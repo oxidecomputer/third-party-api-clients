@@ -38,7 +38,7 @@ impl RoomsLocation {
         type_: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::AddAzrLocationResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::AddAzrLocationResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -59,7 +59,7 @@ impl RoomsLocation {
         let url = self
             .client
             .url(&format!("/rooms/locations?{}", query_), None);
-        let resp: crate::types::ListZrLocationsResponseData = self
+        let resp: crate::Response<crate::types::ListZrLocationsResponseData> = self
             .client
             .get(
                 &url,
@@ -71,7 +71,11 @@ impl RoomsLocation {
             .await?;
 
         // Return our response data.
-        Ok(resp.locations.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.locations.to_vec(),
+        ))
     }
     /**
      * List Zoom Room locations.
@@ -92,7 +96,7 @@ impl RoomsLocation {
         &self,
         parent_location_id: &str,
         type_: &str,
-    ) -> ClientResult<Vec<crate::types::AddAzrLocationResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::AddAzrLocationResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent_location_id.is_empty() {
             query_args.push((
@@ -107,7 +111,11 @@ impl RoomsLocation {
         let url = self
             .client
             .url(&format!("/rooms/locations?{}", query_), None);
-        let mut resp: crate::types::ListZrLocationsResponseData = self
+        let crate::Response::<crate::types::ListZrLocationsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -118,14 +126,18 @@ impl RoomsLocation {
             )
             .await?;
 
-        let mut locations = resp.locations;
-        let mut page = resp.next_page_token;
+        let mut locations = body.locations;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListZrLocationsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -136,7 +148,11 @@ impl RoomsLocation {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListZrLocationsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -148,17 +164,17 @@ impl RoomsLocation {
                     .await?;
             }
 
-            locations.append(&mut resp.locations);
+            locations.append(&mut body.locations);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(locations)
+        Ok(crate::Response::new(status, headers, locations))
     }
     /**
      * Add a location.
@@ -178,7 +194,7 @@ impl RoomsLocation {
     pub async fn add_azr_location(
         &self,
         body: &crate::types::AddAzrLocationRequest,
-    ) -> ClientResult<crate::types::AddAzrLocationResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddAzrLocationResponse>> {
         let url = self.client.url("/rooms/locations", None);
         self.client
             .post(
@@ -211,7 +227,7 @@ impl RoomsLocation {
     pub async fn get_zr_location_profile(
         &self,
         location_id: &str,
-    ) -> ClientResult<crate::types::GetZrLocationProfileResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetZrLocationProfileResponse>> {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}",
@@ -252,7 +268,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         body: &crate::types::GetZrLocationProfileResponse,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}",
@@ -293,7 +309,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         setting_type: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -340,7 +356,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         setting_type: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -378,7 +394,7 @@ impl RoomsLocation {
      */
     pub async fn get_zr_location_structure(
         &self,
-    ) -> ClientResult<crate::types::GetZrLocationStructureResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetZrLocationStructureResponse>> {
         let url = self.client.url("/rooms/locations/structure", None);
         self.client
             .get(
@@ -405,7 +421,7 @@ impl RoomsLocation {
     pub async fn update_zoom_structure(
         &self,
         body: &crate::types::GetZrLocationStructureResponse,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/rooms/locations/structure", None);
         self.client
             .patch(
@@ -437,7 +453,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         body: &crate::types::ChangeParentLocationRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}/location",

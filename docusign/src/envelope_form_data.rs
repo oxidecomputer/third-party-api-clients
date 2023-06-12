@@ -29,7 +29,7 @@ impl EnvelopeFormData {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeFormDataType> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeFormDataType>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/form_data",

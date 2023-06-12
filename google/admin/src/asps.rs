@@ -20,7 +20,7 @@ impl Asps {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn list(&self, user_key: &str) -> ClientResult<crate::types::Asps> {
+    pub async fn list(&self, user_key: &str) -> ClientResult<crate::Response<crate::types::Asps>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/asps",
@@ -48,7 +48,11 @@ impl Asps {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `code_id: i64` -- The unique ID of the ASP.
      */
-    pub async fn get(&self, user_key: &str, code_id: i64) -> ClientResult<crate::types::Asp> {
+    pub async fn get(
+        &self,
+        user_key: &str,
+        code_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Asp>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/asps/{}",
@@ -77,7 +81,7 @@ impl Asps {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `code_id: i64` -- The unique ID of the ASP to be deleted.
      */
-    pub async fn delete(&self, user_key: &str, code_id: i64) -> ClientResult<()> {
+    pub async fn delete(&self, user_key: &str, code_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/asps/{}",

@@ -26,7 +26,7 @@ impl ChunkedUploads {
         &self,
         account_id: &str,
         body: &crate::types::ChunkedUploadRequest,
-    ) -> ClientResult<crate::types::ChunkedUploadResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChunkedUploadResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads",
@@ -64,7 +64,7 @@ impl ChunkedUploads {
         account_id: &str,
         chunked_upload_id: &str,
         include: &str,
-    ) -> ClientResult<crate::types::ChunkedUploadResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChunkedUploadResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -111,7 +111,7 @@ impl ChunkedUploads {
         account_id: &str,
         chunked_upload_id: &str,
         action: &str,
-    ) -> ClientResult<crate::types::ChunkedUploadResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChunkedUploadResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !action.is_empty() {
             query_args.push(("action".to_string(), action.to_string()));
@@ -160,7 +160,7 @@ impl ChunkedUploads {
         &self,
         account_id: &str,
         chunked_upload_id: &str,
-    ) -> ClientResult<crate::types::ChunkedUploadResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChunkedUploadResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads/{}",
@@ -214,7 +214,7 @@ impl ChunkedUploads {
         chunked_upload_id: &str,
         chunked_upload_part_seq: &str,
         body: &crate::types::ChunkedUploadRequest,
-    ) -> ClientResult<crate::types::ChunkedUploadResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChunkedUploadResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads/{}/{}",

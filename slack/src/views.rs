@@ -28,7 +28,7 @@ impl Views {
         &self,
         trigger_id: &str,
         view: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !trigger_id.is_empty() {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
@@ -67,7 +67,7 @@ impl Views {
         user_id: &str,
         view: &str,
         hash: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !hash.is_empty() {
             query_args.push(("hash".to_string(), hash.to_string()));
@@ -107,7 +107,7 @@ impl Views {
         &self,
         trigger_id: &str,
         view: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !trigger_id.is_empty() {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
@@ -148,7 +148,7 @@ impl Views {
         external_id: &str,
         view: &str,
         hash: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !external_id.is_empty() {
             query_args.push(("external_id".to_string(), external_id.to_string()));

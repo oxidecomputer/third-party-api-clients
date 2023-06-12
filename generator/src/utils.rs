@@ -82,7 +82,7 @@ pub mod date_time_format {
                                                     DateTime::<Utc>::from_utc(
                                                         chrono::NaiveDateTime::new(
                                                             d,
-                                                            chrono::NaiveTime::from_hms(0,0,0),
+                                                            chrono::NaiveTime::from_hms_opt(0,0,0).unwrap(),
                                                         ),
                                                         Utc,
                                                     )

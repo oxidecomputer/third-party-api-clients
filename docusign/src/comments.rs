@@ -31,7 +31,7 @@ impl Comments {
         account_id: &str,
         envelope_id: &str,
         encoding: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !encoding.is_empty() {
             query_args.push(("encoding".to_string(), encoding.to_string()));

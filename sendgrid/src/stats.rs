@@ -35,7 +35,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetStatsResponseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -78,7 +78,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetStatsResponseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -132,7 +132,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetGeoStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetGeoStatsResponseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -181,7 +181,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetGeoStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetGeoStatsResponseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -245,7 +245,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetClientsStatsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetClientsStatsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -299,7 +299,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetClientsStatsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetClientsStatsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -348,7 +348,7 @@ impl Stats {
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-    ) -> ClientResult<Vec<crate::types::GetClientsStatsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetClientsStatsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -389,7 +389,7 @@ impl Stats {
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-    ) -> ClientResult<Vec<crate::types::GetClientsStatsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetClientsStatsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -442,7 +442,7 @@ impl Stats {
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-    ) -> ClientResult<Vec<crate::types::GetClientsStatsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetClientsStatsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -497,7 +497,7 @@ impl Stats {
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-    ) -> ClientResult<Vec<crate::types::GetClientsStatsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetClientsStatsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -555,7 +555,8 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetMailboxProvidersStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetMailboxProvidersStatsResponseData>>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -609,7 +610,8 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetMailboxProvidersStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetMailboxProvidersStatsResponseData>>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -671,7 +673,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetBrowsersStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetBrowsersStatsResponseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -722,7 +724,7 @@ impl Stats {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::GetBrowsersStatsResponseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetBrowsersStatsResponseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));

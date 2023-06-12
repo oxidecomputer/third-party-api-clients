@@ -27,7 +27,7 @@ impl Interactions {
     pub async fn get_restrictions_for_org(
         &self,
         org: &str,
-    ) -> ClientResult<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
+    ) -> ClientResult<crate::Response<crate::types::InteractionsGetRestrictionsResponseAnyOf>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
@@ -62,7 +62,7 @@ impl Interactions {
         &self,
         org: &str,
         body: &crate::types::InteractionLimit,
-    ) -> ClientResult<crate::types::InteractionLimits> {
+    ) -> ClientResult<crate::Response<crate::types::InteractionLimits>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
@@ -93,7 +93,10 @@ impl Interactions {
      *
      * * `org: &str`
      */
-    pub async fn remove_restrictions_for_org(&self, org: &str) -> ClientResult<()> {
+    pub async fn remove_restrictions_for_org(
+        &self,
+        org: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
@@ -129,7 +132,7 @@ impl Interactions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
+    ) -> ClientResult<crate::Response<crate::types::InteractionsGetRestrictionsResponseAnyOf>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
@@ -167,7 +170,7 @@ impl Interactions {
         owner: &str,
         repo: &str,
         body: &crate::types::InteractionLimit,
-    ) -> ClientResult<crate::types::InteractionLimits> {
+    ) -> ClientResult<crate::Response<crate::types::InteractionLimits>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
@@ -200,7 +203,11 @@ impl Interactions {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn remove_restrictions_for_repo(&self, owner: &str, repo: &str) -> ClientResult<()> {
+    pub async fn remove_restrictions_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
@@ -230,7 +237,7 @@ impl Interactions {
      */
     pub async fn get_restrictions_for_authenticated_user(
         &self,
-    ) -> ClientResult<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
+    ) -> ClientResult<crate::Response<crate::types::InteractionsGetRestrictionsResponseAnyOf>> {
         let url = self.client.url("/user/interaction-limits", None);
         self.client
             .get(
@@ -254,7 +261,7 @@ impl Interactions {
     pub async fn set_restrictions_for_authenticated_user(
         &self,
         body: &crate::types::InteractionLimit,
-    ) -> ClientResult<crate::types::InteractionLimits> {
+    ) -> ClientResult<crate::Response<crate::types::InteractionLimits>> {
         let url = self.client.url("/user/interaction-limits", None);
         self.client
             .put(
@@ -275,7 +282,9 @@ impl Interactions {
      *
      * FROM: <https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-from-your-public-repositories>
      */
-    pub async fn remove_restrictions_for_authenticated_user(&self) -> ClientResult<()> {
+    pub async fn remove_restrictions_for_authenticated_user(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/user/interaction-limits", None);
         self.client
             .delete(

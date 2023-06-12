@@ -28,7 +28,7 @@ impl CardPrograms {
         &self,
         start: &str,
         page_size: f64,
-    ) -> ClientResult<Vec<crate::types::CardProgram>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CardProgram>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -38,7 +38,7 @@ impl CardPrograms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/card-programs?{}", query_), None);
-        let resp: crate::types::GetCardProgramsResponse = self
+        let resp: crate::Response<crate::types::GetCardProgramsResponse> = self
             .client
             .get(
                 &url,
@@ -50,7 +50,11 @@ impl CardPrograms {
             .await?;
 
         // Return our response data.
-        Ok(resp.card_programs.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.card_programs.to_vec(),
+        ))
     }
     /**
      * List card programs.
@@ -61,9 +65,13 @@ impl CardPrograms {
      *
      * Retrieve all card programs.
      */
-    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::CardProgram>> {
+    pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::CardProgram>>> {
         let url = self.client.url("/card-programs", None);
-        let resp: crate::types::GetCardProgramsResponse = self
+        let crate::Response::<crate::types::GetCardProgramsResponse> {
+            mut status,
+            mut headers,
+            body,
+        } = self
             .client
             .get(
                 &url,
@@ -74,8 +82,8 @@ impl CardPrograms {
             )
             .await?;
 
-        let mut card_programs = resp.card_programs;
-        let mut page = resp.page.next.to_string();
+        let mut card_programs = body.card_programs;
+        let mut page = body.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -91,10 +99,12 @@ impl CardPrograms {
                 .await
             {
                 Ok(mut resp) => {
-                    card_programs.append(&mut resp.card_programs);
+                    card_programs.append(&mut resp.body.card_programs);
+                    status = resp.status;
+                    headers = resp.headers;
 
-                    page = if resp.page.next != page {
-                        resp.page.next.to_string()
+                    page = if body.page.next != page {
+                        body.page.next.to_string()
                     } else {
                         "".to_string()
                     };
@@ -110,7 +120,7 @@ impl CardPrograms {
         }
 
         // Return our response data.
-        Ok(card_programs)
+        Ok(crate::Response::new(status, headers, card_programs))
     }
     /**
      * Create a card program.
@@ -126,7 +136,7 @@ impl CardPrograms {
     pub async fn post_resources(
         &self,
         body: &crate::types::PostResourcesCardProgramRequest,
-    ) -> ClientResult<crate::types::CardProgram> {
+    ) -> ClientResult<crate::Response<crate::types::CardProgram>> {
         let url = self.client.url("/card-programs", None);
         self.client
             .post(
@@ -149,7 +159,10 @@ impl CardPrograms {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_program(&self, id: &str) -> ClientResult<crate::types::CardProgram> {
+    pub async fn get_program(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::CardProgram>> {
         let url = self.client.url(
             &format!(
                 "/card-programs/{}",

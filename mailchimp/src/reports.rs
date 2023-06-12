@@ -37,7 +37,7 @@ impl Reports {
         type_: crate::types::CampaignType,
         before_send_time: Option<chrono::DateTime<chrono::Utc>>,
         since_send_time: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> ClientResult<crate::types::CampaignReportsData> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignReportsData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = before_send_time {
             query_args.push(("before_send_time".to_string(), date.to_rfc3339()));
@@ -90,7 +90,7 @@ impl Reports {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::Reports> {
+    ) -> ClientResult<crate::Response<crate::types::Reports>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -135,7 +135,7 @@ impl Reports {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::AbuseComplaintsData> {
+    ) -> ClientResult<crate::Response<crate::types::AbuseComplaintsData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -182,7 +182,7 @@ impl Reports {
         exclude_fields: &[String],
         campaign_id: &str,
         report_id: &str,
-    ) -> ClientResult<crate::types::AbuseComplaint> {
+    ) -> ClientResult<crate::Response<crate::types::AbuseComplaint>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -228,7 +228,7 @@ impl Reports {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::CampaignAdviceReport> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignAdviceReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -277,7 +277,7 @@ impl Reports {
         count: i64,
         offset: i64,
         campaign_id: &str,
-    ) -> ClientResult<crate::types::ClickDetailReport> {
+    ) -> ClientResult<crate::Response<crate::types::ClickDetailReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -330,7 +330,7 @@ impl Reports {
         exclude_fields: &[String],
         campaign_id: &str,
         link_id: &str,
-    ) -> ClientResult<crate::types::UrlsClicked> {
+    ) -> ClientResult<crate::Response<crate::types::UrlsClicked>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -382,7 +382,7 @@ impl Reports {
         offset: i64,
         campaign_id: &str,
         link_id: &str,
-    ) -> ClientResult<crate::types::ClickDetailMembers> {
+    ) -> ClientResult<crate::Response<crate::types::ClickDetailMembers>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -438,7 +438,7 @@ impl Reports {
         campaign_id: &str,
         link_id: &str,
         subscriber_hash: &str,
-    ) -> ClientResult<crate::types::ClickDetailMember> {
+    ) -> ClientResult<crate::Response<crate::types::ClickDetailMember>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -491,7 +491,7 @@ impl Reports {
         offset: i64,
         campaign_id: &str,
         since: &str,
-    ) -> ClientResult<crate::types::OpenDetailReport> {
+    ) -> ClientResult<crate::Response<crate::types::OpenDetailReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -547,7 +547,7 @@ impl Reports {
         exclude_fields: &[String],
         campaign_id: &str,
         subscriber_hash: &str,
-    ) -> ClientResult<crate::types::OpenActivity> {
+    ) -> ClientResult<crate::Response<crate::types::OpenActivity>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -593,7 +593,7 @@ impl Reports {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::DomainPerformance> {
+    ) -> ClientResult<crate::Response<crate::types::DomainPerformance>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -638,7 +638,7 @@ impl Reports {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::EepurlActivity> {
+    ) -> ClientResult<crate::Response<crate::types::EepurlActivity>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -689,7 +689,7 @@ impl Reports {
         offset: i64,
         campaign_id: &str,
         since: &str,
-    ) -> ClientResult<crate::types::EmailActivityData> {
+    ) -> ClientResult<crate::Response<crate::types::EmailActivityData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -747,7 +747,7 @@ impl Reports {
         campaign_id: &str,
         subscriber_hash: &str,
         since: &str,
-    ) -> ClientResult<crate::types::EmailActivity> {
+    ) -> ClientResult<crate::Response<crate::types::EmailActivity>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -800,7 +800,7 @@ impl Reports {
         campaign_id: &str,
         count: i64,
         offset: i64,
-    ) -> ClientResult<crate::types::OpenLocationsData> {
+    ) -> ClientResult<crate::Response<crate::types::OpenLocationsData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -855,7 +855,7 @@ impl Reports {
         count: i64,
         offset: i64,
         campaign_id: &str,
-    ) -> ClientResult<crate::types::SentData> {
+    ) -> ClientResult<crate::Response<crate::types::SentData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -908,7 +908,7 @@ impl Reports {
         exclude_fields: &[String],
         campaign_id: &str,
         subscriber_hash: &str,
-    ) -> ClientResult<crate::types::SentTo> {
+    ) -> ClientResult<crate::Response<crate::types::SentTo>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -954,7 +954,7 @@ impl Reports {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::CampaignSubReports> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignSubReports>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1003,7 +1003,7 @@ impl Reports {
         count: i64,
         offset: i64,
         campaign_id: &str,
-    ) -> ClientResult<crate::types::UnsubscribesData> {
+    ) -> ClientResult<crate::Response<crate::types::UnsubscribesData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1056,7 +1056,7 @@ impl Reports {
         exclude_fields: &[String],
         campaign_id: &str,
         subscriber_hash: &str,
-    ) -> ClientResult<crate::types::Unsubscribes> {
+    ) -> ClientResult<crate::Response<crate::types::Unsubscribes>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1108,7 +1108,8 @@ impl Reports {
         offset: i64,
         campaign_id: &str,
         sort_field: crate::types::GetReportsEcommerceProductActivitySortField,
-    ) -> ClientResult<crate::types::GetReportsEcommerceProductActivityResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetReportsEcommerceProductActivityResponse>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));

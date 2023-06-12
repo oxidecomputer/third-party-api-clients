@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.3.2"
+//! octorust = "0.7.0-rc.1"
 //! ```
 //!
 //! ## Basic example
@@ -55,7 +55,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host_override](https://docs.rs/octorust/0.3.2/octorust/struct.Client.html#method.host_override) method.
+//! [Client#host_override](https://docs.rs/octorust/0.7.0-rc.1/octorust/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -69,7 +69,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.3.2", features = ["httpcache"] }
+//! octorust = { version = "0.7.0-rc.1", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -115,6 +115,7 @@
 //! use octorust::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
 //! #[cfg(feature = "httpcache")]
 //! use octorust::http_cache::FileBasedCache;
+//! use base64::{Engine, engine::general_purpose::STANDARD};
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
@@ -123,7 +124,7 @@
 //! let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
 //!
 //! let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
-//! let private_key = base64::decode(encoded_private_key).unwrap();
+//! let private_key = STANDARD.decode(encoded_private_key).unwrap();
 //!
 //! // Decode the key.
 //! let key = nom_pem::decode_block(&private_key).unwrap();
@@ -242,8 +243,28 @@ pub mod users;
 #[doc(hidden)]
 pub mod utils;
 
-use thiserror::Error;
+pub use reqwest::{header::HeaderMap, StatusCode};
+
+#[derive(Debug)]
+pub struct Response<T> {
+    pub status: reqwest::StatusCode,
+    pub headers: reqwest::header::HeaderMap,
+    pub body: T,
+}
+
+impl<T> Response<T> {
+    pub fn new(status: reqwest::StatusCode, headers: reqwest::header::HeaderMap, body: T) -> Self {
+        Self {
+            status,
+            headers,
+            body,
+        }
+    }
+}
+
 type ClientResult<T> = Result<T, ClientError>;
+
+use thiserror::Error;
 
 /// Errors returned by the client
 #[derive(Debug, Error)]
@@ -279,6 +300,7 @@ pub enum ClientError {
     #[error("HTTP Error. Code: {status}, message: {error}")]
     HttpError {
         status: http::StatusCode,
+        headers: reqwest::header::HeaderMap,
         error: String,
     },
 }
@@ -338,7 +360,9 @@ impl Client {
         A: Into<String>,
         C: Into<Option<crate::auth::Credentials>>,
     {
-        let http = reqwest::Client::builder().build()?;
+        let http = reqwest::Client::builder()
+            .redirect(reqwest::redirect::Policy::none())
+            .build()?;
         let retry_policy =
             reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         let client = reqwest_middleware::ClientBuilder::new(http)
@@ -454,7 +478,7 @@ impl Client {
             ) => creds,
             (
                 crate::auth::AuthenticationConstraint::JWT,
-                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
+                Some(crate::auth::Credentials::InstallationToken(apptoken)),
             ) => Some(apptoken.jwt()),
             (crate::auth::AuthenticationConstraint::JWT, _) => {
                 log::info!(
@@ -473,22 +497,22 @@ impl Client {
         let mut parsed_url = uri.parse::<reqwest::Url>()?;
 
         match self.credentials(authentication) {
-            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => {
+            Some(crate::auth::Credentials::Client(id, secret)) => {
                 parsed_url
                     .query_pairs_mut()
                     .append_pair("client_id", id)
                     .append_pair("client_secret", secret);
                 Ok((parsed_url, None))
             }
-            Some(&crate::auth::Credentials::Token(ref token)) => {
+            Some(crate::auth::Credentials::Token(token)) => {
                 let auth = format!("token {}", token);
                 Ok((parsed_url, Some(auth)))
             }
-            Some(&crate::auth::Credentials::JWT(ref jwt)) => {
+            Some(crate::auth::Credentials::JWT(jwt)) => {
                 let auth = format!("Bearer {}", jwt.token());
                 Ok((parsed_url, Some(auth)))
             }
-            Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
+            Some(crate::auth::Credentials::InstallationToken(apptoken)) => {
                 let token = if let Some(token) = apptoken.token().await {
                     token
                 } else {
@@ -511,10 +535,10 @@ impl Client {
                             )
                             .await?;
                         *token_guard = Some(crate::auth::ExpiringInstallationToken::new(
-                            token.token.clone(),
+                            token.body.token.clone(),
                             created_at,
                         ));
-                        token.token
+                        token.body.token
                     }
                 };
                 let auth = format!("token {}", token);
@@ -524,43 +548,23 @@ impl Client {
         }
     }
 
-    async fn request<Out>(
+    async fn make_request(
         &self,
         method: http::Method,
         uri: &str,
         message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> ClientResult<(Option<crate::utils::NextLink>, Out)>
-    where
-        Out: serde::de::DeserializeOwned + 'static + Send,
-    {
-        #[cfg(feature = "httpcache")]
-        let uri2 = uri.to_string();
-
+    ) -> ClientResult<reqwest_middleware::RequestBuilder> {
         let (url, auth) = self.url_and_auth(uri, authentication).await?;
 
-        let instance = <&Client>::clone(&self);
-
-        #[cfg(not(feature = "httpcache"))]
-        let mut req = instance.client.request(method, url);
-
-        #[cfg(feature = "httpcache")]
-        let mut req = {
-            let mut req = instance.client.request(method.clone(), url);
-            if method == http::Method::GET {
-                if let Ok(etag) = instance.http_cache.lookup_etag(&uri2) {
-                    req = req.header(http::header::IF_NONE_MATCH, etag);
-                }
-            }
-            req
-        };
+        let mut req = self.client.request(method, url);
 
         if let Some(content_type) = &message.content_type {
             req = req.header(http::header::CONTENT_TYPE, content_type.clone());
         }
 
-        req = req.header(http::header::USER_AGENT, &*instance.agent);
+        req = req.header(http::header::USER_AGENT, &*self.agent);
         req = req.header(http::header::ACCEPT, &media_type.to_string());
 
         if let Some(auth_str) = auth {
@@ -570,13 +574,42 @@ impl Client {
         if let Some(body) = message.body {
             req = req.body(body);
         }
+
+        Ok(req)
+    }
+
+    async fn request<Out>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        message: Message,
+        media_type: crate::utils::MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> ClientResult<(Option<crate::utils::NextLink>, crate::Response<Out>)>
+    where
+        Out: serde::de::DeserializeOwned + 'static + Send,
+    {
+        #[cfg(not(feature = "httpcache"))]
+        let req = self
+            .make_request(method.clone(), uri, message, media_type, authentication)
+            .await?;
+
+        #[cfg(feature = "httpcache")]
+        let req = {
+            let mut req = self
+                .make_request(method.clone(), uri, message, media_type, authentication)
+                .await?;
+
+            if method == http::Method::GET {
+                if let Ok(etag) = self.http_cache.lookup_etag(&uri) {
+                    req = req.header(http::header::IF_NONE_MATCH, etag);
+                }
+            }
+
+            req
+        };
+
         let response = req.send().await?;
-
-        #[cfg(feature = "httpcache")]
-        let instance2 = <&Client>::clone(&self);
-
-        #[cfg(feature = "httpcache")]
-        let uri3 = uri.to_string();
 
         #[cfg(not(feature = "httpcache"))]
         let (remaining, reset) = crate::utils::get_header_values(response.headers());
@@ -585,6 +618,7 @@ impl Client {
         let (remaining, reset, etag) = crate::utils::get_header_values(response.headers());
 
         let status = response.status();
+        let headers = response.headers().clone();
         let link = response
             .headers()
             .get(http::header::LINK)
@@ -599,8 +633,8 @@ impl Client {
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
-                    if let Err(e) = instance2.http_cache.cache_response(
-                        &uri3,
+                    if let Err(e) = self.http_cache.cache_response(
+                        &uri,
                         &response_body,
                         &etag,
                         &next_link.as_ref().map(|n| n.0.clone()),
@@ -618,26 +652,46 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)?
             };
-            Ok((next_link, parsed_response))
-        } else if status == http::StatusCode::NOT_MODIFIED {
-            // only supported case is when client provides if-none-match
-            // header when cargo builds with --cfg feature="httpcache"
-            #[cfg(feature = "httpcache")]
-            {
-                let body = instance2.http_cache.lookup_body(&uri3).unwrap();
-                let out = serde_json::from_str::<Out>(&body).unwrap();
-                let link = match next_link {
-                    Some(next_link) => Ok(Some(next_link)),
-                    None => instance2
-                        .http_cache
-                        .lookup_next_link(&uri3)
-                        .map(|next_link| next_link.map(crate::utils::NextLink)),
-                };
-                link.map(|link| (link, out))
-            }
-            #[cfg(not(feature = "httpcache"))]
-            {
-                unreachable!("this should not be reachable without the httpcache feature enabled")
+            Ok((
+                next_link,
+                crate::Response::new(status, headers, parsed_response),
+            ))
+        } else if status.is_redirection() {
+            match status {
+                http::StatusCode::NOT_MODIFIED => {
+                    // only supported case is when client provides if-none-match
+                    // header when cargo builds with --cfg feature="httpcache"
+                    #[cfg(feature = "httpcache")]
+                    {
+                        let body = self.http_cache.lookup_body(&uri).unwrap();
+                        let out = serde_json::from_str::<Out>(&body).unwrap();
+                        let link = match next_link {
+                            Some(next_link) => Ok(Some(next_link)),
+                            None => self
+                                .http_cache
+                                .lookup_next_link(&uri)
+                                .map(|next_link| next_link.map(crate::utils::NextLink)),
+                        };
+                        link.map(|link| (link, Response::new(status, headers, out)))
+                    }
+                    #[cfg(not(feature = "httpcache"))]
+                    {
+                        unreachable!(
+                            "this should not be reachable without the httpcache feature enabled"
+                        )
+                    }
+                }
+                _ => {
+                    // The body still needs to be parsed. Except in the case of 304 (handled above),
+                    // returning a body in the response is allowed.
+                    let body = if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>() {
+                        serde_json::from_str("null")?
+                    } else {
+                        serde_json::from_slice::<Out>(&response_body)?
+                    };
+
+                    Ok((None, crate::Response::new(status, headers, body)))
+                }
             }
         } else {
             let error = match (remaining, reset) {
@@ -654,11 +708,13 @@ impl Client {
                     if response_body.is_empty() {
                         ClientError::HttpError {
                             status,
+                            headers,
                             error: "empty response".into(),
                         }
                     } else {
                         ClientError::HttpError {
                             status,
+                            headers,
                             error: String::from_utf8_lossy(&response_body).into(),
                         }
                     }
@@ -675,7 +731,7 @@ impl Client {
         message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> ClientResult<D>
+    ) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -685,7 +741,7 @@ impl Client {
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -698,7 +754,7 @@ impl Client {
         uri: &str,
         media: crate::utils::MediaType,
         message: Message,
-    ) -> ClientResult<D>
+    ) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -712,7 +768,11 @@ impl Client {
         .await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> ClientResult<Vec<D>>
+    async fn get_all_pages<D>(
+        &self,
+        uri: &str,
+        _message: Message,
+    ) -> ClientResult<crate::Response<Vec<D>>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -722,7 +782,7 @@ impl Client {
     async fn get_pages<D>(
         &self,
         uri: &str,
-    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, crate::Response<Vec<D>>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -739,7 +799,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, crate::Response<Vec<D>>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -753,7 +813,7 @@ impl Client {
         .await
     }
 
-    async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -772,7 +832,7 @@ impl Client {
         message: Message,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> ClientResult<D>
+    ) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -785,7 +845,7 @@ impl Client {
         uri: &str,
         message: Message,
         media: crate::utils::MediaType,
-    ) -> ClientResult<D>
+    ) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -799,7 +859,7 @@ impl Client {
         .await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -807,7 +867,7 @@ impl Client {
             .await
     }
 
-    async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -820,7 +880,7 @@ impl Client {
         uri: &str,
         message: Message,
         media: crate::utils::MediaType,
-    ) -> ClientResult<D>
+    ) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -834,7 +894,7 @@ impl Client {
         .await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -849,25 +909,29 @@ impl Client {
     }
 
     /// "unfold" paginated results of a vector of items
-    async fn unfold<D>(&self, uri: &str) -> ClientResult<Vec<D>>
+    async fn unfold<D>(&self, uri: &str) -> ClientResult<crate::Response<Vec<D>>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let mut global_items = Vec::new();
-        let (new_link, mut items) = self.get_pages(uri).await?;
+        let (new_link, mut response) = self.get_pages(uri).await?;
         let mut link = new_link;
-        while !items.is_empty() {
-            global_items.append(&mut items);
+        while !response.body.is_empty() {
+            global_items.append(&mut response.body);
             // We need to get the next link.
             if let Some(url) = &link {
                 let url = reqwest::Url::parse(&url.0)?;
-                let (new_link, new_items) = self.get_pages_url(&url).await?;
+                let (new_link, new_response) = self.get_pages_url(&url).await?;
                 link = new_link;
-                items = new_items;
+                response = new_response;
             }
         }
 
-        Ok(global_items)
+        Ok(Response::new(
+            response.status,
+            response.headers,
+            global_items,
+        ))
     }
 
     /// Endpoints to manage GitHub Actions using the REST API.

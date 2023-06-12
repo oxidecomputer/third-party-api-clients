@@ -35,7 +35,7 @@ impl SetupAttempts {
         limit: i64,
         setup_intent: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::SetupAttempt>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SetupAttempt>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -53,7 +53,7 @@ impl SetupAttempts {
         let url = self
             .client
             .url(&format!("/v1/setup_attempts?{}", query_), None);
-        let resp: crate::types::PaymentFlowsSetupIntentAttemptList = self
+        let resp: crate::Response<crate::types::PaymentFlowsSetupIntentAttemptList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl SetupAttempts {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/setup_attempts` endpoint.
@@ -78,7 +82,7 @@ impl SetupAttempts {
         &self,
         _created: &str,
         setup_intent: &str,
-    ) -> ClientResult<Vec<crate::types::SetupAttempt>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SetupAttempt>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setup_intent.is_empty() {
             query_args.push(("setup_intent".to_string(), setup_intent.to_string()));
@@ -87,7 +91,11 @@ impl SetupAttempts {
         let url = self
             .client
             .url(&format!("/v1/setup_attempts?{}", query_), None);
-        let mut resp: crate::types::PaymentFlowsSetupIntentAttemptList = self
+        let crate::Response::<crate::types::PaymentFlowsSetupIntentAttemptList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -98,8 +106,8 @@ impl SetupAttempts {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -115,7 +123,11 @@ impl SetupAttempts {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsSetupIntentAttemptList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -126,7 +138,11 @@ impl SetupAttempts {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsSetupIntentAttemptList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -138,12 +154,12 @@ impl SetupAttempts {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
 }

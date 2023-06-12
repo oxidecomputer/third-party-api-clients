@@ -35,7 +35,7 @@ impl Groups {
         include_usercount: &str,
         search_text: &str,
         start_position: &str,
-    ) -> ClientResult<crate::types::GroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::GroupInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -89,7 +89,7 @@ impl Groups {
         &self,
         account_id: &str,
         body: &crate::types::GroupInformation,
-    ) -> ClientResult<crate::types::GroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::GroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups",
@@ -124,7 +124,7 @@ impl Groups {
         &self,
         account_id: &str,
         body: &crate::types::GroupInformation,
-    ) -> ClientResult<crate::types::GroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::GroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups",
@@ -171,7 +171,7 @@ impl Groups {
         &self,
         account_id: &str,
         body: &crate::types::GroupInformation,
-    ) -> ClientResult<crate::types::GroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::GroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups",

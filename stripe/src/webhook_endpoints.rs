@@ -28,7 +28,7 @@ impl WebhookEndpoints {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::WebhookEndpoint>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::WebhookEndpoint>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -43,7 +43,7 @@ impl WebhookEndpoints {
         let url = self
             .client
             .url(&format!("/v1/webhook_endpoints?{}", query_), None);
-        let resp: crate::types::GetWebhookEndpointsResponse = self
+        let resp: crate::Response<crate::types::GetWebhookEndpointsResponse> = self
             .client
             .get(
                 &url,
@@ -55,7 +55,11 @@ impl WebhookEndpoints {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/webhook_endpoints` endpoint.
@@ -64,9 +68,15 @@ impl WebhookEndpoints {
      *
      * <p>Returns a list of your webhook endpoints.</p>
      */
-    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::WebhookEndpoint>> {
+    pub async fn get_all(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::WebhookEndpoint>>> {
         let url = self.client.url("/v1/webhook_endpoints", None);
-        let mut resp: crate::types::GetWebhookEndpointsResponse = self
+        let crate::Response::<crate::types::GetWebhookEndpointsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -77,8 +87,8 @@ impl WebhookEndpoints {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -94,7 +104,11 @@ impl WebhookEndpoints {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetWebhookEndpointsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -105,7 +119,11 @@ impl WebhookEndpoints {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetWebhookEndpointsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -117,20 +135,20 @@ impl WebhookEndpoints {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/webhook_endpoints` endpoint.
      *
      * <p>A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a Connect webhook endpoint that notifies the specified <code>url</code> about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified <code>url</code> only about events from your account is created. You can also create webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of the Dashboard.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::WebhookEndpoint> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::WebhookEndpoint>> {
         let url = self.client.url("/v1/webhook_endpoints", None);
         self.client
             .post(
@@ -155,7 +173,7 @@ impl WebhookEndpoints {
     pub async fn get_endpoint(
         &self,
         webhook_endpoint: &str,
-    ) -> ClientResult<crate::types::WebhookEndpoint> {
+    ) -> ClientResult<crate::Response<crate::types::WebhookEndpoint>> {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",
@@ -185,7 +203,7 @@ impl WebhookEndpoints {
     pub async fn post_endpoint(
         &self,
         webhook_endpoint: &str,
-    ) -> ClientResult<crate::types::WebhookEndpoint> {
+    ) -> ClientResult<crate::Response<crate::types::WebhookEndpoint>> {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",
@@ -215,7 +233,7 @@ impl WebhookEndpoints {
     pub async fn delete_endpoint(
         &self,
         webhook_endpoint: &str,
-    ) -> ClientResult<crate::types::DeletedWebhookEndpoint> {
+    ) -> ClientResult<crate::Response<crate::types::DeletedWebhookEndpoint>> {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",

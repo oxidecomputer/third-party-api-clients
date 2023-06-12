@@ -3,11 +3,12 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /**
-* Payee:<br>`master` - master account holder pays.<br>`sub` - Sub account holder pays.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Payee:<br>`master` - master account holder pays.<br>`sub` - Sub account holder pays.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PayMode {
     #[serde(rename = "master")]
+    #[default]
     Master,
     #[serde(rename = "sub")]
     Sub,
@@ -23,12 +24,6 @@ impl std::fmt::Display for PayMode {
             PayMode::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for PayMode {
-    fn default() -> PayMode {
-        PayMode::Master
     }
 }
 
@@ -426,7 +421,6 @@ pub struct AccountPlans {
     /**
      * Account base plan object.
      */
-    #[serde()]
     pub plan_base: PlanBase,
     /**
      * Account Plans object.
@@ -473,11 +467,12 @@ pub struct AccountPlans {
 }
 
 /**
-* Determine how participants can join the audio portion of the meeting.<br>`both` - Telephony and VoIP.<br>`telephony` - Audio PSTN telephony only.<br>`voip` - VoIP only.<br>`thirdParty` - 3rd party audio conference.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Determine how participants can join the audio portion of the meeting.<br>`both` - Telephony and VoIP.<br>`telephony` - Audio PSTN telephony only.<br>`voip` - VoIP only.<br>`thirdParty` - 3rd party audio conference.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AudioType {
     #[serde(rename = "both")]
+    #[default]
     Both,
     #[serde(rename = "telephony")]
     Telephony,
@@ -502,17 +497,11 @@ impl std::fmt::Display for AudioType {
     }
 }
 
-impl Default for AudioType {
-    fn default() -> AudioType {
-        AudioType::Both
-    }
-}
-
 /**
-* Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
-*   
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
+ *   
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RequirePasswordPmiMeetings {
     #[serde(rename = "all")]
     All,
@@ -521,6 +510,7 @@ pub enum RequirePasswordPmiMeetings {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -539,11 +529,6 @@ impl std::fmt::Display for RequirePasswordPmiMeetings {
     }
 }
 
-impl Default for RequirePasswordPmiMeetings {
-    fn default() -> RequirePasswordPmiMeetings {
-        RequirePasswordPmiMeetings::Noop
-    }
-}
 impl RequirePasswordPmiMeetings {
     pub fn is_noop(&self) -> bool {
         matches!(self, RequirePasswordPmiMeetings::Noop)
@@ -764,9 +749,9 @@ pub struct ScheduleMeeting {
 }
 
 /**
-* Play sound when participants join or leave.<br>`host` - Heard by host only.<br>`all` - Heard by host and all attendees.<br>`none` - Disable.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Play sound when participants join or leave.<br>`host` - Heard by host only.<br>`all` - Heard by host and all attendees.<br>`none` - Disable.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EntryExitChime {
     #[serde(rename = "all")]
     All,
@@ -775,6 +760,7 @@ pub enum EntryExitChime {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -793,11 +779,6 @@ impl std::fmt::Display for EntryExitChime {
     }
 }
 
-impl Default for EntryExitChime {
-    fn default() -> EntryExitChime {
-        EntryExitChime::Noop
-    }
-}
 impl EntryExitChime {
     pub fn is_noop(&self) -> bool {
         matches!(self, EntryExitChime::Noop)
@@ -892,18 +873,19 @@ pub struct VirtualBackgroundSettings {
 }
 
 /**
-* Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
-*   `host`: Only host can share the screen.<br>
-*   `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
-*   
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
+ *   `host`: Only host can share the screen.<br>
+ *   `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
+ *   
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum WhoCanShareScreen {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "host")]
     Host,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -921,11 +903,6 @@ impl std::fmt::Display for WhoCanShareScreen {
     }
 }
 
-impl Default for WhoCanShareScreen {
-    fn default() -> WhoCanShareScreen {
-        WhoCanShareScreen::Noop
-    }
-}
 impl WhoCanShareScreen {
     pub fn is_noop(&self) -> bool {
         matches!(self, WhoCanShareScreen::Noop)
@@ -1535,15 +1512,15 @@ pub struct PasswordRequirement {
 }
 
 /**
-* Settings for 2FA( [two factor authentication](https://support.zoom.us/hc/en-us/articles/360038247071) ). The value can be one of the following:
-*   `all`: Two factor authentication will be enabled for all users in the account.<br>
-*   `none`: Two factor authentication is disabled.<br>
-*   `group`: Two factor authentication will be enabled for users belonging to specific groups. If 2FA is enabled for certain groups, the group IDs of the group(s) will be provided in the `sign_in_with_two_factor_auth_groups` field.<br>
-*   `role`: Two factor authentication will be enabled only for users assigned with specific roles in the account. If 2FA is enabled for specific roles, the role IDs will be provided in the
-*   `sign_in_with_two_factor_auth_roles` field.
-*   
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Settings for 2FA( [two factor authentication](https://support.zoom.us/hc/en-us/articles/360038247071) ). The value can be one of the following:
+ *   `all`: Two factor authentication will be enabled for all users in the account.<br>
+ *   `none`: Two factor authentication is disabled.<br>
+ *   `group`: Two factor authentication will be enabled for users belonging to specific groups. If 2FA is enabled for certain groups, the group IDs of the group(s) will be provided in the `sign_in_with_two_factor_auth_groups` field.<br>
+ *   `role`: Two factor authentication will be enabled only for users assigned with specific roles in the account. If 2FA is enabled for specific roles, the role IDs will be provided in the
+ *   `sign_in_with_two_factor_auth_roles` field.
+ *   
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SignInWithTwoFactorAuth {
     #[serde(rename = "all")]
     All,
@@ -1554,6 +1531,7 @@ pub enum SignInWithTwoFactorAuth {
     #[serde(rename = "role")]
     Role,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1573,11 +1551,6 @@ impl std::fmt::Display for SignInWithTwoFactorAuth {
     }
 }
 
-impl Default for SignInWithTwoFactorAuth {
-    fn default() -> SignInWithTwoFactorAuth {
-        SignInWithTwoFactorAuth::Noop
-    }
-}
 impl SignInWithTwoFactorAuth {
     pub fn is_noop(&self) -> bool {
         matches!(self, SignInWithTwoFactorAuth::Noop)
@@ -1660,9 +1633,9 @@ pub struct Security {
 }
 
 /**
-* Automatic recording:<br>`local` - Record on local.<br>`cloud` -  Record on cloud.<br>`none` - Disabled.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Automatic recording:<br>`local` - Record on local.<br>`cloud` -  Record on cloud.<br>`none` - Disabled.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AutoRecording {
     #[serde(rename = "cloud")]
     Cloud,
@@ -1671,6 +1644,7 @@ pub enum AutoRecording {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1689,11 +1663,6 @@ impl std::fmt::Display for AutoRecording {
     }
 }
 
-impl Default for AutoRecording {
-    fn default() -> AutoRecording {
-        AutoRecording::Noop
-    }
-}
 impl AutoRecording {
     pub fn is_noop(&self) -> bool {
         matches!(self, AutoRecording::Noop)
@@ -2561,15 +2530,16 @@ pub struct DateTime {
 }
 
 /**
-* Device protocol:<br>`H.323` - H.323.<br>`SIP` - SIP.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Device protocol:<br>`H.323` - H.323.<br>`SIP` - SIP.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Protocol {
     #[serde(rename = "H.323")]
     H323,
     #[serde(rename = "SIP")]
     Sip,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2587,11 +2557,6 @@ impl std::fmt::Display for Protocol {
     }
 }
 
-impl Default for Protocol {
-    fn default() -> Protocol {
-        Protocol::Noop
-    }
-}
 impl Protocol {
     pub fn is_noop(&self) -> bool {
         matches!(self, Protocol::Noop)
@@ -2599,9 +2564,9 @@ impl Protocol {
 }
 
 /**
-* Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Encryption {
     #[serde(rename = "auto")]
     Auto,
@@ -2610,6 +2575,7 @@ pub enum Encryption {
     #[serde(rename = "yes")]
     Yes,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2628,11 +2594,6 @@ impl std::fmt::Display for Encryption {
     }
 }
 
-impl Default for Encryption {
-    fn default() -> Encryption {
-        Encryption::Noop
-    }
-}
 impl Encryption {
     pub fn is_noop(&self) -> bool {
         matches!(self, Encryption::Noop)
@@ -2870,11 +2831,12 @@ pub struct Occurrence {
 }
 
 /**
-* Determine how participants can join the audio portion of the meeting.<br>`both` - Both Telephony and VoIP.<br>`telephony` - Telephony only.<br>`voip` - VoIP only.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Determine how participants can join the audio portion of the meeting.<br>`both` - Both Telephony and VoIP.<br>`telephony` - Telephony only.<br>`voip` - VoIP only.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Audio {
     #[serde(rename = "both")]
+    #[default]
     Both,
     #[serde(rename = "telephony")]
     Telephony,
@@ -2896,22 +2858,17 @@ impl std::fmt::Display for Audio {
     }
 }
 
-impl Default for Audio {
-    fn default() -> Audio {
-        Audio::Both
-    }
-}
-
 /**
-* Type of number.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Type of number.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "toll")]
     Toll,
     #[serde(rename = "tollfree")]
     Tollfree,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2929,11 +2886,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -2986,18 +2938,19 @@ pub struct GlobalDialInNumbers {
 }
 
 /**
-* Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be **automatically disabled**. <br><br>The value of this field can be one of the following:<br>
-*   `enhanced_encryption`: Enhanced encryption. Encryption is stored in the cloud if you enable this option. <br>
-*   
-*   `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also **disables** the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be **automatically disabled**. <br><br>The value of this field can be one of the following:<br>
+ *   `enhanced_encryption`: Enhanced encryption. Encryption is stored in the cloud if you enable this option. <br>
+ *   
+ *   `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also **disables** the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EncryptionType {
     #[serde(rename = "e2ee")]
     E2Ee,
     #[serde(rename = "enhanced_encryption")]
     EnhancedEncryption,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3015,11 +2968,6 @@ impl std::fmt::Display for EncryptionType {
     }
 }
 
-impl Default for EncryptionType {
-    fn default() -> EncryptionType {
-        EncryptionType::Noop
-    }
-}
 impl EncryptionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EncryptionType::Noop)
@@ -3027,17 +2975,18 @@ impl EncryptionType {
 }
 
 /**
-* Specify whether to allow users from specific regions to join this meeting; or block users from specific regions from joining this meeting. <br><br>
-*   `approve`: Allow users from specific regions/countries to join this meeting. If this setting is selected, the approved regions/countries must be included in the `approved_list`.<br><br>
-*   `deny`: Block users from specific regions/countries from joining this meeting. If this setting is selected, the approved regions/countries must be included in the `denied_list`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Specify whether to allow users from specific regions to join this meeting; or block users from specific regions from joining this meeting. <br><br>
+ *   `approve`: Allow users from specific regions/countries to join this meeting. If this setting is selected, the approved regions/countries must be included in the `approved_list`.<br><br>
+ *   `deny`: Block users from specific regions/countries from joining this meeting. If this setting is selected, the approved regions/countries must be included in the `denied_list`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Method {
     #[serde(rename = "approve")]
     Approve,
     #[serde(rename = "deny")]
     Deny,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3055,11 +3004,6 @@ impl std::fmt::Display for Method {
     }
 }
 
-impl Default for Method {
-    fn default() -> Method {
-        Method::Noop
-    }
-}
 impl Method {
     pub fn is_noop(&self) -> bool {
         matches!(self, Method::Noop)
@@ -3539,13 +3483,14 @@ pub struct MeetingSettings {
 }
 
 /**
-* This field is required **if you're scheduling a recurring meeting of type** `2` to state which day(s) of the week the meeting should repeat. <br> <br> The value for this field could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `"1"` as the value of this field.<br><br> **Note:** If you would like the meeting to occur on multiple days of a week, you should provide comma separated values for this field. For instance, if the meeting should recur on Sundays and Tuesdays provide `"1,3"` as the value of this field.
-*   
-*    <br>`1`  - Sunday. <br>`2` - Monday.<br>`3` - Tuesday.<br>`4` -  Wednesday.<br>`5` -  Thursday.<br>`6` - Friday.<br>`7` - Saturday.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * This field is required **if you're scheduling a recurring meeting of type** `2` to state which day(s) of the week the meeting should repeat. <br> <br> The value for this field could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `"1"` as the value of this field.<br><br> **Note:** If you would like the meeting to occur on multiple days of a week, you should provide comma separated values for this field. For instance, if the meeting should recur on Sundays and Tuesdays provide `"1,3"` as the value of this field.
+ *   
+ *    <br>`1`  - Sunday. <br>`2` - Monday.<br>`3` - Tuesday.<br>`4` -  Wednesday.<br>`5` -  Thursday.<br>`6` - Friday.<br>`7` - Saturday.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum WeeklyDays {
     #[serde(rename = "1")]
+    #[default]
     One,
     #[serde(rename = "2")]
     Two,
@@ -3576,12 +3521,6 @@ impl std::fmt::Display for WeeklyDays {
             WeeklyDays::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for WeeklyDays {
-    fn default() -> WeeklyDays {
-        WeeklyDays::One
     }
 }
 
@@ -3811,15 +3750,16 @@ pub struct MeetingInfo {
 }
 
 /**
-* Meeting status
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Meeting status
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Status {
     #[serde(rename = "started")]
     Started,
     #[serde(rename = "waiting")]
     Waiting,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3837,11 +3777,6 @@ impl std::fmt::Display for Status {
     }
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Status::Noop
-    }
-}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -4238,19 +4173,20 @@ pub struct MeetingLiveStream {
 }
 
 /**
-* Update the status of a livestream.
-*   
-*   The value can be one of the following:<br>
-*   `start`: Start a live stream. <br>
-*   `stop`: Stop an ongoing live stream.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Update the status of a livestream.
+ *   
+ *   The value can be one of the following:<br>
+ *   `start`: Start a live stream. <br>
+ *   `stop`: Stop an ongoing live stream.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Action {
     #[serde(rename = "start")]
     Start,
     #[serde(rename = "stop")]
     Stop,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4268,11 +4204,6 @@ impl std::fmt::Display for Action {
     }
 }
 
-impl Default for Action {
-    fn default() -> Action {
-        Action::Noop
-    }
-}
 impl Action {
     pub fn is_noop(&self) -> bool {
         matches!(self, Action::Noop)
@@ -4596,13 +4527,14 @@ pub struct QosAudio {
 }
 
 /**
-* The recording status.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The recording status.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RecordingStatus {
     #[serde(rename = "completed")]
     Completed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4619,11 +4551,6 @@ impl std::fmt::Display for RecordingStatus {
     }
 }
 
-impl Default for RecordingStatus {
-    fn default() -> RecordingStatus {
-        RecordingStatus::Noop
-    }
-}
 impl RecordingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, RecordingStatus::Noop)
@@ -4813,9 +4740,9 @@ pub struct RecordingSeparateAudio {
 }
 
 /**
-* Determine how the meeting recording is shared.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Determine how the meeting recording is shared.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ShareRecording {
     #[serde(rename = "internally")]
     Internally,
@@ -4824,6 +4751,7 @@ pub enum ShareRecording {
     #[serde(rename = "publicly")]
     Publicly,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4842,11 +4770,6 @@ impl std::fmt::Display for ShareRecording {
     }
 }
 
-impl Default for ShareRecording {
-    fn default() -> ShareRecording {
-        ShareRecording::Noop
-    }
-}
 impl ShareRecording {
     pub fn is_noop(&self) -> bool {
         matches!(self, ShareRecording::Noop)
@@ -5094,9 +5017,9 @@ pub struct Registrant {
 }
 
 /**
-* Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RegistrantStatusAction {
     #[serde(rename = "approve")]
     Approve,
@@ -5105,6 +5028,7 @@ pub enum RegistrantStatusAction {
     #[serde(rename = "deny")]
     Deny,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5123,11 +5047,6 @@ impl std::fmt::Display for RegistrantStatusAction {
     }
 }
 
-impl Default for RegistrantStatusAction {
-    fn default() -> RegistrantStatusAction {
-        RegistrantStatusAction::Noop
-    }
-}
 impl RegistrantStatusAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, RegistrantStatusAction::Noop)
@@ -5569,19 +5488,20 @@ pub struct RecurrenceWebinar {
 }
 
 /**
-* Indicate whether you want attendees to be able to view answered questions only or view all questions.
-*   
-*   * `only`: Attendees are able to view answered questions only.
-*   
-*   *  `all`: Attendees are able to view all questions submitted in the Q&A.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Indicate whether you want attendees to be able to view answered questions only or view all questions.
+ *   
+ *   * `only`: Attendees are able to view answered questions only.
+ *   
+ *   *  `all`: Attendees are able to view all questions submitted in the Q&A.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AnswerQuestions {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "only")]
     Only,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5599,11 +5519,6 @@ impl std::fmt::Display for AnswerQuestions {
     }
 }
 
-impl Default for AnswerQuestions {
-    fn default() -> AnswerQuestions {
-        AnswerQuestions::Noop
-    }
-}
 impl AnswerQuestions {
     pub fn is_noop(&self) -> bool {
         matches!(self, AnswerQuestions::Noop)
@@ -6187,10 +6102,10 @@ pub struct SessionWebinarUpdate {
 }
 
 /**
-* Dial-in number types:<br>`toll` - Toll number.<br>`tollfree` -Toll free number.<br>
-*   `media_link` - Media link.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Dial-in number types:<br>`toll` - Toll number.<br>`tollfree` -Toll free number.<br>
+ *   `media_link` - Media link.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TspAccountsListDialInNumbersType {
     #[serde(rename = "media_link")]
     MediaLink,
@@ -6199,6 +6114,7 @@ pub enum TspAccountsListDialInNumbersType {
     #[serde(rename = "tollfree")]
     Tollfree,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6217,11 +6133,6 @@ impl std::fmt::Display for TspAccountsListDialInNumbersType {
     }
 }
 
-impl Default for TspAccountsListDialInNumbersType {
-    fn default() -> TspAccountsListDialInNumbersType {
-        TspAccountsListDialInNumbersType::Noop
-    }
-}
 impl TspAccountsListDialInNumbersType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TspAccountsListDialInNumbersType::Noop)
@@ -6266,15 +6177,16 @@ pub struct DialInNumbers {
 }
 
 /**
-* Telephony bridge
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Telephony bridge
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TspBridge {
     #[serde(rename = "EU_TSP_TB")]
     EuTspTb,
     #[serde(rename = "US_TSP_TB")]
     UsTspTb,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6292,11 +6204,6 @@ impl std::fmt::Display for TspBridge {
     }
 }
 
-impl Default for TspBridge {
-    fn default() -> TspBridge {
-        TspBridge::Noop
-    }
-}
 impl TspBridge {
     pub fn is_noop(&self) -> bool {
         matches!(self, TspBridge::Noop)
@@ -6558,14 +6465,14 @@ pub struct CustomAttributes {
 }
 
 /**
-* The label to add to the user's phone number. You can only add one label to the user's phone number:
-*   
-*   * `Mobile`
-*   * `Office`
-*   * `Home`
-*   * `Fax`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The label to add to the user's phone number. You can only add one label to the user's phone number:
+ *   
+ *   * `Mobile`
+ *   * `Office`
+ *   * `Home`
+ *   * `Fax`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Label {
     #[serde(rename = "Fax")]
     Fax,
@@ -6576,6 +6483,7 @@ pub enum Label {
     #[serde(rename = "Office")]
     Office,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6595,11 +6503,6 @@ impl std::fmt::Display for Label {
     }
 }
 
-impl Default for Label {
-    fn default() -> Label {
-        Label::Noop
-    }
-}
 impl Label {
     pub fn is_noop(&self) -> bool {
         matches!(self, Label::Noop)
@@ -8333,15 +8236,16 @@ pub struct ZoomRoom {
 }
 
 /**
-* Poll Question & Answer type:<br>`single` - Single choice<br>`mutliple` - Multiple choice
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Poll Question & Answer type:<br>`single` - Single choice<br>`mutliple` - Multiple choice
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PollQuestionsType {
     #[serde(rename = "multiple")]
     Multiple,
     #[serde(rename = "single")]
     Single,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8359,11 +8263,6 @@ impl std::fmt::Display for PollQuestionsType {
     }
 }
 
-impl Default for PollQuestionsType {
-    fn default() -> PollQuestionsType {
-        PollQuestionsType::Noop
-    }
-}
 impl PollQuestionsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PollQuestionsType::Noop)
@@ -8424,9 +8323,9 @@ pub struct Poll {
 }
 
 /**
-* Field name of the question.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Field name of the question.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FieldName {
     #[serde(rename = "address")]
     Address,
@@ -8455,6 +8354,7 @@ pub enum FieldName {
     #[serde(rename = "zip")]
     Zip,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8483,11 +8383,6 @@ impl std::fmt::Display for FieldName {
     }
 }
 
-impl Default for FieldName {
-    fn default() -> FieldName {
-        FieldName::Noop
-    }
-}
 impl FieldName {
     pub fn is_noop(&self) -> bool {
         matches!(self, FieldName::Noop)
@@ -8512,15 +8407,16 @@ pub struct MeetingRegistrantQuestions {
 }
 
 /**
-* Type of the question being asked.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Type of the question being asked.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MeetingRegistrantQuestionsCustomType {
     #[serde(rename = "short")]
     Short,
     #[serde(rename = "single")]
     Single,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8538,11 +8434,6 @@ impl std::fmt::Display for MeetingRegistrantQuestionsCustomType {
     }
 }
 
-impl Default for MeetingRegistrantQuestionsCustomType {
-    fn default() -> MeetingRegistrantQuestionsCustomType {
-        MeetingRegistrantQuestionsCustomType::Noop
-    }
-}
 impl MeetingRegistrantQuestionsCustomType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MeetingRegistrantQuestionsCustomType::Noop)
@@ -8634,9 +8525,9 @@ pub struct WebinarRegistrantQuestions {
 }
 
 /**
-* Field name.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Field name.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RecordingRegistrantQuestionsFieldName {
     #[serde(rename = "address")]
     Address,
@@ -8667,6 +8558,7 @@ pub enum RecordingRegistrantQuestionsFieldName {
     #[serde(rename = "zip")]
     Zip,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8698,11 +8590,6 @@ impl std::fmt::Display for RecordingRegistrantQuestionsFieldName {
     }
 }
 
-impl Default for RecordingRegistrantQuestionsFieldName {
-    fn default() -> RecordingRegistrantQuestionsFieldName {
-        RecordingRegistrantQuestionsFieldName::Noop
-    }
-}
 impl RecordingRegistrantQuestionsFieldName {
     pub fn is_noop(&self) -> bool {
         matches!(self, RecordingRegistrantQuestionsFieldName::Noop)
@@ -8727,9 +8614,9 @@ pub struct RecordingRegistrantQuestions {
 }
 
 /**
-* The type of registration question and answers.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of registration question and answers.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RecordingRegistrantQuestionsCustomType {
     #[serde(rename = "multiple")]
     Multiple,
@@ -8738,6 +8625,7 @@ pub enum RecordingRegistrantQuestionsCustomType {
     #[serde(rename = "single")]
     Single,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8756,11 +8644,6 @@ impl std::fmt::Display for RecordingRegistrantQuestionsCustomType {
     }
 }
 
-impl Default for RecordingRegistrantQuestionsCustomType {
-    fn default() -> RecordingRegistrantQuestionsCustomType {
-        RecordingRegistrantQuestionsCustomType::Noop
-    }
-}
 impl RecordingRegistrantQuestionsCustomType {
     pub fn is_noop(&self) -> bool {
         matches!(self, RecordingRegistrantQuestionsCustomType::Noop)
@@ -10247,7 +10130,7 @@ pub struct ParticipantQos {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AccountSettingsRecordingAuthenticationUpdateOptionType {
     #[serde(rename = "enforce_login")]
     EnforceLogin,
@@ -10256,6 +10139,7 @@ pub enum AccountSettingsRecordingAuthenticationUpdateOptionType {
     #[serde(rename = "internally")]
     Internally,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10276,11 +10160,6 @@ impl std::fmt::Display for AccountSettingsRecordingAuthenticationUpdateOptionTyp
     }
 }
 
-impl Default for AccountSettingsRecordingAuthenticationUpdateOptionType {
-    fn default() -> AccountSettingsRecordingAuthenticationUpdateOptionType {
-        AccountSettingsRecordingAuthenticationUpdateOptionType::Noop
-    }
-}
 impl AccountSettingsRecordingAuthenticationUpdateOptionType {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -10290,7 +10169,7 @@ impl AccountSettingsRecordingAuthenticationUpdateOptionType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AccountSettingsRecordingAuthenticationUpdateOptionAction {
     #[serde(rename = "add")]
     Add,
@@ -10299,6 +10178,7 @@ pub enum AccountSettingsRecordingAuthenticationUpdateOptionAction {
     #[serde(rename = "update")]
     Update,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10317,11 +10197,6 @@ impl std::fmt::Display for AccountSettingsRecordingAuthenticationUpdateOptionAct
     }
 }
 
-impl Default for AccountSettingsRecordingAuthenticationUpdateOptionAction {
-    fn default() -> AccountSettingsRecordingAuthenticationUpdateOptionAction {
-        AccountSettingsRecordingAuthenticationUpdateOptionAction::Noop
-    }
-}
 impl AccountSettingsRecordingAuthenticationUpdateOptionAction {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -10873,17 +10748,17 @@ pub struct Metrics {
 }
 
 /**
-* The archived file's file type:
-*   * `MP4` — Video file.
-*   * `M4A` — Audio-only file.
-*   * `TRANSCRIPT` — A transcript file of the recording, in VTT file format.
-*   * `CHAT` — A TXT file containing chat messages that were sent during the meeting.
-*   * `CC` — A file containing the recording's closed captions, in VTT file format.
-*   * `CSV` — A file containing polling data in, in CSV format.
-*   
-*   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The archived file's file type:
+ *   * `MP4` — Video file.
+ *   * `M4A` — Audio-only file.
+ *   * `TRANSCRIPT` — A transcript file of the recording, in VTT file format.
+ *   * `CHAT` — A TXT file containing chat messages that were sent during the meeting.
+ *   * `CC` — A file containing the recording's closed captions, in VTT file format.
+ *   * `CSV` — A file containing polling data in, in CSV format.
+ *   
+ *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FileType {
     #[serde(rename = "CC")]
     Cc,
@@ -10898,6 +10773,7 @@ pub enum FileType {
     #[serde(rename = "TRANSCRIPT")]
     Transcript,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10919,11 +10795,6 @@ impl std::fmt::Display for FileType {
     }
 }
 
-impl Default for FileType {
-    fn default() -> FileType {
-        FileType::Noop
-    }
-}
 impl FileType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FileType::Noop)
@@ -10931,22 +10802,22 @@ impl FileType {
 }
 
 /**
-* The archived file's recording type:
-*   * `shared_screen_with_speaker_view(CC)`
-*   * `shared_screen_with_speaker_view`
-*   * `shared_screen_with_gallery_view`
-*   * `speaker_view`
-*   * `gallery_view`
-*   * `shared_screen`
-*   * `audio_only`
-*   * `audio_transcript`
-*   * `chat_file`
-*   * `active_speaker`
-*   * `host_video`
-*   
-*   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The archived file's recording type:
+ *   * `shared_screen_with_speaker_view(CC)`
+ *   * `shared_screen_with_speaker_view`
+ *   * `shared_screen_with_gallery_view`
+ *   * `speaker_view`
+ *   * `gallery_view`
+ *   * `shared_screen`
+ *   * `audio_only`
+ *   * `audio_transcript`
+ *   * `chat_file`
+ *   * `active_speaker`
+ *   * `host_video`
+ *   
+ *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RecordingType {
     #[serde(rename = "active_speaker")]
     ActiveSpeaker,
@@ -10971,6 +10842,7 @@ pub enum RecordingType {
     #[serde(rename = "speaker_view")]
     SpeakerView,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10997,11 +10869,6 @@ impl std::fmt::Display for RecordingType {
     }
 }
 
-impl Default for RecordingType {
-    fn default() -> RecordingType {
-        RecordingType::Noop
-    }
-}
 impl RecordingType {
     pub fn is_noop(&self) -> bool {
         matches!(self, RecordingType::Noop)
@@ -11264,11 +11131,12 @@ pub struct InviteLinks {
     pub attendees: Vec<InviteLinksAttendees>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RecordingStatusUpdateBodyRequestAction {
     #[serde(rename = "recover")]
     Recover,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11285,11 +11153,6 @@ impl std::fmt::Display for RecordingStatusUpdateBodyRequestAction {
     }
 }
 
-impl Default for RecordingStatusUpdateBodyRequestAction {
-    fn default() -> RecordingStatusUpdateBodyRequestAction {
-        RecordingStatusUpdateBodyRequestAction::Noop
-    }
-}
 impl RecordingStatusUpdateBodyRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, RecordingStatusUpdateBodyRequestAction::Noop)
@@ -11381,7 +11244,6 @@ pub struct SetUpAccountRequest {
     /**
      * Specify emergency address for the account.
      */
-    #[serde()]
     pub emergency_address: EmergencyAddress,
     /**
      * User's first name.
@@ -11395,13 +11257,13 @@ pub struct SetUpAccountRequest {
 }
 
 /**
-* Query response by number assignment. The value can be one of the following:
-*   <br>
-*   `assigned`: The number has been assigned to either a user, a call queue, an auto-receptionist or a common area phone in an account. <br>`unassigned`: The number is not assigned to anyone.<br>
-*   `all`: Include both assigned and unassigned numbers in the response.<br>
-*   `byoc`: Include Bring Your Own Carrier (BYOC) numbers only in the response.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Query response by number assignment. The value can be one of the following:
+ *   <br>
+ *   `assigned`: The number has been assigned to either a user, a call queue, an auto-receptionist or a common area phone in an account. <br>`unassigned`: The number is not assigned to anyone.<br>
+ *   `all`: Include both assigned and unassigned numbers in the response.<br>
+ *   `byoc`: Include Bring Your Own Carrier (BYOC) numbers only in the response.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListAccountPhoneNumbersType {
     #[serde(rename = "all")]
     All,
@@ -11410,6 +11272,7 @@ pub enum ListAccountPhoneNumbersType {
     #[serde(rename = "unassigned")]
     Unassigned,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11428,11 +11291,6 @@ impl std::fmt::Display for ListAccountPhoneNumbersType {
     }
 }
 
-impl Default for ListAccountPhoneNumbersType {
-    fn default() -> ListAccountPhoneNumbersType {
-        ListAccountPhoneNumbersType::Noop
-    }
-}
 impl ListAccountPhoneNumbersType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListAccountPhoneNumbersType::Noop)
@@ -11440,11 +11298,11 @@ impl ListAccountPhoneNumbersType {
 }
 
 /**
-* The type of assignee to whom the number is assigned. The value can be one of the following:<br>
-*   `user`<br> `callQueue`<br> `autoReceptionist`<br>
-*   `commonAreaPhone`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of assignee to whom the number is assigned. The value can be one of the following:<br>
+ *   `user`<br> `callQueue`<br> `autoReceptionist`<br>
+ *   `commonAreaPhone`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ExtensionType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -11455,6 +11313,7 @@ pub enum ExtensionType {
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11474,11 +11333,6 @@ impl std::fmt::Display for ExtensionType {
     }
 }
 
-impl Default for ExtensionType {
-    fn default() -> ExtensionType {
-        ExtensionType::Noop
-    }
-}
 impl ExtensionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ExtensionType::Noop)
@@ -11486,15 +11340,16 @@ impl ExtensionType {
 }
 
 /**
-* Source of phone number.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Source of phone number.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Source {
     #[serde(rename = "external")]
     External,
     #[serde(rename = "internal")]
     Internal,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11512,11 +11367,6 @@ impl std::fmt::Display for Source {
     }
 }
 
-impl Default for Source {
-    fn default() -> Source {
-        Source::Noop
-    }
-}
 impl Source {
     pub fn is_noop(&self) -> bool {
         matches!(self, Source::Noop)
@@ -11524,15 +11374,16 @@ impl Source {
 }
 
 /**
-* Status of the number.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of the number.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListAccountPhoneNumbersResponseStatus {
     #[serde(rename = "available")]
     Available,
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11550,11 +11401,6 @@ impl std::fmt::Display for ListAccountPhoneNumbersResponseStatus {
     }
 }
 
-impl Default for ListAccountPhoneNumbersResponseStatus {
-    fn default() -> ListAccountPhoneNumbersResponseStatus {
-        ListAccountPhoneNumbersResponseStatus::Noop
-    }
-}
 impl ListAccountPhoneNumbersResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListAccountPhoneNumbersResponseStatus::Noop)
@@ -11786,9 +11632,9 @@ pub struct ListAccountPhoneNumbersResponseData {
 }
 
 /**
-* Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TransportProtocol {
     #[serde(rename = "AUTO")]
     Auto,
@@ -11799,6 +11645,7 @@ pub enum TransportProtocol {
     #[serde(rename = "UDP")]
     Udp,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11818,11 +11665,6 @@ impl std::fmt::Display for TransportProtocol {
     }
 }
 
-impl Default for TransportProtocol {
-    fn default() -> TransportProtocol {
-        TransportProtocol::Noop
-    }
-}
 impl TransportProtocol {
     pub fn is_noop(&self) -> bool {
         matches!(self, TransportProtocol::Noop)
@@ -12332,9 +12174,9 @@ pub struct UpdateSipPhoneRequest {
 }
 
 /**
-* The status of the Zoom Room.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The status of the Zoom Room.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListZoomRoomsStatus {
     #[serde(rename = "Available")]
     Available,
@@ -12345,6 +12187,7 @@ pub enum ListZoomRoomsStatus {
     #[serde(rename = "UnderConstruction")]
     UnderConstruction,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12364,11 +12207,6 @@ impl std::fmt::Display for ListZoomRoomsStatus {
     }
 }
 
-impl Default for ListZoomRoomsStatus {
-    fn default() -> ListZoomRoomsStatus {
-        ListZoomRoomsStatus::Noop
-    }
-}
 impl ListZoomRoomsStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListZoomRoomsStatus::Noop)
@@ -12376,9 +12214,9 @@ impl ListZoomRoomsStatus {
 }
 
 /**
-* Type of the Zoom Rooms.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Type of the Zoom Rooms.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListZoomRoomsType {
     #[serde(rename = "DigitalSignageOnly")]
     DigitalSignageOnly,
@@ -12387,6 +12225,7 @@ pub enum ListZoomRoomsType {
     #[serde(rename = "ZoomRoom")]
     ZoomRoom,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12405,11 +12244,6 @@ impl std::fmt::Display for ListZoomRoomsType {
     }
 }
 
-impl Default for ListZoomRoomsType {
-    fn default() -> ListZoomRoomsType {
-        ListZoomRoomsType::Noop
-    }
-}
 impl ListZoomRoomsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListZoomRoomsType::Noop)
@@ -12944,10 +12778,10 @@ pub struct UpdateSiteDetailsRequest {
 }
 
 /**
-* Presence status of the contact in Zoom Client. The value of this field can be one of the following:
-*   `Do_Not_Disturb`<br> `away`<br> `Available`<br> `Offline`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Presence status of the contact in Zoom Client. The value of this field can be one of the following:
+ *   `Do_Not_Disturb`<br> `away`<br> `Available`<br> `Offline`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PresenceStatus {
     #[serde(rename = "Available")]
     Available,
@@ -12958,6 +12792,7 @@ pub enum PresenceStatus {
     #[serde(rename = "Offline")]
     Offline,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12977,11 +12812,6 @@ impl std::fmt::Display for PresenceStatus {
     }
 }
 
-impl Default for PresenceStatus {
-    fn default() -> PresenceStatus {
-        PresenceStatus::Noop
-    }
-}
 impl PresenceStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PresenceStatus::Noop)
@@ -13147,11 +12977,11 @@ pub struct SearchCompanyContactsResponse {
 }
 
 /**
-* This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
-*   
-*   This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
+ *   
+ *   This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetChatMessagesResponseStatus {
     #[serde(rename = "Deleted")]
     Deleted,
@@ -13160,6 +12990,7 @@ pub enum GetChatMessagesResponseStatus {
     #[serde(rename = "Normal")]
     Normal,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13178,11 +13009,6 @@ impl std::fmt::Display for GetChatMessagesResponseStatus {
     }
 }
 
-impl Default for GetChatMessagesResponseStatus {
-    fn default() -> GetChatMessagesResponseStatus {
-        GetChatMessagesResponseStatus::Noop
-    }
-}
 impl GetChatMessagesResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetChatMessagesResponseStatus::Noop)
@@ -13463,17 +13289,18 @@ pub struct MarkMessageRequest {
 }
 
 /**
-* The action to perform with the message:
-*   * `add` — Add an emoji reaction.
-*   * `remove` — Remove an emoji reaction.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The action to perform with the message:
+ *   * `add` — Add an emoji reaction.
+ *   * `remove` — Remove an emoji reaction.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ReactMessageRequestAction {
     #[serde(rename = "add")]
     Add,
     #[serde(rename = "remove")]
     Remove,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13491,11 +13318,6 @@ impl std::fmt::Display for ReactMessageRequestAction {
     }
 }
 
-impl Default for ReactMessageRequestAction {
-    fn default() -> ReactMessageRequestAction {
-        ReactMessageRequestAction::Noop
-    }
-}
 impl ReactMessageRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReactMessageRequestAction::Noop)
@@ -14019,9 +13841,9 @@ pub struct GetUserContactResponse {
 }
 
 /**
-* The role of the member. The value can be one of these: `owner`, `admin`, `member`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The role of the member. The value can be one of these: `owner`, `admin`, `member`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Role {
     #[serde(rename = "admin")]
     Admin,
@@ -14030,6 +13852,7 @@ pub enum Role {
     #[serde(rename = "owner")]
     Owner,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14048,11 +13871,6 @@ impl std::fmt::Display for Role {
     }
 }
 
-impl Default for Role {
-    fn default() -> Role {
-        Role::Noop
-    }
-}
 impl Role {
     pub fn is_noop(&self) -> bool {
         matches!(self, Role::Noop)
@@ -14363,19 +14181,20 @@ pub struct AccountResponse {
 }
 
 /**
-* Use the following options to filter the results of the account's information:
-*   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-*   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-*   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-*   * `meeting_security` — View the account's meeting security settings.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Use the following options to filter the results of the account's information:
+ *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+ *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+ *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+ *   * `meeting_security` — View the account's meeting security settings.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OptionData {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
     #[serde(rename = "recording_authentication")]
     RecordingAuthentication,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14393,11 +14212,6 @@ impl std::fmt::Display for OptionData {
     }
 }
 
-impl Default for OptionData {
-    fn default() -> OptionData {
-        OptionData::Noop
-    }
-}
 impl OptionData {
     pub fn is_noop(&self) -> bool {
         matches!(self, OptionData::Noop)
@@ -14494,7 +14308,7 @@ impl AccountSettingsUpdateRequestOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AccountSettingsUpdateOption {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
@@ -14505,6 +14319,7 @@ pub enum AccountSettingsUpdateOption {
     #[serde(rename = "security")]
     Security,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14524,11 +14339,6 @@ impl std::fmt::Display for AccountSettingsUpdateOption {
     }
 }
 
-impl Default for AccountSettingsUpdateOption {
-    fn default() -> AccountSettingsUpdateOption {
-        AccountSettingsUpdateOption::Noop
-    }
-}
 impl AccountSettingsUpdateOption {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountSettingsUpdateOption::Noop)
@@ -14552,9 +14362,9 @@ pub struct AccountTrustedDomainResponse {
 }
 
 /**
-* Status of the plan.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of the plan.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AccountPlansResponsePlanBaseStatus {
     #[serde(rename = "active")]
     Active,
@@ -14563,6 +14373,7 @@ pub enum AccountPlansResponsePlanBaseStatus {
     #[serde(rename = "expired")]
     Expired,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14581,11 +14392,6 @@ impl std::fmt::Display for AccountPlansResponsePlanBaseStatus {
     }
 }
 
-impl Default for AccountPlansResponsePlanBaseStatus {
-    fn default() -> AccountPlansResponsePlanBaseStatus {
-        AccountPlansResponsePlanBaseStatus::Noop
-    }
-}
 impl AccountPlansResponsePlanBaseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountPlansResponsePlanBaseStatus::Noop)
@@ -14686,15 +14492,16 @@ pub struct PlanWebinar {
 }
 
 /**
-* Status of additional Cloud Recording plan.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of additional Cloud Recording plan.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PlanRecordingStatus {
     #[serde(rename = "Active")]
     Active,
     #[serde(rename = "Cancelled")]
     Cancelled,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14712,11 +14519,6 @@ impl std::fmt::Display for PlanRecordingStatus {
     }
 }
 
-impl Default for PlanRecordingStatus {
-    fn default() -> PlanRecordingStatus {
-        PlanRecordingStatus::Noop
-    }
-}
 impl PlanRecordingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlanRecordingStatus::Noop)
@@ -14967,7 +14769,6 @@ pub struct AccountPlanAddonCreateRequest {
     /**
      * Phone Plan Object
      */
-    #[serde()]
     pub plan_details: PhonePlan,
     /**
      * User's first name.
@@ -15202,17 +15003,18 @@ pub struct GroupMembersCreateResponse {
 }
 
 /**
-* The action to perform:
-*   * `move` — Remove the group member from one group and move them to a different group.
-*   * `set_primary` — Set the user's primary group.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The action to perform:
+ *   * `move` — Remove the group member from one group and move them to a different group.
+ *   * `set_primary` — Set the user's primary group.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UpdateGroupMemberRequestAction {
     #[serde(rename = "move")]
     Move,
     #[serde(rename = "set_primary")]
     SetPrimary,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15230,11 +15032,6 @@ impl std::fmt::Display for UpdateGroupMemberRequestAction {
     }
 }
 
-impl Default for UpdateGroupMemberRequestAction {
-    fn default() -> UpdateGroupMemberRequestAction {
-        UpdateGroupMemberRequestAction::Noop
-    }
-}
 impl UpdateGroupMemberRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, UpdateGroupMemberRequestAction::Noop)
@@ -15297,11 +15094,12 @@ pub struct TrackingfieldGetResponseAllOf {
 }
 
 /**
-* IM Group types:<br>`normal` - Only members can see automatically see the other members of this group. Other people can search for members within this group. <br>`shared` - Everyone under an account can see the group members automatically.<br>`restricted` - Nobody can see the group or search for members except the members in the group.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * IM Group types:<br>`normal` - Only members can see automatically see the other members of this group. Other people can search for members within this group. <br>`shared` - Everyone under an account can see the group members automatically.<br>`restricted` - Nobody can see the group or search for members except the members in the group.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ImGroupCreateRequestType {
     #[serde(rename = "normal")]
+    #[default]
     Normal,
     #[serde(rename = "restricted")]
     Restricted,
@@ -15320,12 +15118,6 @@ impl std::fmt::Display for ImGroupCreateRequestType {
             ImGroupCreateRequestType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for ImGroupCreateRequestType {
-    fn default() -> ImGroupCreateRequestType {
-        ImGroupCreateRequestType::Normal
     }
 }
 
@@ -15453,15 +15245,16 @@ pub struct DashboardImResponse {
 }
 
 /**
-* IM chat session type.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * IM chat session type.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ImChatSessionsResponseType {
     #[serde(rename = "1:1")]
     One,
     #[serde(rename = "Group")]
     Group,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15479,11 +15272,6 @@ impl std::fmt::Display for ImChatSessionsResponseType {
     }
 }
 
-impl Default for ImChatSessionsResponseType {
-    fn default() -> ImChatSessionsResponseType {
-        ImChatSessionsResponseType::Noop
-    }
-}
 impl ImChatSessionsResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ImChatSessionsResponseType::Noop)
@@ -15671,11 +15459,12 @@ pub struct ImChatMessagesResponseAllOf {
 }
 
 /**
-* The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MeetingsType {
     #[serde(rename = "live")]
+    #[default]
     Live,
     #[serde(rename = "scheduled")]
     Scheduled,
@@ -15694,12 +15483,6 @@ impl std::fmt::Display for MeetingsType {
             MeetingsType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for MeetingsType {
-    fn default() -> MeetingsType {
-        MeetingsType::Live
     }
 }
 
@@ -15851,17 +15634,18 @@ pub struct MeetingUpdateRequestAllOf {
 }
 
 /**
-* `end` - End a meeting.<br>
-*   `recover` - [Recover](https://support.zoom.us/hc/en-us/articles/360038297111-Recover-a-deleted-meeting) a deleted meeting.
-*   
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * `end` - End a meeting.<br>
+ *   `recover` - [Recover](https://support.zoom.us/hc/en-us/articles/360038297111-Recover-a-deleted-meeting) a deleted meeting.
+ *   
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MeetingStatusRequestAction {
     #[serde(rename = "end")]
     End,
     #[serde(rename = "recover")]
     Recover,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15879,11 +15663,6 @@ impl std::fmt::Display for MeetingStatusRequestAction {
     }
 }
 
-impl Default for MeetingStatusRequestAction {
-    fn default() -> MeetingStatusRequestAction {
-        MeetingStatusRequestAction::Noop
-    }
-}
 impl MeetingStatusRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, MeetingStatusRequestAction::Noop)
@@ -15902,11 +15681,12 @@ pub struct MeetingStatusRequest {
 }
 
 /**
-* The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MeetingRegistrantsStatus {
     #[serde(rename = "approved")]
+    #[default]
     Approved,
     #[serde(rename = "denied")]
     Denied,
@@ -15925,12 +15705,6 @@ impl std::fmt::Display for MeetingRegistrantsStatus {
             MeetingRegistrantsStatus::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for MeetingRegistrantsStatus {
-    fn default() -> MeetingRegistrantsStatus {
-        MeetingRegistrantsStatus::Approved
     }
 }
 
@@ -16157,9 +15931,9 @@ pub struct PastMeetingParticipantsResponseAllOf {
 }
 
 /**
-* Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MeetingPollCreateResponseStatus {
     #[serde(rename = "ended")]
     Ended,
@@ -16170,6 +15944,7 @@ pub enum MeetingPollCreateResponseStatus {
     #[serde(rename = "started")]
     Started,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16189,11 +15964,6 @@ impl std::fmt::Display for MeetingPollCreateResponseStatus {
     }
 }
 
-impl Default for MeetingPollCreateResponseStatus {
-    fn default() -> MeetingPollCreateResponseStatus {
-        MeetingPollCreateResponseStatus::Noop
-    }
-}
 impl MeetingPollCreateResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, MeetingPollCreateResponseStatus::Noop)
@@ -16270,13 +16040,14 @@ pub struct RecordingGetResponseAllOf {
 }
 
 /**
-* The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RecordingDeleteAction {
     #[serde(rename = "delete")]
     Delete,
     #[serde(rename = "trash")]
+    #[default]
     Trash,
     #[serde(other)]
     FallthroughString,
@@ -16290,12 +16061,6 @@ impl std::fmt::Display for RecordingDeleteAction {
             RecordingDeleteAction::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for RecordingDeleteAction {
-    fn default() -> RecordingDeleteAction {
-        RecordingDeleteAction::Trash
     }
 }
 
@@ -16340,13 +16105,14 @@ pub struct MeetingRecordingRegistrantCreateResponse {
 }
 
 /**
-* Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-*   
-*   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+ *   
+ *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DashboardMeetingsType {
     #[serde(rename = "live")]
+    #[default]
     Live,
     #[serde(rename = "past")]
     Past,
@@ -16368,20 +16134,15 @@ impl std::fmt::Display for DashboardMeetingsType {
     }
 }
 
-impl Default for DashboardMeetingsType {
-    fn default() -> DashboardMeetingsType {
-        DashboardMeetingsType::Live
-    }
-}
-
 /**
-* Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum IncludeFields {
     #[serde(rename = "tracking_fields")]
     TrackingFields,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16398,11 +16159,6 @@ impl std::fmt::Display for IncludeFields {
     }
 }
 
-impl Default for IncludeFields {
-    fn default() -> IncludeFields {
-        IncludeFields::Noop
-    }
-}
 impl IncludeFields {
     pub fn is_noop(&self) -> bool {
         matches!(self, IncludeFields::Noop)
@@ -16442,13 +16198,14 @@ pub struct DashboardMeetingsResponseAllOf {
 }
 
 /**
-* Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DashboardMeetingParticipantsIncludeFields {
     #[serde(rename = "registrant_id")]
     RegistrantId,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16465,11 +16222,6 @@ impl std::fmt::Display for DashboardMeetingParticipantsIncludeFields {
     }
 }
 
-impl Default for DashboardMeetingParticipantsIncludeFields {
-    fn default() -> DashboardMeetingParticipantsIncludeFields {
-        DashboardMeetingParticipantsIncludeFields::Noop
-    }
-}
 impl DashboardMeetingParticipantsIncludeFields {
     pub fn is_noop(&self) -> bool {
         matches!(self, DashboardMeetingParticipantsIncludeFields::Noop)
@@ -16477,17 +16229,17 @@ impl DashboardMeetingParticipantsIncludeFields {
 }
 
 /**
-* The type of device the participant used to join the meeting:
-*   * `Phone` — Participant joined via PSTN.
-*   * `H.323/SIP` — Participant joined via an H.323 or SIP device.
-*   * `Windows` — Participant joined via VoIP using a Windows device.
-*   * `Mac` — Participant joined via VoIP using a Mac device.
-*   * `iOS` — Participant joined via VoIP using an iOS device.
-*   * `Android` — Participant joined via VoIP using an Android device.
-*   
-*   **Note:** This response returns an empty string (`““`) value for any users who are **not** a part of the host’s account (external users).
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of device the participant used to join the meeting:
+ *   * `Phone` — Participant joined via PSTN.
+ *   * `H.323/SIP` — Participant joined via an H.323 or SIP device.
+ *   * `Windows` — Participant joined via VoIP using a Windows device.
+ *   * `Mac` — Participant joined via VoIP using a Mac device.
+ *   * `iOS` — Participant joined via VoIP using an iOS device.
+ *   * `Android` — Participant joined via VoIP using an Android device.
+ *   
+ *   **Note:** This response returns an empty string (`““`) value for any users who are **not** a part of the host’s account (external users).
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DashboardMeetingParticipantsResponseDevice {
     #[serde(rename = "Android")]
     Android,
@@ -16502,6 +16254,7 @@ pub enum DashboardMeetingParticipantsResponseDevice {
     #[serde(rename = "iOS")]
     IOs,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16523,11 +16276,6 @@ impl std::fmt::Display for DashboardMeetingParticipantsResponseDevice {
     }
 }
 
-impl Default for DashboardMeetingParticipantsResponseDevice {
-    fn default() -> DashboardMeetingParticipantsResponseDevice {
-        DashboardMeetingParticipantsResponseDevice::Noop
-    }
-}
 impl DashboardMeetingParticipantsResponseDevice {
     pub fn is_noop(&self) -> bool {
         matches!(self, DashboardMeetingParticipantsResponseDevice::Noop)
@@ -16535,15 +16283,15 @@ impl DashboardMeetingParticipantsResponseDevice {
 }
 
 /**
-* The participant's network type:
-*   
-*   * `Wired`
-*   * `Wifi`
-*   * `PPP` — Point-to-Point.
-*   * `Cellular` — 3G, 4G, and 5G cellular.
-*   * `Others` — An unknown device.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The participant's network type:
+ *   
+ *   * `Wired`
+ *   * `Wifi`
+ *   * `PPP` — Point-to-Point.
+ *   * `Cellular` — 3G, 4G, and 5G cellular.
+ *   * `Others` — An unknown device.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum NetworkType {
     #[serde(rename = "Cellular")]
     Cellular,
@@ -16556,6 +16304,7 @@ pub enum NetworkType {
     #[serde(rename = "Wired")]
     Wired,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16576,11 +16325,6 @@ impl std::fmt::Display for NetworkType {
     }
 }
 
-impl Default for NetworkType {
-    fn default() -> NetworkType {
-        NetworkType::Noop
-    }
-}
 impl NetworkType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkType::Noop)
@@ -16588,9 +16332,9 @@ impl NetworkType {
 }
 
 /**
-* Audio quality of the participant.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Audio quality of the participant.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AudioQuality {
     #[serde(rename = "bad")]
     Bad,
@@ -16601,6 +16345,7 @@ pub enum AudioQuality {
     #[serde(rename = "poor")]
     Poor,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16620,11 +16365,6 @@ impl std::fmt::Display for AudioQuality {
     }
 }
 
-impl Default for AudioQuality {
-    fn default() -> AudioQuality {
-        AudioQuality::Noop
-    }
-}
 impl AudioQuality {
     pub fn is_noop(&self) -> bool {
         matches!(self, AudioQuality::Noop)
@@ -16632,17 +16372,18 @@ impl AudioQuality {
 }
 
 /**
-* Indicates whether the participant is in the waiting room or in the meeting.
-*   
-*   The value of this field can be `in_meeting` or `in_waiting_room`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Indicates whether the participant is in the waiting room or in the meeting.
+ *   
+ *   The value of this field can be `in_meeting` or `in_waiting_room`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DashboardMeetingParticipantsResponseStatus {
     #[serde(rename = "in_meeting")]
     InMeeting,
     #[serde(rename = "in_waiting_room")]
     InWaitingRoom,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16660,11 +16401,6 @@ impl std::fmt::Display for DashboardMeetingParticipantsResponseStatus {
     }
 }
 
-impl Default for DashboardMeetingParticipantsResponseStatus {
-    fn default() -> DashboardMeetingParticipantsResponseStatus {
-        DashboardMeetingParticipantsResponseStatus::Noop
-    }
-}
 impl DashboardMeetingParticipantsResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, DashboardMeetingParticipantsResponseStatus::Noop)
@@ -17083,11 +16819,12 @@ pub struct DashboardMeetingParticipantShareResponseAllOf {
 }
 
 /**
-* The webinar type.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The webinar type.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DashboardWebinarsType {
     #[serde(rename = "live")]
+    #[default]
     Live,
     #[serde(rename = "past")]
     Past,
@@ -17103,12 +16840,6 @@ impl std::fmt::Display for DashboardWebinarsType {
             DashboardWebinarsType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for DashboardWebinarsType {
-    fn default() -> DashboardWebinarsType {
-        DashboardWebinarsType::Live
     }
 }
 
@@ -18077,15 +17808,16 @@ pub struct ReportDailyResponse {
 }
 
 /**
-* Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ReportUsersType {
     #[serde(rename = "active")]
     Active,
     #[serde(rename = "inactive")]
     Inactive,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18103,11 +17835,6 @@ impl std::fmt::Display for ReportUsersType {
     }
 }
 
-impl Default for ReportUsersType {
-    fn default() -> ReportUsersType {
-        ReportUsersType::Noop
-    }
-}
 impl ReportUsersType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReportUsersType::Noop)
@@ -18115,11 +17842,12 @@ impl ReportUsersType {
 }
 
 /**
-* The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ReportMeetingsType {
     #[serde(rename = "past")]
+    #[default]
     Past,
     #[serde(rename = "pastOne")]
     PastOne,
@@ -18135,12 +17863,6 @@ impl std::fmt::Display for ReportMeetingsType {
             ReportMeetingsType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for ReportMeetingsType {
-    fn default() -> ReportMeetingsType {
-        ReportMeetingsType::Past
     }
 }
 
@@ -18897,13 +18619,14 @@ pub struct ReportWebinarQaResponse {
 }
 
 /**
-* Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum QueryDateType {
     #[serde(rename = "end_time")]
     EndTime,
     #[serde(rename = "start_time")]
+    #[default]
     StartTime,
     #[serde(other)]
     FallthroughString,
@@ -18917,12 +18640,6 @@ impl std::fmt::Display for QueryDateType {
             QueryDateType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for QueryDateType {
-    fn default() -> QueryDateType {
-        QueryDateType::StartTime
     }
 }
 
@@ -18956,11 +18673,11 @@ pub struct ReportCloudRecordingResponseAllOf {
 }
 
 /**
-* **Optional**<br>
-*   Filter your response by a category type to see reports for a specific category.
-*   The value for this field can be one of the following:<br> `all`<br>`user`<br>`user_settings`<br>`account`<br>`billing`<br>`im`<br>`recording`<br>`phone_contacts`<br>`webinar`<br>`sub_account`<br>`role`<br>`zoom_rooms`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * **Optional**<br>
+ *   Filter your response by a category type to see reports for a specific category.
+ *   The value for this field can be one of the following:<br> `all`<br>`user`<br>`user_settings`<br>`account`<br>`billing`<br>`im`<br>`recording`<br>`phone_contacts`<br>`webinar`<br>`sub_account`<br>`role`<br>`zoom_rooms`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum CategoryType {
     #[serde(rename = "account")]
     Account,
@@ -18987,6 +18704,7 @@ pub enum CategoryType {
     #[serde(rename = "zoom_rooms")]
     ZoomRooms,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19014,11 +18732,6 @@ impl std::fmt::Display for CategoryType {
     }
 }
 
-impl Default for CategoryType {
-    fn default() -> CategoryType {
-        CategoryType::Noop
-    }
-}
 impl CategoryType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CategoryType::Noop)
@@ -19351,16 +19064,17 @@ pub struct TspUpdateRequest {
 }
 
 /**
-* The user's status:
-*   * `active` — An active user.
-*   * `inactive` — A deactivated user.
-*   * `pending` — A pending user.
-*   
-*   This value defaults to `active`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The user's status:
+ *   * `active` — An active user.
+ *   * `inactive` — A deactivated user.
+ *   * `pending` — A pending user.
+ *   
+ *   This value defaults to `active`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UsersStatus {
     #[serde(rename = "active")]
+    #[default]
     Active,
     #[serde(rename = "inactive")]
     Inactive,
@@ -19382,24 +19096,19 @@ impl std::fmt::Display for UsersStatus {
     }
 }
 
-impl Default for UsersStatus {
-    fn default() -> UsersStatus {
-        UsersStatus::Active
-    }
-}
-
 /**
-* Use this parameter to display one of the following attributes in the API call's response:
-*   * `custom_attributes` — Return the user's custom attributes.
-*   * `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Use this parameter to display one of the following attributes in the API call's response:
+ *   * `custom_attributes` — Return the user's custom attributes.
+ *   * `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UsersIncludeFields {
     #[serde(rename = "custom_attributes")]
     CustomAttributes,
     #[serde(rename = "host_key")]
     HostKey,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19417,11 +19126,6 @@ impl std::fmt::Display for UsersIncludeFields {
     }
 }
 
-impl Default for UsersIncludeFields {
-    fn default() -> UsersIncludeFields {
-        UsersIncludeFields::Noop
-    }
-}
 impl UsersIncludeFields {
     pub fn is_noop(&self) -> bool {
         matches!(self, UsersIncludeFields::Noop)
@@ -19703,9 +19407,9 @@ pub struct UsersResponseData {
 }
 
 /**
-* Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserCreateRequestAction {
     #[serde(rename = "autoCreate")]
     AutoCreate,
@@ -19716,6 +19420,7 @@ pub enum UserCreateRequestAction {
     #[serde(rename = "ssoCreate")]
     SsoCreate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19735,11 +19440,6 @@ impl std::fmt::Display for UserCreateRequestAction {
     }
 }
 
-impl Default for UserCreateRequestAction {
-    fn default() -> UserCreateRequestAction {
-        UserCreateRequestAction::Noop
-    }
-}
 impl UserCreateRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserCreateRequestAction::Noop)
@@ -19808,15 +19508,15 @@ pub struct UserCreateRequest {
 }
 
 /**
-* The user's login method:
-*   
-*   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-*   
-*   The following login methods are only available in China:
-*   
-*   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The user's login method:
+ *   
+ *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+ *   
+ *   The following login methods are only available in China:
+ *   
+ *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LoginType {
     #[serde(rename = "0")]
     Zero,
@@ -19843,6 +19543,7 @@ pub enum LoginType {
     #[serde(rename = "99")]
     NinetyNine,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19870,11 +19571,6 @@ impl std::fmt::Display for LoginType {
     }
 }
 
-impl Default for LoginType {
-    fn default() -> LoginType {
-        LoginType::Noop
-    }
-}
 impl LoginType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LoginType::Noop)
@@ -20206,13 +19902,14 @@ pub struct UserResponseAllOf {
 }
 
 /**
-* Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserDeleteAction {
     #[serde(rename = "delete")]
     Delete,
     #[serde(rename = "disassociate")]
+    #[default]
     Disassociate,
     #[serde(other)]
     FallthroughString,
@@ -20226,12 +19923,6 @@ impl std::fmt::Display for UserDeleteAction {
             UserDeleteAction::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for UserDeleteAction {
-    fn default() -> UserDeleteAction {
-        UserDeleteAction::Disassociate
     }
 }
 
@@ -20326,7 +20017,7 @@ impl UserSettingsUpdateRequestOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserSettingsUpdateOption {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
@@ -20335,6 +20026,7 @@ pub enum UserSettingsUpdateOption {
     #[serde(rename = "recording_authentication")]
     RecordingAuthentication,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20353,11 +20045,6 @@ impl std::fmt::Display for UserSettingsUpdateOption {
     }
 }
 
-impl Default for UserSettingsUpdateOption {
-    fn default() -> UserSettingsUpdateOption {
-        UserSettingsUpdateOption::Noop
-    }
-}
 impl UserSettingsUpdateOption {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserSettingsUpdateOption::Noop)
@@ -20365,15 +20052,16 @@ impl UserSettingsUpdateOption {
 }
 
 /**
-* The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserStatusRequestAction {
     #[serde(rename = "activate")]
     Activate,
     #[serde(rename = "deactivate")]
     Deactivate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20391,11 +20079,6 @@ impl std::fmt::Display for UserStatusRequestAction {
     }
 }
 
-impl Default for UserStatusRequestAction {
-    fn default() -> UserStatusRequestAction {
-        UserStatusRequestAction::Noop
-    }
-}
 impl UserStatusRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserStatusRequestAction::Noop)
@@ -20624,15 +20307,16 @@ pub struct TspAccountData {
 }
 
 /**
-* User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserTokenType {
     #[serde(rename = "token")]
     Token,
     #[serde(rename = "zak")]
     Zak,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20650,11 +20334,6 @@ impl std::fmt::Display for UserTokenType {
     }
 }
 
-impl Default for UserTokenType {
-    fn default() -> UserTokenType {
-        UserTokenType::Noop
-    }
-}
 impl UserTokenType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserTokenType::Noop)
@@ -20863,11 +20542,12 @@ pub struct ListWebinarParticipantsResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum WebinarStatusRequestAction {
     #[serde(rename = "end")]
     End,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20884,11 +20564,6 @@ impl std::fmt::Display for WebinarStatusRequestAction {
     }
 }
 
-impl Default for WebinarStatusRequestAction {
-    fn default() -> WebinarStatusRequestAction {
-        WebinarStatusRequestAction::Noop
-    }
-}
 impl WebinarStatusRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, WebinarStatusRequestAction::Noop)
@@ -21070,7 +20745,6 @@ pub struct SendchatbotRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_id: String,
-    #[serde()]
     pub content: Domains,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -21126,7 +20800,6 @@ pub struct EditChatbotMessageRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_id: String,
-    #[serde()]
     pub content: Domains,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -21992,16 +21665,16 @@ pub struct PhoneUserSettingsResponse {
 }
 
 /**
-* Template type.<br>
-*   The value of this field can be one of the following:<br>
-*   * `user`<br>
-*   * `group`<br>
-*   * `autReceptionist`<br>
-*   * `commonArea`<br>
-*   * `zr`<br>
-*   * `interop`<br>
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Template type.<br>
+ *   The value of this field can be one of the following:<br>
+ *   * `user`<br>
+ *   * `group`<br>
+ *   * `autReceptionist`<br>
+ *   * `commonArea`<br>
+ *   * `zr`<br>
+ *   * `interop`<br>
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListSettingTemplatesResponseType {
     #[serde(rename = "autReceptionist")]
     AutReceptionist,
@@ -22016,6 +21689,7 @@ pub enum ListSettingTemplatesResponseType {
     #[serde(rename = "zr")]
     Zr,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -22037,11 +21711,6 @@ impl std::fmt::Display for ListSettingTemplatesResponseType {
     }
 }
 
-impl Default for ListSettingTemplatesResponseType {
-    fn default() -> ListSettingTemplatesResponseType {
-        ListSettingTemplatesResponseType::Noop
-    }
-}
 impl ListSettingTemplatesResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListSettingTemplatesResponseType::Noop)
@@ -22129,9 +21798,9 @@ pub struct ListSettingTemplatesResponse {
 }
 
 /**
-* The type of template. Values include `user`, `group`, `autoReceptionist`, `commonarea`, or `interop`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of template. Values include `user`, `group`, `autoReceptionist`, `commonarea`, or `interop`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AddSettingTemplateRequestType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -22144,6 +21813,7 @@ pub enum AddSettingTemplateRequestType {
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -22164,11 +21834,6 @@ impl std::fmt::Display for AddSettingTemplateRequestType {
     }
 }
 
-impl Default for AddSettingTemplateRequestType {
-    fn default() -> AddSettingTemplateRequestType {
-        AddSettingTemplateRequestType::Noop
-    }
-}
 impl AddSettingTemplateRequestType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AddSettingTemplateRequestType::Noop)
@@ -22403,7 +22068,6 @@ pub struct Locations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub elin: String,
-    #[serde()]
     pub emergency_address: BatchAddLocationsRequestEmergencyAddress,
     /**
      * User's first name.
@@ -23167,9 +22831,9 @@ pub struct ListSipGroupsResponse {
 }
 
 /**
-* The type of template being queried. Values: `user`, `group`, `auto receptionist` `common area`,`zr`, `interop`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of template being queried. Values: `user`, `group`, `auto receptionist` `common area`,`zr`, `interop`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetSettingTemplateResponseType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -23184,6 +22848,7 @@ pub enum GetSettingTemplateResponseType {
     #[serde(rename = "zr")]
     Zr,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23205,11 +22870,6 @@ impl std::fmt::Display for GetSettingTemplateResponseType {
     }
 }
 
-impl Default for GetSettingTemplateResponseType {
-    fn default() -> GetSettingTemplateResponseType {
-        GetSettingTemplateResponseType::Noop
-    }
-}
 impl GetSettingTemplateResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetSettingTemplateResponseType::Noop)
@@ -23391,15 +23051,15 @@ pub struct CustomHours {
 }
 
 /**
-* Values:<br>
-*   1-user,<br>
-*   2-callQueue, <br>
-*   3-autoReceptionist,<br>
-*   4-commonAreaPhone,<br>
-*   5-zoomRoom, <br>
-*   7-sharedLineGroup
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Values:<br>
+ *   1-user,<br>
+ *   2-callQueue, <br>
+ *   3-autoReceptionist,<br>
+ *   4-commonAreaPhone,<br>
+ *   5-zoomRoom, <br>
+ *   7-sharedLineGroup
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -23414,6 +23074,7 @@ pub enum GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectO
     #[serde(rename = "zoomRoom")]
     ZoomRoom,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23437,14 +23098,6 @@ GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorTy
     }
 }
 
-impl Default
-    for GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType
-{
-    fn default(
-    ) -> GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType {
-        GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType::Noop
-    }
-}
 impl GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType::Noop)
@@ -23571,19 +23224,20 @@ pub struct GetSettingTemplateResponseUserSettingsDeskPhone {
 }
 
 /**
-* The value of this field can be either `default` or `disable`.
-*   
-*   * `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
-*   
-*   * `disable`: This means that the hold music is disabled.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The value of this field can be either `default` or `disable`.
+ *   
+ *   * `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
+ *   
+ *   * `disable`: This means that the hold music is disabled.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum HoldMusic {
     #[serde(rename = "default")]
     Default,
     #[serde(rename = "disable")]
     Disable,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23601,11 +23255,6 @@ impl std::fmt::Display for HoldMusic {
     }
 }
 
-impl Default for HoldMusic {
-    fn default() -> HoldMusic {
-        HoldMusic::Noop
-    }
-}
 impl HoldMusic {
     pub fn is_noop(&self) -> bool {
         matches!(self, HoldMusic::Noop)
@@ -23689,9 +23338,9 @@ pub struct GetSettingTemplateResponse {
 }
 
 /**
-* Values: inbound, outbound, both.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Values: inbound, outbound, both.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RecordingCalls {
     #[serde(rename = "both")]
     Both,
@@ -23700,6 +23349,7 @@ pub enum RecordingCalls {
     #[serde(rename = "outbound")]
     Outbound,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23718,11 +23368,6 @@ impl std::fmt::Display for RecordingCalls {
     }
 }
 
-impl Default for RecordingCalls {
-    fn default() -> RecordingCalls {
-        RecordingCalls::Noop
-    }
-}
 impl RecordingCalls {
     pub fn is_noop(&self) -> bool {
         matches!(self, RecordingCalls::Noop)
@@ -23802,13 +23447,14 @@ pub struct UpdateSettingTemplateRequest {
     pub user_settings: Option<GetSettingTemplateResponseUserSettings>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PhoneUserCallLogsType {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "missed")]
     Missed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23826,11 +23472,6 @@ impl std::fmt::Display for PhoneUserCallLogsType {
     }
 }
 
-impl Default for PhoneUserCallLogsType {
-    fn default() -> PhoneUserCallLogsType {
-        PhoneUserCallLogsType::Noop
-    }
-}
 impl PhoneUserCallLogsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PhoneUserCallLogsType::Noop)
@@ -23838,13 +23479,14 @@ impl PhoneUserCallLogsType {
 }
 
 /**
-* Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TimeType {
     #[serde(rename = "endTime")]
     EndTime,
     #[serde(rename = "startTime")]
+    #[default]
     StartTime,
     #[serde(other)]
     FallthroughString,
@@ -23858,12 +23500,6 @@ impl std::fmt::Display for TimeType {
             TimeType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for TimeType {
-    fn default() -> TimeType {
-        TimeType::StartTime
     }
 }
 
@@ -23917,7 +23553,7 @@ pub struct ForwardedTo {
     pub phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PhoneUserCallLogsResponseForwardedByExtensionType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -23930,6 +23566,7 @@ pub enum PhoneUserCallLogsResponseForwardedByExtensionType {
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23952,11 +23589,6 @@ impl std::fmt::Display for PhoneUserCallLogsResponseForwardedByExtensionType {
     }
 }
 
-impl Default for PhoneUserCallLogsResponseForwardedByExtensionType {
-    fn default() -> PhoneUserCallLogsResponseForwardedByExtensionType {
-        PhoneUserCallLogsResponseForwardedByExtensionType::Noop
-    }
-}
 impl PhoneUserCallLogsResponseForwardedByExtensionType {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -24603,11 +24235,12 @@ pub struct PhoneUserRecordingsResponse {
 }
 
 /**
-* Status of the voice mail
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of the voice mail
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PhoneUserVoiceMailsStatus {
     #[serde(rename = "all")]
+    #[default]
     All,
     #[serde(rename = "read")]
     Read,
@@ -24629,22 +24262,17 @@ impl std::fmt::Display for PhoneUserVoiceMailsStatus {
     }
 }
 
-impl Default for PhoneUserVoiceMailsStatus {
-    fn default() -> PhoneUserVoiceMailsStatus {
-        PhoneUserVoiceMailsStatus::All
-    }
-}
-
 /**
-* Status of the voice mail. Can be either 'read' or 'unread'
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of the voice mail. Can be either 'read' or 'unread'
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PhoneUserVoiceMailsResponseStatus {
     #[serde(rename = "read")]
     Read,
     #[serde(rename = "unread")]
     Unread,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24662,11 +24290,6 @@ impl std::fmt::Display for PhoneUserVoiceMailsResponseStatus {
     }
 }
 
-impl Default for PhoneUserVoiceMailsResponseStatus {
-    fn default() -> PhoneUserVoiceMailsResponseStatus {
-        PhoneUserVoiceMailsResponseStatus::Noop
-    }
-}
 impl PhoneUserVoiceMailsResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PhoneUserVoiceMailsResponseStatus::Noop)
@@ -24972,14 +24595,14 @@ pub struct UpdateUserSettingRequest {
 }
 
 /**
-* The type of call:
-*   *`voip` (Voice over IP)
-*   *`pstn` (Public Switched Telephone Network)
-*   *`tollfree`
-*   *`international`
-*   *`contactCenter`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of call:
+ *   *`voip` (Voice over IP)
+ *   *`pstn` (Public Switched Telephone Network)
+ *   *`tollfree`
+ *   *`international`
+ *   *`contactCenter`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum CallType {
     #[serde(rename = "contactCenter")]
     ContactCenter,
@@ -24992,6 +24615,7 @@ pub enum CallType {
     #[serde(rename = "voip")]
     Voip,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -25012,11 +24636,6 @@ impl std::fmt::Display for CallType {
     }
 }
 
-impl Default for CallType {
-    fn default() -> CallType {
-        CallType::Noop
-    }
-}
 impl CallType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CallType::Noop)
@@ -25378,15 +24997,16 @@ pub struct AssignCallingPlanRequest {
 }
 
 /**
-* The owner type: `user` or `call queue`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The owner type: `user` or `call queue`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetPhoneRecordingsResponseOwnerType {
     #[serde(rename = "call queue")]
     CallQueue,
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -25404,11 +25024,6 @@ impl std::fmt::Display for GetPhoneRecordingsResponseOwnerType {
     }
 }
 
-impl Default for GetPhoneRecordingsResponseOwnerType {
-    fn default() -> GetPhoneRecordingsResponseOwnerType {
-        GetPhoneRecordingsResponseOwnerType::Noop
-    }
-}
 impl GetPhoneRecordingsResponseOwnerType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetPhoneRecordingsResponseOwnerType::Noop)
@@ -25453,15 +25068,16 @@ pub struct GetPhoneRecordingsResponseOwner {
 }
 
 /**
-* The direction of the call. Values: `inbound` or `outbound`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The direction of the call. Values: `inbound` or `outbound`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Direction {
     #[serde(rename = "inbound")]
     Inbound,
     #[serde(rename = "outbound")]
     Outbound,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -25479,11 +25095,6 @@ impl std::fmt::Display for Direction {
     }
 }
 
-impl Default for Direction {
-    fn default() -> Direction {
-        Direction::Noop
-    }
-}
 impl Direction {
     pub fn is_noop(&self) -> bool {
         matches!(self, Direction::Noop)
@@ -25847,13 +25458,14 @@ pub struct AccountPlanBaseDeleteRequest {
 }
 
 /**
-* The action that needs to be taken for this sub account. Value must be set to "cancel".
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The action that needs to be taken for this sub account. Value must be set to "cancel".
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AccountPlanAddonCancelRequestAction {
     #[serde(rename = "cancel")]
     Cancel,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -25870,11 +25482,6 @@ impl std::fmt::Display for AccountPlanAddonCancelRequestAction {
     }
 }
 
-impl Default for AccountPlanAddonCancelRequestAction {
-    fn default() -> AccountPlanAddonCancelRequestAction {
-        AccountPlanAddonCancelRequestAction::Noop
-    }
-}
 impl AccountPlanAddonCancelRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountPlanAddonCancelRequestAction::Noop)
@@ -27352,7 +26959,7 @@ impl UpdateGroupSettingsRequestOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UpdateGroupSettingsOption {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
@@ -27361,6 +26968,7 @@ pub enum UpdateGroupSettingsOption {
     #[serde(rename = "recording_authentication")]
     RecordingAuthentication,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27379,11 +26987,6 @@ impl std::fmt::Display for UpdateGroupSettingsOption {
     }
 }
 
-impl Default for UpdateGroupSettingsOption {
-    fn default() -> UpdateGroupSettingsOption {
-        UpdateGroupSettingsOption::Noop
-    }
-}
 impl UpdateGroupSettingsOption {
     pub fn is_noop(&self) -> bool {
         matches!(self, UpdateGroupSettingsOption::Noop)
@@ -28507,19 +28110,19 @@ pub struct SwitchUserAccountRequest {
 }
 
 /**
-* The recording file type. The value of this field could be one of the following:<br>
-*   * `MP4`: Video file of the recording.<br>
-*   * `M4A` Audio-only file of the recording.<br>
-*   * `TB`: Timestamp file of the recording in JSON format.<br>
-*   * `TRANSCRIPT`: Transcription file of the recording in VTT format.<br>
-*   * `CHAT`: A TXT file containing in-meeting chat messages that were sent during the meeting.<br>
-*   * `CC`: File containing closed captions of the recording in VTT file format.<br>
-*   * `CSV`: File containing polling data in csv format.
-*   
-*   A recording file object with file type of either `CC` or `TB` **does not have** the following properties:<br>
-*   	`id`, `status`, `file_size`, `recording_type`, and `play_url`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The recording file type. The value of this field could be one of the following:<br>
+ *   * `MP4`: Video file of the recording.<br>
+ *   * `M4A` Audio-only file of the recording.<br>
+ *   * `TB`: Timestamp file of the recording in JSON format.<br>
+ *   * `TRANSCRIPT`: Transcription file of the recording in VTT format.<br>
+ *   * `CHAT`: A TXT file containing in-meeting chat messages that were sent during the meeting.<br>
+ *   * `CC`: File containing closed captions of the recording in VTT file format.<br>
+ *   * `CSV`: File containing polling data in csv format.
+ *   
+ *   A recording file object with file type of either `CC` or `TB` **does not have** the following properties:<br>
+ *   	`id`, `status`, `file_size`, `recording_type`, and `play_url`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesFileType {
     #[serde(rename = "CC")]
     Cc,
@@ -28536,6 +28139,7 @@ pub enum GetAccountCloudRecordingResponseMeetingsFilesFileType {
     #[serde(rename = "TRANSCRIPT")]
     Transcript,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28558,11 +28162,6 @@ impl std::fmt::Display for GetAccountCloudRecordingResponseMeetingsFilesFileType
     }
 }
 
-impl Default for GetAccountCloudRecordingResponseMeetingsFilesFileType {
-    fn default() -> GetAccountCloudRecordingResponseMeetingsFilesFileType {
-        GetAccountCloudRecordingResponseMeetingsFilesFileType::Noop
-    }
-}
 impl GetAccountCloudRecordingResponseMeetingsFilesFileType {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -28573,15 +28172,16 @@ impl GetAccountCloudRecordingResponseMeetingsFilesFileType {
 }
 
 /**
-* The status of the recording, either `completed` or `processing`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The status of the recording, either `completed` or `processing`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesStatus {
     #[serde(rename = "completed")]
     Completed,
     #[serde(rename = "processing")]
     Processing,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28599,11 +28199,6 @@ impl std::fmt::Display for GetAccountCloudRecordingResponseMeetingsFilesStatus {
     }
 }
 
-impl Default for GetAccountCloudRecordingResponseMeetingsFilesStatus {
-    fn default() -> GetAccountCloudRecordingResponseMeetingsFilesStatus {
-        GetAccountCloudRecordingResponseMeetingsFilesStatus::Noop
-    }
-}
 impl GetAccountCloudRecordingResponseMeetingsFilesStatus {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -28614,24 +28209,24 @@ impl GetAccountCloudRecordingResponseMeetingsFilesStatus {
 }
 
 /**
-* The recording type. The value of this field can be one of the following:<br>
-*   * `shared_screen_with_speaker_view(CC)`
-*   * `shared_screen_with_speaker_view`
-*   * `shared_screen_with_gallery_view`
-*   * `shared_screen`
-*   * `active_speaker`
-*   * `gallery_view`
-*   * `audio_only`
-*   * `audio_transcript`
-*   * `chat_file`
-*   * `host_video`
-*   * `closed_caption`
-*   * `poll`
-*   * `timeline`
-*   * `thumbnail`
-*   
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The recording type. The value of this field can be one of the following:<br>
+ *   * `shared_screen_with_speaker_view(CC)`
+ *   * `shared_screen_with_speaker_view`
+ *   * `shared_screen_with_gallery_view`
+ *   * `shared_screen`
+ *   * `active_speaker`
+ *   * `gallery_view`
+ *   * `audio_only`
+ *   * `audio_transcript`
+ *   * `chat_file`
+ *   * `host_video`
+ *   * `closed_caption`
+ *   * `poll`
+ *   * `timeline`
+ *   * `thumbnail`
+ *   
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesType {
     #[serde(rename = "active_speaker")]
     ActiveSpeaker,
@@ -28662,6 +28257,7 @@ pub enum GetAccountCloudRecordingResponseMeetingsFilesType {
     #[serde(rename = "timeline")]
     Timeline,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28699,11 +28295,6 @@ impl std::fmt::Display for GetAccountCloudRecordingResponseMeetingsFilesType {
     }
 }
 
-impl Default for GetAccountCloudRecordingResponseMeetingsFilesType {
-    fn default() -> GetAccountCloudRecordingResponseMeetingsFilesType {
-        GetAccountCloudRecordingResponseMeetingsFilesType::Noop
-    }
-}
 impl GetAccountCloudRecordingResponseMeetingsFilesType {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -29080,15 +28671,16 @@ pub struct UpdateZrAccProfileRequest {
 }
 
 /**
-* The type of setting that you would like to retrieve.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
-*   `meeting`: Meeting settings of the Zoom Rooms Account. <br>
-*   `signage`: View digital signage settings of the Zoom Rooms Account.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of setting that you would like to retrieve.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
+ *   `meeting`: Meeting settings of the Zoom Rooms Account. <br>
+ *   `signage`: View digital signage settings of the Zoom Rooms Account.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SettingType {
     #[serde(rename = "alert")]
     Alert,
     #[serde(rename = "meeting")]
+    #[default]
     Meeting,
     #[serde(other)]
     FallthroughString,
@@ -29105,17 +28697,11 @@ impl std::fmt::Display for SettingType {
     }
 }
 
-impl Default for SettingType {
-    fn default() -> SettingType {
-        SettingType::Meeting
-    }
-}
-
 /**
-* The type of location. The value can be one of the following:
-*   `country`, `states`, `city`, `campus`, `building`, `floor`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of location. The value can be one of the following:
+ *   `country`, `states`, `city`, `campus`, `building`, `floor`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListZrLocationsResponseType {
     #[serde(rename = "building")]
     Building,
@@ -29130,6 +28716,7 @@ pub enum ListZrLocationsResponseType {
     #[serde(rename = "states")]
     States,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29151,11 +28738,6 @@ impl std::fmt::Display for ListZrLocationsResponseType {
     }
 }
 
-impl Default for ListZrLocationsResponseType {
-    fn default() -> ListZrLocationsResponseType {
-        ListZrLocationsResponseType::Noop
-    }
-}
 impl ListZrLocationsResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListZrLocationsResponseType::Noop)
@@ -29481,9 +29063,9 @@ pub struct UpdateRoomProfileRequest {
 }
 
 /**
-* Type of the device. The value of this field can be one of the following:<br>`Zoom Rooms Computer`,<br> `Controller`, `Scheduling Display`, `Zoom Rooms Control System`, `Companion Whiteboard`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Type of the device. The value of this field can be one of the following:<br>`Zoom Rooms Computer`,<br> `Controller`, `Scheduling Display`, `Zoom Rooms Control System`, `Companion Whiteboard`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DeviceType {
     #[serde(rename = "Companion Whiteboard")]
     CompanionWhiteboard,
@@ -29496,6 +29078,7 @@ pub enum DeviceType {
     #[serde(rename = "Zoom Rooms Control System")]
     ZoomRoomsControlSystem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29516,11 +29099,6 @@ impl std::fmt::Display for DeviceType {
     }
 }
 
-impl Default for DeviceType {
-    fn default() -> DeviceType {
-        DeviceType::Noop
-    }
-}
 impl DeviceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeviceType::Noop)
@@ -29528,15 +29106,16 @@ impl DeviceType {
 }
 
 /**
-* Status of the device. The value can be either `Online` or `Offline`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of the device. The value can be either `Online` or `Offline`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListZrDevicesResponseStatus {
     #[serde(rename = "Offline")]
     Offline,
     #[serde(rename = "Online")]
     Online,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29554,11 +29133,6 @@ impl std::fmt::Display for ListZrDevicesResponseStatus {
     }
 }
 
-impl Default for ListZrDevicesResponseStatus {
-    fn default() -> ListZrDevicesResponseStatus {
-        ListZrDevicesResponseStatus::Noop
-    }
-}
 impl ListZrDevicesResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListZrDevicesResponseStatus::Noop)
@@ -29832,15 +29406,16 @@ pub struct ListMeetingSatisfactionResponse {
 }
 
 /**
-* State of the device. The value should be either `assigned` to list devices that have been assigned to user(s) or `unassigned` to list devices that have not yet been assigned to any user in the Zoom account.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * State of the device. The value should be either `assigned` to list devices that have been assigned to user(s) or `unassigned` to list devices that have not yet been assigned to any user in the Zoom account.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListPhoneDevicesType {
     #[serde(rename = "assigned")]
     Assigned,
     #[serde(rename = "unassigned")]
     Unassigned,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29858,11 +29433,6 @@ impl std::fmt::Display for ListPhoneDevicesType {
     }
 }
 
-impl Default for ListPhoneDevicesType {
-    fn default() -> ListPhoneDevicesType {
-        ListPhoneDevicesType::Noop
-    }
-}
 impl ListPhoneDevicesType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListPhoneDevicesType::Noop)
@@ -29901,15 +29471,16 @@ pub struct AddAutoReceptionistResponse {
 }
 
 /**
-* Status of the device. The value is either `online` or `offline`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Status of the device. The value is either `online` or `offline`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListPhoneDevicesResponseStatus {
     #[serde(rename = "offline")]
     Offline,
     #[serde(rename = "online")]
     Online,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29927,11 +29498,6 @@ impl std::fmt::Display for ListPhoneDevicesResponseStatus {
     }
 }
 
-impl Default for ListPhoneDevicesResponseStatus {
-    fn default() -> ListPhoneDevicesResponseStatus {
-        ListPhoneDevicesResponseStatus::Noop
-    }
-}
 impl ListPhoneDevicesResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListPhoneDevicesResponseStatus::Noop)
@@ -30107,15 +29673,15 @@ pub struct GetDeviceResponseAssignee {
 }
 
 /**
-* [Provisioning type](https://support.zoom.us/hc/en-us/articles/360033223411). The value can be one of the following:
-*   
-*   * `ztp` : Zero touch provisioning.
-*   * `assisted`: Assisted provisioning.
-*   * `manual`: Manual provisioning.
-*   
-*   
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * [Provisioning type](https://support.zoom.us/hc/en-us/articles/360033223411). The value can be one of the following:
+ *   
+ *   * `ztp` : Zero touch provisioning.
+ *   * `assisted`: Assisted provisioning.
+ *   * `manual`: Manual provisioning.
+ *   
+ *   
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetDeviceResponseProvisionType {
     #[serde(rename = "assisted")]
     Assisted,
@@ -30124,6 +29690,7 @@ pub enum GetDeviceResponseProvisionType {
     #[serde(rename = "ztp")]
     Ztp,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30142,11 +29709,6 @@ impl std::fmt::Display for GetDeviceResponseProvisionType {
     }
 }
 
-impl Default for GetDeviceResponseProvisionType {
-    fn default() -> GetDeviceResponseProvisionType {
-        GetDeviceResponseProvisionType::Noop
-    }
-}
 impl GetDeviceResponseProvisionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetDeviceResponseProvisionType::Noop)
@@ -30879,17 +30441,18 @@ pub struct CreateCallQueueResponse {
 }
 
 /**
-* Level of the user. The value can be one of the following:<br>
-*   `manager`: A call queue manager has the privilege to change call queue settings, policy settings and manage recordings and voicemail inbox. There can only be one manager for each call queue.<br><br>
-*   `user`: Regular user without the privileges of a manager.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Level of the user. The value can be one of the following:<br>
+ *   `manager`: A call queue manager has the privilege to change call queue settings, policy settings and manage recordings and voicemail inbox. There can only be one manager for each call queue.<br><br>
+ *   `user`: Regular user without the privileges of a manager.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Level {
     #[serde(rename = "manager")]
     Manager,
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30907,11 +30470,6 @@ impl std::fmt::Display for Level {
     }
 }
 
-impl Default for Level {
-    fn default() -> Level {
-        Level::Noop
-    }
-}
 impl Level {
     pub fn is_noop(&self) -> bool {
         matches!(self, Level::Noop)
@@ -31848,9 +31406,9 @@ pub struct InternationalCall {
 }
 
 /**
-* Allow Hot Desking feature to current device.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Allow Hot Desking feature to current device.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
     #[serde(rename = "off")]
     Off,
@@ -31859,6 +31417,7 @@ pub enum GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
     #[serde(rename = "unsupported")]
     Unsupported,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31877,11 +31436,6 @@ impl std::fmt::Display for GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
     }
 }
 
-impl Default for GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
-    fn default() -> GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
-        GetCommonAreaPhoneResponsePolicyHotDeskingStatus::Noop
-    }
-}
 impl GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetCommonAreaPhoneResponsePolicyHotDeskingStatus::Noop)
@@ -32153,17 +31707,18 @@ pub struct AssignCallingPlansCommonAreaPhoneResponseData {
 }
 
 /**
-* Indicates the match type for the blocked list. The values can be one of the following:<br>
-*   `phoneNumber`: Indicates that only a specific phone number that is shown in the `phone_number` field is blocked.<br><br>
-*   `prefix`: Indicates that all numbers starting with prefix that is shown in the `phone_number` field are blocked.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Indicates the match type for the blocked list. The values can be one of the following:<br>
+ *   `phoneNumber`: Indicates that only a specific phone number that is shown in the `phone_number` field is blocked.<br><br>
+ *   `prefix`: Indicates that all numbers starting with prefix that is shown in the `phone_number` field are blocked.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MatchType {
     #[serde(rename = "phoneNumber")]
     PhoneNumber,
     #[serde(rename = "prefix")]
     Prefix,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32181,11 +31736,6 @@ impl std::fmt::Display for MatchType {
     }
 }
 
-impl Default for MatchType {
-    fn default() -> MatchType {
-        MatchType::Noop
-    }
-}
 impl MatchType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MatchType::Noop)
@@ -33358,9 +32908,9 @@ pub struct AddCalloutCountriesResponse {
 }
 
 /**
-* Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Languages {
     #[serde(rename = "de-DE")]
     De,
@@ -33369,6 +32919,7 @@ pub enum Languages {
     #[serde(rename = "en-US")]
     EnUs,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -33387,11 +32938,6 @@ impl std::fmt::Display for Languages {
     }
 }
 
-impl Default for Languages {
-    fn default() -> Languages {
-        Languages::Noop
-    }
-}
 impl Languages {
     pub fn is_noop(&self) -> bool {
         matches!(self, Languages::Noop)
@@ -33623,13 +33169,13 @@ pub struct AddInternalNumbersResponseData {
 }
 
 /**
-* Specify one of the following values for this field:
-*   
-*   `upgrade`: Upgrade to the latest Zoom Rooms App Version.<br>
-*   `downgrade`: Downgrade the Zoom Rooms App Version.<br>
-*   `cancel`: Cancel an ongoing upgrade or downgrade process.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Specify one of the following values for this field:
+ *   
+ *   `upgrade`: Upgrade to the latest Zoom Rooms App Version.<br>
+ *   `downgrade`: Downgrade the Zoom Rooms App Version.<br>
+ *   `cancel`: Cancel an ongoing upgrade or downgrade process.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ChangeZoomRoomsAppVersionRequestAction {
     #[serde(rename = "cancel")]
     Cancel,
@@ -33638,6 +33184,7 @@ pub enum ChangeZoomRoomsAppVersionRequestAction {
     #[serde(rename = "upgrade")]
     Upgrade,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -33656,11 +33203,6 @@ impl std::fmt::Display for ChangeZoomRoomsAppVersionRequestAction {
     }
 }
 
-impl Default for ChangeZoomRoomsAppVersionRequestAction {
-    fn default() -> ChangeZoomRoomsAppVersionRequestAction {
-        ChangeZoomRoomsAppVersionRequestAction::Noop
-    }
-}
 impl ChangeZoomRoomsAppVersionRequestAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ChangeZoomRoomsAppVersionRequestAction::Noop)
@@ -33728,26 +33270,26 @@ pub struct ListWebinarTemplatesResponse {
 }
 
 /**
-* Presence status of the user. The value can be set to one of the following:<br>
-*   * `Away`
-*   * `Do_Not_Disturb`
-*   * `Available`
-*   * `In_Calendar_Event`
-*   * `Presenting`
-*   * `In_A_Zoom_Meeting`
-*   * `On_A_Call`
-*   
-*   Users who are on Zoom Client with a version **lower than 5.3.0** can update the status from:
-*   * `Away` to `Do_Not_Disturb`
-*   * `Available` to `Do_Not_Disturb`
-*   
-*   Users who are on **Zoom Client 5.3.0** or higher can update the status from:
-*   * `Do_Not_Disturb` to `Away`
-*   * `Do_Not_Disturb` to `Available`
-*   * `Available` to `Away`
-*   * `Away` to `Available`
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Presence status of the user. The value can be set to one of the following:<br>
+ *   * `Away`
+ *   * `Do_Not_Disturb`
+ *   * `Available`
+ *   * `In_Calendar_Event`
+ *   * `Presenting`
+ *   * `In_A_Zoom_Meeting`
+ *   * `On_A_Call`
+ *   
+ *   Users who are on Zoom Client with a version **lower than 5.3.0** can update the status from:
+ *   * `Away` to `Do_Not_Disturb`
+ *   * `Available` to `Do_Not_Disturb`
+ *   
+ *   Users who are on **Zoom Client 5.3.0** or higher can update the status from:
+ *   * `Do_Not_Disturb` to `Away`
+ *   * `Do_Not_Disturb` to `Available`
+ *   * `Available` to `Away`
+ *   * `Away` to `Available`
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UpdatePresenceStatusRequest {
     #[serde(rename = "Available")]
     Available,
@@ -33764,6 +33306,7 @@ pub enum UpdatePresenceStatusRequest {
     #[serde(rename = "Presenting")]
     Presenting,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -33786,11 +33329,6 @@ impl std::fmt::Display for UpdatePresenceStatusRequest {
     }
 }
 
-impl Default for UpdatePresenceStatusRequest {
-    fn default() -> UpdatePresenceStatusRequest {
-        UpdatePresenceStatusRequest::Noop
-    }
-}
 impl UpdatePresenceStatusRequest {
     pub fn is_noop(&self) -> bool {
         matches!(self, UpdatePresenceStatusRequest::Noop)
@@ -34675,18 +34213,19 @@ pub struct GetAccountBillingInvoiceResponse {
 }
 
 /**
-* Feedback submitted by the participant.
-*   
-*   * `GOOD`: Thumbs up.
-*   * `NOT GOOD`: Thumbs down.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Feedback submitted by the participant.
+ *   
+ *   * `GOOD`: Thumbs up.
+ *   * `NOT GOOD`: Thumbs down.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Quality {
     #[serde(rename = "GOOD")]
     Good,
     #[serde(rename = "NOT GOOD")]
     NotGood,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34704,11 +34243,6 @@ impl std::fmt::Display for Quality {
     }
 }
 
-impl Default for Quality {
-    fn default() -> Quality {
-        Quality::Noop
-    }
-}
 impl Quality {
     pub fn is_noop(&self) -> bool {
         matches!(self, Quality::Noop)
@@ -34783,9 +34317,9 @@ pub struct ParticipantFeedbackResponse {
 }
 
 /**
-* Result of the call: `call_connected` | `recorded` | `no_answer`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Result of the call: `call_connected` | `recorded` | `no_answer`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Result {
     #[serde(rename = "call_connected")]
     CallConnected,
@@ -34794,6 +34328,7 @@ pub enum Result {
     #[serde(rename = "recorded")]
     Recorded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34812,11 +34347,6 @@ impl std::fmt::Display for Result {
     }
 }
 
-impl Default for Result {
-    fn default() -> Result {
-        Result::Noop
-    }
-}
 impl Result {
     pub fn is_noop(&self) -> bool {
         matches!(self, Result::Noop)
@@ -35189,13 +34719,14 @@ pub struct ListMeetingTemplatesResponseData {
 }
 
 /**
-* The query date type for the `from` and `to` parameters.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The query date type for the `from` and `to` parameters.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ListArchivedFilesQueryDateType {
     #[serde(rename = "archive_complete_time")]
     ArchiveCompleteTime,
     #[serde(rename = "meeting_start_time")]
+    #[default]
     MeetingStartTime,
     #[serde(other)]
     FallthroughString,
@@ -35209,12 +34740,6 @@ impl std::fmt::Display for ListArchivedFilesQueryDateType {
             ListArchivedFilesQueryDateType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for ListArchivedFilesQueryDateType {
-    fn default() -> ListArchivedFilesQueryDateType {
-        ListArchivedFilesQueryDateType::MeetingStartTime
     }
 }
 

@@ -34,7 +34,7 @@ impl Transfers {
         limit: i64,
         starting_after: &str,
         transfer_group: &str,
-    ) -> ClientResult<Vec<crate::types::Transfer>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Transfer>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -53,7 +53,7 @@ impl Transfers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/transfers?{}", query_), None);
-        let resp: crate::types::TransferList = self
+        let resp: crate::Response<crate::types::TransferList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl Transfers {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/transfers` endpoint.
@@ -79,7 +83,7 @@ impl Transfers {
         _created: &str,
         destination: &str,
         transfer_group: &str,
-    ) -> ClientResult<Vec<crate::types::Transfer>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Transfer>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -89,7 +93,11 @@ impl Transfers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/transfers?{}", query_), None);
-        let mut resp: crate::types::TransferList = self
+        let crate::Response::<crate::types::TransferList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -100,8 +108,8 @@ impl Transfers {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -117,7 +125,11 @@ impl Transfers {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::TransferList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -128,7 +140,11 @@ impl Transfers {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::TransferList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -140,20 +156,20 @@ impl Transfers {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/transfers` endpoint.
      *
      * <p>To send funds from your Stripe account to a connected account, you create a new transfer object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Transfer> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Transfer>> {
         let url = self.client.url("/v1/transfers", None);
         self.client
             .post(
@@ -184,7 +200,7 @@ impl Transfers {
         id: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::TransferReversal>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TransferReversal>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -204,7 +220,7 @@ impl Transfers {
             ),
             None,
         );
-        let resp: crate::types::Reversals = self
+        let resp: crate::Response<crate::types::Reversals> = self
             .client
             .get(
                 &url,
@@ -216,7 +232,11 @@ impl Transfers {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/transfers/{id}/reversals` endpoint.
@@ -228,7 +248,7 @@ impl Transfers {
     pub async fn get_all_reversals(
         &self,
         id: &str,
-    ) -> ClientResult<Vec<crate::types::TransferReversal>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TransferReversal>>> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals",
@@ -236,7 +256,11 @@ impl Transfers {
             ),
             None,
         );
-        let mut resp: crate::types::Reversals = self
+        let crate::Response::<crate::types::Reversals> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -247,8 +271,8 @@ impl Transfers {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -264,7 +288,11 @@ impl Transfers {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Reversals> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -275,7 +303,11 @@ impl Transfers {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Reversals> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -287,13 +319,13 @@ impl Transfers {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/transfers/{id}/reversals` endpoint.
@@ -308,7 +340,10 @@ impl Transfers {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_reversal(&self, id: &str) -> ClientResult<crate::types::TransferReversal> {
+    pub async fn post_reversal(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::TransferReversal>> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals",
@@ -336,7 +371,10 @@ impl Transfers {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `transfer: &str` -- The account's country.
      */
-    pub async fn get(&self, transfer: &str) -> ClientResult<crate::types::Transfer> {
+    pub async fn get(
+        &self,
+        transfer: &str,
+    ) -> ClientResult<crate::Response<crate::types::Transfer>> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}",
@@ -365,7 +403,10 @@ impl Transfers {
      *
      * * `transfer: &str` -- The account's country.
      */
-    pub async fn post_transfers(&self, transfer: &str) -> ClientResult<crate::types::Transfer> {
+    pub async fn post_transfers(
+        &self,
+        transfer: &str,
+    ) -> ClientResult<crate::Response<crate::types::Transfer>> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}",
@@ -398,7 +439,7 @@ impl Transfers {
         &self,
         id: &str,
         transfer: &str,
-    ) -> ClientResult<crate::types::TransferReversal> {
+    ) -> ClientResult<crate::Response<crate::types::TransferReversal>> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals/{}",
@@ -433,7 +474,7 @@ impl Transfers {
         &self,
         id: &str,
         transfer: &str,
-    ) -> ClientResult<crate::types::TransferReversal> {
+    ) -> ClientResult<crate::Response<crate::types::TransferReversal>> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals/{}",

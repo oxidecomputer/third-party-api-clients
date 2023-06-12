@@ -34,7 +34,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         body: &crate::types::ChecksCreateRequest,
-    ) -> ClientResult<crate::types::CheckRun> {
+    ) -> ClientResult<crate::Response<crate::types::CheckRun>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs",
@@ -75,7 +75,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         check_run_id: i64,
-    ) -> ClientResult<crate::types::CheckRun> {
+    ) -> ClientResult<crate::Response<crate::types::CheckRun>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs/{}",
@@ -118,7 +118,7 @@ impl Checks {
         repo: &str,
         check_run_id: i64,
         body: &crate::types::ChecksUpdateRequest,
-    ) -> ClientResult<crate::types::CheckRun> {
+    ) -> ClientResult<crate::Response<crate::types::CheckRun>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs/{}",
@@ -162,7 +162,7 @@ impl Checks {
         check_run_id: i64,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::CheckAnnotation>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CheckAnnotation>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -207,7 +207,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         check_run_id: i64,
-    ) -> ClientResult<Vec<crate::types::CheckAnnotation>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CheckAnnotation>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs/{}/annotations",
@@ -248,7 +248,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         body: &crate::types::ChecksCreateSuiteRequest,
-    ) -> ClientResult<crate::types::CheckSuiteData> {
+    ) -> ClientResult<crate::Response<crate::types::CheckSuiteData>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites",
@@ -286,7 +286,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         body: &crate::types::Preferences,
-    ) -> ClientResult<crate::types::CheckSuitePreference> {
+    ) -> ClientResult<crate::Response<crate::types::CheckSuitePreference>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites/preferences",
@@ -327,7 +327,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         check_suite_id: i64,
-    ) -> ClientResult<crate::types::CheckSuiteData> {
+    ) -> ClientResult<crate::Response<crate::types::CheckSuiteData>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites/{}",
@@ -381,7 +381,7 @@ impl Checks {
         filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ChecksListRefResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChecksListRefResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !check_name.is_empty() {
             query_args.push(("check_name".to_string(), check_name.to_string()));
@@ -441,7 +441,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         check_suite_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites/{}/rerequest",
@@ -497,7 +497,7 @@ impl Checks {
         per_page: i64,
         page: i64,
         app_id: i64,
-    ) -> ClientResult<crate::types::ChecksListRefResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChecksListRefResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if app_id > 0 {
             query_args.push(("app_id".to_string(), app_id.to_string()));
@@ -568,7 +568,7 @@ impl Checks {
         check_name: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ChecksListSuitesRefResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ChecksListSuitesRefResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if app_id > 0 {
             query_args.push(("app_id".to_string(), app_id.to_string()));

@@ -35,7 +35,7 @@ impl Devices {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -68,7 +68,7 @@ impl Devices {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light` <br>
      */
-    pub async fn create(&self, body: &crate::types::Device) -> ClientResult<()> {
+    pub async fn create(&self, body: &crate::types::Device) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/h323/devices", None);
         self.client
             .post(
@@ -94,7 +94,7 @@ impl Devices {
      *
      * * `device_id: &str` -- User's first name.
      */
-    pub async fn delete(&self, device_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, device_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/h323/devices/{}",
@@ -126,7 +126,11 @@ impl Devices {
      *
      * * `device_id: &str` -- User's first name.
      */
-    pub async fn update(&self, device_id: &str, body: &crate::types::Device) -> ClientResult<()> {
+    pub async fn update(
+        &self,
+        device_id: &str,
+        body: &crate::types::Device,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/h323/devices/{}",

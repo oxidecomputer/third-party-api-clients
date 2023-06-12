@@ -39,7 +39,7 @@ impl IpAddresses {
         offset: i64,
         subuser: &str,
         sort_by_direction: crate::types::SortByDirection,
-    ) -> ClientResult<Vec<crate::types::GetIpsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetIpsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if exclude_whitelabels {
             query_args.push((
@@ -97,7 +97,7 @@ impl IpAddresses {
         offset: i64,
         subuser: &str,
         sort_by_direction: crate::types::SortByDirection,
-    ) -> ClientResult<Vec<crate::types::GetIpsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetIpsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if exclude_whitelabels {
             query_args.push((
@@ -142,7 +142,7 @@ impl IpAddresses {
     pub async fn post_ip(
         &self,
         body: &crate::types::PostIpsRequest,
-    ) -> ClientResult<crate::types::PostIpsResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::PostIpsResponseData>> {
         let url = self.client.url("/ips", None);
         self.client
             .post(
@@ -161,7 +161,9 @@ impl IpAddresses {
      *
      * **This endpoint gets amount of IP Addresses that can still be created during a given period and the price of those IPs.**
      */
-    pub async fn get_ips_remaining(&self) -> ClientResult<crate::types::GetIpsRemainingResponse> {
+    pub async fn get_ips_remaining(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::GetIpsRemainingResponse>> {
         let url = self.client.url("/ips/remaining", None);
         self.client
             .get(
@@ -184,7 +186,7 @@ impl IpAddresses {
      */
     pub async fn get_ips_assigned(
         &self,
-    ) -> ClientResult<Vec<crate::types::GetIpsAssignedResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetIpsAssignedResponse>>> {
         let url = self.client.url("/ips/assigned", None);
         self.client
             .get(
@@ -209,7 +211,7 @@ impl IpAddresses {
      */
     pub async fn get_all_ips_assigned(
         &self,
-    ) -> ClientResult<Vec<crate::types::GetIpsAssignedResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetIpsAssignedResponse>>> {
         let url = self.client.url("/ips/assigned", None);
         self.client
             .get_all_pages(
@@ -235,7 +237,7 @@ impl IpAddresses {
     pub async fn get_ips_ip_address(
         &self,
         ip_address: &str,
-    ) -> ClientResult<crate::types::GetIpsIpAddressResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetIpsIpAddressResponse>> {
         let url = self.client.url(
             &format!(
                 "/ips/{}",

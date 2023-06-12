@@ -1,3 +1,4 @@
+use base64::{engine::general_purpose::STANDARD, Engine};
 use std::env;
 
 #[cfg(feature = "httpcache")]
@@ -16,7 +17,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app_installation_id = app_installation_id_str.parse::<i64>().unwrap();
 
     let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
-    let private_key = base64::decode(encoded_private_key).unwrap();
+    let private_key = STANDARD.decode(encoded_private_key).unwrap();
 
     // Decode the key.
     let key = nom_pem::decode_block(&private_key).unwrap();

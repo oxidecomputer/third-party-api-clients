@@ -27,7 +27,7 @@ impl ConnectConfigurations {
     pub async fn connect_get_config(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::ConnectConfigResults> {
+    ) -> ClientResult<crate::Response<crate::types::ConnectConfigResults>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
@@ -62,7 +62,7 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
-    ) -> ClientResult<crate::types::ConnectCustomConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::ConnectCustomConfiguration>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
@@ -98,7 +98,7 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
-    ) -> ClientResult<crate::types::ConnectCustomConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::ConnectCustomConfiguration>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
@@ -135,7 +135,7 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
         connect_id: &str,
-    ) -> ClientResult<crate::types::ConnectConfigResults> {
+    ) -> ClientResult<crate::Response<crate::types::ConnectConfigResults>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/{}",
@@ -175,7 +175,7 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
         connect_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/{}",
@@ -233,7 +233,7 @@ impl ConnectConfigurations {
         start_position: &str,
         status: &str,
         user_name_substring: &str,
-    ) -> ClientResult<crate::types::IntegratedUserInfoList> {
+    ) -> ClientResult<crate::Response<crate::types::IntegratedUserInfoList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));

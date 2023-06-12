@@ -895,13 +895,13 @@ impl TypeSpace {
         if let Some(s) = schema {
             if let Some(description) = &s.description {
                 a(&format!(
-                    "* {}",
-                    description.replace('*', "\\*").replace('\n', "\n*  ")
+                    " * {}",
+                    description.replace('*', "\\*").replace('\n', "\n *  ")
                 ));
             }
             if let Some(external_docs) = &s.external_docs {
-                a("*");
-                a(&format!("* FROM: <{}>", external_docs.url));
+                a(" *");
+                a(&format!(" * FROM: <{}>", external_docs.url));
             }
         }
 
@@ -2195,8 +2195,8 @@ fn render_param(
 
     if !description.is_empty() {
         a("/**");
-        a(&format!("* {}", description.replace('\n', "\n*   ")));
-        a("*/");
+        a(&format!(" * {}", description.replace('\n', "\n *   ")));
+        a(" */");
     }
 
     a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
@@ -2281,6 +2281,7 @@ fn render_param(
     out.to_string()
 }
 
+#[allow(clippy::too_many_arguments)]
 fn gen(
     api: &OpenAPI,
     proper_name: &str,
@@ -2372,8 +2373,31 @@ fn gen(
 
     a("");
 
-    a("use thiserror::Error;");
+    a(r#"
+pub use reqwest::{StatusCode, header::HeaderMap};
+
+#[derive(Debug)]
+pub struct Response<T> {
+    pub status: reqwest::StatusCode,
+    pub headers: reqwest::header::HeaderMap,
+    pub body: T
+}
+
+impl<T> Response<T> {
+    pub fn new(status: reqwest::StatusCode, headers: reqwest::header::HeaderMap, body: T) -> Self {
+        Self {
+            status,
+            headers,
+            body,
+        }
+    }
+}"#);
+    a("");
+
     a("type ClientResult<T> = Result<T, ClientError>;");
+    a("");
+
+    a("use thiserror::Error;");
     a("");
     a(r#"
 /// Errors returned by the client
@@ -2443,6 +2467,7 @@ pub enum ClientError {"#);
     #[error("HTTP Error. Code: {status}, message: {error}")]
     HttpError {
         status: http::StatusCode,
+        headers: reqwest::header::HeaderMap,
         error: String,
     },
 }
@@ -3317,15 +3342,13 @@ fn main() -> Result<()> {
             /*
              * Write the Cargo.toml file:
              */
-            let mut uuid_lib = "".to_string();
             let mut yup_oauth2_lib = "".to_string();
-            if proper_name != "GitHub" {
-                uuid_lib = r#"
+
+            let uuid_lib = r#"
 bytes = { version = "1", features = ["serde"] }
 async-trait = "^0.1.51"
 uuid = { version = "1.1", features = ["serde", "v4"] }"#
-                    .to_string();
-            }
+                .to_string();
 
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"
@@ -3348,7 +3371,7 @@ edition = "2021"
 license = "MIT"
 
 [features]
-default = ["rustls-tls", "reqwest-tracing/opentelemetry_0_17"]
+default = ["rustls-tls"]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
 native-tls = ["reqwest/default-tls", "openssl"]
@@ -3367,10 +3390,10 @@ parse_link_header = "0.3.3"
 pem = {{ version = "1.1.0",  default-features = false, optional = true }}
 percent-encoding = "2.2"
 reqwest = {{ version = "0.11.14", default-features = false, features = ["json", "multipart"] }}
-reqwest-conditional-middleware = "0.1.0"
-reqwest-middleware = "0.1.5"
-reqwest-retry = "0.1.4"
-reqwest-tracing = "0.3.0"
+reqwest-conditional-middleware = "0.2.1"
+reqwest-middleware = "0.2.2"
+reqwest-retry = "0.2.2"
+reqwest-tracing = "0.4.4"
 ring = {{ version = "0.16", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}
@@ -3378,15 +3401,15 @@ serde_json = "1"
 serde_urlencoded = "^0.7"
 url = {{ version = "2", features = ["serde"] }}{}{}
 thiserror = "1"
-tokio = {{ version = "1.25.0", features = ["full"] }}
+tokio = {{ version = "1.25.0", default-features = false }}
 
 [dev-dependencies]
-base64 = "^0.13"
+base64 = "^0.21"
 dirs = "^3.0.2"
 nom_pem = "4"
 rand = "0.8.5"
 rsa = "0.8.1"
-tokio = {{ version = "1.25.0", features = ["test-util"] }}
+tokio = {{ version = "1.25.0", features = ["full", "test-util"] }}
 wiremock = "0.5.17"
 
 [package.metadata.docs.rs]
@@ -3425,14 +3448,29 @@ rustdoc-args = ["--cfg", "docsrs"]
                         &spec_link,
                     )
                 }
-                TemplateType::GenericToken => template::generate_docs_generic_token(
-                    &api,
-                    &to_snake_case(&name),
-                    &version,
-                    &proper_name,
-                    &spec_link,
-                    &add_post_header,
-                ),
+                TemplateType::GenericToken => {
+                    if proper_name == "Gusto" {
+                        template::generate_docs_generic_token(
+                            &api,
+                            &to_snake_case(&name),
+                            &version,
+                            &proper_name,
+                            &spec_link,
+                            &add_post_header,
+                            &format!("{}::RootProductionServer", to_snake_case(&name)),
+                        )
+                    } else {
+                        template::generate_docs_generic_token(
+                            &api,
+                            &to_snake_case(&name),
+                            &version,
+                            &proper_name,
+                            &spec_link,
+                            &add_post_header,
+                            "",
+                        )
+                    }
+                }
             };
 
             let mut readme = root.clone();

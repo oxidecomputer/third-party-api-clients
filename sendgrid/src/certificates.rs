@@ -21,7 +21,7 @@ impl Certificates {
     pub async fn post_sso(
         &self,
         body: &crate::types::PostSsoCertificatesRequest,
-    ) -> ClientResult<crate::types::SsoCertificateBody> {
+    ) -> ClientResult<crate::Response<crate::types::SsoCertificateBody>> {
         let url = self.client.url("/sso/certificates", None);
         self.client
             .post(
@@ -45,7 +45,7 @@ impl Certificates {
     pub async fn get_sso_integrations_integration(
         &self,
         integration_id: &str,
-    ) -> ClientResult<Vec<crate::types::SsoCertificateBody>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SsoCertificateBody>>> {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}/certificates",
@@ -77,7 +77,7 @@ impl Certificates {
     pub async fn get_all_sso_integrations_integration(
         &self,
         integration_id: &str,
-    ) -> ClientResult<Vec<crate::types::SsoCertificateBody>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SsoCertificateBody>>> {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}/certificates",
@@ -105,7 +105,7 @@ impl Certificates {
     pub async fn get_sso_cert(
         &self,
         cert_id: &str,
-    ) -> ClientResult<crate::types::SsoCertificateBody> {
+    ) -> ClientResult<crate::Response<crate::types::SsoCertificateBody>> {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",
@@ -135,7 +135,7 @@ impl Certificates {
     pub async fn delete_sso_cert(
         &self,
         cert_id: &str,
-    ) -> ClientResult<crate::types::SsoCertificateBody> {
+    ) -> ClientResult<crate::Response<crate::types::SsoCertificateBody>> {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",
@@ -166,7 +166,7 @@ impl Certificates {
         &self,
         cert_id: &str,
         body: &crate::types::PatchSsoCertificatesCertRequest,
-    ) -> ClientResult<Vec<crate::types::SsoErrorResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SsoErrorResponse>>> {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",

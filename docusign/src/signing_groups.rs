@@ -29,7 +29,7 @@ impl SigningGroups {
         account_id: &str,
         group_type: &str,
         include_users: &str,
-    ) -> ClientResult<crate::types::SigningGroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroupInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !group_type.is_empty() {
             query_args.push(("group_type".to_string(), group_type.to_string()));
@@ -71,7 +71,7 @@ impl SigningGroups {
         &self,
         account_id: &str,
         body: &crate::types::SigningGroupInformation,
-    ) -> ClientResult<crate::types::SigningGroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups",
@@ -110,7 +110,7 @@ impl SigningGroups {
         &self,
         account_id: &str,
         body: &crate::types::SigningGroupInformation,
-    ) -> ClientResult<crate::types::SigningGroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups",
@@ -143,7 +143,7 @@ impl SigningGroups {
         &self,
         account_id: &str,
         body: &crate::types::SigningGroupInformation,
-    ) -> ClientResult<crate::types::SigningGroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups",
@@ -179,7 +179,7 @@ impl SigningGroups {
         &self,
         account_id: &str,
         signing_group_id: &str,
-    ) -> ClientResult<crate::types::SigningGroup> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroup>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}",
@@ -217,7 +217,7 @@ impl SigningGroups {
         account_id: &str,
         signing_group_id: &str,
         body: &crate::types::SigningGroup,
-    ) -> ClientResult<crate::types::SigningGroup> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroup>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}",

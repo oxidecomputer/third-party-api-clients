@@ -33,7 +33,7 @@ impl OauthAuthorizations {
         per_page: i64,
         page: i64,
         client_id: &str,
-    ) -> ClientResult<Vec<crate::types::ApplicationGrant>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ApplicationGrant>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));
@@ -74,7 +74,7 @@ impl OauthAuthorizations {
     pub async fn list_all_grants(
         &self,
         client_id: &str,
-    ) -> ClientResult<Vec<crate::types::ApplicationGrant>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ApplicationGrant>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));
@@ -106,7 +106,10 @@ impl OauthAuthorizations {
      *
      * * `grant_id: i64` -- grant_id parameter.
      */
-    pub async fn get_grant(&self, grant_id: i64) -> ClientResult<crate::types::ApplicationGrant> {
+    pub async fn get_grant(
+        &self,
+        grant_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::ApplicationGrant>> {
         let url = self.client.url(
             &format!(
                 "/applications/grants/{}",
@@ -139,7 +142,7 @@ impl OauthAuthorizations {
      *
      * * `grant_id: i64` -- grant_id parameter.
      */
-    pub async fn delete_grant(&self, grant_id: i64) -> ClientResult<()> {
+    pub async fn delete_grant(&self, grant_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/applications/grants/{}",
@@ -177,7 +180,7 @@ impl OauthAuthorizations {
         per_page: i64,
         page: i64,
         client_id: &str,
-    ) -> ClientResult<Vec<crate::types::Authorization>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Authorization>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));
@@ -216,7 +219,7 @@ impl OauthAuthorizations {
     pub async fn list_all_authorizations(
         &self,
         client_id: &str,
-    ) -> ClientResult<Vec<crate::types::Authorization>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Authorization>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));
@@ -257,7 +260,7 @@ impl OauthAuthorizations {
     pub async fn create_authorization(
         &self,
         body: &crate::types::OauthAuthorizationsCreateAuthorizationRequest,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url("/authorizations", None);
         self.client
             .post(
@@ -294,7 +297,7 @@ impl OauthAuthorizations {
         &self,
         client_id: &str,
         body: &crate::types::OauthAuthorizationsGetCreateAuthorizationAppRequest,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/authorizations/clients/{}",
@@ -337,7 +340,7 @@ impl OauthAuthorizations {
         client_id: &str,
         fingerprint: &str,
         body: &crate::types::OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/authorizations/clients/{}/{}",
@@ -372,7 +375,7 @@ impl OauthAuthorizations {
     pub async fn get_authorization(
         &self,
         authorization_id: i64,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/authorizations/{}",
@@ -403,7 +406,10 @@ impl OauthAuthorizations {
      *
      * * `authorization_id: i64` -- authorization_id parameter.
      */
-    pub async fn delete_authorization(&self, authorization_id: i64) -> ClientResult<()> {
+    pub async fn delete_authorization(
+        &self,
+        authorization_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/authorizations/{}",
@@ -442,7 +448,7 @@ impl OauthAuthorizations {
         &self,
         authorization_id: i64,
         body: &crate::types::OauthAuthorizationsUpdateAuthorizationRequest,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/authorizations/{}",

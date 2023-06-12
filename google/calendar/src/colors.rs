@@ -16,7 +16,7 @@ impl Colors {
      *
      * Returns the color definitions for calendars and events.
      */
-    pub async fn get(&self) -> ClientResult<crate::types::Colors> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Colors>> {
         let url = self.client.url("/colors", None);
         self.client
             .get(

@@ -36,7 +36,7 @@ impl Issuing {
         limit: i64,
         starting_after: &str,
         status: crate::types::IssuingAuthorizationStatus,
-    ) -> ClientResult<Vec<crate::types::IssuingAuthorization>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingAuthorization>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -60,7 +60,7 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/authorizations?{}", query_), None);
-        let resp: crate::types::GetIssuingAuthorizationsResponse = self
+        let resp: crate::Response<crate::types::GetIssuingAuthorizationsResponse> = self
             .client
             .get(
                 &url,
@@ -72,7 +72,11 @@ impl Issuing {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/authorizations` endpoint.
@@ -87,7 +91,7 @@ impl Issuing {
         cardholder: &str,
         _created: &str,
         status: crate::types::IssuingAuthorizationStatus,
-    ) -> ClientResult<Vec<crate::types::IssuingAuthorization>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingAuthorization>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -102,7 +106,11 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/authorizations?{}", query_), None);
-        let mut resp: crate::types::GetIssuingAuthorizationsResponse = self
+        let crate::Response::<crate::types::GetIssuingAuthorizationsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -113,8 +121,8 @@ impl Issuing {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -130,7 +138,11 @@ impl Issuing {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetIssuingAuthorizationsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -141,7 +153,11 @@ impl Issuing {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetIssuingAuthorizationsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -153,13 +169,13 @@ impl Issuing {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/authorizations/{authorization}` endpoint.
@@ -174,7 +190,7 @@ impl Issuing {
     pub async fn get_authorizations_authorization(
         &self,
         authorization: &str,
-    ) -> ClientResult<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingAuthorization>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}",
@@ -204,7 +220,7 @@ impl Issuing {
     pub async fn post_authorizations_authorization(
         &self,
         authorization: &str,
-    ) -> ClientResult<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingAuthorization>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}",
@@ -234,7 +250,7 @@ impl Issuing {
     pub async fn post_authorizations_authorization_approve(
         &self,
         authorization: &str,
-    ) -> ClientResult<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingAuthorization>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}/approve",
@@ -264,7 +280,7 @@ impl Issuing {
     pub async fn post_authorizations_authorization_decline(
         &self,
         authorization: &str,
-    ) -> ClientResult<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingAuthorization>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}/decline",
@@ -309,7 +325,7 @@ impl Issuing {
         starting_after: &str,
         status: crate::types::IssuingCardholderStatus,
         type_: crate::types::AccountHolderType,
-    ) -> ClientResult<Vec<crate::types::IssuingCardholder>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingCardholder>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -336,7 +352,7 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/cardholders?{}", query_), None);
-        let resp: crate::types::GetIssuingCardholdersResponse = self
+        let resp: crate::Response<crate::types::GetIssuingCardholdersResponse> = self
             .client
             .get(
                 &url,
@@ -348,7 +364,11 @@ impl Issuing {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/cardholders` endpoint.
@@ -364,7 +384,7 @@ impl Issuing {
         phone_number: &str,
         status: crate::types::IssuingCardholderStatus,
         type_: crate::types::AccountHolderType,
-    ) -> ClientResult<Vec<crate::types::IssuingCardholder>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingCardholder>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -382,7 +402,11 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/cardholders?{}", query_), None);
-        let mut resp: crate::types::GetIssuingCardholdersResponse = self
+        let crate::Response::<crate::types::GetIssuingCardholdersResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -393,8 +417,8 @@ impl Issuing {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -410,7 +434,11 @@ impl Issuing {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetIssuingCardholdersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -421,7 +449,11 @@ impl Issuing {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetIssuingCardholdersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -433,20 +465,22 @@ impl Issuing {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/issuing/cardholders` endpoint.
      *
      * <p>Creates a new Issuing <code>Cardholder</code> object that can be issued cards.</p>
      */
-    pub async fn post_cardholder(&self) -> ClientResult<crate::types::IssuingCardholder> {
+    pub async fn post_cardholder(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::IssuingCardholder>> {
         let url = self.client.url("/v1/issuing/cardholders", None);
         self.client
             .post(
@@ -471,7 +505,7 @@ impl Issuing {
     pub async fn get_cardholders_cardholder(
         &self,
         cardholder: &str,
-    ) -> ClientResult<crate::types::IssuingCardholder> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingCardholder>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cardholders/{}",
@@ -501,7 +535,7 @@ impl Issuing {
     pub async fn post_cardholders_cardholder(
         &self,
         cardholder: &str,
-    ) -> ClientResult<crate::types::IssuingCardholder> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingCardholder>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cardholders/{}",
@@ -550,7 +584,7 @@ impl Issuing {
         starting_after: &str,
         status: crate::types::IssuingCardStatus,
         type_: crate::types::IssuingCardType,
-    ) -> ClientResult<Vec<crate::types::IssuingCard>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingCard>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cardholder.is_empty() {
             query_args.push(("cardholder".to_string(), cardholder.to_string()));
@@ -583,7 +617,7 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/cards?{}", query_), None);
-        let resp: crate::types::GetIssuingCardsResponse = self
+        let resp: crate::Response<crate::types::GetIssuingCardsResponse> = self
             .client
             .get(
                 &url,
@@ -595,7 +629,11 @@ impl Issuing {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/cards` endpoint.
@@ -613,7 +651,7 @@ impl Issuing {
         last_4: &str,
         status: crate::types::IssuingCardStatus,
         type_: crate::types::IssuingCardType,
-    ) -> ClientResult<Vec<crate::types::IssuingCard>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingCard>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cardholder.is_empty() {
             query_args.push(("cardholder".to_string(), cardholder.to_string()));
@@ -637,7 +675,11 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/cards?{}", query_), None);
-        let mut resp: crate::types::GetIssuingCardsResponse = self
+        let crate::Response::<crate::types::GetIssuingCardsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -648,8 +690,8 @@ impl Issuing {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -665,7 +707,11 @@ impl Issuing {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetIssuingCardsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -676,7 +722,11 @@ impl Issuing {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetIssuingCardsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -688,20 +738,20 @@ impl Issuing {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/issuing/cards` endpoint.
      *
      * <p>Creates an Issuing <code>Card</code> object.</p>
      */
-    pub async fn post_card(&self) -> ClientResult<crate::types::IssuingCard> {
+    pub async fn post_card(&self) -> ClientResult<crate::Response<crate::types::IssuingCard>> {
         let url = self.client.url("/v1/issuing/cards", None);
         self.client
             .post(
@@ -723,7 +773,10 @@ impl Issuing {
      * * `card: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get_cards_card(&self, card: &str) -> ClientResult<crate::types::IssuingCard> {
+    pub async fn get_cards_card(
+        &self,
+        card: &str,
+    ) -> ClientResult<crate::Response<crate::types::IssuingCard>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cards/{}",
@@ -750,7 +803,10 @@ impl Issuing {
      *
      * * `card: &str` -- The account's country.
      */
-    pub async fn post_cards_card(&self, card: &str) -> ClientResult<crate::types::IssuingCard> {
+    pub async fn post_cards_card(
+        &self,
+        card: &str,
+    ) -> ClientResult<crate::Response<crate::types::IssuingCard>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cards/{}",
@@ -791,7 +847,7 @@ impl Issuing {
         starting_after: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
-    ) -> ClientResult<Vec<crate::types::IssuingDispute>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingDispute>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -812,7 +868,7 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/disputes?{}", query_), None);
-        let resp: crate::types::IssuingDisputeList = self
+        let resp: crate::Response<crate::types::IssuingDisputeList> = self
             .client
             .get(
                 &url,
@@ -824,7 +880,11 @@ impl Issuing {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/disputes` endpoint.
@@ -838,7 +898,7 @@ impl Issuing {
         _created: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
-    ) -> ClientResult<Vec<crate::types::IssuingDispute>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingDispute>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.to_string().is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -850,7 +910,11 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/disputes?{}", query_), None);
-        let mut resp: crate::types::IssuingDisputeList = self
+        let crate::Response::<crate::types::IssuingDisputeList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -861,8 +925,8 @@ impl Issuing {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -878,7 +942,11 @@ impl Issuing {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::IssuingDisputeList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -889,7 +957,11 @@ impl Issuing {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::IssuingDisputeList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -901,20 +973,22 @@ impl Issuing {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/issuing/disputes` endpoint.
      *
      * <p>Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>evidence</code> object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to <a href="/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute reasons and evidence</a> for more details about evidence requirements.</p>
      */
-    pub async fn post_dispute(&self) -> ClientResult<crate::types::IssuingDispute> {
+    pub async fn post_dispute(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::IssuingDispute>> {
         let url = self.client.url("/v1/issuing/disputes", None);
         self.client
             .post(
@@ -939,7 +1013,7 @@ impl Issuing {
     pub async fn get_disputes_dispute(
         &self,
         dispute: &str,
-    ) -> ClientResult<crate::types::IssuingDispute> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingDispute>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/disputes/{}",
@@ -969,7 +1043,7 @@ impl Issuing {
     pub async fn post_disputes_dispute(
         &self,
         dispute: &str,
-    ) -> ClientResult<crate::types::IssuingDispute> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingDispute>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/disputes/{}",
@@ -999,7 +1073,7 @@ impl Issuing {
     pub async fn post_disputes_dispute_submit(
         &self,
         dispute: &str,
-    ) -> ClientResult<crate::types::IssuingDispute> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingDispute>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/disputes/{}/submit",
@@ -1036,7 +1110,7 @@ impl Issuing {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::IssuingSettlement>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingSettlement>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -1051,7 +1125,7 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/settlements?{}", query_), None);
-        let resp: crate::types::GetIssuingSettlementsResponse = self
+        let resp: crate::Response<crate::types::GetIssuingSettlementsResponse> = self
             .client
             .get(
                 &url,
@@ -1063,7 +1137,11 @@ impl Issuing {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/settlements` endpoint.
@@ -1075,9 +1153,13 @@ impl Issuing {
     pub async fn get_all_settlements(
         &self,
         _created: &str,
-    ) -> ClientResult<Vec<crate::types::IssuingSettlement>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingSettlement>>> {
         let url = self.client.url("/v1/issuing/settlements", None);
-        let mut resp: crate::types::GetIssuingSettlementsResponse = self
+        let crate::Response::<crate::types::GetIssuingSettlementsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1088,8 +1170,8 @@ impl Issuing {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -1105,7 +1187,11 @@ impl Issuing {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetIssuingSettlementsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -1116,7 +1202,11 @@ impl Issuing {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetIssuingSettlementsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -1128,13 +1218,13 @@ impl Issuing {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/settlements/{settlement}` endpoint.
@@ -1149,7 +1239,7 @@ impl Issuing {
     pub async fn get_settlements_settlement(
         &self,
         settlement: &str,
-    ) -> ClientResult<crate::types::IssuingSettlement> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingSettlement>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/settlements/{}",
@@ -1179,7 +1269,7 @@ impl Issuing {
     pub async fn post_settlements_settlement(
         &self,
         settlement: &str,
-    ) -> ClientResult<crate::types::IssuingSettlement> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingSettlement>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/settlements/{}",
@@ -1222,7 +1312,7 @@ impl Issuing {
         limit: i64,
         starting_after: &str,
         type_: crate::types::IssuingTransactionType,
-    ) -> ClientResult<Vec<crate::types::IssuingTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -1246,7 +1336,7 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/transactions?{}", query_), None);
-        let resp: crate::types::GetIssuingTransactionsResponse = self
+        let resp: crate::Response<crate::types::GetIssuingTransactionsResponse> = self
             .client
             .get(
                 &url,
@@ -1258,7 +1348,11 @@ impl Issuing {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/transactions` endpoint.
@@ -1273,7 +1367,7 @@ impl Issuing {
         cardholder: &str,
         _created: &str,
         type_: crate::types::IssuingTransactionType,
-    ) -> ClientResult<Vec<crate::types::IssuingTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuingTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -1288,7 +1382,11 @@ impl Issuing {
         let url = self
             .client
             .url(&format!("/v1/issuing/transactions?{}", query_), None);
-        let mut resp: crate::types::GetIssuingTransactionsResponse = self
+        let crate::Response::<crate::types::GetIssuingTransactionsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1299,8 +1397,8 @@ impl Issuing {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -1316,7 +1414,11 @@ impl Issuing {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetIssuingTransactionsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -1327,7 +1429,11 @@ impl Issuing {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetIssuingTransactionsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -1339,13 +1445,13 @@ impl Issuing {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/issuing/transactions/{transaction}` endpoint.
@@ -1360,7 +1466,7 @@ impl Issuing {
     pub async fn get_transactions_transaction(
         &self,
         transaction: &str,
-    ) -> ClientResult<crate::types::IssuingTransaction> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingTransaction>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/transactions/{}",
@@ -1390,7 +1496,7 @@ impl Issuing {
     pub async fn post_transactions_transaction(
         &self,
         transaction: &str,
-    ) -> ClientResult<crate::types::IssuingTransaction> {
+    ) -> ClientResult<crate::Response<crate::types::IssuingTransaction>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/transactions/{}",

@@ -24,7 +24,7 @@ impl ContactsApiCustomFields {
      */
     pub async fn get_contactdb_custom_fields(
         &self,
-    ) -> ClientResult<crate::types::ListAllCustomFieldsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListAllCustomFieldsResponse>> {
         let url = self.client.url("/contactdb/custom_fields", None);
         self.client
             .get(
@@ -52,7 +52,7 @@ impl ContactsApiCustomFields {
     pub async fn post_contactdb_custom_field(
         &self,
         body: &crate::types::PostContactdbCustomFieldsRequest,
-    ) -> ClientResult<crate::types::ContactdbCustomFieldWithAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbCustomFieldWithAllOf>> {
         let url = self.client.url("/contactdb/custom_fields", None);
         self.client
             .post(
@@ -78,7 +78,7 @@ impl ContactsApiCustomFields {
     pub async fn get_contactdb_custom_fields_field(
         &self,
         custom_field_id: i64,
-    ) -> ClientResult<crate::types::ContactdbCustomFieldWithAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbCustomFieldWithAllOf>> {
         let url = self.client.url(
             &format!(
                 "/contactdb/custom_fields/{}",
@@ -110,7 +110,7 @@ impl ContactsApiCustomFields {
     pub async fn delete_contactdb_custom_fields_field(
         &self,
         custom_field_id: i64,
-    ) -> ClientResult<crate::types::GlobalErrorResponseSchema> {
+    ) -> ClientResult<crate::Response<crate::types::GlobalErrorResponseSchema>> {
         let url = self.client.url(
             &format!(
                 "/contactdb/custom_fields/{}",
@@ -141,7 +141,7 @@ impl ContactsApiCustomFields {
      */
     pub async fn get_contactdb_reserved_fields(
         &self,
-    ) -> ClientResult<crate::types::GetContactdbReservedFieldsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetContactdbReservedFieldsResponse>> {
         let url = self.client.url("/contactdb/reserved_fields", None);
         self.client
             .get(

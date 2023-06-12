@@ -21,7 +21,7 @@ impl ImGroups {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn get(&self) -> ClientResult<crate::types::Domains> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url("/im/groups", None);
         self.client
             .get(
@@ -43,7 +43,10 @@ impl ImGroups {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn create(&self, body: &crate::types::ImGroupCreateRequest) -> ClientResult<()> {
+    pub async fn create(
+        &self,
+        body: &crate::types::ImGroupCreateRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/im/groups", None);
         self.client
             .post(
@@ -73,7 +76,7 @@ impl ImGroups {
     pub async fn im_group(
         &self,
         group_id: &str,
-    ) -> ClientResult<crate::types::ImGroupResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::ImGroupResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}",
@@ -106,7 +109,7 @@ impl ImGroups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn delete(&self, group_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, group_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}",
@@ -143,7 +146,7 @@ impl ImGroups {
         &self,
         group_id: &str,
         body: &crate::types::ImGroupCreateRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}",
@@ -188,7 +191,7 @@ impl ImGroups {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -237,7 +240,7 @@ impl ImGroups {
         &self,
         group_id: &str,
         body: &crate::types::AddRoleMembersRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}/members",
@@ -271,7 +274,11 @@ impl ImGroups {
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `member_id: &str` -- User's first name.
      */
-    pub async fn members_delete(&self, group_id: &str, member_id: &str) -> ClientResult<()> {
+    pub async fn members_delete(
+        &self,
+        group_id: &str,
+        member_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}/members/{}",

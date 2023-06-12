@@ -28,7 +28,7 @@ impl ExchangeRates {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::ExchangeRate>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ExchangeRate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -43,7 +43,7 @@ impl ExchangeRates {
         let url = self
             .client
             .url(&format!("/v1/exchange_rates?{}", query_), None);
-        let resp: crate::types::GetExchangeRatesResponse = self
+        let resp: crate::Response<crate::types::GetExchangeRatesResponse> = self
             .client
             .get(
                 &url,
@@ -55,7 +55,11 @@ impl ExchangeRates {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
@@ -64,9 +68,13 @@ impl ExchangeRates {
      *
      * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
      */
-    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::ExchangeRate>> {
+    pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::ExchangeRate>>> {
         let url = self.client.url("/v1/exchange_rates", None);
-        let mut resp: crate::types::GetExchangeRatesResponse = self
+        let crate::Response::<crate::types::GetExchangeRatesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -77,8 +85,8 @@ impl ExchangeRates {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -94,7 +102,11 @@ impl ExchangeRates {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetExchangeRatesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -105,7 +117,11 @@ impl ExchangeRates {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetExchangeRatesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -117,13 +133,13 @@ impl ExchangeRates {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/exchange_rates/{rate_id}` endpoint.
@@ -135,7 +151,10 @@ impl ExchangeRates {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `rate_id: &str` -- The account's country.
      */
-    pub async fn get_rate(&self, rate_id: &str) -> ClientResult<crate::types::ExchangeRate> {
+    pub async fn get_rate(
+        &self,
+        rate_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::ExchangeRate>> {
         let url = self.client.url(
             &format!(
                 "/v1/exchange_rates/{}",

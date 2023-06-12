@@ -27,7 +27,7 @@ impl Roles {
         customer: &str,
         max_results: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Role>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Role>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -44,7 +44,7 @@ impl Roles {
             ),
             None,
         );
-        let resp: crate::types::Roles = self
+        let resp: crate::Response<crate::types::Roles> = self
             .client
             .get(
                 &url,
@@ -56,7 +56,11 @@ impl Roles {
             .await?;
 
         // Return our response data.
-        Ok(resp.items.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.items.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
@@ -65,7 +69,10 @@ impl Roles {
      *
      * Retrieves a paginated list of all the roles in a domain.
      */
-    pub async fn list_all(&self, customer: &str) -> ClientResult<Vec<crate::types::Role>> {
+    pub async fn list_all(
+        &self,
+        customer: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Role>>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles",
@@ -73,7 +80,11 @@ impl Roles {
             ),
             None,
         );
-        let mut resp: crate::types::Roles = self
+        let crate::Response::<crate::types::Roles> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -84,13 +95,17 @@ impl Roles {
             )
             .await?;
 
-        let mut items = resp.items;
-        let mut page = resp.next_page_token;
+        let mut items = body.items;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Roles> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -101,7 +116,11 @@ impl Roles {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Roles> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -113,17 +132,17 @@ impl Roles {
                     .await?;
             }
 
-            items.append(&mut resp.items);
+            items.append(&mut body.items);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(items)
+        Ok(crate::Response::new(status, headers, items))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
@@ -138,7 +157,7 @@ impl Roles {
         &self,
         customer: &str,
         body: &crate::types::Role,
-    ) -> ClientResult<crate::types::Role> {
+    ) -> ClientResult<crate::Response<crate::types::Role>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles",
@@ -166,7 +185,11 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn get(&self, customer: &str, role_id: &str) -> ClientResult<crate::types::Role> {
+    pub async fn get(
+        &self,
+        customer: &str,
+        role_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Role>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
@@ -200,7 +223,7 @@ impl Roles {
         customer: &str,
         role_id: &str,
         body: &crate::types::Role,
-    ) -> ClientResult<crate::types::Role> {
+    ) -> ClientResult<crate::Response<crate::types::Role>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
@@ -229,7 +252,7 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn delete(&self, customer: &str, role_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, customer: &str, role_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
@@ -263,7 +286,7 @@ impl Roles {
         customer: &str,
         role_id: &str,
         body: &crate::types::Role,
-    ) -> ClientResult<crate::types::Role> {
+    ) -> ClientResult<crate::Response<crate::types::Role>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",

@@ -23,7 +23,7 @@ impl Locations {
     pub async fn get_company(
         &self,
         company_id_or_uuid: &str,
-    ) -> ClientResult<Vec<crate::types::Location>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Location>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/locations",
@@ -55,7 +55,7 @@ impl Locations {
     pub async fn get_all_company(
         &self,
         company_id_or_uuid: &str,
-    ) -> ClientResult<Vec<crate::types::Location>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Location>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/locations",
@@ -86,7 +86,7 @@ impl Locations {
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyLocationsRequest,
-    ) -> ClientResult<crate::types::Location> {
+    ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/locations",
@@ -111,7 +111,10 @@ impl Locations {
      *
      * Get a location.
      */
-    pub async fn get(&self, location_id: &str) -> ClientResult<crate::types::Location> {
+    pub async fn get(
+        &self,
+        location_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
             &format!(
                 "/v1/locations/{}",
@@ -140,7 +143,7 @@ impl Locations {
         &self,
         location_id: &str,
         body: &crate::types::PutLocationRequest,
-    ) -> ClientResult<crate::types::Location> {
+    ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
             &format!(
                 "/v1/locations/{}",

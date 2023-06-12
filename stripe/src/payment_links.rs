@@ -30,7 +30,7 @@ impl PaymentLinks {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::PaymentLink>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaymentLink>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -48,7 +48,7 @@ impl PaymentLinks {
         let url = self
             .client
             .url(&format!("/v1/payment_links?{}", query_), None);
-        let resp: crate::types::GetPaymentLinksResponse = self
+        let resp: crate::Response<crate::types::GetPaymentLinksResponse> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl PaymentLinks {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/payment_links` endpoint.
@@ -69,7 +73,10 @@ impl PaymentLinks {
      *
      * <p>Returns a list of your payment links.</p>
      */
-    pub async fn get_all(&self, active: bool) -> ClientResult<Vec<crate::types::PaymentLink>> {
+    pub async fn get_all(
+        &self,
+        active: bool,
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaymentLink>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -78,7 +85,11 @@ impl PaymentLinks {
         let url = self
             .client
             .url(&format!("/v1/payment_links?{}", query_), None);
-        let mut resp: crate::types::GetPaymentLinksResponse = self
+        let crate::Response::<crate::types::GetPaymentLinksResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -89,8 +100,8 @@ impl PaymentLinks {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -106,7 +117,11 @@ impl PaymentLinks {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetPaymentLinksResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -117,7 +132,11 @@ impl PaymentLinks {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetPaymentLinksResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -129,20 +148,20 @@ impl PaymentLinks {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/payment_links` endpoint.
      *
      * <p>Creates a payment link.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::PaymentLink> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PaymentLink>> {
         let url = self.client.url("/v1/payment_links", None);
         self.client
             .post(
@@ -164,7 +183,10 @@ impl PaymentLinks {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `payment_link: &str` -- The account's country.
      */
-    pub async fn get_link(&self, payment_link: &str) -> ClientResult<crate::types::PaymentLink> {
+    pub async fn get_link(
+        &self,
+        payment_link: &str,
+    ) -> ClientResult<crate::Response<crate::types::PaymentLink>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_links/{}",
@@ -191,7 +213,10 @@ impl PaymentLinks {
      *
      * * `payment_link: &str` -- The account's country.
      */
-    pub async fn post_link(&self, payment_link: &str) -> ClientResult<crate::types::PaymentLink> {
+    pub async fn post_link(
+        &self,
+        payment_link: &str,
+    ) -> ClientResult<crate::Response<crate::types::PaymentLink>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_links/{}",
@@ -228,7 +253,7 @@ impl PaymentLinks {
         limit: i64,
         payment_link: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::Item>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -248,7 +273,7 @@ impl PaymentLinks {
             ),
             None,
         );
-        let resp: crate::types::LineItems = self
+        let resp: crate::Response<crate::types::LineItems> = self
             .client
             .get(
                 &url,
@@ -260,7 +285,11 @@ impl PaymentLinks {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/payment_links/{payment_link}/line_items` endpoint.
@@ -272,7 +301,7 @@ impl PaymentLinks {
     pub async fn get_all_link_line_items(
         &self,
         payment_link: &str,
-    ) -> ClientResult<Vec<crate::types::Item>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_links/{}/line_items",
@@ -280,7 +309,11 @@ impl PaymentLinks {
             ),
             None,
         );
-        let mut resp: crate::types::LineItems = self
+        let crate::Response::<crate::types::LineItems> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -291,8 +324,8 @@ impl PaymentLinks {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -308,7 +341,11 @@ impl PaymentLinks {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -319,7 +356,11 @@ impl PaymentLinks {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -331,12 +372,12 @@ impl PaymentLinks {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
 }

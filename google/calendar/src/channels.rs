@@ -16,7 +16,7 @@ impl Channels {
      *
      * Stop watching resources through this channel
      */
-    pub async fn stop(&self, body: &crate::types::Channel) -> ClientResult<()> {
+    pub async fn stop(&self, body: &crate::types::Channel) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/channels/stop", None);
         self.client
             .post(

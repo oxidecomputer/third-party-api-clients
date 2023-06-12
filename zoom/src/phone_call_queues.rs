@@ -36,7 +36,7 @@ impl PhoneCallQueues {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::CallQueues>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CallQueues>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -48,7 +48,7 @@ impl PhoneCallQueues {
         let url = self
             .client
             .url(&format!("/phone/call_queues?{}", query_), None);
-        let resp: crate::types::ListCallQueuesResponse = self
+        let resp: crate::Response<crate::types::ListCallQueuesResponse> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl PhoneCallQueues {
             .await?;
 
         // Return our response data.
-        Ok(resp.call_queues.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.call_queues.to_vec(),
+        ))
     }
     /**
      * List call queues.
@@ -80,9 +84,15 @@ impl PhoneCallQueues {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      */
-    pub async fn list_all_call_queues(&self) -> ClientResult<Vec<crate::types::CallQueues>> {
+    pub async fn list_all_call_queues(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::CallQueues>>> {
         let url = self.client.url("/phone/call_queues", None);
-        let mut resp: crate::types::ListCallQueuesResponse = self
+        let crate::Response::<crate::types::ListCallQueuesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -93,14 +103,18 @@ impl PhoneCallQueues {
             )
             .await?;
 
-        let mut call_queues = resp.call_queues;
-        let mut page = resp.next_page_token;
+        let mut call_queues = body.call_queues;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListCallQueuesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -111,7 +125,11 @@ impl PhoneCallQueues {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListCallQueuesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -123,17 +141,17 @@ impl PhoneCallQueues {
                     .await?;
             }
 
-            call_queues.append(&mut resp.call_queues);
+            call_queues.append(&mut body.call_queues);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(call_queues)
+        Ok(crate::Response::new(status, headers, call_queues))
     }
     /**
      * Create a call queue.
@@ -154,7 +172,7 @@ impl PhoneCallQueues {
     pub async fn create_call_queue(
         &self,
         body: &crate::types::CreateCallQueueRequest,
-    ) -> ClientResult<crate::types::CreateCallQueueResponse> {
+    ) -> ClientResult<crate::Response<crate::types::CreateCallQueueResponse>> {
         let url = self.client.url("/phone/call_queues", None);
         self.client
             .post(
@@ -188,7 +206,7 @@ impl PhoneCallQueues {
     pub async fn get_call_queue(
         &self,
         call_queue_id: &str,
-    ) -> ClientResult<crate::types::GetCallQueueResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCallQueueResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}",
@@ -227,7 +245,10 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the call queue.
      */
-    pub async fn delete_call_queue(&self, call_queue_id: &str) -> ClientResult<()> {
+    pub async fn delete_call_queue(
+        &self,
+        call_queue_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}",
@@ -268,7 +289,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::UpdateCallQueueRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}",
@@ -309,7 +330,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::AddByocNumberResponse,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/phone_numbers",
@@ -348,7 +369,7 @@ impl PhoneCallQueues {
     pub async fn unassign_phone_num_call_queue(
         &self,
         call_queue_id: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/phone_numbers",
@@ -389,7 +410,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         phone_number_id: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/phone_numbers/{}",
@@ -430,7 +451,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::AddMembersCallQueueRequestData,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/members",
@@ -466,7 +487,10 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- User's first name.
      */
-    pub async fn unassign_all_members(&self, call_queue_id: &str) -> ClientResult<()> {
+    pub async fn unassign_all_members(
+        &self,
+        call_queue_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/members",
@@ -507,7 +531,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         member_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/members/{}",
@@ -550,7 +574,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::ChangeCallQueueManagerRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/manager",
@@ -597,7 +621,7 @@ impl PhoneCallQueues {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<Vec<crate::types::GetCallQueueRecordingsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetCallQueueRecordingsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -620,7 +644,7 @@ impl PhoneCallQueues {
             ),
             None,
         );
-        let resp: crate::types::GetCallQueueRecordingsResponseData = self
+        let resp: crate::Response<crate::types::GetCallQueueRecordingsResponseData> = self
             .client
             .get(
                 &url,
@@ -632,7 +656,11 @@ impl PhoneCallQueues {
             .await?;
 
         // Return our response data.
-        Ok(resp.recordings.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.recordings.to_vec(),
+        ))
     }
     /**
      * Get call queue recordings.
@@ -655,7 +683,7 @@ impl PhoneCallQueues {
         call_queue_id: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<Vec<crate::types::GetCallQueueRecordingsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetCallQueueRecordingsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -672,7 +700,11 @@ impl PhoneCallQueues {
             ),
             None,
         );
-        let mut resp: crate::types::GetCallQueueRecordingsResponseData = self
+        let crate::Response::<crate::types::GetCallQueueRecordingsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -683,14 +715,18 @@ impl PhoneCallQueues {
             )
             .await?;
 
-        let mut recordings = resp.recordings;
-        let mut page = resp.next_page_token;
+        let mut recordings = body.recordings;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetCallQueueRecordingsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -701,7 +737,11 @@ impl PhoneCallQueues {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetCallQueueRecordingsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -713,16 +753,16 @@ impl PhoneCallQueues {
                     .await?;
             }
 
-            recordings.append(&mut resp.recordings);
+            recordings.append(&mut body.recordings);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(recordings)
+        Ok(crate::Response::new(status, headers, recordings))
     }
 }

@@ -29,7 +29,7 @@ impl EnvelopeDocumentFields {
         account_id: &str,
         document_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",
@@ -68,7 +68,7 @@ impl EnvelopeDocumentFields {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDocumentFields,
-    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",
@@ -107,7 +107,7 @@ impl EnvelopeDocumentFields {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDocumentFields,
-    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",
@@ -146,7 +146,7 @@ impl EnvelopeDocumentFields {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDocumentFields,
-    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",

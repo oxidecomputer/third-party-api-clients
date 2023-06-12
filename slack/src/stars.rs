@@ -22,7 +22,7 @@ impl Stars {
      *
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
-    pub async fn add(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/stars.add", None);
         self.client
             .post(
@@ -55,7 +55,7 @@ impl Stars {
         page: &str,
         cursor: &str,
         limit: i64,
-    ) -> ClientResult<crate::types::StarsListSchema> {
+    ) -> ClientResult<crate::Response<crate::types::StarsListSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -92,7 +92,7 @@ impl Stars {
      *
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
-    pub async fn remove(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/stars.remove", None);
         self.client
             .post(

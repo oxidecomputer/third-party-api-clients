@@ -37,7 +37,7 @@ impl Chromeosdevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> ClientResult<Vec<crate::types::ChromeOsDevice>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ChromeOsDevice>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -69,7 +69,7 @@ impl Chromeosdevices {
             ),
             None,
         );
-        let resp: crate::types::ChromeOsDevices = self
+        let resp: crate::Response<crate::types::ChromeOsDevices> = self
             .client
             .get(
                 &url,
@@ -81,7 +81,11 @@ impl Chromeosdevices {
             .await?;
 
         // Return our response data.
-        Ok(resp.chromeosdevices.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.chromeosdevices.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos` endpoint.
@@ -98,7 +102,7 @@ impl Chromeosdevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> ClientResult<Vec<crate::types::ChromeOsDevice>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ChromeOsDevice>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.to_string().is_empty() {
             query_args.push(("orderBy".to_string(), order_by.to_string()));
@@ -124,7 +128,11 @@ impl Chromeosdevices {
             ),
             None,
         );
-        let mut resp: crate::types::ChromeOsDevices = self
+        let crate::Response::<crate::types::ChromeOsDevices> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -135,13 +143,17 @@ impl Chromeosdevices {
             )
             .await?;
 
-        let mut chromeosdevices = resp.chromeosdevices;
-        let mut page = resp.next_page_token;
+        let mut chromeosdevices = body.chromeosdevices;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ChromeOsDevices> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -152,7 +164,11 @@ impl Chromeosdevices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ChromeOsDevices> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -164,17 +180,17 @@ impl Chromeosdevices {
                     .await?;
             }
 
-            chromeosdevices.append(&mut resp.chromeosdevices);
+            chromeosdevices.append(&mut body.chromeosdevices);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(chromeosdevices)
+        Ok(crate::Response::new(status, headers, chromeosdevices))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/moveDevicesToOu` endpoint.
@@ -191,7 +207,7 @@ impl Chromeosdevices {
         customer_id: &str,
         org_unit_path: &str,
         body: &crate::types::ChromeOsMoveDevicesOu,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !org_unit_path.is_empty() {
             query_args.push(("orgUnitPath".to_string(), org_unit_path.to_string()));
@@ -231,7 +247,7 @@ impl Chromeosdevices {
         customer_id: &str,
         device_id: &str,
         projection: crate::types::Projection,
-    ) -> ClientResult<crate::types::ChromeOsDevice> {
+    ) -> ClientResult<crate::Response<crate::types::ChromeOsDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -273,7 +289,7 @@ impl Chromeosdevices {
         device_id: &str,
         projection: crate::types::Projection,
         body: &crate::types::ChromeOsDevice,
-    ) -> ClientResult<crate::types::ChromeOsDevice> {
+    ) -> ClientResult<crate::Response<crate::types::ChromeOsDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -315,7 +331,7 @@ impl Chromeosdevices {
         device_id: &str,
         projection: crate::types::Projection,
         body: &crate::types::ChromeOsDevice,
-    ) -> ClientResult<crate::types::ChromeOsDevice> {
+    ) -> ClientResult<crate::Response<crate::types::ChromeOsDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -355,7 +371,7 @@ impl Chromeosdevices {
         customer_id: &str,
         resource_id: &str,
         body: &crate::types::ChromeOsDeviceAction,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/chromeos/{}/action",

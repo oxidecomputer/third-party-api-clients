@@ -37,7 +37,7 @@ impl Conversations {
         has_unread_messages: crate::types::IsRead,
         list_id: &str,
         campaign_id: &str,
-    ) -> ClientResult<crate::types::TrackedConversations> {
+    ) -> ClientResult<crate::Response<crate::types::TrackedConversations>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !campaign_id.is_empty() {
             query_args.push(("campaign_id".to_string(), campaign_id.to_string()));
@@ -93,7 +93,7 @@ impl Conversations {
         fields: &[String],
         exclude_fields: &[String],
         conversation_id: &str,
-    ) -> ClientResult<crate::types::Conversation> {
+    ) -> ClientResult<crate::Response<crate::types::Conversation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -144,7 +144,7 @@ impl Conversations {
         is_read: crate::types::IsRead,
         before_timestamp: Option<chrono::DateTime<chrono::Utc>>,
         since_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> ClientResult<crate::types::CollectionOfConversationMessages> {
+    ) -> ClientResult<crate::Response<crate::types::CollectionOfConversationMessages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = before_timestamp {
             query_args.push(("before_timestamp".to_string(), date.to_rfc3339()));
@@ -200,7 +200,7 @@ impl Conversations {
         exclude_fields: &[String],
         conversation_id: &str,
         message_id: &str,
-    ) -> ClientResult<crate::types::ConversationMessage> {
+    ) -> ClientResult<crate::Response<crate::types::ConversationMessage>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

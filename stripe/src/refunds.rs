@@ -34,7 +34,7 @@ impl Refunds {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::Refund>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Refund>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -53,7 +53,7 @@ impl Refunds {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/refunds?{}", query_), None);
-        let resp: crate::types::RefundList = self
+        let resp: crate::Response<crate::types::RefundList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl Refunds {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/refunds` endpoint.
@@ -79,7 +83,7 @@ impl Refunds {
         charge: &str,
         _created: &str,
         payment_intent: &str,
-    ) -> ClientResult<Vec<crate::types::Refund>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Refund>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -89,7 +93,11 @@ impl Refunds {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/refunds?{}", query_), None);
-        let mut resp: crate::types::RefundList = self
+        let crate::Response::<crate::types::RefundList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -100,8 +108,8 @@ impl Refunds {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -117,7 +125,11 @@ impl Refunds {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::RefundList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -128,7 +140,11 @@ impl Refunds {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::RefundList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -140,20 +156,20 @@ impl Refunds {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/refunds` endpoint.
      *
      * <p>Create a refund.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Refund> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Refund>> {
         let url = self.client.url("/v1/refunds", None);
         self.client
             .post(
@@ -175,7 +191,7 @@ impl Refunds {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `refund: &str` -- The account's country.
      */
-    pub async fn get(&self, refund: &str) -> ClientResult<crate::types::Refund> {
+    pub async fn get(&self, refund: &str) -> ClientResult<crate::Response<crate::types::Refund>> {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
@@ -204,7 +220,10 @@ impl Refunds {
      *
      * * `refund: &str` -- The account's country.
      */
-    pub async fn post_refunds(&self, refund: &str) -> ClientResult<crate::types::Refund> {
+    pub async fn post_refunds(
+        &self,
+        refund: &str,
+    ) -> ClientResult<crate::Response<crate::types::Refund>> {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
@@ -233,7 +252,10 @@ impl Refunds {
      *
      * * `refund: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, refund: &str) -> ClientResult<crate::types::Refund> {
+    pub async fn post_cancel(
+        &self,
+        refund: &str,
+    ) -> ClientResult<crate::Response<crate::types::Refund>> {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}/cancel",

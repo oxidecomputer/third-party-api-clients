@@ -18,7 +18,10 @@ impl Contractors {
      *
      * Get a contractor.
      */
-    pub async fn get(&self, contractor_id_or_uuid: &str) -> ClientResult<crate::types::Contractor> {
+    pub async fn get(
+        &self,
+        contractor_id_or_uuid: &str,
+    ) -> ClientResult<crate::Response<crate::types::Contractor>> {
         let url = self.client.url(
             &format!(
                 "/v1/contractors/{}",
@@ -47,7 +50,7 @@ impl Contractors {
         &self,
         contractor_id_or_uuid: &str,
         body: &crate::types::PutComntractorRequest,
-    ) -> ClientResult<crate::types::Contractor> {
+    ) -> ClientResult<crate::Response<crate::types::Contractor>> {
         let url = self.client.url(
             &format!(
                 "/v1/contractors/{}",
@@ -75,7 +78,7 @@ impl Contractors {
     pub async fn get_company(
         &self,
         company_id_or_uuid: &str,
-    ) -> ClientResult<Vec<crate::types::Contractor>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Contractor>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractors",
@@ -105,7 +108,7 @@ impl Contractors {
     pub async fn get_all_company(
         &self,
         company_id_or_uuid: &str,
-    ) -> ClientResult<Vec<crate::types::Contractor>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Contractor>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractors",
@@ -134,7 +137,7 @@ impl Contractors {
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyContractorsRequest,
-    ) -> ClientResult<crate::types::Contractor> {
+    ) -> ClientResult<crate::Response<crate::types::Contractor>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractors",

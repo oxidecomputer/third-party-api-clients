@@ -37,7 +37,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google-cloud-resource-manager = "0.4.0"
+google-cloud-resource-manager = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -45,7 +45,7 @@ google-cloud-resource-manager = "0.4.0"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use google_cloud_resource_manager::Client;
 
 let google cloud resource manager = Client::new(
@@ -66,7 +66,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use google_cloud_resource_manager::Client;
 
 let google cloud resource manager = Client::new_from_env(
@@ -80,7 +80,7 @@ the initial state of the client, you will not know these values.
 
 To start off a fresh client and get a `token` and `refresh_token`, use the following.
 
-```
+```rust
 use google_cloud_resource_manager::Client;
 
 async fn do_call() {

@@ -29,7 +29,7 @@ impl SearchCampaigns {
         fields: &[String],
         exclude_fields: &[String],
         query: &str,
-    ) -> ClientResult<crate::types::Campaigns> {
+    ) -> ClientResult<crate::Response<crate::types::Campaigns>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

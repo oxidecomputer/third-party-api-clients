@@ -27,7 +27,7 @@ impl StoreProperties {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -51,19 +51,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-01
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-01
+     */
     pub async fn deprecated_202001_create_countries(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/countries.json", None);
         self.client
             .post(
@@ -82,7 +82,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-01
      */
-    pub async fn deprecated_202001_get_countries_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_countries_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/countries/count.json", None);
@@ -112,7 +112,7 @@ impl StoreProperties {
         &self,
         country_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -137,24 +137,24 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_countries_param_country(
         &self,
         country_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/countries/{}/json",
@@ -186,7 +186,7 @@ impl StoreProperties {
     pub async fn deprecated_202001_delete_countries_param_country(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/countries/{}/json",
@@ -220,7 +220,7 @@ impl StoreProperties {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -244,19 +244,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-04
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-04
+     */
     pub async fn deprecated_202004_create_countries(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/countries.json", None);
         self.client
             .post(
@@ -275,7 +275,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-04
      */
-    pub async fn deprecated_202004_get_countries_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_countries_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/countries/count.json", None);
@@ -305,7 +305,7 @@ impl StoreProperties {
         &self,
         country_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -330,24 +330,24 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_countries_param_country(
         &self,
         country_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/countries/{}/json",
@@ -379,7 +379,7 @@ impl StoreProperties {
     pub async fn deprecated_202004_delete_countries_param_country(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/countries/{}/json",
@@ -413,7 +413,7 @@ impl StoreProperties {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -437,19 +437,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-07
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-07
+     */
     pub async fn deprecated_202007_create_countries(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/countries.json", None);
         self.client
             .post(
@@ -468,7 +468,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-07
      */
-    pub async fn deprecated_202007_get_countries_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_countries_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/countries/count.json", None);
@@ -498,7 +498,7 @@ impl StoreProperties {
         &self,
         country_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -523,24 +523,24 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_countries_param_country(
         &self,
         country_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/countries/{}/json",
@@ -572,7 +572,7 @@ impl StoreProperties {
     pub async fn deprecated_202007_delete_countries_param_country(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/countries/{}/json",
@@ -602,7 +602,11 @@ impl StoreProperties {
      * * `since_id: &str` -- Restrict results to after the specified ID.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_countrie(&self, since_id: &str, fields: &str) -> ClientResult<()> {
+    pub async fn get_countrie(
+        &self,
+        since_id: &str,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -626,16 +630,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-10
-    */
-    pub async fn create_countries(&self, body: &serde_json::Value) -> ClientResult<()> {
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-10
+     */
+    pub async fn create_countries(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/countries.json", None);
         self.client
             .post(
@@ -654,7 +661,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-10
      */
-    pub async fn get_countries_count(&self) -> ClientResult<()> {
+    pub async fn get_countries_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/countries/count.json", None);
@@ -684,7 +691,7 @@ impl StoreProperties {
         &self,
         country_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -709,24 +716,24 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_countries_param_country(
         &self,
         country_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/countries/{}/json",
@@ -755,7 +762,10 @@ impl StoreProperties {
      *
      * * `country_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_countries_param_country(&self, country_id: &str) -> ClientResult<()> {
+    pub async fn delete_countries_param_country(
+        &self,
+        country_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/countries/{}/json",
@@ -789,7 +799,7 @@ impl StoreProperties {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -813,19 +823,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2021-01
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2021-01
+     */
     pub async fn deprecated_202101_create_countries(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/countries.json", None);
         self.client
             .post(
@@ -844,7 +854,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2021-01
      */
-    pub async fn deprecated_202101_get_countries_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_countries_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/countries/count.json", None);
@@ -874,7 +884,7 @@ impl StoreProperties {
         &self,
         country_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -899,24 +909,24 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_countries_param_country(
         &self,
         country_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/countries/{}/json",
@@ -948,7 +958,7 @@ impl StoreProperties {
     pub async fn deprecated_202101_delete_countries_param_country(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/countries/{}/json",
@@ -982,7 +992,7 @@ impl StoreProperties {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1006,19 +1016,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-unstable
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-unstable
+     */
     pub async fn deprecated_unstable_create_countries(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/countries.json", None);
         self.client
             .post(
@@ -1037,7 +1047,9 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-unstable
      */
-    pub async fn deprecated_unstable_get_countries_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_countries_count(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/countries/count.json", None);
@@ -1067,7 +1079,7 @@ impl StoreProperties {
         &self,
         country_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1092,24 +1104,24 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_countries_param_country(
         &self,
         country_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/countries/{}/json",
@@ -1141,7 +1153,7 @@ impl StoreProperties {
     pub async fn deprecated_unstable_delete_countries_param_country(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/countries/{}/json",
@@ -1166,7 +1178,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-01
      */
-    pub async fn deprecated_202001_get_currencie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_currencie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/currencies.json", None);
         self.client
             .get(
@@ -1185,7 +1197,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-04
      */
-    pub async fn deprecated_202004_get_currencie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_currencie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/currencies.json", None);
         self.client
             .get(
@@ -1204,7 +1216,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-07
      */
-    pub async fn deprecated_202007_get_currencie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_currencie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/currencies.json", None);
         self.client
             .get(
@@ -1223,7 +1235,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-10
      */
-    pub async fn get_currencie(&self) -> ClientResult<()> {
+    pub async fn get_currencie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/currencies.json", None);
         self.client
             .get(
@@ -1242,7 +1254,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2021-01
      */
-    pub async fn deprecated_202101_get_currencie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_currencie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/currencies.json", None);
         self.client
             .get(
@@ -1261,7 +1273,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-unstable
      */
-    pub async fn deprecated_unstable_get_currencie(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_currencie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/currencies.json", None);
         self.client
             .get(
@@ -1280,7 +1292,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-01
      */
-    pub async fn deprecated_202001_get_policie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_policie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/policies.json", None);
         self.client
             .get(
@@ -1299,7 +1311,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-04
      */
-    pub async fn deprecated_202004_get_policie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_policie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/policies.json", None);
         self.client
             .get(
@@ -1318,7 +1330,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-07
      */
-    pub async fn deprecated_202007_get_policie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_policie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/policies.json", None);
         self.client
             .get(
@@ -1337,7 +1349,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-10
      */
-    pub async fn get_policie(&self) -> ClientResult<()> {
+    pub async fn get_policie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/policies.json", None);
         self.client
             .get(
@@ -1356,7 +1368,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2021-01
      */
-    pub async fn deprecated_202101_get_policie(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_policie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/policies.json", None);
         self.client
             .get(
@@ -1375,7 +1387,7 @@ impl StoreProperties {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-unstable
      */
-    pub async fn deprecated_unstable_get_policie(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_policie(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/policies.json", None);
         self.client
             .get(
@@ -1405,7 +1417,7 @@ impl StoreProperties {
         country_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1446,7 +1458,7 @@ impl StoreProperties {
     pub async fn deprecated_202001_get_countries_param_country_provinces_count(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/countries/{}/provinces/count.json",
@@ -1482,7 +1494,7 @@ impl StoreProperties {
         country_id: &str,
         province_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1508,26 +1520,26 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
         province_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/countries/{}/provinces/{}/json",
@@ -1564,7 +1576,7 @@ impl StoreProperties {
         country_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1605,7 +1617,7 @@ impl StoreProperties {
     pub async fn deprecated_202004_get_countries_param_country_provinces_count(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/countries/{}/provinces/count.json",
@@ -1641,7 +1653,7 @@ impl StoreProperties {
         country_id: &str,
         province_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1667,26 +1679,26 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
         province_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/countries/{}/provinces/{}/json",
@@ -1723,7 +1735,7 @@ impl StoreProperties {
         country_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1764,7 +1776,7 @@ impl StoreProperties {
     pub async fn deprecated_202007_get_countries_param_country_provinces_count(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/countries/{}/provinces/count.json",
@@ -1800,7 +1812,7 @@ impl StoreProperties {
         country_id: &str,
         province_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1826,26 +1838,26 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
         province_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/countries/{}/provinces/{}/json",
@@ -1882,7 +1894,7 @@ impl StoreProperties {
         country_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1923,7 +1935,7 @@ impl StoreProperties {
     pub async fn get_countries_param_country_provinces_count(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/countries/{}/provinces/count.json",
@@ -1959,7 +1971,7 @@ impl StoreProperties {
         country_id: &str,
         province_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1985,26 +1997,26 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
         province_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/countries/{}/provinces/{}/json",
@@ -2041,7 +2053,7 @@ impl StoreProperties {
         country_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2082,7 +2094,7 @@ impl StoreProperties {
     pub async fn deprecated_202101_get_countries_param_country_provinces_count(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/countries/{}/provinces/count.json",
@@ -2118,7 +2130,7 @@ impl StoreProperties {
         country_id: &str,
         province_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2144,26 +2156,26 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
         province_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/countries/{}/provinces/{}/json",
@@ -2200,7 +2212,7 @@ impl StoreProperties {
         country_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2241,7 +2253,7 @@ impl StoreProperties {
     pub async fn deprecated_unstable_get_countries_param_country_provinces_count(
         &self,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/countries/{}/provinces/count.json",
@@ -2277,7 +2289,7 @@ impl StoreProperties {
         country_id: &str,
         province_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2303,26 +2315,26 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
         province_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/countries/{}/provinces/{}/json",
@@ -2352,7 +2364,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202001_get_shipping_zone(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_shipping_zone(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2383,7 +2398,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202004_get_shipping_zone(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_shipping_zone(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2414,7 +2432,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202007_get_shipping_zone(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_shipping_zone(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2445,7 +2466,7 @@ impl StoreProperties {
      *
      * * `fields: &str` -- comma-separated list of fields to include in the response.
      */
-    pub async fn get_shipping_zone(&self, fields: &str) -> ClientResult<()> {
+    pub async fn get_shipping_zone(&self, fields: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2476,7 +2497,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202101_get_shipping_zone(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_shipping_zone(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2507,7 +2531,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_unstable_get_shipping_zone(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_shipping_zone(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2538,7 +2565,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202001_get_shop(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_shop(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2568,7 +2598,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202004_get_shop(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_shop(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2598,7 +2631,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202007_get_shop(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_shop(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2628,7 +2664,7 @@ impl StoreProperties {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn get_shop(&self, fields: &str) -> ClientResult<()> {
+    pub async fn get_shop(&self, fields: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2658,7 +2694,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202101_get_shop(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_shop(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2688,7 +2727,10 @@ impl StoreProperties {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_unstable_get_shop(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_shop(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));

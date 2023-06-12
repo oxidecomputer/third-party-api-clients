@@ -37,7 +37,7 @@ impl CommonAreaPhones {
         &self,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::CommonAreaPhones>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CommonAreaPhones>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -49,7 +49,7 @@ impl CommonAreaPhones {
         let url = self
             .client
             .url(&format!("/phone/common_area_phones?{}", query_), None);
-        let resp: crate::types::ListCommonAreaPhonesResponse = self
+        let resp: crate::Response<crate::types::ListCommonAreaPhonesResponse> = self
             .client
             .get(
                 &url,
@@ -61,7 +61,11 @@ impl CommonAreaPhones {
             .await?;
 
         // Return our response data.
-        Ok(resp.common_area_phones.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.common_area_phones.to_vec(),
+        ))
     }
     /**
      * List common area phones.
@@ -82,9 +86,15 @@ impl CommonAreaPhones {
      * * Account owner or admin permissions.
      * * A [supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)
      */
-    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::CommonAreaPhones>> {
+    pub async fn list_all(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::CommonAreaPhones>>> {
         let url = self.client.url("/phone/common_area_phones", None);
-        let mut resp: crate::types::ListCommonAreaPhonesResponse = self
+        let crate::Response::<crate::types::ListCommonAreaPhonesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -95,14 +105,18 @@ impl CommonAreaPhones {
             )
             .await?;
 
-        let mut common_area_phones = resp.common_area_phones;
-        let mut page = resp.next_page_token;
+        let mut common_area_phones = body.common_area_phones;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListCommonAreaPhonesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -113,7 +127,11 @@ impl CommonAreaPhones {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListCommonAreaPhonesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -125,17 +143,17 @@ impl CommonAreaPhones {
                     .await?;
             }
 
-            common_area_phones.append(&mut resp.common_area_phones);
+            common_area_phones.append(&mut body.common_area_phones);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(common_area_phones)
+        Ok(crate::Response::new(status, headers, common_area_phones))
     }
     /**
      * Add a common area phone.
@@ -157,7 +175,7 @@ impl CommonAreaPhones {
     pub async fn add(
         &self,
         body: &crate::types::AddCommonAreaPhoneRequest,
-    ) -> ClientResult<crate::types::AddCommonAreaPhoneResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddCommonAreaPhoneResponse>> {
         let url = self.client.url("/phone/common_area_phones", None);
         self.client
             .post(
@@ -192,7 +210,7 @@ impl CommonAreaPhones {
     pub async fn get(
         &self,
         common_area_phone_id: &str,
-    ) -> ClientResult<crate::types::GetCommonAreaPhoneResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCommonAreaPhoneResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}",
@@ -228,7 +246,7 @@ impl CommonAreaPhones {
      *
      * * `common_area_phone_id: &str` -- Unique Identifier of the common area phone.
      */
-    pub async fn delete(&self, common_area_phone_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, common_area_phone_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}",
@@ -267,7 +285,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         body: &crate::types::UpdateCommonAreaPhoneRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}",
@@ -303,7 +321,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         body: &crate::types::AssignPhoneNumbersCommonAreaRequest,
-    ) -> ClientResult<crate::types::AssignPhoneNumbersCommonAreaResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::AssignPhoneNumbersCommonAreaResponseData>> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/phone_numbers",
@@ -343,7 +361,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         phone_number_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/phone_numbers/{}",
@@ -380,7 +398,8 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         body: &crate::types::AssignCallingPlansCommonAreaPhoneRequestData,
-    ) -> ClientResult<crate::types::AssignCallingPlansCommonAreaPhoneResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::AssignCallingPlansCommonAreaPhoneResponseData>>
+    {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/calling_plans",
@@ -420,7 +439,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         type_: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/calling_plans/{}",

@@ -32,7 +32,7 @@ impl PaymentIntents {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::PaymentIntent>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaymentIntent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -50,7 +50,7 @@ impl PaymentIntents {
         let url = self
             .client
             .url(&format!("/v1/payment_intents?{}", query_), None);
-        let resp: crate::types::PaymentFlowsIntentList = self
+        let resp: crate::Response<crate::types::PaymentFlowsIntentList> = self
             .client
             .get(
                 &url,
@@ -62,7 +62,11 @@ impl PaymentIntents {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/payment_intents` endpoint.
@@ -75,7 +79,7 @@ impl PaymentIntents {
         &self,
         _created: &str,
         customer: &str,
-    ) -> ClientResult<Vec<crate::types::PaymentIntent>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaymentIntent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -84,7 +88,11 @@ impl PaymentIntents {
         let url = self
             .client
             .url(&format!("/v1/payment_intents?{}", query_), None);
-        let mut resp: crate::types::PaymentFlowsIntentList = self
+        let crate::Response::<crate::types::PaymentFlowsIntentList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -95,8 +103,8 @@ impl PaymentIntents {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -112,7 +120,11 @@ impl PaymentIntents {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsIntentList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -123,7 +135,11 @@ impl PaymentIntents {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsIntentList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -135,13 +151,13 @@ impl PaymentIntents {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/payment_intents` endpoint.
@@ -157,7 +173,7 @@ impl PaymentIntents {
      * available in the <a href="/docs/api/payment_intents/confirm">confirm API</a> when <code>confirm=true</code>
      * is supplied.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::PaymentIntent> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
         let url = self.client.url("/v1/payment_intents", None);
         self.client
             .post(
@@ -189,7 +205,7 @@ impl PaymentIntents {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> ClientResult<Vec<crate::types::Charge>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -204,7 +220,7 @@ impl PaymentIntents {
         let url = self
             .client
             .url(&format!("/v1/payment_intents/search?{}", query_), None);
-        let resp: crate::types::SearchResult = self
+        let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
                 &url,
@@ -216,7 +232,11 @@ impl PaymentIntents {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/payment_intents/search` endpoint.
@@ -228,7 +248,10 @@ impl PaymentIntents {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(
+        &self,
+        query: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -237,7 +260,11 @@ impl PaymentIntents {
         let url = self
             .client
             .url(&format!("/v1/payment_intents/search?{}", query_), None);
-        let mut resp: crate::types::SearchResult = self
+        let crate::Response::<crate::types::SearchResult> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -248,8 +275,8 @@ impl PaymentIntents {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -265,7 +292,11 @@ impl PaymentIntents {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -276,7 +307,11 @@ impl PaymentIntents {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -288,13 +323,13 @@ impl PaymentIntents {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/payment_intents/{intent}` endpoint.
@@ -315,7 +350,7 @@ impl PaymentIntents {
         &self,
         client_secret: &str,
         intent: &str,
-    ) -> ClientResult<crate::types::PaymentIntent> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
@@ -354,7 +389,10 @@ impl PaymentIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent(&self, intent: &str) -> ClientResult<crate::types::PaymentIntent> {
+    pub async fn post_intent(
+        &self,
+        intent: &str,
+    ) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}",
@@ -388,7 +426,7 @@ impl PaymentIntents {
     pub async fn post_intent_cancel(
         &self,
         intent: &str,
-    ) -> ClientResult<crate::types::PaymentIntent> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/cancel",
@@ -422,7 +460,7 @@ impl PaymentIntents {
     pub async fn post_intent_capture(
         &self,
         intent: &str,
-    ) -> ClientResult<crate::types::PaymentIntent> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/capture",
@@ -476,7 +514,7 @@ impl PaymentIntents {
     pub async fn post_intent_confirm(
         &self,
         intent: &str,
-    ) -> ClientResult<crate::types::PaymentIntent> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/confirm",
@@ -506,7 +544,7 @@ impl PaymentIntents {
     pub async fn post_intent_verify_microdeposit(
         &self,
         intent: &str,
-    ) -> ClientResult<crate::types::PaymentIntent> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/verify_microdeposits",

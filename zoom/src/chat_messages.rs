@@ -50,7 +50,7 @@ impl ChatMessages {
         page_size: i64,
         next_page_token: &str,
         include_deleted_and_edited_message: &str,
-    ) -> ClientResult<Vec<crate::types::Messages>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Messages>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date.to_string().is_empty() {
             query_args.push(("date".to_string(), date.to_string()));
@@ -82,7 +82,7 @@ impl ChatMessages {
             ),
             None,
         );
-        let resp: crate::types::GetChatMessagesResponse = self
+        let resp: crate::Response<crate::types::GetChatMessagesResponse> = self
             .client
             .get(
                 &url,
@@ -94,7 +94,11 @@ impl ChatMessages {
             .await?;
 
         // Return our response data.
-        Ok(resp.messages.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.messages.to_vec(),
+        ))
     }
     /**
      * List user's chat messages.
@@ -121,7 +125,7 @@ impl ChatMessages {
         to_channel: &str,
         date: chrono::NaiveDate,
         include_deleted_and_edited_message: &str,
-    ) -> ClientResult<Vec<crate::types::Messages>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Messages>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date.to_string().is_empty() {
             query_args.push(("date".to_string(), date.to_string()));
@@ -147,7 +151,11 @@ impl ChatMessages {
             ),
             None,
         );
-        let mut resp: crate::types::GetChatMessagesResponse = self
+        let crate::Response::<crate::types::GetChatMessagesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -158,14 +166,18 @@ impl ChatMessages {
             )
             .await?;
 
-        let mut messages = resp.messages;
-        let mut page = resp.next_page_token;
+        let mut messages = body.messages;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetChatMessagesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -176,7 +188,11 @@ impl ChatMessages {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetChatMessagesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -188,17 +204,17 @@ impl ChatMessages {
                     .await?;
             }
 
-            messages.append(&mut resp.messages);
+            messages.append(&mut body.messages);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(messages)
+        Ok(crate::Response::new(status, headers, messages))
     }
     /**
      * Send a chat message.
@@ -217,7 +233,7 @@ impl ChatMessages {
         &self,
         user_id: &str,
         body: &crate::types::SendaChatMessageRequest,
-    ) -> ClientResult<crate::types::Groups> {
+    ) -> ClientResult<crate::Response<crate::types::Groups>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages",
@@ -256,7 +272,7 @@ impl ChatMessages {
         user_id: &str,
         message_id: &str,
         body: &crate::types::MarkMessageRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}/status",
@@ -296,7 +312,7 @@ impl ChatMessages {
         user_id: &str,
         message_id: &str,
         body: &crate::types::ReactMessageRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}/emoji_reactions",
@@ -342,7 +358,7 @@ impl ChatMessages {
         message_id: &str,
         to_contact: &str,
         to_channel: &str,
-    ) -> ClientResult<crate::types::GetChatMessageResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetChatMessageResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !to_channel.is_empty() {
             query_args.push(("to_channel".to_string(), to_channel.to_string()));
@@ -393,7 +409,7 @@ impl ChatMessages {
         user_id: &str,
         message_id: &str,
         body: &crate::types::EditMessageRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}",
@@ -446,7 +462,7 @@ impl ChatMessages {
         message_id: &str,
         to_contact: &str,
         to_channel: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !to_channel.is_empty() {
             query_args.push(("to_channel".to_string(), to_channel.to_string()));

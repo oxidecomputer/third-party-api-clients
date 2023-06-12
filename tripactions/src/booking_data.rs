@@ -39,7 +39,7 @@ impl BookingData {
         page: u64,
         size: i64,
         booking_type: crate::types::BookingType,
-    ) -> ClientResult<Vec<crate::types::BookingReport>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BookingReport>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
             query_args.push(("bookingStatus".to_string(), booking_status.to_string()));
@@ -67,7 +67,7 @@ impl BookingData {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/bookings?{}", query_), None);
-        let resp: crate::types::BookingReportResponse = self
+        let resp: crate::Response<crate::types::BookingReportResponse> = self
             .client
             .get(
                 &url,
@@ -79,7 +79,11 @@ impl BookingData {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * Your company's bookings.
@@ -98,7 +102,7 @@ impl BookingData {
         start_date_to: &str,
         booking_status: crate::types::BookingStatus,
         booking_type: crate::types::BookingType,
-    ) -> ClientResult<Vec<crate::types::BookingReport>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BookingReport>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
             query_args.push(("bookingStatus".to_string(), booking_status.to_string()));
@@ -121,7 +125,11 @@ impl BookingData {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/bookings?{}", query_), None);
 
-        let mut resp: crate::types::BookingReportResponse = if !url.contains('?') {
+        let crate::Response::<crate::types::BookingReportResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = if !url.contains('?') {
             self.client
                 .get(
                     &format!("{}?page=0&size=100", url),
@@ -143,13 +151,17 @@ impl BookingData {
                 .await?
         };
 
-        let mut data = resp.data;
-        let mut page = resp.page.current_page + 1;
+        let mut data = body.data;
+        let mut page = body.page.current_page + 1;
 
         // Paginate if we should.
-        while page <= (resp.page.total_pages - 1) {
+        while page <= (body.page.total_pages - 1) {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::BookingReportResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?page={}&size=100", url, page),
@@ -160,7 +172,11 @@ impl BookingData {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::BookingReportResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&page={}&size=100", url, page),
@@ -172,12 +188,12 @@ impl BookingData {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            page = resp.page.current_page + 1;
+            page = body.page.current_page + 1;
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(crate::Response::new(status, headers, data))
     }
 }

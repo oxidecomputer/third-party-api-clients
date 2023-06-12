@@ -22,7 +22,7 @@ impl CustomIds {
      */
     pub async fn get_custom_provider(
         &self,
-    ) -> ClientResult<crate::types::GetCustomProviderResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCustomProviderResponse>> {
         let url = self.client.url("/custom-id-provider", None);
         self.client
             .get(
@@ -47,7 +47,7 @@ impl CustomIds {
      */
     pub async fn postcustom_provider(
         &self,
-    ) -> ClientResult<crate::types::PostcustomProviderResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PostcustomProviderResponse>> {
         let url = self.client.url("/custom-id-provider", None);
         self.client
             .post(
@@ -69,7 +69,7 @@ impl CustomIds {
     pub async fn post_custom_provider_application_link(
         &self,
         body: &crate::types::GetCustomProviderResponse,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/custom-id-provider/application-link", None);
@@ -98,7 +98,7 @@ impl CustomIds {
         &self,
         entity_type: &str,
         custom_id: &str,
-    ) -> ClientResult<crate::types::GetEntityTypeCustomRampResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetEntityTypeCustomRampResponse>> {
         let url = self.client.url(
             &format!(
                 "/custom-id-provider/{}/{}/ramp-id",
@@ -130,7 +130,7 @@ impl CustomIds {
         &self,
         entity_type: &str,
         ramp_id: &str,
-    ) -> ClientResult<crate::types::GetEntityTypeRampCustomResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetEntityTypeRampCustomResponse>> {
         let url = self.client.url(
             &format!(
                 "/custom-id-provider/{}/{}/custom-id",
@@ -160,7 +160,7 @@ impl CustomIds {
         &self,
         entity_type: &str,
         body: &crate::types::PostCustomProviderEntityTypeLinkRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/custom-id-provider/{}/custom-id-link",

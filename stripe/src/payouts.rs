@@ -36,7 +36,7 @@ impl Payouts {
         limit: i64,
         starting_after: &str,
         status: &str,
-    ) -> ClientResult<Vec<crate::types::Payout>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Payout>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -55,7 +55,7 @@ impl Payouts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/payouts?{}", query_), None);
-        let resp: crate::types::PayoutList = self
+        let resp: crate::Response<crate::types::PayoutList> = self
             .client
             .get(
                 &url,
@@ -67,7 +67,11 @@ impl Payouts {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/payouts` endpoint.
@@ -82,7 +86,7 @@ impl Payouts {
         _created: &str,
         destination: &str,
         status: &str,
-    ) -> ClientResult<Vec<crate::types::Payout>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Payout>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -92,7 +96,11 @@ impl Payouts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/payouts?{}", query_), None);
-        let mut resp: crate::types::PayoutList = self
+        let crate::Response::<crate::types::PayoutList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -103,8 +111,8 @@ impl Payouts {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -120,7 +128,11 @@ impl Payouts {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PayoutList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -131,7 +143,11 @@ impl Payouts {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PayoutList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -143,13 +159,13 @@ impl Payouts {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/payouts` endpoint.
@@ -160,7 +176,7 @@ impl Payouts {
      *
      * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source types, you’ll need to specify the source type balance that the payout should draw from. The <a href="#balance_object">balance object</a> details available and pending amounts by source type.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Payout> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Payout>> {
         let url = self.client.url("/v1/payouts", None);
         self.client
             .post(
@@ -182,7 +198,7 @@ impl Payouts {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `payout: &str` -- The account's country.
      */
-    pub async fn get(&self, payout: &str) -> ClientResult<crate::types::Payout> {
+    pub async fn get(&self, payout: &str) -> ClientResult<crate::Response<crate::types::Payout>> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}",
@@ -209,7 +225,10 @@ impl Payouts {
      *
      * * `payout: &str` -- The account's country.
      */
-    pub async fn post_payouts(&self, payout: &str) -> ClientResult<crate::types::Payout> {
+    pub async fn post_payouts(
+        &self,
+        payout: &str,
+    ) -> ClientResult<crate::Response<crate::types::Payout>> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}",
@@ -236,7 +255,10 @@ impl Payouts {
      *
      * * `payout: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, payout: &str) -> ClientResult<crate::types::Payout> {
+    pub async fn post_cancel(
+        &self,
+        payout: &str,
+    ) -> ClientResult<crate::Response<crate::types::Payout>> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}/cancel",
@@ -265,7 +287,10 @@ impl Payouts {
      *
      * * `payout: &str` -- The account's country.
      */
-    pub async fn post_reverse(&self, payout: &str) -> ClientResult<crate::types::Payout> {
+    pub async fn post_reverse(
+        &self,
+        payout: &str,
+    ) -> ClientResult<crate::Response<crate::types::Payout>> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}/reverse",

@@ -49,7 +49,7 @@ impl CodeScanning {
         per_page: i64,
         ref_: &str,
         state: crate::types::CodeScanningAlertState,
-    ) -> ClientResult<Vec<crate::types::CodeScanningAlertItems>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeScanningAlertItems>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -116,7 +116,7 @@ impl CodeScanning {
         tool_guid: &str,
         ref_: &str,
         state: crate::types::CodeScanningAlertState,
-    ) -> ClientResult<Vec<crate::types::CodeScanningAlertItems>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeScanningAlertItems>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -173,7 +173,7 @@ impl CodeScanning {
         owner: &str,
         repo: &str,
         alert_number: i64,
-    ) -> ClientResult<crate::types::CodeScanningAlert> {
+    ) -> ClientResult<crate::Response<crate::types::CodeScanningAlert>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/code-scanning/alerts/{}",
@@ -214,7 +214,7 @@ impl CodeScanning {
         repo: &str,
         alert_number: i64,
         body: &crate::types::CodeScanningUpdateAlertRequest,
-    ) -> ClientResult<crate::types::CodeScanningAlert> {
+    ) -> ClientResult<crate::Response<crate::types::CodeScanningAlert>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/code-scanning/alerts/{}",
@@ -260,7 +260,7 @@ impl CodeScanning {
         page: i64,
         per_page: i64,
         ref_: &str,
-    ) -> ClientResult<Vec<crate::types::CodeScanningAlertInstance>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeScanningAlertInstance>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -309,7 +309,7 @@ impl CodeScanning {
         repo: &str,
         alert_number: i64,
         ref_: &str,
-    ) -> ClientResult<Vec<crate::types::CodeScanningAlertInstance>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeScanningAlertInstance>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -380,7 +380,7 @@ impl CodeScanning {
         per_page: i64,
         ref_: &str,
         sarif_id: &str,
-    ) -> ClientResult<Vec<crate::types::CodeScanningAnalysis>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeScanningAnalysis>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -454,7 +454,7 @@ impl CodeScanning {
         tool_guid: &str,
         ref_: &str,
         sarif_id: &str,
-    ) -> ClientResult<Vec<crate::types::CodeScanningAnalysis>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeScanningAnalysis>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -528,7 +528,7 @@ impl CodeScanning {
         owner: &str,
         repo: &str,
         analysis_id: i64,
-    ) -> ClientResult<crate::types::CodeScanningAnalysis> {
+    ) -> ClientResult<crate::Response<crate::types::CodeScanningAnalysis>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/code-scanning/analyses/{}",
@@ -633,7 +633,7 @@ impl CodeScanning {
         repo: &str,
         analysis_id: i64,
         confirm_delete: &str,
-    ) -> ClientResult<crate::types::AnalysisDeletion> {
+    ) -> ClientResult<crate::Response<crate::types::AnalysisDeletion>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !confirm_delete.is_empty() {
             query_args.push(("confirm_delete".to_string(), confirm_delete.to_string()));
@@ -694,7 +694,7 @@ impl CodeScanning {
         owner: &str,
         repo: &str,
         body: &crate::types::CodeScanningUploadSarifRequest,
-    ) -> ClientResult<crate::types::CodeScanningSarifsReceipt> {
+    ) -> ClientResult<crate::Response<crate::types::CodeScanningSarifsReceipt>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/code-scanning/sarifs",
@@ -733,7 +733,7 @@ impl CodeScanning {
         owner: &str,
         repo: &str,
         sarif_id: &str,
-    ) -> ClientResult<crate::types::CodeScanningSarifsStatus> {
+    ) -> ClientResult<crate::Response<crate::types::CodeScanningSarifsStatus>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/code-scanning/sarifs/{}",

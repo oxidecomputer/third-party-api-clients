@@ -28,7 +28,7 @@ impl UsersProfile {
         &self,
         include_labels: bool,
         user: &str,
-    ) -> ClientResult<crate::types::UsersProfileGetSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UsersProfileGetSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_labels {
             query_args.push(("include_labels".to_string(), include_labels.to_string()));
@@ -61,7 +61,7 @@ impl UsersProfile {
      *
      * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
      */
-    pub async fn set(&self) -> ClientResult<crate::types::UsersProfileSetSchema> {
+    pub async fn set(&self) -> ClientResult<crate::Response<crate::types::UsersProfileSetSchema>> {
         let url = self.client.url("/users.profile.set", None);
         self.client
             .post(

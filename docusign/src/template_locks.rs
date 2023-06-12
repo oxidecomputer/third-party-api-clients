@@ -40,7 +40,7 @@ impl TemplateLocks {
         &self,
         account_id: &str,
         template_id: &str,
-    ) -> ClientResult<crate::types::LockInformation> {
+    ) -> ClientResult<crate::Response<crate::types::LockInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",
@@ -98,7 +98,7 @@ impl TemplateLocks {
         account_id: &str,
         template_id: &str,
         body: &crate::types::LockRequest,
-    ) -> ClientResult<crate::types::LockInformation> {
+    ) -> ClientResult<crate::Response<crate::types::LockInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",
@@ -190,7 +190,7 @@ impl TemplateLocks {
         account_id: &str,
         template_id: &str,
         body: &crate::types::LockRequest,
-    ) -> ClientResult<crate::types::LockInformation> {
+    ) -> ClientResult<crate::Response<crate::types::LockInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",
@@ -243,7 +243,7 @@ impl TemplateLocks {
         account_id: &str,
         template_id: &str,
         body: &crate::types::LockRequest,
-    ) -> ClientResult<crate::types::LockInformation> {
+    ) -> ClientResult<crate::Response<crate::types::LockInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",

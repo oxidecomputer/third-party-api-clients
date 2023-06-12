@@ -22,7 +22,10 @@ impl FavoriteTemplates {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str) -> ClientResult<crate::types::FavoriteTemplatesInfo> {
+    pub async fn get(
+        &self,
+        account_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::FavoriteTemplatesInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/favorite_templates",
@@ -41,22 +44,22 @@ impl FavoriteTemplates {
             .await
     }
     /**
-    * Sets a template as a favorite.
+     * Sets a template as a favorite.
     .
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn put_template(
         &self,
         account_id: &str,
         body: &crate::types::FavoriteTemplatesInfo,
-    ) -> ClientResult<crate::types::FavoriteTemplatesInfo> {
+    ) -> ClientResult<crate::Response<crate::types::FavoriteTemplatesInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/favorite_templates",
@@ -89,7 +92,7 @@ impl FavoriteTemplates {
         &self,
         account_id: &str,
         body: &crate::types::FavoriteTemplatesInfo,
-    ) -> ClientResult<crate::types::FavoriteTemplatesInfo> {
+    ) -> ClientResult<crate::Response<crate::types::FavoriteTemplatesInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/favorite_templates",

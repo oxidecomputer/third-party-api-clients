@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-gusto-api = "0.4.0"
+gusto-api = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -39,7 +39,7 @@ gusto-api = "0.4.0"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use gusto_api::Client;
 
 let gusto = Client::new(
@@ -47,7 +47,8 @@ let gusto = Client::new(
     String::from("client-secret"),
     String::from("redirect-uri"),
     String::from("token"),
-    String::from("refresh-token")
+    String::from("refresh-token"),
+    gusto_api::RootProductionServer
 );
 ```
 
@@ -60,12 +61,13 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use gusto_api::Client;
 
 let gusto = Client::new_from_env(
     String::from("token"),
-    String::from("refresh-token")
+    String::from("refresh-token"),
+    gusto_api::RootProductionServer
 );
 ```
 
@@ -74,11 +76,11 @@ the initial state of the client, you will not know these values.
 
 To start off a fresh client and get a `token` and `refresh_token`, use the following.
 
-```
+```rust
 use gusto_api::Client;
 
 async fn do_call() {
-    let mut gusto = Client::new_from_env("", "");
+    let mut gusto = Client::new_from_env("", "", gusto_api::RootProductionServer);
 
     // Get the URL to request consent from the user.
     // You can optionally pass in scopes. If none are provided, then the

@@ -223,7 +223,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! revai = "0.5.0"
+//! revai = "0.7.0-rc.1"
 //! ```
 //!
 //! ## Basic example
@@ -231,7 +231,7 @@
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use revai::Client;
 //!
 //! let rev.ai = Client::new(
@@ -246,7 +246,7 @@
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use revai::Client;
 //!
 //! let rev.ai = Client::new_from_env();
@@ -269,8 +269,28 @@ pub mod types;
 #[doc(hidden)]
 pub mod utils;
 
-use thiserror::Error;
+pub use reqwest::{header::HeaderMap, StatusCode};
+
+#[derive(Debug)]
+pub struct Response<T> {
+    pub status: reqwest::StatusCode,
+    pub headers: reqwest::header::HeaderMap,
+    pub body: T,
+}
+
+impl<T> Response<T> {
+    pub fn new(status: reqwest::StatusCode, headers: reqwest::header::HeaderMap, body: T) -> Self {
+        Self {
+            status,
+            headers,
+            body,
+        }
+    }
+}
+
 type ClientResult<T> = Result<T, ClientError>;
+
+use thiserror::Error;
 
 /// Errors returned by the client
 #[derive(Debug, Error)]
@@ -297,6 +317,7 @@ pub enum ClientError {
     #[error("HTTP Error. Code: {status}, message: {error}")]
     HttpError {
         status: http::StatusCode,
+        headers: reqwest::header::HeaderMap,
         error: String,
     },
 }
@@ -351,14 +372,18 @@ pub struct Client {
 }
 
 impl Client {
-    /// Create a new Client struct. It takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key your requests will work.
+    /// Create a new Client struct.
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if the internal http client fails to create
     pub fn new<T>(token: T) -> Self
     where
         T: ToString,
     {
-        let client = reqwest::Client::builder().build();
+        let client = reqwest::Client::builder()
+            .redirect(reqwest::redirect::Policy::none())
+            .build();
         let retry_policy =
             reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {
@@ -416,12 +441,14 @@ impl Client {
         )
     }
 
-    /// Create a new Client struct from environment variables. It
-    /// takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key and your requests will work.
-    /// We pass in the token and refresh token to the client so if you are storing
-    /// it in a database, you can get it first.
+    /// Create a new Client struct from environment variables.
+    ///
+    /// The following environment variables are expected to be set:
+    ///   * `REVAI_API_KEY`
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if the expected environment variables can not be found
     pub fn new_from_env() -> Self {
         let token = env::var("REVAI_API_KEY").expect("must set REVAI_API_KEY");
 
@@ -475,13 +502,14 @@ impl Client {
         method: reqwest::Method,
         uri: &str,
         message: Message,
-    ) -> ClientResult<Out>
+    ) -> ClientResult<crate::Response<Out>>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         let response = self.request_raw(method, uri, message).await?;
 
         let status = response.status();
+        let headers = response.headers().clone();
 
         let response_body = response.bytes().await?;
 
@@ -494,16 +522,18 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)?
             };
-            Ok(parsed_response)
+            Ok(crate::Response::new(status, headers, parsed_response))
         } else {
             let error = if response_body.is_empty() {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: "empty response".into(),
                 }
             } else {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: String::from_utf8_lossy(&response_body).into(),
                 }
             };
@@ -517,13 +547,14 @@ impl Client {
         method: http::Method,
         uri: &str,
         message: Message,
-    ) -> ClientResult<(Option<crate::utils::NextLink>, Out)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, crate::Response<Out>)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         let response = self.request_raw(method, uri, message).await?;
 
         let status = response.status();
+        let headers = response.headers().clone();
         let link = response
             .headers()
             .get(http::header::LINK)
@@ -544,16 +575,18 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)?
             };
-            Ok((link, parsed_response))
+            Ok((link, crate::Response::new(status, headers, parsed_response)))
         } else {
             let error = if response_body.is_empty() {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: "empty response".into(),
                 }
             } else {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: String::from_utf8_lossy(&response_body).into(),
                 }
             };
@@ -563,7 +596,11 @@ impl Client {
 
     /* TODO: make this more DRY */
     #[allow(dead_code)]
-    async fn post_form<Out>(&self, uri: &str, form: reqwest::multipart::Form) -> ClientResult<Out>
+    async fn post_form<Out>(
+        &self,
+        uri: &str,
+        form: reqwest::multipart::Form,
+    ) -> ClientResult<crate::Response<Out>>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -588,6 +625,7 @@ impl Client {
         let response = req.send().await?;
 
         let status = response.status();
+        let headers = response.headers().clone();
 
         let response_body = response.bytes().await?;
 
@@ -604,16 +642,18 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)?
             };
-            Ok(parsed_response)
+            Ok(crate::Response::new(status, headers, parsed_response))
         } else {
             let error = if response_body.is_empty() {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: "empty response".into(),
                 }
             } else {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: String::from_utf8_lossy(&response_body).into(),
                 }
             };
@@ -629,7 +669,7 @@ impl Client {
         method: reqwest::Method,
         uri: &str,
         accept_mime_type: &str,
-    ) -> ClientResult<Out>
+    ) -> ClientResult<crate::Response<Out>>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -652,6 +692,7 @@ impl Client {
         let response = req.send().await?;
 
         let status = response.status();
+        let headers = response.headers().clone();
 
         let response_body = response.bytes().await?;
 
@@ -668,16 +709,18 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)?
             };
-            Ok(parsed_response)
+            Ok(crate::Response::new(status, headers, parsed_response))
         } else {
             let error = if response_body.is_empty() {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: "empty response".into(),
                 }
             } else {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: String::from_utf8_lossy(&response_body).into(),
                 }
             };
@@ -694,7 +737,7 @@ impl Client {
         uri: &str,
         content: &[u8],
         mime_type: &str,
-    ) -> ClientResult<Out>
+    ) -> ClientResult<crate::Response<Out>>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -737,6 +780,7 @@ impl Client {
         let response = req.send().await?;
 
         let status = response.status();
+        let headers = response.headers().clone();
 
         let response_body = response.bytes().await?;
 
@@ -749,16 +793,18 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)?
             };
-            Ok(parsed_response)
+            Ok(crate::Response::new(status, headers, parsed_response))
         } else {
             let error = if response_body.is_empty() {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: "empty response".into(),
                 }
             } else {
                 ClientError::HttpError {
                     status,
+                    headers,
                     error: String::from_utf8_lossy(&response_body).into(),
                 }
             };
@@ -772,7 +818,7 @@ impl Client {
         method: http::Method,
         uri: &str,
         message: Message,
-    ) -> ClientResult<D>
+    ) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -781,7 +827,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -789,7 +835,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> ClientResult<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> ClientResult<Response<Vec<D>>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -799,32 +845,36 @@ impl Client {
 
     /// "unfold" paginated results of a vector of items
     #[allow(dead_code)]
-    async fn unfold<D>(&self, uri: &str) -> ClientResult<Vec<D>>
+    async fn unfold<D>(&self, uri: &str) -> ClientResult<crate::Response<Vec<D>>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let mut global_items = Vec::new();
-        let (new_link, mut items) = self.get_pages(uri).await?;
+        let (new_link, mut response) = self.get_pages(uri).await?;
         let mut link = new_link;
-        while !items.is_empty() {
-            global_items.append(&mut items);
+        while !response.body.is_empty() {
+            global_items.append(&mut response.body);
             // We need to get the next link.
-            if let Some(url) = link.as_ref() {
+            if let Some(url) = &link {
                 let url = reqwest::Url::parse(&url.0)?;
-                let (new_link, new_items) = self.get_pages_url(&url).await?;
+                let (new_link, new_response) = self.get_pages_url(&url).await?;
                 link = new_link;
-                items = new_items;
+                response = new_response;
             }
         }
 
-        Ok(global_items)
+        Ok(Response::new(
+            response.status,
+            response.headers,
+            global_items,
+        ))
     }
 
     #[allow(dead_code)]
     async fn get_pages<D>(
         &self,
         uri: &str,
-    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, crate::Response<Vec<D>>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -836,7 +886,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, crate::Response<Vec<D>>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -845,7 +895,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -853,7 +903,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -861,7 +911,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -869,7 +919,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<crate::Response<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {

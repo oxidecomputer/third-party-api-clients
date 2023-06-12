@@ -21,7 +21,7 @@ impl Sessions {
     pub async fn create(
         &self,
         body: &crate::types::CreateSessionRequest,
-    ) -> ClientResult<crate::types::Session> {
+    ) -> ClientResult<crate::Response<crate::types::Session>> {
         let url = self.client.url("/api/v1/sessions", None);
         self.client
             .post(
@@ -42,7 +42,10 @@ impl Sessions {
      *
      * * `session_id: &str`
      */
-    pub async fn get(&self, session_id: &str) -> ClientResult<crate::types::Session> {
+    pub async fn get(
+        &self,
+        session_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Session>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}",
@@ -71,7 +74,7 @@ impl Sessions {
      *
      * * `session_id: &str`
      */
-    pub async fn end(&self, session_id: &str) -> ClientResult<()> {
+    pub async fn end(&self, session_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}",
@@ -100,7 +103,10 @@ impl Sessions {
      *
      * * `session_id: &str`
      */
-    pub async fn refresh(&self, session_id: &str) -> ClientResult<crate::types::Session> {
+    pub async fn refresh(
+        &self,
+        session_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Session>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}/lifecycle/refresh",

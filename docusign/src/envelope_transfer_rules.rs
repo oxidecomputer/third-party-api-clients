@@ -31,7 +31,7 @@ impl EnvelopeTransferRules {
         account_id: &str,
         count: &str,
         start_position: &str,
-    ) -> ClientResult<crate::types::EnvelopeTransferRuleInformation> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeTransferRuleInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -75,7 +75,7 @@ impl EnvelopeTransferRules {
         &self,
         account_id: &str,
         body: &crate::types::EnvelopeTransferRuleInformation,
-    ) -> ClientResult<crate::types::EnvelopeTransferRuleInformation> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeTransferRuleInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules",
@@ -119,7 +119,7 @@ impl EnvelopeTransferRules {
         &self,
         account_id: &str,
         body: &crate::types::EnvelopeTransferRuleRequest,
-    ) -> ClientResult<crate::types::EnvelopeTransferRuleInformation> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeTransferRuleInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules",
@@ -158,7 +158,7 @@ impl EnvelopeTransferRules {
         account_id: &str,
         envelope_transfer_rule_id: &str,
         body: &crate::types::EnvelopeTransferRule,
-    ) -> ClientResult<crate::types::EnvelopeTransferRule> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeTransferRule>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules/{}",
@@ -195,7 +195,7 @@ impl EnvelopeTransferRules {
         &self,
         account_id: &str,
         envelope_transfer_rule_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules/{}",

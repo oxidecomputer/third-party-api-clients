@@ -33,7 +33,7 @@ impl Projects {
         state: crate::types::IssuesListState,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Project>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -78,7 +78,7 @@ impl Projects {
         &self,
         org: &str,
         state: crate::types::IssuesListState,
-    ) -> ClientResult<Vec<crate::types::Project>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
             query_args.push(("state".to_string(), state.to_string()));
@@ -119,7 +119,7 @@ impl Projects {
         &self,
         org: &str,
         body: &crate::types::ProjectsCreateRequest,
-    ) -> ClientResult<crate::types::Project> {
+    ) -> ClientResult<crate::Response<crate::types::Project>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/projects",
@@ -150,7 +150,10 @@ impl Projects {
      *
      * * `card_id: i64` -- card_id parameter.
      */
-    pub async fn get_card(&self, card_id: i64) -> ClientResult<crate::types::ProjectCard> {
+    pub async fn get_card(
+        &self,
+        card_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::ProjectCard>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}",
@@ -181,7 +184,7 @@ impl Projects {
      *
      * * `card_id: i64` -- card_id parameter.
      */
-    pub async fn delete_card(&self, card_id: i64) -> ClientResult<()> {
+    pub async fn delete_card(&self, card_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}",
@@ -216,7 +219,7 @@ impl Projects {
         &self,
         card_id: i64,
         body: &crate::types::ProjectsUpdateCardRequest,
-    ) -> ClientResult<crate::types::ProjectCard> {
+    ) -> ClientResult<crate::Response<crate::types::ProjectCard>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}",
@@ -251,7 +254,7 @@ impl Projects {
         &self,
         card_id: i64,
         body: &crate::types::ProjectsMoveCardRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}/moves",
@@ -282,7 +285,10 @@ impl Projects {
      *
      * * `column_id: i64` -- column_id parameter.
      */
-    pub async fn get_column(&self, column_id: i64) -> ClientResult<crate::types::ProjectColumn> {
+    pub async fn get_column(
+        &self,
+        column_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::ProjectColumn>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}",
@@ -313,7 +319,7 @@ impl Projects {
      *
      * * `column_id: i64` -- column_id parameter.
      */
-    pub async fn delete_column(&self, column_id: i64) -> ClientResult<()> {
+    pub async fn delete_column(&self, column_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}",
@@ -348,7 +354,7 @@ impl Projects {
         &self,
         column_id: i64,
         body: &crate::types::ProjectsUpdateColumnRequest,
-    ) -> ClientResult<crate::types::ProjectColumn> {
+    ) -> ClientResult<crate::Response<crate::types::ProjectColumn>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}",
@@ -388,7 +394,7 @@ impl Projects {
         archived_state: crate::types::ArchivedState,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::ProjectCard>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectCard>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !archived_state.to_string().is_empty() {
             query_args.push(("archived_state".to_string(), archived_state.to_string()));
@@ -433,7 +439,7 @@ impl Projects {
         &self,
         column_id: i64,
         archived_state: crate::types::ArchivedState,
-    ) -> ClientResult<Vec<crate::types::ProjectCard>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectCard>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !archived_state.to_string().is_empty() {
             query_args.push(("archived_state".to_string(), archived_state.to_string()));
@@ -474,7 +480,7 @@ impl Projects {
         &self,
         column_id: i64,
         body: &crate::types::ProjectsCreateCardRequestOneOf,
-    ) -> ClientResult<crate::types::ProjectCard> {
+    ) -> ClientResult<crate::Response<crate::types::ProjectCard>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}/cards",
@@ -509,7 +515,7 @@ impl Projects {
         &self,
         column_id: i64,
         body: &crate::types::ProjectsMoveColumnRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}/moves",
@@ -540,7 +546,10 @@ impl Projects {
      *
      * * `project_id: i64`
      */
-    pub async fn get(&self, project_id: i64) -> ClientResult<crate::types::Project> {
+    pub async fn get(
+        &self,
+        project_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Project>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}",
@@ -571,7 +580,7 @@ impl Projects {
      *
      * * `project_id: i64`
      */
-    pub async fn delete(&self, project_id: i64) -> ClientResult<()> {
+    pub async fn delete(&self, project_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}",
@@ -606,7 +615,7 @@ impl Projects {
         &self,
         project_id: i64,
         body: &crate::types::ProjectsUpdateRequest,
-    ) -> ClientResult<crate::types::Project> {
+    ) -> ClientResult<crate::Response<crate::types::Project>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}",
@@ -649,7 +658,7 @@ impl Projects {
         affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.to_string().is_empty() {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
@@ -694,7 +703,7 @@ impl Projects {
         &self,
         project_id: i64,
         affiliation: crate::types::Affiliation,
-    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.to_string().is_empty() {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
@@ -737,7 +746,7 @@ impl Projects {
         project_id: i64,
         username: &str,
         body: &crate::types::ProjectsAddCollaboratorRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators/{}",
@@ -770,7 +779,11 @@ impl Projects {
      * * `project_id: i64`
      * * `username: &str`
      */
-    pub async fn remove_collaborator(&self, project_id: i64, username: &str) -> ClientResult<()> {
+    pub async fn remove_collaborator(
+        &self,
+        project_id: i64,
+        username: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators/{}",
@@ -807,7 +820,7 @@ impl Projects {
         &self,
         project_id: i64,
         username: &str,
-    ) -> ClientResult<crate::types::RepositoryCollaboratorPermission> {
+    ) -> ClientResult<crate::Response<crate::types::RepositoryCollaboratorPermission>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators/{}/permission",
@@ -846,7 +859,7 @@ impl Projects {
         project_id: i64,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::ProjectColumn>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectColumn>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -887,7 +900,7 @@ impl Projects {
     pub async fn list_all_columns(
         &self,
         project_id: i64,
-    ) -> ClientResult<Vec<crate::types::ProjectColumn>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectColumn>>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}/columns",
@@ -922,7 +935,7 @@ impl Projects {
         &self,
         project_id: i64,
         body: &crate::types::ProjectsUpdateColumnRequest,
-    ) -> ClientResult<crate::types::ProjectColumn> {
+    ) -> ClientResult<crate::Response<crate::types::ProjectColumn>> {
         let url = self.client.url(
             &format!(
                 "/projects/{}/columns",
@@ -964,7 +977,7 @@ impl Projects {
         state: crate::types::IssuesListState,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Project>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1011,7 +1024,7 @@ impl Projects {
         owner: &str,
         repo: &str,
         state: crate::types::IssuesListState,
-    ) -> ClientResult<Vec<crate::types::Project>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
             query_args.push(("state".to_string(), state.to_string()));
@@ -1055,7 +1068,7 @@ impl Projects {
         owner: &str,
         repo: &str,
         body: &crate::types::ProjectsCreateRequest,
-    ) -> ClientResult<crate::types::Project> {
+    ) -> ClientResult<crate::Response<crate::types::Project>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/projects",
@@ -1086,7 +1099,7 @@ impl Projects {
     pub async fn create_for_authenticated_user(
         &self,
         body: &crate::types::ProjectsCreateRequest,
-    ) -> ClientResult<crate::types::Project> {
+    ) -> ClientResult<crate::Response<crate::types::Project>> {
         let url = self.client.url("/user/projects", None);
         self.client
             .post(
@@ -1120,7 +1133,7 @@ impl Projects {
         state: crate::types::IssuesListState,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Project>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1165,7 +1178,7 @@ impl Projects {
         &self,
         username: &str,
         state: crate::types::IssuesListState,
-    ) -> ClientResult<Vec<crate::types::Project>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
             query_args.push(("state".to_string(), state.to_string()));

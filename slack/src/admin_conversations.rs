@@ -22,7 +22,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn archive(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn archive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.archive", None);
         self.client
             .post(
@@ -45,7 +45,9 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn convert_private(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn convert_private(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
             .url("/admin.conversations.convertToPrivate", None);
@@ -70,7 +72,9 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn create(&self) -> ClientResult<crate::types::AdminConversationsCreateSchema> {
+    pub async fn create(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::AdminConversationsCreateSchema>> {
         let url = self.client.url("/admin.conversations.create", None);
         self.client
             .post(
@@ -93,7 +97,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn delete(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.delete", None);
         self.client
             .post(
@@ -116,7 +120,9 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn disconnect_shared(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn disconnect_shared(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
             .url("/admin.conversations.disconnectShared", None);
@@ -145,7 +151,8 @@ impl AdminConversations {
     pub async fn get_conversation_pref(
         &self,
         channel_id: &str,
-    ) -> ClientResult<crate::types::AdminConversationsGetConversationPrefsSchemaData> {
+    ) -> ClientResult<crate::Response<crate::types::AdminConversationsGetConversationPrefsSchemaData>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel_id.is_empty() {
             query_args.push(("channel_id".to_string(), channel_id.to_string()));
@@ -184,7 +191,7 @@ impl AdminConversations {
         channel_id: &str,
         cursor: &str,
         limit: i64,
-    ) -> ClientResult<crate::types::AdminConversationsGetTeamsSchema> {
+    ) -> ClientResult<crate::Response<crate::types::AdminConversationsGetTeamsSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel_id.is_empty() {
             query_args.push(("channel_id".to_string(), channel_id.to_string()));
@@ -220,7 +227,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn invite(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn invite(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.invite", None);
         self.client
             .post(
@@ -243,7 +250,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn rename(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn rename(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.rename", None);
         self.client
             .post(
@@ -282,7 +289,7 @@ impl AdminConversations {
         search_channel_types: &str,
         sort: &str,
         sort_dir: &str,
-    ) -> ClientResult<crate::types::AdminConversationsSearchSchema> {
+    ) -> ClientResult<crate::Response<crate::types::AdminConversationsSearchSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -333,7 +340,9 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn set_conversation_prefs(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn set_conversation_prefs(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
             .url("/admin.conversations.setConversationPrefs", None);
@@ -358,7 +367,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn set_teams(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn set_teams(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.setTeams", None);
         self.client
             .post(
@@ -381,7 +390,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn unarchive(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn unarchive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.unarchive", None);
         self.client
             .post(

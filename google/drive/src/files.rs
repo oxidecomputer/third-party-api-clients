@@ -48,7 +48,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> ClientResult<Vec<crate::types::File>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::File>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !corpora.is_empty() {
             query_args.push(("corpora".to_string(), corpora.to_string()));
@@ -106,7 +106,7 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/files?{}", query_), None);
-        let resp: crate::types::FileList = self
+        let resp: crate::Response<crate::types::FileList> = self
             .client
             .get(
                 &url,
@@ -118,7 +118,11 @@ impl Files {
             .await?;
 
         // Return our response data.
-        Ok(resp.files.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.files.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/files` endpoint.
@@ -140,7 +144,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> ClientResult<Vec<crate::types::File>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::File>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !corpora.is_empty() {
             query_args.push(("corpora".to_string(), corpora.to_string()));
@@ -192,7 +196,11 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/files?{}", query_), None);
-        let mut resp: crate::types::FileList = self
+        let crate::Response::<crate::types::FileList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -203,13 +211,17 @@ impl Files {
             )
             .await?;
 
-        let mut files = resp.files;
-        let mut page = resp.next_page_token;
+        let mut files = body.files;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::FileList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -220,7 +232,11 @@ impl Files {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::FileList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -232,17 +248,17 @@ impl Files {
                     .await?;
             }
 
-            files.append(&mut resp.files);
+            files.append(&mut body.files);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(files)
+        Ok(crate::Response::new(status, headers, files))
     }
     /**
      * This function performs a `POST` to the `/files` endpoint.
@@ -270,7 +286,7 @@ impl Files {
         supports_team_drives: bool,
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
-    ) -> ClientResult<crate::types::File> {
+    ) -> ClientResult<crate::Response<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
             query_args.push((
@@ -339,7 +355,7 @@ impl Files {
         count: i64,
         space: &str,
         type_: &str,
-    ) -> ClientResult<crate::types::GeneratedIds> {
+    ) -> ClientResult<crate::Response<crate::types::GeneratedIds>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -373,7 +389,7 @@ impl Files {
      *
      * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
-    pub async fn empty_trash(&self) -> ClientResult<()> {
+    pub async fn empty_trash(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/files/trash", None);
         self.client
             .delete(
@@ -405,7 +421,7 @@ impl Files {
         include_permissions_for_view: &str,
         supports_all_drives: bool,
         supports_team_drives: bool,
-    ) -> ClientResult<crate::types::File> {
+    ) -> ClientResult<crate::Response<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((
@@ -467,7 +483,7 @@ impl Files {
         file_id: &str,
         supports_all_drives: bool,
         supports_team_drives: bool,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
             query_args.push((
@@ -530,7 +546,7 @@ impl Files {
         supports_team_drives: bool,
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
-    ) -> ClientResult<crate::types::File> {
+    ) -> ClientResult<crate::Response<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !add_parents.is_empty() {
             query_args.push(("addParents".to_string(), add_parents.to_string()));
@@ -616,7 +632,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         body: &crate::types::File,
-    ) -> ClientResult<crate::types::File> {
+    ) -> ClientResult<crate::Response<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
             query_args.push((
@@ -680,7 +696,11 @@ impl Files {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `mime_type: &str` -- The MIME type of the format requested for this export.
      */
-    pub async fn export(&self, file_id: &str, mime_type: &str) -> ClientResult<()> {
+    pub async fn export(
+        &self,
+        file_id: &str,
+        mime_type: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !mime_type.is_empty() {
             query_args.push(("mimeType".to_string(), mime_type.to_string()));
@@ -725,7 +745,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((

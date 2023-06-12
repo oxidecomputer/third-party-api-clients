@@ -29,7 +29,7 @@ impl TrustedOrigins {
         filter: &str,
         after: &str,
         limit: i64,
-    ) -> ClientResult<Vec<crate::types::TrustedOrigin>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TrustedOrigin>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -68,7 +68,7 @@ impl TrustedOrigins {
         &self,
         q: &str,
         filter: &str,
-    ) -> ClientResult<Vec<crate::types::TrustedOrigin>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TrustedOrigin>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -98,7 +98,7 @@ impl TrustedOrigins {
     pub async fn create_origin(
         &self,
         body: &crate::types::TrustedOrigin,
-    ) -> ClientResult<crate::types::TrustedOrigin> {
+    ) -> ClientResult<crate::Response<crate::types::TrustedOrigin>> {
         let url = self.client.url("/api/v1/trustedOrigins", None);
         self.client
             .post(
@@ -122,7 +122,7 @@ impl TrustedOrigins {
     pub async fn get_origin(
         &self,
         trusted_origin_id: &str,
-    ) -> ClientResult<crate::types::TrustedOrigin> {
+    ) -> ClientResult<crate::Response<crate::types::TrustedOrigin>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}",
@@ -153,7 +153,7 @@ impl TrustedOrigins {
         &self,
         trusted_origin_id: &str,
         body: &crate::types::TrustedOrigin,
-    ) -> ClientResult<crate::types::TrustedOrigin> {
+    ) -> ClientResult<crate::Response<crate::types::TrustedOrigin>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}",
@@ -180,7 +180,10 @@ impl TrustedOrigins {
      *
      * * `trusted_origin_id: &str`
      */
-    pub async fn delete_origin(&self, trusted_origin_id: &str) -> ClientResult<()> {
+    pub async fn delete_origin(
+        &self,
+        trusted_origin_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}",
@@ -210,7 +213,7 @@ impl TrustedOrigins {
     pub async fn activate_origin(
         &self,
         trusted_origin_id: &str,
-    ) -> ClientResult<crate::types::TrustedOrigin> {
+    ) -> ClientResult<crate::Response<crate::types::TrustedOrigin>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}/lifecycle/activate",
@@ -240,7 +243,7 @@ impl TrustedOrigins {
     pub async fn deactivate_origin(
         &self,
         trusted_origin_id: &str,
-    ) -> ClientResult<crate::types::TrustedOrigin> {
+    ) -> ClientResult<crate::Response<crate::types::TrustedOrigin>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}/lifecycle/deactivate",

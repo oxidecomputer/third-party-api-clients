@@ -32,7 +32,7 @@ impl CreditNotes {
         invoice: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::CreditNote>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CreditNote>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -53,7 +53,7 @@ impl CreditNotes {
         let url = self
             .client
             .url(&format!("/v1/credit_notes?{}", query_), None);
-        let resp: crate::types::CreditNotesList = self
+        let resp: crate::Response<crate::types::CreditNotesList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl CreditNotes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/credit_notes` endpoint.
@@ -78,7 +82,7 @@ impl CreditNotes {
         &self,
         customer: &str,
         invoice: &str,
-    ) -> ClientResult<Vec<crate::types::CreditNote>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CreditNote>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -90,7 +94,11 @@ impl CreditNotes {
         let url = self
             .client
             .url(&format!("/v1/credit_notes?{}", query_), None);
-        let mut resp: crate::types::CreditNotesList = self
+        let crate::Response::<crate::types::CreditNotesList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -101,8 +109,8 @@ impl CreditNotes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -118,7 +126,11 @@ impl CreditNotes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::CreditNotesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -129,7 +141,11 @@ impl CreditNotes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::CreditNotesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -141,13 +157,13 @@ impl CreditNotes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/credit_notes` endpoint.
@@ -167,7 +183,7 @@ impl CreditNotes {
      * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s <code>pre_payment_credit_notes_amount</code>
      * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::CreditNote> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::CreditNote>> {
         let url = self.client.url("/v1/credit_notes", None);
         self.client
             .post(
@@ -210,7 +226,7 @@ impl CreditNotes {
         reason: crate::types::Reason,
         refund: &str,
         refund_amount: i64,
-    ) -> ClientResult<crate::types::CreditNote> {
+    ) -> ClientResult<crate::Response<crate::types::CreditNote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if amount > 0 {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -290,7 +306,7 @@ impl CreditNotes {
         refund: &str,
         refund_amount: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CreditNoteLineItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if amount > 0 {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -332,7 +348,7 @@ impl CreditNotes {
         let url = self
             .client
             .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
-        let resp: crate::types::Lines = self
+        let resp: crate::Response<crate::types::Lines> = self
             .client
             .get(
                 &url,
@@ -344,7 +360,11 @@ impl CreditNotes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
@@ -365,7 +385,7 @@ impl CreditNotes {
         reason: crate::types::Reason,
         refund: &str,
         refund_amount: i64,
-    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CreditNoteLineItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if amount > 0 {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -398,7 +418,11 @@ impl CreditNotes {
         let url = self
             .client
             .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
-        let mut resp: crate::types::Lines = self
+        let crate::Response::<crate::types::Lines> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -409,8 +433,8 @@ impl CreditNotes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -426,7 +450,11 @@ impl CreditNotes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Lines> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -437,7 +465,11 @@ impl CreditNotes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Lines> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -449,13 +481,13 @@ impl CreditNotes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
@@ -476,7 +508,7 @@ impl CreditNotes {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CreditNoteLineItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -496,7 +528,7 @@ impl CreditNotes {
             ),
             None,
         );
-        let resp: crate::types::Lines = self
+        let resp: crate::Response<crate::types::Lines> = self
             .client
             .get(
                 &url,
@@ -508,7 +540,11 @@ impl CreditNotes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
@@ -520,7 +556,7 @@ impl CreditNotes {
     pub async fn get_all_note_lines(
         &self,
         credit_note: &str,
-    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CreditNoteLineItem>>> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/lines",
@@ -528,7 +564,11 @@ impl CreditNotes {
             ),
             None,
         );
-        let mut resp: crate::types::Lines = self
+        let crate::Response::<crate::types::Lines> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -539,8 +579,8 @@ impl CreditNotes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -556,7 +596,11 @@ impl CreditNotes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Lines> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -567,7 +611,11 @@ impl CreditNotes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Lines> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -579,13 +627,13 @@ impl CreditNotes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/credit_notes/{id}` endpoint.
@@ -597,7 +645,7 @@ impl CreditNotes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::CreditNote> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::CreditNote>> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
@@ -624,7 +672,10 @@ impl CreditNotes {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_credit_notes(&self, id: &str) -> ClientResult<crate::types::CreditNote> {
+    pub async fn post_credit_notes(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::CreditNote>> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
@@ -651,7 +702,10 @@ impl CreditNotes {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_void(&self, id: &str) -> ClientResult<crate::types::CreditNote> {
+    pub async fn post_void(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::CreditNote>> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/void",

@@ -32,7 +32,7 @@ impl BillingPortal {
         is_default: bool,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::PortalConfiguration>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PortalConfiguration>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -54,7 +54,7 @@ impl BillingPortal {
             &format!("/v1/billing_portal/configurations?{}", query_),
             None,
         );
-        let resp: crate::types::GetBillingPortalConfigurationsResponse = self
+        let resp: crate::Response<crate::types::GetBillingPortalConfigurationsResponse> = self
             .client
             .get(
                 &url,
@@ -66,7 +66,11 @@ impl BillingPortal {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/billing_portal/configurations` endpoint.
@@ -79,7 +83,7 @@ impl BillingPortal {
         &self,
         active: bool,
         is_default: bool,
-    ) -> ClientResult<Vec<crate::types::PortalConfiguration>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PortalConfiguration>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -92,7 +96,11 @@ impl BillingPortal {
             &format!("/v1/billing_portal/configurations?{}", query_),
             None,
         );
-        let mut resp: crate::types::GetBillingPortalConfigurationsResponse = self
+        let crate::Response::<crate::types::GetBillingPortalConfigurationsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -103,8 +111,8 @@ impl BillingPortal {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -120,7 +128,11 @@ impl BillingPortal {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetBillingPortalConfigurationsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -131,7 +143,11 @@ impl BillingPortal {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetBillingPortalConfigurationsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -143,20 +159,22 @@ impl BillingPortal {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/billing_portal/configurations` endpoint.
      *
      * <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
      */
-    pub async fn post_configuration(&self) -> ClientResult<crate::types::PortalConfiguration> {
+    pub async fn post_configuration(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::PortalConfiguration>> {
         let url = self.client.url("/v1/billing_portal/configurations", None);
         self.client
             .post(
@@ -181,7 +199,7 @@ impl BillingPortal {
     pub async fn get_configurations_configuration(
         &self,
         configuration: &str,
-    ) -> ClientResult<crate::types::PortalConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::PortalConfiguration>> {
         let url = self.client.url(
             &format!(
                 "/v1/billing_portal/configurations/{}",
@@ -211,7 +229,7 @@ impl BillingPortal {
     pub async fn post_configurations_configuration(
         &self,
         configuration: &str,
-    ) -> ClientResult<crate::types::PortalConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::PortalConfiguration>> {
         let url = self.client.url(
             &format!(
                 "/v1/billing_portal/configurations/{}",
@@ -234,7 +252,7 @@ impl BillingPortal {
      *
      * <p>Creates a session of the customer portal.</p>
      */
-    pub async fn post_session(&self) -> ClientResult<crate::types::PortalSession> {
+    pub async fn post_session(&self) -> ClientResult<crate::Response<crate::types::PortalSession>> {
         let url = self.client.url("/v1/billing_portal/sessions", None);
         self.client
             .post(

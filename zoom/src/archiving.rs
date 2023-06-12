@@ -40,7 +40,7 @@ impl Archiving {
         from: &str,
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
-    ) -> ClientResult<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListArchivedFilesResponseMeetings>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -59,7 +59,7 @@ impl Archiving {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/archive_files?{}", query_), None);
-        let resp: crate::types::ListArchivedFilesResponse = self
+        let resp: crate::Response<crate::types::ListArchivedFilesResponse> = self
             .client
             .get(
                 &url,
@@ -71,7 +71,11 @@ impl Archiving {
             .await?;
 
         // Return our response data.
-        Ok(resp.meetings.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.meetings.to_vec(),
+        ))
     }
     /**
      * List archived files.
@@ -94,7 +98,7 @@ impl Archiving {
         from: &str,
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
-    ) -> ClientResult<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListArchivedFilesResponseMeetings>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -107,7 +111,11 @@ impl Archiving {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/archive_files?{}", query_), None);
-        let mut resp: crate::types::ListArchivedFilesResponse = self
+        let crate::Response::<crate::types::ListArchivedFilesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -118,14 +126,18 @@ impl Archiving {
             )
             .await?;
 
-        let mut meetings = resp.meetings;
-        let mut page = resp.next_page_token;
+        let mut meetings = body.meetings;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListArchivedFilesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -136,7 +148,11 @@ impl Archiving {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListArchivedFilesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -148,17 +164,17 @@ impl Archiving {
                     .await?;
             }
 
-            meetings.append(&mut resp.meetings);
+            meetings.append(&mut body.meetings);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(meetings)
+        Ok(crate::Response::new(status, headers, meetings))
     }
     /**
      * Get meeting archived files.
@@ -182,7 +198,7 @@ impl Archiving {
     pub async fn testget_record_archived_file(
         &self,
         meeting_uuid: &str,
-    ) -> ClientResult<crate::types::CloudArchivedFiles> {
+    ) -> ClientResult<crate::Response<crate::types::CloudArchivedFiles>> {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/archive_files",

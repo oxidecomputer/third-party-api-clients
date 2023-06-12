@@ -34,7 +34,7 @@ impl Users {
         exclude_archived: bool,
         limit: i64,
         cursor: &str,
-    ) -> ClientResult<crate::types::UsersConversationsSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UsersConversationsSuccessSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -72,7 +72,7 @@ impl Users {
      *
      * FROM: <https://api.slack.com/methods/users.deletePhoto>
      */
-    pub async fn delete_photo(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn delete_photo(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/users.deletePhoto", None);
         self.client
             .post(
@@ -99,7 +99,7 @@ impl Users {
     pub async fn get_presence(
         &self,
         user: &str,
-    ) -> ClientResult<crate::types::ApiMethodUsersGetPresence> {
+    ) -> ClientResult<crate::Response<crate::types::ApiMethodUsersGetPresence>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
@@ -129,7 +129,9 @@ impl Users {
      *
      * * `token: &str` -- Authentication token. Requires scope: `identity.basic`.
      */
-    pub async fn identity(&self) -> ClientResult<Vec<crate::types::UsersIdentityResponseAnyOf>> {
+    pub async fn identity(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::UsersIdentityResponseAnyOf>>> {
         let url = self.client.url("/users.identity", None);
         self.client
             .get(
@@ -152,7 +154,7 @@ impl Users {
      */
     pub async fn get_all_identity(
         &self,
-    ) -> ClientResult<Vec<crate::types::UsersIdentityResponseAnyOf>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UsersIdentityResponseAnyOf>>> {
         let url = self.client.url("/users.identity", None);
         self.client
             .get_all_pages(
@@ -181,7 +183,7 @@ impl Users {
         &self,
         include_locale: bool,
         user: &str,
-    ) -> ClientResult<crate::types::UsersInfoSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UsersInfoSuccessSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_locale {
             query_args.push(("include_locale".to_string(), include_locale.to_string()));
@@ -220,7 +222,7 @@ impl Users {
         limit: i64,
         cursor: &str,
         include_locale: bool,
-    ) -> ClientResult<crate::types::UsersListSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UsersListSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -258,7 +260,7 @@ impl Users {
     pub async fn lookup_email(
         &self,
         email: &str,
-    ) -> ClientResult<crate::types::UsersInfoSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UsersInfoSuccessSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -288,7 +290,7 @@ impl Users {
      *
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
-    pub async fn set_active(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn set_active(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/users.setActive", None);
         self.client
             .post(
@@ -307,7 +309,9 @@ impl Users {
      *
      * FROM: <https://api.slack.com/methods/users.setPhoto>
      */
-    pub async fn set_photo(&self) -> ClientResult<crate::types::UsersSetPhotoSchema> {
+    pub async fn set_photo(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::UsersSetPhotoSchema>> {
         let url = self.client.url("/users.setPhoto", None);
         self.client
             .post(
@@ -330,7 +334,7 @@ impl Users {
      *
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
-    pub async fn set_presence(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn set_presence(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/users.setPresence", None);
         self.client
             .post(

@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-dolladollabills = "0.4.0"
+dolladollabills = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -39,7 +39,7 @@ dolladollabills = "0.4.0"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use dolladollabills::Client;
 
 let stripe = Client::new(
@@ -54,7 +54,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use dolladollabills::Client;
 
 let stripe = Client::new_from_env();

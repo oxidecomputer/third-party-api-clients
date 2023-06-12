@@ -42,7 +42,7 @@ impl Prices {
         _recurring: &str,
         starting_after: &str,
         type_: crate::types::PriceType,
-    ) -> ClientResult<Vec<crate::types::PriceData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PriceData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -67,7 +67,7 @@ impl Prices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/prices?{}", query_), None);
-        let resp: crate::types::PriceList = self
+        let resp: crate::Response<crate::types::PriceList> = self
             .client
             .get(
                 &url,
@@ -79,7 +79,11 @@ impl Prices {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/prices` endpoint.
@@ -97,7 +101,7 @@ impl Prices {
         product: &str,
         _recurring: &str,
         type_: crate::types::PriceType,
-    ) -> ClientResult<Vec<crate::types::PriceData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PriceData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -113,7 +117,11 @@ impl Prices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/prices?{}", query_), None);
-        let mut resp: crate::types::PriceList = self
+        let crate::Response::<crate::types::PriceList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -124,8 +132,8 @@ impl Prices {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -141,7 +149,11 @@ impl Prices {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PriceList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -152,7 +164,11 @@ impl Prices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PriceList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -164,20 +180,20 @@ impl Prices {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/prices` endpoint.
      *
      * <p>Creates a new price for an existing product. The price can be recurring or one-time.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::PriceData> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PriceData>> {
         let url = self.client.url("/v1/prices", None);
         self.client
             .post(
@@ -209,7 +225,7 @@ impl Prices {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> ClientResult<Vec<crate::types::Charge>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -224,7 +240,7 @@ impl Prices {
         let url = self
             .client
             .url(&format!("/v1/prices/search?{}", query_), None);
-        let resp: crate::types::SearchResult = self
+        let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
                 &url,
@@ -236,7 +252,11 @@ impl Prices {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/prices/search` endpoint.
@@ -248,7 +268,10 @@ impl Prices {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(
+        &self,
+        query: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -257,7 +280,11 @@ impl Prices {
         let url = self
             .client
             .url(&format!("/v1/prices/search?{}", query_), None);
-        let mut resp: crate::types::SearchResult = self
+        let crate::Response::<crate::types::SearchResult> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -268,8 +295,8 @@ impl Prices {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -285,7 +312,11 @@ impl Prices {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -296,7 +327,11 @@ impl Prices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -308,13 +343,13 @@ impl Prices {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/prices/{price}` endpoint.
@@ -326,7 +361,7 @@ impl Prices {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `price: &str` -- The account's country.
      */
-    pub async fn get(&self, price: &str) -> ClientResult<crate::types::PriceData> {
+    pub async fn get(&self, price: &str) -> ClientResult<crate::Response<crate::types::PriceData>> {
         let url = self.client.url(
             &format!(
                 "/v1/prices/{}",
@@ -353,7 +388,10 @@ impl Prices {
      *
      * * `price: &str` -- The account's country.
      */
-    pub async fn post_prices(&self, price: &str) -> ClientResult<crate::types::PriceData> {
+    pub async fn post_prices(
+        &self,
+        price: &str,
+    ) -> ClientResult<crate::Response<crate::types::PriceData>> {
         let url = self.client.url(
             &format!(
                 "/v1/prices/{}",

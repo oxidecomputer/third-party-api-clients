@@ -20,7 +20,7 @@ impl CustomFields {
      */
     pub async fn get_mc_field_definitions(
         &self,
-    ) -> ClientResult<crate::types::GetMcFieldDefinitionsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetMcFieldDefinitionsResponse>> {
         let url = self.client.url("/marketing/field_definitions", None);
         self.client
             .get(
@@ -48,7 +48,7 @@ impl CustomFields {
     pub async fn post_mc_field_definition(
         &self,
         body: &crate::types::PostMcFieldDefinitionsRequest,
-    ) -> ClientResult<crate::types::PostMcFieldDefinitionsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::PostMcFieldDefinitionsResponseAllOf>> {
         let url = self.client.url("/marketing/field_definitions", None);
         self.client
             .post(
@@ -72,7 +72,7 @@ impl CustomFields {
     pub async fn delete_mc_field_definitions_custom(
         &self,
         custom_field_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/marketing/field_definitions/{}",
@@ -103,7 +103,7 @@ impl CustomFields {
         &self,
         custom_field_id: &str,
         body: &crate::types::IpPool,
-    ) -> ClientResult<crate::types::PostMcFieldDefinitionsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::PostMcFieldDefinitionsResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/marketing/field_definitions/{}",

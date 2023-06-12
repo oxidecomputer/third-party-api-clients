@@ -225,7 +225,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-revai = "0.5.0"
+revai = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -233,7 +233,7 @@ revai = "0.5.0"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use revai::Client;
 
 let rev.ai = Client::new(
@@ -248,7 +248,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use revai::Client;
 
 let rev.ai = Client::new_from_env();

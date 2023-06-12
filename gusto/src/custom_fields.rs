@@ -21,7 +21,7 @@ impl CustomFields {
     pub async fn get_employee(
         &self,
         employee_id: &str,
-    ) -> ClientResult<crate::types::GetEmployeeCustomFieldsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetEmployeeCustomFieldsResponse>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/custom_fields",
@@ -49,7 +49,7 @@ impl CustomFields {
     pub async fn get_company(
         &self,
         company_id: &str,
-    ) -> ClientResult<crate::types::GetCompanyCustomFieldsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCompanyCustomFieldsResponse>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/custom_fields",

@@ -32,7 +32,7 @@ impl CsvUiOnly {
     pub async fn post_messages_download(
         &self,
         query: &str,
-    ) -> ClientResult<crate::types::PostMessagesDownloadResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PostMessagesDownloadResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -65,7 +65,7 @@ impl CsvUiOnly {
     pub async fn get_messages_download(
         &self,
         download_uuid: &str,
-    ) -> ClientResult<crate::types::GetMessagesDownloadResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetMessagesDownloadResponse>> {
         let url = self.client.url(
             &format!(
                 "/messages/download/{}",

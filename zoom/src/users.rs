@@ -44,7 +44,7 @@ impl Users {
         page_number: &str,
         include_fields: crate::types::UsersIncludeFields,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::UsersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UsersResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.to_string().is_empty() {
             query_args.push(("include_fields".to_string(), include_fields.to_string()));
@@ -66,7 +66,7 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/users?{}", query_), None);
-        let resp: crate::types::UsersResponseData = self
+        let resp: crate::Response<crate::types::UsersResponseData> = self
             .client
             .get(
                 &url,
@@ -78,7 +78,11 @@ impl Users {
             .await?;
 
         // Return our response data.
-        Ok(resp.users.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.users.to_vec(),
+        ))
     }
     /**
      * List users.
@@ -96,7 +100,7 @@ impl Users {
         status: crate::types::UsersStatus,
         role_id: &str,
         include_fields: crate::types::UsersIncludeFields,
-    ) -> ClientResult<Vec<crate::types::UsersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UsersResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.to_string().is_empty() {
             query_args.push(("include_fields".to_string(), include_fields.to_string()));
@@ -109,7 +113,11 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/users?{}", query_), None);
-        let mut resp: crate::types::UsersResponseData = self
+        let crate::Response::<crate::types::UsersResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -120,14 +128,18 @@ impl Users {
             )
             .await?;
 
-        let mut users = resp.users;
-        let mut page = resp.next_page_token;
+        let mut users = body.users;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::UsersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -138,7 +150,11 @@ impl Users {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::UsersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -150,17 +166,17 @@ impl Users {
                     .await?;
             }
 
-            users.append(&mut resp.users);
+            users.append(&mut body.users);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(users)
+        Ok(crate::Response::new(status, headers, users))
     }
     /**
      * Create users.
@@ -177,7 +193,7 @@ impl Users {
     pub async fn create(
         &self,
         body: &crate::types::UserCreateRequest,
-    ) -> ClientResult<crate::types::UserCreateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::UserCreateResponse>> {
         let url = self.client.url("/users", None);
         self.client
             .post(
@@ -217,7 +233,7 @@ impl Users {
         user_id: &str,
         login_type: crate::types::LoginType,
         encrypted_email: bool,
-    ) -> ClientResult<crate::types::UserResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::UserResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if encrypted_email {
             query_args.push(("encrypted_email".to_string(), encrypted_email.to_string()));
@@ -274,7 +290,7 @@ impl Users {
         transfer_meeting: bool,
         transfer_webinar: bool,
         transfer_recording: bool,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !action.to_string().is_empty() {
             query_args.push(("action".to_string(), action.to_string()));
@@ -338,7 +354,7 @@ impl Users {
         user_id: &str,
         login_type: crate::types::LoginType,
         body: &crate::types::UserUpdate,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !login_type.to_string().is_empty() {
             query_args.push(("login_type".to_string(), login_type.to_string()));
@@ -374,7 +390,7 @@ impl Users {
      *
      *
      */
-    pub async fn zak(&self) -> ClientResult<crate::types::UserZakResponse> {
+    pub async fn zak(&self) -> ClientResult<crate::Response<crate::types::UserZakResponse>> {
         let url = self.client.url("/users/me/zak", None);
         self.client
             .get(
@@ -405,7 +421,10 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn assistant(&self, user_id: &str) -> ClientResult<crate::types::UserAssistantsList> {
+    pub async fn assistant(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::UserAssistantsList>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants",
@@ -446,7 +465,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::UserAssistantsList,
-    ) -> ClientResult<crate::types::AddRoleMembersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddRoleMembersResponse>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants",
@@ -483,7 +502,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn assistants_delete(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn assistants_delete(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants",
@@ -521,7 +540,11 @@ impl Users {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `assistant_id: &str` -- User's first name.
      */
-    pub async fn assistant_delete(&self, user_id: &str, assistant_id: &str) -> ClientResult<()> {
+    pub async fn assistant_delete(
+        &self,
+        user_id: &str,
+        assistant_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants/{}",
@@ -558,7 +581,10 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn scheduler(&self, user_id: &str) -> ClientResult<crate::types::UserSchedulersList> {
+    pub async fn scheduler(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::UserSchedulersList>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/schedulers",
@@ -594,7 +620,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn schedulers_delete(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn schedulers_delete(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/schedulers",
@@ -631,7 +657,11 @@ impl Users {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `scheduler_id: &str` -- User's first name.
      */
-    pub async fn scheduler_delete(&self, user_id: &str, scheduler_id: &str) -> ClientResult<()> {
+    pub async fn scheduler_delete(
+        &self,
+        user_id: &str,
+        scheduler_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/schedulers/{}",
@@ -665,7 +695,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn picture(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn picture(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/picture",
@@ -721,7 +751,7 @@ impl Users {
         login_type: crate::types::LoginType,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -792,7 +822,7 @@ impl Users {
         login_type: crate::types::LoginType,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> ClientResult<crate::types::UserSettings> {
+    ) -> ClientResult<crate::Response<crate::types::UserSettings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -863,7 +893,7 @@ impl Users {
         login_type: crate::types::LoginType,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> ClientResult<crate::types::MeetingSecuritySettings> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingSecuritySettings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -934,7 +964,7 @@ impl Users {
         login_type: crate::types::LoginType,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> ClientResult<crate::types::UserSettingsResponseOneOf> {
+    ) -> ClientResult<crate::Response<crate::types::UserSettingsResponseOneOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -986,7 +1016,7 @@ impl Users {
         option: crate::types::UserSettingsUpdateOption,
         user_id: &str,
         body: &crate::types::UserSettingsUpdateRequestOneOf,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !option.to_string().is_empty() {
             query_args.push(("option".to_string(), option.to_string()));
@@ -1029,7 +1059,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::UserStatusRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/status",
@@ -1069,7 +1099,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::UserPasswordRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/password",
@@ -1102,7 +1132,10 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn permission(&self, user_id: &str) -> ClientResult<crate::types::UserPermissions> {
+    pub async fn permission(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::UserPermissions>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/permissions",
@@ -1142,7 +1175,7 @@ impl Users {
         user_id: &str,
         type_: crate::types::UserTokenType,
         ttl: i64,
-    ) -> ClientResult<crate::types::UserZakResponse> {
+    ) -> ClientResult<crate::Response<crate::types::UserZakResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ttl > 0 {
             query_args.push(("ttl".to_string(), ttl.to_string()));
@@ -1184,7 +1217,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn sso_token_delete(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn sso_token_delete(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/token",
@@ -1220,7 +1253,10 @@ impl Users {
      *
      * * `email: &str` -- The email address to be verified.
      */
-    pub async fn email(&self, email: &str) -> ClientResult<crate::types::UserEmailResponse> {
+    pub async fn email(
+        &self,
+        email: &str,
+    ) -> ClientResult<crate::Response<crate::types::UserEmailResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -1261,7 +1297,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::Members,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/email",
@@ -1297,7 +1333,7 @@ impl Users {
     pub async fn vanity_name(
         &self,
         vanity_name: &str,
-    ) -> ClientResult<crate::types::UserVanityNameResponse> {
+    ) -> ClientResult<crate::Response<crate::types::UserVanityNameResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !vanity_name.is_empty() {
             query_args.push(("vanity_name".to_string(), vanity_name.to_string()));
@@ -1345,7 +1381,7 @@ impl Users {
         account_id: &str,
         user_id: &str,
         body: &crate::types::SwitchUserAccountRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/users/{}/account",
@@ -1390,7 +1426,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::UpdatePresenceStatusRequestData,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/presence_status",
@@ -1431,7 +1467,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::UploadVbRequest,
-    ) -> ClientResult<crate::types::Files> {
+    ) -> ClientResult<crate::Response<crate::types::Files>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/virtual_backgrounds",
@@ -1466,7 +1502,7 @@ impl Users {
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API. .
      */
-    pub async fn del_vb(&self, user_id: &str, file_ids: &str) -> ClientResult<()> {
+    pub async fn del_vb(&self, user_id: &str, file_ids: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
             query_args.push(("file_ids".to_string(), file_ids.to_string()));

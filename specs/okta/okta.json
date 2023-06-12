@@ -11456,7 +11456,7 @@
     },
     "servers": [
         {
-            "url": "https://your-subdomain.okta.com"
+            "url": "https://na4.okta.net"
         }
     ],
     "components": {

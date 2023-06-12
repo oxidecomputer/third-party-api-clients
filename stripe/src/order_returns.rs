@@ -32,7 +32,7 @@ impl OrderReturns {
         limit: i64,
         order: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::OrderReturn>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrderReturn>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -50,7 +50,7 @@ impl OrderReturns {
         let url = self
             .client
             .url(&format!("/v1/order_returns?{}", query_), None);
-        let resp: crate::types::Returns = self
+        let resp: crate::Response<crate::types::Returns> = self
             .client
             .get(
                 &url,
@@ -62,7 +62,11 @@ impl OrderReturns {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/order_returns` endpoint.
@@ -75,7 +79,7 @@ impl OrderReturns {
         &self,
         _created: &str,
         order: &str,
-    ) -> ClientResult<Vec<crate::types::OrderReturn>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrderReturn>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.is_empty() {
             query_args.push(("order".to_string(), order.to_string()));
@@ -84,7 +88,11 @@ impl OrderReturns {
         let url = self
             .client
             .url(&format!("/v1/order_returns?{}", query_), None);
-        let mut resp: crate::types::Returns = self
+        let crate::Response::<crate::types::Returns> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -95,8 +103,8 @@ impl OrderReturns {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -112,7 +120,11 @@ impl OrderReturns {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Returns> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -123,7 +135,11 @@ impl OrderReturns {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Returns> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -135,13 +151,13 @@ impl OrderReturns {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/order_returns/{id}` endpoint.
@@ -153,7 +169,7 @@ impl OrderReturns {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::OrderReturn> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::OrderReturn>> {
         let url = self.client.url(
             &format!(
                 "/v1/order_returns/{}",

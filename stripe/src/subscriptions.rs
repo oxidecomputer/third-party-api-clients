@@ -44,7 +44,7 @@ impl Subscriptions {
         starting_after: &str,
         status: crate::types::GetSubscriptionsStatus,
         test_clock: &str,
-    ) -> ClientResult<Vec<crate::types::Subscription>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Subscription>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -77,7 +77,7 @@ impl Subscriptions {
         let url = self
             .client
             .url(&format!("/v1/subscriptions?{}", query_), None);
-        let resp: crate::types::Subscriptions = self
+        let resp: crate::Response<crate::types::Subscriptions> = self
             .client
             .get(
                 &url,
@@ -89,7 +89,11 @@ impl Subscriptions {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/subscriptions` endpoint.
@@ -108,7 +112,7 @@ impl Subscriptions {
         price: &str,
         status: crate::types::GetSubscriptionsStatus,
         test_clock: &str,
-    ) -> ClientResult<Vec<crate::types::Subscription>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Subscription>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -132,7 +136,11 @@ impl Subscriptions {
         let url = self
             .client
             .url(&format!("/v1/subscriptions?{}", query_), None);
-        let mut resp: crate::types::Subscriptions = self
+        let crate::Response::<crate::types::Subscriptions> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -143,8 +151,8 @@ impl Subscriptions {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -160,7 +168,11 @@ impl Subscriptions {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Subscriptions> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -171,7 +183,11 @@ impl Subscriptions {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Subscriptions> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -183,13 +199,13 @@ impl Subscriptions {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/subscriptions` endpoint.
@@ -202,7 +218,7 @@ impl Subscriptions {
      * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status, use <a href="/docs/billing/subscriptions/subscription-schedules#managing">subscription schedules</a> instead.
      * Schedules provide the flexibility to model more complex billing configurations that change over time.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Subscription> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Subscription>> {
         let url = self.client.url("/v1/subscriptions", None);
         self.client
             .post(
@@ -234,7 +250,7 @@ impl Subscriptions {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> ClientResult<Vec<crate::types::Charge>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -249,7 +265,7 @@ impl Subscriptions {
         let url = self
             .client
             .url(&format!("/v1/subscriptions/search?{}", query_), None);
-        let resp: crate::types::SearchResult = self
+        let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
                 &url,
@@ -261,7 +277,11 @@ impl Subscriptions {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/subscriptions/search` endpoint.
@@ -273,7 +293,10 @@ impl Subscriptions {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(
+        &self,
+        query: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -282,7 +305,11 @@ impl Subscriptions {
         let url = self
             .client
             .url(&format!("/v1/subscriptions/search?{}", query_), None);
-        let mut resp: crate::types::SearchResult = self
+        let crate::Response::<crate::types::SearchResult> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -293,8 +320,8 @@ impl Subscriptions {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -310,7 +337,11 @@ impl Subscriptions {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -321,7 +352,11 @@ impl Subscriptions {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -333,13 +368,13 @@ impl Subscriptions {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/subscriptions/{subscription_exposed_id}` endpoint.
@@ -354,7 +389,7 @@ impl Subscriptions {
     pub async fn get_exposed(
         &self,
         subscription_exposed_id: &str,
-    ) -> ClientResult<crate::types::Subscription> {
+    ) -> ClientResult<crate::Response<crate::types::Subscription>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
@@ -384,7 +419,7 @@ impl Subscriptions {
     pub async fn post_exposed(
         &self,
         subscription_exposed_id: &str,
-    ) -> ClientResult<crate::types::Subscription> {
+    ) -> ClientResult<crate::Response<crate::types::Subscription>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
@@ -418,7 +453,7 @@ impl Subscriptions {
     pub async fn delete_exposed(
         &self,
         subscription_exposed_id: &str,
-    ) -> ClientResult<crate::types::Subscription> {
+    ) -> ClientResult<crate::Response<crate::types::Subscription>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
@@ -448,7 +483,7 @@ impl Subscriptions {
     pub async fn delete_exposed_discount(
         &self,
         subscription_exposed_id: &str,
-    ) -> ClientResult<crate::types::DeletedDiscount> {
+    ) -> ClientResult<crate::Response<crate::types::DeletedDiscount>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}/discount",

@@ -27,7 +27,7 @@ impl EarningType {
     pub async fn get_company(
         &self,
         company_id: &str,
-    ) -> ClientResult<crate::types::EarningTypeListResponse> {
+    ) -> ClientResult<crate::Response<crate::types::EarningTypeListResponse>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types",
@@ -58,7 +58,7 @@ impl EarningType {
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyEarningTypesRequest,
-    ) -> ClientResult<crate::types::EarningType> {
+    ) -> ClientResult<crate::Response<crate::types::EarningType>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types",
@@ -88,7 +88,7 @@ impl EarningType {
         company_id: &str,
         earning_type_uuid: &str,
         body: &crate::types::PutCompanyEarningTypeRequest,
-    ) -> ClientResult<crate::types::EarningType> {
+    ) -> ClientResult<crate::Response<crate::types::EarningType>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types/{}",
@@ -118,7 +118,7 @@ impl EarningType {
         &self,
         company_id: &str,
         earning_type_uuid: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types/{}",

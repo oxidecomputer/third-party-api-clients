@@ -35,7 +35,7 @@ impl FacebookAds {
         offset: i64,
         sort_field: crate::types::GetAllFacebookAdsSortField,
         sort_dir: crate::types::SortDir,
-    ) -> ClientResult<crate::types::GetAllFacebookAdsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetAllFacebookAdsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -85,7 +85,7 @@ impl FacebookAds {
         fields: &[String],
         outreach_id: &str,
         exclude_fields: &[String],
-    ) -> ClientResult<crate::types::FacebookAdsAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::FacebookAdsAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

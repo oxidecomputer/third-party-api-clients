@@ -43,7 +43,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
-    ) -> ClientResult<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeViews>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/correct",
@@ -79,7 +79,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/correct",
@@ -132,7 +132,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
-    ) -> ClientResult<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeViews>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/edit",
@@ -194,7 +194,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
-    ) -> ClientResult<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeViews>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/recipient",
@@ -258,7 +258,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
-    ) -> ClientResult<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeViews>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/sender",
@@ -299,7 +299,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
-    ) -> ClientResult<crate::types::ViewUrl> {
+    ) -> ClientResult<crate::Response<crate::types::ViewUrl>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/shared",
@@ -338,7 +338,7 @@ impl EnvelopeViews {
         &self,
         account_id: &str,
         body: &crate::types::ConsoleViewRequest,
-    ) -> ClientResult<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeViews>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/views/console",

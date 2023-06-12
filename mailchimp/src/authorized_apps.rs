@@ -31,7 +31,7 @@ impl AuthorizedApps {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> ClientResult<crate::types::GetAuthorizedAppsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetAuthorizedAppsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -77,7 +77,7 @@ impl AuthorizedApps {
         fields: &[String],
         exclude_fields: &[String],
         app_id: &str,
-    ) -> ClientResult<crate::types::Apps> {
+    ) -> ClientResult<crate::Response<crate::types::Apps>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

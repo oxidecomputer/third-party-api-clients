@@ -20,7 +20,9 @@ impl CodesOfConduct {
      *
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
-    pub async fn get_all_codes_of_conduct(&self) -> ClientResult<Vec<crate::types::CodeOfConduct>> {
+    pub async fn get_all_codes_of_conduct(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeOfConduct>>> {
         let url = self.client.url("/codes_of_conduct", None);
         self.client
             .get(
@@ -45,7 +47,7 @@ impl CodesOfConduct {
      */
     pub async fn get_all_all_codes_of_conduct(
         &self,
-    ) -> ClientResult<Vec<crate::types::CodeOfConduct>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CodeOfConduct>>> {
         let url = self.client.url("/codes_of_conduct", None);
         self.client
             .get_all_pages(
@@ -70,7 +72,10 @@ impl CodesOfConduct {
      *
      * * `key: &str`
      */
-    pub async fn get_conduct_code(&self, key: &str) -> ClientResult<crate::types::CodeOfConduct> {
+    pub async fn get_conduct_code(
+        &self,
+        key: &str,
+    ) -> ClientResult<crate::Response<crate::types::CodeOfConduct>> {
         let url = self.client.url(
             &format!(
                 "/codes_of_conduct/{}",
@@ -108,7 +113,7 @@ impl CodesOfConduct {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::CodeOfConduct> {
+    ) -> ClientResult<crate::Response<crate::types::CodeOfConduct>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/community/code_of_conduct",

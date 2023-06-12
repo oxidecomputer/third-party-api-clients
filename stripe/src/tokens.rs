@@ -17,7 +17,7 @@ impl Tokens {
      * <p>Creates a single-use token that represents a bank account’s details.
      * This token can be used with any API method in place of a bank account dictionary. This token can be used only once, by attaching it to a <a href="#accounts">Custom account</a>.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Token> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Token>> {
         let url = self.client.url("/v1/tokens", None);
         self.client
             .post(
@@ -39,7 +39,7 @@ impl Tokens {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `token: &str` -- The account's country.
      */
-    pub async fn get(&self, token: &str) -> ClientResult<crate::types::Token> {
+    pub async fn get(&self, token: &str) -> ClientResult<crate::Response<crate::types::Token>> {
         let url = self.client.url(
             &format!(
                 "/v1/tokens/{}",

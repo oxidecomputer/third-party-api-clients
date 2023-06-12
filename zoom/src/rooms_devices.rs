@@ -32,7 +32,7 @@ impl RoomsDevices {
         room_id: &str,
         device_id: &str,
         body: &crate::types::ChangeZoomRoomsAppVersionRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/devices/{}/app_version",

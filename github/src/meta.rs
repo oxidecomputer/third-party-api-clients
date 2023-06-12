@@ -20,7 +20,7 @@ impl Meta {
      *
      * FROM: <https://docs.github.com/rest/overview/resources-in-the-rest-api#root-endpoint>
      */
-    pub async fn root(&self) -> ClientResult<crate::types::MetaRootResponse> {
+    pub async fn root(&self) -> ClientResult<crate::Response<crate::types::MetaRootResponse>> {
         let url = self.client.url("", None);
         self.client
             .get(
@@ -43,7 +43,7 @@ impl Meta {
      *
      * FROM: <https://docs.github.com/rest/reference/meta#get-github-meta-information>
      */
-    pub async fn get(&self) -> ClientResult<crate::types::ApiOverview> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::ApiOverview>> {
         let url = self.client.url("/meta", None);
         self.client
             .get(
@@ -68,7 +68,7 @@ impl Meta {
      *
      * * `s: &str` -- The words to show in Octocat's speech bubble.
      */
-    pub async fn get_octocat(&self, s: &str) -> ClientResult<String> {
+    pub async fn get_octocat(&self, s: &str) -> ClientResult<crate::Response<String>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !s.is_empty() {
             query_args.push(("s".to_string(), s.to_string()));
@@ -92,7 +92,7 @@ impl Meta {
      *
      * Get a random sentence from the Zen of GitHub
      */
-    pub async fn get_zen(&self) -> ClientResult<String> {
+    pub async fn get_zen(&self) -> ClientResult<crate::Response<String>> {
         let url = self.client.url("/zen", None);
         self.client
             .get(

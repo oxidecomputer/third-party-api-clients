@@ -12,21 +12,21 @@ impl Reports {
     }
 
     /**
-    * Gets the descriptors for all of
+     * Gets the descriptors for all of
     an account's active reports (for listings).
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/reports` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/reports` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_get_list(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::ReportInProductList> {
+    ) -> ClientResult<crate::Response<crate::types::ReportInProductList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports",
@@ -59,7 +59,7 @@ impl Reports {
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
-    ) -> ClientResult<crate::types::ReportInProductSaveResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ReportInProductSaveResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports",
@@ -92,7 +92,7 @@ impl Reports {
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
-    ) -> ClientResult<crate::types::ReportInProductRunResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ReportInProductRunResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/report_results",
@@ -125,7 +125,7 @@ impl Reports {
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductCsvRunRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/report_results_csv",
@@ -159,7 +159,7 @@ impl Reports {
         &self,
         account_id: &str,
         id: &str,
-    ) -> ClientResult<crate::types::ReportInProductGet> {
+    ) -> ClientResult<crate::Response<crate::types::ReportInProductGet>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/{}",
@@ -195,7 +195,7 @@ impl Reports {
         account_id: &str,
         id: &str,
         body: &crate::types::ReportInProductRunRequest,
-    ) -> ClientResult<crate::types::ReportInProductSaveResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ReportInProductSaveResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/{}",
@@ -230,7 +230,7 @@ impl Reports {
         &self,
         account_id: &str,
         id: &str,
-    ) -> ClientResult<crate::types::ReportInProductSaveResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ReportInProductSaveResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/{}",

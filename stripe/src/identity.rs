@@ -34,7 +34,7 @@ impl Identity {
         starting_after: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
-    ) -> ClientResult<Vec<crate::types::GelatoVerificationReport>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationReport>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -59,7 +59,7 @@ impl Identity {
             &format!("/v1/identity/verification_reports?{}", query_),
             None,
         );
-        let resp: crate::types::GetIdentityVerificationReportsResponse = self
+        let resp: crate::Response<crate::types::GetIdentityVerificationReportsResponse> = self
             .client
             .get(
                 &url,
@@ -71,7 +71,11 @@ impl Identity {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/identity/verification_reports` endpoint.
@@ -85,7 +89,7 @@ impl Identity {
         _created: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
-    ) -> ClientResult<Vec<crate::types::GelatoVerificationReport>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationReport>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -101,7 +105,11 @@ impl Identity {
             &format!("/v1/identity/verification_reports?{}", query_),
             None,
         );
-        let mut resp: crate::types::GetIdentityVerificationReportsResponse = self
+        let crate::Response::<crate::types::GetIdentityVerificationReportsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -112,8 +120,8 @@ impl Identity {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -129,7 +137,11 @@ impl Identity {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetIdentityVerificationReportsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -140,7 +152,11 @@ impl Identity {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetIdentityVerificationReportsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -152,13 +168,13 @@ impl Identity {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/identity/verification_reports/{report}` endpoint.
@@ -173,7 +189,7 @@ impl Identity {
     pub async fn get_verification_reports_report(
         &self,
         report: &str,
-    ) -> ClientResult<crate::types::GelatoVerificationReport> {
+    ) -> ClientResult<crate::Response<crate::types::GelatoVerificationReport>> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_reports/{}",
@@ -212,7 +228,7 @@ impl Identity {
         limit: i64,
         starting_after: &str,
         status: crate::types::GelatoVerificationSessionStatus,
-    ) -> ClientResult<Vec<crate::types::GelatoVerificationSession>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationSession>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -231,7 +247,7 @@ impl Identity {
             &format!("/v1/identity/verification_sessions?{}", query_),
             None,
         );
-        let resp: crate::types::GetIdentityVerificationSessionsResponse = self
+        let resp: crate::Response<crate::types::GetIdentityVerificationSessionsResponse> = self
             .client
             .get(
                 &url,
@@ -243,7 +259,11 @@ impl Identity {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/identity/verification_sessions` endpoint.
@@ -256,7 +276,7 @@ impl Identity {
         &self,
         _created: &str,
         status: crate::types::GelatoVerificationSessionStatus,
-    ) -> ClientResult<Vec<crate::types::GelatoVerificationSession>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationSession>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.to_string().is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -266,7 +286,11 @@ impl Identity {
             &format!("/v1/identity/verification_sessions?{}", query_),
             None,
         );
-        let mut resp: crate::types::GetIdentityVerificationSessionsResponse = self
+        let crate::Response::<crate::types::GetIdentityVerificationSessionsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -277,8 +301,8 @@ impl Identity {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -294,7 +318,11 @@ impl Identity {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetIdentityVerificationSessionsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -305,7 +333,11 @@ impl Identity {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetIdentityVerificationSessionsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -317,13 +349,13 @@ impl Identity {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/identity/verification_sessions` endpoint.
@@ -338,7 +370,7 @@ impl Identity {
      */
     pub async fn post_verification_session(
         &self,
-    ) -> ClientResult<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
         let url = self.client.url("/v1/identity/verification_sessions", None);
         self.client
             .post(
@@ -366,7 +398,7 @@ impl Identity {
     pub async fn get_verification_sessions_session(
         &self,
         session: &str,
-    ) -> ClientResult<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
@@ -399,7 +431,7 @@ impl Identity {
     pub async fn post_verification_sessions_session(
         &self,
         session: &str,
-    ) -> ClientResult<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
@@ -431,7 +463,7 @@ impl Identity {
     pub async fn post_verification_sessions_session_cancel(
         &self,
         session: &str,
-    ) -> ClientResult<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/cancel",
@@ -479,7 +511,7 @@ impl Identity {
     pub async fn post_verification_sessions_session_redact(
         &self,
         session: &str,
-    ) -> ClientResult<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/redact",

@@ -41,7 +41,7 @@ impl Files {
         limit: i64,
         purpose: crate::types::Purpose,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::File>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::File>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -57,7 +57,7 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/files?{}", query_), None);
-        let resp: crate::types::GetFilesResponse = self
+        let resp: crate::Response<crate::types::GetFilesResponse> = self
             .client
             .get(
                 &url,
@@ -69,7 +69,11 @@ impl Files {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/files` endpoint.
@@ -82,14 +86,18 @@ impl Files {
         &self,
         _created: &str,
         purpose: crate::types::Purpose,
-    ) -> ClientResult<Vec<crate::types::File>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::File>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !purpose.to_string().is_empty() {
             query_args.push(("purpose".to_string(), purpose.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/files?{}", query_), None);
-        let mut resp: crate::types::GetFilesResponse = self
+        let crate::Response::<crate::types::GetFilesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -100,8 +108,8 @@ impl Files {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -117,7 +125,11 @@ impl Files {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetFilesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -128,7 +140,11 @@ impl Files {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetFilesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -140,13 +156,13 @@ impl Files {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/files` endpoint.
@@ -155,7 +171,7 @@ impl Files {
      *
      * <p>All of Stripe’s officially supported Client libraries should have support for sending <code>multipart/form-data</code>.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::File> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::File>> {
         let url = self.client.url(
             "/v1/files",
             Some(PostFilesDefaultServer::default().default_url()),
@@ -180,7 +196,7 @@ impl Files {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `file: &str` -- The account's country.
      */
-    pub async fn get(&self, file: &str) -> ClientResult<crate::types::File> {
+    pub async fn get(&self, file: &str) -> ClientResult<crate::Response<crate::types::File>> {
         let url = self.client.url(
             &format!("/v1/files/{}", crate::progenitor_support::encode_path(file),),
             None,

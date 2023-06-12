@@ -33,7 +33,7 @@ impl PhoneSite {
         &self,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Sites>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Sites>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -43,7 +43,7 @@ impl PhoneSite {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/phone/sites?{}", query_), None);
-        let resp: crate::types::ListPhoneSitesResponse = self
+        let resp: crate::Response<crate::types::ListPhoneSitesResponse> = self
             .client
             .get(
                 &url,
@@ -55,7 +55,11 @@ impl PhoneSite {
             .await?;
 
         // Return our response data.
-        Ok(resp.sites.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.sites.to_vec(),
+        ))
     }
     /**
      * List phone sites.
@@ -72,9 +76,13 @@ impl PhoneSite {
      * **Scope:** `phone:read:admin`<br>
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::Sites>> {
+    pub async fn list_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Sites>>> {
         let url = self.client.url("/phone/sites", None);
-        let mut resp: crate::types::ListPhoneSitesResponse = self
+        let crate::Response::<crate::types::ListPhoneSitesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -85,14 +93,18 @@ impl PhoneSite {
             )
             .await?;
 
-        let mut sites = resp.sites;
-        let mut page = resp.next_page_token;
+        let mut sites = body.sites;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListPhoneSitesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -103,7 +115,11 @@ impl PhoneSite {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListPhoneSitesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -115,17 +131,17 @@ impl PhoneSite {
                     .await?;
             }
 
-            sites.append(&mut resp.sites);
+            sites.append(&mut body.sites);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(sites)
+        Ok(crate::Response::new(status, headers, sites))
     }
     /**
      * Create a phone site.
@@ -145,7 +161,7 @@ impl PhoneSite {
     pub async fn create(
         &self,
         body: &crate::types::CreatePhoneSiteRequest,
-    ) -> ClientResult<crate::types::Site> {
+    ) -> ClientResult<crate::Response<crate::types::Site>> {
         let url = self.client.url("/phone/sites", None);
         self.client
             .post(
@@ -177,7 +193,10 @@ impl PhoneSite {
      *
      * * `site_id: &str` -- Unique Identifier of the Site.
      */
-    pub async fn get_site(&self, site_id: &str) -> ClientResult<crate::types::GetSiteResponse> {
+    pub async fn get_site(
+        &self,
+        site_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::GetSiteResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/sites/{}",
@@ -216,7 +235,11 @@ impl PhoneSite {
      * * `site_id: &str` -- Unique Identifier of the Site.
      * * `transfer_site_id: &str` -- The Site ID of another site where the assets of the current site (users, numbers and phones) can be transferred to.
      */
-    pub async fn delete(&self, site_id: &str, transfer_site_id: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        site_id: &str,
+        transfer_site_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !transfer_site_id.is_empty() {
             query_args.push(("transfer_site_id".to_string(), transfer_site_id.to_string()));
@@ -263,7 +286,7 @@ impl PhoneSite {
         &self,
         site_id: &str,
         body: &crate::types::UpdateSiteDetailsRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/sites/{}",

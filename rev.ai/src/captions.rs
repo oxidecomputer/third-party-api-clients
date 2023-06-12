@@ -32,7 +32,7 @@ impl Captions {
         id: &str,
         accept: crate::types::Accept,
         speaker_channel: i64,
-    ) -> ClientResult<String> {
+    ) -> ClientResult<crate::Response<String>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if speaker_channel > 0 {
             query_args.push(("speaker_channel".to_string(), speaker_channel.to_string()));

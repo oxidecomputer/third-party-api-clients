@@ -39,7 +39,7 @@ impl EnvelopeLocks {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeLocks>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",
@@ -97,7 +97,7 @@ impl EnvelopeLocks {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::LockRequest,
-    ) -> ClientResult<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeLocks>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",
@@ -189,7 +189,7 @@ impl EnvelopeLocks {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::LockRequest,
-    ) -> ClientResult<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeLocks>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",
@@ -240,7 +240,7 @@ impl EnvelopeLocks {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeLocks>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",

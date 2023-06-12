@@ -37,7 +37,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-octorust = "0.3.2"
+octorust = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -57,7 +57,7 @@ let github = Client::new(
 ```
 
 If you are a GitHub enterprise customer, you will want to create a client with the
-[Client#host_override](https://docs.rs/octorust/0.3.2/octorust/struct.Client.html#method.host_override) method.
+[Client#host_override](https://docs.rs/octorust/0.7.0-rc.1/octorust/struct.Client.html#method.host_override) method.
 
 ## Feature flags
 
@@ -71,7 +71,7 @@ To enable this, add the following to your `Cargo.toml` file:
 
 ```toml
 [dependencies]
-octorust = { version = "0.3.2", features = ["httpcache"] }
+octorust = { version = "0.7.0-rc.1", features = ["httpcache"] }
 ```
 
 Then use the `Client::custom` constructor to provide a cache implementation.
@@ -117,6 +117,7 @@ use std::env;
 use octorust::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
 #[cfg(feature = "httpcache")]
 use octorust::http_cache::FileBasedCache;
+use base64::{Engine, engine::general_purpose::STANDARD};
 
 let app_id_str = env::var("GH_APP_ID").unwrap();
 let app_id = app_id_str.parse::<u64>().unwrap();
@@ -125,7 +126,7 @@ let app_installation_id_str = env::var("GH_INSTALLATION_ID").unwrap();
 let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
 
 let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
-let private_key = base64::decode(encoded_private_key).unwrap();
+let private_key = STANDARD.decode(encoded_private_key).unwrap();
 
 // Decode the key.
 let key = nom_pem::decode_block(&private_key).unwrap();

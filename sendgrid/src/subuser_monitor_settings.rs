@@ -19,7 +19,7 @@ impl SubuserMonitorSettings {
     pub async fn get_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
-    ) -> ClientResult<crate::types::Monitor> {
+    ) -> ClientResult<crate::Response<crate::types::Monitor>> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
@@ -46,7 +46,7 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
         body: &crate::types::Monitor,
-    ) -> ClientResult<crate::types::Monitor> {
+    ) -> ClientResult<crate::Response<crate::types::Monitor>> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
@@ -73,7 +73,7 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
         body: &crate::types::Monitor,
-    ) -> ClientResult<crate::types::Monitor> {
+    ) -> ClientResult<crate::Response<crate::types::Monitor>> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
@@ -99,7 +99,7 @@ impl SubuserMonitorSettings {
     pub async fn delete_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",

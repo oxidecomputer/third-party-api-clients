@@ -31,7 +31,7 @@ impl Inventory {
         ids_required: &str,
         limit: &str,
         ids: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ids > 0 {
             query_args.push(("ids".to_string(), ids.to_string()));
@@ -76,7 +76,7 @@ impl Inventory {
     pub async fn deprecated_202001_get_items_param_item(
         &self,
         inventory_item_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/inventory_items/{}/json",
@@ -109,7 +109,7 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/inventory_items/{}/json",
@@ -147,7 +147,7 @@ impl Inventory {
         ids_required: &str,
         limit: &str,
         ids: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ids > 0 {
             query_args.push(("ids".to_string(), ids.to_string()));
@@ -192,7 +192,7 @@ impl Inventory {
     pub async fn deprecated_202004_get_items_param_item(
         &self,
         inventory_item_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/inventory_items/{}/json",
@@ -225,7 +225,7 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/inventory_items/{}/json",
@@ -263,7 +263,7 @@ impl Inventory {
         ids_required: &str,
         limit: &str,
         ids: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ids > 0 {
             query_args.push(("ids".to_string(), ids.to_string()));
@@ -308,7 +308,7 @@ impl Inventory {
     pub async fn deprecated_202007_get_items_param_item(
         &self,
         inventory_item_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/inventory_items/{}/json",
@@ -341,7 +341,7 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/inventory_items/{}/json",
@@ -374,7 +374,12 @@ impl Inventory {
      *                     (default: 50, maximum: 250).
      * * `ids: i64` -- recurring_application_charge[capped_amount].
      */
-    pub async fn get_item(&self, ids_required: &str, limit: &str, ids: i64) -> ClientResult<()> {
+    pub async fn get_item(
+        &self,
+        ids_required: &str,
+        limit: &str,
+        ids: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ids > 0 {
             query_args.push(("ids".to_string(), ids.to_string()));
@@ -416,7 +421,10 @@ impl Inventory {
      *
      * * `inventory_item_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_items_param_item(&self, inventory_item_id: &str) -> ClientResult<()> {
+    pub async fn get_items_param_item(
+        &self,
+        inventory_item_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/inventory_items/{}/json",
@@ -449,7 +457,7 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/inventory_items/{}/json",
@@ -487,7 +495,7 @@ impl Inventory {
         ids_required: &str,
         limit: &str,
         ids: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ids > 0 {
             query_args.push(("ids".to_string(), ids.to_string()));
@@ -532,7 +540,7 @@ impl Inventory {
     pub async fn deprecated_202101_get_items_param_item(
         &self,
         inventory_item_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/inventory_items/{}/json",
@@ -565,7 +573,7 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/inventory_items/{}/json",
@@ -603,7 +611,7 @@ impl Inventory {
         ids_required: &str,
         limit: &str,
         ids: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ids > 0 {
             query_args.push(("ids".to_string(), ids.to_string()));
@@ -648,7 +656,7 @@ impl Inventory {
     pub async fn deprecated_unstable_get_items_param_item(
         &self,
         inventory_item_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/inventory_items/{}/json",
@@ -681,7 +689,7 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/inventory_items/{}/json",
@@ -701,8 +709,8 @@ impl Inventory {
     }
     /**
     * Retrieves a list of inventory levels.
-              You must include inventory_item_ids, location_ids, or both as filter parameters.
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             You must include inventory_item_ids, location_ids, or both as filter parameters.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/inventory_levels.json` endpoint.
     *
@@ -711,11 +719,11 @@ impl Inventory {
     * **Parameters:**
     *
     * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
     */
     pub async fn deprecated_202001_get_level(
@@ -724,7 +732,7 @@ impl Inventory {
         location_ids: &str,
         limit: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_ids.is_empty() {
             query_args.push((
@@ -758,9 +766,9 @@ impl Inventory {
     }
     /**
     * Deletes an inventory level of an inventory item at a location.
-              Deleting an inventory level for an inventory item removes that item from the specified location.
-              Every inventory item must have at least one inventory level. To move inventory to another location,
-              first connect the inventory item to another location, and then delete the previous inventory level.
+             Deleting an inventory level for an inventory item removes that item from the specified location.
+             Every inventory item must have at least one inventory level. To move inventory to another location,
+             first connect the inventory item to another location, and then delete the previous inventory level.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-01/inventory_levels.json` endpoint.
     *
@@ -779,7 +787,7 @@ impl Inventory {
         location_id_required: &str,
         inventory_item_id: i64,
         location_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if inventory_item_id > 0 {
             query_args.push((
@@ -840,7 +848,7 @@ impl Inventory {
         location_id_required: &str,
         available_adjustment_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_adjustment_required.is_empty() {
             query_args.push((
@@ -883,8 +891,8 @@ impl Inventory {
     }
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
-            When connecting inventory items to locations, it's important to understand the rules around
-            fulfillment service locations.
+           When connecting inventory items to locations, it's important to understand the rules around
+           fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/inventory_levels/connect.json` endpoint.
     *
@@ -895,7 +903,7 @@ impl Inventory {
     * * `inventory_item_required: &str` -- The ID of the inventory item.
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202001_create_levels_connect(
         &self,
@@ -903,7 +911,7 @@ impl Inventory {
         location_id_required: &str,
         relocate_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_id_required.is_empty() {
             query_args.push((
@@ -947,9 +955,9 @@ impl Inventory {
     }
     /**
     * Sets the inventory level for an inventory item at a location.
-              If the specified location is not connected, it will be automatically connected first.
-              When connecting inventory items to locations, it's important to understand the rules around
-              fulfillment service locations.
+             If the specified location is not connected, it will be automatically connected first.
+             When connecting inventory items to locations, it's important to understand the rules around
+             fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/inventory_levels/set.json` endpoint.
     *
@@ -961,7 +969,7 @@ impl Inventory {
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `available_required: &str` -- Sets the available inventory quantity.
     * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202001_create_levels_set(
         &self,
@@ -970,7 +978,7 @@ impl Inventory {
         available_required: &str,
         disconnect_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_required.is_empty() {
             query_args.push((
@@ -1019,8 +1027,8 @@ impl Inventory {
     }
     /**
     * Retrieves a list of inventory levels.
-              You must include inventory_item_ids, location_ids, or both as filter parameters.
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             You must include inventory_item_ids, location_ids, or both as filter parameters.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/inventory_levels.json` endpoint.
     *
@@ -1029,11 +1037,11 @@ impl Inventory {
     * **Parameters:**
     *
     * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
     */
     pub async fn deprecated_202004_get_level(
@@ -1042,7 +1050,7 @@ impl Inventory {
         location_ids: &str,
         limit: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_ids.is_empty() {
             query_args.push((
@@ -1076,9 +1084,9 @@ impl Inventory {
     }
     /**
     * Deletes an inventory level of an inventory item at a location.
-              Deleting an inventory level for an inventory item removes that item from the specified location.
-              Every inventory item must have at least one inventory level. To move inventory to another location,
-              first connect the inventory item to another location, and then delete the previous inventory level.
+             Deleting an inventory level for an inventory item removes that item from the specified location.
+             Every inventory item must have at least one inventory level. To move inventory to another location,
+             first connect the inventory item to another location, and then delete the previous inventory level.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-04/inventory_levels.json` endpoint.
     *
@@ -1097,7 +1105,7 @@ impl Inventory {
         location_id_required: &str,
         inventory_item_id: i64,
         location_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if inventory_item_id > 0 {
             query_args.push((
@@ -1158,7 +1166,7 @@ impl Inventory {
         location_id_required: &str,
         available_adjustment_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_adjustment_required.is_empty() {
             query_args.push((
@@ -1201,8 +1209,8 @@ impl Inventory {
     }
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
-            When connecting inventory items to locations, it's important to understand the rules around
-            fulfillment service locations.
+           When connecting inventory items to locations, it's important to understand the rules around
+           fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/inventory_levels/connect.json` endpoint.
     *
@@ -1213,7 +1221,7 @@ impl Inventory {
     * * `inventory_item_required: &str` -- The ID of the inventory item.
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202004_create_levels_connect(
         &self,
@@ -1221,7 +1229,7 @@ impl Inventory {
         location_id_required: &str,
         relocate_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_id_required.is_empty() {
             query_args.push((
@@ -1265,9 +1273,9 @@ impl Inventory {
     }
     /**
     * Sets the inventory level for an inventory item at a location.
-              If the specified location is not connected, it will be automatically connected first.
-              When connecting inventory items to locations, it's important to understand the rules around
-              fulfillment service locations.
+             If the specified location is not connected, it will be automatically connected first.
+             When connecting inventory items to locations, it's important to understand the rules around
+             fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/inventory_levels/set.json` endpoint.
     *
@@ -1279,7 +1287,7 @@ impl Inventory {
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `available_required: &str` -- Sets the available inventory quantity.
     * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202004_create_levels_set(
         &self,
@@ -1288,7 +1296,7 @@ impl Inventory {
         available_required: &str,
         disconnect_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_required.is_empty() {
             query_args.push((
@@ -1337,8 +1345,8 @@ impl Inventory {
     }
     /**
     * Retrieves a list of inventory levels.
-              You must include inventory_item_ids, location_ids, or both as filter parameters.
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             You must include inventory_item_ids, location_ids, or both as filter parameters.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/inventory_levels.json` endpoint.
     *
@@ -1347,11 +1355,11 @@ impl Inventory {
     * **Parameters:**
     *
     * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
     */
     pub async fn deprecated_202007_get_level(
@@ -1360,7 +1368,7 @@ impl Inventory {
         location_ids: &str,
         limit: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_ids.is_empty() {
             query_args.push((
@@ -1394,9 +1402,9 @@ impl Inventory {
     }
     /**
     * Deletes an inventory level of an inventory item at a location.
-              Deleting an inventory level for an inventory item removes that item from the specified location.
-              Every inventory item must have at least one inventory level. To move inventory to another location,
-              first connect the inventory item to another location, and then delete the previous inventory level.
+             Deleting an inventory level for an inventory item removes that item from the specified location.
+             Every inventory item must have at least one inventory level. To move inventory to another location,
+             first connect the inventory item to another location, and then delete the previous inventory level.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-07/inventory_levels.json` endpoint.
     *
@@ -1415,7 +1423,7 @@ impl Inventory {
         location_id_required: &str,
         inventory_item_id: i64,
         location_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if inventory_item_id > 0 {
             query_args.push((
@@ -1476,7 +1484,7 @@ impl Inventory {
         location_id_required: &str,
         available_adjustment_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_adjustment_required.is_empty() {
             query_args.push((
@@ -1519,8 +1527,8 @@ impl Inventory {
     }
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
-            When connecting inventory items to locations, it's important to understand the rules around
-            fulfillment service locations.
+           When connecting inventory items to locations, it's important to understand the rules around
+           fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/inventory_levels/connect.json` endpoint.
     *
@@ -1531,7 +1539,7 @@ impl Inventory {
     * * `inventory_item_required: &str` -- The ID of the inventory item.
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202007_create_levels_connect(
         &self,
@@ -1539,7 +1547,7 @@ impl Inventory {
         location_id_required: &str,
         relocate_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_id_required.is_empty() {
             query_args.push((
@@ -1583,9 +1591,9 @@ impl Inventory {
     }
     /**
     * Sets the inventory level for an inventory item at a location.
-              If the specified location is not connected, it will be automatically connected first.
-              When connecting inventory items to locations, it's important to understand the rules around
-              fulfillment service locations.
+             If the specified location is not connected, it will be automatically connected first.
+             When connecting inventory items to locations, it's important to understand the rules around
+             fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/inventory_levels/set.json` endpoint.
     *
@@ -1597,7 +1605,7 @@ impl Inventory {
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `available_required: &str` -- Sets the available inventory quantity.
     * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202007_create_levels_set(
         &self,
@@ -1606,7 +1614,7 @@ impl Inventory {
         available_required: &str,
         disconnect_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_required.is_empty() {
             query_args.push((
@@ -1655,8 +1663,8 @@ impl Inventory {
     }
     /**
     * Retrieves a list of inventory levels.
-              You must include inventory_item_ids, location_ids, or both as filter parameters.
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             You must include inventory_item_ids, location_ids, or both as filter parameters.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/inventory_levels.json` endpoint.
     *
@@ -1665,11 +1673,11 @@ impl Inventory {
     * **Parameters:**
     *
     * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
     */
     pub async fn get_level(
@@ -1678,7 +1686,7 @@ impl Inventory {
         location_ids: &str,
         limit: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_ids.is_empty() {
             query_args.push((
@@ -1712,9 +1720,9 @@ impl Inventory {
     }
     /**
     * Deletes an inventory level of an inventory item at a location.
-              Deleting an inventory level for an inventory item removes that item from the specified location.
-              Every inventory item must have at least one inventory level. To move inventory to another location,
-              first connect the inventory item to another location, and then delete the previous inventory level.
+             Deleting an inventory level for an inventory item removes that item from the specified location.
+             Every inventory item must have at least one inventory level. To move inventory to another location,
+             first connect the inventory item to another location, and then delete the previous inventory level.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-10/inventory_levels.json` endpoint.
     *
@@ -1733,7 +1741,7 @@ impl Inventory {
         location_id_required: &str,
         inventory_item_id: i64,
         location_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if inventory_item_id > 0 {
             query_args.push((
@@ -1794,7 +1802,7 @@ impl Inventory {
         location_id_required: &str,
         available_adjustment_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_adjustment_required.is_empty() {
             query_args.push((
@@ -1837,8 +1845,8 @@ impl Inventory {
     }
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
-            When connecting inventory items to locations, it's important to understand the rules around
-            fulfillment service locations.
+           When connecting inventory items to locations, it's important to understand the rules around
+           fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/inventory_levels/connect.json` endpoint.
     *
@@ -1849,7 +1857,7 @@ impl Inventory {
     * * `inventory_item_required: &str` -- The ID of the inventory item.
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn create_levels_connect(
         &self,
@@ -1857,7 +1865,7 @@ impl Inventory {
         location_id_required: &str,
         relocate_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_id_required.is_empty() {
             query_args.push((
@@ -1901,9 +1909,9 @@ impl Inventory {
     }
     /**
     * Sets the inventory level for an inventory item at a location.
-              If the specified location is not connected, it will be automatically connected first.
-              When connecting inventory items to locations, it's important to understand the rules around
-              fulfillment service locations.
+             If the specified location is not connected, it will be automatically connected first.
+             When connecting inventory items to locations, it's important to understand the rules around
+             fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/inventory_levels/set.json` endpoint.
     *
@@ -1915,7 +1923,7 @@ impl Inventory {
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `available_required: &str` -- Sets the available inventory quantity.
     * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn create_levels_set(
         &self,
@@ -1924,7 +1932,7 @@ impl Inventory {
         available_required: &str,
         disconnect_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_required.is_empty() {
             query_args.push((
@@ -1973,8 +1981,8 @@ impl Inventory {
     }
     /**
     * Retrieves a list of inventory levels.
-              You must include inventory_item_ids, location_ids, or both as filter parameters.
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             You must include inventory_item_ids, location_ids, or both as filter parameters.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/inventory_levels.json` endpoint.
     *
@@ -1983,11 +1991,11 @@ impl Inventory {
     * **Parameters:**
     *
     * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
     */
     pub async fn deprecated_202101_get_level(
@@ -1996,7 +2004,7 @@ impl Inventory {
         location_ids: &str,
         limit: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_ids.is_empty() {
             query_args.push((
@@ -2030,9 +2038,9 @@ impl Inventory {
     }
     /**
     * Deletes an inventory level of an inventory item at a location.
-              Deleting an inventory level for an inventory item removes that item from the specified location.
-              Every inventory item must have at least one inventory level. To move inventory to another location,
-              first connect the inventory item to another location, and then delete the previous inventory level.
+             Deleting an inventory level for an inventory item removes that item from the specified location.
+             Every inventory item must have at least one inventory level. To move inventory to another location,
+             first connect the inventory item to another location, and then delete the previous inventory level.
     *
     * This function performs a `DELETE` to the `/admin/api/2021-01/inventory_levels.json` endpoint.
     *
@@ -2051,7 +2059,7 @@ impl Inventory {
         location_id_required: &str,
         inventory_item_id: i64,
         location_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if inventory_item_id > 0 {
             query_args.push((
@@ -2112,7 +2120,7 @@ impl Inventory {
         location_id_required: &str,
         available_adjustment_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_adjustment_required.is_empty() {
             query_args.push((
@@ -2155,8 +2163,8 @@ impl Inventory {
     }
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
-            When connecting inventory items to locations, it's important to understand the rules around
-            fulfillment service locations.
+           When connecting inventory items to locations, it's important to understand the rules around
+           fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/inventory_levels/connect.json` endpoint.
     *
@@ -2167,7 +2175,7 @@ impl Inventory {
     * * `inventory_item_required: &str` -- The ID of the inventory item.
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202101_create_levels_connect(
         &self,
@@ -2175,7 +2183,7 @@ impl Inventory {
         location_id_required: &str,
         relocate_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_id_required.is_empty() {
             query_args.push((
@@ -2219,9 +2227,9 @@ impl Inventory {
     }
     /**
     * Sets the inventory level for an inventory item at a location.
-              If the specified location is not connected, it will be automatically connected first.
-              When connecting inventory items to locations, it's important to understand the rules around
-              fulfillment service locations.
+             If the specified location is not connected, it will be automatically connected first.
+             When connecting inventory items to locations, it's important to understand the rules around
+             fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/inventory_levels/set.json` endpoint.
     *
@@ -2233,7 +2241,7 @@ impl Inventory {
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `available_required: &str` -- Sets the available inventory quantity.
     * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_202101_create_levels_set(
         &self,
@@ -2242,7 +2250,7 @@ impl Inventory {
         available_required: &str,
         disconnect_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_required.is_empty() {
             query_args.push((
@@ -2291,8 +2299,8 @@ impl Inventory {
     }
     /**
     * Retrieves a list of inventory levels.
-              You must include inventory_item_ids, location_ids, or both as filter parameters.
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             You must include inventory_item_ids, location_ids, or both as filter parameters.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/unstable/inventory_levels.json` endpoint.
     *
@@ -2301,11 +2309,11 @@ impl Inventory {
     * **Parameters:**
     *
     * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-    *                     (maximum: 50).
+     *                     (maximum: 50).
     * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
     */
     pub async fn deprecated_unstable_get_level(
@@ -2314,7 +2322,7 @@ impl Inventory {
         location_ids: &str,
         limit: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_ids.is_empty() {
             query_args.push((
@@ -2348,9 +2356,9 @@ impl Inventory {
     }
     /**
     * Deletes an inventory level of an inventory item at a location.
-              Deleting an inventory level for an inventory item removes that item from the specified location.
-              Every inventory item must have at least one inventory level. To move inventory to another location,
-              first connect the inventory item to another location, and then delete the previous inventory level.
+             Deleting an inventory level for an inventory item removes that item from the specified location.
+             Every inventory item must have at least one inventory level. To move inventory to another location,
+             first connect the inventory item to another location, and then delete the previous inventory level.
     *
     * This function performs a `DELETE` to the `/admin/api/unstable/inventory_levels.json` endpoint.
     *
@@ -2369,7 +2377,7 @@ impl Inventory {
         location_id_required: &str,
         inventory_item_id: i64,
         location_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if inventory_item_id > 0 {
             query_args.push((
@@ -2430,7 +2438,7 @@ impl Inventory {
         location_id_required: &str,
         available_adjustment_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_adjustment_required.is_empty() {
             query_args.push((
@@ -2476,8 +2484,8 @@ impl Inventory {
     }
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
-            When connecting inventory items to locations, it's important to understand the rules around
-            fulfillment service locations.
+           When connecting inventory items to locations, it's important to understand the rules around
+           fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/unstable/inventory_levels/connect.json` endpoint.
     *
@@ -2488,7 +2496,7 @@ impl Inventory {
     * * `inventory_item_required: &str` -- The ID of the inventory item.
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_unstable_create_levels_connect(
         &self,
@@ -2496,7 +2504,7 @@ impl Inventory {
         location_id_required: &str,
         relocate_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inventory_item_id_required.is_empty() {
             query_args.push((
@@ -2540,9 +2548,9 @@ impl Inventory {
     }
     /**
     * Sets the inventory level for an inventory item at a location.
-              If the specified location is not connected, it will be automatically connected first.
-              When connecting inventory items to locations, it's important to understand the rules around
-              fulfillment service locations.
+             If the specified location is not connected, it will be automatically connected first.
+             When connecting inventory items to locations, it's important to understand the rules around
+             fulfillment service locations.
     *
     * This function performs a `POST` to the `/admin/api/unstable/inventory_levels/set.json` endpoint.
     *
@@ -2554,7 +2562,7 @@ impl Inventory {
     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
     * * `available_required: &str` -- Sets the available inventory quantity.
     * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-    *                     (default: false).
+     *                     (default: false).
     */
     pub async fn deprecated_unstable_create_levels_set(
         &self,
@@ -2563,7 +2571,7 @@ impl Inventory {
         available_required: &str,
         disconnect_if_necessary: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !available_required.is_empty() {
             query_args.push((
@@ -2617,7 +2625,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-01
      */
-    pub async fn deprecated_202001_get_location(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_location(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/locations.json", None);
         self.client
             .get(
@@ -2643,7 +2651,7 @@ impl Inventory {
     pub async fn deprecated_202001_get_locations_param_location(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/locations/{}/json",
@@ -2668,7 +2676,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-01
      */
-    pub async fn deprecated_202001_get_locations_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/locations/count.json", None);
@@ -2696,7 +2704,7 @@ impl Inventory {
     pub async fn deprecated_202001_get_locations_param_location_level(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/locations/{}/inventory_levels.json",
@@ -2721,7 +2729,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-04
      */
-    pub async fn deprecated_202004_get_location(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_location(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/locations.json", None);
         self.client
             .get(
@@ -2747,7 +2755,7 @@ impl Inventory {
     pub async fn deprecated_202004_get_locations_param_location(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/locations/{}/json",
@@ -2772,7 +2780,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-04
      */
-    pub async fn deprecated_202004_get_locations_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/locations/count.json", None);
@@ -2800,7 +2808,7 @@ impl Inventory {
     pub async fn deprecated_202004_get_locations_param_location_level(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/locations/{}/inventory_levels.json",
@@ -2825,7 +2833,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-07
      */
-    pub async fn deprecated_202007_get_location(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_location(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/locations.json", None);
         self.client
             .get(
@@ -2851,7 +2859,7 @@ impl Inventory {
     pub async fn deprecated_202007_get_locations_param_location(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/locations/{}/json",
@@ -2876,7 +2884,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-07
      */
-    pub async fn deprecated_202007_get_locations_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/locations/count.json", None);
@@ -2904,7 +2912,7 @@ impl Inventory {
     pub async fn deprecated_202007_get_locations_param_location_level(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/locations/{}/inventory_levels.json",
@@ -2929,7 +2937,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-10
      */
-    pub async fn get_location(&self) -> ClientResult<()> {
+    pub async fn get_location(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/locations.json", None);
         self.client
             .get(
@@ -2952,7 +2960,10 @@ impl Inventory {
      *
      * * `location_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_locations_param_location(&self, location_id: &str) -> ClientResult<()> {
+    pub async fn get_locations_param_location(
+        &self,
+        location_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/locations/{}/json",
@@ -2977,7 +2988,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-10
      */
-    pub async fn get_locations_count(&self) -> ClientResult<()> {
+    pub async fn get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/locations/count.json", None);
@@ -3002,7 +3013,10 @@ impl Inventory {
      *
      * * `location_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_locations_param_location_level(&self, location_id: &str) -> ClientResult<()> {
+    pub async fn get_locations_param_location_level(
+        &self,
+        location_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/locations/{}/inventory_levels.json",
@@ -3027,7 +3041,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2021-01
      */
-    pub async fn deprecated_202101_get_location(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_location(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/locations.json", None);
         self.client
             .get(
@@ -3053,7 +3067,7 @@ impl Inventory {
     pub async fn deprecated_202101_get_locations_param_location(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/locations/{}/json",
@@ -3078,7 +3092,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2021-01
      */
-    pub async fn deprecated_202101_get_locations_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/locations/count.json", None);
@@ -3106,7 +3120,7 @@ impl Inventory {
     pub async fn deprecated_202101_get_locations_param_location_level(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/locations/{}/inventory_levels.json",
@@ -3131,7 +3145,7 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-unstable
      */
-    pub async fn deprecated_unstable_get_location(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_location(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/locations.json", None);
         self.client
             .get(
@@ -3157,7 +3171,7 @@ impl Inventory {
     pub async fn deprecated_unstable_get_locations_param_location(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/locations/{}/json",
@@ -3182,7 +3196,9 @@ impl Inventory {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-unstable
      */
-    pub async fn deprecated_unstable_get_locations_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_locations_count(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/locations/count.json", None);
@@ -3210,7 +3226,7 @@ impl Inventory {
     pub async fn deprecated_unstable_get_locations_param_location_level(
         &self,
         location_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/locations/{}/inventory_levels.json",

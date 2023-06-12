@@ -31,7 +31,7 @@ impl GroupUsers {
         group_id: &str,
         count: &str,
         start_position: &str,
-    ) -> ClientResult<crate::types::UsersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::UsersResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -76,7 +76,7 @@ impl GroupUsers {
         account_id: &str,
         group_id: &str,
         body: &crate::types::UserInfoList,
-    ) -> ClientResult<crate::types::UsersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::UsersResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/users",
@@ -113,7 +113,7 @@ impl GroupUsers {
         account_id: &str,
         group_id: &str,
         body: &crate::types::UserInfoList,
-    ) -> ClientResult<crate::types::UsersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::UsersResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/users",

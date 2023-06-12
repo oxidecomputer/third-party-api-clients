@@ -26,7 +26,7 @@ impl TeamProfile {
     pub async fn get(
         &self,
         visibility: &str,
-    ) -> ClientResult<crate::types::TeamProfileGetSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::TeamProfileGetSuccessSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !visibility.is_empty() {
             query_args.push(("visibility".to_string(), visibility.to_string()));

@@ -18,7 +18,7 @@ impl ThreatInsights {
      */
     pub async fn get_current_configuration(
         &self,
-    ) -> ClientResult<crate::types::ThreatInsightConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::ThreatInsightConfiguration>> {
         let url = self.client.url("/api/v1/threats/configuration", None);
         self.client
             .get(
@@ -38,7 +38,7 @@ impl ThreatInsights {
     pub async fn update_configuration(
         &self,
         body: &crate::types::ThreatInsightConfiguration,
-    ) -> ClientResult<crate::types::ThreatInsightConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::ThreatInsightConfiguration>> {
         let url = self.client.url("/api/v1/threats/configuration", None);
         self.client
             .post(

@@ -33,7 +33,7 @@ impl SettingsInboundParse {
     pub async fn post_user_webhooks_parse_setting(
         &self,
         body: &crate::types::ParseSetting,
-    ) -> ClientResult<crate::types::ParseSetting> {
+    ) -> ClientResult<crate::Response<crate::types::ParseSetting>> {
         let url = self.client.url("/user/webhooks/parse/settings", None);
         self.client
             .post(
@@ -61,7 +61,7 @@ impl SettingsInboundParse {
     pub async fn get_user_webhooks_parse_settings_hostname(
         &self,
         hostname: &str,
-    ) -> ClientResult<crate::types::ParseSetting> {
+    ) -> ClientResult<crate::Response<crate::types::ParseSetting>> {
         let url = self.client.url(
             &format!(
                 "/user/webhooks/parse/settings/{}",
@@ -95,7 +95,7 @@ impl SettingsInboundParse {
     pub async fn delete_user_webhooks_parse_settings_hostname(
         &self,
         hostname: &str,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!(
                 "/user/webhooks/parse/settings/{}",
@@ -130,7 +130,7 @@ impl SettingsInboundParse {
         &self,
         hostname: &str,
         body: &crate::types::ParseSetting,
-    ) -> ClientResult<crate::types::ParseSetting> {
+    ) -> ClientResult<crate::Response<crate::types::ParseSetting>> {
         let url = self.client.url(
             &format!(
                 "/user/webhooks/parse/settings/{}",

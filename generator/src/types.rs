@@ -170,16 +170,20 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                             if !p.is_empty() && p != desc {
                                 a("/**");
                                 a(&p);
-                                a("*/");
+                                a(" */");
                             }
 
                             let te = ts.id_to_entry.get(tid).unwrap();
+
+                            // Assume that we are going to output a serde attribute
+                            let mut started_serde_attr = true;
 
                             // Render the serde string.
                             if rt == "String"
                                 || rt.starts_with("Vec<")
                                 || rt.starts_with("Option<")
                                 || rt.starts_with("HashMap<")
+                                || rt.starts_with("std::collections::HashMap<")
                             {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {
@@ -258,7 +262,9 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                     a(&format!(r#"skip_serializing_if = "{}::is_noop","#, rt));
                                 }
                             } else {
-                                a(r#"#[serde("#);
+                                // In only this case do we switch to not outputting the start of
+                                // a serde attribute
+                                started_serde_attr = false
                             }
 
                             if !prop.ends_with('_') {
@@ -281,12 +287,26 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 prop = format!("{}_", prop);
                             }
 
-                            // Close the serde string.
+                            // Before closing, ensure that we have actually opened a serde attribute,
+                            // otherwise print the full tag
                             if *name != prop {
-                                a(&format!(r#"rename = "{}")]"#, name));
+                                if !started_serde_attr {
+                                    a(r#"#[serde("#);
+                                    started_serde_attr = true;
+                                }
+
+                                a(&format!(r#"rename = "{}""#, name));
                             } else if rt == "Page" && prop == "page" || rt.ends_with("Page") {
-                                a(r#"default)]"#);
-                            } else {
+                                if !started_serde_attr {
+                                    a(r#"#[serde("#);
+                                    started_serde_attr = true;
+                                }
+
+                                a(r#"default,"#);
+                            }
+
+                            // Only output the closing if output has actually started
+                            if started_serde_attr {
                                 a(r#")]"#);
                             }
 
@@ -386,7 +406,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
             if !p.is_empty() && p != description {
                 a("/**");
                 a(&p);
-                a("*/");
+                a(" */");
             }
 
             a(&format!("{}({}),", fn_name, name));
@@ -552,7 +572,7 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
             if !p.is_empty() && p != description {
                 a("/**");
                 a(&p);
-                a("*/");
+                a(" */");
             }
 
             a("#[serde(flatten)]");

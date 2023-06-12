@@ -21,7 +21,7 @@ impl Returns {
      * * `id: i64` -- Unique id of the channel.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, id: i64) -> ClientResult<crate::types::ReturnOrder> {
+    pub async fn get(&self, id: i64) -> ClientResult<crate::Response<crate::types::ReturnOrder>> {
         let url = self.client.url(
             &format!(
                 "/return/{}",
@@ -53,7 +53,7 @@ impl Returns {
         &self,
         id: i64,
         body: &crate::types::ReturnsCreateReturn,
-    ) -> ClientResult<crate::types::ReturnOrder> {
+    ) -> ClientResult<crate::Response<crate::types::ReturnOrder>> {
         let url = self.client.url(
             &format!(
                 "/return/{}",
@@ -106,7 +106,7 @@ impl Returns {
         tracking_numbers: &[String],
         original_shipment_ids: &[String],
         inventory_ids: &[String],
-    ) -> ClientResult<Vec<crate::types::ReturnOrder>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ReturnOrder>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -181,7 +181,7 @@ impl Returns {
         tracking_numbers: &[String],
         original_shipment_ids: &[String],
         inventory_ids: &[String],
-    ) -> ClientResult<Vec<crate::types::ReturnOrder>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ReturnOrder>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -243,7 +243,7 @@ impl Returns {
     pub async fn post(
         &self,
         body: &crate::types::ReturnsCreateReturn,
-    ) -> ClientResult<crate::types::ReturnOrder> {
+    ) -> ClientResult<crate::Response<crate::types::ReturnOrder>> {
         let url = self.client.url("/return", None);
         self.client
             .post(
@@ -265,7 +265,10 @@ impl Returns {
      * * `id: i64` -- Unique id of the channel.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn post_cancel(&self, id: i64) -> ClientResult<crate::types::ReturnOrder> {
+    pub async fn post_cancel(
+        &self,
+        id: i64,
+    ) -> ClientResult<crate::Response<crate::types::ReturnOrder>> {
         let url = self.client.url(
             &format!(
                 "/return/{}/cancel",
@@ -296,7 +299,7 @@ impl Returns {
     pub async fn get_status_history(
         &self,
         id: i64,
-    ) -> ClientResult<crate::types::ReturnOrderStatusHistory> {
+    ) -> ClientResult<crate::Response<crate::types::ReturnOrderStatusHistory>> {
         let url = self.client.url(
             &format!(
                 "/return/{}/statushistory",

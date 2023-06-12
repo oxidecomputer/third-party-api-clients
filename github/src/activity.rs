@@ -29,7 +29,7 @@ impl Activity {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -60,7 +60,9 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events>
      */
-    pub async fn list_all_public_events(&self) -> ClientResult<Vec<crate::types::Event>> {
+    pub async fn list_all_public_events(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url("/events", None);
         self.client
             .get_all_pages(
@@ -91,7 +93,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#get-feeds>
      */
-    pub async fn get_feeds(&self) -> ClientResult<crate::types::Feed> {
+    pub async fn get_feeds(&self) -> ClientResult<crate::Response<crate::types::Feed>> {
         let url = self.client.url("/feeds", None);
         self.client
             .get(
@@ -125,7 +127,7 @@ impl Activity {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -168,7 +170,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/networks/{}/{}/events",
@@ -213,7 +215,7 @@ impl Activity {
         before: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Thread>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Thread>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if all {
             query_args.push(("all".to_string(), all.to_string()));
@@ -262,7 +264,7 @@ impl Activity {
         participating: bool,
         since: Option<chrono::DateTime<chrono::Utc>>,
         before: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> ClientResult<Vec<crate::types::Thread>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Thread>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if all {
             query_args.push(("all".to_string(), all.to_string()));
@@ -300,7 +302,7 @@ impl Activity {
     pub async fn mark_notifications_as_read(
         &self,
         body: &crate::types::ActivityMarkNotificationsAsReadRequest,
-    ) -> ClientResult<crate::types::Error> {
+    ) -> ClientResult<crate::Response<crate::types::Error>> {
         let url = self.client.url("/notifications", None);
         self.client
             .put(
@@ -325,7 +327,10 @@ impl Activity {
      *
      * * `thread_id: i64` -- thread_id parameter.
      */
-    pub async fn get_thread(&self, thread_id: i64) -> ClientResult<crate::types::Thread> {
+    pub async fn get_thread(
+        &self,
+        thread_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Thread>> {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}",
@@ -356,7 +361,7 @@ impl Activity {
      *
      * * `thread_id: i64` -- thread_id parameter.
      */
-    pub async fn mark_thread_as_read(&self, thread_id: i64) -> ClientResult<()> {
+    pub async fn mark_thread_as_read(&self, thread_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}",
@@ -392,7 +397,7 @@ impl Activity {
     pub async fn get_thread_subscription_for_authenticated_user(
         &self,
         thread_id: i64,
-    ) -> ClientResult<crate::types::ThreadSubscription> {
+    ) -> ClientResult<crate::Response<crate::types::ThreadSubscription>> {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}/subscription",
@@ -431,7 +436,7 @@ impl Activity {
         &self,
         thread_id: i64,
         body: &crate::types::ActivitySetThreadSubscriptionRequest,
-    ) -> ClientResult<crate::types::ThreadSubscription> {
+    ) -> ClientResult<crate::Response<crate::types::ThreadSubscription>> {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}/subscription",
@@ -462,7 +467,10 @@ impl Activity {
      *
      * * `thread_id: i64` -- thread_id parameter.
      */
-    pub async fn delete_thread_subscription(&self, thread_id: i64) -> ClientResult<()> {
+    pub async fn delete_thread_subscription(
+        &self,
+        thread_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}/subscription",
@@ -500,7 +508,7 @@ impl Activity {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -541,7 +549,7 @@ impl Activity {
     pub async fn list_all_public_org_events(
         &self,
         org: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/events",
@@ -581,7 +589,7 @@ impl Activity {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -624,7 +632,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/events",
@@ -673,7 +681,7 @@ impl Activity {
         before: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Thread>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Thread>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if all {
             query_args.push(("all".to_string(), all.to_string()));
@@ -732,7 +740,7 @@ impl Activity {
         participating: bool,
         since: Option<chrono::DateTime<chrono::Utc>>,
         before: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> ClientResult<Vec<crate::types::Thread>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Thread>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if all {
             query_args.push(("all".to_string(), all.to_string()));
@@ -785,7 +793,7 @@ impl Activity {
         owner: &str,
         repo: &str,
         body: &crate::types::ActivityMarkRepoNotificationsAsReadRequest,
-    ) -> ClientResult<crate::types::PullsUpdateBranchResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PullsUpdateBranchResponse>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/notifications",
@@ -828,7 +836,7 @@ impl Activity {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActivityListStargazersRepoResponseAnyOf> {
+    ) -> ClientResult<crate::Response<crate::types::ActivityListStargazersRepoResponseAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -878,7 +886,7 @@ impl Activity {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -921,7 +929,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscribers",
@@ -958,7 +966,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::RepositorySubscription> {
+    ) -> ClientResult<crate::Response<crate::types::RepositorySubscription>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscription",
@@ -996,7 +1004,7 @@ impl Activity {
         owner: &str,
         repo: &str,
         body: &crate::types::ActivitySetRepoSubscriptionRequest,
-    ) -> ClientResult<crate::types::RepositorySubscription> {
+    ) -> ClientResult<crate::Response<crate::types::RepositorySubscription>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscription",
@@ -1029,7 +1037,11 @@ impl Activity {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn delete_repo_subscription(&self, owner: &str, repo: &str) -> ClientResult<()> {
+    pub async fn delete_repo_subscription(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscription",
@@ -1074,7 +1086,7 @@ impl Activity {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Repository>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Repository>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1117,7 +1129,7 @@ impl Activity {
         &self,
         sort: crate::types::Sort,
         direction: crate::types::Order,
-    ) -> ClientResult<Vec<crate::types::Repository>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Repository>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1155,7 +1167,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/starred/{}/{}",
@@ -1192,7 +1204,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/starred/{}/{}",
@@ -1229,7 +1241,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/starred/{}/{}",
@@ -1266,7 +1278,7 @@ impl Activity {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MinimalRepository>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1301,7 +1313,7 @@ impl Activity {
      */
     pub async fn list_all_watched_repos_for_authenticated_user(
         &self,
-    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MinimalRepository>>> {
         let url = self.client.url("/user/subscriptions", None);
         self.client
             .get_all_pages(
@@ -1333,7 +1345,7 @@ impl Activity {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1374,7 +1386,7 @@ impl Activity {
     pub async fn list_all_events_for_authenticated_user(
         &self,
         username: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/events",
@@ -1414,7 +1426,7 @@ impl Activity {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1457,7 +1469,7 @@ impl Activity {
         &self,
         username: &str,
         org: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/events/orgs/{}",
@@ -1496,7 +1508,7 @@ impl Activity {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1537,7 +1549,7 @@ impl Activity {
     pub async fn list_all_public_events_for_user(
         &self,
         username: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/events/public",
@@ -1575,7 +1587,7 @@ impl Activity {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1616,7 +1628,7 @@ impl Activity {
     pub async fn list_all_received_events_for_user(
         &self,
         username: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/received_events",
@@ -1654,7 +1666,7 @@ impl Activity {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1695,7 +1707,7 @@ impl Activity {
     pub async fn list_all_received_public_events_for_user(
         &self,
         username: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/received_events/public",
@@ -1741,7 +1753,8 @@ impl Activity {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActivityListReposStarredByUserResponseAnyOf> {
+    ) -> ClientResult<crate::Response<crate::types::ActivityListReposStarredByUserResponseAnyOf>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1794,7 +1807,7 @@ impl Activity {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MinimalRepository>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1835,7 +1848,7 @@ impl Activity {
     pub async fn list_all_repos_watched_by_user(
         &self,
         username: &str,
-    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MinimalRepository>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/subscriptions",

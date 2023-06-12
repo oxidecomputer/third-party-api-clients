@@ -21,7 +21,7 @@ impl Garnishments {
     pub async fn get_employee(
         &self,
         employee_id: &str,
-    ) -> ClientResult<Vec<crate::types::Garnishment>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Garnishment>>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/garnishments",
@@ -51,7 +51,7 @@ impl Garnishments {
     pub async fn get_all_employee(
         &self,
         employee_id: &str,
-    ) -> ClientResult<Vec<crate::types::Garnishment>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Garnishment>>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/garnishments",
@@ -80,7 +80,7 @@ impl Garnishments {
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeGarnishmentsRequest,
-    ) -> ClientResult<crate::types::Garnishment> {
+    ) -> ClientResult<crate::Response<crate::types::Garnishment>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/garnishments",
@@ -105,7 +105,10 @@ impl Garnishments {
      *
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
-    pub async fn get(&self, garnishment_id: &str) -> ClientResult<crate::types::Garnishment> {
+    pub async fn get(
+        &self,
+        garnishment_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Garnishment>> {
         let url = self.client.url(
             &format!(
                 "/v1/garnishments/{}",
@@ -134,7 +137,7 @@ impl Garnishments {
         &self,
         garnishment_id: &str,
         body: &crate::types::PutGarnishmentRequest,
-    ) -> ClientResult<crate::types::Garnishment> {
+    ) -> ClientResult<crate::Response<crate::types::Garnishment>> {
         let url = self.client.url(
             &format!(
                 "/v1/garnishments/{}",

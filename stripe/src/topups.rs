@@ -34,7 +34,7 @@ impl Topups {
         limit: i64,
         starting_after: &str,
         status: crate::types::GetTopupsStatus,
-    ) -> ClientResult<Vec<crate::types::Topup>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Topup>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -50,7 +50,7 @@ impl Topups {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/topups?{}", query_), None);
-        let resp: crate::types::TopupList = self
+        let resp: crate::Response<crate::types::TopupList> = self
             .client
             .get(
                 &url,
@@ -62,7 +62,11 @@ impl Topups {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/topups` endpoint.
@@ -76,14 +80,18 @@ impl Topups {
         _amount: &str,
         _created: &str,
         status: crate::types::GetTopupsStatus,
-    ) -> ClientResult<Vec<crate::types::Topup>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Topup>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.to_string().is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/topups?{}", query_), None);
-        let mut resp: crate::types::TopupList = self
+        let crate::Response::<crate::types::TopupList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -94,8 +102,8 @@ impl Topups {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -111,7 +119,11 @@ impl Topups {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::TopupList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -122,7 +134,11 @@ impl Topups {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::TopupList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -134,20 +150,20 @@ impl Topups {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/topups` endpoint.
      *
      * <p>Top up the balance of an account</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Topup> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Topup>> {
         let url = self.client.url("/v1/topups", None);
         self.client
             .post(
@@ -169,7 +185,7 @@ impl Topups {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `topup: &str` -- The account's country.
      */
-    pub async fn get(&self, topup: &str) -> ClientResult<crate::types::Topup> {
+    pub async fn get(&self, topup: &str) -> ClientResult<crate::Response<crate::types::Topup>> {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}",
@@ -196,7 +212,10 @@ impl Topups {
      *
      * * `topup: &str` -- The account's country.
      */
-    pub async fn post_topups(&self, topup: &str) -> ClientResult<crate::types::Topup> {
+    pub async fn post_topups(
+        &self,
+        topup: &str,
+    ) -> ClientResult<crate::Response<crate::types::Topup>> {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}",
@@ -223,7 +242,10 @@ impl Topups {
      *
      * * `topup: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, topup: &str) -> ClientResult<crate::types::Topup> {
+    pub async fn post_cancel(
+        &self,
+        topup: &str,
+    ) -> ClientResult<crate::Response<crate::types::Topup>> {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}/cancel",

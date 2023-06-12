@@ -45,7 +45,7 @@ impl TimeOffRequests {
         company_id: &str,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::TimeOffRequest>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TimeOffRequest>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -103,7 +103,7 @@ impl TimeOffRequests {
         company_id: &str,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::TimeOffRequest>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TimeOffRequest>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -141,7 +141,7 @@ impl TimeOffRequests {
         &self,
         company_id: &str,
         time_off_request_id: &str,
-    ) -> ClientResult<crate::types::TimeOffRequest> {
+    ) -> ClientResult<crate::Response<crate::types::TimeOffRequest>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/time_off_requests/{}",

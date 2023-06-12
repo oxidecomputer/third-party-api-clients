@@ -29,7 +29,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-sendgrid-api = "0.4.0"
+sendgrid-api = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -37,7 +37,7 @@ sendgrid-api = "0.4.0"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use sendgrid_api::Client;
 
 let sendgrid = Client::new(
@@ -52,7 +52,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use sendgrid_api::Client;
 
 let sendgrid = Client::new_from_env();

@@ -22,7 +22,9 @@ impl Businesses {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resources_busine(&self) -> ClientResult<crate::types::Business> {
+    pub async fn get_resources_busine(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::Business>> {
         let url = self.client.url("/business", None);
         self.client
             .get(
@@ -47,7 +49,7 @@ impl Businesses {
      */
     pub async fn get_resources_business_current(
         &self,
-    ) -> ClientResult<crate::types::BusinessCurrentStatus> {
+    ) -> ClientResult<crate::Response<crate::types::BusinessCurrentStatus>> {
         let url = self.client.url("/business/balance", None);
         self.client
             .get(

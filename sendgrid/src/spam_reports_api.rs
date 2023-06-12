@@ -32,7 +32,7 @@ impl SpamReportsApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-    ) -> ClientResult<Vec<crate::types::SpamReportsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SpamReportsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -74,7 +74,7 @@ impl SpamReportsApi {
         start_time: i64,
         end_time: i64,
         offset: i64,
-    ) -> ClientResult<Vec<crate::types::SpamReportsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SpamReportsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -120,7 +120,7 @@ impl SpamReportsApi {
     pub async fn delete_suppression_spam_reports(
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url("/suppression/spam_reports", None);
         self.client
             .delete(
@@ -146,7 +146,7 @@ impl SpamReportsApi {
     pub async fn get_suppression_spam_reports_email(
         &self,
         email: &str,
-    ) -> ClientResult<Vec<crate::types::SpamReportsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SpamReportsResponse>>> {
         let url = self.client.url(
             &format!(
                 "/suppression/spam_reports/{}",
@@ -176,7 +176,7 @@ impl SpamReportsApi {
     pub async fn get_all_suppression_spam_reports_email(
         &self,
         email: &str,
-    ) -> ClientResult<Vec<crate::types::SpamReportsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SpamReportsResponse>>> {
         let url = self.client.url(
             &format!(
                 "/suppression/spam_reports/{}",
@@ -210,7 +210,7 @@ impl SpamReportsApi {
     pub async fn delete_suppression_spam_reports_email(
         &self,
         email: &str,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!(
                 "/suppression/spam_reports/{}",

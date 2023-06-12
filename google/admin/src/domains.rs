@@ -20,7 +20,10 @@ impl Domains {
      *
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn list(&self, customer: &str) -> ClientResult<crate::types::Domains2> {
+    pub async fn list(
+        &self,
+        customer: &str,
+    ) -> ClientResult<crate::Response<crate::types::Domains2>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains",
@@ -51,7 +54,7 @@ impl Domains {
         &self,
         customer: &str,
         body: &crate::types::Domains,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains",
@@ -83,7 +86,7 @@ impl Domains {
         &self,
         customer: &str,
         domain_name: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains/{}",
@@ -112,7 +115,11 @@ impl Domains {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `domain_name: &str` -- Name of domain to be deleted.
      */
-    pub async fn delete(&self, customer: &str, domain_name: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        customer: &str,
+        domain_name: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains/{}",

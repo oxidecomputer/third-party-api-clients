@@ -40,7 +40,7 @@ impl SubscriptionSchedules {
         _released_at: &str,
         scheduled: bool,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::SubscriptionSchedule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionSchedule>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -61,7 +61,7 @@ impl SubscriptionSchedules {
         let url = self
             .client
             .url(&format!("/v1/subscription_schedules?{}", query_), None);
-        let resp: crate::types::GetSubscriptionSchedulesResponse = self
+        let resp: crate::Response<crate::types::GetSubscriptionSchedulesResponse> = self
             .client
             .get(
                 &url,
@@ -73,7 +73,11 @@ impl SubscriptionSchedules {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/subscription_schedules` endpoint.
@@ -90,7 +94,7 @@ impl SubscriptionSchedules {
         customer: &str,
         _released_at: &str,
         scheduled: bool,
-    ) -> ClientResult<Vec<crate::types::SubscriptionSchedule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionSchedule>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -102,7 +106,11 @@ impl SubscriptionSchedules {
         let url = self
             .client
             .url(&format!("/v1/subscription_schedules?{}", query_), None);
-        let mut resp: crate::types::GetSubscriptionSchedulesResponse = self
+        let crate::Response::<crate::types::GetSubscriptionSchedulesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -113,8 +121,8 @@ impl SubscriptionSchedules {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -130,7 +138,11 @@ impl SubscriptionSchedules {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetSubscriptionSchedulesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -141,7 +153,11 @@ impl SubscriptionSchedules {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetSubscriptionSchedulesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -153,20 +169,20 @@ impl SubscriptionSchedules {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/subscription_schedules` endpoint.
      *
      * <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::SubscriptionSchedule> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SubscriptionSchedule>> {
         let url = self.client.url("/v1/subscription_schedules", None);
         self.client
             .post(
@@ -191,7 +207,7 @@ impl SubscriptionSchedules {
     pub async fn get_schedule(
         &self,
         schedule: &str,
-    ) -> ClientResult<crate::types::SubscriptionSchedule> {
+    ) -> ClientResult<crate::Response<crate::types::SubscriptionSchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}",
@@ -221,7 +237,7 @@ impl SubscriptionSchedules {
     pub async fn post_schedule(
         &self,
         schedule: &str,
-    ) -> ClientResult<crate::types::SubscriptionSchedule> {
+    ) -> ClientResult<crate::Response<crate::types::SubscriptionSchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}",
@@ -251,7 +267,7 @@ impl SubscriptionSchedules {
     pub async fn post_schedule_cancel(
         &self,
         schedule: &str,
-    ) -> ClientResult<crate::types::SubscriptionSchedule> {
+    ) -> ClientResult<crate::Response<crate::types::SubscriptionSchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}/cancel",
@@ -281,7 +297,7 @@ impl SubscriptionSchedules {
     pub async fn post_schedule_release(
         &self,
         schedule: &str,
-    ) -> ClientResult<crate::types::SubscriptionSchedule> {
+    ) -> ClientResult<crate::Response<crate::types::SubscriptionSchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}/release",

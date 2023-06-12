@@ -23,7 +23,11 @@ impl TabsBlob {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str, envelope_id: &str) -> ClientResult<()> {
+    pub async fn get(
+        &self,
+        account_id: &str,
+        envelope_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/tabs_blob",
@@ -54,7 +58,11 @@ impl TabsBlob {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn put(&self, account_id: &str, envelope_id: &str) -> ClientResult<()> {
+    pub async fn put(
+        &self,
+        account_id: &str,
+        envelope_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/tabs_blob",

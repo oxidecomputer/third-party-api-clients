@@ -26,7 +26,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
-    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::TransactionalTemplateVersionOutputAllOf>> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions",
@@ -59,7 +59,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::TransactionalTemplateVersionOutputAllOf>> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}/activate",
@@ -93,7 +93,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::TransactionalTemplateVersionOutputAllOf>> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",
@@ -127,7 +127,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",
@@ -162,7 +162,7 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
-    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::TransactionalTemplateVersionOutputAllOf>> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",

@@ -29,7 +29,7 @@ impl EnvelopeDocumentVisibility {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> ClientResult<crate::types::DocumentVisibilityList> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentVisibilityList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
@@ -70,7 +70,7 @@ impl EnvelopeDocumentVisibility {
         envelope_id: &str,
         recipient_id: &str,
         body: &crate::types::DocumentVisibilityList,
-    ) -> ClientResult<crate::types::DocumentVisibilityList> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentVisibilityList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",

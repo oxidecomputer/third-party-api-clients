@@ -18,7 +18,9 @@ impl IpPools {
      *
      * **This endpoint allows you to get all of your IP pools.**
      */
-    pub async fn get_ips_pools(&self) -> ClientResult<Vec<crate::types::IpPoolsPoolResp>> {
+    pub async fn get_ips_pools(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::IpPoolsPoolResp>>> {
         let url = self.client.url("/ips/pools", None);
         self.client
             .get(
@@ -39,7 +41,9 @@ impl IpPools {
      *
      * **This endpoint allows you to get all of your IP pools.**
      */
-    pub async fn get_all_ips_pools(&self) -> ClientResult<Vec<crate::types::IpPoolsPoolResp>> {
+    pub async fn get_all_ips_pools(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::IpPoolsPoolResp>>> {
         let url = self.client.url("/ips/pools", None);
         self.client
             .get_all_pages(
@@ -69,7 +73,7 @@ impl IpPools {
     pub async fn post_ips_pool(
         &self,
         body: &crate::types::IpPool,
-    ) -> ClientResult<crate::types::IpPoolsPoolResp> {
+    ) -> ClientResult<crate::Response<crate::types::IpPoolsPoolResp>> {
         let url = self.client.url("/ips/pools", None);
         self.client
             .post(
@@ -104,7 +108,7 @@ impl IpPools {
         &self,
         pool_name: &str,
         body: &crate::types::PostIpsWarmupRequest,
-    ) -> ClientResult<crate::types::GetIpsAssignedResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetIpsAssignedResponse>> {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}/ips",
@@ -132,7 +136,7 @@ impl IpPools {
     pub async fn get_ips_pools_pool_name(
         &self,
         pool_name: &str,
-    ) -> ClientResult<crate::types::GetIpsPoolsPoolNameResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetIpsPoolsPoolNameResponse>> {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}",
@@ -161,7 +165,7 @@ impl IpPools {
         &self,
         pool_name: &str,
         body: &crate::types::PutIpsPoolsPoolNameRequest,
-    ) -> ClientResult<crate::types::IpPoolsPoolResp> {
+    ) -> ClientResult<crate::Response<crate::types::IpPoolsPoolResp>> {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}",
@@ -189,7 +193,7 @@ impl IpPools {
     pub async fn delete_ips_pools_pool_name(
         &self,
         pool_name: &str,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}",
@@ -218,7 +222,7 @@ impl IpPools {
         &self,
         pool_name: &str,
         ip: &str,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}/ips/{}",

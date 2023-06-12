@@ -29,7 +29,7 @@ impl Drives {
         page_token: &str,
         q: &str,
         use_domain_admin_access: bool,
-    ) -> ClientResult<Vec<crate::types::Drive>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Drive>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("pageSize".to_string(), page_size.to_string()));
@@ -48,7 +48,7 @@ impl Drives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/drives?{}", query_), None);
-        let resp: crate::types::DriveList = self
+        let resp: crate::Response<crate::types::DriveList> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl Drives {
             .await?;
 
         // Return our response data.
-        Ok(resp.drives.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.drives.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/drives` endpoint.
@@ -73,7 +77,7 @@ impl Drives {
         &self,
         q: &str,
         use_domain_admin_access: bool,
-    ) -> ClientResult<Vec<crate::types::Drive>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Drive>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -86,7 +90,11 @@ impl Drives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/drives?{}", query_), None);
-        let mut resp: crate::types::DriveList = self
+        let crate::Response::<crate::types::DriveList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -97,13 +105,17 @@ impl Drives {
             )
             .await?;
 
-        let mut drives = resp.drives;
-        let mut page = resp.next_page_token;
+        let mut drives = body.drives;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::DriveList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -114,7 +126,11 @@ impl Drives {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::DriveList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -126,17 +142,17 @@ impl Drives {
                     .await?;
             }
 
-            drives.append(&mut resp.drives);
+            drives.append(&mut body.drives);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(drives)
+        Ok(crate::Response::new(status, headers, drives))
     }
     /**
      * This function performs a `POST` to the `/drives` endpoint.
@@ -151,7 +167,7 @@ impl Drives {
         &self,
         request_id: &str,
         body: &crate::types::Drive,
-    ) -> ClientResult<crate::types::Drive> {
+    ) -> ClientResult<crate::Response<crate::types::Drive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !request_id.is_empty() {
             query_args.push(("requestId".to_string(), request_id.to_string()));
@@ -182,7 +198,7 @@ impl Drives {
         &self,
         drive_id: &str,
         use_domain_admin_access: bool,
-    ) -> ClientResult<crate::types::Drive> {
+    ) -> ClientResult<crate::Response<crate::types::Drive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((
@@ -218,7 +234,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn delete(&self, drive_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, drive_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/drives/{}",
@@ -251,7 +267,7 @@ impl Drives {
         drive_id: &str,
         use_domain_admin_access: bool,
         body: &crate::types::Drive,
-    ) -> ClientResult<crate::types::Drive> {
+    ) -> ClientResult<crate::Response<crate::types::Drive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((
@@ -287,7 +303,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn hide(&self, drive_id: &str) -> ClientResult<crate::types::Drive> {
+    pub async fn hide(&self, drive_id: &str) -> ClientResult<crate::Response<crate::types::Drive>> {
         let url = self.client.url(
             &format!(
                 "/drives/{}/hide",
@@ -314,7 +330,10 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn unhide(&self, drive_id: &str) -> ClientResult<crate::types::Drive> {
+    pub async fn unhide(
+        &self,
+        drive_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Drive>> {
         let url = self.client.url(
             &format!(
                 "/drives/{}/unhide",

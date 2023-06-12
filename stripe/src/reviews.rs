@@ -30,7 +30,7 @@ impl Reviews {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::Review>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Review>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -43,7 +43,7 @@ impl Reviews {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/reviews?{}", query_), None);
-        let resp: crate::types::GetReviewsResponse = self
+        let resp: crate::Response<crate::types::GetReviewsResponse> = self
             .client
             .get(
                 &url,
@@ -55,7 +55,11 @@ impl Reviews {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/reviews` endpoint.
@@ -64,9 +68,16 @@ impl Reviews {
      *
      * <p>Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true</code>. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
      */
-    pub async fn get_all(&self, _created: &str) -> ClientResult<Vec<crate::types::Review>> {
+    pub async fn get_all(
+        &self,
+        _created: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Review>>> {
         let url = self.client.url("/v1/reviews", None);
-        let mut resp: crate::types::GetReviewsResponse = self
+        let crate::Response::<crate::types::GetReviewsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -77,8 +88,8 @@ impl Reviews {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -94,7 +105,11 @@ impl Reviews {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetReviewsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -105,7 +120,11 @@ impl Reviews {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetReviewsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -117,13 +136,13 @@ impl Reviews {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/reviews/{review}` endpoint.
@@ -135,7 +154,7 @@ impl Reviews {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `review: &str` -- The account's country.
      */
-    pub async fn get(&self, review: &str) -> ClientResult<crate::types::Review> {
+    pub async fn get(&self, review: &str) -> ClientResult<crate::Response<crate::types::Review>> {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}",
@@ -162,7 +181,10 @@ impl Reviews {
      *
      * * `review: &str` -- The account's country.
      */
-    pub async fn post_approve(&self, review: &str) -> ClientResult<crate::types::Review> {
+    pub async fn post_approve(
+        &self,
+        review: &str,
+    ) -> ClientResult<crate::Response<crate::types::Review>> {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}/approve",

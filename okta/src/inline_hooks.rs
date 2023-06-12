@@ -20,7 +20,10 @@ impl InlineHooks {
      *
      * * `type_: &str`
      */
-    pub async fn list(&self, type_: &str) -> ClientResult<Vec<crate::types::InlineHook>> {
+    pub async fn list(
+        &self,
+        type_: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::InlineHook>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -46,7 +49,10 @@ impl InlineHooks {
      *
      * Success
      */
-    pub async fn list_all(&self, type_: &str) -> ClientResult<Vec<crate::types::InlineHook>> {
+    pub async fn list_all(
+        &self,
+        type_: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::InlineHook>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -73,7 +79,7 @@ impl InlineHooks {
     pub async fn create(
         &self,
         body: &crate::types::InlineHook,
-    ) -> ClientResult<crate::types::InlineHook> {
+    ) -> ClientResult<crate::Response<crate::types::InlineHook>> {
         let url = self.client.url("/api/v1/inlineHooks", None);
         self.client
             .post(
@@ -94,7 +100,10 @@ impl InlineHooks {
      *
      * * `inline_hook_id: &str`
      */
-    pub async fn get(&self, inline_hook_id: &str) -> ClientResult<crate::types::InlineHook> {
+    pub async fn get(
+        &self,
+        inline_hook_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::InlineHook>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/inlineHooks/{}",
@@ -125,7 +134,7 @@ impl InlineHooks {
         &self,
         inline_hook_id: &str,
         body: &crate::types::InlineHook,
-    ) -> ClientResult<crate::types::InlineHook> {
+    ) -> ClientResult<crate::Response<crate::types::InlineHook>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/inlineHooks/{}",
@@ -152,7 +161,7 @@ impl InlineHooks {
      *
      * * `inline_hook_id: &str`
      */
-    pub async fn delete(&self, inline_hook_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, inline_hook_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/inlineHooks/{}",
@@ -183,7 +192,7 @@ impl InlineHooks {
         &self,
         inline_hook_id: &str,
         body: &crate::types::Links,
-    ) -> ClientResult<crate::types::InlineHookResponse> {
+    ) -> ClientResult<crate::Response<crate::types::InlineHookResponse>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/inlineHooks/{}/execute",
@@ -210,7 +219,10 @@ impl InlineHooks {
      *
      * * `inline_hook_id: &str`
      */
-    pub async fn activate(&self, inline_hook_id: &str) -> ClientResult<crate::types::InlineHook> {
+    pub async fn activate(
+        &self,
+        inline_hook_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::InlineHook>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/inlineHooks/{}/lifecycle/activate",
@@ -237,7 +249,10 @@ impl InlineHooks {
      *
      * * `inline_hook_id: &str`
      */
-    pub async fn deactivate(&self, inline_hook_id: &str) -> ClientResult<crate::types::InlineHook> {
+    pub async fn deactivate(
+        &self,
+        inline_hook_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::InlineHook>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/inlineHooks/{}/lifecycle/deactivate",

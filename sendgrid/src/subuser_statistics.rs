@@ -37,7 +37,7 @@ impl SubuserStatistics {
         sort_by_direction: crate::types::SortByDirection,
         limit: i64,
         offset: i64,
-    ) -> ClientResult<crate::types::SubuserStatsData> {
+    ) -> ClientResult<crate::Response<crate::types::SubuserStatsData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date.is_empty() {
             query_args.push(("date".to_string(), date.to_string()));
@@ -103,7 +103,7 @@ impl SubuserStatistics {
         sort_by_direction: crate::types::SortByDirection,
         limit: i64,
         offset: i64,
-    ) -> ClientResult<crate::types::SubuserStatsData> {
+    ) -> ClientResult<crate::Response<crate::types::SubuserStatsData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date.is_empty() {
             query_args.push(("date".to_string(), date.to_string()));
@@ -166,7 +166,7 @@ impl SubuserStatistics {
         offset: i64,
         aggregated_by: &str,
         sort_by_metric: &str,
-    ) -> ClientResult<crate::types::CategoryStats> {
+    ) -> ClientResult<crate::Response<crate::types::CategoryStats>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -232,7 +232,7 @@ impl SubuserStatistics {
         subusers: &str,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<crate::types::CategoryStats> {
+    ) -> ClientResult<crate::Response<crate::types::CategoryStats>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));

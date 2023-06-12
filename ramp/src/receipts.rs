@@ -35,7 +35,7 @@ impl Receipts {
         created_before: Option<chrono::DateTime<chrono::Utc>>,
         start: &str,
         page_size: f64,
-    ) -> ClientResult<Vec<crate::types::Receipt>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Receipt>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = created_after {
             query_args.push(("created_after".to_string(), date.to_rfc3339()));
@@ -57,7 +57,7 @@ impl Receipts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/receipts?{}", query_), None);
-        let resp: crate::types::GetReceiptsResponse = self
+        let resp: crate::Response<crate::types::GetReceiptsResponse> = self
             .client
             .get(
                 &url,
@@ -69,7 +69,11 @@ impl Receipts {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * List receipts.
@@ -86,7 +90,7 @@ impl Receipts {
         to_date: Option<chrono::DateTime<chrono::Utc>>,
         created_after: Option<chrono::DateTime<chrono::Utc>>,
         created_before: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> ClientResult<Vec<crate::types::Receipt>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Receipt>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = created_after {
             query_args.push(("created_after".to_string(), date.to_rfc3339()));
@@ -102,7 +106,11 @@ impl Receipts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/receipts?{}", query_), None);
-        let resp: crate::types::GetReceiptsResponse = self
+        let crate::Response::<crate::types::GetReceiptsResponse> {
+            mut status,
+            mut headers,
+            body,
+        } = self
             .client
             .get(
                 &url,
@@ -113,8 +121,8 @@ impl Receipts {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut page = resp.page.next.to_string();
+        let mut data = body.data;
+        let mut page = body.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -130,10 +138,12 @@ impl Receipts {
                 .await
             {
                 Ok(mut resp) => {
-                    data.append(&mut resp.data);
+                    data.append(&mut resp.body.data);
+                    status = resp.status;
+                    headers = resp.headers;
 
-                    page = if resp.page.next != page {
-                        resp.page.next.to_string()
+                    page = if body.page.next != page {
+                        body.page.next.to_string()
                     } else {
                         "".to_string()
                     };
@@ -149,7 +159,7 @@ impl Receipts {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(crate::Response::new(status, headers, data))
     }
     /**
      * Get details for one receipt.
@@ -158,7 +168,7 @@ impl Receipts {
      *
      *
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Receipt> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Receipt>> {
         let url = self.client.url(
             &format!("/receipts/{}", crate::progenitor_support::encode_path(id),),
             None,

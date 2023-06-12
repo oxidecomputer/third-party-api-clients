@@ -30,7 +30,7 @@ impl Categories {
         limit: i64,
         category: &str,
         offset: i64,
-    ) -> ClientResult<Vec<crate::types::GetCategoriesResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetCategoriesResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !category.is_empty() {
             query_args.push(("category".to_string(), category.to_string()));
@@ -66,7 +66,7 @@ impl Categories {
         &self,
         category: &str,
         offset: i64,
-    ) -> ClientResult<Vec<crate::types::GetCategoriesResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetCategoriesResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !category.is_empty() {
             query_args.push(("category".to_string(), category.to_string()));
@@ -115,7 +115,7 @@ impl Categories {
         limit: i64,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-    ) -> ClientResult<crate::types::CategoryStats> {
+    ) -> ClientResult<crate::Response<crate::types::CategoryStats>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -182,7 +182,7 @@ impl Categories {
         limit: i64,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-    ) -> ClientResult<Vec<crate::types::CategoryStats>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CategoryStats>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -234,7 +234,7 @@ impl Categories {
         categories: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-    ) -> ClientResult<Vec<crate::types::CategoryStats>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CategoryStats>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));

@@ -30,7 +30,7 @@ impl Migration {
         users: &str,
         team_id: &str,
         to_old: bool,
-    ) -> ClientResult<crate::types::MigrationExchangeSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::MigrationExchangeSuccessSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !team_id.is_empty() {
             query_args.push(("team_id".to_string(), team_id.to_string()));

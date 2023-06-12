@@ -27,7 +27,7 @@ impl Policies {
         type_: &str,
         status: &str,
         expand: &str,
-    ) -> ClientResult<Vec<crate::types::Policy>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Policy>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -64,7 +64,7 @@ impl Policies {
         type_: &str,
         status: &str,
         expand: &str,
-    ) -> ClientResult<Vec<crate::types::Policy>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Policy>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -102,7 +102,7 @@ impl Policies {
         &self,
         activate: bool,
         body: &crate::types::Policy,
-    ) -> ClientResult<crate::types::Policy> {
+    ) -> ClientResult<crate::Response<crate::types::Policy>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if activate {
             query_args.push(("activate".to_string(), activate.to_string()));
@@ -135,7 +135,7 @@ impl Policies {
         &self,
         policy_id: &str,
         expand: &str,
-    ) -> ClientResult<crate::types::Policy> {
+    ) -> ClientResult<crate::Response<crate::types::Policy>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -172,7 +172,7 @@ impl Policies {
         &self,
         policy_id: &str,
         body: &crate::types::Policy,
-    ) -> ClientResult<crate::types::Policy> {
+    ) -> ClientResult<crate::Response<crate::types::Policy>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}",
@@ -199,7 +199,7 @@ impl Policies {
      *
      * * `policy_id: &str`
      */
-    pub async fn delete_policy(&self, policy_id: &str) -> ClientResult<()> {
+    pub async fn delete_policy(&self, policy_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}",
@@ -226,7 +226,7 @@ impl Policies {
      *
      * * `policy_id: &str`
      */
-    pub async fn activate_policy(&self, policy_id: &str) -> ClientResult<()> {
+    pub async fn activate_policy(&self, policy_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/lifecycle/activate",
@@ -253,7 +253,7 @@ impl Policies {
      *
      * * `policy_id: &str`
      */
-    pub async fn deactivate_policy(&self, policy_id: &str) -> ClientResult<()> {
+    pub async fn deactivate_policy(&self, policy_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/lifecycle/deactivate",
@@ -283,7 +283,7 @@ impl Policies {
     pub async fn list_policy_rules(
         &self,
         policy_id: &str,
-    ) -> ClientResult<Vec<crate::types::PolicyRule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PolicyRule>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
@@ -311,7 +311,7 @@ impl Policies {
     pub async fn list_all_policy_rules(
         &self,
         policy_id: &str,
-    ) -> ClientResult<Vec<crate::types::PolicyRule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PolicyRule>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
@@ -342,7 +342,7 @@ impl Policies {
         &self,
         policy_id: &str,
         body: &crate::types::PolicyRule,
-    ) -> ClientResult<crate::types::PolicyRule> {
+    ) -> ClientResult<crate::Response<crate::types::PolicyRule>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
@@ -374,7 +374,7 @@ impl Policies {
         &self,
         policy_id: &str,
         rule_id: &str,
-    ) -> ClientResult<crate::types::PolicyRule> {
+    ) -> ClientResult<crate::Response<crate::types::PolicyRule>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
@@ -408,7 +408,7 @@ impl Policies {
         policy_id: &str,
         rule_id: &str,
         body: &crate::types::PolicyRule,
-    ) -> ClientResult<crate::types::PolicyRule> {
+    ) -> ClientResult<crate::Response<crate::types::PolicyRule>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
@@ -437,7 +437,11 @@ impl Policies {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn delete_policy_rule(&self, policy_id: &str, rule_id: &str) -> ClientResult<()> {
+    pub async fn delete_policy_rule(
+        &self,
+        policy_id: &str,
+        rule_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
@@ -466,7 +470,11 @@ impl Policies {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn activate_policy_rule(&self, policy_id: &str, rule_id: &str) -> ClientResult<()> {
+    pub async fn activate_policy_rule(
+        &self,
+        policy_id: &str,
+        rule_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}/lifecycle/activate",
@@ -495,7 +503,11 @@ impl Policies {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn deactivate_policy_rule(&self, policy_id: &str, rule_id: &str) -> ClientResult<()> {
+    pub async fn deactivate_policy_rule(
+        &self,
+        policy_id: &str,
+        rule_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}/lifecycle/deactivate",

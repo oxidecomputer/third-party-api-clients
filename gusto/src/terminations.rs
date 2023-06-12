@@ -23,7 +23,7 @@ impl Terminations {
     pub async fn get_employee(
         &self,
         employee_id: &str,
-    ) -> ClientResult<Vec<crate::types::Termination>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Termination>>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",
@@ -55,7 +55,7 @@ impl Terminations {
     pub async fn get_all_employee(
         &self,
         employee_id: &str,
-    ) -> ClientResult<Vec<crate::types::Termination>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Termination>>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",
@@ -86,7 +86,7 @@ impl Terminations {
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeTerminationsRequest,
-    ) -> ClientResult<crate::types::Termination> {
+    ) -> ClientResult<crate::Response<crate::types::Termination>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",

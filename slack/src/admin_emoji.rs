@@ -18,7 +18,7 @@ impl AdminEmoji {
      *
      * FROM: <https://api.slack.com/methods/admin.emoji.add>
      */
-    pub async fn add(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.emoji.add", None);
         self.client
             .post(
@@ -37,7 +37,7 @@ impl AdminEmoji {
      *
      * FROM: <https://api.slack.com/methods/admin.emoji.addAlias>
      */
-    pub async fn add_alias(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn add_alias(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.emoji.addAlias", None);
         self.client
             .post(
@@ -62,7 +62,11 @@ impl AdminEmoji {
      * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
      * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
      */
-    pub async fn list(&self, cursor: &str, limit: i64) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn list(
+        &self,
+        cursor: &str,
+        limit: i64,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -91,7 +95,7 @@ impl AdminEmoji {
      *
      * FROM: <https://api.slack.com/methods/admin.emoji.remove>
      */
-    pub async fn remove(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.emoji.remove", None);
         self.client
             .post(
@@ -110,7 +114,7 @@ impl AdminEmoji {
      *
      * FROM: <https://api.slack.com/methods/admin.emoji.rename>
      */
-    pub async fn rename(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn rename(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.emoji.rename", None);
         self.client
             .post(

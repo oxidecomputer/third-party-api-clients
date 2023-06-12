@@ -29,7 +29,7 @@ impl BouncesApi {
         &self,
         start_time: i64,
         end_time: i64,
-    ) -> ClientResult<Vec<crate::types::BounceResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BounceResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -64,7 +64,7 @@ impl BouncesApi {
         &self,
         start_time: i64,
         end_time: i64,
-    ) -> ClientResult<Vec<crate::types::BounceResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BounceResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -105,7 +105,7 @@ impl BouncesApi {
     pub async fn delete_suppression_bounces(
         &self,
         body: &crate::types::DeleteSuppressionBouncesRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/suppression/bounces", None);
         self.client
             .delete(
@@ -131,7 +131,7 @@ impl BouncesApi {
     pub async fn get_suppression_bounces_email(
         &self,
         email: &str,
-    ) -> ClientResult<Vec<crate::types::BounceResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BounceResponse>>> {
         let url = self.client.url(
             &format!(
                 "/suppression/bounces/{}",
@@ -161,7 +161,7 @@ impl BouncesApi {
     pub async fn get_all_suppression_bounces_email(
         &self,
         email: &str,
-    ) -> ClientResult<Vec<crate::types::BounceResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BounceResponse>>> {
         let url = self.client.url(
             &format!(
                 "/suppression/bounces/{}",
@@ -196,7 +196,7 @@ impl BouncesApi {
         email: &str,
         email_address: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email_address.is_empty() {
             query_args.push(("email_address".to_string(), email_address.to_string()));

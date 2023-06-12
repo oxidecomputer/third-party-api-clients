@@ -26,7 +26,7 @@ impl Roles {
      * *  For setting the initial role, you must be the Account Owner.
      * *  For subsequent role management, you must be the Account Owner or user with role management permissions.
      */
-    pub async fn get(&self) -> ClientResult<crate::types::Domains> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url("/roles", None);
         self.client
             .get(
@@ -53,7 +53,10 @@ impl Roles {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn create(&self, body: &crate::types::CreateRoleRequest) -> ClientResult<()> {
+    pub async fn create(
+        &self,
+        body: &crate::types::CreateRoleRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/roles", None);
         self.client
             .post(
@@ -95,7 +98,7 @@ impl Roles {
         page_number: i64,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::Domains>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Domains>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -118,7 +121,7 @@ impl Roles {
             ),
             None,
         );
-        let resp: crate::types::RoleMembersList = self
+        let resp: crate::Response<crate::types::RoleMembersList> = self
             .client
             .get(
                 &url,
@@ -130,7 +133,11 @@ impl Roles {
             .await?;
 
         // Return our response data.
-        Ok(resp.members.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.members.to_vec(),
+        ))
     }
     /**
      * List members in a role.
@@ -150,7 +157,7 @@ impl Roles {
         &self,
         role_id: &str,
         page_count: &str,
-    ) -> ClientResult<Vec<crate::types::Domains>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Domains>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_count.is_empty() {
             query_args.push(("page_count".to_string(), page_count.to_string()));
@@ -164,7 +171,11 @@ impl Roles {
             ),
             None,
         );
-        let mut resp: crate::types::RoleMembersList = self
+        let crate::Response::<crate::types::RoleMembersList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -175,14 +186,18 @@ impl Roles {
             )
             .await?;
 
-        let mut members = resp.members;
-        let mut page = resp.next_page_token;
+        let mut members = body.members;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::RoleMembersList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -193,7 +208,11 @@ impl Roles {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::RoleMembersList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -205,17 +224,17 @@ impl Roles {
                     .await?;
             }
 
-            members.append(&mut resp.members);
+            members.append(&mut body.members);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(members)
+        Ok(crate::Response::new(status, headers, members))
     }
     /**
      * Assign a role.
@@ -238,7 +257,7 @@ impl Roles {
         &self,
         role_id: &str,
         body: &crate::types::AddRoleMembersRequest,
-    ) -> ClientResult<crate::types::AddRoleMembersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddRoleMembersResponse>> {
         let url = self.client.url(
             &format!(
                 "/roles/{}/members",
@@ -274,7 +293,11 @@ impl Roles {
      * * `role_id: &str` -- User's first name.
      * * `member_id: &str` -- User's first name.
      */
-    pub async fn member_delete(&self, role_id: &str, member_id: &str) -> ClientResult<()> {
+    pub async fn member_delete(
+        &self,
+        role_id: &str,
+        member_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/roles/{}/members/{}",
@@ -316,7 +339,7 @@ impl Roles {
     pub async fn get_information(
         &self,
         role_id: &str,
-    ) -> ClientResult<crate::types::GetRoleInformationResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetRoleInformationResponse>> {
         let url = self.client.url(
             &format!("/roles/{}", crate::progenitor_support::encode_path(role_id),),
             None,
@@ -351,7 +374,7 @@ impl Roles {
      *
      * * `role_id: &str` -- User's first name.
      */
-    pub async fn delete(&self, role_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, role_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!("/roles/{}", crate::progenitor_support::encode_path(role_id),),
             None,
@@ -388,7 +411,7 @@ impl Roles {
         &self,
         role_id: &str,
         body: &crate::types::UpdateRoleRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!("/roles/{}", crate::progenitor_support::encode_path(role_id),),
             None,

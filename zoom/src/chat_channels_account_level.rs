@@ -33,7 +33,7 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
@@ -69,7 +69,11 @@ impl ChatChannelsAccountLevel {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn delete_channel(&self, user_id: &str, channel_id: &str) -> ClientResult<()> {
+    pub async fn delete_channel(
+        &self,
+        user_id: &str,
+        channel_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
@@ -111,7 +115,7 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
         body: &crate::types::Attendees,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
@@ -154,7 +158,7 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::ListChannelMembersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListChannelMembersResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -172,7 +176,7 @@ impl ChatChannelsAccountLevel {
             ),
             None,
         );
-        let resp: crate::types::ListChannelMembersResponseData = self
+        let resp: crate::Response<crate::types::ListChannelMembersResponseData> = self
             .client
             .get(
                 &url,
@@ -184,7 +188,11 @@ impl ChatChannelsAccountLevel {
             .await?;
 
         // Return our response data.
-        Ok(resp.members.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.members.to_vec(),
+        ))
     }
     /**
      * List channel members.
@@ -203,7 +211,7 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-    ) -> ClientResult<Vec<crate::types::ListChannelMembersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListChannelMembersResponse>>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members",
@@ -212,7 +220,11 @@ impl ChatChannelsAccountLevel {
             ),
             None,
         );
-        let mut resp: crate::types::ListChannelMembersResponseData = self
+        let crate::Response::<crate::types::ListChannelMembersResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -223,14 +235,18 @@ impl ChatChannelsAccountLevel {
             )
             .await?;
 
-        let mut members = resp.members;
-        let mut page = resp.next_page_token;
+        let mut members = body.members;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListChannelMembersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -241,7 +257,11 @@ impl ChatChannelsAccountLevel {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListChannelMembersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -253,17 +273,17 @@ impl ChatChannelsAccountLevel {
                     .await?;
             }
 
-            members.append(&mut resp.members);
+            members.append(&mut body.members);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(members)
+        Ok(crate::Response::new(status, headers, members))
     }
     /**
      * Invite channel members.
@@ -286,7 +306,7 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
         body: &crate::types::InviteChannelMembersRequest,
-    ) -> ClientResult<crate::types::InviteChannelMembersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::InviteChannelMembersResponse>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members",
@@ -329,7 +349,7 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
         member_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members/{}",

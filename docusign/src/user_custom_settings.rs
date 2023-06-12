@@ -42,7 +42,7 @@ impl UserCustomSettings {
         &self,
         account_id: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::CustomSettingsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::CustomSettingsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/custom_settings",
@@ -99,7 +99,7 @@ impl UserCustomSettings {
         account_id: &str,
         user_id: &str,
         body: &crate::types::CustomSettingsInformation,
-    ) -> ClientResult<crate::types::CustomSettingsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::CustomSettingsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/custom_settings",
@@ -146,7 +146,7 @@ impl UserCustomSettings {
         account_id: &str,
         user_id: &str,
         body: &crate::types::CustomSettingsInformation,
-    ) -> ClientResult<crate::types::CustomSettingsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::CustomSettingsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/custom_settings",

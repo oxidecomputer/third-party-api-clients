@@ -9,6 +9,15 @@ enum Component {
     Parameter(String),
 }
 
+impl Component {
+    fn is_command(&self) -> bool {
+        match self {
+            Self::Constant(c) => c.starts_with(':'),
+            _ => false,
+        }
+    }
+}
+
 #[derive(Eq, PartialEq, Clone, Debug)]
 pub struct Template {
     components: Vec<Component>,
@@ -121,7 +130,10 @@ impl Template {
 
         out.push_str("&format!(\"");
         for c in self.components.iter() {
-            out.push('/');
+            if !c.is_command() {
+                out.push('/');
+            }
+
             match c {
                 Component::Constant(n) => out.push_str(n),
                 Component::Parameter(_) => {
@@ -176,7 +188,7 @@ fn parse_inner(t: &str) -> Result<Template> {
         Start,
         ConstantOrParameter,
         Parameter,
-        ParameterSlash,
+        ParameterSlashOrCommand,
         Constant,
     }
 
@@ -218,19 +230,22 @@ fn parse_inner(t: &str) -> Result<Template> {
                 if c == '}' {
                     components.push(Component::Parameter(a));
                     a = String::new();
-                    s = State::ParameterSlash;
+                    s = State::ParameterSlashOrCommand;
                 } else if c == '/' || c == '{' {
                     bail!("expected parameter");
                 } else {
                     a.push(c);
                 }
             }
-            State::ParameterSlash => {
-                if c == '/' || c == ':' || c == '.' {
+            State::ParameterSlashOrCommand => {
+                if c == '/' || c == '.' {
                     // Google Admin API has ":issueCommand" so we want to allow that!
                     // Shopify sometimes ends after a parameter with ".json", so we want to allow
                     // that.
                     s = State::ConstantOrParameter;
+                } else if c == ':' {
+                    a.push(c);
+                    s = State::Constant;
                 } else {
                     bail!("expected a slash after parameter");
                 }
@@ -240,7 +255,7 @@ fn parse_inner(t: &str) -> Result<Template> {
 
     match s {
         State::Start => bail!("empty path"),
-        State::ConstantOrParameter | State::ParameterSlash => (),
+        State::ConstantOrParameter | State::ParameterSlashOrCommand => (),
         State::Constant => components.push(Component::Constant(a)),
         State::Parameter => bail!("unterminated parameter"),
     }
@@ -302,6 +317,17 @@ crate::progenitor_support::encode_path(&number.to_string()),), None);
 "#;
         assert_eq!(want, &out);
         Ok(())
+    }
+
+    #[test]
+    fn compile_with_command() -> Result<()> {
+        let t = parse("/path/{param}:command")?;
+        let out = t.compile(Default::default(), "None");
+        let want = r#"let url = self.client.url(
+&format!("/path/{}:command",
+crate::progenitor_support::encode_path(&param.to_string()),), None);
+"#;
+        Ok(assert_eq!(want, &out))
     }
 }
 
@@ -403,6 +429,7 @@ pub fn generate_docs_github(
 //! use {name}::{{Client, auth::{{Credentials, InstallationTokenGenerator, JWTCredentials}}}};
 //! #[cfg(feature = "httpcache")]
 //! use {name}::http_cache::FileBasedCache;
+//! use base64::{{Engine, engine::general_purpose::STANDARD}};
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
@@ -411,7 +438,7 @@ pub fn generate_docs_github(
 //! let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
 //!
 //! let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
-//! let private_key = base64::decode(encoded_private_key).unwrap();
+//! let private_key = STANDARD.decode(encoded_private_key).unwrap();
 //!
 //! // Decode the key.
 //! let key = nom_pem::decode_block(&private_key).unwrap();
@@ -595,6 +622,7 @@ pub fn generate_docs_generic_token(
     proper_name: &str,
     spec_link: &str,
     add_post_header: &str,
+    server_args: &str,
 ) -> String {
     let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
 
@@ -609,6 +637,17 @@ pub fn generate_docs_generic_token(
 
     let add_post_header_var = if !add_post_header.is_empty() {
         r#", """#.to_string()
+    } else {
+        String::new()
+    };
+
+    let server_args_nl = if !server_args.is_empty() {
+        format!(",\n//!     {}", server_args)
+    } else {
+        String::new()
+    };
+    let server_args_flat = if !server_args.is_empty() {
+        format!(", {}", server_args)
     } else {
         String::new()
     };
@@ -628,7 +667,7 @@ pub fn generate_docs_generic_token(
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! let {} = Client::new(
@@ -636,7 +675,7 @@ pub fn generate_docs_generic_token(
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token"){}
+//!     String::from("refresh-token"){}{}
 //! );
 //! ```
 //!
@@ -649,12 +688,12 @@ pub fn generate_docs_generic_token(
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! let {} = Client::new_from_env(
 //!     String::from("token"),
-//!     String::from("refresh-token"){}
+//!     String::from("refresh-token"){}{}
 //! );
 //! ```
 //!
@@ -663,11 +702,11 @@ pub fn generate_docs_generic_token(
 //!
 //! To start off a fresh client and get a `token` and `refresh_token`, use the following.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! async fn do_call() {{
-//!     let mut {} = Client::new_from_env("", ""{});
+//!     let mut {} = Client::new_from_env("", ""{}{});
 //!
 //!     // Get the URL to request consent from the user.
 //!     // You can optionally pass in scopes. If none are provided, then the
@@ -692,15 +731,18 @@ pub fn generate_docs_generic_token(
         name,
         proper_name.to_lowercase(),
         add_post_header_args,
+        server_args_nl,
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         name,
         proper_name.to_lowercase(),
         add_post_header_args,
+        server_args_nl,
         name,
         proper_name.to_lowercase(),
         add_post_header_var,
+        server_args_flat,
         proper_name.to_lowercase(),
         proper_name.to_lowercase(),
         proper_name.to_lowercase(),
@@ -730,7 +772,7 @@ pub fn generate_docs_generic_api_key(
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! let {} = Client::new(
@@ -745,7 +787,7 @@ pub fn generate_docs_generic_api_key(
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! let {} = Client::new_from_env();
@@ -785,7 +827,7 @@ pub fn generate_docs_generic_client_credentials(
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! let {} = Client::new(
@@ -803,7 +845,7 @@ pub fn generate_docs_generic_client_credentials(
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! let {} = Client::new_from_env(
@@ -816,7 +858,7 @@ pub fn generate_docs_generic_client_credentials(
 //!
 //! To start off a fresh client and get a `token`, use the following.
 //!
-//! ```
+//! ```rust
 //! use {}::Client;
 //!
 //! async fn do_call() {{

@@ -29,7 +29,7 @@ impl EmailCnameRecords {
     pub async fn post_whitelabel_dns_email(
         &self,
         body: &crate::types::PostWhitelabelDnsEmailRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/whitelabel/dns/email", None);
         self.client
             .post(

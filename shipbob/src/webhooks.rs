@@ -29,7 +29,7 @@ impl Webhooks {
         topic: crate::types::WebhooksTopics,
         page: u64,
         limit: i64,
-    ) -> ClientResult<Vec<crate::types::Webhook>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Webhook>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("Limit".to_string(), limit.to_string()));
@@ -64,7 +64,7 @@ impl Webhooks {
     pub async fn get_all(
         &self,
         topic: crate::types::WebhooksTopics,
-    ) -> ClientResult<Vec<crate::types::Webhook>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Webhook>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !topic.to_string().is_empty() {
             query_args.push(("Topic".to_string(), topic.to_string()));
@@ -93,7 +93,7 @@ impl Webhooks {
     pub async fn post(
         &self,
         body: &crate::types::WebhooksCreateWebhookSubscriptionModel,
-    ) -> ClientResult<crate::types::Webhook> {
+    ) -> ClientResult<crate::Response<crate::types::Webhook>> {
         let url = self.client.url("/webhook", None);
         self.client
             .post(
@@ -114,7 +114,7 @@ impl Webhooks {
      *
      * * `id: i64` -- Unique id of the channel.
      */
-    pub async fn delete(&self, id: i64) -> ClientResult<()> {
+    pub async fn delete(&self, id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webhook/{}",

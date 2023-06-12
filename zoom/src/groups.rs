@@ -23,7 +23,7 @@ impl Groups {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn get(&self) -> ClientResult<crate::types::GroupList> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::GroupList>> {
         let url = self.client.url("/groups", None);
         self.client
             .get(
@@ -49,7 +49,10 @@ impl Groups {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn create(&self, body: &crate::types::GroupCreateRequest) -> ClientResult<()> {
+    pub async fn create(
+        &self,
+        body: &crate::types::GroupCreateRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/groups", None);
         self.client
             .post(
@@ -78,7 +81,10 @@ impl Groups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn group(&self, group_id: &str) -> ClientResult<crate::types::GroupResponse> {
+    pub async fn group(
+        &self,
+        group_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::GroupResponse>> {
         let url = self.client.url(
             &format!(
                 "/groups/{}",
@@ -113,7 +119,7 @@ impl Groups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn delete(&self, group_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, group_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/groups/{}",
@@ -152,7 +158,7 @@ impl Groups {
         &self,
         group_id: &str,
         body: &crate::types::GroupCreateRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/groups/{}",
@@ -199,7 +205,7 @@ impl Groups {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::UserCreateResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UserCreateResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -219,7 +225,7 @@ impl Groups {
             ),
             None,
         );
-        let resp: crate::types::GroupMembersResponseData = self
+        let resp: crate::Response<crate::types::GroupMembersResponseData> = self
             .client
             .get(
                 &url,
@@ -231,7 +237,11 @@ impl Groups {
             .await?;
 
         // Return our response data.
-        Ok(resp.members.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.members.to_vec(),
+        ))
     }
     /**
      * List group members .
@@ -250,7 +260,7 @@ impl Groups {
     pub async fn get_all_members(
         &self,
         group_id: &str,
-    ) -> ClientResult<Vec<crate::types::UserCreateResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UserCreateResponse>>> {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members",
@@ -258,7 +268,11 @@ impl Groups {
             ),
             None,
         );
-        let mut resp: crate::types::GroupMembersResponseData = self
+        let crate::Response::<crate::types::GroupMembersResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -269,14 +283,18 @@ impl Groups {
             )
             .await?;
 
-        let mut members = resp.members;
-        let mut page = resp.next_page_token;
+        let mut members = body.members;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GroupMembersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -287,7 +305,11 @@ impl Groups {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GroupMembersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -299,17 +321,17 @@ impl Groups {
                     .await?;
             }
 
-            members.append(&mut resp.members);
+            members.append(&mut body.members);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(members)
+        Ok(crate::Response::new(status, headers, members))
     }
     /**
      * Add group members.
@@ -332,7 +354,7 @@ impl Groups {
         &self,
         group_id: &str,
         body: &crate::types::AddRoleMembersRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members",
@@ -368,7 +390,11 @@ impl Groups {
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `member_id: &str` -- User's first name.
      */
-    pub async fn members_delete(&self, group_id: &str, member_id: &str) -> ClientResult<()> {
+    pub async fn members_delete(
+        &self,
+        group_id: &str,
+        member_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members/{}",
@@ -415,7 +441,7 @@ impl Groups {
         group_id: &str,
         member_id: &str,
         body: &crate::types::UpdateGroupMemberRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members/{}",
@@ -458,7 +484,7 @@ impl Groups {
         group_id: &str,
         custom_query_fields: &str,
         option: crate::types::OptionData,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -512,7 +538,7 @@ impl Groups {
         group_id: &str,
         custom_query_fields: &str,
         option: crate::types::OptionData,
-    ) -> ClientResult<crate::types::MeetingSecuritySettings> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingSecuritySettings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -566,7 +592,7 @@ impl Groups {
         group_id: &str,
         custom_query_fields: &str,
         option: crate::types::OptionData,
-    ) -> ClientResult<crate::types::GetGroupSettingsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetGroupSettingsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -620,7 +646,7 @@ impl Groups {
         group_id: &str,
         custom_query_fields: &str,
         option: crate::types::OptionData,
-    ) -> ClientResult<crate::types::GetGroupSettingsResponseOneOf> {
+    ) -> ClientResult<crate::Response<crate::types::GetGroupSettingsResponseOneOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -672,7 +698,7 @@ impl Groups {
         custom_query_fields: &str,
         option: crate::types::UpdateGroupSettingsOption,
         body: &crate::types::UpdateGroupSettingsRequestOneOf,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -724,7 +750,7 @@ impl Groups {
         group_id: &str,
         custom_query_fields: &str,
         option: &str,
-    ) -> ClientResult<crate::types::MeetingSecuritySettings> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingSecuritySettings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -776,7 +802,7 @@ impl Groups {
         group_id: &str,
         custom_query_fields: &str,
         option: &str,
-    ) -> ClientResult<crate::types::GetGroupLockSettingsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetGroupLockSettingsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -828,7 +854,7 @@ impl Groups {
         group_id: &str,
         custom_query_fields: &str,
         option: &str,
-    ) -> ClientResult<crate::types::GetGroupLockSettingsResponseOneOf> {
+    ) -> ClientResult<crate::Response<crate::types::GetGroupLockSettingsResponseOneOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -881,7 +907,7 @@ impl Groups {
         custom_query_fields: &str,
         option: &str,
         body: &crate::types::GroupLockedSettingsRequestOneOf,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -936,7 +962,7 @@ impl Groups {
         file_ids: &str,
         group_id: &str,
         body: &crate::types::UploadVbRequest,
-    ) -> ClientResult<crate::types::Files> {
+    ) -> ClientResult<crate::Response<crate::types::Files>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
             query_args.push(("file_ids".to_string(), file_ids.to_string()));
@@ -979,7 +1005,11 @@ impl Groups {
      * * `group_id: &str` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      */
-    pub async fn del_vb(&self, file_ids: &str, group_id: &str) -> ClientResult<()> {
+    pub async fn del_vb(
+        &self,
+        file_ids: &str,
+        group_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
             query_args.push(("file_ids".to_string(), file_ids.to_string()));

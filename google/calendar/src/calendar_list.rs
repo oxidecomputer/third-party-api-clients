@@ -36,7 +36,7 @@ impl CalendarList {
         page_token: &str,
         show_deleted: bool,
         show_hidden: bool,
-    ) -> ClientResult<Vec<crate::types::CalendarListEntry>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CalendarListEntry>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -57,7 +57,7 @@ impl CalendarList {
         let url = self
             .client
             .url(&format!("/users/me/calendarList?{}", query_), None);
-        let resp: crate::types::CalendarList = self
+        let resp: crate::Response<crate::types::CalendarList> = self
             .client
             .get(
                 &url,
@@ -69,7 +69,11 @@ impl CalendarList {
             .await?;
 
         // Return our response data.
-        Ok(resp.items.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.items.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/users/me/calendarList` endpoint.
@@ -83,7 +87,7 @@ impl CalendarList {
         min_access_role: crate::types::MinAccessRole,
         show_deleted: bool,
         show_hidden: bool,
-    ) -> ClientResult<Vec<crate::types::CalendarListEntry>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CalendarListEntry>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !min_access_role.to_string().is_empty() {
             query_args.push(("minAccessRole".to_string(), min_access_role.to_string()));
@@ -98,7 +102,11 @@ impl CalendarList {
         let url = self
             .client
             .url(&format!("/users/me/calendarList?{}", query_), None);
-        let mut resp: crate::types::CalendarList = self
+        let crate::Response::<crate::types::CalendarList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -109,13 +117,17 @@ impl CalendarList {
             )
             .await?;
 
-        let mut items = resp.items;
-        let mut page = resp.next_page_token;
+        let mut items = body.items;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::CalendarList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -126,7 +138,11 @@ impl CalendarList {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::CalendarList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -138,17 +154,17 @@ impl CalendarList {
                     .await?;
             }
 
-            items.append(&mut resp.items);
+            items.append(&mut body.items);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(items)
+        Ok(crate::Response::new(status, headers, items))
     }
     /**
      * This function performs a `POST` to the `/users/me/calendarList` endpoint.
@@ -163,7 +179,7 @@ impl CalendarList {
         &self,
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
-    ) -> ClientResult<crate::types::CalendarListEntry> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarListEntry>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if color_rgb_format {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
@@ -208,7 +224,7 @@ impl CalendarList {
         show_deleted: bool,
         show_hidden: bool,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -251,7 +267,7 @@ impl CalendarList {
     pub async fn list_get(
         &self,
         calendar_id: &str,
-    ) -> ClientResult<crate::types::CalendarListEntry> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarListEntry>> {
         let url = self.client.url(
             &format!(
                 "/users/me/calendarList/{}",
@@ -284,7 +300,7 @@ impl CalendarList {
         calendar_id: &str,
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
-    ) -> ClientResult<crate::types::CalendarListEntry> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarListEntry>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if color_rgb_format {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
@@ -317,7 +333,7 @@ impl CalendarList {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn list_delete(&self, calendar_id: &str) -> ClientResult<()> {
+    pub async fn list_delete(&self, calendar_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/me/calendarList/{}",
@@ -350,7 +366,7 @@ impl CalendarList {
         calendar_id: &str,
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
-    ) -> ClientResult<crate::types::CalendarListEntry> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarListEntry>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if color_rgb_format {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));

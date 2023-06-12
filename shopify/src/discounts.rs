@@ -25,7 +25,7 @@ impl Discounts {
     pub async fn deprecated_202001_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/discount_codes.json",
@@ -58,7 +58,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/discount_codes.json",
@@ -92,7 +92,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
@@ -128,7 +128,7 @@ impl Discounts {
         price_rule_id: &str,
         discount_code_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
@@ -163,7 +163,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
@@ -184,8 +184,8 @@ impl Discounts {
     }
     /**
     * Retrieves the location of a discount code.
-              The discount code's location is returned in the location header, not in the DiscountCode object itself.
-                Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+             The discount code's location is returned in the location header, not in the DiscountCode object itself.
+               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/discount_codes/lookup.json` endpoint.
     *
@@ -195,7 +195,10 @@ impl Discounts {
     *
     * * `code: i64` -- recurring_application_charge[capped_amount].
     */
-    pub async fn deprecated_202001_get_codes_lookup(&self, code: i64) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_codes_lookup(
+        &self,
+        code: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if code > 0 {
             query_args.push(("code".to_string(), code.to_string()));
@@ -217,23 +220,23 @@ impl Discounts {
     }
     /**
     * Creates a discount code creation job.
-              The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-              enqueues and returns a discount_code_creation object that can be monitored for completion.
-              Response fields that are specific to the batch endpoint include:
+             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+             enqueues and returns a discount_code_creation object that can be monitored for completion.
+             Response fields that are specific to the batch endpoint include:
 
-                status: The state of the discount code creation job. Possible values are:
+               status: The state of the discount code creation job. Possible values are:
 
-                    queued: The job is acknowledged, but not started.
-                    running: The job is in process.
-                    completed: The job has finished.
+                   queued: The job is acknowledged, but not started.
+                   running: The job is in process.
+                   completed: The job has finished.
 
-                codes_count: The number of discount codes to create.
-                imported_count: The number of discount codes created successfully.
-                failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-                logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+               codes_count: The number of discount codes to create.
+               imported_count: The number of discount codes created successfully.
+               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
 
-                    "Price rule target selection can't be blank"
-                    "Price rule allocation method can't be blank".
+                   "Price rule target selection can't be blank"
+                   "Price rule allocation method can't be blank".
     *
     * This function performs a `POST` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch.json` endpoint.
     *
@@ -247,7 +250,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/batch.json",
@@ -281,7 +284,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/batch/{}/json",
@@ -302,8 +305,8 @@ impl Discounts {
     }
     /**
     * Retrieves a list of discount codes for a discount code creation job.
-              Discount codes that have been successfully created include a populated id field. Discount codes that
-              encountered errors during the creation process include a populated errors field.
+             Discount codes that have been successfully created include a populated id field. Discount codes that
+             encountered errors during the creation process include a populated errors field.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
     *
@@ -318,7 +321,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/price_rules/{}/batch/{}/discount_codes.json",
@@ -351,7 +354,7 @@ impl Discounts {
     pub async fn deprecated_202004_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/discount_codes.json",
@@ -384,7 +387,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/discount_codes.json",
@@ -418,7 +421,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
@@ -454,7 +457,7 @@ impl Discounts {
         price_rule_id: &str,
         discount_code_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
@@ -489,7 +492,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
@@ -510,8 +513,8 @@ impl Discounts {
     }
     /**
     * Retrieves the location of a discount code.
-              The discount code's location is returned in the location header, not in the DiscountCode object itself.
-                Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+             The discount code's location is returned in the location header, not in the DiscountCode object itself.
+               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/discount_codes/lookup.json` endpoint.
     *
@@ -521,7 +524,10 @@ impl Discounts {
     *
     * * `code: i64` -- recurring_application_charge[capped_amount].
     */
-    pub async fn deprecated_202004_get_codes_lookup(&self, code: i64) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_codes_lookup(
+        &self,
+        code: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if code > 0 {
             query_args.push(("code".to_string(), code.to_string()));
@@ -543,23 +549,23 @@ impl Discounts {
     }
     /**
     * Creates a discount code creation job.
-              The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-              enqueues and returns a discount_code_creation object that can be monitored for completion.
-              Response fields that are specific to the batch endpoint include:
+             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+             enqueues and returns a discount_code_creation object that can be monitored for completion.
+             Response fields that are specific to the batch endpoint include:
 
-                status: The state of the discount code creation job. Possible values are:
+               status: The state of the discount code creation job. Possible values are:
 
-                    queued: The job is acknowledged, but not started.
-                    running: The job is in process.
-                    completed: The job has finished.
+                   queued: The job is acknowledged, but not started.
+                   running: The job is in process.
+                   completed: The job has finished.
 
-                codes_count: The number of discount codes to create.
-                imported_count: The number of discount codes created successfully.
-                failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-                logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+               codes_count: The number of discount codes to create.
+               imported_count: The number of discount codes created successfully.
+               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
 
-                    "Price rule target selection can't be blank"
-                    "Price rule allocation method can't be blank".
+                   "Price rule target selection can't be blank"
+                   "Price rule allocation method can't be blank".
     *
     * This function performs a `POST` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch.json` endpoint.
     *
@@ -573,7 +579,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/batch.json",
@@ -607,7 +613,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/batch/{}/json",
@@ -628,8 +634,8 @@ impl Discounts {
     }
     /**
     * Retrieves a list of discount codes for a discount code creation job.
-              Discount codes that have been successfully created include a populated id field. Discount codes that
-              encountered errors during the creation process include a populated errors field.
+             Discount codes that have been successfully created include a populated id field. Discount codes that
+             encountered errors during the creation process include a populated errors field.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
     *
@@ -644,7 +650,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/price_rules/{}/batch/{}/discount_codes.json",
@@ -677,7 +683,7 @@ impl Discounts {
     pub async fn deprecated_202007_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/discount_codes.json",
@@ -710,7 +716,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/discount_codes.json",
@@ -744,7 +750,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
@@ -780,7 +786,7 @@ impl Discounts {
         price_rule_id: &str,
         discount_code_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
@@ -815,7 +821,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
@@ -836,8 +842,8 @@ impl Discounts {
     }
     /**
     * Retrieves the location of a discount code.
-              The discount code's location is returned in the location header, not in the DiscountCode object itself.
-                Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+             The discount code's location is returned in the location header, not in the DiscountCode object itself.
+               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/discount_codes/lookup.json` endpoint.
     *
@@ -847,7 +853,10 @@ impl Discounts {
     *
     * * `code: i64` -- recurring_application_charge[capped_amount].
     */
-    pub async fn deprecated_202007_get_codes_lookup(&self, code: i64) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_codes_lookup(
+        &self,
+        code: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if code > 0 {
             query_args.push(("code".to_string(), code.to_string()));
@@ -869,23 +878,23 @@ impl Discounts {
     }
     /**
     * Creates a discount code creation job.
-              The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-              enqueues and returns a discount_code_creation object that can be monitored for completion.
-              Response fields that are specific to the batch endpoint include:
+             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+             enqueues and returns a discount_code_creation object that can be monitored for completion.
+             Response fields that are specific to the batch endpoint include:
 
-                status: The state of the discount code creation job. Possible values are:
+               status: The state of the discount code creation job. Possible values are:
 
-                    queued: The job is acknowledged, but not started.
-                    running: The job is in process.
-                    completed: The job has finished.
+                   queued: The job is acknowledged, but not started.
+                   running: The job is in process.
+                   completed: The job has finished.
 
-                codes_count: The number of discount codes to create.
-                imported_count: The number of discount codes created successfully.
-                failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-                logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+               codes_count: The number of discount codes to create.
+               imported_count: The number of discount codes created successfully.
+               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
 
-                    "Price rule target selection can't be blank"
-                    "Price rule allocation method can't be blank".
+                   "Price rule target selection can't be blank"
+                   "Price rule allocation method can't be blank".
     *
     * This function performs a `POST` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch.json` endpoint.
     *
@@ -899,7 +908,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/batch.json",
@@ -933,7 +942,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/batch/{}/json",
@@ -954,8 +963,8 @@ impl Discounts {
     }
     /**
     * Retrieves a list of discount codes for a discount code creation job.
-              Discount codes that have been successfully created include a populated id field. Discount codes that
-              encountered errors during the creation process include a populated errors field.
+             Discount codes that have been successfully created include a populated id field. Discount codes that
+             encountered errors during the creation process include a populated errors field.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
     *
@@ -970,7 +979,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/price_rules/{}/batch/{}/discount_codes.json",
@@ -1000,7 +1009,10 @@ impl Discounts {
      *
      * * `price_rule_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_price_rules_param_rule_code(&self, price_rule_id: &str) -> ClientResult<()> {
+    pub async fn get_price_rules_param_rule_code(
+        &self,
+        price_rule_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/discount_codes.json",
@@ -1033,7 +1045,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/discount_codes.json",
@@ -1067,7 +1079,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
@@ -1103,7 +1115,7 @@ impl Discounts {
         price_rule_id: &str,
         discount_code_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
@@ -1138,7 +1150,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
@@ -1159,8 +1171,8 @@ impl Discounts {
     }
     /**
     * Retrieves the location of a discount code.
-              The discount code's location is returned in the location header, not in the DiscountCode object itself.
-                Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+             The discount code's location is returned in the location header, not in the DiscountCode object itself.
+               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/discount_codes/lookup.json` endpoint.
     *
@@ -1170,7 +1182,7 @@ impl Discounts {
     *
     * * `code: i64` -- recurring_application_charge[capped_amount].
     */
-    pub async fn get_codes_lookup(&self, code: i64) -> ClientResult<()> {
+    pub async fn get_codes_lookup(&self, code: i64) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if code > 0 {
             query_args.push(("code".to_string(), code.to_string()));
@@ -1192,23 +1204,23 @@ impl Discounts {
     }
     /**
     * Creates a discount code creation job.
-              The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-              enqueues and returns a discount_code_creation object that can be monitored for completion.
-              Response fields that are specific to the batch endpoint include:
+             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+             enqueues and returns a discount_code_creation object that can be monitored for completion.
+             Response fields that are specific to the batch endpoint include:
 
-                status: The state of the discount code creation job. Possible values are:
+               status: The state of the discount code creation job. Possible values are:
 
-                    queued: The job is acknowledged, but not started.
-                    running: The job is in process.
-                    completed: The job has finished.
+                   queued: The job is acknowledged, but not started.
+                   running: The job is in process.
+                   completed: The job has finished.
 
-                codes_count: The number of discount codes to create.
-                imported_count: The number of discount codes created successfully.
-                failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-                logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+               codes_count: The number of discount codes to create.
+               imported_count: The number of discount codes created successfully.
+               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
 
-                    "Price rule target selection can't be blank"
-                    "Price rule allocation method can't be blank".
+                   "Price rule target selection can't be blank"
+                   "Price rule allocation method can't be blank".
     *
     * This function performs a `POST` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch.json` endpoint.
     *
@@ -1222,7 +1234,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/batch.json",
@@ -1256,7 +1268,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/batch/{}/json",
@@ -1277,8 +1289,8 @@ impl Discounts {
     }
     /**
     * Retrieves a list of discount codes for a discount code creation job.
-              Discount codes that have been successfully created include a populated id field. Discount codes that
-              encountered errors during the creation process include a populated errors field.
+             Discount codes that have been successfully created include a populated id field. Discount codes that
+             encountered errors during the creation process include a populated errors field.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
     *
@@ -1293,7 +1305,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/price_rules/{}/batch/{}/discount_codes.json",
@@ -1326,7 +1338,7 @@ impl Discounts {
     pub async fn deprecated_202101_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/discount_codes.json",
@@ -1359,7 +1371,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/discount_codes.json",
@@ -1393,7 +1405,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
@@ -1429,7 +1441,7 @@ impl Discounts {
         price_rule_id: &str,
         discount_code_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
@@ -1464,7 +1476,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
@@ -1485,8 +1497,8 @@ impl Discounts {
     }
     /**
     * Retrieves the location of a discount code.
-              The discount code's location is returned in the location header, not in the DiscountCode object itself.
-                Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+             The discount code's location is returned in the location header, not in the DiscountCode object itself.
+               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/discount_codes/lookup.json` endpoint.
     *
@@ -1496,7 +1508,10 @@ impl Discounts {
     *
     * * `code: i64` -- recurring_application_charge[capped_amount].
     */
-    pub async fn deprecated_202101_get_codes_lookup(&self, code: i64) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_codes_lookup(
+        &self,
+        code: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if code > 0 {
             query_args.push(("code".to_string(), code.to_string()));
@@ -1518,23 +1533,23 @@ impl Discounts {
     }
     /**
     * Creates a discount code creation job.
-              The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-              enqueues and returns a discount_code_creation object that can be monitored for completion.
-              Response fields that are specific to the batch endpoint include:
+             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+             enqueues and returns a discount_code_creation object that can be monitored for completion.
+             Response fields that are specific to the batch endpoint include:
 
-                status: The state of the discount code creation job. Possible values are:
+               status: The state of the discount code creation job. Possible values are:
 
-                    queued: The job is acknowledged, but not started.
-                    running: The job is in process.
-                    completed: The job has finished.
+                   queued: The job is acknowledged, but not started.
+                   running: The job is in process.
+                   completed: The job has finished.
 
-                codes_count: The number of discount codes to create.
-                imported_count: The number of discount codes created successfully.
-                failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-                logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+               codes_count: The number of discount codes to create.
+               imported_count: The number of discount codes created successfully.
+               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
 
-                    "Price rule target selection can't be blank"
-                    "Price rule allocation method can't be blank".
+                   "Price rule target selection can't be blank"
+                   "Price rule allocation method can't be blank".
     *
     * This function performs a `POST` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch.json` endpoint.
     *
@@ -1548,7 +1563,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/batch.json",
@@ -1582,7 +1597,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/batch/{}/json",
@@ -1603,8 +1618,8 @@ impl Discounts {
     }
     /**
     * Retrieves a list of discount codes for a discount code creation job.
-              Discount codes that have been successfully created include a populated id field. Discount codes that
-              encountered errors during the creation process include a populated errors field.
+             Discount codes that have been successfully created include a populated id field. Discount codes that
+             encountered errors during the creation process include a populated errors field.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
     *
@@ -1619,7 +1634,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/price_rules/{}/batch/{}/discount_codes.json",
@@ -1652,7 +1667,7 @@ impl Discounts {
     pub async fn deprecated_unstable_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/discount_codes.json",
@@ -1685,7 +1700,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/discount_codes.json",
@@ -1719,7 +1734,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
@@ -1755,7 +1770,7 @@ impl Discounts {
         price_rule_id: &str,
         discount_code_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
@@ -1790,7 +1805,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         discount_code_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
@@ -1811,8 +1826,8 @@ impl Discounts {
     }
     /**
     * Retrieves the location of a discount code.
-              The discount code's location is returned in the location header, not in the DiscountCode object itself.
-                Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+             The discount code's location is returned in the location header, not in the DiscountCode object itself.
+               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
     *
     * This function performs a `GET` to the `/admin/api/unstable/discount_codes/lookup.json` endpoint.
     *
@@ -1822,7 +1837,10 @@ impl Discounts {
     *
     * * `code: i64` -- recurring_application_charge[capped_amount].
     */
-    pub async fn deprecated_unstable_get_codes_lookup(&self, code: i64) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_codes_lookup(
+        &self,
+        code: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if code > 0 {
             query_args.push(("code".to_string(), code.to_string()));
@@ -1844,23 +1862,23 @@ impl Discounts {
     }
     /**
     * Creates a discount code creation job.
-              The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-              enqueues and returns a discount_code_creation object that can be monitored for completion.
-              Response fields that are specific to the batch endpoint include:
+             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+             enqueues and returns a discount_code_creation object that can be monitored for completion.
+             Response fields that are specific to the batch endpoint include:
 
-                status: The state of the discount code creation job. Possible values are:
+               status: The state of the discount code creation job. Possible values are:
 
-                    queued: The job is acknowledged, but not started.
-                    running: The job is in process.
-                    completed: The job has finished.
+                   queued: The job is acknowledged, but not started.
+                   running: The job is in process.
+                   completed: The job has finished.
 
-                codes_count: The number of discount codes to create.
-                imported_count: The number of discount codes created successfully.
-                failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-                logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+               codes_count: The number of discount codes to create.
+               imported_count: The number of discount codes created successfully.
+               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
 
-                    "Price rule target selection can't be blank"
-                    "Price rule allocation method can't be blank".
+                   "Price rule target selection can't be blank"
+                   "Price rule allocation method can't be blank".
     *
     * This function performs a `POST` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch.json` endpoint.
     *
@@ -1874,7 +1892,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/batch.json",
@@ -1908,7 +1926,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/batch/{}/json",
@@ -1929,8 +1947,8 @@ impl Discounts {
     }
     /**
     * Retrieves a list of discount codes for a discount code creation job.
-              Discount codes that have been successfully created include a populated id field. Discount codes that
-              encountered errors during the creation process include a populated errors field.
+             Discount codes that have been successfully created include a populated id field. Discount codes that
+             encountered errors during the creation process include a populated errors field.
     *
     * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
     *
@@ -1945,7 +1963,7 @@ impl Discounts {
         &self,
         price_rule_id: &str,
         batch_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/price_rules/{}/batch/{}/discount_codes.json",

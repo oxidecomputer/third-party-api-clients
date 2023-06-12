@@ -162,7 +162,7 @@ async fn test_follows_next_links_during_unfold() {
 
     mem::drop(server);
 
-    assert_eq!(res.unwrap().len(), 3)
+    assert_eq!(res.unwrap().body.len(), 3)
 }
 
 #[tokio::test]
@@ -302,4 +302,81 @@ async fn test_ratelimit_error() {
     } else {
         unreachable!("Expected Ratelimiting error, got {:?}", err)
     }
+}
+
+#[tokio::test]
+async fn test_does_not_follow_redirects() {
+    let installation_id = installation_id();
+    let jwt = JWTCredentials::new(app_id(), private_key()).expect("JWT creation should succeed");
+
+    let server = MockServer::start().await;
+    let auth_response = ResponseTemplate::new(200)
+        .set_delay(Duration::from_secs(1))
+        .set_body_json(InstallationToken {
+            token: "test-token".to_owned(),
+            expires_at: Default::default(),
+            has_multiple_single_files: Default::default(),
+            permissions: Default::default(),
+            repositories: Default::default(),
+            repository_selection: Default::default(),
+            single_file: Default::default(),
+            single_file_paths: Default::default(),
+        });
+
+    Mock::given(method("POST"))
+        .and(path(format!(
+            "/app/installations/{installation_id}/access_tokens"
+        )))
+        .and(bearer_token(jwt.token()))
+        .respond_with(auth_response)
+        .expect(1)
+        .mount(&server)
+        .await;
+
+    let download_path = "/fake-download-path";
+
+    Mock::given(method("GET"))
+        .and(path(
+            "/repos/test_owner/test_repo/actions/artifacts/12345/test_fmt".to_string(),
+        ))
+        .respond_with(
+            ResponseTemplate::new(302)
+                .set_delay(Duration::from_secs(1))
+                .append_header(
+                    HeaderName::from_bytes("Location".as_bytes().to_vec()).unwrap(),
+                    HeaderValue::from_bytes(
+                        format!("{}{}", server.uri(), download_path).into_bytes(),
+                    )
+                    .unwrap(),
+                )
+                .set_body_bytes(vec![]),
+        )
+        .expect(1)
+        .named("Get artifact location")
+        .mount(&server)
+        .await;
+
+    let token_generator = InstallationTokenGenerator::new(installation_id, jwt);
+    let mut client = Client::new(
+        concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
+        Credentials::InstallationToken(token_generator),
+    )
+    .expect("Client creation should succeed");
+    client.with_host_override(server.uri());
+
+    let res = client
+        .actions()
+        .download_artifact("test_owner", "test_repo", 12345, "test_fmt")
+        .await;
+
+    mem::drop(server);
+
+    assert!(res
+        .unwrap()
+        .headers
+        .get("Location")
+        .unwrap()
+        .to_str()
+        .unwrap()
+        .ends_with("/fake-download-path"));
 }

@@ -27,7 +27,7 @@ impl Resources {
         customer: &str,
         max_results: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Building>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Building>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -44,7 +44,7 @@ impl Resources {
             ),
             None,
         );
-        let resp: crate::types::Buildings = self
+        let resp: crate::Response<crate::types::Buildings> = self
             .client
             .get(
                 &url,
@@ -56,7 +56,11 @@ impl Resources {
             .await?;
 
         // Return our response data.
-        Ok(resp.buildings.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.buildings.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
@@ -68,7 +72,7 @@ impl Resources {
     pub async fn buildings_list_all(
         &self,
         customer: &str,
-    ) -> ClientResult<Vec<crate::types::Building>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Building>>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings",
@@ -76,7 +80,11 @@ impl Resources {
             ),
             None,
         );
-        let mut resp: crate::types::Buildings = self
+        let crate::Response::<crate::types::Buildings> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -87,13 +95,17 @@ impl Resources {
             )
             .await?;
 
-        let mut buildings = resp.buildings;
-        let mut page = resp.next_page_token;
+        let mut buildings = body.buildings;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Buildings> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -104,7 +116,11 @@ impl Resources {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Buildings> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -116,17 +132,17 @@ impl Resources {
                     .await?;
             }
 
-            buildings.append(&mut resp.buildings);
+            buildings.append(&mut body.buildings);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(buildings)
+        Ok(crate::Response::new(status, headers, buildings))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
@@ -143,7 +159,7 @@ impl Resources {
         customer: &str,
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
-    ) -> ClientResult<crate::types::Building> {
+    ) -> ClientResult<crate::Response<crate::types::Building>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
@@ -184,7 +200,7 @@ impl Resources {
         &self,
         customer: &str,
         building_id: &str,
-    ) -> ClientResult<crate::types::Building> {
+    ) -> ClientResult<crate::Response<crate::types::Building>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}",
@@ -220,7 +236,7 @@ impl Resources {
         building_id: &str,
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
-    ) -> ClientResult<crate::types::Building> {
+    ) -> ClientResult<crate::Response<crate::types::Building>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
@@ -258,7 +274,11 @@ impl Resources {
      * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      * * `building_id: &str` -- The id of the building to delete.
      */
-    pub async fn buildings_delete(&self, customer: &str, building_id: &str) -> ClientResult<()> {
+    pub async fn buildings_delete(
+        &self,
+        customer: &str,
+        building_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}",
@@ -294,7 +314,7 @@ impl Resources {
         building_id: &str,
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
-    ) -> ClientResult<crate::types::Building> {
+    ) -> ClientResult<crate::Response<crate::types::Building>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
@@ -342,7 +362,7 @@ impl Resources {
         order_by: &str,
         page_token: &str,
         query: &str,
-    ) -> ClientResult<Vec<crate::types::CalendarResource>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CalendarResource>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -365,7 +385,7 @@ impl Resources {
             ),
             None,
         );
-        let resp: crate::types::CalendarResources = self
+        let resp: crate::Response<crate::types::CalendarResources> = self
             .client
             .get(
                 &url,
@@ -377,7 +397,11 @@ impl Resources {
             .await?;
 
         // Return our response data.
-        Ok(resp.items.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.items.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
@@ -391,7 +415,7 @@ impl Resources {
         customer: &str,
         order_by: &str,
         query: &str,
-    ) -> ClientResult<Vec<crate::types::CalendarResource>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CalendarResource>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.is_empty() {
             query_args.push(("orderBy".to_string(), order_by.to_string()));
@@ -408,7 +432,11 @@ impl Resources {
             ),
             None,
         );
-        let mut resp: crate::types::CalendarResources = self
+        let crate::Response::<crate::types::CalendarResources> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -419,13 +447,17 @@ impl Resources {
             )
             .await?;
 
-        let mut items = resp.items;
-        let mut page = resp.next_page_token;
+        let mut items = body.items;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::CalendarResources> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -436,7 +468,11 @@ impl Resources {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::CalendarResources> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -448,17 +484,17 @@ impl Resources {
                     .await?;
             }
 
-            items.append(&mut resp.items);
+            items.append(&mut body.items);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(items)
+        Ok(crate::Response::new(status, headers, items))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
@@ -473,7 +509,7 @@ impl Resources {
         &self,
         customer: &str,
         body: &crate::types::CalendarResource,
-    ) -> ClientResult<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarResource>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars",
@@ -505,7 +541,7 @@ impl Resources {
         &self,
         customer: &str,
         calendar_resource_id: &str,
-    ) -> ClientResult<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarResource>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -539,7 +575,7 @@ impl Resources {
         customer: &str,
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
-    ) -> ClientResult<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarResource>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -572,7 +608,7 @@ impl Resources {
         &self,
         customer: &str,
         calendar_resource_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -606,7 +642,7 @@ impl Resources {
         customer: &str,
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
-    ) -> ClientResult<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::Response<crate::types::CalendarResource>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -641,7 +677,7 @@ impl Resources {
         customer: &str,
         max_results: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Feature>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -658,7 +694,7 @@ impl Resources {
             ),
             None,
         );
-        let resp: crate::types::Features = self
+        let resp: crate::Response<crate::types::Features> = self
             .client
             .get(
                 &url,
@@ -670,7 +706,11 @@ impl Resources {
             .await?;
 
         // Return our response data.
-        Ok(resp.features.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.features.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
@@ -682,7 +722,7 @@ impl Resources {
     pub async fn features_list_all(
         &self,
         customer: &str,
-    ) -> ClientResult<Vec<crate::types::Feature>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features",
@@ -690,7 +730,11 @@ impl Resources {
             ),
             None,
         );
-        let mut resp: crate::types::Features = self
+        let crate::Response::<crate::types::Features> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -701,13 +745,17 @@ impl Resources {
             )
             .await?;
 
-        let mut features = resp.features;
-        let mut page = resp.next_page_token;
+        let mut features = body.features;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Features> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -718,7 +766,11 @@ impl Resources {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Features> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -730,17 +782,17 @@ impl Resources {
                     .await?;
             }
 
-            features.append(&mut resp.features);
+            features.append(&mut body.features);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(features)
+        Ok(crate::Response::new(status, headers, features))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
@@ -755,7 +807,7 @@ impl Resources {
         &self,
         customer: &str,
         body: &crate::types::Feature,
-    ) -> ClientResult<crate::types::Feature> {
+    ) -> ClientResult<crate::Response<crate::types::Feature>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features",
@@ -787,7 +839,7 @@ impl Resources {
         &self,
         customer: &str,
         feature_key: &str,
-    ) -> ClientResult<crate::types::Feature> {
+    ) -> ClientResult<crate::Response<crate::types::Feature>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -821,7 +873,7 @@ impl Resources {
         customer: &str,
         feature_key: &str,
         body: &crate::types::Feature,
-    ) -> ClientResult<crate::types::Feature> {
+    ) -> ClientResult<crate::Response<crate::types::Feature>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -850,7 +902,11 @@ impl Resources {
      * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      * * `feature_key: &str` -- The unique ID of the feature to delete.
      */
-    pub async fn features_delete(&self, customer: &str, feature_key: &str) -> ClientResult<()> {
+    pub async fn features_delete(
+        &self,
+        customer: &str,
+        feature_key: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -884,7 +940,7 @@ impl Resources {
         customer: &str,
         feature_key: &str,
         body: &crate::types::Feature,
-    ) -> ClientResult<crate::types::Feature> {
+    ) -> ClientResult<crate::Response<crate::types::Feature>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -918,7 +974,7 @@ impl Resources {
         customer: &str,
         old_name: &str,
         body: &crate::types::FeatureRename,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}/rename",

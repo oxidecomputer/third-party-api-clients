@@ -27,7 +27,7 @@ impl TemplateCustomFields {
         &self,
         account_id: &str,
         template_id: &str,
-    ) -> ClientResult<crate::types::CustomFields> {
+    ) -> ClientResult<crate::Response<crate::types::CustomFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/custom_fields",
@@ -65,7 +65,7 @@ impl TemplateCustomFields {
         account_id: &str,
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
-    ) -> ClientResult<crate::types::CustomFields> {
+    ) -> ClientResult<crate::Response<crate::types::CustomFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/custom_fields",
@@ -101,7 +101,7 @@ impl TemplateCustomFields {
         account_id: &str,
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
-    ) -> ClientResult<crate::types::CustomFields> {
+    ) -> ClientResult<crate::Response<crate::types::CustomFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/custom_fields",
@@ -137,7 +137,7 @@ impl TemplateCustomFields {
         account_id: &str,
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
-    ) -> ClientResult<crate::types::CustomFields> {
+    ) -> ClientResult<crate::Response<crate::types::CustomFields>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/custom_fields",

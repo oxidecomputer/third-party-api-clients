@@ -18,7 +18,7 @@ impl Receiving {
      */
     pub async fn get_fulfillment_center(
         &self,
-    ) -> ClientResult<Vec<crate::types::ReceivingFulfillmentCenter>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ReceivingFulfillmentCenter>>> {
         let url = self.client.url("/fulfillmentCenter", None);
         self.client
             .get(
@@ -39,7 +39,7 @@ impl Receiving {
      */
     pub async fn get_all_fulfillment_center(
         &self,
-    ) -> ClientResult<Vec<crate::types::ReceivingFulfillmentCenter>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ReceivingFulfillmentCenter>>> {
         let url = self.client.url("/fulfillmentCenter", None);
         self.client
             .get_all_pages(
@@ -60,7 +60,10 @@ impl Receiving {
      *
      * * `id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, id: i64) -> ClientResult<crate::types::ReceivingOrder> {
+    pub async fn get(
+        &self,
+        id: i64,
+    ) -> ClientResult<crate::Response<crate::types::ReceivingOrder>> {
         let url = self.client.url(
             &format!(
                 "/receiving/{}",
@@ -87,7 +90,7 @@ impl Receiving {
      *
      * * `id: i64` -- Unique id of the channel.
      */
-    pub async fn get_label(&self, id: i64) -> ClientResult<bytes::Bytes> {
+    pub async fn get_label(&self, id: i64) -> ClientResult<crate::Response<bytes::Bytes>> {
         let url = self.client.url(
             &format!(
                 "/receiving/{}/labels",
@@ -113,7 +116,7 @@ impl Receiving {
     pub async fn post(
         &self,
         body: &crate::types::ReceivingCreateOrderModel,
-    ) -> ClientResult<crate::types::ReceivingOrder> {
+    ) -> ClientResult<crate::Response<crate::types::ReceivingOrder>> {
         let url = self.client.url("/receiving", None);
         self.client
             .post(
@@ -134,7 +137,7 @@ impl Receiving {
      *
      * * `id: i64` -- Id of the receiving order to cancel.
      */
-    pub async fn post_cancel(&self, id: i64) -> ClientResult<()> {
+    pub async fn post_cancel(&self, id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/receiving/{}/cancel",

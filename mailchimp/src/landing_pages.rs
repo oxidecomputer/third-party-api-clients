@@ -33,7 +33,7 @@ impl LandingPages {
         fields: &[String],
         exclude_fields: &[String],
         count: i64,
-    ) -> ClientResult<crate::types::GetAllLandingPagesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetAllLandingPagesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -77,7 +77,7 @@ impl LandingPages {
         &self,
         use_default_list: bool,
         body: &crate::types::LandingPageData,
-    ) -> ClientResult<crate::types::LandingPage> {
+    ) -> ClientResult<crate::Response<crate::types::LandingPage>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_default_list {
             query_args.push(("use_default_list".to_string(), use_default_list.to_string()));
@@ -112,7 +112,7 @@ impl LandingPages {
         fields: &[String],
         exclude_fields: &[String],
         page_id: &str,
-    ) -> ClientResult<crate::types::LandingPage> {
+    ) -> ClientResult<crate::Response<crate::types::LandingPage>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -150,7 +150,7 @@ impl LandingPages {
      *
      * * `page_id: &str` -- The unique id for the page.
      */
-    pub async fn delete(&self, page_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, page_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}",
@@ -183,7 +183,7 @@ impl LandingPages {
         &self,
         page_id: &str,
         body: &crate::types::LandingPageDataType,
-    ) -> ClientResult<crate::types::LandingPage> {
+    ) -> ClientResult<crate::Response<crate::types::LandingPage>> {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}",
@@ -215,7 +215,7 @@ impl LandingPages {
     pub async fn post_actions_publish(
         &self,
         page_id: &str,
-    ) -> ClientResult<crate::types::LandingPage> {
+    ) -> ClientResult<crate::Response<crate::types::LandingPage>> {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}/actions/publish",
@@ -244,7 +244,7 @@ impl LandingPages {
      *
      * * `page_id: &str` -- The unique id for the page.
      */
-    pub async fn post_actions_unpublish(&self, page_id: &str) -> ClientResult<()> {
+    pub async fn post_actions_unpublish(&self, page_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}/actions/unpublish",
@@ -280,7 +280,7 @@ impl LandingPages {
         fields: &[String],
         exclude_fields: &[String],
         page_id: &str,
-    ) -> ClientResult<crate::types::LandingPageContent> {
+    ) -> ClientResult<crate::Response<crate::types::LandingPageContent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

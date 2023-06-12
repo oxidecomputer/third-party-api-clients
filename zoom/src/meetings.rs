@@ -37,7 +37,7 @@ impl Meetings {
         page_size: i64,
         next_page_token: &str,
         page_number: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -96,7 +96,7 @@ impl Meetings {
         &self,
         user_id: &str,
         body: &crate::types::MeetingCreate,
-    ) -> ClientResult<crate::types::MeetingCreateResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingCreateResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/meetings",
@@ -139,7 +139,7 @@ impl Meetings {
         meeting_id: i64,
         occurrence_id: &str,
         show_previous_occurrences: bool,
-    ) -> ClientResult<crate::types::MeetingResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -200,7 +200,7 @@ impl Meetings {
         occurrence_id: &str,
         schedule_for_reminder: bool,
         cancel_meeting_reminder: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cancel_meeting_reminder.is_empty() {
             query_args.push((
@@ -257,7 +257,7 @@ impl Meetings {
         meeting_id: i64,
         occurrence_id: &str,
         body: &crate::types::MeetingUpdateRequestAllOf,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -300,7 +300,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         body: &crate::types::MeetingStatusRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/status",
@@ -350,7 +350,7 @@ impl Meetings {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -410,7 +410,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         occurrence_ids: &str,
-    ) -> ClientResult<crate::types::MeetingRegistrantCreateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingRegistrantCreateResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_ids.is_empty() {
             query_args.push(("occurrence_ids".to_string(), occurrence_ids.to_string()));
@@ -455,7 +455,7 @@ impl Meetings {
         occurrence_id: &str,
         meeting_id: i64,
         registrant_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -501,7 +501,7 @@ impl Meetings {
         meeting_id: i64,
         occurrence_id: &str,
         body: &crate::types::RegistrantStatus,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -545,7 +545,7 @@ impl Meetings {
     pub async fn past_details(
         &self,
         meeting_uuid: &str,
-    ) -> ClientResult<crate::types::PastMeetingDetailsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PastMeetingDetailsResponse>> {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}",
@@ -591,7 +591,7 @@ impl Meetings {
         meeting_uuid: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::PastMeetingParticipantsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::PastMeetingParticipantsResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -634,7 +634,10 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn past(&self, meeting_id: i64) -> ClientResult<crate::types::Domains> {
+    pub async fn past(
+        &self,
+        meeting_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/instances",
@@ -671,7 +674,10 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn poll(&self, meeting_id: i64) -> ClientResult<crate::types::Domains> {
+    pub async fn poll(
+        &self,
+        meeting_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls",
@@ -713,7 +719,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         body: &crate::types::Poll,
-    ) -> ClientResult<crate::types::MeetingPollGetResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingPollGetResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls",
@@ -755,7 +761,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         poll_id: &str,
-    ) -> ClientResult<crate::types::MeetingPollGetResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingPollGetResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls/{}",
@@ -798,7 +804,7 @@ impl Meetings {
         meeting_id: i64,
         poll_id: &str,
         body: &crate::types::Poll,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls/{}",
@@ -837,7 +843,11 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `poll_id: &str` -- User's first name.
      */
-    pub async fn poll_delete(&self, meeting_id: i64, poll_id: &str) -> ClientResult<()> {
+    pub async fn poll_delete(
+        &self,
+        meeting_id: i64,
+        poll_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls/{}",
@@ -878,7 +888,7 @@ impl Meetings {
     pub async fn registrants_questions_get(
         &self,
         meeting_id: i64,
-    ) -> ClientResult<crate::types::MeetingRegistrantQuestionsData> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingRegistrantQuestionsData>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants/questions",
@@ -918,7 +928,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         body: &crate::types::MeetingRegistrantQuestionsData,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants/questions",
@@ -957,7 +967,7 @@ impl Meetings {
     pub async fn invitation(
         &self,
         meeting_id: i64,
-    ) -> ClientResult<crate::types::MeetingInvitation> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingInvitation>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/invitation",
@@ -998,7 +1008,7 @@ impl Meetings {
     pub async fn get_live_stream_details(
         &self,
         meeting_id: &str,
-    ) -> ClientResult<crate::types::GetLiveStreamDetailsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetLiveStreamDetailsResponse>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/livestream",
@@ -1038,7 +1048,7 @@ impl Meetings {
         &self,
         meeting_id: &str,
         body: &crate::types::MeetingLiveStream,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/livestream",
@@ -1079,7 +1089,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         body: &crate::types::MeetingLiveStreamStatus,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/livestream/status",
@@ -1119,7 +1129,7 @@ impl Meetings {
     pub async fn list_past_polls(
         &self,
         meeting_id: &str,
-    ) -> ClientResult<crate::types::ReportMeetingPollsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ReportMeetingPollsResponse>> {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/polls",
@@ -1166,7 +1176,7 @@ impl Meetings {
         &self,
         meeting_id: &str,
         body: &crate::types::AddBatchRegistrantsRequest,
-    ) -> ClientResult<crate::types::AddBatchRegistrantsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddBatchRegistrantsResponse>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/batch_registrants",
@@ -1207,7 +1217,7 @@ impl Meetings {
         &self,
         meeting_id: &str,
         body: &crate::types::InMeetingRecordingControlRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/live_meetings/{}/events",
@@ -1232,7 +1242,7 @@ impl Meetings {
      *
      * Get the quality scores of a meeting.
      */
-    pub async fn quality_score(&self) -> ClientResult<crate::types::Domains> {
+    pub async fn quality_score(&self) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url("/metrics/quality", None);
         self.client
             .get(
@@ -1266,7 +1276,7 @@ impl Meetings {
         &self,
         meeting_id: &str,
         body: &crate::types::CreateBatchPollsRequest,
-    ) -> ClientResult<crate::types::CreateBatchPollsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::CreateBatchPollsResponse>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/batch_polls",
@@ -1301,7 +1311,7 @@ impl Meetings {
     pub async fn list_template(
         &self,
         user_id: &str,
-    ) -> ClientResult<crate::types::ListMeetingTemplatesResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::ListMeetingTemplatesResponseData>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/meeting_templates",
@@ -1338,7 +1348,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         body: &crate::types::InviteLink,
-    ) -> ClientResult<crate::types::InviteLinks> {
+    ) -> ClientResult<crate::Response<crate::types::InviteLinks>> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/invite_links",

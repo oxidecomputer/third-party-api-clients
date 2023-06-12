@@ -35,7 +35,7 @@ impl PhoneDevices {
         type_: crate::types::ListPhoneDevicesType,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::ListPhoneDevicesResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListPhoneDevicesResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -48,7 +48,7 @@ impl PhoneDevices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/phone/devices?{}", query_), None);
-        let resp: crate::types::ListPhoneDevicesResponseData = self
+        let resp: crate::Response<crate::types::ListPhoneDevicesResponseData> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl PhoneDevices {
             .await?;
 
         // Return our response data.
-        Ok(resp.devices.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.devices.to_vec(),
+        ))
     }
     /**
      * List devices.
@@ -80,14 +84,18 @@ impl PhoneDevices {
     pub async fn list_all(
         &self,
         type_: crate::types::ListPhoneDevicesType,
-    ) -> ClientResult<Vec<crate::types::ListPhoneDevicesResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListPhoneDevicesResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/phone/devices?{}", query_), None);
-        let mut resp: crate::types::ListPhoneDevicesResponseData = self
+        let crate::Response::<crate::types::ListPhoneDevicesResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -98,14 +106,18 @@ impl PhoneDevices {
             )
             .await?;
 
-        let mut devices = resp.devices;
-        let mut page = resp.next_page_token;
+        let mut devices = body.devices;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListPhoneDevicesResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -116,7 +128,11 @@ impl PhoneDevices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListPhoneDevicesResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -128,17 +144,17 @@ impl PhoneDevices {
                     .await?;
             }
 
-            devices.append(&mut resp.devices);
+            devices.append(&mut body.devices);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(devices)
+        Ok(crate::Response::new(status, headers, devices))
     }
     /**
      * Add a device.
@@ -156,7 +172,10 @@ impl PhoneDevices {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn add(&self, body: &crate::types::AddPhoneDeviceRequest) -> ClientResult<()> {
+    pub async fn add(
+        &self,
+        body: &crate::types::AddPhoneDeviceRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/phone/devices", None);
         self.client
             .post(
@@ -188,7 +207,7 @@ impl PhoneDevices {
     pub async fn get_device(
         &self,
         device_id: &str,
-    ) -> ClientResult<crate::types::GetDeviceResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetDeviceResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",
@@ -225,7 +244,7 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the device.
      */
-    pub async fn delete_device(&self, device_id: &str) -> ClientResult<()> {
+    pub async fn delete_device(&self, device_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",
@@ -265,7 +284,7 @@ impl PhoneDevices {
         &self,
         device_id: &str,
         body: &crate::types::UpdateDeviceRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",

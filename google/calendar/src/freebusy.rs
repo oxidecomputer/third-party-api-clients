@@ -19,7 +19,7 @@ impl Freebusy {
     pub async fn query(
         &self,
         body: &crate::types::FreeBusyRequest,
-    ) -> ClientResult<crate::types::FreeBusyResponse> {
+    ) -> ClientResult<crate::Response<crate::types::FreeBusyResponse>> {
         let url = self.client.url("/freeBusy", None);
         self.client
             .post(

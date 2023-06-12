@@ -27,7 +27,7 @@ impl ActivityFeed {
         &self,
         count: i64,
         offset: i64,
-    ) -> ClientResult<crate::types::GetActivityFeedChimpChatterResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetActivityFeedChimpChatterResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));

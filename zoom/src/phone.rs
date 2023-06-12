@@ -33,7 +33,7 @@ impl Phone {
         &self,
         account_id: &str,
         body: &crate::types::SetUpAccountRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/setup",
@@ -89,7 +89,7 @@ impl Phone {
         number_type: crate::types::Type,
         pending_numbers: bool,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListAccountPhoneNumbersResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !extension_type.to_string().is_empty() {
             query_args.push(("extension_type".to_string(), extension_type.to_string()));
@@ -114,7 +114,7 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/phone/numbers?{}", query_), None);
-        let resp: crate::types::ListAccountPhoneNumbersResponseData = self
+        let resp: crate::Response<crate::types::ListAccountPhoneNumbersResponseData> = self
             .client
             .get(
                 &url,
@@ -126,7 +126,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.phone_numbers.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.phone_numbers.to_vec(),
+        ))
     }
     /**
      * List phone numbers.
@@ -150,7 +154,7 @@ impl Phone {
         number_type: crate::types::Type,
         pending_numbers: bool,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListAccountPhoneNumbersResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !extension_type.to_string().is_empty() {
             query_args.push(("extension_type".to_string(), extension_type.to_string()));
@@ -169,7 +173,11 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/phone/numbers?{}", query_), None);
-        let mut resp: crate::types::ListAccountPhoneNumbersResponseData = self
+        let crate::Response::<crate::types::ListAccountPhoneNumbersResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -180,14 +188,18 @@ impl Phone {
             )
             .await?;
 
-        let mut phone_numbers = resp.phone_numbers;
-        let mut page = resp.next_page_token;
+        let mut phone_numbers = body.phone_numbers;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListAccountPhoneNumbersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -198,7 +210,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListAccountPhoneNumbersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -210,17 +226,17 @@ impl Phone {
                     .await?;
             }
 
-            phone_numbers.append(&mut resp.phone_numbers);
+            phone_numbers.append(&mut body.phone_numbers);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(phone_numbers)
+        Ok(crate::Response::new(status, headers, phone_numbers))
     }
     /**
      * Get user's profile.
@@ -239,7 +255,10 @@ impl Phone {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user(&self, user_id: &str) -> ClientResult<crate::types::PhoneUserResponse> {
+    pub async fn user(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::PhoneUserResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}",
@@ -274,7 +293,7 @@ impl Phone {
         &self,
         user_id: &str,
         body: &crate::types::UpdateUserProfileRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}",
@@ -308,7 +327,7 @@ impl Phone {
     pub async fn setting(
         &self,
         _account_id: &str,
-    ) -> ClientResult<crate::types::PhoneSettingResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PhoneSettingResponse>> {
         let url = self.client.url("/phone/settings", None);
         self.client
             .get(
@@ -340,7 +359,7 @@ impl Phone {
         &self,
         _account_id: &str,
         body: &crate::types::UpdatePhoneSettingsRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/phone/settings", None);
         self.client
             .patch(
@@ -372,7 +391,7 @@ impl Phone {
     pub async fn user_settings(
         &self,
         user_id: &str,
-    ) -> ClientResult<crate::types::PhoneUserSettingsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PhoneUserSettingsResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings",
@@ -414,7 +433,7 @@ impl Phone {
         page_size: i64,
         next_page_token: &str,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::Templates>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Templates>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -429,7 +448,7 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/setting_templates?{}", query_), None);
-        let resp: crate::types::ListSettingTemplatesResponse = self
+        let resp: crate::Response<crate::types::ListSettingTemplatesResponse> = self
             .client
             .get(
                 &url,
@@ -441,7 +460,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.templates.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.templates.to_vec(),
+        ))
     }
     /**
      * List setting templates.
@@ -461,7 +484,7 @@ impl Phone {
     pub async fn list_all_setting_templates(
         &self,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::Templates>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Templates>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !site_id.is_empty() {
             query_args.push(("site_id".to_string(), site_id.to_string()));
@@ -470,7 +493,11 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/setting_templates?{}", query_), None);
-        let mut resp: crate::types::ListSettingTemplatesResponse = self
+        let crate::Response::<crate::types::ListSettingTemplatesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -481,14 +508,18 @@ impl Phone {
             )
             .await?;
 
-        let mut templates = resp.templates;
-        let mut page = resp.next_page_token;
+        let mut templates = body.templates;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListSettingTemplatesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -499,7 +530,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListSettingTemplatesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -511,17 +546,17 @@ impl Phone {
                     .await?;
             }
 
-            templates.append(&mut resp.templates);
+            templates.append(&mut body.templates);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(templates)
+        Ok(crate::Response::new(status, headers, templates))
     }
     /**
      * Add a setting template.
@@ -539,7 +574,7 @@ impl Phone {
     pub async fn add_setting_template(
         &self,
         body: &crate::types::AddSettingTemplateRequest,
-    ) -> ClientResult<crate::types::AddSettingTemplateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddSettingTemplateResponse>> {
         let url = self.client.url("/phone/setting_templates", None);
         self.client
             .post(
@@ -561,7 +596,7 @@ impl Phone {
     pub async fn batch_add_locations(
         &self,
         body: &crate::types::BatchAddLocationsRequest,
-    ) -> ClientResult<Vec<crate::types::BatchAddLocationsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BatchAddLocationsResponse>>> {
         let url = self.client.url("/phone/batch_locations", None);
         self.client
             .post(
@@ -595,7 +630,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::ListLocationsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListLocationsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -607,7 +642,7 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/locations?{}", query_), None);
-        let resp: crate::types::ListLocationsResponseData = self
+        let resp: crate::Response<crate::types::ListLocationsResponseData> = self
             .client
             .get(
                 &url,
@@ -619,7 +654,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.locations.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.locations.to_vec(),
+        ))
     }
     /**
      * List emergency service locations.
@@ -638,9 +677,13 @@ impl Phone {
      */
     pub async fn list_all_locations(
         &self,
-    ) -> ClientResult<Vec<crate::types::ListLocationsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListLocationsResponse>>> {
         let url = self.client.url("/phone/locations", None);
-        let mut resp: crate::types::ListLocationsResponseData = self
+        let crate::Response::<crate::types::ListLocationsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -651,14 +694,18 @@ impl Phone {
             )
             .await?;
 
-        let mut locations = resp.locations;
-        let mut page = resp.next_page_token;
+        let mut locations = body.locations;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListLocationsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -669,7 +716,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListLocationsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -681,17 +732,17 @@ impl Phone {
                     .await?;
             }
 
-            locations.append(&mut resp.locations);
+            locations.append(&mut body.locations);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(locations)
+        Ok(crate::Response::new(status, headers, locations))
     }
     /**
      * Add emergency service location.
@@ -709,7 +760,7 @@ impl Phone {
     pub async fn add_location(
         &self,
         body: &crate::types::AddLocationRequest,
-    ) -> ClientResult<Vec<crate::types::Site>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Site>>> {
         let url = self.client.url("/phone/locations", None);
         self.client
             .post(
@@ -741,7 +792,7 @@ impl Phone {
     pub async fn get_location(
         &self,
         location_id: &str,
-    ) -> ClientResult<crate::types::GetLocationResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetLocationResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
@@ -776,7 +827,7 @@ impl Phone {
      *
      * * `location_id: &str` -- The emergency service location's ID.
      */
-    pub async fn delete_location(&self, location_id: &str) -> ClientResult<()> {
+    pub async fn delete_location(&self, location_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
@@ -811,7 +862,7 @@ impl Phone {
         &self,
         location_id: &str,
         body: &crate::types::UpdateLocationRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
@@ -851,7 +902,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::SipGroups>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SipGroups>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -863,7 +914,7 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/sip_groups?{}", query_), None);
-        let resp: crate::types::ListSipGroupsResponse = self
+        let resp: crate::Response<crate::types::ListSipGroupsResponse> = self
             .client
             .get(
                 &url,
@@ -875,7 +926,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.sip_groups.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.sip_groups.to_vec(),
+        ))
     }
     /**
      * List SIP groups.
@@ -892,9 +947,15 @@ impl Phone {
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
-    pub async fn list_all_sip_groups(&self) -> ClientResult<Vec<crate::types::SipGroups>> {
+    pub async fn list_all_sip_groups(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::SipGroups>>> {
         let url = self.client.url("/phone/sip_groups", None);
-        let mut resp: crate::types::ListSipGroupsResponse = self
+        let crate::Response::<crate::types::ListSipGroupsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -905,14 +966,18 @@ impl Phone {
             )
             .await?;
 
-        let mut sip_groups = resp.sip_groups;
-        let mut page = resp.next_page_token;
+        let mut sip_groups = body.sip_groups;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListSipGroupsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -923,7 +988,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListSipGroupsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -935,17 +1004,17 @@ impl Phone {
                     .await?;
             }
 
-            sip_groups.append(&mut resp.sip_groups);
+            sip_groups.append(&mut body.sip_groups);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(sip_groups)
+        Ok(crate::Response::new(status, headers, sip_groups))
     }
     /**
      * Get setting template details.
@@ -969,7 +1038,7 @@ impl Phone {
         &self,
         template_id: &str,
         custom_query_fields: &str,
-    ) -> ClientResult<crate::types::GetSettingTemplateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetSettingTemplateResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -1017,7 +1086,7 @@ impl Phone {
         &self,
         template_id: &str,
         body: &crate::types::UpdateSettingTemplateRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/setting_templates/{}",
@@ -1069,7 +1138,7 @@ impl Phone {
         next_page_token: &str,
         phone_number: &str,
         time_type: crate::types::TimeType,
-    ) -> ClientResult<Vec<crate::types::CallLogs>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CallLogs>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1101,7 +1170,7 @@ impl Phone {
             ),
             None,
         );
-        let resp: crate::types::PhoneUserCallLogsResponse = self
+        let resp: crate::Response<crate::types::PhoneUserCallLogsResponse> = self
             .client
             .get(
                 &url,
@@ -1113,7 +1182,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.call_logs.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.call_logs.to_vec(),
+        ))
     }
     /**
      * Get user's call logs.
@@ -1138,7 +1211,7 @@ impl Phone {
         type_: crate::types::PhoneUserCallLogsType,
         phone_number: &str,
         time_type: crate::types::TimeType,
-    ) -> ClientResult<Vec<crate::types::CallLogs>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CallLogs>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1164,7 +1237,11 @@ impl Phone {
             ),
             None,
         );
-        let mut resp: crate::types::PhoneUserCallLogsResponse = self
+        let crate::Response::<crate::types::PhoneUserCallLogsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1175,14 +1252,18 @@ impl Phone {
             )
             .await?;
 
-        let mut call_logs = resp.call_logs;
-        let mut page = resp.next_page_token;
+        let mut call_logs = body.call_logs;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PhoneUserCallLogsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -1193,7 +1274,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PhoneUserCallLogsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -1205,17 +1290,17 @@ impl Phone {
                     .await?;
             }
 
-            call_logs.append(&mut resp.call_logs);
+            call_logs.append(&mut body.call_logs);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(call_logs)
+        Ok(crate::Response::new(status, headers, call_logs))
     }
     /**
      * Get user's recordings.
@@ -1245,7 +1330,7 @@ impl Phone {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<Vec<crate::types::Recordings>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Recordings>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1268,7 +1353,7 @@ impl Phone {
             ),
             None,
         );
-        let resp: crate::types::PhoneUserRecordingsResponse = self
+        let resp: crate::Response<crate::types::PhoneUserRecordingsResponse> = self
             .client
             .get(
                 &url,
@@ -1280,7 +1365,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.recordings.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.recordings.to_vec(),
+        ))
     }
     /**
      * Get user's recordings.
@@ -1302,7 +1391,7 @@ impl Phone {
         user_id: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<Vec<crate::types::Recordings>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Recordings>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1319,7 +1408,11 @@ impl Phone {
             ),
             None,
         );
-        let mut resp: crate::types::PhoneUserRecordingsResponse = self
+        let crate::Response::<crate::types::PhoneUserRecordingsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1330,14 +1423,18 @@ impl Phone {
             )
             .await?;
 
-        let mut recordings = resp.recordings;
-        let mut page = resp.next_page_token;
+        let mut recordings = body.recordings;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PhoneUserRecordingsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -1348,7 +1445,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PhoneUserRecordingsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -1360,17 +1461,17 @@ impl Phone {
                     .await?;
             }
 
-            recordings.append(&mut resp.recordings);
+            recordings.append(&mut body.recordings);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(recordings)
+        Ok(crate::Response::new(status, headers, recordings))
     }
     /**
      * Get user's voicemails.
@@ -1402,7 +1503,7 @@ impl Phone {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<Vec<crate::types::VoiceMails>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::VoiceMails>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1428,7 +1529,7 @@ impl Phone {
             ),
             None,
         );
-        let resp: crate::types::PhoneUserVoiceMailsResponse = self
+        let resp: crate::Response<crate::types::PhoneUserVoiceMailsResponse> = self
             .client
             .get(
                 &url,
@@ -1440,7 +1541,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.voice_mails.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.voice_mails.to_vec(),
+        ))
     }
     /**
      * Get user's voicemails.
@@ -1463,7 +1568,7 @@ impl Phone {
         status: crate::types::PhoneUserVoiceMailsStatus,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<Vec<crate::types::VoiceMails>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::VoiceMails>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1483,7 +1588,11 @@ impl Phone {
             ),
             None,
         );
-        let mut resp: crate::types::PhoneUserVoiceMailsResponse = self
+        let crate::Response::<crate::types::PhoneUserVoiceMailsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1494,14 +1603,18 @@ impl Phone {
             )
             .await?;
 
-        let mut voice_mails = resp.voice_mails;
-        let mut page = resp.next_page_token;
+        let mut voice_mails = body.voice_mails;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PhoneUserVoiceMailsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -1512,7 +1625,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PhoneUserVoiceMailsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -1524,17 +1641,17 @@ impl Phone {
                     .await?;
             }
 
-            voice_mails.append(&mut resp.voice_mails);
+            voice_mails.append(&mut body.voice_mails);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(voice_mails)
+        Ok(crate::Response::new(status, headers, voice_mails))
     }
     /**
      * Set up shared access.
@@ -1562,7 +1679,7 @@ impl Phone {
         user_id: &str,
         setting_type: &str,
         body: &crate::types::AddUserSettingRequest,
-    ) -> ClientResult<crate::types::AddUserSettingResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddUserSettingResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings/{}",
@@ -1606,7 +1723,7 @@ impl Phone {
         user_id: &str,
         setting_type: &str,
         shared_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !shared_id.is_empty() {
             query_args.push(("shared_id".to_string(), shared_id.to_string()));
@@ -1657,7 +1774,7 @@ impl Phone {
         setting_type: &str,
         user_id: &str,
         body: &crate::types::UpdateUserSettingRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings/{}",
@@ -1715,7 +1832,7 @@ impl Phone {
         path: &str,
         time_type: crate::types::TimeType,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::AccountCallLogsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::AccountCallLogsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1745,7 +1862,7 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/call_logs?{}", query_), None);
-        let resp: crate::types::AccountCallLogsResponseData = self
+        let resp: crate::Response<crate::types::AccountCallLogsResponseData> = self
             .client
             .get(
                 &url,
@@ -1757,7 +1874,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.call_logs.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.call_logs.to_vec(),
+        ))
     }
     /**
      * Get account's call logs.
@@ -1783,7 +1904,7 @@ impl Phone {
         path: &str,
         time_type: crate::types::TimeType,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::AccountCallLogsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::AccountCallLogsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1807,7 +1928,11 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/call_logs?{}", query_), None);
-        let mut resp: crate::types::AccountCallLogsResponseData = self
+        let crate::Response::<crate::types::AccountCallLogsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1818,14 +1943,18 @@ impl Phone {
             )
             .await?;
 
-        let mut call_logs = resp.call_logs;
-        let mut page = resp.next_page_token;
+        let mut call_logs = body.call_logs;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::AccountCallLogsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -1836,7 +1965,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::AccountCallLogsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -1848,17 +1981,17 @@ impl Phone {
                     .await?;
             }
 
-            call_logs.append(&mut resp.call_logs);
+            call_logs.append(&mut body.call_logs);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(call_logs)
+        Ok(crate::Response::new(status, headers, call_logs))
     }
     /**
      * Assign phone number to user.
@@ -1877,7 +2010,7 @@ impl Phone {
         &self,
         user_id: &str,
         body: &crate::types::AddByocNumberResponse,
-    ) -> ClientResult<crate::types::AddByocNumberResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddByocNumberResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/phone_numbers",
@@ -1916,7 +2049,11 @@ impl Phone {
      * * `user_id: &str` -- Provide either userId or email address of the user.
      * * `phone_number_id: &str` -- Provide either phone number or phoneNumberId of the user. .
      */
-    pub async fn unassign_number(&self, user_id: &str, phone_number_id: &str) -> ClientResult<()> {
+    pub async fn unassign_number(
+        &self,
+        user_id: &str,
+        phone_number_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/phone_numbers/{}",
@@ -1952,7 +2089,7 @@ impl Phone {
         &self,
         user_id: &str,
         body: &crate::types::AssignCallingPlanRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/calling_plans",
@@ -1988,7 +2125,11 @@ impl Phone {
      * * `type_: &str` -- The [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of the calling plan that was assigned to user. (e.g: The value of type would be "200" for Unlimited US/Canada calling plan.)
      *   .
      */
-    pub async fn unassign_calling_plan(&self, user_id: &str, type_: &str) -> ClientResult<()> {
+    pub async fn unassign_calling_plan(
+        &self,
+        user_id: &str,
+        type_: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/calling_plans/{}",
@@ -2047,7 +2188,7 @@ impl Phone {
         recording_type: &str,
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
-    ) -> ClientResult<Vec<crate::types::GetPhoneRecordingsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetPhoneRecordingsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -2077,7 +2218,7 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/recordings?{}", query_), None);
-        let resp: crate::types::GetPhoneRecordingsResponseData = self
+        let resp: crate::Response<crate::types::GetPhoneRecordingsResponseData> = self
             .client
             .get(
                 &url,
@@ -2089,7 +2230,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.recordings.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.recordings.to_vec(),
+        ))
     }
     /**
      * Get call recordings.
@@ -2115,7 +2260,7 @@ impl Phone {
         recording_type: &str,
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
-    ) -> ClientResult<Vec<crate::types::GetPhoneRecordingsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetPhoneRecordingsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -2139,7 +2284,11 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/recordings?{}", query_), None);
-        let mut resp: crate::types::GetPhoneRecordingsResponseData = self
+        let crate::Response::<crate::types::GetPhoneRecordingsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -2150,14 +2299,18 @@ impl Phone {
             )
             .await?;
 
-        let mut recordings = resp.recordings;
-        let mut page = resp.next_page_token;
+        let mut recordings = body.recordings;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetPhoneRecordingsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -2168,7 +2321,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetPhoneRecordingsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -2180,17 +2337,17 @@ impl Phone {
                     .await?;
             }
 
-            recordings.append(&mut resp.recordings);
+            recordings.append(&mut body.recordings);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(recordings)
+        Ok(crate::Response::new(status, headers, recordings))
     }
     /**
      * List BYOC SIP trunks.
@@ -2213,7 +2370,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::ByocSipTrunk>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ByocSipTrunk>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -2225,7 +2382,7 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/sip_trunk/trunks?{}", query_), None);
-        let resp: crate::types::ListByocsipTrunkResponse = self
+        let resp: crate::Response<crate::types::ListByocsipTrunkResponse> = self
             .client
             .get(
                 &url,
@@ -2237,7 +2394,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.byoc_sip_trunk.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.byoc_sip_trunk.to_vec(),
+        ))
     }
     /**
      * List BYOC SIP trunks.
@@ -2253,9 +2414,15 @@ impl Phone {
      * **Prerequisites:**
      * * A Business or Enterprise account
      */
-    pub async fn list_all_byocsip_trunk(&self) -> ClientResult<Vec<crate::types::ByocSipTrunk>> {
+    pub async fn list_all_byocsip_trunk(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ByocSipTrunk>>> {
         let url = self.client.url("/phone/sip_trunk/trunks", None);
-        let mut resp: crate::types::ListByocsipTrunkResponse = self
+        let crate::Response::<crate::types::ListByocsipTrunkResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -2266,14 +2433,18 @@ impl Phone {
             )
             .await?;
 
-        let mut byoc_sip_trunk = resp.byoc_sip_trunk;
-        let mut page = resp.next_page_token;
+        let mut byoc_sip_trunk = body.byoc_sip_trunk;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListByocsipTrunkResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -2284,7 +2455,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListByocsipTrunkResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -2296,17 +2471,17 @@ impl Phone {
                     .await?;
             }
 
-            byoc_sip_trunk.append(&mut resp.byoc_sip_trunk);
+            byoc_sip_trunk.append(&mut body.byoc_sip_trunk);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(byoc_sip_trunk)
+        Ok(crate::Response::new(status, headers, byoc_sip_trunk))
     }
     /**
      * Assign SIP trunks.
@@ -2328,7 +2503,7 @@ impl Phone {
         &self,
         account_id: &str,
         body: &crate::types::PostPhoneSipTrunkRequest,
-    ) -> ClientResult<crate::types::PostPhoneSipTrunkRequest> {
+    ) -> ClientResult<crate::Response<crate::types::PostPhoneSipTrunkRequest>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/sip_trunk/trunks",
@@ -2368,7 +2543,7 @@ impl Phone {
         sip_trunk_id: &str,
         account_id: &str,
         body: &crate::types::UpdatePhoneSipTrunkRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/sip_trunk/trunks/{}",
@@ -2409,7 +2584,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::ExternalContacts>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ExternalContacts>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -2421,7 +2596,7 @@ impl Phone {
         let url = self
             .client
             .url(&format!("/phone/external_contacts?{}", query_), None);
-        let resp: crate::types::ListExternalContactsResponse = self
+        let resp: crate::Response<crate::types::ListExternalContactsResponse> = self
             .client
             .get(
                 &url,
@@ -2433,7 +2608,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.external_contacts.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.external_contacts.to_vec(),
+        ))
     }
     /**
      * List external contacts.
@@ -2452,9 +2631,13 @@ impl Phone {
      */
     pub async fn list_all_external_contacts(
         &self,
-    ) -> ClientResult<Vec<crate::types::ExternalContacts>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ExternalContacts>>> {
         let url = self.client.url("/phone/external_contacts", None);
-        let mut resp: crate::types::ListExternalContactsResponse = self
+        let crate::Response::<crate::types::ListExternalContactsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -2465,14 +2648,18 @@ impl Phone {
             )
             .await?;
 
-        let mut external_contacts = resp.external_contacts;
-        let mut page = resp.next_page_token;
+        let mut external_contacts = body.external_contacts;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListExternalContactsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -2483,7 +2670,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListExternalContactsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -2495,17 +2686,17 @@ impl Phone {
                     .await?;
             }
 
-            external_contacts.append(&mut resp.external_contacts);
+            external_contacts.append(&mut body.external_contacts);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(external_contacts)
+        Ok(crate::Response::new(status, headers, external_contacts))
     }
     /**
      * Add an external contact.
@@ -2523,7 +2714,7 @@ impl Phone {
     pub async fn add_external_contact(
         &self,
         body: &crate::types::AddExternalContactRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/phone/external_contacts", None);
         self.client
             .post(
@@ -2555,7 +2746,7 @@ impl Phone {
     pub async fn get_external_contact(
         &self,
         external_contact_id: &str,
-    ) -> ClientResult<crate::types::ExternalContacts> {
+    ) -> ClientResult<crate::Response<crate::types::ExternalContacts>> {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
@@ -2590,7 +2781,10 @@ impl Phone {
      *
      * * `external_contact_id: &str` -- The external contact's ID.
      */
-    pub async fn delete_external_contact(&self, external_contact_id: &str) -> ClientResult<()> {
+    pub async fn delete_external_contact(
+        &self,
+        external_contact_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
@@ -2629,7 +2823,7 @@ impl Phone {
         &self,
         external_contact_id: &str,
         body: &crate::types::UpdateExternalContactRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
@@ -2667,7 +2861,7 @@ impl Phone {
     pub async fn get_number_details(
         &self,
         number_id: &str,
-    ) -> ClientResult<crate::types::GetPhoneNumberDetailsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetPhoneNumberDetailsResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/numbers/{}",
@@ -2705,7 +2899,7 @@ impl Phone {
         &self,
         number_id: &str,
         body: &crate::types::UpdatePhoneNumberDetailsRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/numbers/{}",
@@ -2741,7 +2935,7 @@ impl Phone {
     pub async fn change_main_company_number(
         &self,
         body: &crate::types::ChangeMainCompanyNumberRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/phone/company_number", None);
         self.client
             .put(
@@ -2768,7 +2962,7 @@ impl Phone {
      */
     pub async fn list_calling_plan(
         &self,
-    ) -> ClientResult<crate::types::ListCallingPlansResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::ListCallingPlansResponseData>> {
         let url = self.client.url("/phone/calling_plans", None);
         self.client
             .get(
@@ -2804,7 +2998,7 @@ impl Phone {
         page_size: i64,
         next_page_token: &str,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::ListPhoneUsersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListPhoneUsersResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -2817,7 +3011,7 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/phone/users?{}", query_), None);
-        let resp: crate::types::ListPhoneUsersResponseData = self
+        let resp: crate::Response<crate::types::ListPhoneUsersResponseData> = self
             .client
             .get(
                 &url,
@@ -2829,7 +3023,11 @@ impl Phone {
             .await?;
 
         // Return our response data.
-        Ok(resp.users.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.users.to_vec(),
+        ))
     }
     /**
      * List phone users.
@@ -2849,14 +3047,18 @@ impl Phone {
     pub async fn list_all_users(
         &self,
         site_id: &str,
-    ) -> ClientResult<Vec<crate::types::ListPhoneUsersResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListPhoneUsersResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !site_id.is_empty() {
             query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/phone/users?{}", query_), None);
-        let mut resp: crate::types::ListPhoneUsersResponseData = self
+        let crate::Response::<crate::types::ListPhoneUsersResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -2867,14 +3069,18 @@ impl Phone {
             )
             .await?;
 
-        let mut users = resp.users;
-        let mut page = resp.next_page_token;
+        let mut users = body.users;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListPhoneUsersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -2885,7 +3091,11 @@ impl Phone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListPhoneUsersResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -2897,17 +3107,17 @@ impl Phone {
                     .await?;
             }
 
-            users.append(&mut resp.users);
+            users.append(&mut body.users);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(users)
+        Ok(crate::Response::new(status, headers, users))
     }
     /**
      * Get call log details.
@@ -2929,7 +3139,7 @@ impl Phone {
     pub async fn get_call_log_details(
         &self,
         call_log_id: &str,
-    ) -> ClientResult<crate::types::GetCallLogDetailsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCallLogDetailsResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/call_logs/{}",
@@ -2965,7 +3175,11 @@ impl Phone {
      * * `user_id: &str` -- The user ID or email address of the user.
      * * `call_log_id: &str` -- Unique identifier of the call log. The value for this field can be retrieved from [account's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/accountcalllogs) or [user's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneusercalllogs).
      */
-    pub async fn delete_call_log(&self, user_id: &str, call_log_id: &str) -> ClientResult<()> {
+    pub async fn delete_call_log(
+        &self,
+        user_id: &str,
+        call_log_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/call_logs/{}",
@@ -3000,7 +3214,7 @@ impl Phone {
     pub async fn add_byoc_number(
         &self,
         body: &crate::types::AddByocNumberRequest,
-    ) -> ClientResult<crate::types::AddByocNumberResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddByocNumberResponse>> {
         let url = self.client.url("/phone/byoc_numbers", None);
         self.client
             .post(
@@ -3028,7 +3242,7 @@ impl Phone {
      *
      * * `voicemail_id: &str` -- Unique identifier of the voicemail. Retrieve the value for this field by calling the [Get voicemails](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneuservoicemails) API.
      */
-    pub async fn delete_voicemail(&self, voicemail_id: &str) -> ClientResult<()> {
+    pub async fn delete_voicemail(&self, voicemail_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/voice_mails/{}",

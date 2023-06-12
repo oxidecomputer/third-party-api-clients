@@ -68,7 +68,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
             query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
@@ -133,7 +133,7 @@ impl Events {
             ),
             None,
         );
-        let resp: crate::types::Events = self
+        let resp: crate::Response<crate::types::Events> = self
             .client
             .get(
                 &url,
@@ -145,7 +145,11 @@ impl Events {
             .await?;
 
         // Return our response data.
-        Ok(resp.items.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.items.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events` endpoint.
@@ -170,7 +174,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
             query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
@@ -229,7 +233,11 @@ impl Events {
             ),
             None,
         );
-        let mut resp: crate::types::Events = self
+        let crate::Response::<crate::types::Events> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -240,13 +248,17 @@ impl Events {
             )
             .await?;
 
-        let mut items = resp.items;
-        let mut page = resp.next_page_token;
+        let mut items = body.items;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Events> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -257,7 +269,11 @@ impl Events {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Events> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -269,17 +285,17 @@ impl Events {
                     .await?;
             }
 
-            items.append(&mut resp.items);
+            items.append(&mut body.items);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(items)
+        Ok(crate::Response::new(status, headers, items))
     }
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events` endpoint.
@@ -306,7 +322,7 @@ impl Events {
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> ClientResult<crate::types::Event> {
+    ) -> ClientResult<crate::Response<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -368,7 +384,7 @@ impl Events {
         conference_data_version: u64,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> ClientResult<crate::types::Event> {
+    ) -> ClientResult<crate::Response<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -421,7 +437,7 @@ impl Events {
         text: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> ClientResult<crate::types::Event> {
+    ) -> ClientResult<crate::Response<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -512,7 +528,7 @@ impl Events {
         time_zone: &str,
         updated_min: &str,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
             query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
@@ -606,7 +622,7 @@ impl Events {
         event_id: &str,
         max_attendees: i64,
         time_zone: &str,
-    ) -> ClientResult<crate::types::Event> {
+    ) -> ClientResult<crate::Response<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
             query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
@@ -662,7 +678,7 @@ impl Events {
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> ClientResult<crate::types::Event> {
+    ) -> ClientResult<crate::Response<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -728,7 +744,7 @@ impl Events {
         event_id: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -787,7 +803,7 @@ impl Events {
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> ClientResult<crate::types::Event> {
+    ) -> ClientResult<crate::Response<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -864,7 +880,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
             query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
@@ -900,7 +916,7 @@ impl Events {
             ),
             None,
         );
-        let resp: crate::types::Events = self
+        let resp: crate::Response<crate::types::Events> = self
             .client
             .get(
                 &url,
@@ -912,7 +928,11 @@ impl Events {
             .await?;
 
         // Return our response data.
-        Ok(resp.items.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.items.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}/instances` endpoint.
@@ -931,7 +951,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> ClientResult<Vec<crate::types::Event>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
             query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
@@ -961,7 +981,11 @@ impl Events {
             ),
             None,
         );
-        let mut resp: crate::types::Events = self
+        let crate::Response::<crate::types::Events> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -972,13 +996,17 @@ impl Events {
             )
             .await?;
 
-        let mut items = resp.items;
-        let mut page = resp.next_page_token;
+        let mut items = body.items;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Events> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -989,7 +1017,11 @@ impl Events {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Events> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -1001,17 +1033,17 @@ impl Events {
                     .await?;
             }
 
-            items.append(&mut resp.items);
+            items.append(&mut body.items);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(items)
+        Ok(crate::Response::new(status, headers, items))
     }
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/{eventId}/move` endpoint.
@@ -1035,7 +1067,7 @@ impl Events {
         destination: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> ClientResult<crate::types::Event> {
+    ) -> ClientResult<crate::Response<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));

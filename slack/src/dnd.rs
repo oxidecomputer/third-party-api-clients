@@ -22,7 +22,7 @@ impl Dnd {
      *
      * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
      */
-    pub async fn end(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn end(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/dnd.endDnd", None);
         self.client
             .post(
@@ -45,7 +45,9 @@ impl Dnd {
      *
      * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
      */
-    pub async fn end_snooze(&self) -> ClientResult<crate::types::DndEndSnoozeSchema> {
+    pub async fn end_snooze(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSnoozeSchema>> {
         let url = self.client.url("/dnd.endSnooze", None);
         self.client
             .post(
@@ -69,7 +71,10 @@ impl Dnd {
      * * `token: &str` -- Authentication token. Requires scope: `dnd:read`.
      * * `user: &str` -- User to fetch status for (defaults to current user).
      */
-    pub async fn info(&self, user: &str) -> ClientResult<crate::types::DndInfoSchema> {
+    pub async fn info(
+        &self,
+        user: &str,
+    ) -> ClientResult<crate::Response<crate::types::DndInfoSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
@@ -93,7 +98,9 @@ impl Dnd {
      *
      * FROM: <https://api.slack.com/methods/dnd.setSnooze>
      */
-    pub async fn set_snooze(&self) -> ClientResult<crate::types::DndSetSnoozeSchema> {
+    pub async fn set_snooze(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::DndSetSnoozeSchema>> {
         let url = self.client.url("/dnd.setSnooze", None);
         self.client
             .post(
@@ -117,7 +124,10 @@ impl Dnd {
      * * `token: &str` -- Authentication token. Requires scope: `dnd:read`.
      * * `users: &str` -- Comma-separated list of users to fetch Do Not Disturb status for.
      */
-    pub async fn team_info(&self, users: &str) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn team_info(
+        &self,
+        users: &str,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !users.is_empty() {
             query_args.push(("users".to_string(), users.to_string()));

@@ -22,7 +22,7 @@ impl Users {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::User> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url(
             &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -44,7 +44,7 @@ impl Users {
      *
      * Suspends a user. Does not delete the user's cards. Currently this action is not reversible.
      */
-    pub async fn delete(&self, id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -70,7 +70,7 @@ impl Users {
         &self,
         id: &str,
         body: &crate::types::PatchUsersRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -106,7 +106,7 @@ impl Users {
         page_size: f64,
         department_id: &str,
         location_id: &str,
-    ) -> ClientResult<Vec<crate::types::User>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::User>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -122,7 +122,7 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/users?{}", query_), None);
-        let resp: crate::types::GetUsersResponse = self
+        let resp: crate::Response<crate::types::GetUsersResponse> = self
             .client
             .get(
                 &url,
@@ -134,7 +134,11 @@ impl Users {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * List users.
@@ -149,7 +153,7 @@ impl Users {
         &self,
         department_id: &str,
         location_id: &str,
-    ) -> ClientResult<Vec<crate::types::User>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::User>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -159,7 +163,11 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/users?{}", query_), None);
-        let resp: crate::types::GetUsersResponse = self
+        let crate::Response::<crate::types::GetUsersResponse> {
+            mut status,
+            mut headers,
+            body,
+        } = self
             .client
             .get(
                 &url,
@@ -170,8 +178,8 @@ impl Users {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut page = resp.page.next.to_string();
+        let mut data = body.data;
+        let mut page = body.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -187,10 +195,12 @@ impl Users {
                 .await
             {
                 Ok(mut resp) => {
-                    data.append(&mut resp.data);
+                    data.append(&mut resp.body.data);
+                    status = resp.status;
+                    headers = resp.headers;
 
-                    page = if resp.page.next != page {
-                        resp.page.next.to_string()
+                    page = if body.page.next != page {
+                        body.page.next.to_string()
                     } else {
                         "".to_string()
                     };
@@ -206,7 +216,7 @@ impl Users {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(crate::Response::new(status, headers, data))
     }
     /**
      * Invite a new user.
@@ -218,7 +228,7 @@ impl Users {
     pub async fn post_deferred(
         &self,
         body: &crate::types::PostUsersDeferredRequest,
-    ) -> ClientResult<crate::types::User> {
+    ) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url("/users/deferred", None);
         self.client
             .post(
@@ -240,7 +250,7 @@ impl Users {
     pub async fn get_deferred_status(
         &self,
         id: &str,
-    ) -> ClientResult<crate::types::GetUsersDeferredStatusResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetUsersDeferredStatusResponse>> {
         let url = self.client.url(
             &format!(
                 "/users/deferred/status/{}",

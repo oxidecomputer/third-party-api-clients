@@ -27,7 +27,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-tripactions = "0.4.0"
+tripactions = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -35,7 +35,7 @@ tripactions = "0.4.0"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use tripactions::Client;
 
 let tripactions = Client::new(
@@ -53,7 +53,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use tripactions::Client;
 
 let tripactions = Client::new_from_env(
@@ -66,7 +66,7 @@ the initial state of the client, you will not know this value.
 
 To start off a fresh client and get a `token`, use the following.
 
-```
+```rust
 use tripactions::Client;
 
 async fn do_call() {

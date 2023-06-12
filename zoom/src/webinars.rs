@@ -39,7 +39,7 @@ impl Webinars {
         user_id: &str,
         page_size: i64,
         page_number: i64,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_number > 0 {
             query_args.push(("page_number".to_string(), page_number.to_string()));
@@ -87,7 +87,7 @@ impl Webinars {
     pub async fn create(
         &self,
         user_id: &str,
-    ) -> ClientResult<crate::types::WebinarCreateResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::WebinarCreateResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/webinars",
@@ -126,7 +126,7 @@ impl Webinars {
         webinar_id: i64,
         occurrence_id: &str,
         show_previous_occurrences: bool,
-    ) -> ClientResult<crate::types::WebinarResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::WebinarResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -183,7 +183,7 @@ impl Webinars {
         webinar_id: i64,
         occurrence_id: &str,
         cancel_webinar_reminder: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cancel_webinar_reminder.is_empty() {
             query_args.push((
@@ -231,7 +231,11 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `occurrence_id: &str` -- Webinar occurrence id. Support change of agenda, start_time, duration, settings: {host_video, panelist_video, hd_video, watermark, auto_recording}.
      */
-    pub async fn update(&self, webinar_id: i64, occurrence_id: &str) -> ClientResult<()> {
+    pub async fn update(
+        &self,
+        webinar_id: i64,
+        occurrence_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -283,7 +287,7 @@ impl Webinars {
         webinar_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Participants>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Participants>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -300,7 +304,7 @@ impl Webinars {
             ),
             None,
         );
-        let resp: crate::types::ListWebinarParticipantsResponse = self
+        let resp: crate::Response<crate::types::ListWebinarParticipantsResponse> = self
             .client
             .get(
                 &url,
@@ -312,7 +316,11 @@ impl Webinars {
             .await?;
 
         // Return our response data.
-        Ok(resp.participants.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.participants.to_vec(),
+        ))
     }
     /**
      * List webinar participants.
@@ -336,7 +344,7 @@ impl Webinars {
     pub async fn list_all_participants(
         &self,
         webinar_id: &str,
-    ) -> ClientResult<Vec<crate::types::Participants>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Participants>>> {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/participants",
@@ -344,7 +352,11 @@ impl Webinars {
             ),
             None,
         );
-        let mut resp: crate::types::ListWebinarParticipantsResponse = self
+        let crate::Response::<crate::types::ListWebinarParticipantsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -355,14 +367,18 @@ impl Webinars {
             )
             .await?;
 
-        let mut participants = resp.participants;
-        let mut page = resp.next_page_token;
+        let mut participants = body.participants;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListWebinarParticipantsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -373,7 +389,11 @@ impl Webinars {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListWebinarParticipantsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -385,17 +405,17 @@ impl Webinars {
                     .await?;
             }
 
-            participants.append(&mut resp.participants);
+            participants.append(&mut body.participants);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(participants)
+        Ok(crate::Response::new(status, headers, participants))
     }
     /**
      * Update webinar status.
@@ -417,7 +437,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         body: &crate::types::WebinarStatusRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/status",
@@ -453,7 +473,10 @@ impl Webinars {
      *
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
-    pub async fn panelist(&self, webinar_id: i64) -> ClientResult<crate::types::Domains> {
+    pub async fn panelist(
+        &self,
+        webinar_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/panelists",
@@ -492,7 +515,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         body: &crate::types::WebinarPanelist,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/panelists",
@@ -526,7 +549,7 @@ impl Webinars {
      *
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
-    pub async fn panelists_delete(&self, webinar_id: i64) -> ClientResult<()> {
+    pub async fn panelists_delete(&self, webinar_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/panelists",
@@ -563,7 +586,11 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `panelist_id: i64` -- The panelist ID or panelist email.
      */
-    pub async fn panelist_delete(&self, webinar_id: i64, panelist_id: i64) -> ClientResult<()> {
+    pub async fn panelist_delete(
+        &self,
+        webinar_id: i64,
+        panelist_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/panelists/{}",
@@ -618,7 +645,7 @@ impl Webinars {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -681,7 +708,7 @@ impl Webinars {
         &self,
         webinar_id: &str,
         occurrence_ids: &str,
-    ) -> ClientResult<crate::types::WebinarRegistrantCreateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::WebinarRegistrantCreateResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_ids.is_empty() {
             query_args.push(("occurrence_ids".to_string(), occurrence_ids.to_string()));
@@ -734,7 +761,7 @@ impl Webinars {
         &self,
         webinar_id: &str,
         body: &crate::types::AddBatchRegistrantsRequest,
-    ) -> ClientResult<crate::types::AddBatchRegistrantsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddBatchRegistrantsResponse>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/batch_registrants",
@@ -774,7 +801,7 @@ impl Webinars {
         webinar_id: i64,
         occurrence_id: &str,
         body: &crate::types::RegistrantStatus,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -814,7 +841,10 @@ impl Webinars {
      *
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
-    pub async fn past(&self, webinar_id: i64) -> ClientResult<crate::types::Domains> {
+    pub async fn past(
+        &self,
+        webinar_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/instances",
@@ -848,7 +878,10 @@ impl Webinars {
      *
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
-    pub async fn poll(&self, webinar_id: i64) -> ClientResult<crate::types::Domains> {
+    pub async fn poll(
+        &self,
+        webinar_id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/polls",
@@ -886,7 +919,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         body: &crate::types::Poll,
-    ) -> ClientResult<crate::types::MeetingPollGetResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingPollGetResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/polls",
@@ -925,7 +958,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         poll_id: &str,
-    ) -> ClientResult<crate::types::MeetingPollGetResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingPollGetResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/polls/{}",
@@ -966,7 +999,7 @@ impl Webinars {
         webinar_id: i64,
         poll_id: &str,
         body: &crate::types::Poll,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/polls/{}",
@@ -1002,7 +1035,11 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `poll_id: &str` -- User's first name.
      */
-    pub async fn poll_delete(&self, webinar_id: i64, poll_id: &str) -> ClientResult<()> {
+    pub async fn poll_delete(
+        &self,
+        webinar_id: i64,
+        poll_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/polls/{}",
@@ -1042,7 +1079,7 @@ impl Webinars {
     pub async fn registrants_questions_get(
         &self,
         webinar_id: i64,
-    ) -> ClientResult<crate::types::WebinarRegistrantQuestions> {
+    ) -> ClientResult<crate::Response<crate::types::WebinarRegistrantQuestions>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/registrants/questions",
@@ -1083,7 +1120,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         body: &crate::types::WebinarRegistrantQuestions,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/registrants/questions",
@@ -1124,7 +1161,7 @@ impl Webinars {
         webinar_id: &str,
         registrant_id: &str,
         occurrence_id: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -1170,7 +1207,7 @@ impl Webinars {
         webinar_id: &str,
         registrant_id: &str,
         occurrence_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
@@ -1217,7 +1254,7 @@ impl Webinars {
         page_size: i64,
         next_page_token: &str,
         webinar_uuid: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -1268,7 +1305,7 @@ impl Webinars {
     pub async fn get_tracking_sources(
         &self,
         webinar_id: &str,
-    ) -> ClientResult<crate::types::GetTrackingSourcesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetTrackingSourcesResponse>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/tracking_sources",
@@ -1309,7 +1346,7 @@ impl Webinars {
     pub async fn list_past_poll_results(
         &self,
         webinar_id: &str,
-    ) -> ClientResult<crate::types::ReportMeetingPollsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ReportMeetingPollsResponse>> {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/polls",
@@ -1352,7 +1389,7 @@ impl Webinars {
     pub async fn list_past_qa(
         &self,
         webinar_id: &str,
-    ) -> ClientResult<crate::types::ReportWebinarQaResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ReportWebinarQaResponse>> {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/qa",
@@ -1385,7 +1422,7 @@ impl Webinars {
     pub async fn list_templates(
         &self,
         user_id: &str,
-    ) -> ClientResult<crate::types::ListWebinarTemplatesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListWebinarTemplatesResponse>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/webinar_templates",
@@ -1426,7 +1463,7 @@ impl Webinars {
     pub async fn get_live_stream_details(
         &self,
         webinar_id: &str,
-    ) -> ClientResult<crate::types::GetLiveStreamDetailsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetLiveStreamDetailsResponse>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/livestream",
@@ -1467,7 +1504,7 @@ impl Webinars {
         &self,
         webinar_id: &str,
         body: &crate::types::MeetingLiveStream,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/livestream",
@@ -1507,7 +1544,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         body: &crate::types::WebinarLiveStreamStatus,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/livestream/status",
@@ -1546,7 +1583,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         body: &crate::types::InviteLink,
-    ) -> ClientResult<crate::types::InviteLinks> {
+    ) -> ClientResult<crate::Response<crate::types::InviteLinks>> {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/invite_links",

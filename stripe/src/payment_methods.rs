@@ -32,7 +32,7 @@ impl PaymentMethods {
         limit: i64,
         starting_after: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
-    ) -> ClientResult<Vec<crate::types::PaymentMethod>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaymentMethod>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -53,7 +53,7 @@ impl PaymentMethods {
         let url = self
             .client
             .url(&format!("/v1/payment_methods?{}", query_), None);
-        let resp: crate::types::PaymentFlowsMethodList = self
+        let resp: crate::Response<crate::types::PaymentFlowsMethodList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl PaymentMethods {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/payment_methods` endpoint.
@@ -78,7 +82,7 @@ impl PaymentMethods {
         &self,
         customer: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
-    ) -> ClientResult<Vec<crate::types::PaymentMethod>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaymentMethod>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -90,7 +94,11 @@ impl PaymentMethods {
         let url = self
             .client
             .url(&format!("/v1/payment_methods?{}", query_), None);
-        let mut resp: crate::types::PaymentFlowsMethodList = self
+        let crate::Response::<crate::types::PaymentFlowsMethodList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -101,8 +109,8 @@ impl PaymentMethods {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -118,7 +126,11 @@ impl PaymentMethods {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsMethodList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -129,7 +141,11 @@ impl PaymentMethods {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsMethodList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -141,13 +157,13 @@ impl PaymentMethods {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/payment_methods` endpoint.
@@ -156,7 +172,7 @@ impl PaymentMethods {
      *
      * <p>Instead of creating a PaymentMethod directly, we recommend using the <a href="/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a payment immediately or the <a href="/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment method details ahead of a future payment.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::PaymentMethod> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PaymentMethod>> {
         let url = self.client.url("/v1/payment_methods", None);
         self.client
             .post(
@@ -181,7 +197,7 @@ impl PaymentMethods {
     pub async fn get_method(
         &self,
         payment_method: &str,
-    ) -> ClientResult<crate::types::PaymentMethod> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentMethod>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}",
@@ -211,7 +227,7 @@ impl PaymentMethods {
     pub async fn post_method(
         &self,
         payment_method: &str,
-    ) -> ClientResult<crate::types::PaymentMethod> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentMethod>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}",
@@ -251,7 +267,7 @@ impl PaymentMethods {
     pub async fn post_method_attach(
         &self,
         payment_method: &str,
-    ) -> ClientResult<crate::types::PaymentMethod> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentMethod>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}/attach",
@@ -281,7 +297,7 @@ impl PaymentMethods {
     pub async fn post_method_detach(
         &self,
         payment_method: &str,
-    ) -> ClientResult<crate::types::PaymentMethod> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentMethod>> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}/detach",

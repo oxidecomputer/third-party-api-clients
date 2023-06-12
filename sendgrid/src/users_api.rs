@@ -20,7 +20,9 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_profile(&self) -> ClientResult<crate::types::GetUserProfileResponse> {
+    pub async fn get_user_profile(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::GetUserProfileResponse>> {
         let url = self.client.url("/user/profile", None);
         self.client
             .get(
@@ -48,7 +50,7 @@ impl UsersApi {
     pub async fn patch_user_profile(
         &self,
         body: &crate::types::UserProfile,
-    ) -> ClientResult<crate::types::UserProfile> {
+    ) -> ClientResult<crate::Response<crate::types::UserProfile>> {
         let url = self.client.url("/user/profile", None);
         self.client
             .patch(
@@ -73,7 +75,9 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_account(&self) -> ClientResult<crate::types::GetUserAccountResponse> {
+    pub async fn get_user_account(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::GetUserAccountResponse>> {
         let url = self.client.url("/user/account", None);
         self.client
             .get(
@@ -96,7 +100,9 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_email(&self) -> ClientResult<crate::types::GetUserEmailResponse> {
+    pub async fn get_user_email(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::GetUserEmailResponse>> {
         let url = self.client.url("/user/email", None);
         self.client
             .get(
@@ -122,7 +128,7 @@ impl UsersApi {
     pub async fn put_user_email(
         &self,
         body: &crate::types::PutUserEmailRequest,
-    ) -> ClientResult<crate::types::GetUserEmailResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetUserEmailResponse>> {
         let url = self.client.url("/user/email", None);
         self.client
             .put(
@@ -145,7 +151,7 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_username(&self) -> ClientResult<crate::types::Users> {
+    pub async fn get_user_username(&self) -> ClientResult<crate::Response<crate::types::Users>> {
         let url = self.client.url("/user/username", None);
         self.client
             .get(
@@ -171,7 +177,7 @@ impl UsersApi {
     pub async fn put_user_username(
         &self,
         body: &crate::types::PutUserUsernameRequest,
-    ) -> ClientResult<crate::types::PutUserUsernameResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PutUserUsernameResponse>> {
         let url = self.client.url("/user/username", None);
         self.client
             .put(
@@ -196,7 +202,9 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_credits(&self) -> ClientResult<crate::types::GetUserCreditsResponse> {
+    pub async fn get_user_credits(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::GetUserCreditsResponse>> {
         let url = self.client.url("/user/credits", None);
         self.client
             .get(
@@ -222,7 +230,7 @@ impl UsersApi {
     pub async fn put_user_password(
         &self,
         body: &crate::types::PutUserPasswordRequest,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url("/user/password", None);
         self.client
             .put(

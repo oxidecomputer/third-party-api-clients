@@ -20,7 +20,10 @@ impl Customers {
      *
      * * `customer_key: &str` -- Id of the customer to be retrieved.
      */
-    pub async fn get(&self, customer_key: &str) -> ClientResult<crate::types::Customer> {
+    pub async fn get(
+        &self,
+        customer_key: &str,
+    ) -> ClientResult<crate::Response<crate::types::Customer>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
@@ -51,7 +54,7 @@ impl Customers {
         &self,
         customer_key: &str,
         body: &crate::types::Customer,
-    ) -> ClientResult<crate::types::Customer> {
+    ) -> ClientResult<crate::Response<crate::types::Customer>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
@@ -82,7 +85,7 @@ impl Customers {
         &self,
         customer_key: &str,
         body: &crate::types::Customer,
-    ) -> ClientResult<crate::types::Customer> {
+    ) -> ClientResult<crate::Response<crate::types::Customer>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
@@ -112,7 +115,7 @@ impl Customers {
     pub async fn admin_chrome_printers_get(
         &self,
         name: &str,
-    ) -> ClientResult<crate::types::Printer> {
+    ) -> ClientResult<crate::Response<crate::types::Printer>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}",
@@ -142,7 +145,7 @@ impl Customers {
     pub async fn admin_chrome_printers_delete(
         &self,
         name: &str,
-    ) -> ClientResult<crate::types::Empty> {
+    ) -> ClientResult<crate::Response<crate::types::Empty>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}",
@@ -177,7 +180,7 @@ impl Customers {
         clear_mask: &str,
         update_mask: &str,
         body: &crate::types::Printer,
-    ) -> ClientResult<crate::types::Printer> {
+    ) -> ClientResult<crate::Response<crate::types::Printer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !clear_mask.is_empty() {
             query_args.push(("clearMask".to_string(), clear_mask.to_string()));
@@ -224,7 +227,7 @@ impl Customers {
         org_unit_id: &str,
         page_size: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Printer>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Printer>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -247,7 +250,7 @@ impl Customers {
             ),
             None,
         );
-        let resp: crate::types::ListPrintersResponse = self
+        let resp: crate::Response<crate::types::ListPrintersResponse> = self
             .client
             .get(
                 &url,
@@ -259,7 +262,11 @@ impl Customers {
             .await?;
 
         // Return our response data.
-        Ok(resp.printers.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.printers.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers` endpoint.
@@ -273,7 +280,7 @@ impl Customers {
         parent: &str,
         filter: &str,
         org_unit_id: &str,
-    ) -> ClientResult<Vec<crate::types::Printer>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Printer>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -290,7 +297,11 @@ impl Customers {
             ),
             None,
         );
-        let mut resp: crate::types::ListPrintersResponse = self
+        let crate::Response::<crate::types::ListPrintersResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -301,13 +312,17 @@ impl Customers {
             )
             .await?;
 
-        let mut printers = resp.printers;
-        let mut page = resp.next_page_token;
+        let mut printers = body.printers;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListPrintersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -318,7 +333,11 @@ impl Customers {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListPrintersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -330,17 +349,17 @@ impl Customers {
                     .await?;
             }
 
-            printers.append(&mut resp.printers);
+            printers.append(&mut body.printers);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(printers)
+        Ok(crate::Response::new(status, headers, printers))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/{parent}/chrome/printers` endpoint.
@@ -355,7 +374,7 @@ impl Customers {
         &self,
         parent: &str,
         body: &crate::types::Printer,
-    ) -> ClientResult<crate::types::Printer> {
+    ) -> ClientResult<crate::Response<crate::types::Printer>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers",
@@ -386,7 +405,7 @@ impl Customers {
         &self,
         parent: &str,
         body: &crate::types::BatchCreatePrintersRequest,
-    ) -> ClientResult<crate::types::BatchCreatePrintersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::BatchCreatePrintersResponse>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters",
@@ -417,7 +436,7 @@ impl Customers {
         &self,
         parent: &str,
         body: &crate::types::BatchDeletePrintersRequest,
-    ) -> ClientResult<crate::types::BatchDeletePrintersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::BatchDeletePrintersResponse>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters",
@@ -453,7 +472,7 @@ impl Customers {
         filter: &str,
         page_size: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::PrinterModel>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PrinterModel>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -473,7 +492,7 @@ impl Customers {
             ),
             None,
         );
-        let resp: crate::types::ListPrinterModelsResponse = self
+        let resp: crate::Response<crate::types::ListPrinterModelsResponse> = self
             .client
             .get(
                 &url,
@@ -485,7 +504,11 @@ impl Customers {
             .await?;
 
         // Return our response data.
-        Ok(resp.printer_models.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.printer_models.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers:listPrinterModels` endpoint.
@@ -498,7 +521,7 @@ impl Customers {
         &self,
         parent: &str,
         filter: &str,
-    ) -> ClientResult<Vec<crate::types::PrinterModel>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PrinterModel>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -512,7 +535,11 @@ impl Customers {
             ),
             None,
         );
-        let mut resp: crate::types::ListPrinterModelsResponse = self
+        let crate::Response::<crate::types::ListPrinterModelsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -523,13 +550,17 @@ impl Customers {
             )
             .await?;
 
-        let mut printer_models = resp.printer_models;
-        let mut page = resp.next_page_token;
+        let mut printer_models = body.printer_models;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListPrinterModelsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -540,7 +571,11 @@ impl Customers {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListPrinterModelsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -552,16 +587,16 @@ impl Customers {
                     .await?;
             }
 
-            printer_models.append(&mut resp.printer_models);
+            printer_models.append(&mut body.printer_models);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(printer_models)
+        Ok(crate::Response::new(status, headers, printer_models))
     }
 }

@@ -27,7 +27,7 @@ impl SipConnectedAudio {
      */
     pub async fn list_sip_trunk_numbers(
         &self,
-    ) -> ClientResult<crate::types::ListSipTrunkNumbersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListSipTrunkNumbersResponse>> {
         let url = self.client.url("/sip_trunk/numbers", None);
         self.client
             .get(
@@ -58,7 +58,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AssignSipConfigRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/settings",
@@ -98,7 +98,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AssignSipTrunkNumbersRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/numbers",
@@ -133,7 +133,10 @@ impl SipConnectedAudio {
      *
      * * `account_id: &str` -- Account ID of the sub account from which the numbers are to be deleted. This can be retrieved from [List sub accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/account) API.
      */
-    pub async fn delete_all_sip_numbers(&self, account_id: &str) -> ClientResult<()> {
+    pub async fn delete_all_sip_numbers(
+        &self,
+        account_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/numbers",
@@ -168,7 +171,7 @@ impl SipConnectedAudio {
     pub async fn list_sip_trunk(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::ListSipTrunksResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::ListSipTrunksResponseData>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks",
@@ -203,7 +206,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AssignSipTrunksRequestData,
-    ) -> ClientResult<crate::types::AssignSipTrunksResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::AssignSipTrunksResponseData>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks",
@@ -240,7 +243,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         trunk_id: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks/{}",
@@ -276,7 +279,7 @@ impl SipConnectedAudio {
     pub async fn list_internal_callout_countries(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::ListInternalCalloutCountriesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListInternalCalloutCountriesResponse>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries",
@@ -312,7 +315,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AddCalloutCountriesRequestData,
-    ) -> ClientResult<crate::types::AddCalloutCountriesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddCalloutCountriesResponse>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries",
@@ -350,7 +353,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         country_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries/{}",
@@ -393,7 +396,7 @@ impl SipConnectedAudio {
         account_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::InternalNumbers>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::InternalNumbers>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -410,7 +413,7 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        let resp: crate::types::ListInternalNumbersResponse = self
+        let resp: crate::Response<crate::types::ListInternalNumbersResponse> = self
             .client
             .get(
                 &url,
@@ -422,7 +425,11 @@ impl SipConnectedAudio {
             .await?;
 
         // Return our response data.
-        Ok(resp.internal_numbers.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.internal_numbers.to_vec(),
+        ))
     }
     /**
      * List internal numbers.
@@ -442,7 +449,7 @@ impl SipConnectedAudio {
     pub async fn list_all_internal_numbers(
         &self,
         account_id: &str,
-    ) -> ClientResult<Vec<crate::types::InternalNumbers>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::InternalNumbers>>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers",
@@ -450,7 +457,11 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        let mut resp: crate::types::ListInternalNumbersResponse = self
+        let crate::Response::<crate::types::ListInternalNumbersResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -461,14 +472,18 @@ impl SipConnectedAudio {
             )
             .await?;
 
-        let mut internal_numbers = resp.internal_numbers;
-        let mut page = resp.next_page_token;
+        let mut internal_numbers = body.internal_numbers;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListInternalNumbersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -479,7 +494,11 @@ impl SipConnectedAudio {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListInternalNumbersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -491,17 +510,17 @@ impl SipConnectedAudio {
                     .await?;
             }
 
-            internal_numbers.append(&mut resp.internal_numbers);
+            internal_numbers.append(&mut body.internal_numbers);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(internal_numbers)
+        Ok(crate::Response::new(status, headers, internal_numbers))
     }
     /**
      * Add internal numbers.
@@ -523,7 +542,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AddInternalNumbersRequest,
-    ) -> ClientResult<crate::types::AddInternalNumbersResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::AddInternalNumbersResponseData>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers",
@@ -563,7 +582,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         number_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers/{}",

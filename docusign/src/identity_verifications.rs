@@ -27,7 +27,7 @@ impl IdentityVerifications {
     pub async fn account_get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::AccountIdentityVerificationResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AccountIdentityVerificationResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/identity_verification",

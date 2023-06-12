@@ -31,7 +31,7 @@ impl IdentityProviders {
         after: &str,
         limit: i64,
         type_: &str,
-    ) -> ClientResult<Vec<crate::types::IdentityProvider>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IdentityProvider>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -70,7 +70,7 @@ impl IdentityProviders {
         &self,
         q: &str,
         type_: &str,
-    ) -> ClientResult<Vec<crate::types::IdentityProvider>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IdentityProvider>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -100,7 +100,7 @@ impl IdentityProviders {
     pub async fn create(
         &self,
         body: &crate::types::IdentityProvider,
-    ) -> ClientResult<crate::types::IdentityProvider> {
+    ) -> ClientResult<crate::Response<crate::types::IdentityProvider>> {
         let url = self.client.url("/api/v1/idps", None);
         self.client
             .post(
@@ -128,7 +128,7 @@ impl IdentityProviders {
         &self,
         after: &str,
         limit: i64,
-    ) -> ClientResult<Vec<crate::types::JsonWebKey>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::JsonWebKey>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -159,7 +159,9 @@ impl IdentityProviders {
      *
      * Enumerates IdP key credentials.
      */
-    pub async fn list_all_keys(&self) -> ClientResult<Vec<crate::types::JsonWebKey>> {
+    pub async fn list_all_keys(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::JsonWebKey>>> {
         let url = self.client.url("/api/v1/idps/credentials/keys", None);
         self.client
             .get_all_pages(
@@ -181,7 +183,7 @@ impl IdentityProviders {
     pub async fn create_key(
         &self,
         body: &crate::types::JsonWebKey,
-    ) -> ClientResult<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
         let url = self.client.url("/api/v1/idps/credentials/keys", None);
         self.client
             .post(
@@ -204,7 +206,10 @@ impl IdentityProviders {
      *
      * * `key_id: &str`
      */
-    pub async fn get_key(&self, key_id: &str) -> ClientResult<crate::types::JsonWebKey> {
+    pub async fn get_key(
+        &self,
+        key_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/credentials/keys/{}",
@@ -233,7 +238,7 @@ impl IdentityProviders {
      *
      * * `key_id: &str`
      */
-    pub async fn delete_key(&self, key_id: &str) -> ClientResult<()> {
+    pub async fn delete_key(&self, key_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/credentials/keys/{}",
@@ -262,7 +267,10 @@ impl IdentityProviders {
      *
      * * `idp_id: &str`
      */
-    pub async fn get(&self, idp_id: &str) -> ClientResult<crate::types::IdentityProvider> {
+    pub async fn get(
+        &self,
+        idp_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::IdentityProvider>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}",
@@ -295,7 +303,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         body: &crate::types::IdentityProvider,
-    ) -> ClientResult<crate::types::IdentityProvider> {
+    ) -> ClientResult<crate::Response<crate::types::IdentityProvider>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}",
@@ -324,7 +332,7 @@ impl IdentityProviders {
      *
      * * `idp_id: &str`
      */
-    pub async fn delete(&self, idp_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, idp_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}",
@@ -353,7 +361,10 @@ impl IdentityProviders {
      *
      * * `idp_id: &str`
      */
-    pub async fn list_csrs_fors(&self, idp_id: &str) -> ClientResult<Vec<crate::types::Csr>> {
+    pub async fn list_csrs_fors(
+        &self,
+        idp_id: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Csr>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs",
@@ -380,7 +391,10 @@ impl IdentityProviders {
      *
      * Enumerates Certificate Signing Requests for an IdP
      */
-    pub async fn list_all_csrs_fors(&self, idp_id: &str) -> ClientResult<Vec<crate::types::Csr>> {
+    pub async fn list_all_csrs_fors(
+        &self,
+        idp_id: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Csr>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs",
@@ -413,7 +427,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         body: &crate::types::CsrMetadata,
-    ) -> ClientResult<crate::types::Csr> {
+    ) -> ClientResult<crate::Response<crate::types::Csr>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs",
@@ -441,7 +455,11 @@ impl IdentityProviders {
      * * `idp_id: &str`
      * * `csr_id: &str`
      */
-    pub async fn get_csr_for(&self, idp_id: &str, csr_id: &str) -> ClientResult<crate::types::Csr> {
+    pub async fn get_csr_for(
+        &self,
+        idp_id: &str,
+        csr_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Csr>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs/{}",
@@ -470,7 +488,11 @@ impl IdentityProviders {
      * * `idp_id: &str`
      * * `csr_id: &str`
      */
-    pub async fn revoke_csr_for(&self, idp_id: &str, csr_id: &str) -> ClientResult<()> {
+    pub async fn revoke_csr_for(
+        &self,
+        idp_id: &str,
+        csr_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs/{}",
@@ -503,7 +525,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         csr_id: &str,
-    ) -> ClientResult<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs/{}/lifecycle/publish",
@@ -536,7 +558,7 @@ impl IdentityProviders {
     pub async fn list_signing_keys(
         &self,
         idp_id: &str,
-    ) -> ClientResult<Vec<crate::types::JsonWebKey>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::JsonWebKey>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys",
@@ -566,7 +588,7 @@ impl IdentityProviders {
     pub async fn list_all_signing_keys(
         &self,
         idp_id: &str,
-    ) -> ClientResult<Vec<crate::types::JsonWebKey>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::JsonWebKey>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys",
@@ -600,7 +622,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         validity_years: i64,
-    ) -> ClientResult<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if validity_years > 0 {
             query_args.push(("validityYears".to_string(), validity_years.to_string()));
@@ -640,7 +662,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         key_id: &str,
-    ) -> ClientResult<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys/{}",
@@ -677,7 +699,7 @@ impl IdentityProviders {
         idp_id: &str,
         key_id: &str,
         target_idp_id: &str,
-    ) -> ClientResult<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !target_idp_id.is_empty() {
             query_args.push(("targetIdpId".to_string(), target_idp_id.to_string()));
@@ -713,7 +735,10 @@ impl IdentityProviders {
      *
      * * `idp_id: &str`
      */
-    pub async fn activate(&self, idp_id: &str) -> ClientResult<crate::types::IdentityProvider> {
+    pub async fn activate(
+        &self,
+        idp_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::IdentityProvider>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/lifecycle/activate",
@@ -742,7 +767,10 @@ impl IdentityProviders {
      *
      * * `idp_id: &str`
      */
-    pub async fn deactivate(&self, idp_id: &str) -> ClientResult<crate::types::IdentityProvider> {
+    pub async fn deactivate(
+        &self,
+        idp_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::IdentityProvider>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/lifecycle/deactivate",
@@ -774,7 +802,7 @@ impl IdentityProviders {
     pub async fn list_application_users(
         &self,
         idp_id: &str,
-    ) -> ClientResult<Vec<crate::types::IdentityProviderApplicationUser>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IdentityProviderApplicationUser>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users",
@@ -804,7 +832,7 @@ impl IdentityProviders {
     pub async fn list_all_application_users(
         &self,
         idp_id: &str,
-    ) -> ClientResult<Vec<crate::types::IdentityProviderApplicationUser>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IdentityProviderApplicationUser>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users",
@@ -836,7 +864,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::IdentityProviderApplicationUser> {
+    ) -> ClientResult<crate::Response<crate::types::IdentityProviderApplicationUser>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}",
@@ -872,7 +900,7 @@ impl IdentityProviders {
         idp_id: &str,
         user_id: &str,
         body: &crate::types::UserIdentityProviderLinkRequest,
-    ) -> ClientResult<crate::types::IdentityProviderApplicationUser> {
+    ) -> ClientResult<crate::Response<crate::types::IdentityProviderApplicationUser>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}",
@@ -903,7 +931,11 @@ impl IdentityProviders {
      * * `idp_id: &str`
      * * `user_id: &str`
      */
-    pub async fn unlink_user_from(&self, idp_id: &str, user_id: &str) -> ClientResult<()> {
+    pub async fn unlink_user_from(
+        &self,
+        idp_id: &str,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}",
@@ -938,7 +970,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         user_id: &str,
-    ) -> ClientResult<Vec<crate::types::SocialAuthToken>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SocialAuthToken>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}/credentials/tokens",
@@ -970,7 +1002,7 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
         user_id: &str,
-    ) -> ClientResult<Vec<crate::types::SocialAuthToken>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SocialAuthToken>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}/credentials/tokens",

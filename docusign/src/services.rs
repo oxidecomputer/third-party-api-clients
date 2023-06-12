@@ -23,7 +23,9 @@ impl Services {
      *
      * You do not need an integrator key to view the REST API versions and resources.
      */
-    pub async fn information_get(&self) -> ClientResult<crate::types::ServiceInformation> {
+    pub async fn information_get(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ServiceInformation>> {
         let url = self.client.url("/service_information", None);
         self.client
             .get(

@@ -31,7 +31,7 @@ impl Payroll {
         company_id_or_uuid: &str,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::PayPeriod>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PayPeriod>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -75,7 +75,7 @@ impl Payroll {
         company_id_or_uuid: &str,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::PayPeriod>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PayPeriod>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -130,7 +130,7 @@ impl Payroll {
         include: &[String],
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::PayrollData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PayrollData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -191,7 +191,7 @@ impl Payroll {
         include: &[String],
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<Vec<crate::types::PayrollData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PayrollData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -243,7 +243,7 @@ impl Payroll {
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyPayrollsRequest,
-    ) -> ClientResult<crate::types::PayrollData> {
+    ) -> ClientResult<crate::Response<crate::types::PayrollData>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls",
@@ -284,7 +284,7 @@ impl Payroll {
         payroll_id_or_uuid: &str,
         include: crate::types::GetCompanyPayrollsInclude,
         show_calculation: &str,
-    ) -> ClientResult<crate::types::PayrollData> {
+    ) -> ClientResult<crate::Response<crate::types::PayrollData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.to_string().is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -324,7 +324,7 @@ impl Payroll {
         company_id_or_uuid: &str,
         payroll_id_or_uuid: &str,
         body: &crate::types::PutCompanyPayrollsRequest,
-    ) -> ClientResult<crate::types::PayrollData> {
+    ) -> ClientResult<crate::Response<crate::types::PayrollData>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}",
@@ -358,7 +358,7 @@ impl Payroll {
         pay_period_start_date: &str,
         pay_period_end_date: &str,
         body: &crate::types::PutCompanyPayrollsRequest,
-    ) -> ClientResult<crate::types::PayrollData> {
+    ) -> ClientResult<crate::Response<crate::types::PayrollData>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/{}",
@@ -393,7 +393,7 @@ impl Payroll {
         &self,
         company_id: &str,
         payroll_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/calculate",
@@ -421,7 +421,11 @@ impl Payroll {
      *
      * Submits an unprocessed payroll to be calculated and run. Upon success, transitions the payroll to the `processed` state.
      */
-    pub async fn put_company_submit(&self, company_id: &str, payroll_id: &str) -> ClientResult<()> {
+    pub async fn put_company_submit(
+        &self,
+        company_id: &str,
+        payroll_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/submit",
@@ -454,7 +458,7 @@ impl Payroll {
         &self,
         company_id: &str,
         payroll_id: &str,
-    ) -> ClientResult<crate::types::PayrollData> {
+    ) -> ClientResult<crate::Response<crate::types::PayrollData>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/cancel",
@@ -483,7 +487,7 @@ impl Payroll {
     pub async fn get_company_or_reversals(
         &self,
         company_id_or_uuid: &str,
-    ) -> ClientResult<crate::types::GetCompanyPayrollReversalsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCompanyPayrollReversalsResponse>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payroll_reversals",

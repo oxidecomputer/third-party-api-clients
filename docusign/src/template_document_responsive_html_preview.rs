@@ -40,7 +40,7 @@ impl TemplateDocumentResponsiveHtmlPreview {
         document_id: &str,
         template_id: &str,
         body: &crate::types::DocumentHtmlDefinition,
-    ) -> ClientResult<crate::types::DocumentHtmlDefinitions> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentHtmlDefinitions>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/responsive_html_preview",

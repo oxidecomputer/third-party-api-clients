@@ -44,7 +44,7 @@ impl Users {
         show_deleted: &str,
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
-    ) -> ClientResult<Vec<crate::types::User>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::User>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -83,7 +83,7 @@ impl Users {
         let url = self
             .client
             .url(&format!("/admin/directory/v1/users?{}", query_), None);
-        let resp: crate::types::Users = self
+        let resp: crate::Response<crate::types::Users> = self
             .client
             .get(
                 &url,
@@ -95,7 +95,11 @@ impl Users {
             .await?;
 
         // Return our response data.
-        Ok(resp.users.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.users.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
@@ -115,7 +119,7 @@ impl Users {
         show_deleted: &str,
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
-    ) -> ClientResult<Vec<crate::types::User>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::User>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -148,7 +152,11 @@ impl Users {
         let url = self
             .client
             .url(&format!("/admin/directory/v1/users?{}", query_), None);
-        let mut resp: crate::types::Users = self
+        let crate::Response::<crate::types::Users> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -159,13 +167,17 @@ impl Users {
             )
             .await?;
 
-        let mut users = resp.users;
-        let mut page = resp.next_page_token;
+        let mut users = body.users;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Users> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -176,7 +188,11 @@ impl Users {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Users> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -188,24 +204,27 @@ impl Users {
                     .await?;
             }
 
-            users.append(&mut resp.users);
+            users.append(&mut body.users);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(users)
+        Ok(crate::Response::new(status, headers, users))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users` endpoint.
      *
      * Creates a user.
      */
-    pub async fn insert(&self, body: &crate::types::User) -> ClientResult<crate::types::User> {
+    pub async fn insert(
+        &self,
+        body: &crate::types::User,
+    ) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url("/admin/directory/v1/users", None);
         self.client
             .post(
@@ -251,7 +270,7 @@ impl Users {
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -317,7 +336,7 @@ impl Users {
         user_key: &str,
         projection: crate::types::DirectoryUsersListProjection,
         view_type: crate::types::ViewType,
-    ) -> ClientResult<crate::types::User> {
+    ) -> ClientResult<crate::Response<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -357,7 +376,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::User,
-    ) -> ClientResult<crate::types::User> {
+    ) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
@@ -384,7 +403,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn delete(&self, user_key: &str) -> ClientResult<()> {
+    pub async fn delete(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
@@ -415,7 +434,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::User,
-    ) -> ClientResult<crate::types::User> {
+    ) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
@@ -447,7 +466,7 @@ impl Users {
         &self,
         user_key: &str,
         event: crate::types::DirectoryUsersAliasesListEvent,
-    ) -> ClientResult<crate::types::Aliases> {
+    ) -> ClientResult<crate::Response<crate::types::Aliases>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !event.to_string().is_empty() {
             query_args.push(("event".to_string(), event.to_string()));
@@ -484,7 +503,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::Alias,
-    ) -> ClientResult<crate::types::Alias> {
+    ) -> ClientResult<crate::Response<crate::types::Alias>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases",
@@ -517,7 +536,7 @@ impl Users {
         user_key: &str,
         event: crate::types::DirectoryUsersAliasesListEvent,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !event.to_string().is_empty() {
             query_args.push(("event".to_string(), event.to_string()));
@@ -551,7 +570,11 @@ impl Users {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `alias: &str` -- The alias to be removed.
      */
-    pub async fn aliases_delete(&self, user_key: &str, alias: &str) -> ClientResult<()> {
+    pub async fn aliases_delete(
+        &self,
+        user_key: &str,
+        alias: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases/{}",
@@ -583,7 +606,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::UserMakeAdmin,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/makeAdmin",
@@ -610,7 +633,10 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn photos_get(&self, user_key: &str) -> ClientResult<crate::types::UserPhoto> {
+    pub async fn photos_get(
+        &self,
+        user_key: &str,
+    ) -> ClientResult<crate::Response<crate::types::UserPhoto>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -641,7 +667,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::UserPhoto,
-    ) -> ClientResult<crate::types::UserPhoto> {
+    ) -> ClientResult<crate::Response<crate::types::UserPhoto>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -668,7 +694,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn photos_delete(&self, user_key: &str) -> ClientResult<()> {
+    pub async fn photos_delete(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -699,7 +725,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::UserPhoto,
-    ) -> ClientResult<crate::types::UserPhoto> {
+    ) -> ClientResult<crate::Response<crate::types::UserPhoto>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -726,7 +752,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn sign_out(&self, user_key: &str) -> ClientResult<()> {
+    pub async fn sign_out(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/signOut",
@@ -757,7 +783,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::UserUndelete,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/undelete",

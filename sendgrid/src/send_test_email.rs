@@ -29,7 +29,7 @@ impl SendTestEmail {
     pub async fn post_marketing_test_send_email(
         &self,
         body: &crate::types::PostMarketingTestSendEmailRequest,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url("/marketing/test/send_email", None);
         self.client
             .post(

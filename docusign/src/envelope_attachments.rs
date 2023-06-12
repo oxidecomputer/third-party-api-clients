@@ -27,7 +27,7 @@ impl EnvelopeAttachments {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeAttachmentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeAttachmentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/attachments",
@@ -63,7 +63,7 @@ impl EnvelopeAttachments {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeAttachmentsRequest,
-    ) -> ClientResult<crate::types::EnvelopeAttachmentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeAttachmentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/attachments",
@@ -99,7 +99,7 @@ impl EnvelopeAttachments {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeAttachmentsRequest,
-    ) -> ClientResult<crate::types::EnvelopeAttachmentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeAttachmentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/attachments",
@@ -136,7 +136,7 @@ impl EnvelopeAttachments {
         account_id: &str,
         attachment_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
@@ -175,7 +175,7 @@ impl EnvelopeAttachments {
         attachment_id: &str,
         envelope_id: &str,
         body: &crate::types::Attachment,
-    ) -> ClientResult<crate::types::EnvelopeAttachmentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeAttachmentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/attachments/{}",

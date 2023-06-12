@@ -28,7 +28,7 @@ impl LinkBranding {
     pub async fn get_whitelabel_links(
         &self,
         limit: i64,
-    ) -> ClientResult<Vec<crate::types::LinkBranding200Response>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::LinkBranding200Response>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -60,7 +60,7 @@ impl LinkBranding {
      */
     pub async fn get_all_whitelabel_links(
         &self,
-    ) -> ClientResult<Vec<crate::types::LinkBranding200Response>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::LinkBranding200Response>>> {
         let url = self.client.url("/whitelabel/links", None);
         self.client
             .get_all_pages(
@@ -90,7 +90,7 @@ impl LinkBranding {
     pub async fn post_whitelabel_link(
         &self,
         body: &crate::types::PostWhitelabelLinksRequest,
-    ) -> ClientResult<crate::types::LinkBranding200Response> {
+    ) -> ClientResult<crate::Response<crate::types::LinkBranding200Response>> {
         let url = self.client.url("/whitelabel/links", None);
         self.client
             .post(
@@ -118,7 +118,7 @@ impl LinkBranding {
     pub async fn post_whitelabel_links_validate(
         &self,
         id: i64,
-    ) -> ClientResult<crate::types::PostWhitelabelLinksValidateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PostWhitelabelLinksValidateResponse>> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}/validate",
@@ -149,7 +149,7 @@ impl LinkBranding {
         &self,
         link_id: i64,
         body: &crate::types::PostWhitelabelLinksLinkSubuserRequest,
-    ) -> ClientResult<crate::types::LinkBranding200Response> {
+    ) -> ClientResult<crate::Response<crate::types::LinkBranding200Response>> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}/subuser",
@@ -183,7 +183,7 @@ impl LinkBranding {
     pub async fn get_whitelabel_links_link_branding(
         &self,
         id: i64,
-    ) -> ClientResult<crate::types::LinkBranding200Response> {
+    ) -> ClientResult<crate::Response<crate::types::LinkBranding200Response>> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}",
@@ -216,7 +216,10 @@ impl LinkBranding {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_whitelabel_links(&self, id: i64) -> ClientResult<crate::types::Help> {
+    pub async fn delete_whitelabel_links(
+        &self,
+        id: i64,
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}",
@@ -251,7 +254,7 @@ impl LinkBranding {
         &self,
         id: i64,
         body: &crate::types::PatchWhitelabelLinksRequest,
-    ) -> ClientResult<crate::types::LinkBranding200Response> {
+    ) -> ClientResult<crate::Response<crate::types::LinkBranding200Response>> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}",
@@ -292,7 +295,7 @@ impl LinkBranding {
     pub async fn get_whitelabel_links_default(
         &self,
         domain: &str,
-    ) -> ClientResult<crate::types::LinkBranding200Response> {
+    ) -> ClientResult<crate::Response<crate::types::LinkBranding200Response>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain.is_empty() {
             query_args.push(("domain".to_string(), domain.to_string()));
@@ -327,7 +330,7 @@ impl LinkBranding {
     pub async fn get_whitelabel_links_subuser(
         &self,
         username: &str,
-    ) -> ClientResult<crate::types::LinkBranding200Response> {
+    ) -> ClientResult<crate::Response<crate::types::LinkBranding200Response>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !username.is_empty() {
             query_args.push(("username".to_string(), username.to_string()));
@@ -364,7 +367,7 @@ impl LinkBranding {
     pub async fn delete_whitelabel_links_subuser(
         &self,
         username: &str,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !username.is_empty() {
             query_args.push(("username".to_string(), username.to_string()));

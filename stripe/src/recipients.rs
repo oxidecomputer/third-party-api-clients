@@ -34,7 +34,7 @@ impl Recipients {
         starting_after: &str,
         type_: crate::types::GetRecipientsType,
         verified: bool,
-    ) -> ClientResult<Vec<crate::types::Recipient>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Recipient>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -53,7 +53,7 @@ impl Recipients {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/recipients?{}", query_), None);
-        let resp: crate::types::GetRecipientsResponse = self
+        let resp: crate::Response<crate::types::GetRecipientsResponse> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl Recipients {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/recipients` endpoint.
@@ -79,7 +83,7 @@ impl Recipients {
         _created: &str,
         type_: crate::types::GetRecipientsType,
         verified: bool,
-    ) -> ClientResult<Vec<crate::types::Recipient>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Recipient>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -89,7 +93,11 @@ impl Recipients {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/recipients?{}", query_), None);
-        let mut resp: crate::types::GetRecipientsResponse = self
+        let crate::Response::<crate::types::GetRecipientsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -100,8 +108,8 @@ impl Recipients {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -117,7 +125,11 @@ impl Recipients {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetRecipientsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -128,7 +140,11 @@ impl Recipients {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetRecipientsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -140,13 +156,13 @@ impl Recipients {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/recipients` endpoint.
@@ -154,7 +170,7 @@ impl Recipients {
      * <p>Creates a new <code>Recipient</code> object and verifies the recipient’s identity.
      * Also verifies the recipient’s bank account information or debit card, if either is provided.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Recipient> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Recipient>> {
         let url = self.client.url("/v1/recipients", None);
         self.client
             .post(
@@ -176,7 +192,10 @@ impl Recipients {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::GetRecipientsResponseAnyOf> {
+    pub async fn get(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::GetRecipientsResponseAnyOf>> {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",
@@ -207,7 +226,10 @@ impl Recipients {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_recipients(&self, id: &str) -> ClientResult<crate::types::Recipient> {
+    pub async fn post_recipients(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Recipient>> {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",
@@ -234,7 +256,10 @@ impl Recipients {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn delete(&self, id: &str) -> ClientResult<crate::types::DeletedRecipient> {
+    pub async fn delete(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::DeletedRecipient>> {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",

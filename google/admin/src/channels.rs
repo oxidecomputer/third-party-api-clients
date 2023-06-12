@@ -16,7 +16,10 @@ impl Channels {
      *
      * Stops watching resources through this channel.
      */
-    pub async fn admin_stop(&self, body: &crate::types::Channel) -> ClientResult<()> {
+    pub async fn admin_stop(
+        &self,
+        body: &crate::types::Channel,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/directory_v1/channels/stop", None);
         self.client
             .post(

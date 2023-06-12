@@ -32,7 +32,7 @@ impl AdminConversationsEkm {
         team_ids: &str,
         limit: i64,
         cursor: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel_ids.is_empty() {
             query_args.push(("channel_ids".to_string(), channel_ids.to_string()));

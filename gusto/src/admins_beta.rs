@@ -23,7 +23,7 @@ impl AdminsBeta {
     pub async fn get_company_admins(
         &self,
         company_id: &str,
-    ) -> ClientResult<Vec<crate::types::Admin>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Admin>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",
@@ -55,7 +55,7 @@ impl AdminsBeta {
     pub async fn get_all_company_admins(
         &self,
         company_id: &str,
-    ) -> ClientResult<Vec<crate::types::Admin>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Admin>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",
@@ -86,7 +86,7 @@ impl AdminsBeta {
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyAdminsRequest,
-    ) -> ClientResult<crate::types::Admin> {
+    ) -> ClientResult<crate::Response<crate::types::Admin>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",

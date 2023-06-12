@@ -29,7 +29,7 @@ impl NetworkZones {
         after: &str,
         limit: i64,
         filter: &str,
-    ) -> ClientResult<Vec<crate::types::NetworkZone>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::NetworkZone>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -61,7 +61,10 @@ impl NetworkZones {
      *
      * Enumerates network zones added to your organization with pagination. A subset of zones can be returned that match a supported filter expression or query.
      */
-    pub async fn list_all(&self, filter: &str) -> ClientResult<Vec<crate::types::NetworkZone>> {
+    pub async fn list_all(
+        &self,
+        filter: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::NetworkZone>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -88,7 +91,7 @@ impl NetworkZones {
     pub async fn create(
         &self,
         body: &crate::types::NetworkZone,
-    ) -> ClientResult<crate::types::NetworkZone> {
+    ) -> ClientResult<crate::Response<crate::types::NetworkZone>> {
         let url = self.client.url("/api/v1/zones", None);
         self.client
             .post(
@@ -111,7 +114,10 @@ impl NetworkZones {
      *
      * * `zone_id: &str`
      */
-    pub async fn get(&self, zone_id: &str) -> ClientResult<crate::types::NetworkZone> {
+    pub async fn get(
+        &self,
+        zone_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::NetworkZone>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}",
@@ -144,7 +150,7 @@ impl NetworkZones {
         &self,
         zone_id: &str,
         body: &crate::types::NetworkZone,
-    ) -> ClientResult<crate::types::NetworkZone> {
+    ) -> ClientResult<crate::Response<crate::types::NetworkZone>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}",
@@ -173,7 +179,7 @@ impl NetworkZones {
      *
      * * `zone_id: &str`
      */
-    pub async fn delete(&self, zone_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, zone_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}",
@@ -202,7 +208,10 @@ impl NetworkZones {
      *
      * * `zone_id: &str`
      */
-    pub async fn activate(&self, zone_id: &str) -> ClientResult<crate::types::NetworkZone> {
+    pub async fn activate(
+        &self,
+        zone_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::NetworkZone>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}/lifecycle/activate",
@@ -231,7 +240,10 @@ impl NetworkZones {
      *
      * * `zone_id: &str`
      */
-    pub async fn deactivate(&self, zone_id: &str) -> ClientResult<crate::types::NetworkZone> {
+    pub async fn deactivate(
+        &self,
+        zone_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::NetworkZone>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}/lifecycle/deactivate",

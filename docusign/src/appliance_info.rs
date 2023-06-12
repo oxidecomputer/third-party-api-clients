@@ -25,7 +25,7 @@ impl ApplianceInfo {
     pub async fn envelope_get_dynamic_system_setting(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/display_appliance_info/dynamicsystemsettings",
@@ -57,7 +57,7 @@ impl ApplianceInfo {
     pub async fn envelope_get_template(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/display_appliance_info/templateInfo",
@@ -91,7 +91,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info",
@@ -126,7 +126,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::DisplayApplianceAccount> {
+    ) -> ClientResult<crate::Response<crate::types::DisplayApplianceAccount>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/account_info",
@@ -161,7 +161,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/custom_fields",
@@ -196,7 +196,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/custom_fields/delete",
@@ -231,7 +231,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/date_signed",
@@ -268,7 +268,7 @@ impl ApplianceInfo {
         account_id: &str,
         document_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document/{}",
@@ -306,7 +306,7 @@ impl ApplianceInfo {
         account_id: &str,
         document_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document/{}",
@@ -342,7 +342,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document_page_list",
@@ -377,7 +377,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/image",
@@ -415,7 +415,7 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/localepolicy/{}",
@@ -447,7 +447,11 @@ impl ApplianceInfo {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn envelope_put_page(&self, account_id: &str, envelope_id: &str) -> ClientResult<()> {
+    pub async fn envelope_put_page(
+        &self,
+        account_id: &str,
+        envelope_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info",
@@ -482,7 +486,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info",
@@ -517,7 +521,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info/delete",
@@ -552,7 +556,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf",
@@ -591,7 +595,7 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
         pdf_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf/{}",
@@ -627,7 +631,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
@@ -662,7 +666,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
@@ -697,7 +701,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
@@ -732,7 +736,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/recipient_denied_copy",
@@ -767,7 +771,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/recipient_denied_copy",
@@ -802,7 +806,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::ApplianceInfo> {
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/signer_attachment_info",
@@ -837,7 +841,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/signer_attachment_info",
@@ -863,7 +867,7 @@ impl ApplianceInfo {
      *
      *
      */
-    pub async fn envelope_post_error(&self) -> ClientResult<()> {
+    pub async fn envelope_post_error(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/v2.1/display_appliance_info/error", None);
         self.client
             .post(
@@ -882,7 +886,9 @@ impl ApplianceInfo {
      *
      *
      */
-    pub async fn envelope_post_redeem(&self) -> ClientResult<crate::types::ApplianceInfo> {
+    pub async fn envelope_post_redeem(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
         let url = self.client.url("/v2.1/display_appliance_info/redeem", None);
         self.client
             .post(

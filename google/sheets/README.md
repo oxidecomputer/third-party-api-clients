@@ -37,7 +37,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-sheets = "0.6.0"
+sheets = "0.7.0-rc.1"
 ```
 
 ## Basic example
@@ -45,7 +45,7 @@ sheets = "0.6.0"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use sheets::Client;
 
 let google sheets = Client::new(
@@ -66,7 +66,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use sheets::Client;
 
 let google sheets = Client::new_from_env(
@@ -80,7 +80,7 @@ the initial state of the client, you will not know these values.
 
 To start off a fresh client and get a `token` and `refresh_token`, use the following.
 
-```
+```rust
 use sheets::Client;
 
 async fn do_call() {

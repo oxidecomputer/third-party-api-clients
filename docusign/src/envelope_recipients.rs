@@ -37,7 +37,7 @@ impl EnvelopeRecipients {
         include_extended: &str,
         include_metadata: &str,
         include_tabs: &str,
-    ) -> ClientResult<crate::types::EnvelopeRecipients> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipients>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_anchor_tab_locations.is_empty() {
             query_args.push((
@@ -126,7 +126,7 @@ impl EnvelopeRecipients {
         offline_signing: &str,
         resend_envelope: &str,
         body: &crate::types::EnvelopeRecipients,
-    ) -> ClientResult<crate::types::RecipientsUpdateSummary> {
+    ) -> ClientResult<crate::Response<crate::types::RecipientsUpdateSummary>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !combine_same_order_recipients.is_empty() {
             query_args.push((
@@ -181,7 +181,7 @@ impl EnvelopeRecipients {
         envelope_id: &str,
         resend_envelope: &str,
         body: &crate::types::EnvelopeRecipients,
-    ) -> ClientResult<crate::types::EnvelopeRecipients> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipients>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !resend_envelope.is_empty() {
             query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
@@ -225,7 +225,7 @@ impl EnvelopeRecipients {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeRecipients,
-    ) -> ClientResult<crate::types::EnvelopeRecipients> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipients>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients",
@@ -263,7 +263,7 @@ impl EnvelopeRecipients {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::DocumentVisibilityList,
-    ) -> ClientResult<crate::types::DocumentVisibilityList> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentVisibilityList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/document_visibility",
@@ -302,7 +302,7 @@ impl EnvelopeRecipients {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeRecipients> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipients>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}",
@@ -340,7 +340,7 @@ impl EnvelopeRecipients {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> ClientResult<crate::types::ProofServiceResourceToken> {
+    ) -> ClientResult<crate::Response<crate::types::ProofServiceResourceToken>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/identity_proof_token",
@@ -391,7 +391,7 @@ impl EnvelopeRecipients {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> ClientResult<crate::types::ViewUrl> {
+    ) -> ClientResult<crate::Response<crate::types::ViewUrl>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/views/identity_manual_review",
@@ -430,7 +430,7 @@ impl EnvelopeRecipients {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::RecipientPreviewRequest,
-    ) -> ClientResult<crate::types::ViewUrl> {
+    ) -> ClientResult<crate::Response<crate::types::ViewUrl>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/recipient_preview",

@@ -32,7 +32,7 @@ impl Checkout {
         payment_intent: &str,
         starting_after: &str,
         subscription: &str,
-    ) -> ClientResult<Vec<crate::types::Session>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Session>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -53,7 +53,7 @@ impl Checkout {
         let url = self
             .client
             .url(&format!("/v1/checkout/sessions?{}", query_), None);
-        let resp: crate::types::PaymentPagesCheckoutSessionList = self
+        let resp: crate::Response<crate::types::PaymentPagesCheckoutSessionList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl Checkout {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
@@ -78,7 +82,7 @@ impl Checkout {
         &self,
         payment_intent: &str,
         subscription: &str,
-    ) -> ClientResult<Vec<crate::types::Session>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Session>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !payment_intent.is_empty() {
             query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
@@ -90,7 +94,11 @@ impl Checkout {
         let url = self
             .client
             .url(&format!("/v1/checkout/sessions?{}", query_), None);
-        let mut resp: crate::types::PaymentPagesCheckoutSessionList = self
+        let crate::Response::<crate::types::PaymentPagesCheckoutSessionList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -101,8 +109,8 @@ impl Checkout {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -118,7 +126,11 @@ impl Checkout {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PaymentPagesCheckoutSessionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -129,7 +141,11 @@ impl Checkout {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PaymentPagesCheckoutSessionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -141,20 +157,20 @@ impl Checkout {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/checkout/sessions` endpoint.
      *
      * <p>Creates a Session object.</p>
      */
-    pub async fn post_session(&self) -> ClientResult<crate::types::Session> {
+    pub async fn post_session(&self) -> ClientResult<crate::Response<crate::types::Session>> {
         let url = self.client.url("/v1/checkout/sessions", None);
         self.client
             .post(
@@ -176,7 +192,10 @@ impl Checkout {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `session: &str` -- The account's country.
      */
-    pub async fn get_sessions_session(&self, session: &str) -> ClientResult<crate::types::Session> {
+    pub async fn get_sessions_session(
+        &self,
+        session: &str,
+    ) -> ClientResult<crate::Response<crate::types::Session>> {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}",
@@ -208,7 +227,7 @@ impl Checkout {
     pub async fn post_sessions_session_expire(
         &self,
         session: &str,
-    ) -> ClientResult<crate::types::Session> {
+    ) -> ClientResult<crate::Response<crate::types::Session>> {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}/expire",
@@ -245,7 +264,7 @@ impl Checkout {
         limit: i64,
         session: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::Item>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -265,7 +284,7 @@ impl Checkout {
             ),
             None,
         );
-        let resp: crate::types::LineItems = self
+        let resp: crate::Response<crate::types::LineItems> = self
             .client
             .get(
                 &url,
@@ -277,7 +296,11 @@ impl Checkout {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
@@ -289,7 +312,7 @@ impl Checkout {
     pub async fn get_all_sessions_session_line_items(
         &self,
         session: &str,
-    ) -> ClientResult<Vec<crate::types::Item>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}/line_items",
@@ -297,7 +320,11 @@ impl Checkout {
             ),
             None,
         );
-        let mut resp: crate::types::LineItems = self
+        let crate::Response::<crate::types::LineItems> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -308,8 +335,8 @@ impl Checkout {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -325,7 +352,11 @@ impl Checkout {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -336,7 +367,11 @@ impl Checkout {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -348,12 +383,12 @@ impl Checkout {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
 }

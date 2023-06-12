@@ -18,7 +18,7 @@ impl Account {
      *
      * Get the developer's account information
      */
-    pub async fn get(&self) -> ClientResult<crate::types::Account> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Account>> {
         let url = self.client.url("/account", None);
         self.client
             .get(

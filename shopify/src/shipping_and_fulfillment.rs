@@ -32,7 +32,7 @@ impl ShippingAndFulfillment {
         &self,
         assignment_status: &str,
         location_ids: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignment_status.is_empty() {
             query_args.push((
@@ -82,7 +82,7 @@ impl ShippingAndFulfillment {
         &self,
         assignment_status: &str,
         location_ids: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignment_status.is_empty() {
             query_args.push((
@@ -132,7 +132,7 @@ impl ShippingAndFulfillment {
         &self,
         assignment_status: &str,
         location_ids: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignment_status.is_empty() {
             query_args.push((
@@ -182,7 +182,7 @@ impl ShippingAndFulfillment {
         &self,
         assignment_status: &str,
         location_ids: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignment_status.is_empty() {
             query_args.push((
@@ -232,7 +232,7 @@ impl ShippingAndFulfillment {
         &self,
         assignment_status: &str,
         location_ids: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignment_status.is_empty() {
             query_args.push((
@@ -282,7 +282,7 @@ impl ShippingAndFulfillment {
         &self,
         assignment_status: &str,
         location_ids: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignment_status.is_empty() {
             query_args.push((
@@ -328,7 +328,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -369,7 +369,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -410,7 +410,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -451,7 +451,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -492,7 +492,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -533,7 +533,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -574,7 +574,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -615,7 +615,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -656,7 +656,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -697,7 +697,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -738,7 +738,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -779,7 +779,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -820,7 +820,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -861,7 +861,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -902,7 +902,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -943,7 +943,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -984,7 +984,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -1025,7 +1025,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -1056,7 +1056,7 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-01
      */
-    pub async fn deprecated_202001_get_carrier_service(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/carrier_services.json", None);
@@ -1080,7 +1080,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_create_carrier_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/carrier_services.json", None);
@@ -1108,7 +1108,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/carrier_services/{}/json",
@@ -1141,7 +1141,7 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/carrier_services/{}/json",
@@ -1173,7 +1173,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/carrier_services/{}/json",
@@ -1198,7 +1198,7 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-04
      */
-    pub async fn deprecated_202004_get_carrier_service(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/carrier_services.json", None);
@@ -1222,7 +1222,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_create_carrier_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/carrier_services.json", None);
@@ -1250,7 +1250,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/carrier_services/{}/json",
@@ -1283,7 +1283,7 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/carrier_services/{}/json",
@@ -1315,7 +1315,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/carrier_services/{}/json",
@@ -1340,7 +1340,7 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-07
      */
-    pub async fn deprecated_202007_get_carrier_service(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/carrier_services.json", None);
@@ -1364,7 +1364,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_create_carrier_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/carrier_services.json", None);
@@ -1392,7 +1392,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/carrier_services/{}/json",
@@ -1425,7 +1425,7 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/carrier_services/{}/json",
@@ -1457,7 +1457,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/carrier_services/{}/json",
@@ -1482,7 +1482,7 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-10
      */
-    pub async fn get_carrier_service(&self) -> ClientResult<()> {
+    pub async fn get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/carrier_services.json", None);
@@ -1503,7 +1503,10 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-10
      */
-    pub async fn create_carrier_services(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_carrier_services(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/carrier_services.json", None);
@@ -1531,7 +1534,7 @@ impl ShippingAndFulfillment {
     pub async fn get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/carrier_services/{}/json",
@@ -1564,7 +1567,7 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/carrier_services/{}/json",
@@ -1596,7 +1599,7 @@ impl ShippingAndFulfillment {
     pub async fn delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/carrier_services/{}/json",
@@ -1621,7 +1624,7 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2021-01
      */
-    pub async fn deprecated_202101_get_carrier_service(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/carrier_services.json", None);
@@ -1645,7 +1648,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_create_carrier_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/carrier_services.json", None);
@@ -1673,7 +1676,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/carrier_services/{}/json",
@@ -1706,7 +1709,7 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/carrier_services/{}/json",
@@ -1738,7 +1741,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/carrier_services/{}/json",
@@ -1763,7 +1766,9 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-unstable
      */
-    pub async fn deprecated_unstable_get_carrier_service(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_carrier_service(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/carrier_services.json", None);
@@ -1787,7 +1792,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_create_carrier_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/carrier_services.json", None);
@@ -1815,7 +1820,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/carrier_services/{}/json",
@@ -1848,7 +1853,7 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/carrier_services/{}/json",
@@ -1880,7 +1885,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/carrier_services/{}/json",
@@ -1927,7 +1932,7 @@ impl ShippingAndFulfillment {
         since_id: &str,
         updated_at_max: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1971,28 +1976,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -2006,7 +2011,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments.json",
@@ -2039,7 +2044,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/fulfillments.json",
@@ -2079,7 +2084,7 @@ impl ShippingAndFulfillment {
         created_at_max: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -2130,7 +2135,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2172,7 +2177,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/json",
@@ -2201,7 +2206,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_create_fulfillments(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/fulfillments.json", None);
@@ -2230,7 +2235,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillments/{}/update_tracking.json",
@@ -2265,7 +2270,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/complete.json",
@@ -2301,7 +2306,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/open.json",
@@ -2337,7 +2342,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/cancel.json",
@@ -2371,7 +2376,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillments/{}/cancel.json",
@@ -2418,7 +2423,7 @@ impl ShippingAndFulfillment {
         since_id: &str,
         updated_at_max: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -2462,28 +2467,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -2497,7 +2502,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments.json",
@@ -2530,7 +2535,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/fulfillments.json",
@@ -2570,7 +2575,7 @@ impl ShippingAndFulfillment {
         created_at_max: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -2621,7 +2626,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2663,7 +2668,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/json",
@@ -2692,7 +2697,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_create_fulfillments(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/fulfillments.json", None);
@@ -2721,7 +2726,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillments/{}/update_tracking.json",
@@ -2756,7 +2761,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/complete.json",
@@ -2792,7 +2797,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/open.json",
@@ -2828,7 +2833,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/cancel.json",
@@ -2862,7 +2867,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillments/{}/cancel.json",
@@ -2909,7 +2914,7 @@ impl ShippingAndFulfillment {
         since_id: &str,
         updated_at_max: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -2953,28 +2958,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -2988,7 +2993,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments.json",
@@ -3021,7 +3026,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/fulfillments.json",
@@ -3061,7 +3066,7 @@ impl ShippingAndFulfillment {
         created_at_max: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -3112,7 +3117,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3154,7 +3159,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/json",
@@ -3183,7 +3188,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_create_fulfillments(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/fulfillments.json", None);
@@ -3212,7 +3217,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillments/{}/update_tracking.json",
@@ -3247,7 +3252,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/complete.json",
@@ -3283,7 +3288,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/open.json",
@@ -3319,7 +3324,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/cancel.json",
@@ -3353,7 +3358,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillments/{}/cancel.json",
@@ -3400,7 +3405,7 @@ impl ShippingAndFulfillment {
         since_id: &str,
         updated_at_max: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -3444,28 +3449,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -3479,7 +3484,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments.json",
@@ -3512,7 +3517,7 @@ impl ShippingAndFulfillment {
     pub async fn get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/fulfillments.json",
@@ -3552,7 +3557,7 @@ impl ShippingAndFulfillment {
         created_at_max: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -3603,7 +3608,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3645,7 +3650,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/json",
@@ -3671,7 +3676,10 @@ impl ShippingAndFulfillment {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-10
      */
-    pub async fn create_fulfillments(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_fulfillments(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/fulfillments.json", None);
@@ -3700,7 +3708,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillments/{}/update_tracking.json",
@@ -3735,7 +3743,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/complete.json",
@@ -3771,7 +3779,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/open.json",
@@ -3807,7 +3815,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/cancel.json",
@@ -3841,7 +3849,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillments/{}/cancel.json",
@@ -3888,7 +3896,7 @@ impl ShippingAndFulfillment {
         since_id: &str,
         updated_at_max: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -3932,28 +3940,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -3967,7 +3975,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments.json",
@@ -4000,7 +4008,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/fulfillments.json",
@@ -4040,7 +4048,7 @@ impl ShippingAndFulfillment {
         created_at_max: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -4091,7 +4099,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4133,7 +4141,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/json",
@@ -4162,7 +4170,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_create_fulfillments(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/fulfillments.json", None);
@@ -4191,7 +4199,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillments/{}/update_tracking.json",
@@ -4226,7 +4234,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/complete.json",
@@ -4262,7 +4270,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/open.json",
@@ -4298,7 +4306,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/cancel.json",
@@ -4332,7 +4340,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillments/{}/cancel.json",
@@ -4379,7 +4387,7 @@ impl ShippingAndFulfillment {
         since_id: &str,
         updated_at_max: &str,
         updated_at_min: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -4423,28 +4431,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -4458,7 +4466,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments.json",
@@ -4491,7 +4499,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/fulfillments.json",
@@ -4531,7 +4539,7 @@ impl ShippingAndFulfillment {
         created_at_max: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -4582,7 +4590,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4624,7 +4632,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/json",
@@ -4653,7 +4661,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_create_fulfillments(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/fulfillments.json", None);
@@ -4682,7 +4690,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillments/{}/update_tracking.json",
@@ -4717,7 +4725,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/complete.json",
@@ -4753,7 +4761,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/open.json",
@@ -4789,7 +4797,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/cancel.json",
@@ -4823,7 +4831,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillments/{}/cancel.json",
@@ -4859,7 +4867,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         fulfillment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
@@ -4895,7 +4903,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
@@ -4933,7 +4941,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
@@ -4971,7 +4979,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
@@ -5009,7 +5017,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         fulfillment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
@@ -5045,7 +5053,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
@@ -5083,7 +5091,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
@@ -5121,7 +5129,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
@@ -5159,7 +5167,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         fulfillment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
@@ -5195,7 +5203,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
@@ -5233,7 +5241,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
@@ -5271,7 +5279,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
@@ -5309,7 +5317,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         fulfillment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
@@ -5345,7 +5353,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
@@ -5383,7 +5391,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
@@ -5421,7 +5429,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
@@ -5459,7 +5467,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         fulfillment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
@@ -5495,7 +5503,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
@@ -5533,7 +5541,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
@@ -5571,7 +5579,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
@@ -5609,7 +5617,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         fulfillment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
@@ -5645,7 +5653,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
@@ -5683,7 +5691,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
@@ -5721,7 +5729,7 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
         event_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
@@ -5756,7 +5764,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillment_orders.json",
@@ -5788,7 +5796,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/json",
@@ -5821,7 +5829,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/cancel.json",
@@ -5841,7 +5849,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -5857,7 +5865,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -5898,7 +5906,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         new_location_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !new_location_id.is_empty() {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
@@ -5937,7 +5945,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillment_orders.json",
@@ -5969,7 +5977,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/json",
@@ -6002,7 +6010,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/cancel.json",
@@ -6022,7 +6030,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6038,7 +6046,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -6079,7 +6087,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         new_location_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !new_location_id.is_empty() {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
@@ -6118,7 +6126,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillment_orders.json",
@@ -6150,7 +6158,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/json",
@@ -6183,7 +6191,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/cancel.json",
@@ -6203,7 +6211,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6219,7 +6227,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -6260,7 +6268,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         new_location_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !new_location_id.is_empty() {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
@@ -6299,7 +6307,7 @@ impl ShippingAndFulfillment {
     pub async fn get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillment_orders.json",
@@ -6331,7 +6339,7 @@ impl ShippingAndFulfillment {
     pub async fn get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/json",
@@ -6364,7 +6372,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/cancel.json",
@@ -6384,7 +6392,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6400,7 +6408,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -6441,7 +6449,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         new_location_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !new_location_id.is_empty() {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
@@ -6480,7 +6488,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillment_orders.json",
@@ -6512,7 +6520,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/json",
@@ -6545,7 +6553,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/cancel.json",
@@ -6565,7 +6573,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6581,7 +6589,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -6622,7 +6630,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         new_location_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !new_location_id.is_empty() {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
@@ -6648,7 +6656,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks a scheduled fulfillment order as ready for fulfillment.
-              This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
+             This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/open.json` endpoint.
     *
@@ -6662,7 +6670,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/open.json",
@@ -6682,7 +6690,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Updates the fulfill_at time of a scheduled fulfillment order.
-              This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
+             This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/reschedule.json` endpoint.
     *
@@ -6696,7 +6704,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/reschedule.json",
@@ -6729,7 +6737,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillment_orders.json",
@@ -6761,7 +6769,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/json",
@@ -6794,7 +6802,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/cancel.json",
@@ -6814,7 +6822,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Releases the fulfillment order holds for a specific order. Fulfillment orders are created
-              with an ON_HOLD status if the channel that created the order has a fulfillment hold policy.
+             with an ON_HOLD status if the channel that created the order has a fulfillment hold policy.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/release_hold.json` endpoint.
     *
@@ -6828,7 +6836,7 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_id.is_empty() {
             query_args.push(("order_id".to_string(), order_id.to_string()));
@@ -6853,7 +6861,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6869,7 +6877,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -6910,7 +6918,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         new_location_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !new_location_id.is_empty() {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
@@ -6936,7 +6944,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks a scheduled fulfillment order as ready for fulfillment.
-              This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
+             This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/open.json` endpoint.
     *
@@ -6950,7 +6958,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/open.json",
@@ -6970,7 +6978,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Updates the fulfill_at time of a scheduled fulfillment order.
-              This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
+             This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/reschedule.json` endpoint.
     *
@@ -6984,7 +6992,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/reschedule.json",
@@ -7021,7 +7029,7 @@ impl ShippingAndFulfillment {
         message: &str,
         fulfillment_order_line_items: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fulfillment_order_line_items.is_empty() {
             query_args.push((
@@ -7068,7 +7076,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7109,7 +7117,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7152,7 +7160,7 @@ impl ShippingAndFulfillment {
         message: &str,
         fulfillment_order_line_items: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fulfillment_order_line_items.is_empty() {
             query_args.push((
@@ -7199,7 +7207,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7240,7 +7248,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7283,7 +7291,7 @@ impl ShippingAndFulfillment {
         message: &str,
         fulfillment_order_line_items: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fulfillment_order_line_items.is_empty() {
             query_args.push((
@@ -7330,7 +7338,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7371,7 +7379,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7414,7 +7422,7 @@ impl ShippingAndFulfillment {
         message: &str,
         fulfillment_order_line_items: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fulfillment_order_line_items.is_empty() {
             query_args.push((
@@ -7461,7 +7469,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7502,7 +7510,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7545,7 +7553,7 @@ impl ShippingAndFulfillment {
         message: &str,
         fulfillment_order_line_items: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fulfillment_order_line_items.is_empty() {
             query_args.push((
@@ -7592,7 +7600,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7633,7 +7641,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7676,7 +7684,7 @@ impl ShippingAndFulfillment {
         message: &str,
         fulfillment_order_line_items: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fulfillment_order_line_items.is_empty() {
             query_args.push((
@@ -7723,7 +7731,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7764,7 +7772,7 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         message: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !message.is_empty() {
             query_args.push(("message".to_string(), message.to_string()));
@@ -7804,7 +7812,7 @@ impl ShippingAndFulfillment {
         &self,
         order_names: &str,
         shop: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_names.is_empty() {
             query_args.push(("order_names".to_string(), order_names.to_string()));
@@ -7846,7 +7854,7 @@ impl ShippingAndFulfillment {
         shop: &str,
         sku: &str,
         timestamp: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !max_retries.is_empty() {
             query_args.push(("max_retries".to_string(), max_retries.to_string()));
@@ -7884,7 +7892,10 @@ impl ShippingAndFulfillment {
      * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
      *                           all: Returns all the fulfillment providers.
      */
-    pub async fn deprecated_202001_get_fulfillment_service(&self, scope: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_fulfillment_service(
+        &self,
+        scope: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
             query_args.push(("scope".to_string(), scope.to_string()));
@@ -7906,9 +7917,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_services.json` endpoint.
     *
@@ -7917,7 +7928,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_create_fulfillment_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/fulfillment_services.json", None);
@@ -7945,7 +7956,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_services/{}/json",
@@ -7978,7 +7989,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_services/{}/json",
@@ -8010,7 +8021,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_services/{}/json",
@@ -8040,7 +8051,10 @@ impl ShippingAndFulfillment {
      * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
      *                           all: Returns all the fulfillment providers.
      */
-    pub async fn deprecated_202004_get_fulfillment_service(&self, scope: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_fulfillment_service(
+        &self,
+        scope: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
             query_args.push(("scope".to_string(), scope.to_string()));
@@ -8062,9 +8076,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_services.json` endpoint.
     *
@@ -8073,7 +8087,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_create_fulfillment_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/fulfillment_services.json", None);
@@ -8101,7 +8115,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_services/{}/json",
@@ -8134,7 +8148,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_services/{}/json",
@@ -8166,7 +8180,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_services/{}/json",
@@ -8196,7 +8210,10 @@ impl ShippingAndFulfillment {
      * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
      *                           all: Returns all the fulfillment providers.
      */
-    pub async fn deprecated_202007_get_fulfillment_service(&self, scope: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_fulfillment_service(
+        &self,
+        scope: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
             query_args.push(("scope".to_string(), scope.to_string()));
@@ -8218,9 +8235,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_services.json` endpoint.
     *
@@ -8229,7 +8246,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_create_fulfillment_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/fulfillment_services.json", None);
@@ -8257,7 +8274,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_services/{}/json",
@@ -8290,7 +8307,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_services/{}/json",
@@ -8322,7 +8339,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_services/{}/json",
@@ -8352,7 +8369,7 @@ impl ShippingAndFulfillment {
      * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
      *                           all: Returns all the fulfillment providers.
      */
-    pub async fn get_fulfillment_service(&self, scope: &str) -> ClientResult<()> {
+    pub async fn get_fulfillment_service(&self, scope: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
             query_args.push(("scope".to_string(), scope.to_string()));
@@ -8374,15 +8391,18 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_services.json` endpoint.
     *
     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#create-2020-10
     */
-    pub async fn create_fulfillment_services(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_fulfillment_services(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/fulfillment_services.json", None);
@@ -8410,7 +8430,7 @@ impl ShippingAndFulfillment {
     pub async fn get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_services/{}/json",
@@ -8443,7 +8463,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_services/{}/json",
@@ -8475,7 +8495,7 @@ impl ShippingAndFulfillment {
     pub async fn delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_services/{}/json",
@@ -8505,7 +8525,10 @@ impl ShippingAndFulfillment {
      * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
      *                           all: Returns all the fulfillment providers.
      */
-    pub async fn deprecated_202101_get_fulfillment_service(&self, scope: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_fulfillment_service(
+        &self,
+        scope: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
             query_args.push(("scope".to_string(), scope.to_string()));
@@ -8527,9 +8550,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_services.json` endpoint.
     *
@@ -8538,7 +8561,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_create_fulfillment_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/fulfillment_services.json", None);
@@ -8566,7 +8589,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_services/{}/json",
@@ -8599,7 +8622,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_services/{}/json",
@@ -8631,7 +8654,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_services/{}/json",
@@ -8664,7 +8687,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_fulfillment_service(
         &self,
         scope: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
             query_args.push(("scope".to_string(), scope.to_string()));
@@ -8686,9 +8709,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_services.json` endpoint.
     *
@@ -8697,7 +8720,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_create_fulfillment_services(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/fulfillment_services.json", None);
@@ -8725,7 +8748,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_services/{}/json",
@@ -8758,7 +8781,7 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_services/{}/json",
@@ -8790,7 +8813,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_services/{}/json",
@@ -8810,7 +8833,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8824,7 +8847,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202001_get_fulfillment_orders_param_order_locations_for_move(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/locations_for_move.json",
@@ -8844,7 +8867,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8858,7 +8881,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202004_get_fulfillment_orders_param_order_locations_for_move(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/locations_for_move.json",
@@ -8878,7 +8901,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8892,7 +8915,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202007_get_fulfillment_orders_param_order_locations_for_move(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/locations_for_move.json",
@@ -8912,7 +8935,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8926,7 +8949,7 @@ impl ShippingAndFulfillment {
     pub async fn get_fulfillment_orders_param_order_locations_for_move(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/locations_for_move.json",
@@ -8946,7 +8969,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8960,7 +8983,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_202101_get_fulfillment_orders_param_order_locations_for_move(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/locations_for_move.json",
@@ -8980,7 +9003,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8994,7 +9017,7 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_fulfillment_orders_param_order_locations_for_move(
         &self,
         fulfillment_order_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/locations_for_move.json",
