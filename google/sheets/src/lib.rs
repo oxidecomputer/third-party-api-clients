@@ -26,7 +26,7 @@
 //! ## Client Details
 //!
 //! This client is generated from the [Google Sheets OpenAPI
-//! specs](https://sheets.googleapis.com/iscovery/rest?version=v4) based on API spec version `v4`. This way it will remain
+//! specs](https://sheets.googleapis.com/$discovery/rest?version=v4) based on API spec version `v4`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //!
