@@ -520,7 +520,7 @@ impl Client {
                     if let Some(token) = token_guard.as_ref().and_then(|t| t.token()) {
                         token.to_owned()
                     } else {
-                        log::debug!("app token is stale, refreshing");
+                        log::info!("[octorust] App token is stale, refreshing");
 
                         let created_at = tokio::time::Instant::now();
                         let token = self
@@ -663,6 +663,7 @@ impl Client {
                     // header when cargo builds with --cfg feature="httpcache"
                     #[cfg(feature = "httpcache")]
                     {
+                        log::info!("[octorust] Not modified response received for {}", uri);
                         let body = self.http_cache.lookup_body(&uri).unwrap();
                         let out = serde_json::from_str::<Out>(&body).unwrap();
                         let link = match next_link {

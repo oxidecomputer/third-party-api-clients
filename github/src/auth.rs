@@ -105,6 +105,7 @@ impl JWTCredentials {
     pub fn token(&self) -> String {
         let mut expiring = self.cache.lock().unwrap();
         if expiring.is_stale() {
+            log::info!("[octorust] JWt token is stale, generating a new token");
             *expiring = ExpiringJWTCredential::calculate(self.app_id, &self.private_key)
                 .expect("JWT private key worked before, it should work now...");
         }
