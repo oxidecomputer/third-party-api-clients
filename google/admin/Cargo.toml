@@ -1,7 +1,7 @@
 [package]
 name = "gsuite-api"
 description = "A fully generated & opinionated API client for the Google Admin API."
-version = "0.7.0-rc.1"
+version = "0.7.0"
 documentation = "https://docs.rs/gsuite-api/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/google/admin"
 readme = "README.md"

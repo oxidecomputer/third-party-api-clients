@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-docusign = "0.7.0-rc.1"
+docusign = "0.7.0"
 ```
 
 ## Basic example

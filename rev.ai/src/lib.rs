@@ -223,7 +223,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! revai = "0.7.0-rc.1"
+//! revai = "0.7.0"
 //! ```
 //!
 //! ## Basic example

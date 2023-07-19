@@ -25,7 +25,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-shopify = "0.7.0-rc.1"
+shopify = "0.7.0"
 ```
 
 ## Basic example
