@@ -1,6 +1,6 @@
 [package]
 name = "okta"
-description = "A fully generated & opinionated API client for the Okta API."
+description = "A fully generated & opinionated API client for the Okta API. Okta is a registered trademark of Okta, Inc. and this library has no affiliation with or sponsorship by Okta, Inc."
 version = "0.7.0"
 documentation = "https://docs.rs/okta/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/okta"

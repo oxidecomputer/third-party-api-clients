@@ -382,7 +382,7 @@ okta: target/debug/generator $(OKTA_SPEC)
 		-o okta \
 		-n okta \
 		--proper-name Okta \
-		-d "A fully generated & opinionated API client for the Okta API." \
+		-d "A fully generated & opinionated API client for the Okta API. Okta is a registered trademark of Okta, Inc. and this library has no affiliation with or sponsorship by Okta, Inc." \
 		--spec-link "https://github.com/$(OKTA_SPEC_REPO)" \
 		--host "na4.okta.net" \
 		--token-endpoint "account.okta.com/oauth/token" \
