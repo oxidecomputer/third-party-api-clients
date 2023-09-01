@@ -32,7 +32,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-dolladollabills = "0.7.0"
+dolladollabills = "0.7.1"
 ```
 
 ## Basic example

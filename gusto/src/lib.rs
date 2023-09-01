@@ -30,7 +30,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gusto-api = "0.7.0"
+//! gusto-api = "0.7.1"
 //! ```
 //!
 //! ## Basic example

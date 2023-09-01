@@ -1,6 +1,6 @@
 SHELL := bash
 
-VERSION = 0.7.0
+VERSION = 0.7.1
 
 DOCUSIGN_SPEC_DIR = $(CURDIR)/specs/docusign
 DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.yaml

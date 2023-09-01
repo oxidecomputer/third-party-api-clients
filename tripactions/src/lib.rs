@@ -26,7 +26,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! tripactions = "0.7.0"
+//! tripactions = "0.7.1"
 //! ```
 //!
 //! ## Basic example

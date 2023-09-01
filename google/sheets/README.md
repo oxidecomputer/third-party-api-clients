@@ -38,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-sheets = "0.7.0"
+sheets = "0.7.1"
 ```
 
 ## Basic example
