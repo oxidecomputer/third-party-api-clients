@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Google Drive.
 
+
 [![docs.rs](https://docs.rs/google-drive/badge.svg)](https://docs.rs/google-drive)
 
 ## API Details

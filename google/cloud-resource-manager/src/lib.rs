@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Google Cloud Resource Manager.
 //!
+//!
 //! [![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)
 //!
 //! ## API Details

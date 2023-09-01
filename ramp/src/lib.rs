@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Ramp.
 //!
+//!
 //! [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)
 //!
 //! ## API Details

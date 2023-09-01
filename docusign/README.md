@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for DocuSign.
 
+
 [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)
 
 ## API Details

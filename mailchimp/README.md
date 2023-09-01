@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for MailChimp.
 
+
 [![docs.rs](https://docs.rs/mailchimp-api/badge.svg)](https://docs.rs/mailchimp-api)
 
 ## API Details

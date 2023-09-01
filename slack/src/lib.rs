@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Slack.
 //!
+//!
 //! [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)
 //!
 //! ## API Details

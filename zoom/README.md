@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Zoom.
 
+
 [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)
 
 ## API Details

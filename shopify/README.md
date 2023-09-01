@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Shopify.
 
+
 [![docs.rs](https://docs.rs/shopify/badge.svg)](https://docs.rs/shopify)
 
 ## API Details

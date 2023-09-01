@@ -338,8 +338,9 @@ pub fn generate_docs_github(
     proper_name: &str,
     _host: &str,
     spec_link: &str,
+    disclaimer: &str,
 ) -> String {
-    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name, disclaimer);
     let docs_proper_name = proper_name.to_lowercase();
 
     format!(
@@ -487,6 +488,7 @@ pub fn generate_docs_openapi_info(
     proper_name: &str,
     spec_link: &str,
     package_name: &str,
+    disclaimer: &str,
 ) -> String {
     let mut description = String::new();
     if let Some(d) = &api.info.description {
@@ -583,6 +585,7 @@ pub fn generate_docs_openapi_info(
 
     format!(
         r#"//! A fully generated, opinionated API client library for {}.
+//! {}
 //!
 //! [![docs.rs](https://docs.rs/{}/badge.svg)](https://docs.rs/{})
 //!
@@ -603,6 +606,7 @@ pub fn generate_docs_openapi_info(
 //! along with the code to make this library easy to use.
 //! "#,
         proper_name,
+        disclaimer,
         to_kebab_case(package_name),
         to_kebab_case(package_name),
         description,
@@ -615,6 +619,7 @@ pub fn generate_docs_openapi_info(
     )
 }
 
+#[allow(clippy::too_many_arguments)]
 pub fn generate_docs_generic_token(
     api: &openapiv3::OpenAPI,
     name: &str,
@@ -623,8 +628,9 @@ pub fn generate_docs_generic_token(
     spec_link: &str,
     add_post_header: &str,
     server_args: &str,
+    disclaimer: &str,
 ) -> String {
-    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name, disclaimer);
 
     let add_post_header_args = if !add_post_header.is_empty() {
         format!(
@@ -755,8 +761,9 @@ pub fn generate_docs_generic_api_key(
     version: &str,
     proper_name: &str,
     spec_link: &str,
+    disclaimer: &str,
 ) -> String {
-    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name, disclaimer);
     format!(
         r#"{}
 //!
@@ -810,8 +817,9 @@ pub fn generate_docs_generic_client_credentials(
     version: &str,
     proper_name: &str,
     spec_link: &str,
+    disclaimer: &str,
 ) -> String {
-    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name, disclaimer);
     format!(
         r#"{}
 //!

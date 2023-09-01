@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Rev.ai.
 //!
+//!
 //! [![docs.rs](https://docs.rs/revai/badge.svg)](https://docs.rs/revai)
 //!
 //! ## API Details

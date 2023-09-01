@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for ShipBob.
 //!
+//!
 //! [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
 //!
 //! ## API Details

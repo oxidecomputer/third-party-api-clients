@@ -382,11 +382,12 @@ okta: target/debug/generator $(OKTA_SPEC)
 		-o okta \
 		-n okta \
 		--proper-name Okta \
-		-d "A fully generated & opinionated API client for the Okta API. Okta is a registered trademark of Okta, Inc. and this library has no affiliation with or sponsorship by Okta, Inc." \
+		-d "A fully generated & opinionated API client for the Okta API." \
 		--spec-link "https://github.com/$(OKTA_SPEC_REPO)" \
 		--host "na4.okta.net" \
 		--token-endpoint "account.okta.com/oauth/token" \
-		--user-consent-endpoint "account.okta.com/oauth/auth" $(EXTRA_ARGS)
+		--user-consent-endpoint "account.okta.com/oauth/auth" $(EXTRA_ARGS) \
+		--disclaimer "Okta is a registered trademark of Okta, Inc. and this library has no affiliation with or sponsorship by Okta, Inc."
 	cargo fmt -p okta
 	@echo -e "- [Okta](okta/) [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)" >> README.md
 

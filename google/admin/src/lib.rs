@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Google Admin.
 //!
+//!
 //! [![docs.rs](https://docs.rs/gsuite-api/badge.svg)](https://docs.rs/gsuite-api)
 //!
 //! ## API Details
