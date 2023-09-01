@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Google Drive.
 
+
 [![docs.rs](https://docs.rs/google-drive/badge.svg)](https://docs.rs/google-drive)
 
 ## API Details
@@ -37,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google-drive = "0.7.0"
+google-drive = "0.7.1"
 ```
 
 ## Basic example

@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Google Calendar.
 //!
+//!
 //! [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)
 //!
 //! ## API Details
@@ -35,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-calendar = "0.7.0"
+//! google-calendar = "0.7.1"
 //! ```
 //!
 //! ## Basic example

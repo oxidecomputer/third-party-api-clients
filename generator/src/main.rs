@@ -2927,6 +2927,7 @@ fn main() -> Result<()> {
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
+    opts.optopt("", "disclaimer", "Disclaimer for README", "DISCLAIMER");
     opts.reqopt("", "host", "Target default host", "DEFAULT_HOST");
     opts.reqopt(
         "",
@@ -3320,6 +3321,7 @@ fn main() -> Result<()> {
     } else {
         String::new()
     };
+
     let fail = match gen(
         &api,
         &proper_name,
@@ -3420,6 +3422,8 @@ rustdoc-args = ["--cfg", "docsrs"]
             );
             save(&toml, tomlout.as_str())?;
 
+            let disclaimer = args.opt_str("disclaimer").unwrap_or_default();
+
             /*
              * Generate our documentation for the library.
              */
@@ -3431,6 +3435,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                     &proper_name,
                     host.trim_start_matches("https://"),
                     &spec_link,
+                    &disclaimer,
                 ),
                 TemplateType::GenericApiKey => template::generate_docs_generic_api_key(
                     &api,
@@ -3438,6 +3443,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                     &version,
                     &proper_name,
                     &spec_link,
+                    &disclaimer,
                 ),
                 TemplateType::GenericClientCredentials => {
                     template::generate_docs_generic_client_credentials(
@@ -3446,6 +3452,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                         &version,
                         &proper_name,
                         &spec_link,
+                        &disclaimer,
                     )
                 }
                 TemplateType::GenericToken => {
@@ -3458,6 +3465,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                             &spec_link,
                             &add_post_header,
                             &format!("{}::RootProductionServer", to_snake_case(&name)),
+                            &disclaimer,
                         )
                     } else {
                         template::generate_docs_generic_token(
@@ -3468,6 +3476,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                             &spec_link,
                             &add_post_header,
                             "",
+                            &disclaimer,
                         )
                     }
                 }

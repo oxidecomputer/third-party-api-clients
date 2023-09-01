@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Ramp.
 //!
+//!
 //! [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)
 //!
 //! ## API Details
@@ -25,7 +26,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! ramp-api = "0.7.0"
+//! ramp-api = "0.7.1"
 //! ```
 //!
 //! ## Basic example

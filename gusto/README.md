@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Gusto.
 
+
 [![docs.rs](https://docs.rs/gusto-api/badge.svg)](https://docs.rs/gusto-api)
 
 ## API Details
@@ -31,7 +32,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-gusto-api = "0.7.0"
+gusto-api = "0.7.1"
 ```
 
 ## Basic example

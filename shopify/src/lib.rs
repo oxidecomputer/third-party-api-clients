@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Shopify.
 //!
+//!
 //! [![docs.rs](https://docs.rs/shopify/badge.svg)](https://docs.rs/shopify)
 //!
 //! ## API Details
@@ -23,7 +24,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shopify = "0.7.0"
+//! shopify = "0.7.1"
 //! ```
 //!
 //! ## Basic example

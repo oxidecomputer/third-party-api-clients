@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Zoom.
 
+
 [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)
 
 ## API Details
@@ -40,7 +41,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-zoom-api = "0.7.0"
+zoom-api = "0.7.1"
 ```
 
 ## Basic example

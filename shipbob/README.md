@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for ShipBob.
 
+
 [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
 
 ## API Details
@@ -29,7 +30,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-shipbob = "0.7.0"
+shipbob = "0.7.1"
 ```
 
 ## Basic example

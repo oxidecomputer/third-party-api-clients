@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Google Groups Settings.
 //!
+//!
 //! [![docs.rs](https://docs.rs/google-groups-settings/badge.svg)](https://docs.rs/google-groups-settings)
 //!
 //! ## API Details
@@ -35,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-groups-settings = "0.7.0"
+//! google-groups-settings = "0.7.1"
 //! ```
 //!
 //! ## Basic example

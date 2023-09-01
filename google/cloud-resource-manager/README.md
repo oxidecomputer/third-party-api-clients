@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Google Cloud Resource Manager.
 
+
 [![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)
 
 ## API Details
@@ -37,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google-cloud-resource-manager = "0.7.0"
+google-cloud-resource-manager = "0.7.1"
 ```
 
 ## Basic example

@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Giphy.
 
+
 [![docs.rs](https://docs.rs/giphy-api/badge.svg)](https://docs.rs/giphy-api)
 
 ## API Details
@@ -31,7 +32,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-giphy-api = "0.7.0"
+giphy-api = "0.7.1"
 ```
 
 ## Basic example

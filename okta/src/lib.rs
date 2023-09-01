@@ -1,4 +1,5 @@
 //! A fully generated, opinionated API client library for Okta.
+//! Okta is a registered trademark of Okta, Inc. and this library has no affiliation with or sponsorship by Okta, Inc.
 //!
 //! [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)
 //!
@@ -35,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! okta = "0.7.0"
+//! okta = "0.7.1"
 //! ```
 //!
 //! ## Basic example

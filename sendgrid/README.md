@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for SendGrid.
 
+
 [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)
 
 ## API Details
@@ -29,7 +30,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-sendgrid-api = "0.7.0"
+sendgrid-api = "0.7.1"
 ```
 
 ## Basic example

@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for DocuSign.
 
+
 [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)
 
 ## API Details
@@ -31,7 +32,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-docusign = "0.7.0"
+docusign = "0.7.1"
 ```
 
 ## Basic example

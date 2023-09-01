@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Stripe.
 
+
 [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
 
 ## API Details
@@ -31,7 +32,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-dolladollabills = "0.7.0"
+dolladollabills = "0.7.1"
 ```
 
 ## Basic example

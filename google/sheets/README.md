@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Google Sheets.
 
+
 [![docs.rs](https://docs.rs/sheets/badge.svg)](https://docs.rs/sheets)
 
 ## API Details
@@ -37,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-sheets = "0.7.0"
+sheets = "0.7.1"
 ```
 
 ## Basic example

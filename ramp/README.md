@@ -2,6 +2,7 @@
 
 A fully generated, opinionated API client library for Ramp.
 
+
 [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)
 
 ## API Details
@@ -27,7 +28,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-ramp-api = "0.7.0"
+ramp-api = "0.7.1"
 ```
 
 ## Basic example

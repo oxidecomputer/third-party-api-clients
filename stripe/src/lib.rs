@@ -1,5 +1,6 @@
 //! A fully generated, opinionated API client library for Stripe.
 //!
+//!
 //! [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
 //!
 //! ## API Details
@@ -29,7 +30,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! dolladollabills = "0.7.0"
+//! dolladollabills = "0.7.1"
 //! ```
 //!
 //! ## Basic example
