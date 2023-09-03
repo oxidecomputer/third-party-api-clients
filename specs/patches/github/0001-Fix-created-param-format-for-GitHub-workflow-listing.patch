@@ -1,0 +1,20 @@
+commit 41a997b90c17c3bcc2197db26b8afef4d35fe7c1
+Author: Augustus Mayo <gusmayo@gmail.com>
+Date:   Mon Apr 3 10:27:02 2023 -0500
+
+    Fix created param format for GitHub workflow listing
+
+diff --git a/specs/github/api.github.com.json b/specs/github/api.github.com.json
+index 66bc0e6..5ec536d 100644
+--- a/specs/github/api.github.com.json
++++ b/specs/github/api.github.com.json
+@@ -95467,8 +95467,7 @@
+         "in": "query",
+         "required": false,
+         "schema": {
+-          "type": "string",
+-          "format": "date-time"
++          "type": "string"
+         }
+       },
+       "run-id": {
