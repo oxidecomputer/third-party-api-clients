@@ -473,6 +473,15 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
+        /*
+         * GitHub threaten to break the API in the future in unspecified ways.
+         * Although I have no idea what version of the API this client actually
+         * uses, there is only one supported release at the time of writing this
+         * comment.  Specify it explicitly here to avoid surprises in the
+         * future.
+         */
+        req = req.header("X-GitHub-Api-Version", "2022-11-28");
+
         if let Some(body) = body {
             log::debug!(
                 "body: {:?}",
