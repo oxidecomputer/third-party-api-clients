@@ -586,6 +586,7 @@ impl Client {
         message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
+        skip_cache: bool,
     ) -> ClientResult<(Option<crate::utils::NextLink>, crate::Response<Out>)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
@@ -601,7 +602,7 @@ impl Client {
                 .make_request(method.clone(), uri, message, media_type, authentication)
                 .await?;
 
-            if method == http::Method::GET {
+            if method == http::Method::GET && !skip_cache {
                 if let Ok(etag) = self.http_cache.lookup_etag(&uri) {
                     req = req.header(http::header::IF_NONE_MATCH, etag);
                 }
@@ -664,16 +665,36 @@ impl Client {
                     // header when cargo builds with --cfg feature="httpcache"
                     #[cfg(feature = "httpcache")]
                     {
-                        let body = self.http_cache.lookup_body(&uri).unwrap();
-                        let out = serde_json::from_str::<Out>(&body).unwrap();
-                        let link = match next_link {
-                            Some(next_link) => Ok(Some(next_link)),
-                            None => self
-                                .http_cache
-                                .lookup_next_link(&uri)
-                                .map(|next_link| next_link.map(crate::utils::NextLink)),
-                        };
-                        link.map(|link| (link, Response::new(status, headers, out)))
+                        if let Some(body) = self.http_cache.lookup_body(&uri) {
+                            if let Ok(out) = serde_json::from_str::<Out>(&body) {
+                                let link = match next_link {
+                                    Some(next_link) => Ok(Some(next_link)),
+                                    None => self
+                                        .http_cache
+                                        .lookup_next_link(&uri)
+                                        .map(|next_link| next_link.map(crate::utils::NextLink)),
+                                };
+                                link.map(|link| (link, Response::new(status, headers, out)))
+                            } else {
+                                self.request(
+                                    method,
+                                    uri,
+                                    message,
+                                    media_type,
+                                    authentication,
+                                    true,
+                                )
+                            }
+                        } else {
+                            self.request(
+                                method,
+                                uri,
+                                message,
+                                media_type,
+                                authentication,
+                                true,
+                            )
+                        }
                     }
                     #[cfg(not(feature = "httpcache"))]
                     {
@@ -737,7 +758,7 @@ impl Client {
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let (_, r) = self
-            .request(method, uri, message, media_type, authentication)
+            .request(method, uri, message, media_type, authentication, false)
             .await?;
         Ok(r)
     }
@@ -793,6 +814,7 @@ impl Client {
             Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            false,
         )
         .await
     }
@@ -810,6 +832,7 @@ impl Client {
             Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            false,
         )
         .await
     }
