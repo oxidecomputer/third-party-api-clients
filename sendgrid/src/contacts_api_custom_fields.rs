@@ -27,7 +27,7 @@ impl ContactsApiCustomFields {
     ) -> ClientResult<crate::Response<crate::types::ListAllCustomFieldsResponse>> {
         let url = self
             .client
-            .url("/contactdb/custom_fields", None);
+            .url(&"/contactdb/custom_fields".to_string(), None);
         self.client
             .get(
                 &url,
@@ -57,7 +57,7 @@ impl ContactsApiCustomFields {
     ) -> ClientResult<crate::Response<crate::types::ContactdbCustomFieldWithAllOf>> {
         let url = self
             .client
-            .url("/contactdb/custom_fields", None);
+            .url(&"/contactdb/custom_fields".to_string(), None);
         self.client
             .post(
                 &url,
@@ -148,7 +148,7 @@ impl ContactsApiCustomFields {
     ) -> ClientResult<crate::Response<crate::types::GetContactdbReservedFieldsResponse>> {
         let url = self
             .client
-            .url("/contactdb/reserved_fields", None);
+            .url(&"/contactdb/reserved_fields".to_string(), None);
         self.client
             .get(
                 &url,

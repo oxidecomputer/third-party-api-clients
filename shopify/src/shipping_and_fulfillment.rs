@@ -337,7 +337,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -378,7 +378,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -419,7 +419,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -460,7 +460,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -501,7 +501,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -542,7 +542,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -583,7 +583,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -624,7 +624,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -665,7 +665,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -706,7 +706,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -747,7 +747,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -788,7 +788,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -829,7 +829,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -870,7 +870,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -911,7 +911,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -952,7 +952,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/cancellation_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -993,7 +993,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -1034,7 +1034,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -1058,7 +1058,7 @@ impl ShippingAndFulfillment {
      */
     pub async fn deprecated_202001_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-01/carrier_services.json",
+            &"/admin/api/2020-01/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1083,7 +1083,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-01/carrier_services.json",
+            &"/admin/api/2020-01/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1114,7 +1114,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1147,7 +1147,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1179,7 +1179,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1202,7 +1202,7 @@ impl ShippingAndFulfillment {
      */
     pub async fn deprecated_202004_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-04/carrier_services.json",
+            &"/admin/api/2020-04/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1227,7 +1227,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-04/carrier_services.json",
+            &"/admin/api/2020-04/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1258,7 +1258,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1291,7 +1291,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1323,7 +1323,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1346,7 +1346,7 @@ impl ShippingAndFulfillment {
      */
     pub async fn deprecated_202007_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-07/carrier_services.json",
+            &"/admin/api/2020-07/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1371,7 +1371,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-07/carrier_services.json",
+            &"/admin/api/2020-07/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1402,7 +1402,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1435,7 +1435,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1467,7 +1467,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1490,7 +1490,7 @@ impl ShippingAndFulfillment {
      */
     pub async fn get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-10/carrier_services.json",
+            &"/admin/api/2020-10/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1515,7 +1515,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-10/carrier_services.json",
+            &"/admin/api/2020-10/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1546,7 +1546,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1579,7 +1579,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1611,7 +1611,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1634,7 +1634,7 @@ impl ShippingAndFulfillment {
      */
     pub async fn deprecated_202101_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2021-01/carrier_services.json",
+            &"/admin/api/2021-01/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1659,7 +1659,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2021-01/carrier_services.json",
+            &"/admin/api/2021-01/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1690,7 +1690,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1723,7 +1723,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1755,7 +1755,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1780,7 +1780,7 @@ impl ShippingAndFulfillment {
         &self,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/unstable/carrier_services.json",
+            &"/admin/api/unstable/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1805,7 +1805,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/unstable/carrier_services.json",
+            &"/admin/api/unstable/carrier_services.json".to_string(),
             None,
         );
         self.client
@@ -1836,7 +1836,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1869,7 +1869,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1901,7 +1901,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/carrier_services/{}/json",
-                crate::progenitor_support::encode_path(carrier_service_id),
+                crate::progenitor_support::encode_path(&carrier_service_id.to_string()),
             ),
             None,
         );
@@ -1971,7 +1971,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -2027,7 +2027,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -2060,7 +2060,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -2114,7 +2114,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/count.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -2156,8 +2156,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/json?{}",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
                 query_
             ),
             None,
@@ -2193,8 +2193,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2221,7 +2221,7 @@ impl ShippingAndFulfillment {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-01/fulfillments.json", None);
+            .url(&"/admin/api/2020-01/fulfillments.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -2251,7 +2251,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillments/{}/update_tracking.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2286,8 +2286,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/complete.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2322,8 +2322,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/open.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2358,8 +2358,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2392,7 +2392,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2462,7 +2462,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -2518,7 +2518,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -2551,7 +2551,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -2605,7 +2605,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/count.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -2647,8 +2647,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/json?{}",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
                 query_
             ),
             None,
@@ -2684,8 +2684,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2712,7 +2712,7 @@ impl ShippingAndFulfillment {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-04/fulfillments.json", None);
+            .url(&"/admin/api/2020-04/fulfillments.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -2742,7 +2742,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillments/{}/update_tracking.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2777,8 +2777,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/complete.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2813,8 +2813,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/open.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2849,8 +2849,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2883,7 +2883,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -2953,7 +2953,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -3009,7 +3009,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -3042,7 +3042,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -3096,7 +3096,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/count.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -3138,8 +3138,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/json?{}",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
                 query_
             ),
             None,
@@ -3175,8 +3175,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3203,7 +3203,7 @@ impl ShippingAndFulfillment {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-07/fulfillments.json", None);
+            .url(&"/admin/api/2020-07/fulfillments.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -3233,7 +3233,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillments/{}/update_tracking.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3268,8 +3268,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/complete.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3304,8 +3304,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/open.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3340,8 +3340,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3374,7 +3374,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3444,7 +3444,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -3500,7 +3500,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -3533,7 +3533,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -3587,7 +3587,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/count.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -3629,8 +3629,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/json?{}",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
                 query_
             ),
             None,
@@ -3666,8 +3666,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3694,7 +3694,7 @@ impl ShippingAndFulfillment {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-10/fulfillments.json", None);
+            .url(&"/admin/api/2020-10/fulfillments.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -3724,7 +3724,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillments/{}/update_tracking.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3759,8 +3759,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/complete.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3795,8 +3795,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/open.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3831,8 +3831,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3865,7 +3865,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -3935,7 +3935,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -3991,7 +3991,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -4024,7 +4024,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -4078,7 +4078,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/count.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -4120,8 +4120,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/json?{}",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
                 query_
             ),
             None,
@@ -4157,8 +4157,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4185,7 +4185,7 @@ impl ShippingAndFulfillment {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2021-01/fulfillments.json", None);
+            .url(&"/admin/api/2021-01/fulfillments.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -4215,7 +4215,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillments/{}/update_tracking.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4250,8 +4250,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/complete.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4286,8 +4286,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/open.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4322,8 +4322,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4356,7 +4356,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4426,7 +4426,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -4482,7 +4482,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -4515,7 +4515,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/fulfillments.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -4569,7 +4569,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/count.json?{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -4611,8 +4611,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/json?{}",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
                 query_
             ),
             None,
@@ -4648,8 +4648,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4676,7 +4676,7 @@ impl ShippingAndFulfillment {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/unstable/fulfillments.json", None);
+            .url(&"/admin/api/unstable/fulfillments.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -4706,7 +4706,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillments/{}/update_tracking.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4741,8 +4741,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/complete.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4777,8 +4777,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/open.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4813,8 +4813,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4847,7 +4847,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillments/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4883,8 +4883,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4919,8 +4919,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -4957,9 +4957,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -4995,9 +4995,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5033,8 +5033,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5069,8 +5069,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5107,9 +5107,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5145,9 +5145,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5183,8 +5183,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5219,8 +5219,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5257,9 +5257,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5295,9 +5295,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5333,8 +5333,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5369,8 +5369,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5407,9 +5407,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5445,9 +5445,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5483,8 +5483,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5519,8 +5519,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5557,9 +5557,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5595,9 +5595,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5633,8 +5633,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5669,8 +5669,8 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
             ),
             None,
         );
@@ -5707,9 +5707,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5745,9 +5745,9 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(fulfillment_id),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&fulfillment_id.to_string()),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -5780,7 +5780,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/fulfillment_orders.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -5812,7 +5812,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -5845,7 +5845,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -5886,7 +5886,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/close.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -5927,7 +5927,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/move.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -5961,7 +5961,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/fulfillment_orders.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -5993,7 +5993,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6026,7 +6026,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6067,7 +6067,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/close.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6108,7 +6108,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/move.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6142,7 +6142,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/fulfillment_orders.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -6174,7 +6174,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6207,7 +6207,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6248,7 +6248,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/close.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6289,7 +6289,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/move.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6323,7 +6323,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/fulfillment_orders.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -6355,7 +6355,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6388,7 +6388,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6429,7 +6429,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/close.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6470,7 +6470,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/move.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6504,7 +6504,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/fulfillment_orders.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -6536,7 +6536,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6569,7 +6569,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6610,7 +6610,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/close.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6651,7 +6651,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/move.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6686,7 +6686,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/open.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6720,7 +6720,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/reschedule.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6753,7 +6753,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/fulfillment_orders.json",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -6785,7 +6785,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6818,7 +6818,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/cancel.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -6898,7 +6898,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/close.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6939,7 +6939,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/move.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -6974,7 +6974,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/open.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -7008,7 +7008,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/reschedule.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -7056,7 +7056,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7097,7 +7097,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7138,7 +7138,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7187,7 +7187,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7228,7 +7228,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7269,7 +7269,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7318,7 +7318,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7359,7 +7359,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7400,7 +7400,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7449,7 +7449,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7490,7 +7490,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7531,7 +7531,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7580,7 +7580,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7621,7 +7621,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7662,7 +7662,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7711,7 +7711,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7752,7 +7752,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7793,7 +7793,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
                 query_
             ),
             None,
@@ -7942,7 +7942,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-01/fulfillment_services.json",
+            &"/admin/api/2020-01/fulfillment_services.json".to_string(),
             None,
         );
         self.client
@@ -7973,7 +7973,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8006,7 +8006,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8038,7 +8038,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8102,7 +8102,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-04/fulfillment_services.json",
+            &"/admin/api/2020-04/fulfillment_services.json".to_string(),
             None,
         );
         self.client
@@ -8133,7 +8133,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8166,7 +8166,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8198,7 +8198,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8262,7 +8262,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-07/fulfillment_services.json",
+            &"/admin/api/2020-07/fulfillment_services.json".to_string(),
             None,
         );
         self.client
@@ -8293,7 +8293,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8326,7 +8326,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8358,7 +8358,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8419,7 +8419,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-10/fulfillment_services.json",
+            &"/admin/api/2020-10/fulfillment_services.json".to_string(),
             None,
         );
         self.client
@@ -8450,7 +8450,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8483,7 +8483,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8515,7 +8515,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8579,7 +8579,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2021-01/fulfillment_services.json",
+            &"/admin/api/2021-01/fulfillment_services.json".to_string(),
             None,
         );
         self.client
@@ -8610,7 +8610,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8643,7 +8643,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8675,7 +8675,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8739,7 +8739,7 @@ impl ShippingAndFulfillment {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/unstable/fulfillment_services.json",
+            &"/admin/api/unstable/fulfillment_services.json".to_string(),
             None,
         );
         self.client
@@ -8770,7 +8770,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8803,7 +8803,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8835,7 +8835,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_services/{}/json",
-                crate::progenitor_support::encode_path(fulfillment_service_id),
+                crate::progenitor_support::encode_path(&fulfillment_service_id.to_string()),
             ),
             None,
         );
@@ -8869,7 +8869,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/fulfillment_orders/{}/locations_for_move.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -8903,7 +8903,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/fulfillment_orders/{}/locations_for_move.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -8937,7 +8937,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/fulfillment_orders/{}/locations_for_move.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -8971,7 +8971,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/fulfillment_orders/{}/locations_for_move.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -9005,7 +9005,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/fulfillment_orders/{}/locations_for_move.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );
@@ -9039,7 +9039,7 @@ impl ShippingAndFulfillment {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/fulfillment_orders/{}/locations_for_move.json",
-                crate::progenitor_support::encode_path(fulfillment_order_id),
+                crate::progenitor_support::encode_path(&fulfillment_order_id.to_string()),
             ),
             None,
         );

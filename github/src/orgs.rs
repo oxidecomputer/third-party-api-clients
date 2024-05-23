@@ -106,7 +106,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -143,7 +143,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -224,7 +224,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/audit-log?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -281,7 +281,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/audit-log?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -316,7 +316,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -348,7 +348,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -384,8 +384,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -417,8 +417,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -454,8 +454,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -491,7 +491,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/credential-authorizations",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -525,7 +525,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/credential-authorizations",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -563,7 +563,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/credential-authorizations/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&credential_id.to_string()),
             ),
             None,
@@ -610,7 +610,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/failed_invitations?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -643,7 +643,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/failed_invitations",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -689,7 +689,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -722,7 +722,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -757,7 +757,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -793,7 +793,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
@@ -830,7 +830,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
@@ -868,7 +868,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
@@ -907,7 +907,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/config",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
@@ -947,7 +947,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/config",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
@@ -996,7 +996,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/deliveries?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
                 query_
             ),
@@ -1037,7 +1037,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/deliveries?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
                 query_
             ),
@@ -1077,7 +1077,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/deliveries/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
                 crate::progenitor_support::encode_path(&delivery_id.to_string()),
             ),
@@ -1117,7 +1117,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/deliveries/{}/attempts",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
                 crate::progenitor_support::encode_path(&delivery_id.to_string()),
             ),
@@ -1151,7 +1151,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/pings",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
@@ -1198,7 +1198,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/installations?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -1245,7 +1245,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -1278,7 +1278,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -1315,7 +1315,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -1353,7 +1353,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&invitation_id.to_string()),
             ),
             None,
@@ -1402,7 +1402,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations/{}/teams?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&invitation_id.to_string()),
                 query_
             ),
@@ -1437,7 +1437,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations/{}/teams",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&invitation_id.to_string()),
             ),
             None,
@@ -1499,7 +1499,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/members?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -1542,7 +1542,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/members?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -1579,8 +1579,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/members/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1616,8 +1616,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/members/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1653,8 +1653,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/memberships/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1699,8 +1699,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/memberships/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1738,8 +1738,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/memberships/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1792,7 +1792,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/outside_collaborators?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -1831,7 +1831,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/outside_collaborators?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -1868,8 +1868,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/outside_collaborators/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1905,8 +1905,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/outside_collaborators/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1952,7 +1952,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -1985,7 +1985,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -2021,8 +2021,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -2060,8 +2060,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -2097,8 +2097,8 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -2210,7 +2210,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/user/memberships/orgs/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -2245,7 +2245,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/user/memberships/orgs/{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -2319,7 +2319,7 @@ impl Orgs {
     pub async fn list_all_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::OrganizationSimple>>> {
-        let url = self.client.url("/user/orgs", None);
+        let url = self.client.url(&"/user/orgs".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -2364,7 +2364,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/users/{}/orgs?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -2399,7 +2399,7 @@ impl Orgs {
         let url = self.client.url(
             &format!(
                 "/users/{}/orgs",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );

@@ -64,7 +64,7 @@ impl SingleSends {
         &self,
         body: &crate::types::SinglesendRequest,
     ) -> ClientResult<crate::Response<crate::types::SinglesendResponseAllOf>> {
-        let url = self.client.url("/marketing/singlesends", None);
+        let url = self.client.url(&"/marketing/singlesends".to_string(), None);
         self.client
             .post(
                 &url,
@@ -128,7 +128,7 @@ impl SingleSends {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -161,7 +161,7 @@ impl SingleSends {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -193,7 +193,7 @@ impl SingleSends {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -224,7 +224,7 @@ impl SingleSends {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -310,7 +310,7 @@ impl SingleSends {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}/schedule",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -340,7 +340,7 @@ impl SingleSends {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}/schedule",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -369,7 +369,7 @@ impl SingleSends {
     {
         let url = self
             .client
-            .url("/marketing/singlesends/categories", None);
+            .url(&"/marketing/singlesends/categories".to_string(), None);
         self.client
             .get(
                 &url,

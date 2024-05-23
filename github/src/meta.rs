@@ -44,7 +44,7 @@ impl Meta {
      * FROM: <https://docs.github.com/rest/reference/meta#get-github-meta-information>
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::ApiOverview>> {
-        let url = self.client.url("/meta", None);
+        let url = self.client.url(&"/meta".to_string(), None);
         self.client
             .get(
                 &url,
@@ -93,7 +93,7 @@ impl Meta {
      * Get a random sentence from the Zen of GitHub
      */
     pub async fn get_zen(&self) -> ClientResult<crate::Response<String>> {
-        let url = self.client.url("/zen", None);
+        let url = self.client.url(&"/zen".to_string(), None);
         self.client
             .get(
                 &url,

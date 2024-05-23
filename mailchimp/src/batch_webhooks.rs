@@ -70,7 +70,7 @@ impl BatchWebhooks {
         &self,
         body: &crate::types::BatchWebhook,
     ) -> ClientResult<crate::Response<crate::types::Webhooks>> {
-        let url = self.client.url("/batch-webhooks", None);
+        let url = self.client.url(&"/batch-webhooks".to_string(), None);
         self.client
             .post(
                 &url,
@@ -111,7 +111,7 @@ impl BatchWebhooks {
         let url = self.client.url(
             &format!(
                 "/batch-webhooks/{}?{}",
-                crate::progenitor_support::encode_path(batch_webhook_id),
+                crate::progenitor_support::encode_path(&batch_webhook_id.to_string()),
                 query_
             ),
             None,
@@ -141,7 +141,7 @@ impl BatchWebhooks {
         let url = self.client.url(
             &format!(
                 "/batch-webhooks/{}",
-                crate::progenitor_support::encode_path(batch_webhook_id),
+                crate::progenitor_support::encode_path(&batch_webhook_id.to_string()),
             ),
             None,
         );
@@ -174,7 +174,7 @@ impl BatchWebhooks {
         let url = self.client.url(
             &format!(
                 "/batch-webhooks/{}",
-                crate::progenitor_support::encode_path(batch_webhook_id),
+                crate::progenitor_support::encode_path(&batch_webhook_id.to_string()),
             ),
             None,
         );

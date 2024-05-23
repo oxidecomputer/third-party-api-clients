@@ -37,7 +37,7 @@ impl DomainAliases {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domainaliases?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -69,7 +69,7 @@ impl DomainAliases {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domainaliases",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -101,8 +101,8 @@ impl DomainAliases {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domainaliases/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(domain_alias_name),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
             ),
             None,
         );
@@ -134,8 +134,8 @@ impl DomainAliases {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domainaliases/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(domain_alias_name),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
             ),
             None,
         );

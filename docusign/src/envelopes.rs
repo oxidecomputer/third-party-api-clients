@@ -412,7 +412,7 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -548,7 +548,7 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -734,7 +734,7 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/status?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -794,8 +794,8 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
                 query_
             ),
             None,
@@ -1007,8 +1007,8 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
                 query_
             ),
             None,
@@ -1043,8 +1043,8 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/audit_events",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );
@@ -1117,9 +1117,9 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(document_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&document_id.to_string()),
                 query_
             ),
             None,
@@ -1158,10 +1158,10 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(document_id),
-                crate::progenitor_support::encode_path(page_number),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&document_id.to_string()),
+                crate::progenitor_support::encode_path(&page_number.to_string()),
             ),
             None,
         );
@@ -1221,10 +1221,10 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(document_id),
-                crate::progenitor_support::encode_path(page_number),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&document_id.to_string()),
+                crate::progenitor_support::encode_path(&page_number.to_string()),
                 query_
             ),
             None,
@@ -1264,10 +1264,10 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(document_id),
-                crate::progenitor_support::encode_path(page_number),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&document_id.to_string()),
+                crate::progenitor_support::encode_path(&page_number.to_string()),
             ),
             None,
         );
@@ -1301,8 +1301,8 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/notification",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );
@@ -1339,8 +1339,8 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/notification",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );
@@ -1391,9 +1391,9 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
                 query_
             ),
             None,
@@ -1432,9 +1432,9 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );
@@ -1470,9 +1470,9 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );
@@ -1523,9 +1523,9 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
                 query_
             ),
             None,
@@ -1564,9 +1564,9 @@ impl Envelopes {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );

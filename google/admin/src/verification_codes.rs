@@ -27,7 +27,7 @@ impl VerificationCodes {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/verificationCodes",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -54,7 +54,7 @@ impl VerificationCodes {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/verificationCodes/generate",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -81,7 +81,7 @@ impl VerificationCodes {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/verificationCodes/invalidate",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );

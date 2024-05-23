@@ -26,7 +26,7 @@ impl Services {
     pub async fn information_get(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ServiceInformation>> {
-        let url = self.client.url("/service_information", None);
+        let url = self.client.url(&"/service_information".to_string(), None);
         self.client
             .get(
                 &url,

@@ -31,7 +31,7 @@ impl SettingsPartner {
     ) -> ClientResult<crate::Response<crate::types::PartnerSettingsNewRelic>> {
         let url = self
             .client
-            .url("/partner_settings/new_relic", None);
+            .url(&"/partner_settings/new_relic".to_string(), None);
         self.client
             .get(
                 &url,
@@ -63,7 +63,7 @@ impl SettingsPartner {
     ) -> ClientResult<crate::Response<crate::types::PartnerSettingsNewRelic>> {
         let url = self
             .client
-            .url("/partner_settings/new_relic", None);
+            .url(&"/partner_settings/new_relic".to_string(), None);
         self.client
             .patch(
                 &url,

@@ -27,7 +27,7 @@ impl TestHelpers {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/terminal/readers/{}/present_payment_method",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );
@@ -103,7 +103,7 @@ impl TestHelpers {
     ) -> ClientResult<crate::Response<Vec<crate::types::TestClock>>> {
         let url = self
             .client
-            .url("/v1/test_helpers/test_clocks", None);
+            .url(&"/v1/test_helpers/test_clocks".to_string(), None);
         let crate::Response::<crate::types::GetTestHelpersClocksResponse> {
             mut status,
             mut headers,
@@ -183,7 +183,7 @@ impl TestHelpers {
     pub async fn post_clock(&self) -> ClientResult<crate::Response<crate::types::TestClock>> {
         let url = self
             .client
-            .url("/v1/test_helpers/test_clocks", None);
+            .url(&"/v1/test_helpers/test_clocks".to_string(), None);
         self.client
             .post(
                 &url,
@@ -211,7 +211,7 @@ impl TestHelpers {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}",
-                crate::progenitor_support::encode_path(test_clock),
+                crate::progenitor_support::encode_path(&test_clock.to_string()),
             ),
             None,
         );
@@ -241,7 +241,7 @@ impl TestHelpers {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}",
-                crate::progenitor_support::encode_path(test_clock),
+                crate::progenitor_support::encode_path(&test_clock.to_string()),
             ),
             None,
         );
@@ -271,7 +271,7 @@ impl TestHelpers {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}/advance",
-                crate::progenitor_support::encode_path(test_clock),
+                crate::progenitor_support::encode_path(&test_clock.to_string()),
             ),
             None,
         );

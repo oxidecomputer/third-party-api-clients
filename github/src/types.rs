@@ -843,14 +843,12 @@ pub struct Enterprise {
  * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Pages {
     #[serde(rename = "read")]
     Read,
     #[serde(rename = "write")]
     Write,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -868,7 +866,11 @@ impl std::fmt::Display for Pages {
     }
 }
 
-
+impl Default for Pages {
+    fn default() -> Pages {
+        Pages::Noop
+    }
+}
 impl Pages {
     pub fn is_noop(&self) -> bool {
         matches!(self, Pages::Noop)
@@ -879,7 +881,6 @@ impl Pages {
  * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum RepositoryProjects {
     #[serde(rename = "admin")]
     Admin,
@@ -888,7 +889,6 @@ pub enum RepositoryProjects {
     #[serde(rename = "write")]
     Write,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -907,7 +907,11 @@ impl std::fmt::Display for RepositoryProjects {
     }
 }
 
-
+impl Default for RepositoryProjects {
+    fn default() -> RepositoryProjects {
+        RepositoryProjects::Noop
+    }
+}
 impl RepositoryProjects {
     pub fn is_noop(&self) -> bool {
         matches!(self, RepositoryProjects::Noop)
@@ -918,12 +922,10 @@ impl RepositoryProjects {
  * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrganizationPlan {
     #[serde(rename = "read")]
     Read,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -940,7 +942,11 @@ impl std::fmt::Display for OrganizationPlan {
     }
 }
 
-
+impl Default for OrganizationPlan {
+    fn default() -> OrganizationPlan {
+        OrganizationPlan::Noop
+    }
+}
 impl OrganizationPlan {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrganizationPlan::Noop)
@@ -951,12 +957,10 @@ impl OrganizationPlan {
  * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Workflows {
     #[serde(rename = "write")]
     Write,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -973,7 +977,11 @@ impl std::fmt::Display for Workflows {
     }
 }
 
-
+impl Default for Workflows {
+    fn default() -> Workflows {
+        Workflows::Noop
+    }
+}
 impl Workflows {
     pub fn is_noop(&self) -> bool {
         matches!(self, Workflows::Noop)
@@ -1163,14 +1171,12 @@ pub struct AccountAnyOf {
  * Describe whether all repositories have been selected or there's a selection involved
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum RepositorySelection {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "selected")]
     Selected,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1188,7 +1194,11 @@ impl std::fmt::Display for RepositorySelection {
     }
 }
 
-
+impl Default for RepositorySelection {
+    fn default() -> RepositorySelection {
+        RepositorySelection::Noop
+    }
+}
 impl RepositorySelection {
     pub fn is_noop(&self) -> bool {
         matches!(self, RepositorySelection::Noop)
@@ -2802,7 +2812,6 @@ pub struct CodeOfConduct {
  * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EnabledRepositories {
     #[serde(rename = "all")]
     All,
@@ -2811,7 +2820,6 @@ pub enum EnabledRepositories {
     #[serde(rename = "selected")]
     Selected,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2830,7 +2838,11 @@ impl std::fmt::Display for EnabledRepositories {
     }
 }
 
-
+impl Default for EnabledRepositories {
+    fn default() -> EnabledRepositories {
+        EnabledRepositories::Noop
+    }
+}
 impl EnabledRepositories {
     pub fn is_noop(&self) -> bool {
         matches!(self, EnabledRepositories::Noop)
@@ -2841,7 +2853,6 @@ impl EnabledRepositories {
  * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AllowedActions {
     #[serde(rename = "all")]
     All,
@@ -2850,7 +2861,6 @@ pub enum AllowedActions {
     #[serde(rename = "selected")]
     Selected,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2869,7 +2879,11 @@ impl std::fmt::Display for AllowedActions {
     }
 }
 
-
+impl Default for AllowedActions {
+    fn default() -> AllowedActions {
+        AllowedActions::Noop
+    }
+}
 impl AllowedActions {
     pub fn is_noop(&self) -> bool {
         matches!(self, AllowedActions::Noop)
@@ -3049,14 +3063,12 @@ pub struct RunnerGroupsEnterprise {
  * The type of label. Read-only labels are applied automatically when the runner is configured.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Type {
     #[serde(rename = "custom")]
     Custom,
     #[serde(rename = "read-only")]
     ReadOnly,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3074,7 +3086,11 @@ impl std::fmt::Display for Type {
     }
 }
 
-
+impl Default for Type {
+    fn default() -> Type {
+        Type::Noop
+    }
+}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -3664,12 +3680,10 @@ pub struct Label {
  * The state of the milestone.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum State {
     #[serde(rename = "closed")]
     Closed,
     #[serde(rename = "open")]
-    #[default]
     Open,
     #[serde(other)]
     FallthroughString,
@@ -3686,7 +3700,11 @@ impl std::fmt::Display for State {
     }
 }
 
-
+impl Default for State {
+    fn default() -> State {
+        State::Open
+    }
+}
 
 /// A collection of related issues and pull requests.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3788,7 +3806,6 @@ pub struct Milestone {
  * How the author is associated with the repository.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AuthorAssociation {
     #[serde(rename = "COLLABORATOR")]
     Collaborator,
@@ -3807,7 +3824,6 @@ pub enum AuthorAssociation {
     #[serde(rename = "OWNER")]
     Owner,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3831,7 +3847,11 @@ impl std::fmt::Display for AuthorAssociation {
     }
 }
 
-
+impl Default for AuthorAssociation {
+    fn default() -> AuthorAssociation {
+        AuthorAssociation::Noop
+    }
+}
 impl AuthorAssociation {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthorAssociation::Noop)
@@ -7187,7 +7207,6 @@ pub struct RunnerGroupsOrg {
  * Visibility of a secret
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Visibility {
     #[serde(rename = "all")]
     All,
@@ -7196,7 +7215,6 @@ pub enum Visibility {
     #[serde(rename = "selected")]
     Selected,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7215,7 +7233,11 @@ impl std::fmt::Display for Visibility {
     }
 }
 
-
+impl Default for Visibility {
+    fn default() -> Visibility {
+        Visibility::Noop
+    }
+}
 impl Visibility {
     pub fn is_noop(&self) -> bool {
         matches!(self, Visibility::Noop)
@@ -7551,7 +7573,6 @@ pub struct OrgHook {
  * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum InteractionGroup {
     #[serde(rename = "collaborators_only")]
     CollaboratorsOnly,
@@ -7560,7 +7581,6 @@ pub enum InteractionGroup {
     #[serde(rename = "existing_users")]
     ExistingUsers,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7579,7 +7599,11 @@ impl std::fmt::Display for InteractionGroup {
     }
 }
 
-
+impl Default for InteractionGroup {
+    fn default() -> InteractionGroup {
+        InteractionGroup::Noop
+    }
+}
 impl InteractionGroup {
     pub fn is_noop(&self) -> bool {
         matches!(self, InteractionGroup::Noop)
@@ -7611,7 +7635,6 @@ pub struct InteractionLimits {
  * The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum InteractionExpiry {
     #[serde(rename = "one_day")]
     OneDay,
@@ -7624,7 +7647,6 @@ pub enum InteractionExpiry {
     #[serde(rename = "three_days")]
     ThreeDays,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7645,7 +7667,11 @@ impl std::fmt::Display for InteractionExpiry {
     }
 }
 
-
+impl Default for InteractionExpiry {
+    fn default() -> InteractionExpiry {
+        InteractionExpiry::Noop
+    }
+}
 impl InteractionExpiry {
     pub fn is_noop(&self) -> bool {
         matches!(self, InteractionExpiry::Noop)
@@ -7854,14 +7880,12 @@ pub struct Team {
  * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrgMembershipState {
     #[serde(rename = "active")]
     Active,
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7879,7 +7903,11 @@ impl std::fmt::Display for OrgMembershipState {
     }
 }
 
-
+impl Default for OrgMembershipState {
+    fn default() -> OrgMembershipState {
+        OrgMembershipState::Noop
+    }
+}
 impl OrgMembershipState {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrgMembershipState::Noop)
@@ -7890,7 +7918,6 @@ impl OrgMembershipState {
  * The user's membership type in the organization.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Role {
     #[serde(rename = "admin")]
     Admin,
@@ -7899,7 +7926,6 @@ pub enum Role {
     #[serde(rename = "member")]
     Member,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7918,7 +7944,11 @@ impl std::fmt::Display for Role {
     }
 }
 
-
+impl Default for Role {
+    fn default() -> Role {
+        Role::Noop
+    }
+}
 impl Role {
     pub fn is_noop(&self) -> bool {
         matches!(self, Role::Noop)
@@ -8053,7 +8083,6 @@ pub struct Migration {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PackageType {
     #[serde(rename = "container")]
     Container,
@@ -8068,7 +8097,6 @@ pub enum PackageType {
     #[serde(rename = "rubygems")]
     Rubygems,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8090,7 +8118,11 @@ impl std::fmt::Display for PackageType {
     }
 }
 
-
+impl Default for PackageType {
+    fn default() -> PackageType {
+        PackageType::Noop
+    }
+}
 impl PackageType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PackageType::Noop)
@@ -8098,14 +8130,12 @@ impl PackageType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PackageVisibility {
     #[serde(rename = "private")]
     Private,
     #[serde(rename = "public")]
     Public,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8123,7 +8153,11 @@ impl std::fmt::Display for PackageVisibility {
     }
 }
 
-
+impl Default for PackageVisibility {
+    fn default() -> PackageVisibility {
+        PackageVisibility::Noop
+    }
+}
 impl PackageVisibility {
     pub fn is_noop(&self) -> bool {
         matches!(self, PackageVisibility::Noop)
@@ -8295,7 +8329,6 @@ pub struct PackageVersion {
  * The baseline permission that all organization members have on this project. Only present if owner is an organization.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrganizationPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -8306,7 +8339,6 @@ pub enum OrganizationPermission {
     #[serde(rename = "write")]
     Write,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8326,7 +8358,11 @@ impl std::fmt::Display for OrganizationPermission {
     }
 }
 
-
+impl Default for OrganizationPermission {
+    fn default() -> OrganizationPermission {
+        OrganizationPermission::Noop
+    }
+}
 impl OrganizationPermission {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrganizationPermission::Noop)
@@ -8477,14 +8513,12 @@ pub struct GroupMapping {
  * The level of privacy this team should have
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Privacy {
     #[serde(rename = "closed")]
     Closed,
     #[serde(rename = "secret")]
     Secret,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8502,7 +8536,11 @@ impl std::fmt::Display for Privacy {
     }
 }
 
-
+impl Default for Privacy {
+    fn default() -> Privacy {
+        Privacy::Noop
+    }
+}
 impl Privacy {
     pub fn is_noop(&self) -> bool {
         matches!(self, Privacy::Noop)
@@ -8803,7 +8841,6 @@ pub struct TeamDiscussionComment {
  * The reaction to use
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Content {
     #[serde(rename = "+1")]
     PlusOne,
@@ -8822,7 +8859,6 @@ pub enum Content {
     #[serde(rename = "rocket")]
     Rocket,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8846,7 +8882,11 @@ impl std::fmt::Display for Content {
     }
 }
 
-
+impl Default for Content {
+    fn default() -> Content {
+        Content::Noop
+    }
+}
 impl Content {
     pub fn is_noop(&self) -> bool {
         matches!(self, Content::Noop)
@@ -8887,12 +8927,10 @@ pub struct Reaction {
  * The role of the user in the team.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TeamMembershipRole {
     #[serde(rename = "maintainer")]
     Maintainer,
     #[serde(rename = "member")]
-    #[default]
     Member,
     #[serde(other)]
     FallthroughString,
@@ -8909,7 +8947,11 @@ impl std::fmt::Display for TeamMembershipRole {
     }
 }
 
-
+impl Default for TeamMembershipRole {
+    fn default() -> TeamMembershipRole {
+        TeamMembershipRole::Member
+    }
+}
 
 /// Team Membership
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -9822,14 +9864,12 @@ pub struct FullRepositoryPermissions {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Status {
     #[serde(rename = "disabled")]
     Disabled,
     #[serde(rename = "enabled")]
     Enabled,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9847,7 +9887,11 @@ impl std::fmt::Display for Status {
     }
 }
 
-
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
+    }
+}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -10489,7 +10533,6 @@ pub struct Artifact {
  * The phase of the lifecycle that the job is currently in.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum JobStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -10498,7 +10541,6 @@ pub enum JobStatus {
     #[serde(rename = "queued")]
     Queued,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10517,7 +10559,11 @@ impl std::fmt::Display for JobStatus {
     }
 }
 
-
+impl Default for JobStatus {
+    fn default() -> JobStatus {
+        JobStatus::Noop
+    }
+}
 impl JobStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, JobStatus::Noop)
@@ -10987,14 +11033,12 @@ pub struct Environments {
  * Whether deployment to the environment(s) was approved or rejected
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EnvironmentApprovalState {
     #[serde(rename = "approved")]
     Approved,
     #[serde(rename = "rejected")]
     Rejected,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11012,7 +11056,11 @@ impl std::fmt::Display for EnvironmentApprovalState {
     }
 }
 
-
+impl Default for EnvironmentApprovalState {
+    fn default() -> EnvironmentApprovalState {
+        EnvironmentApprovalState::Noop
+    }
+}
 impl EnvironmentApprovalState {
     pub fn is_noop(&self) -> bool {
         matches!(self, EnvironmentApprovalState::Noop)
@@ -11053,14 +11101,12 @@ pub struct EnvironmentApproval {
  * The type of reviewer. Must be one of: `User` or `Team`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DeploymentReviewerType {
     #[serde(rename = "Team")]
     Team,
     #[serde(rename = "User")]
     User,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11078,7 +11124,11 @@ impl std::fmt::Display for DeploymentReviewerType {
     }
 }
 
-
+impl Default for DeploymentReviewerType {
+    fn default() -> DeploymentReviewerType {
+        DeploymentReviewerType::Noop
+    }
+}
 impl DeploymentReviewerType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeploymentReviewerType::Noop)
@@ -11393,7 +11443,6 @@ pub struct ActionsSecret {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum WorkflowState {
     #[serde(rename = "active")]
     Active,
@@ -11406,7 +11455,6 @@ pub enum WorkflowState {
     #[serde(rename = "disabled_manually")]
     DisabledManually,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11427,7 +11475,11 @@ impl std::fmt::Display for WorkflowState {
     }
 }
 
-
+impl Default for WorkflowState {
+    fn default() -> WorkflowState {
+        WorkflowState::Noop
+    }
+}
 impl WorkflowState {
     pub fn is_noop(&self) -> bool {
         matches!(self, WorkflowState::Noop)
@@ -12715,7 +12767,6 @@ pub struct DeploymentSimple {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Conclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -12732,7 +12783,6 @@ pub enum Conclusion {
     #[serde(rename = "timed_out")]
     TimedOut,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12755,7 +12805,11 @@ impl std::fmt::Display for Conclusion {
     }
 }
 
-
+impl Default for Conclusion {
+    fn default() -> Conclusion {
+        Conclusion::Noop
+    }
+}
 impl Conclusion {
     pub fn is_noop(&self) -> bool {
         matches!(self, Conclusion::Noop)
@@ -13092,7 +13146,6 @@ pub struct CheckSuitePreference {
  * State of a code scanning alert.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CodeScanningAlertState {
     #[serde(rename = "closed")]
     Closed,
@@ -13103,7 +13156,6 @@ pub enum CodeScanningAlertState {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13123,7 +13175,11 @@ impl std::fmt::Display for CodeScanningAlertState {
     }
 }
 
-
+impl Default for CodeScanningAlertState {
+    fn default() -> CodeScanningAlertState {
+        CodeScanningAlertState::Noop
+    }
+}
 impl CodeScanningAlertState {
     pub fn is_noop(&self) -> bool {
         matches!(self, CodeScanningAlertState::Noop)
@@ -13134,7 +13190,6 @@ impl CodeScanningAlertState {
  * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CodeScanningAlertDismissedReason {
     #[serde(rename = "false positive")]
     FalsePositive,
@@ -13143,7 +13198,6 @@ pub enum CodeScanningAlertDismissedReason {
     #[serde(rename = "won't fix")]
     WonTFix,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13162,7 +13216,11 @@ impl std::fmt::Display for CodeScanningAlertDismissedReason {
     }
 }
 
-
+impl Default for CodeScanningAlertDismissedReason {
+    fn default() -> CodeScanningAlertDismissedReason {
+        CodeScanningAlertDismissedReason::Noop
+    }
+}
 impl CodeScanningAlertDismissedReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, CodeScanningAlertDismissedReason::Noop)
@@ -13173,7 +13231,6 @@ impl CodeScanningAlertDismissedReason {
  * The severity of the alert.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Severity {
     #[serde(rename = "error")]
     Error,
@@ -13184,7 +13241,6 @@ pub enum Severity {
     #[serde(rename = "warning")]
     Warning,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13204,7 +13260,11 @@ impl std::fmt::Display for Severity {
     }
 }
 
-
+impl Default for Severity {
+    fn default() -> Severity {
+        Severity::Noop
+    }
+}
 impl Severity {
     pub fn is_noop(&self) -> bool {
         matches!(self, Severity::Noop)
@@ -13311,7 +13371,6 @@ pub struct CodeScanningAlertLocation {
  * A classification of the file. For example to identify it as generated.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CodeScanningAlertClassification {
     #[serde(rename = "generated")]
     Generated,
@@ -13322,7 +13381,6 @@ pub enum CodeScanningAlertClassification {
     #[serde(rename = "test")]
     Test,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13342,7 +13400,11 @@ impl std::fmt::Display for CodeScanningAlertClassification {
     }
 }
 
-
+impl Default for CodeScanningAlertClassification {
+    fn default() -> CodeScanningAlertClassification {
+        CodeScanningAlertClassification::Noop
+    }
+}
 impl CodeScanningAlertClassification {
     pub fn is_noop(&self) -> bool {
         matches!(self, CodeScanningAlertClassification::Noop)
@@ -13477,7 +13539,6 @@ pub struct CodeScanningAlertItems {
  * The security severity of the alert.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SecuritySeverityLevel {
     #[serde(rename = "critical")]
     Critical,
@@ -13488,7 +13549,6 @@ pub enum SecuritySeverityLevel {
     #[serde(rename = "medium")]
     Medium,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13508,7 +13568,11 @@ impl std::fmt::Display for SecuritySeverityLevel {
     }
 }
 
-
+impl Default for SecuritySeverityLevel {
+    fn default() -> SecuritySeverityLevel {
+        SecuritySeverityLevel::Noop
+    }
+}
 impl SecuritySeverityLevel {
     pub fn is_noop(&self) -> bool {
         matches!(self, SecuritySeverityLevel::Noop)
@@ -13631,14 +13695,12 @@ pub struct CodeScanningAlert {
  * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CodeScanningAlertSetState {
     #[serde(rename = "dismissed")]
     Dismissed,
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13656,7 +13718,11 @@ impl std::fmt::Display for CodeScanningAlertSetState {
     }
 }
 
-
+impl Default for CodeScanningAlertSetState {
+    fn default() -> CodeScanningAlertSetState {
+        CodeScanningAlertSetState::Noop
+    }
+}
 impl CodeScanningAlertSetState {
     pub fn is_noop(&self) -> bool {
         matches!(self, CodeScanningAlertSetState::Noop)
@@ -13795,14 +13861,12 @@ pub struct CodeScanningSarifsReceipt {
  * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProcessingStatus {
     #[serde(rename = "complete")]
     Complete,
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13820,7 +13884,11 @@ impl std::fmt::Display for ProcessingStatus {
     }
 }
 
-
+impl Default for ProcessingStatus {
+    fn default() -> ProcessingStatus {
+        ProcessingStatus::Noop
+    }
+}
 impl ProcessingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProcessingStatus::Noop)
@@ -13976,7 +14044,6 @@ pub struct Collaborator {
  * The permission associated with the invitation.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum RepositoryInvitationPermissions {
     #[serde(rename = "admin")]
     Admin,
@@ -13989,7 +14056,6 @@ pub enum RepositoryInvitationPermissions {
     #[serde(rename = "write")]
     Write,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14010,7 +14076,11 @@ impl std::fmt::Display for RepositoryInvitationPermissions {
     }
 }
 
-
+impl Default for RepositoryInvitationPermissions {
+    fn default() -> RepositoryInvitationPermissions {
+        RepositoryInvitationPermissions::Noop
+    }
+}
 impl RepositoryInvitationPermissions {
     pub fn is_noop(&self) -> bool {
         matches!(self, RepositoryInvitationPermissions::Noop)
@@ -14190,7 +14260,6 @@ pub struct Link {
  * The merge method to use.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MergeMethod {
     #[serde(rename = "merge")]
     Merge,
@@ -14199,7 +14268,6 @@ pub enum MergeMethod {
     #[serde(rename = "squash")]
     Squash,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14218,7 +14286,11 @@ impl std::fmt::Display for MergeMethod {
     }
 }
 
-
+impl Default for MergeMethod {
+    fn default() -> MergeMethod {
+        MergeMethod::Noop
+    }
+}
 impl MergeMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, MergeMethod::Noop)
@@ -14876,7 +14948,6 @@ pub struct DiffEntry {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CommitComparisonStatus {
     #[serde(rename = "ahead")]
     Ahead,
@@ -14887,7 +14958,6 @@ pub enum CommitComparisonStatus {
     #[serde(rename = "identical")]
     Identical,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14907,7 +14977,11 @@ impl std::fmt::Display for CommitComparisonStatus {
     }
 }
 
-
+impl Default for CommitComparisonStatus {
+    fn default() -> CommitComparisonStatus {
+        CommitComparisonStatus::Noop
+    }
+}
 impl CommitComparisonStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, CommitComparisonStatus::Noop)
@@ -15689,7 +15763,6 @@ pub struct Contributor {
  * The state of the status.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DeploymentStatusState {
     #[serde(rename = "error")]
     Error,
@@ -15706,7 +15779,6 @@ pub enum DeploymentStatusState {
     #[serde(rename = "success")]
     Success,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15729,7 +15801,11 @@ impl std::fmt::Display for DeploymentStatusState {
     }
 }
 
-
+impl Default for DeploymentStatusState {
+    fn default() -> DeploymentStatusState {
+        DeploymentStatusState::Noop
+    }
+}
 impl DeploymentStatusState {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeploymentStatusState::Noop)
@@ -16440,7 +16516,6 @@ pub struct Hook {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ImportStatus {
     #[serde(rename = "auth")]
     Auth,
@@ -16475,7 +16550,6 @@ pub enum ImportStatus {
     #[serde(rename = "waiting_to_push")]
     WaitingToPush,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16507,7 +16581,11 @@ impl std::fmt::Display for ImportStatus {
     }
 }
 
-
+impl Default for ImportStatus {
+    fn default() -> ImportStatus {
+        ImportStatus::Noop
+    }
+}
 impl ImportStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ImportStatus::Noop)
@@ -18151,12 +18229,10 @@ pub struct PullRequestReviewCommentLinks {
  * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Side {
     #[serde(rename = "LEFT")]
     Left,
     #[serde(rename = "RIGHT")]
-    #[default]
     Right,
     #[serde(other)]
     FallthroughString,
@@ -18173,7 +18249,11 @@ impl std::fmt::Display for Side {
     }
 }
 
-
+impl Default for Side {
+    fn default() -> Side {
+        Side::Right
+    }
+}
 
 /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -18611,7 +18691,6 @@ pub struct PagesSourceHash {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PagesHttpsCertificateState {
     #[serde(rename = "approved")]
     Approved,
@@ -18638,7 +18717,6 @@ pub enum PagesHttpsCertificateState {
     #[serde(rename = "uploaded")]
     Uploaded,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18666,7 +18744,11 @@ impl std::fmt::Display for PagesHttpsCertificateState {
     }
 }
 
-
+impl Default for PagesHttpsCertificateState {
+    fn default() -> PagesHttpsCertificateState {
+        PagesHttpsCertificateState::Noop
+    }
+}
 impl PagesHttpsCertificateState {
     pub fn is_noop(&self) -> bool {
         matches!(self, PagesHttpsCertificateState::Noop)
@@ -18704,7 +18786,6 @@ pub struct PagesHttpsCertificate {
  * The status of the most recent build of the Page.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PageStatus {
     #[serde(rename = "building")]
     Building,
@@ -18713,7 +18794,6 @@ pub enum PageStatus {
     #[serde(rename = "errored")]
     Errored,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18732,7 +18812,11 @@ impl std::fmt::Display for PageStatus {
     }
 }
 
-
+impl Default for PageStatus {
+    fn default() -> PageStatus {
+        PageStatus::Noop
+    }
+}
 impl PageStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PageStatus::Noop)
@@ -20825,14 +20909,12 @@ pub struct ReviewComment {
  * State of the release asset.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReleaseAssetState {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "uploaded")]
     Uploaded,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20850,7 +20932,11 @@ impl std::fmt::Display for ReleaseAssetState {
     }
 }
 
-
+impl Default for ReleaseAssetState {
+    fn default() -> ReleaseAssetState {
+        ReleaseAssetState::Noop
+    }
+}
 impl ReleaseAssetState {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReleaseAssetState::Noop)
@@ -21081,14 +21167,12 @@ pub struct Release {
  * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SecretScanningAlertState {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "resolved")]
     Resolved,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21106,7 +21190,11 @@ impl std::fmt::Display for SecretScanningAlertState {
     }
 }
 
-
+impl Default for SecretScanningAlertState {
+    fn default() -> SecretScanningAlertState {
+        SecretScanningAlertState::Noop
+    }
+}
 impl SecretScanningAlertState {
     pub fn is_noop(&self) -> bool {
         matches!(self, SecretScanningAlertState::Noop)
@@ -21117,7 +21205,6 @@ impl SecretScanningAlertState {
  * **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SecretScanningAlertResolution {
     #[serde(rename = "false_positive")]
     FalsePositive,
@@ -21128,7 +21215,6 @@ pub enum SecretScanningAlertResolution {
     #[serde(rename = "wont_fix")]
     WontFix,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21148,7 +21234,11 @@ impl std::fmt::Display for SecretScanningAlertResolution {
     }
 }
 
-
+impl Default for SecretScanningAlertResolution {
+    fn default() -> SecretScanningAlertResolution {
+        SecretScanningAlertResolution::Noop
+    }
+}
 impl SecretScanningAlertResolution {
     pub fn is_noop(&self) -> bool {
         matches!(self, SecretScanningAlertResolution::Noop)
@@ -21877,7 +21967,6 @@ pub struct ScimUserMeta {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Op {
     #[serde(rename = "add")]
     Add,
@@ -21886,7 +21975,6 @@ pub enum Op {
     #[serde(rename = "replace")]
     Replace,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21905,7 +21993,11 @@ impl std::fmt::Display for Op {
     }
 }
 
-
+impl Default for Op {
+    fn default() -> Op {
+        Op::Noop
+    }
+}
 impl Op {
     pub fn is_noop(&self) -> bool {
         matches!(self, Op::Noop)
@@ -24160,7 +24252,6 @@ pub struct KeySimple {
  *   The default is `web`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Include {
     #[serde(rename = "all")]
     All,
@@ -24169,7 +24260,6 @@ pub enum Include {
     #[serde(rename = "web")]
     Web,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24188,7 +24278,11 @@ impl std::fmt::Display for Include {
     }
 }
 
-
+impl Default for Include {
+    fn default() -> Include {
+        Include::Noop
+    }
+}
 impl Include {
     pub fn is_noop(&self) -> bool {
         matches!(self, Include::Noop)
@@ -24201,14 +24295,12 @@ impl Include {
  *   The default is `desc`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Order {
     #[serde(rename = "asc")]
     Asc,
     #[serde(rename = "desc")]
     Desc,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24226,7 +24318,11 @@ impl std::fmt::Display for Order {
     }
 }
 
-
+impl Default for Order {
+    fn default() -> Order {
+        Order::Noop
+    }
+}
 impl Order {
     pub fn is_noop(&self) -> bool {
         matches!(self, Order::Noop)
@@ -24237,10 +24333,8 @@ impl Order {
  * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Sort {
     #[serde(rename = "created")]
-    #[default]
     Created,
     #[serde(rename = "updated")]
     Updated,
@@ -24259,13 +24353,16 @@ impl std::fmt::Display for Sort {
     }
 }
 
-
+impl Default for Sort {
+    fn default() -> Sort {
+        Sort::Created
+    }
+}
 
 /**
  * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum WorkflowRunStatus {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -24294,7 +24391,6 @@ pub enum WorkflowRunStatus {
     #[serde(rename = "waiting")]
     Waiting,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24323,7 +24419,11 @@ impl std::fmt::Display for WorkflowRunStatus {
     }
 }
 
-
+impl Default for WorkflowRunStatus {
+    fn default() -> WorkflowRunStatus {
+        WorkflowRunStatus::Noop
+    }
+}
 impl WorkflowRunStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, WorkflowRunStatus::Noop)
@@ -24388,10 +24488,8 @@ impl std::convert::From<TitleOneOf> for String {
  * Must be one of: `day`, `week`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Per {
     #[serde(rename = "day")]
-    #[default]
     Day,
     #[serde(rename = "week")]
     Week,
@@ -24410,7 +24508,11 @@ impl std::fmt::Display for Per {
     }
 }
 
-
+impl Default for Per {
+    fn default() -> Per {
+        Per::Day
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsMergeResponse {
@@ -25165,10 +25267,8 @@ pub struct FilesAdditionalPropertiesData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Public {
     #[serde(rename = "false")]
-    #[default]
     False,
     #[serde(rename = "true")]
     True,
@@ -25187,7 +25287,11 @@ impl std::fmt::Display for Public {
     }
 }
 
-
+impl Default for Public {
+    fn default() -> Public {
+        Public::False
+    }
+}
 
 /// All of the following types:
 ///
@@ -25317,12 +25421,10 @@ pub struct AppsListInstallationReposResponse {
  *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Filter {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "assigned")]
-    #[default]
     Assigned,
     #[serde(rename = "created")]
     Created,
@@ -25351,20 +25453,22 @@ impl std::fmt::Display for Filter {
     }
 }
 
-
+impl Default for Filter {
+    fn default() -> Filter {
+        Filter::Assigned
+    }
+}
 
 /**
  * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum IssuesListState {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "closed")]
     Closed,
     #[serde(rename = "open")]
-    #[default]
     Open,
     #[serde(other)]
     FallthroughString,
@@ -25382,18 +25486,20 @@ impl std::fmt::Display for IssuesListState {
     }
 }
 
-
+impl Default for IssuesListState {
+    fn default() -> IssuesListState {
+        IssuesListState::Open
+    }
+}
 
 /**
  * What to sort results by. Can be either `created`, `updated`, `comments`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum IssuesListSort {
     #[serde(rename = "comments")]
     Comments,
     #[serde(rename = "created")]
-    #[default]
     Created,
     #[serde(rename = "updated")]
     Updated,
@@ -25413,18 +25519,20 @@ impl std::fmt::Display for IssuesListSort {
     }
 }
 
-
+impl Default for IssuesListSort {
+    fn default() -> IssuesListSort {
+        IssuesListSort::Created
+    }
+}
 
 /**
  * The rendering mode.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Mode {
     #[serde(rename = "gfm")]
     Gfm,
     #[serde(rename = "markdown")]
-    #[default]
     Markdown,
     #[serde(other)]
     FallthroughString,
@@ -25441,7 +25549,11 @@ impl std::fmt::Display for Mode {
     }
 }
 
-
+impl Default for Mode {
+    fn default() -> Mode {
+        Mode::Markdown
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarkdownRenderRequest {
@@ -25490,7 +25602,6 @@ pub struct ActivitySetThreadSubscriptionRequest {
  *   **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MembersAllowedRepositoryCreationType {
     #[serde(rename = "all")]
     All,
@@ -25499,7 +25610,6 @@ pub enum MembersAllowedRepositoryCreationType {
     #[serde(rename = "private")]
     Private,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -25518,7 +25628,11 @@ impl std::fmt::Display for MembersAllowedRepositoryCreationType {
     }
 }
 
-
+impl Default for MembersAllowedRepositoryCreationType {
+    fn default() -> MembersAllowedRepositoryCreationType {
+        MembersAllowedRepositoryCreationType::Noop
+    }
+}
 impl MembersAllowedRepositoryCreationType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MembersAllowedRepositoryCreationType::Noop)
@@ -26016,14 +26130,12 @@ pub struct InteractionsGetRestrictionsResponseAnyOf {
  *   \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrgsCreateInvitationRequestRole {
     #[serde(rename = "admin")]
     Admin,
     #[serde(rename = "billing_manager")]
     BillingManager,
     #[serde(rename = "direct_member")]
-    #[default]
     DirectMember,
     #[serde(other)]
     FallthroughString,
@@ -26041,7 +26153,11 @@ impl std::fmt::Display for OrgsCreateInvitationRequestRole {
     }
 }
 
-
+impl Default for OrgsCreateInvitationRequestRole {
+    fn default() -> OrgsCreateInvitationRequestRole {
+        OrgsCreateInvitationRequestRole::DirectMember
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgsCreateInvitationRequest {
@@ -26082,12 +26198,10 @@ pub struct OrgsCreateInvitationRequest {
  *   \* `all` - All members the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrgsListMembersFilter {
     #[serde(rename = "2fa_disabled")]
     TwoFaDisabled,
     #[serde(rename = "all")]
-    #[default]
     All,
     #[serde(other)]
     FallthroughString,
@@ -26104,7 +26218,11 @@ impl std::fmt::Display for OrgsListMembersFilter {
     }
 }
 
-
+impl Default for OrgsListMembersFilter {
+    fn default() -> OrgsListMembersFilter {
+        OrgsListMembersFilter::All
+    }
+}
 
 /**
  * Filter members returned by their role. Can be one of:  
@@ -26113,12 +26231,10 @@ impl std::fmt::Display for OrgsListMembersFilter {
  *   \* `member` - Non-owner organization members.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrgsListMembersRole {
     #[serde(rename = "admin")]
     Admin,
     #[serde(rename = "all")]
-    #[default]
     All,
     #[serde(rename = "member")]
     Member,
@@ -26138,7 +26254,11 @@ impl std::fmt::Display for OrgsListMembersRole {
     }
 }
 
-
+impl Default for OrgsListMembersRole {
+    fn default() -> OrgsListMembersRole {
+        OrgsListMembersRole::All
+    }
+}
 
 /**
  * The role to give the user in the organization. Can be one of:  
@@ -26146,12 +26266,10 @@ impl std::fmt::Display for OrgsListMembersRole {
  *   \* `member` - The user will become a non-owner member of the organization.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrgsSetMembershipUserRequestRole {
     #[serde(rename = "admin")]
     Admin,
     #[serde(rename = "member")]
-    #[default]
     Member,
     #[serde(other)]
     FallthroughString,
@@ -26168,7 +26286,11 @@ impl std::fmt::Display for OrgsSetMembershipUserRequestRole {
     }
 }
 
-
+impl Default for OrgsSetMembershipUserRequestRole {
+    fn default() -> OrgsSetMembershipUserRequestRole {
+        OrgsSetMembershipUserRequestRole::Member
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgsSetMembershipUserRequest {
@@ -26185,12 +26307,10 @@ pub struct OrgsSetMembershipUserRequest {
  * Allowed values that can be passed to the exclude param.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Exclude {
     #[serde(rename = "repositories")]
     Repositories,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -26207,7 +26327,11 @@ impl std::fmt::Display for Exclude {
     }
 }
 
-
+impl Default for Exclude {
+    fn default() -> Exclude {
+        Exclude::Noop
+    }
+}
 impl Exclude {
     pub fn is_noop(&self) -> bool {
         matches!(self, Exclude::Noop)
@@ -26244,10 +26368,8 @@ pub struct MigrationsStartRequest {
  * The state of the package, either active or deleted.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
     #[serde(rename = "active")]
-    #[default]
     Active,
     #[serde(rename = "deleted")]
     Deleted,
@@ -26266,7 +26388,11 @@ impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
     }
 }
 
-
+impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
+    fn default() -> PackagesGetAllPackageVersionsOwnedByOrgState {
+        PackagesGetAllPackageVersionsOwnedByOrgState::Active
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateRequest {
@@ -26288,7 +26414,6 @@ pub struct ProjectsCreateRequest {
  * Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposListOrgType {
     #[serde(rename = "all")]
     All,
@@ -26305,7 +26430,6 @@ pub enum ReposListOrgType {
     #[serde(rename = "sources")]
     Sources,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -26328,7 +26452,11 @@ impl std::fmt::Display for ReposListOrgType {
     }
 }
 
-
+impl Default for ReposListOrgType {
+    fn default() -> ReposListOrgType {
+        ReposListOrgType::Noop
+    }
+}
 impl ReposListOrgType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReposListOrgType::Noop)
@@ -26339,10 +26467,8 @@ impl ReposListOrgType {
  * Can be one of `created`, `updated`, `pushed`, `full_name`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposListOrgSort {
     #[serde(rename = "created")]
-    #[default]
     Created,
     #[serde(rename = "full_name")]
     FullName,
@@ -26367,14 +26493,17 @@ impl std::fmt::Display for ReposListOrgSort {
     }
 }
 
-
+impl Default for ReposListOrgSort {
+    fn default() -> ReposListOrgSort {
+        ReposListOrgSort::Created
+    }
+}
 
 /**
  * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
  *   The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposCreateInOrgRequestVisibility {
     #[serde(rename = "internal")]
     Internal,
@@ -26385,7 +26514,6 @@ pub enum ReposCreateInOrgRequestVisibility {
     #[serde(rename = "visibility")]
     Visibility,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -26405,7 +26533,11 @@ impl std::fmt::Display for ReposCreateInOrgRequestVisibility {
     }
 }
 
-
+impl Default for ReposCreateInOrgRequestVisibility {
+    fn default() -> ReposCreateInOrgRequestVisibility {
+        ReposCreateInOrgRequestVisibility::Noop
+    }
+}
 impl ReposCreateInOrgRequestVisibility {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReposCreateInOrgRequestVisibility::Noop)
@@ -26487,12 +26619,10 @@ pub struct ReposCreateInOrgRequest {
  *   \* `admin` - team members can pull, push and administer newly-added repositories.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Permission {
     #[serde(rename = "admin")]
     Admin,
     #[serde(rename = "pull")]
-    #[default]
     Pull,
     #[serde(rename = "push")]
     Push,
@@ -26512,7 +26642,11 @@ impl std::fmt::Display for Permission {
     }
 }
 
-
+impl Default for Permission {
+    fn default() -> Permission {
+        Permission::Pull
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateRequest {
@@ -26652,10 +26786,8 @@ pub struct ReactionsCreateIssueRequest {
  *   \* `all` - all members of the team.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TeamsListMembersInOrgRole {
     #[serde(rename = "all")]
-    #[default]
     All,
     #[serde(rename = "maintainer")]
     Maintainer,
@@ -26677,7 +26809,11 @@ impl std::fmt::Display for TeamsListMembersInOrgRole {
     }
 }
 
-
+impl Default for TeamsListMembersInOrgRole {
+    fn default() -> TeamsListMembersInOrgRole {
+        TeamsListMembersInOrgRole::All
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateMembershipUserInOrgRequest {
@@ -26705,7 +26841,6 @@ pub struct ProjectsAddCollaboratorRequest {
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -26718,7 +26853,6 @@ pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     #[serde(rename = "triage")]
     Triage,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -26739,7 +26873,11 @@ impl std::fmt::Display for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     }
 }
 
-
+impl Default for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
+    fn default() -> TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
+        TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Noop
+    }
+}
 impl TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -26961,14 +27099,12 @@ pub struct ProjectsUpdateColumnRequest {
  * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ArchivedState {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "archived")]
     Archived,
     #[serde(rename = "not_archived")]
-    #[default]
     NotArchived,
     #[serde(other)]
     FallthroughString,
@@ -26986,7 +27122,11 @@ impl std::fmt::Display for ArchivedState {
     }
 }
 
-
+impl Default for ArchivedState {
+    fn default() -> ArchivedState {
+        ArchivedState::NotArchived
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateCardRequest {
@@ -27090,10 +27230,8 @@ pub struct ProjectsUpdateRequest {
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Affiliation {
     #[serde(rename = "all")]
-    #[default]
     All,
     #[serde(rename = "direct")]
     Direct,
@@ -27115,7 +27253,11 @@ impl std::fmt::Display for Affiliation {
     }
 }
 
-
+impl Default for Affiliation {
+    fn default() -> Affiliation {
+        Affiliation::All
+    }
+}
 
 /// Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -27253,12 +27395,10 @@ pub struct ActionsListWorkflowRunsResponse {
  *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ActionsListJobsWorkflowRunFilter {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "latest")]
-    #[default]
     Latest,
     #[serde(other)]
     FallthroughString,
@@ -27275,7 +27415,11 @@ impl std::fmt::Display for ActionsListJobsWorkflowRunFilter {
     }
 }
 
-
+impl Default for ActionsListJobsWorkflowRunFilter {
+    fn default() -> ActionsListJobsWorkflowRunFilter {
+        ActionsListJobsWorkflowRunFilter::Latest
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListJobsWorkflowRunResponse {
@@ -27845,7 +27989,6 @@ pub struct ReposRenameBranchRequest {
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ChecksCreateRequestConclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -27864,7 +28007,6 @@ pub enum ChecksCreateRequestConclusion {
     #[serde(rename = "timed_out")]
     TimedOut,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27888,7 +28030,11 @@ impl std::fmt::Display for ChecksCreateRequestConclusion {
     }
 }
 
-
+impl Default for ChecksCreateRequestConclusion {
+    fn default() -> ChecksCreateRequestConclusion {
+        ChecksCreateRequestConclusion::Noop
+    }
+}
 impl ChecksCreateRequestConclusion {
     pub fn is_noop(&self) -> bool {
         matches!(self, ChecksCreateRequestConclusion::Noop)
@@ -27899,7 +28045,6 @@ impl ChecksCreateRequestConclusion {
  * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AnnotationLevel {
     #[serde(rename = "failure")]
     Failure,
@@ -27908,7 +28053,6 @@ pub enum AnnotationLevel {
     #[serde(rename = "warning")]
     Warning,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27927,7 +28071,11 @@ impl std::fmt::Display for AnnotationLevel {
     }
 }
 
-
+impl Default for AnnotationLevel {
+    fn default() -> AnnotationLevel {
+        AnnotationLevel::Noop
+    }
+}
 impl AnnotationLevel {
     pub fn is_noop(&self) -> bool {
         matches!(self, AnnotationLevel::Noop)
@@ -28564,7 +28712,6 @@ pub struct ReposCreateDeploymentRequest {
  * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposCreateDeploymentStatusRequestEnvironment {
     #[serde(rename = "production")]
     Production,
@@ -28573,7 +28720,6 @@ pub enum ReposCreateDeploymentStatusRequestEnvironment {
     #[serde(rename = "staging")]
     Staging,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28592,7 +28738,11 @@ impl std::fmt::Display for ReposCreateDeploymentStatusRequestEnvironment {
     }
 }
 
-
+impl Default for ReposCreateDeploymentStatusRequestEnvironment {
+    fn default() -> ReposCreateDeploymentStatusRequestEnvironment {
+        ReposCreateDeploymentStatusRequestEnvironment::Noop
+    }
+}
 impl ReposCreateDeploymentStatusRequestEnvironment {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReposCreateDeploymentStatusRequestEnvironment::Noop)
@@ -28710,10 +28860,8 @@ pub struct ReposCreateUpdateEnvironmentRequest {
  * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposListForksSort {
     #[serde(rename = "newest")]
-    #[default]
     Newest,
     #[serde(rename = "oldest")]
     Oldest,
@@ -28738,7 +28886,11 @@ impl std::fmt::Display for ReposListForksSort {
     }
 }
 
-
+impl Default for ReposListForksSort {
+    fn default() -> ReposListForksSort {
+        ReposListForksSort::Newest
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreateForkRequest {
@@ -28898,7 +29050,6 @@ pub struct GitUpdateRefRequest {
  * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GitCreateTagRequestType {
     #[serde(rename = "blob")]
     Blob,
@@ -28907,7 +29058,6 @@ pub enum GitCreateTagRequestType {
     #[serde(rename = "tree")]
     Tree,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28926,7 +29076,11 @@ impl std::fmt::Display for GitCreateTagRequestType {
     }
 }
 
-
+impl Default for GitCreateTagRequestType {
+    fn default() -> GitCreateTagRequestType {
+        GitCreateTagRequestType::Noop
+    }
+}
 impl GitCreateTagRequestType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GitCreateTagRequestType::Noop)
@@ -28999,7 +29153,6 @@ pub struct GitCreateTagRequest {
  * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GitCreateTreeRequestMode {
     #[serde(rename = "040000")]
     SubdirectoryTree,
@@ -29012,7 +29165,6 @@ pub enum GitCreateTreeRequestMode {
     #[serde(rename = "160000")]
     SubmoduleCommit,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29033,7 +29185,11 @@ impl std::fmt::Display for GitCreateTreeRequestMode {
     }
 }
 
-
+impl Default for GitCreateTreeRequestMode {
+    fn default() -> GitCreateTreeRequestMode {
+        GitCreateTreeRequestMode::Noop
+    }
+}
 impl GitCreateTreeRequestMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, GitCreateTreeRequestMode::Noop)
@@ -29233,7 +29389,6 @@ pub struct ReposUpdateWebhookRequest {
  * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Vcs {
     #[serde(rename = "git")]
     Git,
@@ -29244,7 +29399,6 @@ pub enum Vcs {
     #[serde(rename = "tfvc")]
     Tfvc,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29264,7 +29418,11 @@ impl std::fmt::Display for Vcs {
     }
 }
 
-
+impl Default for Vcs {
+    fn default() -> Vcs {
+        Vcs::Noop
+    }
+}
 impl Vcs {
     pub fn is_noop(&self) -> bool {
         matches!(self, Vcs::Noop)
@@ -29336,14 +29494,12 @@ pub struct MigrationsUpdateImportRequest {
  * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UseLfs {
     #[serde(rename = "opt_in")]
     OptIn,
     #[serde(rename = "opt_out")]
     OptOut,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29361,7 +29517,11 @@ impl std::fmt::Display for UseLfs {
     }
 }
 
-
+impl Default for UseLfs {
+    fn default() -> UseLfs {
+        UseLfs::Noop
+    }
+}
 impl UseLfs {
     pub fn is_noop(&self) -> bool {
         matches!(self, UseLfs::Noop)
@@ -29701,7 +29861,6 @@ pub struct IssuesSetLabelsRequestAnyOf {
  *   \* `spam`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LockReason {
     #[serde(rename = "off-topic")]
     OffTopic,
@@ -29712,7 +29871,6 @@ pub enum LockReason {
     #[serde(rename = "too heated")]
     TooHeated,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29732,7 +29890,11 @@ impl std::fmt::Display for LockReason {
     }
 }
 
-
+impl Default for LockReason {
+    fn default() -> LockReason {
+        LockReason::Noop
+    }
+}
 impl LockReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, LockReason::Noop)
@@ -29833,12 +29995,10 @@ pub struct ReposMergeRequest {
  * What to sort results by. Either `due_on` or `completeness`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum IssuesListMilestonesSort {
     #[serde(rename = "completeness")]
     Completeness,
     #[serde(rename = "due_on")]
-    #[default]
     DueOn,
     #[serde(other)]
     FallthroughString,
@@ -29855,7 +30015,11 @@ impl std::fmt::Display for IssuesListMilestonesSort {
     }
 }
 
-
+impl Default for IssuesListMilestonesSort {
+    fn default() -> IssuesListMilestonesSort {
+        IssuesListMilestonesSort::DueOn
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesCreateMilestoneRequest {
@@ -29914,10 +30078,8 @@ pub struct PullsUpdateBranchResponse {
  * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Path {
     #[serde(rename = "/")]
-    #[default]
     Root,
     #[serde(rename = "/docs")]
     Docs,
@@ -29936,7 +30098,11 @@ impl std::fmt::Display for Path {
     }
 }
 
-
+impl Default for Path {
+    fn default() -> Path {
+        Path::Root
+    }
+}
 
 /// The source branch and directory used to publish your Pages site.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -29967,7 +30133,6 @@ pub struct ReposCreatePagesSiteRequest {
  * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SourceData {
     #[serde(rename = "gh-pages")]
     GhPages,
@@ -29976,7 +30141,6 @@ pub enum SourceData {
     #[serde(rename = "master /docs")]
     MasterDocs,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29995,7 +30159,11 @@ impl std::fmt::Display for SourceData {
     }
 }
 
-
+impl Default for SourceData {
+    fn default() -> SourceData {
+        SourceData::Noop
+    }
+}
 impl SourceData {
     pub fn is_noop(&self) -> bool {
         matches!(self, SourceData::Noop)
@@ -30057,10 +30225,8 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
  * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PullsListSort {
     #[serde(rename = "created")]
-    #[default]
     Created,
     #[serde(rename = "long-running")]
     LongRunning,
@@ -30085,7 +30251,11 @@ impl std::fmt::Display for PullsListSort {
     }
 }
 
-
+impl Default for PullsListSort {
+    fn default() -> PullsListSort {
+        PullsListSort::Created
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsCreateRequest {
@@ -30126,7 +30296,6 @@ pub struct PullsCreateRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PullsListReviewCommentsRepoSort {
     #[serde(rename = "created")]
     Created,
@@ -30135,7 +30304,6 @@ pub enum PullsListReviewCommentsRepoSort {
     #[serde(rename = "updated")]
     Updated,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30154,7 +30322,11 @@ impl std::fmt::Display for PullsListReviewCommentsRepoSort {
     }
 }
 
-
+impl Default for PullsListReviewCommentsRepoSort {
+    fn default() -> PullsListReviewCommentsRepoSort {
+        PullsListReviewCommentsRepoSort::Noop
+    }
+}
 impl PullsListReviewCommentsRepoSort {
     pub fn is_noop(&self) -> bool {
         matches!(self, PullsListReviewCommentsRepoSort::Noop)
@@ -30194,7 +30366,6 @@ pub struct PullsUpdateRequest {
  * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PullsCreateReviewCommentRequestStartSide {
     #[serde(rename = "LEFT")]
     Left,
@@ -30203,7 +30374,6 @@ pub enum PullsCreateReviewCommentRequestStartSide {
     #[serde(rename = "side")]
     Side,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30222,7 +30392,11 @@ impl std::fmt::Display for PullsCreateReviewCommentRequestStartSide {
     }
 }
 
-
+impl Default for PullsCreateReviewCommentRequestStartSide {
+    fn default() -> PullsCreateReviewCommentRequestStartSide {
+        PullsCreateReviewCommentRequestStartSide::Noop
+    }
+}
 impl PullsCreateReviewCommentRequestStartSide {
     pub fn is_noop(&self) -> bool {
         matches!(self, PullsCreateReviewCommentRequestStartSide::Noop)
@@ -30357,7 +30531,6 @@ pub struct PullsRemoveRequestedReviewersRequest {
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PullsCreateReviewRequestEvent {
     #[serde(rename = "APPROVE")]
     Approve,
@@ -30366,7 +30539,6 @@ pub enum PullsCreateReviewRequestEvent {
     #[serde(rename = "REQUEST_CHANGES")]
     RequestChanges,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30385,7 +30557,11 @@ impl std::fmt::Display for PullsCreateReviewRequestEvent {
     }
 }
 
-
+impl Default for PullsCreateReviewRequestEvent {
+    fn default() -> PullsCreateReviewRequestEvent {
+        PullsCreateReviewRequestEvent::Noop
+    }
+}
 impl PullsCreateReviewRequestEvent {
     pub fn is_noop(&self) -> bool {
         matches!(self, PullsCreateReviewRequestEvent::Noop)
@@ -30576,7 +30752,6 @@ pub struct ReposUpdateReleaseAssetRequest {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReactionsCreateReleaseRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -30591,7 +30766,6 @@ pub enum ReactionsCreateReleaseRequestContent {
     #[serde(rename = "rocket")]
     Rocket,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30613,7 +30787,11 @@ impl std::fmt::Display for ReactionsCreateReleaseRequestContent {
     }
 }
 
-
+impl Default for ReactionsCreateReleaseRequestContent {
+    fn default() -> ReactionsCreateReleaseRequestContent {
+        ReactionsCreateReleaseRequestContent::Noop
+    }
+}
 impl ReactionsCreateReleaseRequestContent {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReactionsCreateReleaseRequestContent::Noop)
@@ -30662,7 +30840,6 @@ pub struct ActivityListStargazersRepoResponseAnyOf {
  * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposCreateCommitStatusRequestState {
     #[serde(rename = "error")]
     Error,
@@ -30673,7 +30850,6 @@ pub enum ReposCreateCommitStatusRequestState {
     #[serde(rename = "success")]
     Success,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30693,7 +30869,11 @@ impl std::fmt::Display for ReposCreateCommitStatusRequestState {
     }
 }
 
-
+impl Default for ReposCreateCommitStatusRequestState {
+    fn default() -> ReposCreateCommitStatusRequestState {
+        ReposCreateCommitStatusRequestState::Noop
+    }
+}
 impl ReposCreateCommitStatusRequestState {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReposCreateCommitStatusRequestState::Noop)
@@ -30810,7 +30990,6 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     #[serde(rename = "Add")]
     Add,
@@ -30819,7 +30998,6 @@ pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     #[serde(rename = "Replace")]
     Replace,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30838,7 +31016,11 @@ impl std::fmt::Display for EnterpriseAdminUpdateAttributeGroupRequestOperationsO
     }
 }
 
-
+impl Default for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
+    fn default() -> EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
+        EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Noop
+    }
+}
 impl EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -31170,12 +31352,10 @@ pub struct ScimUpdateAttributeUserRequest {
  * Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SearchCodeSort {
     #[serde(rename = "indexed")]
     Indexed,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31192,7 +31372,11 @@ impl std::fmt::Display for SearchCodeSort {
     }
 }
 
-
+impl Default for SearchCodeSort {
+    fn default() -> SearchCodeSort {
+        SearchCodeSort::Noop
+    }
+}
 impl SearchCodeSort {
     pub fn is_noop(&self) -> bool {
         matches!(self, SearchCodeSort::Noop)
@@ -31224,14 +31408,12 @@ pub struct SearchCodeResponse {
  * Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SearchCommitsSort {
     #[serde(rename = "author-date")]
     AuthorDate,
     #[serde(rename = "committer-date")]
     CommitterDate,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31249,7 +31431,11 @@ impl std::fmt::Display for SearchCommitsSort {
     }
 }
 
-
+impl Default for SearchCommitsSort {
+    fn default() -> SearchCommitsSort {
+        SearchCommitsSort::Noop
+    }
+}
 impl SearchCommitsSort {
     pub fn is_noop(&self) -> bool {
         matches!(self, SearchCommitsSort::Noop)
@@ -31281,7 +31467,6 @@ pub struct SearchCommitsResponse {
  * Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SearchIssuesPullRequestsSort {
     #[serde(rename = "comments")]
     Comments,
@@ -31306,7 +31491,6 @@ pub enum SearchIssuesPullRequestsSort {
     #[serde(rename = "updated")]
     Updated,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31333,7 +31517,11 @@ impl std::fmt::Display for SearchIssuesPullRequestsSort {
     }
 }
 
-
+impl Default for SearchIssuesPullRequestsSort {
+    fn default() -> SearchIssuesPullRequestsSort {
+        SearchIssuesPullRequestsSort::Noop
+    }
+}
 impl SearchIssuesPullRequestsSort {
     pub fn is_noop(&self) -> bool {
         matches!(self, SearchIssuesPullRequestsSort::Noop)
@@ -31386,7 +31574,6 @@ pub struct SearchLabelsResponse {
  * Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SearchReposSort {
     #[serde(rename = "forks")]
     Forks,
@@ -31397,7 +31584,6 @@ pub enum SearchReposSort {
     #[serde(rename = "updated")]
     Updated,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31417,7 +31603,11 @@ impl std::fmt::Display for SearchReposSort {
     }
 }
 
-
+impl Default for SearchReposSort {
+    fn default() -> SearchReposSort {
+        SearchReposSort::Noop
+    }
+}
 impl SearchReposSort {
     pub fn is_noop(&self) -> bool {
         matches!(self, SearchReposSort::Noop)
@@ -31470,7 +31660,6 @@ pub struct SearchTopicsResponse {
  * Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SearchUsersSort {
     #[serde(rename = "followers")]
     Followers,
@@ -31479,7 +31668,6 @@ pub enum SearchUsersSort {
     #[serde(rename = "repositories")]
     Repositories,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31498,7 +31686,11 @@ impl std::fmt::Display for SearchUsersSort {
     }
 }
 
-
+impl Default for SearchUsersSort {
+    fn default() -> SearchUsersSort {
+        SearchUsersSort::Noop
+    }
+}
 impl SearchUsersSort {
     pub fn is_noop(&self) -> bool {
         matches!(self, SearchUsersSort::Noop)
@@ -31809,12 +32001,10 @@ pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
  * The state that the membership should be in. Only `"active"` will be accepted.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrgsUpdateMembershipRequestState {
     #[serde(rename = "active")]
     Active,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31831,7 +32021,11 @@ impl std::fmt::Display for OrgsUpdateMembershipRequestState {
     }
 }
 
-
+impl Default for OrgsUpdateMembershipRequestState {
+    fn default() -> OrgsUpdateMembershipRequestState {
+        OrgsUpdateMembershipRequestState::Noop
+    }
+}
 impl OrgsUpdateMembershipRequestState {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrgsUpdateMembershipRequestState::Noop)
@@ -31854,10 +32048,8 @@ pub struct OrgsUpdateMembershipRequest {
  * Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposListVisibility {
     #[serde(rename = "all")]
-    #[default]
     All,
     #[serde(rename = "private")]
     Private,
@@ -31879,7 +32071,11 @@ impl std::fmt::Display for ReposListVisibility {
     }
 }
 
-
+impl Default for ReposListVisibility {
+    fn default() -> ReposListVisibility {
+        ReposListVisibility::All
+    }
+}
 
 /**
  * Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
@@ -31887,10 +32083,8 @@ impl std::fmt::Display for ReposListVisibility {
  *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposListType {
     #[serde(rename = "all")]
-    #[default]
     All,
     #[serde(rename = "member")]
     Member,
@@ -31918,7 +32112,11 @@ impl std::fmt::Display for ReposListType {
     }
 }
 
-
+impl Default for ReposListType {
+    fn default() -> ReposListType {
+        ReposListType::All
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreateRequest {
@@ -31988,7 +32186,6 @@ pub struct ReposCreateRequest {
  * Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SubjectType {
     #[serde(rename = "issue")]
     Issue,
@@ -31999,7 +32196,6 @@ pub enum SubjectType {
     #[serde(rename = "repository")]
     Repository,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32019,7 +32215,11 @@ impl std::fmt::Display for SubjectType {
     }
 }
 
-
+impl Default for SubjectType {
+    fn default() -> SubjectType {
+        SubjectType::Noop
+    }
+}
 impl SubjectType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubjectType::Noop)
@@ -32030,14 +32230,12 @@ impl SubjectType {
  * Can be one of `all`, `owner`, `member`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ReposListUserType {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "member")]
     Member,
     #[serde(rename = "owner")]
-    #[default]
     Owner,
     #[serde(other)]
     FallthroughString,
@@ -32055,7 +32253,11 @@ impl std::fmt::Display for ReposListUserType {
     }
 }
 
-
+impl Default for ReposListUserType {
+    fn default() -> ReposListUserType {
+        ReposListUserType::Owner
+    }
+}
 
 /// All of the following types are flattened into one object:
 ///

@@ -23,7 +23,7 @@ impl Dnd {
      * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
      */
     pub async fn end(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/dnd.endDnd", None);
+        let url = self.client.url(&"/dnd.endDnd".to_string(), None);
         self.client
             .post(
                 &url,
@@ -48,7 +48,7 @@ impl Dnd {
     pub async fn end_snooze(
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndEndSnoozeSchema>> {
-        let url = self.client.url("/dnd.endSnooze", None);
+        let url = self.client.url(&"/dnd.endSnooze".to_string(), None);
         self.client
             .post(
                 &url,
@@ -101,7 +101,7 @@ impl Dnd {
     pub async fn set_snooze(
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndSetSnoozeSchema>> {
-        let url = self.client.url("/dnd.setSnooze", None);
+        let url = self.client.url(&"/dnd.setSnooze".to_string(), None);
         self.client
             .post(
                 &url,

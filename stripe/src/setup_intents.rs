@@ -28,7 +28,7 @@ impl SetupIntents {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -82,7 +82,7 @@ impl SetupIntents {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         payment_method: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::SetupIntent>>> {
@@ -177,7 +177,7 @@ impl SetupIntents {
      * to collect any required permissions to charge the payment method later.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
-        let url = self.client.url("/v1/setup_intents", None);
+        let url = self.client.url(&"/v1/setup_intents".to_string(), None);
         self.client
             .post(
                 &url,
@@ -216,7 +216,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}?{}",
-                crate::progenitor_support::encode_path(intent),
+                crate::progenitor_support::encode_path(&intent.to_string()),
                 query_
             ),
             None,
@@ -247,7 +247,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}",
-                crate::progenitor_support::encode_path(intent),
+                crate::progenitor_support::encode_path(&intent.to_string()),
             ),
             None,
         );
@@ -279,7 +279,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/cancel",
-                crate::progenitor_support::encode_path(intent),
+                crate::progenitor_support::encode_path(&intent.to_string()),
             ),
             None,
         );
@@ -321,7 +321,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/confirm",
-                crate::progenitor_support::encode_path(intent),
+                crate::progenitor_support::encode_path(&intent.to_string()),
             ),
             None,
         );
@@ -351,7 +351,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/verify_microdeposits",
-                crate::progenitor_support::encode_path(intent),
+                crate::progenitor_support::encode_path(&intent.to_string()),
             ),
             None,
         );

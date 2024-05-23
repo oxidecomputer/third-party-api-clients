@@ -31,7 +31,7 @@ impl ConnectConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -66,7 +66,7 @@ impl ConnectConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -102,7 +102,7 @@ impl ConnectConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -139,8 +139,8 @@ impl ConnectConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(connect_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&connect_id.to_string()),
             ),
             None,
         );
@@ -179,8 +179,8 @@ impl ConnectConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(connect_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&connect_id.to_string()),
             ),
             None,
         );
@@ -263,8 +263,8 @@ impl ConnectConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/{}/users?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(connect_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&connect_id.to_string()),
                 query_
             ),
             None,

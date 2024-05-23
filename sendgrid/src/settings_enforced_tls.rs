@@ -31,7 +31,7 @@ impl SettingsEnforcedTls {
     ) -> ClientResult<crate::Response<crate::types::EnforcedTlsRequestResponse>> {
         let url = self
             .client
-            .url("/user/settings/enforced_tls", None);
+            .url(&"/user/settings/enforced_tls".to_string(), None);
         self.client
             .get(
                 &url,
@@ -63,7 +63,7 @@ impl SettingsEnforcedTls {
     ) -> ClientResult<crate::Response<crate::types::EnforcedTlsRequestResponse>> {
         let url = self
             .client
-            .url("/user/settings/enforced_tls", None);
+            .url(&"/user/settings/enforced_tls".to_string(), None);
         self.client
             .patch(
                 &url,

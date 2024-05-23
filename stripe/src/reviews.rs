@@ -26,7 +26,7 @@ impl Reviews {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -70,9 +70,9 @@ impl Reviews {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Review>>> {
-        let url = self.client.url("/v1/reviews", None);
+        let url = self.client.url(&"/v1/reviews".to_string(), None);
         let crate::Response::<crate::types::GetReviewsResponse> {
             mut status,
             mut headers,
@@ -158,7 +158,7 @@ impl Reviews {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}",
-                crate::progenitor_support::encode_path(review),
+                crate::progenitor_support::encode_path(&review.to_string()),
             ),
             None,
         );
@@ -188,7 +188,7 @@ impl Reviews {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}/approve",
-                crate::progenitor_support::encode_path(review),
+                crate::progenitor_support::encode_path(&review.to_string()),
             ),
             None,
         );

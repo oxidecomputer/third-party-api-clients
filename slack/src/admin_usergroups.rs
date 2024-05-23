@@ -25,7 +25,7 @@ impl AdminUsergroups {
     pub async fn add_channels(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.usergroups.addChannels", None);
+            .url(&"/admin.usergroups.addChannels".to_string(), None);
         self.client
             .post(
                 &url,
@@ -50,7 +50,7 @@ impl AdminUsergroups {
     pub async fn add_teams(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.usergroups.addTeams", None);
+            .url(&"/admin.usergroups.addTeams".to_string(), None);
         self.client
             .post(
                 &url,
@@ -124,7 +124,7 @@ impl AdminUsergroups {
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.usergroups.removeChannels", None);
+            .url(&"/admin.usergroups.removeChannels".to_string(), None);
         self.client
             .post(
                 &url,

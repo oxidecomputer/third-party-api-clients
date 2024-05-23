@@ -57,14 +57,12 @@ pub struct ActivateFactorRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Type {
     #[serde(rename = "APP")]
     App,
     #[serde(rename = "APP_TYPE")]
     AppType,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -82,7 +80,11 @@ impl std::fmt::Display for Type {
     }
 }
 
-
+impl Default for Type {
+    fn default() -> Type {
+        Type::Noop
+    }
+}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -313,7 +315,6 @@ pub struct AppUserPasswordCredential {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Status {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -322,7 +323,6 @@ pub enum Status {
     #[serde(rename = "INACTIVE")]
     Inactive,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -341,7 +341,11 @@ impl std::fmt::Display for Status {
     }
 }
 
-
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
+    }
+}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -474,7 +478,6 @@ pub struct ApplicationCredentialsOAuthClient {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ApplicationCredentialsScheme {
     #[serde(rename = "ADMIN_SETS_CREDENTIALS")]
     AdminSetsCredentials,
@@ -487,7 +490,6 @@ pub enum ApplicationCredentialsScheme {
     #[serde(rename = "SHARED_USERNAME_AND_PASSWORD")]
     SharedUsernameAndPassword,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -510,7 +512,11 @@ impl std::fmt::Display for ApplicationCredentialsScheme {
     }
 }
 
-
+impl Default for ApplicationCredentialsScheme {
+    fn default() -> ApplicationCredentialsScheme {
+        ApplicationCredentialsScheme::Noop
+    }
+}
 impl ApplicationCredentialsScheme {
     pub fn is_noop(&self) -> bool {
         matches!(self, ApplicationCredentialsScheme::Noop)
@@ -551,12 +557,10 @@ pub struct ApplicationCredentialsSigning {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Use {
     #[serde(rename = "sig")]
     Sig,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -573,7 +577,11 @@ impl std::fmt::Display for Use {
     }
 }
 
-
+impl Default for Use {
+    fn default() -> Use {
+        Use::Noop
+    }
+}
 impl Use {
     pub fn is_noop(&self) -> bool {
         matches!(self, Use::Noop)
@@ -712,7 +720,6 @@ pub struct ApplicationSettingsNotificationsVpnNetwork {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ApplicationSignOnMode {
     #[serde(rename = "AUTO_LOGIN")]
     AutoLogin,
@@ -733,7 +740,6 @@ pub enum ApplicationSignOnMode {
     #[serde(rename = "WS_FEDERATION")]
     WsFederation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -758,7 +764,11 @@ impl std::fmt::Display for ApplicationSignOnMode {
     }
 }
 
-
+impl Default for ApplicationSignOnMode {
+    fn default() -> ApplicationSignOnMode {
+        ApplicationSignOnMode::Noop
+    }
+}
 impl ApplicationSignOnMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, ApplicationSignOnMode::Noop)
@@ -817,7 +827,6 @@ pub struct AuthenticationProvider {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AuthenticationProviderType {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -832,7 +841,6 @@ pub enum AuthenticationProviderType {
     #[serde(rename = "SOCIAL")]
     Social,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -854,7 +862,11 @@ impl std::fmt::Display for AuthenticationProviderType {
     }
 }
 
-
+impl Default for AuthenticationProviderType {
+    fn default() -> AuthenticationProviderType {
+        AuthenticationProviderType::Noop
+    }
+}
 impl AuthenticationProviderType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthenticationProviderType::Noop)
@@ -862,14 +874,12 @@ impl AuthenticationProviderType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum IssuerMode {
     #[serde(rename = "CUSTOM_URL")]
     CustomUrl,
     #[serde(rename = "ORG_URL")]
     OrgUrl,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -887,7 +897,11 @@ impl std::fmt::Display for IssuerMode {
     }
 }
 
-
+impl Default for IssuerMode {
+    fn default() -> IssuerMode {
+        IssuerMode::Noop
+    }
+}
 impl IssuerMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuerMode::Noop)
@@ -895,14 +909,12 @@ impl IssuerMode {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum RoleStatus {
     #[serde(rename = "ACTIVE")]
     Active,
     #[serde(rename = "INACTIVE")]
     Inactive,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -920,7 +932,11 @@ impl std::fmt::Display for RoleStatus {
     }
 }
 
-
+impl Default for RoleStatus {
+    fn default() -> RoleStatus {
+        RoleStatus::Noop
+    }
+}
 impl RoleStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, RoleStatus::Noop)
@@ -993,14 +1009,12 @@ pub struct AuthorizationServerCredentials {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AuthorizationServerCredentialsRotationMode {
     #[serde(rename = "AUTO")]
     Auto,
     #[serde(rename = "MANUAL")]
     Manual,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1018,7 +1032,11 @@ impl std::fmt::Display for AuthorizationServerCredentialsRotationMode {
     }
 }
 
-
+impl Default for AuthorizationServerCredentialsRotationMode {
+    fn default() -> AuthorizationServerCredentialsRotationMode {
+        AuthorizationServerCredentialsRotationMode::Noop
+    }
+}
 impl AuthorizationServerCredentialsRotationMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthorizationServerCredentialsRotationMode::Noop)
@@ -1114,12 +1132,10 @@ pub struct AuthorizationServerPolicy {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AuthorizationServerPolicyRuleType {
     #[serde(rename = "RESOURCE_ACCESS")]
     ResourceAccess,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1136,7 +1152,11 @@ impl std::fmt::Display for AuthorizationServerPolicyRuleType {
     }
 }
 
-
+impl Default for AuthorizationServerPolicyRuleType {
+    fn default() -> AuthorizationServerPolicyRuleType {
+        AuthorizationServerPolicyRuleType::Noop
+    }
+}
 impl AuthorizationServerPolicyRuleType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthorizationServerPolicyRuleType::Noop)
@@ -1636,14 +1656,12 @@ pub struct DnsRecord {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DnsRecordType {
     #[serde(rename = "CNAME")]
     Cname,
     #[serde(rename = "TXT")]
     Txt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1661,7 +1679,11 @@ impl std::fmt::Display for DnsRecordType {
     }
 }
 
-
+impl Default for DnsRecordType {
+    fn default() -> DnsRecordType {
+        DnsRecordType::Noop
+    }
+}
 impl DnsRecordType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DnsRecordType::Noop)
@@ -1669,14 +1691,12 @@ impl DnsRecordType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TrustLevel {
     #[serde(rename = "ANY")]
     Any,
     #[serde(rename = "TRUSTED")]
     Trusted,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1694,7 +1714,11 @@ impl std::fmt::Display for TrustLevel {
     }
 }
 
-
+impl Default for TrustLevel {
+    fn default() -> TrustLevel {
+        TrustLevel::Noop
+    }
+}
 impl TrustLevel {
     pub fn is_noop(&self) -> bool {
         matches!(self, TrustLevel::Noop)
@@ -1724,7 +1748,6 @@ pub struct DevicePolicyRuleCondition {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SupportedMdmFrameworks {
     #[serde(rename = "AFW")]
     Afw,
@@ -1733,7 +1756,6 @@ pub enum SupportedMdmFrameworks {
     #[serde(rename = "SAFE")]
     Safe,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1752,7 +1774,11 @@ impl std::fmt::Display for SupportedMdmFrameworks {
     }
 }
 
-
+impl Default for SupportedMdmFrameworks {
+    fn default() -> SupportedMdmFrameworks {
+        SupportedMdmFrameworks::Noop
+    }
+}
 impl SupportedMdmFrameworks {
     pub fn is_noop(&self) -> bool {
         matches!(self, SupportedMdmFrameworks::Noop)
@@ -1760,7 +1786,6 @@ impl SupportedMdmFrameworks {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Types {
     #[serde(rename = "ANDROID")]
     Android,
@@ -1771,7 +1796,6 @@ pub enum Types {
     #[serde(rename = "WINDOWS")]
     Windows,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1791,7 +1815,11 @@ impl std::fmt::Display for Types {
     }
 }
 
-
+impl Default for Types {
+    fn default() -> Types {
+        Types::Noop
+    }
+}
 impl Types {
     pub fn is_noop(&self) -> bool {
         matches!(self, Types::Noop)
@@ -1905,12 +1933,10 @@ pub struct DomainCertificateMetadata {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DomainCertificateSourceType {
     #[serde(rename = "MANUAL")]
     Manual,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1927,7 +1953,11 @@ impl std::fmt::Display for DomainCertificateSourceType {
     }
 }
 
-
+impl Default for DomainCertificateSourceType {
+    fn default() -> DomainCertificateSourceType {
+        DomainCertificateSourceType::Noop
+    }
+}
 impl DomainCertificateSourceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DomainCertificateSourceType::Noop)
@@ -1935,12 +1965,10 @@ impl DomainCertificateSourceType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DomainCertificateType {
     #[serde(rename = "PEM")]
     Pem,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1957,7 +1985,11 @@ impl std::fmt::Display for DomainCertificateType {
     }
 }
 
-
+impl Default for DomainCertificateType {
+    fn default() -> DomainCertificateType {
+        DomainCertificateType::Noop
+    }
+}
 impl DomainCertificateType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DomainCertificateType::Noop)
@@ -1975,7 +2007,6 @@ pub struct DomainListResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DomainValidationStatus {
     #[serde(rename = "COMPLETED")]
     Completed,
@@ -1986,7 +2017,6 @@ pub enum DomainValidationStatus {
     #[serde(rename = "VERIFIED")]
     Verified,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2006,7 +2036,11 @@ impl std::fmt::Display for DomainValidationStatus {
     }
 }
 
-
+impl Default for DomainValidationStatus {
+    fn default() -> DomainValidationStatus {
+        DomainValidationStatus::Noop
+    }
+}
 impl DomainValidationStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, DomainValidationStatus::Noop)
@@ -2046,14 +2080,12 @@ pub struct EmailUserFactorProfile {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EnabledStatus {
     #[serde(rename = "DISABLED")]
     Disabled,
     #[serde(rename = "ENABLED")]
     Enabled,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2071,7 +2103,11 @@ impl std::fmt::Display for EnabledStatus {
     }
 }
 
-
+impl Default for EnabledStatus {
+    fn default() -> EnabledStatus {
+        EnabledStatus::Noop
+    }
+}
 impl EnabledStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, EnabledStatus::Noop)
@@ -2079,14 +2115,12 @@ impl EnabledStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum VerificationStatus {
     #[serde(rename = "UNVERIFIED")]
     Unverified,
     #[serde(rename = "VERIFIED")]
     Verified,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2104,7 +2138,11 @@ impl std::fmt::Display for VerificationStatus {
     }
 }
 
-
+impl Default for VerificationStatus {
+    fn default() -> VerificationStatus {
+        VerificationStatus::Noop
+    }
+}
 impl VerificationStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, VerificationStatus::Noop)
@@ -2162,12 +2200,10 @@ pub struct EventHook {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EventHookChannelType {
     #[serde(rename = "HTTP")]
     Http,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2184,7 +2220,11 @@ impl std::fmt::Display for EventHookChannelType {
     }
 }
 
-
+impl Default for EventHookChannelType {
+    fn default() -> EventHookChannelType {
+        EventHookChannelType::Noop
+    }
+}
 impl EventHookChannelType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EventHookChannelType::Noop)
@@ -2246,12 +2286,10 @@ pub struct EventHookChannelConfigAuthScheme {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EventHookChannelConfigAuthSchemeType {
     #[serde(rename = "HEADER")]
     Header,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2268,7 +2306,11 @@ impl std::fmt::Display for EventHookChannelConfigAuthSchemeType {
     }
 }
 
-
+impl Default for EventHookChannelConfigAuthSchemeType {
+    fn default() -> EventHookChannelConfigAuthSchemeType {
+        EventHookChannelConfigAuthSchemeType::Noop
+    }
+}
 impl EventHookChannelConfigAuthSchemeType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EventHookChannelConfigAuthSchemeType::Noop)
@@ -2292,14 +2334,12 @@ pub struct EventHookChannelConfigHeader {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EventSubscriptionsType {
     #[serde(rename = "EVENT_TYPE")]
     EventType,
     #[serde(rename = "FLOW_EVENT")]
     FlowEvent,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2317,7 +2357,11 @@ impl std::fmt::Display for EventSubscriptionsType {
     }
 }
 
-
+impl Default for EventSubscriptionsType {
+    fn default() -> EventSubscriptionsType {
+        EventSubscriptionsType::Noop
+    }
+}
 impl EventSubscriptionsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EventSubscriptionsType::Noop)
@@ -2337,7 +2381,6 @@ pub struct EventSubscriptions {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FactorProvider {
     #[serde(rename = "CUSTOM")]
     Custom,
@@ -2356,7 +2399,6 @@ pub enum FactorProvider {
     #[serde(rename = "YUBICO")]
     Yubico,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2380,7 +2422,11 @@ impl std::fmt::Display for FactorProvider {
     }
 }
 
-
+impl Default for FactorProvider {
+    fn default() -> FactorProvider {
+        FactorProvider::Noop
+    }
+}
 impl FactorProvider {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorProvider::Noop)
@@ -2388,7 +2434,6 @@ impl FactorProvider {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FactorResultType {
     #[serde(rename = "CANCELLED")]
     Cancelled,
@@ -2411,7 +2456,6 @@ pub enum FactorResultType {
     #[serde(rename = "WAITING")]
     Waiting,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2437,7 +2481,11 @@ impl std::fmt::Display for FactorResultType {
     }
 }
 
-
+impl Default for FactorResultType {
+    fn default() -> FactorResultType {
+        FactorResultType::Noop
+    }
+}
 impl FactorResultType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorResultType::Noop)
@@ -2445,7 +2493,6 @@ impl FactorResultType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FactorStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -2462,7 +2509,6 @@ pub enum FactorStatus {
     #[serde(rename = "PENDING_ACTIVATION")]
     PendingActivation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2485,7 +2531,11 @@ impl std::fmt::Display for FactorStatus {
     }
 }
 
-
+impl Default for FactorStatus {
+    fn default() -> FactorStatus {
+        FactorStatus::Noop
+    }
+}
 impl FactorStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorStatus::Noop)
@@ -2493,7 +2543,6 @@ impl FactorStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FactorType {
     #[serde(rename = "call")]
     Call,
@@ -2522,7 +2571,6 @@ pub enum FactorType {
     #[serde(rename = "webauthn")]
     Webauthn,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2551,7 +2599,11 @@ impl std::fmt::Display for FactorType {
     }
 }
 
-
+impl Default for FactorType {
+    fn default() -> FactorType {
+        FactorType::Noop
+    }
+}
 impl FactorType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorType::Noop)
@@ -2597,14 +2649,12 @@ pub struct FeatureStage {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FeatureStageState {
     #[serde(rename = "CLOSED")]
     Closed,
     #[serde(rename = "OPEN")]
     Open,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2622,7 +2672,11 @@ impl std::fmt::Display for FeatureStageState {
     }
 }
 
-
+impl Default for FeatureStageState {
+    fn default() -> FeatureStageState {
+        FeatureStageState::Noop
+    }
+}
 impl FeatureStageState {
     pub fn is_noop(&self) -> bool {
         matches!(self, FeatureStageState::Noop)
@@ -2630,14 +2684,12 @@ impl FeatureStageState {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FeatureStageValue {
     #[serde(rename = "BETA")]
     Beta,
     #[serde(rename = "EA")]
     Ea,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2655,7 +2707,11 @@ impl std::fmt::Display for FeatureStageValue {
     }
 }
 
-
+impl Default for FeatureStageValue {
+    fn default() -> FeatureStageValue {
+        FeatureStageValue::Noop
+    }
+}
 impl FeatureStageValue {
     pub fn is_noop(&self) -> bool {
         matches!(self, FeatureStageValue::Noop)
@@ -2663,12 +2719,10 @@ impl FeatureStageValue {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FeatureType {
     #[serde(rename = "self-service")]
     SelfService,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2685,7 +2739,11 @@ impl std::fmt::Display for FeatureType {
     }
 }
 
-
+impl Default for FeatureType {
+    fn default() -> FeatureType {
+        FeatureType::Noop
+    }
+}
 impl FeatureType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FeatureType::Noop)
@@ -2877,7 +2935,6 @@ pub struct GroupRulePeopleCondition {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GroupRuleStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -2886,7 +2943,6 @@ pub enum GroupRuleStatus {
     #[serde(rename = "INVALID")]
     Invalid,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2905,7 +2961,11 @@ impl std::fmt::Display for GroupRuleStatus {
     }
 }
 
-
+impl Default for GroupRuleStatus {
+    fn default() -> GroupRuleStatus {
+        GroupRuleStatus::Noop
+    }
+}
 impl GroupRuleStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupRuleStatus::Noop)
@@ -2913,7 +2973,6 @@ impl GroupRuleStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GroupType {
     #[serde(rename = "APP_GROUP")]
     AppGroup,
@@ -2922,7 +2981,6 @@ pub enum GroupType {
     #[serde(rename = "OKTA_GROUP")]
     OktaGroup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2941,7 +2999,11 @@ impl std::fmt::Display for GroupType {
     }
 }
 
-
+impl Default for GroupType {
+    fn default() -> GroupType {
+        GroupType::Noop
+    }
+}
 impl GroupType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupType::Noop)
@@ -2966,14 +3028,12 @@ pub struct WebUserFactorProfile {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum IdentityProviderIssuerMode {
     #[serde(rename = "CUSTOM_URL_DOMAIN")]
     CustomUrlDomain,
     #[serde(rename = "ORG_URL")]
     OrgUrl,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2991,7 +3051,11 @@ impl std::fmt::Display for IdentityProviderIssuerMode {
     }
 }
 
-
+impl Default for IdentityProviderIssuerMode {
+    fn default() -> IdentityProviderIssuerMode {
+        IdentityProviderIssuerMode::Noop
+    }
+}
 impl IdentityProviderIssuerMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, IdentityProviderIssuerMode::Noop)
@@ -2999,7 +3063,6 @@ impl IdentityProviderIssuerMode {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum IdentityProviderType {
     #[serde(rename = "AgentlessDSSO")]
     AgentlessDsso,
@@ -3022,7 +3085,6 @@ pub enum IdentityProviderType {
     #[serde(rename = "X509")]
     X509,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3048,7 +3110,11 @@ impl std::fmt::Display for IdentityProviderType {
     }
 }
 
-
+impl Default for IdentityProviderType {
+    fn default() -> IdentityProviderType {
+        IdentityProviderType::Noop
+    }
+}
 impl IdentityProviderType {
     pub fn is_noop(&self) -> bool {
         matches!(self, IdentityProviderType::Noop)
@@ -3173,7 +3239,6 @@ pub struct IdentityProviderCredentialsSigning {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Revocation {
     #[serde(rename = "CRL")]
     Crl,
@@ -3182,7 +3247,6 @@ pub enum Revocation {
     #[serde(rename = "OCSP")]
     Ocsp,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3201,7 +3265,11 @@ impl std::fmt::Display for Revocation {
     }
 }
 
-
+impl Default for Revocation {
+    fn default() -> Revocation {
+        Revocation::Noop
+    }
+}
 impl Revocation {
     pub fn is_noop(&self) -> bool {
         matches!(self, Revocation::Noop)
@@ -3261,7 +3329,6 @@ pub struct IdentityProviderPolicy {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Provider {
     #[serde(rename = "ANY")]
     Any,
@@ -3270,7 +3337,6 @@ pub enum Provider {
     #[serde(rename = "SPECIFIC_IDP")]
     SpecificIdp,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3289,7 +3355,11 @@ impl std::fmt::Display for Provider {
     }
 }
 
-
+impl Default for Provider {
+    fn default() -> Provider {
+        Provider::Noop
+    }
+}
 impl Provider {
     pub fn is_noop(&self) -> bool {
         matches!(self, Provider::Noop)
@@ -3483,7 +3553,6 @@ pub struct InlineHookResponseCommands {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum InlineHookType {
     #[serde(rename = "com.okta.import.transform")]
     ComOktaImportTransform,
@@ -3496,7 +3565,6 @@ pub enum InlineHookType {
     #[serde(rename = "com.okta.user.pre-registration")]
     ComOktaUserPreRegistration,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3519,7 +3587,11 @@ impl std::fmt::Display for InlineHookType {
     }
 }
 
-
+impl Default for InlineHookType {
+    fn default() -> InlineHookType {
+        InlineHookType::Noop
+    }
+}
 impl InlineHookType {
     pub fn is_noop(&self) -> bool {
         matches!(self, InlineHookType::Noop)
@@ -3799,12 +3871,10 @@ pub struct LinkedObjectDetails {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LinkedObjectDetailsType {
     #[serde(rename = "USER")]
     User,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3821,7 +3891,11 @@ impl std::fmt::Display for LinkedObjectDetailsType {
     }
 }
 
-
+impl Default for LinkedObjectDetailsType {
+    fn default() -> LinkedObjectDetailsType {
+        LinkedObjectDetailsType::Noop
+    }
+}
 impl LinkedObjectDetailsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LinkedObjectDetailsType::Noop)
@@ -3906,7 +3980,6 @@ pub struct LogAuthenticationContext {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LogAuthenticationProvider {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -3921,7 +3994,6 @@ pub enum LogAuthenticationProvider {
     #[serde(rename = "SOCIAL")]
     Social,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3943,7 +4015,11 @@ impl std::fmt::Display for LogAuthenticationProvider {
     }
 }
 
-
+impl Default for LogAuthenticationProvider {
+    fn default() -> LogAuthenticationProvider {
+        LogAuthenticationProvider::Noop
+    }
+}
 impl LogAuthenticationProvider {
     pub fn is_noop(&self) -> bool {
         matches!(self, LogAuthenticationProvider::Noop)
@@ -3988,7 +4064,6 @@ pub struct LogClient {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LogCredentialProvider {
     #[serde(rename = "DUO")]
     Duo,
@@ -4005,7 +4080,6 @@ pub enum LogCredentialProvider {
     #[serde(rename = "YUBIKEY")]
     Yubikey,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4028,7 +4102,11 @@ impl std::fmt::Display for LogCredentialProvider {
     }
 }
 
-
+impl Default for LogCredentialProvider {
+    fn default() -> LogCredentialProvider {
+        LogCredentialProvider::Noop
+    }
+}
 impl LogCredentialProvider {
     pub fn is_noop(&self) -> bool {
         matches!(self, LogCredentialProvider::Noop)
@@ -4036,7 +4114,6 @@ impl LogCredentialProvider {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LogCredentialType {
     #[serde(rename = "ASSERTION")]
     Assertion,
@@ -4055,7 +4132,6 @@ pub enum LogCredentialType {
     #[serde(rename = "SMS")]
     Sms,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4079,7 +4155,11 @@ impl std::fmt::Display for LogCredentialType {
     }
 }
 
-
+impl Default for LogCredentialType {
+    fn default() -> LogCredentialType {
+        LogCredentialType::Noop
+    }
+}
 impl LogCredentialType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LogCredentialType::Noop)
@@ -4327,7 +4407,6 @@ pub struct LogSecurityContext {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LogSeverity {
     #[serde(rename = "DEBUG")]
     Debug,
@@ -4338,7 +4417,6 @@ pub enum LogSeverity {
     #[serde(rename = "WARN")]
     Warn,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4358,7 +4436,11 @@ impl std::fmt::Display for LogSeverity {
     }
 }
 
-
+impl Default for LogSeverity {
+    fn default() -> LogSeverity {
+        LogSeverity::Noop
+    }
+}
 impl LogSeverity {
     pub fn is_noop(&self) -> bool {
         matches!(self, LogSeverity::Noop)
@@ -4445,14 +4527,12 @@ pub struct LogUserAgent {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Enrollment {
     #[serde(rename = "ANY_OR_NONE")]
     AnyOrNone,
     #[serde(rename = "OMM")]
     Omm,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4470,7 +4550,11 @@ impl std::fmt::Display for Enrollment {
     }
 }
 
-
+impl Default for Enrollment {
+    fn default() -> Enrollment {
+        Enrollment::Noop
+    }
+}
 impl Enrollment {
     pub fn is_noop(&self) -> bool {
         matches!(self, Enrollment::Noop)
@@ -4575,14 +4659,12 @@ pub struct NetworkZoneAddress {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum NetworkZoneAddressType {
     #[serde(rename = "CIDR")]
     Cidr,
     #[serde(rename = "RANGE")]
     Range,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4600,7 +4682,11 @@ impl std::fmt::Display for NetworkZoneAddressType {
     }
 }
 
-
+impl Default for NetworkZoneAddressType {
+    fn default() -> NetworkZoneAddressType {
+        NetworkZoneAddressType::Noop
+    }
+}
 impl NetworkZoneAddressType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkZoneAddressType::Noop)
@@ -4624,14 +4710,12 @@ pub struct NetworkZoneLocation {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum NetworkZoneType {
     #[serde(rename = "DYNAMIC")]
     Dynamic,
     #[serde(rename = "IP")]
     Ip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4649,7 +4733,11 @@ impl std::fmt::Display for NetworkZoneType {
     }
 }
 
-
+impl Default for NetworkZoneType {
+    fn default() -> NetworkZoneType {
+        NetworkZoneType::Noop
+    }
+}
 impl NetworkZoneType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkZoneType::Noop)
@@ -4657,14 +4745,12 @@ impl NetworkZoneType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum NetworkZoneUsage {
     #[serde(rename = "BLOCKLIST")]
     Blocklist,
     #[serde(rename = "POLICY")]
     Policy,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4682,7 +4768,11 @@ impl std::fmt::Display for NetworkZoneUsage {
     }
 }
 
-
+impl Default for NetworkZoneUsage {
+    fn default() -> NetworkZoneUsage {
+        NetworkZoneUsage::Noop
+    }
+}
 impl NetworkZoneUsage {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkZoneUsage::Noop)
@@ -4707,14 +4797,12 @@ pub struct OAuth2Actor {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ClaimType {
     #[serde(rename = "IDENTITY")]
     Identity,
     #[serde(rename = "RESOURCE")]
     Resource,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4732,7 +4820,11 @@ impl std::fmt::Display for ClaimType {
     }
 }
 
-
+impl Default for ClaimType {
+    fn default() -> ClaimType {
+        ClaimType::Noop
+    }
+}
 impl ClaimType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ClaimType::Noop)
@@ -4740,7 +4832,6 @@ impl ClaimType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GroupFilterType {
     #[serde(rename = "CONTAINS")]
     Contains,
@@ -4751,7 +4842,6 @@ pub enum GroupFilterType {
     #[serde(rename = "STARTS_WITH")]
     StartsWith,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4771,7 +4861,11 @@ impl std::fmt::Display for GroupFilterType {
     }
 }
 
-
+impl Default for GroupFilterType {
+    fn default() -> GroupFilterType {
+        GroupFilterType::Noop
+    }
+}
 impl GroupFilterType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupFilterType::Noop)
@@ -4779,7 +4873,6 @@ impl GroupFilterType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ValueType {
     #[serde(rename = "EXPRESSION")]
     Expression,
@@ -4788,7 +4881,6 @@ pub enum ValueType {
     #[serde(rename = "SYSTEM")]
     System,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4807,7 +4899,11 @@ impl std::fmt::Display for ValueType {
     }
 }
 
-
+impl Default for ValueType {
+    fn default() -> ValueType {
+        ValueType::Noop
+    }
+}
 impl ValueType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ValueType::Noop)
@@ -4900,14 +4996,12 @@ pub struct OAuth2Client {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OAuth2RefreshTokenStatus {
     #[serde(rename = "ACTIVE")]
     Active,
     #[serde(rename = "REVOKED")]
     Revoked,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4925,7 +5019,11 @@ impl std::fmt::Display for OAuth2RefreshTokenStatus {
     }
 }
 
-
+impl Default for OAuth2RefreshTokenStatus {
+    fn default() -> OAuth2RefreshTokenStatus {
+        OAuth2RefreshTokenStatus::Noop
+    }
+}
 impl OAuth2RefreshTokenStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuth2RefreshTokenStatus::Noop)
@@ -4997,7 +5095,6 @@ pub struct OAuth2RefreshToken {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Consent {
     #[serde(rename = "ADMIN")]
     Admin,
@@ -5006,7 +5103,6 @@ pub enum Consent {
     #[serde(rename = "REQUIRED")]
     Required,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5025,7 +5121,11 @@ impl std::fmt::Display for Consent {
     }
 }
 
-
+impl Default for Consent {
+    fn default() -> Consent {
+        Consent::Noop
+    }
+}
 impl Consent {
     pub fn is_noop(&self) -> bool {
         matches!(self, Consent::Noop)
@@ -5033,14 +5133,12 @@ impl Consent {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MetadataPublish {
     #[serde(rename = "ALL_CLIENTS")]
     AllClients,
     #[serde(rename = "NO_CLIENTS")]
     NoClients,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5058,7 +5156,11 @@ impl std::fmt::Display for MetadataPublish {
     }
 }
 
-
+impl Default for MetadataPublish {
+    fn default() -> MetadataPublish {
+        MetadataPublish::Noop
+    }
+}
 impl MetadataPublish {
     pub fn is_noop(&self) -> bool {
         matches!(self, MetadataPublish::Noop)
@@ -5173,14 +5275,12 @@ pub struct OAuth2ScopeConsentGrant {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OAuth2ScopeConsentGrantSource {
     #[serde(rename = "ADMIN")]
     Admin,
     #[serde(rename = "END_USER")]
     EndUser,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5198,7 +5298,11 @@ impl std::fmt::Display for OAuth2ScopeConsentGrantSource {
     }
 }
 
-
+impl Default for OAuth2ScopeConsentGrantSource {
+    fn default() -> OAuth2ScopeConsentGrantSource {
+        OAuth2ScopeConsentGrantSource::Noop
+    }
+}
 impl OAuth2ScopeConsentGrantSource {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuth2ScopeConsentGrantSource::Noop)
@@ -5288,7 +5392,6 @@ pub struct OAuthApplicationCredentials {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OAuthEndpointAuthenticationMethod {
     #[serde(rename = "client_secret_basic")]
     ClientSecretBasic,
@@ -5301,7 +5404,6 @@ pub enum OAuthEndpointAuthenticationMethod {
     #[serde(rename = "private_key_jwt")]
     PrivateKeyJwt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5322,7 +5424,11 @@ impl std::fmt::Display for OAuthEndpointAuthenticationMethod {
     }
 }
 
-
+impl Default for OAuthEndpointAuthenticationMethod {
+    fn default() -> OAuthEndpointAuthenticationMethod {
+        OAuthEndpointAuthenticationMethod::Noop
+    }
+}
 impl OAuthEndpointAuthenticationMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuthEndpointAuthenticationMethod::Noop)
@@ -5330,7 +5436,6 @@ impl OAuthEndpointAuthenticationMethod {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OAuthGrantType {
     #[serde(rename = "authorization_code")]
     AuthorizationCode,
@@ -5343,7 +5448,6 @@ pub enum OAuthGrantType {
     #[serde(rename = "refresh_token")]
     RefreshToken,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5364,7 +5468,11 @@ impl std::fmt::Display for OAuthGrantType {
     }
 }
 
-
+impl Default for OAuthGrantType {
+    fn default() -> OAuthGrantType {
+        OAuthGrantType::Noop
+    }
+}
 impl OAuthGrantType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuthGrantType::Noop)
@@ -5372,7 +5480,6 @@ impl OAuthGrantType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OAuthResponseType {
     #[serde(rename = "code")]
     Code,
@@ -5381,7 +5488,6 @@ pub enum OAuthResponseType {
     #[serde(rename = "token")]
     Token,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5400,7 +5506,11 @@ impl std::fmt::Display for OAuthResponseType {
     }
 }
 
-
+impl Default for OAuthResponseType {
+    fn default() -> OAuthResponseType {
+        OAuthResponseType::Noop
+    }
+}
 impl OAuthResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuthResponseType::Noop)
@@ -5454,14 +5564,12 @@ pub struct OktaSignOnPolicyRuleConditions {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Access {
     #[serde(rename = "ALLOW")]
     Allow,
     #[serde(rename = "DENY")]
     Deny,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5479,7 +5587,11 @@ impl std::fmt::Display for Access {
     }
 }
 
-
+impl Default for Access {
+    fn default() -> Access {
+        Access::Noop
+    }
+}
 impl Access {
     pub fn is_noop(&self) -> bool {
         matches!(self, Access::Noop)
@@ -5487,7 +5599,6 @@ impl Access {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FactorPromptMode {
     #[serde(rename = "ALWAYS")]
     Always,
@@ -5496,7 +5607,6 @@ pub enum FactorPromptMode {
     #[serde(rename = "SESSION")]
     Session,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5515,7 +5625,11 @@ impl std::fmt::Display for FactorPromptMode {
     }
 }
 
-
+impl Default for FactorPromptMode {
+    fn default() -> FactorPromptMode {
+        FactorPromptMode::Noop
+    }
+}
 impl FactorPromptMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorPromptMode::Noop)
@@ -5590,14 +5704,12 @@ pub struct OpenConnectApplication {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OpenConnectApplicationConsentMethod {
     #[serde(rename = "REQUIRED")]
     Required,
     #[serde(rename = "TRUSTED")]
     Trusted,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5615,7 +5727,11 @@ impl std::fmt::Display for OpenConnectApplicationConsentMethod {
     }
 }
 
-
+impl Default for OpenConnectApplicationConsentMethod {
+    fn default() -> OpenConnectApplicationConsentMethod {
+        OpenConnectApplicationConsentMethod::Noop
+    }
+}
 impl OpenConnectApplicationConsentMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, OpenConnectApplicationConsentMethod::Noop)
@@ -5747,7 +5863,6 @@ pub struct OpenConnectApplicationSettingsRefreshToken {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OpenConnectApplicationType {
     #[serde(rename = "browser")]
     Browser,
@@ -5758,7 +5873,6 @@ pub enum OpenConnectApplicationType {
     #[serde(rename = "web")]
     Web,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5778,7 +5892,11 @@ impl std::fmt::Display for OpenConnectApplicationType {
     }
 }
 
-
+impl Default for OpenConnectApplicationType {
+    fn default() -> OpenConnectApplicationType {
+        OpenConnectApplicationType::Noop
+    }
+}
 impl OpenConnectApplicationType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OpenConnectApplicationType::Noop)
@@ -5786,14 +5904,12 @@ impl OpenConnectApplicationType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OpenConnectRefreshTokenRotationType {
     #[serde(rename = "rotate")]
     Rotate,
     #[serde(rename = "static")]
     Static,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5811,7 +5927,11 @@ impl std::fmt::Display for OpenConnectRefreshTokenRotationType {
     }
 }
 
-
+impl Default for OpenConnectRefreshTokenRotationType {
+    fn default() -> OpenConnectRefreshTokenRotationType {
+        OpenConnectRefreshTokenRotationType::Noop
+    }
+}
 impl OpenConnectRefreshTokenRotationType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OpenConnectRefreshTokenRotationType::Noop)
@@ -5865,7 +5985,6 @@ pub struct PasswordCredentialHash {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PasswordCredentialHashAlgorithm {
     #[serde(rename = "BCRYPT")]
     Bcrypt,
@@ -5878,7 +5997,6 @@ pub enum PasswordCredentialHashAlgorithm {
     #[serde(rename = "SHA-512")]
     Sha512,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5899,7 +6017,11 @@ impl std::fmt::Display for PasswordCredentialHashAlgorithm {
     }
 }
 
-
+impl Default for PasswordCredentialHashAlgorithm {
+    fn default() -> PasswordCredentialHashAlgorithm {
+        PasswordCredentialHashAlgorithm::Noop
+    }
+}
 impl PasswordCredentialHashAlgorithm {
     pub fn is_noop(&self) -> bool {
         matches!(self, PasswordCredentialHashAlgorithm::Noop)
@@ -5941,7 +6063,6 @@ pub struct PasswordPolicy {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PasswordPolicyAuthenticationProviderCondition {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -5952,7 +6073,6 @@ pub enum PasswordPolicyAuthenticationProviderCondition {
     #[serde(rename = "OKTA")]
     Okta,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5972,7 +6092,11 @@ impl std::fmt::Display for PasswordPolicyAuthenticationProviderCondition {
     }
 }
 
-
+impl Default for PasswordPolicyAuthenticationProviderCondition {
+    fn default() -> PasswordPolicyAuthenticationProviderCondition {
+        PasswordPolicyAuthenticationProviderCondition::Noop
+    }
+}
 impl PasswordPolicyAuthenticationProviderCondition {
     pub fn is_noop(&self) -> bool {
         matches!(self, PasswordPolicyAuthenticationProviderCondition::Noop)
@@ -6285,7 +6409,6 @@ pub struct PasswordPolicySettingsData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PlatformConditionEvaluatorType {
     #[serde(rename = "ANY")]
     Any,
@@ -6296,7 +6419,6 @@ pub enum PlatformConditionEvaluatorType {
     #[serde(rename = "OTHER")]
     Other,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6316,7 +6438,11 @@ impl std::fmt::Display for PlatformConditionEvaluatorType {
     }
 }
 
-
+impl Default for PlatformConditionEvaluatorType {
+    fn default() -> PlatformConditionEvaluatorType {
+        PlatformConditionEvaluatorType::Noop
+    }
+}
 impl PlatformConditionEvaluatorType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlatformConditionEvaluatorType::Noop)
@@ -6332,7 +6458,6 @@ pub struct PlatformConditionEvaluator {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PlatformConditionEvaluatorOperatingSystemType {
     #[serde(rename = "ANDROID")]
     Android,
@@ -6347,7 +6472,6 @@ pub enum PlatformConditionEvaluatorOperatingSystemType {
     #[serde(rename = "WINDOWS")]
     Windows,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6369,7 +6493,11 @@ impl std::fmt::Display for PlatformConditionEvaluatorOperatingSystemType {
     }
 }
 
-
+impl Default for PlatformConditionEvaluatorOperatingSystemType {
+    fn default() -> PlatformConditionEvaluatorOperatingSystemType {
+        PlatformConditionEvaluatorOperatingSystemType::Noop
+    }
+}
 impl PlatformConditionEvaluatorOperatingSystemType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlatformConditionEvaluatorOperatingSystemType::Noop)
@@ -6391,14 +6519,12 @@ pub struct PlatformConditionEvaluatorOperatingSystem {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MatchType {
     #[serde(rename = "EXPRESSION")]
     Expression,
     #[serde(rename = "SEMVER")]
     Semver,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6416,7 +6542,11 @@ impl std::fmt::Display for MatchType {
     }
 }
 
-
+impl Default for MatchType {
+    fn default() -> MatchType {
+        MatchType::Noop
+    }
+}
 impl MatchType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MatchType::Noop)
@@ -6508,14 +6638,12 @@ pub struct Policy {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Action {
     #[serde(rename = "AUTO")]
     Auto,
     #[serde(rename = "DISABLED")]
     Disabled,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6533,7 +6661,11 @@ impl std::fmt::Display for Action {
     }
 }
 
-
+impl Default for Action {
+    fn default() -> Action {
+        Action::Noop
+    }
+}
 impl Action {
     pub fn is_noop(&self) -> bool {
         matches!(self, Action::Noop)
@@ -6555,14 +6687,12 @@ pub struct PolicyAccountLinkFilter {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Connection {
     #[serde(rename = "ANYWHERE")]
     Anywhere,
     #[serde(rename = "ZONE")]
     Zone,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6580,7 +6710,11 @@ impl std::fmt::Display for Connection {
     }
 }
 
-
+impl Default for Connection {
+    fn default() -> Connection {
+        Connection::Noop
+    }
+}
 impl Connection {
     pub fn is_noop(&self) -> bool {
         matches!(self, Connection::Noop)
@@ -6614,14 +6748,12 @@ pub struct PolicyPeopleCondition {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PolicyRuleType {
     #[serde(rename = "PASSWORD")]
     Password,
     #[serde(rename = "SIGN_ON")]
     SignOn,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6639,7 +6771,11 @@ impl std::fmt::Display for PolicyRuleType {
     }
 }
 
-
+impl Default for PolicyRuleType {
+    fn default() -> PolicyRuleType {
+        PolicyRuleType::Noop
+    }
+}
 impl PolicyRuleType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PolicyRuleType::Noop)
@@ -6727,7 +6863,6 @@ pub struct PolicyRuleActionsEnroll {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PolicyRuleActionsEnrollSelf {
     #[serde(rename = "CHALLENGE")]
     Challenge,
@@ -6736,7 +6871,6 @@ pub enum PolicyRuleActionsEnrollSelf {
     #[serde(rename = "NEVER")]
     Never,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6755,7 +6889,11 @@ impl std::fmt::Display for PolicyRuleActionsEnrollSelf {
     }
 }
 
-
+impl Default for PolicyRuleActionsEnrollSelf {
+    fn default() -> PolicyRuleActionsEnrollSelf {
+        PolicyRuleActionsEnrollSelf::Noop
+    }
+}
 impl PolicyRuleActionsEnrollSelf {
     pub fn is_noop(&self) -> bool {
         matches!(self, PolicyRuleActionsEnrollSelf::Noop)
@@ -6763,14 +6901,12 @@ impl PolicyRuleActionsEnrollSelf {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AuthType {
     #[serde(rename = "ANY")]
     Any,
     #[serde(rename = "RADIUS")]
     Radius,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6788,7 +6924,11 @@ impl std::fmt::Display for AuthType {
     }
 }
 
-
+impl Default for AuthType {
+    fn default() -> AuthType {
+        AuthType::Noop
+    }
+}
 impl AuthType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthType::Noop)
@@ -6911,7 +7051,6 @@ pub struct PolicySubject {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PolicySubjectMatchType {
     #[serde(rename = "CUSTOM_ATTRIBUTE")]
     CustomAttribute,
@@ -6922,7 +7061,6 @@ pub enum PolicySubjectMatchType {
     #[serde(rename = "USERNAME_OR_EMAIL")]
     UsernameOrEmail,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6942,7 +7080,11 @@ impl std::fmt::Display for PolicySubjectMatchType {
     }
 }
 
-
+impl Default for PolicySubjectMatchType {
+    fn default() -> PolicySubjectMatchType {
+        PolicySubjectMatchType::Noop
+    }
+}
 impl PolicySubjectMatchType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PolicySubjectMatchType::Noop)
@@ -6950,7 +7092,6 @@ impl PolicySubjectMatchType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PolicyType {
     #[serde(rename = "IDP_DISCOVERY")]
     IdpDiscovery,
@@ -6961,7 +7102,6 @@ pub enum PolicyType {
     #[serde(rename = "PASSWORD")]
     Password,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6981,7 +7121,11 @@ impl std::fmt::Display for PolicyType {
     }
 }
 
-
+impl Default for PolicyType {
+    fn default() -> PolicyType {
+        PolicyType::Noop
+    }
+}
 impl PolicyType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PolicyType::Noop)
@@ -7058,7 +7202,6 @@ pub struct ProfileMappingSource {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProtocolType {
     #[serde(rename = "MTLS")]
     Mtls,
@@ -7069,7 +7212,6 @@ pub enum ProtocolType {
     #[serde(rename = "SAML2")]
     Saml2,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7089,7 +7231,11 @@ impl std::fmt::Display for ProtocolType {
     }
 }
 
-
+impl Default for ProtocolType {
+    fn default() -> ProtocolType {
+        ProtocolType::Noop
+    }
+}
 impl ProtocolType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProtocolType::Noop)
@@ -7131,7 +7277,6 @@ pub struct ProtocolAlgorithmType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Scope {
     #[serde(rename = "ANY")]
     Any,
@@ -7144,7 +7289,6 @@ pub enum Scope {
     #[serde(rename = "TOKEN")]
     Token,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7165,7 +7309,11 @@ impl std::fmt::Display for Scope {
     }
 }
 
-
+impl Default for Scope {
+    fn default() -> Scope {
+        Scope::Noop
+    }
+}
 impl Scope {
     pub fn is_noop(&self) -> bool {
         matches!(self, Scope::Noop)
@@ -7193,14 +7341,12 @@ pub struct ProtocolAlgorithms {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Binding {
     #[serde(rename = "HTTP-POST")]
     HttpPost,
     #[serde(rename = "HTTP-REDIRECT")]
     HttpRedirect,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7218,7 +7364,11 @@ impl std::fmt::Display for Binding {
     }
 }
 
-
+impl Default for Binding {
+    fn default() -> Binding {
+        Binding::Noop
+    }
+}
 impl Binding {
     pub fn is_noop(&self) -> bool {
         matches!(self, Binding::Noop)
@@ -7226,14 +7376,12 @@ impl Binding {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProtocolEndpointType {
     #[serde(rename = "INSTANCE")]
     Instance,
     #[serde(rename = "ORG")]
     Org,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7251,7 +7399,11 @@ impl std::fmt::Display for ProtocolEndpointType {
     }
 }
 
-
+impl Default for ProtocolEndpointType {
+    fn default() -> ProtocolEndpointType {
+        ProtocolEndpointType::Noop
+    }
+}
 impl ProtocolEndpointType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProtocolEndpointType::Noop)
@@ -7305,14 +7457,12 @@ pub struct ProtocolRelayState {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProtocolRelayStateFormat {
     #[serde(rename = "FROM_URL")]
     FromUrl,
     #[serde(rename = "OPAQUE")]
     Opaque,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7330,7 +7480,11 @@ impl std::fmt::Display for ProtocolRelayStateFormat {
     }
 }
 
-
+impl Default for ProtocolRelayStateFormat {
+    fn default() -> ProtocolRelayStateFormat {
+        ProtocolRelayStateFormat::Noop
+    }
+}
 impl ProtocolRelayStateFormat {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProtocolRelayStateFormat::Noop)
@@ -7349,7 +7503,6 @@ pub struct ProtocolSettings {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProvisioningAction {
     #[serde(rename = "AUTO")]
     Auto,
@@ -7358,7 +7511,6 @@ pub enum ProvisioningAction {
     #[serde(rename = "DISABLED")]
     Disabled,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7377,7 +7529,11 @@ impl std::fmt::Display for ProvisioningAction {
     }
 }
 
-
+impl Default for ProvisioningAction {
+    fn default() -> ProvisioningAction {
+        ProvisioningAction::Noop
+    }
+}
 impl ProvisioningAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProvisioningAction::Noop)
@@ -7409,14 +7565,12 @@ pub struct ProvisioningConditions {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProvisioningDeprovisionedConditionAction {
     #[serde(rename = "NONE")]
     None,
     #[serde(rename = "REACTIVATE")]
     Reactivate,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7434,7 +7588,11 @@ impl std::fmt::Display for ProvisioningDeprovisionedConditionAction {
     }
 }
 
-
+impl Default for ProvisioningDeprovisionedConditionAction {
+    fn default() -> ProvisioningDeprovisionedConditionAction {
+        ProvisioningDeprovisionedConditionAction::Noop
+    }
+}
 impl ProvisioningDeprovisionedConditionAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProvisioningDeprovisionedConditionAction::Noop)
@@ -7448,7 +7606,6 @@ pub struct ProvisioningDeprovisionedCondition {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProvisioningGroupsAction {
     #[serde(rename = "APPEND")]
     Append,
@@ -7459,7 +7616,6 @@ pub enum ProvisioningGroupsAction {
     #[serde(rename = "SYNC")]
     Sync,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7479,7 +7635,11 @@ impl std::fmt::Display for ProvisioningGroupsAction {
     }
 }
 
-
+impl Default for ProvisioningGroupsAction {
+    fn default() -> ProvisioningGroupsAction {
+        ProvisioningGroupsAction::Noop
+    }
+}
 impl ProvisioningGroupsAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProvisioningGroupsAction::Noop)
@@ -7512,14 +7672,12 @@ pub struct ProvisioningGroups {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ProvisioningSuspendedConditionAction {
     #[serde(rename = "NONE")]
     None,
     #[serde(rename = "UNSUSPEND")]
     Unsuspend,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7537,7 +7695,11 @@ impl std::fmt::Display for ProvisioningSuspendedConditionAction {
     }
 }
 
-
+impl Default for ProvisioningSuspendedConditionAction {
+    fn default() -> ProvisioningSuspendedConditionAction {
+        ProvisioningSuspendedConditionAction::Noop
+    }
+}
 impl ProvisioningSuspendedConditionAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProvisioningSuspendedConditionAction::Noop)
@@ -7698,14 +7860,12 @@ pub struct Role {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum RoleAssignmentType {
     #[serde(rename = "GROUP")]
     Group,
     #[serde(rename = "USER")]
     User,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7723,7 +7883,11 @@ impl std::fmt::Display for RoleAssignmentType {
     }
 }
 
-
+impl Default for RoleAssignmentType {
+    fn default() -> RoleAssignmentType {
+        RoleAssignmentType::Noop
+    }
+}
 impl RoleAssignmentType {
     pub fn is_noop(&self) -> bool {
         matches!(self, RoleAssignmentType::Noop)
@@ -7731,7 +7895,6 @@ impl RoleAssignmentType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum RoleType {
     #[serde(rename = "API_ACCESS_MANAGEMENT_ADMIN")]
     ApiAccessManagementAdmin,
@@ -7752,7 +7915,6 @@ pub enum RoleType {
     #[serde(rename = "USER_ADMIN")]
     UserAdmin,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7777,7 +7939,11 @@ impl std::fmt::Display for RoleType {
     }
 }
 
-
+impl Default for RoleType {
+    fn default() -> RoleType {
+        RoleType::Noop
+    }
+}
 impl RoleType {
     pub fn is_noop(&self) -> bool {
         matches!(self, RoleType::Noop)
@@ -8012,7 +8178,6 @@ pub struct SamlAttributeStatement {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Value {
     #[serde(rename = "ACTIVATING")]
     Activating,
@@ -8031,7 +8196,6 @@ pub enum Value {
     #[serde(rename = "SUSPENDED")]
     Suspended,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8055,7 +8219,11 @@ impl std::fmt::Display for Value {
     }
 }
 
-
+impl Default for Value {
+    fn default() -> Value {
+        Value::Noop
+    }
+}
 impl Value {
     pub fn is_noop(&self) -> bool {
         matches!(self, Value::Noop)
@@ -8105,14 +8273,12 @@ pub struct ScopeData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ScopeType {
     #[serde(rename = "CORS")]
     Cors,
     #[serde(rename = "REDIRECT")]
     Redirect,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8130,7 +8296,11 @@ impl std::fmt::Display for ScopeType {
     }
 }
 
-
+impl Default for ScopeType {
+    fn default() -> ScopeType {
+        ScopeType::Noop
+    }
+}
 impl ScopeType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ScopeType::Noop)
@@ -8312,7 +8482,6 @@ pub struct Session {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SessionAuthenticationMethod {
     #[serde(rename = "fpt")]
     Fpt,
@@ -8335,7 +8504,6 @@ pub enum SessionAuthenticationMethod {
     #[serde(rename = "tel")]
     Tel,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8361,7 +8529,11 @@ impl std::fmt::Display for SessionAuthenticationMethod {
     }
 }
 
-
+impl Default for SessionAuthenticationMethod {
+    fn default() -> SessionAuthenticationMethod {
+        SessionAuthenticationMethod::Noop
+    }
+}
 impl SessionAuthenticationMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionAuthenticationMethod::Noop)
@@ -8381,7 +8553,6 @@ pub struct SessionIdentityProvider {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SessionIdentityProviderType {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -8394,7 +8565,6 @@ pub enum SessionIdentityProviderType {
     #[serde(rename = "SOCIAL")]
     Social,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8415,7 +8585,11 @@ impl std::fmt::Display for SessionIdentityProviderType {
     }
 }
 
-
+impl Default for SessionIdentityProviderType {
+    fn default() -> SessionIdentityProviderType {
+        SessionIdentityProviderType::Noop
+    }
+}
 impl SessionIdentityProviderType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionIdentityProviderType::Noop)
@@ -8423,7 +8597,6 @@ impl SessionIdentityProviderType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SessionStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -8432,7 +8605,6 @@ pub enum SessionStatus {
     #[serde(rename = "MFA_REQUIRED")]
     MfaRequired,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8451,7 +8623,11 @@ impl std::fmt::Display for SessionStatus {
     }
 }
 
-
+impl Default for SessionStatus {
+    fn default() -> SessionStatus {
+        SessionStatus::Noop
+    }
+}
 impl SessionStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionStatus::Noop)
@@ -8530,12 +8706,10 @@ pub struct SmsTemplate {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SmsTemplateType {
     #[serde(rename = "SMS_VERIFY_CODE")]
     SmsVerifyCode,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8552,7 +8726,11 @@ impl std::fmt::Display for SmsTemplateType {
     }
 }
 
-
+impl Default for SmsTemplateType {
+    fn default() -> SmsTemplateType {
+        SmsTemplateType::Noop
+    }
+}
 impl SmsTemplateType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SmsTemplateType::Noop)
@@ -8577,14 +8755,12 @@ pub struct SmsUserFactorProfile {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TokenType {
     #[serde(rename = "ACCESS")]
     Access,
     #[serde(rename = "REFRESH")]
     Refresh,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8602,7 +8778,11 @@ impl std::fmt::Display for TokenType {
     }
 }
 
-
+impl Default for TokenType {
+    fn default() -> TokenType {
+        TokenType::Noop
+    }
+}
 impl TokenType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TokenType::Noop)
@@ -9078,7 +9258,6 @@ pub struct UserFactor {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UserIdentifierConditionEvaluatorPatternMatchType {
     #[serde(rename = "CONTAINS")]
     Contains,
@@ -9091,7 +9270,6 @@ pub enum UserIdentifierConditionEvaluatorPatternMatchType {
     #[serde(rename = "SUFFIX")]
     Suffix,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9112,7 +9290,11 @@ impl std::fmt::Display for UserIdentifierConditionEvaluatorPatternMatchType {
     }
 }
 
-
+impl Default for UserIdentifierConditionEvaluatorPatternMatchType {
+    fn default() -> UserIdentifierConditionEvaluatorPatternMatchType {
+        UserIdentifierConditionEvaluatorPatternMatchType::Noop
+    }
+}
 impl UserIdentifierConditionEvaluatorPatternMatchType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserIdentifierConditionEvaluatorPatternMatchType::Noop)
@@ -9132,14 +9314,12 @@ pub struct UserIdentifierConditionEvaluatorPattern {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UserIdentifierPolicyRuleConditionType {
     #[serde(rename = "ATTRIBUTE")]
     Attribute,
     #[serde(rename = "IDENTIFIER")]
     Identifier,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9157,7 +9337,11 @@ impl std::fmt::Display for UserIdentifierPolicyRuleConditionType {
     }
 }
 
-
+impl Default for UserIdentifierPolicyRuleConditionType {
+    fn default() -> UserIdentifierPolicyRuleConditionType {
+        UserIdentifierPolicyRuleConditionType::Noop
+    }
+}
 impl UserIdentifierPolicyRuleConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserIdentifierPolicyRuleConditionType::Noop)
@@ -9212,12 +9396,10 @@ pub struct UserLifecycleAttributePolicyRuleCondition {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UserNextLogin {
     #[serde(rename = "changePassword")]
     ChangePassword,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9234,7 +9416,11 @@ impl std::fmt::Display for UserNextLogin {
     }
 }
 
-
+impl Default for UserNextLogin {
+    fn default() -> UserNextLogin {
+        UserNextLogin::Noop
+    }
+}
 impl UserNextLogin {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserNextLogin::Noop)
@@ -9794,7 +9980,6 @@ pub struct UserSchemaAttributeMasterPriority {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UserSchemaAttributeMasterType {
     #[serde(rename = "OKTA")]
     Okta,
@@ -9803,7 +9988,6 @@ pub enum UserSchemaAttributeMasterType {
     #[serde(rename = "PROFILE_MASTER")]
     ProfileMaster,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9822,7 +10006,11 @@ impl std::fmt::Display for UserSchemaAttributeMasterType {
     }
 }
 
-
+impl Default for UserSchemaAttributeMasterType {
+    fn default() -> UserSchemaAttributeMasterType {
+        UserSchemaAttributeMasterType::Noop
+    }
+}
 impl UserSchemaAttributeMasterType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserSchemaAttributeMasterType::Noop)
@@ -9846,7 +10034,6 @@ pub struct UserSchemaAttributePermission {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UserSchemaAttributeType {
     #[serde(rename = "array")]
     Array,
@@ -9859,7 +10046,6 @@ pub enum UserSchemaAttributeType {
     #[serde(rename = "string")]
     String,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9880,7 +10066,11 @@ impl std::fmt::Display for UserSchemaAttributeType {
     }
 }
 
-
+impl Default for UserSchemaAttributeType {
+    fn default() -> UserSchemaAttributeType {
+        UserSchemaAttributeType::Noop
+    }
+}
 impl UserSchemaAttributeType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserSchemaAttributeType::Noop)
@@ -10096,7 +10286,6 @@ pub struct UserSchemaPublic {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UserStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -10115,7 +10304,6 @@ pub enum UserStatus {
     #[serde(rename = "SUSPENDED")]
     Suspended,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10139,7 +10327,11 @@ impl std::fmt::Display for UserStatus {
     }
 }
 
-
+impl Default for UserStatus {
+    fn default() -> UserStatus {
+        UserStatus::Noop
+    }
+}
 impl UserStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserStatus::Noop)
@@ -10274,7 +10466,6 @@ pub struct VerifyFactorRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FactorResult {
     #[serde(rename = "CHALLENGE")]
     Challenge,
@@ -10297,7 +10488,6 @@ pub enum FactorResult {
     #[serde(rename = "WAITING")]
     Waiting,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10323,7 +10513,11 @@ impl std::fmt::Display for FactorResult {
     }
 }
 
-
+impl Default for FactorResult {
+    fn default() -> FactorResult {
+        FactorResult::Noop
+    }
+}
 impl FactorResult {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorResult::Noop)

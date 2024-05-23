@@ -24,7 +24,7 @@ impl Operations {
         let url = self.client.url(
             &format!(
                 "/v1/{}",
-                crate::progenitor_support::encode_path(name),
+                crate::progenitor_support::encode_path(&name.to_string()),
             ),
             None,
         );

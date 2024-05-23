@@ -73,7 +73,7 @@ impl Users {
      * FROM: <https://api.slack.com/methods/users.deletePhoto>
      */
     pub async fn delete_photo(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/users.deletePhoto", None);
+        let url = self.client.url(&"/users.deletePhoto".to_string(), None);
         self.client
             .post(
                 &url,
@@ -132,7 +132,7 @@ impl Users {
     pub async fn identity(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UsersIdentityResponseAnyOf>>> {
-        let url = self.client.url("/users.identity", None);
+        let url = self.client.url(&"/users.identity".to_string(), None);
         self.client
             .get(
                 &url,
@@ -155,7 +155,7 @@ impl Users {
     pub async fn get_all_identity(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UsersIdentityResponseAnyOf>>> {
-        let url = self.client.url("/users.identity", None);
+        let url = self.client.url(&"/users.identity".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -291,7 +291,7 @@ impl Users {
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
     pub async fn set_active(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/users.setActive", None);
+        let url = self.client.url(&"/users.setActive".to_string(), None);
         self.client
             .post(
                 &url,
@@ -312,7 +312,7 @@ impl Users {
     pub async fn set_photo(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UsersSetPhotoSchema>> {
-        let url = self.client.url("/users.setPhoto", None);
+        let url = self.client.url(&"/users.setPhoto".to_string(), None);
         self.client
             .post(
                 &url,
@@ -335,7 +335,7 @@ impl Users {
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
     pub async fn set_presence(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/users.setPresence", None);
+        let url = self.client.url(&"/users.setPresence".to_string(), None);
         self.client
             .post(
                 &url,

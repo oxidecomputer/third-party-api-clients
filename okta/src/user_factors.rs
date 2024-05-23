@@ -27,7 +27,7 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -55,7 +55,7 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -113,7 +113,7 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -144,7 +144,7 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/catalog",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -172,7 +172,7 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/catalog",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -202,7 +202,7 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/questions",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -230,7 +230,7 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/questions",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -262,8 +262,8 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(factor_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&factor_id.to_string()),
             ),
             None,
         );
@@ -295,8 +295,8 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(factor_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&factor_id.to_string()),
             ),
             None,
         );
@@ -331,8 +331,8 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(factor_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&factor_id.to_string()),
             ),
             None,
         );
@@ -366,9 +366,9 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}/transactions/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(factor_id),
-                crate::progenitor_support::encode_path(transaction_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&factor_id.to_string()),
+                crate::progenitor_support::encode_path(&transaction_id.to_string()),
             ),
             None,
         );
@@ -421,8 +421,8 @@ impl UserFactors {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}/verify?{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(factor_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&factor_id.to_string()),
                 query_
             ),
             None,

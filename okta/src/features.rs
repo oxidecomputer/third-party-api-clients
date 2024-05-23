@@ -17,7 +17,7 @@ impl Features {
      * Success
      */
     pub async fn list(&self) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
-        let url = self.client.url("/api/v1/features", None);
+        let url = self.client.url(&"/api/v1/features".to_string(), None);
         self.client
             .get(
                 &url,
@@ -36,7 +36,7 @@ impl Features {
      * Success
      */
     pub async fn list_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
-        let url = self.client.url("/api/v1/features", None);
+        let url = self.client.url(&"/api/v1/features".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -63,7 +63,7 @@ impl Features {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}",
-                crate::progenitor_support::encode_path(feature_id),
+                crate::progenitor_support::encode_path(&feature_id.to_string()),
             ),
             None,
         );
@@ -93,7 +93,7 @@ impl Features {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependencies",
-                crate::progenitor_support::encode_path(feature_id),
+                crate::progenitor_support::encode_path(&feature_id.to_string()),
             ),
             None,
         );
@@ -121,7 +121,7 @@ impl Features {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependencies",
-                crate::progenitor_support::encode_path(feature_id),
+                crate::progenitor_support::encode_path(&feature_id.to_string()),
             ),
             None,
         );
@@ -151,7 +151,7 @@ impl Features {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependents",
-                crate::progenitor_support::encode_path(feature_id),
+                crate::progenitor_support::encode_path(&feature_id.to_string()),
             ),
             None,
         );
@@ -179,7 +179,7 @@ impl Features {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependents",
-                crate::progenitor_support::encode_path(feature_id),
+                crate::progenitor_support::encode_path(&feature_id.to_string()),
             ),
             None,
         );
@@ -218,8 +218,8 @@ impl Features {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/{}?{}",
-                crate::progenitor_support::encode_path(feature_id),
-                crate::progenitor_support::encode_path(lifecycle),
+                crate::progenitor_support::encode_path(&feature_id.to_string()),
+                crate::progenitor_support::encode_path(&lifecycle.to_string()),
                 query_
             ),
             None,

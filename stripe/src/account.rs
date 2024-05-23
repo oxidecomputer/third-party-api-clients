@@ -21,7 +21,7 @@ impl Account {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Account>> {
-        let url = self.client.url("/v1/account", None);
+        let url = self.client.url(&"/v1/account".to_string(), None);
         self.client
             .get(
                 &url,
@@ -40,7 +40,7 @@ impl Account {
      * <p>To update your own account, use the <a href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Account>> {
-        let url = self.client.url("/v1/account", None);
+        let url = self.client.url(&"/v1/account".to_string(), None);
         self.client
             .post(
                 &url,
@@ -61,7 +61,7 @@ impl Account {
      * <p>If you want to delete your own account, use the <a href="https://dashboard.stripe.com/account">account information tab in your account settings</a> instead.</p>
      */
     pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DeletedAccount>> {
-        let url = self.client.url("/v1/account", None);
+        let url = self.client.url(&"/v1/account".to_string(), None);
         self.client
             .delete(
                 &url,
@@ -80,7 +80,7 @@ impl Account {
     pub async fn post_bank(&self) -> ClientResult<crate::Response<crate::types::DataAnyOf>> {
         let url = self
             .client
-            .url("/v1/account/bank_accounts", None);
+            .url(&"/v1/account/bank_accounts".to_string(), None);
         self.client
             .post(
                 &url,
@@ -108,7 +108,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/bank_accounts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -140,7 +140,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/bank_accounts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -170,7 +170,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/bank_accounts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -198,7 +198,7 @@ impl Account {
     ) -> ClientResult<crate::Response<Vec<crate::types::Capability>>> {
         let url = self
             .client
-            .url("/v1/account/capabilities", None);
+            .url(&"/v1/account/capabilities".to_string(), None);
         let resp: crate::Response<crate::types::ListAccountCapability> = self
             .client
             .get(
@@ -229,7 +229,7 @@ impl Account {
     ) -> ClientResult<crate::Response<Vec<crate::types::Capability>>> {
         let url = self
             .client
-            .url("/v1/account/capabilities", None);
+            .url(&"/v1/account/capabilities".to_string(), None);
         let crate::Response::<crate::types::ListAccountCapability> {
             mut status,
             mut headers,
@@ -318,7 +318,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/capabilities/{}",
-                crate::progenitor_support::encode_path(capability),
+                crate::progenitor_support::encode_path(&capability.to_string()),
             ),
             None,
         );
@@ -348,7 +348,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/capabilities/{}",
-                crate::progenitor_support::encode_path(capability),
+                crate::progenitor_support::encode_path(&capability.to_string()),
             ),
             None,
         );
@@ -424,7 +424,7 @@ impl Account {
     ) -> ClientResult<crate::Response<Vec<crate::types::DataAnyOf>>> {
         let url = self
             .client
-            .url("/v1/account/external_accounts", None);
+            .url(&"/v1/account/external_accounts".to_string(), None);
         let crate::Response::<crate::types::ExternalAccounts> {
             mut status,
             mut headers,
@@ -504,7 +504,7 @@ impl Account {
     pub async fn post_external(&self) -> ClientResult<crate::Response<crate::types::DataAnyOf>> {
         let url = self
             .client
-            .url("/v1/account/external_accounts", None);
+            .url(&"/v1/account/external_accounts".to_string(), None);
         self.client
             .post(
                 &url,
@@ -532,7 +532,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/external_accounts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -564,7 +564,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/external_accounts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -594,7 +594,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/external_accounts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -618,7 +618,7 @@ impl Account {
     pub async fn post_login_link(&self) -> ClientResult<crate::Response<crate::types::LoginLink>> {
         let url = self
             .client
-            .url("/v1/account/login_links", None);
+            .url(&"/v1/account/login_links".to_string(), None);
         self.client
             .post(
                 &url,
@@ -646,7 +646,7 @@ impl Account {
         &self,
         ending_before: &str,
         limit: i64,
-        _relationship: &str,
+        relationship: &str,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -690,9 +690,9 @@ impl Account {
      */
     pub async fn get_all_people(
         &self,
-        _relationship: &str,
+        relationship: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
-        let url = self.client.url("/v1/account/people", None);
+        let url = self.client.url(&"/v1/account/people".to_string(), None);
         let crate::Response::<crate::types::GetAccountPeopleResponse> {
             mut status,
             mut headers,
@@ -770,7 +770,7 @@ impl Account {
      * <p>Creates a new person.</p>
      */
     pub async fn post_people(&self) -> ClientResult<crate::Response<crate::types::Person>> {
-        let url = self.client.url("/v1/account/people", None);
+        let url = self.client.url(&"/v1/account/people".to_string(), None);
         self.client
             .post(
                 &url,
@@ -798,7 +798,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/people/{}",
-                crate::progenitor_support::encode_path(person),
+                crate::progenitor_support::encode_path(&person.to_string()),
             ),
             None,
         );
@@ -828,7 +828,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/people/{}",
-                crate::progenitor_support::encode_path(person),
+                crate::progenitor_support::encode_path(&person.to_string()),
             ),
             None,
         );
@@ -858,7 +858,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/people/{}",
-                crate::progenitor_support::encode_path(person),
+                crate::progenitor_support::encode_path(&person.to_string()),
             ),
             None,
         );
@@ -889,7 +889,7 @@ impl Account {
         &self,
         ending_before: &str,
         limit: i64,
-        _relationship: &str,
+        relationship: &str,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -933,9 +933,9 @@ impl Account {
      */
     pub async fn get_all_persons(
         &self,
-        _relationship: &str,
+        relationship: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
-        let url = self.client.url("/v1/account/persons", None);
+        let url = self.client.url(&"/v1/account/persons".to_string(), None);
         let crate::Response::<crate::types::GetAccountPeopleResponse> {
             mut status,
             mut headers,
@@ -1013,7 +1013,7 @@ impl Account {
      * <p>Creates a new person.</p>
      */
     pub async fn post_person(&self) -> ClientResult<crate::Response<crate::types::Person>> {
-        let url = self.client.url("/v1/account/persons", None);
+        let url = self.client.url(&"/v1/account/persons".to_string(), None);
         self.client
             .post(
                 &url,
@@ -1041,7 +1041,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/persons/{}",
-                crate::progenitor_support::encode_path(person),
+                crate::progenitor_support::encode_path(&person.to_string()),
             ),
             None,
         );
@@ -1071,7 +1071,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/persons/{}",
-                crate::progenitor_support::encode_path(person),
+                crate::progenitor_support::encode_path(&person.to_string()),
             ),
             None,
         );
@@ -1101,7 +1101,7 @@ impl Account {
         let url = self.client.url(
             &format!(
                 "/v1/account/persons/{}",
-                crate::progenitor_support::encode_path(person),
+                crate::progenitor_support::encode_path(&person.to_string()),
             ),
             None,
         );

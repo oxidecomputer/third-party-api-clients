@@ -29,7 +29,7 @@ impl VerifiedDomains {
         let url = self.client.url(
             &format!(
                 "/verified-domains/{}",
-                crate::progenitor_support::encode_path(domain_name),
+                crate::progenitor_support::encode_path(&domain_name.to_string()),
             ),
             None,
         );
@@ -58,7 +58,7 @@ impl VerifiedDomains {
         let url = self.client.url(
             &format!(
                 "/verified-domains/{}",
-                crate::progenitor_support::encode_path(domain_name),
+                crate::progenitor_support::encode_path(&domain_name.to_string()),
             ),
             None,
         );
@@ -91,7 +91,7 @@ impl VerifiedDomains {
         let url = self.client.url(
             &format!(
                 "/verified-domains/{}/actions/verify",
-                crate::progenitor_support::encode_path(domain_name),
+                crate::progenitor_support::encode_path(&domain_name.to_string()),
             ),
             None,
         );
@@ -115,7 +115,7 @@ impl VerifiedDomains {
     pub async fn get_verified_domains(
         &self,
     ) -> ClientResult<crate::Response<crate::types::VerifiedDomainsData>> {
-        let url = self.client.url("/verified-domains", None);
+        let url = self.client.url(&"/verified-domains".to_string(), None);
         self.client
             .get(
                 &url,
@@ -137,7 +137,7 @@ impl VerifiedDomains {
         &self,
         body: &crate::types::VerifiedDomainsDataType,
     ) -> ClientResult<crate::Response<crate::types::VerifiedDomains>> {
-        let url = self.client.url("/verified-domains", None);
+        let url = self.client.url(&"/verified-domains".to_string(), None);
         self.client
             .post(
                 &url,

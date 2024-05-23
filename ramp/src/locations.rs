@@ -66,7 +66,7 @@ impl Locations {
      * Retrieves all locations for your business.
      */
     pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Location>>> {
-        let url = self.client.url("/locations", None);
+        let url = self.client.url(&"/locations".to_string(), None);
         let crate::Response::<crate::types::GetLocationResponse> {
             mut status,
             mut headers,
@@ -137,7 +137,7 @@ impl Locations {
         &self,
         body: &crate::types::PostLocationRequest,
     ) -> ClientResult<crate::Response<crate::types::Location>> {
-        let url = self.client.url("/locations", None);
+        let url = self.client.url(&"/locations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -163,7 +163,7 @@ impl Locations {
         let url = self.client.url(
             &format!(
                 "/locations/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -192,7 +192,7 @@ impl Locations {
         let url = self.client.url(
             &format!(
                 "/locations/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

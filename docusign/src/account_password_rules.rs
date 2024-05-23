@@ -29,7 +29,7 @@ impl AccountPasswordRules {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/password_rules",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -64,7 +64,7 @@ impl AccountPasswordRules {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/password_rules",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -90,7 +90,7 @@ impl AccountPasswordRules {
     ) -> ClientResult<crate::Response<crate::types::UserPasswordRules>> {
         let url = self
             .client
-            .url("/v2.1/current_user/password_rules", None);
+            .url(&"/v2.1/current_user/password_rules".to_string(), None);
         self.client
             .get(
                 &url,

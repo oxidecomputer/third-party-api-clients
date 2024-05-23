@@ -202,7 +202,7 @@ impl Archiving {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/archive_files",
-                crate::progenitor_support::encode_path(meeting_uuid),
+                crate::progenitor_support::encode_path(&meeting_uuid.to_string()),
             ),
             None,
         );

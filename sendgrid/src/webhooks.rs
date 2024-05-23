@@ -33,7 +33,7 @@ impl Webhooks {
     ) -> ClientResult<crate::Response<crate::types::WebhooksEventWebhookResponse>> {
         let url = self
             .client
-            .url("/user/webhooks/event/settings", None);
+            .url(&"/user/webhooks/event/settings".to_string(), None);
         self.client
             .get(
                 &url,
@@ -67,7 +67,7 @@ impl Webhooks {
     ) -> ClientResult<crate::Response<crate::types::WebhooksEventWebhookResponse>> {
         let url = self
             .client
-            .url("/user/webhooks/event/settings", None);
+            .url(&"/user/webhooks/event/settings".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -94,7 +94,7 @@ impl Webhooks {
     ) -> ClientResult<crate::Response<crate::types::GetUserWebhooksParseSettingsResponse>> {
         let url = self
             .client
-            .url("/user/webhooks/parse/settings", None);
+            .url(&"/user/webhooks/parse/settings".to_string(), None);
         self.client
             .get(
                 &url,
@@ -233,7 +233,7 @@ impl Webhooks {
     {
         let url = self
             .client
-            .url("/user/webhooks/event/settings/signed", None);
+            .url(&"/user/webhooks/event/settings/signed".to_string(), None);
         self.client
             .get(
                 &url,
@@ -266,7 +266,7 @@ impl Webhooks {
     {
         let url = self
             .client
-            .url("/user/webhooks/event/settings/signed", None);
+            .url(&"/user/webhooks/event/settings/signed".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -302,7 +302,7 @@ impl Webhooks {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/user/webhooks/event/test", None);
+            .url(&"/user/webhooks/event/test".to_string(), None);
         self.client
             .post(
                 &url,

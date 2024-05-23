@@ -23,7 +23,7 @@ impl Reactions {
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/reactions.add", None);
+        let url = self.client.url(&"/reactions.add".to_string(), None);
         self.client
             .post(
                 &url,
@@ -157,7 +157,7 @@ impl Reactions {
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/reactions.remove", None);
+        let url = self.client.url(&"/reactions.remove".to_string(), None);
         self.client
             .post(
                 &url,

@@ -36,7 +36,7 @@ impl SettingsInboundParse {
     ) -> ClientResult<crate::Response<crate::types::ParseSetting>> {
         let url = self
             .client
-            .url("/user/webhooks/parse/settings", None);
+            .url(&"/user/webhooks/parse/settings".to_string(), None);
         self.client
             .post(
                 &url,
@@ -67,7 +67,7 @@ impl SettingsInboundParse {
         let url = self.client.url(
             &format!(
                 "/user/webhooks/parse/settings/{}",
-                crate::progenitor_support::encode_path(hostname),
+                crate::progenitor_support::encode_path(&hostname.to_string()),
             ),
             None,
         );
@@ -101,7 +101,7 @@ impl SettingsInboundParse {
         let url = self.client.url(
             &format!(
                 "/user/webhooks/parse/settings/{}",
-                crate::progenitor_support::encode_path(hostname),
+                crate::progenitor_support::encode_path(&hostname.to_string()),
             ),
             None,
         );
@@ -136,7 +136,7 @@ impl SettingsInboundParse {
         let url = self.client.url(
             &format!(
                 "/user/webhooks/parse/settings/{}",
-                crate::progenitor_support::encode_path(hostname),
+                crate::progenitor_support::encode_path(&hostname.to_string()),
             ),
             None,
         );

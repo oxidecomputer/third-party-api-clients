@@ -26,7 +26,7 @@ impl Coupons {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -70,9 +70,9 @@ impl Coupons {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Coupon>>> {
-        let url = self.client.url("/v1/coupons", None);
+        let url = self.client.url(&"/v1/coupons".to_string(), None);
         let crate::Response::<crate::types::GetCouponsResponse> {
             mut status,
             mut headers,
@@ -152,7 +152,7 @@ impl Coupons {
      * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any invoice’s subtotal. For example, an invoice with a subtotal of <currency>100</currency> will have a final total of <currency>0</currency> if a coupon with an <code>amount_off</code> of <amount>200</amount> is applied to it and an invoice with a subtotal of <currency>300</currency> will have a final total of <currency>100</currency> if a coupon with an <code>amount_off</code> of <amount>200</amount> is applied to it.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Coupon>> {
-        let url = self.client.url("/v1/coupons", None);
+        let url = self.client.url(&"/v1/coupons".to_string(), None);
         self.client
             .post(
                 &url,
@@ -177,7 +177,7 @@ impl Coupons {
         let url = self.client.url(
             &format!(
                 "/v1/coupons/{}",
-                crate::progenitor_support::encode_path(coupon),
+                crate::progenitor_support::encode_path(&coupon.to_string()),
             ),
             None,
         );
@@ -207,7 +207,7 @@ impl Coupons {
         let url = self.client.url(
             &format!(
                 "/v1/coupons/{}",
-                crate::progenitor_support::encode_path(coupon),
+                crate::progenitor_support::encode_path(&coupon.to_string()),
             ),
             None,
         );
@@ -237,7 +237,7 @@ impl Coupons {
         let url = self.client.url(
             &format!(
                 "/v1/coupons/{}",
-                crate::progenitor_support::encode_path(coupon),
+                crate::progenitor_support::encode_path(&coupon.to_string()),
             ),
             None,
         );

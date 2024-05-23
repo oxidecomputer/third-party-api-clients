@@ -31,15 +31,15 @@ impl Orders {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         limit: i64,
         starting_after: &str,
         status: &str,
-        _status_transitions: &str,
-        _upstream_ids: &[String],
+        status_transitions: &str,
+        upstream_ids: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -86,12 +86,12 @@ impl Orders {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
-        _ids: &[String],
+        ids: &[String],
         status: &str,
-        _status_transitions: &str,
-        _upstream_ids: &[String],
+        status_transitions: &str,
+        upstream_ids: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -179,7 +179,7 @@ impl Orders {
      * <p>Creates a new order object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Order>> {
-        let url = self.client.url("/v1/orders", None);
+        let url = self.client.url(&"/v1/orders".to_string(), None);
         self.client
             .post(
                 &url,
@@ -204,7 +204,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -234,7 +234,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -261,7 +261,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}/pay",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -291,7 +291,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}/returns",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

@@ -31,9 +31,9 @@ impl Skus {
     pub async fn get_page(
         &self,
         active: bool,
-        _attributes: &str,
+        attributes: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         in_stock: bool,
         limit: i64,
         product: &str,
@@ -88,8 +88,8 @@ impl Skus {
     pub async fn get_all(
         &self,
         active: bool,
-        _attributes: &str,
-        _ids: &[String],
+        attributes: &str,
+        ids: &[String],
         in_stock: bool,
         product: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Sku>>> {
@@ -182,7 +182,7 @@ impl Skus {
      * <p>Creates a new SKU associated with a product.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Sku>> {
-        let url = self.client.url("/v1/skus", None);
+        let url = self.client.url(&"/v1/skus".to_string(), None);
         self.client
             .post(
                 &url,
@@ -210,7 +210,7 @@ impl Skus {
         let url = self.client.url(
             &format!(
                 "/v1/skus/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -239,7 +239,7 @@ impl Skus {
         let url = self.client.url(
             &format!(
                 "/v1/skus/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -269,7 +269,7 @@ impl Skus {
         let url = self.client.url(
             &format!(
                 "/v1/skus/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

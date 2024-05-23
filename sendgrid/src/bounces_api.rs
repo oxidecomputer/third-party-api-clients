@@ -106,7 +106,7 @@ impl BouncesApi {
         &self,
         body: &crate::types::DeleteSuppressionBouncesRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/suppression/bounces", None);
+        let url = self.client.url(&"/suppression/bounces".to_string(), None);
         self.client
             .delete(
                 &url,
@@ -135,7 +135,7 @@ impl BouncesApi {
         let url = self.client.url(
             &format!(
                 "/suppression/bounces/{}",
-                crate::progenitor_support::encode_path(email),
+                crate::progenitor_support::encode_path(&email.to_string()),
             ),
             None,
         );
@@ -165,7 +165,7 @@ impl BouncesApi {
         let url = self.client.url(
             &format!(
                 "/suppression/bounces/{}",
-                crate::progenitor_support::encode_path(email),
+                crate::progenitor_support::encode_path(&email.to_string()),
             ),
             None,
         );
@@ -205,7 +205,7 @@ impl BouncesApi {
         let url = self.client.url(
             &format!(
                 "/suppression/bounces/{}?{}",
-                crate::progenitor_support::encode_path(email),
+                crate::progenitor_support::encode_path(&email.to_string()),
                 query_
             ),
             None,

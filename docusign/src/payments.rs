@@ -43,7 +43,7 @@ impl Payments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_payments?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -84,7 +84,7 @@ impl Payments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_payments",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -120,8 +120,8 @@ impl Payments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_payments/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(payment_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&payment_id.to_string()),
             ),
             None,
         );

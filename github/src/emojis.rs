@@ -21,7 +21,7 @@ impl Emojis {
      * FROM: <https://docs.github.com/rest/reference/emojis#get-emojis>
      */
     pub async fn get(&self) -> ClientResult<crate::Response<String>> {
-        let url = self.client.url("/emojis", None);
+        let url = self.client.url(&"/emojis".to_string(), None);
         self.client
             .get(
                 &url,

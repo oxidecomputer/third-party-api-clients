@@ -70,7 +70,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsAddressWhitelabel>> {
         let url = self
             .client
-            .url("/mail_settings/address_whitelist", None);
+            .url(&"/mail_settings/address_whitelist".to_string(), None);
         self.client
             .get(
                 &url,
@@ -108,7 +108,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsAddressWhitelabel>> {
         let url = self
             .client
-            .url("/mail_settings/address_whitelist", None);
+            .url(&"/mail_settings/address_whitelist".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -137,7 +137,7 @@ impl SettingsMail {
     pub async fn get_mail_settings_footer(
         &self,
     ) -> ClientResult<crate::Response<crate::types::MailSettingsFooter>> {
-        let url = self.client.url("/mail_settings/footer", None);
+        let url = self.client.url(&"/mail_settings/footer".to_string(), None);
         self.client
             .get(
                 &url,
@@ -167,7 +167,7 @@ impl SettingsMail {
         &self,
         body: &crate::types::MailSettingsFooter,
     ) -> ClientResult<crate::Response<crate::types::MailSettingsFooter>> {
-        let url = self.client.url("/mail_settings/footer", None);
+        let url = self.client.url(&"/mail_settings/footer".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -196,7 +196,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsForwardSpam>> {
         let url = self
             .client
-            .url("/mail_settings/forward_spam", None);
+            .url(&"/mail_settings/forward_spam".to_string(), None);
         self.client
             .get(
                 &url,
@@ -239,7 +239,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsForwardSpam>> {
         let url = self
             .client
-            .url("/mail_settings/forward_spam", None);
+            .url(&"/mail_settings/forward_spam".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -270,7 +270,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsTemplate>> {
         let url = self
             .client
-            .url("/mail_settings/template", None);
+            .url(&"/mail_settings/template".to_string(), None);
         self.client
             .get(
                 &url,
@@ -302,7 +302,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::PatchMailSettingsTemplateResponse>> {
         let url = self
             .client
-            .url("/mail_settings/template", None);
+            .url(&"/mail_settings/template".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -337,7 +337,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsBouncePurge>> {
         let url = self
             .client
-            .url("/mail_settings/bounce_purge", None);
+            .url(&"/mail_settings/bounce_purge".to_string(), None);
         self.client
             .get(
                 &url,
@@ -373,7 +373,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsBouncePurge>> {
         let url = self
             .client
-            .url("/mail_settings/bounce_purge", None);
+            .url(&"/mail_settings/bounce_purge".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -402,7 +402,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsForwardBounce>> {
         let url = self
             .client
-            .url("/mail_settings/forward_bounce", None);
+            .url(&"/mail_settings/forward_bounce".to_string(), None);
         self.client
             .get(
                 &url,
@@ -434,7 +434,7 @@ impl SettingsMail {
     ) -> ClientResult<crate::Response<crate::types::MailSettingsForwardBounce>> {
         let url = self
             .client
-            .url("/mail_settings/forward_bounce", None);
+            .url(&"/mail_settings/forward_bounce".to_string(), None);
         self.client
             .patch(
                 &url,

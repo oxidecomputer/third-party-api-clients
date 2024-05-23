@@ -28,7 +28,7 @@ impl FileLinks {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         expired: bool,
         file: &str,
@@ -80,7 +80,7 @@ impl FileLinks {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         expired: bool,
         file: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::FileLink>>> {
@@ -170,7 +170,7 @@ impl FileLinks {
      * <p>Creates a new file link object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::FileLink>> {
-        let url = self.client.url("/v1/file_links", None);
+        let url = self.client.url(&"/v1/file_links".to_string(), None);
         self.client
             .post(
                 &url,
@@ -198,7 +198,7 @@ impl FileLinks {
         let url = self.client.url(
             &format!(
                 "/v1/file_links/{}",
-                crate::progenitor_support::encode_path(link),
+                crate::progenitor_support::encode_path(&link.to_string()),
             ),
             None,
         );
@@ -228,7 +228,7 @@ impl FileLinks {
         let url = self.client.url(
             &format!(
                 "/v1/file_links/{}",
-                crate::progenitor_support::encode_path(link),
+                crate::progenitor_support::encode_path(&link.to_string()),
             ),
             None,
         );

@@ -69,7 +69,7 @@ impl CampaignsApi {
         &self,
         body: &crate::types::CampaignsRequest,
     ) -> ClientResult<crate::Response<crate::types::CampaignResponseAllOf>> {
-        let url = self.client.url("/campaigns", None);
+        let url = self.client.url(&"/campaigns".to_string(), None);
         self.client
             .post(
                 &url,

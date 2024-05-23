@@ -89,7 +89,6 @@ pub struct Interest {
  * Determines how this category’s interests appear on signup forms.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Type {
     #[serde(rename = "checkboxes")]
     Checkboxes,
@@ -100,7 +99,6 @@ pub enum Type {
     #[serde(rename = "radio")]
     Radio,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -120,7 +118,11 @@ impl std::fmt::Display for Type {
     }
 }
 
-
+impl Default for Type {
+    fn default() -> Type {
+        Type::Noop
+    }
+}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -365,7 +367,6 @@ pub struct ECommerceProductVariant {
  * The type of pricing plan the account is on.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PricingPlanType {
     #[serde(rename = "forever_free")]
     ForeverFree,
@@ -374,7 +375,6 @@ pub enum PricingPlanType {
     #[serde(rename = "pay_as_you_go")]
     PayAsYouGo,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -393,7 +393,11 @@ impl std::fmt::Display for PricingPlanType {
     }
 }
 
-
+impl Default for PricingPlanType {
+    fn default() -> PricingPlanType {
+        PricingPlanType::Noop
+    }
+}
 impl PricingPlanType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PricingPlanType::Noop)
@@ -506,7 +510,6 @@ pub struct IndustryStats {
  * The HTTP method that should be used when accessing the URL defined in 'href'.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Method {
     #[serde(rename = "DELETE")]
     Delete,
@@ -523,7 +526,6 @@ pub enum Method {
     #[serde(rename = "PUT")]
     Put,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -546,7 +548,11 @@ impl std::fmt::Display for Method {
     }
 }
 
-
+impl Default for Method {
+    fn default() -> Method {
+        Method::Noop
+    }
+}
 impl Method {
     pub fn is_noop(&self) -> bool {
         matches!(self, Method::Noop)
@@ -777,7 +783,6 @@ pub struct ApiRoot {
  * The type of activity
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetActivityFeedChimpChatterResponseType {
     #[serde(rename = "campaigns:facebook-likes")]
     CampaignsFacebookLikes,
@@ -792,7 +797,6 @@ pub enum GetActivityFeedChimpChatterResponseType {
     #[serde(rename = "lists:unsubscribes")]
     ListsUnsubscribes,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -818,7 +822,11 @@ impl std::fmt::Display for GetActivityFeedChimpChatterResponseType {
     }
 }
 
-
+impl Default for GetActivityFeedChimpChatterResponseType {
+    fn default() -> GetActivityFeedChimpChatterResponseType {
+        GetActivityFeedChimpChatterResponseType::Noop
+    }
+}
 impl GetActivityFeedChimpChatterResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetActivityFeedChimpChatterResponseType::Noop)
@@ -1010,7 +1018,6 @@ pub struct GetAuthorizedAppsResponse {
  * Restrict the results to automations with the specified status.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Status {
     #[serde(rename = "paused")]
     Paused,
@@ -1019,7 +1026,6 @@ pub enum Status {
     #[serde(rename = "sending")]
     Sending,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1038,7 +1044,11 @@ impl std::fmt::Display for Status {
     }
 }
 
-
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
+    }
+}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -1049,14 +1059,12 @@ impl Status {
  * Segment match type.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Match {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "any")]
     Any,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1074,7 +1082,11 @@ impl std::fmt::Display for Match {
     }
 }
 
-
+impl Default for Match {
+    fn default() -> Match {
+        Match::Noop
+    }
+}
 impl Match {
     pub fn is_noop(&self) -> bool {
         matches!(self, Match::Noop)
@@ -1082,12 +1094,10 @@ impl Match {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ConditionType {
     #[serde(rename = "Aim")]
     Aim,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1104,7 +1114,11 @@ impl std::fmt::Display for ConditionType {
     }
 }
 
-
+impl Default for ConditionType {
+    fn default() -> ConditionType {
+        ConditionType::Noop
+    }
+}
 impl ConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ConditionType::Noop)
@@ -1115,12 +1129,10 @@ impl ConditionType {
  * Segment by interaction with a specific campaign.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Field {
     #[serde(rename = "aim")]
     Aim,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1137,7 +1149,11 @@ impl std::fmt::Display for Field {
     }
 }
 
-
+impl Default for Field {
+    fn default() -> Field {
+        Field::Noop
+    }
+}
 impl Field {
     pub fn is_noop(&self) -> bool {
         matches!(self, Field::Noop)
@@ -1148,7 +1164,6 @@ impl Field {
  * The status of the member with regard to their campaign interaction. One of the following: opened, clicked, was sent, didn't open, didn't click, or was not sent.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Op {
     #[serde(rename = "click")]
     Click,
@@ -1163,7 +1178,6 @@ pub enum Op {
     #[serde(rename = "sent")]
     Sent,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1185,7 +1199,11 @@ impl std::fmt::Display for Op {
     }
 }
 
-
+impl Default for Op {
+    fn default() -> Op {
+        Op::Noop
+    }
+}
 impl Op {
     pub fn is_noop(&self) -> bool {
         matches!(self, Op::Noop)
@@ -1222,12 +1240,10 @@ pub struct Conditions {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AutomationSegmentConditionType {
     #[serde(rename = "Automation")]
     Automation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1244,7 +1260,11 @@ impl std::fmt::Display for AutomationSegmentConditionType {
     }
 }
 
-
+impl Default for AutomationSegmentConditionType {
+    fn default() -> AutomationSegmentConditionType {
+        AutomationSegmentConditionType::Noop
+    }
+}
 impl AutomationSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AutomationSegmentConditionType::Noop)
@@ -1255,12 +1275,10 @@ impl AutomationSegmentConditionType {
  * Segment by interaction with an Automation workflow.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SegmentField {
     #[serde(rename = "automation")]
     Automation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1277,7 +1295,11 @@ impl std::fmt::Display for SegmentField {
     }
 }
 
-
+impl Default for SegmentField {
+    fn default() -> SegmentField {
+        SegmentField::Noop
+    }
+}
 impl SegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SegmentField::Noop)
@@ -1288,7 +1310,6 @@ impl SegmentField {
  * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SegmentOperator {
     #[serde(rename = "completed")]
     Completed,
@@ -1299,7 +1320,6 @@ pub enum SegmentOperator {
     #[serde(rename = "started")]
     Started,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1319,7 +1339,11 @@ impl std::fmt::Display for SegmentOperator {
     }
 }
 
-
+impl Default for SegmentOperator {
+    fn default() -> SegmentOperator {
+        SegmentOperator::Noop
+    }
+}
 impl SegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, SegmentOperator::Noop)
@@ -1356,12 +1380,10 @@ pub struct AutomationSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PollActivitySegmentConditionType {
     #[serde(rename = "CampaignPoll")]
     CampaignPoll,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1378,7 +1400,11 @@ impl std::fmt::Display for PollActivitySegmentConditionType {
     }
 }
 
-
+impl Default for PollActivitySegmentConditionType {
+    fn default() -> PollActivitySegmentConditionType {
+        PollActivitySegmentConditionType::Noop
+    }
+}
 impl PollActivitySegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PollActivitySegmentConditionType::Noop)
@@ -1389,12 +1415,10 @@ impl PollActivitySegmentConditionType {
  * Segment by poll activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PollActivitySegmentField {
     #[serde(rename = "poll")]
     Poll,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1411,7 +1435,11 @@ impl std::fmt::Display for PollActivitySegmentField {
     }
 }
 
-
+impl Default for PollActivitySegmentField {
+    fn default() -> PollActivitySegmentField {
+        PollActivitySegmentField::Noop
+    }
+}
 impl PollActivitySegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, PollActivitySegmentField::Noop)
@@ -1422,14 +1450,12 @@ impl PollActivitySegmentField {
  * Members have/have not interacted with a specific poll in a Mailchimp email.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PollActivitySegmentOperator {
     #[serde(rename = "member")]
     Member,
     #[serde(rename = "notmember")]
     Notmember,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1447,7 +1473,11 @@ impl std::fmt::Display for PollActivitySegmentOperator {
     }
 }
 
-
+impl Default for PollActivitySegmentOperator {
+    fn default() -> PollActivitySegmentOperator {
+        PollActivitySegmentOperator::Noop
+    }
+}
 impl PollActivitySegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, PollActivitySegmentOperator::Noop)
@@ -1484,12 +1514,10 @@ pub struct PollActivitySegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ConversationSegmentConditionType {
     #[serde(rename = "Conversation")]
     Conversation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1506,7 +1534,11 @@ impl std::fmt::Display for ConversationSegmentConditionType {
     }
 }
 
-
+impl Default for ConversationSegmentConditionType {
+    fn default() -> ConversationSegmentConditionType {
+        ConversationSegmentConditionType::Noop
+    }
+}
 impl ConversationSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ConversationSegmentConditionType::Noop)
@@ -1517,12 +1549,10 @@ impl ConversationSegmentConditionType {
  * Segment by interaction with a campaign via Conversations.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ConversationSegmentField {
     #[serde(rename = "conversation")]
     Conversation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1539,7 +1569,11 @@ impl std::fmt::Display for ConversationSegmentField {
     }
 }
 
-
+impl Default for ConversationSegmentField {
+    fn default() -> ConversationSegmentField {
+        ConversationSegmentField::Noop
+    }
+}
 impl ConversationSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, ConversationSegmentField::Noop)
@@ -1576,12 +1610,10 @@ pub struct ConversationSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DateSegmentConditionType {
     #[serde(rename = "Date")]
     Date,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1598,7 +1630,11 @@ impl std::fmt::Display for DateSegmentConditionType {
     }
 }
 
-
+impl Default for DateSegmentConditionType {
+    fn default() -> DateSegmentConditionType {
+        DateSegmentConditionType::Noop
+    }
+}
 impl DateSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DateSegmentConditionType::Noop)
@@ -1609,7 +1645,6 @@ impl DateSegmentConditionType {
  * The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DateSegmentField {
     #[serde(rename = "ecomm_date")]
     EcommDate,
@@ -1618,7 +1653,6 @@ pub enum DateSegmentField {
     #[serde(rename = "timestamp_opt")]
     TimestampOpt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1637,7 +1671,11 @@ impl std::fmt::Display for DateSegmentField {
     }
 }
 
-
+impl Default for DateSegmentField {
+    fn default() -> DateSegmentField {
+        DateSegmentField::Noop
+    }
+}
 impl DateSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, DateSegmentField::Noop)
@@ -1648,7 +1686,6 @@ impl DateSegmentField {
  * When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DateSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -1667,7 +1704,6 @@ pub enum DateSegmentOperator {
     #[serde(rename = "within")]
     Within,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1691,7 +1727,11 @@ impl std::fmt::Display for DateSegmentOperator {
     }
 }
 
-
+impl Default for DateSegmentOperator {
+    fn default() -> DateSegmentOperator {
+        DateSegmentOperator::Noop
+    }
+}
 impl DateSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, DateSegmentOperator::Noop)
@@ -1737,12 +1777,10 @@ pub struct DateSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailClientSegmentConditionType {
     #[serde(rename = "EmailClient")]
     EmailClient,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1759,7 +1797,11 @@ impl std::fmt::Display for EmailClientSegmentConditionType {
     }
 }
 
-
+impl Default for EmailClientSegmentConditionType {
+    fn default() -> EmailClientSegmentConditionType {
+        EmailClientSegmentConditionType::Noop
+    }
+}
 impl EmailClientSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailClientSegmentConditionType::Noop)
@@ -1770,12 +1812,10 @@ impl EmailClientSegmentConditionType {
  * Segment by use of a particular email client.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailClientSegmentField {
     #[serde(rename = "email_client")]
     EmailClient,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1792,7 +1832,11 @@ impl std::fmt::Display for EmailClientSegmentField {
     }
 }
 
-
+impl Default for EmailClientSegmentField {
+    fn default() -> EmailClientSegmentField {
+        EmailClientSegmentField::Noop
+    }
+}
 impl EmailClientSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailClientSegmentField::Noop)
@@ -1803,14 +1847,12 @@ impl EmailClientSegmentField {
  * The operation to determine whether we select clients that match the value, or clients that do not match the value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailClientSegmentOperator {
     #[serde(rename = "client_is")]
     ClientIs,
     #[serde(rename = "client_not")]
     ClientNot,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1828,7 +1870,11 @@ impl std::fmt::Display for EmailClientSegmentOperator {
     }
 }
 
-
+impl Default for EmailClientSegmentOperator {
+    fn default() -> EmailClientSegmentOperator {
+        EmailClientSegmentOperator::Noop
+    }
+}
 impl EmailClientSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailClientSegmentOperator::Noop)
@@ -1865,12 +1911,10 @@ pub struct EmailClientSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LanguageSegmentConditionType {
     #[serde(rename = "Language")]
     Language,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1887,7 +1931,11 @@ impl std::fmt::Display for LanguageSegmentConditionType {
     }
 }
 
-
+impl Default for LanguageSegmentConditionType {
+    fn default() -> LanguageSegmentConditionType {
+        LanguageSegmentConditionType::Noop
+    }
+}
 impl LanguageSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LanguageSegmentConditionType::Noop)
@@ -1898,12 +1946,10 @@ impl LanguageSegmentConditionType {
  * Segmenting based off of a subscriber's language.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LanguageSegmentField {
     #[serde(rename = "language")]
     Language,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1920,7 +1966,11 @@ impl std::fmt::Display for LanguageSegmentField {
     }
 }
 
-
+impl Default for LanguageSegmentField {
+    fn default() -> LanguageSegmentField {
+        LanguageSegmentField::Noop
+    }
+}
 impl LanguageSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, LanguageSegmentField::Noop)
@@ -1931,14 +1981,12 @@ impl LanguageSegmentField {
  * Whether the member's language is or is not set to a specific language.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LanguageSegmentOperator {
     #[serde(rename = "is")]
     Is,
     #[serde(rename = "not")]
     Not,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1956,7 +2004,11 @@ impl std::fmt::Display for LanguageSegmentOperator {
     }
 }
 
-
+impl Default for LanguageSegmentOperator {
+    fn default() -> LanguageSegmentOperator {
+        LanguageSegmentOperator::Noop
+    }
+}
 impl LanguageSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, LanguageSegmentOperator::Noop)
@@ -1993,12 +2045,10 @@ pub struct LanguageSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MemberRatingSegmentConditionType {
     #[serde(rename = "MemberRating")]
     MemberRating,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2015,7 +2065,11 @@ impl std::fmt::Display for MemberRatingSegmentConditionType {
     }
 }
 
-
+impl Default for MemberRatingSegmentConditionType {
+    fn default() -> MemberRatingSegmentConditionType {
+        MemberRatingSegmentConditionType::Noop
+    }
+}
 impl MemberRatingSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MemberRatingSegmentConditionType::Noop)
@@ -2026,12 +2080,10 @@ impl MemberRatingSegmentConditionType {
  * Segment by member rating.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MemberRatingSegmentField {
     #[serde(rename = "rating")]
     Rating,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2048,7 +2100,11 @@ impl std::fmt::Display for MemberRatingSegmentField {
     }
 }
 
-
+impl Default for MemberRatingSegmentField {
+    fn default() -> MemberRatingSegmentField {
+        MemberRatingSegmentField::Noop
+    }
+}
 impl MemberRatingSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, MemberRatingSegmentField::Noop)
@@ -2059,7 +2115,6 @@ impl MemberRatingSegmentField {
  * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MemberRatingSegmentOperator {
     #[serde(rename = "greater")]
     Greater,
@@ -2070,7 +2125,6 @@ pub enum MemberRatingSegmentOperator {
     #[serde(rename = "not")]
     Not,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2090,7 +2144,11 @@ impl std::fmt::Display for MemberRatingSegmentOperator {
     }
 }
 
-
+impl Default for MemberRatingSegmentOperator {
+    fn default() -> MemberRatingSegmentOperator {
+        MemberRatingSegmentOperator::Noop
+    }
+}
 impl MemberRatingSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, MemberRatingSegmentOperator::Noop)
@@ -2127,12 +2185,10 @@ pub struct MemberRatingSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SignupSourceSegmentType {
     #[serde(rename = "SignupSource")]
     SignupSource,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2149,7 +2205,11 @@ impl std::fmt::Display for SignupSourceSegmentType {
     }
 }
 
-
+impl Default for SignupSourceSegmentType {
+    fn default() -> SignupSourceSegmentType {
+        SignupSourceSegmentType::Noop
+    }
+}
 impl SignupSourceSegmentType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SignupSourceSegmentType::Noop)
@@ -2157,12 +2217,10 @@ impl SignupSourceSegmentType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SignupSourceSegmentField {
     #[serde(rename = "source")]
     Source,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2179,7 +2237,11 @@ impl std::fmt::Display for SignupSourceSegmentField {
     }
 }
 
-
+impl Default for SignupSourceSegmentField {
+    fn default() -> SignupSourceSegmentField {
+        SignupSourceSegmentField::Noop
+    }
+}
 impl SignupSourceSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SignupSourceSegmentField::Noop)
@@ -2190,14 +2252,12 @@ impl SignupSourceSegmentField {
  * Whether the member's signup source was/was not a particular value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SignupSourceSegmentOperator {
     #[serde(rename = "source_is")]
     SourceIs,
     #[serde(rename = "source_not")]
     SourceNot,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2215,7 +2275,11 @@ impl std::fmt::Display for SignupSourceSegmentOperator {
     }
 }
 
-
+impl Default for SignupSourceSegmentOperator {
+    fn default() -> SignupSourceSegmentOperator {
+        SignupSourceSegmentOperator::Noop
+    }
+}
 impl SignupSourceSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, SignupSourceSegmentOperator::Noop)
@@ -2246,12 +2310,10 @@ pub struct SignupSourceSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SurveyMonkeySegmentConditionType {
     #[serde(rename = "SurveyMonkey")]
     SurveyMonkey,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2268,7 +2330,11 @@ impl std::fmt::Display for SurveyMonkeySegmentConditionType {
     }
 }
 
-
+impl Default for SurveyMonkeySegmentConditionType {
+    fn default() -> SurveyMonkeySegmentConditionType {
+        SurveyMonkeySegmentConditionType::Noop
+    }
+}
 impl SurveyMonkeySegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SurveyMonkeySegmentConditionType::Noop)
@@ -2279,12 +2345,10 @@ impl SurveyMonkeySegmentConditionType {
  * Segment by interaction with a SurveyMonkey survey.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SurveyMonkeySegmentField {
     #[serde(rename = "survey_monkey")]
     SurveyMonkey,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2301,7 +2365,11 @@ impl std::fmt::Display for SurveyMonkeySegmentField {
     }
 }
 
-
+impl Default for SurveyMonkeySegmentField {
+    fn default() -> SurveyMonkeySegmentField {
+        SurveyMonkeySegmentField::Noop
+    }
+}
 impl SurveyMonkeySegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SurveyMonkeySegmentField::Noop)
@@ -2338,12 +2406,10 @@ pub struct SurveyMonkeySegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum VipSegmentConditionType {
     #[serde(rename = "VIP")]
     Vip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2360,7 +2426,11 @@ impl std::fmt::Display for VipSegmentConditionType {
     }
 }
 
-
+impl Default for VipSegmentConditionType {
+    fn default() -> VipSegmentConditionType {
+        VipSegmentConditionType::Noop
+    }
+}
 impl VipSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, VipSegmentConditionType::Noop)
@@ -2371,12 +2441,10 @@ impl VipSegmentConditionType {
  * Segment by VIP status.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum VipSegmentField {
     #[serde(rename = "gmonkey")]
     Gmonkey,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2393,7 +2461,11 @@ impl std::fmt::Display for VipSegmentField {
     }
 }
 
-
+impl Default for VipSegmentField {
+    fn default() -> VipSegmentField {
+        VipSegmentField::Noop
+    }
+}
 impl VipSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, VipSegmentField::Noop)
@@ -2421,12 +2493,10 @@ pub struct VipSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum InterestsSegmentConditionType {
     #[serde(rename = "Interests")]
     Interests,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2443,7 +2513,11 @@ impl std::fmt::Display for InterestsSegmentConditionType {
     }
 }
 
-
+impl Default for InterestsSegmentConditionType {
+    fn default() -> InterestsSegmentConditionType {
+        InterestsSegmentConditionType::Noop
+    }
+}
 impl InterestsSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, InterestsSegmentConditionType::Noop)
@@ -2454,7 +2528,6 @@ impl InterestsSegmentConditionType {
  * Whether the member is a part of one, all, or none of the groups.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum InterestsSegmentOperator {
     #[serde(rename = "interestcontains")]
     Interestcontains,
@@ -2463,7 +2536,6 @@ pub enum InterestsSegmentOperator {
     #[serde(rename = "interestnotcontains")]
     Interestnotcontains,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2482,7 +2554,11 @@ impl std::fmt::Display for InterestsSegmentOperator {
     }
 }
 
-
+impl Default for InterestsSegmentOperator {
+    fn default() -> InterestsSegmentOperator {
+        InterestsSegmentOperator::Noop
+    }
+}
 impl InterestsSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, InterestsSegmentOperator::Noop)
@@ -2523,12 +2599,10 @@ pub struct InterestsSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceCategorySegmentConditionType {
     #[serde(rename = "EcommCategory")]
     EcommCategory,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2545,7 +2619,11 @@ impl std::fmt::Display for EcommerceCategorySegmentConditionType {
     }
 }
 
-
+impl Default for EcommerceCategorySegmentConditionType {
+    fn default() -> EcommerceCategorySegmentConditionType {
+        EcommerceCategorySegmentConditionType::Noop
+    }
+}
 impl EcommerceCategorySegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceCategorySegmentConditionType::Noop)
@@ -2556,14 +2634,12 @@ impl EcommerceCategorySegmentConditionType {
  * Segment by purchases in specific items or categories.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceCategorySegmentField {
     #[serde(rename = "ecomm_cat")]
     EcommCat,
     #[serde(rename = "ecomm_prod")]
     EcommProd,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2581,7 +2657,11 @@ impl std::fmt::Display for EcommerceCategorySegmentField {
     }
 }
 
-
+impl Default for EcommerceCategorySegmentField {
+    fn default() -> EcommerceCategorySegmentField {
+        EcommerceCategorySegmentField::Noop
+    }
+}
 impl EcommerceCategorySegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceCategorySegmentField::Noop)
@@ -2592,7 +2672,6 @@ impl EcommerceCategorySegmentField {
  * A member who has purchased from a category/specific item that is/is not a specific name, where the category/item name contains/doesn't contain a specific phrase or string, or a category/item name that starts/ends with a string.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceCategorySegmentOperator {
     #[serde(rename = "contains")]
     Contains,
@@ -2607,7 +2686,6 @@ pub enum EcommerceCategorySegmentOperator {
     #[serde(rename = "starts")]
     Starts,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2629,7 +2707,11 @@ impl std::fmt::Display for EcommerceCategorySegmentOperator {
     }
 }
 
-
+impl Default for EcommerceCategorySegmentOperator {
+    fn default() -> EcommerceCategorySegmentOperator {
+        EcommerceCategorySegmentOperator::Noop
+    }
+}
 impl EcommerceCategorySegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceCategorySegmentOperator::Noop)
@@ -2666,12 +2748,10 @@ pub struct EcommerceCategorySegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceNumberSegmentConditionType {
     #[serde(rename = "EcommNumber")]
     EcommNumber,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2688,7 +2768,11 @@ impl std::fmt::Display for EcommerceNumberSegmentConditionType {
     }
 }
 
-
+impl Default for EcommerceNumberSegmentConditionType {
+    fn default() -> EcommerceNumberSegmentConditionType {
+        EcommerceNumberSegmentConditionType::Noop
+    }
+}
 impl EcommerceNumberSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceNumberSegmentConditionType::Noop)
@@ -2699,7 +2783,6 @@ impl EcommerceNumberSegmentConditionType {
  * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceNumberSegmentField {
     #[serde(rename = "ecomm_avg_ord")]
     EcommAvgOrd,
@@ -2710,7 +2793,6 @@ pub enum EcommerceNumberSegmentField {
     #[serde(rename = "ecomm_spent_avg")]
     EcommSpentAvg,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2730,7 +2812,11 @@ impl std::fmt::Display for EcommerceNumberSegmentField {
     }
 }
 
-
+impl Default for EcommerceNumberSegmentField {
+    fn default() -> EcommerceNumberSegmentField {
+        EcommerceNumberSegmentField::Noop
+    }
+}
 impl EcommerceNumberSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceNumberSegmentField::Noop)
@@ -2767,12 +2853,10 @@ pub struct EcommerceNumberSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommercePurchasedSegmentConditionType {
     #[serde(rename = "EcommPurchased")]
     EcommPurchased,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2789,7 +2873,11 @@ impl std::fmt::Display for EcommercePurchasedSegmentConditionType {
     }
 }
 
-
+impl Default for EcommercePurchasedSegmentConditionType {
+    fn default() -> EcommercePurchasedSegmentConditionType {
+        EcommercePurchasedSegmentConditionType::Noop
+    }
+}
 impl EcommercePurchasedSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommercePurchasedSegmentConditionType::Noop)
@@ -2800,12 +2888,10 @@ impl EcommercePurchasedSegmentConditionType {
  * Segment by whether someone has purchased anything.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommercePurchasedSegmentField {
     #[serde(rename = "ecomm_purchased")]
     EcommPurchased,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2822,7 +2908,11 @@ impl std::fmt::Display for EcommercePurchasedSegmentField {
     }
 }
 
-
+impl Default for EcommercePurchasedSegmentField {
+    fn default() -> EcommercePurchasedSegmentField {
+        EcommercePurchasedSegmentField::Noop
+    }
+}
 impl EcommercePurchasedSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommercePurchasedSegmentField::Noop)
@@ -2850,12 +2940,10 @@ pub struct EcommercePurchasedSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceSpentSegmentConditionType {
     #[serde(rename = "EcommSpent")]
     EcommSpent,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2872,7 +2960,11 @@ impl std::fmt::Display for EcommerceSpentSegmentConditionType {
     }
 }
 
-
+impl Default for EcommerceSpentSegmentConditionType {
+    fn default() -> EcommerceSpentSegmentConditionType {
+        EcommerceSpentSegmentConditionType::Noop
+    }
+}
 impl EcommerceSpentSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceSpentSegmentConditionType::Noop)
@@ -2883,14 +2975,12 @@ impl EcommerceSpentSegmentConditionType {
  * Segment by amount spent on a single order or across all orders.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceSpentSegmentField {
     #[serde(rename = "ecomm_spent_all")]
     EcommSpentAll,
     #[serde(rename = "ecomm_spent_one")]
     EcommSpentOne,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2908,7 +2998,11 @@ impl std::fmt::Display for EcommerceSpentSegmentField {
     }
 }
 
-
+impl Default for EcommerceSpentSegmentField {
+    fn default() -> EcommerceSpentSegmentField {
+        EcommerceSpentSegmentField::Noop
+    }
+}
 impl EcommerceSpentSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceSpentSegmentField::Noop)
@@ -2919,14 +3013,12 @@ impl EcommerceSpentSegmentField {
  * Members who have spent 'more' or 'less' than then specified value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceSpentSegmentOperator {
     #[serde(rename = "greater")]
     Greater,
     #[serde(rename = "less")]
     Less,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2944,7 +3036,11 @@ impl std::fmt::Display for EcommerceSpentSegmentOperator {
     }
 }
 
-
+impl Default for EcommerceSpentSegmentOperator {
+    fn default() -> EcommerceSpentSegmentOperator {
+        EcommerceSpentSegmentOperator::Noop
+    }
+}
 impl EcommerceSpentSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceSpentSegmentOperator::Noop)
@@ -2981,12 +3077,10 @@ pub struct EcommerceSpentSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommercePurchasedStoreSegmentConditionType {
     #[serde(rename = "EcommStore")]
     EcommStore,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3003,7 +3097,11 @@ impl std::fmt::Display for EcommercePurchasedStoreSegmentConditionType {
     }
 }
 
-
+impl Default for EcommercePurchasedStoreSegmentConditionType {
+    fn default() -> EcommercePurchasedStoreSegmentConditionType {
+        EcommercePurchasedStoreSegmentConditionType::Noop
+    }
+}
 impl EcommercePurchasedStoreSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommercePurchasedStoreSegmentConditionType::Noop)
@@ -3014,12 +3112,10 @@ impl EcommercePurchasedStoreSegmentConditionType {
  * Segment by purchases from a specific store.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommercePurchasedStoreSegmentField {
     #[serde(rename = "ecomm_store")]
     EcommStore,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3036,7 +3132,11 @@ impl std::fmt::Display for EcommercePurchasedStoreSegmentField {
     }
 }
 
-
+impl Default for EcommercePurchasedStoreSegmentField {
+    fn default() -> EcommercePurchasedStoreSegmentField {
+        EcommercePurchasedStoreSegmentField::Noop
+    }
+}
 impl EcommercePurchasedStoreSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommercePurchasedStoreSegmentField::Noop)
@@ -3073,12 +3173,10 @@ pub struct EcommercePurchasedStoreSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GoalActivitySegmentConditionType {
     #[serde(rename = "GoalActivity")]
     GoalActivity,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3095,7 +3193,11 @@ impl std::fmt::Display for GoalActivitySegmentConditionType {
     }
 }
 
-
+impl Default for GoalActivitySegmentConditionType {
+    fn default() -> GoalActivitySegmentConditionType {
+        GoalActivitySegmentConditionType::Noop
+    }
+}
 impl GoalActivitySegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GoalActivitySegmentConditionType::Noop)
@@ -3106,12 +3208,10 @@ impl GoalActivitySegmentConditionType {
  * Segment by Goal activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GoalActivitySegmentField {
     #[serde(rename = "goal")]
     Goal,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3128,7 +3228,11 @@ impl std::fmt::Display for GoalActivitySegmentField {
     }
 }
 
-
+impl Default for GoalActivitySegmentField {
+    fn default() -> GoalActivitySegmentField {
+        GoalActivitySegmentField::Noop
+    }
+}
 impl GoalActivitySegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GoalActivitySegmentField::Noop)
@@ -3139,7 +3243,6 @@ impl GoalActivitySegmentField {
  * Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GoalActivitySegmentOperator {
     #[serde(rename = "contains")]
     Contains,
@@ -3154,7 +3257,6 @@ pub enum GoalActivitySegmentOperator {
     #[serde(rename = "starts")]
     Starts,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3176,7 +3278,11 @@ impl std::fmt::Display for GoalActivitySegmentOperator {
     }
 }
 
-
+impl Default for GoalActivitySegmentOperator {
+    fn default() -> GoalActivitySegmentOperator {
+        GoalActivitySegmentOperator::Noop
+    }
+}
 impl GoalActivitySegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, GoalActivitySegmentOperator::Noop)
@@ -3213,12 +3319,10 @@ pub struct GoalActivitySegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GoalTimestampSegmentConditionType {
     #[serde(rename = "GoalTimestamp")]
     GoalTimestamp,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3235,7 +3339,11 @@ impl std::fmt::Display for GoalTimestampSegmentConditionType {
     }
 }
 
-
+impl Default for GoalTimestampSegmentConditionType {
+    fn default() -> GoalTimestampSegmentConditionType {
+        GoalTimestampSegmentConditionType::Noop
+    }
+}
 impl GoalTimestampSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GoalTimestampSegmentConditionType::Noop)
@@ -3246,12 +3354,10 @@ impl GoalTimestampSegmentConditionType {
  * Segment by most recent interaction with a website.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GoalTimestampSegmentField {
     #[serde(rename = "goal_last_visited")]
     GoalLastVisited,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3268,7 +3374,11 @@ impl std::fmt::Display for GoalTimestampSegmentField {
     }
 }
 
-
+impl Default for GoalTimestampSegmentField {
+    fn default() -> GoalTimestampSegmentField {
+        GoalTimestampSegmentField::Noop
+    }
+}
 impl GoalTimestampSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GoalTimestampSegmentField::Noop)
@@ -3279,7 +3389,6 @@ impl GoalTimestampSegmentField {
  * Whether the website activity happened after, before, or at a given timestamp.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GoalTimestampSegmentOperator {
     #[serde(rename = "greater")]
     Greater,
@@ -3288,7 +3397,6 @@ pub enum GoalTimestampSegmentOperator {
     #[serde(rename = "less")]
     Less,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3307,7 +3415,11 @@ impl std::fmt::Display for GoalTimestampSegmentOperator {
     }
 }
 
-
+impl Default for GoalTimestampSegmentOperator {
+    fn default() -> GoalTimestampSegmentOperator {
+        GoalTimestampSegmentOperator::Noop
+    }
+}
 impl GoalTimestampSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, GoalTimestampSegmentOperator::Noop)
@@ -3344,12 +3456,10 @@ pub struct GoalTimestampSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SimilarSubscribersSegmentMemberConditionType {
     #[serde(rename = "FuzzySegment")]
     FuzzySegment,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3366,7 +3476,11 @@ impl std::fmt::Display for SimilarSubscribersSegmentMemberConditionType {
     }
 }
 
-
+impl Default for SimilarSubscribersSegmentMemberConditionType {
+    fn default() -> SimilarSubscribersSegmentMemberConditionType {
+        SimilarSubscribersSegmentMemberConditionType::Noop
+    }
+}
 impl SimilarSubscribersSegmentMemberConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SimilarSubscribersSegmentMemberConditionType::Noop)
@@ -3377,12 +3491,10 @@ impl SimilarSubscribersSegmentMemberConditionType {
  * Segment by similar subscribers.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SimilarSubscribersSegmentMemberField {
     #[serde(rename = "fuzzy_segment")]
     FuzzySegment,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3399,7 +3511,11 @@ impl std::fmt::Display for SimilarSubscribersSegmentMemberField {
     }
 }
 
-
+impl Default for SimilarSubscribersSegmentMemberField {
+    fn default() -> SimilarSubscribersSegmentMemberField {
+        SimilarSubscribersSegmentMemberField::Noop
+    }
+}
 impl SimilarSubscribersSegmentMemberField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SimilarSubscribersSegmentMemberField::Noop)
@@ -3410,14 +3526,12 @@ impl SimilarSubscribersSegmentMemberField {
  * Members who are/are not apart of a 'similar subscribers' segment.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SimilarSubscribersSegmentMemberOperator {
     #[serde(rename = "fuzzy_is")]
     FuzzyIs,
     #[serde(rename = "fuzzy_not")]
     FuzzyNot,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3435,7 +3549,11 @@ impl std::fmt::Display for SimilarSubscribersSegmentMemberOperator {
     }
 }
 
-
+impl Default for SimilarSubscribersSegmentMemberOperator {
+    fn default() -> SimilarSubscribersSegmentMemberOperator {
+        SimilarSubscribersSegmentMemberOperator::Noop
+    }
+}
 impl SimilarSubscribersSegmentMemberOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, SimilarSubscribersSegmentMemberOperator::Noop)
@@ -3478,12 +3596,10 @@ pub struct SimilarSubscribersSegmentMember {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum StaticSegmentMemberConditionType {
     #[serde(rename = "StaticSegment")]
     StaticSegment,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3500,7 +3616,11 @@ impl std::fmt::Display for StaticSegmentMemberConditionType {
     }
 }
 
-
+impl Default for StaticSegmentMemberConditionType {
+    fn default() -> StaticSegmentMemberConditionType {
+        StaticSegmentMemberConditionType::Noop
+    }
+}
 impl StaticSegmentMemberConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, StaticSegmentMemberConditionType::Noop)
@@ -3511,12 +3631,10 @@ impl StaticSegmentMemberConditionType {
  * Segment by a given static segment.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum StaticSegmentMemberField {
     #[serde(rename = "static_segment")]
     StaticSegment,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3533,7 +3651,11 @@ impl std::fmt::Display for StaticSegmentMemberField {
     }
 }
 
-
+impl Default for StaticSegmentMemberField {
+    fn default() -> StaticSegmentMemberField {
+        StaticSegmentMemberField::Noop
+    }
+}
 impl StaticSegmentMemberField {
     pub fn is_noop(&self) -> bool {
         matches!(self, StaticSegmentMemberField::Noop)
@@ -3544,14 +3666,12 @@ impl StaticSegmentMemberField {
  * Members who are/are not apart of a static segment.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum StaticSegmentMemberOperator {
     #[serde(rename = "static_is")]
     StaticIs,
     #[serde(rename = "static_not")]
     StaticNot,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3569,7 +3689,11 @@ impl std::fmt::Display for StaticSegmentMemberOperator {
     }
 }
 
-
+impl Default for StaticSegmentMemberOperator {
+    fn default() -> StaticSegmentMemberOperator {
+        StaticSegmentMemberOperator::Noop
+    }
+}
 impl StaticSegmentMemberOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, StaticSegmentMemberOperator::Noop)
@@ -3606,12 +3730,10 @@ pub struct StaticSegmentMember {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LocationBasedSegmentConditionType {
     #[serde(rename = "IPGeoCountryState")]
     IpGeoCountryState,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3628,7 +3750,11 @@ impl std::fmt::Display for LocationBasedSegmentConditionType {
     }
 }
 
-
+impl Default for LocationBasedSegmentConditionType {
+    fn default() -> LocationBasedSegmentConditionType {
+        LocationBasedSegmentConditionType::Noop
+    }
+}
 impl LocationBasedSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LocationBasedSegmentConditionType::Noop)
@@ -3639,12 +3765,10 @@ impl LocationBasedSegmentConditionType {
  * Segmenting subscribers who are within a specific location.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LocationBasedSegmentField {
     #[serde(rename = "ipgeo")]
     Ipgeo,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3661,7 +3785,11 @@ impl std::fmt::Display for LocationBasedSegmentField {
     }
 }
 
-
+impl Default for LocationBasedSegmentField {
+    fn default() -> LocationBasedSegmentField {
+        LocationBasedSegmentField::Noop
+    }
+}
 impl LocationBasedSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, LocationBasedSegmentField::Noop)
@@ -3672,7 +3800,6 @@ impl LocationBasedSegmentField {
  * Segment members who are within a specific country or US state.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LocationBasedSegmentOperator {
     #[serde(rename = "ipgeocountry")]
     Ipgeocountry,
@@ -3683,7 +3810,6 @@ pub enum LocationBasedSegmentOperator {
     #[serde(rename = "ipgeostate")]
     Ipgeostate,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3703,7 +3829,11 @@ impl std::fmt::Display for LocationBasedSegmentOperator {
     }
 }
 
-
+impl Default for LocationBasedSegmentOperator {
+    fn default() -> LocationBasedSegmentOperator {
+        LocationBasedSegmentOperator::Noop
+    }
+}
 impl LocationBasedSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, LocationBasedSegmentOperator::Noop)
@@ -3740,12 +3870,10 @@ pub struct LocationBasedSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GeolocationSegmentConditionType {
     #[serde(rename = "IPGeoIn")]
     IpGeoIn,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3762,7 +3890,11 @@ impl std::fmt::Display for GeolocationSegmentConditionType {
     }
 }
 
-
+impl Default for GeolocationSegmentConditionType {
+    fn default() -> GeolocationSegmentConditionType {
+        GeolocationSegmentConditionType::Noop
+    }
+}
 impl GeolocationSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GeolocationSegmentConditionType::Noop)
@@ -3773,14 +3905,12 @@ impl GeolocationSegmentConditionType {
  * Segment members who are within a specific geographic region.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GeolocationSegmentOperator {
     #[serde(rename = "ipgeoin")]
     Ipgeoin,
     #[serde(rename = "ipgeonotin")]
     Ipgeonotin,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3798,7 +3928,11 @@ impl std::fmt::Display for GeolocationSegmentOperator {
     }
 }
 
-
+impl Default for GeolocationSegmentOperator {
+    fn default() -> GeolocationSegmentOperator {
+        GeolocationSegmentOperator::Noop
+    }
+}
 impl GeolocationSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, GeolocationSegmentOperator::Noop)
@@ -3862,12 +3996,10 @@ pub struct GeolocationSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UsZipCodeSegmentConditionType {
     #[serde(rename = "IPGeoInZip")]
     IpGeoInZip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3884,7 +4016,11 @@ impl std::fmt::Display for UsZipCodeSegmentConditionType {
     }
 }
 
-
+impl Default for UsZipCodeSegmentConditionType {
+    fn default() -> UsZipCodeSegmentConditionType {
+        UsZipCodeSegmentConditionType::Noop
+    }
+}
 impl UsZipCodeSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UsZipCodeSegmentConditionType::Noop)
@@ -3895,12 +4031,10 @@ impl UsZipCodeSegmentConditionType {
  * Segment members who are within a specific US zip code.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UsZipCodeSegmentOperator {
     #[serde(rename = "ipgeoinzip")]
     Ipgeoinzip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3917,7 +4051,11 @@ impl std::fmt::Display for UsZipCodeSegmentOperator {
     }
 }
 
-
+impl Default for UsZipCodeSegmentOperator {
+    fn default() -> UsZipCodeSegmentOperator {
+        UsZipCodeSegmentOperator::Noop
+    }
+}
 impl UsZipCodeSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, UsZipCodeSegmentOperator::Noop)
@@ -3963,12 +4101,10 @@ pub struct UsZipCodeSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UnknownLocationBasedSegmentConditionType {
     #[serde(rename = "IPGeoUnknown")]
     IpGeoUnknown,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3985,7 +4121,11 @@ impl std::fmt::Display for UnknownLocationBasedSegmentConditionType {
     }
 }
 
-
+impl Default for UnknownLocationBasedSegmentConditionType {
+    fn default() -> UnknownLocationBasedSegmentConditionType {
+        UnknownLocationBasedSegmentConditionType::Noop
+    }
+}
 impl UnknownLocationBasedSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UnknownLocationBasedSegmentConditionType::Noop)
@@ -3996,12 +4136,10 @@ impl UnknownLocationBasedSegmentConditionType {
  * Segment members for which location information is unknown.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum UnknownLocationBasedSegmentOperator {
     #[serde(rename = "ipgeounknown")]
     Ipgeounknown,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4018,7 +4156,11 @@ impl std::fmt::Display for UnknownLocationBasedSegmentOperator {
     }
 }
 
-
+impl Default for UnknownLocationBasedSegmentOperator {
+    fn default() -> UnknownLocationBasedSegmentOperator {
+        UnknownLocationBasedSegmentOperator::Noop
+    }
+}
 impl UnknownLocationBasedSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, UnknownLocationBasedSegmentOperator::Noop)
@@ -4049,12 +4191,10 @@ pub struct UnknownLocationBasedSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ZipCodeLocationBasedSegmentConditionType {
     #[serde(rename = "IPGeoZip")]
     IpGeoZip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4071,7 +4211,11 @@ impl std::fmt::Display for ZipCodeLocationBasedSegmentConditionType {
     }
 }
 
-
+impl Default for ZipCodeLocationBasedSegmentConditionType {
+    fn default() -> ZipCodeLocationBasedSegmentConditionType {
+        ZipCodeLocationBasedSegmentConditionType::Noop
+    }
+}
 impl ZipCodeLocationBasedSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ZipCodeLocationBasedSegmentConditionType::Noop)
@@ -4082,14 +4226,12 @@ impl ZipCodeLocationBasedSegmentConditionType {
  * Segment members who are/are not within a specific US zip code.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ZipCodeLocationBasedSegmentOperator {
     #[serde(rename = "ipgeoiszip")]
     Ipgeoiszip,
     #[serde(rename = "ipgeonotzip")]
     Ipgeonotzip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4107,7 +4249,11 @@ impl std::fmt::Display for ZipCodeLocationBasedSegmentOperator {
     }
 }
 
-
+impl Default for ZipCodeLocationBasedSegmentOperator {
+    fn default() -> ZipCodeLocationBasedSegmentOperator {
+        ZipCodeLocationBasedSegmentOperator::Noop
+    }
+}
 impl ZipCodeLocationBasedSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, ZipCodeLocationBasedSegmentOperator::Noop)
@@ -4147,12 +4293,10 @@ pub struct ZipCodeLocationBasedSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesAgeSegmentConditionType {
     #[serde(rename = "SocialAge")]
     SocialAge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4169,7 +4313,11 @@ impl std::fmt::Display for SocialProfilesAgeSegmentConditionType {
     }
 }
 
-
+impl Default for SocialProfilesAgeSegmentConditionType {
+    fn default() -> SocialProfilesAgeSegmentConditionType {
+        SocialProfilesAgeSegmentConditionType::Noop
+    }
+}
 impl SocialProfilesAgeSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesAgeSegmentConditionType::Noop)
@@ -4180,12 +4328,10 @@ impl SocialProfilesAgeSegmentConditionType {
  * Segment by age ranges in Social Profiles data.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesAgeSegmentField {
     #[serde(rename = "social_age")]
     SocialAge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4202,7 +4348,11 @@ impl std::fmt::Display for SocialProfilesAgeSegmentField {
     }
 }
 
-
+impl Default for SocialProfilesAgeSegmentField {
+    fn default() -> SocialProfilesAgeSegmentField {
+        SocialProfilesAgeSegmentField::Noop
+    }
+}
 impl SocialProfilesAgeSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesAgeSegmentField::Noop)
@@ -4213,7 +4363,6 @@ impl SocialProfilesAgeSegmentField {
  * The age range to segment.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Value {
     #[serde(rename = "18-24")]
     OneThousandEightHundredAndTwentyFour,
@@ -4224,7 +4373,6 @@ pub enum Value {
     #[serde(rename = "55+")]
     FiftyFive,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4244,7 +4392,11 @@ impl std::fmt::Display for Value {
     }
 }
 
-
+impl Default for Value {
+    fn default() -> Value {
+        Value::Noop
+    }
+}
 impl Value {
     pub fn is_noop(&self) -> bool {
         matches!(self, Value::Noop)
@@ -4280,12 +4432,10 @@ pub struct SocialProfilesAgeSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesGenderSegmentConditionType {
     #[serde(rename = "SocialGender")]
     SocialGender,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4302,7 +4452,11 @@ impl std::fmt::Display for SocialProfilesGenderSegmentConditionType {
     }
 }
 
-
+impl Default for SocialProfilesGenderSegmentConditionType {
+    fn default() -> SocialProfilesGenderSegmentConditionType {
+        SocialProfilesGenderSegmentConditionType::Noop
+    }
+}
 impl SocialProfilesGenderSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesGenderSegmentConditionType::Noop)
@@ -4313,12 +4467,10 @@ impl SocialProfilesGenderSegmentConditionType {
  * Segment by listed gender in Social Profiles data.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesGenderSegmentField {
     #[serde(rename = "social_gender")]
     SocialGender,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4335,7 +4487,11 @@ impl std::fmt::Display for SocialProfilesGenderSegmentField {
     }
 }
 
-
+impl Default for SocialProfilesGenderSegmentField {
+    fn default() -> SocialProfilesGenderSegmentField {
+        SocialProfilesGenderSegmentField::Noop
+    }
+}
 impl SocialProfilesGenderSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesGenderSegmentField::Noop)
@@ -4346,14 +4502,12 @@ impl SocialProfilesGenderSegmentField {
  * The Social Profiles gender to segment.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesGenderSegmentOperator {
     #[serde(rename = "female")]
     Female,
     #[serde(rename = "male")]
     Male,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4371,7 +4525,11 @@ impl std::fmt::Display for SocialProfilesGenderSegmentOperator {
     }
 }
 
-
+impl Default for SocialProfilesGenderSegmentOperator {
+    fn default() -> SocialProfilesGenderSegmentOperator {
+        SocialProfilesGenderSegmentOperator::Noop
+    }
+}
 impl SocialProfilesGenderSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesGenderSegmentOperator::Noop)
@@ -4410,12 +4568,10 @@ pub struct SocialProfilesGenderSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesInfluenceSegmentConditionType {
     #[serde(rename = "SocialInfluence")]
     SocialInfluence,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4432,7 +4588,11 @@ impl std::fmt::Display for SocialProfilesInfluenceSegmentConditionType {
     }
 }
 
-
+impl Default for SocialProfilesInfluenceSegmentConditionType {
+    fn default() -> SocialProfilesInfluenceSegmentConditionType {
+        SocialProfilesInfluenceSegmentConditionType::Noop
+    }
+}
 impl SocialProfilesInfluenceSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesInfluenceSegmentConditionType::Noop)
@@ -4443,12 +4603,10 @@ impl SocialProfilesInfluenceSegmentConditionType {
  * Segment by influence rating in Social Profiles data.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesInfluenceSegmentField {
     #[serde(rename = "social_influence")]
     SocialInfluence,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4465,7 +4623,11 @@ impl std::fmt::Display for SocialProfilesInfluenceSegmentField {
     }
 }
 
-
+impl Default for SocialProfilesInfluenceSegmentField {
+    fn default() -> SocialProfilesInfluenceSegmentField {
+        SocialProfilesInfluenceSegmentField::Noop
+    }
+}
 impl SocialProfilesInfluenceSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesInfluenceSegmentField::Noop)
@@ -4505,12 +4667,10 @@ pub struct SocialProfilesInfluenceSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesNetworkSegmentConditionType {
     #[serde(rename = "SocialNetworkMember")]
     SocialNetworkMember,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4527,7 +4687,11 @@ impl std::fmt::Display for SocialProfilesNetworkSegmentConditionType {
     }
 }
 
-
+impl Default for SocialProfilesNetworkSegmentConditionType {
+    fn default() -> SocialProfilesNetworkSegmentConditionType {
+        SocialProfilesNetworkSegmentConditionType::Noop
+    }
+}
 impl SocialProfilesNetworkSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesNetworkSegmentConditionType::Noop)
@@ -4538,12 +4702,10 @@ impl SocialProfilesNetworkSegmentConditionType {
  * Segment by social network in Social Profiles data.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesNetworkSegmentField {
     #[serde(rename = "social_network")]
     SocialNetwork,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4560,7 +4722,11 @@ impl std::fmt::Display for SocialProfilesNetworkSegmentField {
     }
 }
 
-
+impl Default for SocialProfilesNetworkSegmentField {
+    fn default() -> SocialProfilesNetworkSegmentField {
+        SocialProfilesNetworkSegmentField::Noop
+    }
+}
 impl SocialProfilesNetworkSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesNetworkSegmentField::Noop)
@@ -4571,7 +4737,6 @@ impl SocialProfilesNetworkSegmentField {
  * The social network to segment against.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesNetworkSegmentOperator {
     #[serde(rename = "facebook")]
     Facebook,
@@ -4596,7 +4761,6 @@ pub enum SocialProfilesNetworkSegmentOperator {
     #[serde(rename = "youtube")]
     Youtube,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4623,7 +4787,11 @@ impl std::fmt::Display for SocialProfilesNetworkSegmentOperator {
     }
 }
 
-
+impl Default for SocialProfilesNetworkSegmentOperator {
+    fn default() -> SocialProfilesNetworkSegmentOperator {
+        SocialProfilesNetworkSegmentOperator::Noop
+    }
+}
 impl SocialProfilesNetworkSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesNetworkSegmentOperator::Noop)
@@ -4662,12 +4830,10 @@ pub struct SocialProfilesNetworkSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesNetworkFollowSegmentConditionType {
     #[serde(rename = "SocialNetworkFollow")]
     SocialNetworkFollow,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4686,7 +4852,11 @@ impl std::fmt::Display for SocialProfilesNetworkFollowSegmentConditionType {
     }
 }
 
-
+impl Default for SocialProfilesNetworkFollowSegmentConditionType {
+    fn default() -> SocialProfilesNetworkFollowSegmentConditionType {
+        SocialProfilesNetworkFollowSegmentConditionType::Noop
+    }
+}
 impl SocialProfilesNetworkFollowSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesNetworkFollowSegmentConditionType::Noop)
@@ -4697,14 +4867,12 @@ impl SocialProfilesNetworkFollowSegmentConditionType {
  * Members who are/not following a linked account on a given social network.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesNetworkFollowSegmentOperator {
     #[serde(rename = "follow")]
     Follow,
     #[serde(rename = "notfollow")]
     Notfollow,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4722,7 +4890,11 @@ impl std::fmt::Display for SocialProfilesNetworkFollowSegmentOperator {
     }
 }
 
-
+impl Default for SocialProfilesNetworkFollowSegmentOperator {
+    fn default() -> SocialProfilesNetworkFollowSegmentOperator {
+        SocialProfilesNetworkFollowSegmentOperator::Noop
+    }
+}
 impl SocialProfilesNetworkFollowSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesNetworkFollowSegmentOperator::Noop)
@@ -4733,12 +4905,10 @@ impl SocialProfilesNetworkFollowSegmentOperator {
  * The social network to segment against.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SocialProfilesNetworkFollowSegmentOperatorData {
     #[serde(rename = "twitter_follow")]
     TwitterFollow,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4755,7 +4925,11 @@ impl std::fmt::Display for SocialProfilesNetworkFollowSegmentOperatorData {
     }
 }
 
-
+impl Default for SocialProfilesNetworkFollowSegmentOperatorData {
+    fn default() -> SocialProfilesNetworkFollowSegmentOperatorData {
+        SocialProfilesNetworkFollowSegmentOperatorData::Noop
+    }
+}
 impl SocialProfilesNetworkFollowSegmentOperatorData {
     pub fn is_noop(&self) -> bool {
         matches!(self, SocialProfilesNetworkFollowSegmentOperatorData::Noop)
@@ -4797,12 +4971,10 @@ pub struct SocialProfilesNetworkFollowSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AddressMergeFieldSegmentConditionType {
     #[serde(rename = "AddressMerge")]
     AddressMerge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4819,7 +4991,11 @@ impl std::fmt::Display for AddressMergeFieldSegmentConditionType {
     }
 }
 
-
+impl Default for AddressMergeFieldSegmentConditionType {
+    fn default() -> AddressMergeFieldSegmentConditionType {
+        AddressMergeFieldSegmentConditionType::Noop
+    }
+}
 impl AddressMergeFieldSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AddressMergeFieldSegmentConditionType::Noop)
@@ -4830,7 +5006,6 @@ impl AddressMergeFieldSegmentConditionType {
  * Whether the member's address merge field contains/does not contain a value or is/is not blank.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AddressMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -4841,7 +5016,6 @@ pub enum AddressMergeFieldSegmentOperator {
     #[serde(rename = "notcontain")]
     Notcontain,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4861,7 +5035,11 @@ impl std::fmt::Display for AddressMergeFieldSegmentOperator {
     }
 }
 
-
+impl Default for AddressMergeFieldSegmentOperator {
+    fn default() -> AddressMergeFieldSegmentOperator {
+        AddressMergeFieldSegmentOperator::Noop
+    }
+}
 impl AddressMergeFieldSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, AddressMergeFieldSegmentOperator::Noop)
@@ -4905,12 +5083,10 @@ pub struct AddressMergeFieldSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AddressZipMergeFieldSegmentConditionType {
     #[serde(rename = "ZipMerge")]
     ZipMerge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4927,7 +5103,11 @@ impl std::fmt::Display for AddressZipMergeFieldSegmentConditionType {
     }
 }
 
-
+impl Default for AddressZipMergeFieldSegmentConditionType {
+    fn default() -> AddressZipMergeFieldSegmentConditionType {
+        AddressZipMergeFieldSegmentConditionType::Noop
+    }
+}
 impl AddressZipMergeFieldSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AddressZipMergeFieldSegmentConditionType::Noop)
@@ -4938,12 +5118,10 @@ impl AddressZipMergeFieldSegmentConditionType {
  * Whether the member's address merge field is within a given distance from a city or zip.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AddressZipMergeFieldSegmentOperator {
     #[serde(rename = "geoin")]
     Geoin,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4960,7 +5138,11 @@ impl std::fmt::Display for AddressZipMergeFieldSegmentOperator {
     }
 }
 
-
+impl Default for AddressZipMergeFieldSegmentOperator {
+    fn default() -> AddressZipMergeFieldSegmentOperator {
+        AddressZipMergeFieldSegmentOperator::Noop
+    }
+}
 impl AddressZipMergeFieldSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, AddressZipMergeFieldSegmentOperator::Noop)
@@ -5013,12 +5195,10 @@ pub struct AddressZipMergeFieldSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum BirthdayMergeFieldSegmentConditionType {
     #[serde(rename = "BirthdayMerge")]
     BirthdayMerge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5035,7 +5215,11 @@ impl std::fmt::Display for BirthdayMergeFieldSegmentConditionType {
     }
 }
 
-
+impl Default for BirthdayMergeFieldSegmentConditionType {
+    fn default() -> BirthdayMergeFieldSegmentConditionType {
+        BirthdayMergeFieldSegmentConditionType::Noop
+    }
+}
 impl BirthdayMergeFieldSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BirthdayMergeFieldSegmentConditionType::Noop)
@@ -5046,7 +5230,6 @@ impl BirthdayMergeFieldSegmentConditionType {
  * Whether the member's birthday merge information is/is not a certain date or is/is not blank.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum BirthdayMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -5057,7 +5240,6 @@ pub enum BirthdayMergeFieldSegmentOperator {
     #[serde(rename = "not")]
     Not,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5077,7 +5259,11 @@ impl std::fmt::Display for BirthdayMergeFieldSegmentOperator {
     }
 }
 
-
+impl Default for BirthdayMergeFieldSegmentOperator {
+    fn default() -> BirthdayMergeFieldSegmentOperator {
+        BirthdayMergeFieldSegmentOperator::Noop
+    }
+}
 impl BirthdayMergeFieldSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, BirthdayMergeFieldSegmentOperator::Noop)
@@ -5121,12 +5307,10 @@ pub struct BirthdayMergeFieldSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DateMergeFieldSegmentConditionType {
     #[serde(rename = "DateMerge")]
     DateMerge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5143,7 +5327,11 @@ impl std::fmt::Display for DateMergeFieldSegmentConditionType {
     }
 }
 
-
+impl Default for DateMergeFieldSegmentConditionType {
+    fn default() -> DateMergeFieldSegmentConditionType {
+        DateMergeFieldSegmentConditionType::Noop
+    }
+}
 impl DateMergeFieldSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DateMergeFieldSegmentConditionType::Noop)
@@ -5154,7 +5342,6 @@ impl DateMergeFieldSegmentConditionType {
  * Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DateMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -5169,7 +5356,6 @@ pub enum DateMergeFieldSegmentOperator {
     #[serde(rename = "not")]
     Not,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5191,7 +5377,11 @@ impl std::fmt::Display for DateMergeFieldSegmentOperator {
     }
 }
 
-
+impl Default for DateMergeFieldSegmentOperator {
+    fn default() -> DateMergeFieldSegmentOperator {
+        DateMergeFieldSegmentOperator::Noop
+    }
+}
 impl DateMergeFieldSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, DateMergeFieldSegmentOperator::Noop)
@@ -5235,12 +5425,10 @@ pub struct DateMergeFieldSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DropdownRadioMergeFieldSegmentConditionType {
     #[serde(rename = "SelectMerge")]
     SelectMerge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5257,7 +5445,11 @@ impl std::fmt::Display for DropdownRadioMergeFieldSegmentConditionType {
     }
 }
 
-
+impl Default for DropdownRadioMergeFieldSegmentConditionType {
+    fn default() -> DropdownRadioMergeFieldSegmentConditionType {
+        DropdownRadioMergeFieldSegmentConditionType::Noop
+    }
+}
 impl DropdownRadioMergeFieldSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DropdownRadioMergeFieldSegmentConditionType::Noop)
@@ -5268,7 +5460,6 @@ impl DropdownRadioMergeFieldSegmentConditionType {
  * Whether the member's merge information is/is not a value or is/is not blank.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DropdownRadioMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -5283,7 +5474,6 @@ pub enum DropdownRadioMergeFieldSegmentOperator {
     #[serde(rename = "notcontain")]
     Notcontain,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5305,7 +5495,11 @@ impl std::fmt::Display for DropdownRadioMergeFieldSegmentOperator {
     }
 }
 
-
+impl Default for DropdownRadioMergeFieldSegmentOperator {
+    fn default() -> DropdownRadioMergeFieldSegmentOperator {
+        DropdownRadioMergeFieldSegmentOperator::Noop
+    }
+}
 impl DropdownRadioMergeFieldSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, DropdownRadioMergeFieldSegmentOperator::Noop)
@@ -5349,12 +5543,10 @@ pub struct DropdownRadioMergeFieldSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TextNumberMergeFieldSegmentConditionType {
     #[serde(rename = "TextMerge")]
     TextMerge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5371,7 +5563,11 @@ impl std::fmt::Display for TextNumberMergeFieldSegmentConditionType {
     }
 }
 
-
+impl Default for TextNumberMergeFieldSegmentConditionType {
+    fn default() -> TextNumberMergeFieldSegmentConditionType {
+        TextNumberMergeFieldSegmentConditionType::Noop
+    }
+}
 impl TextNumberMergeFieldSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TextNumberMergeFieldSegmentConditionType::Noop)
@@ -5382,7 +5578,6 @@ impl TextNumberMergeFieldSegmentConditionType {
  * Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TextNumberMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -5405,7 +5600,6 @@ pub enum TextNumberMergeFieldSegmentOperator {
     #[serde(rename = "starts")]
     Starts,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5431,7 +5625,11 @@ impl std::fmt::Display for TextNumberMergeFieldSegmentOperator {
     }
 }
 
-
+impl Default for TextNumberMergeFieldSegmentOperator {
+    fn default() -> TextNumberMergeFieldSegmentOperator {
+        TextNumberMergeFieldSegmentOperator::Noop
+    }
+}
 impl TextNumberMergeFieldSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, TextNumberMergeFieldSegmentOperator::Noop)
@@ -5475,12 +5673,10 @@ pub struct TextNumberMergeFieldSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailSegmentConditionType {
     #[serde(rename = "EmailAddress")]
     EmailAddress,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5497,7 +5693,11 @@ impl std::fmt::Display for EmailSegmentConditionType {
     }
 }
 
-
+impl Default for EmailSegmentConditionType {
+    fn default() -> EmailSegmentConditionType {
+        EmailSegmentConditionType::Noop
+    }
+}
 impl EmailSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailSegmentConditionType::Noop)
@@ -5508,14 +5708,12 @@ impl EmailSegmentConditionType {
  * Segmenting based off of a subscriber's email address.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailSegmentField {
     #[serde(rename = "EMAIL")]
     Email,
     #[serde(rename = "merge0")]
     Merge0,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5533,7 +5731,11 @@ impl std::fmt::Display for EmailSegmentField {
     }
 }
 
-
+impl Default for EmailSegmentField {
+    fn default() -> EmailSegmentField {
+        EmailSegmentField::Noop
+    }
+}
 impl EmailSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailSegmentField::Noop)
@@ -5544,7 +5746,6 @@ impl EmailSegmentField {
  * Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailSegmentOperator {
     #[serde(rename = "contains")]
     Contains,
@@ -5563,7 +5764,6 @@ pub enum EmailSegmentOperator {
     #[serde(rename = "starts")]
     Starts,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5587,7 +5787,11 @@ impl std::fmt::Display for EmailSegmentOperator {
     }
 }
 
-
+impl Default for EmailSegmentOperator {
+    fn default() -> EmailSegmentOperator {
+        EmailSegmentOperator::Noop
+    }
+}
 impl EmailSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailSegmentOperator::Noop)
@@ -5624,12 +5828,10 @@ pub struct EmailSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PredictedGenderSegmentConditionType {
     #[serde(rename = "PredictedGender")]
     PredictedGender,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5646,7 +5848,11 @@ impl std::fmt::Display for PredictedGenderSegmentConditionType {
     }
 }
 
-
+impl Default for PredictedGenderSegmentConditionType {
+    fn default() -> PredictedGenderSegmentConditionType {
+        PredictedGenderSegmentConditionType::Noop
+    }
+}
 impl PredictedGenderSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PredictedGenderSegmentConditionType::Noop)
@@ -5657,12 +5863,10 @@ impl PredictedGenderSegmentConditionType {
  * Segment by predicted gender.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PredictedGenderSegmentField {
     #[serde(rename = "predicted_gender")]
     PredictedGender,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5679,7 +5883,11 @@ impl std::fmt::Display for PredictedGenderSegmentField {
     }
 }
 
-
+impl Default for PredictedGenderSegmentField {
+    fn default() -> PredictedGenderSegmentField {
+        PredictedGenderSegmentField::Noop
+    }
+}
 impl PredictedGenderSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, PredictedGenderSegmentField::Noop)
@@ -5715,12 +5923,10 @@ pub struct PredictedGenderSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PredictedAgeSegmentConditionType {
     #[serde(rename = "PredictedAge")]
     PredictedAge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5737,7 +5943,11 @@ impl std::fmt::Display for PredictedAgeSegmentConditionType {
     }
 }
 
-
+impl Default for PredictedAgeSegmentConditionType {
+    fn default() -> PredictedAgeSegmentConditionType {
+        PredictedAgeSegmentConditionType::Noop
+    }
+}
 impl PredictedAgeSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PredictedAgeSegmentConditionType::Noop)
@@ -5748,12 +5958,10 @@ impl PredictedAgeSegmentConditionType {
  * Segment by predicted age.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PredictedAgeSegmentField {
     #[serde(rename = "predicted_age_range")]
     PredictedAgeRange,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5770,7 +5978,11 @@ impl std::fmt::Display for PredictedAgeSegmentField {
     }
 }
 
-
+impl Default for PredictedAgeSegmentField {
+    fn default() -> PredictedAgeSegmentField {
+        PredictedAgeSegmentField::Noop
+    }
+}
 impl PredictedAgeSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, PredictedAgeSegmentField::Noop)
@@ -5781,12 +5993,10 @@ impl PredictedAgeSegmentField {
  * Members who are/not the exact criteria listed.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PredictedAgeSegmentOperator {
     #[serde(rename = "is")]
     Is,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5803,7 +6013,11 @@ impl std::fmt::Display for PredictedAgeSegmentOperator {
     }
 }
 
-
+impl Default for PredictedAgeSegmentOperator {
+    fn default() -> PredictedAgeSegmentOperator {
+        PredictedAgeSegmentOperator::Noop
+    }
+}
 impl PredictedAgeSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, PredictedAgeSegmentOperator::Noop)
@@ -5814,7 +6028,6 @@ impl PredictedAgeSegmentOperator {
  * The predicted age to segment.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PredictedAgeSegmentOperatorData {
     #[serde(rename = "18-24")]
     OneThousandEightHundredAndTwentyFour,
@@ -5829,7 +6042,6 @@ pub enum PredictedAgeSegmentOperatorData {
     #[serde(rename = "65+")]
     SixtyFive,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5851,7 +6063,11 @@ impl std::fmt::Display for PredictedAgeSegmentOperatorData {
     }
 }
 
-
+impl Default for PredictedAgeSegmentOperatorData {
+    fn default() -> PredictedAgeSegmentOperatorData {
+        PredictedAgeSegmentOperatorData::Noop
+    }
+}
 impl PredictedAgeSegmentOperatorData {
     pub fn is_noop(&self) -> bool {
         matches!(self, PredictedAgeSegmentOperatorData::Noop)
@@ -5887,12 +6103,10 @@ pub struct PredictedAgeSegment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum NewSubscribersPrebuiltSegmentConditionType {
     #[serde(rename = "NewSubscribers")]
     NewSubscribers,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5909,7 +6123,11 @@ impl std::fmt::Display for NewSubscribersPrebuiltSegmentConditionType {
     }
 }
 
-
+impl Default for NewSubscribersPrebuiltSegmentConditionType {
+    fn default() -> NewSubscribersPrebuiltSegmentConditionType {
+        NewSubscribersPrebuiltSegmentConditionType::Noop
+    }
+}
 impl NewSubscribersPrebuiltSegmentConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NewSubscribersPrebuiltSegmentConditionType::Noop)
@@ -5920,12 +6138,10 @@ impl NewSubscribersPrebuiltSegmentConditionType {
  * Segment by when people subscribed.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum NewSubscribersPrebuiltSegmentField {
     #[serde(rename = "timestamp_opt")]
     TimestampOpt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5942,7 +6158,11 @@ impl std::fmt::Display for NewSubscribersPrebuiltSegmentField {
     }
 }
 
-
+impl Default for NewSubscribersPrebuiltSegmentField {
+    fn default() -> NewSubscribersPrebuiltSegmentField {
+        NewSubscribersPrebuiltSegmentField::Noop
+    }
+}
 impl NewSubscribersPrebuiltSegmentField {
     pub fn is_noop(&self) -> bool {
         matches!(self, NewSubscribersPrebuiltSegmentField::Noop)
@@ -5953,12 +6173,10 @@ impl NewSubscribersPrebuiltSegmentField {
  * Whe the event took place, namely within a time frame.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum NewSubscribersPrebuiltSegmentOperator {
     #[serde(rename = "date_within")]
     DateWithin,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5975,7 +6193,11 @@ impl std::fmt::Display for NewSubscribersPrebuiltSegmentOperator {
     }
 }
 
-
+impl Default for NewSubscribersPrebuiltSegmentOperator {
+    fn default() -> NewSubscribersPrebuiltSegmentOperator {
+        NewSubscribersPrebuiltSegmentOperator::Noop
+    }
+}
 impl NewSubscribersPrebuiltSegmentOperator {
     pub fn is_noop(&self) -> bool {
         matches!(self, NewSubscribersPrebuiltSegmentOperator::Noop)
@@ -6775,7 +6997,6 @@ pub struct Tracking {
  * The type of Automation workflow.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum WorkflowType {
     #[serde(rename = "abandonedBrowse")]
     AbandonedBrowse,
@@ -6812,7 +7033,6 @@ pub enum WorkflowType {
     #[serde(rename = "welcomeSeries")]
     WelcomeSeries,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6845,7 +7065,11 @@ impl std::fmt::Display for WorkflowType {
     }
 }
 
-
+impl Default for WorkflowType {
+    fn default() -> WorkflowType {
+        WorkflowType::Noop
+    }
+}
 impl WorkflowType {
     pub fn is_noop(&self) -> bool {
         matches!(self, WorkflowType::Noop)
@@ -6853,7 +7077,6 @@ impl WorkflowType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Days {
     #[serde(rename = "friday")]
     Friday,
@@ -6870,7 +7093,6 @@ pub enum Days {
     #[serde(rename = "wednesday")]
     Wednesday,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6893,7 +7115,11 @@ impl std::fmt::Display for Days {
     }
 }
 
-
+impl Default for Days {
+    fn default() -> Days {
+        Days::Noop
+    }
+}
 impl Days {
     pub fn is_noop(&self) -> bool {
         matches!(self, Days::Noop)
@@ -6904,7 +7130,6 @@ impl Days {
  * When to send the Automation email.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailSendTimeSettings {
     #[serde(rename = "send_asap")]
     SendAsap,
@@ -6913,7 +7138,6 @@ pub enum EmailSendTimeSettings {
     #[serde(rename = "send_between")]
     SendBetween,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6932,7 +7156,11 @@ impl std::fmt::Display for EmailSendTimeSettings {
     }
 }
 
-
+impl Default for EmailSendTimeSettings {
+    fn default() -> EmailSendTimeSettings {
+        EmailSendTimeSettings::Noop
+    }
+}
 impl EmailSendTimeSettings {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailSendTimeSettings::Noop)
@@ -7260,7 +7488,6 @@ pub struct AutomationWorkflow {
  * The type of delay for an Automation email.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DelayType {
     #[serde(rename = "day")]
     Day,
@@ -7271,7 +7498,6 @@ pub enum DelayType {
     #[serde(rename = "week")]
     Week,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7291,7 +7517,11 @@ impl std::fmt::Display for DelayType {
     }
 }
 
-
+impl Default for DelayType {
+    fn default() -> DelayType {
+        DelayType::Noop
+    }
+}
 impl DelayType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DelayType::Noop)
@@ -7302,14 +7532,12 @@ impl DelayType {
  * Whether the delay settings describe before or after the delay action of an Automation email.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Direction {
     #[serde(rename = "after")]
     After,
     #[serde(rename = "before")]
     Before,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7327,7 +7555,11 @@ impl std::fmt::Display for Direction {
     }
 }
 
-
+impl Default for Direction {
+    fn default() -> Direction {
+        Direction::Noop
+    }
+}
 impl Direction {
     pub fn is_noop(&self) -> bool {
         matches!(self, Direction::Noop)
@@ -7338,7 +7570,6 @@ impl Direction {
  * The action that triggers the delay of an Automation email.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Action {
     #[serde(rename = "annual")]
     Annual,
@@ -7407,7 +7638,6 @@ pub enum Action {
     #[serde(rename = "tag_add")]
     TagAdd,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7456,7 +7686,11 @@ impl std::fmt::Display for Action {
     }
 }
 
-
+impl Default for Action {
+    fn default() -> Action {
+        Action::Noop
+    }
+}
 impl Action {
     pub fn is_noop(&self) -> bool {
         matches!(self, Action::Noop)
@@ -8130,12 +8364,10 @@ pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
  * Whether the delay settings describe before or after the delay action of an automation email.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DelayDirection {
     #[serde(rename = "after")]
     After,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8152,7 +8384,11 @@ impl std::fmt::Display for DelayDirection {
     }
 }
 
-
+impl Default for DelayDirection {
+    fn default() -> DelayDirection {
+        DelayDirection::Noop
+    }
+}
 impl DelayDirection {
     pub fn is_noop(&self) -> bool {
         matches!(self, DelayDirection::Noop)
@@ -8163,7 +8399,6 @@ impl DelayDirection {
  * The action that triggers the delay of an automation emails.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DelayAction {
     #[serde(rename = "ecomm_abandoned_browse")]
     EcommAbandonedBrowse,
@@ -8172,7 +8407,6 @@ pub enum DelayAction {
     #[serde(rename = "signup")]
     Signup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8191,7 +8425,11 @@ impl std::fmt::Display for DelayAction {
     }
 }
 
-
+impl Default for DelayAction {
+    fn default() -> DelayAction {
+        DelayAction::Noop
+    }
+}
 impl DelayAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, DelayAction::Noop)
@@ -8536,7 +8774,6 @@ pub struct RemovedSubscribers {
  * The status of the batch call. [Learn more](https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/#check-the-status-of-a-batch-operation) about the batch operation status.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum BatchOperationsStatus {
     #[serde(rename = "finalizing")]
     Finalizing,
@@ -8549,7 +8786,6 @@ pub enum BatchOperationsStatus {
     #[serde(rename = "started")]
     Started,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8570,7 +8806,11 @@ impl std::fmt::Display for BatchOperationsStatus {
     }
 }
 
-
+impl Default for BatchOperationsStatus {
+    fn default() -> BatchOperationsStatus {
+        BatchOperationsStatus::Noop
+    }
+}
 impl BatchOperationsStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, BatchOperationsStatus::Noop)
@@ -8697,7 +8937,6 @@ pub struct BatchOperations {
  * The HTTP method to use for the operation.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum HttpMethod {
     #[serde(rename = "DELETE")]
     Delete,
@@ -8710,7 +8949,6 @@ pub enum HttpMethod {
     #[serde(rename = "PUT")]
     Put,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8731,7 +8969,11 @@ impl std::fmt::Display for HttpMethod {
     }
 }
 
-
+impl Default for HttpMethod {
+    fn default() -> HttpMethod {
+        HttpMethod::Noop
+    }
+}
 impl HttpMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, HttpMethod::Noop)
@@ -9021,7 +9263,6 @@ pub struct CampaignFolders {
  * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CampaignType {
     #[serde(rename = "absplit")]
     Absplit,
@@ -9034,7 +9275,6 @@ pub enum CampaignType {
     #[serde(rename = "variate")]
     Variate,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9055,7 +9295,11 @@ impl std::fmt::Display for CampaignType {
     }
 }
 
-
+impl Default for CampaignType {
+    fn default() -> CampaignType {
+        CampaignType::Noop
+    }
+}
 impl CampaignType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CampaignType::Noop)
@@ -9066,7 +9310,6 @@ impl CampaignType {
  * The status of the campaign.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetCampaignsStatus {
     #[serde(rename = "paused")]
     Paused,
@@ -9079,7 +9322,6 @@ pub enum GetCampaignsStatus {
     #[serde(rename = "sent")]
     Sent,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9100,7 +9342,11 @@ impl std::fmt::Display for GetCampaignsStatus {
     }
 }
 
-
+impl Default for GetCampaignsStatus {
+    fn default() -> GetCampaignsStatus {
+        GetCampaignsStatus::Noop
+    }
+}
 impl GetCampaignsStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetCampaignsStatus::Noop)
@@ -9111,14 +9357,12 @@ impl GetCampaignsStatus {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SortField {
     #[serde(rename = "create_time")]
     CreateTime,
     #[serde(rename = "send_time")]
     SendTime,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9136,7 +9380,11 @@ impl std::fmt::Display for SortField {
     }
 }
 
-
+impl Default for SortField {
+    fn default() -> SortField {
+        SortField::Noop
+    }
+}
 impl SortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, SortField::Noop)
@@ -9147,14 +9395,12 @@ impl SortField {
  * Determines the order direction for sorted results.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SortDir {
     #[serde(rename = "ASC")]
     Asc,
     #[serde(rename = "DESC")]
     Desc,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9172,7 +9418,11 @@ impl std::fmt::Display for SortDir {
     }
 }
 
-
+impl Default for SortDir {
+    fn default() -> SortDir {
+        SortDir::Noop
+    }
+}
 impl SortDir {
     pub fn is_noop(&self) -> bool {
         matches!(self, SortDir::Noop)
@@ -9183,7 +9433,6 @@ impl SortDir {
  * The current status of the campaign.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CampaignStatus {
     #[serde(rename = "archived")]
     Archived,
@@ -9202,7 +9451,6 @@ pub enum CampaignStatus {
     #[serde(rename = "sent")]
     Sent,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9226,7 +9474,11 @@ impl std::fmt::Display for CampaignStatus {
     }
 }
 
-
+impl Default for CampaignStatus {
+    fn default() -> CampaignStatus {
+        CampaignStatus::Noop
+    }
+}
 impl CampaignStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, CampaignStatus::Noop)
@@ -9237,7 +9489,6 @@ impl CampaignStatus {
  * How the campaign's content is put together.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ContentType {
     #[serde(rename = "html")]
     Html,
@@ -9248,7 +9499,6 @@ pub enum ContentType {
     #[serde(rename = "url")]
     Url,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9268,7 +9518,11 @@ impl std::fmt::Display for ContentType {
     }
 }
 
-
+impl Default for ContentType {
+    fn default() -> ContentType {
+        ContentType::Noop
+    }
+}
 impl ContentType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ContentType::Noop)
@@ -9429,7 +9683,6 @@ pub struct GetCampaignsResponseCampaignSettings {
  * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum WinnerCriteria {
     #[serde(rename = "clicks")]
     Clicks,
@@ -9440,7 +9693,6 @@ pub enum WinnerCriteria {
     #[serde(rename = "total_revenue")]
     TotalRevenue,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9460,7 +9712,11 @@ impl std::fmt::Display for WinnerCriteria {
     }
 }
 
-
+impl Default for WinnerCriteria {
+    fn default() -> WinnerCriteria {
+        WinnerCriteria::Noop
+    }
+}
 impl WinnerCriteria {
     pub fn is_noop(&self) -> bool {
         matches!(self, WinnerCriteria::Noop)
@@ -9638,7 +9894,6 @@ pub struct ABTestOptions {
  * The frequency of the RSS Campaign.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Frequency {
     #[serde(rename = "daily")]
     Daily,
@@ -9647,7 +9902,6 @@ pub enum Frequency {
     #[serde(rename = "weekly")]
     Weekly,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9666,7 +9920,11 @@ impl std::fmt::Display for Frequency {
     }
 }
 
-
+impl Default for Frequency {
+    fn default() -> Frequency {
+        Frequency::Noop
+    }
+}
 impl Frequency {
     pub fn is_noop(&self) -> bool {
         matches!(self, Frequency::Noop)
@@ -9812,7 +10070,6 @@ pub struct RssOpts {
  * The type of AB split to run.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SplitTest {
     #[serde(rename = "from_name")]
     FromName,
@@ -9821,7 +10078,6 @@ pub enum SplitTest {
     #[serde(rename = "subject")]
     Subject,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9840,7 +10096,11 @@ impl std::fmt::Display for SplitTest {
     }
 }
 
-
+impl Default for SplitTest {
+    fn default() -> SplitTest {
+        SplitTest::Noop
+    }
+}
 impl SplitTest {
     pub fn is_noop(&self) -> bool {
         matches!(self, SplitTest::Noop)
@@ -9851,7 +10111,6 @@ impl SplitTest {
  * How we should evaluate a winner. Based on 'opens', 'clicks', or 'manual'.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PickWinner {
     #[serde(rename = "clicks")]
     Clicks,
@@ -9860,7 +10119,6 @@ pub enum PickWinner {
     #[serde(rename = "opens")]
     Opens,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9879,7 +10137,11 @@ impl std::fmt::Display for PickWinner {
     }
 }
 
-
+impl Default for PickWinner {
+    fn default() -> PickWinner {
+        PickWinner::Noop
+    }
+}
 impl PickWinner {
     pub fn is_noop(&self) -> bool {
         matches!(self, PickWinner::Noop)
@@ -9890,14 +10152,12 @@ impl PickWinner {
  * How unit of time for measuring the winner ('hours' or 'days'). This cannot be changed after a campaign is sent.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum WaitTime {
     #[serde(rename = "days")]
     Days,
     #[serde(rename = "hours")]
     Hours,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9915,7 +10175,11 @@ impl std::fmt::Display for WaitTime {
     }
 }
 
-
+impl Default for WaitTime {
+    fn default() -> WaitTime {
+        WaitTime::Noop
+    }
+}
 impl WaitTime {
     pub fn is_noop(&self) -> bool {
         matches!(self, WaitTime::Noop)
@@ -10141,7 +10405,6 @@ pub struct GetCampaignsResponseCampaignReportSummary {
  * The current state of a campaign delivery.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CampaignDeliveryStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -10152,7 +10415,6 @@ pub enum CampaignDeliveryStatus {
     #[serde(rename = "delivering")]
     Delivering,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10172,7 +10434,11 @@ impl std::fmt::Display for CampaignDeliveryStatus {
     }
 }
 
-
+impl Default for CampaignDeliveryStatus {
+    fn default() -> CampaignDeliveryStatus {
+        CampaignDeliveryStatus::Noop
+    }
+}
 impl CampaignDeliveryStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, CampaignDeliveryStatus::Noop)
@@ -10700,14 +10966,12 @@ pub struct RssOptions {
  * How the campaign's content is put together. The old drag and drop editor uses 'template' while the new editor uses 'multichannel'. Defaults to template.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CreatedCampaignContentType {
     #[serde(rename = "multichannel")]
     Multichannel,
     #[serde(rename = "template")]
     Template,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10725,7 +10989,11 @@ impl std::fmt::Display for CreatedCampaignContentType {
     }
 }
 
-
+impl Default for CreatedCampaignContentType {
+    fn default() -> CreatedCampaignContentType {
+        CreatedCampaignContentType::Noop
+    }
+}
 impl CreatedCampaignContentType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CreatedCampaignContentType::Noop)
@@ -11472,14 +11740,12 @@ pub struct PostCampaignsActionsScheduleRequest {
  * Choose the type of test email to send.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SendType {
     #[serde(rename = "html")]
     Html,
     #[serde(rename = "plaintext")]
     Plaintext,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11497,7 +11763,11 @@ impl std::fmt::Display for SendType {
     }
 }
 
-
+impl Default for SendType {
+    fn default() -> SendType {
+        SendType::Noop
+    }
+}
 impl SendType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SendType::Noop)
@@ -11627,7 +11897,6 @@ pub struct Template {
  * The type of encoded file. Defaults to zip.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ArchiveType {
     #[serde(rename = "tar")]
     Tar,
@@ -11642,7 +11911,6 @@ pub enum ArchiveType {
     #[serde(rename = "zip")]
     Zip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11664,7 +11932,11 @@ impl std::fmt::Display for ArchiveType {
     }
 }
 
-
+impl Default for ArchiveType {
+    fn default() -> ArchiveType {
+        ArchiveType::Noop
+    }
+}
 impl ArchiveType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ArchiveType::Noop)
@@ -11814,7 +12086,6 @@ pub struct CampaignContentData {
  * The source of the feedback.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Source {
     #[serde(rename = "android")]
     Android,
@@ -11829,7 +12100,6 @@ pub enum Source {
     #[serde(rename = "web")]
     Web,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11851,7 +12121,11 @@ impl std::fmt::Display for Source {
     }
 }
 
-
+impl Default for Source {
+    fn default() -> Source {
+        Source::Noop
+    }
+}
 impl Source {
     pub fn is_noop(&self) -> bool {
         matches!(self, Source::Noop)
@@ -12166,7 +12440,6 @@ pub struct CampaignFeedbackDataType {
  * The item type.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SendChecklistItemsType {
     #[serde(rename = "error")]
     Error,
@@ -12175,7 +12448,6 @@ pub enum SendChecklistItemsType {
     #[serde(rename = "warning")]
     Warning,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12194,7 +12466,11 @@ impl std::fmt::Display for SendChecklistItemsType {
     }
 }
 
-
+impl Default for SendChecklistItemsType {
+    fn default() -> SendChecklistItemsType {
+        SendChecklistItemsType::Noop
+    }
+}
 impl SendChecklistItemsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SendChecklistItemsType::Noop)
@@ -12426,14 +12702,12 @@ pub struct ConnectedSite {
  * Whether a conversation message has been marked as read.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum IsRead {
     #[serde(rename = "false")]
     False,
     #[serde(rename = "true")]
     True,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12451,7 +12725,11 @@ impl std::fmt::Display for IsRead {
     }
 }
 
-
+impl Default for IsRead {
+    fn default() -> IsRead {
+        IsRead::Noop
+    }
+}
 impl IsRead {
     pub fn is_noop(&self) -> bool {
         matches!(self, IsRead::Noop)
@@ -12782,12 +13060,10 @@ pub struct CollectionOfConversationMessages {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetFileManagerFilesSortField {
     #[serde(rename = "added_date")]
     AddedDate,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12804,7 +13080,11 @@ impl std::fmt::Display for GetFileManagerFilesSortField {
     }
 }
 
-
+impl Default for GetFileManagerFilesSortField {
+    fn default() -> GetFileManagerFilesSortField {
+        GetFileManagerFilesSortField::Noop
+    }
+}
 impl GetFileManagerFilesSortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetFileManagerFilesSortField::Noop)
@@ -12815,14 +13095,12 @@ impl GetFileManagerFilesSortField {
  * The type of file in the File Manager.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FileType {
     #[serde(rename = "file")]
     File,
     #[serde(rename = "image")]
     Image,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12840,7 +13118,11 @@ impl std::fmt::Display for FileType {
     }
 }
 
-
+impl Default for FileType {
+    fn default() -> FileType {
+        FileType::Noop
+    }
+}
 impl FileType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FileType::Noop)
@@ -13151,12 +13433,10 @@ pub struct FileManagerFolders {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetListsSortField {
     #[serde(rename = "date_created")]
     DateCreated,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13173,7 +13453,11 @@ impl std::fmt::Display for GetListsSortField {
     }
 }
 
-
+impl Default for GetListsSortField {
+    fn default() -> GetListsSortField {
+        GetListsSortField::Noop
+    }
+}
 impl GetListsSortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetListsSortField::Noop)
@@ -13304,14 +13588,12 @@ pub struct CampaignDefaults {
  * Legacy - visibility settings are no longer used
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Visibility {
     #[serde(rename = "prv")]
     Prv,
     #[serde(rename = "pub")]
     Pub,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13329,7 +13611,11 @@ impl std::fmt::Display for Visibility {
     }
 }
 
-
+impl Default for Visibility {
+    fn default() -> Visibility {
+        Visibility::Noop
+    }
+}
 impl Visibility {
     pub fn is_noop(&self) -> bool {
         matches!(self, Visibility::Noop)
@@ -13951,7 +14237,6 @@ pub struct SubscriberList {
  * Subscriber's current status.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MembersSubscribeUnsubscribeFromAListInBatchStatus {
     #[serde(rename = "cleaned")]
     Cleaned,
@@ -13962,7 +14247,6 @@ pub enum MembersSubscribeUnsubscribeFromAListInBatchStatus {
     #[serde(rename = "unsubscribed")]
     Unsubscribed,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13982,7 +14266,11 @@ impl std::fmt::Display for MembersSubscribeUnsubscribeFromAListInBatchStatus {
     }
 }
 
-
+impl Default for MembersSubscribeUnsubscribeFromAListInBatchStatus {
+    fn default() -> MembersSubscribeUnsubscribeFromAListInBatchStatus {
+        MembersSubscribeUnsubscribeFromAListInBatchStatus::Noop
+    }
+}
 impl MembersSubscribeUnsubscribeFromAListInBatchStatus {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -14140,7 +14428,6 @@ pub struct MembersSubscribeUnsubscribeFromAListInBatch {
  * Subscriber's status. This value is required only if the email address is not already present on the list.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum StatusIfNew {
     #[serde(rename = "cleaned")]
     Cleaned,
@@ -14153,7 +14440,6 @@ pub enum StatusIfNew {
     #[serde(rename = "unsubscribed")]
     Unsubscribed,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14174,7 +14460,11 @@ impl std::fmt::Display for StatusIfNew {
     }
 }
 
-
+impl Default for StatusIfNew {
+    fn default() -> StatusIfNew {
+        StatusIfNew::Noop
+    }
+}
 impl StatusIfNew {
     pub fn is_noop(&self) -> bool {
         matches!(self, StatusIfNew::Noop)
@@ -14521,14 +14811,12 @@ pub struct NewMembers {
  * A unique code that identifies this specifc error.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ErrorCode {
     #[serde(rename = "ERROR_CONTACT_EXISTS")]
     ErrorContactExists,
     #[serde(rename = "ERROR_GENERIC")]
     ErrorGeneric,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14546,7 +14834,11 @@ impl std::fmt::Display for ErrorCode {
     }
 }
 
-
+impl Default for ErrorCode {
+    fn default() -> ErrorCode {
+        ErrorCode::Noop
+    }
+}
 impl ErrorCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, ErrorCode::Noop)
@@ -15149,12 +15441,10 @@ pub struct EmailClients {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetListsGrowthHistorySortField {
     #[serde(rename = "month")]
     Month,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15171,7 +15461,11 @@ impl std::fmt::Display for GetListsGrowthHistorySortField {
     }
 }
 
-
+impl Default for GetListsGrowthHistorySortField {
+    fn default() -> GetListsGrowthHistorySortField {
+        GetListsGrowthHistorySortField::Noop
+    }
+}
 impl GetListsGrowthHistorySortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetListsGrowthHistorySortField::Noop)
@@ -15565,7 +15859,6 @@ pub struct InterestsData {
  * The type of segment. Static segments are now known as tags. Learn more about [tags](https://mailchimp.com/help/getting-started-tags?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CollectionOfSegmentsType {
     #[serde(rename = "fuzzy")]
     Fuzzy,
@@ -15574,7 +15867,6 @@ pub enum CollectionOfSegmentsType {
     #[serde(rename = "static")]
     Static,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15593,7 +15885,11 @@ impl std::fmt::Display for CollectionOfSegmentsType {
     }
 }
 
-
+impl Default for CollectionOfSegmentsType {
+    fn default() -> CollectionOfSegmentsType {
+        CollectionOfSegmentsType::Noop
+    }
+}
 impl CollectionOfSegmentsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CollectionOfSegmentsType::Noop)
@@ -16181,7 +16477,6 @@ pub struct TagSearchResults {
  * The subscriber's status.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetListsMembersStatus {
     #[serde(rename = "archived")]
     Archived,
@@ -16196,7 +16491,6 @@ pub enum GetListsMembersStatus {
     #[serde(rename = "unsubscribed")]
     Unsubscribed,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16218,7 +16512,11 @@ impl std::fmt::Display for GetListsMembersStatus {
     }
 }
 
-
+impl Default for GetListsMembersStatus {
+    fn default() -> GetListsMembersStatus {
+        GetListsMembersStatus::Noop
+    }
+}
 impl GetListsMembersStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetListsMembersStatus::Noop)
@@ -16229,7 +16527,6 @@ impl GetListsMembersStatus {
  * Used to filter list members by interests. Must be accompanied by interest_category_id and interest_ids. "any" will match a member with any of the interest supplied, "all" will only match members with every interest supplied, and "none" will match members without any of the interest supplied.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum InterestMatch {
     #[serde(rename = "all")]
     All,
@@ -16238,7 +16535,6 @@ pub enum InterestMatch {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16257,7 +16553,11 @@ impl std::fmt::Display for InterestMatch {
     }
 }
 
-
+impl Default for InterestMatch {
+    fn default() -> InterestMatch {
+        InterestMatch::Noop
+    }
+}
 impl InterestMatch {
     pub fn is_noop(&self) -> bool {
         matches!(self, InterestMatch::Noop)
@@ -16268,7 +16568,6 @@ impl InterestMatch {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetListsMembersSortField {
     #[serde(rename = "last_changed")]
     LastChanged,
@@ -16277,7 +16576,6 @@ pub enum GetListsMembersSortField {
     #[serde(rename = "timestamp_signup")]
     TimestampSignup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16296,7 +16594,11 @@ impl std::fmt::Display for GetListsMembersSortField {
     }
 }
 
-
+impl Default for GetListsMembersSortField {
+    fn default() -> GetListsMembersSortField {
+        GetListsMembersSortField::Noop
+    }
+}
 impl GetListsMembersSortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetListsMembersSortField::Noop)
@@ -17156,12 +17458,10 @@ pub struct MemberActivityEvents {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ActivityType {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17178,7 +17478,11 @@ impl std::fmt::Display for ActivityType {
     }
 }
 
-
+impl Default for ActivityType {
+    fn default() -> ActivityType {
+        ActivityType::Noop
+    }
+}
 impl ActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ActivityType::Noop)
@@ -17226,12 +17530,10 @@ pub struct EmailOpens {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailClicksActivityType {
     #[serde(rename = "click")]
     Click,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17248,7 +17550,11 @@ impl std::fmt::Display for EmailClicksActivityType {
     }
 }
 
-
+impl Default for EmailClicksActivityType {
+    fn default() -> EmailClicksActivityType {
+        EmailClicksActivityType::Noop
+    }
+}
 impl EmailClicksActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailClicksActivityType::Noop)
@@ -17305,12 +17611,10 @@ pub struct EmailClicks {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailBouncedActivityType {
     #[serde(rename = "bounce")]
     Bounce,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17327,7 +17631,11 @@ impl std::fmt::Display for EmailBouncedActivityType {
     }
 }
 
-
+impl Default for EmailBouncedActivityType {
+    fn default() -> EmailBouncedActivityType {
+        EmailBouncedActivityType::Noop
+    }
+}
 impl EmailBouncedActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailBouncedActivityType::Noop)
@@ -17338,14 +17646,12 @@ impl EmailBouncedActivityType {
  * The type of bounce.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum BounceType {
     #[serde(rename = "hard")]
     Hard,
     #[serde(rename = "soft")]
     Soft,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17363,7 +17669,11 @@ impl std::fmt::Display for BounceType {
     }
 }
 
-
+impl Default for BounceType {
+    fn default() -> BounceType {
+        BounceType::Noop
+    }
+}
 impl BounceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BounceType::Noop)
@@ -17424,12 +17734,10 @@ pub struct EmailBounced {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ListUnsubscribedActivityType {
     #[serde(rename = "unsub")]
     Unsub,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17446,7 +17754,11 @@ impl std::fmt::Display for ListUnsubscribedActivityType {
     }
 }
 
-
+impl Default for ListUnsubscribedActivityType {
+    fn default() -> ListUnsubscribedActivityType {
+        ListUnsubscribedActivityType::Noop
+    }
+}
 impl ListUnsubscribedActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ListUnsubscribedActivityType::Noop)
@@ -17511,12 +17823,10 @@ pub struct ListUnsubscribed {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EmailSentActivityType {
     #[serde(rename = "sent")]
     Sent,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17533,7 +17843,11 @@ impl std::fmt::Display for EmailSentActivityType {
     }
 }
 
-
+impl Default for EmailSentActivityType {
+    fn default() -> EmailSentActivityType {
+        EmailSentActivityType::Noop
+    }
+}
 impl EmailSentActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailSentActivityType::Noop)
@@ -17679,12 +17993,10 @@ pub struct EmailConversation {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum NoteActivityType {
     #[serde(rename = "note")]
     Note,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17701,7 +18013,11 @@ impl std::fmt::Display for NoteActivityType {
     }
 }
 
-
+impl Default for NoteActivityType {
+    fn default() -> NoteActivityType {
+        NoteActivityType::Noop
+    }
+}
 impl NoteActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NoteActivityType::Noop)
@@ -17776,12 +18092,10 @@ pub struct Note {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MarketingPermissionActivityType {
     #[serde(rename = "marketing_permission")]
     MarketingPermission,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17798,7 +18112,11 @@ impl std::fmt::Display for MarketingPermissionActivityType {
     }
 }
 
-
+impl Default for MarketingPermissionActivityType {
+    fn default() -> MarketingPermissionActivityType {
+        MarketingPermissionActivityType::Noop
+    }
+}
 impl MarketingPermissionActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MarketingPermissionActivityType::Noop)
@@ -17854,12 +18172,10 @@ pub struct MarketingPermissionData {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PostcardSentActivityType {
     #[serde(rename = "postcard_sent")]
     PostcardSent,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17876,7 +18192,11 @@ impl std::fmt::Display for PostcardSentActivityType {
     }
 }
 
-
+impl Default for PostcardSentActivityType {
+    fn default() -> PostcardSentActivityType {
+        PostcardSentActivityType::Noop
+    }
+}
 impl PostcardSentActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PostcardSentActivityType::Noop)
@@ -17924,12 +18244,10 @@ pub struct PostcardSent {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SquatterSignupActivityType {
     #[serde(rename = "squatter_signup")]
     SquatterSignup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17946,7 +18264,11 @@ impl std::fmt::Display for SquatterSignupActivityType {
     }
 }
 
-
+impl Default for SquatterSignupActivityType {
+    fn default() -> SquatterSignupActivityType {
+        SquatterSignupActivityType::Noop
+    }
+}
 impl SquatterSignupActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SquatterSignupActivityType::Noop)
@@ -17994,12 +18316,10 @@ pub struct SquatterSignup {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum WebsiteSignupActivityType {
     #[serde(rename = "website_signup")]
     WebsiteSignup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18016,7 +18336,11 @@ impl std::fmt::Display for WebsiteSignupActivityType {
     }
 }
 
-
+impl Default for WebsiteSignupActivityType {
+    fn default() -> WebsiteSignupActivityType {
+        WebsiteSignupActivityType::Noop
+    }
+}
 impl WebsiteSignupActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, WebsiteSignupActivityType::Noop)
@@ -18064,12 +18388,10 @@ pub struct WebsiteSignup {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LandingPageSignupActivityType {
     #[serde(rename = "landing_page_signup")]
     LandingPageSignup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18086,7 +18408,11 @@ impl std::fmt::Display for LandingPageSignupActivityType {
     }
 }
 
-
+impl Default for LandingPageSignupActivityType {
+    fn default() -> LandingPageSignupActivityType {
+        LandingPageSignupActivityType::Noop
+    }
+}
 impl LandingPageSignupActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LandingPageSignupActivityType::Noop)
@@ -18134,12 +18460,10 @@ pub struct LandingPageSignup {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceSignupActivityType {
     #[serde(rename = "ecommerce_signup")]
     EcommerceSignup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18156,7 +18480,11 @@ impl std::fmt::Display for EcommerceSignupActivityType {
     }
 }
 
-
+impl Default for EcommerceSignupActivityType {
+    fn default() -> EcommerceSignupActivityType {
+        EcommerceSignupActivityType::Noop
+    }
+}
 impl EcommerceSignupActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceSignupActivityType::Noop)
@@ -18195,12 +18523,10 @@ pub struct EcommerceSignup {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GenericSignupActivityType {
     #[serde(rename = "generic_signup")]
     GenericSignup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18217,7 +18543,11 @@ impl std::fmt::Display for GenericSignupActivityType {
     }
 }
 
-
+impl Default for GenericSignupActivityType {
+    fn default() -> GenericSignupActivityType {
+        GenericSignupActivityType::Noop
+    }
+}
 impl GenericSignupActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GenericSignupActivityType::Noop)
@@ -18256,12 +18586,10 @@ pub struct GenericSignup {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EcommerceOrderActivityType {
     #[serde(rename = "order")]
     Order,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18278,7 +18606,11 @@ impl std::fmt::Display for EcommerceOrderActivityType {
     }
 }
 
-
+impl Default for EcommerceOrderActivityType {
+    fn default() -> EcommerceOrderActivityType {
+        EcommerceOrderActivityType::Noop
+    }
+}
 impl EcommerceOrderActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EcommerceOrderActivityType::Noop)
@@ -18476,12 +18808,10 @@ pub struct EcommerceOrder {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ContactActivityEventType {
     #[serde(rename = "event")]
     Event,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18498,7 +18828,11 @@ impl std::fmt::Display for ContactActivityEventType {
     }
 }
 
-
+impl Default for ContactActivityEventType {
+    fn default() -> ContactActivityEventType {
+        ContactActivityEventType::Noop
+    }
+}
 impl ContactActivityEventType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ContactActivityEventType::Noop)
@@ -18546,12 +18880,10 @@ pub struct ContactActivityEvent {
  * The type of event activity.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SurveyResponseActivityType {
     #[serde(rename = "survey_response")]
     SurveyResponse,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18568,7 +18900,11 @@ impl std::fmt::Display for SurveyResponseActivityType {
     }
 }
 
-
+impl Default for SurveyResponseActivityType {
+    fn default() -> SurveyResponseActivityType {
+        SurveyResponseActivityType::Noop
+    }
+}
 impl SurveyResponseActivityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SurveyResponseActivityType::Noop)
@@ -18907,14 +19243,12 @@ pub struct CollectionOfTags {
  * The status for the tag on the member, pass in active to add a tag or inactive to remove it.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MemberTagsTagStatus {
     #[serde(rename = "active")]
     Active,
     #[serde(rename = "inactive")]
     Inactive,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18932,7 +19266,11 @@ impl std::fmt::Display for MemberTagsTagStatus {
     }
 }
 
-
+impl Default for MemberTagsTagStatus {
+    fn default() -> MemberTagsTagStatus {
+        MemberTagsTagStatus::Noop
+    }
+}
 impl MemberTagsTagStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, MemberTagsTagStatus::Noop)
@@ -19181,7 +19519,6 @@ pub struct CollectionOfMemberActivityEvents {
  * Returns notes sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetListsMembersNotesSortField {
     #[serde(rename = "created_at")]
     CreatedAt,
@@ -19190,7 +19527,6 @@ pub enum GetListsMembersNotesSortField {
     #[serde(rename = "updated_at")]
     UpdatedAt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19209,7 +19545,11 @@ impl std::fmt::Display for GetListsMembersNotesSortField {
     }
 }
 
-
+impl Default for GetListsMembersNotesSortField {
+    fn default() -> GetListsMembersNotesSortField {
+        GetListsMembersNotesSortField::Noop
+    }
+}
 impl GetListsMembersNotesSortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetListsMembersNotesSortField::Noop)
@@ -19349,7 +19689,6 @@ pub struct CollectionOfNotes {
  * The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum MergeFieldType {
     #[serde(rename = "address")]
     Address,
@@ -19374,7 +19713,6 @@ pub enum MergeFieldType {
     #[serde(rename = "zip")]
     Zip,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19401,7 +19739,11 @@ impl std::fmt::Display for MergeFieldType {
     }
 }
 
-
+impl Default for MergeFieldType {
+    fn default() -> MergeFieldType {
+        MergeFieldType::Noop
+    }
+}
 impl MergeFieldType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MergeFieldType::Noop)
@@ -19976,7 +20318,6 @@ pub struct ListWebhooksData {
  * Image alignment.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ImageAlign {
     #[serde(rename = "center")]
     Center,
@@ -19987,7 +20328,6 @@ pub enum ImageAlign {
     #[serde(rename = "right")]
     Right,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20007,7 +20347,11 @@ impl std::fmt::Display for ImageAlign {
     }
 }
 
-
+impl Default for ImageAlign {
+    fn default() -> ImageAlign {
+        ImageAlign::Noop
+    }
+}
 impl ImageAlign {
     pub fn is_noop(&self) -> bool {
         matches!(self, ImageAlign::Noop)
@@ -20018,7 +20362,6 @@ impl ImageAlign {
  * Image border style.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ImageBorderStyle {
     #[serde(rename = "dashed")]
     Dashed,
@@ -20039,7 +20382,6 @@ pub enum ImageBorderStyle {
     #[serde(rename = "solid")]
     Solid,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20064,7 +20406,11 @@ impl std::fmt::Display for ImageBorderStyle {
     }
 }
 
-
+impl Default for ImageBorderStyle {
+    fn default() -> ImageBorderStyle {
+        ImageBorderStyle::Noop
+    }
+}
 impl ImageBorderStyle {
     pub fn is_noop(&self) -> bool {
         matches!(self, ImageBorderStyle::Noop)
@@ -20075,14 +20421,12 @@ impl ImageBorderStyle {
  * Image link target.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum ImageTarget {
     #[serde(rename = "_blank")]
     Blank,
     #[serde(rename = "null")]
     Null,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20100,7 +20444,11 @@ impl std::fmt::Display for ImageTarget {
     }
 }
 
-
+impl Default for ImageTarget {
+    fn default() -> ImageTarget {
+        ImageTarget::Noop
+    }
+}
 impl ImageTarget {
     pub fn is_noop(&self) -> bool {
         matches!(self, ImageTarget::Noop)
@@ -20203,7 +20551,6 @@ pub struct Header {
  * The content section name.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Section {
     #[serde(rename = "signup_message")]
     SignupMessage,
@@ -20212,7 +20559,6 @@ pub enum Section {
     #[serde(rename = "unsub_message")]
     UnsubMessage,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20231,7 +20577,11 @@ impl std::fmt::Display for Section {
     }
 }
 
-
+impl Default for Section {
+    fn default() -> Section {
+        Section::Noop
+    }
+}
 impl Section {
     pub fn is_noop(&self) -> bool {
         matches!(self, Section::Noop)
@@ -20261,7 +20611,6 @@ pub struct Contents {
  * A string that identifies the element selector.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Selector {
     #[serde(rename = "body_background")]
     BodyBackground,
@@ -20292,7 +20641,6 @@ pub enum Selector {
     #[serde(rename = "page_outer_wrapper")]
     PageOuterWrapper,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20322,7 +20670,11 @@ impl std::fmt::Display for Selector {
     }
 }
 
-
+impl Default for Selector {
+    fn default() -> Selector {
+        Selector::Noop
+    }
+}
 impl Selector {
     pub fn is_noop(&self) -> bool {
         matches!(self, Selector::Noop)
@@ -20571,14 +20923,12 @@ pub struct ListLocations {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetAllLandingPagesSortField {
     #[serde(rename = "created_at")]
     CreatedAt,
     #[serde(rename = "updated_at")]
     UpdatedAt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20596,7 +20946,11 @@ impl std::fmt::Display for GetAllLandingPagesSortField {
     }
 }
 
-
+impl Default for GetAllLandingPagesSortField {
+    fn default() -> GetAllLandingPagesSortField {
+        GetAllLandingPagesSortField::Noop
+    }
+}
 impl GetAllLandingPagesSortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetAllLandingPagesSortField::Noop)
@@ -20607,7 +20961,6 @@ impl GetAllLandingPagesSortField {
  * The status of this landing page.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LandingPageStatus {
     #[serde(rename = "draft")]
     Draft,
@@ -20616,7 +20969,6 @@ pub enum LandingPageStatus {
     #[serde(rename = "unpublished")]
     Unpublished,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20635,7 +20987,11 @@ impl std::fmt::Display for LandingPageStatus {
     }
 }
 
-
+impl Default for LandingPageStatus {
+    fn default() -> LandingPageStatus {
+        LandingPageStatus::Noop
+    }
+}
 impl LandingPageStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, LandingPageStatus::Noop)
@@ -20851,14 +21207,12 @@ pub struct GetAllLandingPagesResponse {
  * The type of template the landing page has.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum LandingPageTemplateType {
     #[serde(rename = "product")]
     Product,
     #[serde(rename = "signup")]
     Signup,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20876,7 +21230,11 @@ impl std::fmt::Display for LandingPageTemplateType {
     }
 }
 
-
+impl Default for LandingPageTemplateType {
+    fn default() -> LandingPageTemplateType {
+        LandingPageTemplateType::Noop
+    }
+}
 impl LandingPageTemplateType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LandingPageTemplateType::Noop)
@@ -22069,7 +22427,6 @@ pub struct AbuseComplaintsData {
  * The sentiment type for a feedback message.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AdviceType {
     #[serde(rename = "negative")]
     Negative,
@@ -22078,7 +22435,6 @@ pub enum AdviceType {
     #[serde(rename = "positive")]
     Positive,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -22097,7 +22453,11 @@ impl std::fmt::Display for AdviceType {
     }
 }
 
-
+impl Default for AdviceType {
+    fn default() -> AdviceType {
+        AdviceType::Noop
+    }
+}
 impl AdviceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AdviceType::Noop)
@@ -23720,7 +24080,6 @@ pub struct UnsubscribesData {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetReportsEcommerceProductActivitySortField {
     #[serde(rename = "title")]
     Title,
@@ -23729,7 +24088,6 @@ pub enum GetReportsEcommerceProductActivitySortField {
     #[serde(rename = "total_revenue")]
     TotalRevenue,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23748,7 +24106,11 @@ impl std::fmt::Display for GetReportsEcommerceProductActivitySortField {
     }
 }
 
-
+impl Default for GetReportsEcommerceProductActivitySortField {
+    fn default() -> GetReportsEcommerceProductActivitySortField {
+        GetReportsEcommerceProductActivitySortField::Noop
+    }
+}
 impl GetReportsEcommerceProductActivitySortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetReportsEcommerceProductActivitySortField::Noop)
@@ -23868,7 +24230,6 @@ pub struct GetReportsEcommerceProductActivityResponse {
  * Returns user templates sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetTemplatesSortField {
     #[serde(rename = "date_created")]
     DateCreated,
@@ -23877,7 +24238,6 @@ pub enum GetTemplatesSortField {
     #[serde(rename = "name")]
     Name,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23896,7 +24256,11 @@ impl std::fmt::Display for GetTemplatesSortField {
     }
 }
 
-
+impl Default for GetTemplatesSortField {
+    fn default() -> GetTemplatesSortField {
+        GetTemplatesSortField::Noop
+    }
+}
 impl GetTemplatesSortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetTemplatesSortField::Noop)
@@ -24287,12 +24651,10 @@ pub struct Customer {
  * The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TrackingCode {
     #[serde(rename = "prec")]
     Prec,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24309,7 +24671,11 @@ impl std::fmt::Display for TrackingCode {
     }
 }
 
-
+impl Default for TrackingCode {
+    fn default() -> TrackingCode {
+        TrackingCode::Noop
+    }
+}
 impl TrackingCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, TrackingCode::Noop)
@@ -24568,14 +24934,12 @@ pub struct BillingAddress {
  * Type of discount. For free shipping set type to fixed
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OrdersPromosType {
     #[serde(rename = "fixed")]
     Fixed,
     #[serde(rename = "percentage")]
     Percentage,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24593,7 +24957,11 @@ impl std::fmt::Display for OrdersPromosType {
     }
 }
 
-
+impl Default for OrdersPromosType {
+    fn default() -> OrdersPromosType {
+        OrdersPromosType::Noop
+    }
+}
 impl OrdersPromosType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrdersPromosType::Noop)
@@ -26271,7 +26639,6 @@ pub struct ECommerceCustomerDataType {
  * The target that the discount applies to.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Target {
     #[serde(rename = "per_item")]
     PerItem,
@@ -26280,7 +26647,6 @@ pub enum Target {
     #[serde(rename = "total")]
     Total,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -26299,7 +26665,11 @@ impl std::fmt::Display for Target {
     }
 }
 
-
+impl Default for Target {
+    fn default() -> Target {
+        Target::Noop
+    }
+}
 impl Target {
     pub fn is_noop(&self) -> bool {
         matches!(self, Target::Noop)
@@ -28373,7 +28743,6 @@ pub struct ApiHealthStatus {
  * Returns files sorted by the specified field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetAllFacebookAdsSortField {
     #[serde(rename = "created_at")]
     CreatedAt,
@@ -28382,7 +28751,6 @@ pub enum GetAllFacebookAdsSortField {
     #[serde(rename = "updated_at")]
     UpdatedAt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28401,7 +28769,11 @@ impl std::fmt::Display for GetAllFacebookAdsSortField {
     }
 }
 
-
+impl Default for GetAllFacebookAdsSortField {
+    fn default() -> GetAllFacebookAdsSortField {
+        GetAllFacebookAdsSortField::Noop
+    }
+}
 impl GetAllFacebookAdsSortField {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetAllFacebookAdsSortField::Noop)
@@ -28412,7 +28784,6 @@ impl GetAllFacebookAdsSortField {
  * Supported Campaign, Ad, Page type
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OutreachType {
     #[serde(rename = "absplit")]
     Absplit,
@@ -28443,7 +28814,6 @@ pub enum OutreachType {
     #[serde(rename = "website")]
     Website,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28473,7 +28843,11 @@ impl std::fmt::Display for OutreachType {
     }
 }
 
-
+impl Default for OutreachType {
+    fn default() -> OutreachType {
+        OutreachType::Noop
+    }
+}
 impl OutreachType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OutreachType::Noop)
@@ -28484,7 +28858,6 @@ impl OutreachType {
  * Campaign, Ad, or Page status
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OutreachStatus {
     #[serde(rename = "active")]
     Active,
@@ -28521,7 +28894,6 @@ pub enum OutreachStatus {
     #[serde(rename = "unpublished")]
     Unpublished,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28554,7 +28926,11 @@ impl std::fmt::Display for OutreachStatus {
     }
 }
 
-
+impl Default for OutreachStatus {
+    fn default() -> OutreachStatus {
+        OutreachStatus::Noop
+    }
+}
 impl OutreachStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, OutreachStatus::Noop)
@@ -29049,7 +29425,6 @@ pub struct Site {
  * Type of the audience
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FacebookAdsAudienceType {
     #[serde(rename = "Custom Audience")]
     CustomAudience,
@@ -29058,7 +29433,6 @@ pub enum FacebookAdsAudienceType {
     #[serde(rename = "Lookalike Audience")]
     LookalikeAudience,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29077,7 +29451,11 @@ impl std::fmt::Display for FacebookAdsAudienceType {
     }
 }
 
-
+impl Default for FacebookAdsAudienceType {
+    fn default() -> FacebookAdsAudienceType {
+        FacebookAdsAudienceType::Noop
+    }
+}
 impl FacebookAdsAudienceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FacebookAdsAudienceType::Noop)
@@ -29088,14 +29466,12 @@ impl FacebookAdsAudienceType {
  * List or Facebook based audience
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum SourceType {
     #[serde(rename = "facebook")]
     Facebook,
     #[serde(rename = "list")]
     List,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29113,7 +29489,11 @@ impl std::fmt::Display for SourceType {
     }
 }
 
-
+impl Default for SourceType {
+    fn default() -> SourceType {
+        SourceType::Noop
+    }
+}
 impl SourceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SourceType::Noop)

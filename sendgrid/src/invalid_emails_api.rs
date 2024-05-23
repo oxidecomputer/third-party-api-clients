@@ -121,7 +121,7 @@ impl InvalidEmailsApi {
     ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self
             .client
-            .url("/suppression/invalid_emails", None);
+            .url(&"/suppression/invalid_emails".to_string(), None);
         self.client
             .delete(
                 &url,
@@ -150,7 +150,7 @@ impl InvalidEmailsApi {
         let url = self.client.url(
             &format!(
                 "/suppression/invalid_emails/{}",
-                crate::progenitor_support::encode_path(email),
+                crate::progenitor_support::encode_path(&email.to_string()),
             ),
             None,
         );
@@ -180,7 +180,7 @@ impl InvalidEmailsApi {
         let url = self.client.url(
             &format!(
                 "/suppression/invalid_emails/{}",
-                crate::progenitor_support::encode_path(email),
+                crate::progenitor_support::encode_path(&email.to_string()),
             ),
             None,
         );
@@ -212,7 +212,7 @@ impl InvalidEmailsApi {
         let url = self.client.url(
             &format!(
                 "/suppression/invalid_emails/{}",
-                crate::progenitor_support::encode_path(email),
+                crate::progenitor_support::encode_path(&email.to_string()),
             ),
             None,
         );

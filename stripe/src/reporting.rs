@@ -26,7 +26,7 @@ impl Reporting {
      */
     pub async fn get_report_runs(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -72,11 +72,11 @@ impl Reporting {
      */
     pub async fn get_all_report_runs(
         &self,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportRun>>> {
         let url = self
             .client
-            .url("/v1/reporting/report_runs", None);
+            .url(&"/v1/reporting/report_runs".to_string(), None);
         let crate::Response::<crate::types::GetReportingReportRunsResponse> {
             mut status,
             mut headers,
@@ -158,7 +158,7 @@ impl Reporting {
     ) -> ClientResult<crate::Response<crate::types::ReportingReportRun>> {
         let url = self
             .client
-            .url("/v1/reporting/report_runs", None);
+            .url(&"/v1/reporting/report_runs".to_string(), None);
         self.client
             .post(
                 &url,
@@ -186,7 +186,7 @@ impl Reporting {
         let url = self.client.url(
             &format!(
                 "/v1/reporting/report_runs/{}",
-                crate::progenitor_support::encode_path(report_run),
+                crate::progenitor_support::encode_path(&report_run.to_string()),
             ),
             None,
         );
@@ -214,7 +214,7 @@ impl Reporting {
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportType>>> {
         let url = self
             .client
-            .url("/v1/reporting/report_types", None);
+            .url(&"/v1/reporting/report_types".to_string(), None);
         let resp: crate::Response<crate::types::FinancialReportingFinanceReportTypeList> = self
             .client
             .get(
@@ -245,7 +245,7 @@ impl Reporting {
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportType>>> {
         let url = self
             .client
-            .url("/v1/reporting/report_types", None);
+            .url(&"/v1/reporting/report_types".to_string(), None);
         let crate::Response::<crate::types::FinancialReportingFinanceReportTypeList> {
             mut status,
             mut headers,
@@ -334,7 +334,7 @@ impl Reporting {
         let url = self.client.url(
             &format!(
                 "/v1/reporting/report_types/{}",
-                crate::progenitor_support::encode_path(report_type),
+                crate::progenitor_support::encode_path(&report_type.to_string()),
             ),
             None,
         );

@@ -29,7 +29,7 @@ impl ENoteConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/enote_configuration",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -62,7 +62,7 @@ impl ENoteConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/enote_configuration",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -91,7 +91,7 @@ impl ENoteConfigurations {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/enote_configuration",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );

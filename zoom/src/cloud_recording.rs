@@ -80,7 +80,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/users/{}/recordings?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -133,7 +133,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -183,7 +183,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -231,8 +231,8 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/{}?{}",
-                crate::progenitor_support::encode_path(meeting_id),
-                crate::progenitor_support::encode_path(recording_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(&recording_id.to_string()),
                 query_
             ),
             None,
@@ -275,7 +275,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/status",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -318,8 +318,8 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/{}/status",
-                crate::progenitor_support::encode_path(meeting_id),
-                crate::progenitor_support::encode_path(recording_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(&recording_id.to_string()),
             ),
             None,
         );
@@ -358,7 +358,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/settings",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -398,7 +398,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/settings",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -588,7 +588,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/registrants/questions",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -630,7 +630,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/registrants/questions",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -696,7 +696,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/recordings?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -757,7 +757,7 @@ impl CloudRecording {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/recordings?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,

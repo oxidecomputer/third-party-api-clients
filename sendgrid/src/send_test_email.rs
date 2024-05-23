@@ -32,7 +32,7 @@ impl SendTestEmail {
     ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self
             .client
-            .url("/marketing/test/send_email", None);
+            .url(&"/marketing/test/send_email".to_string(), None);
         self.client
             .post(
                 &url,

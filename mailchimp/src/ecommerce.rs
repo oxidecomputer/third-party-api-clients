@@ -138,7 +138,7 @@ impl Ecommerce {
         &self,
         body: &crate::types::ECommerceStore,
     ) -> ClientResult<crate::Response<crate::types::Stores>> {
-        let url = self.client.url("/ecommerce/stores", None);
+        let url = self.client.url(&"/ecommerce/stores".to_string(), None);
         self.client
             .post(
                 &url,
@@ -179,7 +179,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
                 query_
             ),
             None,
@@ -209,7 +209,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
             ),
             None,
         );
@@ -242,7 +242,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
             ),
             None,
         );
@@ -296,7 +296,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts?{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
                 query_
             ),
             None,
@@ -330,7 +330,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
             ),
             None,
         );
@@ -376,8 +376,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
                 query_
             ),
             None,
@@ -412,8 +412,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
             ),
             None,
         );
@@ -448,8 +448,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
             ),
             None,
         );
@@ -505,8 +505,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
                 query_
             ),
             None,
@@ -542,8 +542,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
             ),
             None,
         );
@@ -591,9 +591,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
-                crate::progenitor_support::encode_path(line_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
+                crate::progenitor_support::encode_path(&line_id.to_string()),
                 query_
             ),
             None,
@@ -630,9 +630,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
-                crate::progenitor_support::encode_path(line_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
+                crate::progenitor_support::encode_path(&line_id.to_string()),
             ),
             None,
         );
@@ -669,9 +669,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(cart_id),
-                crate::progenitor_support::encode_path(line_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&cart_id.to_string()),
+                crate::progenitor_support::encode_path(&line_id.to_string()),
             ),
             None,
         );
@@ -730,7 +730,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers?{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
                 query_
             ),
             None,
@@ -764,7 +764,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
             ),
             None,
         );
@@ -810,8 +810,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
                 query_
             ),
             None,
@@ -847,8 +847,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
             ),
             None,
         );
@@ -882,8 +882,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
             ),
             None,
         );
@@ -918,8 +918,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
             ),
             None,
         );
@@ -973,7 +973,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules?{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
                 query_
             ),
             None,
@@ -1007,7 +1007,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
             ),
             None,
         );
@@ -1053,8 +1053,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
                 query_
             ),
             None,
@@ -1089,8 +1089,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
             ),
             None,
         );
@@ -1125,8 +1125,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
             ),
             None,
         );
@@ -1182,8 +1182,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
                 query_
             ),
             None,
@@ -1219,8 +1219,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
             ),
             None,
         );
@@ -1268,9 +1268,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
-                crate::progenitor_support::encode_path(promo_code_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_code_id.to_string()),
                 query_
             ),
             None,
@@ -1307,9 +1307,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
-                crate::progenitor_support::encode_path(promo_code_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_code_id.to_string()),
             ),
             None,
         );
@@ -1346,9 +1346,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(promo_rule_id),
-                crate::progenitor_support::encode_path(promo_code_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+                crate::progenitor_support::encode_path(&promo_code_id.to_string()),
             ),
             None,
         );
@@ -1422,7 +1422,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders?{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
                 query_
             ),
             None,
@@ -1456,7 +1456,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
             ),
             None,
         );
@@ -1502,8 +1502,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -1538,8 +1538,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -1574,8 +1574,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -1631,8 +1631,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 query_
             ),
             None,
@@ -1668,8 +1668,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -1717,9 +1717,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(line_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&line_id.to_string()),
                 query_
             ),
             None,
@@ -1756,9 +1756,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(line_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&line_id.to_string()),
             ),
             None,
         );
@@ -1795,9 +1795,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(line_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&line_id.to_string()),
             ),
             None,
         );
@@ -1851,7 +1851,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products?{}",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
                 query_
             ),
             None,
@@ -1885,7 +1885,7 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products",
-                crate::progenitor_support::encode_path(store_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
             ),
             None,
         );
@@ -1931,8 +1931,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -1967,8 +1967,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -2003,8 +2003,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -2060,8 +2060,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -2097,8 +2097,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -2146,9 +2146,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(variant_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&variant_id.to_string()),
                 query_
             ),
             None,
@@ -2186,9 +2186,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(variant_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&variant_id.to_string()),
             ),
             None,
         );
@@ -2224,9 +2224,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(variant_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&variant_id.to_string()),
             ),
             None,
         );
@@ -2263,9 +2263,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(variant_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&variant_id.to_string()),
             ),
             None,
         );
@@ -2321,8 +2321,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -2358,8 +2358,8 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -2407,9 +2407,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images/{}?{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
                 query_
             ),
             None,
@@ -2446,9 +2446,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -2485,9 +2485,9 @@ impl Ecommerce {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images/{}",
-                crate::progenitor_support::encode_path(store_id),
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&store_id.to_string()),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );

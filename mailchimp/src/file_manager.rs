@@ -103,7 +103,7 @@ impl FileManager {
         &self,
         body: &crate::types::GalleryFile,
     ) -> ClientResult<crate::Response<crate::types::Files>> {
-        let url = self.client.url("/file-manager/files", None);
+        let url = self.client.url(&"/file-manager/files".to_string(), None);
         self.client
             .post(
                 &url,
@@ -144,7 +144,7 @@ impl FileManager {
         let url = self.client.url(
             &format!(
                 "/file-manager/files/{}?{}",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
                 query_
             ),
             None,
@@ -174,7 +174,7 @@ impl FileManager {
         let url = self.client.url(
             &format!(
                 "/file-manager/files/{}",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
             ),
             None,
         );
@@ -207,7 +207,7 @@ impl FileManager {
         let url = self.client.url(
             &format!(
                 "/file-manager/files/{}",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
             ),
             None,
         );
@@ -298,7 +298,7 @@ impl FileManager {
         &self,
         body: &crate::types::GalleryFolder,
     ) -> ClientResult<crate::Response<crate::types::FileManagerFoldersGalleryFolder>> {
-        let url = self.client.url("/file-manager/folders", None);
+        let url = self.client.url(&"/file-manager/folders".to_string(), None);
         self.client
             .post(
                 &url,
@@ -339,7 +339,7 @@ impl FileManager {
         let url = self.client.url(
             &format!(
                 "/file-manager/folders/{}?{}",
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
                 query_
             ),
             None,
@@ -369,7 +369,7 @@ impl FileManager {
         let url = self.client.url(
             &format!(
                 "/file-manager/folders/{}",
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
             ),
             None,
         );
@@ -402,7 +402,7 @@ impl FileManager {
         let url = self.client.url(
             &format!(
                 "/file-manager/folders/{}",
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
             ),
             None,
         );

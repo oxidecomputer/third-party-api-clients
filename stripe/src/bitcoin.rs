@@ -191,7 +191,7 @@ impl Bitcoin {
         let url = self.client.url(
             &format!(
                 "/v1/bitcoin/receivers/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -244,7 +244,7 @@ impl Bitcoin {
         let url = self.client.url(
             &format!(
                 "/v1/bitcoin/receivers/{}/transactions?{}",
-                crate::progenitor_support::encode_path(receiver),
+                crate::progenitor_support::encode_path(&receiver.to_string()),
                 query_
             ),
             None,
@@ -287,7 +287,7 @@ impl Bitcoin {
         let url = self.client.url(
             &format!(
                 "/v1/bitcoin/receivers/{}/transactions?{}",
-                crate::progenitor_support::encode_path(receiver),
+                crate::progenitor_support::encode_path(&receiver.to_string()),
                 query_
             ),
             None,

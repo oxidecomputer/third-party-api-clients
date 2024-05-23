@@ -25,7 +25,7 @@ impl SenderIdentitiesApi {
     pub async fn get_senders(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetSendersResponse>> {
-        let url = self.client.url("/senders", None);
+        let url = self.client.url(&"/senders".to_string(), None);
         self.client
             .get(
                 &url,
@@ -53,7 +53,7 @@ impl SenderIdentitiesApi {
         &self,
         body: &crate::types::PostSendersRequestAllOf,
     ) -> ClientResult<crate::Response<crate::types::SenderAllOf>> {
-        let url = self.client.url("/senders", None);
+        let url = self.client.url(&"/senders".to_string(), None);
         self.client
             .post(
                 &url,

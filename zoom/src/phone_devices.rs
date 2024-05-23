@@ -176,7 +176,7 @@ impl PhoneDevices {
         &self,
         body: &crate::types::AddPhoneDeviceRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/phone/devices", None);
+        let url = self.client.url(&"/phone/devices".to_string(), None);
         self.client
             .post(
                 &url,
@@ -211,7 +211,7 @@ impl PhoneDevices {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",
-                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(&device_id.to_string()),
             ),
             None,
         );
@@ -248,7 +248,7 @@ impl PhoneDevices {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",
-                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(&device_id.to_string()),
             ),
             None,
         );
@@ -288,7 +288,7 @@ impl PhoneDevices {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",
-                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(&device_id.to_string()),
             ),
             None,
         );

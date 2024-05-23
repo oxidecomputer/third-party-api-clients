@@ -101,7 +101,7 @@ impl IdentityProviders {
         &self,
         body: &crate::types::IdentityProvider,
     ) -> ClientResult<crate::Response<crate::types::IdentityProvider>> {
-        let url = self.client.url("/api/v1/idps", None);
+        let url = self.client.url(&"/api/v1/idps".to_string(), None);
         self.client
             .post(
                 &url,
@@ -164,7 +164,7 @@ impl IdentityProviders {
     ) -> ClientResult<crate::Response<Vec<crate::types::JsonWebKey>>> {
         let url = self
             .client
-            .url("/api/v1/idps/credentials/keys", None);
+            .url(&"/api/v1/idps/credentials/keys".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -188,7 +188,7 @@ impl IdentityProviders {
     ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
         let url = self
             .client
-            .url("/api/v1/idps/credentials/keys", None);
+            .url(&"/api/v1/idps/credentials/keys".to_string(), None);
         self.client
             .post(
                 &url,
@@ -217,7 +217,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/credentials/keys/{}",
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
             ),
             None,
         );
@@ -246,7 +246,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/credentials/keys/{}",
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
             ),
             None,
         );
@@ -278,7 +278,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -311,7 +311,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -340,7 +340,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -372,7 +372,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -402,7 +402,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -435,7 +435,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -467,8 +467,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs/{}",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(csr_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&csr_id.to_string()),
             ),
             None,
         );
@@ -500,8 +500,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs/{}",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(csr_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&csr_id.to_string()),
             ),
             None,
         );
@@ -533,8 +533,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/csrs/{}/lifecycle/publish",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(csr_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&csr_id.to_string()),
             ),
             None,
         );
@@ -566,7 +566,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -596,7 +596,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -635,7 +635,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys/generate?{}",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
                 query_
             ),
             None,
@@ -670,8 +670,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys/{}",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
             ),
             None,
         );
@@ -712,8 +712,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/credentials/keys/{}/clone?{}",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
                 query_
             ),
             None,
@@ -746,7 +746,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -778,7 +778,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -810,7 +810,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -840,7 +840,7 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users",
-                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
             ),
             None,
         );
@@ -872,8 +872,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -908,8 +908,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -943,8 +943,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -978,8 +978,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}/credentials/tokens",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -1010,8 +1010,8 @@ impl IdentityProviders {
         let url = self.client.url(
             &format!(
                 "/api/v1/idps/{}/users/{}/credentials/tokens",
-                crate::progenitor_support::encode_path(idp_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&idp_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );

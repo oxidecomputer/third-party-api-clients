@@ -23,7 +23,7 @@ impl CustomFields {
     ) -> ClientResult<crate::Response<crate::types::GetMcFieldDefinitionsResponse>> {
         let url = self
             .client
-            .url("/marketing/field_definitions", None);
+            .url(&"/marketing/field_definitions".to_string(), None);
         self.client
             .get(
                 &url,
@@ -53,7 +53,7 @@ impl CustomFields {
     ) -> ClientResult<crate::Response<crate::types::PostMcFieldDefinitionsResponseAllOf>> {
         let url = self
             .client
-            .url("/marketing/field_definitions", None);
+            .url(&"/marketing/field_definitions".to_string(), None);
         self.client
             .post(
                 &url,
@@ -80,7 +80,7 @@ impl CustomFields {
         let url = self.client.url(
             &format!(
                 "/marketing/field_definitions/{}",
-                crate::progenitor_support::encode_path(custom_field_id),
+                crate::progenitor_support::encode_path(&custom_field_id.to_string()),
             ),
             None,
         );
@@ -111,7 +111,7 @@ impl CustomFields {
         let url = self.client.url(
             &format!(
                 "/marketing/field_definitions/{}",
-                crate::progenitor_support::encode_path(custom_field_id),
+                crate::progenitor_support::encode_path(&custom_field_id.to_string()),
             ),
             None,
         );

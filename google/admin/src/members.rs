@@ -29,8 +29,8 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/hasMember/{}",
-                crate::progenitor_support::encode_path(group_key),
-                crate::progenitor_support::encode_path(member_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
+                crate::progenitor_support::encode_path(&member_key.to_string()),
             ),
             None,
         );
@@ -85,7 +85,7 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members?{}",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
                 query_
             ),
             None,
@@ -135,7 +135,7 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members?{}",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
                 query_
             ),
             None,
@@ -221,7 +221,7 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
             ),
             None,
         );
@@ -253,8 +253,8 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
-                crate::progenitor_support::encode_path(group_key),
-                crate::progenitor_support::encode_path(member_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
+                crate::progenitor_support::encode_path(&member_key.to_string()),
             ),
             None,
         );
@@ -287,8 +287,8 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
-                crate::progenitor_support::encode_path(group_key),
-                crate::progenitor_support::encode_path(member_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
+                crate::progenitor_support::encode_path(&member_key.to_string()),
             ),
             None,
         );
@@ -320,8 +320,8 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
-                crate::progenitor_support::encode_path(group_key),
-                crate::progenitor_support::encode_path(member_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
+                crate::progenitor_support::encode_path(&member_key.to_string()),
             ),
             None,
         );
@@ -354,8 +354,8 @@ impl Members {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
-                crate::progenitor_support::encode_path(group_key),
-                crate::progenitor_support::encode_path(member_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
+                crate::progenitor_support::encode_path(&member_key.to_string()),
             ),
             None,
         );

@@ -92,7 +92,7 @@ impl NetworkZones {
         &self,
         body: &crate::types::NetworkZone,
     ) -> ClientResult<crate::Response<crate::types::NetworkZone>> {
-        let url = self.client.url("/api/v1/zones", None);
+        let url = self.client.url(&"/api/v1/zones".to_string(), None);
         self.client
             .post(
                 &url,
@@ -121,7 +121,7 @@ impl NetworkZones {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}",
-                crate::progenitor_support::encode_path(zone_id),
+                crate::progenitor_support::encode_path(&zone_id.to_string()),
             ),
             None,
         );
@@ -154,7 +154,7 @@ impl NetworkZones {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}",
-                crate::progenitor_support::encode_path(zone_id),
+                crate::progenitor_support::encode_path(&zone_id.to_string()),
             ),
             None,
         );
@@ -183,7 +183,7 @@ impl NetworkZones {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}",
-                crate::progenitor_support::encode_path(zone_id),
+                crate::progenitor_support::encode_path(&zone_id.to_string()),
             ),
             None,
         );
@@ -215,7 +215,7 @@ impl NetworkZones {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(zone_id),
+                crate::progenitor_support::encode_path(&zone_id.to_string()),
             ),
             None,
         );
@@ -247,7 +247,7 @@ impl NetworkZones {
         let url = self.client.url(
             &format!(
                 "/api/v1/zones/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(zone_id),
+                crate::progenitor_support::encode_path(&zone_id.to_string()),
             ),
             None,
         );

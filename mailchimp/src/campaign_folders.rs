@@ -70,7 +70,7 @@ impl CampaignFolders {
         &self,
         body: &crate::types::GalleryFolder,
     ) -> ClientResult<crate::Response<crate::types::CampaignFolder>> {
-        let url = self.client.url("/campaign-folders", None);
+        let url = self.client.url(&"/campaign-folders".to_string(), None);
         self.client
             .post(
                 &url,
@@ -111,7 +111,7 @@ impl CampaignFolders {
         let url = self.client.url(
             &format!(
                 "/campaign-folders/{}?{}",
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
                 query_
             ),
             None,
@@ -141,7 +141,7 @@ impl CampaignFolders {
         let url = self.client.url(
             &format!(
                 "/campaign-folders/{}",
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
             ),
             None,
         );
@@ -174,7 +174,7 @@ impl CampaignFolders {
         let url = self.client.url(
             &format!(
                 "/campaign-folders/{}",
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
             ),
             None,
         );

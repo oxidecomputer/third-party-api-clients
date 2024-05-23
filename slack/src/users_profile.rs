@@ -62,7 +62,7 @@ impl UsersProfile {
      * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
      */
     pub async fn set(&self) -> ClientResult<crate::Response<crate::types::UsersProfileSetSchema>> {
-        let url = self.client.url("/users.profile.set", None);
+        let url = self.client.url(&"/users.profile.set".to_string(), None);
         self.client
             .post(
                 &url,

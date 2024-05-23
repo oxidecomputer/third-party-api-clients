@@ -69,7 +69,7 @@ impl Scim {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -105,7 +105,7 @@ impl Scim {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -141,8 +141,8 @@ impl Scim {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(scim_user_id),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&scim_user_id.to_string()),
             ),
             None,
         );
@@ -183,8 +183,8 @@ impl Scim {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(scim_user_id),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&scim_user_id.to_string()),
             ),
             None,
         );
@@ -220,8 +220,8 @@ impl Scim {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(scim_user_id),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&scim_user_id.to_string()),
             ),
             None,
         );
@@ -273,8 +273,8 @@ impl Scim {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
-                crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(scim_user_id),
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&scim_user_id.to_string()),
             ),
             None,
         );

@@ -172,7 +172,7 @@ impl Receipts {
         let url = self.client.url(
             &format!(
                 "/receipts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

@@ -271,7 +271,7 @@ impl CalendarList {
         let url = self.client.url(
             &format!(
                 "/users/me/calendarList/{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
             ),
             None,
         );
@@ -309,7 +309,7 @@ impl CalendarList {
         let url = self.client.url(
             &format!(
                 "/users/me/calendarList/{}?{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
                 query_
             ),
             None,
@@ -337,7 +337,7 @@ impl CalendarList {
         let url = self.client.url(
             &format!(
                 "/users/me/calendarList/{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
             ),
             None,
         );
@@ -375,7 +375,7 @@ impl CalendarList {
         let url = self.client.url(
             &format!(
                 "/users/me/calendarList/{}?{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
                 query_
             ),
             None,

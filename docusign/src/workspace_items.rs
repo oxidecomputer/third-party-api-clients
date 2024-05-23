@@ -82,9 +82,9 @@ impl WorkspaceItems {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(workspace_id),
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
                 query_
             ),
             None,
@@ -124,9 +124,9 @@ impl WorkspaceItems {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(workspace_id),
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
             ),
             None,
         );
@@ -162,9 +162,9 @@ impl WorkspaceItems {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}/files",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(workspace_id),
-                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
             ),
             None,
         );
@@ -214,10 +214,10 @@ impl WorkspaceItems {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(workspace_id),
-                crate::progenitor_support::encode_path(folder_id),
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
                 query_
             ),
             None,
@@ -256,10 +256,10 @@ impl WorkspaceItems {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(workspace_id),
-                crate::progenitor_support::encode_path(folder_id),
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
             ),
             None,
         );
@@ -324,10 +324,10 @@ impl WorkspaceItems {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}/pages?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(workspace_id),
-                crate::progenitor_support::encode_path(folder_id),
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(&folder_id.to_string()),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
                 query_
             ),
             None,

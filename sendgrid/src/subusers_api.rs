@@ -100,7 +100,7 @@ impl SubusersApi {
         &self,
         body: &crate::types::PostSubusersRequest,
     ) -> ClientResult<crate::Response<crate::types::SubuserPost>> {
-        let url = self.client.url("/subusers", None);
+        let url = self.client.url(&"/subusers".to_string(), None);
         self.client
             .post(
                 &url,
@@ -127,7 +127,7 @@ impl SubusersApi {
         let url = self.client.url(
             &format!(
                 "/subusers/{}",
-                crate::progenitor_support::encode_path(subuser_name),
+                crate::progenitor_support::encode_path(&subuser_name.to_string()),
             ),
             None,
         );
@@ -156,7 +156,7 @@ impl SubusersApi {
         let url = self.client.url(
             &format!(
                 "/subusers/{}",
-                crate::progenitor_support::encode_path(subuser_name),
+                crate::progenitor_support::encode_path(&subuser_name.to_string()),
             ),
             None,
         );
@@ -260,7 +260,7 @@ impl SubusersApi {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/ips",
-                crate::progenitor_support::encode_path(subuser_name),
+                crate::progenitor_support::encode_path(&subuser_name.to_string()),
             ),
             None,
         );

@@ -227,7 +227,7 @@ impl Users {
     ) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self
             .client
-            .url("/admin/directory/v1/users", None);
+            .url(&"/admin/directory/v1/users".to_string(), None);
         self.client
             .post(
                 &url,
@@ -350,7 +350,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}?{}",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
                 query_
             ),
             None,
@@ -382,7 +382,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -409,7 +409,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -440,7 +440,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -477,7 +477,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases?{}",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
                 query_
             ),
             None,
@@ -509,7 +509,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -547,7 +547,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases/watch?{}",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
                 query_
             ),
             None,
@@ -580,8 +580,8 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases/{}",
-                crate::progenitor_support::encode_path(user_key),
-                crate::progenitor_support::encode_path(alias),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
+                crate::progenitor_support::encode_path(&alias.to_string()),
             ),
             None,
         );
@@ -612,7 +612,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/makeAdmin",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -642,7 +642,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -673,7 +673,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -700,7 +700,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -731,7 +731,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -758,7 +758,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/signOut",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );
@@ -789,7 +789,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/undelete",
-                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&user_key.to_string()),
             ),
             None,
         );

@@ -31,9 +31,9 @@ impl Customer {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}",
-                crate::progenitor_support::encode_path(customer_id),
-                crate::progenitor_support::encode_path(device_id),
-                crate::progenitor_support::encode_path(command_id),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(&device_id.to_string()),
+                crate::progenitor_support::encode_path(&command_id.to_string()),
             ),
             None,
         );
@@ -67,8 +67,8 @@ impl Customer {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/chromeos/{}:issueCommand",
-                crate::progenitor_support::encode_path(customer_id),
-                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(&device_id.to_string()),
             ),
             None,
         );

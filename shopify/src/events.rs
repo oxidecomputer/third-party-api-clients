@@ -100,7 +100,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/events/{}/json?{}",
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
                 query_
             ),
             None,
@@ -243,7 +243,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/events/{}/json?{}",
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
                 query_
             ),
             None,
@@ -386,7 +386,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/events/{}/json?{}",
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
                 query_
             ),
             None,
@@ -529,7 +529,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/events/{}/json?{}",
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
                 query_
             ),
             None,
@@ -672,7 +672,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/events/{}/json?{}",
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
                 query_
             ),
             None,
@@ -815,7 +815,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/events/{}/json?{}",
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
                 query_
             ),
             None,
@@ -1046,7 +1046,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/webhooks/{}/json?{}",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
                 query_
             ),
             None,
@@ -1080,7 +1080,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -1112,7 +1112,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -1303,7 +1303,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/webhooks/{}/json?{}",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
                 query_
             ),
             None,
@@ -1337,7 +1337,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -1369,7 +1369,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -1560,7 +1560,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/webhooks/{}/json?{}",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
                 query_
             ),
             None,
@@ -1594,7 +1594,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -1626,7 +1626,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -1817,7 +1817,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/webhooks/{}/json?{}",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
                 query_
             ),
             None,
@@ -1851,7 +1851,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -1883,7 +1883,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -2074,7 +2074,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/webhooks/{}/json?{}",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
                 query_
             ),
             None,
@@ -2108,7 +2108,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -2140,7 +2140,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -2331,7 +2331,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/webhooks/{}/json?{}",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
                 query_
             ),
             None,
@@ -2365,7 +2365,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -2397,7 +2397,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/webhooks/{}/json",
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );

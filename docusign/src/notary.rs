@@ -61,7 +61,7 @@ impl Notary {
     ) -> ClientResult<crate::Response<crate::types::NotaryData>> {
         let url = self
             .client
-            .url("/v2.1/current_user/notary", None);
+            .url(&"/v2.1/current_user/notary".to_string(), None);
         self.client
             .put(
                 &url,
@@ -85,7 +85,7 @@ impl Notary {
     ) -> ClientResult<crate::Response<crate::types::NotaryData>> {
         let url = self
             .client
-            .url("/v2.1/current_user/notary", None);
+            .url(&"/v2.1/current_user/notary".to_string(), None);
         self.client
             .post(
                 &url,

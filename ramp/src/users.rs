@@ -26,7 +26,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -51,7 +51,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -80,7 +80,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -238,7 +238,7 @@ impl Users {
         &self,
         body: &crate::types::PostUsersDeferredRequest,
     ) -> ClientResult<crate::Response<crate::types::User>> {
-        let url = self.client.url("/users/deferred", None);
+        let url = self.client.url(&"/users/deferred".to_string(), None);
         self.client
             .post(
                 &url,
@@ -263,7 +263,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/deferred/status/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

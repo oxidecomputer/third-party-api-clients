@@ -27,7 +27,7 @@ impl AppsPermissionsScopes {
     ) -> ClientResult<crate::Response<crate::types::ApiPermissionsScopesListSuccessSchema>> {
         let url = self
             .client
-            .url("/apps.permissions.scopes.list", None);
+            .url(&"/apps.permissions.scopes.list".to_string(), None);
         self.client
             .get(
                 &url,

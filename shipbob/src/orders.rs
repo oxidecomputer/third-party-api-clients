@@ -29,7 +29,7 @@ impl Orders {
         &self,
         body: &crate::types::OrdersEstimateFulfillmentRequestModel,
     ) -> ClientResult<crate::Response<crate::types::OrdersEstimate>> {
-        let url = self.client.url("/order/estimate", None);
+        let url = self.client.url(&"/order/estimate".to_string(), None);
         self.client
             .post(
                 &url,
@@ -230,7 +230,7 @@ impl Orders {
         &self,
         body: &crate::types::OrdersCreateOrderModel,
     ) -> ClientResult<crate::Response<crate::types::Order>> {
-        let url = self.client.url("/order", None);
+        let url = self.client.url(&"/order".to_string(), None);
         self.client
             .post(
                 &url,
@@ -383,7 +383,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/cancel",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
                 crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
@@ -660,7 +660,7 @@ impl Orders {
         &self,
         body: &crate::types::OrdersCancelShipmentsModel,
     ) -> ClientResult<crate::Response<crate::types::OrdersCanceledShipments>> {
-        let url = self.client.url("/shipment/cancelbulk", None);
+        let url = self.client.url(&"/shipment/cancelbulk".to_string(), None);
         self.client
             .post(
                 &url,
@@ -839,7 +839,7 @@ impl Orders {
     pub async fn get_all_shipping_method(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipMethodDetail>>> {
-        let url = self.client.url("/shippingmethod", None);
+        let url = self.client.url(&"/shippingmethod".to_string(), None);
         self.client
             .get_all_pages(
                 &url,

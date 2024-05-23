@@ -114,7 +114,7 @@ impl Templates {
         &self,
         body: &crate::types::TemplateInstance,
     ) -> ClientResult<crate::Response<crate::types::Templates>> {
-        let url = self.client.url("/templates", None);
+        let url = self.client.url(&"/templates".to_string(), None);
         self.client
             .post(
                 &url,
@@ -155,7 +155,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/templates/{}?{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
                 query_
             ),
             None,
@@ -185,7 +185,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );
@@ -218,7 +218,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );
@@ -262,7 +262,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/templates/{}/default-content?{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
                 query_
             ),
             None,

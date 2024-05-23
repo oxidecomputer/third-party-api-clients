@@ -20,7 +20,7 @@ impl Freebusy {
         &self,
         body: &crate::types::FreeBusyRequest,
     ) -> ClientResult<crate::Response<crate::types::FreeBusyResponse>> {
-        let url = self.client.url("/freeBusy", None);
+        let url = self.client.url(&"/freeBusy".to_string(), None);
         self.client
             .post(
                 &url,

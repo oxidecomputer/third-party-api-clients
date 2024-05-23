@@ -25,7 +25,7 @@ impl Companies {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}",
-                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             ),
             None,
         );
@@ -76,7 +76,7 @@ impl Companies {
     ) -> ClientResult<crate::Response<crate::types::PostPartnerManagedCompaniesResponse>> {
         let url = self
             .client
-            .url("/v1/partner_managed_companies", None);
+            .url(&"/v1/partner_managed_companies".to_string(), None);
         self.client
             .post(
                 &url,
@@ -116,7 +116,7 @@ impl Companies {
         &self,
         body: &crate::types::PostProvisionRequest,
     ) -> ClientResult<crate::Response<crate::types::PostProvisionResponse>> {
-        let url = self.client.url("/v1/provision", None);
+        let url = self.client.url(&"/v1/provision".to_string(), None);
         self.client
             .post(
                 &url,

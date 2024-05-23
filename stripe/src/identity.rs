@@ -28,7 +28,7 @@ impl Identity {
      */
     pub async fn get_verification_reports(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -86,7 +86,7 @@ impl Identity {
      */
     pub async fn get_all_verification_reports(
         &self,
-        _created: &str,
+        created: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationReport>>> {
@@ -193,7 +193,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_reports/{}",
-                crate::progenitor_support::encode_path(report),
+                crate::progenitor_support::encode_path(&report.to_string()),
             ),
             None,
         );
@@ -223,7 +223,7 @@ impl Identity {
      */
     pub async fn get_verification_sessions(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -274,7 +274,7 @@ impl Identity {
      */
     pub async fn get_all_verification_sessions(
         &self,
-        _created: &str,
+        created: &str,
         status: crate::types::GelatoVerificationSessionStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationSession>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -373,7 +373,7 @@ impl Identity {
     ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
         let url = self
             .client
-            .url("/v1/identity/verification_sessions", None);
+            .url(&"/v1/identity/verification_sessions".to_string(), None);
         self.client
             .post(
                 &url,
@@ -404,7 +404,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
             ),
             None,
         );
@@ -437,7 +437,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
             ),
             None,
         );
@@ -469,7 +469,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/cancel",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
             ),
             None,
         );
@@ -517,7 +517,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/redact",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
             ),
             None,
         );

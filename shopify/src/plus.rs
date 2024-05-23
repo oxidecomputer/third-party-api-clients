@@ -77,7 +77,7 @@ impl Plus {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-01/gift_cards.json", None);
+            .url(&"/admin/api/2020-01/gift_cards.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -106,7 +106,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -140,7 +140,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/gift_cards/{}/disable.json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -352,7 +352,7 @@ impl Plus {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-04/gift_cards.json", None);
+            .url(&"/admin/api/2020-04/gift_cards.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -381,7 +381,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -415,7 +415,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -485,7 +485,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/gift_cards/{}/disable.json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -627,7 +627,7 @@ impl Plus {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-07/gift_cards.json", None);
+            .url(&"/admin/api/2020-07/gift_cards.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -656,7 +656,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -690,7 +690,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -760,7 +760,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/gift_cards/{}/disable.json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -902,7 +902,7 @@ impl Plus {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-10/gift_cards.json", None);
+            .url(&"/admin/api/2020-10/gift_cards.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -931,7 +931,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -965,7 +965,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1032,7 +1032,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/gift_cards/{}/disable.json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1174,7 +1174,7 @@ impl Plus {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2021-01/gift_cards.json", None);
+            .url(&"/admin/api/2021-01/gift_cards.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -1203,7 +1203,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1237,7 +1237,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1307,7 +1307,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/gift_cards/{}/disable.json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1449,7 +1449,7 @@ impl Plus {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/unstable/gift_cards.json", None);
+            .url(&"/admin/api/unstable/gift_cards.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -1478,7 +1478,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1512,7 +1512,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/gift_cards/{}/json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1582,7 +1582,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/gift_cards/{}/disable.json",
-                crate::progenitor_support::encode_path(gift_card_id),
+                crate::progenitor_support::encode_path(&gift_card_id.to_string()),
             ),
             None,
         );
@@ -1715,7 +1715,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/users/{}/json",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -1739,7 +1739,7 @@ impl Plus {
     pub async fn deprecated_202001_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-01/users/current.json", None);
+            .url(&"/admin/api/2020-01/users/current.json".to_string(), None);
         self.client
             .get(
                 &url,
@@ -1807,7 +1807,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/users/{}/json",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -1831,7 +1831,7 @@ impl Plus {
     pub async fn deprecated_202004_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-04/users/current.json", None);
+            .url(&"/admin/api/2020-04/users/current.json".to_string(), None);
         self.client
             .get(
                 &url,
@@ -1899,7 +1899,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/users/{}/json",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -1923,7 +1923,7 @@ impl Plus {
     pub async fn deprecated_202007_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-07/users/current.json", None);
+            .url(&"/admin/api/2020-07/users/current.json".to_string(), None);
         self.client
             .get(
                 &url,
@@ -1988,7 +1988,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/users/{}/json",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -2012,7 +2012,7 @@ impl Plus {
     pub async fn get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2020-10/users/current.json", None);
+            .url(&"/admin/api/2020-10/users/current.json".to_string(), None);
         self.client
             .get(
                 &url,
@@ -2080,7 +2080,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/users/{}/json",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -2104,7 +2104,7 @@ impl Plus {
     pub async fn deprecated_202101_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/2021-01/users/current.json", None);
+            .url(&"/admin/api/2021-01/users/current.json".to_string(), None);
         self.client
             .get(
                 &url,
@@ -2172,7 +2172,7 @@ impl Plus {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/users/{}/json",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -2196,7 +2196,7 @@ impl Plus {
     pub async fn deprecated_unstable_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/api/unstable/users/current.json", None);
+            .url(&"/admin/api/unstable/users/current.json".to_string(), None);
         self.client
             .get(
                 &url,

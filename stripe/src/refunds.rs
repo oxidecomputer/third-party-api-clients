@@ -29,7 +29,7 @@ impl Refunds {
     pub async fn get_page(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         payment_intent: &str,
@@ -81,7 +81,7 @@ impl Refunds {
     pub async fn get_all(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
         payment_intent: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Refund>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -170,7 +170,7 @@ impl Refunds {
      * <p>Create a refund.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Refund>> {
-        let url = self.client.url("/v1/refunds", None);
+        let url = self.client.url(&"/v1/refunds".to_string(), None);
         self.client
             .post(
                 &url,
@@ -195,7 +195,7 @@ impl Refunds {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
-                crate::progenitor_support::encode_path(refund),
+                crate::progenitor_support::encode_path(&refund.to_string()),
             ),
             None,
         );
@@ -227,7 +227,7 @@ impl Refunds {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
-                crate::progenitor_support::encode_path(refund),
+                crate::progenitor_support::encode_path(&refund.to_string()),
             ),
             None,
         );
@@ -259,7 +259,7 @@ impl Refunds {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}/cancel",
-                crate::progenitor_support::encode_path(refund),
+                crate::progenitor_support::encode_path(&refund.to_string()),
             ),
             None,
         );

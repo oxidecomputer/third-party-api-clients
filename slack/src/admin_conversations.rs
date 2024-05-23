@@ -25,7 +25,7 @@ impl AdminConversations {
     pub async fn archive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.archive", None);
+            .url(&"/admin.conversations.archive".to_string(), None);
         self.client
             .post(
                 &url,
@@ -52,7 +52,7 @@ impl AdminConversations {
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.convertToPrivate", None);
+            .url(&"/admin.conversations.convertToPrivate".to_string(), None);
         self.client
             .post(
                 &url,
@@ -79,7 +79,7 @@ impl AdminConversations {
     ) -> ClientResult<crate::Response<crate::types::AdminConversationsCreateSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.create", None);
+            .url(&"/admin.conversations.create".to_string(), None);
         self.client
             .post(
                 &url,
@@ -104,7 +104,7 @@ impl AdminConversations {
     pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.delete", None);
+            .url(&"/admin.conversations.delete".to_string(), None);
         self.client
             .post(
                 &url,
@@ -131,7 +131,7 @@ impl AdminConversations {
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.disconnectShared", None);
+            .url(&"/admin.conversations.disconnectShared".to_string(), None);
         self.client
             .post(
                 &url,
@@ -236,7 +236,7 @@ impl AdminConversations {
     pub async fn invite(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.invite", None);
+            .url(&"/admin.conversations.invite".to_string(), None);
         self.client
             .post(
                 &url,
@@ -261,7 +261,7 @@ impl AdminConversations {
     pub async fn rename(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.rename", None);
+            .url(&"/admin.conversations.rename".to_string(), None);
         self.client
             .post(
                 &url,
@@ -354,7 +354,7 @@ impl AdminConversations {
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url(
-            "/admin.conversations.setConversationPrefs",
+            &"/admin.conversations.setConversationPrefs".to_string(),
             None,
         );
         self.client
@@ -381,7 +381,7 @@ impl AdminConversations {
     pub async fn set_teams(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.setTeams", None);
+            .url(&"/admin.conversations.setTeams".to_string(), None);
         self.client
             .post(
                 &url,
@@ -406,7 +406,7 @@ impl AdminConversations {
     pub async fn unarchive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.conversations.unarchive", None);
+            .url(&"/admin.conversations.unarchive".to_string(), None);
         self.client
             .post(
                 &url,

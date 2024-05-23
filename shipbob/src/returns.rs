@@ -244,7 +244,7 @@ impl Returns {
         &self,
         body: &crate::types::ReturnsCreateReturn,
     ) -> ClientResult<crate::Response<crate::types::ReturnOrder>> {
-        let url = self.client.url("/return", None);
+        let url = self.client.url(&"/return".to_string(), None);
         self.client
             .post(
                 &url,

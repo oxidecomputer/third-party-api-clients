@@ -67,7 +67,7 @@ impl MailSend {
         &self,
         body: &crate::types::PostMailSendRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/mail/send", None);
+        let url = self.client.url(&"/mail/send".to_string(), None);
         self.client
             .post(
                 &url,

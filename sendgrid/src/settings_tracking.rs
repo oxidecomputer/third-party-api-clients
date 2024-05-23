@@ -25,7 +25,7 @@ impl SettingsTracking {
     pub async fn get_tracking_settings(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetTrackingSettingsResponse>> {
-        let url = self.client.url("/tracking_settings", None);
+        let url = self.client.url(&"/tracking_settings".to_string(), None);
         self.client
             .get(
                 &url,
@@ -56,7 +56,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::ClickTracking>> {
         let url = self
             .client
-            .url("/tracking_settings/click", None);
+            .url(&"/tracking_settings/click".to_string(), None);
         self.client
             .get(
                 &url,
@@ -88,7 +88,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::ClickTracking>> {
         let url = self
             .client
-            .url("/tracking_settings/click", None);
+            .url(&"/tracking_settings/click".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -120,7 +120,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::GoogleAnalyticsSettings>> {
         let url = self
             .client
-            .url("/tracking_settings/google_analytics", None);
+            .url(&"/tracking_settings/google_analytics".to_string(), None);
         self.client
             .get(
                 &url,
@@ -152,7 +152,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::GoogleAnalyticsSettings>> {
         let url = self
             .client
-            .url("/tracking_settings/google_analytics", None);
+            .url(&"/tracking_settings/google_analytics".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -185,7 +185,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::GetTrackingSettingsOpenResponse>> {
         let url = self
             .client
-            .url("/tracking_settings/open", None);
+            .url(&"/tracking_settings/open".to_string(), None);
         self.client
             .get(
                 &url,
@@ -219,7 +219,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::GetTrackingSettingsOpenResponse>> {
         let url = self
             .client
-            .url("/tracking_settings/open", None);
+            .url(&"/tracking_settings/open".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -248,7 +248,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::SubscriptionTrackingSettings>> {
         let url = self
             .client
-            .url("/tracking_settings/subscription", None);
+            .url(&"/tracking_settings/subscription".to_string(), None);
         self.client
             .get(
                 &url,
@@ -278,7 +278,7 @@ impl SettingsTracking {
     ) -> ClientResult<crate::Response<crate::types::SubscriptionTrackingSettings>> {
         let url = self
             .client
-            .url("/tracking_settings/subscription", None);
+            .url(&"/tracking_settings/subscription".to_string(), None);
         self.client
             .patch(
                 &url,

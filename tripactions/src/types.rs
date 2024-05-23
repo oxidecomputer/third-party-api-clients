@@ -3,14 +3,12 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum TravelerType {
     #[serde(rename = "GUEST")]
     Guest,
     #[serde(rename = "PASSENGER")]
     Passenger,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28,7 +26,11 @@ impl std::fmt::Display for TravelerType {
     }
 }
 
-
+impl Default for TravelerType {
+    fn default() -> TravelerType {
+        TravelerType::Noop
+    }
+}
 impl TravelerType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TravelerType::Noop)
@@ -36,7 +38,6 @@ impl TravelerType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum BookingStatus {
     #[serde(rename = "ACCEPTED")]
     Accepted,
@@ -49,7 +50,6 @@ pub enum BookingStatus {
     #[serde(rename = "VOIDED")]
     Voided,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -70,7 +70,11 @@ impl std::fmt::Display for BookingStatus {
     }
 }
 
-
+impl Default for BookingStatus {
+    fn default() -> BookingStatus {
+        BookingStatus::Noop
+    }
+}
 impl BookingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, BookingStatus::Noop)
@@ -78,7 +82,6 @@ impl BookingStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum BookingType {
     #[serde(rename = "BLACK_CAR")]
     BlackCar,
@@ -93,7 +96,6 @@ pub enum BookingType {
     #[serde(rename = "TRANSPORTATION")]
     Transportation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -115,7 +117,11 @@ impl std::fmt::Display for BookingType {
     }
 }
 
-
+impl Default for BookingType {
+    fn default() -> BookingType {
+        BookingType::Noop
+    }
+}
 impl BookingType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BookingType::Noop)
@@ -123,7 +129,6 @@ impl BookingType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PaymentSchedule {
     #[serde(rename = "LATER")]
     Later,
@@ -134,7 +139,6 @@ pub enum PaymentSchedule {
     #[serde(rename = "UNKNOWN")]
     Unknown,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -154,7 +158,11 @@ impl std::fmt::Display for PaymentSchedule {
     }
 }
 
-
+impl Default for PaymentSchedule {
+    fn default() -> PaymentSchedule {
+        PaymentSchedule::Noop
+    }
+}
 impl PaymentSchedule {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentSchedule::Noop)
@@ -162,14 +170,12 @@ impl PaymentSchedule {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PassengerStatus {
     #[serde(rename = "DISABLED")]
     Disabled,
     #[serde(rename = "ENABLED")]
     Enabled,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -187,7 +193,11 @@ impl std::fmt::Display for PassengerStatus {
     }
 }
 
-
+impl Default for PassengerStatus {
+    fn default() -> PassengerStatus {
+        PassengerStatus::Noop
+    }
+}
 impl PassengerStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PassengerStatus::Noop)

@@ -72,7 +72,7 @@ impl ContactsApiRecipients {
         &self,
         body: &[crate::types::PostContactdbRecipientsRequest],
     ) -> ClientResult<crate::Response<crate::types::ContactDbRecipientResponse>> {
-        let url = self.client.url("/contactdb/recipients", None);
+        let url = self.client.url(&"/contactdb/recipients".to_string(), None);
         self.client
             .post(
                 &url,
@@ -100,7 +100,7 @@ impl ContactsApiRecipients {
         &self,
         body: &[String],
     ) -> ClientResult<crate::Response<crate::types::Help>> {
-        let url = self.client.url("/contactdb/recipients", None);
+        let url = self.client.url(&"/contactdb/recipients".to_string(), None);
         self.client
             .delete(
                 &url,
@@ -130,7 +130,7 @@ impl ContactsApiRecipients {
         &self,
         body: &[crate::types::PatchContactdbRecipientsRequest],
     ) -> ClientResult<crate::Response<crate::types::ContactDbRecipientResponse>> {
-        let url = self.client.url("/contactdb/recipients", None);
+        let url = self.client.url(&"/contactdb/recipients".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -155,7 +155,7 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_statu(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetContactdbStatusResponseData>> {
-        let url = self.client.url("/contactdb/status", None);
+        let url = self.client.url(&"/contactdb/status".to_string(), None);
         self.client
             .get(
                 &url,
@@ -184,7 +184,7 @@ impl ContactsApiRecipients {
         let url = self.client.url(
             &format!(
                 "/contactdb/recipients/{}",
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );
@@ -218,7 +218,7 @@ impl ContactsApiRecipients {
         let url = self.client.url(
             &format!(
                 "/contactdb/recipients/{}",
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );
@@ -253,7 +253,7 @@ impl ContactsApiRecipients {
         let url = self.client.url(
             &format!(
                 "/contactdb/recipients/{}/lists",
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );
@@ -285,7 +285,7 @@ impl ContactsApiRecipients {
     ) -> ClientResult<crate::Response<crate::types::ContactdbRecipientCount>> {
         let url = self
             .client
-            .url("/contactdb/recipients/billable_count", None);
+            .url(&"/contactdb/recipients/billable_count".to_string(), None);
         self.client
             .get(
                 &url,
@@ -312,7 +312,7 @@ impl ContactsApiRecipients {
     ) -> ClientResult<crate::Response<crate::types::ContactdbRecipientCount>> {
         let url = self
             .client
-            .url("/contactdb/recipients/count", None);
+            .url(&"/contactdb/recipients/count".to_string(), None);
         self.client
             .get(
                 &url,
@@ -422,7 +422,7 @@ impl ContactsApiRecipients {
     {
         let url = self
             .client
-            .url("/contactdb/recipients/search", None);
+            .url(&"/contactdb/recipients/search".to_string(), None);
         self.client
             .post(
                 &url,

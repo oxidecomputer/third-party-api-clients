@@ -69,7 +69,7 @@ impl Devices {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light` <br>
      */
     pub async fn create(&self, body: &crate::types::Device) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/h323/devices", None);
+        let url = self.client.url(&"/h323/devices".to_string(), None);
         self.client
             .post(
                 &url,
@@ -98,7 +98,7 @@ impl Devices {
         let url = self.client.url(
             &format!(
                 "/h323/devices/{}",
-                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(&device_id.to_string()),
             ),
             None,
         );
@@ -134,7 +134,7 @@ impl Devices {
         let url = self.client.url(
             &format!(
                 "/h323/devices/{}",
-                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(&device_id.to_string()),
             ),
             None,
         );

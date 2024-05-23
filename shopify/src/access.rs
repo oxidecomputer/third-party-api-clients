@@ -21,7 +21,7 @@ impl Access {
     pub async fn get_admin_oauth_scope(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/admin/oauth/access_scopes.json", None);
+            .url(&"/admin/oauth/access_scopes.json".to_string(), None);
         self.client
             .get(
                 &url,
@@ -43,7 +43,7 @@ impl Access {
         &self,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-01/storefront_access_tokens.json",
+            &"/admin/api/2020-01/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -68,7 +68,7 @@ impl Access {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-01/storefront_access_tokens.json",
+            &"/admin/api/2020-01/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -99,7 +99,7 @@ impl Access {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/storefront_access_tokens/{}/json",
-                crate::progenitor_support::encode_path(storefront_access_token_id),
+                crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
             ),
             None,
         );
@@ -124,7 +124,7 @@ impl Access {
         &self,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-04/storefront_access_tokens.json",
+            &"/admin/api/2020-04/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -149,7 +149,7 @@ impl Access {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-04/storefront_access_tokens.json",
+            &"/admin/api/2020-04/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -180,7 +180,7 @@ impl Access {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/storefront_access_tokens/{}/json",
-                crate::progenitor_support::encode_path(storefront_access_token_id),
+                crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
             ),
             None,
         );
@@ -205,7 +205,7 @@ impl Access {
         &self,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-07/storefront_access_tokens.json",
+            &"/admin/api/2020-07/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -230,7 +230,7 @@ impl Access {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-07/storefront_access_tokens.json",
+            &"/admin/api/2020-07/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -261,7 +261,7 @@ impl Access {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/storefront_access_tokens/{}/json",
-                crate::progenitor_support::encode_path(storefront_access_token_id),
+                crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
             ),
             None,
         );
@@ -284,7 +284,7 @@ impl Access {
      */
     pub async fn get_storefront_token(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-10/storefront_access_tokens.json",
+            &"/admin/api/2020-10/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -309,7 +309,7 @@ impl Access {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-10/storefront_access_tokens.json",
+            &"/admin/api/2020-10/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -340,7 +340,7 @@ impl Access {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/storefront_access_tokens/{}/json",
-                crate::progenitor_support::encode_path(storefront_access_token_id),
+                crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
             ),
             None,
         );
@@ -365,7 +365,7 @@ impl Access {
         &self,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2021-01/storefront_access_tokens.json",
+            &"/admin/api/2021-01/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -390,7 +390,7 @@ impl Access {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2021-01/storefront_access_tokens.json",
+            &"/admin/api/2021-01/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -421,7 +421,7 @@ impl Access {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/storefront_access_tokens/{}/json",
-                crate::progenitor_support::encode_path(storefront_access_token_id),
+                crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
             ),
             None,
         );
@@ -446,7 +446,7 @@ impl Access {
         &self,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/unstable/storefront_access_tokens.json",
+            &"/admin/api/unstable/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -471,7 +471,7 @@ impl Access {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/unstable/storefront_access_tokens.json",
+            &"/admin/api/unstable/storefront_access_tokens.json".to_string(),
             None,
         );
         self.client
@@ -502,7 +502,7 @@ impl Access {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/storefront_access_tokens/{}/json",
-                crate::progenitor_support::encode_path(storefront_access_token_id),
+                crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
             ),
             None,
         );

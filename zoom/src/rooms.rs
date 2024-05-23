@@ -194,7 +194,7 @@ impl Rooms {
         &self,
         body: &crate::types::AddRoomRequest,
     ) -> ClientResult<crate::Response<crate::types::AddRoomResponse>> {
-        let url = self.client.url("/rooms", None);
+        let url = self.client.url(&"/rooms".to_string(), None);
         self.client
             .post(
                 &url,
@@ -229,7 +229,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}",
-                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(&room_id.to_string()),
             ),
             None,
         );
@@ -265,7 +265,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}",
-                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(&room_id.to_string()),
             ),
             None,
         );
@@ -303,7 +303,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}",
-                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(&room_id.to_string()),
             ),
             None,
         );
@@ -349,7 +349,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/settings?{}",
-                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(&room_id.to_string()),
                 query_
             ),
             None,
@@ -396,7 +396,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/settings?{}",
-                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(&room_id.to_string()),
                 query_
             ),
             None,
@@ -435,7 +435,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/devices",
-                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(&room_id.to_string()),
             ),
             None,
         );
@@ -473,7 +473,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/location",
-                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(&room_id.to_string()),
             ),
             None,
         );
@@ -512,7 +512,7 @@ impl Rooms {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/events",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -705,7 +705,7 @@ impl Rooms {
     pub async fn manage_e_91_1signage(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ManageE911SignageResponse>> {
-        let url = self.client.url("/rooms/events", None);
+        let url = self.client.url(&"/rooms/events".to_string(), None);
         self.client
             .patch(
                 &url,

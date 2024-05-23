@@ -66,7 +66,7 @@ impl UsergroupsUsers {
     ) -> ClientResult<crate::Response<crate::types::UsergroupsCreateSchema>> {
         let url = self
             .client
-            .url("/usergroups.users.update", None);
+            .url(&"/usergroups.users.update".to_string(), None);
         self.client
             .post(
                 &url,

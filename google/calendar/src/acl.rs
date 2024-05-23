@@ -48,7 +48,7 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl?{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
                 query_
             ),
             None,
@@ -91,7 +91,7 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl?{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
                 query_
             ),
             None,
@@ -187,7 +187,7 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl?{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
                 query_
             ),
             None,
@@ -240,7 +240,7 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/watch?{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
                 query_
             ),
             None,
@@ -273,8 +273,8 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}",
-                crate::progenitor_support::encode_path(calendar_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -317,8 +317,8 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}?{}",
-                crate::progenitor_support::encode_path(calendar_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
                 query_
             ),
             None,
@@ -351,8 +351,8 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}",
-                crate::progenitor_support::encode_path(calendar_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -395,8 +395,8 @@ impl Acl {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}?{}",
-                crate::progenitor_support::encode_path(calendar_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
                 query_
             ),
             None,

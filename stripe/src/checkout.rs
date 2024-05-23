@@ -171,7 +171,7 @@ impl Checkout {
      * <p>Creates a Session object.</p>
      */
     pub async fn post_session(&self) -> ClientResult<crate::Response<crate::types::Session>> {
-        let url = self.client.url("/v1/checkout/sessions", None);
+        let url = self.client.url(&"/v1/checkout/sessions".to_string(), None);
         self.client
             .post(
                 &url,
@@ -199,7 +199,7 @@ impl Checkout {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
             ),
             None,
         );
@@ -231,7 +231,7 @@ impl Checkout {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}/expire",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
             ),
             None,
         );
@@ -279,7 +279,7 @@ impl Checkout {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}/line_items?{}",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
                 query_
             ),
             None,
@@ -316,7 +316,7 @@ impl Checkout {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}/line_items",
-                crate::progenitor_support::encode_path(session),
+                crate::progenitor_support::encode_path(&session.to_string()),
             ),
             None,
         );

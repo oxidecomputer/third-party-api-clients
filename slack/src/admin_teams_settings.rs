@@ -56,7 +56,7 @@ impl AdminTeamsSettings {
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url(
-            "/admin.teams.settings.setDefaultChannels",
+            &"/admin.teams.settings.setDefaultChannels".to_string(),
             None,
         );
         self.client
@@ -85,7 +85,7 @@ impl AdminTeamsSettings {
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.teams.settings.setDescription", None);
+            .url(&"/admin.teams.settings.setDescription".to_string(), None);
         self.client
             .post(
                 &url,
@@ -111,7 +111,7 @@ impl AdminTeamsSettings {
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url(
-            "/admin.teams.settings.setDiscoverability",
+            &"/admin.teams.settings.setDiscoverability".to_string(),
             None,
         );
         self.client
@@ -134,7 +134,7 @@ impl AdminTeamsSettings {
     pub async fn set_icon(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.teams.settings.setIcon", None);
+            .url(&"/admin.teams.settings.setIcon".to_string(), None);
         self.client
             .post(
                 &url,
@@ -159,7 +159,7 @@ impl AdminTeamsSettings {
     pub async fn set_name(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/admin.teams.settings.setName", None);
+            .url(&"/admin.teams.settings.setName".to_string(), None);
         self.client
             .post(
                 &url,

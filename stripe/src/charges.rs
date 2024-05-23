@@ -29,7 +29,7 @@ impl Charges {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -85,7 +85,7 @@ impl Charges {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         payment_intent: &str,
         transfer_group: &str,
@@ -179,7 +179,7 @@ impl Charges {
      * <p>To charge a credit card or other payment source, you create a <code>Charge</code> object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Charge>> {
-        let url = self.client.url("/v1/charges", None);
+        let url = self.client.url(&"/v1/charges".to_string(), None);
         self.client
             .post(
                 &url,
@@ -350,7 +350,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -380,7 +380,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -412,7 +412,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/capture",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -443,7 +443,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/dispute",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -473,7 +473,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/dispute",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -503,7 +503,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/dispute/close",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -543,7 +543,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refund",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -591,7 +591,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds?{}",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
                 query_
             ),
             None,
@@ -628,7 +628,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -719,7 +719,7 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds",
-                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(&charge.to_string()),
             ),
             None,
         );
@@ -752,8 +752,8 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds/{}",
-                crate::progenitor_support::encode_path(charge),
-                crate::progenitor_support::encode_path(refund),
+                crate::progenitor_support::encode_path(&charge.to_string()),
+                crate::progenitor_support::encode_path(&refund.to_string()),
             ),
             None,
         );
@@ -785,8 +785,8 @@ impl Charges {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds/{}",
-                crate::progenitor_support::encode_path(charge),
-                crate::progenitor_support::encode_path(refund),
+                crate::progenitor_support::encode_path(&charge.to_string()),
+                crate::progenitor_support::encode_path(&refund.to_string()),
             ),
             None,
         );

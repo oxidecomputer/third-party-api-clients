@@ -86,7 +86,7 @@ impl Templates {
         &self,
         body: &crate::types::SmsTemplate,
     ) -> ClientResult<crate::Response<crate::types::SmsTemplate>> {
-        let url = self.client.url("/api/v1/templates/sms", None);
+        let url = self.client.url(&"/api/v1/templates/sms".to_string(), None);
         self.client
             .post(
                 &url,
@@ -115,7 +115,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );
@@ -148,7 +148,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );
@@ -181,7 +181,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl Templates {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );

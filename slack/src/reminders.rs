@@ -23,7 +23,7 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::RemindersAddSchema>> {
-        let url = self.client.url("/reminders.add", None);
+        let url = self.client.url(&"/reminders.add".to_string(), None);
         self.client
             .post(
                 &url,
@@ -46,7 +46,7 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
     pub async fn complete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/reminders.complete", None);
+        let url = self.client.url(&"/reminders.complete".to_string(), None);
         self.client
             .post(
                 &url,
@@ -69,7 +69,7 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
     pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/reminders.delete", None);
+        let url = self.client.url(&"/reminders.delete".to_string(), None);
         self.client
             .post(
                 &url,
@@ -126,7 +126,7 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
      */
     pub async fn list(&self) -> ClientResult<crate::Response<crate::types::RemindersListSchema>> {
-        let url = self.client.url("/reminders.list", None);
+        let url = self.client.url(&"/reminders.list".to_string(), None);
         self.client
             .get(
                 &url,

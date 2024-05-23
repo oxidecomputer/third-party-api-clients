@@ -592,7 +592,6 @@ pub struct Termination {
  * The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PaymentUnit {
     #[serde(rename = "Hour")]
     Hour,
@@ -605,7 +604,6 @@ pub enum PaymentUnit {
     #[serde(rename = "Year")]
     Year,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -626,7 +624,11 @@ impl std::fmt::Display for PaymentUnit {
     }
 }
 
-
+impl Default for PaymentUnit {
+    fn default() -> PaymentUnit {
+        PaymentUnit::Noop
+    }
+}
 impl PaymentUnit {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentUnit::Noop)
@@ -637,7 +639,6 @@ impl PaymentUnit {
  * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum FlsaStatus {
     #[serde(rename = "Exempt")]
     Exempt,
@@ -648,7 +649,6 @@ pub enum FlsaStatus {
     #[serde(rename = "Salaried Nonexempt")]
     SalariedNonexempt,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -668,7 +668,11 @@ impl std::fmt::Display for FlsaStatus {
     }
 }
 
-
+impl Default for FlsaStatus {
+    fn default() -> FlsaStatus {
+        FlsaStatus::Noop
+    }
+}
 impl FlsaStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, FlsaStatus::Noop)
@@ -948,7 +952,6 @@ pub struct Admin {
  * The tax payer type of the company.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum EntityType {
     #[serde(rename = "Association")]
     Association,
@@ -975,7 +978,6 @@ pub enum EntityType {
     #[serde(rename = "Trusteeship")]
     Trusteeship,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1003,7 +1005,11 @@ impl std::fmt::Display for EntityType {
     }
 }
 
-
+impl Default for EntityType {
+    fn default() -> EntityType {
+        EntityType::Noop
+    }
+}
 impl EntityType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EntityType::Noop)
@@ -1014,7 +1020,6 @@ impl EntityType {
  * The Gusto product tier of the company.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Tier {
     #[serde(rename = "basic")]
     Basic,
@@ -1027,7 +1032,6 @@ pub enum Tier {
     #[serde(rename = "core")]
     Core,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1048,7 +1052,11 @@ impl std::fmt::Display for Tier {
     }
 }
 
-
+impl Default for Tier {
+    fn default() -> Tier {
+        Tier::Noop
+    }
+}
 impl Tier {
     pub fn is_noop(&self) -> bool {
         matches!(self, Tier::Noop)
@@ -1059,7 +1067,6 @@ impl Tier {
  * The status of the company in Gusto. "Approved" companies may run payroll with Gusto. "Not Approved" companies may not yet run payroll with Gusto. In order to run payroll, the company may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CompanyStatus {
     #[serde(rename = "Approved")]
     Approved,
@@ -1068,7 +1075,6 @@ pub enum CompanyStatus {
     #[serde(rename = "Suspended")]
     Suspended,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1087,7 +1093,11 @@ impl std::fmt::Display for CompanyStatus {
     }
 }
 
-
+impl Default for CompanyStatus {
+    fn default() -> CompanyStatus {
+        CompanyStatus::Noop
+    }
+}
 impl CompanyStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, CompanyStatus::Noop)
@@ -1389,14 +1399,12 @@ pub struct Company {
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum WageType {
     #[serde(rename = "Fixed")]
     Fixed,
     #[serde(rename = "Hourly")]
     Hourly,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1414,7 +1422,11 @@ impl std::fmt::Display for WageType {
     }
 }
 
-
+impl Default for WageType {
+    fn default() -> WageType {
+        WageType::Noop
+    }
+}
 impl WageType {
     pub fn is_noop(&self) -> bool {
         matches!(self, WageType::Noop)
@@ -1425,14 +1437,12 @@ impl WageType {
  * The contractor's type, either "Individual" or "Business".
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Type {
     #[serde(rename = "Business")]
     Business,
     #[serde(rename = "Individual")]
     Individual,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1450,7 +1460,11 @@ impl std::fmt::Display for Type {
     }
 }
 
-
+impl Default for Type {
+    fn default() -> Type {
+        Type::Noop
+    }
+}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -1638,7 +1652,6 @@ pub struct Contractor {
  * The payment method.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PaymentMethod {
     #[serde(rename = "Check")]
     Check,
@@ -1649,7 +1662,6 @@ pub enum PaymentMethod {
     #[serde(rename = "Historical Payment")]
     HistoricalPayment,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1669,7 +1681,11 @@ impl std::fmt::Display for PaymentMethod {
     }
 }
 
-
+impl Default for PaymentMethod {
+    fn default() -> PaymentMethod {
+        PaymentMethod::Noop
+    }
+}
 impl PaymentMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethod::Noop)
@@ -1859,7 +1875,6 @@ pub struct ContractorPaymentSummary {
  * The status of the time off request.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Status {
     #[serde(rename = "approved")]
     Approved,
@@ -1868,7 +1883,6 @@ pub enum Status {
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1887,7 +1901,11 @@ impl std::fmt::Display for Status {
     }
 }
 
-
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
+    }
+}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -1898,14 +1916,12 @@ impl Status {
  * The type of time off request.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum RequestType {
     #[serde(rename = "sick")]
     Sick,
     #[serde(rename = "vacation")]
     Vacation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1923,7 +1939,11 @@ impl std::fmt::Display for RequestType {
     }
 }
 
-
+impl Default for RequestType {
+    fn default() -> RequestType {
+        RequestType::Noop
+    }
+}
 impl RequestType {
     pub fn is_noop(&self) -> bool {
         matches!(self, RequestType::Noop)
@@ -2142,7 +2162,6 @@ pub struct CurrentUser {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Frequency {
     #[serde(rename = "Every other week")]
     EveryOtherWeek,
@@ -2153,7 +2172,6 @@ pub enum Frequency {
     #[serde(rename = "Twice per month")]
     TwicePerMonth,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2173,7 +2191,11 @@ impl std::fmt::Display for Frequency {
     }
 }
 
-
+impl Default for Frequency {
+    fn default() -> Frequency {
+        Frequency::Noop
+    }
+}
 impl Frequency {
     pub fn is_noop(&self) -> bool {
         matches!(self, Frequency::Noop)
@@ -2253,14 +2275,12 @@ pub struct PaySchedule {
  * Bank account type
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum AccountType {
     #[serde(rename = "Checking")]
     Checking,
     #[serde(rename = "Savings")]
     Savings,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2278,7 +2298,11 @@ impl std::fmt::Display for AccountType {
     }
 }
 
-
+impl Default for AccountType {
+    fn default() -> AccountType {
+        AccountType::Noop
+    }
+}
 impl AccountType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountType::Noop)
@@ -2293,7 +2317,6 @@ impl AccountType {
  *   'verified' means the bank account is verified.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum VerificationStatus {
     #[serde(rename = "awaiting_deposits")]
     AwaitingDeposits,
@@ -2302,7 +2325,6 @@ pub enum VerificationStatus {
     #[serde(rename = "verified")]
     Verified,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2321,7 +2343,11 @@ impl std::fmt::Display for VerificationStatus {
     }
 }
 
-
+impl Default for VerificationStatus {
+    fn default() -> VerificationStatus {
+        VerificationStatus::Noop
+    }
+}
 impl VerificationStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, VerificationStatus::Noop)
@@ -2569,14 +2595,12 @@ pub struct EarningType {
  * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum DeductionReducesTaxableIncome {
     #[serde(rename = "does_not_reduce_taxable_income")]
     DoesNotReduceTaxableIncome,
     #[serde(rename = "reduces_taxable_income")]
     ReducesTaxableIncome,
     #[serde(rename = "unset")]
-    #[default]
     Unset,
     #[serde(other)]
     FallthroughString,
@@ -2596,7 +2620,11 @@ impl std::fmt::Display for DeductionReducesTaxableIncome {
     }
 }
 
-
+impl Default for DeductionReducesTaxableIncome {
+    fn default() -> DeductionReducesTaxableIncome {
+        DeductionReducesTaxableIncome::Unset
+    }
+}
 
 /// The representation of an employee benefit.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3043,14 +3071,12 @@ pub struct Totals {
  * The employee's compensation payment method. This value is only available for processed payrolls.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum PayrollEmployeeCompensationsPaymentMethod {
     #[serde(rename = "Check")]
     Check,
     #[serde(rename = "Direct Deposit")]
     DirectDeposit,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3068,7 +3094,11 @@ impl std::fmt::Display for PayrollEmployeeCompensationsPaymentMethod {
     }
 }
 
-
+impl Default for PayrollEmployeeCompensationsPaymentMethod {
+    fn default() -> PayrollEmployeeCompensationsPaymentMethod {
+        PayrollEmployeeCompensationsPaymentMethod::Noop
+    }
+}
 impl PayrollEmployeeCompensationsPaymentMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, PayrollEmployeeCompensationsPaymentMethod::Noop)
@@ -3439,7 +3469,6 @@ pub struct PayrollData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum CustomFieldType {
     #[serde(rename = "currency")]
     Currency,
@@ -3452,7 +3481,6 @@ pub enum CustomFieldType {
     #[serde(rename = "text")]
     Text,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3473,7 +3501,11 @@ impl std::fmt::Display for CustomFieldType {
     }
 }
 
-
+impl Default for CustomFieldType {
+    fn default() -> CustomFieldType {
+        CustomFieldType::Noop
+    }
+}
 impl CustomFieldType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CustomFieldType::Noop)
@@ -3585,7 +3617,6 @@ pub struct CompanyCustomField {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GustoPersonType {
     #[serde(rename = "Candidate")]
     Candidate,
@@ -3594,7 +3625,6 @@ pub enum GustoPersonType {
     #[serde(rename = "Employee")]
     Employee,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3613,7 +3643,11 @@ impl std::fmt::Display for GustoPersonType {
     }
 }
 
-
+impl Default for GustoPersonType {
+    fn default() -> GustoPersonType {
+        GustoPersonType::Noop
+    }
+}
 impl GustoPersonType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GustoPersonType::Noop)
@@ -3837,12 +3871,10 @@ pub struct EarningTypeListResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum Include {
     #[serde(rename = "custom_fields")]
     CustomFields,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3859,7 +3891,11 @@ impl std::fmt::Display for Include {
     }
 }
 
-
+impl Default for Include {
+    fn default() -> Include {
+        Include::Noop
+    }
+}
 impl Include {
     pub fn is_noop(&self) -> bool {
         matches!(self, Include::Noop)
@@ -5030,7 +5066,6 @@ pub struct PutEmployeeBenefitRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum GetCompanyPayrollsInclude {
     #[serde(rename = "benefits")]
     Benefits,
@@ -5039,7 +5074,6 @@ pub enum GetCompanyPayrollsInclude {
     #[serde(rename = "taxes")]
     Taxes,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5058,7 +5092,11 @@ impl std::fmt::Display for GetCompanyPayrollsInclude {
     }
 }
 
-
+impl Default for GetCompanyPayrollsInclude {
+    fn default() -> GetCompanyPayrollsInclude {
+        GetCompanyPayrollsInclude::Noop
+    }
+}
 impl GetCompanyPayrollsInclude {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetCompanyPayrollsInclude::Noop)
@@ -5066,14 +5104,12 @@ impl GetCompanyPayrollsInclude {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OffCycleReason {
     #[serde(rename = "Bonus")]
     Bonus,
     #[serde(rename = "Correction")]
     Correction,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5091,7 +5127,11 @@ impl std::fmt::Display for OffCycleReason {
     }
 }
 
-
+impl Default for OffCycleReason {
+    fn default() -> OffCycleReason {
+        OffCycleReason::Noop
+    }
+}
 impl OffCycleReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, OffCycleReason::Noop)
@@ -5551,14 +5591,12 @@ pub struct GetCompanyCustomFieldsResponse {
  * Must be "Employee" if send_offer is set to true.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
 pub enum OnboardingPersonType {
     #[serde(rename = "Contractor")]
     Contractor,
     #[serde(rename = "Employee")]
     Employee,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5576,7 +5614,11 @@ impl std::fmt::Display for OnboardingPersonType {
     }
 }
 
-
+impl Default for OnboardingPersonType {
+    fn default() -> OnboardingPersonType {
+        OnboardingPersonType::Noop
+    }
+}
 impl OnboardingPersonType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OnboardingPersonType::Noop)

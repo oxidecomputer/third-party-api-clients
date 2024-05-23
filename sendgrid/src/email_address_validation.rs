@@ -22,7 +22,7 @@ impl EmailAddressValidation {
         &self,
         body: &crate::types::PostValidationsEmailRequest,
     ) -> ClientResult<crate::Response<crate::types::PostValidationsEmailResponse>> {
-        let url = self.client.url("/validations/email", None);
+        let url = self.client.url(&"/validations/email".to_string(), None);
         self.client
             .post(
                 &url,

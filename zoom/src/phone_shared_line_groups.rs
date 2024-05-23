@@ -89,7 +89,7 @@ impl PhoneSharedLineGroups {
     ) -> ClientResult<crate::Response<Vec<crate::types::SharedLineGroups>>> {
         let url = self
             .client
-            .url("/phone/shared_line_groups", None);
+            .url(&"/phone/shared_line_groups".to_string(), None);
         let crate::Response::<crate::types::ListSharedLineGroupsResponse> {
             mut status,
             mut headers,
@@ -176,7 +176,7 @@ impl PhoneSharedLineGroups {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/phone/shared_line_groups", None);
+            .url(&"/phone/shared_line_groups".to_string(), None);
         self.client
             .post(
                 &url,
@@ -214,7 +214,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
-                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
             ),
             None,
         );
@@ -254,7 +254,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
-                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
             ),
             None,
         );
@@ -294,7 +294,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
-                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
             ),
             None,
         );
@@ -337,7 +337,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members",
-                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
             ),
             None,
         );
@@ -378,7 +378,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members",
-                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
             ),
             None,
         );
@@ -421,8 +421,8 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members/{}",
-                crate::progenitor_support::encode_path(shared_line_group_id),
-                crate::progenitor_support::encode_path(member_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(&member_id.to_string()),
             ),
             None,
         );
@@ -462,7 +462,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers",
-                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
             ),
             None,
         );
@@ -501,7 +501,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers",
-                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
             ),
             None,
         );
@@ -542,8 +542,8 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers/{}",
-                crate::progenitor_support::encode_path(shared_line_group_id),
-                crate::progenitor_support::encode_path(phone_number_id),
+                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(&phone_number_id.to_string()),
             ),
             None,
         );

@@ -25,7 +25,7 @@ impl CallsParticipants {
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/calls.participants.add", None);
+            .url(&"/calls.participants.add".to_string(), None);
         self.client
             .post(
                 &url,
@@ -50,7 +50,7 @@ impl CallsParticipants {
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url("/calls.participants.remove", None);
+            .url(&"/calls.participants.remove".to_string(), None);
         self.client
             .post(
                 &url,

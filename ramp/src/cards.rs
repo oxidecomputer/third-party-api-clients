@@ -159,7 +159,7 @@ impl Cards {
         let url = self.client.url(
             &format!(
                 "/cards/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -192,7 +192,7 @@ impl Cards {
         let url = self.client.url(
             &format!(
                 "/cards/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -223,7 +223,7 @@ impl Cards {
     ) -> ClientResult<crate::Response<crate::types::TaskResponse>> {
         let url = self
             .client
-            .url("/cards/deferred/physical", None);
+            .url(&"/cards/deferred/physical".to_string(), None);
         self.client
             .post(
                 &url,
@@ -251,7 +251,7 @@ impl Cards {
     ) -> ClientResult<crate::Response<crate::types::TaskResponse>> {
         let url = self
             .client
-            .url("/cards/deferred/virtual", None);
+            .url(&"/cards/deferred/virtual".to_string(), None);
         self.client
             .post(
                 &url,
@@ -277,7 +277,7 @@ impl Cards {
         let url = self.client.url(
             &format!(
                 "/cards/{}/deferred/termination",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -306,7 +306,7 @@ impl Cards {
         let url = self.client.url(
             &format!(
                 "/cards/{}/deferred/suspension",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -335,7 +335,7 @@ impl Cards {
         let url = self.client.url(
             &format!(
                 "/cards/{}/deferred/unsuspension",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -367,7 +367,7 @@ impl Cards {
         let url = self.client.url(
             &format!(
                 "/cards/deferred/status/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

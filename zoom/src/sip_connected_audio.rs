@@ -28,7 +28,7 @@ impl SipConnectedAudio {
     pub async fn list_sip_trunk_numbers(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ListSipTrunkNumbersResponse>> {
-        let url = self.client.url("/sip_trunk/numbers", None);
+        let url = self.client.url(&"/sip_trunk/numbers".to_string(), None);
         self.client
             .get(
                 &url,
@@ -62,7 +62,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/settings",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -102,7 +102,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/numbers",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -140,7 +140,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/numbers",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -175,7 +175,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -247,8 +247,8 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(trunk_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&trunk_id.to_string()),
             ),
             None,
         );
@@ -283,7 +283,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -319,7 +319,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -357,8 +357,8 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&country_id.to_string()),
             ),
             None,
         );
@@ -408,7 +408,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -453,7 +453,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -546,7 +546,7 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -586,8 +586,8 @@ impl SipConnectedAudio {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(number_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&number_id.to_string()),
             ),
             None,
         );

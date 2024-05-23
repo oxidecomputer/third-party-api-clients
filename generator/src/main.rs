@@ -3381,7 +3381,7 @@ rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 
 [dependencies]
 async-recursion = "^1.0"
-chrono = {{ version = "0.4", default-features = false, features = ["serde"] }}
+chrono = {{ version = "0.4.38", default-features = false, features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
 http = "1"
 jsonwebtoken = "8"

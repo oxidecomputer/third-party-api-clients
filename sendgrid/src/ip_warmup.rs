@@ -21,7 +21,7 @@ impl IpWarmup {
     pub async fn get_ips_warmup(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::IpWarmupResponse>>> {
-        let url = self.client.url("/ips/warmup", None);
+        let url = self.client.url(&"/ips/warmup".to_string(), None);
         self.client
             .get(
                 &url,
@@ -44,7 +44,7 @@ impl IpWarmup {
     pub async fn get_all_ips_warmup(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::IpWarmupResponse>>> {
-        let url = self.client.url("/ips/warmup", None);
+        let url = self.client.url(&"/ips/warmup".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -66,7 +66,7 @@ impl IpWarmup {
         &self,
         body: &crate::types::PostIpsWarmupRequest,
     ) -> ClientResult<crate::Response<Vec<crate::types::IpWarmupResponse>>> {
-        let url = self.client.url("/ips/warmup", None);
+        let url = self.client.url(&"/ips/warmup".to_string(), None);
         self.client
             .post(
                 &url,
@@ -93,7 +93,7 @@ impl IpWarmup {
         let url = self.client.url(
             &format!(
                 "/ips/warmup/{}",
-                crate::progenitor_support::encode_path(ip_address),
+                crate::progenitor_support::encode_path(&ip_address.to_string()),
             ),
             None,
         );
@@ -125,7 +125,7 @@ impl IpWarmup {
         let url = self.client.url(
             &format!(
                 "/ips/warmup/{}",
-                crate::progenitor_support::encode_path(ip_address),
+                crate::progenitor_support::encode_path(&ip_address.to_string()),
             ),
             None,
         );
@@ -155,7 +155,7 @@ impl IpWarmup {
         let url = self.client.url(
             &format!(
                 "/ips/warmup/{}",
-                crate::progenitor_support::encode_path(ip_address),
+                crate::progenitor_support::encode_path(&ip_address.to_string()),
             ),
             None,
         );

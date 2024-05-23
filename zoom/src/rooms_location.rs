@@ -195,7 +195,7 @@ impl RoomsLocation {
         &self,
         body: &crate::types::AddAzrLocationRequest,
     ) -> ClientResult<crate::Response<crate::types::AddAzrLocationResponse>> {
-        let url = self.client.url("/rooms/locations", None);
+        let url = self.client.url(&"/rooms/locations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -231,7 +231,7 @@ impl RoomsLocation {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
             ),
             None,
         );
@@ -272,7 +272,7 @@ impl RoomsLocation {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
             ),
             None,
         );
@@ -318,7 +318,7 @@ impl RoomsLocation {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}/settings?{}",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
                 query_
             ),
             None,
@@ -365,7 +365,7 @@ impl RoomsLocation {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}/settings?{}",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
                 query_
             ),
             None,
@@ -397,7 +397,7 @@ impl RoomsLocation {
     ) -> ClientResult<crate::Response<crate::types::GetZrLocationStructureResponse>> {
         let url = self
             .client
-            .url("/rooms/locations/structure", None);
+            .url(&"/rooms/locations/structure".to_string(), None);
         self.client
             .get(
                 &url,
@@ -426,7 +426,7 @@ impl RoomsLocation {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url("/rooms/locations/structure", None);
+            .url(&"/rooms/locations/structure".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -461,7 +461,7 @@ impl RoomsLocation {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}/location",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
             ),
             None,
         );
