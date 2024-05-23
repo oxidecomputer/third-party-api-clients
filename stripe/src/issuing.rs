@@ -481,7 +481,9 @@ impl Issuing {
     pub async fn post_cardholder(
         &self,
     ) -> ClientResult<crate::Response<crate::types::IssuingCardholder>> {
-        let url = self.client.url("/v1/issuing/cardholders", None);
+        let url = self
+            .client
+            .url("/v1/issuing/cardholders", None);
         self.client
             .post(
                 &url,
@@ -1154,7 +1156,9 @@ impl Issuing {
         &self,
         _created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingSettlement>>> {
-        let url = self.client.url("/v1/issuing/settlements", None);
+        let url = self
+            .client
+            .url("/v1/issuing/settlements", None);
         let crate::Response::<crate::types::GetIssuingSettlementsResponse> {
             mut status,
             mut headers,

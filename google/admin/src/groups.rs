@@ -197,7 +197,9 @@ impl Groups {
         &self,
         body: &crate::types::Group,
     ) -> ClientResult<crate::Response<crate::types::Group>> {
-        let url = self.client.url("/admin/directory/v1/groups", None);
+        let url = self
+            .client
+            .url("/admin/directory/v1/groups", None);
         self.client
             .post(
                 &url,

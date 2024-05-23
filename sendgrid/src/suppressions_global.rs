@@ -26,7 +26,9 @@ impl SuppressionsGlobal {
         &self,
         body: &crate::types::SuppressionsRequestBody,
     ) -> ClientResult<crate::Response<crate::types::SuppressionsRequestBody>> {
-        let url = self.client.url("/asm/suppressions/global", None);
+        let url = self
+            .client
+            .url("/asm/suppressions/global", None);
         self.client
             .post(
                 &url,

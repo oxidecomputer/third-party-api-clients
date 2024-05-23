@@ -56,7 +56,8 @@ pub struct ActivateFactorRequest {
     pub state_token: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "APP")]
     App,
@@ -80,6 +81,7 @@ impl std::fmt::Display for Type {
         .fmt(f)
     }
 }
+
 
 impl Type {
     pub fn is_noop(&self) -> bool {
@@ -310,7 +312,8 @@ pub struct AppUserPasswordCredential {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -337,6 +340,7 @@ impl std::fmt::Display for Status {
         .fmt(f)
     }
 }
+
 
 impl Status {
     pub fn is_noop(&self) -> bool {
@@ -469,7 +473,8 @@ pub struct ApplicationCredentialsOAuthClient {
     pub token_endpoint_auth_method: Option<OAuthEndpointAuthenticationMethod>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ApplicationCredentialsScheme {
     #[serde(rename = "ADMIN_SETS_CREDENTIALS")]
     AdminSetsCredentials,
@@ -504,6 +509,7 @@ impl std::fmt::Display for ApplicationCredentialsScheme {
         .fmt(f)
     }
 }
+
 
 impl ApplicationCredentialsScheme {
     pub fn is_noop(&self) -> bool {
@@ -544,7 +550,8 @@ pub struct ApplicationCredentialsSigning {
     pub use_: Option<Use>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Use {
     #[serde(rename = "sig")]
     Sig,
@@ -565,6 +572,7 @@ impl std::fmt::Display for Use {
         .fmt(f)
     }
 }
+
 
 impl Use {
     pub fn is_noop(&self) -> bool {
@@ -703,7 +711,8 @@ pub struct ApplicationSettingsNotificationsVpnNetwork {
     pub include: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ApplicationSignOnMode {
     #[serde(rename = "AUTO_LOGIN")]
     AutoLogin,
@@ -748,6 +757,7 @@ impl std::fmt::Display for ApplicationSignOnMode {
         .fmt(f)
     }
 }
+
 
 impl ApplicationSignOnMode {
     pub fn is_noop(&self) -> bool {
@@ -806,7 +816,8 @@ pub struct AuthenticationProvider {
     pub type_: Option<AuthenticationProviderType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AuthenticationProviderType {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -843,13 +854,15 @@ impl std::fmt::Display for AuthenticationProviderType {
     }
 }
 
+
 impl AuthenticationProviderType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthenticationProviderType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuerMode {
     #[serde(rename = "CUSTOM_URL")]
     CustomUrl,
@@ -874,13 +887,15 @@ impl std::fmt::Display for IssuerMode {
     }
 }
 
+
 impl IssuerMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuerMode::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RoleStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -904,6 +919,7 @@ impl std::fmt::Display for RoleStatus {
         .fmt(f)
     }
 }
+
 
 impl RoleStatus {
     pub fn is_noop(&self) -> bool {
@@ -976,7 +992,8 @@ pub struct AuthorizationServerCredentials {
     pub signing: Option<AuthorizationServerCredentialsSigningConfig>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AuthorizationServerCredentialsRotationMode {
     #[serde(rename = "AUTO")]
     Auto,
@@ -1000,6 +1017,7 @@ impl std::fmt::Display for AuthorizationServerCredentialsRotationMode {
         .fmt(f)
     }
 }
+
 
 impl AuthorizationServerCredentialsRotationMode {
     pub fn is_noop(&self) -> bool {
@@ -1095,7 +1113,8 @@ pub struct AuthorizationServerPolicy {
     pub type_: Option<PolicyType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AuthorizationServerPolicyRuleType {
     #[serde(rename = "RESOURCE_ACCESS")]
     ResourceAccess,
@@ -1116,6 +1135,7 @@ impl std::fmt::Display for AuthorizationServerPolicyRuleType {
         .fmt(f)
     }
 }
+
 
 impl AuthorizationServerPolicyRuleType {
     pub fn is_noop(&self) -> bool {
@@ -1615,7 +1635,8 @@ pub struct DnsRecord {
     pub values: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DnsRecordType {
     #[serde(rename = "CNAME")]
     Cname,
@@ -1640,13 +1661,15 @@ impl std::fmt::Display for DnsRecordType {
     }
 }
 
+
 impl DnsRecordType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DnsRecordType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TrustLevel {
     #[serde(rename = "ANY")]
     Any,
@@ -1670,6 +1693,7 @@ impl std::fmt::Display for TrustLevel {
         .fmt(f)
     }
 }
+
 
 impl TrustLevel {
     pub fn is_noop(&self) -> bool {
@@ -1699,7 +1723,8 @@ pub struct DevicePolicyRuleCondition {
     pub trust_level: Option<TrustLevel>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SupportedMdmFrameworks {
     #[serde(rename = "AFW")]
     Afw,
@@ -1727,13 +1752,15 @@ impl std::fmt::Display for SupportedMdmFrameworks {
     }
 }
 
+
 impl SupportedMdmFrameworks {
     pub fn is_noop(&self) -> bool {
         matches!(self, SupportedMdmFrameworks::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Types {
     #[serde(rename = "ANDROID")]
     Android,
@@ -1763,6 +1790,7 @@ impl std::fmt::Display for Types {
         .fmt(f)
     }
 }
+
 
 impl Types {
     pub fn is_noop(&self) -> bool {
@@ -1876,7 +1904,8 @@ pub struct DomainCertificateMetadata {
     pub subject: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DomainCertificateSourceType {
     #[serde(rename = "MANUAL")]
     Manual,
@@ -1898,13 +1927,15 @@ impl std::fmt::Display for DomainCertificateSourceType {
     }
 }
 
+
 impl DomainCertificateSourceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DomainCertificateSourceType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DomainCertificateType {
     #[serde(rename = "PEM")]
     Pem,
@@ -1926,6 +1957,7 @@ impl std::fmt::Display for DomainCertificateType {
     }
 }
 
+
 impl DomainCertificateType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DomainCertificateType::Noop)
@@ -1942,7 +1974,8 @@ pub struct DomainListResponse {
     pub domains: Vec<Domain>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DomainValidationStatus {
     #[serde(rename = "COMPLETED")]
     Completed,
@@ -1972,6 +2005,7 @@ impl std::fmt::Display for DomainValidationStatus {
         .fmt(f)
     }
 }
+
 
 impl DomainValidationStatus {
     pub fn is_noop(&self) -> bool {
@@ -2011,7 +2045,8 @@ pub struct EmailUserFactorProfile {
     pub email: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EnabledStatus {
     #[serde(rename = "DISABLED")]
     Disabled,
@@ -2036,13 +2071,15 @@ impl std::fmt::Display for EnabledStatus {
     }
 }
 
+
 impl EnabledStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, EnabledStatus::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum VerificationStatus {
     #[serde(rename = "UNVERIFIED")]
     Unverified,
@@ -2066,6 +2103,7 @@ impl std::fmt::Display for VerificationStatus {
         .fmt(f)
     }
 }
+
 
 impl VerificationStatus {
     pub fn is_noop(&self) -> bool {
@@ -2123,7 +2161,8 @@ pub struct EventHook {
     pub verification_status: Option<VerificationStatus>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EventHookChannelType {
     #[serde(rename = "HTTP")]
     Http,
@@ -2144,6 +2183,7 @@ impl std::fmt::Display for EventHookChannelType {
         .fmt(f)
     }
 }
+
 
 impl EventHookChannelType {
     pub fn is_noop(&self) -> bool {
@@ -2205,7 +2245,8 @@ pub struct EventHookChannelConfigAuthScheme {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EventHookChannelConfigAuthSchemeType {
     #[serde(rename = "HEADER")]
     Header,
@@ -2226,6 +2267,7 @@ impl std::fmt::Display for EventHookChannelConfigAuthSchemeType {
         .fmt(f)
     }
 }
+
 
 impl EventHookChannelConfigAuthSchemeType {
     pub fn is_noop(&self) -> bool {
@@ -2249,7 +2291,8 @@ pub struct EventHookChannelConfigHeader {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EventSubscriptionsType {
     #[serde(rename = "EVENT_TYPE")]
     EventType,
@@ -2274,6 +2317,7 @@ impl std::fmt::Display for EventSubscriptionsType {
     }
 }
 
+
 impl EventSubscriptionsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, EventSubscriptionsType::Noop)
@@ -2292,7 +2336,8 @@ pub struct EventSubscriptions {
     pub type_: Option<EventSubscriptionsType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FactorProvider {
     #[serde(rename = "CUSTOM")]
     Custom,
@@ -2335,13 +2380,15 @@ impl std::fmt::Display for FactorProvider {
     }
 }
 
+
 impl FactorProvider {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorProvider::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FactorResultType {
     #[serde(rename = "CANCELLED")]
     Cancelled,
@@ -2390,13 +2437,15 @@ impl std::fmt::Display for FactorResultType {
     }
 }
 
+
 impl FactorResultType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorResultType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FactorStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -2436,13 +2485,15 @@ impl std::fmt::Display for FactorStatus {
     }
 }
 
+
 impl FactorStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorStatus::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FactorType {
     #[serde(rename = "call")]
     Call,
@@ -2500,6 +2551,7 @@ impl std::fmt::Display for FactorType {
     }
 }
 
+
 impl FactorType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FactorType::Noop)
@@ -2544,7 +2596,8 @@ pub struct FeatureStage {
     pub value: Option<FeatureStageValue>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FeatureStageState {
     #[serde(rename = "CLOSED")]
     Closed,
@@ -2569,13 +2622,15 @@ impl std::fmt::Display for FeatureStageState {
     }
 }
 
+
 impl FeatureStageState {
     pub fn is_noop(&self) -> bool {
         matches!(self, FeatureStageState::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FeatureStageValue {
     #[serde(rename = "BETA")]
     Beta,
@@ -2600,13 +2655,15 @@ impl std::fmt::Display for FeatureStageValue {
     }
 }
 
+
 impl FeatureStageValue {
     pub fn is_noop(&self) -> bool {
         matches!(self, FeatureStageValue::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FeatureType {
     #[serde(rename = "self-service")]
     SelfService,
@@ -2627,6 +2684,7 @@ impl std::fmt::Display for FeatureType {
         .fmt(f)
     }
 }
+
 
 impl FeatureType {
     pub fn is_noop(&self) -> bool {
@@ -2818,7 +2876,8 @@ pub struct GroupRulePeopleCondition {
     pub users: Option<GroupRuleCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GroupRuleStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -2846,13 +2905,15 @@ impl std::fmt::Display for GroupRuleStatus {
     }
 }
 
+
 impl GroupRuleStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupRuleStatus::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GroupType {
     #[serde(rename = "APP_GROUP")]
     AppGroup,
@@ -2880,6 +2941,7 @@ impl std::fmt::Display for GroupType {
     }
 }
 
+
 impl GroupType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupType::Noop)
@@ -2903,7 +2965,8 @@ pub struct WebUserFactorProfile {
     pub credential_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IdentityProviderIssuerMode {
     #[serde(rename = "CUSTOM_URL_DOMAIN")]
     CustomUrlDomain,
@@ -2928,13 +2991,15 @@ impl std::fmt::Display for IdentityProviderIssuerMode {
     }
 }
 
+
 impl IdentityProviderIssuerMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, IdentityProviderIssuerMode::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IdentityProviderType {
     #[serde(rename = "AgentlessDSSO")]
     AgentlessDsso,
@@ -2982,6 +3047,7 @@ impl std::fmt::Display for IdentityProviderType {
         .fmt(f)
     }
 }
+
 
 impl IdentityProviderType {
     pub fn is_noop(&self) -> bool {
@@ -3106,7 +3172,8 @@ pub struct IdentityProviderCredentialsSigning {
     pub kid: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Revocation {
     #[serde(rename = "CRL")]
     Crl,
@@ -3133,6 +3200,7 @@ impl std::fmt::Display for Revocation {
         .fmt(f)
     }
 }
+
 
 impl Revocation {
     pub fn is_noop(&self) -> bool {
@@ -3192,7 +3260,8 @@ pub struct IdentityProviderPolicy {
     pub subject: Option<PolicySubject>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Provider {
     #[serde(rename = "ANY")]
     Any,
@@ -3219,6 +3288,7 @@ impl std::fmt::Display for Provider {
         .fmt(f)
     }
 }
+
 
 impl Provider {
     pub fn is_noop(&self) -> bool {
@@ -3412,7 +3482,8 @@ pub struct InlineHookResponseCommands {
     pub value: Vec<InlineHookResponseCommandValue>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InlineHookType {
     #[serde(rename = "com.okta.import.transform")]
     ComOktaImportTransform,
@@ -3447,6 +3518,7 @@ impl std::fmt::Display for InlineHookType {
         .fmt(f)
     }
 }
+
 
 impl InlineHookType {
     pub fn is_noop(&self) -> bool {
@@ -3726,7 +3798,8 @@ pub struct LinkedObjectDetails {
     pub type_: Option<LinkedObjectDetailsType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LinkedObjectDetailsType {
     #[serde(rename = "USER")]
     User,
@@ -3747,6 +3820,7 @@ impl std::fmt::Display for LinkedObjectDetailsType {
         .fmt(f)
     }
 }
+
 
 impl LinkedObjectDetailsType {
     pub fn is_noop(&self) -> bool {
@@ -3831,7 +3905,8 @@ pub struct LogAuthenticationContext {
     pub issuer: Option<LogIssuer>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LogAuthenticationProvider {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -3867,6 +3942,7 @@ impl std::fmt::Display for LogAuthenticationProvider {
         .fmt(f)
     }
 }
+
 
 impl LogAuthenticationProvider {
     pub fn is_noop(&self) -> bool {
@@ -3911,7 +3987,8 @@ pub struct LogClient {
     pub zone: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LogCredentialProvider {
     #[serde(rename = "DUO")]
     Duo,
@@ -3951,13 +4028,15 @@ impl std::fmt::Display for LogCredentialProvider {
     }
 }
 
+
 impl LogCredentialProvider {
     pub fn is_noop(&self) -> bool {
         matches!(self, LogCredentialProvider::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LogCredentialType {
     #[serde(rename = "ASSERTION")]
     Assertion,
@@ -3999,6 +4078,7 @@ impl std::fmt::Display for LogCredentialType {
         .fmt(f)
     }
 }
+
 
 impl LogCredentialType {
     pub fn is_noop(&self) -> bool {
@@ -4246,7 +4326,8 @@ pub struct LogSecurityContext {
     pub isp: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LogSeverity {
     #[serde(rename = "DEBUG")]
     Debug,
@@ -4276,6 +4357,7 @@ impl std::fmt::Display for LogSeverity {
         .fmt(f)
     }
 }
+
 
 impl LogSeverity {
     pub fn is_noop(&self) -> bool {
@@ -4362,7 +4444,8 @@ pub struct LogUserAgent {
     pub raw_user_agent: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Enrollment {
     #[serde(rename = "ANY_OR_NONE")]
     AnyOrNone,
@@ -4386,6 +4469,7 @@ impl std::fmt::Display for Enrollment {
         .fmt(f)
     }
 }
+
 
 impl Enrollment {
     pub fn is_noop(&self) -> bool {
@@ -4490,7 +4574,8 @@ pub struct NetworkZoneAddress {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NetworkZoneAddressType {
     #[serde(rename = "CIDR")]
     Cidr,
@@ -4515,6 +4600,7 @@ impl std::fmt::Display for NetworkZoneAddressType {
     }
 }
 
+
 impl NetworkZoneAddressType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkZoneAddressType::Noop)
@@ -4537,7 +4623,8 @@ pub struct NetworkZoneLocation {
     pub region: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NetworkZoneType {
     #[serde(rename = "DYNAMIC")]
     Dynamic,
@@ -4562,13 +4649,15 @@ impl std::fmt::Display for NetworkZoneType {
     }
 }
 
+
 impl NetworkZoneType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkZoneType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NetworkZoneUsage {
     #[serde(rename = "BLOCKLIST")]
     Blocklist,
@@ -4593,6 +4682,7 @@ impl std::fmt::Display for NetworkZoneUsage {
     }
 }
 
+
 impl NetworkZoneUsage {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkZoneUsage::Noop)
@@ -4616,7 +4706,8 @@ pub struct OAuth2Actor {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ClaimType {
     #[serde(rename = "IDENTITY")]
     Identity,
@@ -4641,13 +4732,15 @@ impl std::fmt::Display for ClaimType {
     }
 }
 
+
 impl ClaimType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ClaimType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GroupFilterType {
     #[serde(rename = "CONTAINS")]
     Contains,
@@ -4678,13 +4771,15 @@ impl std::fmt::Display for GroupFilterType {
     }
 }
 
+
 impl GroupFilterType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupFilterType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ValueType {
     #[serde(rename = "EXPRESSION")]
     Expression,
@@ -4711,6 +4806,7 @@ impl std::fmt::Display for ValueType {
         .fmt(f)
     }
 }
+
 
 impl ValueType {
     pub fn is_noop(&self) -> bool {
@@ -4803,7 +4899,8 @@ pub struct OAuth2Client {
     pub logo_uri: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OAuth2RefreshTokenStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -4827,6 +4924,7 @@ impl std::fmt::Display for OAuth2RefreshTokenStatus {
         .fmt(f)
     }
 }
+
 
 impl OAuth2RefreshTokenStatus {
     pub fn is_noop(&self) -> bool {
@@ -4898,7 +4996,8 @@ pub struct OAuth2RefreshToken {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Consent {
     #[serde(rename = "ADMIN")]
     Admin,
@@ -4926,13 +5025,15 @@ impl std::fmt::Display for Consent {
     }
 }
 
+
 impl Consent {
     pub fn is_noop(&self) -> bool {
         matches!(self, Consent::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MetadataPublish {
     #[serde(rename = "ALL_CLIENTS")]
     AllClients,
@@ -4956,6 +5057,7 @@ impl std::fmt::Display for MetadataPublish {
         .fmt(f)
     }
 }
+
 
 impl MetadataPublish {
     pub fn is_noop(&self) -> bool {
@@ -5070,7 +5172,8 @@ pub struct OAuth2ScopeConsentGrant {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OAuth2ScopeConsentGrantSource {
     #[serde(rename = "ADMIN")]
     Admin,
@@ -5094,6 +5197,7 @@ impl std::fmt::Display for OAuth2ScopeConsentGrantSource {
         .fmt(f)
     }
 }
+
 
 impl OAuth2ScopeConsentGrantSource {
     pub fn is_noop(&self) -> bool {
@@ -5183,7 +5287,8 @@ pub struct OAuthApplicationCredentials {
     pub oauth_client: Option<ApplicationCredentialsOAuthClient>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OAuthEndpointAuthenticationMethod {
     #[serde(rename = "client_secret_basic")]
     ClientSecretBasic,
@@ -5217,13 +5322,15 @@ impl std::fmt::Display for OAuthEndpointAuthenticationMethod {
     }
 }
 
+
 impl OAuthEndpointAuthenticationMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuthEndpointAuthenticationMethod::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OAuthGrantType {
     #[serde(rename = "authorization_code")]
     AuthorizationCode,
@@ -5257,13 +5364,15 @@ impl std::fmt::Display for OAuthGrantType {
     }
 }
 
+
 impl OAuthGrantType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuthGrantType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OAuthResponseType {
     #[serde(rename = "code")]
     Code,
@@ -5290,6 +5399,7 @@ impl std::fmt::Display for OAuthResponseType {
         .fmt(f)
     }
 }
+
 
 impl OAuthResponseType {
     pub fn is_noop(&self) -> bool {
@@ -5343,7 +5453,8 @@ pub struct OktaSignOnPolicyRuleConditions {
     pub people: Option<PolicyPeopleCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Access {
     #[serde(rename = "ALLOW")]
     Allow,
@@ -5368,13 +5479,15 @@ impl std::fmt::Display for Access {
     }
 }
 
+
 impl Access {
     pub fn is_noop(&self) -> bool {
         matches!(self, Access::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FactorPromptMode {
     #[serde(rename = "ALWAYS")]
     Always,
@@ -5401,6 +5514,7 @@ impl std::fmt::Display for FactorPromptMode {
         .fmt(f)
     }
 }
+
 
 impl FactorPromptMode {
     pub fn is_noop(&self) -> bool {
@@ -5475,7 +5589,8 @@ pub struct OpenConnectApplication {
     pub settings: Option<OpenConnectApplicationSettings>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OpenConnectApplicationConsentMethod {
     #[serde(rename = "REQUIRED")]
     Required,
@@ -5499,6 +5614,7 @@ impl std::fmt::Display for OpenConnectApplicationConsentMethod {
         .fmt(f)
     }
 }
+
 
 impl OpenConnectApplicationConsentMethod {
     pub fn is_noop(&self) -> bool {
@@ -5630,7 +5746,8 @@ pub struct OpenConnectApplicationSettingsRefreshToken {
     pub rotation_type: Option<OpenConnectRefreshTokenRotationType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OpenConnectApplicationType {
     #[serde(rename = "browser")]
     Browser,
@@ -5661,13 +5778,15 @@ impl std::fmt::Display for OpenConnectApplicationType {
     }
 }
 
+
 impl OpenConnectApplicationType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OpenConnectApplicationType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OpenConnectRefreshTokenRotationType {
     #[serde(rename = "rotate")]
     Rotate,
@@ -5691,6 +5810,7 @@ impl std::fmt::Display for OpenConnectRefreshTokenRotationType {
         .fmt(f)
     }
 }
+
 
 impl OpenConnectRefreshTokenRotationType {
     pub fn is_noop(&self) -> bool {
@@ -5744,7 +5864,8 @@ pub struct PasswordCredentialHash {
     pub work_factor: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PasswordCredentialHashAlgorithm {
     #[serde(rename = "BCRYPT")]
     Bcrypt,
@@ -5777,6 +5898,7 @@ impl std::fmt::Display for PasswordCredentialHashAlgorithm {
         .fmt(f)
     }
 }
+
 
 impl PasswordCredentialHashAlgorithm {
     pub fn is_noop(&self) -> bool {
@@ -5818,7 +5940,8 @@ pub struct PasswordPolicy {
     pub settings: Option<PasswordPolicySettingsData>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PasswordPolicyAuthenticationProviderCondition {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -5848,6 +5971,7 @@ impl std::fmt::Display for PasswordPolicyAuthenticationProviderCondition {
         .fmt(f)
     }
 }
+
 
 impl PasswordPolicyAuthenticationProviderCondition {
     pub fn is_noop(&self) -> bool {
@@ -6160,7 +6284,8 @@ pub struct PasswordPolicySettingsData {
     pub recovery: Option<PasswordPolicyRecoverySettings>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PlatformConditionEvaluatorType {
     #[serde(rename = "ANY")]
     Any,
@@ -6191,6 +6316,7 @@ impl std::fmt::Display for PlatformConditionEvaluatorType {
     }
 }
 
+
 impl PlatformConditionEvaluatorType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlatformConditionEvaluatorType::Noop)
@@ -6205,7 +6331,8 @@ pub struct PlatformConditionEvaluator {
     pub type_: Option<PlatformConditionEvaluatorType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PlatformConditionEvaluatorOperatingSystemType {
     #[serde(rename = "ANDROID")]
     Android,
@@ -6242,6 +6369,7 @@ impl std::fmt::Display for PlatformConditionEvaluatorOperatingSystemType {
     }
 }
 
+
 impl PlatformConditionEvaluatorOperatingSystemType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlatformConditionEvaluatorOperatingSystemType::Noop)
@@ -6262,7 +6390,8 @@ pub struct PlatformConditionEvaluatorOperatingSystem {
     pub version: Option<PlatformConditionEvaluatorOperatingSystemVersion>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MatchType {
     #[serde(rename = "EXPRESSION")]
     Expression,
@@ -6286,6 +6415,7 @@ impl std::fmt::Display for MatchType {
         .fmt(f)
     }
 }
+
 
 impl MatchType {
     pub fn is_noop(&self) -> bool {
@@ -6377,7 +6507,8 @@ pub struct Policy {
     pub type_: Option<PolicyType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Action {
     #[serde(rename = "AUTO")]
     Auto,
@@ -6402,6 +6533,7 @@ impl std::fmt::Display for Action {
     }
 }
 
+
 impl Action {
     pub fn is_noop(&self) -> bool {
         matches!(self, Action::Noop)
@@ -6422,7 +6554,8 @@ pub struct PolicyAccountLinkFilter {
     pub groups: Option<ClientPolicyCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Connection {
     #[serde(rename = "ANYWHERE")]
     Anywhere,
@@ -6446,6 +6579,7 @@ impl std::fmt::Display for Connection {
         .fmt(f)
     }
 }
+
 
 impl Connection {
     pub fn is_noop(&self) -> bool {
@@ -6479,7 +6613,8 @@ pub struct PolicyPeopleCondition {
     pub users: Option<UserCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PolicyRuleType {
     #[serde(rename = "PASSWORD")]
     Password,
@@ -6503,6 +6638,7 @@ impl std::fmt::Display for PolicyRuleType {
         .fmt(f)
     }
 }
+
 
 impl PolicyRuleType {
     pub fn is_noop(&self) -> bool {
@@ -6590,7 +6726,8 @@ pub struct PolicyRuleActionsEnroll {
     pub self_: Option<PolicyRuleActionsEnrollSelf>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PolicyRuleActionsEnrollSelf {
     #[serde(rename = "CHALLENGE")]
     Challenge,
@@ -6618,13 +6755,15 @@ impl std::fmt::Display for PolicyRuleActionsEnrollSelf {
     }
 }
 
+
 impl PolicyRuleActionsEnrollSelf {
     pub fn is_noop(&self) -> bool {
         matches!(self, PolicyRuleActionsEnrollSelf::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AuthType {
     #[serde(rename = "ANY")]
     Any,
@@ -6648,6 +6787,7 @@ impl std::fmt::Display for AuthType {
         .fmt(f)
     }
 }
+
 
 impl AuthType {
     pub fn is_noop(&self) -> bool {
@@ -6770,7 +6910,8 @@ pub struct PolicySubject {
     pub user_name_template: Option<PolicyUserNameTemplate>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PolicySubjectMatchType {
     #[serde(rename = "CUSTOM_ATTRIBUTE")]
     CustomAttribute,
@@ -6801,13 +6942,15 @@ impl std::fmt::Display for PolicySubjectMatchType {
     }
 }
 
+
 impl PolicySubjectMatchType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PolicySubjectMatchType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PolicyType {
     #[serde(rename = "IDP_DISCOVERY")]
     IdpDiscovery,
@@ -6837,6 +6980,7 @@ impl std::fmt::Display for PolicyType {
         .fmt(f)
     }
 }
+
 
 impl PolicyType {
     pub fn is_noop(&self) -> bool {
@@ -6913,7 +7057,8 @@ pub struct ProfileMappingSource {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProtocolType {
     #[serde(rename = "MTLS")]
     Mtls,
@@ -6943,6 +7088,7 @@ impl std::fmt::Display for ProtocolType {
         .fmt(f)
     }
 }
+
 
 impl ProtocolType {
     pub fn is_noop(&self) -> bool {
@@ -6984,7 +7130,8 @@ pub struct ProtocolAlgorithmType {
     pub signature: Option<ProtocolAlgorithmTypeSignature>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Scope {
     #[serde(rename = "ANY")]
     Any,
@@ -7018,6 +7165,7 @@ impl std::fmt::Display for Scope {
     }
 }
 
+
 impl Scope {
     pub fn is_noop(&self) -> bool {
         matches!(self, Scope::Noop)
@@ -7044,7 +7192,8 @@ pub struct ProtocolAlgorithms {
     pub response: Option<ProtocolAlgorithmType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Binding {
     #[serde(rename = "HTTP-POST")]
     HttpPost,
@@ -7069,13 +7218,15 @@ impl std::fmt::Display for Binding {
     }
 }
 
+
 impl Binding {
     pub fn is_noop(&self) -> bool {
         matches!(self, Binding::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProtocolEndpointType {
     #[serde(rename = "INSTANCE")]
     Instance,
@@ -7099,6 +7250,7 @@ impl std::fmt::Display for ProtocolEndpointType {
         .fmt(f)
     }
 }
+
 
 impl ProtocolEndpointType {
     pub fn is_noop(&self) -> bool {
@@ -7152,7 +7304,8 @@ pub struct ProtocolRelayState {
     pub format: Option<ProtocolRelayStateFormat>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProtocolRelayStateFormat {
     #[serde(rename = "FROM_URL")]
     FromUrl,
@@ -7177,6 +7330,7 @@ impl std::fmt::Display for ProtocolRelayStateFormat {
     }
 }
 
+
 impl ProtocolRelayStateFormat {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProtocolRelayStateFormat::Noop)
@@ -7194,7 +7348,8 @@ pub struct ProtocolSettings {
     pub name_format: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProvisioningAction {
     #[serde(rename = "AUTO")]
     Auto,
@@ -7221,6 +7376,7 @@ impl std::fmt::Display for ProvisioningAction {
         .fmt(f)
     }
 }
+
 
 impl ProvisioningAction {
     pub fn is_noop(&self) -> bool {
@@ -7252,7 +7408,8 @@ pub struct ProvisioningConditions {
     pub suspended: Option<ProvisioningSuspendedCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProvisioningDeprovisionedConditionAction {
     #[serde(rename = "NONE")]
     None,
@@ -7277,6 +7434,7 @@ impl std::fmt::Display for ProvisioningDeprovisionedConditionAction {
     }
 }
 
+
 impl ProvisioningDeprovisionedConditionAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProvisioningDeprovisionedConditionAction::Noop)
@@ -7289,7 +7447,8 @@ pub struct ProvisioningDeprovisionedCondition {
     pub action: Option<ProvisioningDeprovisionedConditionAction>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProvisioningGroupsAction {
     #[serde(rename = "APPEND")]
     Append,
@@ -7319,6 +7478,7 @@ impl std::fmt::Display for ProvisioningGroupsAction {
         .fmt(f)
     }
 }
+
 
 impl ProvisioningGroupsAction {
     pub fn is_noop(&self) -> bool {
@@ -7351,7 +7511,8 @@ pub struct ProvisioningGroups {
     pub source_attribute_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProvisioningSuspendedConditionAction {
     #[serde(rename = "NONE")]
     None,
@@ -7375,6 +7536,7 @@ impl std::fmt::Display for ProvisioningSuspendedConditionAction {
         .fmt(f)
     }
 }
+
 
 impl ProvisioningSuspendedConditionAction {
     pub fn is_noop(&self) -> bool {
@@ -7535,7 +7697,8 @@ pub struct Role {
     pub type_: Option<RoleType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RoleAssignmentType {
     #[serde(rename = "GROUP")]
     Group,
@@ -7560,13 +7723,15 @@ impl std::fmt::Display for RoleAssignmentType {
     }
 }
 
+
 impl RoleAssignmentType {
     pub fn is_noop(&self) -> bool {
         matches!(self, RoleAssignmentType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RoleType {
     #[serde(rename = "API_ACCESS_MANAGEMENT_ADMIN")]
     ApiAccessManagementAdmin,
@@ -7611,6 +7776,7 @@ impl std::fmt::Display for RoleType {
         .fmt(f)
     }
 }
+
 
 impl RoleType {
     pub fn is_noop(&self) -> bool {
@@ -7845,7 +8011,8 @@ pub struct SamlAttributeStatement {
     pub values: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Value {
     #[serde(rename = "ACTIVATING")]
     Activating,
@@ -7887,6 +8054,7 @@ impl std::fmt::Display for Value {
         .fmt(f)
     }
 }
+
 
 impl Value {
     pub fn is_noop(&self) -> bool {
@@ -7936,7 +8104,8 @@ pub struct ScopeData {
     pub type_: Option<ScopeType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ScopeType {
     #[serde(rename = "CORS")]
     Cors,
@@ -7960,6 +8129,7 @@ impl std::fmt::Display for ScopeType {
         .fmt(f)
     }
 }
+
 
 impl ScopeType {
     pub fn is_noop(&self) -> bool {
@@ -8141,7 +8311,8 @@ pub struct Session {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SessionAuthenticationMethod {
     #[serde(rename = "fpt")]
     Fpt,
@@ -8190,6 +8361,7 @@ impl std::fmt::Display for SessionAuthenticationMethod {
     }
 }
 
+
 impl SessionAuthenticationMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionAuthenticationMethod::Noop)
@@ -8208,7 +8380,8 @@ pub struct SessionIdentityProvider {
     pub type_: Option<SessionIdentityProviderType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SessionIdentityProviderType {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -8242,13 +8415,15 @@ impl std::fmt::Display for SessionIdentityProviderType {
     }
 }
 
+
 impl SessionIdentityProviderType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionIdentityProviderType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SessionStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -8275,6 +8450,7 @@ impl std::fmt::Display for SessionStatus {
         .fmt(f)
     }
 }
+
 
 impl SessionStatus {
     pub fn is_noop(&self) -> bool {
@@ -8353,7 +8529,8 @@ pub struct SmsTemplate {
     pub type_: Option<SmsTemplateType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SmsTemplateType {
     #[serde(rename = "SMS_VERIFY_CODE")]
     SmsVerifyCode,
@@ -8374,6 +8551,7 @@ impl std::fmt::Display for SmsTemplateType {
         .fmt(f)
     }
 }
+
 
 impl SmsTemplateType {
     pub fn is_noop(&self) -> bool {
@@ -8398,7 +8576,8 @@ pub struct SmsUserFactorProfile {
     pub phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TokenType {
     #[serde(rename = "ACCESS")]
     Access,
@@ -8422,6 +8601,7 @@ impl std::fmt::Display for TokenType {
         .fmt(f)
     }
 }
+
 
 impl TokenType {
     pub fn is_noop(&self) -> bool {
@@ -8897,7 +9077,8 @@ pub struct UserFactor {
     pub verify: Option<VerifyFactorRequest>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserIdentifierConditionEvaluatorPatternMatchType {
     #[serde(rename = "CONTAINS")]
     Contains,
@@ -8931,6 +9112,7 @@ impl std::fmt::Display for UserIdentifierConditionEvaluatorPatternMatchType {
     }
 }
 
+
 impl UserIdentifierConditionEvaluatorPatternMatchType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserIdentifierConditionEvaluatorPatternMatchType::Noop)
@@ -8949,7 +9131,8 @@ pub struct UserIdentifierConditionEvaluatorPattern {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserIdentifierPolicyRuleConditionType {
     #[serde(rename = "ATTRIBUTE")]
     Attribute,
@@ -8973,6 +9156,7 @@ impl std::fmt::Display for UserIdentifierPolicyRuleConditionType {
         .fmt(f)
     }
 }
+
 
 impl UserIdentifierPolicyRuleConditionType {
     pub fn is_noop(&self) -> bool {
@@ -9027,7 +9211,8 @@ pub struct UserLifecycleAttributePolicyRuleCondition {
     pub matching_value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserNextLogin {
     #[serde(rename = "changePassword")]
     ChangePassword,
@@ -9048,6 +9233,7 @@ impl std::fmt::Display for UserNextLogin {
         .fmt(f)
     }
 }
+
 
 impl UserNextLogin {
     pub fn is_noop(&self) -> bool {
@@ -9607,7 +9793,8 @@ pub struct UserSchemaAttributeMasterPriority {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserSchemaAttributeMasterType {
     #[serde(rename = "OKTA")]
     Okta,
@@ -9635,6 +9822,7 @@ impl std::fmt::Display for UserSchemaAttributeMasterType {
     }
 }
 
+
 impl UserSchemaAttributeMasterType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserSchemaAttributeMasterType::Noop)
@@ -9657,7 +9845,8 @@ pub struct UserSchemaAttributePermission {
     pub principal: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserSchemaAttributeType {
     #[serde(rename = "array")]
     Array,
@@ -9690,6 +9879,7 @@ impl std::fmt::Display for UserSchemaAttributeType {
         .fmt(f)
     }
 }
+
 
 impl UserSchemaAttributeType {
     pub fn is_noop(&self) -> bool {
@@ -9905,7 +10095,8 @@ pub struct UserSchemaPublic {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -9947,6 +10138,7 @@ impl std::fmt::Display for UserStatus {
         .fmt(f)
     }
 }
+
 
 impl UserStatus {
     pub fn is_noop(&self) -> bool {
@@ -10081,7 +10273,8 @@ pub struct VerifyFactorRequest {
     pub state_token: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FactorResult {
     #[serde(rename = "CHALLENGE")]
     Challenge,
@@ -10129,6 +10322,7 @@ impl std::fmt::Display for FactorResult {
         .fmt(f)
     }
 }
+
 
 impl FactorResult {
     pub fn is_noop(&self) -> bool {

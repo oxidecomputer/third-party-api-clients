@@ -3348,7 +3348,7 @@ fn main() -> Result<()> {
 
             let uuid_lib = r#"
 bytes = { version = "1", features = ["serde"] }
-async-trait = "^0.1.51"
+async-trait = "^0.1.80"
 uuid = { version = "1.1", features = ["serde", "v4"] }"#
                 .to_string();
 
@@ -3383,7 +3383,7 @@ rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 async-recursion = "^1.0"
 chrono = {{ version = "0.4", default-features = false, features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
-http = "^0.2.4"
+http = "1"
 jsonwebtoken = "8"
 log = {{ version = "^0.4", features = ["serde"] }}
 mime = "0.3"
@@ -3391,11 +3391,11 @@ openssl = {{ version = "0.10", default-features = false, optional = true }}
 parse_link_header = "0.3.3"
 pem = {{ version = "1.1.0",  default-features = false, optional = true }}
 percent-encoding = "2.2"
-reqwest = {{ version = "0.11.14", default-features = false, features = ["json", "multipart"] }}
-reqwest-conditional-middleware = "0.2.1"
-reqwest-middleware = "0.2.2"
-reqwest-retry = "0.2.2"
-reqwest-tracing = "0.4.4"
+reqwest = {{ version = "0.12", default-features = false, features = ["json", "multipart"] }}
+reqwest-conditional-middleware = {{ git = "https://github.com/oxidecomputer/reqwest-conditional-middleware.git" }}
+reqwest-middleware = {{ version = "0.3", features = ["multipart"] }}
+reqwest-retry = "0.5"
+reqwest-tracing = "0.5"
 ring = {{ version = "0.16", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}

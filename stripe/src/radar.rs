@@ -363,7 +363,9 @@ impl Radar {
     pub async fn post_value_list_item(
         &self,
     ) -> ClientResult<crate::Response<crate::types::RadarListItem>> {
-        let url = self.client.url("/v1/radar/value_list_items", None);
+        let url = self
+            .client
+            .url("/v1/radar/value_list_items", None);
         self.client
             .post(
                 &url,

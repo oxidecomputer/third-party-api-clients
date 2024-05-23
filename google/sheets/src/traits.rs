@@ -24,8 +24,8 @@ impl SpreadsheetOps for crate::spreadsheets::Spreadsheets {
             )
             .await?;
 
-        if let Some(v) = resp.body.values.get(0) {
-            if let Some(v) = v.get(0) {
+        if let Some(v) = resp.body.values.first() {
+            if let Some(v) = v.first() {
                 return Ok(Response::new(resp.status, resp.headers, v.to_string()));
             }
         }

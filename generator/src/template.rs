@@ -263,74 +263,6 @@ fn parse_inner(t: &str) -> Result<Template> {
     Ok(Template { components })
 }
 
-#[cfg(test)]
-mod test {
-    use anyhow::{anyhow, Context, Result};
-
-    use super::{parse, Component, Template};
-
-    #[test]
-    fn basic() -> Result<()> {
-        let trials = vec![
-            (
-                "/info",
-                Template {
-                    components: vec![Component::Constant("info".into())],
-                },
-            ),
-            (
-                "/measure/{number}",
-                Template {
-                    components: vec![
-                        Component::Constant("measure".into()),
-                        Component::Parameter("number".into()),
-                    ],
-                },
-            ),
-            (
-                "/one/{two}/three",
-                Template {
-                    components: vec![
-                        Component::Constant("one".into()),
-                        Component::Parameter("two".into()),
-                        Component::Constant("three".into()),
-                    ],
-                },
-            ),
-        ];
-
-        for (path, want) in trials.iter() {
-            let t = parse(path).with_context(|| anyhow!("path {}", path))?;
-            assert_eq!(&t, want);
-        }
-
-        Ok(())
-    }
-
-    #[test]
-    fn compile() -> Result<()> {
-        let t = parse("/measure/{number}")?;
-        let out = t.compile(Default::default(), "None");
-        let want = r#"let url = self.client.url(
-&format!("/measure/{}",
-crate::progenitor_support::encode_path(&number.to_string()),), None);
-"#;
-        assert_eq!(want, &out);
-        Ok(())
-    }
-
-    #[test]
-    fn compile_with_command() -> Result<()> {
-        let t = parse("/path/{param}:command")?;
-        let out = t.compile(Default::default(), "None");
-        let want = r#"let url = self.client.url(
-&format!("/path/{}:command",
-crate::progenitor_support::encode_path(&param.to_string()),), None);
-"#;
-        Ok(assert_eq!(want, &out))
-    }
-}
-
 pub fn generate_docs_github(
     api: &openapiv3::OpenAPI,
     name: &str,
@@ -889,4 +821,70 @@ pub fn generate_docs_generic_client_credentials(
         proper_name.to_lowercase(),
         proper_name.to_lowercase(),
     )
+}
+
+#[cfg(test)]
+mod test {
+    use anyhow::{anyhow, Context, Result};
+
+    use super::{parse, Component, Template};
+
+    #[test]
+    fn basic() -> Result<()> {
+        let trials = [(
+                "/info",
+                Template {
+                    components: vec![Component::Constant("info".into())],
+                },
+            ),
+            (
+                "/measure/{number}",
+                Template {
+                    components: vec![
+                        Component::Constant("measure".into()),
+                        Component::Parameter("number".into()),
+                    ],
+                },
+            ),
+            (
+                "/one/{two}/three",
+                Template {
+                    components: vec![
+                        Component::Constant("one".into()),
+                        Component::Parameter("two".into()),
+                        Component::Constant("three".into()),
+                    ],
+                },
+            )];
+
+        for (path, want) in trials.iter() {
+            let t = parse(path).with_context(|| anyhow!("path {}", path))?;
+            assert_eq!(&t, want);
+        }
+
+        Ok(())
+    }
+
+    #[test]
+    fn compile() -> Result<()> {
+        let t = parse("/measure/{number}")?;
+        let out = t.compile(Default::default(), "None");
+        let want = r#"let url = self.client.url(
+&format!("/measure/{}",
+crate::progenitor_support::encode_path(&number.to_string()),), None);
+"#;
+        assert_eq!(want, &out);
+        Ok(())
+    }
+
+    #[test]
+    fn compile_with_command() -> Result<()> {
+        let t = parse("/path/{param}:command")?;
+        let out = t.compile(Default::default(), "None");
+        let want = r#"let url = self.client.url(
+&format!("/path/{}:command",
+crate::progenitor_support::encode_path(&param.to_string()),), None);
+"#;
+        Ok(assert_eq!(want, &out))
+    }
 }

@@ -74,7 +74,9 @@ impl Companies {
         &self,
         body: &crate::types::PostPartnerManagedCompaniesRequest,
     ) -> ClientResult<crate::Response<crate::types::PostPartnerManagedCompaniesResponse>> {
-        let url = self.client.url("/v1/partner_managed_companies", None);
+        let url = self
+            .client
+            .url("/v1/partner_managed_companies", None);
         self.client
             .post(
                 &url,

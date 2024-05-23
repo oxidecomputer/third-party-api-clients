@@ -193,7 +193,10 @@ impl Plans {
      */
     pub async fn get(&self, plan: &str) -> ClientResult<crate::Response<crate::types::PlanData>> {
         let url = self.client.url(
-            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            &format!(
+                "/v1/plans/{}",
+                crate::progenitor_support::encode_path(plan),
+            ),
             None,
         );
         self.client
@@ -220,7 +223,10 @@ impl Plans {
         plan: &str,
     ) -> ClientResult<crate::Response<crate::types::PlanData>> {
         let url = self.client.url(
-            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            &format!(
+                "/v1/plans/{}",
+                crate::progenitor_support::encode_path(plan),
+            ),
             None,
         );
         self.client
@@ -247,7 +253,10 @@ impl Plans {
         plan: &str,
     ) -> ClientResult<crate::Response<crate::types::DeletedPlan>> {
         let url = self.client.url(
-            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            &format!(
+                "/v1/plans/{}",
+                crate::progenitor_support::encode_path(plan),
+            ),
             None,
         );
         self.client

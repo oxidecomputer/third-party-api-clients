@@ -50,7 +50,9 @@ impl Chat {
     pub async fn delete_scheduled_message(
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url("/chat.deleteScheduledMessage", None);
+        let url = self
+            .client
+            .url("/chat.deleteScheduledMessage", None);
         self.client
             .post(
                 &url,

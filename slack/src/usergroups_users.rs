@@ -64,7 +64,9 @@ impl UsergroupsUsers {
     pub async fn update(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UsergroupsCreateSchema>> {
-        let url = self.client.url("/usergroups.users.update", None);
+        let url = self
+            .client
+            .url("/usergroups.users.update", None);
         self.client
             .post(
                 &url,

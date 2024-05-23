@@ -223,7 +223,7 @@ impl FileOps for crate::files::Files {
             uri += "?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true";
 
             // Create the file.
-        } else if let Some(f) = files.get(0) {
+        } else if let Some(f) = files.first() {
             method = reqwest::Method::PATCH;
             let mut f = f.clone();
             uri += &format!(
@@ -374,7 +374,7 @@ impl FileOps for crate::files::Files {
     // TODO: make binary content work in the actual library.
     async fn get_contents_by_id(&self, id: &str) -> ClientResult<Response<String>> {
         let mut query_ = String::new();
-        let query_args = vec!["mime_type=text/plain".to_string()];
+        let query_args = ["mime_type=text/plain".to_string()];
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -418,7 +418,7 @@ impl FileOps for crate::files::Files {
 
         // Delete the file.
         self.delete(
-            &resp.body.get(0).unwrap().id,
+            &resp.body.first().unwrap().id,
             true, // supports all drives
             true, // supports team drives
         )

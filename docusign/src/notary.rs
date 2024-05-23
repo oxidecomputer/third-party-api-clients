@@ -59,7 +59,9 @@ impl Notary {
         &self,
         body: &crate::types::NotaryData,
     ) -> ClientResult<crate::Response<crate::types::NotaryData>> {
-        let url = self.client.url("/v2.1/current_user/notary", None);
+        let url = self
+            .client
+            .url("/v2.1/current_user/notary", None);
         self.client
             .put(
                 &url,
@@ -81,7 +83,9 @@ impl Notary {
         &self,
         body: &crate::types::NotaryData,
     ) -> ClientResult<crate::Response<crate::types::NotaryData>> {
-        let url = self.client.url("/v2.1/current_user/notary", None);
+        let url = self
+            .client
+            .url("/v2.1/current_user/notary", None);
         self.client
             .post(
                 &url,

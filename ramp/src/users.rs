@@ -24,7 +24,10 @@ impl Users {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url(
-            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/users/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -46,7 +49,10 @@ impl Users {
      */
     pub async fn delete(&self, id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/users/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -72,7 +78,10 @@ impl Users {
         body: &crate::types::PatchUsersRequest,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/users/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
