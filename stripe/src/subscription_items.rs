@@ -162,7 +162,7 @@ impl SubscriptionItems {
      * <p>Adds a new item to an existing subscription. No existing items will be changed or replaced.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SubscriptionItem>> {
-        let url = self.client.url(&"/v1/subscription_items".to_string(), None);
+        let url = self.client.url("/v1/subscription_items", None);
         self.client
             .post(
                 &url,
@@ -190,7 +190,7 @@ impl SubscriptionItems {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
-                crate::progenitor_support::encode_path(&item.to_string()),
+                crate::progenitor_support::encode_path(item),
             ),
             None,
         );
@@ -220,7 +220,7 @@ impl SubscriptionItems {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
-                crate::progenitor_support::encode_path(&item.to_string()),
+                crate::progenitor_support::encode_path(item),
             ),
             None,
         );
@@ -250,7 +250,7 @@ impl SubscriptionItems {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
-                crate::progenitor_support::encode_path(&item.to_string()),
+                crate::progenitor_support::encode_path(item),
             ),
             None,
         );
@@ -300,7 +300,7 @@ impl SubscriptionItems {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}/usage_record_summaries?{}",
-                crate::progenitor_support::encode_path(&subscription_item.to_string()),
+                crate::progenitor_support::encode_path(subscription_item),
                 query_
             ),
             None,
@@ -341,7 +341,7 @@ impl SubscriptionItems {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}/usage_record_summaries",
-                crate::progenitor_support::encode_path(&subscription_item.to_string()),
+                crate::progenitor_support::encode_path(subscription_item),
             ),
             None,
         );
@@ -442,7 +442,7 @@ impl SubscriptionItems {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}/usage_records",
-                crate::progenitor_support::encode_path(&subscription_item.to_string()),
+                crate::progenitor_support::encode_path(subscription_item),
             ),
             None,
         );

@@ -69,7 +69,7 @@ impl Teammates {
         &self,
         body: &crate::types::PostTeammatesRequest,
     ) -> ClientResult<crate::Response<crate::types::PostTeammatesResponse>> {
-        let url = self.client.url(&"/teammates".to_string(), None);
+        let url = self.client.url("/teammates", None);
         self.client
             .post(
                 &url,
@@ -100,7 +100,7 @@ impl Teammates {
         let url = self.client.url(
             &format!(
                 "/teammates/pending/{}/resend",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -203,7 +203,7 @@ impl Teammates {
     pub async fn get_pending(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetTeammatesPendingResponse>> {
-        let url = self.client.url(&"/teammates/pending".to_string(), None);
+        let url = self.client.url("/teammates/pending", None);
         self.client
             .get(
                 &url,
@@ -234,7 +234,7 @@ impl Teammates {
         let url = self.client.url(
             &format!(
                 "/teammates/{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -268,7 +268,7 @@ impl Teammates {
         let url = self.client.url(
             &format!(
                 "/teammates/{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -307,7 +307,7 @@ impl Teammates {
         let url = self.client.url(
             &format!(
                 "/teammates/{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -337,7 +337,7 @@ impl Teammates {
         let url = self.client.url(
             &format!(
                 "/scopes/requests/{}/approve",
-                crate::progenitor_support::encode_path(&request_id.to_string()),
+                crate::progenitor_support::encode_path(request_id),
             ),
             None,
         );
@@ -367,7 +367,7 @@ impl Teammates {
         let url = self.client.url(
             &format!(
                 "/scopes/requests/{}",
-                crate::progenitor_support::encode_path(&request_id.to_string()),
+                crate::progenitor_support::encode_path(request_id),
             ),
             None,
         );
@@ -396,7 +396,7 @@ impl Teammates {
         let url = self.client.url(
             &format!(
                 "/teammates/pending/{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );

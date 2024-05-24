@@ -173,7 +173,7 @@ impl Files {
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::File>> {
         let url = self.client.url(
-            &"/v1/files".to_string(),
+            "/v1/files",
             Some(PostFilesDefaultServer::default().default_url()),
         );
         self.client
@@ -198,10 +198,7 @@ impl Files {
      */
     pub async fn get(&self, file: &str) -> ClientResult<crate::Response<crate::types::File>> {
         let url = self.client.url(
-            &format!(
-                "/v1/files/{}",
-                crate::progenitor_support::encode_path(&file.to_string()),
-            ),
+            &format!("/v1/files/{}", crate::progenitor_support::encode_path(file),),
             None,
         );
         self.client

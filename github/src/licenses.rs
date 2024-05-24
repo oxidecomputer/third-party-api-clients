@@ -105,7 +105,7 @@ impl Licenses {
         let url = self.client.url(
             &format!(
                 "/licenses/{}",
-                crate::progenitor_support::encode_path(&license.to_string()),
+                crate::progenitor_support::encode_path(license),
             ),
             None,
         );
@@ -143,8 +143,8 @@ impl Licenses {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/license",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );

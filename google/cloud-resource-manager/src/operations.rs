@@ -22,10 +22,7 @@ impl Operations {
      */
     pub async fn get(&self, name: &str) -> ClientResult<crate::Response<crate::types::Operation>> {
         let url = self.client.url(
-            &format!(
-                "/v1/{}",
-                crate::progenitor_support::encode_path(&name.to_string()),
-            ),
+            &format!("/v1/{}", crate::progenitor_support::encode_path(name),),
             None,
         );
         self.client

@@ -80,7 +80,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -113,7 +113,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -196,7 +196,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -229,7 +229,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -312,7 +312,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -345,7 +345,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -428,7 +428,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -461,7 +461,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -544,7 +544,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -577,7 +577,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -660,7 +660,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -693,7 +693,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/inventory_items/{}/json",
-                crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
+                crate::progenitor_support::encode_path(inventory_item_id),
             ),
             None,
         );
@@ -2626,9 +2626,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-01
      */
     pub async fn deprecated_202001_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/locations.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/locations.json", None);
         self.client
             .get(
                 &url,
@@ -2657,7 +2655,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/locations/{}/json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -2681,7 +2679,7 @@ impl Inventory {
     pub async fn deprecated_202001_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-01/locations/count.json".to_string(), None);
+            .url("/admin/api/2020-01/locations/count.json", None);
         self.client
             .get(
                 &url,
@@ -2710,7 +2708,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/locations/{}/inventory_levels.json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -2732,9 +2730,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-04
      */
     pub async fn deprecated_202004_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-04/locations.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-04/locations.json", None);
         self.client
             .get(
                 &url,
@@ -2763,7 +2759,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/locations/{}/json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -2787,7 +2783,7 @@ impl Inventory {
     pub async fn deprecated_202004_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-04/locations/count.json".to_string(), None);
+            .url("/admin/api/2020-04/locations/count.json", None);
         self.client
             .get(
                 &url,
@@ -2816,7 +2812,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/locations/{}/inventory_levels.json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -2838,9 +2834,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-07
      */
     pub async fn deprecated_202007_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-07/locations.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-07/locations.json", None);
         self.client
             .get(
                 &url,
@@ -2869,7 +2863,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/locations/{}/json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -2893,7 +2887,7 @@ impl Inventory {
     pub async fn deprecated_202007_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-07/locations/count.json".to_string(), None);
+            .url("/admin/api/2020-07/locations/count.json", None);
         self.client
             .get(
                 &url,
@@ -2922,7 +2916,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/locations/{}/inventory_levels.json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -2944,9 +2938,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-10
      */
     pub async fn get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-10/locations.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-10/locations.json", None);
         self.client
             .get(
                 &url,
@@ -2975,7 +2967,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/locations/{}/json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -2999,7 +2991,7 @@ impl Inventory {
     pub async fn get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-10/locations/count.json".to_string(), None);
+            .url("/admin/api/2020-10/locations/count.json", None);
         self.client
             .get(
                 &url,
@@ -3028,7 +3020,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/locations/{}/inventory_levels.json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -3050,9 +3042,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2021-01
      */
     pub async fn deprecated_202101_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2021-01/locations.json".to_string(), None);
+        let url = self.client.url("/admin/api/2021-01/locations.json", None);
         self.client
             .get(
                 &url,
@@ -3081,7 +3071,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/locations/{}/json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -3105,7 +3095,7 @@ impl Inventory {
     pub async fn deprecated_202101_get_locations_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2021-01/locations/count.json".to_string(), None);
+            .url("/admin/api/2021-01/locations/count.json", None);
         self.client
             .get(
                 &url,
@@ -3134,7 +3124,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/locations/{}/inventory_levels.json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -3156,9 +3146,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-unstable
      */
     pub async fn deprecated_unstable_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/unstable/locations.json".to_string(), None);
+        let url = self.client.url("/admin/api/unstable/locations.json", None);
         self.client
             .get(
                 &url,
@@ -3187,7 +3175,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/locations/{}/json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -3211,10 +3199,9 @@ impl Inventory {
     pub async fn deprecated_unstable_get_locations_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/unstable/locations/count.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/unstable/locations/count.json", None);
         self.client
             .get(
                 &url,
@@ -3243,7 +3230,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/locations/{}/inventory_levels.json",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );

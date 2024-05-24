@@ -176,7 +176,7 @@ impl Quotes {
      * <p>A quote models prices and services for a customer. Default options for <code>header</code>, <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Quote>> {
-        let url = self.client.url(&"/v1/quotes".to_string(), None);
+        let url = self.client.url("/v1/quotes", None);
         self.client
             .post(
                 &url,
@@ -201,7 +201,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );
@@ -231,7 +231,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );
@@ -261,7 +261,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/accept",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );
@@ -291,7 +291,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/cancel",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );
@@ -339,7 +339,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/computed_upfront_line_items?{}",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
                 query_
             ),
             None,
@@ -376,7 +376,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/computed_upfront_line_items",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );
@@ -467,7 +467,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/finalize",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );
@@ -515,7 +515,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/line_items?{}",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
                 query_
             ),
             None,
@@ -552,7 +552,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/line_items",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );
@@ -641,7 +641,7 @@ impl Quotes {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/pdf",
-                crate::progenitor_support::encode_path(&quote.to_string()),
+                crate::progenitor_support::encode_path(quote),
             ),
             None,
         );

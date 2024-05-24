@@ -43,7 +43,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_invoices?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
                 query_
             ),
             None,
@@ -111,8 +111,8 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_invoices/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&invoice_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(invoice_id),
             ),
             None,
         );
@@ -146,7 +146,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_invoices_past_due",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );

@@ -177,7 +177,7 @@ impl SetupIntents {
      * to collect any required permissions to charge the payment method later.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
-        let url = self.client.url(&"/v1/setup_intents".to_string(), None);
+        let url = self.client.url("/v1/setup_intents", None);
         self.client
             .post(
                 &url,
@@ -216,7 +216,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}?{}",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
                 query_
             ),
             None,
@@ -247,7 +247,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );
@@ -279,7 +279,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/cancel",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );
@@ -321,7 +321,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/confirm",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );
@@ -351,7 +351,7 @@ impl SetupIntents {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/verify_microdeposits",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );

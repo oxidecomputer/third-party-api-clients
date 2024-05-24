@@ -21,7 +21,7 @@ impl IpPools {
     pub async fn get_ips_pools(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::IpPoolsPoolResp>>> {
-        let url = self.client.url(&"/ips/pools".to_string(), None);
+        let url = self.client.url("/ips/pools", None);
         self.client
             .get(
                 &url,
@@ -44,7 +44,7 @@ impl IpPools {
     pub async fn get_all_ips_pools(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::IpPoolsPoolResp>>> {
-        let url = self.client.url(&"/ips/pools".to_string(), None);
+        let url = self.client.url("/ips/pools", None);
         self.client
             .get_all_pages(
                 &url,
@@ -74,7 +74,7 @@ impl IpPools {
         &self,
         body: &crate::types::IpPool,
     ) -> ClientResult<crate::Response<crate::types::IpPoolsPoolResp>> {
-        let url = self.client.url(&"/ips/pools".to_string(), None);
+        let url = self.client.url("/ips/pools", None);
         self.client
             .post(
                 &url,
@@ -112,7 +112,7 @@ impl IpPools {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}/ips",
-                crate::progenitor_support::encode_path(&pool_name.to_string()),
+                crate::progenitor_support::encode_path(pool_name),
             ),
             None,
         );
@@ -140,7 +140,7 @@ impl IpPools {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}",
-                crate::progenitor_support::encode_path(&pool_name.to_string()),
+                crate::progenitor_support::encode_path(pool_name),
             ),
             None,
         );
@@ -169,7 +169,7 @@ impl IpPools {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}",
-                crate::progenitor_support::encode_path(&pool_name.to_string()),
+                crate::progenitor_support::encode_path(pool_name),
             ),
             None,
         );
@@ -197,7 +197,7 @@ impl IpPools {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}",
-                crate::progenitor_support::encode_path(&pool_name.to_string()),
+                crate::progenitor_support::encode_path(pool_name),
             ),
             None,
         );
@@ -226,8 +226,8 @@ impl IpPools {
         let url = self.client.url(
             &format!(
                 "/ips/pools/{}/ips/{}",
-                crate::progenitor_support::encode_path(&pool_name.to_string()),
-                crate::progenitor_support::encode_path(&ip.to_string()),
+                crate::progenitor_support::encode_path(pool_name),
+                crate::progenitor_support::encode_path(ip),
             ),
             None,
         );

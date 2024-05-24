@@ -171,7 +171,7 @@ impl Recipients {
      * Also verifies the recipient’s bank account information or debit card, if either is provided.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Recipient>> {
-        let url = self.client.url(&"/v1/recipients".to_string(), None);
+        let url = self.client.url("/v1/recipients", None);
         self.client
             .post(
                 &url,
@@ -199,7 +199,7 @@ impl Recipients {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -233,7 +233,7 @@ impl Recipients {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -263,7 +263,7 @@ impl Recipients {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

@@ -72,7 +72,7 @@ impl Reviews {
         &self,
         created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Review>>> {
-        let url = self.client.url(&"/v1/reviews".to_string(), None);
+        let url = self.client.url("/v1/reviews", None);
         let crate::Response::<crate::types::GetReviewsResponse> {
             mut status,
             mut headers,
@@ -158,7 +158,7 @@ impl Reviews {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}",
-                crate::progenitor_support::encode_path(&review.to_string()),
+                crate::progenitor_support::encode_path(review),
             ),
             None,
         );
@@ -188,7 +188,7 @@ impl Reviews {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}/approve",
-                crate::progenitor_support::encode_path(&review.to_string()),
+                crate::progenitor_support::encode_path(review),
             ),
             None,
         );

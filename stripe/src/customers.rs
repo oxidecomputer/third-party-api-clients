@@ -170,7 +170,7 @@ impl Customers {
      * <p>Creates a new customer object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Customer>> {
-        let url = self.client.url(&"/v1/customers".to_string(), None);
+        let url = self.client.url("/v1/customers", None);
         self.client
             .post(
                 &url,
@@ -344,7 +344,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -376,7 +376,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -406,7 +406,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -454,7 +454,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/balance_transactions?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -491,7 +491,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/balance_transactions",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -582,7 +582,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/balance_transactions",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -615,8 +615,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/balance_transactions/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&transaction.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(transaction),
             ),
             None,
         );
@@ -648,8 +648,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/balance_transactions/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&transaction.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(transaction),
             ),
             None,
         );
@@ -697,7 +697,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/bank_accounts?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -734,7 +734,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/bank_accounts",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -829,7 +829,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/bank_accounts",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -862,8 +862,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/bank_accounts/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -895,8 +895,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/bank_accounts/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -929,8 +929,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/bank_accounts/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -962,8 +962,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/bank_accounts/{}/verify",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1013,7 +1013,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/cards?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -1052,7 +1052,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/cards",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -1147,7 +1147,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/cards",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -1180,8 +1180,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/cards/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1213,8 +1213,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/cards/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1247,8 +1247,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/cards/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1279,7 +1279,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/discount",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -1309,7 +1309,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/discount",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -1362,7 +1362,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/payment_methods?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -1405,7 +1405,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/payment_methods?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -1520,7 +1520,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/sources?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -1563,7 +1563,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/sources?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -1659,7 +1659,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/sources",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -1692,8 +1692,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/sources/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1725,8 +1725,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/sources/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1759,8 +1759,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/sources/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1792,8 +1792,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/sources/{}/verify",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -1841,7 +1841,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -1878,7 +1878,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -1969,7 +1969,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -2002,8 +2002,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -2035,8 +2035,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -2072,8 +2072,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -2106,8 +2106,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions/{}/discount",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -2139,8 +2139,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/subscriptions/{}/discount",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -2188,7 +2188,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/tax_ids?{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
                 query_
             ),
             None,
@@ -2225,7 +2225,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/tax_ids",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -2316,7 +2316,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/tax_ids",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );
@@ -2349,8 +2349,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/tax_ids/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -2382,8 +2382,8 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/v1/customers/{}/tax_ids/{}",
-                crate::progenitor_support::encode_path(&customer.to_string()),
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

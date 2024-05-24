@@ -119,7 +119,7 @@ impl BlocksApi {
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
-        let url = self.client.url(&"/suppression/blocks".to_string(), None);
+        let url = self.client.url("/suppression/blocks", None);
         self.client
             .delete(
                 &url,
@@ -148,7 +148,7 @@ impl BlocksApi {
         let url = self.client.url(
             &format!(
                 "/suppression/blocks/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );
@@ -178,7 +178,7 @@ impl BlocksApi {
         let url = self.client.url(
             &format!(
                 "/suppression/blocks/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl BlocksApi {
         let url = self.client.url(
             &format!(
                 "/suppression/blocks/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );

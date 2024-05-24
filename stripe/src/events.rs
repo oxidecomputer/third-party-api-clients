@@ -179,10 +179,7 @@ impl Events {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Event>> {
         let url = self.client.url(
-            &format!(
-                "/v1/events/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/v1/events/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client

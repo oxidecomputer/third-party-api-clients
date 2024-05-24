@@ -19,10 +19,9 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-01
      */
     pub async fn deprecated_202001_get_balance(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-01/shopify_payments/balance.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-01/shopify_payments/balance.json", None);
         self.client
             .get(
                 &url,
@@ -41,10 +40,9 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-04
      */
     pub async fn deprecated_202004_get_balance(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-04/shopify_payments/balance.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-04/shopify_payments/balance.json", None);
         self.client
             .get(
                 &url,
@@ -63,10 +61,9 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-07
      */
     pub async fn deprecated_202007_get_balance(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-07/shopify_payments/balance.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-07/shopify_payments/balance.json", None);
         self.client
             .get(
                 &url,
@@ -85,10 +82,9 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-10
      */
     pub async fn get_balance(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-10/shopify_payments/balance.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-10/shopify_payments/balance.json", None);
         self.client
             .get(
                 &url,
@@ -107,10 +103,9 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2021-01
      */
     pub async fn deprecated_202101_get_balance(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2021-01/shopify_payments/balance.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2021-01/shopify_payments/balance.json", None);
         self.client
             .get(
                 &url,
@@ -129,10 +124,9 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-unstable
      */
     pub async fn deprecated_unstable_get_balance(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/unstable/shopify_payments/balance.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/unstable/shopify_payments/balance.json", None);
         self.client
             .get(
                 &url,
@@ -214,7 +208,7 @@ impl ShopifyPayments {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/shopify_payments/disputes/{}/json",
-                crate::progenitor_support::encode_path(&dispute_id.to_string()),
+                crate::progenitor_support::encode_path(dispute_id),
             ),
             None,
         );
@@ -362,7 +356,7 @@ impl ShopifyPayments {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/shopify_payments/payouts/{}/json",
-                crate::progenitor_support::encode_path(&payout_id.to_string()),
+                crate::progenitor_support::encode_path(payout_id),
             ),
             None,
         );
@@ -457,7 +451,7 @@ impl ShopifyPayments {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/shopify_payments/payouts/{}/json",
-                crate::progenitor_support::encode_path(&payout_id.to_string()),
+                crate::progenitor_support::encode_path(payout_id),
             ),
             None,
         );
@@ -552,7 +546,7 @@ impl ShopifyPayments {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/shopify_payments/payouts/{}/json",
-                crate::progenitor_support::encode_path(&payout_id.to_string()),
+                crate::progenitor_support::encode_path(payout_id),
             ),
             None,
         );
@@ -647,7 +641,7 @@ impl ShopifyPayments {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/shopify_payments/payouts/{}/json",
-                crate::progenitor_support::encode_path(&payout_id.to_string()),
+                crate::progenitor_support::encode_path(payout_id),
             ),
             None,
         );
@@ -742,7 +736,7 @@ impl ShopifyPayments {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/shopify_payments/payouts/{}/json",
-                crate::progenitor_support::encode_path(&payout_id.to_string()),
+                crate::progenitor_support::encode_path(payout_id),
             ),
             None,
         );
@@ -837,7 +831,7 @@ impl ShopifyPayments {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/shopify_payments/payouts/{}/json",
-                crate::progenitor_support::encode_path(&payout_id.to_string()),
+                crate::progenitor_support::encode_path(payout_id),
             ),
             None,
         );

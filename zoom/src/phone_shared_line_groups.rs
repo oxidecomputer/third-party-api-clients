@@ -87,9 +87,7 @@ impl PhoneSharedLineGroups {
     pub async fn list_all_shared_line_groups(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SharedLineGroups>>> {
-        let url = self
-            .client
-            .url(&"/phone/shared_line_groups".to_string(), None);
+        let url = self.client.url("/phone/shared_line_groups", None);
         let crate::Response::<crate::types::ListSharedLineGroupsResponse> {
             mut status,
             mut headers,
@@ -174,9 +172,7 @@ impl PhoneSharedLineGroups {
         &self,
         body: &crate::types::CreateSharedLineGroupRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/phone/shared_line_groups".to_string(), None);
+        let url = self.client.url("/phone/shared_line_groups", None);
         self.client
             .post(
                 &url,
@@ -214,7 +210,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
             ),
             None,
         );
@@ -254,7 +250,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
             ),
             None,
         );
@@ -294,7 +290,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
             ),
             None,
         );
@@ -337,7 +333,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
             ),
             None,
         );
@@ -378,7 +374,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
             ),
             None,
         );
@@ -421,8 +417,8 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members/{}",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
-                crate::progenitor_support::encode_path(&member_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(member_id),
             ),
             None,
         );
@@ -462,7 +458,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
             ),
             None,
         );
@@ -501,7 +497,7 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
             ),
             None,
         );
@@ -542,8 +538,8 @@ impl PhoneSharedLineGroups {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers/{}",
-                crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
-                crate::progenitor_support::encode_path(&phone_number_id.to_string()),
+                crate::progenitor_support::encode_path(shared_line_group_id),
+                crate::progenitor_support::encode_path(phone_number_id),
             ),
             None,
         );

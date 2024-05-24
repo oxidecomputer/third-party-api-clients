@@ -29,7 +29,7 @@ impl AccountSignatureProviders {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signatureProviders",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );

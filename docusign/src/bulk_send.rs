@@ -60,7 +60,7 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_batch?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
                 query_
             ),
             None,
@@ -101,8 +101,8 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_batch/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&bulk_send_batch_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_batch_id),
             ),
             None,
         );
@@ -137,8 +137,8 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_batch/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&bulk_send_batch_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_batch_id),
             ),
             None,
         );
@@ -170,7 +170,7 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -229,7 +229,7 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -263,8 +263,8 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&bulk_send_list_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
             ),
             None,
         );
@@ -299,8 +299,8 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&bulk_send_list_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
             ),
             None,
         );
@@ -334,8 +334,8 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&bulk_send_list_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
             ),
             None,
         );
@@ -407,8 +407,8 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}/send",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&bulk_send_list_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
             ),
             None,
         );
@@ -480,8 +480,8 @@ impl BulkSend {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}/test",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&bulk_send_list_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
             ),
             None,
         );

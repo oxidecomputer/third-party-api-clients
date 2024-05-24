@@ -108,7 +108,7 @@ impl ProfileMappings {
         let url = self.client.url(
             &format!(
                 "/api/v1/mappings/{}",
-                crate::progenitor_support::encode_path(&mapping_id.to_string()),
+                crate::progenitor_support::encode_path(mapping_id),
             ),
             None,
         );
@@ -141,7 +141,7 @@ impl ProfileMappings {
         let url = self.client.url(
             &format!(
                 "/api/v1/mappings/{}",
-                crate::progenitor_support::encode_path(&mapping_id.to_string()),
+                crate::progenitor_support::encode_path(mapping_id),
             ),
             None,
         );

@@ -27,7 +27,7 @@ impl Roles {
      * *  For subsequent role management, you must be the Account Owner or user with role management permissions.
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Domains>> {
-        let url = self.client.url(&"/roles".to_string(), None);
+        let url = self.client.url("/roles", None);
         self.client
             .get(
                 &url,
@@ -57,7 +57,7 @@ impl Roles {
         &self,
         body: &crate::types::CreateRoleRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(&"/roles".to_string(), None);
+        let url = self.client.url("/roles", None);
         self.client
             .post(
                 &url,
@@ -116,7 +116,7 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/roles/{}/members?{}",
-                crate::progenitor_support::encode_path(&role_id.to_string()),
+                crate::progenitor_support::encode_path(role_id),
                 query_
             ),
             None,
@@ -166,7 +166,7 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/roles/{}/members?{}",
-                crate::progenitor_support::encode_path(&role_id.to_string()),
+                crate::progenitor_support::encode_path(role_id),
                 query_
             ),
             None,
@@ -261,7 +261,7 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/roles/{}/members",
-                crate::progenitor_support::encode_path(&role_id.to_string()),
+                crate::progenitor_support::encode_path(role_id),
             ),
             None,
         );
@@ -301,8 +301,8 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/roles/{}/members/{}",
-                crate::progenitor_support::encode_path(&role_id.to_string()),
-                crate::progenitor_support::encode_path(&member_id.to_string()),
+                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(member_id),
             ),
             None,
         );
@@ -341,10 +341,7 @@ impl Roles {
         role_id: &str,
     ) -> ClientResult<crate::Response<crate::types::GetRoleInformationResponse>> {
         let url = self.client.url(
-            &format!(
-                "/roles/{}",
-                crate::progenitor_support::encode_path(&role_id.to_string()),
-            ),
+            &format!("/roles/{}", crate::progenitor_support::encode_path(role_id),),
             None,
         );
         self.client
@@ -379,10 +376,7 @@ impl Roles {
      */
     pub async fn delete(&self, role_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!(
-                "/roles/{}",
-                crate::progenitor_support::encode_path(&role_id.to_string()),
-            ),
+            &format!("/roles/{}", crate::progenitor_support::encode_path(role_id),),
             None,
         );
         self.client
@@ -419,10 +413,7 @@ impl Roles {
         body: &crate::types::UpdateRoleRequest,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!(
-                "/roles/{}",
-                crate::progenitor_support::encode_path(&role_id.to_string()),
-            ),
+            &format!("/roles/{}", crate::progenitor_support::encode_path(role_id),),
             None,
         );
         self.client

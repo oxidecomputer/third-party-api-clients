@@ -23,7 +23,7 @@ impl CodesOfConduct {
     pub async fn get_all_codes_of_conduct(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::CodeOfConduct>>> {
-        let url = self.client.url(&"/codes_of_conduct".to_string(), None);
+        let url = self.client.url("/codes_of_conduct", None);
         self.client
             .get(
                 &url,
@@ -48,7 +48,7 @@ impl CodesOfConduct {
     pub async fn get_all_all_codes_of_conduct(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::CodeOfConduct>>> {
-        let url = self.client.url(&"/codes_of_conduct".to_string(), None);
+        let url = self.client.url("/codes_of_conduct", None);
         self.client
             .get_all_pages(
                 &url,
@@ -79,7 +79,7 @@ impl CodesOfConduct {
         let url = self.client.url(
             &format!(
                 "/codes_of_conduct/{}",
-                crate::progenitor_support::encode_path(&key.to_string()),
+                crate::progenitor_support::encode_path(key),
             ),
             None,
         );
@@ -117,8 +117,8 @@ impl CodesOfConduct {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/community/code_of_conduct",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );

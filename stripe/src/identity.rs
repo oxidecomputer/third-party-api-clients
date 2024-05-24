@@ -193,7 +193,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_reports/{}",
-                crate::progenitor_support::encode_path(&report.to_string()),
+                crate::progenitor_support::encode_path(report),
             ),
             None,
         );
@@ -371,9 +371,7 @@ impl Identity {
     pub async fn post_verification_session(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
-        let url = self
-            .client
-            .url(&"/v1/identity/verification_sessions".to_string(), None);
+        let url = self.client.url("/v1/identity/verification_sessions", None);
         self.client
             .post(
                 &url,
@@ -404,7 +402,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
-                crate::progenitor_support::encode_path(&session.to_string()),
+                crate::progenitor_support::encode_path(session),
             ),
             None,
         );
@@ -437,7 +435,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
-                crate::progenitor_support::encode_path(&session.to_string()),
+                crate::progenitor_support::encode_path(session),
             ),
             None,
         );
@@ -469,7 +467,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/cancel",
-                crate::progenitor_support::encode_path(&session.to_string()),
+                crate::progenitor_support::encode_path(session),
             ),
             None,
         );
@@ -517,7 +515,7 @@ impl Identity {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/redact",
-                crate::progenitor_support::encode_path(&session.to_string()),
+                crate::progenitor_support::encode_path(session),
             ),
             None,
         );

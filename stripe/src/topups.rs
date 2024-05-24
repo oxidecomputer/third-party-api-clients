@@ -164,7 +164,7 @@ impl Topups {
      * <p>Top up the balance of an account</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Topup>> {
-        let url = self.client.url(&"/v1/topups".to_string(), None);
+        let url = self.client.url("/v1/topups", None);
         self.client
             .post(
                 &url,
@@ -189,7 +189,7 @@ impl Topups {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}",
-                crate::progenitor_support::encode_path(&topup.to_string()),
+                crate::progenitor_support::encode_path(topup),
             ),
             None,
         );
@@ -219,7 +219,7 @@ impl Topups {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}",
-                crate::progenitor_support::encode_path(&topup.to_string()),
+                crate::progenitor_support::encode_path(topup),
             ),
             None,
         );
@@ -249,7 +249,7 @@ impl Topups {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}/cancel",
-                crate::progenitor_support::encode_path(&topup.to_string()),
+                crate::progenitor_support::encode_path(topup),
             ),
             None,
         );

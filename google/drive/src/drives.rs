@@ -210,7 +210,7 @@ impl Drives {
         let url = self.client.url(
             &format!(
                 "/drives/{}?{}",
-                crate::progenitor_support::encode_path(&drive_id.to_string()),
+                crate::progenitor_support::encode_path(drive_id),
                 query_
             ),
             None,
@@ -238,7 +238,7 @@ impl Drives {
         let url = self.client.url(
             &format!(
                 "/drives/{}",
-                crate::progenitor_support::encode_path(&drive_id.to_string()),
+                crate::progenitor_support::encode_path(drive_id),
             ),
             None,
         );
@@ -279,7 +279,7 @@ impl Drives {
         let url = self.client.url(
             &format!(
                 "/drives/{}?{}",
-                crate::progenitor_support::encode_path(&drive_id.to_string()),
+                crate::progenitor_support::encode_path(drive_id),
                 query_
             ),
             None,
@@ -307,7 +307,7 @@ impl Drives {
         let url = self.client.url(
             &format!(
                 "/drives/{}/hide",
-                crate::progenitor_support::encode_path(&drive_id.to_string()),
+                crate::progenitor_support::encode_path(drive_id),
             ),
             None,
         );
@@ -337,7 +337,7 @@ impl Drives {
         let url = self.client.url(
             &format!(
                 "/drives/{}/unhide",
-                crate::progenitor_support::encode_path(&drive_id.to_string()),
+                crate::progenitor_support::encode_path(drive_id),
             ),
             None,
         );

@@ -23,7 +23,7 @@ impl AdminTeams {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
     pub async fn create(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/admin.teams.create".to_string(), None);
+        let url = self.client.url("/admin.teams.create", None);
         self.client
             .post(
                 &url,

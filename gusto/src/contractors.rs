@@ -25,7 +25,7 @@ impl Contractors {
         let url = self.client.url(
             &format!(
                 "/v1/contractors/{}",
-                crate::progenitor_support::encode_path(&contractor_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(contractor_id_or_uuid),
             ),
             None,
         );
@@ -54,7 +54,7 @@ impl Contractors {
         let url = self.client.url(
             &format!(
                 "/v1/contractors/{}",
-                crate::progenitor_support::encode_path(&contractor_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(contractor_id_or_uuid),
             ),
             None,
         );
@@ -82,7 +82,7 @@ impl Contractors {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractors",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );
@@ -112,7 +112,7 @@ impl Contractors {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractors",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );
@@ -141,7 +141,7 @@ impl Contractors {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractors",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );

@@ -117,7 +117,7 @@ impl ImChat {
         let url = self.client.url(
             &format!(
                 "/im/chat/sessions/{}?{}",
-                crate::progenitor_support::encode_path(&session_id.to_string()),
+                crate::progenitor_support::encode_path(session_id),
                 query_
             ),
             None,
@@ -182,7 +182,7 @@ impl ImChat {
         let url = self.client.url(
             &format!(
                 "/im/users/{}/chat/messages?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -240,7 +240,7 @@ impl ImChat {
         let url = self.client.url(
             &format!(
                 "/im/users/{}/chat/messages?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,

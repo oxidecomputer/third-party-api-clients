@@ -23,7 +23,7 @@ impl CustomIds {
     pub async fn get_custom_provider(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetCustomProviderResponse>> {
-        let url = self.client.url(&"/custom-id-provider".to_string(), None);
+        let url = self.client.url("/custom-id-provider", None);
         self.client
             .get(
                 &url,
@@ -48,7 +48,7 @@ impl CustomIds {
     pub async fn postcustom_provider(
         &self,
     ) -> ClientResult<crate::Response<crate::types::PostcustomProviderResponse>> {
-        let url = self.client.url(&"/custom-id-provider".to_string(), None);
+        let url = self.client.url("/custom-id-provider", None);
         self.client
             .post(
                 &url,
@@ -72,7 +72,7 @@ impl CustomIds {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/custom-id-provider/application-link".to_string(), None);
+            .url("/custom-id-provider/application-link", None);
         self.client
             .post(
                 &url,
@@ -102,8 +102,8 @@ impl CustomIds {
         let url = self.client.url(
             &format!(
                 "/custom-id-provider/{}/{}/ramp-id",
-                crate::progenitor_support::encode_path(&entity_type.to_string()),
-                crate::progenitor_support::encode_path(&custom_id.to_string()),
+                crate::progenitor_support::encode_path(entity_type),
+                crate::progenitor_support::encode_path(custom_id),
             ),
             None,
         );
@@ -134,8 +134,8 @@ impl CustomIds {
         let url = self.client.url(
             &format!(
                 "/custom-id-provider/{}/{}/custom-id",
-                crate::progenitor_support::encode_path(&entity_type.to_string()),
-                crate::progenitor_support::encode_path(&ramp_id.to_string()),
+                crate::progenitor_support::encode_path(entity_type),
+                crate::progenitor_support::encode_path(ramp_id),
             ),
             None,
         );
@@ -164,7 +164,7 @@ impl CustomIds {
         let url = self.client.url(
             &format!(
                 "/custom-id-provider/{}/custom-id-link",
-                crate::progenitor_support::encode_path(&entity_type.to_string()),
+                crate::progenitor_support::encode_path(entity_type),
             ),
             None,
         );

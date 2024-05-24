@@ -68,7 +68,7 @@ impl TransactionalTemplates {
         &self,
         body: &crate::types::PostTemplatesRequest,
     ) -> ClientResult<crate::Response<crate::types::TransactionalTemplateAllOf>> {
-        let url = self.client.url(&"/templates".to_string(), None);
+        let url = self.client.url("/templates", None);
         self.client
             .post(
                 &url,
@@ -97,7 +97,7 @@ impl TransactionalTemplates {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
             ),
             None,
         );
@@ -130,7 +130,7 @@ impl TransactionalTemplates {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
             ),
             None,
         );
@@ -162,7 +162,7 @@ impl TransactionalTemplates {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
             ),
             None,
         );
@@ -197,7 +197,7 @@ impl TransactionalTemplates {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
             ),
             None,
         );

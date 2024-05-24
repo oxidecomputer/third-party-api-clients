@@ -102,7 +102,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -136,7 +136,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles.json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles/count.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -252,8 +252,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles/{}/json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
                 query_
             ),
             None,
@@ -289,8 +289,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -324,8 +324,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -347,10 +347,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-01
      */
     pub async fn deprecated_202001_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-01/articles/authors.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-01/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -491,7 +490,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -525,7 +524,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles.json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -599,7 +598,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles/count.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -641,8 +640,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles/{}/json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
                 query_
             ),
             None,
@@ -678,8 +677,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -713,8 +712,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -736,10 +735,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-04
      */
     pub async fn deprecated_202004_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-04/articles/authors.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-04/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -880,7 +878,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -914,7 +912,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles.json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -988,7 +986,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles/count.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -1030,8 +1028,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles/{}/json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
                 query_
             ),
             None,
@@ -1067,8 +1065,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -1102,8 +1100,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -1125,10 +1123,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-07
      */
     pub async fn deprecated_202007_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-07/articles/authors.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-07/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -1269,7 +1266,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -1303,7 +1300,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles.json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -1377,7 +1374,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles/count.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -1419,8 +1416,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles/{}/json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
                 query_
             ),
             None,
@@ -1456,8 +1453,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -1491,8 +1488,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -1514,10 +1511,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-10
      */
     pub async fn get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-10/articles/authors.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-10/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -1658,7 +1654,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -1692,7 +1688,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles.json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -1766,7 +1762,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles/count.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -1808,8 +1804,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles/{}/json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
                 query_
             ),
             None,
@@ -1845,8 +1841,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -1880,8 +1876,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -1903,10 +1899,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2021-01
      */
     pub async fn deprecated_202101_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2021-01/articles/authors.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2021-01/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -2047,7 +2042,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -2081,7 +2076,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles.json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -2155,7 +2150,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles/count.json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -2197,8 +2192,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles/{}/json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
                 query_
             ),
             None,
@@ -2234,8 +2229,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -2269,8 +2264,8 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
-                crate::progenitor_support::encode_path(&article_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
+                crate::progenitor_support::encode_path(article_id),
             ),
             None,
         );
@@ -2294,10 +2289,9 @@ impl OnlineStore {
     pub async fn deprecated_unstable_get_articles_author(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/unstable/articles/authors.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/unstable/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -2379,7 +2373,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2426,7 +2420,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2466,7 +2460,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2513,7 +2507,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2560,7 +2554,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2600,7 +2594,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2647,7 +2641,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2694,7 +2688,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2734,7 +2728,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2781,7 +2775,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2828,7 +2822,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2868,7 +2862,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2915,7 +2909,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -2962,7 +2956,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -3002,7 +2996,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -3049,7 +3043,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -3096,7 +3090,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -3136,7 +3130,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/assets.json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -3211,9 +3205,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/blogs.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/blogs.json", None);
         self.client
             .post(
                 &url,
@@ -3232,9 +3224,7 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/blog#count-2020-01
      */
     pub async fn deprecated_202001_get_blogs_count(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/blogs/count.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/blogs/count.json", None);
         self.client
             .get(
                 &url,
@@ -3270,7 +3260,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/json?{}",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
                 query_
             ),
             None,
@@ -3304,7 +3294,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -3336,7 +3326,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/json",
-                crate::progenitor_support::encode_path(&blog_id.to_string()),
+                crate::progenitor_support::encode_path(blog_id),
             ),
             None,
         );
@@ -3465,9 +3455,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/comments.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/comments.json", None);
         self.client
             .post(
                 &url,
@@ -3591,7 +3579,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/json?{}",
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(comment_id),
                 query_
             ),
             None,
@@ -3625,7 +3613,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/json",
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(comment_id),
             ),
             None,
         );
@@ -3658,7 +3646,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/spam.json",
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(comment_id),
             ),
             None,
         );
@@ -3691,7 +3679,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/not_spam.json",
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(comment_id),
             ),
             None,
         );
@@ -3724,7 +3712,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/approve.json",
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(comment_id),
             ),
             None,
         );
@@ -3757,7 +3745,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/remove.json",
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(comment_id),
             ),
             None,
         );
@@ -3790,7 +3778,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/restore.json",
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(comment_id),
             ),
             None,
         );
@@ -3871,9 +3859,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/redirects.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -3948,7 +3934,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/redirects/{}/json?{}",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
                 query_
             ),
             None,
@@ -3982,7 +3968,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4014,7 +4000,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4095,9 +4081,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-04/redirects.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-04/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4172,7 +4156,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/redirects/{}/json?{}",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
                 query_
             ),
             None,
@@ -4206,7 +4190,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4238,7 +4222,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4319,9 +4303,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-07/redirects.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-07/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4396,7 +4378,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/redirects/{}/json?{}",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
                 query_
             ),
             None,
@@ -4430,7 +4412,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4462,7 +4444,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4543,9 +4525,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-10/redirects.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-10/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4620,7 +4600,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/redirects/{}/json?{}",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
                 query_
             ),
             None,
@@ -4654,7 +4634,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4686,7 +4666,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4767,9 +4747,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2021-01/redirects.json".to_string(), None);
+        let url = self.client.url("/admin/api/2021-01/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4844,7 +4822,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/redirects/{}/json?{}",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
                 query_
             ),
             None,
@@ -4878,7 +4856,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4910,7 +4888,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -4991,9 +4969,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/unstable/redirects.json".to_string(), None);
+        let url = self.client.url("/admin/api/unstable/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -5068,7 +5044,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/redirects/{}/json?{}",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
                 query_
             ),
             None,
@@ -5102,7 +5078,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -5134,7 +5110,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/redirects/{}/json",
-                crate::progenitor_support::encode_path(&redirect_id.to_string()),
+                crate::progenitor_support::encode_path(redirect_id),
             ),
             None,
         );
@@ -5229,9 +5205,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/script_tags.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -5301,7 +5275,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/script_tags/{}/json?{}",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
                 query_
             ),
             None,
@@ -5335,7 +5309,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -5367,7 +5341,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -5462,9 +5436,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-04/script_tags.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-04/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -5534,7 +5506,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/script_tags/{}/json?{}",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
                 query_
             ),
             None,
@@ -5568,7 +5540,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -5600,7 +5572,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -5695,9 +5667,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-07/script_tags.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-07/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -5767,7 +5737,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/script_tags/{}/json?{}",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
                 query_
             ),
             None,
@@ -5801,7 +5771,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -5833,7 +5803,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -5928,9 +5898,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-10/script_tags.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-10/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -5997,7 +5965,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/script_tags/{}/json?{}",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
                 query_
             ),
             None,
@@ -6031,7 +5999,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -6063,7 +6031,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -6158,9 +6126,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2021-01/script_tags.json".to_string(), None);
+        let url = self.client.url("/admin/api/2021-01/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -6230,7 +6196,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/script_tags/{}/json?{}",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
                 query_
             ),
             None,
@@ -6264,7 +6230,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -6296,7 +6262,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -6393,7 +6359,7 @@ impl OnlineStore {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/unstable/script_tags.json".to_string(), None);
+            .url("/admin/api/unstable/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -6463,7 +6429,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/script_tags/{}/json?{}",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
                 query_
             ),
             None,
@@ -6497,7 +6463,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -6529,7 +6495,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/script_tags/{}/json",
-                crate::progenitor_support::encode_path(&script_tag_id.to_string()),
+                crate::progenitor_support::encode_path(script_tag_id),
             ),
             None,
         );
@@ -6590,9 +6556,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/themes.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/themes.json", None);
         self.client
             .post(
                 &url,
@@ -6628,7 +6592,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -6662,7 +6626,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -6694,7 +6658,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -6755,9 +6719,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-04/themes.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-04/themes.json", None);
         self.client
             .post(
                 &url,
@@ -6793,7 +6755,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -6827,7 +6789,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -6859,7 +6821,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -6920,9 +6882,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-07/themes.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-07/themes.json", None);
         self.client
             .post(
                 &url,
@@ -6958,7 +6918,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -6992,7 +6952,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -7024,7 +6984,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -7082,9 +7042,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-10/themes.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-10/themes.json", None);
         self.client
             .post(
                 &url,
@@ -7120,7 +7078,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -7154,7 +7112,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -7186,7 +7144,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -7247,9 +7205,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2021-01/themes.json".to_string(), None);
+        let url = self.client.url("/admin/api/2021-01/themes.json", None);
         self.client
             .post(
                 &url,
@@ -7285,7 +7241,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -7319,7 +7275,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -7351,7 +7307,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -7412,9 +7368,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/unstable/themes.json".to_string(), None);
+        let url = self.client.url("/admin/api/unstable/themes.json", None);
         self.client
             .post(
                 &url,
@@ -7450,7 +7404,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/json?{}",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
                 query_
             ),
             None,
@@ -7484,7 +7438,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );
@@ -7516,7 +7470,7 @@ impl OnlineStore {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/json",
-                crate::progenitor_support::encode_path(&theme_id.to_string()),
+                crate::progenitor_support::encode_path(theme_id),
             ),
             None,
         );

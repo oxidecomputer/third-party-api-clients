@@ -30,7 +30,7 @@ impl EmailCnameRecords {
         &self,
         body: &crate::types::PostWhitelabelDnsEmailRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(&"/whitelabel/dns/email".to_string(), None);
+        let url = self.client.url("/whitelabel/dns/email", None);
         self.client
             .post(
                 &url,

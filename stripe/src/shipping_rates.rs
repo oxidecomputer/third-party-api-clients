@@ -174,7 +174,7 @@ impl ShippingRates {
      * <p>Creates a new shipping rate object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::ShippingRate>> {
-        let url = self.client.url(&"/v1/shipping_rates".to_string(), None);
+        let url = self.client.url("/v1/shipping_rates", None);
         self.client
             .post(
                 &url,
@@ -202,7 +202,7 @@ impl ShippingRates {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",
-                crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
+                crate::progenitor_support::encode_path(shipping_rate_token),
             ),
             None,
         );
@@ -232,7 +232,7 @@ impl ShippingRates {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",
-                crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
+                crate::progenitor_support::encode_path(shipping_rate_token),
             ),
             None,
         );

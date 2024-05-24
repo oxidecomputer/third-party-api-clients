@@ -177,7 +177,7 @@ impl Payouts {
      * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source types, you’ll need to specify the source type balance that the payout should draw from. The <a href="#balance_object">balance object</a> details available and pending amounts by source type.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Payout>> {
-        let url = self.client.url(&"/v1/payouts".to_string(), None);
+        let url = self.client.url("/v1/payouts", None);
         self.client
             .post(
                 &url,
@@ -202,7 +202,7 @@ impl Payouts {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}",
-                crate::progenitor_support::encode_path(&payout.to_string()),
+                crate::progenitor_support::encode_path(payout),
             ),
             None,
         );
@@ -232,7 +232,7 @@ impl Payouts {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}",
-                crate::progenitor_support::encode_path(&payout.to_string()),
+                crate::progenitor_support::encode_path(payout),
             ),
             None,
         );
@@ -262,7 +262,7 @@ impl Payouts {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}/cancel",
-                crate::progenitor_support::encode_path(&payout.to_string()),
+                crate::progenitor_support::encode_path(payout),
             ),
             None,
         );
@@ -294,7 +294,7 @@ impl Payouts {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}/reverse",
-                crate::progenitor_support::encode_path(&payout.to_string()),
+                crate::progenitor_support::encode_path(payout),
             ),
             None,
         );

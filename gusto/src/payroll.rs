@@ -43,7 +43,7 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_periods?{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
                 query_
             ),
             None,
@@ -87,7 +87,7 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_periods?{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
                 query_
             ),
             None,
@@ -154,7 +154,7 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls?{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
                 query_
             ),
             None,
@@ -215,7 +215,7 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls?{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
                 query_
             ),
             None,
@@ -247,7 +247,7 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );
@@ -296,8 +296,8 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}?{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-                crate::progenitor_support::encode_path(&payroll_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(payroll_id_or_uuid),
                 query_
             ),
             None,
@@ -328,8 +328,8 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-                crate::progenitor_support::encode_path(&payroll_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(payroll_id_or_uuid),
             ),
             None,
         );
@@ -362,9 +362,9 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-                crate::progenitor_support::encode_path(&pay_period_start_date.to_string()),
-                crate::progenitor_support::encode_path(&pay_period_end_date.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(pay_period_start_date),
+                crate::progenitor_support::encode_path(pay_period_end_date),
             ),
             None,
         );
@@ -397,8 +397,8 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/calculate",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&payroll_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(payroll_id),
             ),
             None,
         );
@@ -429,8 +429,8 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/submit",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&payroll_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(payroll_id),
             ),
             None,
         );
@@ -462,8 +462,8 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payrolls/{}/cancel",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&payroll_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(payroll_id),
             ),
             None,
         );
@@ -491,7 +491,7 @@ impl Payroll {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/payroll_reversals",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );

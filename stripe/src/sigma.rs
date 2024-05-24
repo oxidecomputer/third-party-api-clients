@@ -71,9 +71,7 @@ impl Sigma {
     pub async fn get_all_scheduled_query_runs(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ScheduledQueryRun>>> {
-        let url = self
-            .client
-            .url(&"/v1/sigma/scheduled_query_runs".to_string(), None);
+        let url = self.client.url("/v1/sigma/scheduled_query_runs", None);
         let crate::Response::<crate::types::GetSigmaScheduledQueryRunsResponse> {
             mut status,
             mut headers,
@@ -162,7 +160,7 @@ impl Sigma {
         let url = self.client.url(
             &format!(
                 "/v1/sigma/scheduled_query_runs/{}",
-                crate::progenitor_support::encode_path(&scheduled_query_run.to_string()),
+                crate::progenitor_support::encode_path(scheduled_query_run),
             ),
             None,
         );

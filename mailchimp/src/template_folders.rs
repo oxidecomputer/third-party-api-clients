@@ -70,7 +70,7 @@ impl TemplateFolders {
         &self,
         body: &crate::types::GalleryFolder,
     ) -> ClientResult<crate::Response<crate::types::Folders>> {
-        let url = self.client.url(&"/template-folders".to_string(), None);
+        let url = self.client.url("/template-folders", None);
         self.client
             .post(
                 &url,
@@ -111,7 +111,7 @@ impl TemplateFolders {
         let url = self.client.url(
             &format!(
                 "/template-folders/{}?{}",
-                crate::progenitor_support::encode_path(&folder_id.to_string()),
+                crate::progenitor_support::encode_path(folder_id),
                 query_
             ),
             None,
@@ -141,7 +141,7 @@ impl TemplateFolders {
         let url = self.client.url(
             &format!(
                 "/template-folders/{}",
-                crate::progenitor_support::encode_path(&folder_id.to_string()),
+                crate::progenitor_support::encode_path(folder_id),
             ),
             None,
         );
@@ -174,7 +174,7 @@ impl TemplateFolders {
         let url = self.client.url(
             &format!(
                 "/template-folders/{}",
-                crate::progenitor_support::encode_path(&folder_id.to_string()),
+                crate::progenitor_support::encode_path(folder_id),
             ),
             None,
         );

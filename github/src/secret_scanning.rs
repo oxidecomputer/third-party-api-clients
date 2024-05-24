@@ -57,8 +57,8 @@ impl SecretScanning {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/secret-scanning/alerts?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -104,8 +104,8 @@ impl SecretScanning {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/secret-scanning/alerts?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -146,8 +146,8 @@ impl SecretScanning {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/secret-scanning/alerts/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&alert_number.to_string()),
             ),
             None,
@@ -189,8 +189,8 @@ impl SecretScanning {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/secret-scanning/alerts/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&alert_number.to_string()),
             ),
             None,

@@ -23,7 +23,7 @@ impl Files {
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
     pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/files.delete".to_string(), None);
+        let url = self.client.url("/files.delete", None);
         self.client
             .post(
                 &url,
@@ -170,7 +170,7 @@ impl Files {
     pub async fn revoke_public_url(
         &self,
     ) -> ClientResult<crate::Response<crate::types::FilesUploadSchema>> {
-        let url = self.client.url(&"/files.revokePublicURL".to_string(), None);
+        let url = self.client.url("/files.revokePublicURL", None);
         self.client
             .post(
                 &url,
@@ -195,7 +195,7 @@ impl Files {
     pub async fn shared_public_url(
         &self,
     ) -> ClientResult<crate::Response<crate::types::FilesUploadSchema>> {
-        let url = self.client.url(&"/files.sharedPublicURL".to_string(), None);
+        let url = self.client.url("/files.sharedPublicURL", None);
         self.client
             .post(
                 &url,
@@ -214,7 +214,7 @@ impl Files {
      * FROM: <https://api.slack.com/methods/files.upload>
      */
     pub async fn upload(&self) -> ClientResult<crate::Response<crate::types::FilesUploadSchema>> {
-        let url = self.client.url(&"/files.upload".to_string(), None);
+        let url = self.client.url("/files.upload", None);
         self.client
             .post(
                 &url,

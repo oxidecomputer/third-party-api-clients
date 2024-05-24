@@ -179,7 +179,7 @@ impl Orders {
      * <p>Creates a new order object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Order>> {
-        let url = self.client.url(&"/v1/orders".to_string(), None);
+        let url = self.client.url("/v1/orders", None);
         self.client
             .post(
                 &url,
@@ -202,10 +202,7 @@ impl Orders {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
-            &format!(
-                "/v1/orders/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client
@@ -232,10 +229,7 @@ impl Orders {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
-            &format!(
-                "/v1/orders/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client
@@ -261,7 +255,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}/pay",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -291,7 +285,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}/returns",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

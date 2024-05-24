@@ -28,7 +28,7 @@ impl ChatbotMessages {
         &self,
         body: &crate::types::SendchatbotRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(&"/im/chat/messages".to_string(), None);
+        let url = self.client.url("/im/chat/messages", None);
         self.client
             .post(
                 &url,
@@ -65,7 +65,7 @@ impl ChatbotMessages {
         let url = self.client.url(
             &format!(
                 "/im/chat/messages/{}",
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(message_id),
             ),
             None,
         );
@@ -96,7 +96,7 @@ impl ChatbotMessages {
         let url = self.client.url(
             &format!(
                 "/im/chat/messages/{}",
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(message_id),
             ),
             None,
         );

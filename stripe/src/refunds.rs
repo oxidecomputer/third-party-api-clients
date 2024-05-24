@@ -170,7 +170,7 @@ impl Refunds {
      * <p>Create a refund.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Refund>> {
-        let url = self.client.url(&"/v1/refunds".to_string(), None);
+        let url = self.client.url("/v1/refunds", None);
         self.client
             .post(
                 &url,
@@ -195,7 +195,7 @@ impl Refunds {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
-                crate::progenitor_support::encode_path(&refund.to_string()),
+                crate::progenitor_support::encode_path(refund),
             ),
             None,
         );
@@ -227,7 +227,7 @@ impl Refunds {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
-                crate::progenitor_support::encode_path(&refund.to_string()),
+                crate::progenitor_support::encode_path(refund),
             ),
             None,
         );
@@ -259,7 +259,7 @@ impl Refunds {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}/cancel",
-                crate::progenitor_support::encode_path(&refund.to_string()),
+                crate::progenitor_support::encode_path(refund),
             ),
             None,
         );

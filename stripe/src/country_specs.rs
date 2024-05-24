@@ -69,7 +69,7 @@ impl CountrySpecs {
      * <p>Lists all Country Spec objects available in the API.</p>
      */
     pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::CountrySpec>>> {
-        let url = self.client.url(&"/v1/country_specs".to_string(), None);
+        let url = self.client.url("/v1/country_specs", None);
         let crate::Response::<crate::types::GetCountrySpecsResponse> {
             mut status,
             mut headers,
@@ -158,7 +158,7 @@ impl CountrySpecs {
         let url = self.client.url(
             &format!(
                 "/v1/country_specs/{}",
-                crate::progenitor_support::encode_path(&country.to_string()),
+                crate::progenitor_support::encode_path(country),
             ),
             None,
         );

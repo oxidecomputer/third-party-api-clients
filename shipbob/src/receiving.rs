@@ -19,7 +19,7 @@ impl Receiving {
     pub async fn get_fulfillment_center(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ReceivingFulfillmentCenter>>> {
-        let url = self.client.url(&"/fulfillmentCenter".to_string(), None);
+        let url = self.client.url("/fulfillmentCenter", None);
         self.client
             .get(
                 &url,
@@ -40,7 +40,7 @@ impl Receiving {
     pub async fn get_all_fulfillment_center(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ReceivingFulfillmentCenter>>> {
-        let url = self.client.url(&"/fulfillmentCenter".to_string(), None);
+        let url = self.client.url("/fulfillmentCenter", None);
         self.client
             .get_all_pages(
                 &url,
@@ -117,7 +117,7 @@ impl Receiving {
         &self,
         body: &crate::types::ReceivingCreateOrderModel,
     ) -> ClientResult<crate::Response<crate::types::ReceivingOrder>> {
-        let url = self.client.url(&"/receiving".to_string(), None);
+        let url = self.client.url("/receiving", None);
         self.client
             .post(
                 &url,

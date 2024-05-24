@@ -25,9 +25,7 @@ impl SenderVerification {
     pub async fn get_verified_senders_domains(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetVerifiedSendersDomainsResponse>> {
-        let url = self
-            .client
-            .url(&"/verified_senders/domains".to_string(), None);
+        let url = self.client.url("/verified_senders/domains", None);
         self.client
             .get(
                 &url,
@@ -52,9 +50,7 @@ impl SenderVerification {
     pub async fn get_verified_senders_steps_completed(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetVerifiedSendersStepsCompletedResponse>> {
-        let url = self
-            .client
-            .url(&"/verified_senders/steps_completed".to_string(), None);
+        let url = self.client.url("/verified_senders/steps_completed", None);
         self.client
             .get(
                 &url,
@@ -133,7 +129,7 @@ impl SenderVerification {
         &self,
         body: &crate::types::VerifiedSenderRequestSchema,
     ) -> ClientResult<crate::Response<crate::types::VerifiedSenderResponseSchema>> {
-        let url = self.client.url(&"/verified_senders".to_string(), None);
+        let url = self.client.url("/verified_senders", None);
         self.client
             .post(
                 &url,
@@ -160,7 +156,7 @@ impl SenderVerification {
         let url = self.client.url(
             &format!(
                 "/verified_senders/verify/{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -192,7 +188,7 @@ impl SenderVerification {
         let url = self.client.url(
             &format!(
                 "/verified_senders/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -227,7 +223,7 @@ impl SenderVerification {
         let url = self.client.url(
             &format!(
                 "/verified_senders/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -259,7 +255,7 @@ impl SenderVerification {
         let url = self.client.url(
             &format!(
                 "/verified_senders/resend/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

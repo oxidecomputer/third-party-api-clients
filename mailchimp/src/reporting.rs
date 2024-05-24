@@ -99,7 +99,7 @@ impl Reporting {
         let url = self.client.url(
             &format!(
                 "/reporting/facebook-ads/{}?{}",
-                crate::progenitor_support::encode_path(&outreach_id.to_string()),
+                crate::progenitor_support::encode_path(outreach_id),
                 query_
             ),
             None,
@@ -160,7 +160,7 @@ impl Reporting {
         let url = self.client.url(
             &format!(
                 "/reporting/facebook-ads/{}/ecommerce-product-activity?{}",
-                crate::progenitor_support::encode_path(&outreach_id.to_string()),
+                crate::progenitor_support::encode_path(outreach_id),
                 query_
             ),
             None,
@@ -205,7 +205,7 @@ impl Reporting {
         let url = self.client.url(
             &format!(
                 "/reporting/landing-pages/{}?{}",
-                crate::progenitor_support::encode_path(&outreach_id.to_string()),
+                crate::progenitor_support::encode_path(outreach_id),
                 query_
             ),
             None,

@@ -66,7 +66,7 @@ impl CardPrograms {
      * Retrieve all card programs.
      */
     pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::CardProgram>>> {
-        let url = self.client.url(&"/card-programs".to_string(), None);
+        let url = self.client.url("/card-programs", None);
         let crate::Response::<crate::types::GetCardProgramsResponse> {
             mut status,
             mut headers,
@@ -137,7 +137,7 @@ impl CardPrograms {
         &self,
         body: &crate::types::PostResourcesCardProgramRequest,
     ) -> ClientResult<crate::Response<crate::types::CardProgram>> {
-        let url = self.client.url(&"/card-programs".to_string(), None);
+        let url = self.client.url("/card-programs", None);
         self.client
             .post(
                 &url,
@@ -166,7 +166,7 @@ impl CardPrograms {
         let url = self.client.url(
             &format!(
                 "/card-programs/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

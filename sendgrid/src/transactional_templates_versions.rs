@@ -30,7 +30,7 @@ impl TransactionalTemplatesVersions {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
             ),
             None,
         );
@@ -63,8 +63,8 @@ impl TransactionalTemplatesVersions {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}/activate",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
-                crate::progenitor_support::encode_path(&version_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
             ),
             None,
         );
@@ -97,8 +97,8 @@ impl TransactionalTemplatesVersions {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
-                crate::progenitor_support::encode_path(&version_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
             ),
             None,
         );
@@ -131,8 +131,8 @@ impl TransactionalTemplatesVersions {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
-                crate::progenitor_support::encode_path(&version_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
             ),
             None,
         );
@@ -166,8 +166,8 @@ impl TransactionalTemplatesVersions {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",
-                crate::progenitor_support::encode_path(&template_id.to_string()),
-                crate::progenitor_support::encode_path(&version_id.to_string()),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
             ),
             None,
         );

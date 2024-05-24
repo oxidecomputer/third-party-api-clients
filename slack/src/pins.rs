@@ -23,7 +23,7 @@ impl Pins {
      * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/pins.add".to_string(), None);
+        let url = self.client.url("/pins.add", None);
         self.client
             .post(
                 &url,
@@ -107,7 +107,7 @@ impl Pins {
      * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/pins.remove".to_string(), None);
+        let url = self.client.url("/pins.remove", None);
         self.client
             .post(
                 &url,

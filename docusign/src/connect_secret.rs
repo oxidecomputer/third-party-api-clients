@@ -31,8 +31,8 @@ impl ConnectSecret {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/secret/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&key_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(key_id),
             ),
             None,
         );

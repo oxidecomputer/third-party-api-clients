@@ -174,7 +174,7 @@ impl PaymentIntents {
      * is supplied.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PaymentIntent>> {
-        let url = self.client.url(&"/v1/payment_intents".to_string(), None);
+        let url = self.client.url("/v1/payment_intents", None);
         self.client
             .post(
                 &url,
@@ -359,7 +359,7 @@ impl PaymentIntents {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}?{}",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
                 query_
             ),
             None,
@@ -396,7 +396,7 @@ impl PaymentIntents {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );
@@ -430,7 +430,7 @@ impl PaymentIntents {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/cancel",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );
@@ -464,7 +464,7 @@ impl PaymentIntents {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/capture",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );
@@ -518,7 +518,7 @@ impl PaymentIntents {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/confirm",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );
@@ -548,7 +548,7 @@ impl PaymentIntents {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/verify_microdeposits",
-                crate::progenitor_support::encode_path(&intent.to_string()),
+                crate::progenitor_support::encode_path(intent),
             ),
             None,
         );

@@ -51,7 +51,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/users/{}/webinars?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -91,7 +91,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/users/{}/webinars",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -299,7 +299,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/participants?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -348,7 +348,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/participants",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -672,7 +672,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/registrants?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -717,7 +717,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/registrants?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -765,7 +765,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/batch_registrants",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -963,7 +963,7 @@ impl Webinars {
             &format!(
                 "/webinars/{}/polls/{}",
                 crate::progenitor_support::encode_path(&webinar_id.to_string()),
-                crate::progenitor_support::encode_path(&poll_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
             ),
             None,
         );
@@ -1004,7 +1004,7 @@ impl Webinars {
             &format!(
                 "/webinars/{}/polls/{}",
                 crate::progenitor_support::encode_path(&webinar_id.to_string()),
-                crate::progenitor_support::encode_path(&poll_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
             ),
             None,
         );
@@ -1044,7 +1044,7 @@ impl Webinars {
             &format!(
                 "/webinars/{}/polls/{}",
                 crate::progenitor_support::encode_path(&webinar_id.to_string()),
-                crate::progenitor_support::encode_path(&poll_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
             ),
             None,
         );
@@ -1170,8 +1170,8 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/registrants/{}?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
-                crate::progenitor_support::encode_path(&registrant_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
+                crate::progenitor_support::encode_path(registrant_id),
                 query_
             ),
             None,
@@ -1216,8 +1216,8 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/registrants/{}?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
-                crate::progenitor_support::encode_path(&registrant_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
+                crate::progenitor_support::encode_path(registrant_id),
                 query_
             ),
             None,
@@ -1269,7 +1269,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/absentees?{}",
-                crate::progenitor_support::encode_path(&webinar_uuid.to_string()),
+                crate::progenitor_support::encode_path(webinar_uuid),
                 query_
             ),
             None,
@@ -1309,7 +1309,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/tracking_sources",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -1350,7 +1350,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/polls",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -1393,7 +1393,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/qa",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -1426,7 +1426,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/users/{}/webinar_templates",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1467,7 +1467,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/livestream",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -1508,7 +1508,7 @@ impl Webinars {
         let url = self.client.url(
             &format!(
                 "/webinars/{}/livestream",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );

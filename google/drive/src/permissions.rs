@@ -71,7 +71,7 @@ impl Permissions {
         let url = self.client.url(
             &format!(
                 "/files/{}/permissions?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -138,7 +138,7 @@ impl Permissions {
         let url = self.client.url(
             &format!(
                 "/files/{}/permissions?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -278,7 +278,7 @@ impl Permissions {
         let url = self.client.url(
             &format!(
                 "/files/{}/permissions?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -337,8 +337,8 @@ impl Permissions {
         let url = self.client.url(
             &format!(
                 "/files/{}/permissions/{}?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&permission_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(permission_id),
                 query_
             ),
             None,
@@ -397,8 +397,8 @@ impl Permissions {
         let url = self.client.url(
             &format!(
                 "/files/{}/permissions/{}?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&permission_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(permission_id),
                 query_
             ),
             None,
@@ -474,8 +474,8 @@ impl Permissions {
         let url = self.client.url(
             &format!(
                 "/files/{}/permissions/{}?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&permission_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(permission_id),
                 query_
             ),
             None,

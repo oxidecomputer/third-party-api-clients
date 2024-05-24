@@ -39,7 +39,7 @@ impl Orgunits {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits?{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
                 query_
             ),
             None,
@@ -71,7 +71,7 @@ impl Orgunits {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
             ),
             None,
         );
@@ -103,8 +103,8 @@ impl Orgunits {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&org_unit_path.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
             ),
             None,
         );
@@ -137,8 +137,8 @@ impl Orgunits {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&org_unit_path.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
             ),
             None,
         );
@@ -170,8 +170,8 @@ impl Orgunits {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&org_unit_path.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
             ),
             None,
         );
@@ -204,8 +204,8 @@ impl Orgunits {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&org_unit_path.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
             ),
             None,
         );

@@ -109,7 +109,7 @@ impl Query {
         let url = self.client.url(
             &format!(
                 "/messages/{}",
-                crate::progenitor_support::encode_path(&msg_id.to_string()),
+                crate::progenitor_support::encode_path(msg_id),
             ),
             None,
         );

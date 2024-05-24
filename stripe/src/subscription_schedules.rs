@@ -183,9 +183,7 @@ impl SubscriptionSchedules {
      * <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SubscriptionSchedule>> {
-        let url = self
-            .client
-            .url(&"/v1/subscription_schedules".to_string(), None);
+        let url = self.client.url("/v1/subscription_schedules", None);
         self.client
             .post(
                 &url,
@@ -213,7 +211,7 @@ impl SubscriptionSchedules {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}",
-                crate::progenitor_support::encode_path(&schedule.to_string()),
+                crate::progenitor_support::encode_path(schedule),
             ),
             None,
         );
@@ -243,7 +241,7 @@ impl SubscriptionSchedules {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}",
-                crate::progenitor_support::encode_path(&schedule.to_string()),
+                crate::progenitor_support::encode_path(schedule),
             ),
             None,
         );
@@ -273,7 +271,7 @@ impl SubscriptionSchedules {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}/cancel",
-                crate::progenitor_support::encode_path(&schedule.to_string()),
+                crate::progenitor_support::encode_path(schedule),
             ),
             None,
         );
@@ -303,7 +301,7 @@ impl SubscriptionSchedules {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}/release",
-                crate::progenitor_support::encode_path(&schedule.to_string()),
+                crate::progenitor_support::encode_path(schedule),
             ),
             None,
         );

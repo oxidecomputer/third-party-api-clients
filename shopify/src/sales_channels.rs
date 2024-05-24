@@ -22,9 +22,7 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-01/checkouts.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-01/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -46,9 +44,7 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-04/checkouts.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-04/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -70,9 +66,7 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-07/checkouts.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-07/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -94,9 +88,7 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2020-10/checkouts.json".to_string(), None);
+        let url = self.client.url("/admin/api/2020-10/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -118,9 +110,7 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/2021-01/checkouts.json".to_string(), None);
+        let url = self.client.url("/admin/api/2021-01/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -142,9 +132,7 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/admin/api/unstable/checkouts.json".to_string(), None);
+        let url = self.client.url("/admin/api/unstable/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -174,7 +162,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/complete.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -206,7 +194,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -239,7 +227,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -273,7 +261,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/shipping_rates.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -306,7 +294,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/complete.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -338,7 +326,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -371,7 +359,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -405,7 +393,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/shipping_rates.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -438,7 +426,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/complete.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -470,7 +458,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -503,7 +491,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -537,7 +525,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/shipping_rates.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -570,7 +558,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/complete.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -602,7 +590,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -635,7 +623,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -669,7 +657,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/shipping_rates.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -702,7 +690,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/complete.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -734,7 +722,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -767,7 +755,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -801,7 +789,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/shipping_rates.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -834,7 +822,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/complete.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -866,7 +854,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -899,7 +887,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -933,7 +921,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/shipping_rates.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -1008,7 +996,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collection_listings/{}/product_ids.json?{}",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
                 query_
             ),
             None,
@@ -1041,7 +1029,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1074,7 +1062,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1106,7 +1094,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1181,7 +1169,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collection_listings/{}/product_ids.json?{}",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
                 query_
             ),
             None,
@@ -1214,7 +1202,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1247,7 +1235,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1279,7 +1267,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1354,7 +1342,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collection_listings/{}/product_ids.json?{}",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
                 query_
             ),
             None,
@@ -1387,7 +1375,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1420,7 +1408,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1452,7 +1440,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1524,7 +1512,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collection_listings/{}/product_ids.json?{}",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
                 query_
             ),
             None,
@@ -1557,7 +1545,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1590,7 +1578,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1622,7 +1610,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1697,7 +1685,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collection_listings/{}/product_ids.json?{}",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
                 query_
             ),
             None,
@@ -1730,7 +1718,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1763,7 +1751,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1795,7 +1783,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1870,7 +1858,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collection_listings/{}/product_ids.json?{}",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
                 query_
             ),
             None,
@@ -1903,7 +1891,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1936,7 +1924,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -1968,7 +1956,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collection_listings/{}/json",
-                crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+                crate::progenitor_support::encode_path(collection_listing_id),
             ),
             None,
         );
@@ -2000,7 +1988,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/payments.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2080,7 +2068,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/payments.json?{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
                 query_
             ),
             None,
@@ -2115,8 +2103,8 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/payments/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
-                crate::progenitor_support::encode_path(&payment_id.to_string()),
+                crate::progenitor_support::encode_path(token),
+                crate::progenitor_support::encode_path(payment_id),
             ),
             None,
         );
@@ -2148,7 +2136,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/payments/count.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2180,7 +2168,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/payments.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2260,7 +2248,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/payments.json?{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
                 query_
             ),
             None,
@@ -2295,8 +2283,8 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/payments/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
-                crate::progenitor_support::encode_path(&payment_id.to_string()),
+                crate::progenitor_support::encode_path(token),
+                crate::progenitor_support::encode_path(payment_id),
             ),
             None,
         );
@@ -2328,7 +2316,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/payments/count.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2360,7 +2348,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/payments.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2440,7 +2428,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/payments.json?{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
                 query_
             ),
             None,
@@ -2475,8 +2463,8 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/payments/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
-                crate::progenitor_support::encode_path(&payment_id.to_string()),
+                crate::progenitor_support::encode_path(token),
+                crate::progenitor_support::encode_path(payment_id),
             ),
             None,
         );
@@ -2508,7 +2496,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/payments/count.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2540,7 +2528,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/payments.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2620,7 +2608,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/payments.json?{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
                 query_
             ),
             None,
@@ -2655,8 +2643,8 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/payments/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
-                crate::progenitor_support::encode_path(&payment_id.to_string()),
+                crate::progenitor_support::encode_path(token),
+                crate::progenitor_support::encode_path(payment_id),
             ),
             None,
         );
@@ -2688,7 +2676,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/payments/count.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2720,7 +2708,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/payments.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2800,7 +2788,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/payments.json?{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
                 query_
             ),
             None,
@@ -2835,8 +2823,8 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/payments/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
-                crate::progenitor_support::encode_path(&payment_id.to_string()),
+                crate::progenitor_support::encode_path(token),
+                crate::progenitor_support::encode_path(payment_id),
             ),
             None,
         );
@@ -2868,7 +2856,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/payments/count.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2900,7 +2888,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/payments.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -2980,7 +2968,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/payments.json?{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
                 query_
             ),
             None,
@@ -3015,8 +3003,8 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/payments/{}/json",
-                crate::progenitor_support::encode_path(&token.to_string()),
-                crate::progenitor_support::encode_path(&payment_id.to_string()),
+                crate::progenitor_support::encode_path(token),
+                crate::progenitor_support::encode_path(payment_id),
             ),
             None,
         );
@@ -3048,7 +3036,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/payments/count.json",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );
@@ -3165,10 +3153,9 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_product_listings_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-01/product_listings/count.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-01/product_listings/count.json", None);
         self.client
             .get(
                 &url,
@@ -3197,7 +3184,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3230,7 +3217,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3262,7 +3249,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3379,10 +3366,9 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_product_listings_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-04/product_listings/count.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-04/product_listings/count.json", None);
         self.client
             .get(
                 &url,
@@ -3411,7 +3397,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3444,7 +3430,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3476,7 +3462,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3593,10 +3579,9 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_product_listings_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &"/admin/api/2020-07/product_listings/count.json".to_string(),
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-07/product_listings/count.json", None);
         self.client
             .get(
                 &url,
@@ -3625,7 +3610,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3658,7 +3643,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );
@@ -3690,7 +3675,7 @@ impl SalesChannels {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/product_listings/{}/json",
-                crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+                crate::progenitor_support::encode_path(product_listing_id),
             ),
             None,
         );

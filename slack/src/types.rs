@@ -2120,11 +2120,12 @@ pub struct NewPagingStyle {
     pub next_cursor: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Warnings {
     #[serde(rename = "method_deprecated")]
     MethodDeprecated,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2141,11 +2142,6 @@ impl std::fmt::Display for Warnings {
     }
 }
 
-impl Default for Warnings {
-    fn default() -> Warnings {
-        Warnings::Noop
-    }
-}
 impl Warnings {
     pub fn is_noop(&self) -> bool {
         matches!(self, Warnings::Noop)
@@ -2206,13 +2202,14 @@ pub struct ObjsResponseMetadataAnyOf {
     pub objs_response_metadata: ObjsResponseMetadata,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AutoType {
     #[serde(rename = "admin")]
     Admin,
     #[serde(rename = "owner")]
     Owner,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2230,11 +2227,6 @@ impl std::fmt::Display for AutoType {
     }
 }
 
-impl Default for AutoType {
-    fn default() -> AutoType {
-        AutoType::Noop
-    }
-}
 impl AutoType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AutoType::Noop)
@@ -2417,7 +2409,7 @@ pub struct TzAnyOf {
     pub value: serde_json::Value,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Plan {
     #[serde(rename = "compliance")]
     Compliance,
@@ -2428,6 +2420,7 @@ pub enum Plan {
     #[serde(rename = "std")]
     Std,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2447,11 +2440,6 @@ impl std::fmt::Display for Plan {
     }
 }
 
-impl Default for Plan {
-    fn default() -> Plan {
-        Plan::Noop
-    }
-}
 impl Plan {
     pub fn is_noop(&self) -> bool {
         matches!(self, Plan::Noop)
@@ -2644,7 +2632,7 @@ pub struct OptionsAnyOf {
     pub objs_team_profile_field_option: ObjsTeamProfileFieldOption,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "date")]
     Date,
@@ -2659,6 +2647,7 @@ pub enum Type {
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2680,11 +2669,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -2782,7 +2766,7 @@ pub struct Profile {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsUser {
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2791,7 +2775,7 @@ pub struct ObjsUser {
     )]
     pub color: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2799,12 +2783,12 @@ pub struct ObjsUser {
     )]
     pub deleted: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enterprise_user: Option<ObjsEnterpriseUser>,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2818,7 +2802,7 @@ pub struct ObjsUser {
     )]
     pub id: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2836,7 +2820,7 @@ pub struct ObjsUser {
     )]
     pub is_bot: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2844,7 +2828,7 @@ pub struct ObjsUser {
     )]
     pub is_external: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2852,7 +2836,7 @@ pub struct ObjsUser {
     )]
     pub is_forgotten: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2860,7 +2844,7 @@ pub struct ObjsUser {
     )]
     pub is_invited_user: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2868,7 +2852,7 @@ pub struct ObjsUser {
     )]
     pub is_owner: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2876,7 +2860,7 @@ pub struct ObjsUser {
     )]
     pub is_primary_owner: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2884,7 +2868,7 @@ pub struct ObjsUser {
     )]
     pub is_restricted: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2892,7 +2876,7 @@ pub struct ObjsUser {
     )]
     pub is_stranger: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2900,7 +2884,7 @@ pub struct ObjsUser {
     )]
     pub is_ultra_restricted: bool,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2915,7 +2899,7 @@ pub struct ObjsUser {
     )]
     pub name: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2925,7 +2909,7 @@ pub struct ObjsUser {
     pub presence: String,
     pub profile: ObjsUserProfile,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2934,7 +2918,7 @@ pub struct ObjsUser {
     )]
     pub real_name: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2943,7 +2927,7 @@ pub struct ObjsUser {
     )]
     pub team: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2952,12 +2936,12 @@ pub struct ObjsUser {
     )]
     pub team_id: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub team_profile: Option<Profile>,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2966,7 +2950,7 @@ pub struct ObjsUser {
     )]
     pub two_factor_type: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2975,7 +2959,7 @@ pub struct ObjsUser {
     )]
     pub tz: Vec<TzAnyOf>,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -2984,7 +2968,7 @@ pub struct ObjsUser {
     )]
     pub tz_label: String,
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(
         default,
@@ -3004,7 +2988,7 @@ pub struct ObjsUser {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsUserData {
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3013,7 +2997,7 @@ pub struct ObjsUserData {
     )]
     pub color: String,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3021,12 +3005,12 @@ pub struct ObjsUserData {
     )]
     pub deleted: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enterprise_user: Option<ObjsEnterpriseUser>,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3040,7 +3024,7 @@ pub struct ObjsUserData {
     )]
     pub id: String,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3058,7 +3042,7 @@ pub struct ObjsUserData {
     )]
     pub is_bot: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3066,7 +3050,7 @@ pub struct ObjsUserData {
     )]
     pub is_external: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3074,7 +3058,7 @@ pub struct ObjsUserData {
     )]
     pub is_forgotten: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3082,7 +3066,7 @@ pub struct ObjsUserData {
     )]
     pub is_owner: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3090,7 +3074,7 @@ pub struct ObjsUserData {
     )]
     pub is_primary_owner: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3098,7 +3082,7 @@ pub struct ObjsUserData {
     )]
     pub is_restricted: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3106,7 +3090,7 @@ pub struct ObjsUserData {
     )]
     pub is_stranger: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3114,7 +3098,7 @@ pub struct ObjsUserData {
     )]
     pub is_ultra_restricted: bool,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3129,7 +3113,7 @@ pub struct ObjsUserData {
     )]
     pub name: String,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3139,7 +3123,7 @@ pub struct ObjsUserData {
     pub presence: String,
     pub profile: ObjsUserProfile,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3148,7 +3132,7 @@ pub struct ObjsUserData {
     )]
     pub real_name: String,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3157,12 +3141,12 @@ pub struct ObjsUserData {
     )]
     pub team_id: String,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub team_profile: Option<Profile>,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3171,7 +3155,7 @@ pub struct ObjsUserData {
     )]
     pub teams: Vec<String>,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3180,7 +3164,7 @@ pub struct ObjsUserData {
     )]
     pub two_factor_type: String,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3189,7 +3173,7 @@ pub struct ObjsUserData {
     )]
     pub tz: Vec<TzAnyOf>,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3198,7 +3182,7 @@ pub struct ObjsUserData {
     )]
     pub tz_label: String,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(
         default,
@@ -3222,12 +3206,12 @@ pub struct ObjsUserData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsUserAnyOf {
     /**
-    * user object for non enterprise type
+     * user object for non enterprise type
      */
     #[serde(flatten)]
     pub objs_user: ObjsUser,
     /**
-    * enterprise user
+     * enterprise user
      */
     #[serde(flatten)]
     pub objs_user_data: ObjsUserData,
@@ -3631,7 +3615,7 @@ pub struct DndEndSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdminConversationsCreateSchema {
     /**
-    * Schema for successful response of admin.conversations.create
+     * Schema for successful response of admin.conversations.create
      */
     #[serde(
         default,
@@ -3680,7 +3664,7 @@ pub struct AdminConversationsGetConversationPrefsSchemaData {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response of admin.conversations.getConversationPrefs
+     * Schema for successful response of admin.conversations.getConversationPrefs
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prefs: Option<AdminConversationsGetConversationPrefsSchema>,
@@ -3695,7 +3679,7 @@ pub struct AdminConversationsGetTeamsSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response of admin.conversations.getTeams
+     * Schema for successful response of admin.conversations.getTeams
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
@@ -3800,7 +3784,7 @@ pub struct AppsPermissionsResourcesListSuccessSchema {
     )]
     pub resources: Vec<Resources>,
     /**
-    * Schema for successful response apps.permissions.resources.list method
+     * Schema for successful response apps.permissions.resources.list method
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
@@ -3882,7 +3866,7 @@ pub struct AuthRevokeSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuthTestSuccessSchema {
     /**
-    * Schema for successful response auth.test method
+     * Schema for successful response auth.test method
      */
     #[serde(
         default,
@@ -3891,7 +3875,7 @@ pub struct AuthTestSuccessSchema {
     )]
     pub bot_id: String,
     /**
-    * Schema for successful response auth.test method
+     * Schema for successful response auth.test method
      */
     #[serde(
         default,
@@ -4034,7 +4018,7 @@ pub struct ChatGetPermalinkSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChatMeMessageSchema {
     /**
-    * Schema for successful response from chat.meMessage method
+     * Schema for successful response from chat.meMessage method
      */
     #[serde(
         default,
@@ -4048,7 +4032,7 @@ pub struct ChatMeMessageSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from chat.meMessage method
+     * Schema for successful response from chat.meMessage method
      */
     #[serde(
         default,
@@ -4271,7 +4255,7 @@ pub struct ChatUpdateSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsCloseSuccessSchema {
     /**
-    * Schema for successful response conversations.close method
+     * Schema for successful response conversations.close method
      */
     #[serde(
         default,
@@ -4279,7 +4263,7 @@ pub struct ConversationsCloseSuccessSchema {
     )]
     pub already_closed: bool,
     /**
-    * Schema for successful response conversations.close method
+     * Schema for successful response conversations.close method
      */
     #[serde(
         default,
@@ -4386,12 +4370,12 @@ pub struct ConversationsJoinSuccessSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from conversations.join method
+     * Schema for successful response from conversations.join method
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<ResponseMetadata>,
     /**
-    * Schema for successful response from conversations.join method
+     * Schema for successful response from conversations.join method
      */
     #[serde(
         default,
@@ -4405,7 +4389,7 @@ pub struct ConversationsJoinSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsLeaveSuccessSchema {
     /**
-    * Schema for successful response from conversations.leave method
+     * Schema for successful response from conversations.leave method
      */
     #[serde(
         default,
@@ -4434,7 +4418,7 @@ pub struct ConversationsListSuccessSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from conversations.list method
+     * Schema for successful response from conversations.list method
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
@@ -4526,7 +4510,7 @@ pub struct ChannelAnyOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsOpenSuccessSchema {
     /**
-    * Schema for successful response from conversations.open method when opening channels, ims, mpims
+     * Schema for successful response from conversations.open method when opening channels, ims, mpims
      */
     #[serde(
         default,
@@ -4540,7 +4524,7 @@ pub struct ConversationsOpenSuccessSchema {
     )]
     pub channel: Vec<ChannelAnyOf>,
     /**
-    * Schema for successful response from conversations.open method when opening channels, ims, mpims
+     * Schema for successful response from conversations.open method when opening channels, ims, mpims
      */
     #[serde(
         default,
@@ -4558,7 +4542,7 @@ pub struct ConversationsOpenSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsRepliesSuccessSchema {
     /**
-    * Schema for successful response from conversations.replies method
+     * Schema for successful response from conversations.replies method
      */
     #[serde(
         default,
@@ -4636,7 +4620,7 @@ pub struct DndInfoSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from dnd.info method
+     * Schema for successful response from dnd.info method
      */
     #[serde(
         default,
@@ -4644,7 +4628,7 @@ pub struct DndInfoSchema {
     )]
     pub snooze_enabled: bool,
     /**
-    * Schema for successful response from dnd.info method
+     * Schema for successful response from dnd.info method
      */
     #[serde(
         default,
@@ -4653,7 +4637,7 @@ pub struct DndInfoSchema {
     )]
     pub snooze_endtime: i64,
     /**
-    * Schema for successful response from dnd.info method
+     * Schema for successful response from dnd.info method
      */
     #[serde(
         default,
@@ -4702,7 +4686,7 @@ pub struct FilesInfoSchema {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_html: Option<serde_json::Value>,
     /**
-    * Schema for successful response from files.info method
+     * Schema for successful response from files.info method
      */
     #[serde(
         default,
@@ -4717,12 +4701,12 @@ pub struct FilesInfoSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from files.info method
+     * Schema for successful response from files.info method
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub paging: Option<ObjsPaging>,
     /**
-    * Schema for successful response from files.info method
+     * Schema for successful response from files.info method
      */
     #[serde(
         default,
@@ -4770,7 +4754,7 @@ pub struct MigrationExchangeSuccessSchema {
     )]
     pub enterprise_id: String,
     /**
-    * Schema for successful response from migration.exchange method
+     * Schema for successful response from migration.exchange method
      */
     #[serde(
         default,
@@ -4790,17 +4774,18 @@ pub struct MigrationExchangeSuccessSchema {
     )]
     pub team_id: String,
     /**
-    * Schema for successful response from migration.exchange method
+     * Schema for successful response from migration.exchange method
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user_id_map: Option<Fields>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ItemsType {
     #[serde(rename = "file")]
     File,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4817,11 +4802,6 @@ impl std::fmt::Display for ItemsType {
     }
 }
 
-impl Default for ItemsType {
-    fn default() -> ItemsType {
-        ItemsType::Noop
-    }
-}
 impl ItemsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ItemsType::Noop)
@@ -4848,11 +4828,12 @@ pub struct Items {
     pub type_: Option<ItemsType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MessagePinType {
     #[serde(rename = "message")]
     Message,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4869,11 +4850,6 @@ impl std::fmt::Display for MessagePinType {
     }
 }
 
-impl Default for MessagePinType {
-    fn default() -> MessagePinType {
-        MessagePinType::Noop
-    }
-}
 impl MessagePinType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MessagePinType::Noop)
@@ -4977,12 +4953,12 @@ pub struct ReactionsListSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from reactions.list method
+     * Schema for successful response from reactions.list method
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub paging: Option<ObjsPaging>,
     /**
-    * Schema for successful response from reactions.list method
+     * Schema for successful response from reactions.list method
      */
     #[serde(
         default,
@@ -5091,7 +5067,7 @@ pub struct StarsListSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from stars.list method
+     * Schema for successful response from stars.list method
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub paging: Option<ObjsPaging>,
@@ -5345,7 +5321,7 @@ pub struct UsersConversationsSuccessSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from users.conversations method. Returned conversation objects do not include `num_members` or `is_member`
+     * Schema for successful response from users.conversations method. Returned conversation objects do not include `num_members` or `is_member`
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
@@ -5355,7 +5331,7 @@ pub struct UsersConversationsSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiMethodUsersGetPresence {
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
      */
     #[serde(
         default,
@@ -5363,7 +5339,7 @@ pub struct ApiMethodUsersGetPresence {
     )]
     pub auto_away: bool,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
      */
     #[serde(
         default,
@@ -5372,7 +5348,7 @@ pub struct ApiMethodUsersGetPresence {
     )]
     pub connection_count: i64,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
      */
     #[serde(
         default,
@@ -5381,7 +5357,7 @@ pub struct ApiMethodUsersGetPresence {
     )]
     pub last_activity: i64,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
      */
     #[serde(
         default,
@@ -5394,7 +5370,7 @@ pub struct ApiMethodUsersGetPresence {
     )]
     pub ok: bool,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
      */
     #[serde(
         default,
@@ -5620,22 +5596,22 @@ pub struct UsersIdentityResponseDataTypeLinks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersIdentityResponseAnyOf {
     /**
-    * Schema for 'identity.basic' scope
+     * Schema for 'identity.basic' scope
      */
     #[serde(flatten)]
     pub users_identity_response: UsersIdentityResponse,
     /**
-    * Schema for 'identity.basic,identity.email' scopes
+     * Schema for 'identity.basic,identity.email' scopes
      */
     #[serde(flatten)]
     pub users_identity_response_data: UsersIdentityResponseData,
     /**
-    * Schema for 'identity.basic,identity.avatar' scopes
+     * Schema for 'identity.basic,identity.avatar' scopes
      */
     #[serde(flatten)]
     pub users_identity_response_data_type: UsersIdentityResponseDataType,
     /**
-    * Schema for 'identity.basic,identity.team' scopes
+     * Schema for 'identity.basic,identity.team' scopes
      */
     #[serde(flatten)]
     pub users_identity_response_data_type_links: UsersIdentityResponseDataTypeLinks,
@@ -5678,7 +5654,7 @@ pub struct UsersListSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from users.list method
+     * Schema for successful response from users.list method
      */
     #[serde(
         default,
@@ -5703,7 +5679,7 @@ pub struct UsersProfileGetSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersProfileSetSchema {
     /**
-    * Schema for successful response from users.profile.set method
+     * Schema for successful response from users.profile.set method
      */
     #[serde(
         default,

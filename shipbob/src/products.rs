@@ -136,7 +136,7 @@ impl Products {
         &self,
         body: &crate::types::ProductsCreateProductModel,
     ) -> ClientResult<crate::Response<Vec<crate::types::Product>>> {
-        let url = self.client.url(&"/product".to_string(), None);
+        let url = self.client.url("/product", None);
         self.client
             .post(
                 &url,
@@ -223,7 +223,7 @@ impl Products {
         &self,
         body: &[crate::types::ProductsCreateProductModel],
     ) -> ClientResult<crate::Response<Vec<crate::types::Product>>> {
-        let url = self.client.url(&"/product/batch".to_string(), None);
+        let url = self.client.url("/product/batch", None);
         self.client
             .post(
                 &url,

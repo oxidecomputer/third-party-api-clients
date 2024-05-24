@@ -23,7 +23,7 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/calls.add".to_string(), None);
+        let url = self.client.url("/calls.add", None);
         self.client
             .post(
                 &url,
@@ -46,7 +46,7 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn end(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/calls.end".to_string(), None);
+        let url = self.client.url("/calls.end", None);
         self.client
             .post(
                 &url,
@@ -101,7 +101,7 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn update(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/calls.update".to_string(), None);
+        let url = self.client.url("/calls.update", None);
         self.client
             .post(
                 &url,

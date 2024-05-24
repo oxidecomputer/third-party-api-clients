@@ -77,7 +77,7 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -146,7 +146,7 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -237,7 +237,7 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -276,8 +276,8 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}/status",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
             ),
             None,
         );
@@ -316,8 +316,8 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}/emoji_reactions",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
             ),
             None,
         );
@@ -370,8 +370,8 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
                 query_
             ),
             None,
@@ -413,8 +413,8 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
             ),
             None,
         );
@@ -474,8 +474,8 @@ impl ChatMessages {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
                 query_
             ),
             None,

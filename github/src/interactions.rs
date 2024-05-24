@@ -31,7 +31,7 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -66,7 +66,7 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -100,7 +100,7 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -136,8 +136,8 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -174,8 +174,8 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -211,8 +211,8 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -238,9 +238,7 @@ impl Interactions {
     pub async fn get_restrictions_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<crate::types::InteractionsGetRestrictionsResponseAnyOf>> {
-        let url = self
-            .client
-            .url(&"/user/interaction-limits".to_string(), None);
+        let url = self.client.url("/user/interaction-limits", None);
         self.client
             .get(
                 &url,
@@ -264,9 +262,7 @@ impl Interactions {
         &self,
         body: &crate::types::InteractionLimit,
     ) -> ClientResult<crate::Response<crate::types::InteractionLimits>> {
-        let url = self
-            .client
-            .url(&"/user/interaction-limits".to_string(), None);
+        let url = self.client.url("/user/interaction-limits", None);
         self.client
             .put(
                 &url,
@@ -289,9 +285,7 @@ impl Interactions {
     pub async fn remove_restrictions_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url(&"/user/interaction-limits".to_string(), None);
+        let url = self.client.url("/user/interaction-limits", None);
         self.client
             .delete(
                 &url,

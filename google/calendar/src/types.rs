@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Acl {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -14,7 +14,7 @@ pub struct Acl {
     )]
     pub etag: String,
     /**
-    * List of rules on the access control list.
+     * List of rules on the access control list.
      */
     #[serde(
         default,
@@ -23,7 +23,7 @@ pub struct Acl {
     )]
     pub items: Vec<AclRule>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -32,7 +32,7 @@ pub struct Acl {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -42,7 +42,7 @@ pub struct Acl {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -57,7 +57,7 @@ pub struct Acl {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Scope {
     /**
-    * The extent to which calendar access is granted by this ACL rule.
+     * The extent to which calendar access is granted by this ACL rule.
      */
     #[serde(
         default,
@@ -67,7 +67,7 @@ pub struct Scope {
     )]
     pub type_: String,
     /**
-    * The extent to which calendar access is granted by this ACL rule.
+     * The extent to which calendar access is granted by this ACL rule.
      */
     #[serde(
         default,
@@ -80,7 +80,7 @@ pub struct Scope {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AclRule {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -89,7 +89,7 @@ pub struct AclRule {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -98,7 +98,7 @@ pub struct AclRule {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -107,7 +107,7 @@ pub struct AclRule {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -116,7 +116,7 @@ pub struct AclRule {
     )]
     pub role: String,
     /**
-    * The extent to which calendar access is granted by this ACL rule.
+     * The extent to which calendar access is granted by this ACL rule.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub scope: Option<Scope>,
@@ -131,7 +131,7 @@ pub struct Calendar {
     )]
     pub conference_properties: Option<ConferenceProperties>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -140,7 +140,7 @@ pub struct Calendar {
     )]
     pub description: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -149,7 +149,7 @@ pub struct Calendar {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -158,7 +158,7 @@ pub struct Calendar {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -167,7 +167,7 @@ pub struct Calendar {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -176,7 +176,7 @@ pub struct Calendar {
     )]
     pub location: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -185,7 +185,7 @@ pub struct Calendar {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -199,7 +199,7 @@ pub struct Calendar {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarList {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -208,7 +208,7 @@ pub struct CalendarList {
     )]
     pub etag: String,
     /**
-    * Calendars that are present on the user's calendar list.
+     * Calendars that are present on the user's calendar list.
      */
     #[serde(
         default,
@@ -217,7 +217,7 @@ pub struct CalendarList {
     )]
     pub items: Vec<CalendarListEntry>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -226,7 +226,7 @@ pub struct CalendarList {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -236,7 +236,7 @@ pub struct CalendarList {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -251,7 +251,7 @@ pub struct CalendarList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotificationSettings {
     /**
-    * The notifications that the authenticated user is receiving for this calendar.
+     * The notifications that the authenticated user is receiving for this calendar.
      */
     #[serde(
         default,
@@ -264,7 +264,7 @@ pub struct NotificationSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarListEntry {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -274,7 +274,7 @@ pub struct CalendarListEntry {
     )]
     pub access_role: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -284,7 +284,7 @@ pub struct CalendarListEntry {
     )]
     pub background_color: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -300,7 +300,7 @@ pub struct CalendarListEntry {
     )]
     pub conference_properties: Option<ConferenceProperties>,
     /**
-    * The default reminders that the authenticated user has for this calendar.
+     * The default reminders that the authenticated user has for this calendar.
      */
     #[serde(
         default,
@@ -310,7 +310,7 @@ pub struct CalendarListEntry {
     )]
     pub default_reminders: Vec<EventReminder>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -318,7 +318,7 @@ pub struct CalendarListEntry {
     )]
     pub deleted: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -327,7 +327,7 @@ pub struct CalendarListEntry {
     )]
     pub description: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -336,7 +336,7 @@ pub struct CalendarListEntry {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -346,7 +346,7 @@ pub struct CalendarListEntry {
     )]
     pub foreground_color: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -354,7 +354,7 @@ pub struct CalendarListEntry {
     )]
     pub hidden: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -363,7 +363,7 @@ pub struct CalendarListEntry {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -372,7 +372,7 @@ pub struct CalendarListEntry {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -381,7 +381,7 @@ pub struct CalendarListEntry {
     )]
     pub location: String,
     /**
-    * The notifications that the authenticated user is receiving for this calendar.
+     * The notifications that the authenticated user is receiving for this calendar.
      */
     #[serde(
         default,
@@ -390,7 +390,7 @@ pub struct CalendarListEntry {
     )]
     pub notification_settings: Option<NotificationSettings>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -398,7 +398,7 @@ pub struct CalendarListEntry {
     )]
     pub primary: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -406,7 +406,7 @@ pub struct CalendarListEntry {
     )]
     pub selected: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -415,7 +415,7 @@ pub struct CalendarListEntry {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -425,7 +425,7 @@ pub struct CalendarListEntry {
     )]
     pub summary_override: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -439,7 +439,7 @@ pub struct CalendarListEntry {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarNotification {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -448,7 +448,7 @@ pub struct CalendarNotification {
     )]
     pub method: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -462,7 +462,7 @@ pub struct CalendarNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -471,7 +471,7 @@ pub struct Channel {
     )]
     pub address: String,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
     #[serde(
         default,
@@ -480,7 +480,7 @@ pub struct Channel {
     )]
     pub expiration: i64,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -489,7 +489,7 @@ pub struct Channel {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -498,7 +498,7 @@ pub struct Channel {
     )]
     pub kind: String,
     /**
-    * Additional parameters controlling delivery channel behavior. Optional.
+     * Additional parameters controlling delivery channel behavior. Optional.
      */
     #[serde(
         default,
@@ -507,7 +507,7 @@ pub struct Channel {
     )]
     pub params: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -515,7 +515,7 @@ pub struct Channel {
     )]
     pub payload: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -525,7 +525,7 @@ pub struct Channel {
     )]
     pub resource_id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -535,7 +535,7 @@ pub struct Channel {
     )]
     pub resource_uri: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -544,7 +544,7 @@ pub struct Channel {
     )]
     pub token: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -558,7 +558,7 @@ pub struct Channel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ColorDefinition {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -567,7 +567,7 @@ pub struct ColorDefinition {
     )]
     pub background: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -580,17 +580,17 @@ pub struct ColorDefinition {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Colors {
     /**
-    * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
+     * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub calendar: Option<ColorDefinition>,
     /**
-    * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
+     * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub event: Option<ColorDefinition>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -599,7 +599,7 @@ pub struct Colors {
     )]
     pub kind: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -613,7 +613,7 @@ pub struct Colors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceData {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -635,7 +635,7 @@ pub struct ConferenceData {
     )]
     pub create_request: Option<CreateConferenceRequest>,
     /**
-    * Information about individual conference entry points, such as URLs or phone numbers.
+     * Information about individual conference entry points, such as URLs or phone numbers.
      *  All of them must belong to the same conference.
      *  Either conferenceSolution and at least one entryPoint, or createRequest is required.
      */
@@ -647,7 +647,7 @@ pub struct ConferenceData {
     )]
     pub entry_points: Vec<EntryPoint>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -658,7 +658,7 @@ pub struct ConferenceData {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parameters: Option<ConferenceParameters>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -685,7 +685,7 @@ pub struct Shared {}
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceParametersAddOn {
     /**
-    * Properties that are shared between copies of the event on other attendees' calendars.
+     * Properties that are shared between copies of the event on other attendees' calendars.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parameters: Option<Shared>,
@@ -694,7 +694,7 @@ pub struct ConferenceParametersAddOn {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceProperties {
     /**
-    * The types of conference solutions that are supported for this calendar.
+     * The types of conference solutions that are supported for this calendar.
      *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
@@ -712,7 +712,7 @@ pub struct ConferenceProperties {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceRequestStatus {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -726,7 +726,7 @@ pub struct ConferenceRequestStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolution {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -738,7 +738,7 @@ pub struct ConferenceSolution {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub key: Option<ConferenceSolutionKey>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -751,7 +751,7 @@ pub struct ConferenceSolution {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolutionKey {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -771,7 +771,7 @@ pub struct CreateConferenceRequest {
     )]
     pub conference_solution_key: Option<ConferenceSolutionKey>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -787,7 +787,7 @@ pub struct CreateConferenceRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EntryPoint {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -797,7 +797,7 @@ pub struct EntryPoint {
     )]
     pub access_code: String,
     /**
-    * The types of conference solutions that are supported for this calendar.
+     * The types of conference solutions that are supported for this calendar.
      *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
@@ -811,7 +811,7 @@ pub struct EntryPoint {
     )]
     pub entry_point_features: Vec<String>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -821,7 +821,7 @@ pub struct EntryPoint {
     )]
     pub entry_point_type: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -830,7 +830,7 @@ pub struct EntryPoint {
     )]
     pub label: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -840,7 +840,7 @@ pub struct EntryPoint {
     )]
     pub meeting_code: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -849,7 +849,7 @@ pub struct EntryPoint {
     )]
     pub passcode: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -858,7 +858,7 @@ pub struct EntryPoint {
     )]
     pub password: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -867,7 +867,7 @@ pub struct EntryPoint {
     )]
     pub pin: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -877,7 +877,7 @@ pub struct EntryPoint {
     )]
     pub region_code: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -890,7 +890,7 @@ pub struct EntryPoint {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Error {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -899,7 +899,7 @@ pub struct Error {
     )]
     pub domain: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -913,7 +913,7 @@ pub struct Error {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Creator {
     /**
-    * The creator of the event. Read-only.
+     * The creator of the event. Read-only.
      */
     #[serde(
         default,
@@ -923,7 +923,7 @@ pub struct Creator {
     )]
     pub display_name: String,
     /**
-    * The creator of the event. Read-only.
+     * The creator of the event. Read-only.
      */
     #[serde(
         default,
@@ -932,7 +932,7 @@ pub struct Creator {
     )]
     pub email: String,
     /**
-    * The creator of the event. Read-only.
+     * The creator of the event. Read-only.
      */
     #[serde(
         default,
@@ -941,7 +941,7 @@ pub struct Creator {
     )]
     pub id: String,
     /**
-    * The creator of the event. Read-only.
+     * The creator of the event. Read-only.
      */
     #[serde(
         default,
@@ -955,12 +955,12 @@ pub struct Creator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExtendedProperties {
     /**
-    * Extended properties of the event.
+     * Extended properties of the event.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub private: Option<Shared>,
     /**
-    * Extended properties of the event.
+     * Extended properties of the event.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shared: Option<Shared>,
@@ -970,7 +970,7 @@ pub struct ExtendedProperties {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Gadget {
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -979,7 +979,7 @@ pub struct Gadget {
     )]
     pub display: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -988,7 +988,7 @@ pub struct Gadget {
     )]
     pub height: i64,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -998,7 +998,7 @@ pub struct Gadget {
     )]
     pub icon_link: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -1007,7 +1007,7 @@ pub struct Gadget {
     )]
     pub link: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -1016,7 +1016,7 @@ pub struct Gadget {
     )]
     pub preferences: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -1025,7 +1025,7 @@ pub struct Gadget {
     )]
     pub title: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -1035,7 +1035,7 @@ pub struct Gadget {
     )]
     pub type_: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(
         default,
@@ -1049,7 +1049,7 @@ pub struct Gadget {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Organizer {
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
      */
     #[serde(
         default,
@@ -1059,7 +1059,7 @@ pub struct Organizer {
     )]
     pub display_name: String,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
      */
     #[serde(
         default,
@@ -1068,7 +1068,7 @@ pub struct Organizer {
     )]
     pub email: String,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
      */
     #[serde(
         default,
@@ -1077,7 +1077,7 @@ pub struct Organizer {
     )]
     pub id: String,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
      */
     #[serde(
         default,
@@ -1091,7 +1091,7 @@ pub struct Organizer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reminders {
     /**
-    * Information about the event's reminders for the authenticated user.
+     * Information about the event's reminders for the authenticated user.
      */
     #[serde(
         default,
@@ -1100,7 +1100,7 @@ pub struct Reminders {
     )]
     pub overrides: Vec<EventReminder>,
     /**
-    * Information about the event's reminders for the authenticated user.
+     * Information about the event's reminders for the authenticated user.
      */
     #[serde(
         default,
@@ -1114,7 +1114,7 @@ pub struct Reminders {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Source {
     /**
-    * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
+     * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
      */
     #[serde(
         default,
@@ -1123,7 +1123,7 @@ pub struct Source {
     )]
     pub title: String,
     /**
-    * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
+     * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
      */
     #[serde(
         default,
@@ -1136,7 +1136,7 @@ pub struct Source {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1145,7 +1145,7 @@ pub struct Event {
     )]
     pub anyone_can_add_self: bool,
     /**
-    * File attachments for the event. Currently only Google Drive attachments are supported.
+     * File attachments for the event. Currently only Google Drive attachments are supported.
      *  In order to modify attachments the supportsAttachments request parameter should be set to true.
      *  There can be at most 25 attachments per event,
      */
@@ -1156,7 +1156,7 @@ pub struct Event {
     )]
     pub attachments: Vec<EventAttachment>,
     /**
-    * The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.
+     * The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.
      */
     #[serde(
         default,
@@ -1165,7 +1165,7 @@ pub struct Event {
     )]
     pub attendees: Vec<EventAttendee>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1174,7 +1174,7 @@ pub struct Event {
     )]
     pub attendees_omitted: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1190,7 +1190,7 @@ pub struct Event {
     )]
     pub conference_data: Option<ConferenceData>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1200,12 +1200,12 @@ pub struct Event {
     )]
     pub created: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The creator of the event. Read-only.
+     * The creator of the event. Read-only.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub creator: Option<Creator>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1216,7 +1216,7 @@ pub struct Event {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end: Option<EventDateTime>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1225,7 +1225,7 @@ pub struct Event {
     )]
     pub end_time_unspecified: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1234,7 +1234,7 @@ pub struct Event {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1244,7 +1244,7 @@ pub struct Event {
     )]
     pub event_type: String,
     /**
-    * Extended properties of the event.
+     * Extended properties of the event.
      */
     #[serde(
         default,
@@ -1253,12 +1253,12 @@ pub struct Event {
     )]
     pub extended_properties: Option<ExtendedProperties>,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub gadget: Option<Gadget>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1267,7 +1267,7 @@ pub struct Event {
     )]
     pub guests_can_invite_others: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1276,7 +1276,7 @@ pub struct Event {
     )]
     pub guests_can_modify: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1285,7 +1285,7 @@ pub struct Event {
     )]
     pub guests_can_see_other_guests: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1295,7 +1295,7 @@ pub struct Event {
     )]
     pub hangout_link: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1305,7 +1305,7 @@ pub struct Event {
     )]
     pub html_link: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1315,7 +1315,7 @@ pub struct Event {
     )]
     pub i_cal_uid: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1324,7 +1324,7 @@ pub struct Event {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1333,7 +1333,7 @@ pub struct Event {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1342,7 +1342,7 @@ pub struct Event {
     )]
     pub location: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1350,7 +1350,7 @@ pub struct Event {
     )]
     pub locked: bool,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organizer: Option<Organizer>,
@@ -1361,7 +1361,7 @@ pub struct Event {
     )]
     pub original_start_time: Option<EventDateTime>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1370,7 +1370,7 @@ pub struct Event {
     )]
     pub private_copy: bool,
     /**
-    * The types of conference solutions that are supported for this calendar.
+     * The types of conference solutions that are supported for this calendar.
      *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
@@ -1383,7 +1383,7 @@ pub struct Event {
     )]
     pub recurrence: Vec<String>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1393,12 +1393,12 @@ pub struct Event {
     )]
     pub recurring_event_id: String,
     /**
-    * Information about the event's reminders for the authenticated user.
+     * Information about the event's reminders for the authenticated user.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reminders: Option<Reminders>,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
     #[serde(
         default,
@@ -1407,14 +1407,14 @@ pub struct Event {
     )]
     pub sequence: i64,
     /**
-    * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
+     * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start: Option<EventDateTime>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1423,7 +1423,7 @@ pub struct Event {
     )]
     pub status: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1432,7 +1432,7 @@ pub struct Event {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1441,7 +1441,7 @@ pub struct Event {
     )]
     pub transparency: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1451,7 +1451,7 @@ pub struct Event {
     )]
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1464,7 +1464,7 @@ pub struct Event {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventAttachment {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1474,7 +1474,7 @@ pub struct EventAttachment {
     )]
     pub file_id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1484,7 +1484,7 @@ pub struct EventAttachment {
     )]
     pub file_url: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1494,7 +1494,7 @@ pub struct EventAttachment {
     )]
     pub icon_link: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1504,7 +1504,7 @@ pub struct EventAttachment {
     )]
     pub mime_type: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1517,7 +1517,7 @@ pub struct EventAttachment {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventAttendee {
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
     #[serde(
         default,
@@ -1527,7 +1527,7 @@ pub struct EventAttendee {
     )]
     pub additional_guests: i64,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1536,7 +1536,7 @@ pub struct EventAttendee {
     )]
     pub comment: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1546,7 +1546,7 @@ pub struct EventAttendee {
     )]
     pub display_name: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1555,7 +1555,7 @@ pub struct EventAttendee {
     )]
     pub email: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1564,7 +1564,7 @@ pub struct EventAttendee {
     )]
     pub id: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1572,7 +1572,7 @@ pub struct EventAttendee {
     )]
     pub optional: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1580,7 +1580,7 @@ pub struct EventAttendee {
     )]
     pub organizer: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1588,7 +1588,7 @@ pub struct EventAttendee {
     )]
     pub resource: bool,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1598,7 +1598,7 @@ pub struct EventAttendee {
     )]
     pub response_status: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
@@ -1611,7 +1611,7 @@ pub struct EventAttendee {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventDateTime {
     /**
-    * The date, in the format "yyyy-mm-dd", if this is an all-day event.
+     * The date, in the format "yyyy-mm-dd", if this is an all-day event.
      */
     #[serde(
         default,
@@ -1620,7 +1620,7 @@ pub struct EventDateTime {
     )]
     pub date: Option<chrono::NaiveDate>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1631,7 +1631,7 @@ pub struct EventDateTime {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1645,7 +1645,7 @@ pub struct EventDateTime {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventReminder {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1654,7 +1654,7 @@ pub struct EventReminder {
     )]
     pub method: String,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
     #[serde(
         default,
@@ -1667,7 +1667,7 @@ pub struct EventReminder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Events {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1677,7 +1677,7 @@ pub struct Events {
     )]
     pub access_role: String,
     /**
-    * The default reminders that the authenticated user has for this calendar.
+     * The default reminders that the authenticated user has for this calendar.
      */
     #[serde(
         default,
@@ -1687,7 +1687,7 @@ pub struct Events {
     )]
     pub default_reminders: Vec<EventReminder>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1696,7 +1696,7 @@ pub struct Events {
     )]
     pub description: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1705,7 +1705,7 @@ pub struct Events {
     )]
     pub etag: String,
     /**
-    * List of events on the calendar.
+     * List of events on the calendar.
      */
     #[serde(
         default,
@@ -1714,7 +1714,7 @@ pub struct Events {
     )]
     pub items: Vec<Event>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1723,7 +1723,7 @@ pub struct Events {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1733,7 +1733,7 @@ pub struct Events {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1743,7 +1743,7 @@ pub struct Events {
     )]
     pub next_sync_token: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1752,7 +1752,7 @@ pub struct Events {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1762,7 +1762,7 @@ pub struct Events {
     )]
     pub time_zone: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1776,7 +1776,7 @@ pub struct Events {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyCalendar {
     /**
-    * List of time ranges during which this calendar should be regarded as busy.
+     * List of time ranges during which this calendar should be regarded as busy.
      */
     #[serde(
         default,
@@ -1785,7 +1785,7 @@ pub struct FreeBusyCalendar {
     )]
     pub busy: Vec<TimePeriod>,
     /**
-    * Optional error(s) (if computation for the calendar failed).
+     * Optional error(s) (if computation for the calendar failed).
      */
     #[serde(
         default,
@@ -1798,7 +1798,7 @@ pub struct FreeBusyCalendar {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyGroup {
     /**
-    * The types of conference solutions that are supported for this calendar.
+     * The types of conference solutions that are supported for this calendar.
      *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
@@ -1811,7 +1811,7 @@ pub struct FreeBusyGroup {
     )]
     pub calendars: Vec<String>,
     /**
-    * Optional error(s) (if computation for the calendar failed).
+     * Optional error(s) (if computation for the calendar failed).
      */
     #[serde(
         default,
@@ -1824,7 +1824,7 @@ pub struct FreeBusyGroup {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequest {
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
     #[serde(
         default,
@@ -1834,7 +1834,7 @@ pub struct FreeBusyRequest {
     )]
     pub calendar_expansion_max: i64,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
     #[serde(
         default,
@@ -1844,7 +1844,7 @@ pub struct FreeBusyRequest {
     )]
     pub group_expansion_max: i64,
     /**
-    * List of calendars and/or groups to query.
+     * List of calendars and/or groups to query.
      */
     #[serde(
         default,
@@ -1853,7 +1853,7 @@ pub struct FreeBusyRequest {
     )]
     pub items: Vec<FreeBusyRequestItem>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1864,7 +1864,7 @@ pub struct FreeBusyRequest {
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1875,7 +1875,7 @@ pub struct FreeBusyRequest {
     )]
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1889,7 +1889,7 @@ pub struct FreeBusyRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequestItem {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1902,17 +1902,17 @@ pub struct FreeBusyRequestItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyResponse {
     /**
-    * List of free/busy information for calendars.
+     * List of free/busy information for calendars.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub calendars: Option<FreeBusyCalendar>,
     /**
-    * Expansion of groups.
+     * Expansion of groups.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub groups: Option<FreeBusyGroup>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1921,7 +1921,7 @@ pub struct FreeBusyResponse {
     )]
     pub kind: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1932,7 +1932,7 @@ pub struct FreeBusyResponse {
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -1947,7 +1947,7 @@ pub struct FreeBusyResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Setting {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1956,7 +1956,7 @@ pub struct Setting {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1965,7 +1965,7 @@ pub struct Setting {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1974,7 +1974,7 @@ pub struct Setting {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1987,7 +1987,7 @@ pub struct Setting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Settings {
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -1996,7 +1996,7 @@ pub struct Settings {
     )]
     pub etag: String,
     /**
-    * List of user settings.
+     * List of user settings.
      */
     #[serde(
         default,
@@ -2005,7 +2005,7 @@ pub struct Settings {
     )]
     pub items: Vec<Setting>,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -2014,7 +2014,7 @@ pub struct Settings {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -2024,7 +2024,7 @@ pub struct Settings {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
+     * ETag of the collection.
      */
     #[serde(
         default,
@@ -2038,7 +2038,7 @@ pub struct Settings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimePeriod {
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -2048,7 +2048,7 @@ pub struct TimePeriod {
     )]
     pub end: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
     #[serde(
         default,
@@ -2062,11 +2062,12 @@ pub struct TimePeriod {
 /**
  * Data format for the response.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2083,11 +2084,6 @@ impl std::fmt::Display for Alt {
     }
 }
 
-impl Default for Alt {
-    fn default() -> Alt {
-        Alt::Noop
-    }
-}
 impl Alt {
     pub fn is_noop(&self) -> bool {
         matches!(self, Alt::Noop)
@@ -2097,13 +2093,14 @@ impl Alt {
 /**
  * The order of the events returned in the result. Optional. The default is an unspecified, stable order.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OrderBy {
     #[serde(rename = "startTime")]
     StartTime,
     #[serde(rename = "updated")]
     Updated,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2121,11 +2118,6 @@ impl std::fmt::Display for OrderBy {
     }
 }
 
-impl Default for OrderBy {
-    fn default() -> OrderBy {
-        OrderBy::Noop
-    }
-}
 impl OrderBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderBy::Noop)
@@ -2135,7 +2127,7 @@ impl OrderBy {
 /**
  * Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SendUpdates {
     #[serde(rename = "all")]
     All,
@@ -2144,6 +2136,7 @@ pub enum SendUpdates {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2162,11 +2155,6 @@ impl std::fmt::Display for SendUpdates {
     }
 }
 
-impl Default for SendUpdates {
-    fn default() -> SendUpdates {
-        SendUpdates::Noop
-    }
-}
 impl SendUpdates {
     pub fn is_noop(&self) -> bool {
         matches!(self, SendUpdates::Noop)
@@ -2176,7 +2164,7 @@ impl SendUpdates {
 /**
  * The minimum access role for the user in the returned entries. Optional. The default is no restriction.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MinAccessRole {
     #[serde(rename = "freeBusyReader")]
     FreeBusyReader,
@@ -2187,6 +2175,7 @@ pub enum MinAccessRole {
     #[serde(rename = "writer")]
     Writer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2206,11 +2195,6 @@ impl std::fmt::Display for MinAccessRole {
     }
 }
 
-impl Default for MinAccessRole {
-    fn default() -> MinAccessRole {
-        MinAccessRole::Noop
-    }
-}
 impl MinAccessRole {
     pub fn is_noop(&self) -> bool {
         matches!(self, MinAccessRole::Noop)

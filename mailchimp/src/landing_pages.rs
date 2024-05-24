@@ -124,7 +124,7 @@ impl LandingPages {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}?{}",
-                crate::progenitor_support::encode_path(&page_id.to_string()),
+                crate::progenitor_support::encode_path(page_id),
                 query_
             ),
             None,
@@ -154,7 +154,7 @@ impl LandingPages {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}",
-                crate::progenitor_support::encode_path(&page_id.to_string()),
+                crate::progenitor_support::encode_path(page_id),
             ),
             None,
         );
@@ -187,7 +187,7 @@ impl LandingPages {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}",
-                crate::progenitor_support::encode_path(&page_id.to_string()),
+                crate::progenitor_support::encode_path(page_id),
             ),
             None,
         );
@@ -219,7 +219,7 @@ impl LandingPages {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}/actions/publish",
-                crate::progenitor_support::encode_path(&page_id.to_string()),
+                crate::progenitor_support::encode_path(page_id),
             ),
             None,
         );
@@ -248,7 +248,7 @@ impl LandingPages {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}/actions/unpublish",
-                crate::progenitor_support::encode_path(&page_id.to_string()),
+                crate::progenitor_support::encode_path(page_id),
             ),
             None,
         );
@@ -292,7 +292,7 @@ impl LandingPages {
         let url = self.client.url(
             &format!(
                 "/landing-pages/{}/content?{}",
-                crate::progenitor_support::encode_path(&page_id.to_string()),
+                crate::progenitor_support::encode_path(page_id),
                 query_
             ),
             None,

@@ -77,7 +77,7 @@ impl PhoneSite {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn list_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Sites>>> {
-        let url = self.client.url(&"/phone/sites".to_string(), None);
+        let url = self.client.url("/phone/sites", None);
         let crate::Response::<crate::types::ListPhoneSitesResponse> {
             mut status,
             mut headers,
@@ -162,7 +162,7 @@ impl PhoneSite {
         &self,
         body: &crate::types::CreatePhoneSiteRequest,
     ) -> ClientResult<crate::Response<crate::types::Site>> {
-        let url = self.client.url(&"/phone/sites".to_string(), None);
+        let url = self.client.url("/phone/sites", None);
         self.client
             .post(
                 &url,
@@ -200,7 +200,7 @@ impl PhoneSite {
         let url = self.client.url(
             &format!(
                 "/phone/sites/{}",
-                crate::progenitor_support::encode_path(&site_id.to_string()),
+                crate::progenitor_support::encode_path(site_id),
             ),
             None,
         );
@@ -248,7 +248,7 @@ impl PhoneSite {
         let url = self.client.url(
             &format!(
                 "/phone/sites/{}?{}",
-                crate::progenitor_support::encode_path(&site_id.to_string()),
+                crate::progenitor_support::encode_path(site_id),
                 query_
             ),
             None,
@@ -290,7 +290,7 @@ impl PhoneSite {
         let url = self.client.url(
             &format!(
                 "/phone/sites/{}",
-                crate::progenitor_support::encode_path(&site_id.to_string()),
+                crate::progenitor_support::encode_path(site_id),
             ),
             None,
         );

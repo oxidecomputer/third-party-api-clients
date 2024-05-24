@@ -184,7 +184,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/early_fraud_warnings/{}",
-                crate::progenitor_support::encode_path(&early_fraud_warning.to_string()),
+                crate::progenitor_support::encode_path(early_fraud_warning),
             ),
             None,
         );
@@ -363,9 +363,7 @@ impl Radar {
     pub async fn post_value_list_item(
         &self,
     ) -> ClientResult<crate::Response<crate::types::RadarListItem>> {
-        let url = self
-            .client
-            .url(&"/v1/radar/value_list_items".to_string(), None);
+        let url = self.client.url("/v1/radar/value_list_items", None);
         self.client
             .post(
                 &url,
@@ -393,7 +391,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
-                crate::progenitor_support::encode_path(&item.to_string()),
+                crate::progenitor_support::encode_path(item),
             ),
             None,
         );
@@ -423,7 +421,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
-                crate::progenitor_support::encode_path(&item.to_string()),
+                crate::progenitor_support::encode_path(item),
             ),
             None,
         );
@@ -600,7 +598,7 @@ impl Radar {
      * <p>Creates a new <code>ValueList</code> object, which can then be referenced in rules.</p>
      */
     pub async fn post_value_list(&self) -> ClientResult<crate::Response<crate::types::RadarList>> {
-        let url = self.client.url(&"/v1/radar/value_lists".to_string(), None);
+        let url = self.client.url("/v1/radar/value_lists", None);
         self.client
             .post(
                 &url,
@@ -628,7 +626,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
-                crate::progenitor_support::encode_path(&value_list.to_string()),
+                crate::progenitor_support::encode_path(value_list),
             ),
             None,
         );
@@ -658,7 +656,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
-                crate::progenitor_support::encode_path(&value_list.to_string()),
+                crate::progenitor_support::encode_path(value_list),
             ),
             None,
         );
@@ -688,7 +686,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
-                crate::progenitor_support::encode_path(&value_list.to_string()),
+                crate::progenitor_support::encode_path(value_list),
             ),
             None,
         );

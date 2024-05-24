@@ -175,9 +175,7 @@ impl BillingPortal {
     pub async fn post_configuration(
         &self,
     ) -> ClientResult<crate::Response<crate::types::PortalConfiguration>> {
-        let url = self
-            .client
-            .url(&"/v1/billing_portal/configurations".to_string(), None);
+        let url = self.client.url("/v1/billing_portal/configurations", None);
         self.client
             .post(
                 &url,
@@ -205,7 +203,7 @@ impl BillingPortal {
         let url = self.client.url(
             &format!(
                 "/v1/billing_portal/configurations/{}",
-                crate::progenitor_support::encode_path(&configuration.to_string()),
+                crate::progenitor_support::encode_path(configuration),
             ),
             None,
         );
@@ -235,7 +233,7 @@ impl BillingPortal {
         let url = self.client.url(
             &format!(
                 "/v1/billing_portal/configurations/{}",
-                crate::progenitor_support::encode_path(&configuration.to_string()),
+                crate::progenitor_support::encode_path(configuration),
             ),
             None,
         );
@@ -255,9 +253,7 @@ impl BillingPortal {
      * <p>Creates a session of the customer portal.</p>
      */
     pub async fn post_session(&self) -> ClientResult<crate::Response<crate::types::PortalSession>> {
-        let url = self
-            .client
-            .url(&"/v1/billing_portal/sessions".to_string(), None);
+        let url = self.client.url("/v1/billing_portal/sessions", None);
         self.client
             .post(
                 &url,

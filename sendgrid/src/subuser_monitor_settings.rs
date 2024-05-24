@@ -23,7 +23,7 @@ impl SubuserMonitorSettings {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
-                crate::progenitor_support::encode_path(&subuser_name.to_string()),
+                crate::progenitor_support::encode_path(subuser_name),
             ),
             None,
         );
@@ -50,7 +50,7 @@ impl SubuserMonitorSettings {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
-                crate::progenitor_support::encode_path(&subuser_name.to_string()),
+                crate::progenitor_support::encode_path(subuser_name),
             ),
             None,
         );
@@ -77,7 +77,7 @@ impl SubuserMonitorSettings {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
-                crate::progenitor_support::encode_path(&subuser_name.to_string()),
+                crate::progenitor_support::encode_path(subuser_name),
             ),
             None,
         );
@@ -103,7 +103,7 @@ impl SubuserMonitorSettings {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
-                crate::progenitor_support::encode_path(&subuser_name.to_string()),
+                crate::progenitor_support::encode_path(subuser_name),
             ),
             None,
         );

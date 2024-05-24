@@ -10,7 +10,7 @@ pub struct PartnerSettingsNewRelic {
     )]
     pub enable_subuser_statistics: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -18,7 +18,7 @@ pub struct PartnerSettingsNewRelic {
     )]
     pub enabled: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -70,7 +70,7 @@ pub struct SubscriptionTrackingSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Errors {
     /**
-    * The indices of the recipient(s) sent that caused the error.
+     * The indices of the recipient(s) sent that caused the error.
      */
     #[serde(
         default,
@@ -79,7 +79,7 @@ pub struct Errors {
     )]
     pub error_indices: Vec<f64>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -92,7 +92,7 @@ pub struct Errors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactDbRecipientResponse {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -113,7 +113,7 @@ pub struct ContactDbRecipientResponse {
     )]
     pub errors: Vec<Errors>,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -122,7 +122,7 @@ pub struct ContactDbRecipientResponse {
     )]
     pub new_count: f64,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -131,7 +131,7 @@ pub struct ContactDbRecipientResponse {
     )]
     pub persisted_recipients: Vec<String>,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -150,7 +150,7 @@ pub struct CampaignResponse {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -173,7 +173,7 @@ pub struct CampaignResponseAllOf {
     pub campaign_response: CampaignResponse,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Operator {
     #[serde(rename = "contains")]
     Contains,
@@ -186,6 +186,7 @@ pub enum Operator {
     #[serde(rename = "ne")]
     Ne,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -206,24 +207,20 @@ impl std::fmt::Display for Operator {
     }
 }
 
-impl Default for Operator {
-    fn default() -> Operator {
-        Operator::Noop
-    }
-}
 impl Operator {
     pub fn is_noop(&self) -> bool {
         matches!(self, Operator::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AndOr {
     #[serde(rename = "and")]
     And,
     #[serde(rename = "or")]
     Or,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -241,11 +238,6 @@ impl std::fmt::Display for AndOr {
     }
 }
 
-impl Default for AndOr {
-    fn default() -> AndOr {
-        AndOr::Noop
-    }
-}
 impl AndOr {
     pub fn is_noop(&self) -> bool {
         matches!(self, AndOr::Noop)
@@ -257,7 +249,7 @@ pub struct ContactdbSegmentsConditions {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub and_or: Option<AndOr>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -268,7 +260,7 @@ pub struct ContactdbSegmentsConditions {
     #[serde(default, skip_serializing_if = "Operator::is_noop")]
     pub operator: Operator,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -385,7 +377,7 @@ pub struct Users {
     )]
     pub user_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -399,7 +391,7 @@ pub struct Users {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Dkim {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -408,7 +400,7 @@ pub struct Dkim {
     )]
     pub data: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -417,7 +409,7 @@ pub struct Dkim {
     )]
     pub host: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -427,7 +419,7 @@ pub struct Dkim {
     )]
     pub type_: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -439,11 +431,11 @@ pub struct Dkim {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReverseDns {
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     pub a_record: Dkim,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -458,7 +450,7 @@ pub struct ReverseDns {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -473,7 +465,7 @@ pub struct ReverseDns {
     )]
     pub last_validation_attempt_at: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -481,7 +473,7 @@ pub struct ReverseDns {
     )]
     pub legacy: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -496,7 +488,7 @@ pub struct ReverseDns {
     )]
     pub subdomain: String,
     /**
-    * The users who are able to send mail from the IP address.
+     * The users who are able to send mail from the IP address.
      */
     #[serde(
         default,
@@ -505,7 +497,7 @@ pub struct ReverseDns {
     )]
     pub users: Vec<Users>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -529,7 +521,7 @@ pub struct SenderId {
     )]
     pub id: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -543,7 +535,7 @@ pub struct SenderId {
     )]
     pub updated_at: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -561,7 +553,7 @@ pub struct SenderId {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SenderAllOf {
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(flatten)]
     pub help: Help,
@@ -574,7 +566,7 @@ pub struct SenderAllOf {
 /**
  * The type of the field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "date")]
     Date,
@@ -583,6 +575,7 @@ pub enum Type {
     #[serde(rename = "text")]
     Text,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -601,11 +594,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -627,7 +615,7 @@ pub struct ContactdbCustomField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Subuser {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -635,7 +623,7 @@ pub struct Subuser {
     )]
     pub disabled: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -644,7 +632,7 @@ pub struct Subuser {
     )]
     pub email: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -653,7 +641,7 @@ pub struct Subuser {
     )]
     pub id: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -681,7 +669,7 @@ pub struct MailSettingsAddressWhitelabel {
 /**
  * The type of DNS record that was generated.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LinkBranding200ResponseDnsDomainCnameType {
     #[serde(rename = "cname")]
     Cname,
@@ -690,6 +678,7 @@ pub enum LinkBranding200ResponseDnsDomainCnameType {
     #[serde(rename = "txt")]
     Txt,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -708,11 +697,6 @@ impl std::fmt::Display for LinkBranding200ResponseDnsDomainCnameType {
     }
 }
 
-impl Default for LinkBranding200ResponseDnsDomainCnameType {
-    fn default() -> LinkBranding200ResponseDnsDomainCnameType {
-        LinkBranding200ResponseDnsDomainCnameType::Noop
-    }
-}
 impl LinkBranding200ResponseDnsDomainCnameType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LinkBranding200ResponseDnsDomainCnameType::Noop)
@@ -723,7 +707,7 @@ impl LinkBranding200ResponseDnsDomainCnameType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainCname {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -732,7 +716,7 @@ pub struct DomainCname {
     )]
     pub data: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -741,7 +725,7 @@ pub struct DomainCname {
     )]
     pub host: String,
     /**
-    * The type of DNS record that was generated.
+     * The type of DNS record that was generated.
      */
     #[serde(
         default,
@@ -750,7 +734,7 @@ pub struct DomainCname {
     )]
     pub type_: LinkBranding200ResponseDnsDomainCnameType,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -763,7 +747,7 @@ pub struct DomainCname {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OwnerCname {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -772,7 +756,7 @@ pub struct OwnerCname {
     )]
     pub data: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -781,12 +765,12 @@ pub struct OwnerCname {
     )]
     pub host: String,
     /**
-    * The DNS record generated to verify who created the link branding.
+     * The DNS record generated to verify who created the link branding.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<LinkBranding200ResponseDnsDomainCnameType>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -799,11 +783,11 @@ pub struct OwnerCname {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Dns {
     /**
-    * The DNS record generated to point to your link branding subdomain.
+     * The DNS record generated to point to your link branding subdomain.
      */
     pub domain_cname: DomainCname,
     /**
-    * The DNS records generated for this link branding.
+     * The DNS records generated for this link branding.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner_cname: Option<OwnerCname>,
@@ -812,7 +796,7 @@ pub struct Dns {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LinkBranding200Response {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -820,11 +804,11 @@ pub struct LinkBranding200Response {
     )]
     pub default: bool,
     /**
-    * The DNS records generated for this link branding.
+     * The DNS records generated for this link branding.
      */
     pub dns: Dns,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -839,7 +823,7 @@ pub struct LinkBranding200Response {
     )]
     pub id: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -859,7 +843,7 @@ pub struct LinkBranding200Response {
     )]
     pub user_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -868,7 +852,7 @@ pub struct LinkBranding200Response {
     )]
     pub username: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -880,7 +864,7 @@ pub struct LinkBranding200Response {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FromEmailObject {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -899,7 +883,7 @@ pub struct FromEmailObject {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiKeyNameScopes {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -925,7 +909,7 @@ pub struct ApiKeyNameScopesAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbSegments {
     /**
-    * The conditions for a recipient to be included in this segment.
+     * The conditions for a recipient to be included in this segment.
      */
     #[serde(
         default,
@@ -940,7 +924,7 @@ pub struct ContactdbSegments {
     )]
     pub list_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -976,7 +960,7 @@ pub struct ApiKeyNameId {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdvancedStatsOpens {
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -985,7 +969,7 @@ pub struct AdvancedStatsOpens {
     )]
     pub opens: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1013,7 +997,7 @@ pub struct MailSettingsTemplate {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IpWarmupResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1032,7 +1016,7 @@ pub struct IpWarmupResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Monitor {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1041,7 +1025,7 @@ pub struct Monitor {
     )]
     pub email: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -1054,7 +1038,7 @@ pub struct Monitor {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GlobalErrorResponseSchemaErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1063,12 +1047,12 @@ pub struct GlobalErrorResponseSchemaErrors {
     )]
     pub field: String,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub help: Option<Help>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1098,7 +1082,7 @@ pub struct GlobalErrorResponseSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdvancedStatsMailboxProvider {
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1107,7 +1091,7 @@ pub struct AdvancedStatsMailboxProvider {
     )]
     pub blocks: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1116,7 +1100,7 @@ pub struct AdvancedStatsMailboxProvider {
     )]
     pub bounces: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1125,7 +1109,7 @@ pub struct AdvancedStatsMailboxProvider {
     )]
     pub deferred: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1134,7 +1118,7 @@ pub struct AdvancedStatsMailboxProvider {
     )]
     pub delivered: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1143,7 +1127,7 @@ pub struct AdvancedStatsMailboxProvider {
     )]
     pub drops: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1152,7 +1136,7 @@ pub struct AdvancedStatsMailboxProvider {
     )]
     pub processed: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1161,7 +1145,7 @@ pub struct AdvancedStatsMailboxProvider {
     )]
     pub requests: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -1181,7 +1165,7 @@ pub struct AdvancedStatsMailboxProviderAllOf {
     #[serde(flatten)]
     pub advanced_stats_clicks_opens_all_of: AdvancedStatsClicksOpensAllOf,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(flatten)]
     pub advanced_stats_mailbox_provider: AdvancedStatsMailboxProvider,
@@ -1190,7 +1174,7 @@ pub struct AdvancedStatsMailboxProviderAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbCustomFieldWithId {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -1216,7 +1200,7 @@ pub struct ContactdbCustomFieldWithAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IpPool {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1268,7 +1252,7 @@ pub struct GoogleAnalyticsSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebhooksEventWebhookResponse {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1276,7 +1260,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub bounce: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1284,7 +1268,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub click: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1292,7 +1276,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub deferred: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1300,7 +1284,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub delivered: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1308,7 +1292,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub dropped: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1316,7 +1300,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub enabled: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1324,7 +1308,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub group_resubscribe: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1344,7 +1328,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub oauth_token_url: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1352,7 +1336,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub open: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1360,7 +1344,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub processed: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1368,7 +1352,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub spam_report: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -1376,7 +1360,7 @@ pub struct WebhooksEventWebhookResponse {
     )]
     pub unsubscribe: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1583,7 +1567,7 @@ pub struct Stats {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<Metrics>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1592,7 +1576,7 @@ pub struct Stats {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1606,7 +1590,7 @@ pub struct Stats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CategoryStats {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1676,7 +1660,7 @@ pub struct ContactdbList {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1695,7 +1679,7 @@ pub struct ContactdbList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SuppressionGroup {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1704,7 +1688,7 @@ pub struct SuppressionGroup {
     )]
     pub description: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -1720,7 +1704,7 @@ pub struct SuppressionGroup {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_email_sent_at: Option<serde_json::Value>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1786,7 +1770,7 @@ pub struct TransactionalTemplateVersionOutputAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Permissions {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1795,7 +1779,7 @@ pub struct Permissions {
     )]
     pub api: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1804,7 +1788,7 @@ pub struct Permissions {
     )]
     pub mail: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -1844,13 +1828,14 @@ pub struct MailSettingsForwardSpam {
 /**
  * The editor used in the UI.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Editor {
     #[serde(rename = "code")]
     Code,
     #[serde(rename = "design")]
     Design,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1868,11 +1853,6 @@ impl std::fmt::Display for Editor {
     }
 }
 
-impl Default for Editor {
-    fn default() -> Editor {
-        Editor::Noop
-    }
-}
 impl Editor {
     pub fn is_noop(&self) -> bool {
         matches!(self, Editor::Noop)
@@ -1908,7 +1888,7 @@ pub struct CampaignsRequest {
     )]
     pub ip_pool: String,
     /**
-    * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
+     * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
     #[serde(
         default,
@@ -1923,7 +1903,7 @@ pub struct CampaignsRequest {
     )]
     pub plain_content: String,
     /**
-    * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
+     * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
     #[serde(
         default,
@@ -1950,7 +1930,7 @@ pub struct CampaignsRequest {
     )]
     pub suppression_group_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2063,7 +2043,7 @@ pub struct SubuserStatsMetrics {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubuserStats {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2072,7 +2052,7 @@ pub struct SubuserStats {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2083,7 +2063,7 @@ pub struct SubuserStats {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<SubuserStatsMetrics>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2092,7 +2072,7 @@ pub struct SubuserStats {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2122,13 +2102,14 @@ pub struct SubuserStatsData {
 /**
  * The status of the scheduled send.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Status {
     #[serde(rename = "cancel")]
     Cancel,
     #[serde(rename = "pause")]
     Pause,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2146,11 +2127,6 @@ impl std::fmt::Display for Status {
     }
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Status::Noop
-    }
-}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -2161,7 +2137,7 @@ impl Status {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserScheduledSendStatus {
     /**
-    * The status of the scheduled send.
+     * The status of the scheduled send.
      */
     #[serde(default, skip_serializing_if = "Status::is_noop")]
     pub status: Status,
@@ -2177,7 +2153,7 @@ pub struct UserScheduledSendStatusAllOf {
     #[serde(flatten)]
     pub mail_batch_id: MailBatchId,
     /**
-    * The status of the scheduled send.
+     * The status of the scheduled send.
      */
     #[serde(flatten)]
     pub user_scheduled_send_status: UserScheduledSendStatus,
@@ -2191,12 +2167,12 @@ pub struct UserScheduledSendStatusAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdvancedStatsClicksOpensAllOf {
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(flatten)]
     pub advanced_stats_opens: AdvancedStatsOpens,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(flatten)]
     pub advanced_stats_clicks: AdvancedStatsClicks,
@@ -2205,7 +2181,7 @@ pub struct AdvancedStatsClicksOpensAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbSegmentsWithId {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2232,7 +2208,7 @@ pub struct ContactdbSegmentsWithAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdvancedStatsClicks {
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -2241,7 +2217,7 @@ pub struct AdvancedStatsClicks {
     )]
     pub clicks: i64,
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(
         default,
@@ -2254,7 +2230,7 @@ pub struct AdvancedStatsClicks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Recipients {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2263,7 +2239,7 @@ pub struct Recipients {
     )]
     pub created_at: f64,
     /**
-    * The custom fields assigned to this recipient and their values.
+     * The custom fields assigned to this recipient and their values.
      */
     #[serde(
         default,
@@ -2272,7 +2248,7 @@ pub struct Recipients {
     )]
     pub custom_fields: Vec<ContactdbCustomFieldWithValueAllOf>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2281,7 +2257,7 @@ pub struct Recipients {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2290,7 +2266,7 @@ pub struct Recipients {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2299,7 +2275,7 @@ pub struct Recipients {
     )]
     pub id: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2308,7 +2284,7 @@ pub struct Recipients {
     )]
     pub last_clicked: f64,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2317,7 +2293,7 @@ pub struct Recipients {
     )]
     pub last_emailed: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2326,7 +2302,7 @@ pub struct Recipients {
     )]
     pub last_name: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2335,7 +2311,7 @@ pub struct Recipients {
     )]
     pub last_opened: f64,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2388,7 +2364,7 @@ pub struct MailSettingsForwardBounce {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MailBatchId {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2401,7 +2377,7 @@ pub struct MailBatchId {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreditAllocation {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2423,7 +2399,7 @@ pub struct SubuserPost {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub credit_allocation: Option<CreditAllocation>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2438,7 +2414,7 @@ pub struct SubuserPost {
     )]
     pub signup_session_token: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2447,7 +2423,7 @@ pub struct SubuserPost {
     )]
     pub user_id: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2460,7 +2436,7 @@ pub struct SubuserPost {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbRecipientCount {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -2473,7 +2449,7 @@ pub struct ContactdbRecipientCount {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbCustomFieldWithValue {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2518,7 +2494,7 @@ pub struct TransactionalTemplateVersionCreate {
     )]
     pub html_content: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2533,7 +2509,7 @@ pub struct TransactionalTemplateVersionCreate {
     )]
     pub plain_content: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2605,13 +2581,14 @@ pub struct TransactionalTemplatesVersionOutputLean {
 /**
  * Defines the generation of the template.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Generation {
     #[serde(rename = "dynamic")]
     Dynamic,
     #[serde(rename = "legacy")]
     Legacy,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2629,11 +2606,6 @@ impl std::fmt::Display for Generation {
     }
 }
 
-impl Default for Generation {
-    fn default() -> Generation {
-        Generation::Noop
-    }
-}
 impl Generation {
     pub fn is_noop(&self) -> bool {
         matches!(self, Generation::Noop)
@@ -2643,12 +2615,12 @@ impl Generation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TransactionalTemplatesTemplateLean {
     /**
-    * Defines the generation of the template.
+     * Defines the generation of the template.
      */
     #[serde(default, skip_serializing_if = "Generation::is_noop")]
     pub generation: Generation,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2657,7 +2629,7 @@ pub struct TransactionalTemplatesTemplateLean {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2666,7 +2638,7 @@ pub struct TransactionalTemplatesTemplateLean {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2718,7 +2690,7 @@ pub struct ContactDetails {
     )]
     pub country: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2741,7 +2713,7 @@ pub struct ContactDetails {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2756,7 +2728,7 @@ pub struct ContactDetails {
     )]
     pub last_name: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -2777,7 +2749,7 @@ pub struct ContactDetails {
     )]
     pub state_province_region: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2791,7 +2763,7 @@ pub struct ContactDetails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Results {
     /**
-    * Result map of the import job.
+     * Result map of the import job.
      */
     #[serde(
         default,
@@ -2800,7 +2772,7 @@ pub struct Results {
     )]
     pub created_count: f64,
     /**
-    * Result map of the import job.
+     * Result map of the import job.
      */
     #[serde(
         default,
@@ -2809,7 +2781,7 @@ pub struct Results {
     )]
     pub deleted_count: f64,
     /**
-    * Result map of the import job.
+     * Result map of the import job.
      */
     #[serde(
         default,
@@ -2818,7 +2790,7 @@ pub struct Results {
     )]
     pub errored_count: f64,
     /**
-    * Result map of the import job.
+     * Result map of the import job.
      */
     #[serde(
         default,
@@ -2827,7 +2799,7 @@ pub struct Results {
     )]
     pub errors_url: String,
     /**
-    * Result map of the import job.
+     * Result map of the import job.
      */
     #[serde(
         default,
@@ -2836,7 +2808,7 @@ pub struct Results {
     )]
     pub requested_count: f64,
     /**
-    * Result map of the import job.
+     * Result map of the import job.
      */
     #[serde(
         default,
@@ -2885,7 +2857,7 @@ pub struct ContactImport {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomFields {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2895,7 +2867,7 @@ pub struct CustomFields {
     )]
     pub custom_field_name_1: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2909,7 +2881,7 @@ pub struct CustomFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contact {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2918,7 +2890,7 @@ pub struct Contact {
     )]
     pub address_line_1: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2927,7 +2899,7 @@ pub struct Contact {
     )]
     pub address_line_2: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2936,7 +2908,7 @@ pub struct Contact {
     )]
     pub alternate_emails: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2945,7 +2917,7 @@ pub struct Contact {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2956,7 +2928,7 @@ pub struct Contact {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub custom_fields: Option<CustomFields>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2965,7 +2937,7 @@ pub struct Contact {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2974,7 +2946,7 @@ pub struct Contact {
     )]
     pub last_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2983,7 +2955,7 @@ pub struct Contact {
     )]
     pub postal_code: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -2992,7 +2964,7 @@ pub struct Contact {
     )]
     pub primary_email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3017,7 +2989,7 @@ pub struct SingleContactRequest {
 /**
  * The export job's status. Allowed values: `pending`, `ready`, or `failure`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ContactExportStatus {
     #[serde(rename = "failure")]
     Failure,
@@ -3026,6 +2998,7 @@ pub enum ContactExportStatus {
     #[serde(rename = "ready")]
     Ready,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3044,11 +3017,6 @@ impl std::fmt::Display for ContactExportStatus {
     }
 }
 
-impl Default for ContactExportStatus {
-    fn default() -> ContactExportStatus {
-        ContactExportStatus::Noop
-    }
-}
 impl ContactExportStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ContactExportStatus::Noop)
@@ -3072,7 +3040,7 @@ pub struct ContactExport {
     )]
     pub contact_count: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3081,7 +3049,7 @@ pub struct ContactExport {
     )]
     pub created_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3090,7 +3058,7 @@ pub struct ContactExport {
     )]
     pub expires_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3105,12 +3073,12 @@ pub struct ContactExport {
     )]
     pub message: String,
     /**
-    * The export job's status. Allowed values: `pending`, `ready`, or `failure`.
+     * The export job's status. Allowed values: `pending`, `ready`, or `failure`.
      */
     #[serde(default, skip_serializing_if = "ContactExportStatus::is_noop")]
     pub status: ContactExportStatus,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3131,7 +3099,7 @@ pub struct ContactSummary {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<SelfMetadata>,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -3152,7 +3120,7 @@ pub struct ContactSummary {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3167,7 +3135,7 @@ pub struct ContactSummary {
     )]
     pub last_name: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -3176,7 +3144,7 @@ pub struct ContactSummary {
     )]
     pub list_ids: Vec<String>,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -3221,7 +3189,7 @@ pub struct ContactRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub custom_fields: Option<Help>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3316,7 +3284,7 @@ pub struct ContactDetails2 {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3337,7 +3305,7 @@ pub struct ContactDetails2 {
     )]
     pub line: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -3415,7 +3383,7 @@ pub struct Error {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3479,7 +3447,7 @@ pub struct Metadata {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Webhook {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3488,7 +3456,7 @@ pub struct Webhook {
     )]
     pub nonce: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3522,7 +3490,7 @@ pub struct List {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FieldType {
     #[serde(rename = "Date")]
     Date,
@@ -3531,6 +3499,7 @@ pub enum FieldType {
     #[serde(rename = "Text")]
     Text,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3549,11 +3518,6 @@ impl std::fmt::Display for FieldType {
     }
 }
 
-impl Default for FieldType {
-    fn default() -> FieldType {
-        FieldType::Noop
-    }
-}
 impl FieldType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FieldType::Noop)
@@ -3565,7 +3529,7 @@ pub struct ReservedFieldDefinitionsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field_type: Option<FieldType>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3574,7 +3538,7 @@ pub struct ReservedFieldDefinitionsResponse {
     )]
     pub name: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -3588,7 +3552,7 @@ pub struct CustomFieldDefinitionsResponse {
     #[serde(default, skip_serializing_if = "FieldType::is_noop")]
     pub field_type: FieldType,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3597,7 +3561,7 @@ pub struct CustomFieldDefinitionsResponse {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3610,7 +3574,7 @@ pub struct CustomFieldDefinitionsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentWrite {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3619,7 +3583,7 @@ pub struct SegmentWrite {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3644,7 +3608,7 @@ pub struct SegmentSummary {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3687,7 +3651,7 @@ pub struct SegmentSummary {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct L {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3696,7 +3660,7 @@ pub struct L {
     )]
     pub t: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3711,7 +3675,7 @@ pub struct SegmentQueryJsonContactsL {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub l: Option<L>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3732,7 +3696,7 @@ pub struct SegmentQueryJsonContactsLR {
     )]
     pub args: Vec<L>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3741,7 +3705,7 @@ pub struct SegmentQueryJsonContactsLR {
     )]
     pub t: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3756,7 +3720,7 @@ pub struct R {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub l: Option<SegmentQueryJsonContactsLR>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3773,7 +3737,7 @@ pub struct SegmentQueryJsonContactsLData {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub l: Option<SegmentQueryJsonContactsL>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3788,7 +3752,7 @@ pub struct SegmentQueryJsonContactsLData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentQueryJsonContactsR {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3797,7 +3761,7 @@ pub struct SegmentQueryJsonContactsR {
     )]
     pub t: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -3812,7 +3776,7 @@ pub struct SegmentQueryJsonContactsRData {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub l: Option<L>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3829,7 +3793,7 @@ pub struct SegmentQueryJsonContacts {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub l: Option<SegmentQueryJsonContactsLData>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3851,7 +3815,7 @@ pub struct SegmentQueryJson {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactResponseCustomFields {
     /**
-    * The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
+     * The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
      */
     #[serde(
         default,
@@ -3861,7 +3825,7 @@ pub struct ContactResponseCustomFields {
     )]
     pub custom_field_name_1: String,
     /**
-    * The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
+     * The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
      */
     #[serde(
         default,
@@ -3875,7 +3839,7 @@ pub struct ContactResponseCustomFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3884,7 +3848,7 @@ pub struct ContactResponse {
     )]
     pub address_line_1: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3893,7 +3857,7 @@ pub struct ContactResponse {
     )]
     pub address_line_2: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -3902,7 +3866,7 @@ pub struct ContactResponse {
     )]
     pub alternate_emails: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3911,7 +3875,7 @@ pub struct ContactResponse {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3920,11 +3884,11 @@ pub struct ContactResponse {
     )]
     pub country: String,
     /**
-    * The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
+     * The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
      */
     pub custom_fields: ContactResponseCustomFields,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3933,7 +3897,7 @@ pub struct ContactResponse {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3942,7 +3906,7 @@ pub struct ContactResponse {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3951,7 +3915,7 @@ pub struct ContactResponse {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -3978,7 +3942,7 @@ pub struct ContactResponse {
     )]
     pub segment_ids: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4002,7 +3966,7 @@ pub struct TneSenderId {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Verified {
     /**
-    * Only verified sender identities can be used to send email.
+     * Only verified sender identities can be used to send email.
      */
     #[serde(
         default,
@@ -4011,7 +3975,7 @@ pub struct Verified {
     )]
     pub reason: String,
     /**
-    * Only verified sender identities can be used to send email.
+     * Only verified sender identities can be used to send email.
      */
     #[serde(
         default,
@@ -4029,7 +3993,7 @@ pub struct TneSenderData {
     )]
     pub created_at: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -4043,7 +4007,7 @@ pub struct TneSenderData {
     )]
     pub updated_at: i64,
     /**
-    * Only verified sender identities can be used to send email.
+     * Only verified sender identities can be used to send email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub verified: Option<Verified>,
@@ -4068,7 +4032,7 @@ pub struct TneSenderAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiError {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4077,7 +4041,7 @@ pub struct ApiError {
     )]
     pub error_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4086,7 +4050,7 @@ pub struct ApiError {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4138,7 +4102,7 @@ pub struct MetadataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DesignInput {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4147,7 +4111,7 @@ pub struct DesignInput {
     )]
     pub html_content: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4195,7 +4159,7 @@ pub struct DesignOutputSummary {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4204,7 +4168,7 @@ pub struct DesignOutputSummary {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4283,7 +4247,7 @@ pub struct ContactDetails3 {
     )]
     pub country: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4312,7 +4276,7 @@ pub struct ContactDetails3 {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4333,7 +4297,7 @@ pub struct ContactDetails3 {
     )]
     pub line: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -4354,7 +4318,7 @@ pub struct ContactDetails3 {
     )]
     pub postal_code: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -4375,7 +4339,7 @@ pub struct ContactDetails3 {
     )]
     pub unique_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4404,7 +4368,7 @@ pub struct Warning {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ErrorsData {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4413,7 +4377,7 @@ pub struct ErrorsData {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4422,7 +4386,7 @@ pub struct ErrorsData {
     )]
     pub message: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4446,9 +4410,10 @@ pub struct ErrorsDataType {
 /**
  * This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbPhase {
     #[serde(rename = "all")]
+    #[default]
     All,
     #[serde(rename = "send")]
     Send,
@@ -4470,21 +4435,15 @@ impl std::fmt::Display for AbPhase {
     }
 }
 
-impl Default for AbPhase {
-    fn default() -> AbPhase {
-        AbPhase::All
-    }
-}
-
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SinglesendsResponseResults {
     /**
-    * This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
+     * This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
      */
     #[serde(default)]
     pub ab_phase: AbPhase,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4493,7 +4452,7 @@ pub struct SinglesendsResponseResults {
     )]
     pub ab_variation: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4502,7 +4461,7 @@ pub struct SinglesendsResponseResults {
     )]
     pub aggregation: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4529,7 +4488,7 @@ pub struct SinglesendsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationsResponseResults {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4538,7 +4497,7 @@ pub struct AutomationsResponseResults {
     )]
     pub aggregation: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4549,7 +4508,7 @@ pub struct AutomationsResponseResults {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<MetricsData>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4647,7 +4606,7 @@ pub struct MetricsData {
     pub unsubscribes: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SinglesendSearchStatus {
     #[serde(rename = "draft")]
     Draft,
@@ -4656,6 +4615,7 @@ pub enum SinglesendSearchStatus {
     #[serde(rename = "triggered")]
     Triggered,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4674,11 +4634,6 @@ impl std::fmt::Display for SinglesendSearchStatus {
     }
 }
 
-impl Default for SinglesendSearchStatus {
-    fn default() -> SinglesendSearchStatus {
-        SinglesendSearchStatus::Noop
-    }
-}
 impl SinglesendSearchStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, SinglesendSearchStatus::Noop)
@@ -4710,7 +4665,7 @@ pub struct SinglesendSearch {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendTo {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -4718,7 +4673,7 @@ pub struct SendTo {
     )]
     pub all: bool,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -4727,7 +4682,7 @@ pub struct SendTo {
     )]
     pub list_ids: Vec<String>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -4740,7 +4695,7 @@ pub struct SendTo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailConfig {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4749,7 +4704,7 @@ pub struct EmailConfig {
     )]
     pub custom_unsubscribe_url: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4758,12 +4713,12 @@ pub struct EmailConfig {
     )]
     pub design_id: String,
     /**
-    * The editor used in the UI.
+     * The editor used in the UI.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub editor: Option<Editor>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -4771,7 +4726,7 @@ pub struct EmailConfig {
     )]
     pub generate_plain_content: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4780,7 +4735,7 @@ pub struct EmailConfig {
     )]
     pub html_content: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4789,7 +4744,7 @@ pub struct EmailConfig {
     )]
     pub ip_pool: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4804,7 +4759,7 @@ pub struct EmailConfig {
     )]
     pub sender_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4831,7 +4786,7 @@ pub struct SinglesendRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_config: Option<EmailConfig>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4864,7 +4819,7 @@ pub struct SinglesendSchedule {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Warnings {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4873,7 +4828,7 @@ pub struct Warnings {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4882,7 +4837,7 @@ pub struct Warnings {
     )]
     pub message: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4905,7 +4860,7 @@ pub struct SinglesendWarning {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReplyTo {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4914,7 +4869,7 @@ pub struct ReplyTo {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -4927,42 +4882,42 @@ pub struct ReplyTo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebhooksEventWebhookUpdateWithOAuthRequest {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bounce: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub click: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deferred: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivered: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dropped: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub group_resubscribe: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub group_unsubscribe: Option<bool>,
@@ -4985,27 +4940,27 @@ pub struct WebhooksEventWebhookUpdateWithOAuthRequest {
     )]
     pub oauth_token_url: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub open: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub processed: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spam_report: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub unsubscribe: Option<bool>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5018,42 +4973,42 @@ pub struct WebhooksEventWebhookUpdateWithOAuthRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebhooksEventWebhookRequest {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bounce: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub click: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deferred: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivered: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dropped: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub group_resubscribe: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub group_unsubscribe: Option<bool>,
@@ -5070,27 +5025,27 @@ pub struct WebhooksEventWebhookRequest {
     )]
     pub oauth_token_url: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub open: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub processed: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spam_report: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub unsubscribe: Option<bool>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5103,7 +5058,7 @@ pub struct WebhooksEventWebhookRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReplyEmailObject {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5128,7 +5083,7 @@ pub struct AutomationsLinkStatsResponseResults {
     )]
     pub clicks: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5137,7 +5092,7 @@ pub struct AutomationsLinkStatsResponseResults {
     )]
     pub step_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5158,7 +5113,7 @@ pub struct AutomationsLinkStatsResponse {
     #[serde(rename = "_metadata")]
     pub metadata: LinkTrackingMetadata,
     /**
-    *
+     *
      */
     #[serde(
         default,
@@ -5206,12 +5161,12 @@ pub struct LinkTrackingMetadata {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SinglesendsLinkStatsResponseResults {
     /**
-    * This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
+     * This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
      */
     #[serde(default)]
     pub ab_phase: AbPhase,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5226,7 +5181,7 @@ pub struct SinglesendsLinkStatsResponseResults {
     )]
     pub clicks: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5247,7 +5202,7 @@ pub struct SinglesendsLinkStatsResponse {
     #[serde(rename = "_metadata")]
     pub metadata: LinkTrackingMetadata,
     /**
-    * This is the index of the link's location in the email contents.
+     * This is the index of the link's location in the email contents.
      */
     #[serde(
         default,
@@ -5272,7 +5227,7 @@ pub struct Subusers {
     )]
     pub user_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5314,13 +5269,14 @@ pub struct DomainAuthentication200ResponseAllOf {
 /**
  * What differs between the A/B tests
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbTestSummaryType {
     #[serde(rename = "content")]
     Content,
     #[serde(rename = "subject")]
     Subject,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5338,11 +5294,6 @@ impl std::fmt::Display for AbTestSummaryType {
     }
 }
 
-impl Default for AbTestSummaryType {
-    fn default() -> AbTestSummaryType {
-        AbTestSummaryType::Noop
-    }
-}
 impl AbTestSummaryType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AbTestSummaryType::Noop)
@@ -5352,7 +5303,7 @@ impl AbTestSummaryType {
 /**
  * How the winner will be decided
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum WinnerCriteria {
     #[serde(rename = "click")]
     Click,
@@ -5361,6 +5312,7 @@ pub enum WinnerCriteria {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5379,11 +5331,6 @@ impl std::fmt::Display for WinnerCriteria {
     }
 }
 
-impl Default for WinnerCriteria {
-    fn default() -> WinnerCriteria {
-        WinnerCriteria::Noop
-    }
-}
 impl WinnerCriteria {
     pub fn is_noop(&self) -> bool {
         matches!(self, WinnerCriteria::Noop)
@@ -5393,7 +5340,7 @@ impl WinnerCriteria {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbTestSummary {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5402,7 +5349,7 @@ pub struct AbTestSummary {
     )]
     pub duration: String,
     /**
-    * Last day to select an A/B Test Winner
+     * Last day to select an A/B Test Winner
      */
     #[serde(
         default,
@@ -5417,7 +5364,7 @@ pub struct AbTestSummary {
     )]
     pub test_percentage: i64,
     /**
-    * What differs between the A/B tests
+     * What differs between the A/B tests
      */
     #[serde(
         default,
@@ -5426,12 +5373,12 @@ pub struct AbTestSummary {
     )]
     pub type_: AbTestSummaryType,
     /**
-    * How the winner will be decided
+     * How the winner will be decided
      */
     #[serde(default, skip_serializing_if = "WinnerCriteria::is_noop")]
     pub winner_criteria: WinnerCriteria,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5440,7 +5387,7 @@ pub struct AbTestSummary {
     )]
     pub winner_selected_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5455,7 +5402,7 @@ pub struct SinglesendResponseShort {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub abtest: Option<AbTestSummary>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -5470,7 +5417,7 @@ pub struct SinglesendResponseShort {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5479,7 +5426,7 @@ pub struct SinglesendResponseShort {
     )]
     pub id: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -5487,7 +5434,7 @@ pub struct SinglesendResponseShort {
     )]
     pub is_abtest: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5514,7 +5461,7 @@ pub struct SinglesendResponseShort {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CcBccEmailObject {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5558,7 +5505,7 @@ pub struct VerifiedSenderRequestSchema {
     )]
     pub country: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5573,7 +5520,7 @@ pub struct VerifiedSenderRequestSchema {
     )]
     pub from_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5582,7 +5529,7 @@ pub struct VerifiedSenderRequestSchema {
     )]
     pub nickname: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5712,7 +5659,7 @@ pub struct Result {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5830,7 +5777,7 @@ pub struct StatsAdvancedGlobalAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StatsAdvancedBaseSchema {
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<Help>,
@@ -5839,7 +5786,7 @@ pub struct StatsAdvancedBaseSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StatsAdvancedBaseSchemaData {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5848,7 +5795,7 @@ pub struct StatsAdvancedBaseSchemaData {
     )]
     pub date: String,
     /**
-    * The individual email activity stats.
+     * The individual email activity stats.
      */
     #[serde(
         default,
@@ -5867,7 +5814,7 @@ pub struct FullSegment {
     )]
     pub contacts_sample: Vec<ContactResponse>,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub query_json: Option<Help>,
@@ -5892,7 +5839,7 @@ pub struct FullSegmentAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct From {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5901,7 +5848,7 @@ pub struct From {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5914,7 +5861,7 @@ pub struct From {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendersRequestBody {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5929,7 +5876,7 @@ pub struct SendersRequestBody {
     )]
     pub address_2: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5938,7 +5885,7 @@ pub struct SendersRequestBody {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5948,7 +5895,7 @@ pub struct SendersRequestBody {
     pub country: String,
     pub from: From,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -5995,7 +5942,7 @@ pub struct SinglesendResponse {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6035,7 +5982,7 @@ pub struct SinglesendResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DesignCommonFields {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -6044,7 +5991,7 @@ pub struct DesignCommonFields {
     )]
     pub categories: Vec<String>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -6052,7 +5999,7 @@ pub struct DesignCommonFields {
     )]
     pub generate_plain_content: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6100,7 +6047,7 @@ pub struct InvalidEmail {
 /**
  * The message's status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EmailActivityResponseCommonFieldsStatus {
     #[serde(rename = "delivered")]
     Delivered,
@@ -6109,6 +6056,7 @@ pub enum EmailActivityResponseCommonFieldsStatus {
     #[serde(rename = "processed")]
     Processed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6127,11 +6075,6 @@ impl std::fmt::Display for EmailActivityResponseCommonFieldsStatus {
     }
 }
 
-impl Default for EmailActivityResponseCommonFieldsStatus {
-    fn default() -> EmailActivityResponseCommonFieldsStatus {
-        EmailActivityResponseCommonFieldsStatus::Noop
-    }
-}
 impl EmailActivityResponseCommonFieldsStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailActivityResponseCommonFieldsStatus::Noop)
@@ -6171,7 +6114,7 @@ pub struct EmailActivityResponseCommonFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SuppressionsRequestBody {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -6239,7 +6182,7 @@ pub struct SsoCertificateBody {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoIntegration {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6248,7 +6191,7 @@ pub struct SsoIntegration {
     )]
     pub audience_url: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6257,7 +6200,7 @@ pub struct SsoIntegration {
     )]
     pub id: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -6266,7 +6209,7 @@ pub struct SsoIntegration {
     )]
     pub last_updated: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6294,12 +6237,12 @@ pub struct CreateIntegrationRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub completed_integration: Option<bool>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6308,7 +6251,7 @@ pub struct CreateIntegrationRequest {
     )]
     pub entity_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6317,7 +6260,7 @@ pub struct CreateIntegrationRequest {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6326,7 +6269,7 @@ pub struct CreateIntegrationRequest {
     )]
     pub signin_url: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6339,7 +6282,7 @@ pub struct CreateIntegrationRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoTeammateResponse {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -6347,7 +6290,7 @@ pub struct SsoTeammateResponse {
     )]
     pub is_sso: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6373,7 +6316,7 @@ pub struct SsoTeammateResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetScopesResponse {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -6399,7 +6342,7 @@ pub struct SsoTeammateRequestAllOf {
 /**
  * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserType {
     #[serde(rename = "admin")]
     Admin,
@@ -6408,6 +6351,7 @@ pub enum UserType {
     #[serde(rename = "teammate")]
     Teammate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6426,11 +6370,6 @@ impl std::fmt::Display for UserType {
     }
 }
 
-impl Default for UserType {
-    fn default() -> UserType {
-        UserType::Noop
-    }
-}
 impl UserType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserType::Noop)
@@ -6440,7 +6379,7 @@ impl UserType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoTeammatesPatchResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6449,7 +6388,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub address: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6459,7 +6398,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub address_2: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6468,7 +6407,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6477,7 +6416,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub company: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6486,7 +6425,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub country: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6495,7 +6434,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6504,7 +6443,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub phone: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -6513,7 +6452,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub scopes: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6522,12 +6461,12 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub state: String,
     /**
-    * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
+     * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user_type: Option<UserType>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6536,7 +6475,7 @@ pub struct SsoTeammatesPatchResponse {
     )]
     pub website: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6562,7 +6501,7 @@ pub struct SsoTeammatesPatchResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoErrorResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6571,7 +6510,7 @@ pub struct SsoErrorResponse {
     )]
     pub error_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6580,7 +6519,7 @@ pub struct SsoErrorResponse {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6593,7 +6532,7 @@ pub struct SsoErrorResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickTracking {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -6601,7 +6540,7 @@ pub struct ClickTracking {
     )]
     pub enable_text: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -6613,7 +6552,7 @@ pub struct ClickTracking {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoTeammateCommonFields {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6622,7 +6561,7 @@ pub struct SsoTeammateCommonFields {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6641,7 +6580,7 @@ pub struct SsoTeammateCommonFields {
     )]
     pub is_read_only: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6660,7 +6599,7 @@ pub struct SpamReportsResponse {
     )]
     pub created: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6669,7 +6608,7 @@ pub struct SpamReportsResponse {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6688,7 +6627,7 @@ pub struct BlocksResponse {
     )]
     pub created: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6697,7 +6636,7 @@ pub struct BlocksResponse {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6706,7 +6645,7 @@ pub struct BlocksResponse {
     )]
     pub reason: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6729,7 +6668,7 @@ pub struct IpPoolsPoolResp {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SenderRequestFrom {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6738,7 +6677,7 @@ pub struct SenderRequestFrom {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6802,7 +6741,7 @@ pub struct SenderRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentStatusResponse {
     /**
-    * Segment status indicates whether the segment's contacts will be updated periodically
+     * Segment status indicates whether the segment's contacts will be updated periodically
      */
     #[serde(
         default,
@@ -6811,7 +6750,7 @@ pub struct SegmentStatusResponse {
     )]
     pub error_message: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6832,7 +6771,7 @@ pub struct AllSegmentsResponse {
     )]
     pub contacts_count: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6841,7 +6780,7 @@ pub struct AllSegmentsResponse {
     )]
     pub created_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6850,7 +6789,7 @@ pub struct AllSegmentsResponse {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6859,7 +6798,7 @@ pub struct AllSegmentsResponse {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6868,7 +6807,7 @@ pub struct AllSegmentsResponse {
     )]
     pub next_sample_update: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -6877,7 +6816,7 @@ pub struct AllSegmentsResponse {
     )]
     pub parent_list_ids: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6886,7 +6825,7 @@ pub struct AllSegmentsResponse {
     )]
     pub query_version: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6895,11 +6834,11 @@ pub struct AllSegmentsResponse {
     )]
     pub sample_updated_at: String,
     /**
-    * Segment status indicates whether the segment's contacts will be updated periodically
+     * Segment status indicates whether the segment's contacts will be updated periodically
      */
     pub status: SegmentStatusResponse,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6913,7 +6852,7 @@ pub struct AllSegmentsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentSummaryV2 {
     /**
-    *
+     *
      */
     #[serde(
         default,
@@ -6938,7 +6877,7 @@ pub struct SegmentResponse {
     )]
     pub contacts_sample: Vec<ContactResponse>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6947,7 +6886,7 @@ pub struct SegmentResponse {
     )]
     pub created_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6956,7 +6895,7 @@ pub struct SegmentResponse {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6965,7 +6904,7 @@ pub struct SegmentResponse {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6974,7 +6913,7 @@ pub struct SegmentResponse {
     )]
     pub next_sample_update: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -6983,7 +6922,7 @@ pub struct SegmentResponse {
     )]
     pub parent_list_ids: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -6992,7 +6931,7 @@ pub struct SegmentResponse {
     )]
     pub query_dsl: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7001,7 +6940,7 @@ pub struct SegmentResponse {
     )]
     pub query_version: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7010,11 +6949,11 @@ pub struct SegmentResponse {
     )]
     pub sample_updated_at: String,
     /**
-    * Segment status indicates whether the segment's contacts will be updated periodically
+     * Segment status indicates whether the segment's contacts will be updated periodically
      */
     pub status: SegmentStatusResponse,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7027,7 +6966,7 @@ pub struct SegmentResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ErrorsSeg {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7036,7 +6975,7 @@ pub struct ErrorsSeg {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7060,7 +6999,7 @@ pub struct ErrorsSegData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentWriteV2 {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7075,7 +7014,7 @@ pub struct SegmentWriteV2 {
     )]
     pub parent_list_ids: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7101,7 +7040,7 @@ pub struct SegmentUpdate {
     pub query_dsl: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbbvMessageStatus {
     #[serde(rename = "delivered")]
     Delivered,
@@ -7110,6 +7049,7 @@ pub enum AbbvMessageStatus {
     #[serde(rename = "processed")]
     Processed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7128,11 +7068,6 @@ impl std::fmt::Display for AbbvMessageStatus {
     }
 }
 
-impl Default for AbbvMessageStatus {
-    fn default() -> AbbvMessageStatus {
-        AbbvMessageStatus::Noop
-    }
-}
 impl AbbvMessageStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, AbbvMessageStatus::Noop)
@@ -7148,7 +7083,7 @@ pub struct Messages {
     )]
     pub clicks_count: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7157,7 +7092,7 @@ pub struct Messages {
     )]
     pub from_email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7166,7 +7101,7 @@ pub struct Messages {
     )]
     pub last_event_time: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7183,7 +7118,7 @@ pub struct Messages {
     #[serde(default, skip_serializing_if = "AbbvMessageStatus::is_noop")]
     pub status: AbbvMessageStatus,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7192,7 +7127,7 @@ pub struct Messages {
     )]
     pub subject: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7205,7 +7140,7 @@ pub struct Messages {
 /**
  * Name of event
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EventName {
     #[serde(rename = "bounced")]
     Bounced,
@@ -7230,6 +7165,7 @@ pub enum EventName {
     #[serde(rename = "unsubscribe")]
     Unsubscribe,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7256,11 +7192,6 @@ impl std::fmt::Display for EventName {
     }
 }
 
-impl Default for EventName {
-    fn default() -> EventName {
-        EventName::Noop
-    }
-}
 impl EventName {
     pub fn is_noop(&self) -> bool {
         matches!(self, EventName::Noop)
@@ -7270,7 +7201,7 @@ impl EventName {
 /**
  * Use to distinguish between types of bounces
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum BounceType {
     #[serde(rename = "blocked")]
     Blocked,
@@ -7279,6 +7210,7 @@ pub enum BounceType {
     #[serde(rename = "expired")]
     Expired,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7297,11 +7229,6 @@ impl std::fmt::Display for BounceType {
     }
 }
 
-impl Default for BounceType {
-    fn default() -> BounceType {
-        BounceType::Noop
-    }
-}
 impl BounceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BounceType::Noop)
@@ -7317,17 +7244,17 @@ pub struct Event {
     )]
     pub attempt_num: i64,
     /**
-    * Use to distinguish between types of bounces
+     * Use to distinguish between types of bounces
      */
     #[serde(default, skip_serializing_if = "BounceType::is_noop")]
     pub bounce_type: BounceType,
     /**
-    * Name of event
+     * Name of event
      */
     #[serde(default, skip_serializing_if = "EventName::is_noop")]
     pub event_name: EventName,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7336,7 +7263,7 @@ pub struct Event {
     )]
     pub http_user_agent: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7345,7 +7272,7 @@ pub struct Event {
     )]
     pub mx_server: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7360,7 +7287,7 @@ pub struct Event {
     )]
     pub reason: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7373,13 +7300,14 @@ pub struct Event {
 /**
  * Whether or not the outbound IP is dedicated vs shared
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OutboundIpType {
     #[serde(rename = "dedicated")]
     Dedicated,
     #[serde(rename = "shared")]
     Shared,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7397,11 +7325,6 @@ impl std::fmt::Display for OutboundIpType {
     }
 }
 
-impl Default for OutboundIpType {
-    fn default() -> OutboundIpType {
-        OutboundIpType::Noop
-    }
-}
 impl OutboundIpType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OutboundIpType::Noop)
@@ -7411,7 +7334,7 @@ impl OutboundIpType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Message {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7426,7 +7349,7 @@ pub struct Message {
     )]
     pub asm_group_id: i64,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -7435,7 +7358,7 @@ pub struct Message {
     )]
     pub categories: Vec<String>,
     /**
-    * List of events related to email message
+     * List of events related to email message
      */
     #[serde(
         default,
@@ -7444,7 +7367,7 @@ pub struct Message {
     )]
     pub events: Vec<Event>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7453,7 +7376,7 @@ pub struct Message {
     )]
     pub from_email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7462,20 +7385,20 @@ pub struct Message {
     )]
     pub msg_id: String,
     /**
-    * This is the IP of the user who sent the message.
+     * This is the IP of the user who sent the message.
      */
     pub originating_ip: std::net::Ipv4Addr,
     /**
-    * This is the IP of the user who sent the message.
+     * This is the IP of the user who sent the message.
      */
     pub outbound_ip: std::net::Ipv4Addr,
     /**
-    * Whether or not the outbound IP is dedicated vs shared
+     * Whether or not the outbound IP is dedicated vs shared
      */
     #[serde(default, skip_serializing_if = "OutboundIpType::is_noop")]
     pub outbound_ip_type: OutboundIpType,
     /**
-    * The message's status.
+     * The message's status.
      */
     #[serde(
         default,
@@ -7483,7 +7406,7 @@ pub struct Message {
     )]
     pub status: EmailActivityResponseCommonFieldsStatus,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7492,7 +7415,7 @@ pub struct Message {
     )]
     pub subject: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7501,7 +7424,7 @@ pub struct Message {
     )]
     pub teammate: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7510,7 +7433,7 @@ pub struct Message {
     )]
     pub template_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7519,7 +7442,7 @@ pub struct Message {
     )]
     pub to_email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7533,19 +7456,19 @@ pub struct Message {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainAuthenticationDns {
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     pub dkim: Dkim,
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     pub domain_spf: Dkim,
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     pub mail_server: Dkim,
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     pub subdomain_spf: Dkim,
 }
@@ -7553,7 +7476,7 @@ pub struct DomainAuthenticationDns {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainAuthentication {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7561,7 +7484,7 @@ pub struct DomainAuthentication {
     )]
     pub automatic_security: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7569,7 +7492,7 @@ pub struct DomainAuthentication {
     )]
     pub custom_spf: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7577,11 +7500,11 @@ pub struct DomainAuthentication {
     )]
     pub default: bool,
     /**
-    * The DNS records for this authenticated domain.
+     * The DNS records for this authenticated domain.
      */
     pub dns: DomainAuthenticationDns,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7596,7 +7519,7 @@ pub struct DomainAuthentication {
     )]
     pub id: i64,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -7605,7 +7528,7 @@ pub struct DomainAuthentication {
     )]
     pub ips: Vec<String>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7625,7 +7548,7 @@ pub struct DomainAuthentication {
     )]
     pub user_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7634,7 +7557,7 @@ pub struct DomainAuthentication {
     )]
     pub username: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7647,17 +7570,17 @@ pub struct DomainAuthentication {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuthenticationDomainDns {
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     #[serde(rename = "dkim1")]
     pub dkim_1: Dkim,
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     #[serde(rename = "dkim2")]
     pub dkim_2: Dkim,
     /**
-    * The DKIM record for messages sent using this authenticated domain.
+     * The DKIM record for messages sent using this authenticated domain.
      */
     pub mail_cname: Dkim,
 }
@@ -7665,7 +7588,7 @@ pub struct AuthenticationDomainDns {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuthenticationDomain {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7673,7 +7596,7 @@ pub struct AuthenticationDomain {
     )]
     pub automatic_security: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7681,7 +7604,7 @@ pub struct AuthenticationDomain {
     )]
     pub custom_spf: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7689,11 +7612,11 @@ pub struct AuthenticationDomain {
     )]
     pub default: bool,
     /**
-    * The DNS records used to authenticate the sending domain.
+     * The DNS records used to authenticate the sending domain.
      */
     pub dns: AuthenticationDomainDns,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7702,7 +7625,7 @@ pub struct AuthenticationDomain {
     )]
     pub domain: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -7711,7 +7634,7 @@ pub struct AuthenticationDomain {
     )]
     pub id: f64,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -7720,7 +7643,7 @@ pub struct AuthenticationDomain {
     )]
     pub ips: Vec<String>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7728,7 +7651,7 @@ pub struct AuthenticationDomain {
     )]
     pub legacy: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7737,7 +7660,7 @@ pub struct AuthenticationDomain {
     )]
     pub subdomain: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -7746,7 +7669,7 @@ pub struct AuthenticationDomain {
     )]
     pub user_id: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7755,7 +7678,7 @@ pub struct AuthenticationDomain {
     )]
     pub username: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -7767,11 +7690,12 @@ pub struct AuthenticationDomain {
 /**
  * Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AggregatedBy {
     #[serde(rename = "day")]
     Day,
     #[serde(rename = "total")]
+    #[default]
     Total,
     #[serde(other)]
     FallthroughString,
@@ -7788,19 +7712,14 @@ impl std::fmt::Display for AggregatedBy {
     }
 }
 
-impl Default for AggregatedBy {
-    fn default() -> AggregatedBy {
-        AggregatedBy::Total
-    }
-}
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GroupBy {
     #[serde(rename = "ab_phase")]
     AbPhase,
     #[serde(rename = "ab_variation")]
     AbVariation,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7818,22 +7737,18 @@ impl std::fmt::Display for GroupBy {
     }
 }
 
-impl Default for GroupBy {
-    fn default() -> GroupBy {
-        GroupBy::Noop
-    }
-}
 impl GroupBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupBy::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TraitAutomationQueryParamsGroupBy {
     #[serde(rename = "step_id")]
     StepId,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7850,24 +7765,20 @@ impl std::fmt::Display for TraitAutomationQueryParamsGroupBy {
     }
 }
 
-impl Default for TraitAutomationQueryParamsGroupBy {
-    fn default() -> TraitAutomationQueryParamsGroupBy {
-        TraitAutomationQueryParamsGroupBy::Noop
-    }
-}
 impl TraitAutomationQueryParamsGroupBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, TraitAutomationQueryParamsGroupBy::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbPhaseId {
     #[serde(rename = "send")]
     Send,
     #[serde(rename = "test")]
     Test,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7885,11 +7796,6 @@ impl std::fmt::Display for AbPhaseId {
     }
 }
 
-impl Default for AbPhaseId {
-    fn default() -> AbPhaseId {
-        AbPhaseId::Noop
-    }
-}
 impl AbPhaseId {
     pub fn is_noop(&self) -> bool {
         matches!(self, AbPhaseId::Noop)
@@ -7899,7 +7805,7 @@ impl AbPhaseId {
 /**
  * How to group the statistics. Must be either "day", "week", or "month".
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     #[serde(rename = "day")]
     Day,
@@ -7908,6 +7814,7 @@ pub enum TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     #[serde(rename = "week")]
     Week,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7926,11 +7833,6 @@ impl std::fmt::Display for TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     }
 }
 
-impl Default for TraitStatsAdvancedBaseQueryStringsAggregatedBy {
-    fn default() -> TraitStatsAdvancedBaseQueryStringsAggregatedBy {
-        TraitStatsAdvancedBaseQueryStringsAggregatedBy::Noop
-    }
-}
 impl TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, TraitStatsAdvancedBaseQueryStringsAggregatedBy::Noop)
@@ -7946,7 +7848,7 @@ pub struct TraitPagination200Response {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TraitGlobalErrors500Response {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7969,7 +7871,7 @@ pub struct GetMessagesMsgResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TraitCancelScheduledSendsErrors400Response {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -7978,12 +7880,12 @@ pub struct TraitCancelScheduledSendsErrors400Response {
     )]
     pub field: String,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub help: Option<Help>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8002,7 +7904,7 @@ pub struct TraitCancelScheduledSendsErrors400ResponseData {
     )]
     pub errors: Vec<TraitCancelScheduledSendsErrors400Response>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8015,7 +7917,7 @@ pub struct TraitCancelScheduledSendsErrors400ResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TraitMakoErrorResponse400Errors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8024,7 +7926,7 @@ pub struct TraitMakoErrorResponse400Errors {
     )]
     pub error_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8033,7 +7935,7 @@ pub struct TraitMakoErrorResponse400Errors {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8042,7 +7944,7 @@ pub struct TraitMakoErrorResponse400Errors {
     )]
     pub message: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8065,7 +7967,7 @@ pub struct TraitMakoErrorResponse400 {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Personalizations {
     /**
-    * An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
+     * An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
      */
     #[serde(
         default,
@@ -8074,7 +7976,7 @@ pub struct Personalizations {
     )]
     pub bcc: Vec<CcBccEmailObject>,
     /**
-    * An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
+     * An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
      */
     #[serde(
         default,
@@ -8083,19 +7985,19 @@ pub struct Personalizations {
     )]
     pub cc: Vec<CcBccEmailObject>,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub custom_args: Option<Help>,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dynamic_template_data: Option<Help>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub from: Option<FromEmailObject>,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub headers: Option<Help>,
@@ -8106,7 +8008,7 @@ pub struct Personalizations {
     )]
     pub send_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8115,7 +8017,7 @@ pub struct Personalizations {
     )]
     pub subject: String,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub substitutions: Option<Help>,
@@ -8130,7 +8032,7 @@ pub struct Personalizations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Content {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8140,7 +8042,7 @@ pub struct Content {
     )]
     pub type_: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8153,9 +8055,10 @@ pub struct Content {
 /**
  * The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Disposition {
     #[serde(rename = "attachment")]
+    #[default]
     Attachment,
     #[serde(rename = "inline")]
     Inline,
@@ -8174,16 +8077,10 @@ impl std::fmt::Display for Disposition {
     }
 }
 
-impl Default for Disposition {
-    fn default() -> Disposition {
-        Disposition::Attachment
-    }
-}
-
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Attachments {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8192,7 +8089,7 @@ pub struct Attachments {
     )]
     pub content: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8201,12 +8098,12 @@ pub struct Attachments {
     )]
     pub content_id: String,
     /**
-    * The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.
+     * The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub disposition: Option<Disposition>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8215,7 +8112,7 @@ pub struct Attachments {
     )]
     pub filename: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8236,7 +8133,7 @@ pub struct Asm {
     )]
     pub group_id: i64,
     /**
-    * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
+     * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
     #[serde(
         default,
@@ -8250,7 +8147,7 @@ pub struct Asm {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BypassListManagement {
     /**
-    * Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. This filter cannot be combined with any other bypass filters. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
+     * Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. This filter cannot be combined with any other bypass filters. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
      */
     #[serde(
         default,
@@ -8263,7 +8160,7 @@ pub struct BypassListManagement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BypassSpamManagement {
     /**
-    * Allows you to bypass the spam report list to ensure that the email is delivered to recipients. Bounce and unsubscribe lists will still be checked; addresses on these other lists will not receive the message. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
+     * Allows you to bypass the spam report list to ensure that the email is delivered to recipients. Bounce and unsubscribe lists will still be checked; addresses on these other lists will not receive the message. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
      */
     #[serde(
         default,
@@ -8276,7 +8173,7 @@ pub struct BypassSpamManagement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BypassBounceManagement {
     /**
-    * Allows you to bypass the bounce list to ensure that the email is delivered to recipients. Spam report and unsubscribe lists will still be checked; addresses on these other lists will not receive the message. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
+     * Allows you to bypass the bounce list to ensure that the email is delivered to recipients. Spam report and unsubscribe lists will still be checked; addresses on these other lists will not receive the message. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
      */
     #[serde(
         default,
@@ -8289,7 +8186,7 @@ pub struct BypassBounceManagement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BypassUnsubscribeManagement {
     /**
-    * Allows you to bypass the global unsubscribe list to ensure that the email is delivered to recipients. Bounce and spam report lists will still be checked; addresses on these other lists will not receive the message. This filter applies only to global unsubscribes and will not bypass group unsubscribes. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
+     * Allows you to bypass the global unsubscribe list to ensure that the email is delivered to recipients. Bounce and spam report lists will still be checked; addresses on these other lists will not receive the message. This filter applies only to global unsubscribes and will not bypass group unsubscribes. This filter cannot be combined with the `bypass_list_management` filter. See our [documentation](https://sendgrid.com/docs/ui/sending-email/index-suppressions/#bypass-suppressions) for more about bypass filters.
      */
     #[serde(
         default,
@@ -8302,7 +8199,7 @@ pub struct BypassUnsubscribeManagement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Footer {
     /**
-    * The default footer that you would like included on every email.
+     * The default footer that you would like included on every email.
      */
     #[serde(
         default,
@@ -8310,7 +8207,7 @@ pub struct Footer {
     )]
     pub enable: bool,
     /**
-    * The default footer that you would like included on every email.
+     * The default footer that you would like included on every email.
      */
     #[serde(
         default,
@@ -8319,7 +8216,7 @@ pub struct Footer {
     )]
     pub html: String,
     /**
-    * The default footer that you would like included on every email.
+     * The default footer that you would like included on every email.
      */
     #[serde(
         default,
@@ -8333,7 +8230,7 @@ pub struct Footer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SandboxMode {
     /**
-    * Sandbox Mode allows you to send a test email to ensure that your request body is valid and formatted correctly.
+     * Sandbox Mode allows you to send a test email to ensure that your request body is valid and formatted correctly.
      */
     #[serde(
         default,
@@ -8346,32 +8243,32 @@ pub struct SandboxMode {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MailSettings {
     /**
-    * A collection of different mail settings that you can use to specify how you would like this email to be handled.
+     * A collection of different mail settings that you can use to specify how you would like this email to be handled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bypass_bounce_management: Option<BypassBounceManagement>,
     /**
-    * A collection of different mail settings that you can use to specify how you would like this email to be handled.
+     * A collection of different mail settings that you can use to specify how you would like this email to be handled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bypass_list_management: Option<BypassListManagement>,
     /**
-    * A collection of different mail settings that you can use to specify how you would like this email to be handled.
+     * A collection of different mail settings that you can use to specify how you would like this email to be handled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bypass_spam_management: Option<BypassSpamManagement>,
     /**
-    * A collection of different mail settings that you can use to specify how you would like this email to be handled.
+     * A collection of different mail settings that you can use to specify how you would like this email to be handled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bypass_unsubscribe_management: Option<BypassUnsubscribeManagement>,
     /**
-    * A collection of different mail settings that you can use to specify how you would like this email to be handled.
+     * A collection of different mail settings that you can use to specify how you would like this email to be handled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub footer: Option<Footer>,
     /**
-    * A collection of different mail settings that you can use to specify how you would like this email to be handled.
+     * A collection of different mail settings that you can use to specify how you would like this email to be handled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sandbox_mode: Option<SandboxMode>,
@@ -8381,7 +8278,7 @@ pub struct MailSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMailSendRequestTrackingSettingsClick {
     /**
-    * Allows you to track if a recipient clicked a link in your email.
+     * Allows you to track if a recipient clicked a link in your email.
      */
     #[serde(
         default,
@@ -8389,7 +8286,7 @@ pub struct PostMailSendRequestTrackingSettingsClick {
     )]
     pub enable: bool,
     /**
-    * Allows you to track if a recipient clicked a link in your email.
+     * Allows you to track if a recipient clicked a link in your email.
      */
     #[serde(
         default,
@@ -8402,7 +8299,7 @@ pub struct PostMailSendRequestTrackingSettingsClick {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenTracking {
     /**
-    * Allows you to track if the email was opened by including a single pixel image in the body of the content. When the pixel is loaded, Twilio SendGrid can log that the email was opened.
+     * Allows you to track if the email was opened by including a single pixel image in the body of the content. When the pixel is loaded, Twilio SendGrid can log that the email was opened.
      */
     #[serde(
         default,
@@ -8410,7 +8307,7 @@ pub struct OpenTracking {
     )]
     pub enable: bool,
     /**
-    * Allows you to track if the email was opened by including a single pixel image in the body of the content. When the pixel is loaded, Twilio SendGrid can log that the email was opened.
+     * Allows you to track if the email was opened by including a single pixel image in the body of the content. When the pixel is loaded, Twilio SendGrid can log that the email was opened.
      */
     #[serde(
         default,
@@ -8424,7 +8321,7 @@ pub struct OpenTracking {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriptionTracking {
     /**
-    * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
+     * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
      */
     #[serde(
         default,
@@ -8432,7 +8329,7 @@ pub struct SubscriptionTracking {
     )]
     pub enable: bool,
     /**
-    * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
+     * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
      */
     #[serde(
         default,
@@ -8441,7 +8338,7 @@ pub struct SubscriptionTracking {
     )]
     pub html: String,
     /**
-    * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
+     * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
      */
     #[serde(
         default,
@@ -8450,7 +8347,7 @@ pub struct SubscriptionTracking {
     )]
     pub substitution_tag: String,
     /**
-    * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
+     * Allows you to insert a subscription management link at the bottom of the text and HTML bodies of your email. If you would like to specify the location of the link within your email, you may use the `substitution_tag`.
      */
     #[serde(
         default,
@@ -8464,7 +8361,7 @@ pub struct SubscriptionTracking {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ganalytics {
     /**
-    * Allows you to enable tracking provided by Google Analytics.
+     * Allows you to enable tracking provided by Google Analytics.
      */
     #[serde(
         default,
@@ -8472,7 +8369,7 @@ pub struct Ganalytics {
     )]
     pub enable: bool,
     /**
-    * Allows you to enable tracking provided by Google Analytics.
+     * Allows you to enable tracking provided by Google Analytics.
      */
     #[serde(
         default,
@@ -8481,7 +8378,7 @@ pub struct Ganalytics {
     )]
     pub utm_campaign: String,
     /**
-    * Allows you to enable tracking provided by Google Analytics.
+     * Allows you to enable tracking provided by Google Analytics.
      */
     #[serde(
         default,
@@ -8490,7 +8387,7 @@ pub struct Ganalytics {
     )]
     pub utm_content: String,
     /**
-    * Allows you to enable tracking provided by Google Analytics.
+     * Allows you to enable tracking provided by Google Analytics.
      */
     #[serde(
         default,
@@ -8499,7 +8396,7 @@ pub struct Ganalytics {
     )]
     pub utm_medium: String,
     /**
-    * Allows you to enable tracking provided by Google Analytics.
+     * Allows you to enable tracking provided by Google Analytics.
      */
     #[serde(
         default,
@@ -8508,7 +8405,7 @@ pub struct Ganalytics {
     )]
     pub utm_source: String,
     /**
-    * Allows you to enable tracking provided by Google Analytics.
+     * Allows you to enable tracking provided by Google Analytics.
      */
     #[serde(
         default,
@@ -8522,22 +8419,22 @@ pub struct Ganalytics {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackingSettings {
     /**
-    * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
+     * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub click_tracking: Option<PostMailSendRequestTrackingSettingsClick>,
     /**
-    * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
+     * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ganalytics: Option<Ganalytics>,
     /**
-    * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
+     * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub open_tracking: Option<OpenTracking>,
     /**
-    * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
+     * Settings to determine how you would like to track the metrics of how your recipients interact with your email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub subscription_tracking: Option<SubscriptionTracking>,
@@ -8566,7 +8463,7 @@ pub struct PostMailSendRequest {
     )]
     pub categories: Vec<String>,
     /**
-    * An array where you can specify the content of your email. You can include multiple [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of content, but you must specify at least one MIME type. To include more than one MIME type, add another object to the array containing the `type` and `value` parameters.
+     * An array where you can specify the content of your email. You can include multiple [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of content, but you must specify at least one MIME type. To include more than one MIME type, add another object to the array containing the `type` and `value` parameters.
      */
     #[serde(
         default,
@@ -8592,7 +8489,7 @@ pub struct PostMailSendRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mail_settings: Option<MailSettings>,
     /**
-    * An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. See our [Personalizations documentation](https://sendgrid.com/docs/for-developers/sending-email/personalizations/) for examples.
+     * An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. See our [Personalizations documentation](https://sendgrid.com/docs/for-developers/sending-email/personalizations/) for examples.
      */
     #[serde(
         default,
@@ -8609,7 +8506,7 @@ pub struct PostMailSendRequest {
     )]
     pub send_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8630,7 +8527,7 @@ pub struct PostMailSendRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CancelPauseAScheduledSendRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8639,7 +8536,7 @@ pub struct CancelPauseAScheduledSendRequest {
     )]
     pub batch_id: String,
     /**
-    * The status of the scheduled send.
+     * The status of the scheduled send.
      */
     #[serde(default, skip_serializing_if = "Status::is_noop")]
     pub status: Status,
@@ -8658,7 +8555,7 @@ pub struct GetApiKeysResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateApiKeysRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8677,7 +8574,7 @@ pub struct CreateApiKeysRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateApiKeysResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8686,7 +8583,7 @@ pub struct CreateApiKeysResponse {
     )]
     pub api_key: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8695,7 +8592,7 @@ pub struct CreateApiKeysResponse {
     )]
     pub api_key_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8704,7 +8601,7 @@ pub struct CreateApiKeysResponse {
     )]
     pub name: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -8727,7 +8624,7 @@ pub struct GetApiKeysKeyResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutApiKeysKeyRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8748,7 +8645,7 @@ pub struct GetScopesResponseErrors {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<serde_json::Value>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8761,7 +8658,7 @@ pub struct GetScopesResponseErrors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetScopesResponseData {
     /**
-    * This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes.
+     * This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes.
      */
     #[serde(
         default,
@@ -8774,7 +8671,7 @@ pub struct GetScopesResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ips {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8787,7 +8684,7 @@ pub struct Ips {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostAccessSettingsWhitelistRequest {
     /**
-    * An array containing the IP(s) you want to allow.
+     * An array containing the IP(s) you want to allow.
      */
     #[serde(
         default,
@@ -8800,7 +8697,7 @@ pub struct PostAccessSettingsWhitelistRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteAccessSettingsWhitelistRequest {
     /**
-    * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
+     * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
     #[serde(
         default,
@@ -8813,7 +8710,7 @@ pub struct DeleteAccessSettingsWhitelistRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAccessSettingsActivityResponseResult {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -8821,7 +8718,7 @@ pub struct GetAccessSettingsActivityResponseResult {
     )]
     pub allowed: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8836,7 +8733,7 @@ pub struct GetAccessSettingsActivityResponseResult {
     )]
     pub first_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8851,7 +8748,7 @@ pub struct GetAccessSettingsActivityResponseResult {
     )]
     pub last_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8864,7 +8761,7 @@ pub struct GetAccessSettingsActivityResponseResult {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAccessSettingsActivityResponse {
     /**
-    * An array containing the IPs that recently attempted to access your account.
+     * An array containing the IPs that recently attempted to access your account.
      */
     #[serde(
         default,
@@ -8878,12 +8775,12 @@ pub struct GetAccessSettingsActivityResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostSsoCertificatesRequest {
     /**
-    *
+     *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8892,7 +8789,7 @@ pub struct PostSsoCertificatesRequest {
     )]
     pub integration_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8947,7 +8844,7 @@ pub struct PatchSsoTeammatesUsernameRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMailSettingsResponseResult {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8956,7 +8853,7 @@ pub struct GetMailSettingsResponseResult {
     )]
     pub description: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -8964,7 +8861,7 @@ pub struct GetMailSettingsResponseResult {
     )]
     pub enabled: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8973,7 +8870,7 @@ pub struct GetMailSettingsResponseResult {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -8986,7 +8883,7 @@ pub struct GetMailSettingsResponseResult {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMailSettingsResponse {
     /**
-    * The list of all mail settings.
+     * The list of all mail settings.
      */
     #[serde(
         default,
@@ -9023,7 +8920,7 @@ pub struct PatchMailSettingsTemplateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchMailSettingsTemplateResponse {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -9031,7 +8928,7 @@ pub struct PatchMailSettingsTemplateResponse {
     )]
     pub enabled: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9058,7 +8955,7 @@ pub struct PatchPartnerSettingsNewRelicRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetPartnerSettingsResponse {
     /**
-    * The list of all mail settings.
+     * The list of all mail settings.
      */
     #[serde(
         default,
@@ -9071,7 +8968,7 @@ pub struct GetPartnerSettingsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTeammatesResponseResult {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9080,7 +8977,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub address: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9090,7 +8987,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub address_2: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9099,7 +8996,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9108,7 +9005,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub country: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9117,7 +9014,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9126,7 +9023,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub first_name: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -9134,7 +9031,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub is_admin: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9143,7 +9040,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub last_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9152,7 +9049,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub phone: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9161,12 +9058,12 @@ pub struct GetTeammatesResponseResult {
     )]
     pub state: String,
     /**
-    * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
+     * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user_type: Option<UserType>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9175,7 +9072,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub username: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9184,7 +9081,7 @@ pub struct GetTeammatesResponseResult {
     )]
     pub website: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9207,7 +9104,7 @@ pub struct GetTeammatesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostTeammatesRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9216,12 +9113,12 @@ pub struct PostTeammatesRequest {
     )]
     pub email: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_admin: Option<bool>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -9234,7 +9131,7 @@ pub struct PostTeammatesRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostTeammatesResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9243,7 +9140,7 @@ pub struct PostTeammatesResponse {
     )]
     pub email: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -9251,7 +9148,7 @@ pub struct PostTeammatesResponse {
     )]
     pub is_admin: bool,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -9260,7 +9157,7 @@ pub struct PostTeammatesResponse {
     )]
     pub scopes: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9273,7 +9170,7 @@ pub struct PostTeammatesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostTeammatesResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9282,7 +9179,7 @@ pub struct PostTeammatesResponseErrors {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9305,7 +9202,7 @@ pub struct PostSendersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetScopesRequestsResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9314,7 +9211,7 @@ pub struct GetScopesRequestsResponse {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9329,7 +9226,7 @@ pub struct GetScopesRequestsResponse {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9338,7 +9235,7 @@ pub struct GetScopesRequestsResponse {
     )]
     pub last_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9347,7 +9244,7 @@ pub struct GetScopesRequestsResponse {
     )]
     pub scope_group_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9360,7 +9257,7 @@ pub struct GetScopesRequestsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTeammatesPendingResponseResult {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9375,7 +9272,7 @@ pub struct GetTeammatesPendingResponseResult {
     )]
     pub expiration_date: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -9383,7 +9280,7 @@ pub struct GetTeammatesPendingResponseResult {
     )]
     pub is_admin: bool,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -9392,7 +9289,7 @@ pub struct GetTeammatesPendingResponseResult {
     )]
     pub scopes: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9415,7 +9312,7 @@ pub struct GetTeammatesPendingResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTeammatesUsernameResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9424,7 +9321,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub address: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9434,7 +9331,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub address_2: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9443,7 +9340,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9452,7 +9349,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub country: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9461,7 +9358,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9470,7 +9367,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub first_name: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -9478,7 +9375,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub is_admin: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9487,7 +9384,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub last_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9496,7 +9393,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub phone: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -9505,7 +9402,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub scopes: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9514,12 +9411,12 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub state: String,
     /**
-    * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
+     * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user_type: Option<UserType>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9528,7 +9425,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub username: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9537,7 +9434,7 @@ pub struct GetTeammatesUsernameResponse {
     )]
     pub website: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9550,12 +9447,12 @@ pub struct GetTeammatesUsernameResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchTeammatesUsernameRequest {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_admin: Option<bool>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -9568,7 +9465,7 @@ pub struct PatchTeammatesUsernameRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchScopesRequestsApproveResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9581,13 +9478,14 @@ pub struct PatchScopesRequestsApproveResponse {
 /**
  * The type of alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetAlertsResponseType {
     #[serde(rename = "stats_notification")]
     StatsNotification,
     #[serde(rename = "usage_limit")]
     UsageLimit,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9605,11 +9503,6 @@ impl std::fmt::Display for GetAlertsResponseType {
     }
 }
 
-impl Default for GetAlertsResponseType {
-    fn default() -> GetAlertsResponseType {
-        GetAlertsResponseType::Noop
-    }
-}
 impl GetAlertsResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetAlertsResponseType::Noop)
@@ -9625,7 +9518,7 @@ pub struct GetAlertsResponse {
     )]
     pub created_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9634,7 +9527,7 @@ pub struct GetAlertsResponse {
     )]
     pub email_to: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9655,7 +9548,7 @@ pub struct GetAlertsResponse {
     )]
     pub percentage: i64,
     /**
-    * The type of alert.
+     * The type of alert.
      */
     #[serde(
         default,
@@ -9674,7 +9567,7 @@ pub struct GetAlertsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostAlertsRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9695,7 +9588,7 @@ pub struct PostAlertsRequest {
     )]
     pub percentage: i64,
     /**
-    * The type of alert.
+     * The type of alert.
      */
     #[serde(
         default,
@@ -9714,7 +9607,7 @@ pub struct PostAlertsResponse {
     )]
     pub created_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9723,7 +9616,7 @@ pub struct PostAlertsResponse {
     )]
     pub email_to: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9744,7 +9637,7 @@ pub struct PostAlertsResponse {
     )]
     pub percentage: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9764,13 +9657,14 @@ pub struct PostAlertsResponse {
 /**
  * The type of alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetAlertsAlertResponseType {
     #[serde(rename = "stats_notification")]
     StatsNotification,
     #[serde(rename = "usage_alert")]
     UsageAlert,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9788,11 +9682,6 @@ impl std::fmt::Display for GetAlertsAlertResponseType {
     }
 }
 
-impl Default for GetAlertsAlertResponseType {
-    fn default() -> GetAlertsAlertResponseType {
-        GetAlertsAlertResponseType::Noop
-    }
-}
 impl GetAlertsAlertResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetAlertsAlertResponseType::Noop)
@@ -9808,7 +9697,7 @@ pub struct GetAlertsAlertResponse {
     )]
     pub created_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9817,7 +9706,7 @@ pub struct GetAlertsAlertResponse {
     )]
     pub email_to: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9838,7 +9727,7 @@ pub struct GetAlertsAlertResponse {
     )]
     pub percentage: i64,
     /**
-    * The type of alert.
+     * The type of alert.
      */
     #[serde(
         default,
@@ -9879,7 +9768,7 @@ pub struct PatchAlertsAlertRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserProfileResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9895,7 +9784,7 @@ pub struct GetUserProfileResponse {
     )]
     pub address_2: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9904,7 +9793,7 @@ pub struct GetUserProfileResponse {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9913,7 +9802,7 @@ pub struct GetUserProfileResponse {
     )]
     pub company: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9922,7 +9811,7 @@ pub struct GetUserProfileResponse {
     )]
     pub country: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9931,7 +9820,7 @@ pub struct GetUserProfileResponse {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9940,7 +9829,7 @@ pub struct GetUserProfileResponse {
     )]
     pub last_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9949,7 +9838,7 @@ pub struct GetUserProfileResponse {
     )]
     pub phone: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9958,7 +9847,7 @@ pub struct GetUserProfileResponse {
     )]
     pub state: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9967,7 +9856,7 @@ pub struct GetUserProfileResponse {
     )]
     pub website: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -9980,13 +9869,14 @@ pub struct GetUserProfileResponse {
 /**
  * The type of account for this user.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetUserAccountResponseType {
     #[serde(rename = "free")]
     Free,
     #[serde(rename = "paid")]
     Paid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10004,11 +9894,6 @@ impl std::fmt::Display for GetUserAccountResponseType {
     }
 }
 
-impl Default for GetUserAccountResponseType {
-    fn default() -> GetUserAccountResponseType {
-        GetUserAccountResponseType::Noop
-    }
-}
 impl GetUserAccountResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetUserAccountResponseType::Noop)
@@ -10018,7 +9903,7 @@ impl GetUserAccountResponseType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserAccountResponse {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -10027,7 +9912,7 @@ pub struct GetUserAccountResponse {
     )]
     pub reputation: f64,
     /**
-    * The type of account for this user.
+     * The type of account for this user.
      */
     #[serde(
         default,
@@ -10040,7 +9925,7 @@ pub struct GetUserAccountResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserEmailResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10073,7 +9958,7 @@ pub struct PutUserUsernameRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutUserUsernameResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10086,7 +9971,7 @@ pub struct PutUserUsernameResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserCreditsResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10095,7 +9980,7 @@ pub struct GetUserCreditsResponse {
     )]
     pub last_reset: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10116,7 +10001,7 @@ pub struct GetUserCreditsResponse {
     )]
     pub remain: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10141,7 +10026,7 @@ pub struct GetUserCreditsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutUserPasswordRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10150,7 +10035,7 @@ pub struct PutUserPasswordRequest {
     )]
     pub new_password: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10163,7 +10048,7 @@ pub struct PutUserPasswordRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostSubusersRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10172,7 +10057,7 @@ pub struct PostSubusersRequest {
     )]
     pub email: String,
     /**
-    * The IP addresses that should be assigned to this subuser.
+     * The IP addresses that should be assigned to this subuser.
      */
     #[serde(
         default,
@@ -10181,7 +10066,7 @@ pub struct PostSubusersRequest {
     )]
     pub ips: Vec<std::net::Ipv4Addr>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10190,7 +10075,7 @@ pub struct PostSubusersRequest {
     )]
     pub password: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10209,7 +10094,7 @@ pub struct PatchSubusersSubuserNameRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSubusersReputationsResponse {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -10218,7 +10103,7 @@ pub struct GetSubusersReputationsResponse {
     )]
     pub reputation: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10231,7 +10116,7 @@ pub struct GetSubusersReputationsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutSubusersSubuserNameIpsResponse {
     /**
-    * The IP addresses that should be assigned to this subuser.
+     * The IP addresses that should be assigned to this subuser.
      */
     #[serde(
         default,
@@ -10244,11 +10129,12 @@ pub struct PutSubusersSubuserNameIpsResponse {
 /**
  * The direction you want to sort.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SortByDirection {
     #[serde(rename = "asc")]
     Asc,
     #[serde(rename = "desc")]
+    #[default]
     Desc,
     #[serde(other)]
     FallthroughString,
@@ -10265,16 +10151,10 @@ impl std::fmt::Display for SortByDirection {
     }
 }
 
-impl Default for SortByDirection {
-    fn default() -> SortByDirection {
-        SortByDirection::Desc
-    }
-}
-
 /**
  * The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SortByMetric {
     #[serde(rename = "blocks")]
     Blocks,
@@ -10283,6 +10163,7 @@ pub enum SortByMetric {
     #[serde(rename = "clicks")]
     Clicks,
     #[serde(rename = "delivered")]
+    #[default]
     Delivered,
     #[serde(rename = "opens")]
     Opens,
@@ -10316,18 +10197,12 @@ impl std::fmt::Display for SortByMetric {
     }
 }
 
-impl Default for SortByMetric {
-    fn default() -> SortByMetric {
-        SortByMetric::Delivered
-    }
-}
-
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelLinksRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub default: Option<bool>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10347,7 +10222,7 @@ pub struct PostWhitelabelLinksRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelLinksValidateResponseValidationResultsDomainCname {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10356,7 +10231,7 @@ pub struct PostWhitelabelLinksValidateResponseValidationResultsDomainCname {
     )]
     pub reason: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10369,11 +10244,11 @@ pub struct PostWhitelabelLinksValidateResponseValidationResultsDomainCname {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ValidationResults {
     /**
-    * The DNS record generated for the sending domain used for this branded link.
+     * The DNS record generated for the sending domain used for this branded link.
      */
     pub domain_cname: PostWhitelabelLinksValidateResponseValidationResultsDomainCname,
     /**
-    * The individual validation results for each of the DNS records associated with this branded link.
+     * The individual validation results for each of the DNS records associated with this branded link.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner_cname: Option<PostWhitelabelLinksValidateResponseValidationResultsDomainCname>,
@@ -10388,7 +10263,7 @@ pub struct PostWhitelabelLinksValidateResponse {
     )]
     pub id: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10396,7 +10271,7 @@ pub struct PostWhitelabelLinksValidateResponse {
     )]
     pub valid: bool,
     /**
-    * The individual validation results for each of the DNS records associated with this branded link.
+     * The individual validation results for each of the DNS records associated with this branded link.
      */
     pub validation_results: ValidationResults,
 }
@@ -10404,7 +10279,7 @@ pub struct PostWhitelabelLinksValidateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelLinksValidateResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10417,7 +10292,7 @@ pub struct PostWhitelabelLinksValidateResponseErrors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSegmentsResponse {
     /**
-    * The reasons why the validation failed.
+     * The reasons why the validation failed.
      */
     #[serde(
         default,
@@ -10458,7 +10333,7 @@ pub struct PostIpsWarmupResponseErrors {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<serde_json::Value>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10471,7 +10346,7 @@ pub struct PostIpsWarmupResponseErrors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostIpsWarmupResponse {
     /**
-    * The errors that were encountered.
+     * The errors that were encountered.
      */
     #[serde(
         default,
@@ -10484,7 +10359,7 @@ pub struct PostIpsWarmupResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelIpsRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10493,7 +10368,7 @@ pub struct PostWhitelabelIpsRequest {
     )]
     pub domain: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10513,7 +10388,7 @@ pub struct PostWhitelabelIpsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelIpsValidateResponseValidationResults {
     /**
-    * The specific results of the validation.
+     * The specific results of the validation.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub a_record: Option<PostWhitelabelLinksValidateResponseValidationResultsDomainCname>,
@@ -10528,7 +10403,7 @@ pub struct PostWhitelabelIpsValidateResponse {
     )]
     pub id: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10536,7 +10411,7 @@ pub struct PostWhitelabelIpsValidateResponse {
     )]
     pub valid: bool,
     /**
-    * The specific results of the validation.
+     * The specific results of the validation.
      */
     pub validation_results: PostWhitelabelIpsValidateResponseValidationResults,
 }
@@ -10544,7 +10419,7 @@ pub struct PostWhitelabelIpsValidateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostValidationsEmailRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10563,7 +10438,7 @@ pub struct PostValidationsEmailRequest {
 /**
  * A generic classification of whether or not the email address is valid.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Verdict {
     #[serde(rename = "Invalid")]
     Invalid,
@@ -10572,6 +10447,7 @@ pub enum Verdict {
     #[serde(rename = "Valid")]
     Valid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10590,11 +10466,6 @@ impl std::fmt::Display for Verdict {
     }
 }
 
-impl Default for Verdict {
-    fn default() -> Verdict {
-        Verdict::Noop
-    }
-}
 impl Verdict {
     pub fn is_noop(&self) -> bool {
         matches!(self, Verdict::Noop)
@@ -10605,7 +10476,7 @@ impl Verdict {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Domain {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10613,7 +10484,7 @@ pub struct Domain {
     )]
     pub has_mx_or_a_record: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10621,7 +10492,7 @@ pub struct Domain {
     )]
     pub has_valid_address_syntax: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10634,7 +10505,7 @@ pub struct Domain {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LocalPart {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10647,7 +10518,7 @@ pub struct LocalPart {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Additional {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10655,7 +10526,7 @@ pub struct Additional {
     )]
     pub has_known_bounces: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10668,15 +10539,15 @@ pub struct Additional {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Checks {
     /**
-    * Additional checks on the email address.
+     * Additional checks on the email address.
      */
     pub additional: Additional,
     /**
-    * Checks on the domain portion of the email address.
+     * Checks on the domain portion of the email address.
      */
     pub domain: Domain,
     /**
-    * Checks on the local part of the email address.
+     * Checks on the local part of the email address.
      */
     pub local_part: LocalPart,
 }
@@ -10684,11 +10555,11 @@ pub struct Checks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostValidationsEmailResponseResult {
     /**
-    * Granular checks for email address validity.
+     * Granular checks for email address validity.
      */
     pub checks: Checks,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10697,7 +10568,7 @@ pub struct PostValidationsEmailResponseResult {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10706,7 +10577,7 @@ pub struct PostValidationsEmailResponseResult {
     )]
     pub host: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10715,7 +10586,7 @@ pub struct PostValidationsEmailResponseResult {
     )]
     pub ip_address: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10724,7 +10595,7 @@ pub struct PostValidationsEmailResponseResult {
     )]
     pub local: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -10733,7 +10604,7 @@ pub struct PostValidationsEmailResponseResult {
     )]
     pub score: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10742,7 +10613,7 @@ pub struct PostValidationsEmailResponseResult {
     )]
     pub source: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10751,7 +10622,7 @@ pub struct PostValidationsEmailResponseResult {
     )]
     pub suggestion: String,
     /**
-    * A generic classification of whether or not the email address is valid.
+     * A generic classification of whether or not the email address is valid.
      */
     #[serde(default, skip_serializing_if = "Verdict::is_noop")]
     pub verdict: Verdict,
@@ -10771,7 +10642,7 @@ pub struct PostWhitelabelDnsEmailRequest {
     )]
     pub domain_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10796,7 +10667,7 @@ pub struct PostWhitelabelDnsEmailRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelDnsEmailResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10805,7 +10676,7 @@ pub struct PostWhitelabelDnsEmailResponseErrors {
     )]
     pub error: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10824,7 +10695,7 @@ pub struct PostWhitelabelDnsEmailResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetIpsAssignedResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10833,7 +10704,7 @@ pub struct GetIpsAssignedResponse {
     )]
     pub ip: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -10848,7 +10719,7 @@ pub struct GetIpsAssignedResponse {
     )]
     pub start_date: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10860,7 +10731,7 @@ pub struct GetIpsAssignedResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetIpsPoolsPoolNameResponse {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -10869,7 +10740,7 @@ pub struct GetIpsPoolsPoolNameResponse {
     )]
     pub ips: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10892,7 +10763,7 @@ pub struct PutIpsPoolsPoolNameRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteIpsPoolsPoolNameResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10911,7 +10782,7 @@ pub struct GetIpsResponse {
     )]
     pub assigned_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10920,7 +10791,7 @@ pub struct GetIpsResponse {
     )]
     pub ip: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -10929,7 +10800,7 @@ pub struct GetIpsResponse {
     )]
     pub pools: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -10938,7 +10809,7 @@ pub struct GetIpsResponse {
     )]
     pub rdns: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -10947,7 +10818,7 @@ pub struct GetIpsResponse {
     )]
     pub start_date: f64,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -10956,7 +10827,7 @@ pub struct GetIpsResponse {
     )]
     pub subusers: Vec<String>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10964,7 +10835,7 @@ pub struct GetIpsResponse {
     )]
     pub warmup: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -10994,7 +10865,7 @@ pub struct PostIpsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostIpsResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11003,7 +10874,7 @@ pub struct PostIpsResponse {
     )]
     pub ip: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11016,7 +10887,7 @@ pub struct PostIpsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostIpsResponseData {
     /**
-    * List of IP objects.
+     * List of IP objects.
      */
     #[serde(
         default,
@@ -11031,7 +10902,7 @@ pub struct PostIpsResponseData {
     )]
     pub remaining_ips: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -11043,7 +10914,7 @@ pub struct PostIpsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetIpsRemainingResponseResults {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11052,7 +10923,7 @@ pub struct GetIpsRemainingResponseResults {
     )]
     pub period: String,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -11081,7 +10952,7 @@ pub struct GetIpsRemainingResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetIpsIpAddressResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11090,7 +10961,7 @@ pub struct GetIpsIpAddressResponse {
     )]
     pub ip: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11099,7 +10970,7 @@ pub struct GetIpsIpAddressResponse {
     )]
     pub pools: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11114,7 +10985,7 @@ pub struct GetIpsIpAddressResponse {
     )]
     pub start_date: i64,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11123,7 +10994,7 @@ pub struct GetIpsIpAddressResponse {
     )]
     pub subusers: Vec<String>,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -11131,7 +11002,7 @@ pub struct GetIpsIpAddressResponse {
     )]
     pub warmup: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -11155,7 +11026,7 @@ pub struct PostWhitelabelDomainsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub default: Option<bool>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11195,7 +11066,7 @@ pub struct PatchWhitelabelDomainsDomainRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MailCname {
     /**
-    * The CNAME record for the authenticated domain.
+     * The CNAME record for the authenticated domain.
      */
     #[serde(
         default,
@@ -11204,7 +11075,7 @@ pub struct MailCname {
     )]
     pub reason: String,
     /**
-    * The CNAME record for the authenticated domain.
+     * The CNAME record for the authenticated domain.
      */
     #[serde(
         default,
@@ -11217,7 +11088,7 @@ pub struct MailCname {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Dkim1 {
     /**
-    * A DNS record for this authenticated domain.
+     * A DNS record for this authenticated domain.
      */
     #[serde(
         default,
@@ -11226,7 +11097,7 @@ pub struct Dkim1 {
     )]
     pub reason: String,
     /**
-    * A DNS record for this authenticated domain.
+     * A DNS record for this authenticated domain.
      */
     #[serde(
         default,
@@ -11239,7 +11110,7 @@ pub struct Dkim1 {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Spf {
     /**
-    * The SPF record for the authenticated domain.
+     * The SPF record for the authenticated domain.
      */
     #[serde(
         default,
@@ -11248,7 +11119,7 @@ pub struct Spf {
     )]
     pub reason: String,
     /**
-    * The SPF record for the authenticated domain.
+     * The SPF record for the authenticated domain.
      */
     #[serde(
         default,
@@ -11261,22 +11132,22 @@ pub struct Spf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelDomainsValidateResponseValidationResults {
     /**
-    * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
+     * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "dkim1")]
     pub dkim_1: Option<Dkim1>,
     /**
-    * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
+     * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "dkim2")]
     pub dkim_2: Option<Dkim1>,
     /**
-    * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
+     * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mail_cname: Option<MailCname>,
     /**
-    * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
+     * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spf: Option<Spf>,
@@ -11291,7 +11162,7 @@ pub struct PostWhitelabelDomainsValidateResponse {
     )]
     pub id: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -11299,7 +11170,7 @@ pub struct PostWhitelabelDomainsValidateResponse {
     )]
     pub valid: bool,
     /**
-    * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
+     * The individual DNS records that are checked when validating, including the reason for any invalid DNS records.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub validation_results: Option<PostWhitelabelDomainsValidateResponseValidationResults>,
@@ -11308,7 +11179,7 @@ pub struct PostWhitelabelDomainsValidateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostWhitelabelDomainsValidateResponseData {
     /**
-    * The reasons why the validation failed.
+     * The reasons why the validation failed.
      */
     #[serde(
         default,
@@ -11321,7 +11192,7 @@ pub struct PostWhitelabelDomainsValidateResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetVerifiedSendersDomainsResponseResults {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11330,7 +11201,7 @@ pub struct GetVerifiedSendersDomainsResponseResults {
     )]
     pub hard_failures: Vec<String>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11348,7 +11219,7 @@ pub struct GetVerifiedSendersDomainsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetVerifiedSendersStepsCompletedResponseResults {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -11356,7 +11227,7 @@ pub struct GetVerifiedSendersStepsCompletedResponseResults {
     )]
     pub domain_verified: bool,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -11384,7 +11255,7 @@ pub struct GetVerifiedSendersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostVerifiedSendersResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11393,7 +11264,7 @@ pub struct PostVerifiedSendersResponseErrors {
     )]
     pub error_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11402,7 +11273,7 @@ pub struct PostVerifiedSendersResponseErrors {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11425,7 +11296,7 @@ pub struct PostVerifiedSendersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetVerifiedSendersVerifyTokenResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11434,7 +11305,7 @@ pub struct GetVerifiedSendersVerifyTokenResponseErrors {
     )]
     pub error_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11543,7 +11414,7 @@ pub struct PostMcListsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutMcContactsRequest {
     /**
-    * One or more contacts objects that you intend to upsert. The available fields for a contact, including the required `email` field are described below.
+     * One or more contacts objects that you intend to upsert. The available fields for a contact, including the required `email` field are described below.
      */
     #[serde(
         default,
@@ -11552,7 +11423,7 @@ pub struct PutMcContactsRequest {
     )]
     pub contacts: Vec<ContactRequest>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11565,7 +11436,7 @@ pub struct PutMcContactsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutMcContactsResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11579,7 +11450,7 @@ pub struct PutMcContactsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteMcContactsResponse {
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     pub job_id: Help,
 }
@@ -11598,12 +11469,12 @@ pub struct DeleteMcContactsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillableBreakdown {
     /**
-    * `billable_breakdown` will only appear to the parent user in an account with subusers.
+     * `billable_breakdown` will only appear to the parent user in an account with subusers.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub breakdown: Option<Help>,
     /**
-    * `billable_breakdown` will only appear to the parent user in an account with subusers.
+     * `billable_breakdown` will only appear to the parent user in an account with subusers.
      */
     #[serde(
         default,
@@ -11616,7 +11487,7 @@ pub struct BillableBreakdown {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMcContactsCountResponse {
     /**
-    * `billable_breakdown` will only appear to the parent user in an account with subusers.
+     * `billable_breakdown` will only appear to the parent user in an account with subusers.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billable_breakdown: Option<BillableBreakdown>,
@@ -11637,7 +11508,7 @@ pub struct GetMcContactsCountResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Lists {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11647,7 +11518,7 @@ pub struct Lists {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11661,7 +11532,7 @@ pub struct Lists {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMarketingContactsExportsResponseResultMetadata {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11670,7 +11541,7 @@ pub struct GetMarketingContactsExportsResponseResultMetadata {
     )]
     pub next: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11679,7 +11550,7 @@ pub struct GetMarketingContactsExportsResponseResultMetadata {
     )]
     pub prev: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11695,7 +11566,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<GetMarketingContactsExportsResponseResultMetadata>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11704,7 +11575,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     )]
     pub completed_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11713,7 +11584,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     )]
     pub created_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11722,7 +11593,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     )]
     pub expires_at: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11731,7 +11602,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     )]
     pub export_type: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11752,7 +11623,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     )]
     pub segments: Vec<Lists>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11761,7 +11632,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     )]
     pub status: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11770,7 +11641,7 @@ pub struct GetMarketingContactsExportsResponseResult {
     )]
     pub urls: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11795,7 +11666,7 @@ pub struct GetMarketingContactsExportsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMarketingContactsExportsResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11804,7 +11675,7 @@ pub struct GetMarketingContactsExportsResponseErrors {
     )]
     pub error_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11827,7 +11698,7 @@ pub struct GetMarketingContactsExportsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Notifications {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -11839,9 +11710,10 @@ pub struct Notifications {
 /**
  * File type for export file. Choose from `json` or `csv`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FileType {
     #[serde(rename = "csv")]
+    #[default]
     Csv,
     #[serde(rename = "json")]
     Json,
@@ -11860,21 +11732,15 @@ impl std::fmt::Display for FileType {
     }
 }
 
-impl Default for FileType {
-    fn default() -> FileType {
-        FileType::Csv
-    }
-}
-
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMcContactsExportsRequest {
     /**
-    * File type for export file. Choose from `json` or `csv`.
+     * File type for export file. Choose from `json` or `csv`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub file_type: Option<FileType>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11891,7 +11757,7 @@ pub struct PostMcContactsExportsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub notifications: Option<Notifications>,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -11906,7 +11772,7 @@ pub struct PostMcContactsExportsResponse {
     #[serde(rename = "_metadata")]
     pub metadata: Metadata,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11919,7 +11785,7 @@ pub struct PostMcContactsExportsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMcContactsSearchRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -11934,7 +11800,7 @@ pub struct PostMcContactsSearchResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<SelfMetadata>,
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -11953,11 +11819,12 @@ pub struct PostMcContactsSearchResponse {
 /**
  * Upload file type.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PutMcContactsImportsRequestFileType {
     #[serde(rename = "csv")]
     Csv,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11974,11 +11841,6 @@ impl std::fmt::Display for PutMcContactsImportsRequestFileType {
     }
 }
 
-impl Default for PutMcContactsImportsRequestFileType {
-    fn default() -> PutMcContactsImportsRequestFileType {
-        PutMcContactsImportsRequestFileType::Noop
-    }
-}
 impl PutMcContactsImportsRequestFileType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PutMcContactsImportsRequestFileType::Noop)
@@ -11993,7 +11855,7 @@ impl PutMcContactsImportsRequestFileType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FieldMappingsAnyOf {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(flatten)]
     pub string: String,
@@ -12004,7 +11866,7 @@ pub struct FieldMappingsAnyOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutMcContactsImportsRequest {
     /**
-    * Import file header to reserved/custom field mapping.
+     * Import file header to reserved/custom field mapping.
      */
     #[serde(
         default,
@@ -12013,7 +11875,7 @@ pub struct PutMcContactsImportsRequest {
     )]
     pub field_mappings: Vec<FieldMappingsAnyOf>,
     /**
-    * Upload file type.
+     * Upload file type.
      */
     #[serde(
         default,
@@ -12021,7 +11883,7 @@ pub struct PutMcContactsImportsRequest {
     )]
     pub file_type: PutMcContactsImportsRequestFileType,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -12034,7 +11896,7 @@ pub struct PutMcContactsImportsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UploadHeaders {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12043,7 +11905,7 @@ pub struct UploadHeaders {
     )]
     pub header: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12056,7 +11918,7 @@ pub struct UploadHeaders {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutMcContactsImportsResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12065,7 +11927,7 @@ pub struct PutMcContactsImportsResponse {
     )]
     pub job_id: String,
     /**
-    * A list of headers that must be included in PUT request.
+     * A list of headers that must be included in PUT request.
      */
     #[serde(
         default,
@@ -12074,7 +11936,7 @@ pub struct PutMcContactsImportsResponse {
     )]
     pub upload_headers: Vec<UploadHeaders>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12104,7 +11966,7 @@ pub struct GetMarketingContactsImportsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingContactsBatchRequest {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -12128,7 +11990,7 @@ pub struct PostMarketingContactsBatchResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingContactsSearchEmailsRequest {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -12141,7 +12003,7 @@ pub struct PostMarketingContactsSearchEmailsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingContactsSearchEmailsResponse {
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub result: Option<Help>,
@@ -12150,7 +12012,7 @@ pub struct PostMarketingContactsSearchEmailsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSendersRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12165,7 +12027,7 @@ pub struct PostMarketingSendersRequest {
     )]
     pub address_2: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12174,7 +12036,7 @@ pub struct PostMarketingSendersRequest {
     )]
     pub city: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12184,7 +12046,7 @@ pub struct PostMarketingSendersRequest {
     pub country: String,
     pub from: From,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12259,7 +12121,7 @@ pub struct GetMcListsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteListsResponse {
     /**
-    * The delete has been accepted and is processing.
+     * The delete has been accepted and is processing.
      */
     #[serde(
         default,
@@ -12283,7 +12145,7 @@ pub struct PatchMcListsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteMcListsContactsResponse {
     /**
-    * The removal is accepted and processing.
+     * The removal is accepted and processing.
      */
     #[serde(
         default,
@@ -12316,7 +12178,7 @@ pub struct PostMcFieldDefinitionsRequest {
     #[serde(default, skip_serializing_if = "FieldType::is_noop")]
     pub field_type: FieldType,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12358,7 +12220,7 @@ pub struct GetMarketingSegmentsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSegmentsRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12395,7 +12257,7 @@ pub struct PostMarketingSegmentsDeleteRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Resources {
     /**
-    * resources in which segment is being used
+     * resources in which segment is being used
      */
     #[serde(
         default,
@@ -12404,7 +12266,7 @@ pub struct Resources {
     )]
     pub ids: Vec<String>,
     /**
-    * resources in which segment is being used
+     * resources in which segment is being used
      */
     #[serde(
         default,
@@ -12418,7 +12280,7 @@ pub struct Resources {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSegmentsDeleteResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12427,7 +12289,7 @@ pub struct PostMarketingSegmentsDeleteResponseErrors {
     )]
     pub error: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12436,7 +12298,7 @@ pub struct PostMarketingSegmentsDeleteResponseErrors {
     )]
     pub id: String,
     /**
-    * resources in which segment is being used
+     * resources in which segment is being used
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resources: Option<Resources>,
@@ -12477,7 +12339,7 @@ pub struct PostMarketingSinglesendsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSinglesendsRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12490,11 +12352,12 @@ pub struct PostMarketingSinglesendsRequest {
 /**
  * This is the ISO 8601 time at which to send the Single Send; must be in future, or the string "now"
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SendAt {
     #[serde(rename = "now")]
     Now,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12511,11 +12374,6 @@ impl std::fmt::Display for SendAt {
     }
 }
 
-impl Default for SendAt {
-    fn default() -> SendAt {
-        SendAt::Noop
-    }
-}
 impl SendAt {
     pub fn is_noop(&self) -> bool {
         matches!(self, SendAt::Noop)
@@ -12525,17 +12383,18 @@ impl SendAt {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutMarketingSinglesendsScheduleRequest {
     /**
-    * This is the ISO 8601 time at which to send the Single Send; must be in future, or the string "now"
+     * This is the ISO 8601 time at which to send the Single Send; must be in future, or the string "now"
      */
     #[serde(default, skip_serializing_if = "SendAt::is_noop")]
     pub send_at: SendAt,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PutMarketingSinglesendsScheduleResponseStatus {
     #[serde(rename = "scheduled")]
     Scheduled,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12552,11 +12411,6 @@ impl std::fmt::Display for PutMarketingSinglesendsScheduleResponseStatus {
     }
 }
 
-impl Default for PutMarketingSinglesendsScheduleResponseStatus {
-    fn default() -> PutMarketingSinglesendsScheduleResponseStatus {
-        PutMarketingSinglesendsScheduleResponseStatus::Noop
-    }
-}
 impl PutMarketingSinglesendsScheduleResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PutMarketingSinglesendsScheduleResponseStatus::Noop)
@@ -12578,7 +12432,7 @@ pub struct PutMarketingSinglesendsScheduleResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMarketingSinglesendsCategoriesResponse {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -12597,7 +12451,7 @@ pub struct PostMarketingTestSendEmailRequest {
     )]
     pub custom_unsubscribe_url: String,
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -12624,7 +12478,7 @@ pub struct PostMarketingTestSendEmailRequest {
     )]
     pub suppression_group_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12653,12 +12507,12 @@ pub struct GetSendersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostSendersRequest {
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub from: Option<Help>,
     /**
-    * helper text or docs for troubleshooting
+     * helper text or docs for troubleshooting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reply_to: Option<Help>,
@@ -12696,7 +12550,7 @@ pub struct PatchContactdbListsListResponse {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12741,7 +12595,7 @@ pub struct PostContactdbRecipientsRequest {
     )]
     pub age: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12750,7 +12604,7 @@ pub struct PostContactdbRecipientsRequest {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12759,7 +12613,7 @@ pub struct PostContactdbRecipientsRequest {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12772,7 +12626,7 @@ pub struct PostContactdbRecipientsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchContactdbRecipientsRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12781,7 +12635,7 @@ pub struct PatchContactdbRecipientsRequest {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12790,7 +12644,7 @@ pub struct PatchContactdbRecipientsRequest {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12803,7 +12657,7 @@ pub struct PatchContactdbRecipientsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetContactdbStatusResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12812,7 +12666,7 @@ pub struct GetContactdbStatusResponse {
     )]
     pub id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12845,7 +12699,7 @@ pub struct GetContactdbRecipientsRecipientListsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostContactdbRecipientsSearchRequest {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -12869,7 +12723,7 @@ pub struct PostContactdbRecipientsSearchRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ValueAnyOf {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(flatten)]
     pub string: String,
@@ -12886,7 +12740,7 @@ pub struct PostContactdbRecipientsSearchResponseCustomFields {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12895,7 +12749,7 @@ pub struct PostContactdbRecipientsSearchResponseCustomFields {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12923,7 +12777,7 @@ pub struct PostContactdbRecipientsSearchResponse {
     )]
     pub custom_fields: Vec<PostContactdbRecipientsSearchResponseCustomFields>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12932,7 +12786,7 @@ pub struct PostContactdbRecipientsSearchResponse {
     )]
     pub email: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -12941,7 +12795,7 @@ pub struct PostContactdbRecipientsSearchResponse {
     )]
     pub first_name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13021,7 +12875,7 @@ pub struct PostContactdbCustomFieldsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReservedFields {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13030,7 +12884,7 @@ pub struct ReservedFields {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13076,7 +12930,7 @@ pub struct PatchContactdbSegmentsSegmentRequest {
     )]
     pub list_id: f64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13099,7 +12953,7 @@ pub struct ListRecipientsOnASegmentResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCategoriesResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13132,7 +12986,7 @@ pub struct GetCampaignsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsCampaignResponse {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -13141,7 +12995,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub categories: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13150,7 +13004,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub custom_unsubscribe_url: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13165,7 +13019,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13174,7 +13028,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub ip_pool: String,
     /**
-    * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
+     * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
     #[serde(
         default,
@@ -13183,7 +13037,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub list_ids: Vec<i64>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13192,7 +13046,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub plain_content: String,
     /**
-    * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
+     * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
     #[serde(
         default,
@@ -13207,7 +13061,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub sender_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13216,7 +13070,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub status: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13231,7 +13085,7 @@ pub struct GetCampaignsCampaignResponse {
     )]
     pub suppression_group_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13244,7 +13098,7 @@ pub struct GetCampaignsCampaignResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateACampaignRequest {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -13253,7 +13107,7 @@ pub struct UpdateACampaignRequest {
     )]
     pub categories: Vec<String>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13262,7 +13116,7 @@ pub struct UpdateACampaignRequest {
     )]
     pub html_content: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13271,7 +13125,7 @@ pub struct UpdateACampaignRequest {
     )]
     pub plain_content: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13280,7 +13134,7 @@ pub struct UpdateACampaignRequest {
     )]
     pub subject: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13299,7 +13153,7 @@ pub struct SendACampaignResponse {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13322,11 +13176,12 @@ pub struct ScheduleACampaignRequest {
 /**
  * The status of your campaign.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ScheduleACampaignResponseStatus {
     #[serde(rename = "Scheduled")]
     Scheduled,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13343,11 +13198,6 @@ impl std::fmt::Display for ScheduleACampaignResponseStatus {
     }
 }
 
-impl Default for ScheduleACampaignResponseStatus {
-    fn default() -> ScheduleACampaignResponseStatus {
-        ScheduleACampaignResponseStatus::Noop
-    }
-}
 impl ScheduleACampaignResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ScheduleACampaignResponseStatus::Noop)
@@ -13369,7 +13219,7 @@ pub struct ScheduleACampaignResponse {
     )]
     pub send_at: i64,
     /**
-    * The status of your campaign.
+     * The status of your campaign.
      */
     #[serde(
         default,
@@ -13393,7 +13243,7 @@ pub struct UpdateAScheduledCampaignResponse {
     )]
     pub send_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13406,7 +13256,7 @@ pub struct UpdateAScheduledCampaignResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendATestCampaignRequest {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13419,11 +13269,12 @@ pub struct SendATestCampaignRequest {
 /**
  * Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Generations {
     #[serde(rename = "dynamic")]
     Dynamic,
     #[serde(rename = "legacy")]
+    #[default]
     Legacy,
     #[serde(rename = "legacy,dynamic")]
     LegacyDynamic,
@@ -13443,18 +13294,12 @@ impl std::fmt::Display for Generations {
     }
 }
 
-impl Default for Generations {
-    fn default() -> Generations {
-        Generations::Legacy
-    }
-}
-
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTemplatesResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<MetadataType>,
     /**
-    *
+     *
      */
     #[serde(
         default,
@@ -13467,7 +13312,7 @@ pub struct GetTemplatesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTemplatesResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13476,7 +13321,7 @@ pub struct GetTemplatesResponseErrors {
     )]
     pub error_id: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13501,7 +13346,7 @@ pub struct PostTemplatesRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub generation: Option<Generation>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13534,7 +13379,7 @@ pub struct PatchTemplatesTemplateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserWebhooksParseSettingsResponse {
     /**
-    * The list of your current inbound parse settings.
+     * The list of your current inbound parse settings.
      */
     #[serde(
         default,
@@ -13547,7 +13392,7 @@ pub struct GetUserWebhooksParseSettingsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserWebhooksParseStatsResponseMetrics {
     /**
-    * The number of errors found while adding recipients.
+     * The number of errors found while adding recipients.
      */
     #[serde(
         default,
@@ -13566,7 +13411,7 @@ pub struct GetUserWebhooksParseStatsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserWebhooksParseStatsResponseData {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13575,7 +13420,7 @@ pub struct GetUserWebhooksParseStatsResponseData {
     )]
     pub date: String,
     /**
-    * The Parse Webhook usage statistics.
+     * The Parse Webhook usage statistics.
      */
     #[serde(
         default,
@@ -13588,7 +13433,7 @@ pub struct GetUserWebhooksParseStatsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserWebhooksEventSettingsSignedResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13601,7 +13446,7 @@ pub struct GetUserWebhooksEventSettingsSignedResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTrackingSettingsOpenResponse {
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -13613,7 +13458,7 @@ pub struct GetTrackingSettingsOpenResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchUserWebhooksEventSettingsSignedResponseErrors {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13622,7 +13467,7 @@ pub struct PatchUserWebhooksEventSettingsSignedResponseErrors {
     )]
     pub field: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13680,11 +13525,12 @@ pub struct GetMessagesResponse {
     pub messages: Vec<Messages>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PostMessagesDownloadResponseStatus {
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13701,11 +13547,6 @@ impl std::fmt::Display for PostMessagesDownloadResponseStatus {
     }
 }
 
-impl Default for PostMessagesDownloadResponseStatus {
-    fn default() -> PostMessagesDownloadResponseStatus {
-        PostMessagesDownloadResponseStatus::Noop
-    }
-}
 impl PostMessagesDownloadResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PostMessagesDownloadResponseStatus::Noop)
@@ -13715,7 +13556,7 @@ impl PostMessagesDownloadResponseStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMessagesDownloadResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13730,7 +13571,7 @@ pub struct PostMessagesDownloadResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMessagesDownloadResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13739,7 +13580,7 @@ pub struct GetMessagesDownloadResponse {
     )]
     pub csv: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13752,7 +13593,7 @@ pub struct GetMessagesDownloadResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTrackingSettingsResponseResult {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13761,7 +13602,7 @@ pub struct GetTrackingSettingsResponseResult {
     )]
     pub description: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -13769,7 +13610,7 @@ pub struct GetTrackingSettingsResponseResult {
     )]
     pub enabled: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13778,7 +13619,7 @@ pub struct GetTrackingSettingsResponseResult {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13791,7 +13632,7 @@ pub struct GetTrackingSettingsResponseResult {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTrackingSettingsResponse {
     /**
-    * The list of all tracking settings.
+     * The list of all tracking settings.
      */
     #[serde(
         default,
@@ -13816,7 +13657,7 @@ pub struct GetStatsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetStatsResponseData {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13825,7 +13666,7 @@ pub struct GetStatsResponseData {
     )]
     pub date: String,
     /**
-    * The individual email activity stats.
+     * The individual email activity stats.
      */
     #[serde(
         default,
@@ -13838,13 +13679,14 @@ pub struct GetStatsResponseData {
 /**
  * The country you would like to see statistics for. Currently only supported for US and CA.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Country {
     #[serde(rename = "CA")]
     Ca,
     #[serde(rename = "US")]
     Us,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13862,11 +13704,6 @@ impl std::fmt::Display for Country {
     }
 }
 
-impl Default for Country {
-    fn default() -> Country {
-        Country::Noop
-    }
-}
 impl Country {
     pub fn is_noop(&self) -> bool {
         matches!(self, Country::Noop)
@@ -13878,7 +13715,7 @@ pub struct GetGeoStatsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<AdvancedStatsClicksOpensAllOf>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13887,7 +13724,7 @@ pub struct GetGeoStatsResponse {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13901,7 +13738,7 @@ pub struct GetGeoStatsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGeoStatsResponseData {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13910,7 +13747,7 @@ pub struct GetGeoStatsResponseData {
     )]
     pub date: String,
     /**
-    * The list of statistics.
+     * The list of statistics.
      */
     #[serde(
         default,
@@ -13923,12 +13760,12 @@ pub struct GetGeoStatsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetDevicesStatsResponse {
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<AdvancedStatsOpens>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13937,7 +13774,7 @@ pub struct GetDevicesStatsResponse {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13951,7 +13788,7 @@ pub struct GetDevicesStatsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetClientsStatsResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -13960,7 +13797,7 @@ pub struct GetClientsStatsResponse {
     )]
     pub date: String,
     /**
-    * The list of statistics.
+     * The list of statistics.
      */
     #[serde(
         default,
@@ -13973,7 +13810,7 @@ pub struct GetClientsStatsResponse {
 /**
  * Specifies the type of client to retrieve stats for. Must be either "phone", "tablet", "webmail", or "desktop".
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ClientType {
     #[serde(rename = "desktop")]
     Desktop,
@@ -13984,6 +13821,7 @@ pub enum ClientType {
     #[serde(rename = "webmail")]
     Webmail,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14003,11 +13841,6 @@ impl std::fmt::Display for ClientType {
     }
 }
 
-impl Default for ClientType {
-    fn default() -> ClientType {
-        ClientType::Noop
-    }
-}
 impl ClientType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ClientType::Noop)
@@ -14019,7 +13852,7 @@ pub struct GetMailboxProvidersStatsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<AdvancedStatsMailboxProviderAllOf>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14028,7 +13861,7 @@ pub struct GetMailboxProvidersStatsResponse {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14042,7 +13875,7 @@ pub struct GetMailboxProvidersStatsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMailboxProvidersStatsResponseData {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14051,7 +13884,7 @@ pub struct GetMailboxProvidersStatsResponseData {
     )]
     pub date: String,
     /**
-    * The list of statistics.
+     * The list of statistics.
      */
     #[serde(
         default,
@@ -14064,12 +13897,12 @@ pub struct GetMailboxProvidersStatsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetBrowsersStatsResponse {
     /**
-    * The individual events and their stats.
+     * The individual events and their stats.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<AdvancedStatsClicks>,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14078,7 +13911,7 @@ pub struct GetBrowsersStatsResponse {
     )]
     pub name: String,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14092,7 +13925,7 @@ pub struct GetBrowsersStatsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetBrowsersStatsResponseData {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14101,7 +13934,7 @@ pub struct GetBrowsersStatsResponseData {
     )]
     pub date: String,
     /**
-    * The list of statistics.
+     * The list of statistics.
      */
     #[serde(
         default,
@@ -14144,7 +13977,7 @@ pub struct GetSuppressionUnsubscribesResponse {
     )]
     pub created: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14157,7 +13990,7 @@ pub struct GetSuppressionUnsubscribesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RetrieveAGlobalSuppressionResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14170,7 +14003,7 @@ pub struct RetrieveAGlobalSuppressionResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostAsmGroupsResponse {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14185,7 +14018,7 @@ pub struct PostAsmGroupsResponse {
     )]
     pub id: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -14193,7 +14026,7 @@ pub struct PostAsmGroupsResponse {
     )]
     pub is_default: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14212,7 +14045,7 @@ pub struct GetAsmGroupsGroupResponse {
     )]
     pub id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14244,7 +14077,7 @@ pub struct GetAsmGroupsGroupResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostAsmGroupsGroupSuppressionsResponse {
     /**
-    * The recipient IDs of the recipients that already existed from this request.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
@@ -14263,7 +14096,7 @@ pub struct GetAsmSuppressionsResponse {
     )]
     pub created_at: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14278,7 +14111,7 @@ pub struct GetAsmSuppressionsResponse {
     )]
     pub group_id: i64,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14291,7 +14124,7 @@ pub struct GetAsmSuppressionsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Suppressions {
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14306,7 +14139,7 @@ pub struct Suppressions {
     )]
     pub id: i64,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -14314,7 +14147,7 @@ pub struct Suppressions {
     )]
     pub is_default: bool,
     /**
-    * The license key provided with your New Relic account.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
@@ -14323,7 +14156,7 @@ pub struct Suppressions {
     )]
     pub name: String,
     /**
-    * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     #[serde(
         default,
@@ -14335,7 +14168,7 @@ pub struct Suppressions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAsmSuppressionsEmailResponse {
     /**
-    * The array of suppression groups.
+     * The array of suppression groups.
      */
     #[serde(
         default,

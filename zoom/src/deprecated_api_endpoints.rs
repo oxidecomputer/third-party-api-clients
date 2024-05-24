@@ -37,7 +37,7 @@ impl DeprecatedApiEndpoints {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/files",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
             ),
             None,
         );
@@ -77,7 +77,7 @@ impl DeprecatedApiEndpoints {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/files",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );

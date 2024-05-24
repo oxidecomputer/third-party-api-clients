@@ -197,7 +197,7 @@ impl Invoices {
      * <p>This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in all pending invoice items on that customer, including prorations. The invoice remains a draft until you <a href="#finalize_invoice">finalize</a> the invoice, which allows you to <a href="#pay_invoice">pay</a> or <a href="#send_invoice">send</a> the invoice to your customers.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Invoice>> {
-        let url = self.client.url(&"/v1/invoices".to_string(), None);
+        let url = self.client.url("/v1/invoices", None);
         self.client
             .post(
                 &url,
@@ -782,7 +782,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -817,7 +817,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -847,7 +847,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -877,7 +877,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/finalize",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -925,7 +925,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/lines?{}",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
                 query_
             ),
             None,
@@ -962,7 +962,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/lines",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -1053,7 +1053,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/mark_uncollectible",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -1083,7 +1083,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/pay",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -1115,7 +1115,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/send",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );
@@ -1145,7 +1145,7 @@ impl Invoices {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/void",
-                crate::progenitor_support::encode_path(&invoice.to_string()),
+                crate::progenitor_support::encode_path(invoice),
             ),
             None,
         );

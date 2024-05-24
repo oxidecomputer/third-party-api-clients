@@ -261,7 +261,7 @@ impl OauthAuthorizations {
         &self,
         body: &crate::types::OauthAuthorizationsCreateAuthorizationRequest,
     ) -> ClientResult<crate::Response<crate::types::Authorization>> {
-        let url = self.client.url(&"/authorizations".to_string(), None);
+        let url = self.client.url("/authorizations", None);
         self.client
             .post(
                 &url,
@@ -301,7 +301,7 @@ impl OauthAuthorizations {
         let url = self.client.url(
             &format!(
                 "/authorizations/clients/{}",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );
@@ -344,8 +344,8 @@ impl OauthAuthorizations {
         let url = self.client.url(
             &format!(
                 "/authorizations/clients/{}/{}",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
-                crate::progenitor_support::encode_path(&fingerprint.to_string()),
+                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(fingerprint),
             ),
             None,
         );

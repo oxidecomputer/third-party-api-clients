@@ -121,9 +121,7 @@ impl SpamReportsApi {
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
-        let url = self
-            .client
-            .url(&"/suppression/spam_reports".to_string(), None);
+        let url = self.client.url("/suppression/spam_reports", None);
         self.client
             .delete(
                 &url,
@@ -152,7 +150,7 @@ impl SpamReportsApi {
         let url = self.client.url(
             &format!(
                 "/suppression/spam_reports/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );
@@ -182,7 +180,7 @@ impl SpamReportsApi {
         let url = self.client.url(
             &format!(
                 "/suppression/spam_reports/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );
@@ -216,7 +214,7 @@ impl SpamReportsApi {
         let url = self.client.url(
             &format!(
                 "/suppression/spam_reports/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );

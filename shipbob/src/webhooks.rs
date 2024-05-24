@@ -94,7 +94,7 @@ impl Webhooks {
         &self,
         body: &crate::types::WebhooksCreateWebhookSubscriptionModel,
     ) -> ClientResult<crate::Response<crate::types::Webhook>> {
-        let url = self.client.url(&"/webhook".to_string(), None);
+        let url = self.client.url("/webhook", None);
         self.client
             .post(
                 &url,

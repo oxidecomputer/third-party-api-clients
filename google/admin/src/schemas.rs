@@ -27,7 +27,7 @@ impl Schemas {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
             ),
             None,
         );
@@ -58,7 +58,7 @@ impl Schemas {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
             ),
             None,
         );
@@ -90,8 +90,8 @@ impl Schemas {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&schema_key.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
             ),
             None,
         );
@@ -124,8 +124,8 @@ impl Schemas {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&schema_key.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
             ),
             None,
         );
@@ -157,8 +157,8 @@ impl Schemas {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&schema_key.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
             ),
             None,
         );
@@ -191,8 +191,8 @@ impl Schemas {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",
-                crate::progenitor_support::encode_path(&customer_id.to_string()),
-                crate::progenitor_support::encode_path(&schema_key.to_string()),
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
             ),
             None,
         );

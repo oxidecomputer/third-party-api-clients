@@ -64,7 +64,7 @@ impl Lists {
         &self,
         body: &crate::types::IpPool,
     ) -> ClientResult<crate::Response<crate::types::List>> {
-        let url = self.client.url(&"/marketing/lists".to_string(), None);
+        let url = self.client.url("/marketing/lists", None);
         self.client
             .post(
                 &url,
@@ -89,7 +89,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/marketing/lists/{}/contacts/count",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -131,7 +131,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/marketing/lists/{}?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,
@@ -172,7 +172,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/marketing/lists/{}?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,
@@ -202,7 +202,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/marketing/lists/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -242,7 +242,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/marketing/lists/{}/contacts?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,

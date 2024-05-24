@@ -25,7 +25,7 @@ impl Garnishments {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/garnishments",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -55,7 +55,7 @@ impl Garnishments {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/garnishments",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -84,7 +84,7 @@ impl Garnishments {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/garnishments",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -112,7 +112,7 @@ impl Garnishments {
         let url = self.client.url(
             &format!(
                 "/v1/garnishments/{}",
-                crate::progenitor_support::encode_path(&garnishment_id.to_string()),
+                crate::progenitor_support::encode_path(garnishment_id),
             ),
             None,
         );
@@ -141,7 +141,7 @@ impl Garnishments {
         let url = self.client.url(
             &format!(
                 "/v1/garnishments/{}",
-                crate::progenitor_support::encode_path(&garnishment_id.to_string()),
+                crate::progenitor_support::encode_path(garnishment_id),
             ),
             None,
         );

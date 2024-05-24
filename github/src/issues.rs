@@ -263,7 +263,7 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/issues?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -327,7 +327,7 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/issues?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -376,8 +376,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/assignees?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -411,8 +411,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/assignees",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -454,9 +454,9 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/assignees/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&assignee.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(assignee),
             ),
             None,
         );
@@ -556,8 +556,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -634,8 +634,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -675,8 +675,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -741,8 +741,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -790,8 +790,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -830,8 +830,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -870,8 +870,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -911,8 +911,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -961,8 +961,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/events?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -996,8 +996,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/events",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1035,8 +1035,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/events/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
@@ -1085,8 +1085,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1126,8 +1126,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1167,8 +1167,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/assignees",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1208,8 +1208,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/assignees",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1265,8 +1265,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/comments?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
@@ -1308,8 +1308,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/comments?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
@@ -1350,8 +1350,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/comments",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1402,8 +1402,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/events?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
@@ -1439,8 +1439,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/events",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1491,8 +1491,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
@@ -1528,8 +1528,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1569,8 +1569,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1610,8 +1610,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1650,8 +1650,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1692,10 +1692,10 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
-                crate::progenitor_support::encode_path(&name.to_string()),
+                crate::progenitor_support::encode_path(name),
             ),
             None,
         );
@@ -1736,8 +1736,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/lock",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1776,8 +1776,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/lock",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1828,8 +1828,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/timeline?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
@@ -1865,8 +1865,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/timeline",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
@@ -1915,8 +1915,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -1950,8 +1950,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1988,8 +1988,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -2027,9 +2027,9 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&name.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(name),
             ),
             None,
         );
@@ -2067,9 +2067,9 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&name.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(name),
             ),
             None,
         );
@@ -2108,9 +2108,9 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&name.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(name),
             ),
             None,
         );
@@ -2175,8 +2175,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -2224,8 +2224,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -2263,8 +2263,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -2302,8 +2302,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,
@@ -2342,8 +2342,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,
@@ -2383,8 +2383,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,
@@ -2435,8 +2435,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}/labels?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&milestone_number.to_string()),
                 query_
             ),
@@ -2472,8 +2472,8 @@ impl Issues {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}/labels",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,

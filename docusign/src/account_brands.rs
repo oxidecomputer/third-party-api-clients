@@ -46,7 +46,7 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
                 query_
             ),
             None,
@@ -86,7 +86,7 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -121,7 +121,7 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -172,8 +172,8 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
                 query_
             ),
             None,
@@ -211,8 +211,8 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
             ),
             None,
         );
@@ -248,8 +248,8 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
             ),
             None,
         );
@@ -285,8 +285,8 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/file",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
             ),
             None,
         );
@@ -324,9 +324,9 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/logos/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
-                crate::progenitor_support::encode_path(&logo_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(logo_type),
             ),
             None,
         );
@@ -369,9 +369,9 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/logos/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
-                crate::progenitor_support::encode_path(&logo_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(logo_type),
             ),
             None,
         );
@@ -409,9 +409,9 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/logos/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
-                crate::progenitor_support::encode_path(&logo_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(logo_type),
             ),
             None,
         );
@@ -447,8 +447,8 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/resources",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
             ),
             None,
         );
@@ -507,9 +507,9 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/resources/{}?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
-                crate::progenitor_support::encode_path(&resource_content_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(resource_content_type),
                 query_
             ),
             None,
@@ -561,9 +561,9 @@ impl AccountBrands {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/resources/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&brand_id.to_string()),
-                crate::progenitor_support::encode_path(&resource_content_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(resource_content_type),
             ),
             None,
         );

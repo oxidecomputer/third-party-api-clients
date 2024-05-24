@@ -25,7 +25,7 @@ impl Apps {
     pub async fn get_authenticated(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GitHubApp>> {
-        let url = self.client.url(&"/app".to_string(), None);
+        let url = self.client.url("/app", None);
         self.client
             .get(
                 &url,
@@ -56,7 +56,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app-manifests/{}/conversions",
-                crate::progenitor_support::encode_path(&code.to_string()),
+                crate::progenitor_support::encode_path(code),
             ),
             None,
         );
@@ -84,7 +84,7 @@ impl Apps {
     pub async fn get_webhook_config_for_app(
         &self,
     ) -> ClientResult<crate::Response<crate::types::WebhookConfig>> {
-        let url = self.client.url(&"/app/hook/config".to_string(), None);
+        let url = self.client.url("/app/hook/config", None);
         self.client
             .get(
                 &url,
@@ -110,7 +110,7 @@ impl Apps {
         &self,
         body: &crate::types::AppsUpdateWebhookConfigAppRequest,
     ) -> ClientResult<crate::Response<crate::types::WebhookConfig>> {
-        let url = self.client.url(&"/app/hook/config".to_string(), None);
+        let url = self.client.url("/app/hook/config", None);
         self.client
             .patch(
                 &url,
@@ -567,7 +567,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/grant",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );
@@ -607,8 +607,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/grants/{}",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
-                crate::progenitor_support::encode_path(&access_token.to_string()),
+                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(access_token),
             ),
             None,
         );
@@ -643,7 +643,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );
@@ -678,7 +678,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );
@@ -713,7 +713,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );
@@ -748,7 +748,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token/scoped",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );
@@ -786,8 +786,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/tokens/{}",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
-                crate::progenitor_support::encode_path(&access_token.to_string()),
+                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(access_token),
             ),
             None,
         );
@@ -825,8 +825,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/tokens/{}",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
-                crate::progenitor_support::encode_path(&access_token.to_string()),
+                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(access_token),
             ),
             None,
         );
@@ -864,8 +864,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/applications/{}/tokens/{}",
-                crate::progenitor_support::encode_path(&client_id.to_string()),
-                crate::progenitor_support::encode_path(&access_token.to_string()),
+                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(access_token),
             ),
             None,
         );
@@ -899,10 +899,7 @@ impl Apps {
         app_slug: &str,
     ) -> ClientResult<crate::Response<crate::types::GitHubApp>> {
         let url = self.client.url(
-            &format!(
-                "/apps/{}",
-                crate::progenitor_support::encode_path(&app_slug.to_string()),
-            ),
+            &format!("/apps/{}", crate::progenitor_support::encode_path(app_slug),),
             None,
         );
         self.client
@@ -971,7 +968,7 @@ impl Apps {
      * FROM: <https://docs.github.com/rest/reference/apps#revoke-an-installation-access-token>
      */
     pub async fn revoke_installation_access_token(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(&"/installation/token".to_string(), None);
+        let url = self.client.url("/installation/token", None);
         self.client
             .delete(
                 &url,
@@ -1076,9 +1073,7 @@ impl Apps {
     pub async fn list_all_plans(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
-        let url = self
-            .client
-            .url(&"/marketplace_listing/plans".to_string(), None);
+        let url = self.client.url("/marketplace_listing/plans", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1290,9 +1285,7 @@ impl Apps {
     pub async fn list_all_plans_stubbed(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
-        let url = self
-            .client
-            .url(&"/marketplace_listing/stubbed/plans".to_string(), None);
+        let url = self.client.url("/marketplace_listing/stubbed/plans", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1431,7 +1424,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/installation",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -1474,8 +1467,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/content_references/{}/attachments",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&content_reference_id.to_string()),
             ),
             None,
@@ -1514,8 +1507,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/installation",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1760,9 +1753,7 @@ impl Apps {
     pub async fn list_all_subscriptions_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
-        let url = self
-            .client
-            .url(&"/user/marketplace_purchases".to_string(), None);
+        let url = self.client.url("/user/marketplace_purchases", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1828,9 +1819,7 @@ impl Apps {
     pub async fn list_all_subscriptions_for_authenticated_user_stubbed(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
-        let url = self
-            .client
-            .url(&"/user/marketplace_purchases/stubbed".to_string(), None);
+        let url = self.client.url("/user/marketplace_purchases/stubbed", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1863,7 +1852,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/users/{}/installation",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );

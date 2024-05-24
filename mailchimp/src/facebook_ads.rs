@@ -97,7 +97,7 @@ impl FacebookAds {
         let url = self.client.url(
             &format!(
                 "/facebook-ads/{}?{}",
-                crate::progenitor_support::encode_path(&outreach_id.to_string()),
+                crate::progenitor_support::encode_path(outreach_id),
                 query_
             ),
             None,

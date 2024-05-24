@@ -37,7 +37,7 @@ impl PhoneAutoReceptionists {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}",
-                crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
+                crate::progenitor_support::encode_path(auto_receptionist_id),
             ),
             None,
         );
@@ -78,7 +78,7 @@ impl PhoneAutoReceptionists {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}/phone_numbers",
-                crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
+                crate::progenitor_support::encode_path(auto_receptionist_id),
             ),
             None,
         );
@@ -114,7 +114,7 @@ impl PhoneAutoReceptionists {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}/phone_numbers",
-                crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
+                crate::progenitor_support::encode_path(auto_receptionist_id),
             ),
             None,
         );
@@ -156,8 +156,8 @@ impl PhoneAutoReceptionists {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}/phone_numbers/{}",
-                crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
-                crate::progenitor_support::encode_path(&phone_number_id.to_string()),
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+                crate::progenitor_support::encode_path(phone_number_id),
             ),
             None,
         );
@@ -189,9 +189,7 @@ impl PhoneAutoReceptionists {
         &self,
         body: &crate::types::AddAutoReceptionistRequest,
     ) -> ClientResult<crate::Response<crate::types::AddAutoReceptionistResponse>> {
-        let url = self
-            .client
-            .url(&"/phone/auto_receptionists".to_string(), None);
+        let url = self.client.url("/phone/auto_receptionists", None);
         self.client
             .post(
                 &url,

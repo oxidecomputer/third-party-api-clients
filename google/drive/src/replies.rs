@@ -46,8 +46,8 @@ impl Replies {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
                 query_
             ),
             None,
@@ -91,8 +91,8 @@ impl Replies {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
                 query_
             ),
             None,
@@ -180,8 +180,8 @@ impl Replies {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
             ),
             None,
         );
@@ -222,9 +222,9 @@ impl Replies {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies/{}?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
-                crate::progenitor_support::encode_path(&reply_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
                 query_
             ),
             None,
@@ -259,9 +259,9 @@ impl Replies {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies/{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
-                crate::progenitor_support::encode_path(&reply_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
             ),
             None,
         );
@@ -296,9 +296,9 @@ impl Replies {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies/{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
-                crate::progenitor_support::encode_path(&comment_id.to_string()),
-                crate::progenitor_support::encode_path(&reply_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
             ),
             None,
         );

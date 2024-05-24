@@ -105,7 +105,7 @@ impl Conversations {
         let url = self.client.url(
             &format!(
                 "/conversations/{}?{}",
-                crate::progenitor_support::encode_path(&conversation_id.to_string()),
+                crate::progenitor_support::encode_path(conversation_id),
                 query_
             ),
             None,
@@ -165,7 +165,7 @@ impl Conversations {
         let url = self.client.url(
             &format!(
                 "/conversations/{}/messages?{}",
-                crate::progenitor_support::encode_path(&conversation_id.to_string()),
+                crate::progenitor_support::encode_path(conversation_id),
                 query_
             ),
             None,
@@ -212,8 +212,8 @@ impl Conversations {
         let url = self.client.url(
             &format!(
                 "/conversations/{}/messages/{}?{}",
-                crate::progenitor_support::encode_path(&conversation_id.to_string()),
-                crate::progenitor_support::encode_path(&message_id.to_string()),
+                crate::progenitor_support::encode_path(conversation_id),
+                crate::progenitor_support::encode_path(message_id),
                 query_
             ),
             None,

@@ -24,10 +24,7 @@ impl Users {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url(
-            &format!(
-                "/users/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client
@@ -49,10 +46,7 @@ impl Users {
      */
     pub async fn delete(&self, id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!(
-                "/users/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client
@@ -78,10 +72,7 @@ impl Users {
         body: &crate::types::PatchUsersRequest,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!(
-                "/users/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client
@@ -238,7 +229,7 @@ impl Users {
         &self,
         body: &crate::types::PostUsersDeferredRequest,
     ) -> ClientResult<crate::Response<crate::types::User>> {
-        let url = self.client.url(&"/users/deferred".to_string(), None);
+        let url = self.client.url("/users/deferred", None);
         self.client
             .post(
                 &url,
@@ -263,7 +254,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/deferred/status/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

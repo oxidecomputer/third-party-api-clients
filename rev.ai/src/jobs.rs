@@ -87,7 +87,7 @@ impl Jobs {
         &self,
         body: &crate::types::SubmitJobMediaUrlOptionsAllOf,
     ) -> ClientResult<crate::Response<crate::types::JobAllOf>> {
-        let url = self.client.url(&"/jobs".to_string(), None);
+        let url = self.client.url("/jobs", None);
         self.client
             .post(
                 &url,
@@ -107,10 +107,7 @@ impl Jobs {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::JobAllOf>> {
         let url = self.client.url(
-            &format!(
-                "/jobs/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/jobs/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client
@@ -132,10 +129,7 @@ impl Jobs {
      */
     pub async fn delete(&self, id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!(
-                "/jobs/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
-            ),
+            &format!("/jobs/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
         self.client

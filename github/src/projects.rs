@@ -48,7 +48,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/projects?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -87,7 +87,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/projects?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -123,7 +123,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/projects",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -751,7 +751,7 @@ impl Projects {
             &format!(
                 "/projects/{}/collaborators/{}",
                 crate::progenitor_support::encode_path(&project_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -788,7 +788,7 @@ impl Projects {
             &format!(
                 "/projects/{}/collaborators/{}",
                 crate::progenitor_support::encode_path(&project_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -825,7 +825,7 @@ impl Projects {
             &format!(
                 "/projects/{}/collaborators/{}/permission",
                 crate::progenitor_support::encode_path(&project_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -992,8 +992,8 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/projects?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -1033,8 +1033,8 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/projects?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -1072,8 +1072,8 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/projects",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1100,7 +1100,7 @@ impl Projects {
         &self,
         body: &crate::types::ProjectsCreateRequest,
     ) -> ClientResult<crate::Response<crate::types::Project>> {
-        let url = self.client.url(&"/user/projects".to_string(), None);
+        let url = self.client.url("/user/projects", None);
         self.client
             .post(
                 &url,
@@ -1148,7 +1148,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/users/{}/projects?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,
@@ -1187,7 +1187,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/users/{}/projects?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,

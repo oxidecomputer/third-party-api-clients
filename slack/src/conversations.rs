@@ -23,7 +23,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn archive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/conversations.archive".to_string(), None);
+        let url = self.client.url("/conversations.archive", None);
         self.client
             .post(
                 &url,
@@ -48,7 +48,7 @@ impl Conversations {
     pub async fn close(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsCloseSuccessSchema>> {
-        let url = self.client.url(&"/conversations.close".to_string(), None);
+        let url = self.client.url("/conversations.close", None);
         self.client
             .post(
                 &url,
@@ -73,7 +73,7 @@ impl Conversations {
     pub async fn create(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsInfoSuccessSchema>> {
-        let url = self.client.url(&"/conversations.create".to_string(), None);
+        let url = self.client.url("/conversations.create", None);
         self.client
             .post(
                 &url,
@@ -204,7 +204,7 @@ impl Conversations {
     pub async fn invite(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsInfoSuccessSchema>> {
-        let url = self.client.url(&"/conversations.invite".to_string(), None);
+        let url = self.client.url("/conversations.invite", None);
         self.client
             .post(
                 &url,
@@ -229,7 +229,7 @@ impl Conversations {
     pub async fn join(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsJoinSuccessSchema>> {
-        let url = self.client.url(&"/conversations.join".to_string(), None);
+        let url = self.client.url("/conversations.join", None);
         self.client
             .post(
                 &url,
@@ -252,7 +252,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn kick(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/conversations.kick".to_string(), None);
+        let url = self.client.url("/conversations.kick", None);
         self.client
             .post(
                 &url,
@@ -277,7 +277,7 @@ impl Conversations {
     pub async fn leave(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsLeaveSuccessSchema>> {
-        let url = self.client.url(&"/conversations.leave".to_string(), None);
+        let url = self.client.url("/conversations.leave", None);
         self.client
             .post(
                 &url,
@@ -349,7 +349,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn mark(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/conversations.mark".to_string(), None);
+        let url = self.client.url("/conversations.mark", None);
         self.client
             .post(
                 &url,
@@ -418,7 +418,7 @@ impl Conversations {
     pub async fn open(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsOpenSuccessSchema>> {
-        let url = self.client.url(&"/conversations.open".to_string(), None);
+        let url = self.client.url("/conversations.open", None);
         self.client
             .post(
                 &url,
@@ -443,7 +443,7 @@ impl Conversations {
     pub async fn rename(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsInfoSuccessSchema>> {
-        let url = self.client.url(&"/conversations.rename".to_string(), None);
+        let url = self.client.url("/conversations.rename", None);
         self.client
             .post(
                 &url,
@@ -532,9 +532,7 @@ impl Conversations {
     pub async fn set_purpose(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsInfoSuccessSchema>> {
-        let url = self
-            .client
-            .url(&"/conversations.setPurpose".to_string(), None);
+        let url = self.client.url("/conversations.setPurpose", None);
         self.client
             .post(
                 &url,
@@ -559,9 +557,7 @@ impl Conversations {
     pub async fn set_topic(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ConversationsInfoSuccessSchema>> {
-        let url = self
-            .client
-            .url(&"/conversations.setTopic".to_string(), None);
+        let url = self.client.url("/conversations.setTopic", None);
         self.client
             .post(
                 &url,
@@ -584,9 +580,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn unarchive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self
-            .client
-            .url(&"/conversations.unarchive".to_string(), None);
+        let url = self.client.url("/conversations.unarchive", None);
         self.client
             .post(
                 &url,

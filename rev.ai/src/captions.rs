@@ -41,7 +41,7 @@ impl Captions {
         let url = self.client.url(
             &format!(
                 "/jobs/{}/captions?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,

@@ -192,7 +192,7 @@ impl PromotionCodes {
      * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PromotionCode>> {
-        let url = self.client.url(&"/v1/promotion_codes".to_string(), None);
+        let url = self.client.url("/v1/promotion_codes", None);
         self.client
             .post(
                 &url,
@@ -220,7 +220,7 @@ impl PromotionCodes {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",
-                crate::progenitor_support::encode_path(&promotion_code.to_string()),
+                crate::progenitor_support::encode_path(promotion_code),
             ),
             None,
         );
@@ -250,7 +250,7 @@ impl PromotionCodes {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",
-                crate::progenitor_support::encode_path(&promotion_code.to_string()),
+                crate::progenitor_support::encode_path(promotion_code),
             ),
             None,
         );

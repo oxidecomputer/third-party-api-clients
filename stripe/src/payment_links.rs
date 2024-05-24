@@ -162,7 +162,7 @@ impl PaymentLinks {
      * <p>Creates a payment link.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PaymentLink>> {
-        let url = self.client.url(&"/v1/payment_links".to_string(), None);
+        let url = self.client.url("/v1/payment_links", None);
         self.client
             .post(
                 &url,
@@ -190,7 +190,7 @@ impl PaymentLinks {
         let url = self.client.url(
             &format!(
                 "/v1/payment_links/{}",
-                crate::progenitor_support::encode_path(&payment_link.to_string()),
+                crate::progenitor_support::encode_path(payment_link),
             ),
             None,
         );
@@ -220,7 +220,7 @@ impl PaymentLinks {
         let url = self.client.url(
             &format!(
                 "/v1/payment_links/{}",
-                crate::progenitor_support::encode_path(&payment_link.to_string()),
+                crate::progenitor_support::encode_path(payment_link),
             ),
             None,
         );
@@ -268,7 +268,7 @@ impl PaymentLinks {
         let url = self.client.url(
             &format!(
                 "/v1/payment_links/{}/line_items?{}",
-                crate::progenitor_support::encode_path(&payment_link.to_string()),
+                crate::progenitor_support::encode_path(payment_link),
                 query_
             ),
             None,
@@ -305,7 +305,7 @@ impl PaymentLinks {
         let url = self.client.url(
             &format!(
                 "/v1/payment_links/{}/line_items",
-                crate::progenitor_support::encode_path(&payment_link.to_string()),
+                crate::progenitor_support::encode_path(payment_link),
             ),
             None,
         );

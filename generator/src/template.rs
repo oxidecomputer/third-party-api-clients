@@ -831,7 +831,8 @@ mod test {
 
     #[test]
     fn basic() -> Result<()> {
-        let trials = [(
+        let trials = [
+            (
                 "/info",
                 Template {
                     components: vec![Component::Constant("info".into())],
@@ -855,7 +856,8 @@ mod test {
                         Component::Constant("three".into()),
                     ],
                 },
-            )];
+            ),
+        ];
 
         for (path, want) in trials.iter() {
             let t = parse(path).with_context(|| anyhow!("path {}", path))?;

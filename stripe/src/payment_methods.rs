@@ -173,7 +173,7 @@ impl PaymentMethods {
      * <p>Instead of creating a PaymentMethod directly, we recommend using the <a href="/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a payment immediately or the <a href="/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment method details ahead of a future payment.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PaymentMethod>> {
-        let url = self.client.url(&"/v1/payment_methods".to_string(), None);
+        let url = self.client.url("/v1/payment_methods", None);
         self.client
             .post(
                 &url,
@@ -201,7 +201,7 @@ impl PaymentMethods {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}",
-                crate::progenitor_support::encode_path(&payment_method.to_string()),
+                crate::progenitor_support::encode_path(payment_method),
             ),
             None,
         );
@@ -231,7 +231,7 @@ impl PaymentMethods {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}",
-                crate::progenitor_support::encode_path(&payment_method.to_string()),
+                crate::progenitor_support::encode_path(payment_method),
             ),
             None,
         );
@@ -271,7 +271,7 @@ impl PaymentMethods {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}/attach",
-                crate::progenitor_support::encode_path(&payment_method.to_string()),
+                crate::progenitor_support::encode_path(payment_method),
             ),
             None,
         );
@@ -301,7 +301,7 @@ impl PaymentMethods {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}/detach",
-                crate::progenitor_support::encode_path(&payment_method.to_string()),
+                crate::progenitor_support::encode_path(payment_method),
             ),
             None,
         );

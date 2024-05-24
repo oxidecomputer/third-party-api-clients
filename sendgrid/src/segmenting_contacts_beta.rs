@@ -74,9 +74,7 @@ impl SegmentingContactsBeta {
         &self,
         body: &crate::types::SegmentWriteV2,
     ) -> ClientResult<crate::Response<crate::types::SegmentResponse>> {
-        let url = self
-            .client
-            .url(&"/marketing/segments/2.0".to_string(), None);
+        let url = self.client.url("/marketing/segments/2.0", None);
         self.client
             .post(
                 &url,
@@ -111,7 +109,7 @@ impl SegmentingContactsBeta {
         let url = self.client.url(
             &format!(
                 "/marketing/segments/2.0/{}?{}",
-                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                crate::progenitor_support::encode_path(segment_id),
                 query_
             ),
             None,
@@ -140,7 +138,7 @@ impl SegmentingContactsBeta {
         let url = self.client.url(
             &format!(
                 "/marketing/segments/2.0/{}",
-                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                crate::progenitor_support::encode_path(segment_id),
             ),
             None,
         );
@@ -171,7 +169,7 @@ impl SegmentingContactsBeta {
         let url = self.client.url(
             &format!(
                 "/marketing/segments/2.0/{}",
-                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                crate::progenitor_support::encode_path(segment_id),
             ),
             None,
         );
