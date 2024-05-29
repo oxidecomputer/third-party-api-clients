@@ -28,7 +28,7 @@ impl Identity {
      */
     pub async fn get_verification_reports(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -86,7 +86,7 @@ impl Identity {
      */
     pub async fn get_all_verification_reports(
         &self,
-        _created: &str,
+        created: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationReport>>> {
@@ -223,7 +223,7 @@ impl Identity {
      */
     pub async fn get_verification_sessions(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -274,7 +274,7 @@ impl Identity {
      */
     pub async fn get_all_verification_sessions(
         &self,
-        _created: &str,
+        created: &str,
         status: crate::types::GelatoVerificationSessionStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationSession>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -371,7 +371,9 @@ impl Identity {
     pub async fn post_verification_session(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
-        let url = self.client.url("/v1/identity/verification_sessions", None);
+        let url = self
+            .client
+            .url("/v1/identity/verification_sessions", None);
         self.client
             .post(
                 &url,

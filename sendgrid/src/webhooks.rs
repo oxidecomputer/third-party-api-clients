@@ -31,7 +31,9 @@ impl Webhooks {
     pub async fn get_user_event_settings(
         &self,
     ) -> ClientResult<crate::Response<crate::types::WebhooksEventWebhookResponse>> {
-        let url = self.client.url("/user/webhooks/event/settings", None);
+        let url = self
+            .client
+            .url("/user/webhooks/event/settings", None);
         self.client
             .get(
                 &url,
@@ -63,7 +65,9 @@ impl Webhooks {
         &self,
         body: &crate::types::WebhooksEventWebhookUpdateWithOAuthRequest,
     ) -> ClientResult<crate::Response<crate::types::WebhooksEventWebhookResponse>> {
-        let url = self.client.url("/user/webhooks/event/settings", None);
+        let url = self
+            .client
+            .url("/user/webhooks/event/settings", None);
         self.client
             .patch(
                 &url,
@@ -88,7 +92,9 @@ impl Webhooks {
     pub async fn get_user_parse_settings(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetUserWebhooksParseSettingsResponse>> {
-        let url = self.client.url("/user/webhooks/parse/settings", None);
+        let url = self
+            .client
+            .url("/user/webhooks/parse/settings", None);
         self.client
             .get(
                 &url,
@@ -294,7 +300,9 @@ impl Webhooks {
         &self,
         body: &crate::types::PostUserWebhooksEventTestRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/user/webhooks/event/test", None);
+        let url = self
+            .client
+            .url("/user/webhooks/event/test", None);
         self.client
             .post(
                 &url,

@@ -29,7 +29,9 @@ impl SettingsEnforcedTls {
     pub async fn get_user(
         &self,
     ) -> ClientResult<crate::Response<crate::types::EnforcedTlsRequestResponse>> {
-        let url = self.client.url("/user/settings/enforced_tls", None);
+        let url = self
+            .client
+            .url("/user/settings/enforced_tls", None);
         self.client
             .get(
                 &url,
@@ -59,7 +61,9 @@ impl SettingsEnforcedTls {
         &self,
         body: &crate::types::EnforcedTlsRequestResponse,
     ) -> ClientResult<crate::Response<crate::types::EnforcedTlsRequestResponse>> {
-        let url = self.client.url("/user/settings/enforced_tls", None);
+        let url = self
+            .client
+            .url("/user/settings/enforced_tls", None);
         self.client
             .patch(
                 &url,

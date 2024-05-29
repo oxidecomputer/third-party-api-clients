@@ -25,7 +25,9 @@ impl SenderVerification {
     pub async fn get_verified_senders_domains(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetVerifiedSendersDomainsResponse>> {
-        let url = self.client.url("/verified_senders/domains", None);
+        let url = self
+            .client
+            .url("/verified_senders/domains", None);
         self.client
             .get(
                 &url,
@@ -50,7 +52,9 @@ impl SenderVerification {
     pub async fn get_verified_senders_steps_completed(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetVerifiedSendersStepsCompletedResponse>> {
-        let url = self.client.url("/verified_senders/steps_completed", None);
+        let url = self
+            .client
+            .url("/verified_senders/steps_completed", None);
         self.client
             .get(
                 &url,

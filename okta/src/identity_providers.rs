@@ -162,7 +162,9 @@ impl IdentityProviders {
     pub async fn list_all_keys(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::JsonWebKey>>> {
-        let url = self.client.url("/api/v1/idps/credentials/keys", None);
+        let url = self
+            .client
+            .url("/api/v1/idps/credentials/keys", None);
         self.client
             .get_all_pages(
                 &url,
@@ -184,7 +186,9 @@ impl IdentityProviders {
         &self,
         body: &crate::types::JsonWebKey,
     ) -> ClientResult<crate::Response<crate::types::JsonWebKey>> {
-        let url = self.client.url("/api/v1/idps/credentials/keys", None);
+        let url = self
+            .client
+            .url("/api/v1/idps/credentials/keys", None);
         self.client
             .post(
                 &url,

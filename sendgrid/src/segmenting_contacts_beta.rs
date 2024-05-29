@@ -74,7 +74,9 @@ impl SegmentingContactsBeta {
         &self,
         body: &crate::types::SegmentWriteV2,
     ) -> ClientResult<crate::Response<crate::types::SegmentResponse>> {
-        let url = self.client.url("/marketing/segments/2.0", None);
+        let url = self
+            .client
+            .url("/marketing/segments/2.0", None);
         self.client
             .post(
                 &url,

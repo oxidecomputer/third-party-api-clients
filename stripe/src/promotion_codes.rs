@@ -33,7 +33,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -95,7 +95,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        _created: &str,
+        created: &str,
         customer: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PromotionCode>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

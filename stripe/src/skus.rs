@@ -31,9 +31,9 @@ impl Skus {
     pub async fn get_page(
         &self,
         active: bool,
-        _attributes: &str,
+        attributes: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         in_stock: bool,
         limit: i64,
         product: &str,
@@ -88,8 +88,8 @@ impl Skus {
     pub async fn get_all(
         &self,
         active: bool,
-        _attributes: &str,
-        _ids: &[String],
+        attributes: &str,
+        ids: &[String],
         in_stock: bool,
         product: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Sku>>> {
@@ -208,7 +208,10 @@ impl Skus {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::GetSkusResponseAnyOf>> {
         let url = self.client.url(
-            &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/v1/skus/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -234,7 +237,10 @@ impl Skus {
      */
     pub async fn post_skus(&self, id: &str) -> ClientResult<crate::Response<crate::types::Sku>> {
         let url = self.client.url(
-            &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/v1/skus/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -261,7 +267,10 @@ impl Skus {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::DeletedSku>> {
         let url = self.client.url(
-            &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/v1/skus/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client

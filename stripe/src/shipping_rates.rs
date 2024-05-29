@@ -29,7 +29,7 @@ impl ShippingRates {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -83,7 +83,7 @@ impl ShippingRates {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::ShippingRate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

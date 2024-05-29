@@ -28,7 +28,7 @@ impl FileLinks {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         expired: bool,
         file: &str,
@@ -80,7 +80,7 @@ impl FileLinks {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         expired: bool,
         file: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::FileLink>>> {

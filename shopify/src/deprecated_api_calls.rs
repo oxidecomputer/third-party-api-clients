@@ -19,9 +19,10 @@ impl DeprecatedApiCalls {
      * https://shopify.dev/docs/admin-api/rest/reference/deprecated_api_calls#index-2021-01
      */
     pub async fn deprecated_202101_get_call(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/deprecated_api_calls.json", None);
+        let url = self.client.url(
+            "/admin/api/2021-01/deprecated_api_calls.json",
+            None,
+        );
         self.client
             .get(
                 &url,
@@ -40,9 +41,10 @@ impl DeprecatedApiCalls {
      * https://shopify.dev/docs/admin-api/rest/reference/deprecated_api_calls#index-unstable
      */
     pub async fn deprecated_unstable_get_call(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/deprecated_api_calls.json", None);
+        let url = self.client.url(
+            "/admin/api/unstable/deprecated_api_calls.json",
+            None,
+        );
         self.client
             .get(
                 &url,

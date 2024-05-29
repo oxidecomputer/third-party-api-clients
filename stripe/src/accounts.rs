@@ -26,7 +26,7 @@ impl Accounts {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -70,7 +70,7 @@ impl Accounts {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Account>>> {
         let url = self.client.url("/v1/accounts", None);
         let crate::Response::<crate::types::GetAccountsResponse> {
@@ -912,7 +912,7 @@ impl Accounts {
         account: &str,
         ending_before: &str,
         limit: i64,
-        _relationship: &str,
+        relationship: &str,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -962,7 +962,7 @@ impl Accounts {
     pub async fn get_all_people(
         &self,
         account: &str,
-        _relationship: &str,
+        relationship: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let url = self.client.url(
             &format!(
@@ -1191,7 +1191,7 @@ impl Accounts {
         account: &str,
         ending_before: &str,
         limit: i64,
-        _relationship: &str,
+        relationship: &str,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1241,7 +1241,7 @@ impl Accounts {
     pub async fn get_all_persons(
         &self,
         account: &str,
-        _relationship: &str,
+        relationship: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let url = self.client.url(
             &format!(
