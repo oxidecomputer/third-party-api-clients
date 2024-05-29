@@ -196,7 +196,7 @@ pub struct GitHubApp {
     )]
     pub description: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -223,7 +223,7 @@ pub struct GitHubApp {
     )]
     pub id: i64,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(
         default,
@@ -252,7 +252,7 @@ pub struct GitHubApp {
     )]
     pub pem: String,
     /**
-     * The set of permissions for the GitHub app
+    * The set of permissions for the GitHub app
      */
     pub permissions: Permissions,
     #[serde(
@@ -314,7 +314,7 @@ pub struct ValidationErrorSimple {
     )]
     pub documentation_url: String,
     /**
-     * Validation Error Simple
+    * Validation Error Simple
      */
     #[serde(
         default,
@@ -394,7 +394,7 @@ pub struct WebhookConfig {
     )]
     pub content_type: String,
     /**
-     * Configuration object of the webhook
+    * Configuration object of the webhook
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
@@ -504,7 +504,7 @@ pub struct ScimError {
     )]
     pub message: String,
     /**
-     * Scim Error
+    * Scim Error
      */
     #[serde(
         default,
@@ -520,7 +520,7 @@ pub struct ScimError {
     )]
     pub scim_type: String,
     /**
-     * Scim Error
+    * Scim Error
      */
     #[serde(
         default,
@@ -544,7 +544,7 @@ pub enum ValueOneOf {
     String(String),
     I64(i64),
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
 }
@@ -654,7 +654,7 @@ pub struct ValidationError {
     )]
     pub documentation_url: String,
     /**
-     * Validation Error
+    * Validation Error
      */
     #[serde(
         default,
@@ -676,12 +676,12 @@ pub struct Data {}
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Request {
     /**
-     * The request headers sent with the webhook delivery.
+    * The request headers sent with the webhook delivery.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub headers: Option<Data>,
     /**
-     * The request headers sent with the webhook delivery.
+    * The request headers sent with the webhook delivery.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payload: Option<Data>,
@@ -690,7 +690,7 @@ pub struct Request {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Response {
     /**
-     * The request headers sent with the webhook delivery.
+    * The request headers sent with the webhook delivery.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub headers: Option<Data>,
@@ -842,7 +842,8 @@ pub struct Enterprise {
 /**
  * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Pages {
     #[serde(rename = "read")]
     Read,
@@ -876,7 +877,8 @@ impl Pages {
 /**
  * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RepositoryProjects {
     #[serde(rename = "admin")]
     Admin,
@@ -913,7 +915,8 @@ impl RepositoryProjects {
 /**
  * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrganizationPlan {
     #[serde(rename = "read")]
     Read,
@@ -944,7 +947,8 @@ impl OrganizationPlan {
 /**
  * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Workflows {
     #[serde(rename = "write")]
     Write,
@@ -976,157 +980,157 @@ impl Workflows {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppPermissions {
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actions: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub administration: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub checks: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_references: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contents: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployments: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub environments: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issues: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metadata: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_administration: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_hooks: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_packages: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_plan: Option<OrganizationPlan>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_projects: Option<RepositoryProjects>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_secrets: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_self_hosted_runners: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_user_blocking: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub packages: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pages: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_requests: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_hooks: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_projects: Option<RepositoryProjects>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub secret_scanning_alerts: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub secrets: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_events: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub single_file: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub statuses: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub team_discussions: Option<Pages>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub vulnerability_alerts: Option<OrganizationPlan>,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub workflows: Option<Workflows>,
@@ -1140,12 +1144,12 @@ pub struct AppPermissions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountAnyOf {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(flatten)]
     pub simple_user: SimpleUser,
     /**
-     * An enterprise account
+    * An enterprise account
      */
     #[serde(flatten)]
     pub enterprise: Enterprise,
@@ -1154,7 +1158,8 @@ pub struct AccountAnyOf {
 /**
  * Describe whether all repositories have been selected or there's a selection involved
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RepositorySelection {
     #[serde(rename = "all")]
     All,
@@ -1220,7 +1225,7 @@ pub struct Installation {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -1229,7 +1234,7 @@ pub struct Installation {
     )]
     pub events: Vec<String>,
     /**
-     * Installation
+    * Installation
      */
     #[serde(
         default,
@@ -1249,7 +1254,7 @@ pub struct Installation {
     )]
     pub id: i64,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     pub permissions: AppPermissions,
     #[serde(
@@ -1259,7 +1264,7 @@ pub struct Installation {
     )]
     pub repositories_url: String,
     /**
-     * Describe whether all repositories have been selected or there's a selection involved
+    * Describe whether all repositories have been selected or there's a selection involved
      */
     #[serde(default, skip_serializing_if = "RepositorySelection::is_noop")]
     pub repository_selection: RepositorySelection,
@@ -1270,7 +1275,7 @@ pub struct Installation {
     )]
     pub single_file_name: String,
     /**
-     * Installation
+    * Installation
      */
     #[serde(
         default,
@@ -1978,7 +1983,7 @@ pub struct TemplateRepository {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Repository {
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -1986,7 +1991,7 @@ pub struct Repository {
     )]
     pub allow_auto_merge: bool,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -1994,7 +1999,7 @@ pub struct Repository {
     )]
     pub allow_merge_commit: bool,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -2002,7 +2007,7 @@ pub struct Repository {
     )]
     pub allow_rebase_merge: bool,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -2093,7 +2098,7 @@ pub struct Repository {
     )]
     pub default_branch: String,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -2232,7 +2237,7 @@ pub struct Repository {
     )]
     pub id: i64,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -2314,7 +2319,7 @@ pub struct Repository {
     )]
     pub name: String,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -2349,12 +2354,12 @@ pub struct Repository {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization: Option<SimpleUser>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryPermissions>,
@@ -2418,7 +2423,7 @@ pub struct Repository {
     )]
     pub statuses_url: String,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -2465,7 +2470,7 @@ pub struct Repository {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<TemplateRepository>,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(
         default,
@@ -2521,7 +2526,7 @@ pub struct InstallationToken {
     )]
     pub expires_at: String,
     /**
-     * Authentication token for a GitHub App installed on a user or org.
+    * Authentication token for a GitHub App installed on a user or org.
      */
     #[serde(
         default,
@@ -2529,12 +2534,12 @@ pub struct InstallationToken {
     )]
     pub has_multiple_single_files: bool,
     /**
-     * Authentication token for a GitHub App installed on a user or org.
+    * Authentication token for a GitHub App installed on a user or org.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<AppPermissions>,
     /**
-     * Authentication token for a GitHub App installed on a user or org.
+    * Authentication token for a GitHub App installed on a user or org.
      */
     #[serde(
         default,
@@ -2543,7 +2548,7 @@ pub struct InstallationToken {
     )]
     pub repositories: Vec<Repository>,
     /**
-     * Authentication token for a GitHub App installed on a user or org.
+    * Authentication token for a GitHub App installed on a user or org.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_selection: Option<RepositorySelection>,
@@ -2554,7 +2559,7 @@ pub struct InstallationToken {
     )]
     pub single_file: String,
     /**
-     * Authentication token for a GitHub App installed on a user or org.
+    * Authentication token for a GitHub App installed on a user or org.
      */
     #[serde(
         default,
@@ -2609,7 +2614,7 @@ pub struct ApplicationGrant {
     )]
     pub id: i64,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -2636,7 +2641,7 @@ pub struct ApplicationGrant {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScopedInstallation {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub account: Option<SimpleUser>,
@@ -2646,7 +2651,7 @@ pub struct ScopedInstallation {
     )]
     pub has_multiple_single_files: bool,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     pub permissions: AppPermissions,
     #[serde(
@@ -2656,7 +2661,7 @@ pub struct ScopedInstallation {
     )]
     pub repositories_url: String,
     /**
-     * Describe whether all repositories have been selected or there's a selection involved
+    * Describe whether all repositories have been selected or there's a selection involved
      */
     #[serde(default, skip_serializing_if = "RepositorySelection::is_noop")]
     pub repository_selection: RepositorySelection,
@@ -2717,7 +2722,7 @@ pub struct Authorization {
     )]
     pub note_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -2791,7 +2796,8 @@ pub struct CodeOfConduct {
 /**
  * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EnabledRepositories {
     #[serde(rename = "all")]
     All,
@@ -2828,7 +2834,8 @@ impl EnabledRepositories {
 /**
  * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AllowedActions {
     #[serde(rename = "all")]
     All,
@@ -2865,12 +2872,12 @@ impl AllowedActions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsEnterprisePermissions {
     /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
     /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
     pub enabled_organizations: EnabledRepositories,
     #[serde(
@@ -2972,7 +2979,7 @@ pub struct SelectedActions {
     )]
     pub github_owned_allowed: bool,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -3034,7 +3041,8 @@ pub struct RunnerGroupsEnterprise {
 /**
  * The type of label. Read-only labels are applied automatically when the runner is configured.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "custom")]
     Custom,
@@ -3080,7 +3088,7 @@ pub struct Labels {
     )]
     pub name: String,
     /**
-     * The type of label. Read-only labels are applied automatically when the runner is configured.
+    * The type of label. Read-only labels are applied automatically when the runner is configured.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
@@ -3178,12 +3186,12 @@ pub struct AuthenticationToken {
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The request headers sent with the webhook delivery.
+    * The request headers sent with the webhook delivery.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<Data>,
     /**
-     * Authentication Token
+    * Authentication Token
      */
     #[serde(
         default,
@@ -3192,7 +3200,7 @@ pub struct AuthenticationToken {
     )]
     pub repositories: Vec<Repository>,
     /**
-     * Authentication Token
+    * Authentication Token
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_selection: Option<RepositorySelection>,
@@ -3279,7 +3287,7 @@ pub struct AuditLogEvent {
     )]
     pub business: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -3288,7 +3296,7 @@ pub struct AuditLogEvent {
     )]
     pub config: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -3323,7 +3331,7 @@ pub struct AuditLogEvent {
     )]
     pub emoji: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -3332,7 +3340,7 @@ pub struct AuditLogEvent {
     )]
     pub events: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -3647,7 +3655,8 @@ pub struct Label {
 /**
  * The state of the milestone.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum State {
     #[serde(rename = "closed")]
     Closed,
@@ -3668,6 +3677,7 @@ impl std::fmt::Display for State {
         .fmt(f)
     }
 }
+
 
 /// A collection of related issues and pull requests.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3741,7 +3751,7 @@ pub struct Milestone {
     )]
     pub open_issues: i64,
     /**
-     * The state of the milestone.
+    * The state of the milestone.
      */
     #[serde(default)]
     pub state: State,
@@ -3768,7 +3778,8 @@ pub struct Milestone {
 /**
  * How the author is associated with the repository.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AuthorAssociation {
     #[serde(rename = "COLLABORATOR")]
     Collaborator,
@@ -3869,7 +3880,7 @@ pub struct IssueSimple {
     )]
     pub assignees: Vec<SimpleUser>,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -3966,12 +3977,12 @@ pub struct IssueSimple {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Issue Simple
+    * Issue Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_request: Option<PullRequest>,
     /**
-     * Issue Simple
+    * Issue Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<Repository>,
@@ -4085,7 +4096,7 @@ pub struct ReactionRollup {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssueComment {
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -4139,7 +4150,7 @@ pub struct IssueComment {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Comments provide a way for people to collaborate on an issue.
+    * Comments provide a way for people to collaborate on an issue.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
@@ -4230,12 +4241,12 @@ pub struct Payload {
     )]
     pub action: String,
     /**
-     * Comments provide a way for people to collaborate on an issue.
+    * Comments provide a way for people to collaborate on an issue.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comment: Option<IssueComment>,
     /**
-     * Issue Simple
+    * Issue Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issue: Option<IssueSimple>,
@@ -4251,7 +4262,7 @@ pub struct Payload {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
-     * Actor
+    * Actor
      */
     pub actor: Actor,
     #[serde(
@@ -4267,7 +4278,7 @@ pub struct Event {
     )]
     pub id: String,
     /**
-     * Event
+    * Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub org: Option<Actor>,
@@ -4309,17 +4320,17 @@ pub struct LinkWithType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Links {
     /**
-     * Hypermedia Link with Type
+    * Hypermedia Link with Type
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user: Option<LinkWithType>,
     /**
-     * Hypermedia Link with Type
+    * Hypermedia Link with Type
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user_actor: Option<LinkWithType>,
     /**
-     * Hypermedia Link with Type
+    * Hypermedia Link with Type
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user_organization: Option<LinkWithType>,
@@ -4330,21 +4341,21 @@ pub struct Links {
     )]
     pub current_user_organizations: Vec<LinkWithType>,
     /**
-     * Hypermedia Link with Type
+    * Hypermedia Link with Type
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user_public: Option<LinkWithType>,
     /**
-     * Hypermedia Link with Type
+    * Hypermedia Link with Type
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_advisories: Option<LinkWithType>,
     /**
-     * Hypermedia Link with Type
+    * Hypermedia Link with Type
      */
     pub timeline: LinkWithType,
     /**
-     * Hypermedia Link with Type
+    * Hypermedia Link with Type
      */
     pub user: LinkWithType,
 }
@@ -4367,7 +4378,7 @@ pub struct Feed {
     )]
     pub current_user_organization_url: String,
     /**
-     * Feed
+    * Feed
      */
     #[serde(
         default,
@@ -4477,7 +4488,7 @@ pub struct BaseGist {
     pub description: String,
     pub files: Files,
     /**
-     * Base Gist
+    * Base Gist
      */
     #[serde(
         default,
@@ -4504,7 +4515,7 @@ pub struct BaseGist {
     )]
     pub git_push_url: String,
     /**
-     * Base Gist
+    * Base Gist
      */
     #[serde(
         default,
@@ -4538,7 +4549,7 @@ pub struct BaseGist {
     )]
     pub public: bool,
     /**
-     * Base Gist
+    * Base Gist
      */
     #[serde(
         default,
@@ -4611,7 +4622,7 @@ pub struct PublicUser {
     )]
     pub blog: String,
     /**
-     * Public User
+    * Public User
      */
     #[serde(
         default,
@@ -4632,7 +4643,7 @@ pub struct PublicUser {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Public User
+    * Public User
      */
     #[serde(
         default,
@@ -4736,7 +4747,7 @@ pub struct PublicUser {
     )]
     pub organizations_url: String,
     /**
-     * Public User
+    * Public User
      */
     #[serde(
         default,
@@ -4745,12 +4756,12 @@ pub struct PublicUser {
     )]
     pub owned_private_repos: i64,
     /**
-     * Public User
+    * Public User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<Plan>,
     /**
-     * Public User
+    * Public User
      */
     #[serde(
         default,
@@ -4800,7 +4811,7 @@ pub struct PublicUser {
     )]
     pub subscriptions_url: String,
     /**
-     * Public User
+    * Public User
      */
     #[serde(
         default,
@@ -4809,7 +4820,7 @@ pub struct PublicUser {
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Public User
+    * Public User
      */
     #[serde(
         default,
@@ -4870,12 +4881,12 @@ pub struct Stats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistHistory {
     /**
-     * Gist History
+    * Gist History
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub change_status: Option<Stats>,
     /**
-     * Gist History
+    * Gist History
      */
     #[serde(
         default,
@@ -4890,7 +4901,7 @@ pub struct GistHistory {
     )]
     pub url: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
@@ -4929,7 +4940,7 @@ pub struct Forks {
     )]
     pub url: String,
     /**
-     * Public User
+    * Public User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<PublicUser>,
@@ -4970,7 +4981,7 @@ pub struct Gist {
     pub description: String,
     pub files: Files,
     /**
-     * Gist
+    * Gist
      */
     #[serde(
         default,
@@ -4997,7 +5008,7 @@ pub struct Gist {
     )]
     pub git_push_url: String,
     /**
-     * Gist
+    * Gist
      */
     #[serde(
         default,
@@ -5031,7 +5042,7 @@ pub struct Gist {
     )]
     pub public: bool,
     /**
-     * Gist
+    * Gist
      */
     #[serde(
         default,
@@ -5104,7 +5115,7 @@ pub struct FilesAdditionalProperties {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistSimple {
     /**
-     * Gist Simple
+    * Gist Simple
      */
     #[serde(
         default,
@@ -5139,7 +5150,7 @@ pub struct GistSimple {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub files: Option<FilesAdditionalProperties>,
     /**
-     * Gist
+    * Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fork_of: Option<Gist>,
@@ -5192,12 +5203,12 @@ pub struct GistSimple {
     )]
     pub node_id: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
     /**
-     * Gist Simple
+    * Gist Simple
      */
     #[serde(
         default,
@@ -5205,7 +5216,7 @@ pub struct GistSimple {
     )]
     pub public: bool,
     /**
-     * Gist Simple
+    * Gist Simple
      */
     #[serde(
         default,
@@ -5236,7 +5247,7 @@ pub struct GistSimple {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistComment {
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -5427,7 +5438,7 @@ pub struct Issue {
     )]
     pub assignees: Vec<SimpleUser>,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -5493,7 +5504,7 @@ pub struct Issue {
     )]
     pub id: i64,
     /**
-     * Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
+    * Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
      */
     #[serde(
         default,
@@ -5529,17 +5540,17 @@ pub struct Issue {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
+    * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_request: Option<PullRequest>,
     /**
-     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
+    * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     /**
-     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
+    * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<Repository>,
@@ -5593,7 +5604,7 @@ pub struct LicenseData {
     )]
     pub body: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -5631,7 +5642,7 @@ pub struct LicenseData {
     )]
     pub key: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -5652,7 +5663,7 @@ pub struct LicenseData {
     )]
     pub node_id: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -5684,7 +5695,7 @@ pub struct MarketplaceListingPlan {
     )]
     pub accounts_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -5819,7 +5830,7 @@ pub struct MarketplacePurchase {
     )]
     pub on_free_trial: bool,
     /**
-     * Marketplace Listing Plan
+    * Marketplace Listing Plan
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<MarketplaceListingPlan>,
@@ -5904,7 +5915,7 @@ pub struct SshKeyFingerprints {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiOverview {
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5913,7 +5924,7 @@ pub struct ApiOverview {
     )]
     pub actions: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5922,7 +5933,7 @@ pub struct ApiOverview {
     )]
     pub api: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5931,7 +5942,7 @@ pub struct ApiOverview {
     )]
     pub dependabot: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5940,7 +5951,7 @@ pub struct ApiOverview {
     )]
     pub git: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5949,7 +5960,7 @@ pub struct ApiOverview {
     )]
     pub hooks: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5958,7 +5969,7 @@ pub struct ApiOverview {
     )]
     pub importer: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5967,7 +5978,7 @@ pub struct ApiOverview {
     )]
     pub packages: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -5976,7 +5987,7 @@ pub struct ApiOverview {
     )]
     pub pages: Vec<String>,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ssh_key_fingerprints: Option<SshKeyFingerprints>,
@@ -5986,7 +5997,7 @@ pub struct ApiOverview {
     )]
     pub verifiable_password_authentication: bool,
     /**
-     * Api Overview
+    * Api Overview
      */
     #[serde(
         default,
@@ -6069,7 +6080,7 @@ pub struct MinimalRepository {
     )]
     pub archive_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6101,7 +6112,7 @@ pub struct MinimalRepository {
     )]
     pub clone_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_of_conduct: Option<CodeOfConduct>,
@@ -6142,7 +6153,7 @@ pub struct MinimalRepository {
     )]
     pub contributors_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6157,7 +6168,7 @@ pub struct MinimalRepository {
     )]
     pub default_branch: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6177,7 +6188,7 @@ pub struct MinimalRepository {
     )]
     pub description: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6202,7 +6213,7 @@ pub struct MinimalRepository {
     )]
     pub fork: bool,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6211,7 +6222,7 @@ pub struct MinimalRepository {
     )]
     pub forks: i64,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6256,7 +6267,7 @@ pub struct MinimalRepository {
     )]
     pub git_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6264,7 +6275,7 @@ pub struct MinimalRepository {
     )]
     pub has_downloads: bool,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6272,7 +6283,7 @@ pub struct MinimalRepository {
     )]
     pub has_issues: bool,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6280,7 +6291,7 @@ pub struct MinimalRepository {
     )]
     pub has_pages: bool,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6288,7 +6299,7 @@ pub struct MinimalRepository {
     )]
     pub has_projects: bool,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6320,7 +6331,7 @@ pub struct MinimalRepository {
     )]
     pub id: i64,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6396,7 +6407,7 @@ pub struct MinimalRepository {
     )]
     pub name: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6417,7 +6428,7 @@ pub struct MinimalRepository {
     )]
     pub notifications_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6426,7 +6437,7 @@ pub struct MinimalRepository {
     )]
     pub open_issues: i64,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6435,12 +6446,12 @@ pub struct MinimalRepository {
     )]
     pub open_issues_count: i64,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<MinimalRepositoryPermissions>,
@@ -6456,7 +6467,7 @@ pub struct MinimalRepository {
     )]
     pub pulls_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6471,7 +6482,7 @@ pub struct MinimalRepository {
     )]
     pub releases_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6486,7 +6497,7 @@ pub struct MinimalRepository {
     )]
     pub ssh_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6507,7 +6518,7 @@ pub struct MinimalRepository {
     )]
     pub statuses_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6552,12 +6563,12 @@ pub struct MinimalRepository {
     )]
     pub temp_clone_token: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<Data>,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6572,7 +6583,7 @@ pub struct MinimalRepository {
     )]
     pub trees_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6593,7 +6604,7 @@ pub struct MinimalRepository {
     )]
     pub visibility: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6602,7 +6613,7 @@ pub struct MinimalRepository {
     )]
     pub watchers: i64,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     #[serde(
         default,
@@ -6663,7 +6674,7 @@ pub struct Thread {
     )]
     pub reason: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
     pub subject: Subject,
@@ -6793,7 +6804,7 @@ pub struct OrganizationFull {
     )]
     pub blog: String,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6826,7 +6837,7 @@ pub struct OrganizationFull {
     )]
     pub description: String,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6887,7 +6898,7 @@ pub struct OrganizationFull {
     )]
     pub id: i64,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6919,7 +6930,7 @@ pub struct OrganizationFull {
     )]
     pub members_allowed_repository_creation_type: String,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6927,7 +6938,7 @@ pub struct OrganizationFull {
     )]
     pub members_can_create_internal_repositories: bool,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6935,7 +6946,7 @@ pub struct OrganizationFull {
     )]
     pub members_can_create_pages: bool,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6943,7 +6954,7 @@ pub struct OrganizationFull {
     )]
     pub members_can_create_private_pages: bool,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6951,7 +6962,7 @@ pub struct OrganizationFull {
     )]
     pub members_can_create_private_repositories: bool,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6959,7 +6970,7 @@ pub struct OrganizationFull {
     )]
     pub members_can_create_public_pages: bool,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6967,7 +6978,7 @@ pub struct OrganizationFull {
     )]
     pub members_can_create_public_repositories: bool,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -6993,7 +7004,7 @@ pub struct OrganizationFull {
     )]
     pub node_id: String,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -7002,12 +7013,12 @@ pub struct OrganizationFull {
     )]
     pub owned_private_repos: i64,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<OrganizationFullPlan>,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -7040,7 +7051,7 @@ pub struct OrganizationFull {
     )]
     pub repos_url: String,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -7055,7 +7066,7 @@ pub struct OrganizationFull {
     )]
     pub twitter_username: String,
     /**
-     * Organization Full
+    * Organization Full
      */
     #[serde(
         default,
@@ -7086,12 +7097,12 @@ pub struct OrganizationFull {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsOrganizationPermissions {
     /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
     /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
     pub enabled_repositories: EnabledRepositories,
     #[serde(
@@ -7165,7 +7176,8 @@ pub struct RunnerGroupsOrg {
 /**
  * Visibility of a secret
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Visibility {
     #[serde(rename = "all")]
     All,
@@ -7227,7 +7239,7 @@ pub struct OrganizationActionsSecret {
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Visibility of a secret
+    * Visibility of a secret
      */
     #[serde(default, skip_serializing_if = "Visibility::is_noop")]
     pub visibility: Visibility,
@@ -7243,7 +7255,7 @@ pub struct ActionsPublicKey {
     )]
     pub created_at: String,
     /**
-     * The public key used for setting Actions Secrets.
+    * The public key used for setting Actions Secrets.
      */
     #[serde(
         default,
@@ -7281,7 +7293,7 @@ pub struct ActionsPublicKey {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CredentialAuthorization {
     /**
-     * Credential Authorization
+    * Credential Authorization
      */
     #[serde(
         default,
@@ -7302,7 +7314,7 @@ pub struct CredentialAuthorization {
     )]
     pub authorized_credential_title: String,
     /**
-     * Credential Authorization
+    * Credential Authorization
      */
     #[serde(
         default,
@@ -7341,7 +7353,7 @@ pub struct CredentialAuthorization {
     )]
     pub login: String,
     /**
-     * Credential Authorization
+    * Credential Authorization
      */
     #[serde(
         default,
@@ -7397,7 +7409,7 @@ pub struct OrganizationInvitation {
     )]
     pub invitation_teams_url: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub inviter: Option<SimpleUser>,
@@ -7477,7 +7489,7 @@ pub struct OrgHook {
     )]
     pub deliveries_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -7527,7 +7539,8 @@ pub struct OrgHook {
 /**
  * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InteractionGroup {
     #[serde(rename = "collaborators_only")]
     CollaboratorsOnly,
@@ -7571,7 +7584,7 @@ pub struct InteractionLimits {
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+    * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
      */
     pub limit: InteractionGroup,
     #[serde(
@@ -7585,7 +7598,8 @@ pub struct InteractionLimits {
 /**
  * The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InteractionExpiry {
     #[serde(rename = "one_day")]
     OneDay,
@@ -7629,12 +7643,12 @@ impl InteractionExpiry {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InteractionLimit {
     /**
-     * Limit interactions to a specific type of user for a specified duration
+    * Limit interactions to a specific type of user for a specified duration
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub expiry: Option<InteractionExpiry>,
     /**
-     * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+    * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
      */
     pub limit: InteractionGroup,
 }
@@ -7793,7 +7807,7 @@ pub struct Team {
     )]
     pub permission: String,
     /**
-     * Groups of organization members that gives permissions on specified repositories.
+    * Groups of organization members that gives permissions on specified repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<TeamPermissions>,
@@ -7826,7 +7840,8 @@ pub struct Team {
 /**
  * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrgMembershipState {
     #[serde(rename = "active")]
     Active,
@@ -7860,7 +7875,8 @@ impl OrgMembershipState {
 /**
  * The user's membership type in the organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Role {
     #[serde(rename = "admin")]
     Admin,
@@ -7907,7 +7923,7 @@ pub struct OrgMembershipPermissions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgMembership {
     /**
-     * Organization Simple
+    * Organization Simple
      */
     pub organization: OrganizationSimple,
     #[serde(
@@ -7917,17 +7933,17 @@ pub struct OrgMembership {
     )]
     pub organization_url: String,
     /**
-     * Org Membership
+    * Org Membership
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<OrgMembershipPermissions>,
     /**
-     * The user's membership type in the organization.
+    * The user's membership type in the organization.
      */
     #[serde(default, skip_serializing_if = "Role::is_noop")]
     pub role: Role,
     /**
-     * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
+    * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
      */
     #[serde(default, skip_serializing_if = "OrgMembershipState::is_noop")]
     pub state: OrgMembershipState,
@@ -7957,7 +7973,7 @@ pub struct Migration {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A migration.
+    * A migration.
      */
     #[serde(
         default,
@@ -8021,7 +8037,8 @@ pub struct Migration {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PackageType {
     #[serde(rename = "container")]
     Container,
@@ -8064,7 +8081,8 @@ impl PackageType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PackageVisibility {
     #[serde(rename = "private")]
     Private,
@@ -8153,7 +8171,7 @@ pub struct Package {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Container {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -8193,7 +8211,7 @@ pub struct PackageVersion {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A version of a software package
+    * A version of a software package
      */
     #[serde(
         default,
@@ -8226,7 +8244,7 @@ pub struct PackageVersion {
     )]
     pub license: String,
     /**
-     * A version of a software package
+    * A version of a software package
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metadata: Option<Metadata>,
@@ -8259,7 +8277,8 @@ pub struct PackageVersion {
 /**
  * The baseline permission that all organization members have on this project. Only present if owner is an organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrganizationPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -8350,7 +8369,7 @@ pub struct Project {
     )]
     pub number: i64,
     /**
-     * Projects are a way to organize columns and cards of work.
+    * Projects are a way to organize columns and cards of work.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_permission: Option<OrganizationPermission>,
@@ -8361,7 +8380,7 @@ pub struct Project {
     )]
     pub owner_url: String,
     /**
-     * Projects are a way to organize columns and cards of work.
+    * Projects are a way to organize columns and cards of work.
      */
     #[serde(
         default,
@@ -8426,7 +8445,7 @@ pub struct Groups {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupMapping {
     /**
-     * External Groups to be mapped to a team for membership
+    * External Groups to be mapped to a team for membership
      */
     #[serde(
         default,
@@ -8439,7 +8458,8 @@ pub struct GroupMapping {
 /**
  * The level of privacy this team should have
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Privacy {
     #[serde(rename = "closed")]
     Closed,
@@ -8528,7 +8548,7 @@ pub struct FullTeam {
     )]
     pub node_id: String,
     /**
-     * Organization Full
+    * Organization Full
      */
     pub organization: OrganizationFull,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -8540,7 +8560,7 @@ pub struct FullTeam {
     )]
     pub permission: String,
     /**
-     * Groups of organization members that gives permissions on specified repositories.
+    * Groups of organization members that gives permissions on specified repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub privacy: Option<Privacy>,
@@ -8652,7 +8672,7 @@ pub struct TeamDiscussion {
     )]
     pub private: bool,
     /**
-     * A team discussion is a persistent record of a free-form conversation within a team.
+    * A team discussion is a persistent record of a free-form conversation within a team.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
@@ -8742,7 +8762,7 @@ pub struct TeamDiscussionComment {
     )]
     pub number: i64,
     /**
-     * A reply to a discussion within a team.
+    * A reply to a discussion within a team.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
@@ -8763,7 +8783,8 @@ pub struct TeamDiscussionComment {
 /**
  * The reaction to use
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Content {
     #[serde(rename = "+1")]
     PlusOne,
@@ -8816,7 +8837,7 @@ impl Content {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reaction {
     /**
-     * The reaction to use
+    * The reaction to use
      */
     #[serde(default, skip_serializing_if = "Content::is_noop")]
     pub content: Content,
@@ -8845,7 +8866,8 @@ pub struct Reaction {
 /**
  * The role of the user in the team.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TeamMembershipRole {
     #[serde(rename = "maintainer")]
     Maintainer,
@@ -8867,16 +8889,17 @@ impl std::fmt::Display for TeamMembershipRole {
     }
 }
 
+
 /// Team Membership
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamMembership {
     /**
-     * The role of the user in the team.
+    * The role of the user in the team.
      */
     #[serde(default)]
     pub role: TeamMembershipRole,
     /**
-     * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
+    * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
      */
     #[serde(default, skip_serializing_if = "OrgMembershipState::is_noop")]
     pub state: OrgMembershipState,
@@ -8929,7 +8952,7 @@ pub struct TeamProject {
     )]
     pub created_at: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub creator: Option<SimpleUser>,
@@ -8977,7 +9000,7 @@ pub struct TeamProject {
     pub owner_url: String,
     pub permissions: TeamProjectPermissions,
     /**
-     * A team's access to a project.
+    * A team's access to a project.
      */
     #[serde(
         default,
@@ -9008,7 +9031,7 @@ pub struct TeamProject {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamRepository {
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9016,7 +9039,7 @@ pub struct TeamRepository {
     )]
     pub allow_auto_merge: bool,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9024,7 +9047,7 @@ pub struct TeamRepository {
     )]
     pub allow_merge_commit: bool,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9032,7 +9055,7 @@ pub struct TeamRepository {
     )]
     pub allow_rebase_merge: bool,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9123,7 +9146,7 @@ pub struct TeamRepository {
     )]
     pub default_branch: String,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9262,7 +9285,7 @@ pub struct TeamRepository {
     )]
     pub id: i64,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9344,7 +9367,7 @@ pub struct TeamRepository {
     )]
     pub name: String,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9379,7 +9402,7 @@ pub struct TeamRepository {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryPermissions>,
@@ -9437,7 +9460,7 @@ pub struct TeamRepository {
     )]
     pub statuses_url: String,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9482,12 +9505,12 @@ pub struct TeamRepository {
     )]
     pub temp_clone_token: String,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<Data>,
     /**
-     * A team's access to a repository.
+    * A team's access to a repository.
      */
     #[serde(
         default,
@@ -9537,7 +9560,7 @@ pub struct TeamRepository {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProjectCard {
     /**
-     * Project cards represent a scope of work.
+    * Project cards represent a scope of work.
      */
     #[serde(
         default,
@@ -9777,7 +9800,8 @@ pub struct FullRepositoryPermissions {
     pub push: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "disabled")]
     Disabled,
@@ -9826,7 +9850,7 @@ pub struct SecurityAnalysis {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullRepository {
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -9834,7 +9858,7 @@ pub struct FullRepository {
     )]
     pub allow_auto_merge: bool,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -9842,7 +9866,7 @@ pub struct FullRepository {
     )]
     pub allow_merge_commit: bool,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -9850,7 +9874,7 @@ pub struct FullRepository {
     )]
     pub allow_rebase_merge: bool,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -9858,7 +9882,7 @@ pub struct FullRepository {
     )]
     pub allow_squash_merge: bool,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -9901,7 +9925,7 @@ pub struct FullRepository {
     )]
     pub clone_url: String,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_of_conduct: Option<CodeOfConductSimple>,
@@ -9954,7 +9978,7 @@ pub struct FullRepository {
     )]
     pub default_branch: String,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -10093,7 +10117,7 @@ pub struct FullRepository {
     )]
     pub id: i64,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -10207,17 +10231,17 @@ pub struct FullRepository {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization: Option<SimpleUser>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parent: Option<Repository>,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
@@ -10253,7 +10277,7 @@ pub struct FullRepository {
     )]
     pub size: i64,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Repository>,
@@ -10324,12 +10348,12 @@ pub struct FullRepository {
     )]
     pub temp_clone_token: String,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<Data>,
     /**
-     * Full Repository
+    * Full Repository
      */
     #[serde(
         default,
@@ -10442,7 +10466,8 @@ pub struct Artifact {
 /**
  * The phase of the lifecycle that the job is currently in.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum JobStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -10509,7 +10534,7 @@ pub struct Steps {
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The phase of the lifecycle that the job is currently in.
+    * The phase of the lifecycle that the job is currently in.
      */
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
@@ -10585,12 +10610,12 @@ pub struct Job {
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The phase of the lifecycle that the job is currently in.
+    * The phase of the lifecycle that the job is currently in.
      */
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
     /**
-     * Information of a job execution in a workflow run
+    * Information of a job execution in a workflow run
      */
     #[serde(
         default,
@@ -10609,7 +10634,7 @@ pub struct Job {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsRepositoryPermissions {
     /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
@@ -10734,7 +10759,7 @@ pub struct WorkflowRun {
     )]
     pub cancel_url: String,
     /**
-     * An invocation of a workflow
+    * An invocation of a workflow
      */
     #[serde(
         default,
@@ -10781,11 +10806,11 @@ pub struct WorkflowRun {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub head_commit: Option<SimpleCommit>,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub head_repository: MinimalRepository,
     /**
-     * An invocation of a workflow
+    * An invocation of a workflow
      */
     #[serde(
         default,
@@ -10842,7 +10867,7 @@ pub struct WorkflowRun {
     )]
     pub pull_requests: Vec<PullRequestMinimal>,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
     #[serde(
@@ -10938,7 +10963,8 @@ pub struct Environments {
 /**
  * Whether deployment to the environment(s) was approved or rejected
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EnvironmentApprovalState {
     #[serde(rename = "approved")]
     Approved,
@@ -10979,7 +11005,7 @@ pub struct EnvironmentApproval {
     )]
     pub comment: String,
     /**
-     * The list of environments that were approved or rejected
+    * The list of environments that were approved or rejected
      */
     #[serde(
         default,
@@ -10988,12 +11014,12 @@ pub struct EnvironmentApproval {
     )]
     pub environments: Vec<Environments>,
     /**
-     * Whether deployment to the environment(s) was approved or rejected
+    * Whether deployment to the environment(s) was approved or rejected
      */
     #[serde(default, skip_serializing_if = "EnvironmentApprovalState::is_noop")]
     pub state: EnvironmentApprovalState,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
@@ -11002,7 +11028,8 @@ pub struct EnvironmentApproval {
 /**
  * The type of reviewer. Must be one of: `User` or `Team`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeploymentReviewerType {
     #[serde(rename = "Team")]
     Team,
@@ -11075,12 +11102,12 @@ pub struct Environment {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewerAnyOf {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(flatten)]
     pub simple_user: SimpleUser,
     /**
-     * Groups of organization members that gives permissions on specified repositories.
+    * Groups of organization members that gives permissions on specified repositories.
      */
     #[serde(flatten)]
     pub team: Team,
@@ -11091,7 +11118,7 @@ pub struct Reviewers {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reviewer: Option<ReviewerAnyOf>,
     /**
-     * The type of reviewer. Must be one of: `User` or `Team`
+    * The type of reviewer. Must be one of: `User` or `Team`
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DeploymentReviewerType>,
@@ -11107,7 +11134,7 @@ pub struct PendingDeployment {
     pub current_user_can_approve: bool,
     pub environment: Environment,
     /**
-     * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+    * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
      */
     #[serde(
         default,
@@ -11216,7 +11243,7 @@ pub struct Deployment {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * A request for a specific ref(branch,sha,tag) to be deployed
+    * A request for a specific ref(branch,sha,tag) to be deployed
      */
     #[serde(
         default,
@@ -11255,7 +11282,7 @@ pub struct Deployment {
     )]
     pub task: String,
     /**
-     * A request for a specific ref(branch,sha,tag) to be deployed
+    * A request for a specific ref(branch,sha,tag) to be deployed
      */
     #[serde(
         default,
@@ -11307,7 +11334,7 @@ pub struct Billable {
 pub struct WorkflowRunUsage {
     pub billable: Billable,
     /**
-     * Workflow Run Usage
+    * Workflow Run Usage
      */
     #[serde(
         default,
@@ -11340,7 +11367,8 @@ pub struct ActionsSecret {
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WorkflowState {
     #[serde(rename = "active")]
     Active,
@@ -11396,7 +11424,7 @@ pub struct Workflow {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A GitHub Actions workflow
+    * A GitHub Actions workflow
      */
     #[serde(
         default,
@@ -11517,7 +11545,7 @@ pub struct EnforceAdmins {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DismissalRestrictions {
     /**
-     * The list of teams with review dismissal access.
+    * The list of teams with review dismissal access.
      */
     #[serde(
         default,
@@ -11560,7 +11588,7 @@ pub struct ProtectedBranchPullRequestReview {
     )]
     pub dismiss_stale_reviews: bool,
     /**
-     * Protected Branch Pull Request Review
+    * Protected Branch Pull Request Review
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissal_restrictions: Option<DismissalRestrictions>,
@@ -11570,7 +11598,7 @@ pub struct ProtectedBranchPullRequestReview {
     )]
     pub require_code_owner_reviews: bool,
     /**
-     * Protected Branch Pull Request Review
+    * Protected Branch Pull Request Review
      */
     #[serde(
         default,
@@ -11847,7 +11875,7 @@ pub struct Apps {
     )]
     pub description: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -11953,7 +11981,7 @@ pub struct BranchRestrictionPolicy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RequiredStatusChecks {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -11999,17 +12027,17 @@ pub struct AllowDeletions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BranchProtection {
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_deletions: Option<AllowDeletions>,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_force_pushes: Option<AllowDeletions>,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(
         default,
@@ -12017,7 +12045,7 @@ pub struct BranchProtection {
     )]
     pub enabled: bool,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enforce_admins: Option<EnforceAdmins>,
@@ -12034,32 +12062,32 @@ pub struct BranchProtection {
     )]
     pub protection_url: String,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_conversation_resolution: Option<AllowDeletions>,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_linear_history: Option<AllowDeletions>,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default)]
     pub required_pull_request_reviews: Option<ProtectedBranchPullRequestReview>,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_signatures: Option<EnforceAdmins>,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default)]
     pub required_status_checks: Option<RequiredStatusChecks>,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     #[serde(default)]
     pub restrictions: Option<BranchRestrictionPolicy>,
@@ -12103,7 +12131,7 @@ pub struct ShortBranch {
     )]
     pub protected: bool,
     /**
-     * Short Branch
+    * Short Branch
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub protection: Option<BranchProtection>,
@@ -12300,7 +12328,7 @@ pub struct CommitDataType {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub committer: Option<SimpleUser>,
     /**
-     * Commit
+    * Commit
      */
     #[serde(
         default,
@@ -12333,7 +12361,7 @@ pub struct CommitDataType {
     )]
     pub sha: String,
     /**
-     * Commit
+    * Commit
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<Stats>,
@@ -12368,7 +12396,7 @@ pub struct BranchWithProtection {
     #[serde(rename = "_links")]
     pub links: BranchWithProtectionLinks,
     /**
-     * Commit
+    * Commit
      */
     pub commit: CommitDataType,
     #[serde(
@@ -12389,7 +12417,7 @@ pub struct BranchWithProtection {
     )]
     pub protected: bool,
     /**
-     * Branch Protection
+    * Branch Protection
      */
     pub protection: BranchProtection,
     #[serde(
@@ -12399,7 +12427,7 @@ pub struct BranchWithProtection {
     )]
     pub protection_url: String,
     /**
-     * Branch With Protection
+    * Branch With Protection
      */
     #[serde(
         default,
@@ -12413,7 +12441,7 @@ pub struct BranchWithProtection {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StatusCheckPolicy {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -12443,7 +12471,7 @@ pub struct StatusCheckPolicy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
     /**
-     * The list of teams with review dismissal access.
+    * The list of teams with review dismissal access.
      */
     #[serde(
         default,
@@ -12519,47 +12547,47 @@ pub struct ProtectedBranchRequiredLinearHistory {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranch {
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_deletions: Option<ProtectedBranchRequiredLinearHistory>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_force_pushes: Option<ProtectedBranchRequiredLinearHistory>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enforce_admins: Option<EnforceAdmins>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_conversation_resolution: Option<AllowDeletions>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_linear_history: Option<ProtectedBranchRequiredLinearHistory>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default)]
     pub required_pull_request_reviews: Option<RequiredPullRequestReviews>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_signatures: Option<EnforceAdmins>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default)]
     pub required_status_checks: Option<StatusCheckPolicy>,
     /**
-     * Branch protections protect branches
+    * Branch protections protect branches
      */
     #[serde(default)]
     pub restrictions: Option<BranchRestrictionPolicy>,
@@ -12613,7 +12641,7 @@ pub struct DeploymentSimple {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * A deployment created as the result of an Actions check run from a workflow that references an environment
+    * A deployment created as the result of an Actions check run from a workflow that references an environment
      */
     #[serde(
         default,
@@ -12639,7 +12667,7 @@ pub struct DeploymentSimple {
     )]
     pub task: String,
     /**
-     * A deployment created as the result of an Actions check run from a workflow that references an environment
+    * A deployment created as the result of an Actions check run from a workflow that references an environment
      */
     #[serde(
         default,
@@ -12660,7 +12688,8 @@ pub struct DeploymentSimple {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Conclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -12766,7 +12795,7 @@ pub struct CheckRun {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conclusion: Option<Conclusion>,
     /**
-     * A check performed on the code of a given code change
+    * A check performed on the code of a given code change
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployment: Option<DeploymentSimple>,
@@ -12826,7 +12855,7 @@ pub struct CheckRun {
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The phase of the lifecycle that the job is currently in.
+    * The phase of the lifecycle that the job is currently in.
      */
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
@@ -12941,7 +12970,7 @@ pub struct CheckSuiteData {
     )]
     pub head_branch: String,
     /**
-     * Simple Commit
+    * Simple Commit
      */
     pub head_commit: SimpleCommit,
     #[serde(
@@ -12975,11 +13004,11 @@ pub struct CheckSuiteData {
     )]
     pub pull_requests: Vec<PullRequestMinimal>,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
     /**
-     * The phase of the lifecycle that the job is currently in.
+    * The phase of the lifecycle that the job is currently in.
      */
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
@@ -13027,7 +13056,7 @@ pub struct Preferences {
 pub struct CheckSuitePreference {
     pub preferences: Preferences,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
 }
@@ -13035,7 +13064,8 @@ pub struct CheckSuitePreference {
 /**
  * State of a code scanning alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CodeScanningAlertState {
     #[serde(rename = "closed")]
     Closed,
@@ -13075,7 +13105,8 @@ impl CodeScanningAlertState {
 /**
  * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CodeScanningAlertDismissedReason {
     #[serde(rename = "false positive")]
     FalsePositive,
@@ -13112,7 +13143,8 @@ impl CodeScanningAlertDismissedReason {
 /**
  * The severity of the alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Severity {
     #[serde(rename = "error")]
     Error,
@@ -13170,7 +13202,7 @@ pub struct CodeScanningAlertRuleSummary {
     )]
     pub name: String,
     /**
-     * The severity of the alert.
+    * The severity of the alert.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub severity: Option<Severity>,
@@ -13202,7 +13234,7 @@ pub struct CodeScanningAnalysisTool {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertLocation {
     /**
-     * Describe a region within a file for the alert.
+    * Describe a region within a file for the alert.
      */
     #[serde(
         default,
@@ -13211,7 +13243,7 @@ pub struct CodeScanningAlertLocation {
     )]
     pub end_column: i64,
     /**
-     * Describe a region within a file for the alert.
+    * Describe a region within a file for the alert.
      */
     #[serde(
         default,
@@ -13226,7 +13258,7 @@ pub struct CodeScanningAlertLocation {
     )]
     pub path: String,
     /**
-     * Describe a region within a file for the alert.
+    * Describe a region within a file for the alert.
      */
     #[serde(
         default,
@@ -13235,7 +13267,7 @@ pub struct CodeScanningAlertLocation {
     )]
     pub start_column: i64,
     /**
-     * Describe a region within a file for the alert.
+    * Describe a region within a file for the alert.
      */
     #[serde(
         default,
@@ -13248,7 +13280,8 @@ pub struct CodeScanningAlertLocation {
 /**
  * A classification of the file. For example to identify it as generated.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CodeScanningAlertClassification {
     #[serde(rename = "generated")]
     Generated,
@@ -13304,7 +13337,7 @@ pub struct CodeScanningAlertInstance {
     )]
     pub analysis_key: String,
     /**
-     * Classifications that have been applied to the file that triggered the alert.
+    * Classifications that have been applied to the file that triggered the alert.
      *  For example identifying it as documentation, or a generated file.
      */
     #[serde(
@@ -13332,7 +13365,7 @@ pub struct CodeScanningAlertInstance {
     )]
     pub html_url: String,
     /**
-     * Describe a region within a file for the alert.
+    * Describe a region within a file for the alert.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<CodeScanningAlertLocation>,
@@ -13346,7 +13379,7 @@ pub struct CodeScanningAlertInstance {
     )]
     pub ref_: String,
     /**
-     * State of a code scanning alert.
+    * State of a code scanning alert.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<CodeScanningAlertState>,
@@ -13367,12 +13400,12 @@ pub struct CodeScanningAlertItems {
     )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_by: Option<SimpleUser>,
     /**
-     * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
+    * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
@@ -13397,7 +13430,7 @@ pub struct CodeScanningAlertItems {
     pub number: i64,
     pub rule: CodeScanningAlertRuleSummary,
     /**
-     * State of a code scanning alert.
+    * State of a code scanning alert.
      */
     pub state: CodeScanningAlertState,
     pub tool: CodeScanningAnalysisTool,
@@ -13412,7 +13445,8 @@ pub struct CodeScanningAlertItems {
 /**
  * The security severity of the alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SecuritySeverityLevel {
     #[serde(rename = "critical")]
     Critical,
@@ -13482,17 +13516,17 @@ pub struct CodeScanningAlertRule {
     )]
     pub name: String,
     /**
-     * The security severity of the alert.
+    * The security severity of the alert.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_severity_level: Option<SecuritySeverityLevel>,
     /**
-     * The severity of the alert.
+    * The severity of the alert.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub severity: Option<Severity>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -13517,12 +13551,12 @@ pub struct CodeScanningAlert {
     )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_by: Option<SimpleUser>,
     /**
-     * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
+    * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
@@ -13549,7 +13583,7 @@ pub struct CodeScanningAlert {
     pub number: i64,
     pub rule: CodeScanningAlertRule,
     /**
-     * State of a code scanning alert.
+    * State of a code scanning alert.
      */
     pub state: CodeScanningAlertState,
     pub tool: CodeScanningAnalysisTool,
@@ -13564,7 +13598,8 @@ pub struct CodeScanningAlert {
 /**
  * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CodeScanningAlertSetState {
     #[serde(rename = "dismissed")]
     Dismissed,
@@ -13726,7 +13761,8 @@ pub struct CodeScanningSarifsReceipt {
 /**
  * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProcessingStatus {
     #[serde(rename = "complete")]
     Complete,
@@ -13766,7 +13802,7 @@ pub struct CodeScanningSarifsStatus {
     )]
     pub analyses_url: String,
     /**
-     * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
+    * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub processing_status: Option<ProcessingStatus>,
@@ -13854,7 +13890,7 @@ pub struct Collaborator {
     )]
     pub organizations_url: String,
     /**
-     * Collaborator
+    * Collaborator
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
@@ -13905,7 +13941,8 @@ pub struct Collaborator {
 /**
  * The permission associated with the invitation.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RepositoryInvitationPermissions {
     #[serde(rename = "admin")]
     Admin,
@@ -13955,7 +13992,7 @@ pub struct RepositoryInvitation {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Repository invitations let you manage who you collaborate with.
+    * Repository invitations let you manage who you collaborate with.
      */
     #[serde(
         default,
@@ -13985,7 +14022,7 @@ pub struct RepositoryInvitation {
     )]
     pub node_id: String,
     /**
-     * The permission associated with the invitation.
+    * The permission associated with the invitation.
      */
     #[serde(
         default,
@@ -13993,7 +14030,7 @@ pub struct RepositoryInvitation {
     )]
     pub permissions: RepositoryInvitationPermissions,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
     #[serde(
@@ -14008,7 +14045,7 @@ pub struct RepositoryInvitation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommitComment {
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -14066,7 +14103,7 @@ pub struct CommitComment {
     )]
     pub position: i64,
     /**
-     * Commit Comment
+    * Commit Comment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
@@ -14117,7 +14154,8 @@ pub struct Link {
 /**
  * The merge method to use.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MergeMethod {
     #[serde(rename = "merge")]
     Merge,
@@ -14167,12 +14205,12 @@ pub struct AutoMerge {
     )]
     pub commit_title: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enabled_by: Option<SimpleUser>,
     /**
-     * The merge method to use.
+    * The merge method to use.
      */
     #[serde(default, skip_serializing_if = "MergeMethod::is_noop")]
     pub merge_method: MergeMethod,
@@ -14194,7 +14232,7 @@ pub struct PullRequestSimpleHead {
     )]
     pub ref_: String,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repo: Option<Repository>,
@@ -14224,7 +14262,7 @@ pub struct Base {
     )]
     pub ref_: String,
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repo: Option<Repository>,
@@ -14241,36 +14279,36 @@ pub struct Base {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestSimpleLinks {
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub comments: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub commits: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub html: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub issue: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub review_comment: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub review_comments: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     #[serde(rename = "self")]
     pub self_: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub statuses: Link,
 }
@@ -14295,11 +14333,11 @@ pub struct PullRequestSimple {
     )]
     pub assignees: Vec<SimpleUser>,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     /**
-     * The status of auto merging a pull request.
+    * The status of auto merging a pull request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_merge: Option<AutoMerge>,
@@ -14341,7 +14379,7 @@ pub struct PullRequestSimple {
     )]
     pub diff_url: String,
     /**
-     * Pull Request Simple
+    * Pull Request Simple
      */
     #[serde(
         default,
@@ -14417,7 +14455,7 @@ pub struct PullRequestSimple {
     )]
     pub requested_reviewers: Vec<SimpleUser>,
     /**
-     * Pull Request Simple
+    * Pull Request Simple
      */
     #[serde(
         default,
@@ -14550,7 +14588,7 @@ pub struct CombinedCommitStatus {
     )]
     pub commit_url: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
     #[serde(
@@ -14607,7 +14645,7 @@ pub struct StatusData {
     )]
     pub created_at: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub creator: Option<SimpleUser>,
@@ -14674,7 +14712,7 @@ pub struct CommunityHealthFile {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommunityProfileFiles {
     /**
-     * Code of Conduct Simple
+    * Code of Conduct Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_of_conduct: Option<CodeOfConductSimple>,
@@ -14696,7 +14734,7 @@ pub struct CommunityProfileFiles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommunityProfile {
     /**
-     * Community Profile
+    * Community Profile
      */
     #[serde(
         default,
@@ -14801,7 +14839,8 @@ pub struct DiffEntry {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CommitComparisonStatus {
     #[serde(rename = "ahead")]
     Ahead,
@@ -14848,7 +14887,7 @@ pub struct CommitComparison {
     )]
     pub ahead_by: i64,
     /**
-     * Commit
+    * Commit
      */
     pub base_commit: CommitDataType,
     #[serde(
@@ -14870,7 +14909,7 @@ pub struct CommitComparison {
     )]
     pub diff_url: String,
     /**
-     * Commit Comparison
+    * Commit Comparison
      */
     #[serde(
         default,
@@ -14885,7 +14924,7 @@ pub struct CommitComparison {
     )]
     pub html_url: String,
     /**
-     * Commit
+    * Commit
      */
     pub merge_base_commit: CommitDataType,
     #[serde(
@@ -15047,7 +15086,7 @@ pub struct ContentTree {
     )]
     pub download_url: String,
     /**
-     * Content Tree
+    * Content Tree
      */
     #[serde(
         default,
@@ -15530,7 +15569,7 @@ pub struct Contributor {
     )]
     pub html_url: String,
     /**
-     * Contributor
+    * Contributor
      */
     #[serde(
         default,
@@ -15575,7 +15614,7 @@ pub struct Contributor {
     )]
     pub repos_url: String,
     /**
-     * Contributor
+    * Contributor
      */
     #[serde(
         default,
@@ -15612,7 +15651,8 @@ pub struct Contributor {
 /**
  * The state of the status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeploymentStatusState {
     #[serde(rename = "error")]
     Error,
@@ -15720,7 +15760,7 @@ pub struct DeploymentStatus {
     )]
     pub repository_url: String,
     /**
-     * The state of the status.
+    * The state of the status.
      */
     #[serde(default, skip_serializing_if = "DeploymentStatusState::is_noop")]
     pub state: DeploymentStatusState,
@@ -15803,7 +15843,7 @@ pub struct ProtectionRulesData {
     )]
     pub node_id: String,
     /**
-     * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+    * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
      */
     #[serde(
         default,
@@ -15869,7 +15909,7 @@ pub struct EnvironmentData {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
+    * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
@@ -15898,7 +15938,7 @@ pub struct EnvironmentData {
     )]
     pub node_id: String,
     /**
-     * Details of a deployment environment
+    * Details of a deployment environment
      */
     #[serde(
         default,
@@ -15994,11 +16034,11 @@ pub struct Committer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCommit {
     /**
-     * Identifying information for the git-user
+    * Identifying information for the git-user
      */
     pub author: Committer,
     /**
-     * Identifying information for the git-user
+    * Identifying information for the git-user
      */
     pub committer: Committer,
     #[serde(
@@ -16125,7 +16165,7 @@ pub struct GitTag {
     )]
     pub url: String,
     /**
-     * Metadata for a Git tag
+    * Metadata for a Git tag
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub verification: Option<Verification>,
@@ -16182,7 +16222,7 @@ pub struct GitTreeData {
     )]
     pub sha: String,
     /**
-     * Objects specifying a tree structure
+    * Objects specifying a tree structure
      */
     #[serde(
         default,
@@ -16307,7 +16347,7 @@ pub struct Hook {
     )]
     pub deliveries_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -16361,7 +16401,8 @@ pub struct Hook {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ImportStatus {
     #[serde(rename = "auth")]
     Auth,
@@ -16460,7 +16501,7 @@ pub struct ProjectChoices {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Import {
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16475,7 +16516,7 @@ pub struct Import {
     )]
     pub authors_url: String,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16496,7 +16537,7 @@ pub struct Import {
     )]
     pub failed_step: String,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16510,7 +16551,7 @@ pub struct Import {
     )]
     pub html_url: String,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16519,7 +16560,7 @@ pub struct Import {
     )]
     pub import_percent: i64,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16528,7 +16569,7 @@ pub struct Import {
     )]
     pub large_files_count: i64,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16543,7 +16584,7 @@ pub struct Import {
     )]
     pub message: String,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16552,7 +16593,7 @@ pub struct Import {
     )]
     pub project_choices: Vec<ProjectChoices>,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16599,7 +16640,7 @@ pub struct Import {
     )]
     pub url: String,
     /**
-     * A repository import from an external source.
+    * A repository import from an external source.
      */
     #[serde(
         default,
@@ -16819,7 +16860,7 @@ pub struct IssueEvent {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assigner: Option<SimpleUser>,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author_association: Option<AuthorAssociation>,
@@ -16842,7 +16883,7 @@ pub struct IssueEvent {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_review: Option<DismissedReview>,
@@ -16859,12 +16900,12 @@ pub struct IssueEvent {
     )]
     pub id: i64,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issue: Option<IssueSimple>,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub label: Option<IssueEventLabel>,
@@ -16875,7 +16916,7 @@ pub struct IssueEvent {
     )]
     pub lock_reason: String,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<IssueEventMilestone>,
@@ -16888,19 +16929,19 @@ pub struct IssueEvent {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rename: Option<Rename>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_reviewer: Option<SimpleUser>,
     /**
-     * Issue Event
+    * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_team: Option<Team>,
@@ -16918,7 +16959,7 @@ pub struct IssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LabeledIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -16953,7 +16994,7 @@ pub struct LabeledIssueEvent {
     )]
     pub id: i64,
     /**
-     * Issue Event Label
+    * Issue Event Label
      */
     pub label: IssueEventLabel,
     #[serde(
@@ -16963,7 +17004,7 @@ pub struct LabeledIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -16979,17 +17020,17 @@ pub struct LabeledIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assigner: Option<SimpleUser>,
@@ -17030,7 +17071,7 @@ pub struct AssignedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -17046,7 +17087,7 @@ pub struct AssignedIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MilestonedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17081,7 +17122,7 @@ pub struct MilestonedIssueEvent {
     )]
     pub id: i64,
     /**
-     * Issue Event Milestone
+    * Issue Event Milestone
      */
     pub milestone: IssueEventMilestone,
     #[serde(
@@ -17091,7 +17132,7 @@ pub struct MilestonedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -17107,7 +17148,7 @@ pub struct MilestonedIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RenamedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17148,7 +17189,7 @@ pub struct RenamedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -17165,7 +17206,7 @@ pub struct RenamedIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewRequestedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17206,22 +17247,22 @@ pub struct ReviewRequestedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_reviewer: Option<SimpleUser>,
     /**
-     * Review Requested Issue Event
+    * Review Requested Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_team: Option<Team>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub review_requester: Option<SimpleUser>,
@@ -17237,7 +17278,7 @@ pub struct ReviewRequestedIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewRequestRemovedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17278,22 +17319,22 @@ pub struct ReviewRequestRemovedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_reviewer: Option<SimpleUser>,
     /**
-     * Review Request Removed Issue Event
+    * Review Request Removed Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_team: Option<Team>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub review_requester: Option<SimpleUser>,
@@ -17309,7 +17350,7 @@ pub struct ReviewRequestRemovedIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewDismissedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17351,7 +17392,7 @@ pub struct ReviewDismissedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -17367,7 +17408,7 @@ pub struct ReviewDismissedIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LockedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17414,7 +17455,7 @@ pub struct LockedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -17430,7 +17471,7 @@ pub struct LockedIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddedProjectIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17471,12 +17512,12 @@ pub struct AddedProjectIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Added to Project Issue Event
+    * Added to Project Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
@@ -17492,7 +17533,7 @@ pub struct AddedProjectIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MovedColumnInProjectIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17533,12 +17574,12 @@ pub struct MovedColumnInProjectIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Moved Column in Project Issue Event
+    * Moved Column in Project Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
@@ -17554,7 +17595,7 @@ pub struct MovedColumnInProjectIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RemovedFromProjectIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17595,12 +17636,12 @@ pub struct RemovedFromProjectIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Removed from Project Issue Event
+    * Removed from Project Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
@@ -17616,7 +17657,7 @@ pub struct RemovedFromProjectIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConvertedNoteIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17657,12 +17698,12 @@ pub struct ConvertedNoteIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Converted Note to Issue Issue Event
+    * Converted Note to Issue Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
@@ -17695,62 +17736,62 @@ pub struct ConvertedNoteIssueEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssueEventAnyOf {
     /**
-     * Labeled Issue Event
+    * Labeled Issue Event
      */
     #[serde(flatten)]
     pub labeled_issue_event: LabeledIssueEvent,
     /**
-     * Assigned Issue Event
+    * Assigned Issue Event
      */
     #[serde(flatten)]
     pub assigned_issue_event: AssignedIssueEvent,
     /**
-     * Milestoned Issue Event
+    * Milestoned Issue Event
      */
     #[serde(flatten)]
     pub milestoned_issue_event: MilestonedIssueEvent,
     /**
-     * Renamed Issue Event
+    * Renamed Issue Event
      */
     #[serde(flatten)]
     pub renamed_issue_event: RenamedIssueEvent,
     /**
-     * Review Requested Issue Event
+    * Review Requested Issue Event
      */
     #[serde(flatten)]
     pub review_requested_issue_event: ReviewRequestedIssueEvent,
     /**
-     * Review Request Removed Issue Event
+    * Review Request Removed Issue Event
      */
     #[serde(flatten)]
     pub review_request_removed_issue_event: ReviewRequestRemovedIssueEvent,
     /**
-     * Review Dismissed Issue Event
+    * Review Dismissed Issue Event
      */
     #[serde(flatten)]
     pub review_dismissed_issue_event: ReviewDismissedIssueEvent,
     /**
-     * Locked Issue Event
+    * Locked Issue Event
      */
     #[serde(flatten)]
     pub locked_issue_event: LockedIssueEvent,
     /**
-     * Added to Project Issue Event
+    * Added to Project Issue Event
      */
     #[serde(flatten)]
     pub added_project_issue_event: AddedProjectIssueEvent,
     /**
-     * Moved Column in Project Issue Event
+    * Moved Column in Project Issue Event
      */
     #[serde(flatten)]
     pub moved_column_in_project_issue_event: MovedColumnInProjectIssueEvent,
     /**
-     * Removed from Project Issue Event
+    * Removed from Project Issue Event
      */
     #[serde(flatten)]
     pub removed_from_project_issue_event: RemovedFromProjectIssueEvent,
     /**
-     * Converted Note to Issue Issue Event
+    * Converted Note to Issue Issue Event
      */
     #[serde(flatten)]
     pub converted_note_issue_event: ConvertedNoteIssueEvent,
@@ -17760,12 +17801,12 @@ pub struct IssueEventAnyOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCommentEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -17823,12 +17864,12 @@ pub struct TimelineCommentEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Timeline Comment Event
+    * Timeline Comment Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
@@ -17845,7 +17886,7 @@ pub struct TimelineCommentEvent {
     )]
     pub url: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
@@ -17854,7 +17895,7 @@ pub struct TimelineCommentEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Source {
     /**
-     * Issue Simple
+    * Issue Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issue: Option<IssueSimple>,
@@ -17871,7 +17912,7 @@ pub struct Source {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCrossReferencedEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17900,11 +17941,11 @@ pub struct TimelineCrossReferencedEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCommittedEvent {
     /**
-     * Identifying information for the git-user
+    * Identifying information for the git-user
      */
     pub author: Committer,
     /**
-     * Identifying information for the git-user
+    * Identifying information for the git-user
      */
     pub committer: Committer,
     #[serde(
@@ -17956,11 +17997,11 @@ pub struct TimelineCommittedEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineReviewedEventLinks {
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub html: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub pull_request: Link,
 }
@@ -17971,7 +18012,7 @@ pub struct TimelineReviewedEvent {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -18035,7 +18076,7 @@ pub struct TimelineReviewedEvent {
     )]
     pub state: String,
     /**
-     * Timeline Reviewed Event
+    * Timeline Reviewed Event
      */
     #[serde(
         default,
@@ -18044,7 +18085,7 @@ pub struct TimelineReviewedEvent {
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
@@ -18053,15 +18094,15 @@ pub struct TimelineReviewedEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewCommentLinks {
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub html: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub pull_request: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     #[serde(rename = "self")]
     pub self_: Link,
@@ -18070,7 +18111,8 @@ pub struct PullRequestReviewCommentLinks {
 /**
  * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Side {
     #[serde(rename = "LEFT")]
     Left,
@@ -18092,13 +18134,14 @@ impl std::fmt::Display for Side {
     }
 }
 
+
 /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewComment {
     #[serde(rename = "_links")]
     pub links: PullRequestReviewCommentLinks,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -18150,7 +18193,7 @@ pub struct PullRequestReviewComment {
     )]
     pub id: i64,
     /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
+    * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
      */
     #[serde(
         default,
@@ -18159,7 +18202,7 @@ pub struct PullRequestReviewComment {
     )]
     pub in_reply_to_id: i64,
     /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
+    * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
      */
     #[serde(
         default,
@@ -18180,7 +18223,7 @@ pub struct PullRequestReviewComment {
     )]
     pub original_commit_id: String,
     /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
+    * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
      */
     #[serde(
         default,
@@ -18195,7 +18238,7 @@ pub struct PullRequestReviewComment {
     )]
     pub original_position: i64,
     /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
+    * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
      */
     #[serde(
         default,
@@ -18228,17 +18271,17 @@ pub struct PullRequestReviewComment {
     )]
     pub pull_request_url: String,
     /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
+    * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
+    * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub side: Option<Side>,
     /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
+    * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
      */
     #[serde(
         default,
@@ -18247,7 +18290,7 @@ pub struct PullRequestReviewComment {
     )]
     pub start_line: i64,
     /**
-     * The side of the first line of the range for a multi-line comment.
+    * The side of the first line of the range for a multi-line comment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<Side>,
@@ -18264,7 +18307,7 @@ pub struct PullRequestReviewComment {
     )]
     pub url: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
@@ -18274,7 +18317,7 @@ pub struct PullRequestReviewComment {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineLineCommentedEvent {
     /**
-     * Timeline Line Commented Event
+    * Timeline Line Commented Event
      */
     #[serde(
         default,
@@ -18300,7 +18343,7 @@ pub struct TimelineLineCommentedEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCommitCommentedEvent {
     /**
-     * Timeline Commit Commented Event
+    * Timeline Commit Commented Event
      */
     #[serde(
         default,
@@ -18332,12 +18375,12 @@ pub struct TimelineCommitCommentedEvent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineAssignedIssueEvent {
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
@@ -18378,7 +18421,7 @@ pub struct TimelineAssignedIssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -18527,7 +18570,8 @@ pub struct PagesSourceHash {
     pub path: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PagesHttpsCertificateState {
     #[serde(rename = "approved")]
     Approved,
@@ -18597,7 +18641,7 @@ pub struct PagesHttpsCertificate {
     )]
     pub description: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -18618,7 +18662,8 @@ pub struct PagesHttpsCertificate {
 /**
  * The status of the most recent build of the Page.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PageStatus {
     #[serde(rename = "building")]
     Building,
@@ -18685,7 +18730,7 @@ pub struct Page {
     pub public: bool,
     pub source: PagesSourceHash,
     /**
-     * The status of the most recent build of the Page.
+    * The status of the most recent build of the Page.
      */
     #[serde(default, skip_serializing_if = "PageStatus::is_noop")]
     pub status: PageStatus,
@@ -19074,7 +19119,7 @@ pub struct PagesHealthCheck {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub alt_domain: Option<AltDomain>,
     /**
-     * Pages Health Check Status
+    * Pages Health Check Status
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub domain: Option<Domain>,
@@ -20099,7 +20144,7 @@ pub struct PullRequestBaseRepo {
     )]
     pub temp_clone_token: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -20191,11 +20236,11 @@ pub struct PullRequestData {
     )]
     pub assignees: Vec<SimpleUser>,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     /**
-     * The status of auto merging a pull request.
+    * The status of auto merging a pull request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_merge: Option<AutoMerge>,
@@ -20261,7 +20306,7 @@ pub struct PullRequestData {
     )]
     pub diff_url: String,
     /**
-     * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+    * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
      */
     #[serde(
         default,
@@ -20354,7 +20399,7 @@ pub struct PullRequestData {
     )]
     pub patch_url: String,
     /**
-     * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+    * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
      */
     #[serde(
         default,
@@ -20392,7 +20437,7 @@ pub struct PullRequestData {
     )]
     pub review_comments_url: String,
     /**
-     * The state of the milestone.
+    * The state of the milestone.
      */
     #[serde(default)]
     pub state: State,
@@ -20450,7 +20495,7 @@ pub struct PullRequestMergeResult {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestReview {
     /**
-     * The list of teams with review dismissal access.
+    * The list of teams with review dismissal access.
      */
     #[serde(
         default,
@@ -20472,7 +20517,7 @@ pub struct PullRequestReviewData {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -20530,7 +20575,7 @@ pub struct PullRequestReviewData {
     )]
     pub state: String,
     /**
-     * Pull Request Reviews are reviews on pull requests.
+    * Pull Request Reviews are reviews on pull requests.
      */
     #[serde(
         default,
@@ -20545,15 +20590,15 @@ pub struct PullRequestReviewData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewCommentLinks {
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub html: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     pub pull_request: Link,
     /**
-     * Hypermedia Link
+    * Hypermedia Link
      */
     #[serde(rename = "self")]
     pub self_: Link,
@@ -20565,7 +20610,7 @@ pub struct ReviewComment {
     #[serde(rename = "_links")]
     pub links: ReviewCommentLinks,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -20617,7 +20662,7 @@ pub struct ReviewComment {
     )]
     pub id: i64,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(
         default,
@@ -20626,7 +20671,7 @@ pub struct ReviewComment {
     )]
     pub in_reply_to_id: i64,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(
         default,
@@ -20647,7 +20692,7 @@ pub struct ReviewComment {
     )]
     pub original_commit_id: String,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(
         default,
@@ -20662,7 +20707,7 @@ pub struct ReviewComment {
     )]
     pub original_position: i64,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(
         default,
@@ -20695,17 +20740,17 @@ pub struct ReviewComment {
     )]
     pub pull_request_url: String,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub side: Option<Side>,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(
         default,
@@ -20714,7 +20759,7 @@ pub struct ReviewComment {
     )]
     pub start_line: i64,
     /**
-     * Legacy Review Comment
+    * Legacy Review Comment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<Side>,
@@ -20737,7 +20782,8 @@ pub struct ReviewComment {
 /**
  * State of the release asset.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReleaseAssetState {
     #[serde(rename = "open")]
     Open,
@@ -20826,7 +20872,7 @@ pub struct ReleaseAsset {
     )]
     pub size: i64,
     /**
-     * State of the release asset.
+    * State of the release asset.
      */
     #[serde(default, skip_serializing_if = "ReleaseAssetState::is_noop")]
     pub state: ReleaseAssetState,
@@ -20862,7 +20908,7 @@ pub struct Release {
     )]
     pub assets_url: String,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<SimpleUser>,
@@ -20914,7 +20960,7 @@ pub struct Release {
     )]
     pub id: i64,
     /**
-     * A release.
+    * A release.
      */
     #[serde(
         default,
@@ -20946,7 +20992,7 @@ pub struct Release {
     )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A release.
+    * A release.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
@@ -20991,7 +21037,8 @@ pub struct Release {
 /**
  * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SecretScanningAlertState {
     #[serde(rename = "open")]
     Open,
@@ -21025,7 +21072,8 @@ impl SecretScanningAlertState {
 /**
  * **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SecretScanningAlertResolution {
     #[serde(rename = "false_positive")]
     FalsePositive,
@@ -21083,7 +21131,7 @@ pub struct SecretScanningAlert {
     )]
     pub number: i64,
     /**
-     * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
+    * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolution: Option<SecretScanningAlertResolution>,
@@ -21094,7 +21142,7 @@ pub struct SecretScanningAlert {
     )]
     pub resolved_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+    * Simple User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolved_by: Option<SimpleUser>,
@@ -21111,7 +21159,7 @@ pub struct SecretScanningAlert {
     )]
     pub secret_type: String,
     /**
-     * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
+    * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<SecretScanningAlertState>,
@@ -21140,7 +21188,7 @@ pub struct Stargazer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommitActivity {
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -21212,7 +21260,7 @@ pub struct ContributorActivity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ParticipationStats {
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -21221,7 +21269,7 @@ pub struct ParticipationStats {
     )]
     pub all: Vec<i64>,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -21304,7 +21352,7 @@ pub struct Tag {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Topic {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -21518,7 +21566,7 @@ pub struct ScimEnterpriseGroup {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meta: Option<Meta>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -21545,7 +21593,7 @@ pub struct ScimGroupListEnterprise {
     )]
     pub items_per_page: f64,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -21656,7 +21704,7 @@ pub struct ScimEnterpriseUser {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub name: Option<Name>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -21690,7 +21738,7 @@ pub struct ScimUserListEnterprise {
     )]
     pub items_per_page: f64,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -21783,7 +21831,8 @@ pub struct ScimUserMeta {
     pub resource_type: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Op {
     #[serde(rename = "add")]
     Add,
@@ -21830,7 +21879,7 @@ impl Op {
 pub enum ScimUserOperationsValueOneOf {
     String(String),
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
     Data(Data),
@@ -21913,7 +21962,7 @@ pub struct ScimUser {
     )]
     pub display_name: String,
     /**
-     * user emails
+    * user emails
      */
     #[serde(
         default,
@@ -21929,7 +21978,7 @@ pub struct ScimUser {
     )]
     pub external_id: String,
     /**
-     * SCIM /Users provisioning endpoints
+    * SCIM /Users provisioning endpoints
      */
     #[serde(
         default,
@@ -21946,7 +21995,7 @@ pub struct ScimUser {
     pub meta: ScimUserMeta,
     pub name: ScimUserName,
     /**
-     * SCIM /Users provisioning endpoints
+    * SCIM /Users provisioning endpoints
      */
     #[serde(
         default,
@@ -21955,7 +22004,7 @@ pub struct ScimUser {
     )]
     pub operations: Vec<Operations>,
     /**
-     * SCIM /Users provisioning endpoints
+    * SCIM /Users provisioning endpoints
      */
     #[serde(
         default,
@@ -21964,7 +22013,7 @@ pub struct ScimUser {
     )]
     pub organization_id: i64,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -21999,7 +22048,7 @@ pub struct ScimUserList {
     )]
     pub items_per_page: i64,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -22026,7 +22075,7 @@ pub struct ScimUserList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Matches {
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -22080,7 +22129,7 @@ pub struct SearchResultTextMatches {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CodeSearchResultItem {
     /**
-     * Code Search Result Item
+    * Code Search Result Item
      */
     #[serde(
         default,
@@ -22107,7 +22156,7 @@ pub struct CodeSearchResultItem {
     )]
     pub language: String,
     /**
-     * Code Search Result Item
+    * Code Search Result Item
      */
     #[serde(
         default,
@@ -22116,7 +22165,7 @@ pub struct CodeSearchResultItem {
     )]
     pub last_modified_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Code Search Result Item
+    * Code Search Result Item
      */
     #[serde(
         default,
@@ -22137,7 +22186,7 @@ pub struct CodeSearchResultItem {
     )]
     pub path: String,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
     #[serde(
@@ -22153,7 +22202,7 @@ pub struct CodeSearchResultItem {
     )]
     pub sha: String,
     /**
-     * Code Search Result Item
+    * Code Search Result Item
      */
     #[serde(
         default,
@@ -22172,7 +22221,7 @@ pub struct CodeSearchResultItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommitSearchResultItem {
     /**
-     * Identifying information for the git-user
+    * Identifying information for the git-user
      */
     pub author: Committer,
     #[serde(
@@ -22233,7 +22282,7 @@ pub struct CommitSearchResultItemData {
     )]
     pub parents: Vec<Parents>,
     /**
-     * Minimal Repository
+    * Minimal Repository
      */
     pub repository: MinimalRepository,
     #[serde(
@@ -22249,7 +22298,7 @@ pub struct CommitSearchResultItemData {
     )]
     pub sha: String,
     /**
-     * Commit Search Result Item
+    * Commit Search Result Item
      */
     #[serde(
         default,
@@ -22283,7 +22332,7 @@ pub struct IssueSearchResultItem {
     )]
     pub assignees: Vec<SimpleUser>,
     /**
-     * How the author is associated with the repository.
+    * How the author is associated with the repository.
      */
     pub author_association: AuthorAssociation,
     #[serde(
@@ -22329,7 +22378,7 @@ pub struct IssueSearchResultItem {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Issue Search Result Item
+    * Issue Search Result Item
      */
     #[serde(
         default,
@@ -22388,12 +22437,12 @@ pub struct IssueSearchResultItem {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     /**
-     * Issue Search Result Item
+    * Issue Search Result Item
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_request: Option<PullRequest>,
     /**
-     * Issue Search Result Item
+    * Issue Search Result Item
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<Repository>,
@@ -22416,7 +22465,7 @@ pub struct IssueSearchResultItem {
     )]
     pub state: String,
     /**
-     * Issue Search Result Item
+    * Issue Search Result Item
      */
     #[serde(
         default,
@@ -22497,7 +22546,7 @@ pub struct LabelSearchResultItem {
     )]
     pub score: f64,
     /**
-     * Label Search Result Item
+    * Label Search Result Item
      */
     #[serde(
         default,
@@ -22517,7 +22566,7 @@ pub struct LabelSearchResultItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RepoSearchResultItem {
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(
         default,
@@ -22525,7 +22574,7 @@ pub struct RepoSearchResultItem {
     )]
     pub allow_auto_merge: bool,
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(
         default,
@@ -22533,7 +22582,7 @@ pub struct RepoSearchResultItem {
     )]
     pub allow_merge_commit: bool,
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(
         default,
@@ -22541,7 +22590,7 @@ pub struct RepoSearchResultItem {
     )]
     pub allow_rebase_merge: bool,
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(
         default,
@@ -22632,7 +22681,7 @@ pub struct RepoSearchResultItem {
     )]
     pub default_branch: String,
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(
         default,
@@ -22871,7 +22920,7 @@ pub struct RepoSearchResultItem {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
@@ -22971,7 +23020,7 @@ pub struct RepoSearchResultItem {
     )]
     pub temp_clone_token: String,
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(
         default,
@@ -22980,7 +23029,7 @@ pub struct RepoSearchResultItem {
     )]
     pub text_matches: Vec<SearchResultTextMatches>,
     /**
-     * Repo Search Result Item
+    * Repo Search Result Item
      */
     #[serde(
         default,
@@ -23122,7 +23171,7 @@ pub struct TopicSearchResultItem {
     )]
     pub released: String,
     /**
-     * Topic Search Result Item
+    * Topic Search Result Item
      */
     #[serde(
         default,
@@ -23143,7 +23192,7 @@ pub struct TopicSearchResultItem {
     )]
     pub short_description: String,
     /**
-     * Topic Search Result Item
+    * Topic Search Result Item
      */
     #[serde(
         default,
@@ -23187,7 +23236,7 @@ pub struct UserSearchResultItem {
     )]
     pub company: String,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23208,7 +23257,7 @@ pub struct UserSearchResultItem {
     )]
     pub events_url: String,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23223,7 +23272,7 @@ pub struct UserSearchResultItem {
     )]
     pub followers_url: String,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23250,7 +23299,7 @@ pub struct UserSearchResultItem {
     )]
     pub gravatar_id: String,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23300,7 +23349,7 @@ pub struct UserSearchResultItem {
     )]
     pub organizations_url: String,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23309,7 +23358,7 @@ pub struct UserSearchResultItem {
     )]
     pub public_gists: i64,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23353,7 +23402,7 @@ pub struct UserSearchResultItem {
     )]
     pub subscriptions_url: String,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23362,7 +23411,7 @@ pub struct UserSearchResultItem {
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23378,7 +23427,7 @@ pub struct UserSearchResultItem {
     )]
     pub type_: String,
     /**
-     * User Search Result Item
+    * User Search Result Item
      */
     #[serde(
         default,
@@ -23416,7 +23465,7 @@ pub struct PrivateUser {
     )]
     pub blog: String,
     /**
-     * Private User
+    * Private User
      */
     #[serde(
         default,
@@ -23555,7 +23604,7 @@ pub struct PrivateUser {
     )]
     pub owned_private_repos: i64,
     /**
-     * Private User
+    * Private User
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<Plan>,
@@ -23607,7 +23656,7 @@ pub struct PrivateUser {
     )]
     pub subscriptions_url: String,
     /**
-     * Private User
+    * Private User
      */
     #[serde(
         default,
@@ -23724,7 +23773,7 @@ pub struct Subkeys {
     )]
     pub created_at: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -23769,7 +23818,7 @@ pub struct Subkeys {
     )]
     pub raw_key: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -23978,7 +24027,7 @@ pub struct UserMarketplacePurchase {
     )]
     pub on_free_trial: bool,
     /**
-     * Marketplace Listing Plan
+    * Marketplace Listing Plan
      */
     pub plan: MarketplaceListingPlan,
     #[serde(
@@ -23999,7 +24048,7 @@ pub struct UserMarketplacePurchase {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StarredRepository {
     /**
-     * A git repository
+    * A git repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repo: Option<Repository>,
@@ -24064,7 +24113,8 @@ pub struct KeySimple {
  *   
  *   The default is `web`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Include {
     #[serde(rename = "all")]
     All,
@@ -24103,7 +24153,8 @@ impl Include {
  *   
  *   The default is `desc`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Order {
     #[serde(rename = "asc")]
     Asc,
@@ -24137,7 +24188,8 @@ impl Order {
 /**
  * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Sort {
     #[serde(rename = "created")]
     #[default]
@@ -24159,10 +24211,12 @@ impl std::fmt::Display for Sort {
     }
 }
 
+
 /**
  * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WorkflowRunStatus {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -24283,7 +24337,8 @@ impl std::convert::From<TitleOneOf> for String {
 /**
  * Must be one of: `day`, `week`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Per {
     #[serde(rename = "day")]
     #[default]
@@ -24304,6 +24359,7 @@ impl std::fmt::Display for Per {
         .fmt(f)
     }
 }
+
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsMergeResponse {
@@ -24621,7 +24677,7 @@ pub struct AppsCreateFromManifestResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppsCreateFromManifestResponseAllOf {
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+    * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(flatten)]
     pub git_hub_app: GitHubApp,
@@ -24656,12 +24712,12 @@ pub struct AppsUpdateWebhookConfigAppRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppsCreateInstallationAccessTokenRequest {
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<AppPermissions>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24670,7 +24726,7 @@ pub struct AppsCreateInstallationAccessTokenRequest {
     )]
     pub repositories: Vec<String>,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -24699,12 +24755,12 @@ pub struct AppsScopeTokenRequest {
     )]
     pub access_token: String,
     /**
-     * The permissions granted to the user-to-server access token.
+    * The permissions granted to the user-to-server access token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<AppPermissions>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24713,7 +24769,7 @@ pub struct AppsScopeTokenRequest {
     )]
     pub repositories: Vec<String>,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -24768,7 +24824,7 @@ pub struct OauthAuthorizationsCreateAuthorizationRequest {
     )]
     pub note_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24805,7 +24861,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
     )]
     pub note_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24836,7 +24892,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
     )]
     pub note_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24849,7 +24905,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24876,7 +24932,7 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     )]
     pub note_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24885,7 +24941,7 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     )]
     pub remove_scopes: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -24898,12 +24954,12 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
     /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
     /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
     pub enabled_organizations: EnabledRepositories,
 }
@@ -24927,7 +24983,7 @@ pub struct EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -24962,7 +25018,7 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
     )]
     pub name: String,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -24971,7 +25027,7 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
     )]
     pub runners: Vec<i64>,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -24980,7 +25036,7 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
     )]
     pub selected_organization_ids: Vec<i64>,
     /**
-     * Describe whether all repositories have been selected or there's a selection involved
+    * Describe whether all repositories have been selected or there's a selection involved
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<RepositorySelection>,
@@ -24995,7 +25051,7 @@ pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
     )]
     pub name: String,
     /**
-     * Describe whether all repositories have been selected or there's a selection involved
+    * Describe whether all repositories have been selected or there's a selection involved
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<RepositorySelection>,
@@ -25020,7 +25076,7 @@ pub struct ActionsListSelfHostedRunnersInGroupOrgResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -25057,7 +25113,8 @@ pub struct FilesAdditionalPropertiesData {
     pub content: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Public {
     #[serde(rename = "false")]
     #[default]
@@ -25078,6 +25135,7 @@ impl std::fmt::Display for Public {
         .fmt(f)
     }
 }
+
 
 /// All of the following types:
 ///
@@ -25130,7 +25188,7 @@ pub struct GistsCreateRequest {
     )]
     pub description: String,
     /**
-     * Names and content for the files that make up the gist
+    * Names and content for the files that make up the gist
      */
     pub files: FilesAdditionalPropertiesData,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25206,7 +25264,8 @@ pub struct AppsListInstallationReposResponse {
  *   \* `subscribed`: Issues you're subscribed to updates for  
  *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Filter {
     #[serde(rename = "all")]
     All,
@@ -25240,10 +25299,12 @@ impl std::fmt::Display for Filter {
     }
 }
 
+
 /**
  * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuesListState {
     #[serde(rename = "all")]
     All,
@@ -25268,10 +25329,12 @@ impl std::fmt::Display for IssuesListState {
     }
 }
 
+
 /**
  * What to sort results by. Can be either `created`, `updated`, `comments`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuesListSort {
     #[serde(rename = "comments")]
     Comments,
@@ -25296,10 +25359,12 @@ impl std::fmt::Display for IssuesListSort {
     }
 }
 
+
 /**
  * The rendering mode.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Mode {
     #[serde(rename = "gfm")]
     Gfm,
@@ -25321,6 +25386,7 @@ impl std::fmt::Display for Mode {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarkdownRenderRequest {
     #[serde(
@@ -25330,7 +25396,7 @@ pub struct MarkdownRenderRequest {
     )]
     pub context: String,
     /**
-     * The rendering mode.
+    * The rendering mode.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mode: Option<Mode>,
@@ -25367,7 +25433,8 @@ pub struct ActivitySetThreadSubscriptionRequest {
  *   \* `none` - only admin members can create repositories.  
  *   **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MembersAllowedRepositoryCreationType {
     #[serde(rename = "all")]
     All,
@@ -25422,7 +25489,7 @@ pub struct OrgsUpdateRequest {
     )]
     pub company: String,
     /**
-     * The baseline permission that all organization members have on this project. Only present if owner is an organization.
+    * The baseline permission that all organization members have on this project. Only present if owner is an organization.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub default_repository_permission: Option<OrganizationPermission>,
@@ -25449,7 +25516,7 @@ pub struct OrgsUpdateRequest {
     )]
     pub location: String,
     /**
-     * Specifies which types of repositories non-admin organization members can create. Can be one of:  
+    * Specifies which types of repositories non-admin organization members can create. Can be one of:  
      *  \\* `all` - all organization members can create public and private repositories.  
      *  \\* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
      *  \\* `none` - only admin members can create repositories.  
@@ -25496,11 +25563,11 @@ pub struct OrgsUpdateRequest {
 #[serde(untagged)]
 pub enum OrgsUpdateResponseOneOf {
     /**
-     * Validation Error Simple
+    * Validation Error Simple
      */
     ValidationErrorSimple(ValidationErrorSimple),
     /**
-     * Validation Error
+    * Validation Error
      */
     ValidationError(ValidationError),
 }
@@ -25524,12 +25591,12 @@ impl OrgsUpdateResponseOneOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsOrganizationRequest {
     /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
     /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
     pub enabled_repositories: EnabledRepositories,
 }
@@ -25553,7 +25620,7 @@ pub struct ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -25588,7 +25655,7 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
     )]
     pub name: String,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -25597,7 +25664,7 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
     )]
     pub runners: Vec<i64>,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -25606,7 +25673,7 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
     )]
     pub selected_repository_ids: Vec<i64>,
     /**
-     * Visibility of a secret
+    * Visibility of a secret
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
@@ -25621,7 +25688,7 @@ pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
     )]
     pub name: String,
     /**
-     * Visibility of a secret
+    * Visibility of a secret
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
@@ -25690,7 +25757,7 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
     )]
     pub key_id: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -25699,7 +25766,7 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
     )]
     pub selected_repository_ids: Vec<String>,
     /**
-     * Visibility of a secret
+    * Visibility of a secret
      */
     #[serde(default, skip_serializing_if = "Visibility::is_noop")]
     pub visibility: Visibility,
@@ -25724,7 +25791,7 @@ pub struct ActionsListSelectedReposOrgSecretResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetSelectedReposOrgSecretRequest {
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -25744,7 +25811,7 @@ pub struct OrgsCreateWebhookRequestConfig {
     )]
     pub content_type: String,
     /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
+    * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
@@ -25779,11 +25846,11 @@ pub struct OrgsCreateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
+    * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
      */
     pub config: OrgsCreateWebhookRequestConfig,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -25809,7 +25876,7 @@ pub struct OrgsUpdateWebhookRequestConfig {
     )]
     pub content_type: String,
     /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
+    * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
@@ -25832,12 +25899,12 @@ pub struct OrgsUpdateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
+    * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub config: Option<OrgsUpdateWebhookRequestConfig>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -25879,7 +25946,7 @@ pub struct InteractionsGetRestrictionsResponseAnyOf {
     #[serde(flatten)]
     pub data: Data,
     /**
-     * Interaction limit settings.
+    * Interaction limit settings.
      */
     #[serde(flatten)]
     pub interaction_limits: InteractionLimits,
@@ -25891,7 +25958,8 @@ pub struct InteractionsGetRestrictionsResponseAnyOf {
  *   \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
  *   \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrgsCreateInvitationRequestRole {
     #[serde(rename = "admin")]
     Admin,
@@ -25916,6 +25984,7 @@ impl std::fmt::Display for OrgsCreateInvitationRequestRole {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgsCreateInvitationRequest {
     #[serde(
@@ -25931,7 +26000,7 @@ pub struct OrgsCreateInvitationRequest {
     )]
     pub invitee_id: i64,
     /**
-     * Specify role for new member. Can be one of:  
+    * Specify role for new member. Can be one of:  
      *  \\* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
      *  \\* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
      *  \\* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
@@ -25939,7 +26008,7 @@ pub struct OrgsCreateInvitationRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<OrgsCreateInvitationRequestRole>,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -25954,7 +26023,8 @@ pub struct OrgsCreateInvitationRequest {
  *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
  *   \* `all` - All members the authenticated user can see.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrgsListMembersFilter {
     #[serde(rename = "2fa_disabled")]
     TwoFaDisabled,
@@ -25976,13 +26046,15 @@ impl std::fmt::Display for OrgsListMembersFilter {
     }
 }
 
+
 /**
  * Filter members returned by their role. Can be one of:  
  *   \* `all` - All members of the organization, regardless of role.  
  *   \* `admin` - Organization owners.  
  *   \* `member` - Non-owner organization members.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrgsListMembersRole {
     #[serde(rename = "admin")]
     Admin,
@@ -26007,12 +26079,14 @@ impl std::fmt::Display for OrgsListMembersRole {
     }
 }
 
+
 /**
  * The role to give the user in the organization. Can be one of:  
  *   \* `admin` - The user will become an owner of the organization.  
  *   \* `member` - The user will become a non-owner member of the organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrgsSetMembershipUserRequestRole {
     #[serde(rename = "admin")]
     Admin,
@@ -26034,10 +26108,11 @@ impl std::fmt::Display for OrgsSetMembershipUserRequestRole {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgsSetMembershipUserRequest {
     /**
-     * The role to give the user in the organization. Can be one of:  
+    * The role to give the user in the organization. Can be one of:  
      *  \\* `admin` - The user will become an owner of the organization.  
      *  \\* `member` - The user will become a non-owner member of the organization.
      */
@@ -26048,7 +26123,8 @@ pub struct OrgsSetMembershipUserRequest {
 /**
  * Allowed values that can be passed to the exclude param.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Exclude {
     #[serde(rename = "repositories")]
     Repositories,
@@ -26079,7 +26155,7 @@ impl Exclude {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MigrationsStartRequest {
     /**
-     * Exclude attributes from the API response to improve performance
+    * Exclude attributes from the API response to improve performance
      */
     #[serde(
         default,
@@ -26092,7 +26168,7 @@ pub struct MigrationsStartRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lock_repositories: Option<bool>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -26105,7 +26181,8 @@ pub struct MigrationsStartRequest {
 /**
  * The state of the package, either active or deleted.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
     #[serde(rename = "active")]
     #[default]
@@ -26127,6 +26204,7 @@ impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateRequest {
     #[serde(
@@ -26146,7 +26224,8 @@ pub struct ProjectsCreateRequest {
 /**
  * Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposListOrgType {
     #[serde(rename = "all")]
     All,
@@ -26195,7 +26274,8 @@ impl ReposListOrgType {
 /**
  * Can be one of `created`, `updated`, `pushed`, `full_name`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposListOrgSort {
     #[serde(rename = "created")]
     #[default]
@@ -26223,11 +26303,13 @@ impl std::fmt::Display for ReposListOrgSort {
     }
 }
 
+
 /**
  * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
  *   The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposCreateInOrgRequestVisibility {
     #[serde(rename = "internal")]
     Internal,
@@ -26325,7 +26407,7 @@ pub struct ReposCreateInOrgRequest {
     )]
     pub team_id: i64,
     /**
-     * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
+    * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
      *  The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26338,7 +26420,8 @@ pub struct ReposCreateInOrgRequest {
  *   \* `push` - team members can pull and push, but not administer newly-added repositories.  
  *   \* `admin` - team members can pull, push and administer newly-added repositories.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Permission {
     #[serde(rename = "admin")]
     Admin,
@@ -26363,6 +26446,7 @@ impl std::fmt::Display for Permission {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateRequest {
     #[serde(
@@ -26372,7 +26456,7 @@ pub struct TeamsCreateRequest {
     )]
     pub description: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -26393,7 +26477,7 @@ pub struct TeamsCreateRequest {
     )]
     pub parent_team_id: i64,
     /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+    * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
      *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
      *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
      *  \\* `admin` - team members can pull, push and administer newly-added repositories.
@@ -26401,12 +26485,12 @@ pub struct TeamsCreateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
     /**
-     * The level of privacy this team should have
+    * The level of privacy this team should have
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub privacy: Option<Privacy>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -26437,7 +26521,7 @@ pub struct TeamsUpdateInOrgRequest {
     )]
     pub parent_team_id: i64,
     /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+    * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
      *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
      *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
      *  \\* `admin` - team members can pull, push and administer newly-added repositories.
@@ -26445,7 +26529,7 @@ pub struct TeamsUpdateInOrgRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
     /**
-     * The level of privacy this team should have
+    * The level of privacy this team should have
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub privacy: Option<Privacy>,
@@ -26488,7 +26572,7 @@ pub struct TeamsUpdateDiscussionInOrgRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateIssueRequest {
     /**
-     * The reaction to use
+    * The reaction to use
      */
     #[serde(default, skip_serializing_if = "Content::is_noop")]
     pub content: Content,
@@ -26500,7 +26584,8 @@ pub struct ReactionsCreateIssueRequest {
  *   \* `maintainer` - team maintainers.  
  *   \* `all` - all members of the team.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TeamsListMembersInOrgRole {
     #[serde(rename = "all")]
     #[default]
@@ -26525,10 +26610,11 @@ impl std::fmt::Display for TeamsListMembersInOrgRole {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateMembershipUserInOrgRequest {
     /**
-     * The role of the user in the team.
+    * The role of the user in the team.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<TeamMembershipRole>,
@@ -26550,7 +26636,8 @@ pub struct ProjectsAddCollaboratorRequest {
  *     
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -26596,7 +26683,7 @@ impl TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
     /**
-     * The permission to grant the team on this repository. Can be one of:  
+    * The permission to grant the team on this repository. Can be one of:  
      *  \\* `pull` - team members can pull, but not push to or administer this repository.  
      *  \\* `push` - team members can pull and push, but not administer this repository.  
      *  \\* `admin` - team members can pull, push and administer this repository.  
@@ -26634,7 +26721,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
     /**
-     * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
+    * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
      */
     #[serde(
         default,
@@ -26653,7 +26740,7 @@ pub struct ProjectsDeleteResponse {
     )]
     pub documentation_url: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -26804,7 +26891,8 @@ pub struct ProjectsUpdateColumnRequest {
 /**
  * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ArchivedState {
     #[serde(rename = "all")]
     All,
@@ -26828,6 +26916,7 @@ impl std::fmt::Display for ArchivedState {
         .fmt(f)
     }
 }
+
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateCardRequest {
@@ -26910,7 +26999,7 @@ pub struct ProjectsUpdateRequest {
     )]
     pub name: String,
     /**
-     * The baseline permission that all organization members have on this project. Only present if owner is an organization.
+    * The baseline permission that all organization members have on this project. Only present if owner is an organization.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_permission: Option<OrganizationPermission>,
@@ -26930,7 +27019,8 @@ pub struct ProjectsUpdateRequest {
  *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
  *   \* `all`: All collaborators the authenticated user can see.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Affiliation {
     #[serde(rename = "all")]
     #[default]
@@ -26955,6 +27045,7 @@ impl std::fmt::Display for Affiliation {
     }
 }
 
+
 /// Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
@@ -26970,12 +27061,12 @@ pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateRequestSecurityAnalysis {
     /**
-     * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
+    * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub advanced_security: Option<ReposUpdateRequestSecurityAnalysisAdvanced>,
     /**
-     * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
+    * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub secret_scanning: Option<ReposUpdateRequestSecurityAnalysisAdvanced>,
@@ -27030,12 +27121,12 @@ pub struct ReposUpdateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub private: Option<bool>,
     /**
-     * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
+    * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_and_analysis: Option<ReposUpdateRequestSecurityAnalysis>,
     /**
-     * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
+    * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
      *  The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27061,7 +27152,7 @@ pub struct ActionsListArtifactsRepoResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsRepositoryRequest {
     /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
@@ -27090,7 +27181,8 @@ pub struct ActionsListWorkflowRunsResponse {
  *   \* `latest`: Returns jobs from the most recent execution of the workflow run.  
  *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ActionsListJobsWorkflowRunFilter {
     #[serde(rename = "all")]
     All,
@@ -27111,6 +27203,7 @@ impl std::fmt::Display for ActionsListJobsWorkflowRunFilter {
         .fmt(f)
     }
 }
+
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListJobsWorkflowRunResponse {
@@ -27137,7 +27230,7 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
     )]
     pub comment: String,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -27146,7 +27239,7 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
     )]
     pub environment_ids: Vec<i64>,
     /**
-     * Whether deployment to the environment(s) was approved or rejected
+    * Whether deployment to the environment(s) was approved or rejected
      */
     #[serde(default, skip_serializing_if = "EnvironmentApprovalState::is_noop")]
     pub state: EnvironmentApprovalState,
@@ -27237,7 +27330,7 @@ pub struct ReposCreateAutolinkRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27256,7 +27349,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions {
     /**
-     * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
+    * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
      */
     #[serde(
         default,
@@ -27265,7 +27358,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestric
     )]
     pub teams: Vec<String>,
     /**
-     * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
+    * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
      */
     #[serde(
         default,
@@ -27279,7 +27372,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestric
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
     /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
+    * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
      */
     #[serde(
         default,
@@ -27287,13 +27380,13 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
     )]
     pub dismiss_stale_reviews: bool,
     /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
+    * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissal_restrictions:
         Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
     /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
+    * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
      */
     #[serde(
         default,
@@ -27301,7 +27394,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
     )]
     pub require_code_owner_reviews: bool,
     /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
+    * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
      */
     #[serde(
         default,
@@ -27315,7 +27408,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Restrictions {
     /**
-     * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
+    * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
      */
     #[serde(
         default,
@@ -27324,7 +27417,7 @@ pub struct Restrictions {
     )]
     pub apps: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27333,7 +27426,7 @@ pub struct Restrictions {
     )]
     pub teams: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27356,18 +27449,18 @@ pub struct ReposUpdateBranchProtectionRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_linear_history: Option<bool>,
     /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
+    * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
      */
     #[serde(default)]
     pub required_pull_request_reviews:
         Option<ReposUpdateBranchProtectionRequestRequiredPullReviews>,
     /**
-     * Require status checks to pass before merging. Set to `null` to disable.
+    * Require status checks to pass before merging. Set to `null` to disable.
      */
     #[serde(default)]
     pub required_status_checks: Option<ReposUpdateBranchProtectionRequestRequiredStatusChecks>,
     /**
-     * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
+    * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
      */
     #[serde(default)]
     pub restrictions: Option<Restrictions>,
@@ -27381,7 +27474,7 @@ pub struct ReposUpdatePullRequestReviewProtection {
     )]
     pub dismiss_stale_reviews: bool,
     /**
-     * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
+    * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissal_restrictions:
@@ -27402,7 +27495,7 @@ pub struct ReposUpdatePullRequestReviewProtection {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateStatusCheckProtectionRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27417,7 +27510,7 @@ pub struct ReposUpdateStatusCheckProtectionRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddStatusCheckContextsRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27438,7 +27531,7 @@ pub struct ReposAddStatusCheckContextsRequest {
 #[serde(untagged)]
 pub enum ReposAddStatusCheckContextsRequestOneOf {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
     ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
@@ -27479,7 +27572,7 @@ impl std::convert::From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String>
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddAppAccessRestrictionsRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27500,7 +27593,7 @@ pub struct ReposAddAppAccessRestrictionsRequest {
 #[serde(untagged)]
 pub enum ReposAddAppAccessRestrictionsRequestOneOf {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
     ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
@@ -27542,7 +27635,7 @@ impl std::convert::From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<Strin
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddTeamAccessRestrictionsRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27563,7 +27656,7 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
 #[serde(untagged)]
 pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
     ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
@@ -27605,7 +27698,7 @@ impl std::convert::From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<Stri
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddUserAccessRestrictionsRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -27626,7 +27719,7 @@ pub struct ReposAddUserAccessRestrictionsRequest {
 #[serde(untagged)]
 pub enum ReposAddUserAccessRestrictionsRequestOneOf {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
     ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
@@ -27679,7 +27772,8 @@ pub struct ReposRenameBranchRequest {
  * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ChecksCreateRequestConclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -27731,7 +27825,8 @@ impl ChecksCreateRequestConclusion {
 /**
  * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AnnotationLevel {
     #[serde(rename = "failure")]
     Failure,
@@ -27768,7 +27863,7 @@ impl AnnotationLevel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Annotations {
     /**
-     * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
+    * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
      */
     #[serde(default, skip_serializing_if = "AnnotationLevel::is_noop")]
     pub annotation_level: AnnotationLevel,
@@ -27848,7 +27943,7 @@ pub struct Images {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateRequestOutput {
     /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
+    * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
      */
     #[serde(
         default,
@@ -27857,7 +27952,7 @@ pub struct ChecksCreateRequestOutput {
     )]
     pub annotations: Vec<Annotations>,
     /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
+    * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
      */
     #[serde(
         default,
@@ -27910,7 +28005,7 @@ pub struct ChecksCreateRequestActions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateRequest {
     /**
-     * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
+    * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
      */
     #[serde(
         default,
@@ -27925,7 +28020,7 @@ pub struct ChecksCreateRequest {
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
+    * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
      *  \*\*Note:\*\* Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27955,7 +28050,7 @@ pub struct ChecksCreateRequest {
     )]
     pub name: String,
     /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
+    * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub output: Option<ChecksCreateRequestOutput>,
@@ -27966,7 +28061,7 @@ pub struct ChecksCreateRequest {
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The phase of the lifecycle that the job is currently in.
+    * The phase of the lifecycle that the job is currently in.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<JobStatus>,
@@ -27976,7 +28071,7 @@ pub struct ChecksCreateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksUpdateRequestOutput {
     /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
+    * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
      */
     #[serde(
         default,
@@ -27985,7 +28080,7 @@ pub struct ChecksUpdateRequestOutput {
     )]
     pub annotations: Vec<Annotations>,
     /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
+    * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
      */
     #[serde(
         default,
@@ -28016,7 +28111,7 @@ pub struct ChecksUpdateRequestOutput {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksUpdateRequest {
     /**
-     * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
+    * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
      */
     #[serde(
         default,
@@ -28031,7 +28126,7 @@ pub struct ChecksUpdateRequest {
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
+    * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
      *  \*\*Note:\*\* Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -28055,7 +28150,7 @@ pub struct ChecksUpdateRequest {
     )]
     pub name: String,
     /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
+    * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub output: Option<ChecksUpdateRequestOutput>,
@@ -28066,7 +28161,7 @@ pub struct ChecksUpdateRequest {
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The phase of the lifecycle that the job is currently in.
+    * The phase of the lifecycle that the job is currently in.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<JobStatus>,
@@ -28101,12 +28196,12 @@ pub struct ChecksListRefResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CodeScanningUpdateAlertRequest {
     /**
-     * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
+    * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
     /**
-     * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
+    * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
      */
     pub state: CodeScanningAlertSetState,
 }
@@ -28155,7 +28250,7 @@ pub struct CodeScanningUploadSarifRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddCollaboratorRequest {
     /**
-     * The permission to grant the team on this repository. Can be one of:  
+    * The permission to grant the team on this repository. Can be one of:  
      *  \\* `pull` - team members can pull, but not push to or administer this repository.  
      *  \\* `push` - team members can pull and push, but not administer this repository.  
      *  \\* `admin` - team members can pull, push and administer this repository.  
@@ -28232,15 +28327,15 @@ pub struct ChecksListSuitesRefResponse {
 pub enum ReposGetContentResponseOneOf {
     EntriesVector(Vec<Entries>),
     /**
-     * Content File
+    * Content File
      */
     ContentFile(ContentFile),
     /**
-     * An object describing a symlink
+    * An object describing a symlink
      */
     SymlinkContent(SymlinkContent),
     /**
-     * An object describing a symlink
+    * An object describing a symlink
      */
     ContentSubmodule(ContentSubmodule),
 }
@@ -28373,7 +28468,7 @@ pub struct ReposCreateDeploymentRequest {
     )]
     pub ref_: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -28394,7 +28489,8 @@ pub struct ReposCreateDeploymentRequest {
 /**
  * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposCreateDeploymentStatusRequestEnvironment {
     #[serde(rename = "production")]
     Production,
@@ -28439,7 +28535,7 @@ pub struct ReposCreateDeploymentStatusRequest {
     )]
     pub description: String,
     /**
-     * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
+    * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub environment: Option<ReposCreateDeploymentStatusRequestEnvironment>,
@@ -28456,7 +28552,7 @@ pub struct ReposCreateDeploymentStatusRequest {
     )]
     pub log_url: String,
     /**
-     * The state of the status.
+    * The state of the status.
      */
     #[serde(default, skip_serializing_if = "DeploymentStatusState::is_noop")]
     pub state: DeploymentStatusState,
@@ -28505,7 +28601,7 @@ pub struct ReposCreateUpdateEnvironmentRequestReviewers {
     )]
     pub id: i64,
     /**
-     * The type of reviewer. Must be one of: `User` or `Team`
+    * The type of reviewer. Must be one of: `User` or `Team`
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DeploymentReviewerType>,
@@ -28514,12 +28610,12 @@ pub struct ReposCreateUpdateEnvironmentRequestReviewers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateEnvironmentRequest {
     /**
-     * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
+    * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
     /**
-     * The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+    * The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
      */
     #[serde(
         default,
@@ -28538,7 +28634,8 @@ pub struct ReposCreateUpdateEnvironmentRequest {
 /**
  * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposListForksSort {
     #[serde(rename = "newest")]
     #[default]
@@ -28565,6 +28662,7 @@ impl std::fmt::Display for ReposListForksSort {
         .fmt(f)
     }
 }
+
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreateForkRequest {
@@ -28596,7 +28694,7 @@ pub struct GitCreateBlobRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequestAuthor {
     /**
-     * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
+    * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
      */
     #[serde(
         default,
@@ -28622,7 +28720,7 @@ pub struct GitCreateCommitRequestAuthor {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequestCommitter {
     /**
-     * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
+    * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
      */
     #[serde(
         default,
@@ -28647,12 +28745,12 @@ pub struct GitCreateCommitRequestCommitter {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequest {
     /**
-     * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
+    * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<GitCreateCommitRequestAuthor>,
     /**
-     * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
+    * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub committer: Option<GitCreateCommitRequestCommitter>,
@@ -28663,7 +28761,7 @@ pub struct GitCreateCommitRequest {
     )]
     pub message: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -28723,7 +28821,8 @@ pub struct GitUpdateRefRequest {
 /**
  * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GitCreateTagRequestType {
     #[serde(rename = "blob")]
     Blob,
@@ -28761,7 +28860,7 @@ impl GitCreateTagRequestType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateTagRequestTagger {
     /**
-     * An object with information about the individual creating the tag.
+    * An object with information about the individual creating the tag.
      */
     #[serde(
         default,
@@ -28804,12 +28903,12 @@ pub struct GitCreateTagRequest {
     )]
     pub tag: String,
     /**
-     * An object with information about the individual creating the tag.
+    * An object with information about the individual creating the tag.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tagger: Option<GitCreateTagRequestTagger>,
     /**
-     * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
+    * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
      */
     #[serde(
         default,
@@ -28822,7 +28921,8 @@ pub struct GitCreateTagRequest {
 /**
  * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GitCreateTreeRequestMode {
     #[serde(rename = "040000")]
     SubdirectoryTree,
@@ -28871,7 +28971,7 @@ pub struct GitCreateTreeRequest {
     )]
     pub content: String,
     /**
-     * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
+    * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mode: Option<GitCreateTreeRequestMode>,
@@ -28888,7 +28988,7 @@ pub struct GitCreateTreeRequest {
     )]
     pub sha: String,
     /**
-     * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
+    * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GitCreateTagRequestType>,
@@ -28903,7 +29003,7 @@ pub struct GitCreateTreeRequestData {
     )]
     pub base_tree: String,
     /**
-     * Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure.
+    * Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure.
      */
     #[serde(
         default,
@@ -28929,7 +29029,7 @@ pub struct ReposCreateWebhookRequestConfig {
     )]
     pub digest: String,
     /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
+    * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
@@ -28989,7 +29089,7 @@ pub struct ReposUpdateWebhookRequestConfig {
     )]
     pub content_type: String,
     /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
+    * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
@@ -29018,7 +29118,7 @@ pub struct ReposUpdateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -29027,12 +29127,12 @@ pub struct ReposUpdateWebhookRequest {
     )]
     pub add_events: Vec<String>,
     /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
+    * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub config: Option<ReposUpdateWebhookRequestConfig>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -29041,7 +29141,7 @@ pub struct ReposUpdateWebhookRequest {
     )]
     pub events: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -29054,7 +29154,8 @@ pub struct ReposUpdateWebhookRequest {
 /**
  * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Vcs {
     #[serde(rename = "git")]
     Git,
@@ -29100,7 +29201,7 @@ pub struct MigrationsStartImportRequest {
     )]
     pub tfvc_project: String,
     /**
-     * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
+    * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub vcs: Option<Vcs>,
@@ -29155,7 +29256,8 @@ pub struct MigrationsUpdateImportRequest {
 /**
  * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UseLfs {
     #[serde(rename = "opt_in")]
     OptIn,
@@ -29189,7 +29291,7 @@ impl UseLfs {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MigrationsSetLfsPreferenceRequest {
     /**
-     * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
+    * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
      */
     #[serde(default, skip_serializing_if = "UseLfs::is_noop")]
     pub use_lfs: UseLfs,
@@ -29198,7 +29300,7 @@ pub struct MigrationsSetLfsPreferenceRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateInvitationRequest {
     /**
-     * The permission associated with the invitation.
+    * The permission associated with the invitation.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryInvitationPermissions>,
@@ -29283,7 +29385,7 @@ pub struct IssuesCreateRequest {
     )]
     pub assignee: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -29298,7 +29400,7 @@ pub struct IssuesCreateRequest {
     )]
     pub body: String,
     /**
-     * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
+    * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
      */
     #[serde(
         default,
@@ -29320,7 +29422,7 @@ pub struct IssuesUpdateRequest {
     )]
     pub assignee: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -29335,7 +29437,7 @@ pub struct IssuesUpdateRequest {
     )]
     pub body: String,
     /**
-     * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
+    * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
      */
     #[serde(
         default,
@@ -29346,7 +29448,7 @@ pub struct IssuesUpdateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<TitleOneOf>,
     /**
-     * The state of the milestone.
+    * The state of the milestone.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
@@ -29357,7 +29459,7 @@ pub struct IssuesUpdateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesAddAssigneesRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -29370,7 +29472,7 @@ pub struct IssuesAddAssigneesRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesAddLabelsRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -29405,7 +29507,7 @@ pub struct IssuesSetLabelsRequest {
 pub enum IssuesAddLabelsRequestOneOf {
     String(String),
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
     IssuesAddLabelsRequest(IssuesAddLabelsRequest),
@@ -29499,7 +29601,7 @@ pub struct IssuesSetLabelsRequestAnyOf {
     #[serde(flatten)]
     pub string: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(flatten)]
     pub string_vector: Vec<String>,
@@ -29518,7 +29620,8 @@ pub struct IssuesSetLabelsRequestAnyOf {
  *   \* `resolved`  
  *   \* `spam`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LockReason {
     #[serde(rename = "off-topic")]
     OffTopic,
@@ -29648,7 +29751,8 @@ pub struct ReposMergeRequest {
 /**
  * What to sort results by. Either `due_on` or `completeness`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuesListMilestonesSort {
     #[serde(rename = "completeness")]
     Completeness,
@@ -29670,6 +29774,7 @@ impl std::fmt::Display for IssuesListMilestonesSort {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesCreateMilestoneRequest {
     #[serde(
@@ -29685,7 +29790,7 @@ pub struct IssuesCreateMilestoneRequest {
     )]
     pub due_on: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The state of the milestone.
+    * The state of the milestone.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
@@ -29726,7 +29831,8 @@ pub struct PullsUpdateBranchResponse {
 /**
  * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Path {
     #[serde(rename = "/")]
     #[default]
@@ -29748,6 +29854,7 @@ impl std::fmt::Display for Path {
     }
 }
 
+
 /// The source branch and directory used to publish your Pages site.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreatePagesSiteRequestSource {
@@ -29758,7 +29865,7 @@ pub struct ReposCreatePagesSiteRequestSource {
     )]
     pub branch: String,
     /**
-     * The source branch and directory used to publish your Pages site.
+    * The source branch and directory used to publish your Pages site.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub path: Option<Path>,
@@ -29768,7 +29875,7 @@ pub struct ReposCreatePagesSiteRequestSource {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreatePagesSiteRequest {
     /**
-     * The source branch and directory used to publish your Pages site.
+    * The source branch and directory used to publish your Pages site.
      */
     pub source: ReposCreatePagesSiteRequestSource,
 }
@@ -29776,7 +29883,8 @@ pub struct ReposCreatePagesSiteRequest {
 /**
  * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SourceData {
     #[serde(rename = "gh-pages")]
     GhPages,
@@ -29820,7 +29928,7 @@ pub struct SourceDataType {
     )]
     pub branch: String,
     /**
-     * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
+    * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
      */
     #[serde(default)]
     pub path: Path,
@@ -29834,12 +29942,12 @@ pub struct SourceDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SourceAnyOf {
     /**
-     * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
+    * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
      */
     #[serde(flatten)]
     pub source_data: SourceData,
     /**
-     * Update the source for the repository. Must include the branch name and path.
+    * Update the source for the repository. Must include the branch name and path.
      */
     #[serde(flatten)]
     pub source_data_type: SourceDataType,
@@ -29864,7 +29972,8 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
 /**
  * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PullsListSort {
     #[serde(rename = "created")]
     #[default]
@@ -29891,6 +30000,7 @@ impl std::fmt::Display for PullsListSort {
         .fmt(f)
     }
 }
+
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsCreateRequest {
@@ -29930,7 +30040,8 @@ pub struct PullsCreateRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PullsListReviewCommentsRepoSort {
     #[serde(rename = "created")]
     Created,
@@ -29981,7 +30092,7 @@ pub struct PullsUpdateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub maintainer_can_modify: Option<bool>,
     /**
-     * The state of the milestone.
+    * The state of the milestone.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
@@ -29996,7 +30107,8 @@ pub struct PullsUpdateRequest {
 /**
  * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PullsCreateReviewCommentRequestStartSide {
     #[serde(rename = "LEFT")]
     Left,
@@ -30069,7 +30181,7 @@ pub struct PullsCreateReviewCommentRequest {
     )]
     pub position: i64,
     /**
-     * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
+    * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub side: Option<Side>,
@@ -30080,7 +30192,7 @@ pub struct PullsCreateReviewCommentRequest {
     )]
     pub start_line: i64,
     /**
-     * \*\*Required when using multi-line comments\*\*. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
+    * \*\*Required when using multi-line comments\*\*. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<PullsCreateReviewCommentRequestStartSide>,
@@ -30113,7 +30225,7 @@ pub struct PullsMergeRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsRequestReviewers {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30122,7 +30234,7 @@ pub struct PullsRequestReviewers {
     )]
     pub reviewers: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30135,7 +30247,7 @@ pub struct PullsRequestReviewers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsRemoveRequestedReviewersRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30144,7 +30256,7 @@ pub struct PullsRemoveRequestedReviewersRequest {
     )]
     pub reviewers: Vec<String>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30157,7 +30269,8 @@ pub struct PullsRemoveRequestedReviewersRequest {
 /**
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PullsCreateReviewRequestEvent {
     #[serde(rename = "APPROVE")]
     Approve,
@@ -30246,7 +30359,7 @@ pub struct PullsCreateReviewRequest {
     )]
     pub body: String,
     /**
-     * Use the following table to specify the location, destination, and contents of the draft review comment.
+    * Use the following table to specify the location, destination, and contents of the draft review comment.
      */
     #[serde(
         default,
@@ -30261,7 +30374,7 @@ pub struct PullsCreateReviewRequest {
     )]
     pub commit_id: String,
     /**
-     * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
+    * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub event: Option<PullsCreateReviewRequestEvent>,
@@ -30292,7 +30405,7 @@ pub struct PullsSubmitReviewRequest {
     )]
     pub body: String,
     /**
-     * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
+    * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
      */
     #[serde(
         default,
@@ -30374,7 +30487,8 @@ pub struct ReposUpdateReleaseAssetRequest {
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReactionsCreateReleaseRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -30420,7 +30534,7 @@ impl ReactionsCreateReleaseRequestContent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateReleaseRequest {
     /**
-     * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
      */
     #[serde(
         default,
@@ -30432,12 +30546,12 @@ pub struct ReactionsCreateReleaseRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SecretScanningUpdateAlertRequest {
     /**
-     * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
+    * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolution: Option<SecretScanningAlertResolution>,
     /**
-     * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
+    * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
      */
     pub state: SecretScanningAlertState,
 }
@@ -30458,7 +30572,8 @@ pub struct ActivityListStargazersRepoResponseAnyOf {
 /**
  * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposCreateCommitStatusRequestState {
     #[serde(rename = "error")]
     Error,
@@ -30510,7 +30625,7 @@ pub struct ReposCreateCommitStatusRequest {
     )]
     pub description: String,
     /**
-     * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
+    * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
      */
     #[serde(
         default,
@@ -30542,7 +30657,7 @@ pub struct ReposTransferRequest {
     )]
     pub new_owner: String,
     /**
-     * Code Frequency Stat
+    * Code Frequency Stat
      */
     #[serde(
         default,
@@ -30594,7 +30709,7 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
     )]
     pub members: Vec<ScimUserListEnterpriseResourcesGroups>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30604,7 +30719,8 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     #[serde(rename = "Add")]
     Add,
@@ -30661,7 +30777,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     /**
-     * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
+    * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
      */
     #[serde(
         default,
@@ -30671,7 +30787,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     )]
     pub operations: Vec<EnterpriseAdminUpdateAttributeGroupRequestOperations>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30706,7 +30822,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminProvisionInviteUserRequest {
     /**
-     * List of user emails.
+    * List of user emails.
      */
     #[serde(
         default,
@@ -30722,7 +30838,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
     pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
     pub name: Name,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30742,7 +30858,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeUserRequest {
     /**
-     * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
+    * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
      */
     #[serde(
         default,
@@ -30752,7 +30868,7 @@ pub struct EnterpriseAdminUpdateAttributeUserRequest {
     )]
     pub operations: Vec<Data>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30787,7 +30903,7 @@ pub struct ScimProvisionInviteUserRequest {
     )]
     pub external_id: String,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30797,7 +30913,7 @@ pub struct ScimProvisionInviteUserRequest {
     pub groups: Vec<String>,
     pub name: ScimUserName,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30864,7 +30980,7 @@ pub struct Value {
 pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
     String(String),
     /**
-     * user emails
+    * user emails
      */
     ScimUserEmailsVector(Vec<ScimUserEmails>),
     Value(Value),
@@ -30939,7 +31055,7 @@ pub struct ScimUpdateAttributeUserRequestOperations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimUpdateAttributeUserRequest {
     /**
-     * Set of operations to be performed
+    * Set of operations to be performed
      */
     #[serde(
         default,
@@ -30949,7 +31065,7 @@ pub struct ScimUpdateAttributeUserRequest {
     )]
     pub operations: Vec<ScimUpdateAttributeUserRequestOperations>,
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -30962,7 +31078,8 @@ pub struct ScimUpdateAttributeUserRequest {
 /**
  * Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SearchCodeSort {
     #[serde(rename = "indexed")]
     Indexed,
@@ -31014,7 +31131,8 @@ pub struct SearchCodeResponse {
 /**
  * Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SearchCommitsSort {
     #[serde(rename = "author-date")]
     AuthorDate,
@@ -31069,7 +31187,8 @@ pub struct SearchCommitsResponse {
 /**
  * Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SearchIssuesPullRequestsSort {
     #[serde(rename = "comments")]
     Comments,
@@ -31172,7 +31291,8 @@ pub struct SearchLabelsResponse {
 /**
  * Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SearchReposSort {
     #[serde(rename = "forks")]
     Forks,
@@ -31254,7 +31374,8 @@ pub struct SearchTopicsResponse {
 /**
  * Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SearchUsersSort {
     #[serde(rename = "followers")]
     Followers,
@@ -31312,7 +31433,7 @@ pub struct SearchUsersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
     /**
-     * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+    * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<RepositoryProjects>,
@@ -31321,7 +31442,7 @@ pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
     /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+    * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
      *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
      *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
      *  \\* `admin` - team members can pull, push and administer newly-added repositories.
@@ -31373,7 +31494,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
     /**
-     * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
+    * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
      */
     #[serde(
         default,
@@ -31400,11 +31521,11 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
 #[serde(untagged)]
 pub enum UsersGetByUsernameResponseOneOf {
     /**
-     * Public User
+    * Public User
      */
     PublicUser(PublicUser),
     /**
-     * Private User
+    * Private User
      */
     PrivateUser(PrivateUser),
 }
@@ -31482,7 +31603,7 @@ pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersAddEmailAuthenticatedRequest {
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     #[serde(
         default,
@@ -31505,7 +31626,7 @@ pub struct UsersAddEmailAuthenticatedRequest {
 pub enum UsersAddEmailAuthenticatedRequestOneOf {
     String(String),
     /**
-     * The list of events for the GitHub app
+    * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
     UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
@@ -31591,7 +31712,8 @@ pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
 /**
  * The state that the membership should be in. Only `"active"` will be accepted.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrgsUpdateMembershipRequestState {
     #[serde(rename = "active")]
     Active,
@@ -31622,7 +31744,7 @@ impl OrgsUpdateMembershipRequestState {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgsUpdateMembershipRequest {
     /**
-     * The state that the membership should be in. Only `"active"` will be accepted.
+    * The state that the membership should be in. Only `"active"` will be accepted.
      */
     #[serde(
         default,
@@ -31634,7 +31756,8 @@ pub struct OrgsUpdateMembershipRequest {
 /**
  * Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposListVisibility {
     #[serde(rename = "all")]
     #[default]
@@ -31659,12 +31782,14 @@ impl std::fmt::Display for ReposListVisibility {
     }
 }
 
+
 /**
  * Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
  *     
  *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposListType {
     #[serde(rename = "all")]
     #[default]
@@ -31694,6 +31819,7 @@ impl std::fmt::Display for ReposListType {
         .fmt(f)
     }
 }
+
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreateRequest {
@@ -31762,7 +31888,8 @@ pub struct ReposCreateRequest {
 /**
  * Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubjectType {
     #[serde(rename = "issue")]
     Issue,
@@ -31802,7 +31929,8 @@ impl SubjectType {
 /**
  * Can be one of `all`, `owner`, `member`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReposListUserType {
     #[serde(rename = "all")]
     All,
@@ -31826,6 +31954,7 @@ impl std::fmt::Display for ReposListUserType {
         .fmt(f)
     }
 }
+
 
 /// All of the following types are flattened into one object:
 ///

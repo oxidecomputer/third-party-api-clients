@@ -74,7 +74,9 @@ impl Reporting {
         &self,
         created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportRun>>> {
-        let url = self.client.url("/v1/reporting/report_runs", None);
+        let url = self
+            .client
+            .url("/v1/reporting/report_runs", None);
         let crate::Response::<crate::types::GetReportingReportRunsResponse> {
             mut status,
             mut headers,
@@ -154,7 +156,9 @@ impl Reporting {
     pub async fn post_report_run(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ReportingReportRun>> {
-        let url = self.client.url("/v1/reporting/report_runs", None);
+        let url = self
+            .client
+            .url("/v1/reporting/report_runs", None);
         self.client
             .post(
                 &url,
@@ -208,7 +212,9 @@ impl Reporting {
     pub async fn get_report_types(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportType>>> {
-        let url = self.client.url("/v1/reporting/report_types", None);
+        let url = self
+            .client
+            .url("/v1/reporting/report_types", None);
         let resp: crate::Response<crate::types::FinancialReportingFinanceReportTypeList> = self
             .client
             .get(
@@ -237,7 +243,9 @@ impl Reporting {
     pub async fn get_all_report_types(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportType>>> {
-        let url = self.client.url("/v1/reporting/report_types", None);
+        let url = self
+            .client
+            .url("/v1/reporting/report_types", None);
         let crate::Response::<crate::types::FinancialReportingFinanceReportTypeList> {
             mut status,
             mut headers,

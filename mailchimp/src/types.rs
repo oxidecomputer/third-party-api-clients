@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GalleryFolder {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -20,7 +20,7 @@ pub struct GalleryFolder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateInstance {
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -29,7 +29,7 @@ pub struct TemplateInstance {
     )]
     pub folder_id: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -38,7 +38,7 @@ pub struct TemplateInstance {
     )]
     pub html: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -52,7 +52,7 @@ pub struct TemplateInstance {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberNotes {
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -66,7 +66,7 @@ pub struct MemberNotes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Interest {
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -75,7 +75,7 @@ pub struct Interest {
     )]
     pub display_order: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -88,7 +88,8 @@ pub struct Interest {
 /**
  * Determines how this category’s interests appear on signup forms.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "checkboxes")]
     Checkboxes,
@@ -129,7 +130,7 @@ impl Type {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestCategory {
     /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
+    * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
     #[serde(
         default,
@@ -138,7 +139,7 @@ pub struct InterestCategory {
     )]
     pub display_order: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -147,7 +148,7 @@ pub struct InterestCategory {
     )]
     pub title: String,
     /**
-     * Determines how this category’s interests appear on signup forms.
+    * Determines how this category’s interests appear on signup forms.
      */
     #[serde(default, skip_serializing_if = "Type::is_noop", rename = "type")]
     pub type_: Type,
@@ -157,7 +158,7 @@ pub struct InterestCategory {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Events {
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -165,7 +166,7 @@ pub struct Events {
     )]
     pub campaign: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -173,7 +174,7 @@ pub struct Events {
     )]
     pub cleaned: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -181,7 +182,7 @@ pub struct Events {
     )]
     pub profile: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -189,7 +190,7 @@ pub struct Events {
     )]
     pub subscribe: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -197,7 +198,7 @@ pub struct Events {
     )]
     pub unsubscribe: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -210,7 +211,7 @@ pub struct Events {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sources {
     /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
+    * The possible sources of any events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -218,7 +219,7 @@ pub struct Sources {
     )]
     pub admin: bool,
     /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
+    * The possible sources of any events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -226,7 +227,7 @@ pub struct Sources {
     )]
     pub api: bool,
     /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
+    * The possible sources of any events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -239,17 +240,17 @@ pub struct Sources {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddWebhook {
     /**
-     * Configure a webhook for the given list.
+    * Configure a webhook for the given list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub events: Option<Events>,
     /**
-     * Configure a webhook for the given list.
+    * Configure a webhook for the given list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sources: Option<Sources>,
     /**
-     * Configure a webhook for the given list.
+    * Configure a webhook for the given list.
      */
     #[serde(
         default,
@@ -263,7 +264,7 @@ pub struct AddWebhook {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberInAutomationQueue {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -277,7 +278,7 @@ pub struct SubscriberInAutomationQueue {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductVariant {
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -286,7 +287,7 @@ pub struct ECommerceProductVariant {
     )]
     pub backorders: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -295,7 +296,7 @@ pub struct ECommerceProductVariant {
     )]
     pub id: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -304,7 +305,7 @@ pub struct ECommerceProductVariant {
     )]
     pub image_url: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -313,7 +314,7 @@ pub struct ECommerceProductVariant {
     )]
     pub inventory_quantity: i64,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -322,7 +323,7 @@ pub struct ECommerceProductVariant {
     )]
     pub price: f64,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -331,7 +332,7 @@ pub struct ECommerceProductVariant {
     )]
     pub sku: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -340,7 +341,7 @@ pub struct ECommerceProductVariant {
     )]
     pub title: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -349,7 +350,7 @@ pub struct ECommerceProductVariant {
     )]
     pub url: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -362,7 +363,8 @@ pub struct ECommerceProductVariant {
 /**
  * The type of pricing plan the account is on.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PricingPlanType {
     #[serde(rename = "forever_free")]
     ForeverFree,
@@ -400,7 +402,7 @@ impl PricingPlanType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contact {
     /**
-     * Information about the account contact.
+    * Information about the account contact.
      */
     #[serde(
         default,
@@ -410,7 +412,7 @@ pub struct Contact {
     )]
     pub addr_1: String,
     /**
-     * Information about the account contact.
+    * Information about the account contact.
      */
     #[serde(
         default,
@@ -420,7 +422,7 @@ pub struct Contact {
     )]
     pub addr_2: String,
     /**
-     * Information about the account contact.
+    * Information about the account contact.
      */
     #[serde(
         default,
@@ -429,7 +431,7 @@ pub struct Contact {
     )]
     pub city: String,
     /**
-     * Information about the account contact.
+    * Information about the account contact.
      */
     #[serde(
         default,
@@ -438,7 +440,7 @@ pub struct Contact {
     )]
     pub company: String,
     /**
-     * Information about the account contact.
+    * Information about the account contact.
      */
     #[serde(
         default,
@@ -447,7 +449,7 @@ pub struct Contact {
     )]
     pub country: String,
     /**
-     * Information about the account contact.
+    * Information about the account contact.
      */
     #[serde(
         default,
@@ -456,7 +458,7 @@ pub struct Contact {
     )]
     pub state: String,
     /**
-     * Information about the account contact.
+    * Information about the account contact.
      */
     #[serde(
         default,
@@ -470,7 +472,7 @@ pub struct Contact {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IndustryStats {
     /**
-     * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
+    * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
      */
     #[serde(
         default,
@@ -479,7 +481,7 @@ pub struct IndustryStats {
     )]
     pub bounce_rate: f64,
     /**
-     * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
+    * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
      */
     #[serde(
         default,
@@ -488,7 +490,7 @@ pub struct IndustryStats {
     )]
     pub click_rate: f64,
     /**
-     * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
+    * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
      */
     #[serde(
         default,
@@ -501,7 +503,8 @@ pub struct IndustryStats {
 /**
  * The HTTP method that should be used when accessing the URL defined in 'href'.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Method {
     #[serde(rename = "DELETE")]
     Delete,
@@ -551,7 +554,7 @@ impl Method {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Links {
     /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
+    * This object represents a link from the resource where it is found to another resource or action that may be performed.
      */
     #[serde(
         default,
@@ -560,12 +563,12 @@ pub struct Links {
     )]
     pub href: String,
     /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
+    * This object represents a link from the resource where it is found to another resource or action that may be performed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub method: Option<Method>,
     /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
+    * This object represents a link from the resource where it is found to another resource or action that may be performed.
      */
     #[serde(
         default,
@@ -574,7 +577,7 @@ pub struct Links {
     )]
     pub rel: String,
     /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
+    * This object represents a link from the resource where it is found to another resource or action that may be performed.
      */
     #[serde(
         default,
@@ -583,7 +586,7 @@ pub struct Links {
     )]
     pub schema: String,
     /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
+    * This object represents a link from the resource where it is found to another resource or action that may be performed.
      */
     #[serde(
         default,
@@ -598,7 +601,7 @@ pub struct Links {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiRoot {
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -608,7 +611,7 @@ pub struct ApiRoot {
     )]
     pub links: Vec<Links>,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -617,7 +620,7 @@ pub struct ApiRoot {
     )]
     pub account_id: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -626,7 +629,7 @@ pub struct ApiRoot {
     )]
     pub account_industry: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -635,7 +638,7 @@ pub struct ApiRoot {
     )]
     pub account_name: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -644,7 +647,7 @@ pub struct ApiRoot {
     )]
     pub account_timezone: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -653,12 +656,12 @@ pub struct ApiRoot {
     )]
     pub avatar_url: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contact: Option<Contact>,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -667,7 +670,7 @@ pub struct ApiRoot {
     )]
     pub email: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -676,7 +679,7 @@ pub struct ApiRoot {
     )]
     pub first_name: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -685,12 +688,12 @@ pub struct ApiRoot {
     )]
     pub first_payment: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub industry_stats: Option<IndustryStats>,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -699,7 +702,7 @@ pub struct ApiRoot {
     )]
     pub last_login: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -708,7 +711,7 @@ pub struct ApiRoot {
     )]
     pub last_name: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -717,7 +720,7 @@ pub struct ApiRoot {
     )]
     pub login_id: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -726,12 +729,12 @@ pub struct ApiRoot {
     )]
     pub member_since: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pricing_plan_type: Option<PricingPlanType>,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -739,7 +742,7 @@ pub struct ApiRoot {
     )]
     pub pro_enabled: bool,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -748,7 +751,7 @@ pub struct ApiRoot {
     )]
     pub role: String,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -757,7 +760,7 @@ pub struct ApiRoot {
     )]
     pub total_subscribers: i64,
     /**
-     * The API root resource links to all other resources available in the API.
+    * The API root resource links to all other resources available in the API.
      */
     #[serde(
         default,
@@ -770,7 +773,8 @@ pub struct ApiRoot {
 /**
  * The type of activity
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetActivityFeedChimpChatterResponseType {
     #[serde(rename = "campaigns:facebook-likes")]
     CampaignsFacebookLikes,
@@ -821,7 +825,7 @@ impl GetActivityFeedChimpChatterResponseType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChimpChatter {
     /**
-     * A Chimp Chatter message
+    * A Chimp Chatter message
      */
     #[serde(
         default,
@@ -830,7 +834,7 @@ pub struct ChimpChatter {
     )]
     pub campaign_id: String,
     /**
-     * A Chimp Chatter message
+    * A Chimp Chatter message
      */
     #[serde(
         default,
@@ -839,7 +843,7 @@ pub struct ChimpChatter {
     )]
     pub list_id: String,
     /**
-     * A Chimp Chatter message
+    * A Chimp Chatter message
      */
     #[serde(
         default,
@@ -848,7 +852,7 @@ pub struct ChimpChatter {
     )]
     pub message: String,
     /**
-     * A Chimp Chatter message
+    * A Chimp Chatter message
      */
     #[serde(
         default,
@@ -857,12 +861,12 @@ pub struct ChimpChatter {
     )]
     pub title: String,
     /**
-     * A Chimp Chatter message
+    * A Chimp Chatter message
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GetActivityFeedChimpChatterResponseType>,
     /**
-     * A Chimp Chatter message
+    * A Chimp Chatter message
      */
     #[serde(
         default,
@@ -871,7 +875,7 @@ pub struct ChimpChatter {
     )]
     pub update_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A Chimp Chatter message
+    * A Chimp Chatter message
      */
     #[serde(
         default,
@@ -885,7 +889,7 @@ pub struct ChimpChatter {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetActivityFeedChimpChatterResponse {
     /**
-     * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
+    * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
      */
     #[serde(
         default,
@@ -895,7 +899,7 @@ pub struct GetActivityFeedChimpChatterResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
+    * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
      */
     #[serde(
         default,
@@ -904,7 +908,7 @@ pub struct GetActivityFeedChimpChatterResponse {
     )]
     pub chimp_chatter: Vec<ChimpChatter>,
     /**
-     * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
+    * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
      */
     #[serde(
         default,
@@ -918,7 +922,7 @@ pub struct GetActivityFeedChimpChatterResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Apps {
     /**
-     * An authorized app.
+    * An authorized app.
      */
     #[serde(
         default,
@@ -928,7 +932,7 @@ pub struct Apps {
     )]
     pub links: Vec<Links>,
     /**
-     * An authorized app.
+    * An authorized app.
      */
     #[serde(
         default,
@@ -937,7 +941,7 @@ pub struct Apps {
     )]
     pub description: String,
     /**
-     * An authorized app.
+    * An authorized app.
      */
     #[serde(
         default,
@@ -946,7 +950,7 @@ pub struct Apps {
     )]
     pub id: i64,
     /**
-     * An authorized app.
+    * An authorized app.
      */
     #[serde(
         default,
@@ -955,7 +959,7 @@ pub struct Apps {
     )]
     pub name: String,
     /**
-     * An authorized app.
+    * An authorized app.
      */
     #[serde(
         default,
@@ -969,7 +973,7 @@ pub struct Apps {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAuthorizedAppsResponse {
     /**
-     * An array of objects, each representing an authorized application.
+    * An array of objects, each representing an authorized application.
      */
     #[serde(
         default,
@@ -979,7 +983,7 @@ pub struct GetAuthorizedAppsResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * An array of objects, each representing an authorized application.
+    * An array of objects, each representing an authorized application.
      */
     #[serde(
         default,
@@ -988,7 +992,7 @@ pub struct GetAuthorizedAppsResponse {
     )]
     pub apps: Vec<Apps>,
     /**
-     * An array of objects, each representing an authorized application.
+    * An array of objects, each representing an authorized application.
      */
     #[serde(
         default,
@@ -1001,7 +1005,8 @@ pub struct GetAuthorizedAppsResponse {
 /**
  * Restrict the results to automations with the specified status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "paused")]
     Paused,
@@ -1038,7 +1043,8 @@ impl Status {
 /**
  * Segment match type.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Match {
     #[serde(rename = "all")]
     All,
@@ -1069,7 +1075,8 @@ impl Match {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ConditionType {
     #[serde(rename = "Aim")]
     Aim,
@@ -1100,7 +1107,8 @@ impl ConditionType {
 /**
  * Segment by interaction with a specific campaign.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Field {
     #[serde(rename = "aim")]
     Aim,
@@ -1131,7 +1139,8 @@ impl Field {
 /**
  * The status of the member with regard to their campaign interaction. One of the following: opened, clicked, was sent, didn't open, didn't click, or was not sent.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Op {
     #[serde(rename = "click")]
     Click,
@@ -1178,22 +1187,22 @@ impl Op {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Conditions {
     /**
-     * Segment by interaction with a specific campaign.
+    * Segment by interaction with a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<ConditionType>,
     /**
-     * Segment by interaction with a specific campaign.
+    * Segment by interaction with a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<Field>,
     /**
-     * Segment by interaction with a specific campaign.
+    * Segment by interaction with a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<Op>,
     /**
-     * Segment by interaction with a specific campaign.
+    * Segment by interaction with a specific campaign.
      */
     #[serde(
         default,
@@ -1203,7 +1212,8 @@ pub struct Conditions {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AutomationSegmentConditionType {
     #[serde(rename = "Automation")]
     Automation,
@@ -1234,7 +1244,8 @@ impl AutomationSegmentConditionType {
 /**
  * Segment by interaction with an Automation workflow.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SegmentField {
     #[serde(rename = "automation")]
     Automation,
@@ -1265,7 +1276,8 @@ impl SegmentField {
 /**
  * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SegmentOperator {
     #[serde(rename = "completed")]
     Completed,
@@ -1306,22 +1318,22 @@ impl SegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationSegment {
     /**
-     * Segment by interaction with an Automation workflow.
+    * Segment by interaction with an Automation workflow.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<AutomationSegmentConditionType>,
     /**
-     * Segment by interaction with an Automation workflow.
+    * Segment by interaction with an Automation workflow.
      */
     #[serde(default, skip_serializing_if = "SegmentField::is_noop")]
     pub field: SegmentField,
     /**
-     * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
+    * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
      */
     #[serde(default, skip_serializing_if = "SegmentOperator::is_noop")]
     pub op: SegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -1331,7 +1343,8 @@ pub struct AutomationSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PollActivitySegmentConditionType {
     #[serde(rename = "CampaignPoll")]
     CampaignPoll,
@@ -1362,7 +1375,8 @@ impl PollActivitySegmentConditionType {
 /**
  * Segment by poll activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PollActivitySegmentField {
     #[serde(rename = "poll")]
     Poll,
@@ -1393,7 +1407,8 @@ impl PollActivitySegmentField {
 /**
  * Members have/have not interacted with a specific poll in a Mailchimp email.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PollActivitySegmentOperator {
     #[serde(rename = "member")]
     Member,
@@ -1428,22 +1443,22 @@ impl PollActivitySegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PollActivitySegment {
     /**
-     * Segment by poll activity.
+    * Segment by poll activity.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<PollActivitySegmentConditionType>,
     /**
-     * Segment by poll activity.
+    * Segment by poll activity.
      */
     #[serde(default, skip_serializing_if = "PollActivitySegmentField::is_noop")]
     pub field: PollActivitySegmentField,
     /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
+    * Members have/have not interacted with a specific poll in a Mailchimp email.
      */
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -1453,7 +1468,8 @@ pub struct PollActivitySegment {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ConversationSegmentConditionType {
     #[serde(rename = "Conversation")]
     Conversation,
@@ -1484,7 +1500,8 @@ impl ConversationSegmentConditionType {
 /**
  * Segment by interaction with a campaign via Conversations.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ConversationSegmentField {
     #[serde(rename = "conversation")]
     Conversation,
@@ -1516,22 +1533,22 @@ impl ConversationSegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationSegment {
     /**
-     * Segment by interaction with a campaign via Conversations.
+    * Segment by interaction with a campaign via Conversations.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<ConversationSegmentConditionType>,
     /**
-     * Segment by interaction with a campaign via Conversations.
+    * Segment by interaction with a campaign via Conversations.
      */
     #[serde(default, skip_serializing_if = "ConversationSegmentField::is_noop")]
     pub field: ConversationSegmentField,
     /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
+    * Members have/have not interacted with a specific poll in a Mailchimp email.
      */
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -1541,7 +1558,8 @@ pub struct ConversationSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DateSegmentConditionType {
     #[serde(rename = "Date")]
     Date,
@@ -1572,7 +1590,8 @@ impl DateSegmentConditionType {
 /**
  * The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DateSegmentField {
     #[serde(rename = "ecomm_date")]
     EcommDate,
@@ -1609,7 +1628,8 @@ impl DateSegmentField {
 /**
  * When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DateSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -1662,12 +1682,12 @@ impl DateSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateSegment {
     /**
-     * Segment by a specific date field.
+    * Segment by a specific date field.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<DateSegmentConditionType>,
     /**
-     * Segment by a specific date field.
+    * Segment by a specific date field.
      */
     #[serde(
         default,
@@ -1676,17 +1696,17 @@ pub struct DateSegment {
     )]
     pub extra: String,
     /**
-     * The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
+    * The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
      */
     #[serde(default, skip_serializing_if = "DateSegmentField::is_noop")]
     pub field: DateSegmentField,
     /**
-     * When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
+    * When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
      */
     #[serde(default, skip_serializing_if = "DateSegmentOperator::is_noop")]
     pub op: DateSegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -1696,7 +1716,8 @@ pub struct DateSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailClientSegmentConditionType {
     #[serde(rename = "EmailClient")]
     EmailClient,
@@ -1727,7 +1748,8 @@ impl EmailClientSegmentConditionType {
 /**
  * Segment by use of a particular email client.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailClientSegmentField {
     #[serde(rename = "email_client")]
     EmailClient,
@@ -1758,7 +1780,8 @@ impl EmailClientSegmentField {
 /**
  * The operation to determine whether we select clients that match the value, or clients that do not match the value.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailClientSegmentOperator {
     #[serde(rename = "client_is")]
     ClientIs,
@@ -1793,22 +1816,22 @@ impl EmailClientSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailClientSegment {
     /**
-     * Segment by use of a particular email client.
+    * Segment by use of a particular email client.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EmailClientSegmentConditionType>,
     /**
-     * Segment by use of a particular email client.
+    * Segment by use of a particular email client.
      */
     #[serde(default, skip_serializing_if = "EmailClientSegmentField::is_noop")]
     pub field: EmailClientSegmentField,
     /**
-     * The operation to determine whether we select clients that match the value, or clients that do not match the value.
+    * The operation to determine whether we select clients that match the value, or clients that do not match the value.
      */
     #[serde(default, skip_serializing_if = "EmailClientSegmentOperator::is_noop")]
     pub op: EmailClientSegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -1818,7 +1841,8 @@ pub struct EmailClientSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LanguageSegmentConditionType {
     #[serde(rename = "Language")]
     Language,
@@ -1849,7 +1873,8 @@ impl LanguageSegmentConditionType {
 /**
  * Segmenting based off of a subscriber's language.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LanguageSegmentField {
     #[serde(rename = "language")]
     Language,
@@ -1880,7 +1905,8 @@ impl LanguageSegmentField {
 /**
  * Whether the member's language is or is not set to a specific language.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LanguageSegmentOperator {
     #[serde(rename = "is")]
     Is,
@@ -1915,22 +1941,22 @@ impl LanguageSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LanguageSegment {
     /**
-     * Segment by language.
+    * Segment by language.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<LanguageSegmentConditionType>,
     /**
-     * Segmenting based off of a subscriber's language.
+    * Segmenting based off of a subscriber's language.
      */
     #[serde(default, skip_serializing_if = "LanguageSegmentField::is_noop")]
     pub field: LanguageSegmentField,
     /**
-     * Whether the member's language is or is not set to a specific language.
+    * Whether the member's language is or is not set to a specific language.
      */
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -1940,7 +1966,8 @@ pub struct LanguageSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MemberRatingSegmentConditionType {
     #[serde(rename = "MemberRating")]
     MemberRating,
@@ -1971,7 +1998,8 @@ impl MemberRatingSegmentConditionType {
 /**
  * Segment by member rating.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MemberRatingSegmentField {
     #[serde(rename = "rating")]
     Rating,
@@ -2002,7 +2030,8 @@ impl MemberRatingSegmentField {
 /**
  * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MemberRatingSegmentOperator {
     #[serde(rename = "greater")]
     Greater,
@@ -2043,22 +2072,22 @@ impl MemberRatingSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberRatingSegment {
     /**
-     * Segment by member rating.
+    * Segment by member rating.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<MemberRatingSegmentConditionType>,
     /**
-     * Segment by member rating.
+    * Segment by member rating.
      */
     #[serde(default, skip_serializing_if = "MemberRatingSegmentField::is_noop")]
     pub field: MemberRatingSegmentField,
     /**
-     * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
+    * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
      */
     #[serde(default, skip_serializing_if = "MemberRatingSegmentOperator::is_noop")]
     pub op: MemberRatingSegmentOperator,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -2068,7 +2097,8 @@ pub struct MemberRatingSegment {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SignupSourceSegmentType {
     #[serde(rename = "SignupSource")]
     SignupSource,
@@ -2096,7 +2126,8 @@ impl SignupSourceSegmentType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SignupSourceSegmentField {
     #[serde(rename = "source")]
     Source,
@@ -2127,7 +2158,8 @@ impl SignupSourceSegmentField {
 /**
  * Whether the member's signup source was/was not a particular value.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SignupSourceSegmentOperator {
     #[serde(rename = "source_is")]
     SourceIs,
@@ -2166,12 +2198,12 @@ pub struct SignupSourceSegment {
     #[serde(default, skip_serializing_if = "SignupSourceSegmentField::is_noop")]
     pub field: SignupSourceSegmentField,
     /**
-     * Whether the member's signup source was/was not a particular value.
+    * Whether the member's signup source was/was not a particular value.
      */
     #[serde(default, skip_serializing_if = "SignupSourceSegmentOperator::is_noop")]
     pub op: SignupSourceSegmentOperator,
     /**
-     * Segment by signup source.
+    * Segment by signup source.
      */
     #[serde(
         default,
@@ -2181,7 +2213,8 @@ pub struct SignupSourceSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SurveyMonkeySegmentConditionType {
     #[serde(rename = "SurveyMonkey")]
     SurveyMonkey,
@@ -2212,7 +2245,8 @@ impl SurveyMonkeySegmentConditionType {
 /**
  * Segment by interaction with a SurveyMonkey survey.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SurveyMonkeySegmentField {
     #[serde(rename = "survey_monkey")]
     SurveyMonkey,
@@ -2244,22 +2278,22 @@ impl SurveyMonkeySegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SurveyMonkeySegment {
     /**
-     * Segment by interaction with a SurveyMonkey survey.
+    * Segment by interaction with a SurveyMonkey survey.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SurveyMonkeySegmentConditionType>,
     /**
-     * Segment by interaction with a SurveyMonkey survey.
+    * Segment by interaction with a SurveyMonkey survey.
      */
     #[serde(default, skip_serializing_if = "SurveyMonkeySegmentField::is_noop")]
     pub field: SurveyMonkeySegmentField,
     /**
-     * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
+    * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
      */
     #[serde(default, skip_serializing_if = "SegmentOperator::is_noop")]
     pub op: SegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -2269,7 +2303,8 @@ pub struct SurveyMonkeySegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum VipSegmentConditionType {
     #[serde(rename = "VIP")]
     Vip,
@@ -2300,7 +2335,8 @@ impl VipSegmentConditionType {
 /**
  * Segment by VIP status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum VipSegmentField {
     #[serde(rename = "gmonkey")]
     Gmonkey,
@@ -2332,23 +2368,24 @@ impl VipSegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VipSegment {
     /**
-     * Segment by VIP status.
+    * Segment by VIP status.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<VipSegmentConditionType>,
     /**
-     * Segment by VIP status.
+    * Segment by VIP status.
      */
     #[serde(default, skip_serializing_if = "VipSegmentField::is_noop")]
     pub field: VipSegmentField,
     /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
+    * Members have/have not interacted with a specific poll in a Mailchimp email.
      */
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InterestsSegmentConditionType {
     #[serde(rename = "Interests")]
     Interests,
@@ -2379,7 +2416,8 @@ impl InterestsSegmentConditionType {
 /**
  * Whether the member is a part of one, all, or none of the groups.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InterestsSegmentOperator {
     #[serde(rename = "interestcontains")]
     Interestcontains,
@@ -2417,12 +2455,12 @@ impl InterestsSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestsSegment {
     /**
-     * Segment by an interest group merge field.
+    * Segment by an interest group merge field.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<InterestsSegmentConditionType>,
     /**
-     * Segment by an interest group merge field.
+    * Segment by an interest group merge field.
      */
     #[serde(
         default,
@@ -2431,12 +2469,12 @@ pub struct InterestsSegment {
     )]
     pub field: String,
     /**
-     * Segment by an interest group merge field.
+    * Segment by an interest group merge field.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<InterestsSegmentOperator>,
     /**
-     * Segment by an interest group merge field.
+    * Segment by an interest group merge field.
      */
     #[serde(
         default,
@@ -2446,7 +2484,8 @@ pub struct InterestsSegment {
     pub value: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceCategorySegmentConditionType {
     #[serde(rename = "EcommCategory")]
     EcommCategory,
@@ -2477,7 +2516,8 @@ impl EcommerceCategorySegmentConditionType {
 /**
  * Segment by purchases in specific items or categories.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceCategorySegmentField {
     #[serde(rename = "ecomm_cat")]
     EcommCat,
@@ -2511,7 +2551,8 @@ impl EcommerceCategorySegmentField {
 /**
  * A member who has purchased from a category/specific item that is/is not a specific name, where the category/item name contains/doesn't contain a specific phrase or string, or a category/item name that starts/ends with a string.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceCategorySegmentOperator {
     #[serde(rename = "contains")]
     Contains,
@@ -2558,22 +2599,22 @@ impl EcommerceCategorySegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceCategorySegment {
     /**
-     * Segment by purchases in specific items or categories.
+    * Segment by purchases in specific items or categories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommerceCategorySegmentConditionType>,
     /**
-     * Segment by purchases in specific items or categories.
+    * Segment by purchases in specific items or categories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommerceCategorySegmentField>,
     /**
-     * Segment by purchases in specific items or categories.
+    * Segment by purchases in specific items or categories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<EcommerceCategorySegmentOperator>,
     /**
-     * Segment by purchases in specific items or categories.
+    * Segment by purchases in specific items or categories.
      */
     #[serde(
         default,
@@ -2583,7 +2624,8 @@ pub struct EcommerceCategorySegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceNumberSegmentConditionType {
     #[serde(rename = "EcommNumber")]
     EcommNumber,
@@ -2614,7 +2656,8 @@ impl EcommerceNumberSegmentConditionType {
 /**
  * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceNumberSegmentField {
     #[serde(rename = "ecomm_avg_ord")]
     EcommAvgOrd,
@@ -2655,22 +2698,22 @@ impl EcommerceNumberSegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceNumberSegment {
     /**
-     * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
+    * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommerceNumberSegmentConditionType>,
     /**
-     * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
+    * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
      */
     #[serde(default, skip_serializing_if = "EcommerceNumberSegmentField::is_noop")]
     pub field: EcommerceNumberSegmentField,
     /**
-     * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
+    * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
      */
     #[serde(default, skip_serializing_if = "MemberRatingSegmentOperator::is_noop")]
     pub op: MemberRatingSegmentOperator,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -2680,7 +2723,8 @@ pub struct EcommerceNumberSegment {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommercePurchasedSegmentConditionType {
     #[serde(rename = "EcommPurchased")]
     EcommPurchased,
@@ -2711,7 +2755,8 @@ impl EcommercePurchasedSegmentConditionType {
 /**
  * Segment by whether someone has purchased anything.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommercePurchasedSegmentField {
     #[serde(rename = "ecomm_purchased")]
     EcommPurchased,
@@ -2743,23 +2788,24 @@ impl EcommercePurchasedSegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommercePurchasedSegment {
     /**
-     * Segment by whether someone has purchased anything.
+    * Segment by whether someone has purchased anything.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommercePurchasedSegmentConditionType>,
     /**
-     * Segment by whether someone has purchased anything.
+    * Segment by whether someone has purchased anything.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommercePurchasedSegmentField>,
     /**
-     * Segment by whether someone has purchased anything.
+    * Segment by whether someone has purchased anything.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<PollActivitySegmentOperator>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceSpentSegmentConditionType {
     #[serde(rename = "EcommSpent")]
     EcommSpent,
@@ -2790,7 +2836,8 @@ impl EcommerceSpentSegmentConditionType {
 /**
  * Segment by amount spent on a single order or across all orders.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceSpentSegmentField {
     #[serde(rename = "ecomm_spent_all")]
     EcommSpentAll,
@@ -2824,7 +2871,8 @@ impl EcommerceSpentSegmentField {
 /**
  * Members who have spent 'more' or 'less' than then specified value.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceSpentSegmentOperator {
     #[serde(rename = "greater")]
     Greater,
@@ -2859,22 +2907,22 @@ impl EcommerceSpentSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceSpentSegment {
     /**
-     * Segment by amount spent on a single order or across all orders.
+    * Segment by amount spent on a single order or across all orders.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommerceSpentSegmentConditionType>,
     /**
-     * Segment by amount spent on a single order or across all orders.
+    * Segment by amount spent on a single order or across all orders.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommerceSpentSegmentField>,
     /**
-     * Segment by amount spent on a single order or across all orders.
+    * Segment by amount spent on a single order or across all orders.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<EcommerceSpentSegmentOperator>,
     /**
-     * Segment by amount spent on a single order or across all orders.
+    * Segment by amount spent on a single order or across all orders.
      */
     #[serde(
         default,
@@ -2884,7 +2932,8 @@ pub struct EcommerceSpentSegment {
     pub value: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommercePurchasedStoreSegmentConditionType {
     #[serde(rename = "EcommStore")]
     EcommStore,
@@ -2915,7 +2964,8 @@ impl EcommercePurchasedStoreSegmentConditionType {
 /**
  * Segment by purchases from a specific store.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommercePurchasedStoreSegmentField {
     #[serde(rename = "ecomm_store")]
     EcommStore,
@@ -2947,22 +2997,22 @@ impl EcommercePurchasedStoreSegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommercePurchasedStoreSegment {
     /**
-     * Segment by purchases from a specific store.
+    * Segment by purchases from a specific store.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommercePurchasedStoreSegmentConditionType>,
     /**
-     * Segment by purchases from a specific store.
+    * Segment by purchases from a specific store.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommercePurchasedStoreSegmentField>,
     /**
-     * Segment by purchases from a specific store.
+    * Segment by purchases from a specific store.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<LanguageSegmentOperator>,
     /**
-     * Segment by purchases from a specific store.
+    * Segment by purchases from a specific store.
      */
     #[serde(
         default,
@@ -2972,7 +3022,8 @@ pub struct EcommercePurchasedStoreSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GoalActivitySegmentConditionType {
     #[serde(rename = "GoalActivity")]
     GoalActivity,
@@ -3003,7 +3054,8 @@ impl GoalActivitySegmentConditionType {
 /**
  * Segment by Goal activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GoalActivitySegmentField {
     #[serde(rename = "goal")]
     Goal,
@@ -3034,7 +3086,8 @@ impl GoalActivitySegmentField {
 /**
  * Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GoalActivitySegmentOperator {
     #[serde(rename = "contains")]
     Contains,
@@ -3081,22 +3134,22 @@ impl GoalActivitySegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GoalActivitySegment {
     /**
-     * Segment by Goal activity.
+    * Segment by Goal activity.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<GoalActivitySegmentConditionType>,
     /**
-     * Segment by Goal activity.
+    * Segment by Goal activity.
      */
     #[serde(default, skip_serializing_if = "GoalActivitySegmentField::is_noop")]
     pub field: GoalActivitySegmentField,
     /**
-     * Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
+    * Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
      */
     #[serde(default, skip_serializing_if = "GoalActivitySegmentOperator::is_noop")]
     pub op: GoalActivitySegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -3106,7 +3159,8 @@ pub struct GoalActivitySegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GoalTimestampSegmentConditionType {
     #[serde(rename = "GoalTimestamp")]
     GoalTimestamp,
@@ -3137,7 +3191,8 @@ impl GoalTimestampSegmentConditionType {
 /**
  * Segment by most recent interaction with a website.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GoalTimestampSegmentField {
     #[serde(rename = "goal_last_visited")]
     GoalLastVisited,
@@ -3168,7 +3223,8 @@ impl GoalTimestampSegmentField {
 /**
  * Whether the website activity happened after, before, or at a given timestamp.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GoalTimestampSegmentOperator {
     #[serde(rename = "greater")]
     Greater,
@@ -3206,22 +3262,22 @@ impl GoalTimestampSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GoalTimestampSegment {
     /**
-     * Segment by most recent interaction with a website.
+    * Segment by most recent interaction with a website.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<GoalTimestampSegmentConditionType>,
     /**
-     * Segment by most recent interaction with a website.
+    * Segment by most recent interaction with a website.
      */
     #[serde(default, skip_serializing_if = "GoalTimestampSegmentField::is_noop")]
     pub field: GoalTimestampSegmentField,
     /**
-     * Whether the website activity happened after, before, or at a given timestamp.
+    * Whether the website activity happened after, before, or at a given timestamp.
      */
     #[serde(default, skip_serializing_if = "GoalTimestampSegmentOperator::is_noop")]
     pub op: GoalTimestampSegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -3231,7 +3287,8 @@ pub struct GoalTimestampSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SimilarSubscribersSegmentMemberConditionType {
     #[serde(rename = "FuzzySegment")]
     FuzzySegment,
@@ -3262,7 +3319,8 @@ impl SimilarSubscribersSegmentMemberConditionType {
 /**
  * Segment by similar subscribers.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SimilarSubscribersSegmentMemberField {
     #[serde(rename = "fuzzy_segment")]
     FuzzySegment,
@@ -3293,7 +3351,8 @@ impl SimilarSubscribersSegmentMemberField {
 /**
  * Members who are/are not apart of a 'similar subscribers' segment.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SimilarSubscribersSegmentMemberOperator {
     #[serde(rename = "fuzzy_is")]
     FuzzyIs,
@@ -3328,12 +3387,12 @@ impl SimilarSubscribersSegmentMemberOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SimilarSubscribersSegmentMember {
     /**
-     * Segment by similar subscribers.
+    * Segment by similar subscribers.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SimilarSubscribersSegmentMemberConditionType>,
     /**
-     * Segment by similar subscribers.
+    * Segment by similar subscribers.
      */
     #[serde(
         default,
@@ -3341,7 +3400,7 @@ pub struct SimilarSubscribersSegmentMember {
     )]
     pub field: SimilarSubscribersSegmentMemberField,
     /**
-     * Members who are/are not apart of a 'similar subscribers' segment.
+    * Members who are/are not apart of a 'similar subscribers' segment.
      */
     #[serde(
         default,
@@ -3349,7 +3408,7 @@ pub struct SimilarSubscribersSegmentMember {
     )]
     pub op: SimilarSubscribersSegmentMemberOperator,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -3359,7 +3418,8 @@ pub struct SimilarSubscribersSegmentMember {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum StaticSegmentMemberConditionType {
     #[serde(rename = "StaticSegment")]
     StaticSegment,
@@ -3390,7 +3450,8 @@ impl StaticSegmentMemberConditionType {
 /**
  * Segment by a given static segment.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum StaticSegmentMemberField {
     #[serde(rename = "static_segment")]
     StaticSegment,
@@ -3421,7 +3482,8 @@ impl StaticSegmentMemberField {
 /**
  * Members who are/are not apart of a static segment.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum StaticSegmentMemberOperator {
     #[serde(rename = "static_is")]
     StaticIs,
@@ -3456,22 +3518,22 @@ impl StaticSegmentMemberOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StaticSegmentMember {
     /**
-     * Segment by a given static segment.
+    * Segment by a given static segment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<StaticSegmentMemberConditionType>,
     /**
-     * Segment by a given static segment.
+    * Segment by a given static segment.
      */
     #[serde(default, skip_serializing_if = "StaticSegmentMemberField::is_noop")]
     pub field: StaticSegmentMemberField,
     /**
-     * Members who are/are not apart of a static segment.
+    * Members who are/are not apart of a static segment.
      */
     #[serde(default, skip_serializing_if = "StaticSegmentMemberOperator::is_noop")]
     pub op: StaticSegmentMemberOperator,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -3481,7 +3543,8 @@ pub struct StaticSegmentMember {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LocationBasedSegmentConditionType {
     #[serde(rename = "IPGeoCountryState")]
     IpGeoCountryState,
@@ -3512,7 +3575,8 @@ impl LocationBasedSegmentConditionType {
 /**
  * Segmenting subscribers who are within a specific location.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LocationBasedSegmentField {
     #[serde(rename = "ipgeo")]
     Ipgeo,
@@ -3543,7 +3607,8 @@ impl LocationBasedSegmentField {
 /**
  * Segment members who are within a specific country or US state.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LocationBasedSegmentOperator {
     #[serde(rename = "ipgeocountry")]
     Ipgeocountry,
@@ -3584,22 +3649,22 @@ impl LocationBasedSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LocationBasedSegment {
     /**
-     * Segment by a specific country or US state.
+    * Segment by a specific country or US state.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<LocationBasedSegmentConditionType>,
     /**
-     * Segmenting subscribers who are within a specific location.
+    * Segmenting subscribers who are within a specific location.
      */
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
     /**
-     * Segment members who are within a specific country or US state.
+    * Segment members who are within a specific country or US state.
      */
     #[serde(default, skip_serializing_if = "LocationBasedSegmentOperator::is_noop")]
     pub op: LocationBasedSegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -3609,7 +3674,8 @@ pub struct LocationBasedSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GeolocationSegmentConditionType {
     #[serde(rename = "IPGeoIn")]
     IpGeoIn,
@@ -3640,7 +3706,8 @@ impl GeolocationSegmentConditionType {
 /**
  * Segment members who are within a specific geographic region.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GeolocationSegmentOperator {
     #[serde(rename = "ipgeoin")]
     Ipgeoin,
@@ -3675,7 +3742,7 @@ impl GeolocationSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GeolocationSegment {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -3684,17 +3751,17 @@ pub struct GeolocationSegment {
     )]
     pub addr: String,
     /**
-     * Segment by a specific geographic region.
+    * Segment by a specific geographic region.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<GeolocationSegmentConditionType>,
     /**
-     * Segmenting subscribers who are within a specific location.
+    * Segmenting subscribers who are within a specific location.
      */
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -3703,7 +3770,7 @@ pub struct GeolocationSegment {
     )]
     pub lat: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -3712,12 +3779,12 @@ pub struct GeolocationSegment {
     )]
     pub lng: String,
     /**
-     * Segment members who are within a specific geographic region.
+    * Segment members who are within a specific geographic region.
      */
     #[serde(default, skip_serializing_if = "GeolocationSegmentOperator::is_noop")]
     pub op: GeolocationSegmentOperator,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -3727,7 +3794,8 @@ pub struct GeolocationSegment {
     pub value: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UsZipCodeSegmentConditionType {
     #[serde(rename = "IPGeoInZip")]
     IpGeoInZip,
@@ -3758,7 +3826,8 @@ impl UsZipCodeSegmentConditionType {
 /**
  * Segment members who are within a specific US zip code.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UsZipCodeSegmentOperator {
     #[serde(rename = "ipgeoinzip")]
     Ipgeoinzip,
@@ -3790,12 +3859,12 @@ impl UsZipCodeSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsZipCodeSegment {
     /**
-     * Segment by a specific US ZIP code.
+    * Segment by a specific US ZIP code.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<UsZipCodeSegmentConditionType>,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -3804,17 +3873,17 @@ pub struct UsZipCodeSegment {
     )]
     pub extra: i64,
     /**
-     * Segmenting subscribers who are within a specific location.
+    * Segmenting subscribers who are within a specific location.
      */
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
     /**
-     * Segment members who are within a specific US zip code.
+    * Segment members who are within a specific US zip code.
      */
     #[serde(default, skip_serializing_if = "UsZipCodeSegmentOperator::is_noop")]
     pub op: UsZipCodeSegmentOperator,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -3824,7 +3893,8 @@ pub struct UsZipCodeSegment {
     pub value: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UnknownLocationBasedSegmentConditionType {
     #[serde(rename = "IPGeoUnknown")]
     IpGeoUnknown,
@@ -3855,7 +3925,8 @@ impl UnknownLocationBasedSegmentConditionType {
 /**
  * Segment members for which location information is unknown.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UnknownLocationBasedSegmentOperator {
     #[serde(rename = "ipgeounknown")]
     Ipgeounknown,
@@ -3887,17 +3958,17 @@ impl UnknownLocationBasedSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UnknownLocationBasedSegment {
     /**
-     * Segment members whose location information is unknown.
+    * Segment members whose location information is unknown.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<UnknownLocationBasedSegmentConditionType>,
     /**
-     * Segmenting subscribers who are within a specific location.
+    * Segmenting subscribers who are within a specific location.
      */
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
     /**
-     * Segment members for which location information is unknown.
+    * Segment members for which location information is unknown.
      */
     #[serde(
         default,
@@ -3906,7 +3977,8 @@ pub struct UnknownLocationBasedSegment {
     pub op: UnknownLocationBasedSegmentOperator,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ZipCodeLocationBasedSegmentConditionType {
     #[serde(rename = "IPGeoZip")]
     IpGeoZip,
@@ -3937,7 +4009,8 @@ impl ZipCodeLocationBasedSegmentConditionType {
 /**
  * Segment members who are/are not within a specific US zip code.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ZipCodeLocationBasedSegmentOperator {
     #[serde(rename = "ipgeoiszip")]
     Ipgeoiszip,
@@ -3972,17 +4045,17 @@ impl ZipCodeLocationBasedSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ZipCodeLocationBasedSegment {
     /**
-     * Segment by a specific US ZIP code.
+    * Segment by a specific US ZIP code.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<ZipCodeLocationBasedSegmentConditionType>,
     /**
-     * Segmenting subscribers who are within a specific location.
+    * Segmenting subscribers who are within a specific location.
      */
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
     /**
-     * Segment members who are/are not within a specific US zip code.
+    * Segment members who are/are not within a specific US zip code.
      */
     #[serde(
         default,
@@ -3990,7 +4063,7 @@ pub struct ZipCodeLocationBasedSegment {
     )]
     pub op: ZipCodeLocationBasedSegmentOperator,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -4000,7 +4073,8 @@ pub struct ZipCodeLocationBasedSegment {
     pub value: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesAgeSegmentConditionType {
     #[serde(rename = "SocialAge")]
     SocialAge,
@@ -4031,7 +4105,8 @@ impl SocialProfilesAgeSegmentConditionType {
 /**
  * Segment by age ranges in Social Profiles data.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesAgeSegmentField {
     #[serde(rename = "social_age")]
     SocialAge,
@@ -4062,7 +4137,8 @@ impl SocialProfilesAgeSegmentField {
 /**
  * The age range to segment.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Value {
     #[serde(rename = "18-24")]
     OneThousandEightHundredAndTwentyFour,
@@ -4103,12 +4179,12 @@ impl Value {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesAgeSegment {
     /**
-     * Segment by age ranges in Social Profiles data.
+    * Segment by age ranges in Social Profiles data.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesAgeSegmentConditionType>,
     /**
-     * Segment by age ranges in Social Profiles data.
+    * Segment by age ranges in Social Profiles data.
      */
     #[serde(
         default,
@@ -4116,18 +4192,19 @@ pub struct SocialProfilesAgeSegment {
     )]
     pub field: SocialProfilesAgeSegmentField,
     /**
-     * Whether the member's language is or is not set to a specific language.
+    * Whether the member's language is or is not set to a specific language.
      */
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
     /**
-     * The age range to segment.
+    * The age range to segment.
      */
     #[serde(default, skip_serializing_if = "Value::is_noop")]
     pub value: Value,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesGenderSegmentConditionType {
     #[serde(rename = "SocialGender")]
     SocialGender,
@@ -4158,7 +4235,8 @@ impl SocialProfilesGenderSegmentConditionType {
 /**
  * Segment by listed gender in Social Profiles data.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesGenderSegmentField {
     #[serde(rename = "social_gender")]
     SocialGender,
@@ -4189,7 +4267,8 @@ impl SocialProfilesGenderSegmentField {
 /**
  * The Social Profiles gender to segment.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesGenderSegmentOperator {
     #[serde(rename = "female")]
     Female,
@@ -4224,12 +4303,12 @@ impl SocialProfilesGenderSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesGenderSegment {
     /**
-     * Segment by listed gender in Social Profiles data.
+    * Segment by listed gender in Social Profiles data.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesGenderSegmentConditionType>,
     /**
-     * Segment by listed gender in Social Profiles data.
+    * Segment by listed gender in Social Profiles data.
      */
     #[serde(
         default,
@@ -4237,12 +4316,12 @@ pub struct SocialProfilesGenderSegment {
     )]
     pub field: SocialProfilesGenderSegmentField,
     /**
-     * Whether the member's language is or is not set to a specific language.
+    * Whether the member's language is or is not set to a specific language.
      */
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
     /**
-     * The Social Profiles gender to segment.
+    * The Social Profiles gender to segment.
      */
     #[serde(
         default,
@@ -4251,7 +4330,8 @@ pub struct SocialProfilesGenderSegment {
     pub value: SocialProfilesGenderSegmentOperator,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesInfluenceSegmentConditionType {
     #[serde(rename = "SocialInfluence")]
     SocialInfluence,
@@ -4282,7 +4362,8 @@ impl SocialProfilesInfluenceSegmentConditionType {
 /**
  * Segment by influence rating in Social Profiles data.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesInfluenceSegmentField {
     #[serde(rename = "social_influence")]
     SocialInfluence,
@@ -4314,12 +4395,12 @@ impl SocialProfilesInfluenceSegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesInfluenceSegment {
     /**
-     * Segment by influence rating in Social Profiles data.
+    * Segment by influence rating in Social Profiles data.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesInfluenceSegmentConditionType>,
     /**
-     * Segment by influence rating in Social Profiles data.
+    * Segment by influence rating in Social Profiles data.
      */
     #[serde(
         default,
@@ -4327,12 +4408,12 @@ pub struct SocialProfilesInfluenceSegment {
     )]
     pub field: SocialProfilesInfluenceSegmentField,
     /**
-     * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
+    * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
      */
     #[serde(default, skip_serializing_if = "MemberRatingSegmentOperator::is_noop")]
     pub op: MemberRatingSegmentOperator,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -4342,7 +4423,8 @@ pub struct SocialProfilesInfluenceSegment {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesNetworkSegmentConditionType {
     #[serde(rename = "SocialNetworkMember")]
     SocialNetworkMember,
@@ -4373,7 +4455,8 @@ impl SocialProfilesNetworkSegmentConditionType {
 /**
  * Segment by social network in Social Profiles data.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesNetworkSegmentField {
     #[serde(rename = "social_network")]
     SocialNetwork,
@@ -4404,7 +4487,8 @@ impl SocialProfilesNetworkSegmentField {
 /**
  * The social network to segment against.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesNetworkSegmentOperator {
     #[serde(rename = "facebook")]
     Facebook,
@@ -4466,12 +4550,12 @@ impl SocialProfilesNetworkSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesNetworkSegment {
     /**
-     * Segment by social network in Social Profiles data.
+    * Segment by social network in Social Profiles data.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesNetworkSegmentConditionType>,
     /**
-     * Segment by social network in Social Profiles data.
+    * Segment by social network in Social Profiles data.
      */
     #[serde(
         default,
@@ -4479,12 +4563,12 @@ pub struct SocialProfilesNetworkSegment {
     )]
     pub field: SocialProfilesNetworkSegmentField,
     /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
+    * Members have/have not interacted with a specific poll in a Mailchimp email.
      */
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
     /**
-     * The social network to segment against.
+    * The social network to segment against.
      */
     #[serde(
         default,
@@ -4493,7 +4577,8 @@ pub struct SocialProfilesNetworkSegment {
     pub value: SocialProfilesNetworkSegmentOperator,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesNetworkFollowSegmentConditionType {
     #[serde(rename = "SocialNetworkFollow")]
     SocialNetworkFollow,
@@ -4526,7 +4611,8 @@ impl SocialProfilesNetworkFollowSegmentConditionType {
 /**
  * Members who are/not following a linked account on a given social network.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesNetworkFollowSegmentOperator {
     #[serde(rename = "follow")]
     Follow,
@@ -4560,7 +4646,8 @@ impl SocialProfilesNetworkFollowSegmentOperator {
 /**
  * The social network to segment against.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SocialProfilesNetworkFollowSegmentOperatorData {
     #[serde(rename = "twitter_follow")]
     TwitterFollow,
@@ -4592,12 +4679,12 @@ impl SocialProfilesNetworkFollowSegmentOperatorData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesNetworkFollowSegment {
     /**
-     * Segment by social network in Social Profiles data.
+    * Segment by social network in Social Profiles data.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesNetworkFollowSegmentConditionType>,
     /**
-     * Segment by social network in Social Profiles data.
+    * Segment by social network in Social Profiles data.
      */
     #[serde(
         default,
@@ -4605,7 +4692,7 @@ pub struct SocialProfilesNetworkFollowSegment {
     )]
     pub field: SocialProfilesNetworkSegmentField,
     /**
-     * Members who are/not following a linked account on a given social network.
+    * Members who are/not following a linked account on a given social network.
      */
     #[serde(
         default,
@@ -4613,7 +4700,7 @@ pub struct SocialProfilesNetworkFollowSegment {
     )]
     pub op: SocialProfilesNetworkFollowSegmentOperator,
     /**
-     * The social network to segment against.
+    * The social network to segment against.
      */
     #[serde(
         default,
@@ -4622,7 +4709,8 @@ pub struct SocialProfilesNetworkFollowSegment {
     pub value: SocialProfilesNetworkFollowSegmentOperatorData,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AddressMergeFieldSegmentConditionType {
     #[serde(rename = "AddressMerge")]
     AddressMerge,
@@ -4653,7 +4741,8 @@ impl AddressMergeFieldSegmentConditionType {
 /**
  * Whether the member's address merge field contains/does not contain a value or is/is not blank.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AddressMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -4694,12 +4783,12 @@ impl AddressMergeFieldSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddressMergeFieldSegment {
     /**
-     * Segment by an address-type merge field.
+    * Segment by an address-type merge field.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<AddressMergeFieldSegmentConditionType>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -4708,7 +4797,7 @@ pub struct AddressMergeFieldSegment {
     )]
     pub field: String,
     /**
-     * Whether the member's address merge field contains/does not contain a value or is/is not blank.
+    * Whether the member's address merge field contains/does not contain a value or is/is not blank.
      */
     #[serde(
         default,
@@ -4716,7 +4805,7 @@ pub struct AddressMergeFieldSegment {
     )]
     pub op: AddressMergeFieldSegmentOperator,
     /**
-     * Segment by an address-type merge field.
+    * Segment by an address-type merge field.
      */
     #[serde(
         default,
@@ -4726,7 +4815,8 @@ pub struct AddressMergeFieldSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AddressZipMergeFieldSegmentConditionType {
     #[serde(rename = "ZipMerge")]
     ZipMerge,
@@ -4757,7 +4847,8 @@ impl AddressZipMergeFieldSegmentConditionType {
 /**
  * Whether the member's address merge field is within a given distance from a city or zip.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AddressZipMergeFieldSegmentOperator {
     #[serde(rename = "geoin")]
     Geoin,
@@ -4789,12 +4880,12 @@ impl AddressZipMergeFieldSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddressZipMergeFieldSegment {
     /**
-     * Segment by an address-type merge field within a given distance.
+    * Segment by an address-type merge field within a given distance.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<AddressZipMergeFieldSegmentConditionType>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -4803,7 +4894,7 @@ pub struct AddressZipMergeFieldSegment {
     )]
     pub extra: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -4812,7 +4903,7 @@ pub struct AddressZipMergeFieldSegment {
     )]
     pub field: String,
     /**
-     * Whether the member's address merge field is within a given distance from a city or zip.
+    * Whether the member's address merge field is within a given distance from a city or zip.
      */
     #[serde(
         default,
@@ -4820,7 +4911,7 @@ pub struct AddressZipMergeFieldSegment {
     )]
     pub op: AddressZipMergeFieldSegmentOperator,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -4830,7 +4921,8 @@ pub struct AddressZipMergeFieldSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BirthdayMergeFieldSegmentConditionType {
     #[serde(rename = "BirthdayMerge")]
     BirthdayMerge,
@@ -4861,7 +4953,8 @@ impl BirthdayMergeFieldSegmentConditionType {
 /**
  * Whether the member's birthday merge information is/is not a certain date or is/is not blank.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BirthdayMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -4902,12 +4995,12 @@ impl BirthdayMergeFieldSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BirthdayMergeFieldSegment {
     /**
-     * Segment by a contact's birthday.
+    * Segment by a contact's birthday.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<BirthdayMergeFieldSegmentConditionType>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -4916,7 +5009,7 @@ pub struct BirthdayMergeFieldSegment {
     )]
     pub field: String,
     /**
-     * Whether the member's birthday merge information is/is not a certain date or is/is not blank.
+    * Whether the member's birthday merge information is/is not a certain date or is/is not blank.
      */
     #[serde(
         default,
@@ -4924,7 +5017,7 @@ pub struct BirthdayMergeFieldSegment {
     )]
     pub op: BirthdayMergeFieldSegmentOperator,
     /**
-     * Segment by a contact's birthday.
+    * Segment by a contact's birthday.
      */
     #[serde(
         default,
@@ -4934,7 +5027,8 @@ pub struct BirthdayMergeFieldSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DateMergeFieldSegmentConditionType {
     #[serde(rename = "DateMerge")]
     DateMerge,
@@ -4965,7 +5059,8 @@ impl DateMergeFieldSegmentConditionType {
 /**
  * Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DateMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -5012,12 +5107,12 @@ impl DateMergeFieldSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateMergeFieldSegment {
     /**
-     * Segment by a given date merge field.
+    * Segment by a given date merge field.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<DateMergeFieldSegmentConditionType>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -5026,7 +5121,7 @@ pub struct DateMergeFieldSegment {
     )]
     pub field: String,
     /**
-     * Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
+    * Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
      */
     #[serde(
         default,
@@ -5034,7 +5129,7 @@ pub struct DateMergeFieldSegment {
     )]
     pub op: DateMergeFieldSegmentOperator,
     /**
-     * Segment by a given date merge field.
+    * Segment by a given date merge field.
      */
     #[serde(
         default,
@@ -5044,7 +5139,8 @@ pub struct DateMergeFieldSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DropdownRadioMergeFieldSegmentConditionType {
     #[serde(rename = "SelectMerge")]
     SelectMerge,
@@ -5075,7 +5171,8 @@ impl DropdownRadioMergeFieldSegmentConditionType {
 /**
  * Whether the member's merge information is/is not a value or is/is not blank.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DropdownRadioMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -5122,12 +5219,12 @@ impl DropdownRadioMergeFieldSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DropdownRadioMergeFieldSegment {
     /**
-     * An individual segment condition
+    * An individual segment condition
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<DropdownRadioMergeFieldSegmentConditionType>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -5136,7 +5233,7 @@ pub struct DropdownRadioMergeFieldSegment {
     )]
     pub field: String,
     /**
-     * Whether the member's merge information is/is not a value or is/is not blank.
+    * Whether the member's merge information is/is not a value or is/is not blank.
      */
     #[serde(
         default,
@@ -5144,7 +5241,7 @@ pub struct DropdownRadioMergeFieldSegment {
     )]
     pub op: DropdownRadioMergeFieldSegmentOperator,
     /**
-     * An individual segment condition
+    * An individual segment condition
      */
     #[serde(
         default,
@@ -5154,7 +5251,8 @@ pub struct DropdownRadioMergeFieldSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TextNumberMergeFieldSegmentConditionType {
     #[serde(rename = "TextMerge")]
     TextMerge,
@@ -5185,7 +5283,8 @@ impl TextNumberMergeFieldSegmentConditionType {
 /**
  * Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TextNumberMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
     Blank,
@@ -5244,12 +5343,12 @@ impl TextNumberMergeFieldSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextNumberMergeFieldSegment {
     /**
-     * Segment by a given text or number merge field.
+    * Segment by a given text or number merge field.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<TextNumberMergeFieldSegmentConditionType>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -5258,7 +5357,7 @@ pub struct TextNumberMergeFieldSegment {
     )]
     pub field: String,
     /**
-     * Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
+    * Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
      */
     #[serde(
         default,
@@ -5266,7 +5365,7 @@ pub struct TextNumberMergeFieldSegment {
     )]
     pub op: TextNumberMergeFieldSegmentOperator,
     /**
-     * Segment by a given text or number merge field.
+    * Segment by a given text or number merge field.
      */
     #[serde(
         default,
@@ -5276,7 +5375,8 @@ pub struct TextNumberMergeFieldSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailSegmentConditionType {
     #[serde(rename = "EmailAddress")]
     EmailAddress,
@@ -5307,7 +5407,8 @@ impl EmailSegmentConditionType {
 /**
  * Segmenting based off of a subscriber's email address.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailSegmentField {
     #[serde(rename = "EMAIL")]
     Email,
@@ -5341,7 +5442,8 @@ impl EmailSegmentField {
 /**
  * Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailSegmentOperator {
     #[serde(rename = "contains")]
     Contains,
@@ -5394,22 +5496,22 @@ impl EmailSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailSegment {
     /**
-     * Segment by email address.
+    * Segment by email address.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EmailSegmentConditionType>,
     /**
-     * Segmenting based off of a subscriber's email address.
+    * Segmenting based off of a subscriber's email address.
      */
     #[serde(default, skip_serializing_if = "EmailSegmentField::is_noop")]
     pub field: EmailSegmentField,
     /**
-     * Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
+    * Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
      */
     #[serde(default, skip_serializing_if = "EmailSegmentOperator::is_noop")]
     pub op: EmailSegmentOperator,
     /**
-     * Segment by email address.
+    * Segment by email address.
      */
     #[serde(
         default,
@@ -5419,7 +5521,8 @@ pub struct EmailSegment {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PredictedGenderSegmentConditionType {
     #[serde(rename = "PredictedGender")]
     PredictedGender,
@@ -5450,7 +5553,8 @@ impl PredictedGenderSegmentConditionType {
 /**
  * Segment by predicted gender.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PredictedGenderSegmentField {
     #[serde(rename = "predicted_gender")]
     PredictedGender,
@@ -5482,22 +5586,22 @@ impl PredictedGenderSegmentField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PredictedGenderSegment {
     /**
-     * Segment by predicted gender.
+    * Segment by predicted gender.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<PredictedGenderSegmentConditionType>,
     /**
-     * Segment by predicted gender.
+    * Segment by predicted gender.
      */
     #[serde(default, skip_serializing_if = "PredictedGenderSegmentField::is_noop")]
     pub field: PredictedGenderSegmentField,
     /**
-     * Whether the member's language is or is not set to a specific language.
+    * Whether the member's language is or is not set to a specific language.
      */
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
     /**
-     * The Social Profiles gender to segment.
+    * The Social Profiles gender to segment.
      */
     #[serde(
         default,
@@ -5506,7 +5610,8 @@ pub struct PredictedGenderSegment {
     pub value: SocialProfilesGenderSegmentOperator,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PredictedAgeSegmentConditionType {
     #[serde(rename = "PredictedAge")]
     PredictedAge,
@@ -5537,7 +5642,8 @@ impl PredictedAgeSegmentConditionType {
 /**
  * Segment by predicted age.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PredictedAgeSegmentField {
     #[serde(rename = "predicted_age_range")]
     PredictedAgeRange,
@@ -5568,7 +5674,8 @@ impl PredictedAgeSegmentField {
 /**
  * Members who are/not the exact criteria listed.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PredictedAgeSegmentOperator {
     #[serde(rename = "is")]
     Is,
@@ -5599,7 +5706,8 @@ impl PredictedAgeSegmentOperator {
 /**
  * The predicted age to segment.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PredictedAgeSegmentOperatorData {
     #[serde(rename = "18-24")]
     OneThousandEightHundredAndTwentyFour,
@@ -5646,22 +5754,22 @@ impl PredictedAgeSegmentOperatorData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PredictedAgeSegment {
     /**
-     * Segment by predicted age.
+    * Segment by predicted age.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<PredictedAgeSegmentConditionType>,
     /**
-     * Segment by predicted age.
+    * Segment by predicted age.
      */
     #[serde(default, skip_serializing_if = "PredictedAgeSegmentField::is_noop")]
     pub field: PredictedAgeSegmentField,
     /**
-     * Members who are/not the exact criteria listed.
+    * Members who are/not the exact criteria listed.
      */
     #[serde(default, skip_serializing_if = "PredictedAgeSegmentOperator::is_noop")]
     pub op: PredictedAgeSegmentOperator,
     /**
-     * The predicted age to segment.
+    * The predicted age to segment.
      */
     #[serde(
         default,
@@ -5670,7 +5778,8 @@ pub struct PredictedAgeSegment {
     pub value: PredictedAgeSegmentOperatorData,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NewSubscribersPrebuiltSegmentConditionType {
     #[serde(rename = "NewSubscribers")]
     NewSubscribers,
@@ -5701,7 +5810,8 @@ impl NewSubscribersPrebuiltSegmentConditionType {
 /**
  * Segment by when people subscribed.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NewSubscribersPrebuiltSegmentField {
     #[serde(rename = "timestamp_opt")]
     TimestampOpt,
@@ -5732,7 +5842,8 @@ impl NewSubscribersPrebuiltSegmentField {
 /**
  * Whe the event took place, namely within a time frame.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NewSubscribersPrebuiltSegmentOperator {
     #[serde(rename = "date_within")]
     DateWithin,
@@ -5764,22 +5875,22 @@ impl NewSubscribersPrebuiltSegmentOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewSubscribersPrebuiltSegment {
     /**
-     * Segment by when people subscribed.
+    * Segment by when people subscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<NewSubscribersPrebuiltSegmentConditionType>,
     /**
-     * Segment by when people subscribed.
+    * Segment by when people subscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<NewSubscribersPrebuiltSegmentField>,
     /**
-     * Segment by when people subscribed.
+    * Segment by when people subscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<NewSubscribersPrebuiltSegmentOperator>,
     /**
-     * Segment by when people subscribed.
+    * Segment by when people subscribed.
      */
     #[serde(
         default,
@@ -5839,167 +5950,167 @@ pub struct NewSubscribersPrebuiltSegment {
 #[serde(untagged)]
 pub enum ConditionsOneOf {
     /**
-     * Segment by interaction with a specific campaign.
+    * Segment by interaction with a specific campaign.
      */
     Conditions(Conditions),
     /**
-     * Segment by interaction with an Automation workflow.
+    * Segment by interaction with an Automation workflow.
      */
     AutomationSegment(AutomationSegment),
     /**
-     * Segment by poll activity.
+    * Segment by poll activity.
      */
     PollActivitySegment(PollActivitySegment),
     /**
-     * Segment by interaction with a campaign via Conversations.
+    * Segment by interaction with a campaign via Conversations.
      */
     ConversationSegment(ConversationSegment),
     /**
-     * Segment by a specific date field.
+    * Segment by a specific date field.
      */
     DateSegment(DateSegment),
     /**
-     * Segment by use of a particular email client.
+    * Segment by use of a particular email client.
      */
     EmailClientSegment(EmailClientSegment),
     /**
-     * Segment by language.
+    * Segment by language.
      */
     LanguageSegment(LanguageSegment),
     /**
-     * Segment by member rating.
+    * Segment by member rating.
      */
     MemberRatingSegment(MemberRatingSegment),
     /**
-     * Segment by signup source.
+    * Segment by signup source.
      */
     SignupSourceSegment(SignupSourceSegment),
     /**
-     * Segment by interaction with a SurveyMonkey survey.
+    * Segment by interaction with a SurveyMonkey survey.
      */
     SurveyMonkeySegment(SurveyMonkeySegment),
     /**
-     * Segment by VIP status.
+    * Segment by VIP status.
      */
     VipSegment(VipSegment),
     /**
-     * Segment by an interest group merge field.
+    * Segment by an interest group merge field.
      */
     InterestsSegment(InterestsSegment),
     /**
-     * Segment by purchases in specific items or categories.
+    * Segment by purchases in specific items or categories.
      */
     EcommerceCategorySegment(EcommerceCategorySegment),
     /**
-     * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
+    * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
      */
     EcommerceNumberSegment(EcommerceNumberSegment),
     /**
-     * Segment by whether someone has purchased anything.
+    * Segment by whether someone has purchased anything.
      */
     EcommercePurchasedSegment(EcommercePurchasedSegment),
     /**
-     * Segment by amount spent on a single order or across all orders.
+    * Segment by amount spent on a single order or across all orders.
      */
     EcommerceSpentSegment(EcommerceSpentSegment),
     /**
-     * Segment by purchases from a specific store.
+    * Segment by purchases from a specific store.
      */
     EcommercePurchasedStoreSegment(EcommercePurchasedStoreSegment),
     /**
-     * Segment by Goal activity.
+    * Segment by Goal activity.
      */
     GoalActivitySegment(GoalActivitySegment),
     /**
-     * Segment by most recent interaction with a website.
+    * Segment by most recent interaction with a website.
      */
     GoalTimestampSegment(GoalTimestampSegment),
     /**
-     * Segment by similar subscribers.
+    * Segment by similar subscribers.
      */
     SimilarSubscribersSegmentMember(SimilarSubscribersSegmentMember),
     /**
-     * Segment by a given static segment.
+    * Segment by a given static segment.
      */
     StaticSegmentMember(StaticSegmentMember),
     /**
-     * Segment by a specific country or US state.
+    * Segment by a specific country or US state.
      */
     LocationBasedSegment(LocationBasedSegment),
     /**
-     * Segment by a specific geographic region.
+    * Segment by a specific geographic region.
      */
     GeolocationSegment(GeolocationSegment),
     /**
-     * Segment by a specific US ZIP code.
+    * Segment by a specific US ZIP code.
      */
     UsZipCodeSegment(UsZipCodeSegment),
     /**
-     * Segment members whose location information is unknown.
+    * Segment members whose location information is unknown.
      */
     UnknownLocationBasedSegment(UnknownLocationBasedSegment),
     /**
-     * Segment by a specific US ZIP code.
+    * Segment by a specific US ZIP code.
      */
     ZipCodeLocationBasedSegment(ZipCodeLocationBasedSegment),
     /**
-     * Segment by age ranges in Social Profiles data.
+    * Segment by age ranges in Social Profiles data.
      */
     SocialProfilesAgeSegment(SocialProfilesAgeSegment),
     /**
-     * Segment by listed gender in Social Profiles data.
+    * Segment by listed gender in Social Profiles data.
      */
     SocialProfilesGenderSegment(SocialProfilesGenderSegment),
     /**
-     * Segment by influence rating in Social Profiles data.
+    * Segment by influence rating in Social Profiles data.
      */
     SocialProfilesInfluenceSegment(SocialProfilesInfluenceSegment),
     /**
-     * Segment by social network in Social Profiles data.
+    * Segment by social network in Social Profiles data.
      */
     SocialProfilesNetworkSegment(SocialProfilesNetworkSegment),
     /**
-     * Segment by social network in Social Profiles data.
+    * Segment by social network in Social Profiles data.
      */
     SocialProfilesNetworkFollowSegment(SocialProfilesNetworkFollowSegment),
     /**
-     * Segment by an address-type merge field.
+    * Segment by an address-type merge field.
      */
     AddressMergeFieldSegment(AddressMergeFieldSegment),
     /**
-     * Segment by an address-type merge field within a given distance.
+    * Segment by an address-type merge field within a given distance.
      */
     AddressZipMergeFieldSegment(AddressZipMergeFieldSegment),
     /**
-     * Segment by a contact's birthday.
+    * Segment by a contact's birthday.
      */
     BirthdayMergeFieldSegment(BirthdayMergeFieldSegment),
     /**
-     * Segment by a given date merge field.
+    * Segment by a given date merge field.
      */
     DateMergeFieldSegment(DateMergeFieldSegment),
     /**
-     * An individual segment condition
+    * An individual segment condition
      */
     DropdownRadioMergeFieldSegment(DropdownRadioMergeFieldSegment),
     /**
-     * Segment by a given text or number merge field.
+    * Segment by a given text or number merge field.
      */
     TextNumberMergeFieldSegment(TextNumberMergeFieldSegment),
     /**
-     * Segment by email address.
+    * Segment by email address.
      */
     EmailSegment(EmailSegment),
     /**
-     * Segment by predicted gender.
+    * Segment by predicted gender.
      */
     PredictedGenderSegment(PredictedGenderSegment),
     /**
-     * Segment by predicted age.
+    * Segment by predicted age.
      */
     PredictedAgeSegment(PredictedAgeSegment),
     /**
-     * Segment by when people subscribed.
+    * Segment by when people subscribed.
      */
     NewSubscribersPrebuiltSegment(NewSubscribersPrebuiltSegment),
 }
@@ -6299,7 +6410,7 @@ impl ConditionsOneOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentOpts {
     /**
-     * An object representing all segmentation options.
+    * An object representing all segmentation options.
      */
     #[serde(
         default,
@@ -6308,12 +6419,12 @@ pub struct SegmentOpts {
     )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
-     * An object representing all segmentation options.
+    * An object representing all segmentation options.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
     /**
-     * An object representing all segmentation options.
+    * An object representing all segmentation options.
      */
     #[serde(
         default,
@@ -6327,7 +6438,7 @@ pub struct SegmentOpts {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct List {
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     #[serde(
         default,
@@ -6336,7 +6447,7 @@ pub struct List {
     )]
     pub list_id: String,
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     #[serde(
         default,
@@ -6344,7 +6455,7 @@ pub struct List {
     )]
     pub list_is_active: bool,
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     #[serde(
         default,
@@ -6353,12 +6464,12 @@ pub struct List {
     )]
     pub list_name: String,
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOpts>,
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     #[serde(
         default,
@@ -6372,7 +6483,7 @@ pub struct List {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Settings {
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6380,7 +6491,7 @@ pub struct Settings {
     )]
     pub authenticate: bool,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6388,7 +6499,7 @@ pub struct Settings {
     )]
     pub auto_footer: bool,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6397,7 +6508,7 @@ pub struct Settings {
     )]
     pub from_name: String,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6405,7 +6516,7 @@ pub struct Settings {
     )]
     pub inline_css: bool,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6414,7 +6525,7 @@ pub struct Settings {
     )]
     pub reply_to: String,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6423,7 +6534,7 @@ pub struct Settings {
     )]
     pub title: String,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6432,7 +6543,7 @@ pub struct Settings {
     )]
     pub to_name: String,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6445,7 +6556,7 @@ pub struct Settings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Salesforce {
     /**
-     * Deprecated
+    * Deprecated
      */
     #[serde(
         default,
@@ -6453,7 +6564,7 @@ pub struct Salesforce {
     )]
     pub campaign: bool,
     /**
-     * Deprecated
+    * Deprecated
      */
     #[serde(
         default,
@@ -6466,7 +6577,7 @@ pub struct Salesforce {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Capsule {
     /**
-     * Deprecated
+    * Deprecated
      */
     #[serde(
         default,
@@ -6479,12 +6590,12 @@ pub struct Capsule {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tracking {
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capsule: Option<Capsule>,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(
         default,
@@ -6493,7 +6604,7 @@ pub struct Tracking {
     )]
     pub clicktale: String,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(
         default,
@@ -6502,7 +6613,7 @@ pub struct Tracking {
     )]
     pub ecomm_360: bool,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(
         default,
@@ -6510,7 +6621,7 @@ pub struct Tracking {
     )]
     pub goal_tracking: bool,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(
         default,
@@ -6519,7 +6630,7 @@ pub struct Tracking {
     )]
     pub google_analytics: String,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(
         default,
@@ -6527,7 +6638,7 @@ pub struct Tracking {
     )]
     pub html_clicks: bool,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(
         default,
@@ -6535,12 +6646,12 @@ pub struct Tracking {
     )]
     pub opens: bool,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub salesforce: Option<Salesforce>,
     /**
-     * The tracking options for the Automation.
+    * The tracking options for the Automation.
      */
     #[serde(
         default,
@@ -6552,7 +6663,8 @@ pub struct Tracking {
 /**
  * The type of Automation workflow.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WorkflowType {
     #[serde(rename = "abandonedBrowse")]
     AbandonedBrowse,
@@ -6628,7 +6740,8 @@ impl WorkflowType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Days {
     #[serde(rename = "friday")]
     Friday,
@@ -6677,7 +6790,8 @@ impl Days {
 /**
  * When to send the Automation email.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailSendTimeSettings {
     #[serde(rename = "send_asap")]
     SendAsap,
@@ -6715,7 +6829,7 @@ impl EmailSendTimeSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Hours {
     /**
-     * When to send the Automation email.
+    * When to send the Automation email.
      */
     #[serde(
         default,
@@ -6729,7 +6843,7 @@ pub struct Hours {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Runtime {
     /**
-     * A workflow's runtime settings for an Automation.
+    * A workflow's runtime settings for an Automation.
      */
     #[serde(
         default,
@@ -6738,7 +6852,7 @@ pub struct Runtime {
     )]
     pub days: Vec<Days>,
     /**
-     * A workflow's runtime settings for an Automation.
+    * A workflow's runtime settings for an Automation.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hours: Option<Hours>,
@@ -6748,12 +6862,12 @@ pub struct Runtime {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TriggerSettings {
     /**
-     * Available triggers for Automation workflows.
+    * Available triggers for Automation workflows.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub runtime: Option<Runtime>,
     /**
-     * Available triggers for Automation workflows.
+    * Available triggers for Automation workflows.
      */
     #[serde(
         default,
@@ -6762,7 +6876,7 @@ pub struct TriggerSettings {
     )]
     pub workflow_emails_count: i64,
     /**
-     * Available triggers for Automation workflows.
+    * Available triggers for Automation workflows.
      */
     #[serde(
         default,
@@ -6771,7 +6885,7 @@ pub struct TriggerSettings {
     )]
     pub workflow_title: String,
     /**
-     * The type of Automation workflow.
+    * The type of Automation workflow.
      */
     #[serde(default, skip_serializing_if = "WorkflowType::is_noop")]
     pub workflow_type: WorkflowType,
@@ -6781,7 +6895,7 @@ pub struct TriggerSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportSummary {
     /**
-     * A summary of opens and clicks for sent campaigns.
+    * A summary of opens and clicks for sent campaigns.
      */
     #[serde(
         default,
@@ -6790,7 +6904,7 @@ pub struct ReportSummary {
     )]
     pub click_rate: f64,
     /**
-     * A summary of opens and clicks for sent campaigns.
+    * A summary of opens and clicks for sent campaigns.
      */
     #[serde(
         default,
@@ -6799,7 +6913,7 @@ pub struct ReportSummary {
     )]
     pub clicks: i64,
     /**
-     * A summary of opens and clicks for sent campaigns.
+    * A summary of opens and clicks for sent campaigns.
      */
     #[serde(
         default,
@@ -6808,7 +6922,7 @@ pub struct ReportSummary {
     )]
     pub open_rate: f64,
     /**
-     * A summary of opens and clicks for sent campaigns.
+    * A summary of opens and clicks for sent campaigns.
      */
     #[serde(
         default,
@@ -6817,7 +6931,7 @@ pub struct ReportSummary {
     )]
     pub opens: i64,
     /**
-     * A summary of opens and clicks for sent campaigns.
+    * A summary of opens and clicks for sent campaigns.
      */
     #[serde(
         default,
@@ -6826,7 +6940,7 @@ pub struct ReportSummary {
     )]
     pub subscriber_clicks: i64,
     /**
-     * A summary of opens and clicks for sent campaigns.
+    * A summary of opens and clicks for sent campaigns.
      */
     #[serde(
         default,
@@ -6840,7 +6954,7 @@ pub struct ReportSummary {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Automations {
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(
         default,
@@ -6850,7 +6964,7 @@ pub struct Automations {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(
         default,
@@ -6859,7 +6973,7 @@ pub struct Automations {
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(
         default,
@@ -6868,7 +6982,7 @@ pub struct Automations {
     )]
     pub emails_sent: i64,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(
         default,
@@ -6877,22 +6991,22 @@ pub struct Automations {
     )]
     pub id: String,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<List>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<ReportSummary>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<Settings>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(
         default,
@@ -6901,17 +7015,17 @@ pub struct Automations {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<Tracking>,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub trigger_settings: Option<TriggerSettings>,
@@ -6921,7 +7035,7 @@ pub struct Automations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAutomationsResponse {
     /**
-     * An array of objects, each representing an Automation workflow.
+    * An array of objects, each representing an Automation workflow.
      */
     #[serde(
         default,
@@ -6931,7 +7045,7 @@ pub struct GetAutomationsResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * An array of objects, each representing an Automation workflow.
+    * An array of objects, each representing an Automation workflow.
      */
     #[serde(
         default,
@@ -6940,7 +7054,7 @@ pub struct GetAutomationsResponse {
     )]
     pub automations: Vec<Automations>,
     /**
-     * An array of objects, each representing an Automation workflow.
+    * An array of objects, each representing an Automation workflow.
      */
     #[serde(
         default,
@@ -6954,7 +7068,7 @@ pub struct GetAutomationsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Recipients {
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     #[serde(
         default,
@@ -6963,7 +7077,7 @@ pub struct Recipients {
     )]
     pub list_id: String,
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     #[serde(
         default,
@@ -6977,7 +7091,7 @@ pub struct Recipients {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationCampaignSettings {
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -6986,7 +7100,7 @@ pub struct AutomationCampaignSettings {
     )]
     pub from_name: String,
     /**
-     * The settings for the Automation workflow.
+    * The settings for the Automation workflow.
      */
     #[serde(
         default,
@@ -7000,7 +7114,7 @@ pub struct AutomationCampaignSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationTrigger {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -7014,16 +7128,16 @@ pub struct AutomationTrigger {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationWorkflow {
     /**
-     * List settings for the Automation.
+    * List settings for the Automation.
      */
     pub recipients: Recipients,
     /**
-     * A summary of an individual Automation workflow's settings and content.
+    * A summary of an individual Automation workflow's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<AutomationCampaignSettings>,
     /**
-     * Trigger settings for the Automation.
+    * Trigger settings for the Automation.
      */
     pub trigger_settings: AutomationTrigger,
 }
@@ -7031,7 +7145,8 @@ pub struct AutomationWorkflow {
 /**
  * The type of delay for an Automation email.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DelayType {
     #[serde(rename = "day")]
     Day,
@@ -7071,7 +7186,8 @@ impl DelayType {
 /**
  * Whether the delay settings describe before or after the delay action of an Automation email.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Direction {
     #[serde(rename = "after")]
     After,
@@ -7105,7 +7221,8 @@ impl Direction {
 /**
  * The action that triggers the delay of an Automation email.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Action {
     #[serde(rename = "annual")]
     Annual,
@@ -7233,12 +7350,12 @@ impl Action {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Delay {
     /**
-     * The delay settings for an Automation email.
+    * The delay settings for an Automation email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<Action>,
     /**
-     * The delay settings for an Automation email.
+    * The delay settings for an Automation email.
      */
     #[serde(
         default,
@@ -7247,7 +7364,7 @@ pub struct Delay {
     )]
     pub action_description: String,
     /**
-     * The delay settings for an Automation email.
+    * The delay settings for an Automation email.
      */
     #[serde(
         default,
@@ -7256,12 +7373,12 @@ pub struct Delay {
     )]
     pub amount: i64,
     /**
-     * The delay settings for an Automation email.
+    * The delay settings for an Automation email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub direction: Option<Direction>,
     /**
-     * The delay settings for an Automation email.
+    * The delay settings for an Automation email.
      */
     #[serde(
         default,
@@ -7270,7 +7387,7 @@ pub struct Delay {
     )]
     pub full_description: String,
     /**
-     * The delay settings for an Automation email.
+    * The delay settings for an Automation email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DelayType>,
@@ -7280,7 +7397,7 @@ pub struct Delay {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentOptions {
     /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
+    * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
     #[serde(
         default,
@@ -7289,12 +7406,12 @@ pub struct SegmentOptions {
     )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
+    * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
     /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
+    * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
     #[serde(
         default,
@@ -7303,7 +7420,7 @@ pub struct SegmentOptions {
     )]
     pub prebuilt_segment_id: String,
     /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
+    * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
     #[serde(
         default,
@@ -7317,7 +7434,7 @@ pub struct SegmentOptions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationEmailsList {
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -7326,7 +7443,7 @@ pub struct AutomationEmailsList {
     )]
     pub list_id: String,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -7334,7 +7451,7 @@ pub struct AutomationEmailsList {
     )]
     pub list_is_active: bool,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -7343,7 +7460,7 @@ pub struct AutomationEmailsList {
     )]
     pub list_name: String,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -7352,12 +7469,12 @@ pub struct AutomationEmailsList {
     )]
     pub recipient_count: i64,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -7371,7 +7488,7 @@ pub struct AutomationEmailsList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignSettings {
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7379,7 +7496,7 @@ pub struct CampaignSettings {
     )]
     pub authenticate: bool,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7388,7 +7505,7 @@ pub struct CampaignSettings {
     )]
     pub auto_fb_post: Vec<String>,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7396,7 +7513,7 @@ pub struct CampaignSettings {
     )]
     pub auto_footer: bool,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7404,7 +7521,7 @@ pub struct CampaignSettings {
     )]
     pub auto_tweet: bool,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7412,7 +7529,7 @@ pub struct CampaignSettings {
     )]
     pub drag_and_drop: bool,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7420,7 +7537,7 @@ pub struct CampaignSettings {
     )]
     pub fb_comments: bool,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7429,7 +7546,7 @@ pub struct CampaignSettings {
     )]
     pub from_name: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7437,7 +7554,7 @@ pub struct CampaignSettings {
     )]
     pub inline_css: bool,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7446,7 +7563,7 @@ pub struct CampaignSettings {
     )]
     pub preview_text: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7455,7 +7572,7 @@ pub struct CampaignSettings {
     )]
     pub reply_to: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7464,7 +7581,7 @@ pub struct CampaignSettings {
     )]
     pub subject_line: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7473,7 +7590,7 @@ pub struct CampaignSettings {
     )]
     pub template_id: i64,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7487,12 +7604,12 @@ pub struct CampaignSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignTrackingOptions {
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capsule: Option<Capsule>,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(
         default,
@@ -7501,7 +7618,7 @@ pub struct CampaignTrackingOptions {
     )]
     pub clicktale: String,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(
         default,
@@ -7510,7 +7627,7 @@ pub struct CampaignTrackingOptions {
     )]
     pub ecomm_360: bool,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(
         default,
@@ -7518,7 +7635,7 @@ pub struct CampaignTrackingOptions {
     )]
     pub goal_tracking: bool,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(
         default,
@@ -7527,7 +7644,7 @@ pub struct CampaignTrackingOptions {
     )]
     pub google_analytics: String,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(
         default,
@@ -7535,7 +7652,7 @@ pub struct CampaignTrackingOptions {
     )]
     pub html_clicks: bool,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(
         default,
@@ -7543,12 +7660,12 @@ pub struct CampaignTrackingOptions {
     )]
     pub opens: bool,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub salesforce: Option<Salesforce>,
     /**
-     * The tracking options for a campaign.
+    * The tracking options for a campaign.
      */
     #[serde(
         default,
@@ -7561,7 +7678,7 @@ pub struct CampaignTrackingOptions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialCard {
     /**
-     * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
+    * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
      */
     #[serde(
         default,
@@ -7570,7 +7687,7 @@ pub struct SocialCard {
     )]
     pub description: String,
     /**
-     * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
+    * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
      */
     #[serde(
         default,
@@ -7579,7 +7696,7 @@ pub struct SocialCard {
     )]
     pub image_url: String,
     /**
-     * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
+    * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
      */
     #[serde(
         default,
@@ -7593,7 +7710,7 @@ pub struct SocialCard {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportSummary {
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -7602,7 +7719,7 @@ pub struct CampaignReportSummary {
     )]
     pub click_rate: f64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -7611,7 +7728,7 @@ pub struct CampaignReportSummary {
     )]
     pub clicks: i64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -7620,7 +7737,7 @@ pub struct CampaignReportSummary {
     )]
     pub open_rate: f64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -7629,7 +7746,7 @@ pub struct CampaignReportSummary {
     )]
     pub opens: i64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -7638,7 +7755,7 @@ pub struct CampaignReportSummary {
     )]
     pub subscriber_clicks: i64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -7652,7 +7769,7 @@ pub struct CampaignReportSummary {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Emails {
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7662,7 +7779,7 @@ pub struct Emails {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7671,7 +7788,7 @@ pub struct Emails {
     )]
     pub archive_url: String,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7680,7 +7797,7 @@ pub struct Emails {
     )]
     pub content_type: String,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7689,12 +7806,12 @@ pub struct Emails {
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delay: Option<Delay>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7703,7 +7820,7 @@ pub struct Emails {
     )]
     pub emails_sent: i64,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7711,7 +7828,7 @@ pub struct Emails {
     )]
     pub has_logo_merge_tag: bool,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7720,7 +7837,7 @@ pub struct Emails {
     )]
     pub id: String,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7728,7 +7845,7 @@ pub struct Emails {
     )]
     pub needs_block_refresh: bool,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7737,17 +7854,17 @@ pub struct Emails {
     )]
     pub position: i64,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<AutomationEmailsList>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<CampaignReportSummary>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7756,17 +7873,17 @@ pub struct Emails {
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<CampaignSettings>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7775,22 +7892,22 @@ pub struct Emails {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub trigger_settings: Option<TriggerSettings>,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7799,7 +7916,7 @@ pub struct Emails {
     )]
     pub web_id: i64,
     /**
-     * A summary of an individual Automation workflow email.
+    * A summary of an individual Automation workflow email.
      */
     #[serde(
         default,
@@ -7813,7 +7930,7 @@ pub struct Emails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationEmails {
     /**
-     * A summary of the emails in an Automation workflow.
+    * A summary of the emails in an Automation workflow.
      */
     #[serde(
         default,
@@ -7823,7 +7940,7 @@ pub struct AutomationEmails {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of the emails in an Automation workflow.
+    * A summary of the emails in an Automation workflow.
      */
     #[serde(
         default,
@@ -7832,7 +7949,7 @@ pub struct AutomationEmails {
     )]
     pub emails: Vec<Emails>,
     /**
-     * A summary of the emails in an Automation workflow.
+    * A summary of the emails in an Automation workflow.
      */
     #[serde(
         default,
@@ -7846,7 +7963,7 @@ pub struct AutomationEmails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7855,7 +7972,7 @@ pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
     )]
     pub from_name: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7864,7 +7981,7 @@ pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
     )]
     pub preview_text: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7873,7 +7990,7 @@ pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
     )]
     pub reply_to: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7882,7 +7999,7 @@ pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
     )]
     pub subject_line: String,
     /**
-     * Settings for the campaign including the email subject, from name, and from email address.
+    * Settings for the campaign including the email subject, from name, and from email address.
      */
     #[serde(
         default,
@@ -7895,7 +8012,8 @@ pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
 /**
  * Whether the delay settings describe before or after the delay action of an automation email.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DelayDirection {
     #[serde(rename = "after")]
     After,
@@ -7926,7 +8044,8 @@ impl DelayDirection {
 /**
  * The action that triggers the delay of an automation emails.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DelayAction {
     #[serde(rename = "ecomm_abandoned_browse")]
     EcommAbandonedBrowse,
@@ -7964,12 +8083,12 @@ impl DelayAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationDelay {
     /**
-     * The action that triggers the delay of an automation emails.
+    * The action that triggers the delay of an automation emails.
      */
     #[serde(default, skip_serializing_if = "DelayAction::is_noop")]
     pub action: DelayAction,
     /**
-     * The delay settings for an automation email.
+    * The delay settings for an automation email.
      */
     #[serde(
         default,
@@ -7978,12 +8097,12 @@ pub struct AutomationDelay {
     )]
     pub amount: i64,
     /**
-     * The delay settings for an automation email.
+    * The delay settings for an automation email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub direction: Option<DelayDirection>,
     /**
-     * The delay settings for an automation email.
+    * The delay settings for an automation email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DelayType>,
@@ -7993,12 +8112,12 @@ pub struct AutomationDelay {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateInformationAboutASpecificWorkflowEmail {
     /**
-     * Update information about an individual Automation workflow email.
+    * Update information about an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delay: Option<AutomationDelay>,
     /**
-     * Update information about an individual Automation workflow email.
+    * Update information about an individual Automation workflow email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<UpdateInformationAboutASpecificWorkflowEmailCampaignSettings>,
@@ -8008,7 +8127,7 @@ pub struct UpdateInformationAboutASpecificWorkflowEmail {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Queue {
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8018,7 +8137,7 @@ pub struct Queue {
     )]
     pub links: Vec<Links>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -8027,7 +8146,7 @@ pub struct Queue {
     )]
     pub email_address: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8036,7 +8155,7 @@ pub struct Queue {
     )]
     pub email_id: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8045,7 +8164,7 @@ pub struct Queue {
     )]
     pub id: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8054,7 +8173,7 @@ pub struct Queue {
     )]
     pub list_id: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8063,7 +8182,7 @@ pub struct Queue {
     )]
     pub next_send: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8077,7 +8196,7 @@ pub struct Queue {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAutomationsEmailsQueueResponse {
     /**
-     * An automation workflow
+    * An automation workflow
      */
     #[serde(
         default,
@@ -8087,7 +8206,7 @@ pub struct GetAutomationsEmailsQueueResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * An automation workflow
+    * An automation workflow
      */
     #[serde(
         default,
@@ -8096,7 +8215,7 @@ pub struct GetAutomationsEmailsQueueResponse {
     )]
     pub email_id: String,
     /**
-     * An automation workflow
+    * An automation workflow
      */
     #[serde(
         default,
@@ -8105,7 +8224,7 @@ pub struct GetAutomationsEmailsQueueResponse {
     )]
     pub queue: Vec<Queue>,
     /**
-     * An automation workflow
+    * An automation workflow
      */
     #[serde(
         default,
@@ -8114,7 +8233,7 @@ pub struct GetAutomationsEmailsQueueResponse {
     )]
     pub total_items: i64,
     /**
-     * An automation workflow
+    * An automation workflow
      */
     #[serde(
         default,
@@ -8128,7 +8247,7 @@ pub struct GetAutomationsEmailsQueueResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberInAutomationQueueData {
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8138,7 +8257,7 @@ pub struct SubscriberInAutomationQueueData {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8147,7 +8266,7 @@ pub struct SubscriberInAutomationQueueData {
     )]
     pub email_address: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8156,7 +8275,7 @@ pub struct SubscriberInAutomationQueueData {
     )]
     pub email_id: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8165,7 +8284,7 @@ pub struct SubscriberInAutomationQueueData {
     )]
     pub id: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8174,7 +8293,7 @@ pub struct SubscriberInAutomationQueueData {
     )]
     pub list_id: String,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8182,7 +8301,7 @@ pub struct SubscriberInAutomationQueueData {
     )]
     pub list_is_active: bool,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8191,7 +8310,7 @@ pub struct SubscriberInAutomationQueueData {
     )]
     pub next_send: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about subscribers in an Automation email queue.
+    * Information about subscribers in an Automation email queue.
      */
     #[serde(
         default,
@@ -8205,7 +8324,7 @@ pub struct SubscriberInAutomationQueueData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Subscribers {
     /**
-     * A summary of a subscriber removed from an Automation workflow.
+    * A summary of a subscriber removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8215,7 +8334,7 @@ pub struct Subscribers {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of a subscriber removed from an Automation workflow.
+    * A summary of a subscriber removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8224,7 +8343,7 @@ pub struct Subscribers {
     )]
     pub email_address: String,
     /**
-     * A summary of a subscriber removed from an Automation workflow.
+    * A summary of a subscriber removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8233,7 +8352,7 @@ pub struct Subscribers {
     )]
     pub id: String,
     /**
-     * A summary of a subscriber removed from an Automation workflow.
+    * A summary of a subscriber removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8242,7 +8361,7 @@ pub struct Subscribers {
     )]
     pub list_id: String,
     /**
-     * A summary of a subscriber removed from an Automation workflow.
+    * A summary of a subscriber removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8256,7 +8375,7 @@ pub struct Subscribers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RemovedSubscribers {
     /**
-     * A summary of the subscribers who were removed from an Automation workflow.
+    * A summary of the subscribers who were removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8266,7 +8385,7 @@ pub struct RemovedSubscribers {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of the subscribers who were removed from an Automation workflow.
+    * A summary of the subscribers who were removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8275,7 +8394,7 @@ pub struct RemovedSubscribers {
     )]
     pub subscribers: Vec<Subscribers>,
     /**
-     * A summary of the subscribers who were removed from an Automation workflow.
+    * A summary of the subscribers who were removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8284,7 +8403,7 @@ pub struct RemovedSubscribers {
     )]
     pub total_items: i64,
     /**
-     * A summary of the subscribers who were removed from an Automation workflow.
+    * A summary of the subscribers who were removed from an Automation workflow.
      */
     #[serde(
         default,
@@ -8297,7 +8416,8 @@ pub struct RemovedSubscribers {
 /**
  * The status of the batch call. [Learn more](https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/#check-the-status-of-a-batch-operation) about the batch operation status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BatchOperationsStatus {
     #[serde(rename = "finalizing")]
     Finalizing,
@@ -8341,7 +8461,7 @@ impl BatchOperationsStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Batch {
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8351,7 +8471,7 @@ pub struct Batch {
     )]
     pub links: Vec<Links>,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8360,7 +8480,7 @@ pub struct Batch {
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8369,7 +8489,7 @@ pub struct Batch {
     )]
     pub errored_operations: i64,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8378,7 +8498,7 @@ pub struct Batch {
     )]
     pub finished_operations: i64,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8387,7 +8507,7 @@ pub struct Batch {
     )]
     pub id: String,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8396,12 +8516,12 @@ pub struct Batch {
     )]
     pub response_body_url: String,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<BatchOperationsStatus>,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8410,7 +8530,7 @@ pub struct Batch {
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The status of a batch request
+    * The status of a batch request
      */
     #[serde(
         default,
@@ -8424,7 +8544,7 @@ pub struct Batch {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchOperations {
     /**
-     * A summary of batch requests that have been made.
+    * A summary of batch requests that have been made.
      */
     #[serde(
         default,
@@ -8434,7 +8554,7 @@ pub struct BatchOperations {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of batch requests that have been made.
+    * A summary of batch requests that have been made.
      */
     #[serde(
         default,
@@ -8443,7 +8563,7 @@ pub struct BatchOperations {
     )]
     pub batches: Vec<Batch>,
     /**
-     * A summary of batch requests that have been made.
+    * A summary of batch requests that have been made.
      */
     #[serde(
         default,
@@ -8456,7 +8576,8 @@ pub struct BatchOperations {
 /**
  * The HTTP method to use for the operation.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum HttpMethod {
     #[serde(rename = "DELETE")]
     Delete,
@@ -8509,7 +8630,7 @@ pub struct Operations {
     )]
     pub body: String,
     /**
-     * The HTTP method to use for the operation.
+    * The HTTP method to use for the operation.
      */
     #[serde(default, skip_serializing_if = "HttpMethod::is_noop")]
     pub method: HttpMethod,
@@ -8522,7 +8643,7 @@ pub struct Operations {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub params: Option<Params>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -8535,7 +8656,7 @@ pub struct Operations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostBatchesRequest {
     /**
-     * An array of objects that describes operations to perform.
+    * An array of objects that describes operations to perform.
      */
     #[serde(
         default,
@@ -8549,7 +8670,7 @@ pub struct PostBatchesRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Webhooks {
     /**
-     * A webhook configured for batch status updates.
+    * A webhook configured for batch status updates.
      */
     #[serde(
         default,
@@ -8559,7 +8680,7 @@ pub struct Webhooks {
     )]
     pub links: Vec<Links>,
     /**
-     * A webhook configured for batch status updates.
+    * A webhook configured for batch status updates.
      */
     #[serde(
         default,
@@ -8568,7 +8689,7 @@ pub struct Webhooks {
     )]
     pub id: String,
     /**
-     * A webhook configured for batch status updates.
+    * A webhook configured for batch status updates.
      */
     #[serde(
         default,
@@ -8582,7 +8703,7 @@ pub struct Webhooks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchWebhooks {
     /**
-     * Manage webhooks for batch requests.
+    * Manage webhooks for batch requests.
      */
     #[serde(
         default,
@@ -8592,7 +8713,7 @@ pub struct BatchWebhooks {
     )]
     pub links: Vec<Links>,
     /**
-     * Manage webhooks for batch requests.
+    * Manage webhooks for batch requests.
      */
     #[serde(
         default,
@@ -8601,7 +8722,7 @@ pub struct BatchWebhooks {
     )]
     pub total_items: i64,
     /**
-     * Manage webhooks for batch requests.
+    * Manage webhooks for batch requests.
      */
     #[serde(
         default,
@@ -8615,7 +8736,7 @@ pub struct BatchWebhooks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchWebhook {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -8629,7 +8750,7 @@ pub struct BatchWebhook {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Folders {
     /**
-     * A folder used to organize templates.
+    * A folder used to organize templates.
      */
     #[serde(
         default,
@@ -8639,7 +8760,7 @@ pub struct Folders {
     )]
     pub links: Vec<Links>,
     /**
-     * A folder used to organize templates.
+    * A folder used to organize templates.
      */
     #[serde(
         default,
@@ -8648,7 +8769,7 @@ pub struct Folders {
     )]
     pub count: i64,
     /**
-     * A folder used to organize templates.
+    * A folder used to organize templates.
      */
     #[serde(
         default,
@@ -8657,7 +8778,7 @@ pub struct Folders {
     )]
     pub id: String,
     /**
-     * A folder used to organize templates.
+    * A folder used to organize templates.
      */
     #[serde(
         default,
@@ -8671,7 +8792,7 @@ pub struct Folders {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateFolders {
     /**
-     * A list of template folders
+    * A list of template folders
      */
     #[serde(
         default,
@@ -8681,7 +8802,7 @@ pub struct TemplateFolders {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of template folders
+    * A list of template folders
      */
     #[serde(
         default,
@@ -8690,7 +8811,7 @@ pub struct TemplateFolders {
     )]
     pub folders: Vec<Folders>,
     /**
-     * A list of template folders
+    * A list of template folders
      */
     #[serde(
         default,
@@ -8704,7 +8825,7 @@ pub struct TemplateFolders {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFolder {
     /**
-     * A folder used to organize campaigns.
+    * A folder used to organize campaigns.
      */
     #[serde(
         default,
@@ -8714,7 +8835,7 @@ pub struct CampaignFolder {
     )]
     pub links: Vec<Links>,
     /**
-     * A folder used to organize campaigns.
+    * A folder used to organize campaigns.
      */
     #[serde(
         default,
@@ -8723,7 +8844,7 @@ pub struct CampaignFolder {
     )]
     pub count: i64,
     /**
-     * A folder used to organize campaigns.
+    * A folder used to organize campaigns.
      */
     #[serde(
         default,
@@ -8732,7 +8853,7 @@ pub struct CampaignFolder {
     )]
     pub id: String,
     /**
-     * A folder used to organize campaigns.
+    * A folder used to organize campaigns.
      */
     #[serde(
         default,
@@ -8746,7 +8867,7 @@ pub struct CampaignFolder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFolders {
     /**
-     * A list of campaign folders
+    * A list of campaign folders
      */
     #[serde(
         default,
@@ -8756,7 +8877,7 @@ pub struct CampaignFolders {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of campaign folders
+    * A list of campaign folders
      */
     #[serde(
         default,
@@ -8765,7 +8886,7 @@ pub struct CampaignFolders {
     )]
     pub folders: Vec<CampaignFolder>,
     /**
-     * A list of campaign folders
+    * A list of campaign folders
      */
     #[serde(
         default,
@@ -8778,7 +8899,8 @@ pub struct CampaignFolders {
 /**
  * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CampaignType {
     #[serde(rename = "absplit")]
     Absplit,
@@ -8821,7 +8943,8 @@ impl CampaignType {
 /**
  * The status of the campaign.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetCampaignsStatus {
     #[serde(rename = "paused")]
     Paused,
@@ -8864,7 +8987,8 @@ impl GetCampaignsStatus {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SortField {
     #[serde(rename = "create_time")]
     CreateTime,
@@ -8898,7 +9022,8 @@ impl SortField {
 /**
  * Determines the order direction for sorted results.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SortDir {
     #[serde(rename = "ASC")]
     Asc,
@@ -8932,7 +9057,8 @@ impl SortDir {
 /**
  * The current status of the campaign.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CampaignStatus {
     #[serde(rename = "archived")]
     Archived,
@@ -8984,7 +9110,8 @@ impl CampaignStatus {
 /**
  * How the campaign's content is put together.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ContentType {
     #[serde(rename = "html")]
     Html,
@@ -9025,7 +9152,7 @@ impl ContentType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsResponseCampaignSettings {
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9033,7 +9160,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub authenticate: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9042,7 +9169,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub auto_fb_post: Vec<String>,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9050,7 +9177,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub auto_footer: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9058,7 +9185,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub auto_tweet: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9066,7 +9193,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub drag_and_drop: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9074,7 +9201,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub fb_comments: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9083,7 +9210,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub folder_id: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9092,7 +9219,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub from_name: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9100,7 +9227,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub inline_css: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9109,7 +9236,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub preview_text: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9118,7 +9245,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub reply_to: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9127,7 +9254,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub subject_line: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9136,7 +9263,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub template_id: i64,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9144,7 +9271,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub timewarp: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9153,7 +9280,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub title: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9162,7 +9289,7 @@ pub struct GetCampaignsResponseCampaignSettings {
     )]
     pub to_name: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -9174,7 +9301,8 @@ pub struct GetCampaignsResponseCampaignSettings {
 /**
  * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WinnerCriteria {
     #[serde(rename = "clicks")]
     Clicks,
@@ -9214,7 +9342,7 @@ impl WinnerCriteria {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Combinations {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -9223,7 +9351,7 @@ pub struct Combinations {
     )]
     pub content_description: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -9232,7 +9360,7 @@ pub struct Combinations {
     )]
     pub from_name: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -9241,7 +9369,7 @@ pub struct Combinations {
     )]
     pub id: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -9250,7 +9378,7 @@ pub struct Combinations {
     )]
     pub recipients: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -9259,7 +9387,7 @@ pub struct Combinations {
     )]
     pub reply_to: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -9268,7 +9396,7 @@ pub struct Combinations {
     )]
     pub send_time: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -9282,7 +9410,7 @@ pub struct Combinations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ABTestOptions {
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9291,7 +9419,7 @@ pub struct ABTestOptions {
     )]
     pub combinations: Vec<Combinations>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9300,7 +9428,7 @@ pub struct ABTestOptions {
     )]
     pub contents: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9309,7 +9437,7 @@ pub struct ABTestOptions {
     )]
     pub from_names: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9318,7 +9446,7 @@ pub struct ABTestOptions {
     )]
     pub reply_to_addresses: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9327,7 +9455,7 @@ pub struct ABTestOptions {
     )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9336,7 +9464,7 @@ pub struct ABTestOptions {
     )]
     pub subject_lines: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9345,7 +9473,7 @@ pub struct ABTestOptions {
     )]
     pub test_size: i64,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9354,12 +9482,12 @@ pub struct ABTestOptions {
     )]
     pub wait_time: i64,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub winner_criteria: Option<WinnerCriteria>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9368,7 +9496,7 @@ pub struct ABTestOptions {
     )]
     pub winning_campaign_id: String,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -9381,7 +9509,8 @@ pub struct ABTestOptions {
 /**
  * The frequency of the RSS Campaign.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Frequency {
     #[serde(rename = "daily")]
     Daily,
@@ -9419,7 +9548,7 @@ impl Frequency {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DailySend {
     /**
-     * The days of the week to send a daily RSS Campaign.
+    * The days of the week to send a daily RSS Campaign.
      */
     #[serde(
         default,
@@ -9427,7 +9556,7 @@ pub struct DailySend {
     )]
     pub friday: bool,
     /**
-     * The days of the week to send a daily RSS Campaign.
+    * The days of the week to send a daily RSS Campaign.
      */
     #[serde(
         default,
@@ -9435,7 +9564,7 @@ pub struct DailySend {
     )]
     pub monday: bool,
     /**
-     * The days of the week to send a daily RSS Campaign.
+    * The days of the week to send a daily RSS Campaign.
      */
     #[serde(
         default,
@@ -9443,7 +9572,7 @@ pub struct DailySend {
     )]
     pub saturday: bool,
     /**
-     * The days of the week to send a daily RSS Campaign.
+    * The days of the week to send a daily RSS Campaign.
      */
     #[serde(
         default,
@@ -9451,7 +9580,7 @@ pub struct DailySend {
     )]
     pub sunday: bool,
     /**
-     * The days of the week to send a daily RSS Campaign.
+    * The days of the week to send a daily RSS Campaign.
      */
     #[serde(
         default,
@@ -9459,7 +9588,7 @@ pub struct DailySend {
     )]
     pub thursday: bool,
     /**
-     * The days of the week to send a daily RSS Campaign.
+    * The days of the week to send a daily RSS Campaign.
      */
     #[serde(
         default,
@@ -9467,7 +9596,7 @@ pub struct DailySend {
     )]
     pub tuesday: bool,
     /**
-     * The days of the week to send a daily RSS Campaign.
+    * The days of the week to send a daily RSS Campaign.
      */
     #[serde(
         default,
@@ -9480,12 +9609,12 @@ pub struct DailySend {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Schedule {
     /**
-     * The schedule for sending the RSS Campaign.
+    * The schedule for sending the RSS Campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub daily_send: Option<DailySend>,
     /**
-     * The schedule for sending the RSS Campaign.
+    * The schedule for sending the RSS Campaign.
      */
     #[serde(
         default,
@@ -9494,7 +9623,7 @@ pub struct Schedule {
     )]
     pub hour: i64,
     /**
-     * The schedule for sending the RSS Campaign.
+    * The schedule for sending the RSS Campaign.
      */
     #[serde(
         default,
@@ -9503,7 +9632,7 @@ pub struct Schedule {
     )]
     pub monthly_send_date: f64,
     /**
-     * The schedule for sending the RSS Campaign.
+    * The schedule for sending the RSS Campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub weekly_send_day: Option<Days>,
@@ -9513,7 +9642,7 @@ pub struct Schedule {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RssOpts {
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(
         default,
@@ -9521,7 +9650,7 @@ pub struct RssOpts {
     )]
     pub constrain_rss_img: bool,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(
         default,
@@ -9530,12 +9659,12 @@ pub struct RssOpts {
     )]
     pub feed_url: String,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub frequency: Option<Frequency>,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(
         default,
@@ -9544,7 +9673,7 @@ pub struct RssOpts {
     )]
     pub last_sent: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
@@ -9553,7 +9682,8 @@ pub struct RssOpts {
 /**
  * The type of AB split to run.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SplitTest {
     #[serde(rename = "from_name")]
     FromName,
@@ -9590,7 +9720,8 @@ impl SplitTest {
 /**
  * How we should evaluate a winner. Based on 'opens', 'clicks', or 'manual'.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PickWinner {
     #[serde(rename = "clicks")]
     Clicks,
@@ -9627,7 +9758,8 @@ impl PickWinner {
 /**
  * How unit of time for measuring the winner ('hours' or 'days'). This cannot be changed after a campaign is sent.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WaitTime {
     #[serde(rename = "days")]
     Days,
@@ -9662,7 +9794,7 @@ impl WaitTime {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbSplitOpts {
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9671,7 +9803,7 @@ pub struct AbSplitOpts {
     )]
     pub from_name_a: String,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9680,12 +9812,12 @@ pub struct AbSplitOpts {
     )]
     pub from_name_b: String,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pick_winner: Option<PickWinner>,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9694,7 +9826,7 @@ pub struct AbSplitOpts {
     )]
     pub reply_email_a: String,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9703,7 +9835,7 @@ pub struct AbSplitOpts {
     )]
     pub reply_email_b: String,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9712,7 +9844,7 @@ pub struct AbSplitOpts {
     )]
     pub send_time_a: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9721,7 +9853,7 @@ pub struct AbSplitOpts {
     )]
     pub send_time_b: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9730,7 +9862,7 @@ pub struct AbSplitOpts {
     )]
     pub send_time_winner: String,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9739,12 +9871,12 @@ pub struct AbSplitOpts {
     )]
     pub split_size: i64,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub split_test: Option<SplitTest>,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9753,7 +9885,7 @@ pub struct AbSplitOpts {
     )]
     pub subject_a: String,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9762,7 +9894,7 @@ pub struct AbSplitOpts {
     )]
     pub subject_b: String,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(
         default,
@@ -9771,7 +9903,7 @@ pub struct AbSplitOpts {
     )]
     pub wait_time: i64,
     /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
+    * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub wait_units: Option<WaitTime>,
@@ -9781,7 +9913,7 @@ pub struct AbSplitOpts {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ecommerce {
     /**
-     * E-Commerce stats for a campaign.
+    * E-Commerce stats for a campaign.
      */
     #[serde(
         default,
@@ -9790,7 +9922,7 @@ pub struct Ecommerce {
     )]
     pub total_orders: i64,
     /**
-     * E-Commerce stats for a campaign.
+    * E-Commerce stats for a campaign.
      */
     #[serde(
         default,
@@ -9799,7 +9931,7 @@ pub struct Ecommerce {
     )]
     pub total_revenue: f64,
     /**
-     * E-Commerce stats for a campaign.
+    * E-Commerce stats for a campaign.
      */
     #[serde(
         default,
@@ -9813,7 +9945,7 @@ pub struct Ecommerce {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsResponseCampaignReportSummary {
     /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
+    * For sent campaigns, a summary of opens, clicks, and e-commerce data.
      */
     #[serde(
         default,
@@ -9822,7 +9954,7 @@ pub struct GetCampaignsResponseCampaignReportSummary {
     )]
     pub click_rate: f64,
     /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
+    * For sent campaigns, a summary of opens, clicks, and e-commerce data.
      */
     #[serde(
         default,
@@ -9831,12 +9963,12 @@ pub struct GetCampaignsResponseCampaignReportSummary {
     )]
     pub clicks: i64,
     /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
+    * For sent campaigns, a summary of opens, clicks, and e-commerce data.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<Ecommerce>,
     /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
+    * For sent campaigns, a summary of opens, clicks, and e-commerce data.
      */
     #[serde(
         default,
@@ -9845,7 +9977,7 @@ pub struct GetCampaignsResponseCampaignReportSummary {
     )]
     pub open_rate: f64,
     /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
+    * For sent campaigns, a summary of opens, clicks, and e-commerce data.
      */
     #[serde(
         default,
@@ -9854,7 +9986,7 @@ pub struct GetCampaignsResponseCampaignReportSummary {
     )]
     pub opens: i64,
     /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
+    * For sent campaigns, a summary of opens, clicks, and e-commerce data.
      */
     #[serde(
         default,
@@ -9863,7 +9995,7 @@ pub struct GetCampaignsResponseCampaignReportSummary {
     )]
     pub subscriber_clicks: i64,
     /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
+    * For sent campaigns, a summary of opens, clicks, and e-commerce data.
      */
     #[serde(
         default,
@@ -9876,7 +10008,8 @@ pub struct GetCampaignsResponseCampaignReportSummary {
 /**
  * The current state of a campaign delivery.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CampaignDeliveryStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -9917,7 +10050,7 @@ impl CampaignDeliveryStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeliveryStatus {
     /**
-     * Updates on campaigns in the process of sending.
+    * Updates on campaigns in the process of sending.
      */
     #[serde(
         default,
@@ -9925,7 +10058,7 @@ pub struct DeliveryStatus {
     )]
     pub can_cancel: bool,
     /**
-     * Updates on campaigns in the process of sending.
+    * Updates on campaigns in the process of sending.
      */
     #[serde(
         default,
@@ -9934,7 +10067,7 @@ pub struct DeliveryStatus {
     )]
     pub emails_canceled: i64,
     /**
-     * Updates on campaigns in the process of sending.
+    * Updates on campaigns in the process of sending.
      */
     #[serde(
         default,
@@ -9943,7 +10076,7 @@ pub struct DeliveryStatus {
     )]
     pub emails_sent: i64,
     /**
-     * Updates on campaigns in the process of sending.
+    * Updates on campaigns in the process of sending.
      */
     #[serde(
         default,
@@ -9951,7 +10084,7 @@ pub struct DeliveryStatus {
     )]
     pub enabled: bool,
     /**
-     * Updates on campaigns in the process of sending.
+    * Updates on campaigns in the process of sending.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<CampaignDeliveryStatus>,
@@ -9961,7 +10094,7 @@ pub struct DeliveryStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Campaign {
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -9971,12 +10104,12 @@ pub struct Campaign {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split_opts: Option<AbSplitOpts>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -9985,12 +10118,12 @@ pub struct Campaign {
     )]
     pub archive_url: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_type: Option<ContentType>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -9999,12 +10132,12 @@ pub struct Campaign {
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivery_status: Option<DeliveryStatus>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10013,7 +10146,7 @@ pub struct Campaign {
     )]
     pub emails_sent: i64,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10022,7 +10155,7 @@ pub struct Campaign {
     )]
     pub id: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10031,7 +10164,7 @@ pub struct Campaign {
     )]
     pub long_archive_url: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10039,7 +10172,7 @@ pub struct Campaign {
     )]
     pub needs_block_refresh: bool,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10048,17 +10181,17 @@ pub struct Campaign {
     )]
     pub parent_campaign_id: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<AutomationEmailsList>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<GetCampaignsResponseCampaignReportSummary>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10066,12 +10199,12 @@ pub struct Campaign {
     )]
     pub resendable: bool,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<RssOpts>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10080,37 +10213,37 @@ pub struct Campaign {
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<GetCampaignsResponseCampaignSettings>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<CampaignStatus>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<CampaignType>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<ABTestOptions>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10124,7 +10257,7 @@ pub struct Campaign {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsResponse {
     /**
-     * An array of campaigns.
+    * An array of campaigns.
      */
     #[serde(
         default,
@@ -10134,7 +10267,7 @@ pub struct GetCampaignsResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * An array of campaigns.
+    * An array of campaigns.
      */
     #[serde(
         default,
@@ -10143,7 +10276,7 @@ pub struct GetCampaignsResponse {
     )]
     pub campaigns: Vec<Campaign>,
     /**
-     * An array of campaigns.
+    * An array of campaigns.
      */
     #[serde(
         default,
@@ -10157,7 +10290,7 @@ pub struct GetCampaignsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaignListSegmentOptions {
     /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
+    * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
     #[serde(
         default,
@@ -10166,12 +10299,12 @@ pub struct CreatedCampaignListSegmentOptions {
     )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
+    * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
     /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
+    * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
     #[serde(
         default,
@@ -10185,7 +10318,7 @@ pub struct CreatedCampaignListSegmentOptions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaignList {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10194,7 +10327,7 @@ pub struct CreatedCampaignList {
     )]
     pub list_id: String,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<CreatedCampaignListSegmentOptions>,
@@ -10204,7 +10337,7 @@ pub struct CreatedCampaignList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaignSettings {
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10212,7 +10345,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub authenticate: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10221,7 +10354,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub auto_fb_post: Vec<String>,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10229,7 +10362,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub auto_footer: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10237,7 +10370,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub auto_tweet: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10245,7 +10378,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub fb_comments: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10254,7 +10387,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub folder_id: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10263,7 +10396,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub from_name: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10271,7 +10404,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub inline_css: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10280,7 +10413,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub preview_text: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10289,7 +10422,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub reply_to: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10298,7 +10431,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub subject_line: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10307,7 +10440,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub template_id: i64,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10316,7 +10449,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub title: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10325,7 +10458,7 @@ pub struct CreatedCampaignSettings {
     )]
     pub to_name: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10338,7 +10471,7 @@ pub struct CreatedCampaignSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VariateSettings {
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10347,7 +10480,7 @@ pub struct VariateSettings {
     )]
     pub from_names: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10356,7 +10489,7 @@ pub struct VariateSettings {
     )]
     pub reply_to_addresses: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10365,7 +10498,7 @@ pub struct VariateSettings {
     )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10374,7 +10507,7 @@ pub struct VariateSettings {
     )]
     pub subject_lines: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10383,7 +10516,7 @@ pub struct VariateSettings {
     )]
     pub test_size: i64,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10392,7 +10525,7 @@ pub struct VariateSettings {
     )]
     pub wait_time: i64,
     /**
-     * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
+    * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
      */
     #[serde(default, skip_serializing_if = "WinnerCriteria::is_noop")]
     pub winner_criteria: WinnerCriteria,
@@ -10402,7 +10535,7 @@ pub struct VariateSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RssOptions {
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
      */
     #[serde(
         default,
@@ -10410,7 +10543,7 @@ pub struct RssOptions {
     )]
     pub constrain_rss_img: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10419,12 +10552,12 @@ pub struct RssOptions {
     )]
     pub feed_url: String,
     /**
-     * The frequency of the RSS Campaign.
+    * The frequency of the RSS Campaign.
      */
     #[serde(default, skip_serializing_if = "Frequency::is_noop")]
     pub frequency: Frequency,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
@@ -10433,7 +10566,8 @@ pub struct RssOptions {
 /**
  * How the campaign's content is put together. The old drag and drop editor uses 'template' while the new editor uses 'multichannel'. Defaults to template.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CreatedCampaignContentType {
     #[serde(rename = "multichannel")]
     Multichannel,
@@ -10468,37 +10602,37 @@ impl CreatedCampaignContentType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaign {
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_type: Option<CreatedCampaignContentType>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<CreatedCampaignList>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<RssOptions>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<CreatedCampaignSettings>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
     /**
-     * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
+    * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
      */
     #[serde(
         default,
@@ -10507,7 +10641,7 @@ pub struct CreatedCampaign {
     )]
     pub type_: CampaignType,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<VariateSettings>,
@@ -10517,7 +10651,7 @@ pub struct CreatedCampaign {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignList {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10526,7 +10660,7 @@ pub struct CampaignList {
     )]
     pub list_id: String,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
@@ -10536,7 +10670,7 @@ pub struct CampaignList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignSettingsData {
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10544,7 +10678,7 @@ pub struct CampaignSettingsData {
     )]
     pub authenticate: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10553,7 +10687,7 @@ pub struct CampaignSettingsData {
     )]
     pub auto_fb_post: Vec<String>,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10561,7 +10695,7 @@ pub struct CampaignSettingsData {
     )]
     pub auto_footer: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10569,7 +10703,7 @@ pub struct CampaignSettingsData {
     )]
     pub auto_tweet: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10577,7 +10711,7 @@ pub struct CampaignSettingsData {
     )]
     pub fb_comments: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10586,7 +10720,7 @@ pub struct CampaignSettingsData {
     )]
     pub folder_id: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10595,7 +10729,7 @@ pub struct CampaignSettingsData {
     )]
     pub from_name: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10603,7 +10737,7 @@ pub struct CampaignSettingsData {
     )]
     pub inline_css: bool,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10612,7 +10746,7 @@ pub struct CampaignSettingsData {
     )]
     pub preview_text: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10621,7 +10755,7 @@ pub struct CampaignSettingsData {
     )]
     pub reply_to: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10630,7 +10764,7 @@ pub struct CampaignSettingsData {
     )]
     pub subject_line: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10639,7 +10773,7 @@ pub struct CampaignSettingsData {
     )]
     pub template_id: i64,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10648,7 +10782,7 @@ pub struct CampaignSettingsData {
     )]
     pub title: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10657,7 +10791,7 @@ pub struct CampaignSettingsData {
     )]
     pub to_name: String,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     #[serde(
         default,
@@ -10670,7 +10804,7 @@ pub struct CampaignSettingsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignRssOptions {
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(
         default,
@@ -10678,7 +10812,7 @@ pub struct CampaignRssOptions {
     )]
     pub constrain_rss_img: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10687,12 +10821,12 @@ pub struct CampaignRssOptions {
     )]
     pub feed_url: String,
     /**
-     * The frequency of the RSS Campaign.
+    * The frequency of the RSS Campaign.
      */
     #[serde(default, skip_serializing_if = "Frequency::is_noop")]
     pub frequency: Frequency,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
@@ -10702,31 +10836,31 @@ pub struct CampaignRssOptions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignData {
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<CampaignList>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<CampaignRssOptions>,
     /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
+    * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
     pub settings: CampaignSettingsData,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<VariateSettings>,
@@ -10736,7 +10870,7 @@ pub struct CampaignData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignListData {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10745,7 +10879,7 @@ pub struct CampaignListData {
     )]
     pub list_id: String,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -10754,7 +10888,7 @@ pub struct CampaignListData {
     )]
     pub list_name: String,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -10763,12 +10897,12 @@ pub struct CampaignListData {
     )]
     pub recipient_count: i64,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
     /**
-     * List settings for the campaign.
+    * List settings for the campaign.
      */
     #[serde(
         default,
@@ -10782,7 +10916,7 @@ pub struct CampaignListData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignABTestOptions {
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10791,7 +10925,7 @@ pub struct CampaignABTestOptions {
     )]
     pub combinations: Vec<Combinations>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10800,7 +10934,7 @@ pub struct CampaignABTestOptions {
     )]
     pub contents: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10809,7 +10943,7 @@ pub struct CampaignABTestOptions {
     )]
     pub from_names: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10818,7 +10952,7 @@ pub struct CampaignABTestOptions {
     )]
     pub reply_to_addresses: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10827,7 +10961,7 @@ pub struct CampaignABTestOptions {
     )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10836,7 +10970,7 @@ pub struct CampaignABTestOptions {
     )]
     pub subject_lines: Vec<String>,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10845,7 +10979,7 @@ pub struct CampaignABTestOptions {
     )]
     pub test_size: i64,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10854,12 +10988,12 @@ pub struct CampaignABTestOptions {
     )]
     pub wait_time: i64,
     /**
-     * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
+    * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
      */
     #[serde(default, skip_serializing_if = "WinnerCriteria::is_noop")]
     pub winner_criteria: WinnerCriteria,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10868,7 +11002,7 @@ pub struct CampaignABTestOptions {
     )]
     pub winning_campaign_id: String,
     /**
-     * The settings specific to A/B test campaigns.
+    * The settings specific to A/B test campaigns.
      */
     #[serde(
         default,
@@ -10882,7 +11016,7 @@ pub struct CampaignABTestOptions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignRssOptionsData {
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(
         default,
@@ -10890,7 +11024,7 @@ pub struct CampaignRssOptionsData {
     )]
     pub constrain_rss_img: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -10899,12 +11033,12 @@ pub struct CampaignRssOptionsData {
     )]
     pub feed_url: String,
     /**
-     * The frequency of the RSS Campaign.
+    * The frequency of the RSS Campaign.
      */
     #[serde(default, skip_serializing_if = "Frequency::is_noop")]
     pub frequency: Frequency,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(
         default,
@@ -10913,7 +11047,7 @@ pub struct CampaignRssOptionsData {
     )]
     pub last_sent: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
+    * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
@@ -10923,7 +11057,7 @@ pub struct CampaignRssOptionsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportSummaryData {
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -10932,7 +11066,7 @@ pub struct CampaignReportSummaryData {
     )]
     pub click_rate: f64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -10941,12 +11075,12 @@ pub struct CampaignReportSummaryData {
     )]
     pub clicks: i64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<Ecommerce>,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -10955,7 +11089,7 @@ pub struct CampaignReportSummaryData {
     )]
     pub open_rate: f64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -10964,7 +11098,7 @@ pub struct CampaignReportSummaryData {
     )]
     pub opens: i64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -10973,7 +11107,7 @@ pub struct CampaignReportSummaryData {
     )]
     pub subscriber_clicks: i64,
     /**
-     * For sent campaigns, a summary of opens and clicks.
+    * For sent campaigns, a summary of opens and clicks.
      */
     #[serde(
         default,
@@ -10987,7 +11121,7 @@ pub struct CampaignReportSummaryData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignDataType {
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -10997,12 +11131,12 @@ pub struct CampaignDataType {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split_opts: Option<AbSplitOpts>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11011,7 +11145,7 @@ pub struct CampaignDataType {
     )]
     pub archive_url: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11020,7 +11154,7 @@ pub struct CampaignDataType {
     )]
     pub content_type: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11029,12 +11163,12 @@ pub struct CampaignDataType {
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivery_status: Option<DeliveryStatus>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11043,7 +11177,7 @@ pub struct CampaignDataType {
     )]
     pub emails_sent: i64,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11052,7 +11186,7 @@ pub struct CampaignDataType {
     )]
     pub id: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11061,7 +11195,7 @@ pub struct CampaignDataType {
     )]
     pub long_archive_url: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11069,7 +11203,7 @@ pub struct CampaignDataType {
     )]
     pub needs_block_refresh: bool,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11078,17 +11212,17 @@ pub struct CampaignDataType {
     )]
     pub parent_campaign_id: String,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<CampaignListData>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<CampaignReportSummaryData>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11096,12 +11230,12 @@ pub struct CampaignDataType {
     )]
     pub resendable: bool,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<CampaignRssOptionsData>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11110,27 +11244,27 @@ pub struct CampaignDataType {
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<GetCampaignsResponseCampaignSettings>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<CampaignStatus>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
     /**
-     * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
+    * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
      */
     #[serde(
         default,
@@ -11139,12 +11273,12 @@ pub struct CampaignDataType {
     )]
     pub type_: CampaignType,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<CampaignABTestOptions>,
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(
         default,
@@ -11158,7 +11292,7 @@ pub struct CampaignDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchDelivery {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -11167,7 +11301,7 @@ pub struct BatchDelivery {
     )]
     pub batch_count: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -11180,12 +11314,12 @@ pub struct BatchDelivery {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCampaignsActionsScheduleRequest {
     /**
-     * Choose whether the campaign should use [Batch Delivery](https://mailchimp.com/help/schedule-batch-delivery/). Cannot be set to `true` for campaigns using [Timewarp](https://mailchimp.com/help/use-timewarp/).
+    * Choose whether the campaign should use [Batch Delivery](https://mailchimp.com/help/schedule-batch-delivery/). Cannot be set to `true` for campaigns using [Timewarp](https://mailchimp.com/help/use-timewarp/).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub batch_delivery: Option<BatchDelivery>,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -11194,7 +11328,7 @@ pub struct PostCampaignsActionsScheduleRequest {
     )]
     pub schedule_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub timewarp: Option<bool>,
@@ -11203,7 +11337,8 @@ pub struct PostCampaignsActionsScheduleRequest {
 /**
  * Choose the type of test email to send.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SendType {
     #[serde(rename = "html")]
     Html,
@@ -11237,12 +11372,12 @@ impl SendType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCampaignsActionsTestRequest {
     /**
-     * Choose the type of test email to send.
+    * Choose the type of test email to send.
      */
     #[serde(default, skip_serializing_if = "SendType::is_noop")]
     pub send_type: SendType,
     /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     #[serde(
         default,
@@ -11255,7 +11390,7 @@ pub struct PostCampaignsActionsTestRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VariateContents {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11264,7 +11399,7 @@ pub struct VariateContents {
     )]
     pub content_label: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11273,7 +11408,7 @@ pub struct VariateContents {
     )]
     pub html: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11287,7 +11422,7 @@ pub struct VariateContents {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignContent {
     /**
-     * The HTML and plain-text content for a campaign.
+    * The HTML and plain-text content for a campaign.
      */
     #[serde(
         default,
@@ -11297,7 +11432,7 @@ pub struct CampaignContent {
     )]
     pub links: Vec<Links>,
     /**
-     * The HTML and plain-text content for a campaign.
+    * The HTML and plain-text content for a campaign.
      */
     #[serde(
         default,
@@ -11306,7 +11441,7 @@ pub struct CampaignContent {
     )]
     pub archive_html: String,
     /**
-     * The HTML and plain-text content for a campaign.
+    * The HTML and plain-text content for a campaign.
      */
     #[serde(
         default,
@@ -11315,7 +11450,7 @@ pub struct CampaignContent {
     )]
     pub html: String,
     /**
-     * The HTML and plain-text content for a campaign.
+    * The HTML and plain-text content for a campaign.
      */
     #[serde(
         default,
@@ -11324,7 +11459,7 @@ pub struct CampaignContent {
     )]
     pub plain_text: String,
     /**
-     * The HTML and plain-text content for a campaign.
+    * The HTML and plain-text content for a campaign.
      */
     #[serde(
         default,
@@ -11338,7 +11473,7 @@ pub struct CampaignContent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Template {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -11347,7 +11482,7 @@ pub struct Template {
     )]
     pub id: i64,
     /**
-     * Use this template to generate the HTML content of the campaign
+    * Use this template to generate the HTML content of the campaign
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sections: Option<Params>,
@@ -11356,7 +11491,8 @@ pub struct Template {
 /**
  * The type of encoded file. Defaults to zip.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ArchiveType {
     #[serde(rename = "tar")]
     Tar,
@@ -11403,7 +11539,7 @@ impl ArchiveType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Archive {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11412,7 +11548,7 @@ pub struct Archive {
     )]
     pub archive_content: String,
     /**
-     * Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
+    * Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive_type: Option<ArchiveType>,
@@ -11422,7 +11558,7 @@ pub struct Archive {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateContent {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -11431,7 +11567,7 @@ pub struct TemplateContent {
     )]
     pub id: i64,
     /**
-     * Use this template to generate the HTML content for the campaign.
+    * Use this template to generate the HTML content for the campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sections: Option<Params>,
@@ -11440,12 +11576,12 @@ pub struct TemplateContent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignContentVariateContents {
     /**
-     * Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
+    * Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive: Option<Archive>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11454,7 +11590,7 @@ pub struct CampaignContentVariateContents {
     )]
     pub content_label: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11463,7 +11599,7 @@ pub struct CampaignContentVariateContents {
     )]
     pub html: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11472,12 +11608,12 @@ pub struct CampaignContentVariateContents {
     )]
     pub plain_text: String,
     /**
-     * Use this template to generate the HTML content for the campaign.
+    * Use this template to generate the HTML content for the campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template: Option<TemplateContent>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11491,12 +11627,12 @@ pub struct CampaignContentVariateContents {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignContentData {
     /**
-     * The HTML and plain-text content for a campaign
+    * The HTML and plain-text content for a campaign
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive: Option<Archive>,
     /**
-     * The HTML and plain-text content for a campaign
+    * The HTML and plain-text content for a campaign
      */
     #[serde(
         default,
@@ -11505,7 +11641,7 @@ pub struct CampaignContentData {
     )]
     pub html: String,
     /**
-     * The HTML and plain-text content for a campaign
+    * The HTML and plain-text content for a campaign
      */
     #[serde(
         default,
@@ -11514,12 +11650,12 @@ pub struct CampaignContentData {
     )]
     pub plain_text: String,
     /**
-     * The HTML and plain-text content for a campaign
+    * The HTML and plain-text content for a campaign
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template: Option<Template>,
     /**
-     * The HTML and plain-text content for a campaign
+    * The HTML and plain-text content for a campaign
      */
     #[serde(
         default,
@@ -11528,7 +11664,7 @@ pub struct CampaignContentData {
     )]
     pub url: String,
     /**
-     * The HTML and plain-text content for a campaign
+    * The HTML and plain-text content for a campaign
      */
     #[serde(
         default,
@@ -11541,7 +11677,8 @@ pub struct CampaignContentData {
 /**
  * The source of the feedback.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Source {
     #[serde(rename = "android")]
     Android,
@@ -11588,7 +11725,7 @@ impl Source {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Feedback {
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11598,7 +11735,7 @@ pub struct Feedback {
     )]
     pub links: Vec<Links>,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11607,7 +11744,7 @@ pub struct Feedback {
     )]
     pub block_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11616,7 +11753,7 @@ pub struct Feedback {
     )]
     pub campaign_id: String,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11625,7 +11762,7 @@ pub struct Feedback {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11634,7 +11771,7 @@ pub struct Feedback {
     )]
     pub created_by: String,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11643,7 +11780,7 @@ pub struct Feedback {
     )]
     pub feedback_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11651,7 +11788,7 @@ pub struct Feedback {
     )]
     pub is_complete: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11660,7 +11797,7 @@ pub struct Feedback {
     )]
     pub message: String,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11669,12 +11806,12 @@ pub struct Feedback {
     )]
     pub parent_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11688,7 +11825,7 @@ pub struct Feedback {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReports {
     /**
-     * A summary of the comment feedback for a specific campaign.
+    * A summary of the comment feedback for a specific campaign.
      */
     #[serde(
         default,
@@ -11698,7 +11835,7 @@ pub struct CampaignReports {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of the comment feedback for a specific campaign.
+    * A summary of the comment feedback for a specific campaign.
      */
     #[serde(
         default,
@@ -11707,7 +11844,7 @@ pub struct CampaignReports {
     )]
     pub campaign_id: String,
     /**
-     * A summary of the comment feedback for a specific campaign.
+    * A summary of the comment feedback for a specific campaign.
      */
     #[serde(
         default,
@@ -11716,7 +11853,7 @@ pub struct CampaignReports {
     )]
     pub feedback: Vec<Feedback>,
     /**
-     * A summary of the comment feedback for a specific campaign.
+    * A summary of the comment feedback for a specific campaign.
      */
     #[serde(
         default,
@@ -11730,7 +11867,7 @@ pub struct CampaignReports {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFeedback {
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11739,7 +11876,7 @@ pub struct CampaignFeedback {
     )]
     pub block_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11747,7 +11884,7 @@ pub struct CampaignFeedback {
     )]
     pub is_complete: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11761,7 +11898,7 @@ pub struct CampaignFeedback {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFeedbackData {
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11771,7 +11908,7 @@ pub struct CampaignFeedbackData {
     )]
     pub links: Vec<Links>,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11780,7 +11917,7 @@ pub struct CampaignFeedbackData {
     )]
     pub block_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11789,7 +11926,7 @@ pub struct CampaignFeedbackData {
     )]
     pub campaign_id: String,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11798,7 +11935,7 @@ pub struct CampaignFeedbackData {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11807,7 +11944,7 @@ pub struct CampaignFeedbackData {
     )]
     pub created_by: String,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11816,7 +11953,7 @@ pub struct CampaignFeedbackData {
     )]
     pub feedback_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11824,7 +11961,7 @@ pub struct CampaignFeedbackData {
     )]
     pub is_complete: bool,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11833,7 +11970,7 @@ pub struct CampaignFeedbackData {
     )]
     pub message: String,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11842,12 +11979,12 @@ pub struct CampaignFeedbackData {
     )]
     pub parent_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11861,7 +11998,7 @@ pub struct CampaignFeedbackData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFeedbackDataType {
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11870,7 +12007,7 @@ pub struct CampaignFeedbackDataType {
     )]
     pub block_id: i64,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11878,7 +12015,7 @@ pub struct CampaignFeedbackDataType {
     )]
     pub is_complete: bool,
     /**
-     * A specific feedback message from a specific campaign.
+    * A specific feedback message from a specific campaign.
      */
     #[serde(
         default,
@@ -11891,7 +12028,8 @@ pub struct CampaignFeedbackDataType {
 /**
  * The item type.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SendChecklistItemsType {
     #[serde(rename = "error")]
     Error,
@@ -11928,7 +12066,7 @@ impl SendChecklistItemsType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Items {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11937,7 +12075,7 @@ pub struct Items {
     )]
     pub details: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -11946,7 +12084,7 @@ pub struct Items {
     )]
     pub heading: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -11955,7 +12093,7 @@ pub struct Items {
     )]
     pub id: i64,
     /**
-     * The item type.
+    * The item type.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<SendChecklistItemsType>,
@@ -11965,7 +12103,7 @@ pub struct Items {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendChecklist {
     /**
-     * The send checklist for the campaign.
+    * The send checklist for the campaign.
      */
     #[serde(
         default,
@@ -11975,7 +12113,7 @@ pub struct SendChecklist {
     )]
     pub links: Vec<Links>,
     /**
-     * The send checklist for the campaign.
+    * The send checklist for the campaign.
      */
     #[serde(
         default,
@@ -11983,7 +12121,7 @@ pub struct SendChecklist {
     )]
     pub is_ready: bool,
     /**
-     * The send checklist for the campaign.
+    * The send checklist for the campaign.
      */
     #[serde(
         default,
@@ -11997,7 +12135,7 @@ pub struct SendChecklist {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Script {
     /**
-     * The script used to connect your site with Mailchimp.
+    * The script used to connect your site with Mailchimp.
      */
     #[serde(
         default,
@@ -12006,7 +12144,7 @@ pub struct Script {
     )]
     pub fragment: String,
     /**
-     * The script used to connect your site with Mailchimp.
+    * The script used to connect your site with Mailchimp.
      */
     #[serde(
         default,
@@ -12020,7 +12158,7 @@ pub struct Script {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sites {
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(
         default,
@@ -12030,7 +12168,7 @@ pub struct Sites {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(
         default,
@@ -12039,7 +12177,7 @@ pub struct Sites {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(
         default,
@@ -12048,7 +12186,7 @@ pub struct Sites {
     )]
     pub domain: String,
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(
         default,
@@ -12057,7 +12195,7 @@ pub struct Sites {
     )]
     pub foreign_id: String,
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(
         default,
@@ -12066,12 +12204,12 @@ pub struct Sites {
     )]
     pub platform: String,
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site_script: Option<Script>,
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(
         default,
@@ -12080,7 +12218,7 @@ pub struct Sites {
     )]
     pub store_id: String,
     /**
-     * Information about a specific connected site.
+    * Information about a specific connected site.
      */
     #[serde(
         default,
@@ -12094,7 +12232,7 @@ pub struct Sites {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectedSites {
     /**
-     * A collection of connected sites in the account.
+    * A collection of connected sites in the account.
      */
     #[serde(
         default,
@@ -12104,7 +12242,7 @@ pub struct ConnectedSites {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of connected sites in the account.
+    * A collection of connected sites in the account.
      */
     #[serde(
         default,
@@ -12113,7 +12251,7 @@ pub struct ConnectedSites {
     )]
     pub sites: Vec<Sites>,
     /**
-     * A collection of connected sites in the account.
+    * A collection of connected sites in the account.
      */
     #[serde(
         default,
@@ -12127,7 +12265,7 @@ pub struct ConnectedSites {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectedSite {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -12136,7 +12274,7 @@ pub struct ConnectedSite {
     )]
     pub domain: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -12149,7 +12287,8 @@ pub struct ConnectedSite {
 /**
  * Whether a conversation message has been marked as read.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IsRead {
     #[serde(rename = "false")]
     False,
@@ -12184,7 +12323,7 @@ impl IsRead {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LastMessage {
     /**
-     * The most recent message in the conversation.
+    * The most recent message in the conversation.
      */
     #[serde(
         default,
@@ -12193,7 +12332,7 @@ pub struct LastMessage {
     )]
     pub from_email: String,
     /**
-     * The most recent message in the conversation.
+    * The most recent message in the conversation.
      */
     #[serde(
         default,
@@ -12202,7 +12341,7 @@ pub struct LastMessage {
     )]
     pub from_label: String,
     /**
-     * The most recent message in the conversation.
+    * The most recent message in the conversation.
      */
     #[serde(
         default,
@@ -12211,7 +12350,7 @@ pub struct LastMessage {
     )]
     pub message: String,
     /**
-     * The most recent message in the conversation.
+    * The most recent message in the conversation.
      */
     #[serde(
         default,
@@ -12219,7 +12358,7 @@ pub struct LastMessage {
     )]
     pub read: bool,
     /**
-     * The most recent message in the conversation.
+    * The most recent message in the conversation.
      */
     #[serde(
         default,
@@ -12228,7 +12367,7 @@ pub struct LastMessage {
     )]
     pub subject: String,
     /**
-     * The most recent message in the conversation.
+    * The most recent message in the conversation.
      */
     #[serde(
         default,
@@ -12242,7 +12381,7 @@ pub struct LastMessage {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Conversation {
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12252,7 +12391,7 @@ pub struct Conversation {
     )]
     pub links: Vec<Links>,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12261,7 +12400,7 @@ pub struct Conversation {
     )]
     pub campaign_id: String,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12270,7 +12409,7 @@ pub struct Conversation {
     )]
     pub from_email: String,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12279,7 +12418,7 @@ pub struct Conversation {
     )]
     pub from_label: String,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12288,12 +12427,12 @@ pub struct Conversation {
     )]
     pub id: String,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_message: Option<LastMessage>,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12302,7 +12441,7 @@ pub struct Conversation {
     )]
     pub list_id: String,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12311,7 +12450,7 @@ pub struct Conversation {
     )]
     pub message_count: i64,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12320,7 +12459,7 @@ pub struct Conversation {
     )]
     pub subject: String,
     /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12334,7 +12473,7 @@ pub struct Conversation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackedConversations {
     /**
-     * A collection of this account's tracked conversations.
+    * A collection of this account's tracked conversations.
      */
     #[serde(
         default,
@@ -12344,7 +12483,7 @@ pub struct TrackedConversations {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of this account's tracked conversations.
+    * A collection of this account's tracked conversations.
      */
     #[serde(
         default,
@@ -12353,7 +12492,7 @@ pub struct TrackedConversations {
     )]
     pub conversations: Vec<Conversation>,
     /**
-     * A collection of this account's tracked conversations.
+    * A collection of this account's tracked conversations.
      */
     #[serde(
         default,
@@ -12367,7 +12506,7 @@ pub struct TrackedConversations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationMessage {
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12377,7 +12516,7 @@ pub struct ConversationMessage {
     )]
     pub links: Vec<Links>,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12386,7 +12525,7 @@ pub struct ConversationMessage {
     )]
     pub conversation_id: String,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12395,7 +12534,7 @@ pub struct ConversationMessage {
     )]
     pub from_email: String,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12404,7 +12543,7 @@ pub struct ConversationMessage {
     )]
     pub from_label: String,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12413,7 +12552,7 @@ pub struct ConversationMessage {
     )]
     pub id: String,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12422,7 +12561,7 @@ pub struct ConversationMessage {
     )]
     pub list_id: i64,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12431,7 +12570,7 @@ pub struct ConversationMessage {
     )]
     pub message: String,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12439,7 +12578,7 @@ pub struct ConversationMessage {
     )]
     pub read: bool,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12448,7 +12587,7 @@ pub struct ConversationMessage {
     )]
     pub subject: String,
     /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
+    * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
     #[serde(
         default,
@@ -12462,7 +12601,7 @@ pub struct ConversationMessage {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfConversationMessages {
     /**
-     * Messages from a specific conversation.
+    * Messages from a specific conversation.
      */
     #[serde(
         default,
@@ -12472,7 +12611,7 @@ pub struct CollectionOfConversationMessages {
     )]
     pub links: Vec<Links>,
     /**
-     * Messages from a specific conversation.
+    * Messages from a specific conversation.
      */
     #[serde(
         default,
@@ -12481,7 +12620,7 @@ pub struct CollectionOfConversationMessages {
     )]
     pub conversation_id: String,
     /**
-     * Messages from a specific conversation.
+    * Messages from a specific conversation.
      */
     #[serde(
         default,
@@ -12490,7 +12629,7 @@ pub struct CollectionOfConversationMessages {
     )]
     pub conversation_messages: Vec<ConversationMessage>,
     /**
-     * Messages from a specific conversation.
+    * Messages from a specific conversation.
      */
     #[serde(
         default,
@@ -12503,7 +12642,8 @@ pub struct CollectionOfConversationMessages {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetFileManagerFilesSortField {
     #[serde(rename = "added_date")]
     AddedDate,
@@ -12534,7 +12674,8 @@ impl GetFileManagerFilesSortField {
 /**
  * The type of file in the File Manager.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FileType {
     #[serde(rename = "file")]
     File,
@@ -12569,7 +12710,7 @@ impl FileType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Files {
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12579,7 +12720,7 @@ pub struct Files {
     )]
     pub links: Vec<Links>,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12588,7 +12729,7 @@ pub struct Files {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12597,7 +12738,7 @@ pub struct Files {
     )]
     pub created_by: String,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12606,7 +12747,7 @@ pub struct Files {
     )]
     pub folder_id: i64,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12615,7 +12756,7 @@ pub struct Files {
     )]
     pub full_size_url: String,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12624,7 +12765,7 @@ pub struct Files {
     )]
     pub height: i64,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12633,7 +12774,7 @@ pub struct Files {
     )]
     pub id: i64,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12642,7 +12783,7 @@ pub struct Files {
     )]
     pub name: String,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12651,7 +12792,7 @@ pub struct Files {
     )]
     pub size: i64,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12660,12 +12801,12 @@ pub struct Files {
     )]
     pub thumbnail_url: String,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<FileType>,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12679,7 +12820,7 @@ pub struct Files {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileManager {
     /**
-     * A list of available images and files stored in the File Manager for the account.
+    * A list of available images and files stored in the File Manager for the account.
      */
     #[serde(
         default,
@@ -12689,7 +12830,7 @@ pub struct FileManager {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of available images and files stored in the File Manager for the account.
+    * A list of available images and files stored in the File Manager for the account.
      */
     #[serde(
         default,
@@ -12698,7 +12839,7 @@ pub struct FileManager {
     )]
     pub files: Vec<Files>,
     /**
-     * A list of available images and files stored in the File Manager for the account.
+    * A list of available images and files stored in the File Manager for the account.
      */
     #[serde(
         default,
@@ -12707,7 +12848,7 @@ pub struct FileManager {
     )]
     pub total_file_size: f64,
     /**
-     * A list of available images and files stored in the File Manager for the account.
+    * A list of available images and files stored in the File Manager for the account.
      */
     #[serde(
         default,
@@ -12721,7 +12862,7 @@ pub struct FileManager {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GalleryFile {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -12730,7 +12871,7 @@ pub struct GalleryFile {
     )]
     pub file_data: String,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12739,7 +12880,7 @@ pub struct GalleryFile {
     )]
     pub folder_id: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -12753,7 +12894,7 @@ pub struct GalleryFile {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GalleryFileData {
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12762,7 +12903,7 @@ pub struct GalleryFileData {
     )]
     pub folder_id: i64,
     /**
-     * An individual file listed in the File Manager.
+    * An individual file listed in the File Manager.
      */
     #[serde(
         default,
@@ -12776,7 +12917,7 @@ pub struct GalleryFileData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileManagerFoldersGalleryFolder {
     /**
-     * An individual folder listed in the File Manager.
+    * An individual folder listed in the File Manager.
      */
     #[serde(
         default,
@@ -12786,7 +12927,7 @@ pub struct FileManagerFoldersGalleryFolder {
     )]
     pub links: Vec<Links>,
     /**
-     * An individual folder listed in the File Manager.
+    * An individual folder listed in the File Manager.
      */
     #[serde(
         default,
@@ -12795,7 +12936,7 @@ pub struct FileManagerFoldersGalleryFolder {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * An individual folder listed in the File Manager.
+    * An individual folder listed in the File Manager.
      */
     #[serde(
         default,
@@ -12804,7 +12945,7 @@ pub struct FileManagerFoldersGalleryFolder {
     )]
     pub created_by: String,
     /**
-     * An individual folder listed in the File Manager.
+    * An individual folder listed in the File Manager.
      */
     #[serde(
         default,
@@ -12813,7 +12954,7 @@ pub struct FileManagerFoldersGalleryFolder {
     )]
     pub file_count: i64,
     /**
-     * An individual folder listed in the File Manager.
+    * An individual folder listed in the File Manager.
      */
     #[serde(
         default,
@@ -12822,7 +12963,7 @@ pub struct FileManagerFoldersGalleryFolder {
     )]
     pub id: i64,
     /**
-     * An individual folder listed in the File Manager.
+    * An individual folder listed in the File Manager.
      */
     #[serde(
         default,
@@ -12836,7 +12977,7 @@ pub struct FileManagerFoldersGalleryFolder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileManagerFolders {
     /**
-     * A list of all folders in the File Manager.
+    * A list of all folders in the File Manager.
      */
     #[serde(
         default,
@@ -12846,7 +12987,7 @@ pub struct FileManagerFolders {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of all folders in the File Manager.
+    * A list of all folders in the File Manager.
      */
     #[serde(
         default,
@@ -12855,7 +12996,7 @@ pub struct FileManagerFolders {
     )]
     pub folders: Vec<FileManagerFoldersGalleryFolder>,
     /**
-     * A list of all folders in the File Manager.
+    * A list of all folders in the File Manager.
      */
     #[serde(
         default,
@@ -12868,7 +13009,8 @@ pub struct FileManagerFolders {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetListsSortField {
     #[serde(rename = "date_created")]
     DateCreated,
@@ -12900,7 +13042,7 @@ impl GetListsSortField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListContact {
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12910,7 +13052,7 @@ pub struct ListContact {
     )]
     pub address_1: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12920,7 +13062,7 @@ pub struct ListContact {
     )]
     pub address_2: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12929,7 +13071,7 @@ pub struct ListContact {
     )]
     pub city: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12938,7 +13080,7 @@ pub struct ListContact {
     )]
     pub company: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12947,7 +13089,7 @@ pub struct ListContact {
     )]
     pub country: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12956,7 +13098,7 @@ pub struct ListContact {
     )]
     pub phone: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12965,7 +13107,7 @@ pub struct ListContact {
     )]
     pub state: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -12979,7 +13121,7 @@ pub struct ListContact {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignDefaults {
     /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
+    * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
     #[serde(
         default,
@@ -12988,7 +13130,7 @@ pub struct CampaignDefaults {
     )]
     pub from_email: String,
     /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
+    * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
     #[serde(
         default,
@@ -12997,7 +13139,7 @@ pub struct CampaignDefaults {
     )]
     pub from_name: String,
     /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
+    * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
     #[serde(
         default,
@@ -13006,7 +13148,7 @@ pub struct CampaignDefaults {
     )]
     pub language: String,
     /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
+    * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
     #[serde(
         default,
@@ -13019,7 +13161,8 @@ pub struct CampaignDefaults {
 /**
  * Legacy - visibility settings are no longer used
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Visibility {
     #[serde(rename = "prv")]
     Prv,
@@ -13054,7 +13197,7 @@ impl Visibility {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Stats {
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13063,7 +13206,7 @@ pub struct Stats {
     )]
     pub avg_sub_rate: f64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13072,7 +13215,7 @@ pub struct Stats {
     )]
     pub avg_unsub_rate: f64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13081,7 +13224,7 @@ pub struct Stats {
     )]
     pub campaign_count: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13090,7 +13233,7 @@ pub struct Stats {
     )]
     pub campaign_last_sent: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13099,7 +13242,7 @@ pub struct Stats {
     )]
     pub cleaned_count: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13108,7 +13251,7 @@ pub struct Stats {
     )]
     pub cleaned_count_since_send: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13117,7 +13260,7 @@ pub struct Stats {
     )]
     pub click_rate: f64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13126,7 +13269,7 @@ pub struct Stats {
     )]
     pub last_sub_date: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13135,7 +13278,7 @@ pub struct Stats {
     )]
     pub last_unsub_date: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13144,7 +13287,7 @@ pub struct Stats {
     )]
     pub member_count: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13153,7 +13296,7 @@ pub struct Stats {
     )]
     pub member_count_since_send: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13162,7 +13305,7 @@ pub struct Stats {
     )]
     pub merge_field_count: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13171,7 +13314,7 @@ pub struct Stats {
     )]
     pub open_rate: f64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13180,7 +13323,7 @@ pub struct Stats {
     )]
     pub target_sub_rate: f64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13189,7 +13332,7 @@ pub struct Stats {
     )]
     pub total_contacts: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13198,7 +13341,7 @@ pub struct Stats {
     )]
     pub unsubscribe_count: i64,
     /**
-     * Stats for the list. Many of these are cached for at least five minutes.
+    * Stats for the list. Many of these are cached for at least five minutes.
      */
     #[serde(
         default,
@@ -13212,7 +13355,7 @@ pub struct Stats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Lists {
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13222,7 +13365,7 @@ pub struct Lists {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13231,17 +13374,17 @@ pub struct Lists {
     )]
     pub beamer_address: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub campaign_defaults: Option<CampaignDefaults>,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contact: Option<ListContact>,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13250,7 +13393,7 @@ pub struct Lists {
     )]
     pub date_created: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13258,7 +13401,7 @@ pub struct Lists {
     )]
     pub double_optin: bool,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13266,7 +13409,7 @@ pub struct Lists {
     )]
     pub email_type_option: bool,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13274,7 +13417,7 @@ pub struct Lists {
     )]
     pub has_welcome: bool,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13283,7 +13426,7 @@ pub struct Lists {
     )]
     pub id: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13292,7 +13435,7 @@ pub struct Lists {
     )]
     pub list_rating: i64,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13300,7 +13443,7 @@ pub struct Lists {
     )]
     pub marketing_permissions: bool,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13309,7 +13452,7 @@ pub struct Lists {
     )]
     pub modules: Vec<String>,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13318,7 +13461,7 @@ pub struct Lists {
     )]
     pub name: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13327,7 +13470,7 @@ pub struct Lists {
     )]
     pub notify_on_subscribe: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13336,7 +13479,7 @@ pub struct Lists {
     )]
     pub notify_on_unsubscribe: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13345,12 +13488,12 @@ pub struct Lists {
     )]
     pub permission_reminder: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<Stats>,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13359,7 +13502,7 @@ pub struct Lists {
     )]
     pub subscribe_url_long: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13368,7 +13511,7 @@ pub struct Lists {
     )]
     pub subscribe_url_short: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13376,12 +13519,12 @@ pub struct Lists {
     )]
     pub use_archive_bar: bool,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13395,7 +13538,7 @@ pub struct Lists {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Constraints {
     /**
-     * Do particular authorization constraints around this collection limit creation of new instances?
+    * Do particular authorization constraints around this collection limit creation of new instances?
      */
     #[serde(
         default,
@@ -13404,7 +13547,7 @@ pub struct Constraints {
     )]
     pub current_total_instances: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -13413,7 +13556,7 @@ pub struct Constraints {
     )]
     pub max_instances: i64,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -13426,7 +13569,7 @@ pub struct Constraints {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberLists {
     /**
-     * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
+    * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
      */
     #[serde(
         default,
@@ -13436,12 +13579,12 @@ pub struct SubscriberLists {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
+    * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub constraints: Option<Constraints>,
     /**
-     * An array of objects, each representing a list.
+    * An array of objects, each representing a list.
      */
     #[serde(
         default,
@@ -13450,7 +13593,7 @@ pub struct SubscriberLists {
     )]
     pub lists: Vec<Lists>,
     /**
-     * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
+    * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
      */
     #[serde(
         default,
@@ -13464,7 +13607,7 @@ pub struct SubscriberLists {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListContact {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13474,7 +13617,7 @@ pub struct SubscriberListContact {
     )]
     pub address_1: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -13484,7 +13627,7 @@ pub struct SubscriberListContact {
     )]
     pub address_2: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13493,7 +13636,7 @@ pub struct SubscriberListContact {
     )]
     pub city: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13502,7 +13645,7 @@ pub struct SubscriberListContact {
     )]
     pub company: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13511,7 +13654,7 @@ pub struct SubscriberListContact {
     )]
     pub country: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -13520,7 +13663,7 @@ pub struct SubscriberListContact {
     )]
     pub phone: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -13529,7 +13672,7 @@ pub struct SubscriberListContact {
     )]
     pub state: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -13543,7 +13686,7 @@ pub struct SubscriberListContact {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListCampaignDefaults {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13552,7 +13695,7 @@ pub struct SubscriberListCampaignDefaults {
     )]
     pub from_email: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13561,7 +13704,7 @@ pub struct SubscriberListCampaignDefaults {
     )]
     pub from_name: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13570,7 +13713,7 @@ pub struct SubscriberListCampaignDefaults {
     )]
     pub language: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13584,15 +13727,15 @@ pub struct SubscriberListCampaignDefaults {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberList {
     /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
+    * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
     pub campaign_defaults: SubscriberListCampaignDefaults,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     pub contact: SubscriberListContact,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13600,7 +13743,7 @@ pub struct SubscriberList {
     )]
     pub double_optin: bool,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -13608,7 +13751,7 @@ pub struct SubscriberList {
     )]
     pub email_type_option: bool,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13616,7 +13759,7 @@ pub struct SubscriberList {
     )]
     pub marketing_permissions: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13625,7 +13768,7 @@ pub struct SubscriberList {
     )]
     pub name: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13634,7 +13777,7 @@ pub struct SubscriberList {
     )]
     pub notify_on_subscribe: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13643,7 +13786,7 @@ pub struct SubscriberList {
     )]
     pub notify_on_unsubscribe: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -13652,7 +13795,7 @@ pub struct SubscriberList {
     )]
     pub permission_reminder: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -13664,7 +13807,8 @@ pub struct SubscriberList {
 /**
  * Subscriber's current status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MembersSubscribeUnsubscribeFromAListInBatchStatus {
     #[serde(rename = "cleaned")]
     Cleaned,
@@ -13708,7 +13852,7 @@ impl MembersSubscribeUnsubscribeFromAListInBatchStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13717,7 +13861,7 @@ pub struct Location {
     )]
     pub latitude: f64,
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13731,7 +13875,7 @@ pub struct Location {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Members {
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13740,7 +13884,7 @@ pub struct Members {
     )]
     pub email_address: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13749,7 +13893,7 @@ pub struct Members {
     )]
     pub email_type: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13757,7 +13901,7 @@ pub struct Members {
     )]
     pub interests: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13766,7 +13910,7 @@ pub struct Members {
     )]
     pub ip_opt: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13775,7 +13919,7 @@ pub struct Members {
     )]
     pub ip_signup: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13784,22 +13928,22 @@ pub struct Members {
     )]
     pub language: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<MembersSubscribeUnsubscribeFromAListInBatchStatus>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13808,7 +13952,7 @@ pub struct Members {
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13817,7 +13961,7 @@ pub struct Members {
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -13830,7 +13974,7 @@ pub struct Members {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MembersSubscribeUnsubscribeFromAListInBatch {
     /**
-     * An array of objects, each representing an email address and the subscription status for a specific list. Up to 500 members may be added or updated with each API call.
+    * An array of objects, each representing an email address and the subscription status for a specific list. Up to 500 members may be added or updated with each API call.
      */
     #[serde(
         default,
@@ -13839,7 +13983,7 @@ pub struct MembersSubscribeUnsubscribeFromAListInBatch {
     )]
     pub members: Vec<Members>,
     /**
-     * Members to subscribe to or unsubscribe from a list.
+    * Members to subscribe to or unsubscribe from a list.
      */
     #[serde(
         default,
@@ -13851,7 +13995,8 @@ pub struct MembersSubscribeUnsubscribeFromAListInBatch {
 /**
  * Subscriber's status. This value is required only if the email address is not already present on the list.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum StatusIfNew {
     #[serde(rename = "cleaned")]
     Cleaned,
@@ -13895,7 +14040,7 @@ impl StatusIfNew {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberStats {
     /**
-     * Open and click rates for this subscriber.
+    * Open and click rates for this subscriber.
      */
     #[serde(
         default,
@@ -13904,7 +14049,7 @@ pub struct SubscriberStats {
     )]
     pub avg_click_rate: f64,
     /**
-     * Open and click rates for this subscriber.
+    * Open and click rates for this subscriber.
      */
     #[serde(
         default,
@@ -13918,7 +14063,7 @@ pub struct SubscriberStats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateListMembersNewLocation {
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13927,7 +14072,7 @@ pub struct BatchUpdateListMembersNewLocation {
     )]
     pub country_code: String,
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13936,7 +14081,7 @@ pub struct BatchUpdateListMembersNewLocation {
     )]
     pub dstoff: i64,
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13945,7 +14090,7 @@ pub struct BatchUpdateListMembersNewLocation {
     )]
     pub gmtoff: i64,
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13954,7 +14099,7 @@ pub struct BatchUpdateListMembersNewLocation {
     )]
     pub latitude: f64,
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13963,7 +14108,7 @@ pub struct BatchUpdateListMembersNewLocation {
     )]
     pub longitude: f64,
     /**
-     * Subscriber location information.
+    * Subscriber location information.
      */
     #[serde(
         default,
@@ -13977,7 +14122,7 @@ pub struct BatchUpdateListMembersNewLocation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Notes {
     /**
-     * The most recent Note added about this member.
+    * The most recent Note added about this member.
      */
     #[serde(
         default,
@@ -13986,7 +14131,7 @@ pub struct Notes {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The most recent Note added about this member.
+    * The most recent Note added about this member.
      */
     #[serde(
         default,
@@ -13995,7 +14140,7 @@ pub struct Notes {
     )]
     pub created_by: String,
     /**
-     * The most recent Note added about this member.
+    * The most recent Note added about this member.
      */
     #[serde(
         default,
@@ -14004,7 +14149,7 @@ pub struct Notes {
     )]
     pub note: String,
     /**
-     * The most recent Note added about this member.
+    * The most recent Note added about this member.
      */
     #[serde(
         default,
@@ -14017,7 +14162,7 @@ pub struct Notes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tags {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -14026,7 +14171,7 @@ pub struct Tags {
     )]
     pub id: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14040,7 +14185,7 @@ pub struct Tags {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewMembers {
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14050,7 +14195,7 @@ pub struct NewMembers {
     )]
     pub links: Vec<Links>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14059,7 +14204,7 @@ pub struct NewMembers {
     )]
     pub email_address: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14068,7 +14213,7 @@ pub struct NewMembers {
     )]
     pub email_client: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14077,7 +14222,7 @@ pub struct NewMembers {
     )]
     pub email_type: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14086,7 +14231,7 @@ pub struct NewMembers {
     )]
     pub id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14094,7 +14239,7 @@ pub struct NewMembers {
     )]
     pub interests: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14103,7 +14248,7 @@ pub struct NewMembers {
     )]
     pub ip_opt: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14112,7 +14257,7 @@ pub struct NewMembers {
     )]
     pub ip_signup: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14121,7 +14266,7 @@ pub struct NewMembers {
     )]
     pub language: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14130,12 +14275,12 @@ pub struct NewMembers {
     )]
     pub last_changed: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_note: Option<Notes>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14144,12 +14289,12 @@ pub struct NewMembers {
     )]
     pub list_id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<BatchUpdateListMembersNewLocation>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14158,22 +14303,22 @@ pub struct NewMembers {
     )]
     pub member_rating: i64,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<SubscriberStats>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<StatusIfNew>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14182,7 +14327,7 @@ pub struct NewMembers {
     )]
     pub tags: Vec<Tags>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14191,7 +14336,7 @@ pub struct NewMembers {
     )]
     pub tags_count: i64,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14200,7 +14345,7 @@ pub struct NewMembers {
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14209,7 +14354,7 @@ pub struct NewMembers {
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14218,7 +14363,7 @@ pub struct NewMembers {
     )]
     pub unique_email_id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -14230,7 +14375,8 @@ pub struct NewMembers {
 /**
  * A unique code that identifies this specifc error.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ErrorCode {
     #[serde(rename = "ERROR_CONTACT_EXISTS")]
     ErrorContactExists,
@@ -14264,7 +14410,7 @@ impl ErrorCode {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Errors {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14273,7 +14419,7 @@ pub struct Errors {
     )]
     pub email_address: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14282,7 +14428,7 @@ pub struct Errors {
     )]
     pub error: String,
     /**
-     * A unique code that identifies this specifc error.
+    * A unique code that identifies this specifc error.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error_code: Option<ErrorCode>,
@@ -14292,7 +14438,7 @@ pub struct Errors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateListMembers {
     /**
-     * Batch update list members.
+    * Batch update list members.
      */
     #[serde(
         default,
@@ -14302,7 +14448,7 @@ pub struct BatchUpdateListMembers {
     )]
     pub links: Vec<Links>,
     /**
-     * Batch update list members.
+    * Batch update list members.
      */
     #[serde(
         default,
@@ -14311,7 +14457,7 @@ pub struct BatchUpdateListMembers {
     )]
     pub error_count: i64,
     /**
-     * Batch update list members.
+    * Batch update list members.
      */
     #[serde(
         default,
@@ -14320,7 +14466,7 @@ pub struct BatchUpdateListMembers {
     )]
     pub errors: Vec<Errors>,
     /**
-     * Batch update list members.
+    * Batch update list members.
      */
     #[serde(
         default,
@@ -14329,7 +14475,7 @@ pub struct BatchUpdateListMembers {
     )]
     pub new_members: Vec<NewMembers>,
     /**
-     * Batch update list members.
+    * Batch update list members.
      */
     #[serde(
         default,
@@ -14338,7 +14484,7 @@ pub struct BatchUpdateListMembers {
     )]
     pub total_created: i64,
     /**
-     * Batch update list members.
+    * Batch update list members.
      */
     #[serde(
         default,
@@ -14347,7 +14493,7 @@ pub struct BatchUpdateListMembers {
     )]
     pub total_updated: i64,
     /**
-     * Batch update list members.
+    * Batch update list members.
      */
     #[serde(
         default,
@@ -14361,7 +14507,7 @@ pub struct BatchUpdateListMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListContactData {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14371,7 +14517,7 @@ pub struct SubscriberListContactData {
     )]
     pub address_1: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -14381,7 +14527,7 @@ pub struct SubscriberListContactData {
     )]
     pub address_2: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14390,7 +14536,7 @@ pub struct SubscriberListContactData {
     )]
     pub city: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14399,7 +14545,7 @@ pub struct SubscriberListContactData {
     )]
     pub company: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14408,7 +14554,7 @@ pub struct SubscriberListContactData {
     )]
     pub country: String,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     #[serde(
         default,
@@ -14417,7 +14563,7 @@ pub struct SubscriberListContactData {
     )]
     pub phone: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14426,7 +14572,7 @@ pub struct SubscriberListContactData {
     )]
     pub state: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14440,15 +14586,15 @@ pub struct SubscriberListContactData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListData {
     /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
+    * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
     pub campaign_defaults: SubscriberListCampaignDefaults,
     /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
+    * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
     pub contact: SubscriberListContactData,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -14456,7 +14602,7 @@ pub struct SubscriberListData {
     )]
     pub double_optin: bool,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -14464,7 +14610,7 @@ pub struct SubscriberListData {
     )]
     pub email_type_option: bool,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -14472,7 +14618,7 @@ pub struct SubscriberListData {
     )]
     pub marketing_permissions: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14481,7 +14627,7 @@ pub struct SubscriberListData {
     )]
     pub name: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -14490,7 +14636,7 @@ pub struct SubscriberListData {
     )]
     pub notify_on_subscribe: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -14499,7 +14645,7 @@ pub struct SubscriberListData {
     )]
     pub notify_on_unsubscribe: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -14508,7 +14654,7 @@ pub struct SubscriberListData {
     )]
     pub permission_reminder: String,
     /**
-     * Information about a specific list.
+    * Information about a specific list.
      */
     #[serde(
         default,
@@ -14521,7 +14667,7 @@ pub struct SubscriberListData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseReports {
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14531,7 +14677,7 @@ pub struct AbuseReports {
     )]
     pub links: Vec<Links>,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14540,7 +14686,7 @@ pub struct AbuseReports {
     )]
     pub campaign_id: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14549,7 +14695,7 @@ pub struct AbuseReports {
     )]
     pub date: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14558,7 +14704,7 @@ pub struct AbuseReports {
     )]
     pub email_address: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14567,7 +14713,7 @@ pub struct AbuseReports {
     )]
     pub email_id: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14576,7 +14722,7 @@ pub struct AbuseReports {
     )]
     pub id: i64,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14585,12 +14731,12 @@ pub struct AbuseReports {
     )]
     pub list_id: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14603,7 +14749,7 @@ pub struct AbuseReports {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseComplaints {
     /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14613,7 +14759,7 @@ pub struct AbuseComplaints {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14622,7 +14768,7 @@ pub struct AbuseComplaints {
     )]
     pub abuse_reports: Vec<AbuseReports>,
     /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14631,7 +14777,7 @@ pub struct AbuseComplaints {
     )]
     pub list_id: String,
     /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -14645,7 +14791,7 @@ pub struct AbuseComplaints {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Activity {
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14655,7 +14801,7 @@ pub struct Activity {
     )]
     pub links: Vec<Links>,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14664,7 +14810,7 @@ pub struct Activity {
     )]
     pub day: String,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14673,7 +14819,7 @@ pub struct Activity {
     )]
     pub emails_sent: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14682,7 +14828,7 @@ pub struct Activity {
     )]
     pub hard_bounce: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14691,7 +14837,7 @@ pub struct Activity {
     )]
     pub other_adds: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14700,7 +14846,7 @@ pub struct Activity {
     )]
     pub other_removes: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14709,7 +14855,7 @@ pub struct Activity {
     )]
     pub recipient_clicks: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14718,7 +14864,7 @@ pub struct Activity {
     )]
     pub soft_bounce: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14727,7 +14873,7 @@ pub struct Activity {
     )]
     pub subs: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14736,7 +14882,7 @@ pub struct Activity {
     )]
     pub unique_opens: i64,
     /**
-     * One day's worth of list activity. Doesn't include Automation activity.
+    * One day's worth of list activity. Doesn't include Automation activity.
      */
     #[serde(
         default,
@@ -14750,7 +14896,7 @@ pub struct Activity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListActivity {
     /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
+    * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
      */
     #[serde(
         default,
@@ -14760,7 +14906,7 @@ pub struct ListActivity {
     )]
     pub links: Vec<Links>,
     /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
+    * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
      */
     #[serde(
         default,
@@ -14769,7 +14915,7 @@ pub struct ListActivity {
     )]
     pub activity: Vec<Activity>,
     /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
+    * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
      */
     #[serde(
         default,
@@ -14778,7 +14924,7 @@ pub struct ListActivity {
     )]
     pub list_id: String,
     /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
+    * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
      */
     #[serde(
         default,
@@ -14792,7 +14938,7 @@ pub struct ListActivity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Clients {
     /**
-     * The email client.
+    * The email client.
      */
     #[serde(
         default,
@@ -14801,7 +14947,7 @@ pub struct Clients {
     )]
     pub client: String,
     /**
-     * The email client.
+    * The email client.
      */
     #[serde(
         default,
@@ -14815,7 +14961,7 @@ pub struct Clients {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailClients {
     /**
-     * The top email clients based on user-agent strings.
+    * The top email clients based on user-agent strings.
      */
     #[serde(
         default,
@@ -14825,7 +14971,7 @@ pub struct EmailClients {
     )]
     pub links: Vec<Links>,
     /**
-     * The top email clients based on user-agent strings.
+    * The top email clients based on user-agent strings.
      */
     #[serde(
         default,
@@ -14834,7 +14980,7 @@ pub struct EmailClients {
     )]
     pub clients: Vec<Clients>,
     /**
-     * The top email clients based on user-agent strings.
+    * The top email clients based on user-agent strings.
      */
     #[serde(
         default,
@@ -14843,7 +14989,7 @@ pub struct EmailClients {
     )]
     pub list_id: String,
     /**
-     * The top email clients based on user-agent strings.
+    * The top email clients based on user-agent strings.
      */
     #[serde(
         default,
@@ -14856,7 +15002,8 @@ pub struct EmailClients {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetListsGrowthHistorySortField {
     #[serde(rename = "month")]
     Month,
@@ -14888,7 +15035,7 @@ impl GetListsGrowthHistorySortField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct History {
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14898,7 +15045,7 @@ pub struct History {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14907,7 +15054,7 @@ pub struct History {
     )]
     pub cleaned: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14916,7 +15063,7 @@ pub struct History {
     )]
     pub deleted: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14925,7 +15072,7 @@ pub struct History {
     )]
     pub existing: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14934,7 +15081,7 @@ pub struct History {
     )]
     pub imports: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14943,7 +15090,7 @@ pub struct History {
     )]
     pub list_id: String,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14952,7 +15099,7 @@ pub struct History {
     )]
     pub month: String,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14961,7 +15108,7 @@ pub struct History {
     )]
     pub optins: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14970,7 +15117,7 @@ pub struct History {
     )]
     pub pending: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14979,7 +15126,7 @@ pub struct History {
     )]
     pub reconfirm: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14988,7 +15135,7 @@ pub struct History {
     )]
     pub subscribed: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -14997,7 +15144,7 @@ pub struct History {
     )]
     pub transactional: i64,
     /**
-     * A summary of a specific list's growth activity for a specific month and year.
+    * A summary of a specific list's growth activity for a specific month and year.
      */
     #[serde(
         default,
@@ -15011,7 +15158,7 @@ pub struct History {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GrowthHistory {
     /**
-     * A month-by-month summary of a specific list's growth activity.
+    * A month-by-month summary of a specific list's growth activity.
      */
     #[serde(
         default,
@@ -15021,7 +15168,7 @@ pub struct GrowthHistory {
     )]
     pub links: Vec<Links>,
     /**
-     * A month-by-month summary of a specific list's growth activity.
+    * A month-by-month summary of a specific list's growth activity.
      */
     #[serde(
         default,
@@ -15030,7 +15177,7 @@ pub struct GrowthHistory {
     )]
     pub history: Vec<History>,
     /**
-     * A month-by-month summary of a specific list's growth activity.
+    * A month-by-month summary of a specific list's growth activity.
      */
     #[serde(
         default,
@@ -15039,7 +15186,7 @@ pub struct GrowthHistory {
     )]
     pub list_id: String,
     /**
-     * A month-by-month summary of a specific list's growth activity.
+    * A month-by-month summary of a specific list's growth activity.
      */
     #[serde(
         default,
@@ -15053,7 +15200,7 @@ pub struct GrowthHistory {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Categories {
     /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
+    * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
     #[serde(
         default,
@@ -15063,7 +15210,7 @@ pub struct Categories {
     )]
     pub links: Vec<Links>,
     /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
+    * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
     #[serde(
         default,
@@ -15072,7 +15219,7 @@ pub struct Categories {
     )]
     pub display_order: i64,
     /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
+    * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
     #[serde(
         default,
@@ -15081,7 +15228,7 @@ pub struct Categories {
     )]
     pub id: String,
     /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
+    * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
     #[serde(
         default,
@@ -15090,7 +15237,7 @@ pub struct Categories {
     )]
     pub list_id: String,
     /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
+    * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
     #[serde(
         default,
@@ -15099,7 +15246,7 @@ pub struct Categories {
     )]
     pub title: String,
     /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
+    * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
@@ -15109,7 +15256,7 @@ pub struct Categories {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestGroupings {
     /**
-     * Information about this list's interest categories.
+    * Information about this list's interest categories.
      */
     #[serde(
         default,
@@ -15119,7 +15266,7 @@ pub struct InterestGroupings {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about this list's interest categories.
+    * Information about this list's interest categories.
      */
     #[serde(
         default,
@@ -15128,7 +15275,7 @@ pub struct InterestGroupings {
     )]
     pub categories: Vec<Categories>,
     /**
-     * Information about this list's interest categories.
+    * Information about this list's interest categories.
      */
     #[serde(
         default,
@@ -15137,7 +15284,7 @@ pub struct InterestGroupings {
     )]
     pub list_id: String,
     /**
-     * Information about this list's interest categories.
+    * Information about this list's interest categories.
      */
     #[serde(
         default,
@@ -15151,7 +15298,7 @@ pub struct InterestGroupings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestsInterest {
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -15161,7 +15308,7 @@ pub struct InterestsInterest {
     )]
     pub links: Vec<Links>,
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -15170,7 +15317,7 @@ pub struct InterestsInterest {
     )]
     pub category_id: String,
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -15179,7 +15326,7 @@ pub struct InterestsInterest {
     )]
     pub display_order: i64,
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -15188,7 +15335,7 @@ pub struct InterestsInterest {
     )]
     pub id: String,
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -15197,7 +15344,7 @@ pub struct InterestsInterest {
     )]
     pub list_id: String,
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -15206,7 +15353,7 @@ pub struct InterestsInterest {
     )]
     pub name: String,
     /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
+    * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
     #[serde(
         default,
@@ -15220,7 +15367,7 @@ pub struct InterestsInterest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestsData {
     /**
-     * A list of this category's interests
+    * A list of this category's interests
      */
     #[serde(
         default,
@@ -15230,7 +15377,7 @@ pub struct InterestsData {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of this category's interests
+    * A list of this category's interests
      */
     #[serde(
         default,
@@ -15239,7 +15386,7 @@ pub struct InterestsData {
     )]
     pub category_id: String,
     /**
-     * A list of this category's interests
+    * A list of this category's interests
      */
     #[serde(
         default,
@@ -15248,7 +15395,7 @@ pub struct InterestsData {
     )]
     pub interests: Vec<InterestsInterest>,
     /**
-     * A list of this category's interests
+    * A list of this category's interests
      */
     #[serde(
         default,
@@ -15257,7 +15404,7 @@ pub struct InterestsData {
     )]
     pub list_id: String,
     /**
-     * A list of this category's interests
+    * A list of this category's interests
      */
     #[serde(
         default,
@@ -15270,7 +15417,8 @@ pub struct InterestsData {
 /**
  * The type of segment. Static segments are now known as tags. Learn more about [tags](https://mailchimp.com/help/getting-started-tags?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CollectionOfSegmentsType {
     #[serde(rename = "fuzzy")]
     Fuzzy,
@@ -15308,7 +15456,7 @@ impl CollectionOfSegmentsType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Options {
     /**
-     * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
+    * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
      */
     #[serde(
         default,
@@ -15317,7 +15465,7 @@ pub struct Options {
     )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
-     * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
+    * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
@@ -15327,7 +15475,7 @@ pub struct Options {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Segments {
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(
         default,
@@ -15337,7 +15485,7 @@ pub struct Segments {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(
         default,
@@ -15346,7 +15494,7 @@ pub struct Segments {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(
         default,
@@ -15355,7 +15503,7 @@ pub struct Segments {
     )]
     pub id: i64,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(
         default,
@@ -15364,7 +15512,7 @@ pub struct Segments {
     )]
     pub list_id: String,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(
         default,
@@ -15373,7 +15521,7 @@ pub struct Segments {
     )]
     pub member_count: i64,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(
         default,
@@ -15382,17 +15530,17 @@ pub struct Segments {
     )]
     pub name: String,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<Options>,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<CollectionOfSegmentsType>,
     /**
-     * Information about a specific segment.
+    * Information about a specific segment.
      */
     #[serde(
         default,
@@ -15406,7 +15554,7 @@ pub struct Segments {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfSegments {
     /**
-     * A list of available segments.
+    * A list of available segments.
      */
     #[serde(
         default,
@@ -15416,7 +15564,7 @@ pub struct CollectionOfSegments {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of available segments.
+    * A list of available segments.
      */
     #[serde(
         default,
@@ -15425,7 +15573,7 @@ pub struct CollectionOfSegments {
     )]
     pub list_id: String,
     /**
-     * A list of available segments.
+    * A list of available segments.
      */
     #[serde(
         default,
@@ -15434,7 +15582,7 @@ pub struct CollectionOfSegments {
     )]
     pub segments: Vec<Segments>,
     /**
-     * A list of available segments.
+    * A list of available segments.
      */
     #[serde(
         default,
@@ -15448,7 +15596,7 @@ pub struct CollectionOfSegments {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListConditions {
     /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
+    * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
      */
     #[serde(
         default,
@@ -15457,7 +15605,7 @@ pub struct ListConditions {
     )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
+    * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
@@ -15467,7 +15615,7 @@ pub struct ListConditions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListData {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -15476,12 +15624,12 @@ pub struct ListData {
     )]
     pub name: String,
     /**
-     * Information about a specific list segment.
+    * Information about a specific list segment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<ListConditions>,
     /**
-     * Information about a specific list segment.
+    * Information about a specific list segment.
      */
     #[serde(
         default,
@@ -15495,7 +15643,7 @@ pub struct ListData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MembersAddRemoveFromAStaticSegment {
     /**
-     * Members to add/remove to/from a static segment
+    * Members to add/remove to/from a static segment
      */
     #[serde(
         default,
@@ -15504,7 +15652,7 @@ pub struct MembersAddRemoveFromAStaticSegment {
     )]
     pub members_to_add: Vec<String>,
     /**
-     * Members to add/remove to/from a static segment
+    * Members to add/remove to/from a static segment
      */
     #[serde(
         default,
@@ -15517,7 +15665,7 @@ pub struct MembersAddRemoveFromAStaticSegment {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchAddRemoveListMembersFromStaticSegmentErrors {
     /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     #[serde(
         default,
@@ -15526,7 +15674,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegmentErrors {
     )]
     pub email_addresses: Vec<String>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -15540,7 +15688,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegmentErrors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchAddRemoveListMembersFromStaticSegment {
     /**
-     * Batch add/remove List members to/from static segment
+    * Batch add/remove List members to/from static segment
      */
     #[serde(
         default,
@@ -15550,7 +15698,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     )]
     pub links: Vec<Links>,
     /**
-     * Batch add/remove List members to/from static segment
+    * Batch add/remove List members to/from static segment
      */
     #[serde(
         default,
@@ -15559,7 +15707,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     )]
     pub error_count: i64,
     /**
-     * Batch add/remove List members to/from static segment
+    * Batch add/remove List members to/from static segment
      */
     #[serde(
         default,
@@ -15568,7 +15716,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     )]
     pub errors: Vec<BatchAddRemoveListMembersFromStaticSegmentErrors>,
     /**
-     * Batch add/remove List members to/from static segment
+    * Batch add/remove List members to/from static segment
      */
     #[serde(
         default,
@@ -15577,7 +15725,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     )]
     pub members_added: Vec<NewMembers>,
     /**
-     * Batch add/remove List members to/from static segment
+    * Batch add/remove List members to/from static segment
      */
     #[serde(
         default,
@@ -15586,7 +15734,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     )]
     pub members_removed: Vec<NewMembers>,
     /**
-     * Batch add/remove List members to/from static segment
+    * Batch add/remove List members to/from static segment
      */
     #[serde(
         default,
@@ -15595,7 +15743,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     )]
     pub total_added: i64,
     /**
-     * Batch add/remove List members to/from static segment
+    * Batch add/remove List members to/from static segment
      */
     #[serde(
         default,
@@ -15609,7 +15757,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListConditionsData {
     /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
+    * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
      */
     #[serde(
         default,
@@ -15618,7 +15766,7 @@ pub struct ListConditionsData {
     )]
     pub conditions: Vec<Vec<ConditionsOneOf>>,
     /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
+    * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
@@ -15628,7 +15776,7 @@ pub struct ListConditionsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListDataType {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -15637,12 +15785,12 @@ pub struct ListDataType {
     )]
     pub name: String,
     /**
-     * Information about a specific list segment.
+    * Information about a specific list segment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<ListConditionsData>,
     /**
-     * Information about a specific list segment.
+    * Information about a specific list segment.
      */
     #[serde(
         default,
@@ -15656,7 +15804,7 @@ pub struct ListDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembers {
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15666,7 +15814,7 @@ pub struct ListMembers {
     )]
     pub links: Vec<Links>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15675,7 +15823,7 @@ pub struct ListMembers {
     )]
     pub email_address: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15684,7 +15832,7 @@ pub struct ListMembers {
     )]
     pub email_client: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15693,7 +15841,7 @@ pub struct ListMembers {
     )]
     pub email_type: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15702,7 +15850,7 @@ pub struct ListMembers {
     )]
     pub id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15710,7 +15858,7 @@ pub struct ListMembers {
     )]
     pub interests: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15719,7 +15867,7 @@ pub struct ListMembers {
     )]
     pub ip_opt: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15728,7 +15876,7 @@ pub struct ListMembers {
     )]
     pub ip_signup: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15737,7 +15885,7 @@ pub struct ListMembers {
     )]
     pub language: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15746,12 +15894,12 @@ pub struct ListMembers {
     )]
     pub last_changed: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_note: Option<Notes>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15760,12 +15908,12 @@ pub struct ListMembers {
     )]
     pub list_id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<BatchUpdateListMembersNewLocation>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15774,22 +15922,22 @@ pub struct ListMembers {
     )]
     pub member_rating: i64,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<SubscriberStats>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<StatusIfNew>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15798,7 +15946,7 @@ pub struct ListMembers {
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15807,7 +15955,7 @@ pub struct ListMembers {
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15816,7 +15964,7 @@ pub struct ListMembers {
     )]
     pub unique_email_id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -15829,7 +15977,7 @@ pub struct ListMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentMembers {
     /**
-     * View members in a specific list segment.
+    * View members in a specific list segment.
      */
     #[serde(
         default,
@@ -15839,7 +15987,7 @@ pub struct SegmentMembers {
     )]
     pub links: Vec<Links>,
     /**
-     * View members in a specific list segment.
+    * View members in a specific list segment.
      */
     #[serde(
         default,
@@ -15848,7 +15996,7 @@ pub struct SegmentMembers {
     )]
     pub members: Vec<ListMembers>,
     /**
-     * View members in a specific list segment.
+    * View members in a specific list segment.
      */
     #[serde(
         default,
@@ -15862,7 +16010,7 @@ pub struct SegmentMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TagSearchResults {
     /**
-     * A list of tags matching the input query.
+    * A list of tags matching the input query.
      */
     #[serde(
         default,
@@ -15871,7 +16019,7 @@ pub struct TagSearchResults {
     )]
     pub tags: Vec<String>,
     /**
-     * A list of tags matching the input query.
+    * A list of tags matching the input query.
      */
     #[serde(
         default,
@@ -15884,7 +16032,8 @@ pub struct TagSearchResults {
 /**
  * The subscriber's status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetListsMembersStatus {
     #[serde(rename = "archived")]
     Archived,
@@ -15930,7 +16079,8 @@ impl GetListsMembersStatus {
 /**
  * Used to filter list members by interests. Must be accompanied by interest_category_id and interest_ids. "any" will match a member with any of the interest supplied, "all" will only match members with every interest supplied, and "none" will match members without any of the interest supplied.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InterestMatch {
     #[serde(rename = "all")]
     All,
@@ -15967,7 +16117,8 @@ impl InterestMatch {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetListsMembersSortField {
     #[serde(rename = "last_changed")]
     LastChanged,
@@ -16005,7 +16156,7 @@ impl GetListsMembersSortField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceData {
     /**
-     * Ecommerce stats for the list member if the list is attached to a store.
+    * Ecommerce stats for the list member if the list is attached to a store.
      */
     #[serde(
         default,
@@ -16014,7 +16165,7 @@ pub struct EcommerceData {
     )]
     pub currency_code: String,
     /**
-     * Ecommerce stats for the list member if the list is attached to a store.
+    * Ecommerce stats for the list member if the list is attached to a store.
      */
     #[serde(
         default,
@@ -16023,7 +16174,7 @@ pub struct EcommerceData {
     )]
     pub number_of_orders: f64,
     /**
-     * Ecommerce stats for the list member if the list is attached to a store.
+    * Ecommerce stats for the list member if the list is attached to a store.
      */
     #[serde(
         default,
@@ -16037,7 +16188,7 @@ pub struct EcommerceData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembersSubscriberStats {
     /**
-     * Open and click rates for this subscriber.
+    * Open and click rates for this subscriber.
      */
     #[serde(
         default,
@@ -16046,7 +16197,7 @@ pub struct ListMembersSubscriberStats {
     )]
     pub avg_click_rate: f64,
     /**
-     * Open and click rates for this subscriber.
+    * Open and click rates for this subscriber.
      */
     #[serde(
         default,
@@ -16055,7 +16206,7 @@ pub struct ListMembersSubscriberStats {
     )]
     pub avg_open_rate: f64,
     /**
-     * Open and click rates for this subscriber.
+    * Open and click rates for this subscriber.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce_data: Option<EcommerceData>,
@@ -16065,7 +16216,7 @@ pub struct ListMembersSubscriberStats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarketingPermission {
     /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
+    * A single marketing permission a subscriber has either opted-in to or opted-out of.
      */
     #[serde(
         default,
@@ -16073,7 +16224,7 @@ pub struct MarketingPermission {
     )]
     pub enabled: bool,
     /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
+    * A single marketing permission a subscriber has either opted-in to or opted-out of.
      */
     #[serde(
         default,
@@ -16082,7 +16233,7 @@ pub struct MarketingPermission {
     )]
     pub marketing_permission_id: String,
     /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
+    * A single marketing permission a subscriber has either opted-in to or opted-out of.
      */
     #[serde(
         default,
@@ -16096,7 +16247,7 @@ pub struct MarketingPermission {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembersData {
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16106,7 +16257,7 @@ pub struct ListMembersData {
     )]
     pub links: Vec<Links>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16115,7 +16266,7 @@ pub struct ListMembersData {
     )]
     pub email_address: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16124,7 +16275,7 @@ pub struct ListMembersData {
     )]
     pub email_client: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16133,7 +16284,7 @@ pub struct ListMembersData {
     )]
     pub email_type: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16142,7 +16293,7 @@ pub struct ListMembersData {
     )]
     pub full_name: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16151,7 +16302,7 @@ pub struct ListMembersData {
     )]
     pub id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16159,7 +16310,7 @@ pub struct ListMembersData {
     )]
     pub interests: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16168,7 +16319,7 @@ pub struct ListMembersData {
     )]
     pub ip_opt: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16177,7 +16328,7 @@ pub struct ListMembersData {
     )]
     pub ip_signup: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16186,7 +16337,7 @@ pub struct ListMembersData {
     )]
     pub language: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16195,12 +16346,12 @@ pub struct ListMembersData {
     )]
     pub last_changed: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_note: Option<Notes>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16209,12 +16360,12 @@ pub struct ListMembersData {
     )]
     pub list_id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<BatchUpdateListMembersNewLocation>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16223,7 +16374,7 @@ pub struct ListMembersData {
     )]
     pub marketing_permissions: Vec<MarketingPermission>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16232,12 +16383,12 @@ pub struct ListMembersData {
     )]
     pub member_rating: i64,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16246,17 +16397,17 @@ pub struct ListMembersData {
     )]
     pub source: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<ListMembersSubscriberStats>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<GetListsMembersStatus>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16265,7 +16416,7 @@ pub struct ListMembersData {
     )]
     pub tags: Vec<Tags>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16274,7 +16425,7 @@ pub struct ListMembersData {
     )]
     pub tags_count: i64,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16283,7 +16434,7 @@ pub struct ListMembersData {
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16292,7 +16443,7 @@ pub struct ListMembersData {
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16301,7 +16452,7 @@ pub struct ListMembersData {
     )]
     pub unique_email_id: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16310,7 +16461,7 @@ pub struct ListMembersData {
     )]
     pub unsubscribe_reason: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16318,7 +16469,7 @@ pub struct ListMembersData {
     )]
     pub vip: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16332,7 +16483,7 @@ pub struct ListMembersData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembersDataType {
     /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
+    * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
      */
     #[serde(
         default,
@@ -16342,7 +16493,7 @@ pub struct ListMembersDataType {
     )]
     pub links: Vec<Links>,
     /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
+    * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
      */
     #[serde(
         default,
@@ -16351,7 +16502,7 @@ pub struct ListMembersDataType {
     )]
     pub list_id: String,
     /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
+    * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
      */
     #[serde(
         default,
@@ -16360,7 +16511,7 @@ pub struct ListMembersDataType {
     )]
     pub members: Vec<ListMembersData>,
     /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
+    * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
      */
     #[serde(
         default,
@@ -16374,7 +16525,7 @@ pub struct ListMembersDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarketingPermissions {
     /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
+    * A single marketing permission a subscriber has either opted-in to or opted-out of.
      */
     #[serde(
         default,
@@ -16382,7 +16533,7 @@ pub struct MarketingPermissions {
     )]
     pub enabled: bool,
     /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
+    * A single marketing permission a subscriber has either opted-in to or opted-out of.
      */
     #[serde(
         default,
@@ -16396,7 +16547,7 @@ pub struct MarketingPermissions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddListMembers {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -16405,7 +16556,7 @@ pub struct AddListMembers {
     )]
     pub email_address: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16414,7 +16565,7 @@ pub struct AddListMembers {
     )]
     pub email_type: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16422,7 +16573,7 @@ pub struct AddListMembers {
     )]
     pub interests: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16431,7 +16582,7 @@ pub struct AddListMembers {
     )]
     pub ip_opt: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16440,7 +16591,7 @@ pub struct AddListMembers {
     )]
     pub ip_signup: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16449,12 +16600,12 @@ pub struct AddListMembers {
     )]
     pub language: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16463,17 +16614,17 @@ pub struct AddListMembers {
     )]
     pub marketing_permissions: Vec<MarketingPermissions>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Subscriber's status. This value is required only if the email address is not already present on the list.
+    * Subscriber's status. This value is required only if the email address is not already present on the list.
      */
     #[serde(default, skip_serializing_if = "StatusIfNew::is_noop")]
     pub status: StatusIfNew,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16482,7 +16633,7 @@ pub struct AddListMembers {
     )]
     pub tags: Vec<String>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16491,7 +16642,7 @@ pub struct AddListMembers {
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16500,7 +16651,7 @@ pub struct AddListMembers {
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16513,7 +16664,7 @@ pub struct AddListMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddListMembersData {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -16522,7 +16673,7 @@ pub struct AddListMembersData {
     )]
     pub email_address: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16531,7 +16682,7 @@ pub struct AddListMembersData {
     )]
     pub email_type: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16539,7 +16690,7 @@ pub struct AddListMembersData {
     )]
     pub interests: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16548,7 +16699,7 @@ pub struct AddListMembersData {
     )]
     pub ip_opt: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16557,7 +16708,7 @@ pub struct AddListMembersData {
     )]
     pub ip_signup: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16566,12 +16717,12 @@ pub struct AddListMembersData {
     )]
     pub language: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16580,22 +16731,22 @@ pub struct AddListMembersData {
     )]
     pub marketing_permissions: Vec<MarketingPermissions>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<StatusIfNew>,
     /**
-     * Subscriber's status. This value is required only if the email address is not already present on the list.
+    * Subscriber's status. This value is required only if the email address is not already present on the list.
      */
     #[serde(default, skip_serializing_if = "StatusIfNew::is_noop")]
     pub status_if_new: StatusIfNew,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16604,7 +16755,7 @@ pub struct AddListMembersData {
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16613,7 +16764,7 @@ pub struct AddListMembersData {
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16626,7 +16777,7 @@ pub struct AddListMembersData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddListMembersDataType {
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16635,7 +16786,7 @@ pub struct AddListMembersDataType {
     )]
     pub email_address: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16644,7 +16795,7 @@ pub struct AddListMembersDataType {
     )]
     pub email_type: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16652,7 +16803,7 @@ pub struct AddListMembersDataType {
     )]
     pub interests: bool,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16661,7 +16812,7 @@ pub struct AddListMembersDataType {
     )]
     pub ip_opt: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16670,7 +16821,7 @@ pub struct AddListMembersDataType {
     )]
     pub ip_signup: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16679,12 +16830,12 @@ pub struct AddListMembersDataType {
     )]
     pub language: String,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16693,17 +16844,17 @@ pub struct AddListMembersDataType {
     )]
     pub marketing_permissions: Vec<MarketingPermissions>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<MembersSubscribeUnsubscribeFromAListInBatchStatus>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16712,7 +16863,7 @@ pub struct AddListMembersDataType {
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16721,7 +16872,7 @@ pub struct AddListMembersDataType {
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
+    * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
     #[serde(
         default,
@@ -16734,7 +16885,7 @@ pub struct AddListMembersDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberActivity {
     /**
-     * Member activity events.
+    * Member activity events.
      */
     #[serde(
         default,
@@ -16743,7 +16894,7 @@ pub struct MemberActivity {
     )]
     pub action: String,
     /**
-     * Member activity events.
+    * Member activity events.
      */
     #[serde(
         default,
@@ -16752,7 +16903,7 @@ pub struct MemberActivity {
     )]
     pub campaign_id: String,
     /**
-     * Member activity events.
+    * Member activity events.
      */
     #[serde(
         default,
@@ -16761,7 +16912,7 @@ pub struct MemberActivity {
     )]
     pub parent_campaign: String,
     /**
-     * Member activity events.
+    * Member activity events.
      */
     #[serde(
         default,
@@ -16770,7 +16921,7 @@ pub struct MemberActivity {
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Member activity events.
+    * Member activity events.
      */
     #[serde(
         default,
@@ -16779,7 +16930,7 @@ pub struct MemberActivity {
     )]
     pub title: String,
     /**
-     * Member activity events.
+    * Member activity events.
      */
     #[serde(
         default,
@@ -16789,7 +16940,7 @@ pub struct MemberActivity {
     )]
     pub type_: String,
     /**
-     * Member activity events.
+    * Member activity events.
      */
     #[serde(
         default,
@@ -16803,7 +16954,7 @@ pub struct MemberActivity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberActivityEvents {
     /**
-     * The last 50 member events for a list.
+    * The last 50 member events for a list.
      */
     #[serde(
         default,
@@ -16813,7 +16964,7 @@ pub struct MemberActivityEvents {
     )]
     pub links: Vec<Links>,
     /**
-     * The last 50 member events for a list.
+    * The last 50 member events for a list.
      */
     #[serde(
         default,
@@ -16822,7 +16973,7 @@ pub struct MemberActivityEvents {
     )]
     pub activity: Vec<MemberActivity>,
     /**
-     * The last 50 member events for a list.
+    * The last 50 member events for a list.
      */
     #[serde(
         default,
@@ -16831,7 +16982,7 @@ pub struct MemberActivityEvents {
     )]
     pub email_id: String,
     /**
-     * The last 50 member events for a list.
+    * The last 50 member events for a list.
      */
     #[serde(
         default,
@@ -16840,7 +16991,7 @@ pub struct MemberActivityEvents {
     )]
     pub list_id: String,
     /**
-     * The last 50 member events for a list.
+    * The last 50 member events for a list.
      */
     #[serde(
         default,
@@ -16853,7 +17004,8 @@ pub struct MemberActivityEvents {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ActivityType {
     #[serde(rename = "open")]
     Open,
@@ -16885,12 +17037,12 @@ impl ActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailOpens {
     /**
-     * Activity feed item representing opening an email.
+    * Activity feed item representing opening an email.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ActivityType>,
     /**
-     * Activity feed item representing opening an email.
+    * Activity feed item representing opening an email.
      */
     #[serde(
         default,
@@ -16899,7 +17051,7 @@ pub struct EmailOpens {
     )]
     pub campaign_id: String,
     /**
-     * Activity feed item representing opening an email.
+    * Activity feed item representing opening an email.
      */
     #[serde(
         default,
@@ -16908,7 +17060,7 @@ pub struct EmailOpens {
     )]
     pub campaign_title: String,
     /**
-     * Activity feed item representing opening an email.
+    * Activity feed item representing opening an email.
      */
     #[serde(
         default,
@@ -16921,7 +17073,8 @@ pub struct EmailOpens {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailClicksActivityType {
     #[serde(rename = "click")]
     Click,
@@ -16953,12 +17106,12 @@ impl EmailClicksActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailClicks {
     /**
-     * Activity feed item representing having a link clicked by a contact.
+    * Activity feed item representing having a link clicked by a contact.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EmailClicksActivityType>,
     /**
-     * Activity feed item representing having a link clicked by a contact.
+    * Activity feed item representing having a link clicked by a contact.
      */
     #[serde(
         default,
@@ -16967,7 +17120,7 @@ pub struct EmailClicks {
     )]
     pub campaign_id: String,
     /**
-     * Activity feed item representing having a link clicked by a contact.
+    * Activity feed item representing having a link clicked by a contact.
      */
     #[serde(
         default,
@@ -16976,7 +17129,7 @@ pub struct EmailClicks {
     )]
     pub campaign_title: String,
     /**
-     * Activity feed item representing having a link clicked by a contact.
+    * Activity feed item representing having a link clicked by a contact.
      */
     #[serde(
         default,
@@ -16985,7 +17138,7 @@ pub struct EmailClicks {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item representing having a link clicked by a contact.
+    * Activity feed item representing having a link clicked by a contact.
      */
     #[serde(
         default,
@@ -16998,7 +17151,8 @@ pub struct EmailClicks {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailBouncedActivityType {
     #[serde(rename = "bounce")]
     Bounce,
@@ -17029,7 +17183,8 @@ impl EmailBouncedActivityType {
 /**
  * The type of bounce.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BounceType {
     #[serde(rename = "hard")]
     Hard,
@@ -17064,12 +17219,12 @@ impl BounceType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailBounced {
     /**
-     * Activity feed item representing an email to this contact bouncing.
+    * Activity feed item representing an email to this contact bouncing.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EmailBouncedActivityType>,
     /**
-     * Activity feed item representing an email to this contact bouncing.
+    * Activity feed item representing an email to this contact bouncing.
      */
     #[serde(
         default,
@@ -17077,12 +17232,12 @@ pub struct EmailBounced {
     )]
     pub bounce_has_open_activity: bool,
     /**
-     * Activity feed item representing an email to this contact bouncing.
+    * Activity feed item representing an email to this contact bouncing.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bounce_type: Option<BounceType>,
     /**
-     * Activity feed item representing an email to this contact bouncing.
+    * Activity feed item representing an email to this contact bouncing.
      */
     #[serde(
         default,
@@ -17091,7 +17246,7 @@ pub struct EmailBounced {
     )]
     pub campaign_id: String,
     /**
-     * Activity feed item representing an email to this contact bouncing.
+    * Activity feed item representing an email to this contact bouncing.
      */
     #[serde(
         default,
@@ -17100,7 +17255,7 @@ pub struct EmailBounced {
     )]
     pub campaign_title: String,
     /**
-     * Activity feed item representing an email to this contact bouncing.
+    * Activity feed item representing an email to this contact bouncing.
      */
     #[serde(
         default,
@@ -17113,7 +17268,8 @@ pub struct EmailBounced {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListUnsubscribedActivityType {
     #[serde(rename = "unsub")]
     Unsub,
@@ -17145,12 +17301,12 @@ impl ListUnsubscribedActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListUnsubscribed {
     /**
-     * Activity feed item representing this contact unsubscribing from a list.
+    * Activity feed item representing this contact unsubscribing from a list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ListUnsubscribedActivityType>,
     /**
-     * Activity feed item representing this contact unsubscribing from a list.
+    * Activity feed item representing this contact unsubscribing from a list.
      */
     #[serde(
         default,
@@ -17159,7 +17315,7 @@ pub struct ListUnsubscribed {
     )]
     pub campaign_id: String,
     /**
-     * Activity feed item representing this contact unsubscribing from a list.
+    * Activity feed item representing this contact unsubscribing from a list.
      */
     #[serde(
         default,
@@ -17168,7 +17324,7 @@ pub struct ListUnsubscribed {
     )]
     pub campaign_title: String,
     /**
-     * Activity feed item representing this contact unsubscribing from a list.
+    * Activity feed item representing this contact unsubscribing from a list.
      */
     #[serde(
         default,
@@ -17177,7 +17333,7 @@ pub struct ListUnsubscribed {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item representing this contact unsubscribing from a list.
+    * Activity feed item representing this contact unsubscribing from a list.
      */
     #[serde(
         default,
@@ -17185,7 +17341,7 @@ pub struct ListUnsubscribed {
     )]
     pub is_admin_unsubscribed: bool,
     /**
-     * Activity feed item representing this contact unsubscribing from a list.
+    * Activity feed item representing this contact unsubscribing from a list.
      */
     #[serde(
         default,
@@ -17198,7 +17354,8 @@ pub struct ListUnsubscribed {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EmailSentActivityType {
     #[serde(rename = "sent")]
     Sent,
@@ -17230,12 +17387,12 @@ impl EmailSentActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailSent {
     /**
-     * Activity feed item representing having an email sent to the contact.
+    * Activity feed item representing having an email sent to the contact.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EmailSentActivityType>,
     /**
-     * Activity feed item representing having an email sent to the contact.
+    * Activity feed item representing having an email sent to the contact.
      */
     #[serde(
         default,
@@ -17244,7 +17401,7 @@ pub struct EmailSent {
     )]
     pub campaign_id: String,
     /**
-     * Activity feed item representing having an email sent to the contact.
+    * Activity feed item representing having an email sent to the contact.
      */
     #[serde(
         default,
@@ -17253,7 +17410,7 @@ pub struct EmailSent {
     )]
     pub campaign_title: String,
     /**
-     * Activity feed item representing having an email sent to the contact.
+    * Activity feed item representing having an email sent to the contact.
      */
     #[serde(
         default,
@@ -17267,12 +17424,12 @@ pub struct EmailSent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailConversation {
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ConversationSegmentField>,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17281,7 +17438,7 @@ pub struct EmailConversation {
     )]
     pub avatar_url: String,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17290,7 +17447,7 @@ pub struct EmailConversation {
     )]
     pub campaign_id: String,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17299,7 +17456,7 @@ pub struct EmailConversation {
     )]
     pub campaign_title: String,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17308,7 +17465,7 @@ pub struct EmailConversation {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17317,7 +17474,7 @@ pub struct EmailConversation {
     )]
     pub created_by: String,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17326,7 +17483,7 @@ pub struct EmailConversation {
     )]
     pub from_email: String,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17334,7 +17491,7 @@ pub struct EmailConversation {
     )]
     pub has_read: bool,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17342,7 +17499,7 @@ pub struct EmailConversation {
     )]
     pub is_user: bool,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17351,7 +17508,7 @@ pub struct EmailConversation {
     )]
     pub message_text: String,
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     #[serde(
         default,
@@ -17364,7 +17521,8 @@ pub struct EmailConversation {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NoteActivityType {
     #[serde(rename = "note")]
     Note,
@@ -17396,12 +17554,12 @@ impl NoteActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Note {
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<NoteActivityType>,
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     #[serde(
         default,
@@ -17410,7 +17568,7 @@ pub struct Note {
     )]
     pub avatar_url: String,
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     #[serde(
         default,
@@ -17419,7 +17577,7 @@ pub struct Note {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     #[serde(
         default,
@@ -17428,7 +17586,7 @@ pub struct Note {
     )]
     pub created_by: String,
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     #[serde(
         default,
@@ -17437,7 +17595,7 @@ pub struct Note {
     )]
     pub note_id: String,
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     #[serde(
         default,
@@ -17446,7 +17604,7 @@ pub struct Note {
     )]
     pub note_text: String,
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     #[serde(
         default,
@@ -17459,7 +17617,8 @@ pub struct Note {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MarketingPermissionActivityType {
     #[serde(rename = "marketing_permission")]
     MarketingPermission,
@@ -17491,12 +17650,12 @@ impl MarketingPermissionActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarketingPermissionData {
     /**
-     * Activity feed item indicating if a marketing permission was added or updated.
+    * Activity feed item indicating if a marketing permission was added or updated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<MarketingPermissionActivityType>,
     /**
-     * Activity feed item indicating if a marketing permission was added or updated.
+    * Activity feed item indicating if a marketing permission was added or updated.
      */
     #[serde(
         default,
@@ -17505,7 +17664,7 @@ pub struct MarketingPermissionData {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item indicating if a marketing permission was added or updated.
+    * Activity feed item indicating if a marketing permission was added or updated.
      */
     #[serde(
         default,
@@ -17513,7 +17672,7 @@ pub struct MarketingPermissionData {
     )]
     pub marketing_permission_opted_in: bool,
     /**
-     * Activity feed item indicating if a marketing permission was added or updated.
+    * Activity feed item indicating if a marketing permission was added or updated.
      */
     #[serde(
         default,
@@ -17522,7 +17681,7 @@ pub struct MarketingPermissionData {
     )]
     pub marketing_permisson_text: String,
     /**
-     * Activity feed item indicating if a marketing permission was added or updated.
+    * Activity feed item indicating if a marketing permission was added or updated.
      */
     #[serde(
         default,
@@ -17535,7 +17694,8 @@ pub struct MarketingPermissionData {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PostcardSentActivityType {
     #[serde(rename = "postcard_sent")]
     PostcardSent,
@@ -17567,12 +17727,12 @@ impl PostcardSentActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostcardSent {
     /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
+    * Activity feed item representing a time when a contact was sent a particular postcard.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<PostcardSentActivityType>,
     /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
+    * Activity feed item representing a time when a contact was sent a particular postcard.
      */
     #[serde(
         default,
@@ -17581,7 +17741,7 @@ pub struct PostcardSent {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
+    * Activity feed item representing a time when a contact was sent a particular postcard.
      */
     #[serde(
         default,
@@ -17590,7 +17750,7 @@ pub struct PostcardSent {
     )]
     pub outreach_id: String,
     /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
+    * Activity feed item representing a time when a contact was sent a particular postcard.
      */
     #[serde(
         default,
@@ -17603,7 +17763,8 @@ pub struct PostcardSent {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SquatterSignupActivityType {
     #[serde(rename = "squatter_signup")]
     SquatterSignup,
@@ -17635,12 +17796,12 @@ impl SquatterSignupActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SquatterSignup {
     /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
+    * Activity feed item to representing a contact signing up for the audience from a squatter page.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<SquatterSignupActivityType>,
     /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
+    * Activity feed item to representing a contact signing up for the audience from a squatter page.
      */
     #[serde(
         default,
@@ -17649,7 +17810,7 @@ pub struct SquatterSignup {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
+    * Activity feed item to representing a contact signing up for the audience from a squatter page.
      */
     #[serde(
         default,
@@ -17658,7 +17819,7 @@ pub struct SquatterSignup {
     )]
     pub outreach_id: String,
     /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
+    * Activity feed item to representing a contact signing up for the audience from a squatter page.
      */
     #[serde(
         default,
@@ -17671,7 +17832,8 @@ pub struct SquatterSignup {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WebsiteSignupActivityType {
     #[serde(rename = "website_signup")]
     WebsiteSignup,
@@ -17703,12 +17865,12 @@ impl WebsiteSignupActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebsiteSignup {
     /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
+    * Activity feed item to representing a contact signing up for the contact through a website page.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<WebsiteSignupActivityType>,
     /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
+    * Activity feed item to representing a contact signing up for the contact through a website page.
      */
     #[serde(
         default,
@@ -17717,7 +17879,7 @@ pub struct WebsiteSignup {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
+    * Activity feed item to representing a contact signing up for the contact through a website page.
      */
     #[serde(
         default,
@@ -17726,7 +17888,7 @@ pub struct WebsiteSignup {
     )]
     pub outreach_id: String,
     /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
+    * Activity feed item to representing a contact signing up for the contact through a website page.
      */
     #[serde(
         default,
@@ -17739,7 +17901,8 @@ pub struct WebsiteSignup {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LandingPageSignupActivityType {
     #[serde(rename = "landing_page_signup")]
     LandingPageSignup,
@@ -17771,12 +17934,12 @@ impl LandingPageSignupActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageSignup {
     /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
+    * Activity feed item to representing a contact signing up for the list via a landing page.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<LandingPageSignupActivityType>,
     /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
+    * Activity feed item to representing a contact signing up for the list via a landing page.
      */
     #[serde(
         default,
@@ -17785,7 +17948,7 @@ pub struct LandingPageSignup {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
+    * Activity feed item to representing a contact signing up for the list via a landing page.
      */
     #[serde(
         default,
@@ -17794,7 +17957,7 @@ pub struct LandingPageSignup {
     )]
     pub outreach_id: String,
     /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
+    * Activity feed item to representing a contact signing up for the list via a landing page.
      */
     #[serde(
         default,
@@ -17807,7 +17970,8 @@ pub struct LandingPageSignup {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceSignupActivityType {
     #[serde(rename = "ecommerce_signup")]
     EcommerceSignup,
@@ -17839,12 +18003,12 @@ impl EcommerceSignupActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceSignup {
     /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
+    * Activity feed item to representing a contact signing up for the list via a ecommerce store.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EcommerceSignupActivityType>,
     /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
+    * Activity feed item to representing a contact signing up for the list via a ecommerce store.
      */
     #[serde(
         default,
@@ -17853,7 +18017,7 @@ pub struct EcommerceSignup {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
+    * Activity feed item to representing a contact signing up for the list via a ecommerce store.
      */
     #[serde(
         default,
@@ -17866,7 +18030,8 @@ pub struct EcommerceSignup {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GenericSignupActivityType {
     #[serde(rename = "generic_signup")]
     GenericSignup,
@@ -17898,12 +18063,12 @@ impl GenericSignupActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GenericSignup {
     /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
+    * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<GenericSignupActivityType>,
     /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
+    * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
      */
     #[serde(
         default,
@@ -17912,7 +18077,7 @@ pub struct GenericSignup {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
+    * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
      */
     #[serde(
         default,
@@ -17925,7 +18090,8 @@ pub struct GenericSignup {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EcommerceOrderActivityType {
     #[serde(rename = "order")]
     Order,
@@ -17957,7 +18123,7 @@ impl EcommerceOrderActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Lines {
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -17967,7 +18133,7 @@ pub struct Lines {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -17976,7 +18142,7 @@ pub struct Lines {
     )]
     pub discount: f64,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -17985,7 +18151,7 @@ pub struct Lines {
     )]
     pub id: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -17994,7 +18160,7 @@ pub struct Lines {
     )]
     pub image_url: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -18003,7 +18169,7 @@ pub struct Lines {
     )]
     pub price: f64,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -18012,7 +18178,7 @@ pub struct Lines {
     )]
     pub product_id: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -18021,7 +18187,7 @@ pub struct Lines {
     )]
     pub product_title: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -18030,7 +18196,7 @@ pub struct Lines {
     )]
     pub product_variant_id: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -18039,7 +18205,7 @@ pub struct Lines {
     )]
     pub product_variant_title: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -18053,12 +18219,12 @@ pub struct Lines {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceOrder {
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EcommerceOrderActivityType>,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18067,7 +18233,7 @@ pub struct EcommerceOrder {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18076,7 +18242,7 @@ pub struct EcommerceOrder {
     )]
     pub order_id: String,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18085,7 +18251,7 @@ pub struct EcommerceOrder {
     )]
     pub order_items: Vec<Lines>,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18094,7 +18260,7 @@ pub struct EcommerceOrder {
     )]
     pub order_total: String,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18103,7 +18269,7 @@ pub struct EcommerceOrder {
     )]
     pub order_url: String,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18112,7 +18278,7 @@ pub struct EcommerceOrder {
     )]
     pub outreach_id: String,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18121,7 +18287,7 @@ pub struct EcommerceOrder {
     )]
     pub outreach_title: String,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18130,7 +18296,7 @@ pub struct EcommerceOrder {
     )]
     pub outreach_type: String,
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     #[serde(
         default,
@@ -18143,7 +18309,8 @@ pub struct EcommerceOrder {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ContactActivityEventType {
     #[serde(rename = "event")]
     Event,
@@ -18175,12 +18342,12 @@ impl ContactActivityEventType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactActivityEvent {
     /**
-     * Activity feed item that represents a generic event.
+    * Activity feed item that represents a generic event.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ContactActivityEventType>,
     /**
-     * Activity feed item that represents a generic event.
+    * Activity feed item that represents a generic event.
      */
     #[serde(
         default,
@@ -18189,7 +18356,7 @@ pub struct ContactActivityEvent {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Activity feed item that represents a generic event.
+    * Activity feed item that represents a generic event.
      */
     #[serde(
         default,
@@ -18198,7 +18365,7 @@ pub struct ContactActivityEvent {
     )]
     pub event_name: String,
     /**
-     * Activity feed item that represents a generic event.
+    * Activity feed item that represents a generic event.
      */
     #[serde(
         default,
@@ -18211,7 +18378,8 @@ pub struct ContactActivityEvent {
 /**
  * The type of event activity.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SurveyResponseActivityType {
     #[serde(rename = "survey_response")]
     SurveyResponse,
@@ -18243,12 +18411,12 @@ impl SurveyResponseActivityType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SurveyResponse {
     /**
-     * Represents when a contact completes and submits a survey
+    * Represents when a contact completes and submits a survey
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<SurveyResponseActivityType>,
     /**
-     * Represents when a contact completes and submits a survey
+    * Represents when a contact completes and submits a survey
      */
     #[serde(
         default,
@@ -18257,7 +18425,7 @@ pub struct SurveyResponse {
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Represents when a contact completes and submits a survey
+    * Represents when a contact completes and submits a survey
      */
     #[serde(
         default,
@@ -18266,7 +18434,7 @@ pub struct SurveyResponse {
     )]
     pub survey_id: String,
     /**
-     * Represents when a contact completes and submits a survey
+    * Represents when a contact completes and submits a survey
      */
     #[serde(
         default,
@@ -18302,71 +18470,71 @@ pub struct SurveyResponse {
 #[serde(untagged)]
 pub enum ActivityOneOf {
     /**
-     * Activity feed item representing opening an email.
+    * Activity feed item representing opening an email.
      */
     EmailOpens(EmailOpens),
     /**
-     * Activity feed item representing having a link clicked by a contact.
+    * Activity feed item representing having a link clicked by a contact.
      */
     EmailClicks(EmailClicks),
     /**
-     * Activity feed item representing an email to this contact bouncing.
+    * Activity feed item representing an email to this contact bouncing.
      */
     EmailBounced(EmailBounced),
     /**
-     * Activity feed item representing this contact unsubscribing from a list.
+    * Activity feed item representing this contact unsubscribing from a list.
      */
     ListUnsubscribed(ListUnsubscribed),
     /**
-     * Activity feed item representing having an email sent to the contact.
+    * Activity feed item representing having an email sent to the contact.
      */
     EmailSent(EmailSent),
     /**
-     * Activity feed item representing an individual reply in a conversation.
+    * Activity feed item representing an individual reply in a conversation.
      */
     EmailConversation(EmailConversation),
     /**
-     * Activity feed item representing a note on the contact record.
+    * Activity feed item representing a note on the contact record.
      */
     Note(Note),
     /**
-     * Activity feed item indicating if a marketing permission was added or updated.
+    * Activity feed item indicating if a marketing permission was added or updated.
      */
     MarketingPermissionData(MarketingPermissionData),
     /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
+    * Activity feed item representing a time when a contact was sent a particular postcard.
      */
     PostcardSent(PostcardSent),
     /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
+    * Activity feed item to representing a contact signing up for the audience from a squatter page.
      */
     SquatterSignup(SquatterSignup),
     /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
+    * Activity feed item to representing a contact signing up for the contact through a website page.
      */
     WebsiteSignup(WebsiteSignup),
     /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
+    * Activity feed item to representing a contact signing up for the list via a landing page.
      */
     LandingPageSignup(LandingPageSignup),
     /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
+    * Activity feed item to representing a contact signing up for the list via a ecommerce store.
      */
     EcommerceSignup(EcommerceSignup),
     /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
+    * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
      */
     GenericSignup(GenericSignup),
     /**
-     * Activity feed item that represents an order.
+    * Activity feed item that represents an order.
      */
     EcommerceOrder(EcommerceOrder),
     /**
-     * Activity feed item that represents a generic event.
+    * Activity feed item that represents a generic event.
      */
     ContactActivityEvent(ContactActivityEvent),
     /**
-     * Represents when a contact completes and submits a survey
+    * Represents when a contact completes and submits a survey
      */
     SurveyResponse(SurveyResponse),
 }
@@ -18496,7 +18664,7 @@ impl ActivityOneOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberActivityEventsData {
     /**
-     * The member activity events for a given member.
+    * The member activity events for a given member.
      */
     #[serde(
         default,
@@ -18506,7 +18674,7 @@ pub struct MemberActivityEventsData {
     )]
     pub links: Vec<Links>,
     /**
-     * The member activity events for a given member.
+    * The member activity events for a given member.
      */
     #[serde(
         default,
@@ -18515,7 +18683,7 @@ pub struct MemberActivityEventsData {
     )]
     pub activity: Vec<ActivityOneOf>,
     /**
-     * The member activity events for a given member.
+    * The member activity events for a given member.
      */
     #[serde(
         default,
@@ -18524,7 +18692,7 @@ pub struct MemberActivityEventsData {
     )]
     pub email_id: String,
     /**
-     * The member activity events for a given member.
+    * The member activity events for a given member.
      */
     #[serde(
         default,
@@ -18538,7 +18706,7 @@ pub struct MemberActivityEventsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfTags {
     /**
-     * A list of tags assigned to a list member.
+    * A list of tags assigned to a list member.
      */
     #[serde(
         default,
@@ -18548,7 +18716,7 @@ pub struct CollectionOfTags {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of tags assigned to a list member.
+    * A list of tags assigned to a list member.
      */
     #[serde(
         default,
@@ -18557,7 +18725,7 @@ pub struct CollectionOfTags {
     )]
     pub tags: Vec<String>,
     /**
-     * A list of tags assigned to a list member.
+    * A list of tags assigned to a list member.
      */
     #[serde(
         default,
@@ -18570,7 +18738,8 @@ pub struct CollectionOfTags {
 /**
  * The status for the tag on the member, pass in active to add a tag or inactive to remove it.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MemberTagsTagStatus {
     #[serde(rename = "active")]
     Active,
@@ -18605,7 +18774,7 @@ impl MemberTagsTagStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberTag {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -18614,7 +18783,7 @@ pub struct MemberTag {
     )]
     pub name: String,
     /**
-     * The status for the tag on the member, pass in active to add a tag or inactive to remove it.
+    * The status for the tag on the member, pass in active to add a tag or inactive to remove it.
      */
     #[serde(default, skip_serializing_if = "MemberTagsTagStatus::is_noop")]
     pub status: MemberTagsTagStatus,
@@ -18624,7 +18793,7 @@ pub struct MemberTag {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberTags {
     /**
-     * A list of tags assigned to a list member.
+    * A list of tags assigned to a list member.
      */
     #[serde(
         default,
@@ -18632,7 +18801,7 @@ pub struct MemberTags {
     )]
     pub is_syncing: bool,
     /**
-     * A list of tags assigned to the list member.
+    * A list of tags assigned to the list member.
      */
     #[serde(
         default,
@@ -18646,7 +18815,7 @@ pub struct MemberTags {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
-     * A specific event for a contact.
+    * A specific event for a contact.
      */
     #[serde(
         default,
@@ -18655,7 +18824,7 @@ pub struct Event {
     )]
     pub name: String,
     /**
-     * A specific event for a contact.
+    * A specific event for a contact.
      */
     #[serde(
         default,
@@ -18664,7 +18833,7 @@ pub struct Event {
     )]
     pub occurred_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A specific event for a contact.
+    * A specific event for a contact.
      */
     #[serde(
         default,
@@ -18678,7 +18847,7 @@ pub struct Event {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfEvents {
     /**
-     * A collection of events for a given contact
+    * A collection of events for a given contact
      */
     #[serde(
         default,
@@ -18688,7 +18857,7 @@ pub struct CollectionOfEvents {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of events for a given contact
+    * A collection of events for a given contact
      */
     #[serde(
         default,
@@ -18697,7 +18866,7 @@ pub struct CollectionOfEvents {
     )]
     pub events: Vec<Event>,
     /**
-     * A collection of events for a given contact
+    * A collection of events for a given contact
      */
     #[serde(
         default,
@@ -18711,7 +18880,7 @@ pub struct CollectionOfEvents {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventsData {
     /**
-     * A new event for a specific list member
+    * A new event for a specific list member
      */
     #[serde(
         default,
@@ -18719,7 +18888,7 @@ pub struct EventsData {
     )]
     pub is_syncing: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -18728,7 +18897,7 @@ pub struct EventsData {
     )]
     pub name: String,
     /**
-     * A new event for a specific list member
+    * A new event for a specific list member
      */
     #[serde(
         default,
@@ -18737,7 +18906,7 @@ pub struct EventsData {
     )]
     pub occurred_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A new event for a specific list member
+    * A new event for a specific list member
      */
     #[serde(
         default,
@@ -18751,7 +18920,7 @@ pub struct EventsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Goal {
     /**
-     * A single instance of a goal activity.
+    * A single instance of a goal activity.
      */
     #[serde(
         default,
@@ -18760,7 +18929,7 @@ pub struct Goal {
     )]
     pub data: String,
     /**
-     * A single instance of a goal activity.
+    * A single instance of a goal activity.
      */
     #[serde(
         default,
@@ -18769,7 +18938,7 @@ pub struct Goal {
     )]
     pub event: String,
     /**
-     * A single instance of a goal activity.
+    * A single instance of a goal activity.
      */
     #[serde(
         default,
@@ -18778,7 +18947,7 @@ pub struct Goal {
     )]
     pub goal_id: i64,
     /**
-     * A single instance of a goal activity.
+    * A single instance of a goal activity.
      */
     #[serde(
         default,
@@ -18792,7 +18961,7 @@ pub struct Goal {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfMemberActivityEvents {
     /**
-     * The last 50 Goal events for a member on a specific list.
+    * The last 50 Goal events for a member on a specific list.
      */
     #[serde(
         default,
@@ -18802,7 +18971,7 @@ pub struct CollectionOfMemberActivityEvents {
     )]
     pub links: Vec<Links>,
     /**
-     * The last 50 Goal events for a member on a specific list.
+    * The last 50 Goal events for a member on a specific list.
      */
     #[serde(
         default,
@@ -18811,7 +18980,7 @@ pub struct CollectionOfMemberActivityEvents {
     )]
     pub email_id: String,
     /**
-     * The last 50 Goal events for a member on a specific list.
+    * The last 50 Goal events for a member on a specific list.
      */
     #[serde(
         default,
@@ -18820,7 +18989,7 @@ pub struct CollectionOfMemberActivityEvents {
     )]
     pub goals: Vec<Goal>,
     /**
-     * The last 50 Goal events for a member on a specific list.
+    * The last 50 Goal events for a member on a specific list.
      */
     #[serde(
         default,
@@ -18829,7 +18998,7 @@ pub struct CollectionOfMemberActivityEvents {
     )]
     pub list_id: String,
     /**
-     * The last 50 Goal events for a member on a specific list.
+    * The last 50 Goal events for a member on a specific list.
      */
     #[serde(
         default,
@@ -18842,7 +19011,8 @@ pub struct CollectionOfMemberActivityEvents {
 /**
  * Returns notes sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetListsMembersNotesSortField {
     #[serde(rename = "created_at")]
     CreatedAt,
@@ -18880,7 +19050,7 @@ impl GetListsMembersNotesSortField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfNotesMember {
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18890,7 +19060,7 @@ pub struct CollectionOfNotesMember {
     )]
     pub links: Vec<Links>,
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18899,7 +19069,7 @@ pub struct CollectionOfNotesMember {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18908,7 +19078,7 @@ pub struct CollectionOfNotesMember {
     )]
     pub created_by: String,
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18917,7 +19087,7 @@ pub struct CollectionOfNotesMember {
     )]
     pub email_id: String,
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18926,7 +19096,7 @@ pub struct CollectionOfNotesMember {
     )]
     pub id: i64,
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18935,7 +19105,7 @@ pub struct CollectionOfNotesMember {
     )]
     pub list_id: String,
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18944,7 +19114,7 @@ pub struct CollectionOfNotesMember {
     )]
     pub note: String,
     /**
-     * A specific note for a specific member.
+    * A specific note for a specific member.
      */
     #[serde(
         default,
@@ -18958,7 +19128,7 @@ pub struct CollectionOfNotesMember {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfNotes {
     /**
-     * The last 10 notes for a specific list member, based on date created.
+    * The last 10 notes for a specific list member, based on date created.
      */
     #[serde(
         default,
@@ -18968,7 +19138,7 @@ pub struct CollectionOfNotes {
     )]
     pub links: Vec<Links>,
     /**
-     * The last 10 notes for a specific list member, based on date created.
+    * The last 10 notes for a specific list member, based on date created.
      */
     #[serde(
         default,
@@ -18977,7 +19147,7 @@ pub struct CollectionOfNotes {
     )]
     pub email_id: String,
     /**
-     * The last 10 notes for a specific list member, based on date created.
+    * The last 10 notes for a specific list member, based on date created.
      */
     #[serde(
         default,
@@ -18986,7 +19156,7 @@ pub struct CollectionOfNotes {
     )]
     pub list_id: String,
     /**
-     * The last 10 notes for a specific list member, based on date created.
+    * The last 10 notes for a specific list member, based on date created.
      */
     #[serde(
         default,
@@ -18995,7 +19165,7 @@ pub struct CollectionOfNotes {
     )]
     pub notes: Vec<CollectionOfNotesMember>,
     /**
-     * The last 10 notes for a specific list member, based on date created.
+    * The last 10 notes for a specific list member, based on date created.
      */
     #[serde(
         default,
@@ -19008,7 +19178,8 @@ pub struct CollectionOfNotes {
 /**
  * The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MergeFieldType {
     #[serde(rename = "address")]
     Address,
@@ -19070,7 +19241,7 @@ impl MergeFieldType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldOptions {
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19079,7 +19250,7 @@ pub struct MergeFieldOptions {
     )]
     pub choices: Vec<String>,
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19088,7 +19259,7 @@ pub struct MergeFieldOptions {
     )]
     pub date_format: Option<chrono::NaiveDate>,
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19097,7 +19268,7 @@ pub struct MergeFieldOptions {
     )]
     pub default_country: i64,
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19106,7 +19277,7 @@ pub struct MergeFieldOptions {
     )]
     pub phone_format: String,
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19120,7 +19291,7 @@ pub struct MergeFieldOptions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeField {
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19130,7 +19301,7 @@ pub struct MergeField {
     )]
     pub links: Vec<Links>,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19139,7 +19310,7 @@ pub struct MergeField {
     )]
     pub default_value: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19148,7 +19319,7 @@ pub struct MergeField {
     )]
     pub display_order: i64,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19157,7 +19328,7 @@ pub struct MergeField {
     )]
     pub help_text: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19166,7 +19337,7 @@ pub struct MergeField {
     )]
     pub list_id: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19175,7 +19346,7 @@ pub struct MergeField {
     )]
     pub merge_id: i64,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19184,12 +19355,12 @@ pub struct MergeField {
     )]
     pub name: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<MergeFieldOptions>,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19197,7 +19368,7 @@ pub struct MergeField {
     )]
     pub public: bool,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19205,7 +19376,7 @@ pub struct MergeField {
     )]
     pub required: bool,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19214,7 +19385,7 @@ pub struct MergeField {
     )]
     pub tag: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<MergeFieldType>,
@@ -19224,7 +19395,7 @@ pub struct MergeField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfMergeFields {
     /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
+    * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
      */
     #[serde(
         default,
@@ -19234,7 +19405,7 @@ pub struct CollectionOfMergeFields {
     )]
     pub links: Vec<Links>,
     /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
+    * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
      */
     #[serde(
         default,
@@ -19243,7 +19414,7 @@ pub struct CollectionOfMergeFields {
     )]
     pub list_id: String,
     /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
+    * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
      */
     #[serde(
         default,
@@ -19252,7 +19423,7 @@ pub struct CollectionOfMergeFields {
     )]
     pub merge_fields: Vec<MergeField>,
     /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
+    * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
      */
     #[serde(
         default,
@@ -19266,7 +19437,7 @@ pub struct CollectionOfMergeFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldData {
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19275,7 +19446,7 @@ pub struct MergeFieldData {
     )]
     pub default_value: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19284,7 +19455,7 @@ pub struct MergeFieldData {
     )]
     pub display_order: i64,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19293,7 +19464,7 @@ pub struct MergeFieldData {
     )]
     pub help_text: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -19302,12 +19473,12 @@ pub struct MergeFieldData {
     )]
     pub name: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<MergeFieldOptions>,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19315,7 +19486,7 @@ pub struct MergeFieldData {
     )]
     pub public: bool,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19323,7 +19494,7 @@ pub struct MergeFieldData {
     )]
     pub required: bool,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19332,7 +19503,7 @@ pub struct MergeFieldData {
     )]
     pub tag: String,
     /**
-     * The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
+    * The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
      */
     #[serde(
         default,
@@ -19346,7 +19517,7 @@ pub struct MergeFieldData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldOptionsData {
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19355,7 +19526,7 @@ pub struct MergeFieldOptionsData {
     )]
     pub choices: Vec<String>,
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19364,7 +19535,7 @@ pub struct MergeFieldOptionsData {
     )]
     pub date_format: Option<chrono::NaiveDate>,
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19373,7 +19544,7 @@ pub struct MergeFieldOptionsData {
     )]
     pub default_country: i64,
     /**
-     * Extra options for some merge field types.
+    * Extra options for some merge field types.
      */
     #[serde(
         default,
@@ -19387,7 +19558,7 @@ pub struct MergeFieldOptionsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldDataType {
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19396,7 +19567,7 @@ pub struct MergeFieldDataType {
     )]
     pub default_value: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19405,7 +19576,7 @@ pub struct MergeFieldDataType {
     )]
     pub display_order: i64,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19414,7 +19585,7 @@ pub struct MergeFieldDataType {
     )]
     pub help_text: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -19423,12 +19594,12 @@ pub struct MergeFieldDataType {
     )]
     pub name: String,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<MergeFieldOptionsData>,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19436,7 +19607,7 @@ pub struct MergeFieldDataType {
     )]
     pub public: bool,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19444,7 +19615,7 @@ pub struct MergeFieldDataType {
     )]
     pub required: bool,
     /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
+    * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
     #[serde(
         default,
@@ -19458,7 +19629,7 @@ pub struct MergeFieldDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooksEvents {
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19466,7 +19637,7 @@ pub struct ListWebhooksEvents {
     )]
     pub campaign: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19474,7 +19645,7 @@ pub struct ListWebhooksEvents {
     )]
     pub cleaned: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19482,7 +19653,7 @@ pub struct ListWebhooksEvents {
     )]
     pub profile: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19490,7 +19661,7 @@ pub struct ListWebhooksEvents {
     )]
     pub subscribe: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19498,7 +19669,7 @@ pub struct ListWebhooksEvents {
     )]
     pub unsubscribe: bool,
     /**
-     * The events that can trigger the webhook and whether they are enabled.
+    * The events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19511,7 +19682,7 @@ pub struct ListWebhooksEvents {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooksSources {
     /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
+    * The possible sources of any events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19519,7 +19690,7 @@ pub struct ListWebhooksSources {
     )]
     pub admin: bool,
     /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
+    * The possible sources of any events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19527,7 +19698,7 @@ pub struct ListWebhooksSources {
     )]
     pub api: bool,
     /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
+    * The possible sources of any events that can trigger the webhook and whether they are enabled.
      */
     #[serde(
         default,
@@ -19540,7 +19711,7 @@ pub struct ListWebhooksSources {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooks {
     /**
-     * Webhook configured for the given list.
+    * Webhook configured for the given list.
      */
     #[serde(
         default,
@@ -19550,12 +19721,12 @@ pub struct ListWebhooks {
     )]
     pub links: Vec<Links>,
     /**
-     * Webhook configured for the given list.
+    * Webhook configured for the given list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub events: Option<ListWebhooksEvents>,
     /**
-     * Webhook configured for the given list.
+    * Webhook configured for the given list.
      */
     #[serde(
         default,
@@ -19564,7 +19735,7 @@ pub struct ListWebhooks {
     )]
     pub id: String,
     /**
-     * Webhook configured for the given list.
+    * Webhook configured for the given list.
      */
     #[serde(
         default,
@@ -19573,12 +19744,12 @@ pub struct ListWebhooks {
     )]
     pub list_id: String,
     /**
-     * Webhook configured for the given list.
+    * Webhook configured for the given list.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sources: Option<ListWebhooksSources>,
     /**
-     * Webhook configured for the given list.
+    * Webhook configured for the given list.
      */
     #[serde(
         default,
@@ -19592,7 +19763,7 @@ pub struct ListWebhooks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooksData {
     /**
-     * Manage webhooks for a specific list.
+    * Manage webhooks for a specific list.
      */
     #[serde(
         default,
@@ -19602,7 +19773,7 @@ pub struct ListWebhooksData {
     )]
     pub links: Vec<Links>,
     /**
-     * Manage webhooks for a specific list.
+    * Manage webhooks for a specific list.
      */
     #[serde(
         default,
@@ -19611,7 +19782,7 @@ pub struct ListWebhooksData {
     )]
     pub list_id: String,
     /**
-     * Manage webhooks for a specific list.
+    * Manage webhooks for a specific list.
      */
     #[serde(
         default,
@@ -19620,7 +19791,7 @@ pub struct ListWebhooksData {
     )]
     pub total_items: i64,
     /**
-     * Manage webhooks for a specific list.
+    * Manage webhooks for a specific list.
      */
     #[serde(
         default,
@@ -19633,7 +19804,8 @@ pub struct ListWebhooksData {
 /**
  * Image alignment.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ImageAlign {
     #[serde(rename = "center")]
     Center,
@@ -19673,7 +19845,8 @@ impl ImageAlign {
 /**
  * Image border style.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ImageBorderStyle {
     #[serde(rename = "dashed")]
     Dashed,
@@ -19728,7 +19901,8 @@ impl ImageBorderStyle {
 /**
  * Image link target.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ImageTarget {
     #[serde(rename = "_blank")]
     Blank,
@@ -19763,12 +19937,12 @@ impl ImageTarget {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Header {
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image_align: Option<ImageAlign>,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19777,7 +19951,7 @@ pub struct Header {
     )]
     pub image_alt: String,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19786,12 +19960,12 @@ pub struct Header {
     )]
     pub image_border_color: String,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image_border_style: Option<ImageBorderStyle>,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19800,7 +19974,7 @@ pub struct Header {
     )]
     pub image_border_width: String,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19809,7 +19983,7 @@ pub struct Header {
     )]
     pub image_height: String,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19818,12 +19992,12 @@ pub struct Header {
     )]
     pub image_link: String,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image_target: Option<ImageTarget>,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19832,7 +20006,7 @@ pub struct Header {
     )]
     pub image_url: String,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19841,7 +20015,7 @@ pub struct Header {
     )]
     pub image_width: String,
     /**
-     * Options for customizing your signup form header.
+    * Options for customizing your signup form header.
      */
     #[serde(
         default,
@@ -19854,7 +20028,8 @@ pub struct Header {
 /**
  * The content section name.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Section {
     #[serde(rename = "signup_message")]
     SignupMessage,
@@ -19892,12 +20067,12 @@ impl Section {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contents {
     /**
-     * Collection of Content for List Signup Forms.
+    * Collection of Content for List Signup Forms.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub section: Option<Section>,
     /**
-     * Collection of Content for List Signup Forms.
+    * Collection of Content for List Signup Forms.
      */
     #[serde(
         default,
@@ -19910,7 +20085,8 @@ pub struct Contents {
 /**
  * A string that identifies the element selector.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Selector {
     #[serde(rename = "body_background")]
     BodyBackground,
@@ -19981,7 +20157,7 @@ impl Selector {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AnOptionSignupFormStyles {
     /**
-     * An option for Signup Form Styles.
+    * An option for Signup Form Styles.
      */
     #[serde(
         default,
@@ -19990,7 +20166,7 @@ pub struct AnOptionSignupFormStyles {
     )]
     pub property: String,
     /**
-     * An option for Signup Form Styles.
+    * An option for Signup Form Styles.
      */
     #[serde(
         default,
@@ -20004,7 +20180,7 @@ pub struct AnOptionSignupFormStyles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Styles {
     /**
-     * Collection of Element style for List Signup Forms.
+    * Collection of Element style for List Signup Forms.
      */
     #[serde(
         default,
@@ -20013,7 +20189,7 @@ pub struct Styles {
     )]
     pub options: Vec<AnOptionSignupFormStyles>,
     /**
-     * Collection of Element style for List Signup Forms.
+    * Collection of Element style for List Signup Forms.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub selector: Option<Selector>,
@@ -20023,7 +20199,7 @@ pub struct Styles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignupForm {
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(
         default,
@@ -20033,7 +20209,7 @@ pub struct SignupForm {
     )]
     pub links: Vec<Links>,
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(
         default,
@@ -20042,12 +20218,12 @@ pub struct SignupForm {
     )]
     pub contents: Vec<Contents>,
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub header: Option<Header>,
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(
         default,
@@ -20056,7 +20232,7 @@ pub struct SignupForm {
     )]
     pub list_id: String,
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(
         default,
@@ -20065,7 +20241,7 @@ pub struct SignupForm {
     )]
     pub signup_form_url: String,
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(
         default,
@@ -20079,7 +20255,7 @@ pub struct SignupForm {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSignupForms {
     /**
-     * List Signup Forms.
+    * List Signup Forms.
      */
     #[serde(
         default,
@@ -20089,7 +20265,7 @@ pub struct ListSignupForms {
     )]
     pub links: Vec<Links>,
     /**
-     * List Signup Forms.
+    * List Signup Forms.
      */
     #[serde(
         default,
@@ -20098,7 +20274,7 @@ pub struct ListSignupForms {
     )]
     pub list_id: String,
     /**
-     * List Signup Forms.
+    * List Signup Forms.
      */
     #[serde(
         default,
@@ -20107,7 +20283,7 @@ pub struct ListSignupForms {
     )]
     pub signup_forms: Vec<SignupForm>,
     /**
-     * List Signup Forms.
+    * List Signup Forms.
      */
     #[serde(
         default,
@@ -20121,7 +20297,7 @@ pub struct ListSignupForms {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignupFormData {
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(
         default,
@@ -20130,12 +20306,12 @@ pub struct SignupFormData {
     )]
     pub contents: Vec<Contents>,
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub header: Option<Header>,
     /**
-     * List signup form.
+    * List signup form.
      */
     #[serde(
         default,
@@ -20177,7 +20353,7 @@ pub struct Locations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListLocations {
     /**
-     * A summary of List's locations.
+    * A summary of List's locations.
      */
     #[serde(
         default,
@@ -20187,7 +20363,7 @@ pub struct ListLocations {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of List's locations.
+    * A summary of List's locations.
      */
     #[serde(
         default,
@@ -20196,7 +20372,7 @@ pub struct ListLocations {
     )]
     pub list_id: String,
     /**
-     * A summary of List's locations.
+    * A summary of List's locations.
      */
     #[serde(
         default,
@@ -20205,7 +20381,7 @@ pub struct ListLocations {
     )]
     pub locations: Vec<Locations>,
     /**
-     * A summary of List's locations.
+    * A summary of List's locations.
      */
     #[serde(
         default,
@@ -20218,7 +20394,8 @@ pub struct ListLocations {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetAllLandingPagesSortField {
     #[serde(rename = "created_at")]
     CreatedAt,
@@ -20252,7 +20429,8 @@ impl GetAllLandingPagesSortField {
 /**
  * The status of this landing page.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LandingPageStatus {
     #[serde(rename = "draft")]
     Draft,
@@ -20290,7 +20468,7 @@ impl LandingPageStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackingSettings {
     /**
-     * The tracking settings applied to this landing page.
+    * The tracking settings applied to this landing page.
      */
     #[serde(
         default,
@@ -20298,7 +20476,7 @@ pub struct TrackingSettings {
     )]
     pub enable_restricted_data_processing: bool,
     /**
-     * The tracking settings applied to this landing page.
+    * The tracking settings applied to this landing page.
      */
     #[serde(
         default,
@@ -20311,7 +20489,7 @@ pub struct TrackingSettings {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPage {
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20321,7 +20499,7 @@ pub struct LandingPage {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20330,7 +20508,7 @@ pub struct LandingPage {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20339,7 +20517,7 @@ pub struct LandingPage {
     )]
     pub created_by_source: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20348,7 +20526,7 @@ pub struct LandingPage {
     )]
     pub description: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20357,7 +20535,7 @@ pub struct LandingPage {
     )]
     pub id: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20366,7 +20544,7 @@ pub struct LandingPage {
     )]
     pub list_id: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20375,7 +20553,7 @@ pub struct LandingPage {
     )]
     pub name: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20384,12 +20562,12 @@ pub struct LandingPage {
     )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<LandingPageStatus>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20398,7 +20576,7 @@ pub struct LandingPage {
     )]
     pub store_id: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20407,7 +20585,7 @@ pub struct LandingPage {
     )]
     pub template_id: i64,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20416,12 +20594,12 @@ pub struct LandingPage {
     )]
     pub title: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<TrackingSettings>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20430,7 +20608,7 @@ pub struct LandingPage {
     )]
     pub unpublished_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20439,7 +20617,7 @@ pub struct LandingPage {
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20448,7 +20626,7 @@ pub struct LandingPage {
     )]
     pub url: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -20462,7 +20640,7 @@ pub struct LandingPage {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAllLandingPagesResponse {
     /**
-     * A collection of landing pages.
+    * A collection of landing pages.
      */
     #[serde(
         default,
@@ -20472,7 +20650,7 @@ pub struct GetAllLandingPagesResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of landing pages.
+    * A collection of landing pages.
      */
     #[serde(
         default,
@@ -20481,7 +20659,7 @@ pub struct GetAllLandingPagesResponse {
     )]
     pub landing_pages: Vec<LandingPage>,
     /**
-     * A collection of landing pages.
+    * A collection of landing pages.
      */
     #[serde(
         default,
@@ -20494,7 +20672,8 @@ pub struct GetAllLandingPagesResponse {
 /**
  * The type of template the landing page has.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LandingPageTemplateType {
     #[serde(rename = "product")]
     Product,
@@ -20529,7 +20708,7 @@ impl LandingPageTemplateType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageData {
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20538,7 +20717,7 @@ pub struct LandingPageData {
     )]
     pub description: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20547,7 +20726,7 @@ pub struct LandingPageData {
     )]
     pub list_id: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20556,7 +20735,7 @@ pub struct LandingPageData {
     )]
     pub name: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20565,7 +20744,7 @@ pub struct LandingPageData {
     )]
     pub store_id: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20574,7 +20753,7 @@ pub struct LandingPageData {
     )]
     pub template_id: i64,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20583,12 +20762,12 @@ pub struct LandingPageData {
     )]
     pub title: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<TrackingSettings>,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<LandingPageTemplateType>,
@@ -20598,7 +20777,7 @@ pub struct LandingPageData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageDataType {
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20607,7 +20786,7 @@ pub struct LandingPageDataType {
     )]
     pub description: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20616,7 +20795,7 @@ pub struct LandingPageDataType {
     )]
     pub list_id: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20625,7 +20804,7 @@ pub struct LandingPageDataType {
     )]
     pub name: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20634,7 +20813,7 @@ pub struct LandingPageDataType {
     )]
     pub store_id: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(
         default,
@@ -20643,7 +20822,7 @@ pub struct LandingPageDataType {
     )]
     pub title: String,
     /**
-     * A summary of an individual page's properties.
+    * A summary of an individual page's properties.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<TrackingSettings>,
@@ -20653,7 +20832,7 @@ pub struct LandingPageDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageContent {
     /**
-     * The HTML content for a landing page.
+    * The HTML content for a landing page.
      */
     #[serde(
         default,
@@ -20663,7 +20842,7 @@ pub struct LandingPageContent {
     )]
     pub links: Vec<Links>,
     /**
-     * The HTML content for a landing page.
+    * The HTML content for a landing page.
      */
     #[serde(
         default,
@@ -20672,7 +20851,7 @@ pub struct LandingPageContent {
     )]
     pub html: String,
     /**
-     * The HTML content for a landing page.
+    * The HTML content for a landing page.
      */
     #[serde(
         default,
@@ -20686,7 +20865,7 @@ pub struct LandingPageContent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Bounces {
     /**
-     * An object describing the bounce summary for the campaign.
+    * An object describing the bounce summary for the campaign.
      */
     #[serde(
         default,
@@ -20695,7 +20874,7 @@ pub struct Bounces {
     )]
     pub hard_bounces: i64,
     /**
-     * An object describing the bounce summary for the campaign.
+    * An object describing the bounce summary for the campaign.
      */
     #[serde(
         default,
@@ -20704,7 +20883,7 @@ pub struct Bounces {
     )]
     pub soft_bounces: i64,
     /**
-     * An object describing the bounce summary for the campaign.
+    * An object describing the bounce summary for the campaign.
      */
     #[serde(
         default,
@@ -20718,7 +20897,7 @@ pub struct Bounces {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Forwards {
     /**
-     * An object describing the forwards and forward activity for the campaign.
+    * An object describing the forwards and forward activity for the campaign.
      */
     #[serde(
         default,
@@ -20727,7 +20906,7 @@ pub struct Forwards {
     )]
     pub forwards_count: i64,
     /**
-     * An object describing the forwards and forward activity for the campaign.
+    * An object describing the forwards and forward activity for the campaign.
      */
     #[serde(
         default,
@@ -20741,7 +20920,7 @@ pub struct Forwards {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Opens {
     /**
-     * An object describing the open activity for the campaign.
+    * An object describing the open activity for the campaign.
      */
     #[serde(
         default,
@@ -20750,7 +20929,7 @@ pub struct Opens {
     )]
     pub last_open: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * An object describing the open activity for the campaign.
+    * An object describing the open activity for the campaign.
      */
     #[serde(
         default,
@@ -20759,7 +20938,7 @@ pub struct Opens {
     )]
     pub open_rate: f64,
     /**
-     * An object describing the open activity for the campaign.
+    * An object describing the open activity for the campaign.
      */
     #[serde(
         default,
@@ -20768,7 +20947,7 @@ pub struct Opens {
     )]
     pub opens_total: i64,
     /**
-     * An object describing the open activity for the campaign.
+    * An object describing the open activity for the campaign.
      */
     #[serde(
         default,
@@ -20782,7 +20961,7 @@ pub struct Opens {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Clicks {
     /**
-     * An object describing the click activity for the campaign.
+    * An object describing the click activity for the campaign.
      */
     #[serde(
         default,
@@ -20791,7 +20970,7 @@ pub struct Clicks {
     )]
     pub click_rate: f64,
     /**
-     * An object describing the click activity for the campaign.
+    * An object describing the click activity for the campaign.
      */
     #[serde(
         default,
@@ -20800,7 +20979,7 @@ pub struct Clicks {
     )]
     pub clicks_total: i64,
     /**
-     * An object describing the click activity for the campaign.
+    * An object describing the click activity for the campaign.
      */
     #[serde(
         default,
@@ -20809,7 +20988,7 @@ pub struct Clicks {
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * An object describing the click activity for the campaign.
+    * An object describing the click activity for the campaign.
      */
     #[serde(
         default,
@@ -20818,7 +20997,7 @@ pub struct Clicks {
     )]
     pub unique_clicks: i64,
     /**
-     * An object describing the click activity for the campaign.
+    * An object describing the click activity for the campaign.
      */
     #[serde(
         default,
@@ -20832,7 +21011,7 @@ pub struct Clicks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookLikes {
     /**
-     * An object describing campaign engagement on Facebook.
+    * An object describing campaign engagement on Facebook.
      */
     #[serde(
         default,
@@ -20841,7 +21020,7 @@ pub struct FacebookLikes {
     )]
     pub facebook_likes: i64,
     /**
-     * An object describing campaign engagement on Facebook.
+    * An object describing campaign engagement on Facebook.
      */
     #[serde(
         default,
@@ -20850,7 +21029,7 @@ pub struct FacebookLikes {
     )]
     pub recipient_likes: i64,
     /**
-     * An object describing campaign engagement on Facebook.
+    * An object describing campaign engagement on Facebook.
      */
     #[serde(
         default,
@@ -20864,7 +21043,7 @@ pub struct FacebookLikes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportsIndustryStats {
     /**
-     * The average campaign statistics for your industry.
+    * The average campaign statistics for your industry.
      */
     #[serde(
         default,
@@ -20873,7 +21052,7 @@ pub struct CampaignReportsIndustryStats {
     )]
     pub abuse_rate: f64,
     /**
-     * The average campaign statistics for your industry.
+    * The average campaign statistics for your industry.
      */
     #[serde(
         default,
@@ -20882,7 +21061,7 @@ pub struct CampaignReportsIndustryStats {
     )]
     pub bounce_rate: f64,
     /**
-     * The average campaign statistics for your industry.
+    * The average campaign statistics for your industry.
      */
     #[serde(
         default,
@@ -20891,7 +21070,7 @@ pub struct CampaignReportsIndustryStats {
     )]
     pub click_rate: f64,
     /**
-     * The average campaign statistics for your industry.
+    * The average campaign statistics for your industry.
      */
     #[serde(
         default,
@@ -20900,7 +21079,7 @@ pub struct CampaignReportsIndustryStats {
     )]
     pub open_rate: f64,
     /**
-     * The average campaign statistics for your industry.
+    * The average campaign statistics for your industry.
      */
     #[serde(
         default,
@@ -20910,7 +21089,7 @@ pub struct CampaignReportsIndustryStats {
     )]
     pub type_: String,
     /**
-     * The average campaign statistics for your industry.
+    * The average campaign statistics for your industry.
      */
     #[serde(
         default,
@@ -20919,7 +21098,7 @@ pub struct CampaignReportsIndustryStats {
     )]
     pub unopen_rate: f64,
     /**
-     * The average campaign statistics for your industry.
+    * The average campaign statistics for your industry.
      */
     #[serde(
         default,
@@ -20933,7 +21112,7 @@ pub struct CampaignReportsIndustryStats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListStats {
     /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
+    * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
      */
     #[serde(
         default,
@@ -20942,7 +21121,7 @@ pub struct ListStats {
     )]
     pub click_rate: f64,
     /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
+    * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
      */
     #[serde(
         default,
@@ -20951,7 +21130,7 @@ pub struct ListStats {
     )]
     pub open_rate: f64,
     /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
+    * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
      */
     #[serde(
         default,
@@ -20960,7 +21139,7 @@ pub struct ListStats {
     )]
     pub sub_rate: f64,
     /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
+    * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
      */
     #[serde(
         default,
@@ -20974,7 +21153,7 @@ pub struct ListStats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct A {
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -20983,7 +21162,7 @@ pub struct A {
     )]
     pub abuse_reports: i64,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -20992,7 +21171,7 @@ pub struct A {
     )]
     pub bounces: i64,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -21001,7 +21180,7 @@ pub struct A {
     )]
     pub forwards: i64,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -21010,7 +21189,7 @@ pub struct A {
     )]
     pub forwards_opens: i64,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -21019,7 +21198,7 @@ pub struct A {
     )]
     pub last_open: String,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -21028,7 +21207,7 @@ pub struct A {
     )]
     pub opens: i64,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -21037,7 +21216,7 @@ pub struct A {
     )]
     pub recipient_clicks: i64,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -21046,7 +21225,7 @@ pub struct A {
     )]
     pub unique_opens: i64,
     /**
-     * Stats for Campaign A.
+    * Stats for Campaign A.
      */
     #[serde(
         default,
@@ -21060,7 +21239,7 @@ pub struct A {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct B {
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21069,7 +21248,7 @@ pub struct B {
     )]
     pub abuse_reports: i64,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21078,7 +21257,7 @@ pub struct B {
     )]
     pub bounces: i64,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21087,7 +21266,7 @@ pub struct B {
     )]
     pub forwards: i64,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21096,7 +21275,7 @@ pub struct B {
     )]
     pub forwards_opens: i64,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21105,7 +21284,7 @@ pub struct B {
     )]
     pub last_open: String,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21114,7 +21293,7 @@ pub struct B {
     )]
     pub opens: i64,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21123,7 +21302,7 @@ pub struct B {
     )]
     pub recipient_clicks: i64,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21132,7 +21311,7 @@ pub struct B {
     )]
     pub unique_opens: i64,
     /**
-     * Stats for Campaign B.
+    * Stats for Campaign B.
      */
     #[serde(
         default,
@@ -21146,12 +21325,12 @@ pub struct B {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbSplit {
     /**
-     * General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
+    * General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub a: Option<A>,
     /**
-     * General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
+    * General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub b: Option<B>,
@@ -21160,7 +21339,7 @@ pub struct AbSplit {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Timewarp {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21169,7 +21348,7 @@ pub struct Timewarp {
     )]
     pub bounces: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21178,7 +21357,7 @@ pub struct Timewarp {
     )]
     pub clicks: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21187,7 +21366,7 @@ pub struct Timewarp {
     )]
     pub gmt_offset: i64,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -21196,7 +21375,7 @@ pub struct Timewarp {
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -21205,7 +21384,7 @@ pub struct Timewarp {
     )]
     pub last_open: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21214,7 +21393,7 @@ pub struct Timewarp {
     )]
     pub opens: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21223,7 +21402,7 @@ pub struct Timewarp {
     )]
     pub unique_clicks: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21236,7 +21415,7 @@ pub struct Timewarp {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Timeseries {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21245,7 +21424,7 @@ pub struct Timeseries {
     )]
     pub emails_sent: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21254,7 +21433,7 @@ pub struct Timeseries {
     )]
     pub recipients_clicks: i64,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -21263,7 +21442,7 @@ pub struct Timeseries {
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -21277,7 +21456,7 @@ pub struct Timeseries {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShareReport {
     /**
-     * The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
+    * The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
      */
     #[serde(
         default,
@@ -21286,7 +21465,7 @@ pub struct ShareReport {
     )]
     pub share_password: String,
     /**
-     * The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
+    * The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
      */
     #[serde(
         default,
@@ -21300,7 +21479,7 @@ pub struct ShareReport {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceReport {
     /**
-     * E-Commerce stats for a campaign.
+    * E-Commerce stats for a campaign.
      */
     #[serde(
         default,
@@ -21309,7 +21488,7 @@ pub struct ECommerceReport {
     )]
     pub currency_code: String,
     /**
-     * E-Commerce stats for a campaign.
+    * E-Commerce stats for a campaign.
      */
     #[serde(
         default,
@@ -21318,7 +21497,7 @@ pub struct ECommerceReport {
     )]
     pub total_orders: i64,
     /**
-     * E-Commerce stats for a campaign.
+    * E-Commerce stats for a campaign.
      */
     #[serde(
         default,
@@ -21327,7 +21506,7 @@ pub struct ECommerceReport {
     )]
     pub total_revenue: f64,
     /**
-     * E-Commerce stats for a campaign.
+    * E-Commerce stats for a campaign.
      */
     #[serde(
         default,
@@ -21341,7 +21520,7 @@ pub struct ECommerceReport {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reports {
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21351,12 +21530,12 @@ pub struct Reports {
     )]
     pub links: Vec<Links>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split: Option<AbSplit>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21365,12 +21544,12 @@ pub struct Reports {
     )]
     pub abuse_reports: i64,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bounces: Option<Bounces>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21379,22 +21558,22 @@ pub struct Reports {
     )]
     pub campaign_title: String,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub clicks: Option<Clicks>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivery_status: Option<DeliveryStatus>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<ECommerceReport>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21403,17 +21582,17 @@ pub struct Reports {
     )]
     pub emails_sent: i64,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub facebook_likes: Option<FacebookLikes>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub forwards: Option<Forwards>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21422,12 +21601,12 @@ pub struct Reports {
     )]
     pub id: String,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub industry_stats: Option<CampaignReportsIndustryStats>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21436,7 +21615,7 @@ pub struct Reports {
     )]
     pub list_id: String,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21444,7 +21623,7 @@ pub struct Reports {
     )]
     pub list_is_active: bool,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21453,17 +21632,17 @@ pub struct Reports {
     )]
     pub list_name: String,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub list_stats: Option<ListStats>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub opens: Option<Opens>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21472,7 +21651,7 @@ pub struct Reports {
     )]
     pub preview_text: String,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21481,7 +21660,7 @@ pub struct Reports {
     )]
     pub rss_last_send: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21490,12 +21669,12 @@ pub struct Reports {
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub share_report: Option<ShareReport>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21504,7 +21683,7 @@ pub struct Reports {
     )]
     pub subject_line: String,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21513,7 +21692,7 @@ pub struct Reports {
     )]
     pub timeseries: Vec<Timeseries>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21522,7 +21701,7 @@ pub struct Reports {
     )]
     pub timewarp: Vec<Timewarp>,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21532,7 +21711,7 @@ pub struct Reports {
     )]
     pub type_: String,
     /**
-     * Report details about a sent campaign.
+    * Report details about a sent campaign.
      */
     #[serde(
         default,
@@ -21546,7 +21725,7 @@ pub struct Reports {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportsData {
     /**
-     * A list of reports containing campaigns marked as Sent.
+    * A list of reports containing campaigns marked as Sent.
      */
     #[serde(
         default,
@@ -21556,7 +21735,7 @@ pub struct CampaignReportsData {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of reports containing campaigns marked as Sent.
+    * A list of reports containing campaigns marked as Sent.
      */
     #[serde(
         default,
@@ -21565,7 +21744,7 @@ pub struct CampaignReportsData {
     )]
     pub reports: Vec<Reports>,
     /**
-     * A list of reports containing campaigns marked as Sent.
+    * A list of reports containing campaigns marked as Sent.
      */
     #[serde(
         default,
@@ -21579,7 +21758,7 @@ pub struct CampaignReportsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseComplaint {
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21589,7 +21768,7 @@ pub struct AbuseComplaint {
     )]
     pub links: Vec<Links>,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21598,7 +21777,7 @@ pub struct AbuseComplaint {
     )]
     pub campaign_id: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21607,7 +21786,7 @@ pub struct AbuseComplaint {
     )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21616,7 +21795,7 @@ pub struct AbuseComplaint {
     )]
     pub email_address: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21625,7 +21804,7 @@ pub struct AbuseComplaint {
     )]
     pub email_id: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21634,7 +21813,7 @@ pub struct AbuseComplaint {
     )]
     pub id: i64,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21643,7 +21822,7 @@ pub struct AbuseComplaint {
     )]
     pub list_id: String,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21651,12 +21830,12 @@ pub struct AbuseComplaint {
     )]
     pub list_is_active: bool,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
+    * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
     #[serde(
         default,
@@ -21669,7 +21848,7 @@ pub struct AbuseComplaint {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseComplaintsData {
     /**
-     * A list of abuse complaints for a specific list.
+    * A list of abuse complaints for a specific list.
      */
     #[serde(
         default,
@@ -21679,7 +21858,7 @@ pub struct AbuseComplaintsData {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of abuse complaints for a specific list.
+    * A list of abuse complaints for a specific list.
      */
     #[serde(
         default,
@@ -21688,7 +21867,7 @@ pub struct AbuseComplaintsData {
     )]
     pub abuse_reports: Vec<AbuseComplaint>,
     /**
-     * A list of abuse complaints for a specific list.
+    * A list of abuse complaints for a specific list.
      */
     #[serde(
         default,
@@ -21697,7 +21876,7 @@ pub struct AbuseComplaintsData {
     )]
     pub campaign_id: String,
     /**
-     * A list of abuse complaints for a specific list.
+    * A list of abuse complaints for a specific list.
      */
     #[serde(
         default,
@@ -21710,7 +21889,8 @@ pub struct AbuseComplaintsData {
 /**
  * The sentiment type for a feedback message.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AdviceType {
     #[serde(rename = "negative")]
     Negative,
@@ -21748,7 +21928,7 @@ impl AdviceType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Advice {
     /**
-     * Campaign feedback details.
+    * Campaign feedback details.
      */
     #[serde(
         default,
@@ -21758,7 +21938,7 @@ pub struct Advice {
     )]
     pub links: Vec<Links>,
     /**
-     * Campaign feedback details.
+    * Campaign feedback details.
      */
     #[serde(
         default,
@@ -21767,7 +21947,7 @@ pub struct Advice {
     )]
     pub message: String,
     /**
-     * Campaign feedback details.
+    * Campaign feedback details.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<AdviceType>,
@@ -21777,7 +21957,7 @@ pub struct Advice {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignAdviceReport {
     /**
-     * A list of feedback based on a campaign's statistics.
+    * A list of feedback based on a campaign's statistics.
      */
     #[serde(
         default,
@@ -21787,7 +21967,7 @@ pub struct CampaignAdviceReport {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of feedback based on a campaign's statistics.
+    * A list of feedback based on a campaign's statistics.
      */
     #[serde(
         default,
@@ -21796,7 +21976,7 @@ pub struct CampaignAdviceReport {
     )]
     pub advice: Vec<Advice>,
     /**
-     * A list of feedback based on a campaign's statistics.
+    * A list of feedback based on a campaign's statistics.
      */
     #[serde(
         default,
@@ -21805,7 +21985,7 @@ pub struct CampaignAdviceReport {
     )]
     pub campaign_id: String,
     /**
-     * A list of feedback based on a campaign's statistics.
+    * A list of feedback based on a campaign's statistics.
      */
     #[serde(
         default,
@@ -21819,7 +21999,7 @@ pub struct CampaignAdviceReport {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupA {
     /**
-     * Stats for Group A.
+    * Stats for Group A.
      */
     #[serde(
         default,
@@ -21828,7 +22008,7 @@ pub struct GroupA {
     )]
     pub click_percentage_a: f64,
     /**
-     * Stats for Group A.
+    * Stats for Group A.
      */
     #[serde(
         default,
@@ -21837,7 +22017,7 @@ pub struct GroupA {
     )]
     pub total_clicks_a: i64,
     /**
-     * Stats for Group A.
+    * Stats for Group A.
      */
     #[serde(
         default,
@@ -21846,7 +22026,7 @@ pub struct GroupA {
     )]
     pub unique_click_percentage_a: f64,
     /**
-     * Stats for Group A.
+    * Stats for Group A.
      */
     #[serde(
         default,
@@ -21860,7 +22040,7 @@ pub struct GroupA {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupB {
     /**
-     * Stats for Group B.
+    * Stats for Group B.
      */
     #[serde(
         default,
@@ -21869,7 +22049,7 @@ pub struct GroupB {
     )]
     pub click_percentage_b: f64,
     /**
-     * Stats for Group B.
+    * Stats for Group B.
      */
     #[serde(
         default,
@@ -21878,7 +22058,7 @@ pub struct GroupB {
     )]
     pub total_clicks_b: i64,
     /**
-     * Stats for Group B.
+    * Stats for Group B.
      */
     #[serde(
         default,
@@ -21887,7 +22067,7 @@ pub struct GroupB {
     )]
     pub unique_click_percentage_b: f64,
     /**
-     * Stats for Group B.
+    * Stats for Group B.
      */
     #[serde(
         default,
@@ -21901,12 +22081,12 @@ pub struct GroupB {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ABSplit {
     /**
-     * A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
+    * A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub a: Option<GroupA>,
     /**
-     * A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
+    * A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub b: Option<GroupB>,
@@ -21916,7 +22096,7 @@ pub struct ABSplit {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UrlsClicked {
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21926,12 +22106,12 @@ pub struct UrlsClicked {
     )]
     pub links: Vec<Links>,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split: Option<ABSplit>,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21940,7 +22120,7 @@ pub struct UrlsClicked {
     )]
     pub campaign_id: String,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21949,7 +22129,7 @@ pub struct UrlsClicked {
     )]
     pub click_percentage: f64,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21958,7 +22138,7 @@ pub struct UrlsClicked {
     )]
     pub id: String,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21967,7 +22147,7 @@ pub struct UrlsClicked {
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21976,7 +22156,7 @@ pub struct UrlsClicked {
     )]
     pub total_clicks: i64,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21985,7 +22165,7 @@ pub struct UrlsClicked {
     )]
     pub unique_click_percentage: f64,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -21994,7 +22174,7 @@ pub struct UrlsClicked {
     )]
     pub unique_clicks: i64,
     /**
-     * A report of links clicked in a specific campaign.
+    * A report of links clicked in a specific campaign.
      */
     #[serde(
         default,
@@ -22008,7 +22188,7 @@ pub struct UrlsClicked {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickDetailReport {
     /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
+    * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
      */
     #[serde(
         default,
@@ -22018,7 +22198,7 @@ pub struct ClickDetailReport {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
+    * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
      */
     #[serde(
         default,
@@ -22027,7 +22207,7 @@ pub struct ClickDetailReport {
     )]
     pub campaign_id: String,
     /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
+    * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
      */
     #[serde(
         default,
@@ -22036,7 +22216,7 @@ pub struct ClickDetailReport {
     )]
     pub total_items: i64,
     /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
+    * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
      */
     #[serde(
         default,
@@ -22050,7 +22230,7 @@ pub struct ClickDetailReport {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickDetailMember {
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22060,7 +22240,7 @@ pub struct ClickDetailMember {
     )]
     pub links: Vec<Links>,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22069,7 +22249,7 @@ pub struct ClickDetailMember {
     )]
     pub campaign_id: String,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22078,7 +22258,7 @@ pub struct ClickDetailMember {
     )]
     pub clicks: i64,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22087,7 +22267,7 @@ pub struct ClickDetailMember {
     )]
     pub contact_status: String,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22096,7 +22276,7 @@ pub struct ClickDetailMember {
     )]
     pub email_address: String,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22105,7 +22285,7 @@ pub struct ClickDetailMember {
     )]
     pub email_id: String,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22114,7 +22294,7 @@ pub struct ClickDetailMember {
     )]
     pub list_id: String,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22122,12 +22302,12 @@ pub struct ClickDetailMember {
     )]
     pub list_is_active: bool,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22136,7 +22316,7 @@ pub struct ClickDetailMember {
     )]
     pub url_id: String,
     /**
-     * A subscriber who clicked a specific URL in a specific campaign.
+    * A subscriber who clicked a specific URL in a specific campaign.
      */
     #[serde(
         default,
@@ -22149,7 +22329,7 @@ pub struct ClickDetailMember {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickDetailMembers {
     /**
-     * A collection of members who clicked on a specific link within a campaign.
+    * A collection of members who clicked on a specific link within a campaign.
      */
     #[serde(
         default,
@@ -22159,7 +22339,7 @@ pub struct ClickDetailMembers {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of members who clicked on a specific link within a campaign.
+    * A collection of members who clicked on a specific link within a campaign.
      */
     #[serde(
         default,
@@ -22168,7 +22348,7 @@ pub struct ClickDetailMembers {
     )]
     pub campaign_id: String,
     /**
-     * A collection of members who clicked on a specific link within a campaign.
+    * A collection of members who clicked on a specific link within a campaign.
      */
     #[serde(
         default,
@@ -22177,7 +22357,7 @@ pub struct ClickDetailMembers {
     )]
     pub members: Vec<ClickDetailMember>,
     /**
-     * A collection of members who clicked on a specific link within a campaign.
+    * A collection of members who clicked on a specific link within a campaign.
      */
     #[serde(
         default,
@@ -22191,7 +22371,7 @@ pub struct ClickDetailMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenDetailReportActivityMember {
     /**
-     * A summary of the interaction with the campaign.
+    * A summary of the interaction with the campaign.
      */
     #[serde(
         default,
@@ -22205,7 +22385,7 @@ pub struct OpenDetailReportActivityMember {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenActivity {
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22215,7 +22395,7 @@ pub struct OpenActivity {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22224,7 +22404,7 @@ pub struct OpenActivity {
     )]
     pub campaign_id: String,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22233,7 +22413,7 @@ pub struct OpenActivity {
     )]
     pub contact_status: String,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22242,7 +22422,7 @@ pub struct OpenActivity {
     )]
     pub email_address: String,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22251,7 +22431,7 @@ pub struct OpenActivity {
     )]
     pub email_id: String,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22260,7 +22440,7 @@ pub struct OpenActivity {
     )]
     pub list_id: String,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22268,12 +22448,12 @@ pub struct OpenActivity {
     )]
     pub list_is_active: bool,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22282,7 +22462,7 @@ pub struct OpenActivity {
     )]
     pub opens: Vec<OpenDetailReportActivityMember>,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22291,7 +22471,7 @@ pub struct OpenActivity {
     )]
     pub opens_count: i64,
     /**
-     * A list of a member's opens activity in a specific campaign.
+    * A list of a member's opens activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22304,7 +22484,7 @@ pub struct OpenActivity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenDetailReport {
     /**
-     * A detailed report of any campaign emails that were opened by a list member.
+    * A detailed report of any campaign emails that were opened by a list member.
      */
     #[serde(
         default,
@@ -22314,7 +22494,7 @@ pub struct OpenDetailReport {
     )]
     pub links: Vec<Links>,
     /**
-     * A detailed report of any campaign emails that were opened by a list member.
+    * A detailed report of any campaign emails that were opened by a list member.
      */
     #[serde(
         default,
@@ -22323,7 +22503,7 @@ pub struct OpenDetailReport {
     )]
     pub campaign_id: String,
     /**
-     * A detailed report of any campaign emails that were opened by a list member.
+    * A detailed report of any campaign emails that were opened by a list member.
      */
     #[serde(
         default,
@@ -22332,7 +22512,7 @@ pub struct OpenDetailReport {
     )]
     pub members: Vec<OpenActivity>,
     /**
-     * A detailed report of any campaign emails that were opened by a list member.
+    * A detailed report of any campaign emails that were opened by a list member.
      */
     #[serde(
         default,
@@ -22341,7 +22521,7 @@ pub struct OpenDetailReport {
     )]
     pub total_items: i64,
     /**
-     * A detailed report of any campaign emails that were opened by a list member.
+    * A detailed report of any campaign emails that were opened by a list member.
      */
     #[serde(
         default,
@@ -22355,7 +22535,7 @@ pub struct OpenDetailReport {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Domains {
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22364,7 +22544,7 @@ pub struct Domains {
     )]
     pub bounces: i64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22373,7 +22553,7 @@ pub struct Domains {
     )]
     pub bounces_pct: f64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22382,7 +22562,7 @@ pub struct Domains {
     )]
     pub clicks: i64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22391,7 +22571,7 @@ pub struct Domains {
     )]
     pub clicks_pct: f64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22400,7 +22580,7 @@ pub struct Domains {
     )]
     pub delivered: i64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22409,7 +22589,7 @@ pub struct Domains {
     )]
     pub domain: String,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22418,7 +22598,7 @@ pub struct Domains {
     )]
     pub emails_pct: f64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22427,7 +22607,7 @@ pub struct Domains {
     )]
     pub emails_sent: i64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22436,7 +22616,7 @@ pub struct Domains {
     )]
     pub opens: i64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22445,7 +22625,7 @@ pub struct Domains {
     )]
     pub opens_pct: f64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22454,7 +22634,7 @@ pub struct Domains {
     )]
     pub unsubs: i64,
     /**
-     * A single email domain's performance
+    * A single email domain's performance
      */
     #[serde(
         default,
@@ -22468,7 +22648,7 @@ pub struct Domains {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainPerformance {
     /**
-     * Statistics for the top-performing email domains in a campaign.
+    * Statistics for the top-performing email domains in a campaign.
      */
     #[serde(
         default,
@@ -22478,7 +22658,7 @@ pub struct DomainPerformance {
     )]
     pub links: Vec<Links>,
     /**
-     * Statistics for the top-performing email domains in a campaign.
+    * Statistics for the top-performing email domains in a campaign.
      */
     #[serde(
         default,
@@ -22487,7 +22667,7 @@ pub struct DomainPerformance {
     )]
     pub campaign_id: String,
     /**
-     * Statistics for the top-performing email domains in a campaign.
+    * Statistics for the top-performing email domains in a campaign.
      */
     #[serde(
         default,
@@ -22496,7 +22676,7 @@ pub struct DomainPerformance {
     )]
     pub domains: Vec<Domains>,
     /**
-     * Statistics for the top-performing email domains in a campaign.
+    * Statistics for the top-performing email domains in a campaign.
      */
     #[serde(
         default,
@@ -22505,7 +22685,7 @@ pub struct DomainPerformance {
     )]
     pub total_items: i64,
     /**
-     * Statistics for the top-performing email domains in a campaign.
+    * Statistics for the top-performing email domains in a campaign.
      */
     #[serde(
         default,
@@ -22519,7 +22699,7 @@ pub struct DomainPerformance {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Statuses {
     /**
-     * An individual tweet.
+    * An individual tweet.
      */
     #[serde(
         default,
@@ -22528,7 +22708,7 @@ pub struct Statuses {
     )]
     pub datetime: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * An individual tweet.
+    * An individual tweet.
      */
     #[serde(
         default,
@@ -22536,7 +22716,7 @@ pub struct Statuses {
     )]
     pub is_retweet: bool,
     /**
-     * An individual tweet.
+    * An individual tweet.
      */
     #[serde(
         default,
@@ -22545,7 +22725,7 @@ pub struct Statuses {
     )]
     pub screen_name: String,
     /**
-     * An individual tweet.
+    * An individual tweet.
      */
     #[serde(
         default,
@@ -22554,7 +22734,7 @@ pub struct Statuses {
     )]
     pub status: String,
     /**
-     * An individual tweet.
+    * An individual tweet.
      */
     #[serde(
         default,
@@ -22568,7 +22748,7 @@ pub struct Statuses {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Twitter {
     /**
-     * A summary of Twitter activity for a campaign.
+    * A summary of Twitter activity for a campaign.
      */
     #[serde(
         default,
@@ -22577,7 +22757,7 @@ pub struct Twitter {
     )]
     pub first_tweet: String,
     /**
-     * A summary of Twitter activity for a campaign.
+    * A summary of Twitter activity for a campaign.
      */
     #[serde(
         default,
@@ -22586,7 +22766,7 @@ pub struct Twitter {
     )]
     pub last_tweet: String,
     /**
-     * A summary of Twitter activity for a campaign.
+    * A summary of Twitter activity for a campaign.
      */
     #[serde(
         default,
@@ -22595,7 +22775,7 @@ pub struct Twitter {
     )]
     pub retweets: i64,
     /**
-     * A summary of Twitter activity for a campaign.
+    * A summary of Twitter activity for a campaign.
      */
     #[serde(
         default,
@@ -22604,7 +22784,7 @@ pub struct Twitter {
     )]
     pub statuses: Vec<Statuses>,
     /**
-     * A summary of Twitter activity for a campaign.
+    * A summary of Twitter activity for a campaign.
      */
     #[serde(
         default,
@@ -22618,7 +22798,7 @@ pub struct Twitter {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EepurlActivityClickSummaryLocation {
     /**
-     * An individual click location.
+    * An individual click location.
      */
     #[serde(
         default,
@@ -22627,7 +22807,7 @@ pub struct EepurlActivityClickSummaryLocation {
     )]
     pub country: String,
     /**
-     * An individual click location.
+    * An individual click location.
      */
     #[serde(
         default,
@@ -22641,7 +22821,7 @@ pub struct EepurlActivityClickSummaryLocation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickSummary {
     /**
-     * A summary of the click-throughs on the campaign's URL.
+    * A summary of the click-throughs on the campaign's URL.
      */
     #[serde(
         default,
@@ -22650,7 +22830,7 @@ pub struct ClickSummary {
     )]
     pub clicks: i64,
     /**
-     * A summary of the click-throughs on the campaign's URL.
+    * A summary of the click-throughs on the campaign's URL.
      */
     #[serde(
         default,
@@ -22659,7 +22839,7 @@ pub struct ClickSummary {
     )]
     pub first_click: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of the click-throughs on the campaign's URL.
+    * A summary of the click-throughs on the campaign's URL.
      */
     #[serde(
         default,
@@ -22668,7 +22848,7 @@ pub struct ClickSummary {
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of the click-throughs on the campaign's URL.
+    * A summary of the click-throughs on the campaign's URL.
      */
     #[serde(
         default,
@@ -22682,7 +22862,7 @@ pub struct ClickSummary {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Referrer {
     /**
-     * A single instance of a campaign referral.
+    * A single instance of a campaign referral.
      */
     #[serde(
         default,
@@ -22691,7 +22871,7 @@ pub struct Referrer {
     )]
     pub clicks: i64,
     /**
-     * A single instance of a campaign referral.
+    * A single instance of a campaign referral.
      */
     #[serde(
         default,
@@ -22700,7 +22880,7 @@ pub struct Referrer {
     )]
     pub first_click: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A single instance of a campaign referral.
+    * A single instance of a campaign referral.
      */
     #[serde(
         default,
@@ -22709,7 +22889,7 @@ pub struct Referrer {
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A single instance of a campaign referral.
+    * A single instance of a campaign referral.
      */
     #[serde(
         default,
@@ -22723,7 +22903,7 @@ pub struct Referrer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EepurlActivity {
     /**
-     * A summary of social activity for the campaign, tracked by EepURL.
+    * A summary of social activity for the campaign, tracked by EepURL.
      */
     #[serde(
         default,
@@ -22733,7 +22913,7 @@ pub struct EepurlActivity {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of social activity for the campaign, tracked by EepURL.
+    * A summary of social activity for the campaign, tracked by EepURL.
      */
     #[serde(
         default,
@@ -22742,12 +22922,12 @@ pub struct EepurlActivity {
     )]
     pub campaign_id: String,
     /**
-     * A summary of social activity for the campaign, tracked by EepURL.
+    * A summary of social activity for the campaign, tracked by EepURL.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub clicks: Option<ClickSummary>,
     /**
-     * A summary of social activity for the campaign, tracked by EepURL.
+    * A summary of social activity for the campaign, tracked by EepURL.
      */
     #[serde(
         default,
@@ -22756,7 +22936,7 @@ pub struct EepurlActivity {
     )]
     pub eepurl: String,
     /**
-     * A summary of social activity for the campaign, tracked by EepURL.
+    * A summary of social activity for the campaign, tracked by EepURL.
      */
     #[serde(
         default,
@@ -22765,7 +22945,7 @@ pub struct EepurlActivity {
     )]
     pub referrers: Vec<Referrer>,
     /**
-     * A summary of social activity for the campaign, tracked by EepURL.
+    * A summary of social activity for the campaign, tracked by EepURL.
      */
     #[serde(
         default,
@@ -22774,7 +22954,7 @@ pub struct EepurlActivity {
     )]
     pub total_items: i64,
     /**
-     * A summary of social activity for the campaign, tracked by EepURL.
+    * A summary of social activity for the campaign, tracked by EepURL.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub twitter: Option<Twitter>,
@@ -22784,7 +22964,7 @@ pub struct EepurlActivity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailActivityMember {
     /**
-     * A summary of the interaction with the campaign.
+    * A summary of the interaction with the campaign.
      */
     #[serde(
         default,
@@ -22793,7 +22973,7 @@ pub struct EmailActivityMember {
     )]
     pub action: String,
     /**
-     * A summary of the interaction with the campaign.
+    * A summary of the interaction with the campaign.
      */
     #[serde(
         default,
@@ -22802,7 +22982,7 @@ pub struct EmailActivityMember {
     )]
     pub ip: String,
     /**
-     * A summary of the interaction with the campaign.
+    * A summary of the interaction with the campaign.
      */
     #[serde(
         default,
@@ -22811,7 +22991,7 @@ pub struct EmailActivityMember {
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of the interaction with the campaign.
+    * A summary of the interaction with the campaign.
      */
     #[serde(
         default,
@@ -22821,7 +23001,7 @@ pub struct EmailActivityMember {
     )]
     pub type_: String,
     /**
-     * A summary of the interaction with the campaign.
+    * A summary of the interaction with the campaign.
      */
     #[serde(
         default,
@@ -22835,7 +23015,7 @@ pub struct EmailActivityMember {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailActivity {
     /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
+    * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
     #[serde(
         default,
@@ -22845,7 +23025,7 @@ pub struct EmailActivity {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
+    * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
     #[serde(
         default,
@@ -22854,7 +23034,7 @@ pub struct EmailActivity {
     )]
     pub activity: Vec<EmailActivityMember>,
     /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
+    * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
     #[serde(
         default,
@@ -22863,7 +23043,7 @@ pub struct EmailActivity {
     )]
     pub campaign_id: String,
     /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
+    * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
     #[serde(
         default,
@@ -22872,7 +23052,7 @@ pub struct EmailActivity {
     )]
     pub email_address: String,
     /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
+    * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
     #[serde(
         default,
@@ -22881,7 +23061,7 @@ pub struct EmailActivity {
     )]
     pub email_id: String,
     /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
+    * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
     #[serde(
         default,
@@ -22890,7 +23070,7 @@ pub struct EmailActivity {
     )]
     pub list_id: String,
     /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
+    * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
     #[serde(
         default,
@@ -22903,7 +23083,7 @@ pub struct EmailActivity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailActivityData {
     /**
-     * A list of member's subscriber activity in a specific campaign.
+    * A list of member's subscriber activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22913,7 +23093,7 @@ pub struct EmailActivityData {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of member's subscriber activity in a specific campaign.
+    * A list of member's subscriber activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22922,7 +23102,7 @@ pub struct EmailActivityData {
     )]
     pub campaign_id: String,
     /**
-     * A list of member's subscriber activity in a specific campaign.
+    * A list of member's subscriber activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22931,7 +23111,7 @@ pub struct EmailActivityData {
     )]
     pub emails: Vec<EmailActivity>,
     /**
-     * A list of member's subscriber activity in a specific campaign.
+    * A list of member's subscriber activity in a specific campaign.
      */
     #[serde(
         default,
@@ -22944,7 +23124,7 @@ pub struct EmailActivityData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenLocations {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -22953,7 +23133,7 @@ pub struct OpenLocations {
     )]
     pub country_code: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -22962,7 +23142,7 @@ pub struct OpenLocations {
     )]
     pub opens: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -22971,7 +23151,7 @@ pub struct OpenLocations {
     )]
     pub region: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -22985,7 +23165,7 @@ pub struct OpenLocations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenLocationsData {
     /**
-     * Top open locations for a specific campaign.
+    * Top open locations for a specific campaign.
      */
     #[serde(
         default,
@@ -22995,7 +23175,7 @@ pub struct OpenLocationsData {
     )]
     pub links: Vec<Links>,
     /**
-     * Top open locations for a specific campaign.
+    * Top open locations for a specific campaign.
      */
     #[serde(
         default,
@@ -23004,7 +23184,7 @@ pub struct OpenLocationsData {
     )]
     pub campaign_id: String,
     /**
-     * Top open locations for a specific campaign.
+    * Top open locations for a specific campaign.
      */
     #[serde(
         default,
@@ -23013,7 +23193,7 @@ pub struct OpenLocationsData {
     )]
     pub locations: Vec<OpenLocations>,
     /**
-     * Top open locations for a specific campaign.
+    * Top open locations for a specific campaign.
      */
     #[serde(
         default,
@@ -23027,7 +23207,7 @@ pub struct OpenLocationsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SentTo {
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23037,7 +23217,7 @@ pub struct SentTo {
     )]
     pub links: Vec<Links>,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23046,7 +23226,7 @@ pub struct SentTo {
     )]
     pub absplit_group: String,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23055,7 +23235,7 @@ pub struct SentTo {
     )]
     pub campaign_id: String,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23064,7 +23244,7 @@ pub struct SentTo {
     )]
     pub email_address: String,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23073,7 +23253,7 @@ pub struct SentTo {
     )]
     pub email_id: String,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23082,7 +23262,7 @@ pub struct SentTo {
     )]
     pub gmt_offset: i64,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23091,7 +23271,7 @@ pub struct SentTo {
     )]
     pub last_open: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23100,7 +23280,7 @@ pub struct SentTo {
     )]
     pub list_id: String,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23108,12 +23288,12 @@ pub struct SentTo {
     )]
     pub list_is_active: bool,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23122,7 +23302,7 @@ pub struct SentTo {
     )]
     pub open_count: i64,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23131,7 +23311,7 @@ pub struct SentTo {
     )]
     pub status: String,
     /**
-     * A subscriber's status for a specific campaign.
+    * A subscriber's status for a specific campaign.
      */
     #[serde(
         default,
@@ -23144,7 +23324,7 @@ pub struct SentTo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SentData {
     /**
-     * A list of subscribers who were sent a specific campaign.
+    * A list of subscribers who were sent a specific campaign.
      */
     #[serde(
         default,
@@ -23154,7 +23334,7 @@ pub struct SentData {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of subscribers who were sent a specific campaign.
+    * A list of subscribers who were sent a specific campaign.
      */
     #[serde(
         default,
@@ -23163,7 +23343,7 @@ pub struct SentData {
     )]
     pub campaign_id: String,
     /**
-     * A list of subscribers who were sent a specific campaign.
+    * A list of subscribers who were sent a specific campaign.
      */
     #[serde(
         default,
@@ -23172,7 +23352,7 @@ pub struct SentData {
     )]
     pub sent_to: Vec<SentTo>,
     /**
-     * A list of subscribers who were sent a specific campaign.
+    * A list of subscribers who were sent a specific campaign.
      */
     #[serde(
         default,
@@ -23186,7 +23366,7 @@ pub struct SentData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignSubReports {
     /**
-     * A list of reports containing child campaigns for a specific campaign.
+    * A list of reports containing child campaigns for a specific campaign.
      */
     #[serde(
         default,
@@ -23196,7 +23376,7 @@ pub struct CampaignSubReports {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of reports containing child campaigns for a specific campaign.
+    * A list of reports containing child campaigns for a specific campaign.
      */
     #[serde(
         default,
@@ -23205,7 +23385,7 @@ pub struct CampaignSubReports {
     )]
     pub campaign_id: String,
     /**
-     * A list of reports containing child campaigns for a specific campaign.
+    * A list of reports containing child campaigns for a specific campaign.
      */
     #[serde(
         default,
@@ -23214,7 +23394,7 @@ pub struct CampaignSubReports {
     )]
     pub reports: Vec<Reports>,
     /**
-     * A list of reports containing child campaigns for a specific campaign.
+    * A list of reports containing child campaigns for a specific campaign.
      */
     #[serde(
         default,
@@ -23228,7 +23408,7 @@ pub struct CampaignSubReports {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Unsubscribes {
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23238,7 +23418,7 @@ pub struct Unsubscribes {
     )]
     pub links: Vec<Links>,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23247,7 +23427,7 @@ pub struct Unsubscribes {
     )]
     pub campaign_id: String,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23256,7 +23436,7 @@ pub struct Unsubscribes {
     )]
     pub email_address: String,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23265,7 +23445,7 @@ pub struct Unsubscribes {
     )]
     pub email_id: String,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23274,7 +23454,7 @@ pub struct Unsubscribes {
     )]
     pub list_id: String,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23282,12 +23462,12 @@ pub struct Unsubscribes {
     )]
     pub list_is_active: bool,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23296,7 +23476,7 @@ pub struct Unsubscribes {
     )]
     pub reason: String,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23305,7 +23485,7 @@ pub struct Unsubscribes {
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A member who unsubscribed from a specific campaign.
+    * A member who unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23318,7 +23498,7 @@ pub struct Unsubscribes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UnsubscribesData {
     /**
-     * A list of members who have unsubscribed from a specific campaign.
+    * A list of members who have unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23328,7 +23508,7 @@ pub struct UnsubscribesData {
     )]
     pub links: Vec<Links>,
     /**
-     * A list of members who have unsubscribed from a specific campaign.
+    * A list of members who have unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23337,7 +23517,7 @@ pub struct UnsubscribesData {
     )]
     pub campaign_id: String,
     /**
-     * A list of members who have unsubscribed from a specific campaign.
+    * A list of members who have unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23346,7 +23526,7 @@ pub struct UnsubscribesData {
     )]
     pub total_items: i64,
     /**
-     * A list of members who have unsubscribed from a specific campaign.
+    * A list of members who have unsubscribed from a specific campaign.
      */
     #[serde(
         default,
@@ -23359,7 +23539,8 @@ pub struct UnsubscribesData {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetReportsEcommerceProductActivitySortField {
     #[serde(rename = "title")]
     Title,
@@ -23396,7 +23577,7 @@ impl GetReportsEcommerceProductActivitySortField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Products {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -23405,7 +23586,7 @@ pub struct Products {
     )]
     pub currency_code: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -23414,7 +23595,7 @@ pub struct Products {
     )]
     pub image_url: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -23423,7 +23604,7 @@ pub struct Products {
     )]
     pub recommendation_purchased: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -23432,7 +23613,7 @@ pub struct Products {
     )]
     pub recommendation_total: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -23441,7 +23622,7 @@ pub struct Products {
     )]
     pub sku: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -23450,7 +23631,7 @@ pub struct Products {
     )]
     pub title: String,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -23459,7 +23640,7 @@ pub struct Products {
     )]
     pub total_purchased: f64,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -23473,7 +23654,7 @@ pub struct Products {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportsEcommerceProductActivityResponse {
     /**
-     * A collection of ecommerce products.
+    * A collection of ecommerce products.
      */
     #[serde(
         default,
@@ -23483,7 +23664,7 @@ pub struct GetReportsEcommerceProductActivityResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of ecommerce products.
+    * A collection of ecommerce products.
      */
     #[serde(
         default,
@@ -23492,7 +23673,7 @@ pub struct GetReportsEcommerceProductActivityResponse {
     )]
     pub products: Vec<Products>,
     /**
-     * A collection of ecommerce products.
+    * A collection of ecommerce products.
      */
     #[serde(
         default,
@@ -23505,7 +23686,8 @@ pub struct GetReportsEcommerceProductActivityResponse {
 /**
  * Returns user templates sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetTemplatesSortField {
     #[serde(rename = "date_created")]
     DateCreated,
@@ -23543,7 +23725,7 @@ impl GetTemplatesSortField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Templates {
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23553,7 +23735,7 @@ pub struct Templates {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23561,7 +23743,7 @@ pub struct Templates {
     )]
     pub active: bool,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23570,7 +23752,7 @@ pub struct Templates {
     )]
     pub category: String,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23579,7 +23761,7 @@ pub struct Templates {
     )]
     pub created_by: String,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23588,7 +23770,7 @@ pub struct Templates {
     )]
     pub date_created: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23597,7 +23779,7 @@ pub struct Templates {
     )]
     pub date_edited: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23605,7 +23787,7 @@ pub struct Templates {
     )]
     pub drag_and_drop: bool,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23614,7 +23796,7 @@ pub struct Templates {
     )]
     pub edited_by: String,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23623,7 +23805,7 @@ pub struct Templates {
     )]
     pub folder_id: String,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23632,7 +23814,7 @@ pub struct Templates {
     )]
     pub id: i64,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23641,7 +23823,7 @@ pub struct Templates {
     )]
     pub name: String,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23649,7 +23831,7 @@ pub struct Templates {
     )]
     pub responsive: bool,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23658,7 +23840,7 @@ pub struct Templates {
     )]
     pub share_url: String,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23667,7 +23849,7 @@ pub struct Templates {
     )]
     pub thumbnail: String,
     /**
-     * Information about a specific template.
+    * Information about a specific template.
      */
     #[serde(
         default,
@@ -23682,7 +23864,7 @@ pub struct Templates {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplatesData {
     /**
-     * A list an account's available templates.
+    * A list an account's available templates.
      */
     #[serde(
         default,
@@ -23692,7 +23874,7 @@ pub struct TemplatesData {
     )]
     pub links: Vec<Links>,
     /**
-     * A list an account's available templates.
+    * A list an account's available templates.
      */
     #[serde(
         default,
@@ -23701,7 +23883,7 @@ pub struct TemplatesData {
     )]
     pub templates: Vec<Templates>,
     /**
-     * A list an account's available templates.
+    * A list an account's available templates.
      */
     #[serde(
         default,
@@ -23715,7 +23897,7 @@ pub struct TemplatesData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDefaultContent {
     /**
-     * Default content for a template.
+    * Default content for a template.
      */
     #[serde(
         default,
@@ -23725,7 +23907,7 @@ pub struct TemplateDefaultContent {
     )]
     pub links: Vec<Links>,
     /**
-     * Default content for a template.
+    * Default content for a template.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sections: Option<serde_json::Value>,
@@ -23735,7 +23917,7 @@ pub struct TemplateDefaultContent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Address {
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23745,7 +23927,7 @@ pub struct Address {
     )]
     pub address_1: String,
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23755,7 +23937,7 @@ pub struct Address {
     )]
     pub address_2: String,
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23764,7 +23946,7 @@ pub struct Address {
     )]
     pub city: String,
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23773,7 +23955,7 @@ pub struct Address {
     )]
     pub country: String,
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23782,7 +23964,7 @@ pub struct Address {
     )]
     pub country_code: String,
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23791,7 +23973,7 @@ pub struct Address {
     )]
     pub postal_code: String,
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23800,7 +23982,7 @@ pub struct Address {
     )]
     pub province: String,
     /**
-     * The customer's address.
+    * The customer's address.
      */
     #[serde(
         default,
@@ -23814,7 +23996,7 @@ pub struct Address {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Customer {
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23824,12 +24006,12 @@ pub struct Customer {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23838,7 +24020,7 @@ pub struct Customer {
     )]
     pub company: String,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23847,7 +24029,7 @@ pub struct Customer {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23856,7 +24038,7 @@ pub struct Customer {
     )]
     pub email_address: String,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23865,7 +24047,7 @@ pub struct Customer {
     )]
     pub first_name: String,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23874,7 +24056,7 @@ pub struct Customer {
     )]
     pub id: String,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23883,7 +24065,7 @@ pub struct Customer {
     )]
     pub last_name: String,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23891,7 +24073,7 @@ pub struct Customer {
     )]
     pub opt_in_status: bool,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23900,7 +24082,7 @@ pub struct Customer {
     )]
     pub orders_count: i64,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23909,7 +24091,7 @@ pub struct Customer {
     )]
     pub total_spent: f64,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -23922,7 +24104,8 @@ pub struct Customer {
 /**
  * The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TrackingCode {
     #[serde(rename = "prec")]
     Prec,
@@ -23954,7 +24137,7 @@ impl TrackingCode {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShippingAddress {
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -23964,7 +24147,7 @@ pub struct ShippingAddress {
     )]
     pub address_1: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -23974,7 +24157,7 @@ pub struct ShippingAddress {
     )]
     pub address_2: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -23983,7 +24166,7 @@ pub struct ShippingAddress {
     )]
     pub city: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -23992,7 +24175,7 @@ pub struct ShippingAddress {
     )]
     pub company: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24001,7 +24184,7 @@ pub struct ShippingAddress {
     )]
     pub country: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24010,7 +24193,7 @@ pub struct ShippingAddress {
     )]
     pub country_code: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24019,7 +24202,7 @@ pub struct ShippingAddress {
     )]
     pub latitude: f64,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24028,7 +24211,7 @@ pub struct ShippingAddress {
     )]
     pub longitude: f64,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24037,7 +24220,7 @@ pub struct ShippingAddress {
     )]
     pub name: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24046,7 +24229,7 @@ pub struct ShippingAddress {
     )]
     pub phone: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24055,7 +24238,7 @@ pub struct ShippingAddress {
     )]
     pub postal_code: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24064,7 +24247,7 @@ pub struct ShippingAddress {
     )]
     pub province: String,
     /**
-     * The shipping address for the order.
+    * The shipping address for the order.
      */
     #[serde(
         default,
@@ -24078,7 +24261,7 @@ pub struct ShippingAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingAddress {
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24088,7 +24271,7 @@ pub struct BillingAddress {
     )]
     pub address_1: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24098,7 +24281,7 @@ pub struct BillingAddress {
     )]
     pub address_2: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24107,7 +24290,7 @@ pub struct BillingAddress {
     )]
     pub city: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24116,7 +24299,7 @@ pub struct BillingAddress {
     )]
     pub company: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24125,7 +24308,7 @@ pub struct BillingAddress {
     )]
     pub country: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24134,7 +24317,7 @@ pub struct BillingAddress {
     )]
     pub country_code: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24143,7 +24326,7 @@ pub struct BillingAddress {
     )]
     pub latitude: f64,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24152,7 +24335,7 @@ pub struct BillingAddress {
     )]
     pub longitude: f64,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24161,7 +24344,7 @@ pub struct BillingAddress {
     )]
     pub name: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24170,7 +24353,7 @@ pub struct BillingAddress {
     )]
     pub phone: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24179,7 +24362,7 @@ pub struct BillingAddress {
     )]
     pub postal_code: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24188,7 +24371,7 @@ pub struct BillingAddress {
     )]
     pub province: String,
     /**
-     * The billing address for the order.
+    * The billing address for the order.
      */
     #[serde(
         default,
@@ -24201,7 +24384,8 @@ pub struct BillingAddress {
 /**
  * Type of discount. For free shipping set type to fixed
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrdersPromosType {
     #[serde(rename = "fixed")]
     Fixed,
@@ -24235,7 +24419,7 @@ impl OrdersPromosType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Promos {
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -24244,7 +24428,7 @@ pub struct Promos {
     )]
     pub amount_discounted: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -24253,7 +24437,7 @@ pub struct Promos {
     )]
     pub code: String,
     /**
-     * Type of discount. For free shipping set type to fixed
+    * Type of discount. For free shipping set type to fixed
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrdersPromosType>,
@@ -24263,7 +24447,7 @@ pub struct Promos {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Outreach {
     /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
+    * The outreach associated with this order. For example, an email campaign or Facebook ad.
      */
     #[serde(
         default,
@@ -24272,7 +24456,7 @@ pub struct Outreach {
     )]
     pub id: String,
     /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
+    * The outreach associated with this order. For example, an email campaign or Facebook ad.
      */
     #[serde(
         default,
@@ -24281,7 +24465,7 @@ pub struct Outreach {
     )]
     pub name: String,
     /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
+    * The outreach associated with this order. For example, an email campaign or Facebook ad.
      */
     #[serde(
         default,
@@ -24290,7 +24474,7 @@ pub struct Outreach {
     )]
     pub published_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
+    * The outreach associated with this order. For example, an email campaign or Facebook ad.
      */
     #[serde(
         default,
@@ -24305,7 +24489,7 @@ pub struct Outreach {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Orders {
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24315,12 +24499,12 @@ pub struct Orders {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_address: Option<BillingAddress>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24329,7 +24513,7 @@ pub struct Orders {
     )]
     pub campaign_id: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24338,7 +24522,7 @@ pub struct Orders {
     )]
     pub cancelled_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24347,12 +24531,12 @@ pub struct Orders {
     )]
     pub currency_code: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<Customer>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24361,7 +24545,7 @@ pub struct Orders {
     )]
     pub discount_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24370,7 +24554,7 @@ pub struct Orders {
     )]
     pub financial_status: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24379,7 +24563,7 @@ pub struct Orders {
     )]
     pub fulfillment_status: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24388,7 +24572,7 @@ pub struct Orders {
     )]
     pub id: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24397,7 +24581,7 @@ pub struct Orders {
     )]
     pub landing_site: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24406,7 +24590,7 @@ pub struct Orders {
     )]
     pub lines: Vec<Lines>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24415,7 +24599,7 @@ pub struct Orders {
     )]
     pub order_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24424,12 +24608,12 @@ pub struct Orders {
     )]
     pub order_url: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outreach: Option<Outreach>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24438,7 +24622,7 @@ pub struct Orders {
     )]
     pub processed_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24447,12 +24631,12 @@ pub struct Orders {
     )]
     pub promos: Vec<Promos>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_address: Option<ShippingAddress>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24461,7 +24645,7 @@ pub struct Orders {
     )]
     pub shipping_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24470,7 +24654,7 @@ pub struct Orders {
     )]
     pub store_id: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24479,12 +24663,12 @@ pub struct Orders {
     )]
     pub tax_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking_code: Option<TrackingCode>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -24498,7 +24682,7 @@ pub struct Orders {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersData {
     /**
-     * A collection of orders in an account.
+    * A collection of orders in an account.
      */
     #[serde(
         default,
@@ -24508,7 +24692,7 @@ pub struct OrdersData {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of orders in an account.
+    * A collection of orders in an account.
      */
     #[serde(
         default,
@@ -24517,7 +24701,7 @@ pub struct OrdersData {
     )]
     pub orders: Vec<Orders>,
     /**
-     * A collection of orders in an account.
+    * A collection of orders in an account.
      */
     #[serde(
         default,
@@ -24531,7 +24715,7 @@ pub struct OrdersData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoresAddress {
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24541,7 +24725,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub address_1: String,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24551,7 +24735,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub address_2: String,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24560,7 +24744,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub city: String,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24569,7 +24753,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub country: String,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24578,7 +24762,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub country_code: String,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24587,7 +24771,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub latitude: f64,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24596,7 +24780,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub longitude: f64,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24605,7 +24789,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub postal_code: String,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24614,7 +24798,7 @@ pub struct ECommerceStoresAddress {
     )]
     pub province: String,
     /**
-     * The store address.
+    * The store address.
      */
     #[serde(
         default,
@@ -24628,7 +24812,7 @@ pub struct ECommerceStoresAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoresConnectedSite {
     /**
-     * The Connected Site associated with the store.
+    * The Connected Site associated with the store.
      */
     #[serde(
         default,
@@ -24637,7 +24821,7 @@ pub struct ECommerceStoresConnectedSite {
     )]
     pub site_foreign_id: String,
     /**
-     * The Connected Site associated with the store.
+    * The Connected Site associated with the store.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site_script: Option<Script>,
@@ -24647,7 +24831,7 @@ pub struct ECommerceStoresConnectedSite {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbandonedCart {
     /**
-     * abandonedCart automation details.
+    * abandonedCart automation details.
      */
     #[serde(
         default,
@@ -24656,7 +24840,7 @@ pub struct AbandonedCart {
     )]
     pub id: String,
     /**
-     * abandonedCart automation details.
+    * abandonedCart automation details.
      */
     #[serde(
         default,
@@ -24664,7 +24848,7 @@ pub struct AbandonedCart {
     )]
     pub is_supported: bool,
     /**
-     * abandonedCart automation details.
+    * abandonedCart automation details.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
@@ -24674,7 +24858,7 @@ pub struct AbandonedCart {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbandonedBrowse {
     /**
-     * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
+    * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
      */
     #[serde(
         default,
@@ -24683,7 +24867,7 @@ pub struct AbandonedBrowse {
     )]
     pub id: String,
     /**
-     * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
+    * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
      */
     #[serde(
         default,
@@ -24691,7 +24875,7 @@ pub struct AbandonedBrowse {
     )]
     pub is_supported: bool,
     /**
-     * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
+    * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
@@ -24701,12 +24885,12 @@ pub struct AbandonedBrowse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoresAutomations {
     /**
-     * Details for the automations attached to this store.
+    * Details for the automations attached to this store.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub abandoned_browse: Option<AbandonedBrowse>,
     /**
-     * Details for the automations attached to this store.
+    * Details for the automations attached to this store.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub abandoned_cart: Option<AbandonedCart>,
@@ -24716,7 +24900,7 @@ pub struct ECommerceStoresAutomations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Stores {
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24726,22 +24910,22 @@ pub struct Stores {
     )]
     pub links: Vec<Links>,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<ECommerceStoresAddress>,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub automations: Option<ECommerceStoresAutomations>,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub connected_site: Option<ECommerceStoresConnectedSite>,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24750,7 +24934,7 @@ pub struct Stores {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24759,7 +24943,7 @@ pub struct Stores {
     )]
     pub currency_code: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24768,7 +24952,7 @@ pub struct Stores {
     )]
     pub domain: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24777,7 +24961,7 @@ pub struct Stores {
     )]
     pub email_address: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24786,7 +24970,7 @@ pub struct Stores {
     )]
     pub id: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24794,7 +24978,7 @@ pub struct Stores {
     )]
     pub is_syncing: bool,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24803,7 +24987,7 @@ pub struct Stores {
     )]
     pub list_id: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24811,7 +24995,7 @@ pub struct Stores {
     )]
     pub list_is_active: bool,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24820,7 +25004,7 @@ pub struct Stores {
     )]
     pub money_format: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24829,7 +25013,7 @@ pub struct Stores {
     )]
     pub name: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24838,7 +25022,7 @@ pub struct Stores {
     )]
     pub phone: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24847,7 +25031,7 @@ pub struct Stores {
     )]
     pub platform: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24856,7 +25040,7 @@ pub struct Stores {
     )]
     pub primary_locale: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24865,7 +25049,7 @@ pub struct Stores {
     )]
     pub timezone: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24879,7 +25063,7 @@ pub struct Stores {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStores {
     /**
-     * A collection of stores in the account.
+    * A collection of stores in the account.
      */
     #[serde(
         default,
@@ -24889,7 +25073,7 @@ pub struct ECommerceStores {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of stores in the account.
+    * A collection of stores in the account.
      */
     #[serde(
         default,
@@ -24898,7 +25082,7 @@ pub struct ECommerceStores {
     )]
     pub stores: Vec<Stores>,
     /**
-     * A collection of stores in the account.
+    * A collection of stores in the account.
      */
     #[serde(
         default,
@@ -24912,12 +25096,12 @@ pub struct ECommerceStores {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStore {
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<ECommerceStoresAddress>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -24926,7 +25110,7 @@ pub struct ECommerceStore {
     )]
     pub currency_code: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24935,7 +25119,7 @@ pub struct ECommerceStore {
     )]
     pub domain: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24944,7 +25128,7 @@ pub struct ECommerceStore {
     )]
     pub email_address: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -24953,7 +25137,7 @@ pub struct ECommerceStore {
     )]
     pub id: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24961,7 +25145,7 @@ pub struct ECommerceStore {
     )]
     pub is_syncing: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -24970,7 +25154,7 @@ pub struct ECommerceStore {
     )]
     pub list_id: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24979,7 +25163,7 @@ pub struct ECommerceStore {
     )]
     pub money_format: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -24988,7 +25172,7 @@ pub struct ECommerceStore {
     )]
     pub name: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -24997,7 +25181,7 @@ pub struct ECommerceStore {
     )]
     pub phone: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25006,7 +25190,7 @@ pub struct ECommerceStore {
     )]
     pub platform: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25015,7 +25199,7 @@ pub struct ECommerceStore {
     )]
     pub primary_locale: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25029,12 +25213,12 @@ pub struct ECommerceStore {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoreData {
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<ECommerceStoresAddress>,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25043,7 +25227,7 @@ pub struct ECommerceStoreData {
     )]
     pub currency_code: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25052,7 +25236,7 @@ pub struct ECommerceStoreData {
     )]
     pub domain: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25061,7 +25245,7 @@ pub struct ECommerceStoreData {
     )]
     pub email_address: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25069,7 +25253,7 @@ pub struct ECommerceStoreData {
     )]
     pub is_syncing: bool,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25078,7 +25262,7 @@ pub struct ECommerceStoreData {
     )]
     pub money_format: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25087,7 +25271,7 @@ pub struct ECommerceStoreData {
     )]
     pub name: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25096,7 +25280,7 @@ pub struct ECommerceStoreData {
     )]
     pub phone: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25105,7 +25289,7 @@ pub struct ECommerceStoreData {
     )]
     pub platform: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25114,7 +25298,7 @@ pub struct ECommerceStoreData {
     )]
     pub primary_locale: String,
     /**
-     * An individual store in an account.
+    * An individual store in an account.
      */
     #[serde(
         default,
@@ -25128,7 +25312,7 @@ pub struct ECommerceStoreData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartLineItem {
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25138,7 +25322,7 @@ pub struct ECommerceCartLineItem {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25147,7 +25331,7 @@ pub struct ECommerceCartLineItem {
     )]
     pub id: String,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25156,7 +25340,7 @@ pub struct ECommerceCartLineItem {
     )]
     pub price: f64,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25165,7 +25349,7 @@ pub struct ECommerceCartLineItem {
     )]
     pub product_id: String,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25174,7 +25358,7 @@ pub struct ECommerceCartLineItem {
     )]
     pub product_title: String,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25183,7 +25367,7 @@ pub struct ECommerceCartLineItem {
     )]
     pub product_variant_id: String,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25192,7 +25376,7 @@ pub struct ECommerceCartLineItem {
     )]
     pub product_variant_title: String,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25206,7 +25390,7 @@ pub struct ECommerceCartLineItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Carts {
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25216,7 +25400,7 @@ pub struct Carts {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25225,7 +25409,7 @@ pub struct Carts {
     )]
     pub campaign_id: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25234,7 +25418,7 @@ pub struct Carts {
     )]
     pub checkout_url: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25243,7 +25427,7 @@ pub struct Carts {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25252,12 +25436,12 @@ pub struct Carts {
     )]
     pub currency_code: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<Customer>,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25266,7 +25450,7 @@ pub struct Carts {
     )]
     pub id: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25275,7 +25459,7 @@ pub struct Carts {
     )]
     pub lines: Vec<ECommerceCartLineItem>,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25284,7 +25468,7 @@ pub struct Carts {
     )]
     pub order_total: f64,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25293,7 +25477,7 @@ pub struct Carts {
     )]
     pub tax_total: f64,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25307,7 +25491,7 @@ pub struct Carts {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CartsData {
     /**
-     * A collection of a store's carts.
+    * A collection of a store's carts.
      */
     #[serde(
         default,
@@ -25317,7 +25501,7 @@ pub struct CartsData {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of a store's carts.
+    * A collection of a store's carts.
      */
     #[serde(
         default,
@@ -25326,7 +25510,7 @@ pub struct CartsData {
     )]
     pub carts: Vec<Carts>,
     /**
-     * A collection of a store's carts.
+    * A collection of a store's carts.
      */
     #[serde(
         default,
@@ -25335,7 +25519,7 @@ pub struct CartsData {
     )]
     pub store_id: String,
     /**
-     * A collection of a store's carts.
+    * A collection of a store's carts.
      */
     #[serde(
         default,
@@ -25349,12 +25533,12 @@ pub struct CartsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCustomer {
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25363,7 +25547,7 @@ pub struct ECommerceCustomer {
     )]
     pub company: String,
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25372,7 +25556,7 @@ pub struct ECommerceCustomer {
     )]
     pub email_address: String,
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25381,7 +25565,7 @@ pub struct ECommerceCustomer {
     )]
     pub first_name: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25390,7 +25574,7 @@ pub struct ECommerceCustomer {
     )]
     pub id: String,
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25399,7 +25583,7 @@ pub struct ECommerceCustomer {
     )]
     pub last_name: String,
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25412,7 +25596,7 @@ pub struct ECommerceCustomer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartLineItemData {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25421,7 +25605,7 @@ pub struct ECommerceCartLineItemData {
     )]
     pub id: String,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -25430,7 +25614,7 @@ pub struct ECommerceCartLineItemData {
     )]
     pub price: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25439,7 +25623,7 @@ pub struct ECommerceCartLineItemData {
     )]
     pub product_id: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25448,7 +25632,7 @@ pub struct ECommerceCartLineItemData {
     )]
     pub product_variant_id: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -25462,7 +25646,7 @@ pub struct ECommerceCartLineItemData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCart {
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25471,7 +25655,7 @@ pub struct ECommerceCart {
     )]
     pub campaign_id: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25480,7 +25664,7 @@ pub struct ECommerceCart {
     )]
     pub checkout_url: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25489,11 +25673,11 @@ pub struct ECommerceCart {
     )]
     pub currency_code: String,
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     pub customer: ECommerceCustomer,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25502,7 +25686,7 @@ pub struct ECommerceCart {
     )]
     pub id: String,
     /**
-     * An array of the cart's line items.
+    * An array of the cart's line items.
      */
     #[serde(
         default,
@@ -25511,7 +25695,7 @@ pub struct ECommerceCart {
     )]
     pub lines: Vec<ECommerceCartLineItemData>,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -25520,7 +25704,7 @@ pub struct ECommerceCart {
     )]
     pub order_total: f64,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25534,12 +25718,12 @@ pub struct ECommerceCart {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartCustomer {
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25548,7 +25732,7 @@ pub struct ECommerceCartCustomer {
     )]
     pub company: String,
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25557,7 +25741,7 @@ pub struct ECommerceCartCustomer {
     )]
     pub first_name: String,
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25566,7 +25750,7 @@ pub struct ECommerceCartCustomer {
     )]
     pub last_name: String,
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25579,7 +25763,7 @@ pub struct ECommerceCartCustomer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartLineItemDataType {
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25588,7 +25772,7 @@ pub struct ECommerceCartLineItemDataType {
     )]
     pub price: f64,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25597,7 +25781,7 @@ pub struct ECommerceCartLineItemDataType {
     )]
     pub product_id: String,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25606,7 +25790,7 @@ pub struct ECommerceCartLineItemDataType {
     )]
     pub product_variant_id: String,
     /**
-     * Information about a specific cart line item.
+    * Information about a specific cart line item.
      */
     #[serde(
         default,
@@ -25620,7 +25804,7 @@ pub struct ECommerceCartLineItemDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartData {
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25629,7 +25813,7 @@ pub struct ECommerceCartData {
     )]
     pub campaign_id: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25638,7 +25822,7 @@ pub struct ECommerceCartData {
     )]
     pub checkout_url: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25647,12 +25831,12 @@ pub struct ECommerceCartData {
     )]
     pub currency_code: String,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<ECommerceCartCustomer>,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25661,7 +25845,7 @@ pub struct ECommerceCartData {
     )]
     pub lines: Vec<ECommerceCartLineItemDataType>,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25670,7 +25854,7 @@ pub struct ECommerceCartData {
     )]
     pub order_total: f64,
     /**
-     * Information about a specific cart.
+    * Information about a specific cart.
      */
     #[serde(
         default,
@@ -25684,7 +25868,7 @@ pub struct ECommerceCartData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CartLines {
     /**
-     * A collection of a cart's line items.
+    * A collection of a cart's line items.
      */
     #[serde(
         default,
@@ -25694,7 +25878,7 @@ pub struct CartLines {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of a cart's line items.
+    * A collection of a cart's line items.
      */
     #[serde(
         default,
@@ -25703,7 +25887,7 @@ pub struct CartLines {
     )]
     pub cart_id: String,
     /**
-     * A collection of a cart's line items.
+    * A collection of a cart's line items.
      */
     #[serde(
         default,
@@ -25712,7 +25896,7 @@ pub struct CartLines {
     )]
     pub lines: Vec<ECommerceCartLineItem>,
     /**
-     * A collection of a cart's line items.
+    * A collection of a cart's line items.
      */
     #[serde(
         default,
@@ -25721,7 +25905,7 @@ pub struct CartLines {
     )]
     pub store_id: String,
     /**
-     * A collection of a cart's line items.
+    * A collection of a cart's line items.
      */
     #[serde(
         default,
@@ -25735,7 +25919,7 @@ pub struct CartLines {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Customers {
     /**
-     * A collection of the store's customers.
+    * A collection of the store's customers.
      */
     #[serde(
         default,
@@ -25745,7 +25929,7 @@ pub struct Customers {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of the store's customers.
+    * A collection of the store's customers.
      */
     #[serde(
         default,
@@ -25754,7 +25938,7 @@ pub struct Customers {
     )]
     pub customers: Vec<Customer>,
     /**
-     * A collection of the store's customers.
+    * A collection of the store's customers.
      */
     #[serde(
         default,
@@ -25763,7 +25947,7 @@ pub struct Customers {
     )]
     pub store_id: String,
     /**
-     * A collection of the store's customers.
+    * A collection of the store's customers.
      */
     #[serde(
         default,
@@ -25777,12 +25961,12 @@ pub struct Customers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCustomerData {
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -25791,7 +25975,7 @@ pub struct ECommerceCustomerData {
     )]
     pub company: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25800,7 +25984,7 @@ pub struct ECommerceCustomerData {
     )]
     pub email_address: String,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -25809,7 +25993,7 @@ pub struct ECommerceCustomerData {
     )]
     pub first_name: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25818,7 +26002,7 @@ pub struct ECommerceCustomerData {
     )]
     pub id: String,
     /**
-     * Information about a specific customer.
+    * Information about a specific customer.
      */
     #[serde(
         default,
@@ -25827,7 +26011,7 @@ pub struct ECommerceCustomerData {
     )]
     pub last_name: String,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -25840,12 +26024,12 @@ pub struct ECommerceCustomerData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCustomerDataType {
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25854,7 +26038,7 @@ pub struct ECommerceCustomerDataType {
     )]
     pub company: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25863,7 +26047,7 @@ pub struct ECommerceCustomerDataType {
     )]
     pub email_address: String,
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25872,7 +26056,7 @@ pub struct ECommerceCustomerDataType {
     )]
     pub first_name: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -25881,7 +26065,7 @@ pub struct ECommerceCustomerDataType {
     )]
     pub id: String,
     /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
      */
     #[serde(
         default,
@@ -25890,7 +26074,7 @@ pub struct ECommerceCustomerDataType {
     )]
     pub last_name: String,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -25902,7 +26086,8 @@ pub struct ECommerceCustomerDataType {
 /**
  * The target that the discount applies to.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Target {
     #[serde(rename = "per_item")]
     PerItem,
@@ -25940,7 +26125,7 @@ impl Target {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoRules {
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -25950,7 +26135,7 @@ pub struct PromoRules {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -25959,7 +26144,7 @@ pub struct PromoRules {
     )]
     pub amount: f64,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -25968,7 +26153,7 @@ pub struct PromoRules {
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -25977,7 +26162,7 @@ pub struct PromoRules {
     )]
     pub description: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -25985,7 +26170,7 @@ pub struct PromoRules {
     )]
     pub enabled: bool,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -25994,7 +26179,7 @@ pub struct PromoRules {
     )]
     pub ends_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -26003,7 +26188,7 @@ pub struct PromoRules {
     )]
     pub id: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -26012,12 +26197,12 @@ pub struct PromoRules {
     )]
     pub starts_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub target: Option<Target>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -26026,12 +26211,12 @@ pub struct PromoRules {
     )]
     pub title: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrdersPromosType>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule
+    * Information about an Ecommerce Store's specific Promo Rule
      */
     #[serde(
         default,
@@ -26045,7 +26230,7 @@ pub struct PromoRules {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoRulesData {
     /**
-     * A collection of the store's promo rules.
+    * A collection of the store's promo rules.
      */
     #[serde(
         default,
@@ -26055,7 +26240,7 @@ pub struct PromoRulesData {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of the store's promo rules.
+    * A collection of the store's promo rules.
      */
     #[serde(
         default,
@@ -26064,7 +26249,7 @@ pub struct PromoRulesData {
     )]
     pub promo_rules: Vec<PromoRules>,
     /**
-     * A collection of the store's promo rules.
+    * A collection of the store's promo rules.
      */
     #[serde(
         default,
@@ -26073,7 +26258,7 @@ pub struct PromoRulesData {
     )]
     pub store_id: String,
     /**
-     * A collection of the store's promo rules.
+    * A collection of the store's promo rules.
      */
     #[serde(
         default,
@@ -26087,7 +26272,7 @@ pub struct PromoRulesData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoRule {
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -26096,7 +26281,7 @@ pub struct ECommercePromoRule {
     )]
     pub amount: f64,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26105,7 +26290,7 @@ pub struct ECommercePromoRule {
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26114,7 +26299,7 @@ pub struct ECommercePromoRule {
     )]
     pub description: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26122,7 +26307,7 @@ pub struct ECommercePromoRule {
     )]
     pub enabled: bool,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26131,7 +26316,7 @@ pub struct ECommercePromoRule {
     )]
     pub ends_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26140,7 +26325,7 @@ pub struct ECommercePromoRule {
     )]
     pub id: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26149,12 +26334,12 @@ pub struct ECommercePromoRule {
     )]
     pub starts_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The target that the discount applies to.
+    * The target that the discount applies to.
      */
     #[serde(default, skip_serializing_if = "Target::is_noop")]
     pub target: Target,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26163,7 +26348,7 @@ pub struct ECommercePromoRule {
     )]
     pub title: String,
     /**
-     * Type of discount. For free shipping set type to fixed
+    * Type of discount. For free shipping set type to fixed
      */
     #[serde(
         default,
@@ -26172,7 +26357,7 @@ pub struct ECommercePromoRule {
     )]
     pub type_: OrdersPromosType,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26186,7 +26371,7 @@ pub struct ECommercePromoRule {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoRuleData {
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26195,7 +26380,7 @@ pub struct ECommercePromoRuleData {
     )]
     pub amount: f64,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26204,7 +26389,7 @@ pub struct ECommercePromoRuleData {
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26213,7 +26398,7 @@ pub struct ECommercePromoRuleData {
     )]
     pub description: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26221,7 +26406,7 @@ pub struct ECommercePromoRuleData {
     )]
     pub enabled: bool,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26230,7 +26415,7 @@ pub struct ECommercePromoRuleData {
     )]
     pub ends_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26239,12 +26424,12 @@ pub struct ECommercePromoRuleData {
     )]
     pub starts_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub target: Option<Target>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26253,12 +26438,12 @@ pub struct ECommercePromoRuleData {
     )]
     pub title: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrdersPromosType>,
     /**
-     * Information about an Ecommerce Store's specific Promo Rule.
+    * Information about an Ecommerce Store's specific Promo Rule.
      */
     #[serde(
         default,
@@ -26272,7 +26457,7 @@ pub struct ECommercePromoRuleData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoCodes {
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26282,7 +26467,7 @@ pub struct PromoCodes {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26291,7 +26476,7 @@ pub struct PromoCodes {
     )]
     pub code: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26300,7 +26485,7 @@ pub struct PromoCodes {
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26308,7 +26493,7 @@ pub struct PromoCodes {
     )]
     pub enabled: bool,
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26317,7 +26502,7 @@ pub struct PromoCodes {
     )]
     pub id: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26326,7 +26511,7 @@ pub struct PromoCodes {
     )]
     pub redemption_url: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26335,7 +26520,7 @@ pub struct PromoCodes {
     )]
     pub updated_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Code
+    * Information about an Ecommerce Store's specific Promo Code
      */
     #[serde(
         default,
@@ -26349,7 +26534,7 @@ pub struct PromoCodes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoCodesData {
     /**
-     * A collection of the store's promo codes.
+    * A collection of the store's promo codes.
      */
     #[serde(
         default,
@@ -26359,7 +26544,7 @@ pub struct PromoCodesData {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of the store's promo codes.
+    * A collection of the store's promo codes.
      */
     #[serde(
         default,
@@ -26368,7 +26553,7 @@ pub struct PromoCodesData {
     )]
     pub promo_codes: Vec<PromoCodes>,
     /**
-     * A collection of the store's promo codes.
+    * A collection of the store's promo codes.
      */
     #[serde(
         default,
@@ -26377,7 +26562,7 @@ pub struct PromoCodesData {
     )]
     pub store_id: String,
     /**
-     * A collection of the store's promo codes.
+    * A collection of the store's promo codes.
      */
     #[serde(
         default,
@@ -26391,7 +26576,7 @@ pub struct PromoCodesData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoCode {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26400,7 +26585,7 @@ pub struct ECommercePromoCode {
     )]
     pub code: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26409,7 +26594,7 @@ pub struct ECommercePromoCode {
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26417,7 +26602,7 @@ pub struct ECommercePromoCode {
     )]
     pub enabled: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26426,7 +26611,7 @@ pub struct ECommercePromoCode {
     )]
     pub id: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26435,7 +26620,7 @@ pub struct ECommercePromoCode {
     )]
     pub redemption_url: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26444,7 +26629,7 @@ pub struct ECommercePromoCode {
     )]
     pub updated_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26458,7 +26643,7 @@ pub struct ECommercePromoCode {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoCodeData {
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26467,7 +26652,7 @@ pub struct ECommercePromoCodeData {
     )]
     pub code: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26476,7 +26661,7 @@ pub struct ECommercePromoCodeData {
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26484,7 +26669,7 @@ pub struct ECommercePromoCodeData {
     )]
     pub enabled: bool,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26493,7 +26678,7 @@ pub struct ECommercePromoCodeData {
     )]
     pub redemption_url: String,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26502,7 +26687,7 @@ pub struct ECommercePromoCodeData {
     )]
     pub updated_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about an Ecommerce Store's specific Promo Code.
+    * Information about an Ecommerce Store's specific Promo Code.
      */
     #[serde(
         default,
@@ -26516,7 +26701,7 @@ pub struct ECommercePromoCodeData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersDataType {
     /**
-     * A collection of orders in a store.
+    * A collection of orders in a store.
      */
     #[serde(
         default,
@@ -26526,7 +26711,7 @@ pub struct OrdersDataType {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of orders in a store.
+    * A collection of orders in a store.
      */
     #[serde(
         default,
@@ -26535,7 +26720,7 @@ pub struct OrdersDataType {
     )]
     pub orders: Vec<Orders>,
     /**
-     * A collection of orders in a store.
+    * A collection of orders in a store.
      */
     #[serde(
         default,
@@ -26544,7 +26729,7 @@ pub struct OrdersDataType {
     )]
     pub store_id: String,
     /**
-     * A collection of orders in a store.
+    * A collection of orders in a store.
      */
     #[serde(
         default,
@@ -26557,7 +26742,7 @@ pub struct OrdersDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderPromos {
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -26566,7 +26751,7 @@ pub struct ECommerceOrderPromos {
     )]
     pub amount_discounted: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26575,7 +26760,7 @@ pub struct ECommerceOrderPromos {
     )]
     pub code: String,
     /**
-     * Type of discount. For free shipping set type to fixed
+    * Type of discount. For free shipping set type to fixed
      */
     #[serde(
         default,
@@ -26589,7 +26774,7 @@ pub struct ECommerceOrderPromos {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderLineItem {
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -26598,7 +26783,7 @@ pub struct ECommerceOrderLineItem {
     )]
     pub discount: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26607,7 +26792,7 @@ pub struct ECommerceOrderLineItem {
     )]
     pub id: String,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -26616,7 +26801,7 @@ pub struct ECommerceOrderLineItem {
     )]
     pub price: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26625,7 +26810,7 @@ pub struct ECommerceOrderLineItem {
     )]
     pub product_id: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26634,7 +26819,7 @@ pub struct ECommerceOrderLineItem {
     )]
     pub product_variant_id: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -26648,7 +26833,7 @@ pub struct ECommerceOrderLineItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderOutreach {
     /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
+    * The outreach associated with this order. For example, an email campaign or Facebook ad.
      */
     #[serde(
         default,
@@ -26662,12 +26847,12 @@ pub struct ECommerceOrderOutreach {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrder {
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_address: Option<BillingAddress>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26676,7 +26861,7 @@ pub struct ECommerceOrder {
     )]
     pub campaign_id: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26685,7 +26870,7 @@ pub struct ECommerceOrder {
     )]
     pub cancelled_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26694,11 +26879,11 @@ pub struct ECommerceOrder {
     )]
     pub currency_code: String,
     /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
+    * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
     pub customer: ECommerceCustomer,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26707,7 +26892,7 @@ pub struct ECommerceOrder {
     )]
     pub discount_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26716,7 +26901,7 @@ pub struct ECommerceOrder {
     )]
     pub financial_status: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26725,7 +26910,7 @@ pub struct ECommerceOrder {
     )]
     pub fulfillment_status: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -26734,7 +26919,7 @@ pub struct ECommerceOrder {
     )]
     pub id: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26743,7 +26928,7 @@ pub struct ECommerceOrder {
     )]
     pub landing_site: String,
     /**
-     * An array of the order's line items.
+    * An array of the order's line items.
      */
     #[serde(
         default,
@@ -26752,7 +26937,7 @@ pub struct ECommerceOrder {
     )]
     pub lines: Vec<ECommerceOrderLineItem>,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -26761,7 +26946,7 @@ pub struct ECommerceOrder {
     )]
     pub order_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26770,12 +26955,12 @@ pub struct ECommerceOrder {
     )]
     pub order_url: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outreach: Option<ECommerceOrderOutreach>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26784,7 +26969,7 @@ pub struct ECommerceOrder {
     )]
     pub processed_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26793,12 +26978,12 @@ pub struct ECommerceOrder {
     )]
     pub promos: Vec<ECommerceOrderPromos>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_address: Option<ShippingAddress>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26807,7 +26992,7 @@ pub struct ECommerceOrder {
     )]
     pub shipping_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26816,12 +27001,12 @@ pub struct ECommerceOrder {
     )]
     pub tax_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking_code: Option<TrackingCode>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26835,7 +27020,7 @@ pub struct ECommerceOrder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderLineItemData {
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -26844,7 +27029,7 @@ pub struct ECommerceOrderLineItemData {
     )]
     pub discount: f64,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -26853,7 +27038,7 @@ pub struct ECommerceOrderLineItemData {
     )]
     pub price: f64,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -26862,7 +27047,7 @@ pub struct ECommerceOrderLineItemData {
     )]
     pub product_id: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -26871,7 +27056,7 @@ pub struct ECommerceOrderLineItemData {
     )]
     pub product_variant_id: String,
     /**
-     * Information about a specific order line.
+    * Information about a specific order line.
      */
     #[serde(
         default,
@@ -26885,12 +27070,12 @@ pub struct ECommerceOrderLineItemData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderData {
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_address: Option<BillingAddress>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26899,7 +27084,7 @@ pub struct ECommerceOrderData {
     )]
     pub campaign_id: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26908,7 +27093,7 @@ pub struct ECommerceOrderData {
     )]
     pub cancelled_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26917,12 +27102,12 @@ pub struct ECommerceOrderData {
     )]
     pub currency_code: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<ECommerceCartCustomer>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26931,7 +27116,7 @@ pub struct ECommerceOrderData {
     )]
     pub discount_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26940,7 +27125,7 @@ pub struct ECommerceOrderData {
     )]
     pub financial_status: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26949,7 +27134,7 @@ pub struct ECommerceOrderData {
     )]
     pub fulfillment_status: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26958,7 +27143,7 @@ pub struct ECommerceOrderData {
     )]
     pub landing_site: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26967,7 +27152,7 @@ pub struct ECommerceOrderData {
     )]
     pub lines: Vec<ECommerceOrderLineItemData>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26976,7 +27161,7 @@ pub struct ECommerceOrderData {
     )]
     pub order_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26985,12 +27170,12 @@ pub struct ECommerceOrderData {
     )]
     pub order_url: String,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outreach: Option<ECommerceOrderOutreach>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -26999,7 +27184,7 @@ pub struct ECommerceOrderData {
     )]
     pub processed_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -27008,12 +27193,12 @@ pub struct ECommerceOrderData {
     )]
     pub promos: Vec<ECommerceOrderPromos>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_address: Option<ShippingAddress>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -27022,7 +27207,7 @@ pub struct ECommerceOrderData {
     )]
     pub shipping_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -27031,12 +27216,12 @@ pub struct ECommerceOrderData {
     )]
     pub tax_total: f64,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking_code: Option<TrackingCode>,
     /**
-     * Information about a specific order.
+    * Information about a specific order.
      */
     #[serde(
         default,
@@ -27050,7 +27235,7 @@ pub struct ECommerceOrderData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrderLines {
     /**
-     * A collection of an order's line items.
+    * A collection of an order's line items.
      */
     #[serde(
         default,
@@ -27060,7 +27245,7 @@ pub struct OrderLines {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of an order's line items.
+    * A collection of an order's line items.
      */
     #[serde(
         default,
@@ -27069,7 +27254,7 @@ pub struct OrderLines {
     )]
     pub lines: Vec<Lines>,
     /**
-     * A collection of an order's line items.
+    * A collection of an order's line items.
      */
     #[serde(
         default,
@@ -27078,7 +27263,7 @@ pub struct OrderLines {
     )]
     pub order_id: String,
     /**
-     * A collection of an order's line items.
+    * A collection of an order's line items.
      */
     #[serde(
         default,
@@ -27087,7 +27272,7 @@ pub struct OrderLines {
     )]
     pub store_id: String,
     /**
-     * A collection of an order's line items.
+    * A collection of an order's line items.
      */
     #[serde(
         default,
@@ -27101,7 +27286,7 @@ pub struct OrderLines {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Variants {
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27111,7 +27296,7 @@ pub struct Variants {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27120,7 +27305,7 @@ pub struct Variants {
     )]
     pub backorders: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27129,7 +27314,7 @@ pub struct Variants {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27138,7 +27323,7 @@ pub struct Variants {
     )]
     pub id: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27147,7 +27332,7 @@ pub struct Variants {
     )]
     pub image_url: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27156,7 +27341,7 @@ pub struct Variants {
     )]
     pub inventory_quantity: i64,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27165,7 +27350,7 @@ pub struct Variants {
     )]
     pub price: f64,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27174,7 +27359,7 @@ pub struct Variants {
     )]
     pub sku: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27183,7 +27368,7 @@ pub struct Variants {
     )]
     pub title: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27192,7 +27377,7 @@ pub struct Variants {
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27201,7 +27386,7 @@ pub struct Variants {
     )]
     pub url: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27215,7 +27400,7 @@ pub struct Variants {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Images {
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27225,7 +27410,7 @@ pub struct Images {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27234,7 +27419,7 @@ pub struct Images {
     )]
     pub id: String,
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27243,7 +27428,7 @@ pub struct Images {
     )]
     pub url: String,
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27257,7 +27442,7 @@ pub struct Images {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProduct {
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27267,7 +27452,7 @@ pub struct ECommerceProduct {
     )]
     pub links: Vec<Links>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27276,7 +27461,7 @@ pub struct ECommerceProduct {
     )]
     pub currency_code: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27285,7 +27470,7 @@ pub struct ECommerceProduct {
     )]
     pub description: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27294,7 +27479,7 @@ pub struct ECommerceProduct {
     )]
     pub handle: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27303,7 +27488,7 @@ pub struct ECommerceProduct {
     )]
     pub id: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27312,7 +27497,7 @@ pub struct ECommerceProduct {
     )]
     pub image_url: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27321,7 +27506,7 @@ pub struct ECommerceProduct {
     )]
     pub images: Vec<Images>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27330,7 +27515,7 @@ pub struct ECommerceProduct {
     )]
     pub published_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27339,7 +27524,7 @@ pub struct ECommerceProduct {
     )]
     pub title: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27349,7 +27534,7 @@ pub struct ECommerceProduct {
     )]
     pub type_: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27358,7 +27543,7 @@ pub struct ECommerceProduct {
     )]
     pub url: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27367,7 +27552,7 @@ pub struct ECommerceProduct {
     )]
     pub variants: Vec<Variants>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27381,7 +27566,7 @@ pub struct ECommerceProduct {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProductsData {
     /**
-     * A collection of a store's products.
+    * A collection of a store's products.
      */
     #[serde(
         default,
@@ -27391,7 +27576,7 @@ pub struct ProductsData {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of a store's products.
+    * A collection of a store's products.
      */
     #[serde(
         default,
@@ -27400,7 +27585,7 @@ pub struct ProductsData {
     )]
     pub products: Vec<ECommerceProduct>,
     /**
-     * A collection of a store's products.
+    * A collection of a store's products.
      */
     #[serde(
         default,
@@ -27409,7 +27594,7 @@ pub struct ProductsData {
     )]
     pub store_id: String,
     /**
-     * A collection of a store's products.
+    * A collection of a store's products.
      */
     #[serde(
         default,
@@ -27423,7 +27608,7 @@ pub struct ProductsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductImage {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -27432,7 +27617,7 @@ pub struct ECommerceProductImage {
     )]
     pub id: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -27441,7 +27626,7 @@ pub struct ECommerceProductImage {
     )]
     pub url: String,
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27455,7 +27640,7 @@ pub struct ECommerceProductImage {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductData {
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27464,7 +27649,7 @@ pub struct ECommerceProductData {
     )]
     pub description: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27473,7 +27658,7 @@ pub struct ECommerceProductData {
     )]
     pub handle: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -27482,7 +27667,7 @@ pub struct ECommerceProductData {
     )]
     pub id: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27491,7 +27676,7 @@ pub struct ECommerceProductData {
     )]
     pub image_url: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27500,7 +27685,7 @@ pub struct ECommerceProductData {
     )]
     pub images: Vec<ECommerceProductImage>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27509,7 +27694,7 @@ pub struct ECommerceProductData {
     )]
     pub published_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -27518,7 +27703,7 @@ pub struct ECommerceProductData {
     )]
     pub title: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27528,7 +27713,7 @@ pub struct ECommerceProductData {
     )]
     pub type_: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27537,7 +27722,7 @@ pub struct ECommerceProductData {
     )]
     pub url: String,
     /**
-     * An array of the product's variants. At least one variant is required for each product. A variant can use the same `id` and `title` as the parent product.
+    * An array of the product's variants. At least one variant is required for each product. A variant can use the same `id` and `title` as the parent product.
      */
     #[serde(
         default,
@@ -27546,7 +27731,7 @@ pub struct ECommerceProductData {
     )]
     pub variants: Vec<ECommerceProductVariant>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27560,7 +27745,7 @@ pub struct ECommerceProductData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductVariantData {
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27569,7 +27754,7 @@ pub struct ECommerceProductVariantData {
     )]
     pub backorders: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27578,7 +27763,7 @@ pub struct ECommerceProductVariantData {
     )]
     pub image_url: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27587,7 +27772,7 @@ pub struct ECommerceProductVariantData {
     )]
     pub inventory_quantity: i64,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27596,7 +27781,7 @@ pub struct ECommerceProductVariantData {
     )]
     pub price: f64,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27605,7 +27790,7 @@ pub struct ECommerceProductVariantData {
     )]
     pub sku: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27614,7 +27799,7 @@ pub struct ECommerceProductVariantData {
     )]
     pub title: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27623,7 +27808,7 @@ pub struct ECommerceProductVariantData {
     )]
     pub url: String,
     /**
-     * Information about a specific product variant.
+    * Information about a specific product variant.
      */
     #[serde(
         default,
@@ -27637,7 +27822,7 @@ pub struct ECommerceProductVariantData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductImageData {
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27646,7 +27831,7 @@ pub struct ECommerceProductImageData {
     )]
     pub id: String,
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27655,7 +27840,7 @@ pub struct ECommerceProductImageData {
     )]
     pub url: String,
     /**
-     * Information about a specific product image.
+    * Information about a specific product image.
      */
     #[serde(
         default,
@@ -27669,7 +27854,7 @@ pub struct ECommerceProductImageData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductDataType {
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27678,7 +27863,7 @@ pub struct ECommerceProductDataType {
     )]
     pub description: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27687,7 +27872,7 @@ pub struct ECommerceProductDataType {
     )]
     pub handle: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27696,7 +27881,7 @@ pub struct ECommerceProductDataType {
     )]
     pub image_url: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27705,7 +27890,7 @@ pub struct ECommerceProductDataType {
     )]
     pub images: Vec<ECommerceProductImageData>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27714,7 +27899,7 @@ pub struct ECommerceProductDataType {
     )]
     pub published_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27723,7 +27908,7 @@ pub struct ECommerceProductDataType {
     )]
     pub title: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27733,7 +27918,7 @@ pub struct ECommerceProductDataType {
     )]
     pub type_: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27742,7 +27927,7 @@ pub struct ECommerceProductDataType {
     )]
     pub url: String,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27751,7 +27936,7 @@ pub struct ECommerceProductDataType {
     )]
     pub variants: Vec<ECommerceProductVariantData>,
     /**
-     * Information about a specific product.
+    * Information about a specific product.
      */
     #[serde(
         default,
@@ -27765,7 +27950,7 @@ pub struct ECommerceProductDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceProductVariants {
     /**
-     * A collection of a product's variants.
+    * A collection of a product's variants.
      */
     #[serde(
         default,
@@ -27775,7 +27960,7 @@ pub struct EcommerceProductVariants {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of a product's variants.
+    * A collection of a product's variants.
      */
     #[serde(
         default,
@@ -27784,7 +27969,7 @@ pub struct EcommerceProductVariants {
     )]
     pub product_id: String,
     /**
-     * A collection of a product's variants.
+    * A collection of a product's variants.
      */
     #[serde(
         default,
@@ -27793,7 +27978,7 @@ pub struct EcommerceProductVariants {
     )]
     pub store_id: String,
     /**
-     * A collection of a product's variants.
+    * A collection of a product's variants.
      */
     #[serde(
         default,
@@ -27802,7 +27987,7 @@ pub struct EcommerceProductVariants {
     )]
     pub total_items: i64,
     /**
-     * A collection of a product's variants.
+    * A collection of a product's variants.
      */
     #[serde(
         default,
@@ -27816,7 +28001,7 @@ pub struct EcommerceProductVariants {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceProductImages {
     /**
-     * A collection of a product's images.
+    * A collection of a product's images.
      */
     #[serde(
         default,
@@ -27826,7 +28011,7 @@ pub struct EcommerceProductImages {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of a product's images.
+    * A collection of a product's images.
      */
     #[serde(
         default,
@@ -27835,7 +28020,7 @@ pub struct EcommerceProductImages {
     )]
     pub images: Vec<Images>,
     /**
-     * A collection of a product's images.
+    * A collection of a product's images.
      */
     #[serde(
         default,
@@ -27844,7 +28029,7 @@ pub struct EcommerceProductImages {
     )]
     pub product_id: String,
     /**
-     * A collection of a product's images.
+    * A collection of a product's images.
      */
     #[serde(
         default,
@@ -27853,7 +28038,7 @@ pub struct EcommerceProductImages {
     )]
     pub store_id: String,
     /**
-     * A collection of a product's images.
+    * A collection of a product's images.
      */
     #[serde(
         default,
@@ -27866,12 +28051,12 @@ pub struct EcommerceProductImages {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Results {
     /**
-     * A summary of an individual campaign's settings and content.
+    * A summary of an individual campaign's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub campaign: Option<Campaign>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -27885,7 +28070,7 @@ pub struct Results {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Campaigns {
     /**
-     * Campaigns and Snippets found for given search term.
+    * Campaigns and Snippets found for given search term.
      */
     #[serde(
         default,
@@ -27895,7 +28080,7 @@ pub struct Campaigns {
     )]
     pub links: Vec<Links>,
     /**
-     * Campaigns and Snippets found for given search term.
+    * Campaigns and Snippets found for given search term.
      */
     #[serde(
         default,
@@ -27904,7 +28089,7 @@ pub struct Campaigns {
     )]
     pub results: Vec<Results>,
     /**
-     * Campaigns and Snippets found for given search term.
+    * Campaigns and Snippets found for given search term.
      */
     #[serde(
         default,
@@ -27918,7 +28103,7 @@ pub struct Campaigns {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExactMatches {
     /**
-     * Exact matches of the provided search query.
+    * Exact matches of the provided search query.
      */
     #[serde(
         default,
@@ -27927,7 +28112,7 @@ pub struct ExactMatches {
     )]
     pub members: Vec<ListMembersData>,
     /**
-     * Exact matches of the provided search query.
+    * Exact matches of the provided search query.
      */
     #[serde(
         default,
@@ -27941,7 +28126,7 @@ pub struct ExactMatches {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullSearch {
     /**
-     * Partial matches of the provided search query.
+    * Partial matches of the provided search query.
      */
     #[serde(
         default,
@@ -27950,7 +28135,7 @@ pub struct FullSearch {
     )]
     pub members: Vec<ListMembersData>,
     /**
-     * Partial matches of the provided search query.
+    * Partial matches of the provided search query.
      */
     #[serde(
         default,
@@ -27964,7 +28149,7 @@ pub struct FullSearch {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MembersData {
     /**
-     * Members found for given search term
+    * Members found for given search term
      */
     #[serde(
         default,
@@ -27974,12 +28159,12 @@ pub struct MembersData {
     )]
     pub links: Vec<Links>,
     /**
-     * Members found for given search term
+    * Members found for given search term
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exact_matches: Option<ExactMatches>,
     /**
-     * Members found for given search term
+    * Members found for given search term
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub full_search: Option<FullSearch>,
@@ -27989,7 +28174,7 @@ pub struct MembersData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiHealthStatus {
     /**
-     * API health status.
+    * API health status.
      */
     #[serde(
         default,
@@ -28002,7 +28187,8 @@ pub struct ApiHealthStatus {
 /**
  * Returns files sorted by the specified field.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetAllFacebookAdsSortField {
     #[serde(rename = "created_at")]
     CreatedAt,
@@ -28039,7 +28225,8 @@ impl GetAllFacebookAdsSortField {
 /**
  * Supported Campaign, Ad, Page type
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OutreachType {
     #[serde(rename = "absplit")]
     Absplit,
@@ -28109,7 +28296,8 @@ impl OutreachType {
 /**
  * Campaign, Ad, or Page status
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OutreachStatus {
     #[serde(rename = "active")]
     Active,
@@ -28188,7 +28376,7 @@ impl OutreachStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummaryEcommerce {
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -28197,7 +28385,7 @@ pub struct FacebookAdsReportSummaryEcommerce {
     )]
     pub average_order_revenue: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28206,7 +28394,7 @@ pub struct FacebookAdsReportSummaryEcommerce {
     )]
     pub currency_code: String,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -28219,7 +28407,7 @@ pub struct FacebookAdsReportSummaryEcommerce {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummary {
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -28228,7 +28416,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub click_rate: f64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28237,7 +28425,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub clicks: i64,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -28248,7 +28436,7 @@ pub struct FacebookAdsReportSummary {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<FacebookAdsReportSummaryEcommerce>,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28257,7 +28445,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub engagements: i64,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -28266,7 +28454,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub impressions: f64,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -28275,7 +28463,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub open_rate: f64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28284,7 +28472,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub opens: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28293,7 +28481,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub reach: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28302,7 +28490,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub subscriber_clicks: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28311,7 +28499,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub subscribes: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28320,7 +28508,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub total_sent: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28329,7 +28517,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub unique_opens: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28338,7 +28526,7 @@ pub struct FacebookAdsReportSummary {
     )]
     pub unique_visits: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28352,7 +28540,7 @@ pub struct FacebookAdsReportSummary {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsList {
     /**
-     * List settings for the outreach
+    * List settings for the outreach
      */
     #[serde(
         default,
@@ -28361,7 +28549,7 @@ pub struct FacebookAdsList {
     )]
     pub list_id: String,
     /**
-     * List settings for the outreach
+    * List settings for the outreach
      */
     #[serde(
         default,
@@ -28369,7 +28557,7 @@ pub struct FacebookAdsList {
     )]
     pub list_is_active: bool,
     /**
-     * List settings for the outreach
+    * List settings for the outreach
      */
     #[serde(
         default,
@@ -28378,7 +28566,7 @@ pub struct FacebookAdsList {
     )]
     pub list_name: String,
     /**
-     * List settings for the outreach
+    * List settings for the outreach
      */
     #[serde(
         default,
@@ -28387,12 +28575,12 @@ pub struct FacebookAdsList {
     )]
     pub recipient_count: i64,
     /**
-     * List settings for the outreach
+    * List settings for the outreach
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
     /**
-     * List settings for the outreach
+    * List settings for the outreach
      */
     #[serde(
         default,
@@ -28405,7 +28593,7 @@ pub struct FacebookAdsList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAds {
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -28414,7 +28602,7 @@ pub struct FacebookAds {
     )]
     pub canceled_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -28423,7 +28611,7 @@ pub struct FacebookAds {
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -28431,7 +28619,7 @@ pub struct FacebookAds {
     )]
     pub has_segment: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28440,7 +28628,7 @@ pub struct FacebookAds {
     )]
     pub id: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28449,7 +28637,7 @@ pub struct FacebookAds {
     )]
     pub name: String,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -28458,14 +28646,14 @@ pub struct FacebookAds {
     )]
     pub published_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * List settings for the outreach
+    * List settings for the outreach
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<FacebookAdsList>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<FacebookAdsReportSummary>,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -28473,7 +28661,7 @@ pub struct FacebookAds {
     )]
     pub show_report: bool,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -28482,12 +28670,12 @@ pub struct FacebookAds {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Campaign, Ad, or Page status
+    * Campaign, Ad, or Page status
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<OutreachStatus>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28496,12 +28684,12 @@ pub struct FacebookAds {
     )]
     pub thumbnail: String,
     /**
-     * Supported Campaign, Ad, Page type
+    * Supported Campaign, Ad, Page type
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OutreachType>,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -28510,7 +28698,7 @@ pub struct FacebookAds {
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28523,7 +28711,7 @@ pub struct FacebookAds {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsData {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28532,7 +28720,7 @@ pub struct FacebookAdsData {
     )]
     pub email_source_name: String,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -28541,7 +28729,7 @@ pub struct FacebookAdsData {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -28549,7 +28737,7 @@ pub struct FacebookAdsData {
     )]
     pub needs_attention: bool,
     /**
-     * The date and time that the account was created in ISO 8601 format.
+    * The date and time that the account was created in ISO 8601 format.
      */
     #[serde(
         default,
@@ -28558,7 +28746,7 @@ pub struct FacebookAdsData {
     )]
     pub paused_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -28571,7 +28759,7 @@ pub struct FacebookAdsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
-     * Channel settings
+    * Channel settings
      */
     #[serde(
         default,
@@ -28579,7 +28767,7 @@ pub struct Channel {
     )]
     pub fb_placement_audience: bool,
     /**
-     * Channel settings
+    * Channel settings
      */
     #[serde(
         default,
@@ -28587,7 +28775,7 @@ pub struct Channel {
     )]
     pub fb_placement_feed: bool,
     /**
-     * Channel settings
+    * Channel settings
      */
     #[serde(
         default,
@@ -28600,7 +28788,7 @@ pub struct Channel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsFeedback {
     /**
-     * Check if this ad is connected to a facebook page
+    * Check if this ad is connected to a facebook page
      */
     #[serde(
         default,
@@ -28609,7 +28797,7 @@ pub struct FacebookAdsFeedback {
     )]
     pub audience: String,
     /**
-     * Check if this ad is connected to a facebook page
+    * Check if this ad is connected to a facebook page
      */
     #[serde(
         default,
@@ -28618,7 +28806,7 @@ pub struct FacebookAdsFeedback {
     )]
     pub budget: String,
     /**
-     * Check if this ad is connected to a facebook page
+    * Check if this ad is connected to a facebook page
      */
     #[serde(
         default,
@@ -28627,7 +28815,7 @@ pub struct FacebookAdsFeedback {
     )]
     pub compliance: String,
     /**
-     * Check if this ad is connected to a facebook page
+    * Check if this ad is connected to a facebook page
      */
     #[serde(
         default,
@@ -28641,7 +28829,7 @@ pub struct FacebookAdsFeedback {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Site {
     /**
-     * Connected Site
+    * Connected Site
      */
     #[serde(
         default,
@@ -28650,7 +28838,7 @@ pub struct Site {
     )]
     pub id: i64,
     /**
-     * Connected Site
+    * Connected Site
      */
     #[serde(
         default,
@@ -28659,7 +28847,7 @@ pub struct Site {
     )]
     pub name: String,
     /**
-     * Connected Site
+    * Connected Site
      */
     #[serde(
         default,
@@ -28672,7 +28860,8 @@ pub struct Site {
 /**
  * Type of the audience
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FacebookAdsAudienceType {
     #[serde(rename = "Custom Audience")]
     CustomAudience,
@@ -28709,7 +28898,8 @@ impl FacebookAdsAudienceType {
 /**
  * List or Facebook based audience
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SourceType {
     #[serde(rename = "facebook")]
     Facebook,
@@ -28743,7 +28933,7 @@ impl SourceType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailSource {
     /**
-     * Whether the webhook is triggered when a list subscriber is added.
+    * Whether the webhook is triggered when a list subscriber is added.
      */
     #[serde(
         default,
@@ -28751,7 +28941,7 @@ pub struct EmailSource {
     )]
     pub is_segment: bool,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28760,7 +28950,7 @@ pub struct EmailSource {
     )]
     pub list_name: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28769,7 +28959,7 @@ pub struct EmailSource {
     )]
     pub name: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28778,7 +28968,7 @@ pub struct EmailSource {
     )]
     pub segment_type: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28792,7 +28982,7 @@ pub struct EmailSource {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAudienceTargetingSpecsLocations {
     /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     #[serde(
         default,
@@ -28801,7 +28991,7 @@ pub struct FacebookAdsAudienceTargetingSpecsLocations {
     )]
     pub cities: Vec<String>,
     /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     #[serde(
         default,
@@ -28810,7 +29000,7 @@ pub struct FacebookAdsAudienceTargetingSpecsLocations {
     )]
     pub countries: Vec<String>,
     /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     #[serde(
         default,
@@ -28819,7 +29009,7 @@ pub struct FacebookAdsAudienceTargetingSpecsLocations {
     )]
     pub regions: Vec<String>,
     /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     #[serde(
         default,
@@ -28832,7 +29022,7 @@ pub struct FacebookAdsAudienceTargetingSpecsLocations {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAudienceTargetingSpecsInterests {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28845,7 +29035,7 @@ pub struct FacebookAdsAudienceTargetingSpecsInterests {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TargetingSpecs {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28862,7 +29052,7 @@ pub struct TargetingSpecs {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub locations: Option<FacebookAdsAudienceTargetingSpecsLocations>,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28871,7 +29061,7 @@ pub struct TargetingSpecs {
     )]
     pub max_age: i64,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28885,12 +29075,12 @@ pub struct TargetingSpecs {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Audience {
     /**
-     * Audience settings
+    * Audience settings
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_source: Option<EmailSource>,
     /**
-     * Audience settings
+    * Audience settings
      */
     #[serde(
         default,
@@ -28898,7 +29088,7 @@ pub struct Audience {
     )]
     pub include_source_in_target: bool,
     /**
-     * Audience settings
+    * Audience settings
      */
     #[serde(
         default,
@@ -28907,17 +29097,17 @@ pub struct Audience {
     )]
     pub lookalike_country_code: String,
     /**
-     * Audience settings
+    * Audience settings
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source_type: Option<SourceType>,
     /**
-     * Audience settings
+    * Audience settings
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub targeting_specs: Option<TargetingSpecs>,
     /**
-     * Audience settings
+    * Audience settings
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<FacebookAdsAudienceType>,
@@ -28926,7 +29116,7 @@ pub struct Audience {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Budget {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28935,7 +29125,7 @@ pub struct Budget {
     )]
     pub currency_code: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -28944,7 +29134,7 @@ pub struct Budget {
     )]
     pub duration: i64,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -28957,7 +29147,7 @@ pub struct Budget {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Attachments {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28966,7 +29156,7 @@ pub struct Attachments {
     )]
     pub call_to_action: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28975,7 +29165,7 @@ pub struct Attachments {
     )]
     pub description: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28984,7 +29174,7 @@ pub struct Attachments {
     )]
     pub image_url: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -28993,7 +29183,7 @@ pub struct Attachments {
     )]
     pub link_url: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29012,7 +29202,7 @@ pub struct Content {
     )]
     pub attachments: Vec<Attachments>,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29021,7 +29211,7 @@ pub struct Content {
     )]
     pub call_to_action: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29030,7 +29220,7 @@ pub struct Content {
     )]
     pub description: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29039,7 +29229,7 @@ pub struct Content {
     )]
     pub image_url: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29048,7 +29238,7 @@ pub struct Content {
     )]
     pub link_url: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29057,7 +29247,7 @@ pub struct Content {
     )]
     pub message: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29071,32 +29261,32 @@ pub struct Content {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsDataType {
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audience: Option<Audience>,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub budget: Option<Budget>,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<Channel>,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content: Option<Content>,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub feedback: Option<FacebookAdsFeedback>,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(
         default,
@@ -29104,7 +29294,7 @@ pub struct FacebookAdsDataType {
     )]
     pub has_audience: bool,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(
         default,
@@ -29112,7 +29302,7 @@ pub struct FacebookAdsDataType {
     )]
     pub has_content: bool,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(
         default,
@@ -29120,7 +29310,7 @@ pub struct FacebookAdsDataType {
     )]
     pub is_connected: bool,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
@@ -29129,7 +29319,7 @@ pub struct FacebookAdsDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetFacebookAdsResponse {
     /**
-     * A list of link types and descriptions for the API schema documents.
+    * A list of link types and descriptions for the API schema documents.
      */
     #[serde(
         default,
@@ -29154,7 +29344,7 @@ pub struct FacebookAdsAllOf {
     #[serde(flatten)]
     pub facebook_ads_data: FacebookAdsData,
     /**
-     * A facebook ad.
+    * A facebook ad.
      */
     #[serde(flatten)]
     pub facebook_ads_data_type: FacebookAdsDataType,
@@ -29166,7 +29356,7 @@ pub struct FacebookAdsAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAllFacebookAdsResponse {
     /**
-     * Contains an array of facebook ads.
+    * Contains an array of facebook ads.
      */
     #[serde(
         default,
@@ -29176,7 +29366,7 @@ pub struct GetAllFacebookAdsResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * Contains an array of facebook ads.
+    * Contains an array of facebook ads.
      */
     #[serde(
         default,
@@ -29185,7 +29375,7 @@ pub struct GetAllFacebookAdsResponse {
     )]
     pub facebook_ads: Vec<FacebookAdsAllOf>,
     /**
-     * Contains an array of facebook ads.
+    * Contains an array of facebook ads.
      */
     #[serde(
         default,
@@ -29198,7 +29388,7 @@ pub struct GetAllFacebookAdsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummaryEcommerceData {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29207,7 +29397,7 @@ pub struct FacebookAdsReportSummaryEcommerceData {
     )]
     pub currency_code: String,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -29220,7 +29410,7 @@ pub struct FacebookAdsReportSummaryEcommerceData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CostPerClick {
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -29229,7 +29419,7 @@ pub struct CostPerClick {
     )]
     pub amount: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29242,7 +29432,7 @@ pub struct CostPerClick {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExtendedAt {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29251,7 +29441,7 @@ pub struct ExtendedAt {
     )]
     pub datetime: String,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29265,17 +29455,17 @@ pub struct ExtendedAt {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummaryData {
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub average_daily_budget: Option<CostPerClick>,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub average_order_amount: Option<CostPerClick>,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29284,7 +29474,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub click_rate: f64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29293,7 +29483,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub clicks: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29302,22 +29492,22 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub comments: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub cost_per_click: Option<CostPerClick>,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<FacebookAdsReportSummaryEcommerceData>,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub extended_at: Option<ExtendedAt>,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29326,7 +29516,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub first_time_buyers: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29334,7 +29524,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub has_extended_ad_duration: bool,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29343,7 +29533,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub impressions: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29352,7 +29542,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub likes: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29361,7 +29551,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub reach: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29370,7 +29560,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub return_on_investment: f64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29379,7 +29569,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub shares: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29388,7 +29578,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub total_orders: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29397,7 +29587,7 @@ pub struct FacebookAdsReportSummaryData {
     )]
     pub total_products_sold: i64,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(
         default,
@@ -29410,7 +29600,7 @@ pub struct FacebookAdsReportSummaryData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAudienceActivityClicks {
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -29419,7 +29609,7 @@ pub struct FacebookAdsAudienceActivityClicks {
     )]
     pub clicks: i64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29432,7 +29622,7 @@ pub struct FacebookAdsAudienceActivityClicks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Impressions {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29441,7 +29631,7 @@ pub struct Impressions {
     )]
     pub date: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -29454,7 +29644,7 @@ pub struct Impressions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Revenue {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29463,7 +29653,7 @@ pub struct Revenue {
     )]
     pub date: String,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -29498,7 +29688,7 @@ pub struct AudienceActivity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsDataTypeLinksObject {
     /**
-     * Audience settings
+    * Audience settings
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audience: Option<Audience>,
@@ -29507,12 +29697,12 @@ pub struct FacebookAdsDataTypeLinksObject {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub budget: Option<Budget>,
     /**
-     * Channel settings
+    * Channel settings
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<Channel>,
     /**
-     * Report summary of facebook ad
+    * Report summary of facebook ad
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<FacebookAdsReportSummaryData>,
@@ -29541,7 +29731,7 @@ pub struct GetReportingFacebookAdsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportingFacebookAdsResponse {
     /**
-     * A collection of Facebook ads.
+    * A collection of Facebook ads.
      */
     #[serde(
         default,
@@ -29551,7 +29741,7 @@ pub struct GetReportingFacebookAdsResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of Facebook ads.
+    * A collection of Facebook ads.
      */
     #[serde(
         default,
@@ -29560,7 +29750,7 @@ pub struct GetReportingFacebookAdsResponse {
     )]
     pub facebook_ads: Vec<GetReportingFacebookAdsResponseAllOf>,
     /**
-     * A collection of Facebook ads.
+    * A collection of Facebook ads.
      */
     #[serde(
         default,
@@ -29573,7 +29763,7 @@ pub struct GetReportingFacebookAdsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Visits {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29582,7 +29772,7 @@ pub struct Visits {
     )]
     pub date: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -29596,7 +29786,7 @@ pub struct Visits {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DailyStats {
     /**
-     * The clicks and visits data from the last seven days.
+    * The clicks and visits data from the last seven days.
      */
     #[serde(
         default,
@@ -29605,7 +29795,7 @@ pub struct DailyStats {
     )]
     pub clicks: Vec<Visits>,
     /**
-     * The clicks and visits data from the last seven days.
+    * The clicks and visits data from the last seven days.
      */
     #[serde(
         default,
@@ -29614,7 +29804,7 @@ pub struct DailyStats {
     )]
     pub unique_visits: Vec<Visits>,
     /**
-     * The clicks and visits data from the last seven days.
+    * The clicks and visits data from the last seven days.
      */
     #[serde(
         default,
@@ -29628,7 +29818,7 @@ pub struct DailyStats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WeeklyStats {
     /**
-     * The clicks and visits data from the last five weeks.
+    * The clicks and visits data from the last five weeks.
      */
     #[serde(
         default,
@@ -29637,7 +29827,7 @@ pub struct WeeklyStats {
     )]
     pub clicks: Vec<Visits>,
     /**
-     * The clicks and visits data from the last five weeks.
+    * The clicks and visits data from the last five weeks.
      */
     #[serde(
         default,
@@ -29646,7 +29836,7 @@ pub struct WeeklyStats {
     )]
     pub unique_visits: Vec<Visits>,
     /**
-     * The clicks and visits data from the last five weeks.
+    * The clicks and visits data from the last five weeks.
      */
     #[serde(
         default,
@@ -29659,12 +29849,12 @@ pub struct WeeklyStats {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageReportTimeseries {
     /**
-     * The clicks and visits data from the last seven days.
+    * The clicks and visits data from the last seven days.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub daily_stats: Option<DailyStats>,
     /**
-     * The clicks and visits data from the last five weeks.
+    * The clicks and visits data from the last five weeks.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub weekly_stats: Option<WeeklyStats>,
@@ -29673,7 +29863,7 @@ pub struct LandingPageReportTimeseries {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageReportEcommerce {
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -29682,7 +29872,7 @@ pub struct LandingPageReportEcommerce {
     )]
     pub average_order_revenue: f64,
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29691,7 +29881,7 @@ pub struct LandingPageReportEcommerce {
     )]
     pub currency_code: String,
     /**
-     * The display order for interests.
+    * The display order for interests.
      */
     #[serde(
         default,
@@ -29700,7 +29890,7 @@ pub struct LandingPageReportEcommerce {
     )]
     pub total_orders: i64,
     /**
-     * The price of a product variant.
+    * The price of a product variant.
      */
     #[serde(
         default,
@@ -29730,7 +29920,7 @@ pub struct Tag {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPages {
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29740,7 +29930,7 @@ pub struct LandingPages {
     )]
     pub links: Vec<Links>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29749,7 +29939,7 @@ pub struct LandingPages {
     )]
     pub clicks: i64,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29758,12 +29948,12 @@ pub struct LandingPages {
     )]
     pub conversion_rate: f64,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<LandingPageReportEcommerce>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29772,7 +29962,7 @@ pub struct LandingPages {
     )]
     pub id: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29781,7 +29971,7 @@ pub struct LandingPages {
     )]
     pub list_id: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29790,7 +29980,7 @@ pub struct LandingPages {
     )]
     pub list_name: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29799,7 +29989,7 @@ pub struct LandingPages {
     )]
     pub name: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29808,7 +29998,7 @@ pub struct LandingPages {
     )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29817,7 +30007,7 @@ pub struct LandingPages {
     )]
     pub signup_tags: Vec<Tag>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29826,7 +30016,7 @@ pub struct LandingPages {
     )]
     pub status: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29835,12 +30025,12 @@ pub struct LandingPages {
     )]
     pub subscribes: i64,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub timeseries: Option<LandingPageReportTimeseries>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29849,7 +30039,7 @@ pub struct LandingPages {
     )]
     pub title: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29858,7 +30048,7 @@ pub struct LandingPages {
     )]
     pub unique_visits: i64,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29867,7 +30057,7 @@ pub struct LandingPages {
     )]
     pub unpublished_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29876,7 +30066,7 @@ pub struct LandingPages {
     )]
     pub url: String,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29885,7 +30075,7 @@ pub struct LandingPages {
     )]
     pub visits: i64,
     /**
-     * A summary of an individual landing page's settings and content.
+    * A summary of an individual landing page's settings and content.
      */
     #[serde(
         default,
@@ -29899,7 +30089,7 @@ pub struct LandingPages {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportingLandingPagesResponse {
     /**
-     * A collection of landing pages.
+    * A collection of landing pages.
      */
     #[serde(
         default,
@@ -29909,7 +30099,7 @@ pub struct GetReportingLandingPagesResponse {
     )]
     pub links: Vec<Links>,
     /**
-     * A collection of landing pages.
+    * A collection of landing pages.
      */
     #[serde(
         default,
@@ -29918,7 +30108,7 @@ pub struct GetReportingLandingPagesResponse {
     )]
     pub landing_pages: Vec<LandingPages>,
     /**
-     * A collection of landing pages.
+    * A collection of landing pages.
      */
     #[serde(
         default,
@@ -29932,7 +30122,7 @@ pub struct GetReportingLandingPagesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifiedDomains {
     /**
-     * The verified domains currently on the account.
+    * The verified domains currently on the account.
      */
     #[serde(
         default,
@@ -29940,7 +30130,7 @@ pub struct VerifiedDomains {
     )]
     pub authenticated: bool,
     /**
-     * The verified domains currently on the account.
+    * The verified domains currently on the account.
      */
     #[serde(
         default,
@@ -29949,7 +30139,7 @@ pub struct VerifiedDomains {
     )]
     pub domain: String,
     /**
-     * The verified domains currently on the account.
+    * The verified domains currently on the account.
      */
     #[serde(
         default,
@@ -29958,7 +30148,7 @@ pub struct VerifiedDomains {
     )]
     pub verification_email: String,
     /**
-     * The verified domains currently on the account.
+    * The verified domains currently on the account.
      */
     #[serde(
         default,
@@ -29967,7 +30157,7 @@ pub struct VerifiedDomains {
     )]
     pub verification_sent: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The verified domains currently on the account.
+    * The verified domains currently on the account.
      */
     #[serde(
         default,
@@ -29980,7 +30170,7 @@ pub struct VerifiedDomains {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifyADomainSending {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,
@@ -29994,7 +30184,7 @@ pub struct VerifyADomainSending {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifiedDomainsData {
     /**
-     * The verified domains currently on the account.
+    * The verified domains currently on the account.
      */
     #[serde(
         default,
@@ -30003,7 +30193,7 @@ pub struct VerifiedDomainsData {
     )]
     pub domains: Vec<VerifiedDomains>,
     /**
-     * The verified domains currently on the account.
+    * The verified domains currently on the account.
      */
     #[serde(
         default,
@@ -30017,7 +30207,7 @@ pub struct VerifiedDomainsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifiedDomainsDataType {
     /**
-     * The name of the folder.
+    * The name of the folder.
      */
     #[serde(
         default,

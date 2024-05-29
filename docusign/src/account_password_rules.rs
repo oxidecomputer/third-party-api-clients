@@ -88,7 +88,9 @@ impl AccountPasswordRules {
     pub async fn password_rules_get(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UserPasswordRules>> {
-        let url = self.client.url("/v2.1/current_user/password_rules", None);
+        let url = self
+            .client
+            .url("/v2.1/current_user/password_rules", None);
         self.client
             .get(
                 &url,

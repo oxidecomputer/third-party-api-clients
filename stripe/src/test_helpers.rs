@@ -101,7 +101,9 @@ impl TestHelpers {
     pub async fn get_all_clocks(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::TestClock>>> {
-        let url = self.client.url("/v1/test_helpers/test_clocks", None);
+        let url = self
+            .client
+            .url("/v1/test_helpers/test_clocks", None);
         let crate::Response::<crate::types::GetTestHelpersClocksResponse> {
             mut status,
             mut headers,
@@ -179,7 +181,9 @@ impl TestHelpers {
      * <p>Creates a new test clock that can be attached to new customers and quotes.</p>
      */
     pub async fn post_clock(&self) -> ClientResult<crate::Response<crate::types::TestClock>> {
-        let url = self.client.url("/v1/test_helpers/test_clocks", None);
+        let url = self
+            .client
+            .url("/v1/test_helpers/test_clocks", None);
         self.client
             .post(
                 &url,

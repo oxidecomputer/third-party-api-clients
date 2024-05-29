@@ -78,7 +78,9 @@ impl Account {
      * <p>Create an external account for a given account.</p>
      */
     pub async fn post_bank(&self) -> ClientResult<crate::Response<crate::types::DataAnyOf>> {
-        let url = self.client.url("/v1/account/bank_accounts", None);
+        let url = self
+            .client
+            .url("/v1/account/bank_accounts", None);
         self.client
             .post(
                 &url,
@@ -194,7 +196,9 @@ impl Account {
     pub async fn get_capabilities(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Capability>>> {
-        let url = self.client.url("/v1/account/capabilities", None);
+        let url = self
+            .client
+            .url("/v1/account/capabilities", None);
         let resp: crate::Response<crate::types::ListAccountCapability> = self
             .client
             .get(
@@ -223,7 +227,9 @@ impl Account {
     pub async fn get_all_capabilities(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Capability>>> {
-        let url = self.client.url("/v1/account/capabilities", None);
+        let url = self
+            .client
+            .url("/v1/account/capabilities", None);
         let crate::Response::<crate::types::ListAccountCapability> {
             mut status,
             mut headers,
@@ -416,7 +422,9 @@ impl Account {
     pub async fn get_all_external(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::DataAnyOf>>> {
-        let url = self.client.url("/v1/account/external_accounts", None);
+        let url = self
+            .client
+            .url("/v1/account/external_accounts", None);
         let crate::Response::<crate::types::ExternalAccounts> {
             mut status,
             mut headers,
@@ -494,7 +502,9 @@ impl Account {
      * <p>Create an external account for a given account.</p>
      */
     pub async fn post_external(&self) -> ClientResult<crate::Response<crate::types::DataAnyOf>> {
-        let url = self.client.url("/v1/account/external_accounts", None);
+        let url = self
+            .client
+            .url("/v1/account/external_accounts", None);
         self.client
             .post(
                 &url,
@@ -606,7 +616,9 @@ impl Account {
      * <p><strong>You may only create login links for <a href="/docs/connect/express-accounts">Express accounts</a> connected to your platform</strong>.</p>
      */
     pub async fn post_login_link(&self) -> ClientResult<crate::Response<crate::types::LoginLink>> {
-        let url = self.client.url("/v1/account/login_links", None);
+        let url = self
+            .client
+            .url("/v1/account/login_links", None);
         self.client
             .post(
                 &url,

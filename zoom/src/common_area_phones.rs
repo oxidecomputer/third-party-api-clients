@@ -89,7 +89,9 @@ impl CommonAreaPhones {
     pub async fn list_all(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::CommonAreaPhones>>> {
-        let url = self.client.url("/phone/common_area_phones", None);
+        let url = self
+            .client
+            .url("/phone/common_area_phones", None);
         let crate::Response::<crate::types::ListCommonAreaPhonesResponse> {
             mut status,
             mut headers,
@@ -176,7 +178,9 @@ impl CommonAreaPhones {
         &self,
         body: &crate::types::AddCommonAreaPhoneRequest,
     ) -> ClientResult<crate::Response<crate::types::AddCommonAreaPhoneResponse>> {
-        let url = self.client.url("/phone/common_area_phones", None);
+        let url = self
+            .client
+            .url("/phone/common_area_phones", None);
         self.client
             .post(
                 &url,

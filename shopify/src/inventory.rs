@@ -2626,7 +2626,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-01
      */
     pub async fn deprecated_202001_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-01/locations.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-01/locations.json", None);
         self.client
             .get(
                 &url,
@@ -2730,7 +2732,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-04
      */
     pub async fn deprecated_202004_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-04/locations.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-04/locations.json", None);
         self.client
             .get(
                 &url,
@@ -2834,7 +2838,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-07
      */
     pub async fn deprecated_202007_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-07/locations.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-07/locations.json", None);
         self.client
             .get(
                 &url,
@@ -2938,7 +2944,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-10
      */
     pub async fn get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-10/locations.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-10/locations.json", None);
         self.client
             .get(
                 &url,
@@ -3042,7 +3050,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2021-01
      */
     pub async fn deprecated_202101_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2021-01/locations.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2021-01/locations.json", None);
         self.client
             .get(
                 &url,
@@ -3146,7 +3156,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-unstable
      */
     pub async fn deprecated_unstable_get_location(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/unstable/locations.json", None);
+        let url = self
+            .client
+            .url("/admin/api/unstable/locations.json", None);
         self.client
             .get(
                 &url,
@@ -3199,9 +3211,10 @@ impl Inventory {
     pub async fn deprecated_unstable_get_locations_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/locations/count.json", None);
+        let url = self.client.url(
+            "/admin/api/unstable/locations/count.json",
+            None,
+        );
         self.client
             .get(
                 &url,

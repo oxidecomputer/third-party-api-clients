@@ -899,7 +899,10 @@ impl Apps {
         app_slug: &str,
     ) -> ClientResult<crate::Response<crate::types::GitHubApp>> {
         let url = self.client.url(
-            &format!("/apps/{}", crate::progenitor_support::encode_path(app_slug),),
+            &format!(
+                "/apps/{}",
+                crate::progenitor_support::encode_path(app_slug),
+            ),
             None,
         );
         self.client
@@ -1073,7 +1076,9 @@ impl Apps {
     pub async fn list_all_plans(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
-        let url = self.client.url("/marketplace_listing/plans", None);
+        let url = self
+            .client
+            .url("/marketplace_listing/plans", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1285,7 +1290,9 @@ impl Apps {
     pub async fn list_all_plans_stubbed(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
-        let url = self.client.url("/marketplace_listing/stubbed/plans", None);
+        let url = self
+            .client
+            .url("/marketplace_listing/stubbed/plans", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1753,7 +1760,9 @@ impl Apps {
     pub async fn list_all_subscriptions_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
-        let url = self.client.url("/user/marketplace_purchases", None);
+        let url = self
+            .client
+            .url("/user/marketplace_purchases", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1819,7 +1828,9 @@ impl Apps {
     pub async fn list_all_subscriptions_for_authenticated_user_stubbed(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
-        let url = self.client.url("/user/marketplace_purchases/stubbed", None);
+        let url = self
+            .client
+            .url("/user/marketplace_purchases/stubbed", None);
         self.client
             .get_all_pages(
                 &url,

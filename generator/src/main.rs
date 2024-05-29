@@ -3301,26 +3301,14 @@ fn main() -> Result<()> {
     let host = args.opt_str("host").unwrap();
     let output_dir = args.opt_str("o").unwrap();
     let spec_link = args.opt_str("spec-link").unwrap();
-    let token_endpoint = if let Some(te) = args.opt_str("token-endpoint") {
-        te
-    } else {
-        String::new()
-    };
-    let user_consent_endpoint = if let Some(uce) = args.opt_str("user-consent-endpoint") {
-        uce
-    } else {
-        String::new()
-    };
+    let token_endpoint = args.opt_str("token-endpoint").unwrap_or_default();
+    let user_consent_endpoint = args.opt_str("user-consent-endpoint").unwrap_or_default();
 
     // Sort our tags and de-duplicate them.
     tags.sort_unstable();
     tags.dedup();
 
-    let add_post_header = if let Some(ph) = args.opt_str("add-post-header") {
-        ph
-    } else {
-        String::new()
-    };
+    let add_post_header = args.opt_str("add-post-header").unwrap_or_default();
 
     let fail = match gen(
         &api,
@@ -3392,7 +3380,7 @@ parse_link_header = "0.3.3"
 pem = {{ version = "1.1.0",  default-features = false, optional = true }}
 percent-encoding = "2.2"
 reqwest = {{ version = "0.12", default-features = false, features = ["json", "multipart"] }}
-reqwest-conditional-middleware = {{ git = "https://github.com/oxidecomputer/reqwest-conditional-middleware.git" }}
+reqwest-conditional-middleware = "0.3"
 reqwest-middleware = {{ version = "0.3", features = ["multipart"] }}
 reqwest-retry = "0.5"
 reqwest-tracing = "0.5"

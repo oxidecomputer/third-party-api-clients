@@ -5,7 +5,8 @@ use serde::{Deserialize, Serialize};
 /**
  * Payee:<br>`master` - master account holder pays.<br>`sub` - Sub account holder pays.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PayMode {
     #[serde(rename = "master")]
     #[default]
@@ -27,11 +28,12 @@ impl std::fmt::Display for PayMode {
     }
 }
 
+
 /// Account options object.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Options {
     /**
-     * Account options object.
+    * Account options object.
      */
     #[serde(
         default,
@@ -39,7 +41,7 @@ pub struct Options {
     )]
     pub billing_auto_renew: bool,
     /**
-     * Account options object.
+    * Account options object.
      */
     #[serde(
         default,
@@ -48,12 +50,12 @@ pub struct Options {
     )]
     pub meeting_connector_list: Vec<String>,
     /**
-     * Account options object.
+    * Account options object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pay_mode: Option<PayMode>,
     /**
-     * Account options object.
+    * Account options object.
      */
     #[serde(
         default,
@@ -62,7 +64,7 @@ pub struct Options {
     )]
     pub room_connector_list: Vec<String>,
     /**
-     * Account options object.
+    * Account options object.
      */
     #[serde(
         default,
@@ -70,7 +72,7 @@ pub struct Options {
     )]
     pub share_mc: bool,
     /**
-     * Account options object.
+    * Account options object.
      */
     #[serde(
         default,
@@ -83,7 +85,7 @@ pub struct Options {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Account {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -92,7 +94,7 @@ pub struct Account {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -101,7 +103,7 @@ pub struct Account {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -110,12 +112,12 @@ pub struct Account {
     )]
     pub last_name: String,
     /**
-     * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
+    * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<Options>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -124,7 +126,7 @@ pub struct Account {
     )]
     pub password: String,
     /**
-     * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
+    * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
      */
     #[serde(
         default,
@@ -137,7 +139,7 @@ pub struct Account {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Accounts {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -146,7 +148,7 @@ pub struct Accounts {
     )]
     pub account_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -155,7 +157,7 @@ pub struct Accounts {
     )]
     pub account_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -164,7 +166,7 @@ pub struct Accounts {
     )]
     pub account_type: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -173,7 +175,7 @@ pub struct Accounts {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -182,7 +184,7 @@ pub struct Accounts {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -191,7 +193,7 @@ pub struct Accounts {
     )]
     pub owner_email: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -200,7 +202,7 @@ pub struct Accounts {
     )]
     pub seats: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -209,7 +211,7 @@ pub struct Accounts {
     )]
     pub subscription_end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -223,7 +225,7 @@ pub struct Accounts {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountListItem {
     /**
-     * Account object in the account list.
+    * Account object in the account list.
      */
     #[serde(
         default,
@@ -240,7 +242,7 @@ pub struct Domains {}
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlan {
     /**
-     * Account plan object.
+    * Account plan object.
      */
     #[serde(
         default,
@@ -249,7 +251,7 @@ pub struct AccountPlan {
     )]
     pub hosts: i64,
     /**
-     * Account plan object.
+    * Account plan object.
      */
     #[serde(
         default,
@@ -264,7 +266,7 @@ pub struct AccountPlan {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanBase {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -273,7 +275,7 @@ pub struct PlanBase {
     )]
     pub hosts: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -288,7 +290,7 @@ pub struct PlanBase {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanAudio {
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
      */
     #[serde(
         default,
@@ -297,7 +299,7 @@ pub struct PlanAudio {
     )]
     pub callout_countries: String,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
      */
     #[serde(
         default,
@@ -306,7 +308,7 @@ pub struct PlanAudio {
     )]
     pub ddi_numbers: i64,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
      */
     #[serde(
         default,
@@ -315,7 +317,7 @@ pub struct PlanAudio {
     )]
     pub premium_countries: String,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
      */
     #[serde(
         default,
@@ -324,7 +326,7 @@ pub struct PlanAudio {
     )]
     pub tollfree_countries: String,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
      */
     #[serde(
         default,
@@ -339,7 +341,7 @@ pub struct PlanAudio {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlansPhonePlanBase {
     /**
-     * Additional phone base plans.
+    * Additional phone base plans.
      */
     #[serde(
         default,
@@ -348,7 +350,7 @@ pub struct AccountPlansPhonePlanBase {
     )]
     pub callout_countries: String,
     /**
-     * Additional phone base plans.
+    * Additional phone base plans.
      */
     #[serde(
         default,
@@ -362,7 +364,7 @@ pub struct AccountPlansPhonePlanBase {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanNumber {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -371,7 +373,7 @@ pub struct PlanNumber {
     )]
     pub hosts: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -386,12 +388,12 @@ pub struct PlanNumber {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhonePlan {
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_base: Option<AccountPlansPhonePlanBase>,
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     #[serde(
         default,
@@ -400,7 +402,7 @@ pub struct PhonePlan {
     )]
     pub plan_calling: Vec<PlanNumber>,
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     #[serde(
         default,
@@ -414,16 +416,16 @@ pub struct PhonePlan {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlans {
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_audio: Option<PlanAudio>,
     /**
-     * Account base plan object.
+    * Account base plan object.
      */
     pub plan_base: PlanBase,
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(
         default,
@@ -432,12 +434,12 @@ pub struct AccountPlans {
     )]
     pub plan_large_meeting: Vec<AccountPlan>,
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_phone: Option<PhonePlan>,
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(
         default,
@@ -446,12 +448,12 @@ pub struct AccountPlans {
     )]
     pub plan_recording: String,
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_room_connector: Option<AccountPlan>,
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(
         default,
@@ -460,7 +462,7 @@ pub struct AccountPlans {
     )]
     pub plan_webinar: Vec<AccountPlan>,
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_zoom_rooms: Option<AccountPlan>,
@@ -469,7 +471,8 @@ pub struct AccountPlans {
 /**
  * Determine how participants can join the audio portion of the meeting.<br>`both` - Telephony and VoIP.<br>`telephony` - Audio PSTN telephony only.<br>`voip` - VoIP only.<br>`thirdParty` - 3rd party audio conference.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AudioType {
     #[serde(rename = "both")]
     #[default]
@@ -497,11 +500,13 @@ impl std::fmt::Display for AudioType {
     }
 }
 
+
 /**
  * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
  *   
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RequirePasswordPmiMeetings {
     #[serde(rename = "all")]
     All,
@@ -539,7 +544,7 @@ impl RequirePasswordPmiMeetings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingPasswordRequirement {
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -548,7 +553,7 @@ pub struct MeetingPasswordRequirement {
     )]
     pub consecutive_characters_length: i64,
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -556,7 +561,7 @@ pub struct MeetingPasswordRequirement {
     )]
     pub have_letter: bool,
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -564,7 +569,7 @@ pub struct MeetingPasswordRequirement {
     )]
     pub have_number: bool,
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -572,7 +577,7 @@ pub struct MeetingPasswordRequirement {
     )]
     pub have_special_character: bool,
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -580,7 +585,7 @@ pub struct MeetingPasswordRequirement {
     )]
     pub have_upper_and_lower_characters: bool,
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -589,7 +594,7 @@ pub struct MeetingPasswordRequirement {
     )]
     pub length: i64,
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -597,7 +602,7 @@ pub struct MeetingPasswordRequirement {
     )]
     pub only_allow_numeric: bool,
     /**
-     * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -610,12 +615,12 @@ pub struct MeetingPasswordRequirement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScheduleMeeting {
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_type: Option<AudioType>,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -623,7 +628,7 @@ pub struct ScheduleMeeting {
     )]
     pub enforce_login: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -632,7 +637,7 @@ pub struct ScheduleMeeting {
     )]
     pub enforce_login_domains: String,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -640,7 +645,7 @@ pub struct ScheduleMeeting {
     )]
     pub enforce_login_with_domains: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -648,7 +653,7 @@ pub struct ScheduleMeeting {
     )]
     pub force_pmi_jbh_password: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -656,7 +661,7 @@ pub struct ScheduleMeeting {
     )]
     pub host_video: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -665,7 +670,7 @@ pub struct ScheduleMeeting {
     )]
     pub jbh_time: i64,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -673,12 +678,12 @@ pub struct ScheduleMeeting {
     )]
     pub join_before_host: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meeting_password_requirement: Option<MeetingPasswordRequirement>,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -686,7 +691,7 @@ pub struct ScheduleMeeting {
     )]
     pub not_store_meeting_topic: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -694,7 +699,7 @@ pub struct ScheduleMeeting {
     )]
     pub participant_video: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -702,7 +707,7 @@ pub struct ScheduleMeeting {
     )]
     pub personal_meeting: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -710,12 +715,12 @@ pub struct ScheduleMeeting {
     )]
     pub require_password_for_instant_meetings: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub require_password_for_pmi_meetings: Option<RequirePasswordPmiMeetings>,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -723,7 +728,7 @@ pub struct ScheduleMeeting {
     )]
     pub require_password_for_scheduled_meetings: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -731,7 +736,7 @@ pub struct ScheduleMeeting {
     )]
     pub require_password_for_scheduling_new_meetings: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -739,7 +744,7 @@ pub struct ScheduleMeeting {
     )]
     pub use_pmi_for_instant_meetings: bool,
     /**
-     * Account Settings: Schedule Meeting.
+    * Account Settings: Schedule Meeting.
      */
     #[serde(
         default,
@@ -751,7 +756,8 @@ pub struct ScheduleMeeting {
 /**
  * Play sound when participants join or leave.<br>`host` - Heard by host only.<br>`all` - Heard by host and all attendees.<br>`none` - Disable.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EntryExitChime {
     #[serde(rename = "all")]
     All,
@@ -788,7 +794,7 @@ impl EntryExitChime {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Files {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -797,7 +803,7 @@ pub struct Files {
     )]
     pub id: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -805,7 +811,7 @@ pub struct Files {
     )]
     pub is_default: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -814,7 +820,7 @@ pub struct Files {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -823,7 +829,7 @@ pub struct Files {
     )]
     pub size: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -838,7 +844,7 @@ pub struct Files {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VirtualBackgroundSettings {
     /**
-     * Settings to manage virtual background.
+    * Settings to manage virtual background.
      */
     #[serde(
         default,
@@ -846,7 +852,7 @@ pub struct VirtualBackgroundSettings {
     )]
     pub allow_upload_custom: bool,
     /**
-     * Settings to manage virtual background.
+    * Settings to manage virtual background.
      */
     #[serde(
         default,
@@ -854,7 +860,7 @@ pub struct VirtualBackgroundSettings {
     )]
     pub allow_videos: bool,
     /**
-     * Settings to manage virtual background.
+    * Settings to manage virtual background.
      */
     #[serde(
         default,
@@ -862,7 +868,7 @@ pub struct VirtualBackgroundSettings {
     )]
     pub enable: bool,
     /**
-     * Settings to manage virtual background.
+    * Settings to manage virtual background.
      */
     #[serde(
         default,
@@ -878,7 +884,8 @@ pub struct VirtualBackgroundSettings {
  *   `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
  *   
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WhoCanShareScreen {
     #[serde(rename = "all")]
     All,
@@ -913,7 +920,7 @@ impl WhoCanShareScreen {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InMeeting {
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -921,7 +928,7 @@ pub struct InMeeting {
     )]
     pub alert_guest_join: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -929,7 +936,7 @@ pub struct InMeeting {
     )]
     pub allow_live_streaming: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -937,7 +944,7 @@ pub struct InMeeting {
     )]
     pub allow_participants_to_rename: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -945,7 +952,7 @@ pub struct InMeeting {
     )]
     pub allow_show_zoom_windows: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -953,7 +960,7 @@ pub struct InMeeting {
     )]
     pub annotation: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -961,7 +968,7 @@ pub struct InMeeting {
     )]
     pub anonymous_question_answer: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -969,7 +976,7 @@ pub struct InMeeting {
     )]
     pub attendee_on_hold: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -977,7 +984,7 @@ pub struct InMeeting {
     )]
     pub auto_answer: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -985,7 +992,7 @@ pub struct InMeeting {
     )]
     pub auto_saving_chat: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -993,7 +1000,7 @@ pub struct InMeeting {
     )]
     pub breakout_room: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1001,7 +1008,7 @@ pub struct InMeeting {
     )]
     pub chat: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1009,7 +1016,7 @@ pub struct InMeeting {
     )]
     pub closed_caption: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1017,7 +1024,7 @@ pub struct InMeeting {
     )]
     pub co_host: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1025,7 +1032,7 @@ pub struct InMeeting {
     )]
     pub custom_data_center_regions: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1033,7 +1040,7 @@ pub struct InMeeting {
     )]
     pub custom_live_streaming_service: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1042,7 +1049,7 @@ pub struct InMeeting {
     )]
     pub custom_service_instructions: String,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1051,7 +1058,7 @@ pub struct InMeeting {
     )]
     pub data_center_regions: Vec<String>,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1060,7 +1067,7 @@ pub struct InMeeting {
     )]
     pub dscp_audio: i64,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1068,7 +1075,7 @@ pub struct InMeeting {
     )]
     pub dscp_marking: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1077,7 +1084,7 @@ pub struct InMeeting {
     )]
     pub dscp_video: i64,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1086,12 +1093,12 @@ pub struct InMeeting {
     )]
     pub e_2e_encryption: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub entry_exit_chime: Option<EntryExitChime>,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1099,7 +1106,7 @@ pub struct InMeeting {
     )]
     pub far_end_camera_control: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1107,7 +1114,7 @@ pub struct InMeeting {
     )]
     pub feedback: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1115,7 +1122,7 @@ pub struct InMeeting {
     )]
     pub file_transfer: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1123,7 +1130,7 @@ pub struct InMeeting {
     )]
     pub group_hd: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1131,7 +1138,7 @@ pub struct InMeeting {
     )]
     pub join_from_desktop: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1139,7 +1146,7 @@ pub struct InMeeting {
     )]
     pub join_from_mobile: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1147,7 +1154,7 @@ pub struct InMeeting {
     )]
     pub meeting_reactions: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1155,7 +1162,7 @@ pub struct InMeeting {
     )]
     pub original_audio: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1164,7 +1171,7 @@ pub struct InMeeting {
     )]
     pub p_2p_connetion: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1173,7 +1180,7 @@ pub struct InMeeting {
     )]
     pub p_2p_ports: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1181,7 +1188,7 @@ pub struct InMeeting {
     )]
     pub polling: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1190,7 +1197,7 @@ pub struct InMeeting {
     )]
     pub ports_range: String,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1198,7 +1205,7 @@ pub struct InMeeting {
     )]
     pub post_meeting_feedback: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1206,7 +1213,7 @@ pub struct InMeeting {
     )]
     pub private_chat: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1214,7 +1221,7 @@ pub struct InMeeting {
     )]
     pub record_play_own_voice: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1222,7 +1229,7 @@ pub struct InMeeting {
     )]
     pub remote_control: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1230,7 +1237,7 @@ pub struct InMeeting {
     )]
     pub request_permission_to_unmute: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1238,7 +1245,7 @@ pub struct InMeeting {
     )]
     pub screen_sharing: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1246,7 +1253,7 @@ pub struct InMeeting {
     )]
     pub sending_default_email_invites: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1254,7 +1261,7 @@ pub struct InMeeting {
     )]
     pub show_a_join_from_your_browser_link: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1262,7 +1269,7 @@ pub struct InMeeting {
     )]
     pub show_meeting_control_toolbar: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1270,7 +1277,7 @@ pub struct InMeeting {
     )]
     pub stereo_audio: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1278,7 +1285,7 @@ pub struct InMeeting {
     )]
     pub use_html_format_email: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1286,12 +1293,12 @@ pub struct InMeeting {
     )]
     pub virtual_background: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub virtual_background_settings: Option<VirtualBackgroundSettings>,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1299,7 +1306,7 @@ pub struct InMeeting {
     )]
     pub watermark: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1307,7 +1314,7 @@ pub struct InMeeting {
     )]
     pub webinar_question_answer: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1315,17 +1322,17 @@ pub struct InMeeting {
     )]
     pub whiteboard: bool,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub who_can_share_screen: Option<WhoCanShareScreen>,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub who_can_share_screen_when_someone_is_sharing: Option<WhoCanShareScreen>,
     /**
-     * Account Settings: In Meeting.
+    * Account Settings: In Meeting.
      */
     #[serde(
         default,
@@ -1338,7 +1345,7 @@ pub struct InMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailNotification {
     /**
-     * Account Settings: Notification.
+    * Account Settings: Notification.
      */
     #[serde(
         default,
@@ -1346,7 +1353,7 @@ pub struct EmailNotification {
     )]
     pub alternative_host_reminder: bool,
     /**
-     * Account Settings: Notification.
+    * Account Settings: Notification.
      */
     #[serde(
         default,
@@ -1354,7 +1361,7 @@ pub struct EmailNotification {
     )]
     pub cancel_meeting_reminder: bool,
     /**
-     * Account Settings: Notification.
+    * Account Settings: Notification.
      */
     #[serde(
         default,
@@ -1362,7 +1369,7 @@ pub struct EmailNotification {
     )]
     pub cloud_recording_avaliable_reminder: bool,
     /**
-     * Account Settings: Notification.
+    * Account Settings: Notification.
      */
     #[serde(
         default,
@@ -1370,7 +1377,7 @@ pub struct EmailNotification {
     )]
     pub jbh_reminder: bool,
     /**
-     * Account Settings: Notification.
+    * Account Settings: Notification.
      */
     #[serde(
         default,
@@ -1378,7 +1385,7 @@ pub struct EmailNotification {
     )]
     pub low_host_count_reminder: bool,
     /**
-     * Account Settings: Notification.
+    * Account Settings: Notification.
      */
     #[serde(
         default,
@@ -1391,7 +1398,7 @@ pub struct EmailNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ZoomRooms {
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1399,7 +1406,7 @@ pub struct ZoomRooms {
     )]
     pub auto_start_stop_scheduled_meetings: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1407,7 +1414,7 @@ pub struct ZoomRooms {
     )]
     pub cmr_for_instant_meeting: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1415,7 +1422,7 @@ pub struct ZoomRooms {
     )]
     pub force_private_meeting: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1423,7 +1430,7 @@ pub struct ZoomRooms {
     )]
     pub hide_host_information: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1431,7 +1438,7 @@ pub struct ZoomRooms {
     )]
     pub list_meetings_with_calendar: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1439,7 +1446,7 @@ pub struct ZoomRooms {
     )]
     pub start_airplay_manually: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1447,7 +1454,7 @@ pub struct ZoomRooms {
     )]
     pub ultrasonic: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1455,7 +1462,7 @@ pub struct ZoomRooms {
     )]
     pub upcoming_meeting_alert: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1463,7 +1470,7 @@ pub struct ZoomRooms {
     )]
     pub weekly_system_restart: bool,
     /**
-     * Account Settings: Zoom Rooms.
+    * Account Settings: Zoom Rooms.
      */
     #[serde(
         default,
@@ -1476,7 +1483,7 @@ pub struct ZoomRooms {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PasswordRequirement {
     /**
-     * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
+    * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
      */
     #[serde(
         default,
@@ -1485,7 +1492,7 @@ pub struct PasswordRequirement {
     )]
     pub consecutive_characters_length: i64,
     /**
-     * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
+    * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
      */
     #[serde(
         default,
@@ -1493,7 +1500,7 @@ pub struct PasswordRequirement {
     )]
     pub have_special_character: bool,
     /**
-     * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
+    * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
      */
     #[serde(
         default,
@@ -1502,7 +1509,7 @@ pub struct PasswordRequirement {
     )]
     pub minimum_password_length: i64,
     /**
-     * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
+    * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
      */
     #[serde(
         default,
@@ -1520,7 +1527,8 @@ pub struct PasswordRequirement {
  *   `sign_in_with_two_factor_auth_roles` field.
  *   
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SignInWithTwoFactorAuth {
     #[serde(rename = "all")]
     All,
@@ -1561,7 +1569,7 @@ impl SignInWithTwoFactorAuth {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Security {
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(
         default,
@@ -1569,7 +1577,7 @@ pub struct Security {
     )]
     pub admin_change_name_pic: bool,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(
         default,
@@ -1577,7 +1585,7 @@ pub struct Security {
     )]
     pub hide_billing_info: bool,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(
         default,
@@ -1585,12 +1593,12 @@ pub struct Security {
     )]
     pub import_photos_from_devices: bool,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub password_requirement: Option<PasswordRequirement>,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(
         default,
@@ -1599,7 +1607,7 @@ pub struct Security {
     )]
     pub sign_again_period_for_inactivity_on_client: i64,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(
         default,
@@ -1608,12 +1616,12 @@ pub struct Security {
     )]
     pub sign_again_period_for_inactivity_on_web: i64,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sign_in_with_two_factor_auth: Option<SignInWithTwoFactorAuth>,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(
         default,
@@ -1622,7 +1630,7 @@ pub struct Security {
     )]
     pub sign_in_with_two_factor_auth_groups: Vec<String>,
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     #[serde(
         default,
@@ -1635,7 +1643,8 @@ pub struct Security {
 /**
  * Automatic recording:<br>`local` - Record on local.<br>`cloud` -  Record on cloud.<br>`none` - Disabled.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AutoRecording {
     #[serde(rename = "cloud")]
     Cloud,
@@ -1673,7 +1682,7 @@ impl AutoRecording {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingPasswordRequirement {
     /**
-     * This object represents the minimum password requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum password requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -1681,7 +1690,7 @@ pub struct RecordingPasswordRequirement {
     )]
     pub have_letter: bool,
     /**
-     * This object represents the minimum password requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum password requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -1689,7 +1698,7 @@ pub struct RecordingPasswordRequirement {
     )]
     pub have_number: bool,
     /**
-     * This object represents the minimum password requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum password requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -1697,7 +1706,7 @@ pub struct RecordingPasswordRequirement {
     )]
     pub have_special_character: bool,
     /**
-     * This object represents the minimum password requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum password requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -1706,7 +1715,7 @@ pub struct RecordingPasswordRequirement {
     )]
     pub length: i64,
     /**
-     * This object represents the minimum password requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum password requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -1720,7 +1729,7 @@ pub struct RecordingPasswordRequirement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IpAddressAccessControl {
     /**
-     * Setting to allow cloud recording access only from specific IP address ranges.
+    * Setting to allow cloud recording access only from specific IP address ranges.
      *
      */
     #[serde(
@@ -1729,7 +1738,7 @@ pub struct IpAddressAccessControl {
     )]
     pub enable: bool,
     /**
-     * Setting to allow cloud recording access only from specific IP address ranges.
+    * Setting to allow cloud recording access only from specific IP address ranges.
      *
      */
     #[serde(
@@ -1743,7 +1752,7 @@ pub struct IpAddressAccessControl {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Settings {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -1751,7 +1760,7 @@ pub struct Settings {
     )]
     pub audio_file: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -1759,7 +1768,7 @@ pub struct Settings {
     )]
     pub cc_transcript_file: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -1767,7 +1776,7 @@ pub struct Settings {
     )]
     pub chat_file: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -1775,7 +1784,7 @@ pub struct Settings {
     )]
     pub chat_with_sender_email: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -1788,7 +1797,7 @@ pub struct Settings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Archive {
     /**
-     * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
+    * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
      */
     #[serde(
         default,
@@ -1796,12 +1805,12 @@ pub struct Archive {
     )]
     pub enable: bool,
     /**
-     * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
+    * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<Settings>,
     /**
-     * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
+    * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
      */
     #[serde(
         default,
@@ -1816,7 +1825,7 @@ pub struct Archive {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Recording {
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1824,7 +1833,7 @@ pub struct Recording {
     )]
     pub account_user_access_recording: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1832,12 +1841,12 @@ pub struct Recording {
     )]
     pub allow_recovery_deleted_cloud_recordings: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive: Option<Archive>,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1845,7 +1854,7 @@ pub struct Recording {
     )]
     pub auto_delete_cmr: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1854,12 +1863,12 @@ pub struct Recording {
     )]
     pub auto_delete_cmr_days: i64,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_recording: Option<AutoRecording>,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1867,7 +1876,7 @@ pub struct Recording {
     )]
     pub cloud_recording: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1875,7 +1884,7 @@ pub struct Recording {
     )]
     pub cloud_recording_download: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1883,7 +1892,7 @@ pub struct Recording {
     )]
     pub cloud_recording_download_host: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1891,12 +1900,12 @@ pub struct Recording {
     )]
     pub host_delete_cloud_recording: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ip_address_access_control: Option<IpAddressAccessControl>,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1904,7 +1913,7 @@ pub struct Recording {
     )]
     pub local_recording: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1912,7 +1921,7 @@ pub struct Recording {
     )]
     pub prevent_host_access_recording: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1920,7 +1929,7 @@ pub struct Recording {
     )]
     pub record_audio_file: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1928,7 +1937,7 @@ pub struct Recording {
     )]
     pub record_audio_file_each_participant: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1936,7 +1945,7 @@ pub struct Recording {
     )]
     pub record_gallery_view: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1944,7 +1953,7 @@ pub struct Recording {
     )]
     pub record_speaker_view: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1952,7 +1961,7 @@ pub struct Recording {
     )]
     pub recording_audio_transcript: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1960,12 +1969,12 @@ pub struct Recording {
     )]
     pub recording_disclaimer: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recording_password_requirement: Option<RecordingPasswordRequirement>,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1973,7 +1982,7 @@ pub struct Recording {
     )]
     pub required_password_for_existing_cloud_recordings: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1981,7 +1990,7 @@ pub struct Recording {
     )]
     pub save_chat_text: bool,
     /**
-     * Account Settings: Recording.
+    * Account Settings: Recording.
      */
     #[serde(
         default,
@@ -1994,7 +2003,7 @@ pub struct Recording {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TelephonyRegions {
     /**
-     * Indicates where most of the participants call into or call from duriing a meeting.
+    * Indicates where most of the participants call into or call from duriing a meeting.
      */
     #[serde(
         default,
@@ -2003,7 +2012,7 @@ pub struct TelephonyRegions {
     )]
     pub allowed_values: Vec<String>,
     /**
-     * Indicates where most of the participants call into or call from duriing a meeting.
+    * Indicates where most of the participants call into or call from duriing a meeting.
      */
     #[serde(
         default,
@@ -2017,7 +2026,7 @@ pub struct TelephonyRegions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Telephony {
     /**
-     * Account Settings: Telephony.
+    * Account Settings: Telephony.
      */
     #[serde(
         default,
@@ -2026,12 +2035,12 @@ pub struct Telephony {
     )]
     pub audio_conference_info: String,
     /**
-     * Account Settings: Telephony.
+    * Account Settings: Telephony.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub telephony_regions: Option<TelephonyRegions>,
     /**
-     * Account Settings: Telephony.
+    * Account Settings: Telephony.
      */
     #[serde(
         default,
@@ -2044,7 +2053,7 @@ pub struct Telephony {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Integration {
     /**
-     * Account Settings: Integration.
+    * Account Settings: Integration.
      */
     #[serde(
         default,
@@ -2053,7 +2062,7 @@ pub struct Integration {
     )]
     pub box_: bool,
     /**
-     * Account Settings: Integration.
+    * Account Settings: Integration.
      */
     #[serde(
         default,
@@ -2061,7 +2070,7 @@ pub struct Integration {
     )]
     pub dropbox: bool,
     /**
-     * Account Settings: Integration.
+    * Account Settings: Integration.
      */
     #[serde(
         default,
@@ -2069,7 +2078,7 @@ pub struct Integration {
     )]
     pub google_calendar: bool,
     /**
-     * Account Settings: Integration.
+    * Account Settings: Integration.
      */
     #[serde(
         default,
@@ -2077,7 +2086,7 @@ pub struct Integration {
     )]
     pub google_drive: bool,
     /**
-     * Account Settings: Integration.
+    * Account Settings: Integration.
      */
     #[serde(
         default,
@@ -2085,7 +2094,7 @@ pub struct Integration {
     )]
     pub kubi: bool,
     /**
-     * Account Settings: Integration.
+    * Account Settings: Integration.
      */
     #[serde(
         default,
@@ -2098,7 +2107,7 @@ pub struct Integration {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Feature {
     /**
-     * Account Settings: Feature.
+    * Account Settings: Feature.
      */
     #[serde(
         default,
@@ -2112,7 +2121,7 @@ pub struct Feature {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tsp {
     /**
-     * Account Settings: TSP.
+    * Account Settings: TSP.
      */
     #[serde(
         default,
@@ -2120,7 +2129,7 @@ pub struct Tsp {
     )]
     pub call_out: bool,
     /**
-     * Account Settings: TSP.
+    * Account Settings: TSP.
      */
     #[serde(
         default,
@@ -2129,7 +2138,7 @@ pub struct Tsp {
     )]
     pub call_out_countries: Vec<String>,
     /**
-     * Account Settings: TSP.
+    * Account Settings: TSP.
      */
     #[serde(
         default,
@@ -2137,7 +2146,7 @@ pub struct Tsp {
     )]
     pub display_toll_free_numbers: bool,
     /**
-     * Account Settings: TSP.
+    * Account Settings: TSP.
      */
     #[serde(
         default,
@@ -2149,7 +2158,7 @@ pub struct Tsp {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingStorageLocation {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -2161,7 +2170,7 @@ pub struct RecordingStorageLocation {
     )]
     pub allowed_values: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2207,7 +2216,7 @@ pub struct AccountSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateAccountSettingsTelephonyRegions {
     /**
-     * Indicates where most of the participants call into or call from duriing a meeting.
+    * Indicates where most of the participants call into or call from duriing a meeting.
      */
     #[serde(
         default,
@@ -2221,7 +2230,7 @@ pub struct UpdateAccountSettingsTelephonyRegions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateAccountSettingsTelephony {
     /**
-     * Account Settings Update: Telephony.
+    * Account Settings Update: Telephony.
      */
     #[serde(
         default,
@@ -2230,12 +2239,12 @@ pub struct UpdateAccountSettingsTelephony {
     )]
     pub audio_conference_info: String,
     /**
-     * Account Settings Update: Telephony.
+    * Account Settings Update: Telephony.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub telephony_regions: Option<UpdateAccountSettingsTelephonyRegions>,
     /**
-     * Account Settings Update: Telephony.
+    * Account Settings Update: Telephony.
      */
     #[serde(
         default,
@@ -2274,7 +2283,7 @@ pub struct UpdateAccountSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainsList {
     /**
-     * List of managed domains.
+    * List of managed domains.
      */
     #[serde(
         default,
@@ -2283,7 +2292,7 @@ pub struct DomainsList {
     )]
     pub domains: Vec<Domains>,
     /**
-     * List of managed domains.
+    * List of managed domains.
      */
     #[serde(
         default,
@@ -2297,7 +2306,7 @@ pub struct DomainsList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingContact {
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2306,7 +2315,7 @@ pub struct BillingContact {
     )]
     pub address: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2315,7 +2324,7 @@ pub struct BillingContact {
     )]
     pub apt: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2324,7 +2333,7 @@ pub struct BillingContact {
     )]
     pub city: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2333,7 +2342,7 @@ pub struct BillingContact {
     )]
     pub country: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2342,7 +2351,7 @@ pub struct BillingContact {
     )]
     pub email: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2351,7 +2360,7 @@ pub struct BillingContact {
     )]
     pub first_name: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2360,7 +2369,7 @@ pub struct BillingContact {
     )]
     pub last_name: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2369,7 +2378,7 @@ pub struct BillingContact {
     )]
     pub phone_number: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2378,7 +2387,7 @@ pub struct BillingContact {
     )]
     pub state: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2392,7 +2401,7 @@ pub struct BillingContact {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contact {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2401,7 +2410,7 @@ pub struct Contact {
     )]
     pub address: String,
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(
         default,
@@ -2410,7 +2419,7 @@ pub struct Contact {
     )]
     pub apt: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2419,7 +2428,7 @@ pub struct Contact {
     )]
     pub city: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2428,7 +2437,7 @@ pub struct Contact {
     )]
     pub country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2437,7 +2446,7 @@ pub struct Contact {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2446,7 +2455,7 @@ pub struct Contact {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2455,7 +2464,7 @@ pub struct Contact {
     )]
     pub last_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2464,7 +2473,7 @@ pub struct Contact {
     )]
     pub phone_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2473,7 +2482,7 @@ pub struct Contact {
     )]
     pub state: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2487,7 +2496,7 @@ pub struct Contact {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomQuestion {
     /**
-     * Custom Question.
+    * Custom Question.
      */
     #[serde(
         default,
@@ -2496,7 +2505,7 @@ pub struct CustomQuestion {
     )]
     pub title: String,
     /**
-     * Custom Question.
+    * Custom Question.
      */
     #[serde(
         default,
@@ -2510,7 +2519,7 @@ pub struct CustomQuestion {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateTime {
     /**
-     * DateTime Object.
+    * DateTime Object.
      */
     #[serde(
         default,
@@ -2519,7 +2528,7 @@ pub struct DateTime {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * DateTime Object.
+    * DateTime Object.
      */
     #[serde(
         default,
@@ -2532,7 +2541,8 @@ pub struct DateTime {
 /**
  * Device protocol:<br>`H.323` - H.323.<br>`SIP` - SIP.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Protocol {
     #[serde(rename = "H.323")]
     H323,
@@ -2566,7 +2576,8 @@ impl Protocol {
 /**
  * Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Encryption {
     #[serde(rename = "auto")]
     Auto,
@@ -2604,12 +2615,12 @@ impl Encryption {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Device {
     /**
-     * Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
+    * Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
      */
     #[serde(default, skip_serializing_if = "Encryption::is_noop")]
     pub encryption: Encryption,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2618,7 +2629,7 @@ pub struct Device {
     )]
     pub ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2627,7 +2638,7 @@ pub struct Device {
     )]
     pub name: String,
     /**
-     * Device protocol:<br>`H.323` - H.323.<br>`SIP` - SIP.
+    * Device protocol:<br>`H.323` - H.323.<br>`SIP` - SIP.
      */
     #[serde(default, skip_serializing_if = "Protocol::is_noop")]
     pub protocol: Protocol,
@@ -2637,7 +2648,7 @@ pub struct Device {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Group {
     /**
-     * Group object.
+    * Group object.
      */
     #[serde(
         default,
@@ -2646,7 +2657,7 @@ pub struct Group {
     )]
     pub name: String,
     /**
-     * Group object.
+    * Group object.
      */
     #[serde(
         default,
@@ -2659,7 +2670,7 @@ pub struct Group {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Groups {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2677,7 +2688,7 @@ pub struct Groups {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupsAllOf {
     /**
-     * Group object.
+    * Group object.
      */
     #[serde(flatten)]
     pub group: Group,
@@ -2689,7 +2700,7 @@ pub struct GroupsAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupList {
     /**
-     * List of Groups.
+    * List of Groups.
      */
     #[serde(
         default,
@@ -2698,7 +2709,7 @@ pub struct GroupList {
     )]
     pub groups: Vec<GroupsAllOf>,
     /**
-     * List of Groups.
+    * List of Groups.
      */
     #[serde(
         default,
@@ -2712,7 +2723,7 @@ pub struct GroupList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupMember {
     /**
-     * Group member object.
+    * Group member object.
      */
     #[serde(
         default,
@@ -2721,7 +2732,7 @@ pub struct GroupMember {
     )]
     pub email: String,
     /**
-     * Group member object.
+    * Group member object.
      */
     #[serde(
         default,
@@ -2730,7 +2741,7 @@ pub struct GroupMember {
     )]
     pub first_name: String,
     /**
-     * Group member object.
+    * Group member object.
      */
     #[serde(
         default,
@@ -2739,7 +2750,7 @@ pub struct GroupMember {
     )]
     pub id: String,
     /**
-     * Group member object.
+    * Group member object.
      */
     #[serde(
         default,
@@ -2748,7 +2759,7 @@ pub struct GroupMember {
     )]
     pub last_name: String,
     /**
-     * Group member object.
+    * Group member object.
      */
     #[serde(
         default,
@@ -2762,7 +2773,7 @@ pub struct GroupMember {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackingFields {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2771,7 +2782,7 @@ pub struct TrackingFields {
     )]
     pub field: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2780,7 +2791,7 @@ pub struct TrackingFields {
     )]
     pub value: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -2793,7 +2804,7 @@ pub struct TrackingFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Occurrence {
     /**
-     * Occurence object. This object is only returned for Recurring Webinars.
+    * Occurence object. This object is only returned for Recurring Webinars.
      */
     #[serde(
         default,
@@ -2802,7 +2813,7 @@ pub struct Occurrence {
     )]
     pub duration: i64,
     /**
-     * Occurence object. This object is only returned for Recurring Webinars.
+    * Occurence object. This object is only returned for Recurring Webinars.
      */
     #[serde(
         default,
@@ -2811,7 +2822,7 @@ pub struct Occurrence {
     )]
     pub occurrence_id: String,
     /**
-     * Occurence object. This object is only returned for Recurring Webinars.
+    * Occurence object. This object is only returned for Recurring Webinars.
      */
     #[serde(
         default,
@@ -2820,7 +2831,7 @@ pub struct Occurrence {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Occurence object. This object is only returned for Recurring Webinars.
+    * Occurence object. This object is only returned for Recurring Webinars.
      */
     #[serde(
         default,
@@ -2833,7 +2844,8 @@ pub struct Occurrence {
 /**
  * Determine how participants can join the audio portion of the meeting.<br>`both` - Both Telephony and VoIP.<br>`telephony` - Telephony only.<br>`voip` - VoIP only.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Audio {
     #[serde(rename = "both")]
     #[default]
@@ -2858,10 +2870,12 @@ impl std::fmt::Display for Audio {
     }
 }
 
+
 /**
  * Type of number.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "toll")]
     Toll,
@@ -2895,7 +2909,7 @@ impl Type {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GlobalDialInNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2904,7 +2918,7 @@ pub struct GlobalDialInNumbers {
     )]
     pub city: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2913,7 +2927,7 @@ pub struct GlobalDialInNumbers {
     )]
     pub country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2922,7 +2936,7 @@ pub struct GlobalDialInNumbers {
     )]
     pub country_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -2931,7 +2945,7 @@ pub struct GlobalDialInNumbers {
     )]
     pub number: String,
     /**
-     * Type of number.
+    * Type of number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
@@ -2943,7 +2957,8 @@ pub struct GlobalDialInNumbers {
  *   
  *   `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also **disables** the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EncryptionType {
     #[serde(rename = "e2ee")]
     E2Ee,
@@ -2979,7 +2994,8 @@ impl EncryptionType {
  *   `approve`: Allow users from specific regions/countries to join this meeting. If this setting is selected, the approved regions/countries must be included in the `approved_list`.<br><br>
  *   `deny`: Block users from specific regions/countries from joining this meeting. If this setting is selected, the approved regions/countries must be included in the `denied_list`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Method {
     #[serde(rename = "approve")]
     Approve,
@@ -3015,7 +3031,7 @@ impl Method {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApprovedDeniedCountriesRegions {
     /**
-     * Approve or block users from specific regions/countries from joining this meeting.
+    * Approve or block users from specific regions/countries from joining this meeting.
      *
      */
     #[serde(
@@ -3025,7 +3041,7 @@ pub struct ApprovedDeniedCountriesRegions {
     )]
     pub approved_list: Vec<String>,
     /**
-     * Approve or block users from specific regions/countries from joining this meeting.
+    * Approve or block users from specific regions/countries from joining this meeting.
      *
      */
     #[serde(
@@ -3035,7 +3051,7 @@ pub struct ApprovedDeniedCountriesRegions {
     )]
     pub denied_list: Vec<String>,
     /**
-     * Approve or block users from specific regions/countries from joining this meeting.
+    * Approve or block users from specific regions/countries from joining this meeting.
      *
      */
     #[serde(
@@ -3044,7 +3060,7 @@ pub struct ApprovedDeniedCountriesRegions {
     )]
     pub enable: bool,
     /**
-     * Approve or block users from specific regions/countries from joining this meeting.
+    * Approve or block users from specific regions/countries from joining this meeting.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -3054,7 +3070,7 @@ pub struct ApprovedDeniedCountriesRegions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuthenticationException {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -3063,7 +3079,7 @@ pub struct AuthenticationException {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -3076,7 +3092,7 @@ pub struct AuthenticationException {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Rooms {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -3085,7 +3101,7 @@ pub struct Rooms {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -3102,7 +3118,7 @@ pub struct Rooms {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BreakoutRoom {
     /**
-     * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
+    * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
     #[serde(
         default,
@@ -3110,7 +3126,7 @@ pub struct BreakoutRoom {
     )]
     pub enable: bool,
     /**
-     * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
+    * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
     #[serde(
         default,
@@ -3123,7 +3139,7 @@ pub struct BreakoutRoom {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Interpreters {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -3132,7 +3148,7 @@ pub struct Interpreters {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -3145,7 +3161,7 @@ pub struct Interpreters {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LanguageInterpretation {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -3153,7 +3169,7 @@ pub struct LanguageInterpretation {
     )]
     pub enable: bool,
     /**
-     * Information associated with the interpreter.
+    * Information associated with the interpreter.
      */
     #[serde(
         default,
@@ -3166,7 +3182,7 @@ pub struct LanguageInterpretation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomKeys {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -3175,7 +3191,7 @@ pub struct CustomKeys {
     )]
     pub key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -3189,7 +3205,7 @@ pub struct CustomKeys {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingSettings {
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3197,7 +3213,7 @@ pub struct MeetingSettings {
     )]
     pub allow_multiple_devices: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3206,7 +3222,7 @@ pub struct MeetingSettings {
     )]
     pub alternative_hosts: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3214,7 +3230,7 @@ pub struct MeetingSettings {
     )]
     pub alternative_hosts_email_notification: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3223,17 +3239,17 @@ pub struct MeetingSettings {
     )]
     pub approval_type: i64,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub approved_or_denied_countries_or_regions: Option<ApprovedDeniedCountriesRegions>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio: Option<Audio>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3242,7 +3258,7 @@ pub struct MeetingSettings {
     )]
     pub authentication_domains: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3251,7 +3267,7 @@ pub struct MeetingSettings {
     )]
     pub authentication_exception: Vec<AuthenticationException>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3260,7 +3276,7 @@ pub struct MeetingSettings {
     )]
     pub authentication_name: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3269,17 +3285,17 @@ pub struct MeetingSettings {
     )]
     pub authentication_option: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_recording: Option<AutoRecording>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub breakout_room: Option<BreakoutRoom>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3287,7 +3303,7 @@ pub struct MeetingSettings {
     )]
     pub close_registration: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3295,7 +3311,7 @@ pub struct MeetingSettings {
     )]
     pub cn_meeting: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3304,7 +3320,7 @@ pub struct MeetingSettings {
     )]
     pub contact_email: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3313,7 +3329,7 @@ pub struct MeetingSettings {
     )]
     pub contact_name: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3322,12 +3338,12 @@ pub struct MeetingSettings {
     )]
     pub custom_keys: Vec<CustomKeys>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub encryption_type: Option<EncryptionType>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3335,7 +3351,7 @@ pub struct MeetingSettings {
     )]
     pub enforce_login: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3344,7 +3360,7 @@ pub struct MeetingSettings {
     )]
     pub enforce_login_domains: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3353,7 +3369,7 @@ pub struct MeetingSettings {
     )]
     pub global_dial_in_countries: Vec<String>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3362,7 +3378,7 @@ pub struct MeetingSettings {
     )]
     pub global_dial_in_numbers: Vec<GlobalDialInNumbers>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3370,7 +3386,7 @@ pub struct MeetingSettings {
     )]
     pub host_video: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3378,7 +3394,7 @@ pub struct MeetingSettings {
     )]
     pub in_meeting: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3387,7 +3403,7 @@ pub struct MeetingSettings {
     )]
     pub jbh_time: i64,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3395,12 +3411,12 @@ pub struct MeetingSettings {
     )]
     pub join_before_host: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub language_interpretation: Option<LanguageInterpretation>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3408,7 +3424,7 @@ pub struct MeetingSettings {
     )]
     pub meeting_authentication: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3416,7 +3432,7 @@ pub struct MeetingSettings {
     )]
     pub mute_upon_entry: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3424,7 +3440,7 @@ pub struct MeetingSettings {
     )]
     pub participant_video: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3432,7 +3448,7 @@ pub struct MeetingSettings {
     )]
     pub registrants_confirmation_email: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3440,7 +3456,7 @@ pub struct MeetingSettings {
     )]
     pub registrants_email_notification: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3449,7 +3465,7 @@ pub struct MeetingSettings {
     )]
     pub registration_type: i64,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3457,7 +3473,7 @@ pub struct MeetingSettings {
     )]
     pub show_share_button: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3465,7 +3481,7 @@ pub struct MeetingSettings {
     )]
     pub use_pmi: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3473,7 +3489,7 @@ pub struct MeetingSettings {
     )]
     pub waiting_room: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -3487,7 +3503,8 @@ pub struct MeetingSettings {
  *   
  *    <br>`1`  - Sunday. <br>`2` - Monday.<br>`3` - Tuesday.<br>`4` -  Wednesday.<br>`5` -  Thursday.<br>`6` - Friday.<br>`7` - Saturday.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WeeklyDays {
     #[serde(rename = "1")]
     #[default]
@@ -3524,11 +3541,12 @@ impl std::fmt::Display for WeeklyDays {
     }
 }
 
+
 /// Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Recurrence {
     /**
-     * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
+    * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
      */
     #[serde(
         default,
@@ -3537,7 +3555,7 @@ pub struct Recurrence {
     )]
     pub end_date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
+    * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
      */
     #[serde(
         default,
@@ -3546,7 +3564,7 @@ pub struct Recurrence {
     )]
     pub end_times: i64,
     /**
-     * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
+    * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
      */
     #[serde(
         default,
@@ -3555,7 +3573,7 @@ pub struct Recurrence {
     )]
     pub monthly_day: i64,
     /**
-     * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
+    * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
      */
     #[serde(
         default,
@@ -3564,7 +3582,7 @@ pub struct Recurrence {
     )]
     pub monthly_week: i64,
     /**
-     * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
+    * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
      */
     #[serde(
         default,
@@ -3573,7 +3591,7 @@ pub struct Recurrence {
     )]
     pub monthly_week_day: i64,
     /**
-     * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
+    * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
      */
     #[serde(
         default,
@@ -3582,7 +3600,7 @@ pub struct Recurrence {
     )]
     pub repeat_interval: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -3592,7 +3610,7 @@ pub struct Recurrence {
     )]
     pub type_: i64,
     /**
-     * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
+    * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub weekly_days: Option<WeeklyDays>,
@@ -3602,7 +3620,7 @@ pub struct Recurrence {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingInfo {
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3611,7 +3629,7 @@ pub struct MeetingInfo {
     )]
     pub agenda: String,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3620,7 +3638,7 @@ pub struct MeetingInfo {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3629,7 +3647,7 @@ pub struct MeetingInfo {
     )]
     pub duration: i64,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3639,7 +3657,7 @@ pub struct MeetingInfo {
     )]
     pub h_323_password: String,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3648,7 +3666,7 @@ pub struct MeetingInfo {
     )]
     pub join_url: String,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3657,7 +3675,7 @@ pub struct MeetingInfo {
     )]
     pub occurrences: Vec<Occurrence>,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3666,7 +3684,7 @@ pub struct MeetingInfo {
     )]
     pub password: String,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3675,7 +3693,7 @@ pub struct MeetingInfo {
     )]
     pub pmi: i64,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3683,17 +3701,17 @@ pub struct MeetingInfo {
     )]
     pub pre_schedule: bool,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<Recurrence>,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<MeetingSettings>,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3702,7 +3720,7 @@ pub struct MeetingInfo {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3711,7 +3729,7 @@ pub struct MeetingInfo {
     )]
     pub start_url: String,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3720,7 +3738,7 @@ pub struct MeetingInfo {
     )]
     pub timezone: String,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3729,7 +3747,7 @@ pub struct MeetingInfo {
     )]
     pub topic: String,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3738,7 +3756,7 @@ pub struct MeetingInfo {
     )]
     pub tracking_fields: Vec<TrackingFields>,
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(
         default,
@@ -3752,7 +3770,8 @@ pub struct MeetingInfo {
 /**
  * Meeting status
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "started")]
     Started,
@@ -3787,7 +3806,7 @@ impl Status {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingInfoGet {
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3796,7 +3815,7 @@ pub struct MeetingInfoGet {
     )]
     pub agenda: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3805,7 +3824,7 @@ pub struct MeetingInfoGet {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3814,7 +3833,7 @@ pub struct MeetingInfoGet {
     )]
     pub duration: i64,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3823,7 +3842,7 @@ pub struct MeetingInfoGet {
     )]
     pub encrypted_password: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3833,7 +3852,7 @@ pub struct MeetingInfoGet {
     )]
     pub h_323_password: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3842,7 +3861,7 @@ pub struct MeetingInfoGet {
     )]
     pub join_url: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3851,7 +3870,7 @@ pub struct MeetingInfoGet {
     )]
     pub occurrences: Vec<Occurrence>,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3860,7 +3879,7 @@ pub struct MeetingInfoGet {
     )]
     pub password: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3869,7 +3888,7 @@ pub struct MeetingInfoGet {
     )]
     pub pmi: i64,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3877,17 +3896,17 @@ pub struct MeetingInfoGet {
     )]
     pub pre_schedule: bool,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<Recurrence>,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<MeetingSettings>,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3896,7 +3915,7 @@ pub struct MeetingInfoGet {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3905,12 +3924,12 @@ pub struct MeetingInfoGet {
     )]
     pub start_url: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3919,7 +3938,7 @@ pub struct MeetingInfoGet {
     )]
     pub timezone: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3928,7 +3947,7 @@ pub struct MeetingInfoGet {
     )]
     pub topic: String,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3937,7 +3956,7 @@ pub struct MeetingInfoGet {
     )]
     pub tracking_fields: Vec<TrackingFields>,
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(
         default,
@@ -3952,7 +3971,7 @@ pub struct MeetingInfoGet {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingMetric {
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -3961,7 +3980,7 @@ pub struct MeetingMetric {
     )]
     pub custom_keys: Vec<CustomKeys>,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -3970,7 +3989,7 @@ pub struct MeetingMetric {
     )]
     pub dept: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -3979,7 +3998,7 @@ pub struct MeetingMetric {
     )]
     pub duration: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -3988,7 +4007,7 @@ pub struct MeetingMetric {
     )]
     pub email: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -3997,7 +4016,7 @@ pub struct MeetingMetric {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4005,7 +4024,7 @@ pub struct MeetingMetric {
     )]
     pub has_3rd_party_audio: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4013,7 +4032,7 @@ pub struct MeetingMetric {
     )]
     pub has_pstn: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4021,7 +4040,7 @@ pub struct MeetingMetric {
     )]
     pub has_recording: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4029,7 +4048,7 @@ pub struct MeetingMetric {
     )]
     pub has_screen_share: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4037,7 +4056,7 @@ pub struct MeetingMetric {
     )]
     pub has_sip: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4045,7 +4064,7 @@ pub struct MeetingMetric {
     )]
     pub has_video: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4053,7 +4072,7 @@ pub struct MeetingMetric {
     )]
     pub has_voip: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4062,7 +4081,7 @@ pub struct MeetingMetric {
     )]
     pub host: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4071,7 +4090,7 @@ pub struct MeetingMetric {
     )]
     pub id: i64,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4080,7 +4099,7 @@ pub struct MeetingMetric {
     )]
     pub in_room_participants: i64,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4089,7 +4108,7 @@ pub struct MeetingMetric {
     )]
     pub participants: i64,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4098,7 +4117,7 @@ pub struct MeetingMetric {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4107,7 +4126,7 @@ pub struct MeetingMetric {
     )]
     pub topic: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4116,7 +4135,7 @@ pub struct MeetingMetric {
     )]
     pub user_type: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -4130,7 +4149,7 @@ pub struct MeetingMetric {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingInvitation {
     /**
-     * Meeting invitation details.
+    * Meeting invitation details.
      */
     #[serde(
         default,
@@ -4144,7 +4163,7 @@ pub struct MeetingInvitation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingLiveStream {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -4153,7 +4172,7 @@ pub struct MeetingLiveStream {
     )]
     pub page_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -4162,7 +4181,7 @@ pub struct MeetingLiveStream {
     )]
     pub stream_key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -4179,7 +4198,8 @@ pub struct MeetingLiveStream {
  *   `start`: Start a live stream. <br>
  *   `stop`: Stop an ongoing live stream.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Action {
     #[serde(rename = "start")]
     Start,
@@ -4214,7 +4234,7 @@ impl Action {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingLiveStreamStatusSettings {
     /**
-     * Update the settings of a live streaming session. The settings can only be updated for a live stream that has been stopped. You can not update the settings of an ongoing live stream.
+    * Update the settings of a live streaming session. The settings can only be updated for a live stream that has been stopped. You can not update the settings of an ongoing live stream.
      */
     #[serde(
         default,
@@ -4222,7 +4242,7 @@ pub struct MeetingLiveStreamStatusSettings {
     )]
     pub active_speaker_name: bool,
     /**
-     * Update the settings of a live streaming session. The settings can only be updated for a live stream that has been stopped. You can not update the settings of an ongoing live stream.
+    * Update the settings of a live streaming session. The settings can only be updated for a live stream that has been stopped. You can not update the settings of an ongoing live stream.
      */
     #[serde(
         default,
@@ -4236,12 +4256,12 @@ pub struct MeetingLiveStreamStatusSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingLiveStreamStatus {
     /**
-     * Meeting live stream status.
+    * Meeting live stream status.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<Action>,
     /**
-     * Meeting live stream status.
+    * Meeting live stream status.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<MeetingLiveStreamStatusSettings>,
@@ -4251,7 +4271,7 @@ pub struct MeetingLiveStreamStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarLiveStreamStatusSettings {
     /**
-     * Update the live stream session's settings. You can \*\*only\*\* update settings for a stopped live stream.
+    * Update the live stream session's settings. You can \*\*only\*\* update settings for a stopped live stream.
      */
     #[serde(
         default,
@@ -4259,7 +4279,7 @@ pub struct WebinarLiveStreamStatusSettings {
     )]
     pub active_speaker_name: bool,
     /**
-     * Update the live stream session's settings. You can \*\*only\*\* update settings for a stopped live stream.
+    * Update the live stream session's settings. You can \*\*only\*\* update settings for a stopped live stream.
      */
     #[serde(
         default,
@@ -4273,12 +4293,12 @@ pub struct WebinarLiveStreamStatusSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarLiveStreamStatus {
     /**
-     * Webinar live stream status.
+    * Webinar live stream status.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<Action>,
     /**
-     * Webinar live stream status.
+    * Webinar live stream status.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<WebinarLiveStreamStatusSettings>,
@@ -4288,7 +4308,7 @@ pub struct WebinarLiveStreamStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Pagination {
     /**
-     * Pagination Object.
+    * Pagination Object.
      */
     #[serde(
         default,
@@ -4297,7 +4317,7 @@ pub struct Pagination {
     )]
     pub next_page_token: String,
     /**
-     * Pagination Object.
+    * Pagination Object.
      */
     #[serde(
         default,
@@ -4306,7 +4326,7 @@ pub struct Pagination {
     )]
     pub page_count: i64,
     /**
-     * Pagination Object.
+    * Pagination Object.
      */
     #[serde(
         default,
@@ -4315,7 +4335,7 @@ pub struct Pagination {
     )]
     pub page_number: i64,
     /**
-     * Pagination Object.
+    * Pagination Object.
      */
     #[serde(
         default,
@@ -4324,7 +4344,7 @@ pub struct Pagination {
     )]
     pub page_size: i64,
     /**
-     * Pagination Object.
+    * Pagination Object.
      */
     #[serde(
         default,
@@ -4338,7 +4358,7 @@ pub struct Pagination {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaginationToken {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(
         default,
@@ -4347,7 +4367,7 @@ pub struct PaginationToken {
     )]
     pub next_page_token: String,
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(
         default,
@@ -4356,7 +4376,7 @@ pub struct PaginationToken {
     )]
     pub page_count: i64,
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(
         default,
@@ -4365,7 +4385,7 @@ pub struct PaginationToken {
     )]
     pub page_size: i64,
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(
         default,
@@ -4379,7 +4399,7 @@ pub struct PaginationToken {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaginationToken4ImChat {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(
         default,
@@ -4388,7 +4408,7 @@ pub struct PaginationToken4ImChat {
     )]
     pub next_page_token: String,
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(
         default,
@@ -4402,7 +4422,7 @@ pub struct PaginationToken4ImChat {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Panelist {
     /**
-     * Panelist base object.
+    * Panelist base object.
      */
     #[serde(
         default,
@@ -4411,7 +4431,7 @@ pub struct Panelist {
     )]
     pub email: String,
     /**
-     * Panelist base object.
+    * Panelist base object.
      */
     #[serde(
         default,
@@ -4424,7 +4444,7 @@ pub struct Panelist {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Panelists {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -4445,7 +4465,7 @@ pub struct PanelistsAllOf {
     #[serde(flatten)]
     pub groups: Groups,
     /**
-     * Panelist base object.
+    * Panelist base object.
      */
     #[serde(flatten)]
     pub panelist: Panelist,
@@ -4457,7 +4477,7 @@ pub struct PanelistsAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PanelistList {
     /**
-     * List of panelists.
+    * List of panelists.
      */
     #[serde(
         default,
@@ -4466,7 +4486,7 @@ pub struct PanelistList {
     )]
     pub panelists: Vec<PanelistsAllOf>,
     /**
-     * List of panelists.
+    * List of panelists.
      */
     #[serde(
         default,
@@ -4480,7 +4500,7 @@ pub struct PanelistList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct QosAudio {
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -4489,7 +4509,7 @@ pub struct QosAudio {
     )]
     pub avg_loss: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -4498,7 +4518,7 @@ pub struct QosAudio {
     )]
     pub bitrate: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -4507,7 +4527,7 @@ pub struct QosAudio {
     )]
     pub jitter: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -4516,7 +4536,7 @@ pub struct QosAudio {
     )]
     pub latency: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -4529,7 +4549,8 @@ pub struct QosAudio {
 /**
  * The recording status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RecordingStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -4561,7 +4582,7 @@ impl RecordingStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingData {
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4570,7 +4591,7 @@ pub struct RecordingData {
     )]
     pub deleted_time: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4579,7 +4600,7 @@ pub struct RecordingData {
     )]
     pub download_url: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4588,7 +4609,7 @@ pub struct RecordingData {
     )]
     pub file_size: f64,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4597,7 +4618,7 @@ pub struct RecordingData {
     )]
     pub file_type: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4606,7 +4627,7 @@ pub struct RecordingData {
     )]
     pub id: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4615,7 +4636,7 @@ pub struct RecordingData {
     )]
     pub meeting_id: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4624,7 +4645,7 @@ pub struct RecordingData {
     )]
     pub play_url: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4633,7 +4654,7 @@ pub struct RecordingData {
     )]
     pub recording_end: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4642,7 +4663,7 @@ pub struct RecordingData {
     )]
     pub recording_start: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(
         default,
@@ -4651,7 +4672,7 @@ pub struct RecordingData {
     )]
     pub recording_type: String,
     /**
-     * Recording file object.
+    * Recording file object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<RecordingStatus>,
@@ -4661,7 +4682,7 @@ pub struct RecordingData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingSeparateAudio {
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4670,7 +4691,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub download_url: String,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4679,7 +4700,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub file_name: String,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4688,7 +4709,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub file_size: f64,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4697,7 +4718,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub file_type: String,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4706,7 +4727,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub id: String,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4715,7 +4736,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub play_url: String,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4724,7 +4745,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub recording_end: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(
         default,
@@ -4733,7 +4754,7 @@ pub struct RecordingSeparateAudio {
     )]
     pub recording_start: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The recording file object.
+    * The recording file object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<RecordingStatus>,
@@ -4742,7 +4763,8 @@ pub struct RecordingSeparateAudio {
 /**
  * Determine how the meeting recording is shared.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ShareRecording {
     #[serde(rename = "internally")]
     Internally,
@@ -4841,14 +4863,14 @@ pub struct RecordingSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantStatus {
     /**
-     * Specify whether to allow users from specific regions to join this meeting; or block users from specific regions from joining this meeting. <br><br>
+    * Specify whether to allow users from specific regions to join this meeting; or block users from specific regions from joining this meeting. <br><br>
      *  `approve`: Allow users from specific regions/countries to join this meeting. If this setting is selected, the approved regions/countries must be included in the `approved_list`.<br><br>
      *  `deny`: Block users from specific regions/countries from joining this meeting. If this setting is selected, the approved regions/countries must be included in the `denied_list`
      */
     #[serde(default, skip_serializing_if = "Method::is_noop")]
     pub action: Method,
     /**
-     * Registrant Status
+    * Registrant Status
      */
     #[serde(
         default,
@@ -4862,7 +4884,7 @@ pub struct RecordingRegistrantStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Registrant {
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4871,7 +4893,7 @@ pub struct Registrant {
     )]
     pub address: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4880,7 +4902,7 @@ pub struct Registrant {
     )]
     pub city: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4889,7 +4911,7 @@ pub struct Registrant {
     )]
     pub comments: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4898,7 +4920,7 @@ pub struct Registrant {
     )]
     pub country: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4907,7 +4929,7 @@ pub struct Registrant {
     )]
     pub custom_questions: Vec<CustomQuestion>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -4916,7 +4938,7 @@ pub struct Registrant {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -4925,7 +4947,7 @@ pub struct Registrant {
     )]
     pub first_name: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4934,7 +4956,7 @@ pub struct Registrant {
     )]
     pub industry: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4943,7 +4965,7 @@ pub struct Registrant {
     )]
     pub job_title: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4952,7 +4974,7 @@ pub struct Registrant {
     )]
     pub last_name: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4961,7 +4983,7 @@ pub struct Registrant {
     )]
     pub no_of_employees: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4970,7 +4992,7 @@ pub struct Registrant {
     )]
     pub org: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4979,7 +5001,7 @@ pub struct Registrant {
     )]
     pub phone: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4988,7 +5010,7 @@ pub struct Registrant {
     )]
     pub purchasing_time_frame: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -4997,7 +5019,7 @@ pub struct Registrant {
     )]
     pub role_in_purchase_process: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -5006,7 +5028,7 @@ pub struct Registrant {
     )]
     pub state: String,
     /**
-     * Registrant base object.
+    * Registrant base object.
      */
     #[serde(
         default,
@@ -5019,7 +5041,8 @@ pub struct Registrant {
 /**
  * Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RegistrantStatusAction {
     #[serde(rename = "approve")]
     Approve,
@@ -5056,7 +5079,7 @@ impl RegistrantStatusAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Assistants {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -5065,7 +5088,7 @@ pub struct Assistants {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -5078,12 +5101,12 @@ pub struct Assistants {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RegistrantStatus {
     /**
-     * Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
+    * Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
      */
     #[serde(default, skip_serializing_if = "RegistrantStatusAction::is_noop")]
     pub action: RegistrantStatusAction,
     /**
-     * List of registrants.
+    * List of registrants.
      */
     #[serde(
         default,
@@ -5097,7 +5120,7 @@ pub struct RegistrantStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RoleMembersList {
     /**
-     * List of a Role Members
+    * List of a Role Members
      */
     #[serde(
         default,
@@ -5106,7 +5129,7 @@ pub struct RoleMembersList {
     )]
     pub members: Vec<Domains>,
     /**
-     * List of a Role Members
+    * List of a Role Members
      */
     #[serde(
         default,
@@ -5115,7 +5138,7 @@ pub struct RoleMembersList {
     )]
     pub next_page_token: String,
     /**
-     * List of a Role Members
+    * List of a Role Members
      */
     #[serde(
         default,
@@ -5124,7 +5147,7 @@ pub struct RoleMembersList {
     )]
     pub page_count: i64,
     /**
-     * List of a Role Members
+    * List of a Role Members
      */
     #[serde(
         default,
@@ -5133,7 +5156,7 @@ pub struct RoleMembersList {
     )]
     pub page_number: i64,
     /**
-     * List of a Role Members
+    * List of a Role Members
      */
     #[serde(
         default,
@@ -5142,7 +5165,7 @@ pub struct RoleMembersList {
     )]
     pub page_size: i64,
     /**
-     * List of a Role Members
+    * List of a Role Members
      */
     #[serde(
         default,
@@ -5156,7 +5179,7 @@ pub struct RoleMembersList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddRoleMembers {
     /**
-     * Add Role Members
+    * Add Role Members
      */
     #[serde(
         default,
@@ -5170,7 +5193,7 @@ pub struct AddRoleMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Session {
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5179,7 +5202,7 @@ pub struct Session {
     )]
     pub agenda: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5188,7 +5211,7 @@ pub struct Session {
     )]
     pub duration: i64,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5197,17 +5220,17 @@ pub struct Session {
     )]
     pub password: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<Recurrence>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<MeetingSettings>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5216,7 +5239,7 @@ pub struct Session {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5225,7 +5248,7 @@ pub struct Session {
     )]
     pub timezone: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5234,7 +5257,7 @@ pub struct Session {
     )]
     pub topic: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5243,7 +5266,7 @@ pub struct Session {
     )]
     pub tracking_fields: Vec<String>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5257,7 +5280,7 @@ pub struct Session {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SessionUpdateTrackingFields {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -5266,7 +5289,7 @@ pub struct SessionUpdateTrackingFields {
     )]
     pub field: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -5279,7 +5302,7 @@ pub struct SessionUpdateTrackingFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SettingsData {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -5296,7 +5319,7 @@ pub struct SettingsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SettingsAllOf {
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(flatten)]
     pub meeting_settings: MeetingSettings,
@@ -5308,7 +5331,7 @@ pub struct SettingsAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SessionUpdate {
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5317,7 +5340,7 @@ pub struct SessionUpdate {
     )]
     pub agenda: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5326,7 +5349,7 @@ pub struct SessionUpdate {
     )]
     pub duration: i64,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5335,7 +5358,7 @@ pub struct SessionUpdate {
     )]
     pub password: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5343,17 +5366,17 @@ pub struct SessionUpdate {
     )]
     pub pre_schedule: bool,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<Recurrence>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<SettingsAllOf>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5362,7 +5385,7 @@ pub struct SessionUpdate {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5371,7 +5394,7 @@ pub struct SessionUpdate {
     )]
     pub template_id: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5380,7 +5403,7 @@ pub struct SessionUpdate {
     )]
     pub timezone: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5389,7 +5412,7 @@ pub struct SessionUpdate {
     )]
     pub topic: String,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5398,7 +5421,7 @@ pub struct SessionUpdate {
     )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
-     * Base object for sessions.
+    * Base object for sessions.
      */
     #[serde(
         default,
@@ -5413,7 +5436,7 @@ pub struct SessionUpdate {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecurrenceWebinar {
     /**
-     * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+    * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
      */
     #[serde(
         default,
@@ -5422,7 +5445,7 @@ pub struct RecurrenceWebinar {
     )]
     pub end_date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+    * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
      */
     #[serde(
         default,
@@ -5431,7 +5454,7 @@ pub struct RecurrenceWebinar {
     )]
     pub end_times: i64,
     /**
-     * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+    * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
      */
     #[serde(
         default,
@@ -5440,7 +5463,7 @@ pub struct RecurrenceWebinar {
     )]
     pub monthly_day: i64,
     /**
-     * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+    * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
      */
     #[serde(
         default,
@@ -5449,7 +5472,7 @@ pub struct RecurrenceWebinar {
     )]
     pub monthly_week: i64,
     /**
-     * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+    * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
      */
     #[serde(
         default,
@@ -5458,7 +5481,7 @@ pub struct RecurrenceWebinar {
     )]
     pub monthly_week_day: i64,
     /**
-     * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+    * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
      */
     #[serde(
         default,
@@ -5467,7 +5490,7 @@ pub struct RecurrenceWebinar {
     )]
     pub repeat_interval: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -5477,7 +5500,7 @@ pub struct RecurrenceWebinar {
     )]
     pub type_: i64,
     /**
-     * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+    * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
      */
     #[serde(
         default,
@@ -5494,7 +5517,8 @@ pub struct RecurrenceWebinar {
  *   
  *   *  `all`: Attendees are able to view all questions submitted in the Q&A.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AnswerQuestions {
     #[serde(rename = "all")]
     All,
@@ -5529,7 +5553,7 @@ impl AnswerQuestions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct QuestionAnswer {
     /**
-     * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
+    * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
      */
     #[serde(
         default,
@@ -5537,12 +5561,12 @@ pub struct QuestionAnswer {
     )]
     pub allow_anonymous_questions: bool,
     /**
-     * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
+    * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub answer_questions: Option<AnswerQuestions>,
     /**
-     * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
+    * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
      */
     #[serde(
         default,
@@ -5550,7 +5574,7 @@ pub struct QuestionAnswer {
     )]
     pub attendees_can_comment: bool,
     /**
-     * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
+    * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
      */
     #[serde(
         default,
@@ -5558,7 +5582,7 @@ pub struct QuestionAnswer {
     )]
     pub attendees_can_upvote: bool,
     /**
-     * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
+    * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
      */
     #[serde(
         default,
@@ -5571,7 +5595,7 @@ pub struct QuestionAnswer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AttendeesPanelistsReminderEmailNotification {
     /**
-     * Send reminder email to attendees and panelists.
+    * Send reminder email to attendees and panelists.
      */
     #[serde(
         default,
@@ -5579,7 +5603,7 @@ pub struct AttendeesPanelistsReminderEmailNotification {
     )]
     pub enable: bool,
     /**
-     * Send reminder email to attendees and panelists.
+    * Send reminder email to attendees and panelists.
      */
     #[serde(
         default,
@@ -5594,7 +5618,7 @@ pub struct AttendeesPanelistsReminderEmailNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FollowUpAttendeesEmailNotification {
     /**
-     * Send follow-up email to attendees.
+    * Send follow-up email to attendees.
      */
     #[serde(
         default,
@@ -5602,7 +5626,7 @@ pub struct FollowUpAttendeesEmailNotification {
     )]
     pub enable: bool,
     /**
-     * Send follow-up email to attendees.
+    * Send follow-up email to attendees.
      */
     #[serde(
         default,
@@ -5617,7 +5641,7 @@ pub struct FollowUpAttendeesEmailNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FollowUpAbsenteesEmailNotification {
     /**
-     * Send follow-up email to absentees.
+    * Send follow-up email to absentees.
      */
     #[serde(
         default,
@@ -5625,7 +5649,7 @@ pub struct FollowUpAbsenteesEmailNotification {
     )]
     pub enable: bool,
     /**
-     * Send follow-up email to absentees.
+    * Send follow-up email to absentees.
      */
     #[serde(
         default,
@@ -5640,7 +5664,7 @@ pub struct FollowUpAbsenteesEmailNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarSettings {
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5648,7 +5672,7 @@ pub struct WebinarSettings {
     )]
     pub allow_multiple_devices: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5657,7 +5681,7 @@ pub struct WebinarSettings {
     )]
     pub alternative_hosts: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5666,18 +5690,18 @@ pub struct WebinarSettings {
     )]
     pub approval_type: i64,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub attendees_and_panelists_reminder_email_notification:
         Option<AttendeesPanelistsReminderEmailNotification>,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio: Option<Audio>,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5686,7 +5710,7 @@ pub struct WebinarSettings {
     )]
     pub authentication_domains: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5695,7 +5719,7 @@ pub struct WebinarSettings {
     )]
     pub authentication_name: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5704,12 +5728,12 @@ pub struct WebinarSettings {
     )]
     pub authentication_option: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_recording: Option<AutoRecording>,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5717,7 +5741,7 @@ pub struct WebinarSettings {
     )]
     pub close_registration: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5726,7 +5750,7 @@ pub struct WebinarSettings {
     )]
     pub contact_email: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5735,7 +5759,7 @@ pub struct WebinarSettings {
     )]
     pub contact_name: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5744,7 +5768,7 @@ pub struct WebinarSettings {
     )]
     pub email_language: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5752,7 +5776,7 @@ pub struct WebinarSettings {
     )]
     pub enforce_login: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5761,17 +5785,17 @@ pub struct WebinarSettings {
     )]
     pub enforce_login_domains: String,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub follow_up_absentees_email_notification: Option<FollowUpAbsenteesEmailNotification>,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub follow_up_attendees_email_notification: Option<FollowUpAttendeesEmailNotification>,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5780,7 +5804,7 @@ pub struct WebinarSettings {
     )]
     pub global_dial_in_countries: Vec<String>,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5788,7 +5812,7 @@ pub struct WebinarSettings {
     )]
     pub hd_video: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5796,7 +5820,7 @@ pub struct WebinarSettings {
     )]
     pub host_video: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5804,7 +5828,7 @@ pub struct WebinarSettings {
     )]
     pub meeting_authentication: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5812,7 +5836,7 @@ pub struct WebinarSettings {
     )]
     pub notify_registrants: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5820,7 +5844,7 @@ pub struct WebinarSettings {
     )]
     pub on_demand: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5828,7 +5852,7 @@ pub struct WebinarSettings {
     )]
     pub panelists_invitation_email_notification: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5836,7 +5860,7 @@ pub struct WebinarSettings {
     )]
     pub panelists_video: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5844,7 +5868,7 @@ pub struct WebinarSettings {
     )]
     pub post_webinar_survey: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5852,12 +5876,12 @@ pub struct WebinarSettings {
     )]
     pub practice_session: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub question_and_answer: Option<QuestionAnswer>,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5865,7 +5889,7 @@ pub struct WebinarSettings {
     )]
     pub registrants_confirmation_email: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5873,7 +5897,7 @@ pub struct WebinarSettings {
     )]
     pub registrants_email_notification: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5882,7 +5906,7 @@ pub struct WebinarSettings {
     )]
     pub registrants_restrict_number: i64,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5891,7 +5915,7 @@ pub struct WebinarSettings {
     )]
     pub registration_type: i64,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5899,7 +5923,7 @@ pub struct WebinarSettings {
     )]
     pub show_share_button: bool,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(
         default,
@@ -5913,7 +5937,7 @@ pub struct WebinarSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SessionWebinar {
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -5922,7 +5946,7 @@ pub struct SessionWebinar {
     )]
     pub agenda: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -5931,7 +5955,7 @@ pub struct SessionWebinar {
     )]
     pub duration: i64,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -5940,17 +5964,17 @@ pub struct SessionWebinar {
     )]
     pub password: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<RecurrenceWebinar>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<WebinarSettings>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -5959,7 +5983,7 @@ pub struct SessionWebinar {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -5968,7 +5992,7 @@ pub struct SessionWebinar {
     )]
     pub timezone: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -5977,7 +6001,7 @@ pub struct SessionWebinar {
     )]
     pub topic: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -5986,7 +6010,7 @@ pub struct SessionWebinar {
     )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6007,7 +6031,7 @@ pub struct SessionWebinarUpdateSettingsAllOf {
     #[serde(flatten)]
     pub settings_data: SettingsData,
     /**
-     * Webinar settings.
+    * Webinar settings.
      */
     #[serde(flatten)]
     pub webinar_settings: WebinarSettings,
@@ -6017,7 +6041,7 @@ pub struct SessionWebinarUpdateSettingsAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SessionWebinarUpdate {
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6026,7 +6050,7 @@ pub struct SessionWebinarUpdate {
     )]
     pub agenda: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6035,7 +6059,7 @@ pub struct SessionWebinarUpdate {
     )]
     pub duration: i64,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6044,17 +6068,17 @@ pub struct SessionWebinarUpdate {
     )]
     pub password: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<Recurrence>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<SessionWebinarUpdateSettingsAllOf>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6063,7 +6087,7 @@ pub struct SessionWebinarUpdate {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6072,7 +6096,7 @@ pub struct SessionWebinarUpdate {
     )]
     pub timezone: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6081,7 +6105,7 @@ pub struct SessionWebinarUpdate {
     )]
     pub topic: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6090,7 +6114,7 @@ pub struct SessionWebinarUpdate {
     )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -6105,7 +6129,8 @@ pub struct SessionWebinarUpdate {
  * Dial-in number types:<br>`toll` - Toll number.<br>`tollfree` -Toll free number.<br>
  *   `media_link` - Media link.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TspAccountsListDialInNumbersType {
     #[serde(rename = "media_link")]
     MediaLink,
@@ -6142,7 +6167,7 @@ impl TspAccountsListDialInNumbersType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DialInNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6151,7 +6176,7 @@ pub struct DialInNumbers {
     )]
     pub code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6160,7 +6185,7 @@ pub struct DialInNumbers {
     )]
     pub country_label: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6169,7 +6194,7 @@ pub struct DialInNumbers {
     )]
     pub number: String,
     /**
-     * Dial-in number types:<br>`toll` - Toll number.<br>`tollfree` -Toll free number.<br>
+    * Dial-in number types:<br>`toll` - Toll number.<br>`tollfree` -Toll free number.<br>
      *  `media_link` - Media link.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
@@ -6179,7 +6204,8 @@ pub struct DialInNumbers {
 /**
  * Telephony bridge
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TspBridge {
     #[serde(rename = "EU_TSP_TB")]
     EuTspTb,
@@ -6214,7 +6240,7 @@ impl TspBridge {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TspAccountsList {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6223,7 +6249,7 @@ pub struct TspAccountsList {
     )]
     pub conference_code: String,
     /**
-     * List of TSP accounts.
+    * List of TSP accounts.
      */
     #[serde(
         default,
@@ -6232,7 +6258,7 @@ pub struct TspAccountsList {
     )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6241,7 +6267,7 @@ pub struct TspAccountsList {
     )]
     pub leader_pin: String,
     /**
-     * List of TSP accounts.
+    * List of TSP accounts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tsp_bridge: Option<TspBridge>,
@@ -6250,7 +6276,7 @@ pub struct TspAccountsList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DedicatedDialInNumber {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6259,7 +6285,7 @@ pub struct DedicatedDialInNumber {
     )]
     pub country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6273,7 +6299,7 @@ pub struct DedicatedDialInNumber {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Pac {
     /**
-     * List of PAC accounts.
+    * List of PAC accounts.
      */
     #[serde(
         default,
@@ -6282,7 +6308,7 @@ pub struct Pac {
     )]
     pub conference_id: i64,
     /**
-     * List of PAC accounts.
+    * List of PAC accounts.
      */
     #[serde(
         default,
@@ -6291,7 +6317,7 @@ pub struct Pac {
     )]
     pub dedicated_dial_in_number: Vec<DedicatedDialInNumber>,
     /**
-     * List of PAC accounts.
+    * List of PAC accounts.
      */
     #[serde(
         default,
@@ -6300,7 +6326,7 @@ pub struct Pac {
     )]
     pub global_dial_in_numbers: Vec<DedicatedDialInNumber>,
     /**
-     * List of PAC accounts.
+    * List of PAC accounts.
      */
     #[serde(
         default,
@@ -6309,7 +6335,7 @@ pub struct Pac {
     )]
     pub listen_only_password: String,
     /**
-     * List of PAC accounts.
+    * List of PAC accounts.
      */
     #[serde(
         default,
@@ -6323,7 +6349,7 @@ pub struct Pac {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6332,7 +6358,7 @@ pub struct User {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6341,7 +6367,7 @@ pub struct User {
     )]
     pub dept: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6350,7 +6376,7 @@ pub struct User {
     )]
     pub email: String,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6359,7 +6385,7 @@ pub struct User {
     )]
     pub first_name: String,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6368,7 +6394,7 @@ pub struct User {
     )]
     pub last_client_version: String,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6377,7 +6403,7 @@ pub struct User {
     )]
     pub last_login_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6386,7 +6412,7 @@ pub struct User {
     )]
     pub last_name: String,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6395,7 +6421,7 @@ pub struct User {
     )]
     pub pmi: i64,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6404,7 +6430,7 @@ pub struct User {
     )]
     pub role_name: String,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6413,7 +6439,7 @@ pub struct User {
     )]
     pub timezone: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -6423,7 +6449,7 @@ pub struct User {
     )]
     pub type_: i64,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(
         default,
@@ -6436,7 +6462,7 @@ pub struct User {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomAttributes {
     /**
-     * Custom attribute(s) of the user.
+    * Custom attribute(s) of the user.
      */
     #[serde(
         default,
@@ -6445,7 +6471,7 @@ pub struct CustomAttributes {
     )]
     pub key: String,
     /**
-     * Custom attribute(s) of the user.
+    * Custom attribute(s) of the user.
      */
     #[serde(
         default,
@@ -6454,7 +6480,7 @@ pub struct CustomAttributes {
     )]
     pub name: String,
     /**
-     * Custom attribute(s) of the user.
+    * Custom attribute(s) of the user.
      */
     #[serde(
         default,
@@ -6472,7 +6498,8 @@ pub struct CustomAttributes {
  *   * `Home`
  *   * `Fax`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Label {
     #[serde(rename = "Fax")]
     Fax,
@@ -6512,7 +6539,7 @@ impl Label {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6521,7 +6548,7 @@ pub struct PhoneNumbers {
     )]
     pub code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6530,7 +6557,7 @@ pub struct PhoneNumbers {
     )]
     pub country: String,
     /**
-     * The label to add to the user's phone number. You can only add one label to the user's phone number:
+    * The label to add to the user's phone number. You can only add one label to the user's phone number:
      *  
      *  \* `Mobile`
      *  \* `Office`
@@ -6540,7 +6567,7 @@ pub struct PhoneNumbers {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub label: Option<Label>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6554,7 +6581,7 @@ pub struct PhoneNumbers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserUpdate {
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6563,7 +6590,7 @@ pub struct UserUpdate {
     )]
     pub cms_user_id: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6572,12 +6599,12 @@ pub struct UserUpdate {
     )]
     pub company: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub custom_attributes: Option<CustomAttributes>,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6586,7 +6613,7 @@ pub struct UserUpdate {
     )]
     pub dept: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6595,7 +6622,7 @@ pub struct UserUpdate {
     )]
     pub first_name: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6604,7 +6631,7 @@ pub struct UserUpdate {
     )]
     pub group_id: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6613,7 +6640,7 @@ pub struct UserUpdate {
     )]
     pub host_key: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6622,7 +6649,7 @@ pub struct UserUpdate {
     )]
     pub job_title: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6631,7 +6658,7 @@ pub struct UserUpdate {
     )]
     pub language: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6640,7 +6667,7 @@ pub struct UserUpdate {
     )]
     pub last_name: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6649,7 +6676,7 @@ pub struct UserUpdate {
     )]
     pub location: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6658,7 +6685,7 @@ pub struct UserUpdate {
     )]
     pub manager: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6667,7 +6694,7 @@ pub struct UserUpdate {
     )]
     pub phone_country: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6676,12 +6703,12 @@ pub struct UserUpdate {
     )]
     pub phone_number: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub phone_numbers: Option<PhoneNumbers>,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6690,7 +6717,7 @@ pub struct UserUpdate {
     )]
     pub pmi: i64,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6699,7 +6726,7 @@ pub struct UserUpdate {
     )]
     pub timezone: String,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6709,7 +6736,7 @@ pub struct UserUpdate {
     )]
     pub type_: i64,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6717,7 +6744,7 @@ pub struct UserUpdate {
     )]
     pub use_pmi: bool,
     /**
-     * The user update object represents a user on Zoom.
+    * The user update object represents a user on Zoom.
      */
     #[serde(
         default,
@@ -6731,7 +6758,7 @@ pub struct UserUpdate {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserAssistantsList {
     /**
-     * List of user's assistants.
+    * List of user's assistants.
      */
     #[serde(
         default,
@@ -6744,7 +6771,7 @@ pub struct UserAssistantsList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Schedulers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6753,7 +6780,7 @@ pub struct Schedulers {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -6762,7 +6789,7 @@ pub struct Schedulers {
     )]
     pub id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -6776,7 +6803,7 @@ pub struct Schedulers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSchedulersList {
     /**
-     * List of user's schedulers.
+    * List of user's schedulers.
      */
     #[serde(
         default,
@@ -6790,7 +6817,7 @@ pub struct UserSchedulersList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsMeetingPasswordRequirement {
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6799,7 +6826,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
     )]
     pub consecutive_characters_length: i64,
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6807,7 +6834,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
     )]
     pub have_letter: bool,
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6815,7 +6842,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
     )]
     pub have_number: bool,
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6823,7 +6850,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
     )]
     pub have_special_character: bool,
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6831,7 +6858,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
     )]
     pub have_upper_and_lower_characters: bool,
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6840,7 +6867,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
     )]
     pub length: i64,
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6848,7 +6875,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
     )]
     pub only_allow_numeric: bool,
     /**
-     * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -6861,12 +6888,12 @@ pub struct UserSettingsMeetingPasswordRequirement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsMeeting {
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_type: Option<AudioType>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6875,7 +6902,7 @@ pub struct UserSettingsMeeting {
     )]
     pub default_password_for_scheduled_meetings: String,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6883,7 +6910,7 @@ pub struct UserSettingsMeeting {
     )]
     pub embed_password_in_join_link: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6891,7 +6918,7 @@ pub struct UserSettingsMeeting {
     )]
     pub force_pmi_jbh_password: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6899,7 +6926,7 @@ pub struct UserSettingsMeeting {
     )]
     pub host_video: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6907,12 +6934,12 @@ pub struct UserSettingsMeeting {
     )]
     pub join_before_host: bool,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meeting_password_requirement: Option<UserSettingsMeetingPasswordRequirement>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6920,7 +6947,7 @@ pub struct UserSettingsMeeting {
     )]
     pub participants_video: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6928,7 +6955,7 @@ pub struct UserSettingsMeeting {
     )]
     pub personal_meeting: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6937,7 +6964,7 @@ pub struct UserSettingsMeeting {
     )]
     pub pmi_password: String,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6945,7 +6972,7 @@ pub struct UserSettingsMeeting {
     )]
     pub pstn_password_protected: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6953,12 +6980,12 @@ pub struct UserSettingsMeeting {
     )]
     pub require_password_for_instant_meetings: bool,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub require_password_for_pmi_meetings: Option<RequirePasswordPmiMeetings>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6966,7 +6993,7 @@ pub struct UserSettingsMeeting {
     )]
     pub require_password_for_scheduled_meetings: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6974,7 +7001,7 @@ pub struct UserSettingsMeeting {
     )]
     pub require_password_for_scheduling_new_meetings: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6982,7 +7009,7 @@ pub struct UserSettingsMeeting {
     )]
     pub use_pmi_for_instant_meetings: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -6995,7 +7022,7 @@ pub struct UserSettingsMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsInMeeting {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7003,7 +7030,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub allow_live_streaming: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7011,7 +7038,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub annotation: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7019,7 +7046,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub attendee_on_hold: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7027,7 +7054,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub auto_saving_chat: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7035,7 +7062,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub breakout_room: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7043,7 +7070,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub chat: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7051,7 +7078,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub closed_caption: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7059,7 +7086,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub co_host: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7067,7 +7094,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub custom_data_center_regions: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7075,7 +7102,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub custom_live_streaming_service: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7084,7 +7111,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub custom_service_instructions: String,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7093,7 +7120,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub data_center_regions: Vec<String>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7102,12 +7129,12 @@ pub struct UserSettingsInMeeting {
     )]
     pub e_2e_encryption: bool,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub entry_exit_chime: Option<EntryExitChime>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7115,7 +7142,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub far_end_camera_control: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7123,7 +7150,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub feedback: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7131,7 +7158,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub file_transfer: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7139,7 +7166,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub group_hd: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7147,7 +7174,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub join_from_desktop: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7155,7 +7182,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub join_from_mobile: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7163,7 +7190,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub non_verbal_feedback: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7171,7 +7198,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub polling: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7179,7 +7206,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub private_chat: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7187,7 +7214,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub record_play_voice: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7195,7 +7222,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub remote_control: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7203,7 +7230,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub remote_support: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7211,7 +7238,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub request_permission_to_unmute: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7219,7 +7246,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub screen_sharing: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7227,7 +7254,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub share_dual_camera: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7235,7 +7262,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub show_a_join_from_your_browser_link: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7243,7 +7270,7 @@ pub struct UserSettingsInMeeting {
     )]
     pub show_meeting_control_toolbar: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7251,12 +7278,12 @@ pub struct UserSettingsInMeeting {
     )]
     pub virtual_background: bool,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub virtual_background_settings: Option<VirtualBackgroundSettings>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7264,17 +7291,17 @@ pub struct UserSettingsInMeeting {
     )]
     pub waiting_room: bool,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub who_can_share_screen: Option<WhoCanShareScreen>,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub who_can_share_screen_when_someone_is_sharing: Option<WhoCanShareScreen>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7287,7 +7314,7 @@ pub struct UserSettingsInMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsNotification {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7295,7 +7322,7 @@ pub struct UserSettingsNotification {
     )]
     pub alternative_host_reminder: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7303,7 +7330,7 @@ pub struct UserSettingsNotification {
     )]
     pub cancel_meeting_reminder: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7311,7 +7338,7 @@ pub struct UserSettingsNotification {
     )]
     pub jbh_reminder: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7324,7 +7351,7 @@ pub struct UserSettingsNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsRecordingPasswordRequirement {
     /**
-     * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -7332,7 +7359,7 @@ pub struct UserSettingsRecordingPasswordRequirement {
     )]
     pub have_letter: bool,
     /**
-     * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -7340,7 +7367,7 @@ pub struct UserSettingsRecordingPasswordRequirement {
     )]
     pub have_number: bool,
     /**
-     * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -7348,7 +7375,7 @@ pub struct UserSettingsRecordingPasswordRequirement {
     )]
     pub have_special_character: bool,
     /**
-     * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -7357,7 +7384,7 @@ pub struct UserSettingsRecordingPasswordRequirement {
     )]
     pub length: i64,
     /**
-     * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
+    * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
      */
     #[serde(
         default,
@@ -7370,7 +7397,7 @@ pub struct UserSettingsRecordingPasswordRequirement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsRecording {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7378,7 +7405,7 @@ pub struct UserSettingsRecording {
     )]
     pub ask_host_to_confirm_disclaimer: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7386,7 +7413,7 @@ pub struct UserSettingsRecording {
     )]
     pub ask_participants_to_consent_disclaimer: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7394,7 +7421,7 @@ pub struct UserSettingsRecording {
     )]
     pub auto_delete_cmr: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7403,12 +7430,12 @@ pub struct UserSettingsRecording {
     )]
     pub auto_delete_cmr_days: i64,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_recording: Option<AutoRecording>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7416,7 +7443,7 @@ pub struct UserSettingsRecording {
     )]
     pub cloud_recording: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7424,12 +7451,12 @@ pub struct UserSettingsRecording {
     )]
     pub host_pause_stop_recording: bool,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ip_address_access_control: Option<IpAddressAccessControl>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7437,7 +7464,7 @@ pub struct UserSettingsRecording {
     )]
     pub local_recording: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7445,7 +7472,7 @@ pub struct UserSettingsRecording {
     )]
     pub record_audio_file: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7453,7 +7480,7 @@ pub struct UserSettingsRecording {
     )]
     pub record_audio_file_each_participant: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7461,7 +7488,7 @@ pub struct UserSettingsRecording {
     )]
     pub record_gallery_view: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7469,7 +7496,7 @@ pub struct UserSettingsRecording {
     )]
     pub record_speaker_view: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7477,7 +7504,7 @@ pub struct UserSettingsRecording {
     )]
     pub recording_audio_transcript: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7485,12 +7512,12 @@ pub struct UserSettingsRecording {
     )]
     pub recording_disclaimer: bool,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recording_password_requirement: Option<UserSettingsRecordingPasswordRequirement>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7498,7 +7525,7 @@ pub struct UserSettingsRecording {
     )]
     pub save_chat_text: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7533,7 +7560,7 @@ pub struct UserSettingsTelephony {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsFeature {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7541,7 +7568,7 @@ pub struct UserSettingsFeature {
     )]
     pub cn_meeting: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7549,7 +7576,7 @@ pub struct UserSettingsFeature {
     )]
     pub in_meeting: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7557,7 +7584,7 @@ pub struct UserSettingsFeature {
     )]
     pub large_meeting: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7566,7 +7593,7 @@ pub struct UserSettingsFeature {
     )]
     pub large_meeting_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7575,7 +7602,7 @@ pub struct UserSettingsFeature {
     )]
     pub meeting_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7583,7 +7610,7 @@ pub struct UserSettingsFeature {
     )]
     pub webinar: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7592,7 +7619,7 @@ pub struct UserSettingsFeature {
     )]
     pub webinar_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7600,7 +7627,7 @@ pub struct UserSettingsFeature {
     )]
     pub zoom_events: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7609,7 +7636,7 @@ pub struct UserSettingsFeature {
     )]
     pub zoom_events_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7622,7 +7649,7 @@ pub struct UserSettingsFeature {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsTsp {
     /**
-     * Account Settings: TSP.
+    * Account Settings: TSP.
      */
     #[serde(
         default,
@@ -7630,7 +7657,7 @@ pub struct UserSettingsTsp {
     )]
     pub call_out: bool,
     /**
-     * Account Settings: TSP.
+    * Account Settings: TSP.
      */
     #[serde(
         default,
@@ -7639,7 +7666,7 @@ pub struct UserSettingsTsp {
     )]
     pub call_out_countries: Vec<String>,
     /**
-     * Account Settings: TSP.
+    * Account Settings: TSP.
      */
     #[serde(
         default,
@@ -7694,7 +7721,7 @@ pub struct SettingsUpdateTelephony {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsUpdateFeature {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7702,7 +7729,7 @@ pub struct UserSettingsUpdateFeature {
     )]
     pub large_meeting: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7711,7 +7738,7 @@ pub struct UserSettingsUpdateFeature {
     )]
     pub large_meeting_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7720,7 +7747,7 @@ pub struct UserSettingsUpdateFeature {
     )]
     pub meeting_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7728,7 +7755,7 @@ pub struct UserSettingsUpdateFeature {
     )]
     pub webinar: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7737,7 +7764,7 @@ pub struct UserSettingsUpdateFeature {
     )]
     pub webinar_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7745,7 +7772,7 @@ pub struct UserSettingsUpdateFeature {
     )]
     pub zoom_events: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7754,7 +7781,7 @@ pub struct UserSettingsUpdateFeature {
     )]
     pub zoom_events_capacity: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7787,7 +7814,7 @@ pub struct UserSettingsUpdate {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserPermissions {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -7801,7 +7828,7 @@ pub struct UserPermissions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarInfo {
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7810,7 +7837,7 @@ pub struct WebinarInfo {
     )]
     pub agenda: String,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7819,7 +7846,7 @@ pub struct WebinarInfo {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7828,7 +7855,7 @@ pub struct WebinarInfo {
     )]
     pub duration: i64,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7837,7 +7864,7 @@ pub struct WebinarInfo {
     )]
     pub join_url: String,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7846,7 +7873,7 @@ pub struct WebinarInfo {
     )]
     pub occurrences: Vec<Occurrence>,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7855,17 +7882,17 @@ pub struct WebinarInfo {
     )]
     pub password: String,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<RecurrenceWebinar>,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<WebinarSettings>,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7874,7 +7901,7 @@ pub struct WebinarInfo {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7883,7 +7910,7 @@ pub struct WebinarInfo {
     )]
     pub start_url: String,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7892,7 +7919,7 @@ pub struct WebinarInfo {
     )]
     pub timezone: String,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7901,7 +7928,7 @@ pub struct WebinarInfo {
     )]
     pub topic: String,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7910,7 +7937,7 @@ pub struct WebinarInfo {
     )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(
         default,
@@ -7925,7 +7952,7 @@ pub struct WebinarInfo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Webinars {
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7934,7 +7961,7 @@ pub struct Webinars {
     )]
     pub custom_keys: Vec<CustomKeys>,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7943,7 +7970,7 @@ pub struct Webinars {
     )]
     pub dept: String,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7952,7 +7979,7 @@ pub struct Webinars {
     )]
     pub duration: String,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7961,7 +7988,7 @@ pub struct Webinars {
     )]
     pub email: String,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7970,7 +7997,7 @@ pub struct Webinars {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7978,7 +8005,7 @@ pub struct Webinars {
     )]
     pub has_3rd_party_audio: bool,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7986,7 +8013,7 @@ pub struct Webinars {
     )]
     pub has_pstn: bool,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -7994,7 +8021,7 @@ pub struct Webinars {
     )]
     pub has_recording: bool,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8002,7 +8029,7 @@ pub struct Webinars {
     )]
     pub has_screen_share: bool,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8010,7 +8037,7 @@ pub struct Webinars {
     )]
     pub has_sip: bool,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8018,7 +8045,7 @@ pub struct Webinars {
     )]
     pub has_video: bool,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8026,7 +8053,7 @@ pub struct Webinars {
     )]
     pub has_voip: bool,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8035,7 +8062,7 @@ pub struct Webinars {
     )]
     pub host: String,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8044,7 +8071,7 @@ pub struct Webinars {
     )]
     pub id: i64,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8053,7 +8080,7 @@ pub struct Webinars {
     )]
     pub participants: i64,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8062,7 +8089,7 @@ pub struct Webinars {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8071,7 +8098,7 @@ pub struct Webinars {
     )]
     pub topic: String,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8080,7 +8107,7 @@ pub struct Webinars {
     )]
     pub user_type: String,
     /**
-     * Webinar metric details.
+    * Webinar metric details.
      */
     #[serde(
         default,
@@ -8094,7 +8121,7 @@ pub struct Webinars {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarPanelist {
     /**
-     * Webinar panelist.
+    * Webinar panelist.
      */
     #[serde(
         default,
@@ -8108,7 +8135,7 @@ pub struct WebinarPanelist {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ZoomRoom {
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8117,7 +8144,7 @@ pub struct ZoomRoom {
     )]
     pub account_type: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8126,7 +8153,7 @@ pub struct ZoomRoom {
     )]
     pub calender_name: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8135,7 +8162,7 @@ pub struct ZoomRoom {
     )]
     pub camera: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8144,7 +8171,7 @@ pub struct ZoomRoom {
     )]
     pub device_ip: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8153,7 +8180,7 @@ pub struct ZoomRoom {
     )]
     pub email: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8162,7 +8189,7 @@ pub struct ZoomRoom {
     )]
     pub health: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8171,7 +8198,7 @@ pub struct ZoomRoom {
     )]
     pub id: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8180,7 +8207,7 @@ pub struct ZoomRoom {
     )]
     pub issues: Vec<String>,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8189,7 +8216,7 @@ pub struct ZoomRoom {
     )]
     pub last_start_time: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8198,7 +8225,7 @@ pub struct ZoomRoom {
     )]
     pub location: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8207,7 +8234,7 @@ pub struct ZoomRoom {
     )]
     pub microphone: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8216,7 +8243,7 @@ pub struct ZoomRoom {
     )]
     pub room_name: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8225,7 +8252,7 @@ pub struct ZoomRoom {
     )]
     pub speaker: String,
     /**
-     * Zoom room.
+    * Zoom room.
      */
     #[serde(
         default,
@@ -8238,7 +8265,8 @@ pub struct ZoomRoom {
 /**
  * Poll Question & Answer type:<br>`single` - Single choice<br>`mutliple` - Multiple choice
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PollQuestionsType {
     #[serde(rename = "multiple")]
     Multiple,
@@ -8272,7 +8300,7 @@ impl PollQuestionsType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Questions {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -8284,7 +8312,7 @@ pub struct Questions {
     )]
     pub answers: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -8293,7 +8321,7 @@ pub struct Questions {
     )]
     pub name: String,
     /**
-     * Poll Question & Answer type:<br>`single` - Single choice<br>`mutliple` - Multiple choice
+    * Poll Question & Answer type:<br>`single` - Single choice<br>`mutliple` - Multiple choice
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<PollQuestionsType>,
@@ -8303,7 +8331,7 @@ pub struct Questions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Poll {
     /**
-     * Poll
+    * Poll
      */
     #[serde(
         default,
@@ -8312,7 +8340,7 @@ pub struct Poll {
     )]
     pub questions: Vec<Questions>,
     /**
-     * Poll
+    * Poll
      */
     #[serde(
         default,
@@ -8325,7 +8353,8 @@ pub struct Poll {
 /**
  * Field name of the question.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FieldName {
     #[serde(rename = "address")]
     Address,
@@ -8392,12 +8421,12 @@ impl FieldName {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingRegistrantQuestions {
     /**
-     * Field name of the question.
+    * Field name of the question.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field_name: Option<FieldName>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -8409,7 +8438,8 @@ pub struct MeetingRegistrantQuestions {
 /**
  * Type of the question being asked.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MeetingRegistrantQuestionsCustomType {
     #[serde(rename = "short")]
     Short,
@@ -8443,7 +8473,7 @@ impl MeetingRegistrantQuestionsCustomType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomQuestions {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -8455,7 +8485,7 @@ pub struct CustomQuestions {
     )]
     pub answers: Vec<String>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -8463,7 +8493,7 @@ pub struct CustomQuestions {
     )]
     pub required: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -8472,7 +8502,7 @@ pub struct CustomQuestions {
     )]
     pub title: String,
     /**
-     * Type of the question being asked.
+    * Type of the question being asked.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<MeetingRegistrantQuestionsCustomType>,
@@ -8482,7 +8512,7 @@ pub struct CustomQuestions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingRegistrantQuestionsData {
     /**
-     * Meeting Registrant Questions
+    * Meeting Registrant Questions
      */
     #[serde(
         default,
@@ -8491,7 +8521,7 @@ pub struct MeetingRegistrantQuestionsData {
     )]
     pub custom_questions: Vec<CustomQuestions>,
     /**
-     * Meeting Registrant Questions
+    * Meeting Registrant Questions
      */
     #[serde(
         default,
@@ -8505,7 +8535,7 @@ pub struct MeetingRegistrantQuestionsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarRegistrantQuestions {
     /**
-     * Webinar Registrant Questions
+    * Webinar Registrant Questions
      */
     #[serde(
         default,
@@ -8514,7 +8544,7 @@ pub struct WebinarRegistrantQuestions {
     )]
     pub custom_questions: Vec<String>,
     /**
-     * Webinar Registrant Questions
+    * Webinar Registrant Questions
      */
     #[serde(
         default,
@@ -8527,7 +8557,8 @@ pub struct WebinarRegistrantQuestions {
 /**
  * Field name.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RecordingRegistrantQuestionsFieldName {
     #[serde(rename = "address")]
     Address,
@@ -8599,12 +8630,12 @@ impl RecordingRegistrantQuestionsFieldName {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantQuestions {
     /**
-     * Field name.
+    * Field name.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field_name: Option<RecordingRegistrantQuestionsFieldName>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -8616,7 +8647,8 @@ pub struct RecordingRegistrantQuestions {
 /**
  * The type of registration question and answers.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RecordingRegistrantQuestionsCustomType {
     #[serde(rename = "multiple")]
     Multiple,
@@ -8653,7 +8685,7 @@ impl RecordingRegistrantQuestionsCustomType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantQuestionsCustom {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -8665,7 +8697,7 @@ pub struct RecordingRegistrantQuestionsCustom {
     )]
     pub answers: Vec<String>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -8673,7 +8705,7 @@ pub struct RecordingRegistrantQuestionsCustom {
     )]
     pub required: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -8682,7 +8714,7 @@ pub struct RecordingRegistrantQuestionsCustom {
     )]
     pub title: String,
     /**
-     * The type of registration question and answers.
+    * The type of registration question and answers.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<RecordingRegistrantQuestionsCustomType>,
@@ -8692,7 +8724,7 @@ pub struct RecordingRegistrantQuestionsCustom {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantQuestionsData {
     /**
-     * Recording Registrant Questions
+    * Recording Registrant Questions
      */
     #[serde(
         default,
@@ -8701,7 +8733,7 @@ pub struct RecordingRegistrantQuestionsData {
     )]
     pub custom_questions: Vec<RecordingRegistrantQuestionsCustom>,
     /**
-     * Recording Registrant Questions
+    * Recording Registrant Questions
      */
     #[serde(
         default,
@@ -8715,7 +8747,7 @@ pub struct RecordingRegistrantQuestionsData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackingField {
     /**
-     * Tracking Field
+    * Tracking Field
      */
     #[serde(
         default,
@@ -8724,7 +8756,7 @@ pub struct TrackingField {
     )]
     pub field: String,
     /**
-     * Tracking Field
+    * Tracking Field
      */
     #[serde(
         default,
@@ -8733,7 +8765,7 @@ pub struct TrackingField {
     )]
     pub recommended_values: Vec<String>,
     /**
-     * Tracking Field
+    * Tracking Field
      */
     #[serde(
         default,
@@ -8741,7 +8773,7 @@ pub struct TrackingField {
     )]
     pub required: bool,
     /**
-     * Tracking Field
+    * Tracking Field
      */
     #[serde(
         default,
@@ -8754,7 +8786,7 @@ pub struct TrackingField {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateWebinarSettings {
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8762,7 +8794,7 @@ pub struct CreateWebinarSettings {
     )]
     pub allow_multiple_devices: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8771,7 +8803,7 @@ pub struct CreateWebinarSettings {
     )]
     pub alternative_hosts: String,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8780,18 +8812,18 @@ pub struct CreateWebinarSettings {
     )]
     pub approval_type: i64,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub attendees_and_panelists_reminder_email_notification:
         Option<AttendeesPanelistsReminderEmailNotification>,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio: Option<Audio>,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8800,7 +8832,7 @@ pub struct CreateWebinarSettings {
     )]
     pub authentication_domains: String,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8809,12 +8841,12 @@ pub struct CreateWebinarSettings {
     )]
     pub authentication_option: String,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_recording: Option<AutoRecording>,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8822,7 +8854,7 @@ pub struct CreateWebinarSettings {
     )]
     pub close_registration: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8831,7 +8863,7 @@ pub struct CreateWebinarSettings {
     )]
     pub contact_email: String,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8840,7 +8872,7 @@ pub struct CreateWebinarSettings {
     )]
     pub contact_name: String,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8849,7 +8881,7 @@ pub struct CreateWebinarSettings {
     )]
     pub email_language: String,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8857,7 +8889,7 @@ pub struct CreateWebinarSettings {
     )]
     pub enforce_login: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8866,17 +8898,17 @@ pub struct CreateWebinarSettings {
     )]
     pub enforce_login_domains: String,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub follow_up_absentees_email_notification: Option<FollowUpAbsenteesEmailNotification>,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub follow_up_attendees_email_notification: Option<FollowUpAttendeesEmailNotification>,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8885,7 +8917,7 @@ pub struct CreateWebinarSettings {
     )]
     pub global_dial_in_countries: Vec<String>,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8893,7 +8925,7 @@ pub struct CreateWebinarSettings {
     )]
     pub hd_video: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8901,7 +8933,7 @@ pub struct CreateWebinarSettings {
     )]
     pub host_video: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8909,7 +8941,7 @@ pub struct CreateWebinarSettings {
     )]
     pub meeting_authentication: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8917,7 +8949,7 @@ pub struct CreateWebinarSettings {
     )]
     pub on_demand: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8925,7 +8957,7 @@ pub struct CreateWebinarSettings {
     )]
     pub panelists_invitation_email_notification: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8933,7 +8965,7 @@ pub struct CreateWebinarSettings {
     )]
     pub panelists_video: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8941,7 +8973,7 @@ pub struct CreateWebinarSettings {
     )]
     pub post_webinar_survey: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8949,12 +8981,12 @@ pub struct CreateWebinarSettings {
     )]
     pub practice_session: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub question_and_answer: Option<QuestionAnswer>,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8962,7 +8994,7 @@ pub struct CreateWebinarSettings {
     )]
     pub registrants_email_notification: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8971,7 +9003,7 @@ pub struct CreateWebinarSettings {
     )]
     pub registrants_restrict_number: i64,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8980,7 +9012,7 @@ pub struct CreateWebinarSettings {
     )]
     pub registration_type: i64,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -8988,7 +9020,7 @@ pub struct CreateWebinarSettings {
     )]
     pub show_share_button: bool,
     /**
-     * Create Webinar settings.
+    * Create Webinar settings.
      */
     #[serde(
         default,
@@ -9001,7 +9033,7 @@ pub struct CreateWebinarSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateTrackingFields {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9010,7 +9042,7 @@ pub struct MeetingCreateTrackingFields {
     )]
     pub field: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9026,7 +9058,7 @@ pub struct MeetingCreateTrackingFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateSettingsLanguageInterpretation {
     /**
-     * Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
+    * Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
      *  
      *  \*\*Note:\*\* This feature is only available on certain Webinar add-on, Education, Business and higher plans. If this feature is not enabled on the host's account, this setting will not be applied for the meeting.
      */
@@ -9036,7 +9068,7 @@ pub struct MeetingCreateSettingsLanguageInterpretation {
     )]
     pub enable: bool,
     /**
-     * Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
+    * Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
      *  
      *  \*\*Note:\*\* This feature is only available on certain Webinar add-on, Education, Business and higher plans. If this feature is not enabled on the host's account, this setting will not be applied for the meeting.
      */
@@ -9052,7 +9084,7 @@ pub struct MeetingCreateSettingsLanguageInterpretation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateSettings {
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9061,7 +9093,7 @@ pub struct MeetingCreateSettings {
     )]
     pub additional_data_center_regions: Vec<String>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9069,7 +9101,7 @@ pub struct MeetingCreateSettings {
     )]
     pub allow_multiple_devices: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9078,7 +9110,7 @@ pub struct MeetingCreateSettings {
     )]
     pub alternative_hosts: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9086,7 +9118,7 @@ pub struct MeetingCreateSettings {
     )]
     pub alternative_hosts_email_notification: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9095,17 +9127,17 @@ pub struct MeetingCreateSettings {
     )]
     pub approval_type: i64,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub approved_or_denied_countries_or_regions: Option<ApprovedDeniedCountriesRegions>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio: Option<Audio>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9114,7 +9146,7 @@ pub struct MeetingCreateSettings {
     )]
     pub authentication_domains: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9123,7 +9155,7 @@ pub struct MeetingCreateSettings {
     )]
     pub authentication_exception: Vec<AuthenticationException>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9132,17 +9164,17 @@ pub struct MeetingCreateSettings {
     )]
     pub authentication_option: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_recording: Option<AutoRecording>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub breakout_room: Option<BreakoutRoom>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9150,7 +9182,7 @@ pub struct MeetingCreateSettings {
     )]
     pub close_registration: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9158,7 +9190,7 @@ pub struct MeetingCreateSettings {
     )]
     pub cn_meeting: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9167,7 +9199,7 @@ pub struct MeetingCreateSettings {
     )]
     pub contact_email: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9176,12 +9208,12 @@ pub struct MeetingCreateSettings {
     )]
     pub contact_name: String,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub encryption_type: Option<EncryptionType>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9190,7 +9222,7 @@ pub struct MeetingCreateSettings {
     )]
     pub global_dial_in_countries: Vec<String>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9198,7 +9230,7 @@ pub struct MeetingCreateSettings {
     )]
     pub host_video: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9206,7 +9238,7 @@ pub struct MeetingCreateSettings {
     )]
     pub in_meeting: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9215,7 +9247,7 @@ pub struct MeetingCreateSettings {
     )]
     pub jbh_time: i64,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9223,12 +9255,12 @@ pub struct MeetingCreateSettings {
     )]
     pub join_before_host: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub language_interpretation: Option<MeetingCreateSettingsLanguageInterpretation>,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9236,7 +9268,7 @@ pub struct MeetingCreateSettings {
     )]
     pub meeting_authentication: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9244,7 +9276,7 @@ pub struct MeetingCreateSettings {
     )]
     pub mute_upon_entry: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9252,7 +9284,7 @@ pub struct MeetingCreateSettings {
     )]
     pub participant_video: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9260,7 +9292,7 @@ pub struct MeetingCreateSettings {
     )]
     pub registrants_confirmation_email: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9268,7 +9300,7 @@ pub struct MeetingCreateSettings {
     )]
     pub registrants_email_notification: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9277,7 +9309,7 @@ pub struct MeetingCreateSettings {
     )]
     pub registration_type: i64,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9285,7 +9317,7 @@ pub struct MeetingCreateSettings {
     )]
     pub show_share_button: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9293,7 +9325,7 @@ pub struct MeetingCreateSettings {
     )]
     pub use_pmi: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9301,7 +9333,7 @@ pub struct MeetingCreateSettings {
     )]
     pub waiting_room: bool,
     /**
-     * Meeting settings.
+    * Meeting settings.
      */
     #[serde(
         default,
@@ -9314,7 +9346,7 @@ pub struct MeetingCreateSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingCreate {
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9323,7 +9355,7 @@ pub struct MeetingCreate {
     )]
     pub agenda: String,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9332,7 +9364,7 @@ pub struct MeetingCreate {
     )]
     pub duration: i64,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9341,7 +9373,7 @@ pub struct MeetingCreate {
     )]
     pub password: String,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9349,12 +9381,12 @@ pub struct MeetingCreate {
     )]
     pub pre_schedule: bool,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<Recurrence>,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9363,12 +9395,12 @@ pub struct MeetingCreate {
     )]
     pub schedule_for: String,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<MeetingCreateSettings>,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9377,7 +9409,7 @@ pub struct MeetingCreate {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9386,7 +9418,7 @@ pub struct MeetingCreate {
     )]
     pub template_id: String,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9395,7 +9427,7 @@ pub struct MeetingCreate {
     )]
     pub timezone: String,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9404,7 +9436,7 @@ pub struct MeetingCreate {
     )]
     pub topic: String,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9413,7 +9445,7 @@ pub struct MeetingCreate {
     )]
     pub tracking_fields: Vec<MeetingCreateTrackingFields>,
     /**
-     * Base object for meeting.
+    * Base object for meeting.
      */
     #[serde(
         default,
@@ -9428,7 +9460,7 @@ pub struct MeetingCreate {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateWebinar {
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9437,7 +9469,7 @@ pub struct CreateWebinar {
     )]
     pub agenda: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9446,7 +9478,7 @@ pub struct CreateWebinar {
     )]
     pub duration: i64,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9455,17 +9487,17 @@ pub struct CreateWebinar {
     )]
     pub password: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurrence: Option<RecurrenceWebinar>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<CreateWebinarSettings>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9474,7 +9506,7 @@ pub struct CreateWebinar {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9483,7 +9515,7 @@ pub struct CreateWebinar {
     )]
     pub timezone: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9492,7 +9524,7 @@ pub struct CreateWebinar {
     )]
     pub topic: String,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9501,7 +9533,7 @@ pub struct CreateWebinar {
     )]
     pub tracking_fields: Vec<MeetingCreateTrackingFields>,
     /**
-     * Base webinar object for sessions.
+    * Base webinar object for sessions.
      */
     #[serde(
         default,
@@ -9525,7 +9557,7 @@ pub struct TspGlobalDialIn {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChannelSettings {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -9534,7 +9566,7 @@ pub struct ChannelSettings {
     )]
     pub allow_to_add_external_users: i64,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -9542,7 +9574,7 @@ pub struct ChannelSettings {
     )]
     pub new_members_can_see_previous_messages_files: bool,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -9557,7 +9589,7 @@ pub struct Properties {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel_settings: Option<ChannelSettings>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9566,7 +9598,7 @@ pub struct Properties {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9575,7 +9607,7 @@ pub struct Properties {
     )]
     pub jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9584,7 +9616,7 @@ pub struct Properties {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -9599,7 +9631,7 @@ pub struct Properties {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
-     * The channel object represents a Zoom chat [channel](https://support.zoom.us/hc/en-us/articles/200912909-Getting-Started-With-Channels-Group-Messaging-).
+    * The channel object represents a Zoom chat [channel](https://support.zoom.us/hc/en-us/articles/200912909-Getting-Started-With-Channels-Group-Messaging-).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<Properties>,
@@ -9608,7 +9640,7 @@ pub struct Channel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CpuUsage {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9617,7 +9649,7 @@ pub struct CpuUsage {
     )]
     pub system_max_cpu_usage: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9626,7 +9658,7 @@ pub struct CpuUsage {
     )]
     pub zoom_avg_cpu_usage: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9635,7 +9667,7 @@ pub struct CpuUsage {
     )]
     pub zoom_max_cpu_usage: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -9649,7 +9681,7 @@ pub struct CpuUsage {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AudioDeviceFromCrc {
     /**
-     * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9658,7 +9690,7 @@ pub struct AudioDeviceFromCrc {
     )]
     pub avg_loss: String,
     /**
-     * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9667,7 +9699,7 @@ pub struct AudioDeviceFromCrc {
     )]
     pub bitrate: String,
     /**
-     * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9676,7 +9708,7 @@ pub struct AudioDeviceFromCrc {
     )]
     pub jitter: String,
     /**
-     * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9685,7 +9717,7 @@ pub struct AudioDeviceFromCrc {
     )]
     pub latency: String,
     /**
-     * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9699,7 +9731,7 @@ pub struct AudioDeviceFromCrc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AudioDeviceCrc {
     /**
-     * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9708,7 +9740,7 @@ pub struct AudioDeviceCrc {
     )]
     pub avg_loss: String,
     /**
-     * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9717,7 +9749,7 @@ pub struct AudioDeviceCrc {
     )]
     pub bitrate: String,
     /**
-     * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9726,7 +9758,7 @@ pub struct AudioDeviceCrc {
     )]
     pub jitter: String,
     /**
-     * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9735,7 +9767,7 @@ pub struct AudioDeviceCrc {
     )]
     pub latency: String,
     /**
-     * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9749,7 +9781,7 @@ pub struct AudioDeviceCrc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VideoDeviceFromCrc {
     /**
-     * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
+    * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
      */
     #[serde(
         default,
@@ -9758,7 +9790,7 @@ pub struct VideoDeviceFromCrc {
     )]
     pub avg_loss: String,
     /**
-     * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
+    * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
      */
     #[serde(
         default,
@@ -9767,7 +9799,7 @@ pub struct VideoDeviceFromCrc {
     )]
     pub bitrate: String,
     /**
-     * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
+    * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
      */
     #[serde(
         default,
@@ -9776,7 +9808,7 @@ pub struct VideoDeviceFromCrc {
     )]
     pub jitter: String,
     /**
-     * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
+    * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
      */
     #[serde(
         default,
@@ -9785,7 +9817,7 @@ pub struct VideoDeviceFromCrc {
     )]
     pub latency: String,
     /**
-     * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
+    * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
      */
     #[serde(
         default,
@@ -9799,7 +9831,7 @@ pub struct VideoDeviceFromCrc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VideoDeviceCrc {
     /**
-     * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9808,7 +9840,7 @@ pub struct VideoDeviceCrc {
     )]
     pub avg_loss: String,
     /**
-     * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9817,7 +9849,7 @@ pub struct VideoDeviceCrc {
     )]
     pub bitrate: String,
     /**
-     * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9826,7 +9858,7 @@ pub struct VideoDeviceCrc {
     )]
     pub jitter: String,
     /**
-     * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9835,7 +9867,7 @@ pub struct VideoDeviceCrc {
     )]
     pub latency: String,
     /**
-     * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9849,7 +9881,7 @@ pub struct VideoDeviceCrc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AsDeviceFromCrc {
     /**
-     * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9858,7 +9890,7 @@ pub struct AsDeviceFromCrc {
     )]
     pub avg_loss: String,
     /**
-     * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9867,7 +9899,7 @@ pub struct AsDeviceFromCrc {
     )]
     pub bitrate: String,
     /**
-     * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9876,7 +9908,7 @@ pub struct AsDeviceFromCrc {
     )]
     pub jitter: String,
     /**
-     * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9885,7 +9917,7 @@ pub struct AsDeviceFromCrc {
     )]
     pub latency: String,
     /**
-     * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9899,7 +9931,7 @@ pub struct AsDeviceFromCrc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AsDeviceCrc {
     /**
-     * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9908,7 +9940,7 @@ pub struct AsDeviceCrc {
     )]
     pub avg_loss: String,
     /**
-     * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9917,7 +9949,7 @@ pub struct AsDeviceCrc {
     )]
     pub bitrate: String,
     /**
-     * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9926,7 +9958,7 @@ pub struct AsDeviceCrc {
     )]
     pub jitter: String,
     /**
-     * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9935,7 +9967,7 @@ pub struct AsDeviceCrc {
     )]
     pub latency: String,
     /**
-     * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(
         default,
@@ -9948,12 +9980,12 @@ pub struct AsDeviceCrc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserQos {
     /**
-     * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub as_device_from_crc: Option<AsDeviceFromCrc>,
     /**
-     * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub as_device_to_crc: Option<AsDeviceCrc>,
@@ -9962,29 +9994,29 @@ pub struct UserQos {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub as_output: Option<Domains>,
     /**
-     * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_device_from_crc: Option<AudioDeviceFromCrc>,
     /**
-     * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_device_to_crc: Option<AudioDeviceCrc>,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_input: Option<QosAudio>,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_output: Option<QosAudio>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub cpu_usage: Option<CpuUsage>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -9993,12 +10025,12 @@ pub struct UserQos {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
+    * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub video_device_from_crc: Option<VideoDeviceFromCrc>,
     /**
-     * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
+    * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub video_device_to_crc: Option<VideoDeviceCrc>,
@@ -10012,7 +10044,7 @@ pub struct UserQos {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ParticipantQos {
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10021,7 +10053,7 @@ pub struct ParticipantQos {
     )]
     pub device: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10030,7 +10062,7 @@ pub struct ParticipantQos {
     )]
     pub domain: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10039,7 +10071,7 @@ pub struct ParticipantQos {
     )]
     pub harddisk_id: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10048,7 +10080,7 @@ pub struct ParticipantQos {
     )]
     pub ip_address: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10057,7 +10089,7 @@ pub struct ParticipantQos {
     )]
     pub join_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10066,7 +10098,7 @@ pub struct ParticipantQos {
     )]
     pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10075,7 +10107,7 @@ pub struct ParticipantQos {
     )]
     pub location: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10084,7 +10116,7 @@ pub struct ParticipantQos {
     )]
     pub mac_addr: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10093,7 +10125,7 @@ pub struct ParticipantQos {
     )]
     pub pc_name: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10102,7 +10134,7 @@ pub struct ParticipantQos {
     )]
     pub user_id: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10111,7 +10143,7 @@ pub struct ParticipantQos {
     )]
     pub user_name: String,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10120,7 +10152,7 @@ pub struct ParticipantQos {
     )]
     pub user_qos: Vec<UserQos>,
     /**
-     * Participant QOS.
+    * Participant QOS.
      */
     #[serde(
         default,
@@ -10130,7 +10162,8 @@ pub struct ParticipantQos {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountSettingsRecordingAuthenticationUpdateOptionType {
     #[serde(rename = "enforce_login")]
     EnforceLogin,
@@ -10169,7 +10202,8 @@ impl AccountSettingsRecordingAuthenticationUpdateOptionType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountSettingsRecordingAuthenticationUpdateOptionAction {
     #[serde(rename = "add")]
     Add,
@@ -10211,7 +10245,7 @@ pub struct AuthenticationOption {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<AccountSettingsRecordingAuthenticationUpdateOptionAction>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10219,7 +10253,7 @@ pub struct AuthenticationOption {
     )]
     pub default_option: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10228,7 +10262,7 @@ pub struct AuthenticationOption {
     )]
     pub domains: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10237,7 +10271,7 @@ pub struct AuthenticationOption {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10254,13 +10288,13 @@ pub struct AuthenticationOption {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSettingsRecordingAuthenticationUpdate {
     /**
-     * Only authenticated users can view cloud recordings
+    * Only authenticated users can view cloud recordings
      *  The viewers need to authenticate prior to viewing the cloud recordings, hosts can choose one of the authentication methods when sharing a cloud recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub authentication_option: Option<AuthenticationOption>,
     /**
-     * Only authenticated users can view cloud recordings
+    * Only authenticated users can view cloud recordings
      *  The viewers need to authenticate prior to viewing the cloud recordings, hosts can choose one of the authentication methods when sharing a cloud recording.
      */
     #[serde(
@@ -10274,7 +10308,7 @@ pub struct AccountSettingsRecordingAuthenticationUpdate {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct QoSPhone {
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -10283,7 +10317,7 @@ pub struct QoSPhone {
     )]
     pub avg_loss: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -10292,7 +10326,7 @@ pub struct QoSPhone {
     )]
     pub bitrate: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -10301,7 +10335,7 @@ pub struct QoSPhone {
     )]
     pub jitter: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -10310,7 +10344,7 @@ pub struct QoSPhone {
     )]
     pub max_loss: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -10319,7 +10353,7 @@ pub struct QoSPhone {
     )]
     pub mos: String,
     /**
-     * Quality of Service object.
+    * Quality of Service object.
      */
     #[serde(
         default,
@@ -10333,7 +10367,7 @@ pub struct QoSPhone {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingSecuritySettingsPasswordRequirement {
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10342,7 +10376,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
     )]
     pub consecutive_characters_length: i64,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10350,7 +10384,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
     )]
     pub have_letter: bool,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10358,7 +10392,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
     )]
     pub have_number: bool,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10366,7 +10400,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
     )]
     pub have_special_character: bool,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10374,7 +10408,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
     )]
     pub have_upper_and_lower_characters: bool,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10383,7 +10417,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
     )]
     pub length: i64,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10391,7 +10425,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
     )]
     pub only_allow_numeric: bool,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(
         default,
@@ -10404,7 +10438,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WaitingRoomSettings {
     /**
-     * Specify the settings to be applied if waiting room is enabled.
+    * Specify the settings to be applied if waiting room is enabled.
      */
     #[serde(
         default,
@@ -10413,7 +10447,7 @@ pub struct WaitingRoomSettings {
     )]
     pub participants_to_place_in_waiting_room: i64,
     /**
-     * Specify the settings to be applied if waiting room is enabled.
+    * Specify the settings to be applied if waiting room is enabled.
      */
     #[serde(
         default,
@@ -10422,7 +10456,7 @@ pub struct WaitingRoomSettings {
     )]
     pub users_who_can_admit_participants_from_waiting_room: i64,
     /**
-     * Specify the settings to be applied if waiting room is enabled.
+    * Specify the settings to be applied if waiting room is enabled.
      */
     #[serde(
         default,
@@ -10435,7 +10469,7 @@ pub struct WaitingRoomSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingSecurity {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10443,7 +10477,7 @@ pub struct MeetingSecurity {
     )]
     pub auto_security: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10451,7 +10485,7 @@ pub struct MeetingSecurity {
     )]
     pub block_user_domain: bool,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -10463,7 +10497,7 @@ pub struct MeetingSecurity {
     )]
     pub block_user_domain_list: Vec<String>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10471,7 +10505,7 @@ pub struct MeetingSecurity {
     )]
     pub embed_password_in_join_link: bool,
     /**
-     * Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be \*\*automatically disabled\*\*. <br><br>The value of this field can be one of the following:<br>
+    * Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be \*\*automatically disabled\*\*. <br><br>The value of this field can be one of the following:<br>
      *  `enhanced_encryption`: Enhanced encryption. Encryption is stored in the cloud if you enable this option. <br>
      *  
      *  `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also \*\*disables\*\* the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
@@ -10479,7 +10513,7 @@ pub struct MeetingSecurity {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub encryption_type: Option<EncryptionType>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10487,7 +10521,7 @@ pub struct MeetingSecurity {
     )]
     pub end_to_end_encrypted_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10495,12 +10529,12 @@ pub struct MeetingSecurity {
     )]
     pub meeting_password: bool,
     /**
-     * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
+    * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meeting_password_requirement: Option<MeetingSecuritySettingsPasswordRequirement>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10508,7 +10542,7 @@ pub struct MeetingSecurity {
     )]
     pub phone_password: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10516,7 +10550,7 @@ pub struct MeetingSecurity {
     )]
     pub pmi_password: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10524,7 +10558,7 @@ pub struct MeetingSecurity {
     )]
     pub require_password_for_scheduled_meeting: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10532,7 +10566,7 @@ pub struct MeetingSecurity {
     )]
     pub require_password_for_scheduled_webinar: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10540,12 +10574,12 @@ pub struct MeetingSecurity {
     )]
     pub waiting_room: bool,
     /**
-     * Specify the settings to be applied if waiting room is enabled.
+    * Specify the settings to be applied if waiting room is enabled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub waiting_room_settings: Option<WaitingRoomSettings>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -10564,7 +10598,7 @@ pub struct MeetingSecuritySettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Metrics {
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10573,7 +10607,7 @@ pub struct Metrics {
     )]
     pub custom_keys: Vec<CustomKeys>,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10582,7 +10616,7 @@ pub struct Metrics {
     )]
     pub dept: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10591,7 +10625,7 @@ pub struct Metrics {
     )]
     pub duration: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10600,7 +10634,7 @@ pub struct Metrics {
     )]
     pub email: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10609,7 +10643,7 @@ pub struct Metrics {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10617,7 +10651,7 @@ pub struct Metrics {
     )]
     pub has_3rd_party_audio: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10625,7 +10659,7 @@ pub struct Metrics {
     )]
     pub has_pstn: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10633,7 +10667,7 @@ pub struct Metrics {
     )]
     pub has_recording: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10641,7 +10675,7 @@ pub struct Metrics {
     )]
     pub has_screen_share: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10649,7 +10683,7 @@ pub struct Metrics {
     )]
     pub has_sip: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10657,7 +10691,7 @@ pub struct Metrics {
     )]
     pub has_video: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10665,7 +10699,7 @@ pub struct Metrics {
     )]
     pub has_voip: bool,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10674,7 +10708,7 @@ pub struct Metrics {
     )]
     pub host: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10683,7 +10717,7 @@ pub struct Metrics {
     )]
     pub id: i64,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10692,7 +10726,7 @@ pub struct Metrics {
     )]
     pub in_room_participants: i64,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10701,7 +10735,7 @@ pub struct Metrics {
     )]
     pub participants: i64,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10710,7 +10744,7 @@ pub struct Metrics {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10719,7 +10753,7 @@ pub struct Metrics {
     )]
     pub topic: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10728,7 +10762,7 @@ pub struct Metrics {
     )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10737,7 +10771,7 @@ pub struct Metrics {
     )]
     pub user_type: String,
     /**
-     * Meeting metric details.
+    * Meeting metric details.
      */
     #[serde(
         default,
@@ -10758,7 +10792,8 @@ pub struct Metrics {
  *   
  *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FileType {
     #[serde(rename = "CC")]
     Cc,
@@ -10817,7 +10852,8 @@ impl FileType {
  *   
  *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RecordingType {
     #[serde(rename = "active_speaker")]
     ActiveSpeaker,
@@ -10878,7 +10914,7 @@ impl RecordingType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ArchiveFiles {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10887,7 +10923,7 @@ pub struct ArchiveFiles {
     )]
     pub download_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10896,7 +10932,7 @@ pub struct ArchiveFiles {
     )]
     pub file_extension: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -10905,7 +10941,7 @@ pub struct ArchiveFiles {
     )]
     pub file_size: i64,
     /**
-     * The archived file's file type:
+    * The archived file's file type:
      *  \* `MP4` — Video file.
      *  \* `M4A` — Audio-only file.
      *  \* `TRANSCRIPT` — A transcript file of the recording, in VTT file format.
@@ -10918,7 +10954,7 @@ pub struct ArchiveFiles {
     #[serde(default, skip_serializing_if = "FileType::is_noop")]
     pub file_type: FileType,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10927,7 +10963,7 @@ pub struct ArchiveFiles {
     )]
     pub id: String,
     /**
-     * The archived file's recording type:
+    * The archived file's recording type:
      *  \* `shared_screen_with_speaker_view(CC)`
      *  \* `shared_screen_with_speaker_view`
      *  \* `shared_screen_with_gallery_view`
@@ -10945,7 +10981,7 @@ pub struct ArchiveFiles {
     #[serde(default, skip_serializing_if = "RecordingType::is_noop")]
     pub recording_type: RecordingType,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10958,7 +10994,7 @@ pub struct ArchiveFiles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CloudArchivedFiles {
     /**
-     * Information about the archive files.
+    * Information about the archive files.
      */
     #[serde(
         default,
@@ -10967,7 +11003,7 @@ pub struct CloudArchivedFiles {
     )]
     pub archive_files: Vec<ArchiveFiles>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -10976,7 +11012,7 @@ pub struct CloudArchivedFiles {
     )]
     pub duration: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -10985,7 +11021,7 @@ pub struct CloudArchivedFiles {
     )]
     pub host_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -10994,7 +11030,7 @@ pub struct CloudArchivedFiles {
     )]
     pub id: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11003,7 +11039,7 @@ pub struct CloudArchivedFiles {
     )]
     pub recording_count: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -11012,7 +11048,7 @@ pub struct CloudArchivedFiles {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11021,7 +11057,7 @@ pub struct CloudArchivedFiles {
     )]
     pub timezone: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11030,7 +11066,7 @@ pub struct CloudArchivedFiles {
     )]
     pub topic: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11039,7 +11075,7 @@ pub struct CloudArchivedFiles {
     )]
     pub total_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11049,7 +11085,7 @@ pub struct CloudArchivedFiles {
     )]
     pub type_: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11062,7 +11098,7 @@ pub struct CloudArchivedFiles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Attendees {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11076,7 +11112,7 @@ pub struct Attendees {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InviteLink {
     /**
-     * Invite Links
+    * Invite Links
      */
     #[serde(
         default,
@@ -11085,7 +11121,7 @@ pub struct InviteLink {
     )]
     pub attendees: Vec<Attendees>,
     /**
-     * Invite Links
+    * Invite Links
      */
     #[serde(
         default,
@@ -11098,7 +11134,7 @@ pub struct InviteLink {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InviteLinksAttendees {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11107,7 +11143,7 @@ pub struct InviteLinksAttendees {
     )]
     pub join_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11121,7 +11157,7 @@ pub struct InviteLinksAttendees {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InviteLinks {
     /**
-     * Invite links response.
+    * Invite links response.
      */
     #[serde(
         default,
@@ -11131,7 +11167,8 @@ pub struct InviteLinks {
     pub attendees: Vec<InviteLinksAttendees>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RecordingStatusUpdateBodyRequestAction {
     #[serde(rename = "recover")]
     Recover,
@@ -11168,7 +11205,7 @@ pub struct RecordingStatusUpdateBodyRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UploadVbRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11182,7 +11219,7 @@ pub struct UploadVbRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmergencyAddress {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11192,7 +11229,7 @@ pub struct EmergencyAddress {
     )]
     pub address_line_1: String,
     /**
-     * Specify emergency address for the account.
+    * Specify emergency address for the account.
      */
     #[serde(
         default,
@@ -11202,7 +11239,7 @@ pub struct EmergencyAddress {
     )]
     pub address_line_2: String,
     /**
-     * Specify emergency address for the account.
+    * Specify emergency address for the account.
      */
     #[serde(
         default,
@@ -11211,7 +11248,7 @@ pub struct EmergencyAddress {
     )]
     pub city: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11220,7 +11257,7 @@ pub struct EmergencyAddress {
     )]
     pub country: String,
     /**
-     * Specify emergency address for the account.
+    * Specify emergency address for the account.
      */
     #[serde(
         default,
@@ -11229,7 +11266,7 @@ pub struct EmergencyAddress {
     )]
     pub state_code: String,
     /**
-     * Specify emergency address for the account.
+    * Specify emergency address for the account.
      */
     #[serde(
         default,
@@ -11242,11 +11279,11 @@ pub struct EmergencyAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SetUpAccountRequest {
     /**
-     * Specify emergency address for the account.
+    * Specify emergency address for the account.
      */
     pub emergency_address: EmergencyAddress,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11263,7 +11300,8 @@ pub struct SetUpAccountRequest {
  *   `all`: Include both assigned and unassigned numbers in the response.<br>
  *   `byoc`: Include Bring Your Own Carrier (BYOC) numbers only in the response.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListAccountPhoneNumbersType {
     #[serde(rename = "all")]
     All,
@@ -11302,7 +11340,8 @@ impl ListAccountPhoneNumbersType {
  *   `user`<br> `callQueue`<br> `autoReceptionist`<br>
  *   `commonAreaPhone`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ExtensionType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -11342,7 +11381,8 @@ impl ExtensionType {
 /**
  * Source of phone number.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Source {
     #[serde(rename = "external")]
     External,
@@ -11376,7 +11416,8 @@ impl Source {
 /**
  * Status of the number.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListAccountPhoneNumbersResponseStatus {
     #[serde(rename = "available")]
     Available,
@@ -11410,7 +11451,7 @@ impl ListAccountPhoneNumbersResponseStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Assignee {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11419,7 +11460,7 @@ pub struct Assignee {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11428,7 +11469,7 @@ pub struct Assignee {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11437,7 +11478,7 @@ pub struct Assignee {
     )]
     pub name: String,
     /**
-     * The type of assignee to whom the number is assigned. The value can be one of the following:<br>
+    * The type of assignee to whom the number is assigned. The value can be one of the following:<br>
      *  `user`<br> `callQueue`<br> `autoReceptionist`<br>
      *  `commonAreaPhone`
      */
@@ -11448,7 +11489,7 @@ pub struct Assignee {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Site {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11457,7 +11498,7 @@ pub struct Site {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11471,7 +11512,7 @@ pub struct Site {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Carrier {
     /**
-     * Displayed when the `type` request parameter is `byoc`.
+    * Displayed when the `type` request parameter is `byoc`.
      */
     #[serde(
         default,
@@ -11480,7 +11521,7 @@ pub struct Carrier {
     )]
     pub code: String,
     /**
-     * Displayed when the `type` request parameter is `byoc`.
+    * Displayed when the `type` request parameter is `byoc`.
      */
     #[serde(
         default,
@@ -11494,7 +11535,7 @@ pub struct Carrier {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SipGroup {
     /**
-     * Displayed when the `type` request parameter is `byoc`.
+    * Displayed when the `type` request parameter is `byoc`.
      */
     #[serde(
         default,
@@ -11503,7 +11544,7 @@ pub struct SipGroup {
     )]
     pub display_name: String,
     /**
-     * Displayed when the `type` request parameter is `byoc`.
+    * Displayed when the `type` request parameter is `byoc`.
      */
     #[serde(
         default,
@@ -11518,7 +11559,7 @@ pub struct ListAccountPhoneNumbersResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<Assignee>,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -11530,12 +11571,12 @@ pub struct ListAccountPhoneNumbersResponse {
     )]
     pub capability: Vec<String>,
     /**
-     * Displayed when the `type` request parameter is `byoc`.
+    * Displayed when the `type` request parameter is `byoc`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub carrier: Option<Carrier>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11544,7 +11585,7 @@ pub struct ListAccountPhoneNumbersResponse {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11553,7 +11594,7 @@ pub struct ListAccountPhoneNumbersResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11562,7 +11603,7 @@ pub struct ListAccountPhoneNumbersResponse {
     )]
     pub location: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11571,24 +11612,24 @@ pub struct ListAccountPhoneNumbersResponse {
     )]
     pub number: String,
     /**
-     * Type of number.
+    * Type of number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub number_type: Option<Type>,
     /**
-     * Displayed when the `type` request parameter is `byoc`.
+    * Displayed when the `type` request parameter is `byoc`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sip_group: Option<SipGroup>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * Source of phone number.
+    * Source of phone number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
     /**
-     * Status of the number.
+    * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ListAccountPhoneNumbersResponseStatus>,
@@ -11597,7 +11638,7 @@ pub struct ListAccountPhoneNumbersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListAccountPhoneNumbersResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11606,7 +11647,7 @@ pub struct ListAccountPhoneNumbersResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11621,7 +11662,7 @@ pub struct ListAccountPhoneNumbersResponseData {
     )]
     pub phone_numbers: Vec<ListAccountPhoneNumbersResponse>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11634,7 +11675,8 @@ pub struct ListAccountPhoneNumbersResponseData {
 /**
  * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TransportProtocol {
     #[serde(rename = "AUTO")]
     Auto,
@@ -11674,7 +11716,7 @@ impl TransportProtocol {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Phones {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11683,7 +11725,7 @@ pub struct Phones {
     )]
     pub authorization_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11692,7 +11734,7 @@ pub struct Phones {
     )]
     pub domain: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11701,7 +11743,7 @@ pub struct Phones {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11710,7 +11752,7 @@ pub struct Phones {
     )]
     pub password: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11719,7 +11761,7 @@ pub struct Phones {
     )]
     pub proxy_server: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11729,7 +11771,7 @@ pub struct Phones {
     )]
     pub proxy_server_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11739,7 +11781,7 @@ pub struct Phones {
     )]
     pub proxy_server_3: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11748,7 +11790,7 @@ pub struct Phones {
     )]
     pub register_server: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11758,7 +11800,7 @@ pub struct Phones {
     )]
     pub register_server_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11768,7 +11810,7 @@ pub struct Phones {
     )]
     pub register_server_3: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11777,12 +11819,12 @@ pub struct Phones {
     )]
     pub registration_expire_time: i64,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub transport_protocol: Option<TransportProtocol>,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(
         default,
@@ -11791,7 +11833,7 @@ pub struct Phones {
     )]
     pub transport_protocol_2: Option<TransportProtocol>,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(
         default,
@@ -11800,7 +11842,7 @@ pub struct Phones {
     )]
     pub transport_protocol_3: Option<TransportProtocol>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11809,7 +11851,7 @@ pub struct Phones {
     )]
     pub user_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11818,7 +11860,7 @@ pub struct Phones {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11831,7 +11873,7 @@ pub struct Phones {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSipPhonesResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11840,7 +11882,7 @@ pub struct ListSipPhonesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11849,7 +11891,7 @@ pub struct ListSipPhonesResponse {
     )]
     pub page_count: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11858,7 +11900,7 @@ pub struct ListSipPhonesResponse {
     )]
     pub page_number: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11867,7 +11909,7 @@ pub struct ListSipPhonesResponse {
     )]
     pub page_size: i64,
     /**
-     * SIP phones object.
+    * SIP phones object.
      */
     #[serde(
         default,
@@ -11876,7 +11918,7 @@ pub struct ListSipPhonesResponse {
     )]
     pub phones: Vec<Phones>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11889,7 +11931,7 @@ pub struct ListSipPhonesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateSipPhoneRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11898,7 +11940,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub authorization_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11907,7 +11949,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub domain: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11916,7 +11958,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub password: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11925,7 +11967,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub proxy_server: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11935,7 +11977,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub proxy_server_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11945,7 +11987,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub proxy_server_3: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11954,7 +11996,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub register_server: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11964,7 +12006,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub register_server_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -11974,7 +12016,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub register_server_3: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -11983,12 +12025,12 @@ pub struct CreateSipPhoneRequest {
     )]
     pub registration_expire_time: i64,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub transport_protocol: Option<TransportProtocol>,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(
         default,
@@ -11997,7 +12039,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub transport_protocol_2: Option<TransportProtocol>,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(
         default,
@@ -12006,7 +12048,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub transport_protocol_3: Option<TransportProtocol>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12015,7 +12057,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub user_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12024,7 +12066,7 @@ pub struct CreateSipPhoneRequest {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12037,7 +12079,7 @@ pub struct CreateSipPhoneRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSipPhoneRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12046,7 +12088,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub authorization_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12055,7 +12097,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub domain: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12064,7 +12106,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub password: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12073,7 +12115,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub proxy_server: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12083,7 +12125,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub proxy_server_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12093,7 +12135,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub proxy_server_3: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12102,7 +12144,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub register_server: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12112,7 +12154,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub register_server_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12122,7 +12164,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub register_server_3: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -12131,12 +12173,12 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub registration_expire_time: i64,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub transport_protocol: Option<TransportProtocol>,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(
         default,
@@ -12145,7 +12187,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub transport_protocol_2: Option<TransportProtocol>,
     /**
-     * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+    * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
     #[serde(
         default,
@@ -12154,7 +12196,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub transport_protocol_3: Option<TransportProtocol>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12163,7 +12205,7 @@ pub struct UpdateSipPhoneRequest {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12176,7 +12218,8 @@ pub struct UpdateSipPhoneRequest {
 /**
  * The status of the Zoom Room.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListZoomRoomsStatus {
     #[serde(rename = "Available")]
     Available,
@@ -12216,7 +12259,8 @@ impl ListZoomRoomsStatus {
 /**
  * Type of the Zoom Rooms.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListZoomRoomsType {
     #[serde(rename = "DigitalSignageOnly")]
     DigitalSignageOnly,
@@ -12253,7 +12297,7 @@ impl ListZoomRoomsType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListZoomRoomsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12262,7 +12306,7 @@ pub struct ListZoomRoomsResponse {
     )]
     pub activation_code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12271,7 +12315,7 @@ pub struct ListZoomRoomsResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12280,7 +12324,7 @@ pub struct ListZoomRoomsResponse {
     )]
     pub location_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12289,7 +12333,7 @@ pub struct ListZoomRoomsResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12298,7 +12342,7 @@ pub struct ListZoomRoomsResponse {
     )]
     pub room_id: String,
     /**
-     * The status of the Zoom Room.
+    * The status of the Zoom Room.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ListZoomRoomsStatus>,
@@ -12307,7 +12351,7 @@ pub struct ListZoomRoomsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListZoomRoomsResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12316,7 +12360,7 @@ pub struct ListZoomRoomsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -12325,7 +12369,7 @@ pub struct ListZoomRoomsResponseData {
     )]
     pub page_size: i64,
     /**
-     * List of existing Zoom Rooms.
+    * List of existing Zoom Rooms.
      */
     #[serde(
         default,
@@ -12338,7 +12382,7 @@ pub struct ListZoomRoomsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddRoomRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12347,7 +12391,7 @@ pub struct AddRoomRequest {
     )]
     pub location_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12356,7 +12400,7 @@ pub struct AddRoomRequest {
     )]
     pub name: String,
     /**
-     * Type of the Zoom Rooms.
+    * Type of the Zoom Rooms.
      */
     #[serde(
         default,
@@ -12369,7 +12413,7 @@ pub struct AddRoomRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddRoomResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12378,7 +12422,7 @@ pub struct AddRoomResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12387,7 +12431,7 @@ pub struct AddRoomResponse {
     )]
     pub location_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12396,7 +12440,7 @@ pub struct AddRoomResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12405,7 +12449,7 @@ pub struct AddRoomResponse {
     )]
     pub room_id: String,
     /**
-     * Type of the Zoom Rooms.
+    * Type of the Zoom Rooms.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<ListZoomRoomsType>,
@@ -12415,7 +12459,7 @@ pub struct AddRoomResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MainAutoReceptionist {
     /**
-     * Auto Receptionist for each site.
+    * Auto Receptionist for each site.
      */
     #[serde(
         default,
@@ -12424,7 +12468,7 @@ pub struct MainAutoReceptionist {
     )]
     pub extension_id: String,
     /**
-     * Auto Receptionist for each site.
+    * Auto Receptionist for each site.
      */
     #[serde(
         default,
@@ -12433,7 +12477,7 @@ pub struct MainAutoReceptionist {
     )]
     pub extension_number: String,
     /**
-     * Auto Receptionist for each site.
+    * Auto Receptionist for each site.
      */
     #[serde(
         default,
@@ -12442,7 +12486,7 @@ pub struct MainAutoReceptionist {
     )]
     pub id: String,
     /**
-     * Auto Receptionist for each site.
+    * Auto Receptionist for each site.
      */
     #[serde(
         default,
@@ -12456,7 +12500,7 @@ pub struct MainAutoReceptionist {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Country {
     /**
-     * Site country
+    * Site country
      */
     #[serde(
         default,
@@ -12465,7 +12509,7 @@ pub struct Country {
     )]
     pub code: String,
     /**
-     * Site country
+    * Site country
      */
     #[serde(
         default,
@@ -12478,12 +12522,12 @@ pub struct Country {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sites {
     /**
-     * Site country
+    * Site country
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub country: Option<Country>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12492,12 +12536,12 @@ pub struct Sites {
     )]
     pub id: String,
     /**
-     * Auto Receptionist for each site.
+    * Auto Receptionist for each site.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub main_auto_receptionist: Option<MainAutoReceptionist>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12506,7 +12550,7 @@ pub struct Sites {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12519,7 +12563,7 @@ pub struct Sites {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPhoneSitesResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12528,7 +12572,7 @@ pub struct ListPhoneSitesResponse {
     )]
     pub next_page_token: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12537,7 +12581,7 @@ pub struct ListPhoneSitesResponse {
     )]
     pub page_size: String,
     /**
-     * List of site(s).
+    * List of site(s).
      */
     #[serde(
         default,
@@ -12546,7 +12590,7 @@ pub struct ListPhoneSitesResponse {
     )]
     pub sites: Vec<Sites>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12559,7 +12603,7 @@ pub struct ListPhoneSitesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DefaultEmergencyAddress {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12569,7 +12613,7 @@ pub struct DefaultEmergencyAddress {
     )]
     pub address_line_1: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12579,7 +12623,7 @@ pub struct DefaultEmergencyAddress {
     )]
     pub address_line_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12588,7 +12632,7 @@ pub struct DefaultEmergencyAddress {
     )]
     pub city: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12597,7 +12641,7 @@ pub struct DefaultEmergencyAddress {
     )]
     pub country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12606,7 +12650,7 @@ pub struct DefaultEmergencyAddress {
     )]
     pub state_code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12620,7 +12664,7 @@ pub struct DefaultEmergencyAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShortExtension {
     /**
-     * Short extension of the phone site.
+    * Short extension of the phone site.
      */
     #[serde(
         default,
@@ -12633,7 +12677,7 @@ pub struct ShortExtension {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatePhoneSiteRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12644,7 +12688,7 @@ pub struct CreatePhoneSiteRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub default_emergency_address: Option<DefaultEmergencyAddress>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12653,12 +12697,12 @@ pub struct CreatePhoneSiteRequest {
     )]
     pub name: String,
     /**
-     * Short extension of the phone site.
+    * Short extension of the phone site.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub short_extension: Option<ShortExtension>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -12672,7 +12716,7 @@ pub struct CreatePhoneSiteRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSiteResponseMainAutoReceptionist {
     /**
-     * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
+    * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
      */
     #[serde(
         default,
@@ -12681,7 +12725,7 @@ pub struct GetSiteResponseMainAutoReceptionist {
     )]
     pub extension_id: String,
     /**
-     * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
+    * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
      */
     #[serde(
         default,
@@ -12690,7 +12734,7 @@ pub struct GetSiteResponseMainAutoReceptionist {
     )]
     pub extension_number: i64,
     /**
-     * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
+    * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
      */
     #[serde(
         default,
@@ -12699,7 +12743,7 @@ pub struct GetSiteResponseMainAutoReceptionist {
     )]
     pub id: String,
     /**
-     * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
+    * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
      */
     #[serde(
         default,
@@ -12712,12 +12756,12 @@ pub struct GetSiteResponseMainAutoReceptionist {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSiteResponse {
     /**
-     * Site country
+    * Site country
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub country: Option<Country>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12726,12 +12770,12 @@ pub struct GetSiteResponse {
     )]
     pub id: String,
     /**
-     * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
+    * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub main_auto_receptionist: Option<GetSiteResponseMainAutoReceptionist>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12740,12 +12784,12 @@ pub struct GetSiteResponse {
     )]
     pub name: String,
     /**
-     * Short extension of the phone site.
+    * Short extension of the phone site.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub short_extension: Option<ShortExtension>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -12758,7 +12802,7 @@ pub struct GetSiteResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSiteDetailsRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12767,7 +12811,7 @@ pub struct UpdateSiteDetailsRequest {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -12781,7 +12825,8 @@ pub struct UpdateSiteDetailsRequest {
  * Presence status of the contact in Zoom Client. The value of this field can be one of the following:
  *   `Do_Not_Disturb`<br> `away`<br> `Available`<br> `Offline`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PresenceStatus {
     #[serde(rename = "Available")]
     Available,
@@ -12821,7 +12866,7 @@ impl PresenceStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contacts {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12830,7 +12875,7 @@ pub struct Contacts {
     )]
     pub dept: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -12842,7 +12887,7 @@ pub struct Contacts {
     )]
     pub direct_numbers: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12851,7 +12896,7 @@ pub struct Contacts {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12860,7 +12905,7 @@ pub struct Contacts {
     )]
     pub extension_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12869,7 +12914,7 @@ pub struct Contacts {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12878,7 +12923,7 @@ pub struct Contacts {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12887,7 +12932,7 @@ pub struct Contacts {
     )]
     pub im_group_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12896,7 +12941,7 @@ pub struct Contacts {
     )]
     pub im_group_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12905,7 +12950,7 @@ pub struct Contacts {
     )]
     pub job_title: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12914,7 +12959,7 @@ pub struct Contacts {
     )]
     pub last_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12923,7 +12968,7 @@ pub struct Contacts {
     )]
     pub location: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12932,13 +12977,13 @@ pub struct Contacts {
     )]
     pub phone_number: String,
     /**
-     * Presence status of the contact in Zoom Client. The value of this field can be one of the following:
+    * Presence status of the contact in Zoom Client. The value of this field can be one of the following:
      *  `Do_Not_Disturb`<br> `away`<br> `Available`<br> `Offline`
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub presence_status: Option<PresenceStatus>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12957,7 +13002,7 @@ pub struct SearchCompanyContactsResponse {
     )]
     pub contacts: Vec<Contacts>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -12966,7 +13011,7 @@ pub struct SearchCompanyContactsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -12981,7 +13026,8 @@ pub struct SearchCompanyContactsResponse {
  *   
  *   This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetChatMessagesResponseStatus {
     #[serde(rename = "Deleted")]
     Deleted,
@@ -13020,7 +13066,7 @@ pub struct Messages {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bot_message: Option<Domains>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -13029,7 +13075,7 @@ pub struct Messages {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13038,7 +13084,7 @@ pub struct Messages {
     )]
     pub download_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13047,7 +13093,7 @@ pub struct Messages {
     )]
     pub file_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13056,7 +13102,7 @@ pub struct Messages {
     )]
     pub file_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13065,7 +13111,7 @@ pub struct Messages {
     )]
     pub file_size: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13074,7 +13120,7 @@ pub struct Messages {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13083,7 +13129,7 @@ pub struct Messages {
     )]
     pub message: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13092,7 +13138,7 @@ pub struct Messages {
     )]
     pub reply_main_message_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13101,7 +13147,7 @@ pub struct Messages {
     )]
     pub reply_main_message_timestamp: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13110,14 +13156,14 @@ pub struct Messages {
     )]
     pub sender: String,
     /**
-     * This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
+    * This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
      *  
      *  This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<GetChatMessagesResponseStatus>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13131,7 +13177,7 @@ pub struct Messages {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetChatMessagesResponse {
     /**
-     * Chat message object.
+    * Chat message object.
      */
     #[serde(
         default,
@@ -13140,7 +13186,7 @@ pub struct GetChatMessagesResponse {
     )]
     pub date: Option<chrono::NaiveDate>,
     /**
-     * Chat message object.
+    * Chat message object.
      */
     #[serde(
         default,
@@ -13149,7 +13195,7 @@ pub struct GetChatMessagesResponse {
     )]
     pub messages: Vec<Messages>,
     /**
-     * Chat message object.
+    * Chat message object.
      */
     #[serde(
         default,
@@ -13158,7 +13204,7 @@ pub struct GetChatMessagesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Chat message object.
+    * Chat message object.
      */
     #[serde(
         default,
@@ -13171,7 +13217,7 @@ pub struct GetChatMessagesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AtItems {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13180,7 +13226,7 @@ pub struct AtItems {
     )]
     pub at_contact: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13189,7 +13235,7 @@ pub struct AtItems {
     )]
     pub at_type: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13198,7 +13244,7 @@ pub struct AtItems {
     )]
     pub end_position: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13211,7 +13257,7 @@ pub struct AtItems {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendaChatMessageRequest {
     /**
-     * [Chat mentions](https://support.zoom.us/hc/en-us/articles/360037567431-Using-chat-mentions-and-slash-commands) object. Use this object to include mentions in the message that will be sent to  a channel.
+    * [Chat mentions](https://support.zoom.us/hc/en-us/articles/360037567431-Using-chat-mentions-and-slash-commands) object. Use this object to include mentions in the message that will be sent to  a channel.
      */
     #[serde(
         default,
@@ -13220,7 +13266,7 @@ pub struct SendaChatMessageRequest {
     )]
     pub at_items: Vec<AtItems>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13229,7 +13275,7 @@ pub struct SendaChatMessageRequest {
     )]
     pub message: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13238,7 +13284,7 @@ pub struct SendaChatMessageRequest {
     )]
     pub to_channel: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13251,7 +13297,7 @@ pub struct SendaChatMessageRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarkMessageRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13260,7 +13306,7 @@ pub struct MarkMessageRequest {
     )]
     pub action: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13269,7 +13315,7 @@ pub struct MarkMessageRequest {
     )]
     pub timestamp: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13278,7 +13324,7 @@ pub struct MarkMessageRequest {
     )]
     pub to_channel: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13293,7 +13339,8 @@ pub struct MarkMessageRequest {
  *   * `add` — Add an emoji reaction.
  *   * `remove` — Remove an emoji reaction.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReactMessageRequestAction {
     #[serde(rename = "add")]
     Add,
@@ -13327,14 +13374,14 @@ impl ReactMessageRequestAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReactMessageRequest {
     /**
-     * The action to perform with the message:
+    * The action to perform with the message:
      *  \* `add` — Add an emoji reaction.
      *  \* `remove` — Remove an emoji reaction.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<ReactMessageRequestAction>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13343,7 +13390,7 @@ pub struct ReactMessageRequest {
     )]
     pub emoji: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13352,7 +13399,7 @@ pub struct ReactMessageRequest {
     )]
     pub to_channel: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13365,7 +13412,7 @@ pub struct ReactMessageRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reactions {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13374,7 +13421,7 @@ pub struct Reactions {
     )]
     pub emoji: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13388,12 +13435,12 @@ pub struct Reactions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetChatMessageResponse {
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bot_message: Option<Domains>,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13402,7 +13449,7 @@ pub struct GetChatMessageResponse {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13411,7 +13458,7 @@ pub struct GetChatMessageResponse {
     )]
     pub download_url: String,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13420,7 +13467,7 @@ pub struct GetChatMessageResponse {
     )]
     pub file_id: String,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13429,7 +13476,7 @@ pub struct GetChatMessageResponse {
     )]
     pub file_name: String,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13438,7 +13485,7 @@ pub struct GetChatMessageResponse {
     )]
     pub file_size: i64,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13447,7 +13494,7 @@ pub struct GetChatMessageResponse {
     )]
     pub id: String,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13456,7 +13503,7 @@ pub struct GetChatMessageResponse {
     )]
     pub message: String,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13465,7 +13512,7 @@ pub struct GetChatMessageResponse {
     )]
     pub reactions: Vec<Reactions>,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13474,7 +13521,7 @@ pub struct GetChatMessageResponse {
     )]
     pub reply_main_message_id: String,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13483,7 +13530,7 @@ pub struct GetChatMessageResponse {
     )]
     pub reply_main_message_timestamp: i64,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13492,7 +13539,7 @@ pub struct GetChatMessageResponse {
     )]
     pub sender: String,
     /**
-     * A chat message object.
+    * A chat message object.
      */
     #[serde(
         default,
@@ -13505,7 +13552,7 @@ pub struct GetChatMessageResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EditMessageRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13514,7 +13561,7 @@ pub struct EditMessageRequest {
     )]
     pub message: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13523,7 +13570,7 @@ pub struct EditMessageRequest {
     )]
     pub to_channel: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13538,7 +13585,7 @@ pub struct Channels {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channels_settings: Option<ChannelSettings>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13547,7 +13594,7 @@ pub struct Channels {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13556,7 +13603,7 @@ pub struct Channels {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13570,7 +13617,7 @@ pub struct Channels {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetChannelsResponse {
     /**
-     * Chat Channel object(s).
+    * Chat Channel object(s).
      */
     #[serde(
         default,
@@ -13579,7 +13626,7 @@ pub struct GetChannelsResponse {
     )]
     pub channels: Vec<Channels>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13588,7 +13635,7 @@ pub struct GetChannelsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13597,7 +13644,7 @@ pub struct GetChannelsResponse {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13610,7 +13657,7 @@ pub struct GetChannelsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Members {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13623,7 +13670,7 @@ pub struct Members {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateChannelRequest {
     /**
-     * Member(s) to include in the channel. A max of 5 members can be added to the channel at once with this API.
+    * Member(s) to include in the channel. A max of 5 members can be added to the channel at once with this API.
      */
     #[serde(
         default,
@@ -13632,7 +13679,7 @@ pub struct CreateChannelRequest {
     )]
     pub members: Vec<Members>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13641,7 +13688,7 @@ pub struct CreateChannelRequest {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13655,7 +13702,7 @@ pub struct CreateChannelRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateChannelResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13664,7 +13711,7 @@ pub struct CreateChannelResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13673,7 +13720,7 @@ pub struct CreateChannelResponse {
     )]
     pub jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13682,7 +13729,7 @@ pub struct CreateChannelResponse {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13696,7 +13743,7 @@ pub struct CreateChannelResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserContactsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13705,7 +13752,7 @@ pub struct GetUserContactsResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13714,7 +13761,7 @@ pub struct GetUserContactsResponse {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13723,7 +13770,7 @@ pub struct GetUserContactsResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13736,7 +13783,7 @@ pub struct GetUserContactsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserContactsResponseData {
     /**
-     * The contacts object.
+    * The contacts object.
      */
     #[serde(
         default,
@@ -13745,7 +13792,7 @@ pub struct GetUserContactsResponseData {
     )]
     pub contacts: Vec<GetUserContactsResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13754,7 +13801,7 @@ pub struct GetUserContactsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13767,7 +13814,7 @@ pub struct GetUserContactsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUserContactResponse {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -13779,7 +13826,7 @@ pub struct GetUserContactResponse {
     )]
     pub direct_numbers: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13788,7 +13835,7 @@ pub struct GetUserContactResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13797,7 +13844,7 @@ pub struct GetUserContactResponse {
     )]
     pub extension_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13806,7 +13853,7 @@ pub struct GetUserContactResponse {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13815,7 +13862,7 @@ pub struct GetUserContactResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13824,7 +13871,7 @@ pub struct GetUserContactResponse {
     )]
     pub last_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13833,7 +13880,7 @@ pub struct GetUserContactResponse {
     )]
     pub phone_number: String,
     /**
-     * Presence status of the contact in Zoom Client. The value of this field can be one of the following:
+    * Presence status of the contact in Zoom Client. The value of this field can be one of the following:
      *  `Do_Not_Disturb`<br> `away`<br> `Available`<br> `Offline`
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -13843,7 +13890,8 @@ pub struct GetUserContactResponse {
 /**
  * The role of the member. The value can be one of these: `owner`, `admin`, `member`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Role {
     #[serde(rename = "admin")]
     Admin,
@@ -13880,7 +13928,7 @@ impl Role {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListChannelMembersResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13889,7 +13937,7 @@ pub struct ListChannelMembersResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13898,7 +13946,7 @@ pub struct ListChannelMembersResponse {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13907,7 +13955,7 @@ pub struct ListChannelMembersResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13916,7 +13964,7 @@ pub struct ListChannelMembersResponse {
     )]
     pub last_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13925,7 +13973,7 @@ pub struct ListChannelMembersResponse {
     )]
     pub name: String,
     /**
-     * The role of the member. The value can be one of these: `owner`, `admin`, `member`.
+    * The role of the member. The value can be one of these: `owner`, `admin`, `member`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<Role>,
@@ -13934,7 +13982,7 @@ pub struct ListChannelMembersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListChannelMembersResponseData {
     /**
-     * Members in a channel.
+    * Members in a channel.
      */
     #[serde(
         default,
@@ -13943,7 +13991,7 @@ pub struct ListChannelMembersResponseData {
     )]
     pub members: Vec<ListChannelMembersResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -13952,7 +14000,7 @@ pub struct ListChannelMembersResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13961,7 +14009,7 @@ pub struct ListChannelMembersResponseData {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -13974,7 +14022,7 @@ pub struct ListChannelMembersResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InviteChannelMembersRequest {
     /**
-     * Member(s) to include in the channel. A max of 5 members can be added to the channel at once with this API.
+    * Member(s) to include in the channel. A max of 5 members can be added to the channel at once with this API.
      */
     #[serde(
         default,
@@ -13987,7 +14035,7 @@ pub struct InviteChannelMembersRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InviteChannelMembersResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -13996,7 +14044,7 @@ pub struct InviteChannelMembersResponse {
     )]
     pub added_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -14012,7 +14060,7 @@ pub struct InviteChannelMembersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct JoinChannelResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -14021,7 +14069,7 @@ pub struct JoinChannelResponse {
     )]
     pub added_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14035,7 +14083,7 @@ pub struct JoinChannelResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountCreateRequest {
     /**
-     * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
+    * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
      */
     #[serde(
         default,
@@ -14044,7 +14092,7 @@ pub struct AccountCreateRequest {
     )]
     pub account_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14053,7 +14101,7 @@ pub struct AccountCreateRequest {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14062,7 +14110,7 @@ pub struct AccountCreateRequest {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14071,12 +14119,12 @@ pub struct AccountCreateRequest {
     )]
     pub last_name: String,
     /**
-     * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
+    * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<Options>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14089,7 +14137,7 @@ pub struct AccountCreateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountCreateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14098,7 +14146,7 @@ pub struct AccountCreateResponse {
     )]
     pub created_at: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14107,7 +14155,7 @@ pub struct AccountCreateResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14116,7 +14164,7 @@ pub struct AccountCreateResponse {
     )]
     pub owner_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14129,7 +14177,7 @@ pub struct AccountCreateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -14138,7 +14186,7 @@ pub struct AccountResponse {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14147,12 +14195,12 @@ pub struct AccountResponse {
     )]
     pub id: String,
     /**
-     * Account options object.
+    * Account options object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<Options>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14161,7 +14209,7 @@ pub struct AccountResponse {
     )]
     pub owner_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14170,7 +14218,7 @@ pub struct AccountResponse {
     )]
     pub owner_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14187,7 +14235,8 @@ pub struct AccountResponse {
  *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
  *   * `meeting_security` — View the account's meeting security settings.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OptionData {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
@@ -14232,7 +14281,7 @@ impl OptionData {
 pub enum AccountSettingsResponseOneOf {
     Domains(Domains),
     /**
-     * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
+    * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     Security(Security),
     AccountSettings(AccountSettings),
@@ -14308,7 +14357,8 @@ impl AccountSettingsUpdateRequestOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountSettingsUpdateOption {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
@@ -14348,7 +14398,7 @@ impl AccountSettingsUpdateOption {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountTrustedDomainResponse {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -14364,7 +14414,8 @@ pub struct AccountTrustedDomainResponse {
 /**
  * Status of the plan.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountPlansResponsePlanBaseStatus {
     #[serde(rename = "active")]
     Active,
@@ -14401,7 +14452,7 @@ impl AccountPlansResponsePlanBaseStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanZoomRooms {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -14410,7 +14461,7 @@ pub struct PlanZoomRooms {
     )]
     pub hosts: i64,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -14419,7 +14470,7 @@ pub struct PlanZoomRooms {
     )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -14428,12 +14479,12 @@ pub struct PlanZoomRooms {
     )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
-     * Status of the plan.
+    * Status of the plan.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<AccountPlansResponsePlanBaseStatus>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14448,7 +14499,7 @@ pub struct PlanZoomRooms {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanWebinar {
     /**
-     * Account plan object.
+    * Account plan object.
      */
     #[serde(
         default,
@@ -14457,7 +14508,7 @@ pub struct PlanWebinar {
     )]
     pub hosts: i64,
     /**
-     * Account plan object.
+    * Account plan object.
      */
     #[serde(
         default,
@@ -14466,7 +14517,7 @@ pub struct PlanWebinar {
     )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
-     * Account plan object.
+    * Account plan object.
      */
     #[serde(
         default,
@@ -14475,12 +14526,12 @@ pub struct PlanWebinar {
     )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
-     * Account plan object.
+    * Account plan object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<AccountPlansResponsePlanBaseStatus>,
     /**
-     * Account plan object.
+    * Account plan object.
      */
     #[serde(
         default,
@@ -14494,7 +14545,8 @@ pub struct PlanWebinar {
 /**
  * Status of additional Cloud Recording plan.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PlanRecordingStatus {
     #[serde(rename = "Active")]
     Active,
@@ -14529,7 +14581,7 @@ impl PlanRecordingStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponsePlanAudio {
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(
         default,
@@ -14538,7 +14590,7 @@ pub struct AccountPlansResponsePlanAudio {
     )]
     pub callout_countries: String,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(
         default,
@@ -14547,7 +14599,7 @@ pub struct AccountPlansResponsePlanAudio {
     )]
     pub ddi_numbers: i64,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(
         default,
@@ -14556,7 +14608,7 @@ pub struct AccountPlansResponsePlanAudio {
     )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(
         default,
@@ -14565,7 +14617,7 @@ pub struct AccountPlansResponsePlanAudio {
     )]
     pub premium_countries: String,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(
         default,
@@ -14574,12 +14626,12 @@ pub struct AccountPlansResponsePlanAudio {
     )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<AccountPlansResponsePlanBaseStatus>,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(
         default,
@@ -14588,7 +14640,7 @@ pub struct AccountPlansResponsePlanAudio {
     )]
     pub tollfree_countries: String,
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(
         default,
@@ -14603,7 +14655,7 @@ pub struct AccountPlansResponsePlanAudio {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponsePlanPhoneBase {
     /**
-     * Additional phone base plans.
+    * Additional phone base plans.
      */
     #[serde(
         default,
@@ -14612,7 +14664,7 @@ pub struct AccountPlansResponsePlanPhoneBase {
     )]
     pub callout_countries: String,
     /**
-     * Additional phone base plans.
+    * Additional phone base plans.
      */
     #[serde(
         default,
@@ -14621,7 +14673,7 @@ pub struct AccountPlansResponsePlanPhoneBase {
     )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
-     * Additional phone base plans.
+    * Additional phone base plans.
      */
     #[serde(
         default,
@@ -14630,12 +14682,12 @@ pub struct AccountPlansResponsePlanPhoneBase {
     )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
-     * Additional phone base plans.
+    * Additional phone base plans.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<AccountPlansResponsePlanBaseStatus>,
     /**
-     * Additional phone base plans.
+    * Additional phone base plans.
      */
     #[serde(
         default,
@@ -14650,12 +14702,12 @@ pub struct AccountPlansResponsePlanPhoneBase {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanPhone {
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_base: Option<AccountPlansResponsePlanPhoneBase>,
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     #[serde(
         default,
@@ -14664,7 +14716,7 @@ pub struct PlanPhone {
     )]
     pub plan_calling: Vec<PlanZoomRooms>,
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     #[serde(
         default,
@@ -14677,7 +14729,7 @@ pub struct PlanPhone {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponse {
     /**
-     * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
+    * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_audio: Option<AccountPlansResponsePlanAudio>,
@@ -14690,12 +14742,12 @@ pub struct AccountPlansResponse {
     )]
     pub plan_large_meeting: Vec<PlanWebinar>,
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_phone: Option<PlanPhone>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14704,7 +14756,7 @@ pub struct AccountPlansResponse {
     )]
     pub plan_recording: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -14713,7 +14765,7 @@ pub struct AccountPlansResponse {
     )]
     pub plan_recording_next_invoice_date: Option<chrono::NaiveDate>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -14722,7 +14774,7 @@ pub struct AccountPlansResponse {
     )]
     pub plan_recording_service_effective_date: Option<chrono::NaiveDate>,
     /**
-     * Status of additional Cloud Recording plan.
+    * Status of additional Cloud Recording plan.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_recording_status: Option<PlanRecordingStatus>,
@@ -14741,7 +14793,7 @@ pub struct AccountPlansResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlanCreateRequest {
     /**
-     * Billing Contact object.
+    * Billing Contact object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contact: Option<Contact>,
@@ -14755,7 +14807,7 @@ pub struct AccountPlanCreateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlanCreateRequestAllOf {
     /**
-     * Account Plans object.
+    * Account Plans object.
      */
     #[serde(flatten)]
     pub account_plans: AccountPlans,
@@ -14767,11 +14819,11 @@ pub struct AccountPlanCreateRequestAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlanAddonCreateRequest {
     /**
-     * Phone Plan Object
+    * Phone Plan Object
      */
     pub plan_details: PhonePlan,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14793,11 +14845,11 @@ pub struct AccountPlanAddonCreateRequest {
 #[serde(untagged)]
 pub enum AccountPlanAddonCreateRequestOneOf {
     /**
-     * Account base plan object.
+    * Account base plan object.
      */
     PlanBase(PlanBase),
     /**
-     * Zoom Phone Plan Object
+    * Zoom Phone Plan Object
      */
     AccountPlanAddonCreateRequest(AccountPlanAddonCreateRequest),
 }
@@ -14821,7 +14873,7 @@ impl AccountPlanAddonCreateRequestOneOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupCreateRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14834,7 +14886,7 @@ pub struct GroupCreateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14843,7 +14895,7 @@ pub struct GroupResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14852,7 +14904,7 @@ pub struct GroupResponse {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -14865,7 +14917,7 @@ pub struct GroupResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserCreateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14874,7 +14926,7 @@ pub struct UserCreateResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14883,7 +14935,7 @@ pub struct UserCreateResponse {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14892,7 +14944,7 @@ pub struct UserCreateResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14901,7 +14953,7 @@ pub struct UserCreateResponse {
     )]
     pub last_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -14921,7 +14973,7 @@ pub struct GroupMembersResponseData {
     )]
     pub members: Vec<UserCreateResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -14930,7 +14982,7 @@ pub struct GroupMembersResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -14939,7 +14991,7 @@ pub struct GroupMembersResponseData {
     )]
     pub page_count: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -14948,7 +15000,7 @@ pub struct GroupMembersResponseData {
     )]
     pub page_number: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -14957,7 +15009,7 @@ pub struct GroupMembersResponseData {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -14970,7 +15022,7 @@ pub struct GroupMembersResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddRoleMembersRequest {
     /**
-     * List of registrants.
+    * List of registrants.
      */
     #[serde(
         default,
@@ -14983,7 +15035,7 @@ pub struct AddRoleMembersRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupMembersCreateResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -14992,7 +15044,7 @@ pub struct GroupMembersCreateResponse {
     )]
     pub added_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15007,7 +15059,8 @@ pub struct GroupMembersCreateResponse {
  *   * `move` — Remove the group member from one group and move them to a different group.
  *   * `set_primary` — Set the user's primary group.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UpdateGroupMemberRequestAction {
     #[serde(rename = "move")]
     Move,
@@ -15041,7 +15094,7 @@ impl UpdateGroupMemberRequestAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupMemberRequest {
     /**
-     * The action to perform:
+    * The action to perform:
      *  \* `move` — Remove the group member from one group and move them to a different group.
      *  \* `set_primary` — Set the user's primary group.
      */
@@ -15051,7 +15104,7 @@ pub struct UpdateGroupMemberRequest {
     )]
     pub action: UpdateGroupMemberRequestAction,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15069,7 +15122,7 @@ pub struct UpdateGroupMemberRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeviceCreateResponseAllOf {
     /**
-     * The H.323/SIP device object.
+    * The H.323/SIP device object.
      */
     #[serde(flatten)]
     pub device: Device,
@@ -15087,7 +15140,7 @@ pub struct TrackingfieldGetResponseAllOf {
     #[serde(flatten)]
     pub groups: Groups,
     /**
-     * Tracking Field
+    * Tracking Field
      */
     #[serde(flatten)]
     pub tracking_field: TrackingField,
@@ -15096,7 +15149,8 @@ pub struct TrackingfieldGetResponseAllOf {
 /**
  * IM Group types:<br>`normal` - Only members can see automatically see the other members of this group. Other people can search for members within this group. <br>`shared` - Everyone under an account can see the group members automatically.<br>`restricted` - Nobody can see the group or search for members except the members in the group.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ImGroupCreateRequestType {
     #[serde(rename = "normal")]
     #[default]
@@ -15121,10 +15175,11 @@ impl std::fmt::Display for ImGroupCreateRequestType {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImGroupCreateRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15133,22 +15188,22 @@ pub struct ImGroupCreateRequest {
     )]
     pub name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub search_by_account: Option<bool>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub search_by_domain: Option<bool>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub search_by_ma_account: Option<bool>,
     /**
-     * IM Group types:<br>`normal` - Only members can see automatically see the other members of this group. Other people can search for members within this group. <br>`shared` - Everyone under an account can see the group members automatically.<br>`restricted` - Nobody can see the group or search for members except the members in the group.
+    * IM Group types:<br>`normal` - Only members can see automatically see the other members of this group. Other people can search for members within this group. <br>`shared` - Everyone under an account can see the group members automatically.<br>`restricted` - Nobody can see the group or search for members except the members in the group.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<ImGroupCreateRequestType>,
@@ -15157,7 +15212,7 @@ pub struct ImGroupCreateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImGroupCreateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15166,7 +15221,7 @@ pub struct ImGroupCreateResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15175,7 +15230,7 @@ pub struct ImGroupCreateResponse {
     )]
     pub name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -15183,7 +15238,7 @@ pub struct ImGroupCreateResponse {
     )]
     pub search_by_account: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -15191,7 +15246,7 @@ pub struct ImGroupCreateResponse {
     )]
     pub search_by_domain: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -15199,7 +15254,7 @@ pub struct ImGroupCreateResponse {
     )]
     pub search_by_ma_account: bool,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15225,7 +15280,7 @@ pub struct ImGroupResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardImResponse {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -15234,7 +15289,7 @@ pub struct DashboardImResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -15247,7 +15302,8 @@ pub struct DashboardImResponse {
 /**
  * IM chat session type.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ImChatSessionsResponseType {
     #[serde(rename = "1:1")]
     One,
@@ -15281,7 +15337,7 @@ impl ImChatSessionsResponseType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sessions {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -15290,7 +15346,7 @@ pub struct Sessions {
     )]
     pub last_message_sent_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15299,7 +15355,7 @@ pub struct Sessions {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15308,7 +15364,7 @@ pub struct Sessions {
     )]
     pub session_id: String,
     /**
-     * IM chat session type.
+    * IM chat session type.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<ImChatSessionsResponseType>,
@@ -15317,7 +15373,7 @@ pub struct Sessions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatSessionsResponseData {
     /**
-     * Array of session objects.
+    * Array of session objects.
      */
     #[serde(
         default,
@@ -15336,7 +15392,7 @@ pub struct ImChatSessionsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatSessionsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token_4_im_chat: PaginationToken4ImChat,
@@ -15349,7 +15405,7 @@ pub struct ImChatSessionsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatMessagesResponse {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -15358,7 +15414,7 @@ pub struct ImChatMessagesResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15367,7 +15423,7 @@ pub struct ImChatMessagesResponse {
     )]
     pub session_id: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -15380,7 +15436,7 @@ pub struct ImChatMessagesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatMessagesResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15389,7 +15445,7 @@ pub struct ImChatMessagesResponseData {
     )]
     pub action: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -15398,7 +15454,7 @@ pub struct ImChatMessagesResponseData {
     )]
     pub action_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -15407,7 +15463,7 @@ pub struct ImChatMessagesResponseData {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15416,7 +15472,7 @@ pub struct ImChatMessagesResponseData {
     )]
     pub message: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15429,7 +15485,7 @@ pub struct ImChatMessagesResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatMessagesResponseDataType {
     /**
-     * Array of session objects.
+    * Array of session objects.
      */
     #[serde(
         default,
@@ -15448,7 +15504,7 @@ pub struct ImChatMessagesResponseDataType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatMessagesResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token_4_im_chat: PaginationToken4ImChat,
@@ -15461,7 +15517,8 @@ pub struct ImChatMessagesResponseAllOf {
 /**
  * The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MeetingsType {
     #[serde(rename = "live")]
     #[default]
@@ -15486,10 +15543,11 @@ impl std::fmt::Display for MeetingsType {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15498,7 +15556,7 @@ pub struct MeetingCreateResponse {
     )]
     pub assistant_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15507,7 +15565,7 @@ pub struct MeetingCreateResponse {
     )]
     pub host_email: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15516,7 +15574,7 @@ pub struct MeetingCreateResponse {
     )]
     pub id: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15534,7 +15592,7 @@ pub struct MeetingCreateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateResponseAllOf {
     /**
-     * Meeting object
+    * Meeting object
      */
     #[serde(flatten)]
     pub meeting_info: MeetingInfo,
@@ -15545,7 +15603,7 @@ pub struct MeetingCreateResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15554,7 +15612,7 @@ pub struct MeetingResponse {
     )]
     pub assistant_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15563,7 +15621,7 @@ pub struct MeetingResponse {
     )]
     pub host_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15572,7 +15630,7 @@ pub struct MeetingResponse {
     )]
     pub host_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15581,7 +15639,7 @@ pub struct MeetingResponse {
     )]
     pub id: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15599,7 +15657,7 @@ pub struct MeetingResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingResponseAllOf {
     /**
-     * Meeting object.
+    * Meeting object.
      */
     #[serde(flatten)]
     pub meeting_info_get: MeetingInfoGet,
@@ -15610,7 +15668,7 @@ pub struct MeetingResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingUpdateRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15638,7 +15696,8 @@ pub struct MeetingUpdateRequestAllOf {
  *   `recover` - [Recover](https://support.zoom.us/hc/en-us/articles/360038297111-Recover-a-deleted-meeting) a deleted meeting.
  *   
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MeetingStatusRequestAction {
     #[serde(rename = "end")]
     End,
@@ -15672,7 +15731,7 @@ impl MeetingStatusRequestAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingStatusRequest {
     /**
-     * `end` - End a meeting.<br>
+    * `end` - End a meeting.<br>
      *  `recover` - [Recover](https://support.zoom.us/hc/en-us/articles/360038297111-Recover-a-deleted-meeting) a deleted meeting.
      *
      */
@@ -15683,7 +15742,8 @@ pub struct MeetingStatusRequest {
 /**
  * The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MeetingRegistrantsStatus {
     #[serde(rename = "approved")]
     #[default]
@@ -15708,10 +15768,11 @@ impl std::fmt::Display for MeetingRegistrantsStatus {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingRegistrantCreateResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15720,7 +15781,7 @@ pub struct MeetingRegistrantCreateResponse {
     )]
     pub id: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15729,7 +15790,7 @@ pub struct MeetingRegistrantCreateResponse {
     )]
     pub join_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15738,7 +15799,7 @@ pub struct MeetingRegistrantCreateResponse {
     )]
     pub registrant_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15747,7 +15808,7 @@ pub struct MeetingRegistrantCreateResponse {
     )]
     pub start_time: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15760,7 +15821,7 @@ pub struct MeetingRegistrantCreateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PastMeetingDetailsResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15769,7 +15830,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub duration: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -15778,7 +15839,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15787,7 +15848,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub host_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15796,7 +15857,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub id: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15805,7 +15866,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub participants_count: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -15814,7 +15875,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15823,7 +15884,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub topic: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15832,7 +15893,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub total_minutes: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -15842,7 +15903,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub type_: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15851,7 +15912,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub user_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15860,7 +15921,7 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15873,7 +15934,7 @@ pub struct PastMeetingDetailsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Participants {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15882,7 +15943,7 @@ pub struct Participants {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15891,7 +15952,7 @@ pub struct Participants {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15904,7 +15965,7 @@ pub struct Participants {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PastMeetingParticipantsResponse {
     /**
-     * Array of meeting participant objects.
+    * Array of meeting participant objects.
      */
     #[serde(
         default,
@@ -15922,7 +15983,7 @@ pub struct PastMeetingParticipantsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PastMeetingParticipantsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -15933,7 +15994,8 @@ pub struct PastMeetingParticipantsResponseAllOf {
 /**
  * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MeetingPollCreateResponseStatus {
     #[serde(rename = "ended")]
     Ended,
@@ -15973,7 +16035,7 @@ impl MeetingPollCreateResponseStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingPollGetResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -15982,7 +16044,7 @@ pub struct MeetingPollGetResponse {
     )]
     pub id: String,
     /**
-     * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
+    * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<MeetingPollCreateResponseStatus>,
@@ -15996,7 +16058,7 @@ pub struct MeetingPollGetResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingPollGetResponseAllOf {
     /**
-     * Poll
+    * Poll
      */
     #[serde(flatten)]
     pub poll: Poll,
@@ -16007,7 +16069,7 @@ pub struct MeetingPollGetResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingGetResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16016,7 +16078,7 @@ pub struct RecordingGetResponse {
     )]
     pub download_access_token: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16042,7 +16104,8 @@ pub struct RecordingGetResponseAllOf {
 /**
  * The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RecordingDeleteAction {
     #[serde(rename = "delete")]
     Delete,
@@ -16064,10 +16127,11 @@ impl std::fmt::Display for RecordingDeleteAction {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingRecordingRegistrantCreateResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -16076,7 +16140,7 @@ pub struct MeetingRecordingRegistrantCreateResponse {
     )]
     pub id: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16085,7 +16149,7 @@ pub struct MeetingRecordingRegistrantCreateResponse {
     )]
     pub registrant_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16094,7 +16158,7 @@ pub struct MeetingRecordingRegistrantCreateResponse {
     )]
     pub share_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16109,7 +16173,8 @@ pub struct MeetingRecordingRegistrantCreateResponse {
  *   
  *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DashboardMeetingsType {
     #[serde(rename = "live")]
     #[default]
@@ -16134,10 +16199,12 @@ impl std::fmt::Display for DashboardMeetingsType {
     }
 }
 
+
 /**
  * Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IncludeFields {
     #[serde(rename = "tracking_fields")]
     TrackingFields,
@@ -16168,7 +16235,7 @@ impl IncludeFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingsResponse {
     /**
-     * Array of meeting objects.
+    * Array of meeting objects.
      */
     #[serde(
         default,
@@ -16187,7 +16254,7 @@ pub struct DashboardMeetingsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -16200,7 +16267,8 @@ pub struct DashboardMeetingsResponseAllOf {
 /**
  * Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DashboardMeetingParticipantsIncludeFields {
     #[serde(rename = "registrant_id")]
     RegistrantId,
@@ -16239,7 +16307,8 @@ impl DashboardMeetingParticipantsIncludeFields {
  *   
  *   **Note:** This response returns an empty string (`““`) value for any users who are **not** a part of the host’s account (external users).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DashboardMeetingParticipantsResponseDevice {
     #[serde(rename = "Android")]
     Android,
@@ -16291,7 +16360,8 @@ impl DashboardMeetingParticipantsResponseDevice {
  *   * `Cellular` — 3G, 4G, and 5G cellular.
  *   * `Others` — An unknown device.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NetworkType {
     #[serde(rename = "Cellular")]
     Cellular,
@@ -16334,7 +16404,8 @@ impl NetworkType {
 /**
  * Audio quality of the participant.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AudioQuality {
     #[serde(rename = "bad")]
     Bad,
@@ -16376,7 +16447,8 @@ impl AudioQuality {
  *   
  *   The value of this field can be `in_meeting` or `in_waiting_room`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DashboardMeetingParticipantsResponseStatus {
     #[serde(rename = "in_meeting")]
     InMeeting,
@@ -16410,12 +16482,12 @@ impl DashboardMeetingParticipantsResponseStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantsResponse {
     /**
-     * Audio quality of the participant.
+    * Audio quality of the participant.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_quality: Option<AudioQuality>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16424,7 +16496,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub camera: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16433,7 +16505,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub connection_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16442,7 +16514,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub customer_key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16451,7 +16523,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub data_center: String,
     /**
-     * The type of device the participant used to join the meeting:
+    * The type of device the participant used to join the meeting:
      *  \* `Phone` — Participant joined via PSTN.
      *  \* `H.323/SIP` — Participant joined via an H.323 or SIP device.
      *  \* `Windows` — Participant joined via VoIP using a Windows device.
@@ -16464,7 +16536,7 @@ pub struct DashboardMeetingParticipantsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub device: Option<DashboardMeetingParticipantsResponseDevice>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16473,7 +16545,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub domain: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16482,7 +16554,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16491,7 +16563,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub harddisk_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16500,7 +16572,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -16509,7 +16581,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub in_room_participants: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16518,7 +16590,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub ip_address: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -16527,7 +16599,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub join_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16536,7 +16608,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub leave_reason: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -16545,7 +16617,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16554,7 +16626,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub location: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16563,7 +16635,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub mac_addr: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16572,7 +16644,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub microphone: String,
     /**
-     * The participant's network type:
+    * The participant's network type:
      *  
      *  \* `Wired`
      *  \* `Wifi`
@@ -16583,7 +16655,7 @@ pub struct DashboardMeetingParticipantsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub network_type: Option<NetworkType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16592,7 +16664,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub pc_name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -16600,7 +16672,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub recording: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16609,12 +16681,12 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub registrant_id: String,
     /**
-     * Audio quality of the participant.
+    * Audio quality of the participant.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub screen_share_quality: Option<AudioQuality>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -16622,7 +16694,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub share_application: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -16630,7 +16702,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub share_desktop: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -16638,7 +16710,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub share_whiteboard: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16647,14 +16719,14 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub speaker: String,
     /**
-     * Indicates whether the participant is in the waiting room or in the meeting.
+    * Indicates whether the participant is in the waiting room or in the meeting.
      *  
      *  The value of this field can be `in_meeting` or `in_waiting_room`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<DashboardMeetingParticipantsResponseStatus>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16663,7 +16735,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub user_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16672,7 +16744,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16681,7 +16753,7 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub version: String,
     /**
-     * Audio quality of the participant.
+    * Audio quality of the participant.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub video_quality: Option<AudioQuality>,
@@ -16690,7 +16762,7 @@ pub struct DashboardMeetingParticipantsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantsResponseData {
     /**
-     * Array of participant session objects. If a participant left a meeting and rejoined the same meeting, their information will appear multiple times (as many times as they joined the meeting).
+    * Array of participant session objects. If a participant left a meeting and rejoined the same meeting, their information will appear multiple times (as many times as they joined the meeting).
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `user_name`, `ip_address`, `location`, and `email` responses.
      */
@@ -16710,7 +16782,7 @@ pub struct DashboardMeetingParticipantsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -16721,7 +16793,7 @@ pub struct DashboardMeetingParticipantsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Details {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16730,7 +16802,7 @@ pub struct Details {
     )]
     pub content: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16739,7 +16811,7 @@ pub struct Details {
     )]
     pub end_time: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16752,7 +16824,7 @@ pub struct Details {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantShareResponseParticipants {
     /**
-     * Array of sharing and recording details.
+    * Array of sharing and recording details.
      */
     #[serde(
         default,
@@ -16761,7 +16833,7 @@ pub struct DashboardMeetingParticipantShareResponseParticipants {
     )]
     pub details: Vec<Details>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16770,7 +16842,7 @@ pub struct DashboardMeetingParticipantShareResponseParticipants {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16779,7 +16851,7 @@ pub struct DashboardMeetingParticipantShareResponseParticipants {
     )]
     pub user_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16792,7 +16864,7 @@ pub struct DashboardMeetingParticipantShareResponseParticipants {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantShareResponse {
     /**
-     * Array of participants.
+    * Array of participants.
      */
     #[serde(
         default,
@@ -16810,7 +16882,7 @@ pub struct DashboardMeetingParticipantShareResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantShareResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -16821,7 +16893,8 @@ pub struct DashboardMeetingParticipantShareResponseAllOf {
 /**
  * The webinar type.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DashboardWebinarsType {
     #[serde(rename = "live")]
     #[default]
@@ -16843,10 +16916,11 @@ impl std::fmt::Display for DashboardWebinarsType {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardWebinarsResponse {
     /**
-     * Array of webinar objects.
+    * Array of webinar objects.
      */
     #[serde(
         default,
@@ -16865,7 +16939,7 @@ pub struct DashboardWebinarsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardWebinarsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -16878,12 +16952,12 @@ pub struct DashboardWebinarsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardWebinarParticipantsResponse {
     /**
-     * Audio quality of the participant.
+    * Audio quality of the participant.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio_quality: Option<AudioQuality>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16892,7 +16966,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub connection_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16901,7 +16975,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub customer_key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16910,7 +16984,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub data_center: String,
     /**
-     * The type of device the participant used to join the meeting:
+    * The type of device the participant used to join the meeting:
      *  \* `Phone` — Participant joined via PSTN.
      *  \* `H.323/SIP` — Participant joined via an H.323 or SIP device.
      *  \* `Windows` — Participant joined via VoIP using a Windows device.
@@ -16923,7 +16997,7 @@ pub struct DashboardWebinarParticipantsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub device: Option<DashboardMeetingParticipantsResponseDevice>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16932,7 +17006,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub domain: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16941,7 +17015,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16950,7 +17024,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub harddisk_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16959,7 +17033,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16968,7 +17042,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub ip_address: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -16977,7 +17051,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub join_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -16986,7 +17060,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub leave_reason: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -16995,7 +17069,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17004,7 +17078,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub location: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17013,7 +17087,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub mac_addr: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17022,7 +17096,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub microphone: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17031,7 +17105,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub network_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17040,7 +17114,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub pc_name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -17048,7 +17122,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub recording: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17057,12 +17131,12 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub registrant_id: String,
     /**
-     * Audio quality of the participant.
+    * Audio quality of the participant.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub screen_share_quality: Option<AudioQuality>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -17070,7 +17144,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub share_application: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -17078,7 +17152,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub share_desktop: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -17086,7 +17160,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub share_whiteboard: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17095,7 +17169,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub speaker: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17104,7 +17178,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub user_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17113,7 +17187,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17122,7 +17196,7 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub version: String,
     /**
-     * Audio quality of the participant.
+    * Audio quality of the participant.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub video_quality: Option<AudioQuality>,
@@ -17131,7 +17205,7 @@ pub struct DashboardWebinarParticipantsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardWebinarParticipantsResponseData {
     /**
-     * Array of user objects.
+    * Array of user objects.
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `user_name`, `ip_address`, `location`, and `email` responses.
      */
@@ -17151,7 +17225,7 @@ pub struct DashboardWebinarParticipantsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardWebinarParticipantsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -17162,7 +17236,7 @@ pub struct DashboardWebinarParticipantsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Users {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17171,7 +17245,7 @@ pub struct Users {
     )]
     pub calls_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17180,7 +17254,7 @@ pub struct Users {
     )]
     pub calls_send: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17189,7 +17263,7 @@ pub struct Users {
     )]
     pub email: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17198,7 +17272,7 @@ pub struct Users {
     )]
     pub emoji_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17207,7 +17281,7 @@ pub struct Users {
     )]
     pub emoji_send: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17216,7 +17290,7 @@ pub struct Users {
     )]
     pub files_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17225,7 +17299,7 @@ pub struct Users {
     )]
     pub files_send: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17234,7 +17308,7 @@ pub struct Users {
     )]
     pub group_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17243,7 +17317,7 @@ pub struct Users {
     )]
     pub group_send: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17252,7 +17326,7 @@ pub struct Users {
     )]
     pub images_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17261,7 +17335,7 @@ pub struct Users {
     )]
     pub images_send: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17270,7 +17344,7 @@ pub struct Users {
     )]
     pub total_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17279,7 +17353,7 @@ pub struct Users {
     )]
     pub total_send: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17288,7 +17362,7 @@ pub struct Users {
     )]
     pub user_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17297,7 +17371,7 @@ pub struct Users {
     )]
     pub user_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17306,7 +17380,7 @@ pub struct Users {
     )]
     pub videos_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17315,7 +17389,7 @@ pub struct Users {
     )]
     pub videos_send: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17324,7 +17398,7 @@ pub struct Users {
     )]
     pub voice_receive: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17353,7 +17427,7 @@ pub struct DashboardImResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardImResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -17366,7 +17440,7 @@ pub struct DashboardImResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardChatResponse {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -17375,7 +17449,7 @@ pub struct DashboardChatResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17384,7 +17458,7 @@ pub struct DashboardChatResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17393,7 +17467,7 @@ pub struct DashboardChatResponse {
     )]
     pub page_size: i64,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -17406,7 +17480,7 @@ pub struct DashboardChatResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardChatResponseUsers {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17415,7 +17489,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub audio_sent: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17424,7 +17498,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub code_sippet_sent: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17433,7 +17507,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub email: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17442,7 +17516,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub files_sent: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17451,7 +17525,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub giphys_sent: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17460,7 +17534,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub group_sent: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17469,7 +17543,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub images_sent: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17479,7 +17553,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub p_2p_sent: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17488,7 +17562,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub text_sent: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17497,7 +17571,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub total_sent: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17506,7 +17580,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub user_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17515,7 +17589,7 @@ pub struct DashboardChatResponseUsers {
     )]
     pub user_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17551,7 +17625,7 @@ pub struct DashboardChatResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClientFeedbacks {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17560,7 +17634,7 @@ pub struct ClientFeedbacks {
     )]
     pub feedback_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17569,7 +17643,7 @@ pub struct ClientFeedbacks {
     )]
     pub feedback_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17588,7 +17662,7 @@ pub struct DashboardClientFeedbackResponse {
     )]
     pub client_feedbacks: Vec<ClientFeedbacks>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -17597,7 +17671,7 @@ pub struct DashboardClientFeedbackResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -17606,7 +17680,7 @@ pub struct DashboardClientFeedbackResponse {
     )]
     pub to: Option<chrono::NaiveDate>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17619,7 +17693,7 @@ pub struct DashboardClientFeedbackResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardIssueZoomRoomResponse {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -17628,7 +17702,7 @@ pub struct DashboardIssueZoomRoomResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -17637,7 +17711,7 @@ pub struct DashboardIssueZoomRoomResponse {
     )]
     pub to: Option<chrono::NaiveDate>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17650,7 +17724,7 @@ pub struct DashboardIssueZoomRoomResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardIssueZoomRoomResponseData {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -17679,7 +17753,7 @@ pub struct DashboardIssueZoomRoomResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssueDetails {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17688,7 +17762,7 @@ pub struct IssueDetails {
     )]
     pub issue: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -17717,7 +17791,7 @@ pub struct DashboardIssueDetailZoomRoomResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardIssueDetailZoomRoomResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -17730,7 +17804,7 @@ pub struct DashboardIssueDetailZoomRoomResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Dates {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -17739,7 +17813,7 @@ pub struct Dates {
     )]
     pub date: Option<chrono::NaiveDate>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17748,7 +17822,7 @@ pub struct Dates {
     )]
     pub meeting_minutes: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17757,7 +17831,7 @@ pub struct Dates {
     )]
     pub meetings: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17766,7 +17840,7 @@ pub struct Dates {
     )]
     pub new_users: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17779,7 +17853,7 @@ pub struct Dates {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportDailyResponse {
     /**
-     * Array of date objects.
+    * Array of date objects.
      */
     #[serde(
         default,
@@ -17788,7 +17862,7 @@ pub struct ReportDailyResponse {
     )]
     pub dates: Vec<Dates>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17797,7 +17871,7 @@ pub struct ReportDailyResponse {
     )]
     pub month: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17810,7 +17884,8 @@ pub struct ReportDailyResponse {
 /**
  * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReportUsersType {
     #[serde(rename = "active")]
     Active,
@@ -17844,7 +17919,8 @@ impl ReportUsersType {
 /**
  * The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReportMeetingsType {
     #[serde(rename = "past")]
     #[default]
@@ -17866,10 +17942,11 @@ impl std::fmt::Display for ReportMeetingsType {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Meetings {
     /**
-     * Custom keys and values assigned to the meeting.
+    * Custom keys and values assigned to the meeting.
      */
     #[serde(
         default,
@@ -17878,7 +17955,7 @@ pub struct Meetings {
     )]
     pub custom_keys: Vec<CustomKeys>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17887,7 +17964,7 @@ pub struct Meetings {
     )]
     pub duration: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -17896,7 +17973,7 @@ pub struct Meetings {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17905,7 +17982,7 @@ pub struct Meetings {
     )]
     pub id: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17914,7 +17991,7 @@ pub struct Meetings {
     )]
     pub participants_count: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17923,7 +18000,7 @@ pub struct Meetings {
     )]
     pub source: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -17932,7 +18009,7 @@ pub struct Meetings {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17941,7 +18018,7 @@ pub struct Meetings {
     )]
     pub topic: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17950,7 +18027,7 @@ pub struct Meetings {
     )]
     pub total_minutes: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -17960,7 +18037,7 @@ pub struct Meetings {
     )]
     pub type_: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17969,7 +18046,7 @@ pub struct Meetings {
     )]
     pub user_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17978,7 +18055,7 @@ pub struct Meetings {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -17991,7 +18068,7 @@ pub struct Meetings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingsResponse {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -18000,7 +18077,7 @@ pub struct ReportMeetingsResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * Array of meeting objects.
+    * Array of meeting objects.
      */
     #[serde(
         default,
@@ -18009,7 +18086,7 @@ pub struct ReportMeetingsResponse {
     )]
     pub meetings: Vec<Meetings>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18018,7 +18095,7 @@ pub struct ReportMeetingsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -18036,7 +18113,7 @@ pub struct ReportMeetingsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingsResponseAllOf {
     /**
-     * Pagination Object.
+    * Pagination Object.
      */
     #[serde(flatten)]
     pub pagination: Pagination,
@@ -18047,7 +18124,7 @@ pub struct ReportMeetingsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingDetailsResponse {
     /**
-     * Custom keys and values assigned to the meeting.
+    * Custom keys and values assigned to the meeting.
      */
     #[serde(
         default,
@@ -18056,7 +18133,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub custom_keys: Vec<CustomKeys>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18065,7 +18142,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub dept: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18074,7 +18151,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub duration: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18083,7 +18160,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18092,7 +18169,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub id: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18101,7 +18178,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub participants_count: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18110,7 +18187,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18119,7 +18196,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub topic: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18128,7 +18205,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub total_minutes: i64,
     /**
-     * Tracking fields
+    * Tracking fields
      */
     #[serde(
         default,
@@ -18137,7 +18214,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18147,7 +18224,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub type_: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18156,7 +18233,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub user_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18165,7 +18242,7 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub user_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18178,7 +18255,7 @@ pub struct ReportMeetingDetailsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingParticipantsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18187,7 +18264,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub customer_key: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18196,7 +18273,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub duration: i64,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -18204,7 +18281,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub failover: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18213,7 +18290,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub id: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18222,7 +18299,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub join_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18231,7 +18308,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18240,7 +18317,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18249,7 +18326,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub registrant_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18258,7 +18335,7 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub user_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18271,7 +18348,7 @@ pub struct ReportMeetingParticipantsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingParticipantsResponseData {
     /**
-     * Array of meeting participant objects.
+    * Array of meeting participant objects.
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `name` and `user_email` responses.
      */
@@ -18291,7 +18368,7 @@ pub struct ReportMeetingParticipantsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingParticipantsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -18302,7 +18379,7 @@ pub struct ReportMeetingParticipantsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct QuestionDetails {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18311,7 +18388,7 @@ pub struct QuestionDetails {
     )]
     pub answer: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18320,7 +18397,7 @@ pub struct QuestionDetails {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18329,7 +18406,7 @@ pub struct QuestionDetails {
     )]
     pub polling_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18342,7 +18419,7 @@ pub struct QuestionDetails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingPollsResponseQuestions {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18351,7 +18428,7 @@ pub struct ReportMeetingPollsResponseQuestions {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18360,7 +18437,7 @@ pub struct ReportMeetingPollsResponseQuestions {
     )]
     pub name: String,
     /**
-     * Array of questions from user.
+    * Array of questions from user.
      */
     #[serde(
         default,
@@ -18373,7 +18450,7 @@ pub struct ReportMeetingPollsResponseQuestions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingPollsResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18382,7 +18459,7 @@ pub struct ReportMeetingPollsResponse {
     )]
     pub id: i64,
     /**
-     * Array of meeting question objects.
+    * Array of meeting question objects.
      */
     #[serde(
         default,
@@ -18391,7 +18468,7 @@ pub struct ReportMeetingPollsResponse {
     )]
     pub questions: Vec<ReportMeetingPollsResponseQuestions>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18400,7 +18477,7 @@ pub struct ReportMeetingPollsResponse {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18413,7 +18490,7 @@ pub struct ReportMeetingPollsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarParticipantsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18422,7 +18499,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub customer_key: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18431,7 +18508,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub duration: i64,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -18439,7 +18516,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub failover: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18448,7 +18525,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub id: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18457,7 +18534,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub join_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18466,7 +18543,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18475,7 +18552,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18484,7 +18561,7 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub user_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18497,7 +18574,7 @@ pub struct ReportWebinarParticipantsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarParticipantsResponseData {
     /**
-     * Array of webinar participant objects.
+    * Array of webinar participant objects.
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `name` and `user_email` responses.
      */
@@ -18517,7 +18594,7 @@ pub struct ReportWebinarParticipantsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarParticipantsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token: PaginationToken,
@@ -18528,7 +18605,7 @@ pub struct ReportWebinarParticipantsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarQaResponseQuestionsQuestionDetails {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18537,7 +18614,7 @@ pub struct ReportWebinarQaResponseQuestionsQuestionDetails {
     )]
     pub answer: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18550,7 +18627,7 @@ pub struct ReportWebinarQaResponseQuestionsQuestionDetails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarQaResponseQuestions {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18559,7 +18636,7 @@ pub struct ReportWebinarQaResponseQuestions {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18568,7 +18645,7 @@ pub struct ReportWebinarQaResponseQuestions {
     )]
     pub name: String,
     /**
-     * Array of questions from user.
+    * Array of questions from user.
      */
     #[serde(
         default,
@@ -18581,7 +18658,7 @@ pub struct ReportWebinarQaResponseQuestions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarQaResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18590,7 +18667,7 @@ pub struct ReportWebinarQaResponse {
     )]
     pub id: i64,
     /**
-     * Array of webinar question objects.
+    * Array of webinar question objects.
      */
     #[serde(
         default,
@@ -18599,7 +18676,7 @@ pub struct ReportWebinarQaResponse {
     )]
     pub questions: Vec<ReportWebinarQaResponseQuestions>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18608,7 +18685,7 @@ pub struct ReportWebinarQaResponse {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18621,7 +18698,8 @@ pub struct ReportWebinarQaResponse {
 /**
  * Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum QueryDateType {
     #[serde(rename = "end_time")]
     EndTime,
@@ -18643,10 +18721,11 @@ impl std::fmt::Display for QueryDateType {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportCloudRecordingResponse {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -18677,7 +18756,8 @@ pub struct ReportCloudRecordingResponseAllOf {
  *   Filter your response by a category type to see reports for a specific category.
  *   The value for this field can be one of the following:<br> `all`<br>`user`<br>`user_settings`<br>`account`<br>`billing`<br>`im`<br>`recording`<br>`phone_contacts`<br>`webinar`<br>`sub_account`<br>`role`<br>`zoom_rooms`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CategoryType {
     #[serde(rename = "account")]
     Account,
@@ -18741,7 +18821,7 @@ impl CategoryType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OperationLogs {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18750,7 +18830,7 @@ pub struct OperationLogs {
     )]
     pub action: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18759,7 +18839,7 @@ pub struct OperationLogs {
     )]
     pub category_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18768,7 +18848,7 @@ pub struct OperationLogs {
     )]
     pub operation_detail: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18777,7 +18857,7 @@ pub struct OperationLogs {
     )]
     pub operator: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18790,7 +18870,7 @@ pub struct OperationLogs {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportOperationLogsResponse {
     /**
-     * Array of operation log objects
+    * Array of operation log objects
      */
     #[serde(
         default,
@@ -18808,7 +18888,7 @@ pub struct ReportOperationLogsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportOperationLogsResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token_4_im_chat: PaginationToken4ImChat,
@@ -18819,7 +18899,7 @@ pub struct ReportOperationLogsResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateRoleRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18828,7 +18908,7 @@ pub struct CreateRoleRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18837,7 +18917,7 @@ pub struct CreateRoleRequest {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -18853,7 +18933,7 @@ pub struct CreateRoleRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateRoleResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18862,7 +18942,7 @@ pub struct CreateRoleResponse {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18871,7 +18951,7 @@ pub struct CreateRoleResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18880,7 +18960,7 @@ pub struct CreateRoleResponse {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -18892,7 +18972,7 @@ pub struct CreateRoleResponse {
     )]
     pub privileges: Vec<String>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -18905,7 +18985,7 @@ pub struct CreateRoleResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddRoleMembersResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -18914,7 +18994,7 @@ pub struct AddRoleMembersResponse {
     )]
     pub add_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18927,7 +19007,7 @@ pub struct AddRoleMembersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TspResponseDialInNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18936,7 +19016,7 @@ pub struct TspResponseDialInNumbers {
     )]
     pub code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18945,7 +19025,7 @@ pub struct TspResponseDialInNumbers {
     )]
     pub number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -18959,7 +19039,7 @@ pub struct TspResponseDialInNumbers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TspResponse {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -18973,7 +19053,7 @@ pub struct TspResponse {
     )]
     pub dial_in_numbers: Vec<TspResponseDialInNumbers>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -18981,7 +19061,7 @@ pub struct TspResponse {
     )]
     pub enable: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -18989,7 +19069,7 @@ pub struct TspResponse {
     )]
     pub master_account_setting_extended: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -18997,12 +19077,12 @@ pub struct TspResponse {
     )]
     pub modify_credential_forbidden: bool,
     /**
-     * Telephony bridge
+    * Telephony bridge
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tsp_bridge: Option<TspBridge>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -19010,7 +19090,7 @@ pub struct TspResponse {
     )]
     pub tsp_enabled: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19023,37 +19103,37 @@ pub struct TspResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TspUpdateRequest {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dial_in_number_unrestricted: Option<bool>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enable: Option<bool>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub master_account_setting_extended: Option<bool>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub modify_credential_forbidden: Option<bool>,
     /**
-     * Telephony bridge
+    * Telephony bridge
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tsp_bridge: Option<TspBridge>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tsp_enabled: Option<bool>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19071,7 +19151,8 @@ pub struct TspUpdateRequest {
  *   
  *   This value defaults to `active`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UsersStatus {
     #[serde(rename = "active")]
     #[default]
@@ -19096,12 +19177,14 @@ impl std::fmt::Display for UsersStatus {
     }
 }
 
+
 /**
  * Use this parameter to display one of the following attributes in the API call's response:
  *   * `custom_attributes` — Return the user's custom attributes.
  *   * `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UsersIncludeFields {
     #[serde(rename = "custom_attributes")]
     CustomAttributes,
@@ -19135,7 +19218,7 @@ impl UsersIncludeFields {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersResponseCustomAttributes {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19144,7 +19227,7 @@ pub struct UsersResponseCustomAttributes {
     )]
     pub key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19153,7 +19236,7 @@ pub struct UsersResponseCustomAttributes {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19166,7 +19249,7 @@ pub struct UsersResponseCustomAttributes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -19175,7 +19258,7 @@ pub struct UsersResponse {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Information about the user's custom attributes.
+    * Information about the user's custom attributes.
      *  
      *  This field is \*\*only\*\* returned if users are assigned custom attributes and you provided the `custom_attributes` value for the `include_fields` query parameter in the API request.
      */
@@ -19186,7 +19269,7 @@ pub struct UsersResponse {
     )]
     pub custom_attributes: Vec<UsersResponseCustomAttributes>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19195,7 +19278,7 @@ pub struct UsersResponse {
     )]
     pub dept: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19204,7 +19287,7 @@ pub struct UsersResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19213,7 +19296,7 @@ pub struct UsersResponse {
     )]
     pub first_name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -19225,7 +19308,7 @@ pub struct UsersResponse {
     )]
     pub group_ids: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19234,7 +19317,7 @@ pub struct UsersResponse {
     )]
     pub host_key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19243,7 +19326,7 @@ pub struct UsersResponse {
     )]
     pub id: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -19255,7 +19338,7 @@ pub struct UsersResponse {
     )]
     pub im_group_ids: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19264,7 +19347,7 @@ pub struct UsersResponse {
     )]
     pub last_client_version: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -19273,7 +19356,7 @@ pub struct UsersResponse {
     )]
     pub last_login_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19282,7 +19365,7 @@ pub struct UsersResponse {
     )]
     pub last_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19291,7 +19374,7 @@ pub struct UsersResponse {
     )]
     pub plan_united_type: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19300,7 +19383,7 @@ pub struct UsersResponse {
     )]
     pub pmi: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19309,7 +19392,7 @@ pub struct UsersResponse {
     )]
     pub role_id: String,
     /**
-     * The user's status:
+    * The user's status:
      *  \* `active` — An active user.
      *  \* `inactive` — A deactivated user.
      *  \* `pending` — A pending user.
@@ -19319,7 +19402,7 @@ pub struct UsersResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<UsersStatus>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19328,7 +19411,7 @@ pub struct UsersResponse {
     )]
     pub timezone: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19338,7 +19421,7 @@ pub struct UsersResponse {
     )]
     pub type_: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19351,7 +19434,7 @@ pub struct UsersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19360,7 +19443,7 @@ pub struct UsersResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19369,7 +19452,7 @@ pub struct UsersResponseData {
     )]
     pub page_count: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19378,7 +19461,7 @@ pub struct UsersResponseData {
     )]
     pub page_number: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19387,7 +19470,7 @@ pub struct UsersResponseData {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19396,7 +19479,7 @@ pub struct UsersResponseData {
     )]
     pub total_records: i64,
     /**
-     * Information about the users.
+    * Information about the users.
      */
     #[serde(
         default,
@@ -19409,7 +19492,8 @@ pub struct UsersResponseData {
 /**
  * Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserCreateRequestAction {
     #[serde(rename = "autoCreate")]
     AutoCreate,
@@ -19449,7 +19533,7 @@ impl UserCreateRequestAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserInfo {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19458,7 +19542,7 @@ pub struct UserInfo {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19467,7 +19551,7 @@ pub struct UserInfo {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19476,7 +19560,7 @@ pub struct UserInfo {
     )]
     pub last_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19485,7 +19569,7 @@ pub struct UserInfo {
     )]
     pub password: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19499,7 +19583,7 @@ pub struct UserInfo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserCreateRequest {
     /**
-     * Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
+    * Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
      */
     #[serde(default, skip_serializing_if = "UserCreateRequestAction::is_noop")]
     pub action: UserCreateRequestAction,
@@ -19516,7 +19600,8 @@ pub struct UserCreateRequest {
  *   
  *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LoginType {
     #[serde(rename = "0")]
     Zero,
@@ -19580,7 +19665,7 @@ impl LoginType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserResponsePhoneNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19589,7 +19674,7 @@ pub struct UserResponsePhoneNumbers {
     )]
     pub code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19598,7 +19683,7 @@ pub struct UserResponsePhoneNumbers {
     )]
     pub country: String,
     /**
-     * The label to add to the user's phone number. You can only add one label to the user's phone number:
+    * The label to add to the user's phone number. You can only add one label to the user's phone number:
      *  
      *  \* `Mobile`
      *  \* `Office`
@@ -19608,7 +19693,7 @@ pub struct UserResponsePhoneNumbers {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub label: Option<Label>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19617,7 +19702,7 @@ pub struct UserResponsePhoneNumbers {
     )]
     pub number: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -19630,7 +19715,7 @@ pub struct UserResponsePhoneNumbers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserResponseCustomAttributes {
     /**
-     * Custom attribute(s) that have been assigned to the user.
+    * Custom attribute(s) that have been assigned to the user.
      */
     #[serde(
         default,
@@ -19639,7 +19724,7 @@ pub struct UserResponseCustomAttributes {
     )]
     pub key: String,
     /**
-     * Custom attribute(s) that have been assigned to the user.
+    * Custom attribute(s) that have been assigned to the user.
      */
     #[serde(
         default,
@@ -19648,7 +19733,7 @@ pub struct UserResponseCustomAttributes {
     )]
     pub name: String,
     /**
-     * Custom attribute(s) that have been assigned to the user.
+    * Custom attribute(s) that have been assigned to the user.
      */
     #[serde(
         default,
@@ -19661,7 +19746,7 @@ pub struct UserResponseCustomAttributes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19670,7 +19755,7 @@ pub struct UserResponse {
     )]
     pub account_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19679,7 +19764,7 @@ pub struct UserResponse {
     )]
     pub cms_user_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19688,7 +19773,7 @@ pub struct UserResponse {
     )]
     pub company: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -19697,12 +19782,12 @@ pub struct UserResponse {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Custom attribute(s) that have been assigned to the user.
+    * Custom attribute(s) that have been assigned to the user.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub custom_attributes: Option<UserResponseCustomAttributes>,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -19714,7 +19799,7 @@ pub struct UserResponse {
     )]
     pub group_ids: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19723,7 +19808,7 @@ pub struct UserResponse {
     )]
     pub host_key: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -19735,7 +19820,7 @@ pub struct UserResponse {
     )]
     pub im_group_ids: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19744,7 +19829,7 @@ pub struct UserResponse {
     )]
     pub jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19753,7 +19838,7 @@ pub struct UserResponse {
     )]
     pub job_title: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19762,7 +19847,7 @@ pub struct UserResponse {
     )]
     pub language: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19771,7 +19856,7 @@ pub struct UserResponse {
     )]
     pub location: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19780,7 +19865,7 @@ pub struct UserResponse {
     )]
     pub login_type: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19789,7 +19874,7 @@ pub struct UserResponse {
     )]
     pub manager: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19798,7 +19883,7 @@ pub struct UserResponse {
     )]
     pub personal_meeting_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19807,7 +19892,7 @@ pub struct UserResponse {
     )]
     pub phone_country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19818,7 +19903,7 @@ pub struct UserResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub phone_numbers: Option<UserResponsePhoneNumbers>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19827,7 +19912,7 @@ pub struct UserResponse {
     )]
     pub pic_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19836,7 +19921,7 @@ pub struct UserResponse {
     )]
     pub plan_united_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19845,7 +19930,7 @@ pub struct UserResponse {
     )]
     pub role_id: String,
     /**
-     * The user's status:
+    * The user's status:
      *  \* `active` — An active user.
      *  \* `inactive` — A deactivated user.
      *  \* `pending` — A pending user.
@@ -19855,7 +19940,7 @@ pub struct UserResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<UsersStatus>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -19863,7 +19948,7 @@ pub struct UserResponse {
     )]
     pub use_pmi: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -19872,7 +19957,7 @@ pub struct UserResponse {
     )]
     pub vanity_url: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -19893,7 +19978,7 @@ pub struct UserResponseAllOf {
     #[serde(flatten)]
     pub groups: Groups,
     /**
-     * The user object represents a specific user on Zoom.
+    * The user object represents a specific user on Zoom.
      */
     #[serde(flatten)]
     pub user: User,
@@ -19904,7 +19989,8 @@ pub struct UserResponseAllOf {
 /**
  * Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserDeleteAction {
     #[serde(rename = "delete")]
     Delete,
@@ -19926,10 +20012,11 @@ impl std::fmt::Display for UserDeleteAction {
     }
 }
 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserZakResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20017,7 +20104,8 @@ impl UserSettingsUpdateRequestOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserSettingsUpdateOption {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
@@ -20054,7 +20142,8 @@ impl UserSettingsUpdateOption {
 /**
  * The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserStatusRequestAction {
     #[serde(rename = "activate")]
     Activate,
@@ -20089,7 +20178,7 @@ impl UserStatusRequestAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserStatusRequest {
     /**
-     * The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
+    * The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
      */
     #[serde(default, skip_serializing_if = "UserStatusRequestAction::is_noop")]
     pub action: UserStatusRequestAction,
@@ -20098,7 +20187,7 @@ pub struct UserStatusRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserPasswordRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20111,7 +20200,7 @@ pub struct UserPasswordRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PacAccounts {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -20120,7 +20209,7 @@ pub struct PacAccounts {
     )]
     pub conference_id: i64,
     /**
-     * List of dedicated dial-in numbers.
+    * List of dedicated dial-in numbers.
      */
     #[serde(
         default,
@@ -20129,7 +20218,7 @@ pub struct PacAccounts {
     )]
     pub dedicated_dial_in_number: Vec<DedicatedDialInNumber>,
     /**
-     * List of dedicated dial-in numbers.
+    * List of dedicated dial-in numbers.
      */
     #[serde(
         default,
@@ -20138,7 +20227,7 @@ pub struct PacAccounts {
     )]
     pub global_dial_in_numbers: Vec<DedicatedDialInNumber>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20147,7 +20236,7 @@ pub struct PacAccounts {
     )]
     pub listen_only_password: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20171,7 +20260,7 @@ pub struct UserPaCsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TspAccounts {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20180,7 +20269,7 @@ pub struct TspAccounts {
     )]
     pub conference_code: String,
     /**
-     * List of TSP accounts.
+    * List of TSP accounts.
      */
     #[serde(
         default,
@@ -20189,7 +20278,7 @@ pub struct TspAccounts {
     )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
-     * List of TSP accounts.
+    * List of TSP accounts.
      */
     #[serde(
         default,
@@ -20198,7 +20287,7 @@ pub struct TspAccounts {
     )]
     pub id: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20207,7 +20296,7 @@ pub struct TspAccounts {
     )]
     pub leader_pin: String,
     /**
-     * List of TSP accounts.
+    * List of TSP accounts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tsp_bridge: Option<TspBridge>,
@@ -20227,7 +20316,7 @@ pub struct UserTsPsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TspAccount {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20236,7 +20325,7 @@ pub struct TspAccount {
     )]
     pub conference_code: String,
     /**
-     * TSP account of the user.
+    * TSP account of the user.
      */
     #[serde(
         default,
@@ -20245,7 +20334,7 @@ pub struct TspAccount {
     )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
-     * TSP account of the user.
+    * TSP account of the user.
      */
     #[serde(
         default,
@@ -20254,7 +20343,7 @@ pub struct TspAccount {
     )]
     pub id: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20263,7 +20352,7 @@ pub struct TspAccount {
     )]
     pub leader_pin: String,
     /**
-     * TSP account of the user.
+    * TSP account of the user.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tsp_bridge: Option<TspBridge>,
@@ -20273,7 +20362,7 @@ pub struct TspAccount {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TspAccountData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20282,7 +20371,7 @@ pub struct TspAccountData {
     )]
     pub conference_code: String,
     /**
-     * TSP account.
+    * TSP account.
      */
     #[serde(
         default,
@@ -20291,7 +20380,7 @@ pub struct TspAccountData {
     )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20300,7 +20389,7 @@ pub struct TspAccountData {
     )]
     pub leader_pin: String,
     /**
-     * TSP account.
+    * TSP account.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tsp_bridge: Option<TspBridge>,
@@ -20309,7 +20398,8 @@ pub struct TspAccountData {
 /**
  * User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UserTokenType {
     #[serde(rename = "token")]
     Token,
@@ -20343,7 +20433,7 @@ impl UserTokenType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserEmailResponse {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -20355,7 +20445,7 @@ pub struct UserEmailResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserVanityNameResponse {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -20367,7 +20457,7 @@ pub struct UserVanityNameResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarCreateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20376,7 +20466,7 @@ pub struct WebinarCreateResponse {
     )]
     pub host_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20385,7 +20475,7 @@ pub struct WebinarCreateResponse {
     )]
     pub host_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -20394,7 +20484,7 @@ pub struct WebinarCreateResponse {
     )]
     pub id: i64,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -20402,7 +20492,7 @@ pub struct WebinarCreateResponse {
     )]
     pub registrants_confirmation_email: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20411,7 +20501,7 @@ pub struct WebinarCreateResponse {
     )]
     pub template_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20429,7 +20519,7 @@ pub struct WebinarCreateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarCreateResponseAllOf {
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(flatten)]
     pub webinar_info: WebinarInfo,
@@ -20440,7 +20530,7 @@ pub struct WebinarCreateResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20449,7 +20539,7 @@ pub struct WebinarResponse {
     )]
     pub host_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20458,7 +20548,7 @@ pub struct WebinarResponse {
     )]
     pub host_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -20467,7 +20557,7 @@ pub struct WebinarResponse {
     )]
     pub id: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20485,7 +20575,7 @@ pub struct WebinarResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarResponseAllOf {
     /**
-     * Webinar object.
+    * Webinar object.
      */
     #[serde(flatten)]
     pub webinar_info: WebinarInfo,
@@ -20496,7 +20586,7 @@ pub struct WebinarResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebinarParticipantsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20505,7 +20595,7 @@ pub struct ListWebinarParticipantsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -20514,7 +20604,7 @@ pub struct ListWebinarParticipantsResponse {
     )]
     pub page_count: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -20523,7 +20613,7 @@ pub struct ListWebinarParticipantsResponse {
     )]
     pub page_size: i64,
     /**
-     * Array of meeting participant objects.
+    * Array of meeting participant objects.
      */
     #[serde(
         default,
@@ -20532,7 +20622,7 @@ pub struct ListWebinarParticipantsResponse {
     )]
     pub participants: Vec<Participants>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -20542,7 +20632,8 @@ pub struct ListWebinarParticipantsResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WebinarStatusRequestAction {
     #[serde(rename = "end")]
     End,
@@ -20579,7 +20670,7 @@ pub struct WebinarStatusRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarPanelistCreateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20588,7 +20679,7 @@ pub struct WebinarPanelistCreateResponse {
     )]
     pub id: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -20601,7 +20692,7 @@ pub struct WebinarPanelistCreateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarRegistrantCreateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20610,7 +20701,7 @@ pub struct WebinarRegistrantCreateResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20619,7 +20710,7 @@ pub struct WebinarRegistrantCreateResponse {
     )]
     pub join_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20628,7 +20719,7 @@ pub struct WebinarRegistrantCreateResponse {
     )]
     pub registrant_id: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -20637,7 +20728,7 @@ pub struct WebinarRegistrantCreateResponse {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20650,7 +20741,7 @@ pub struct WebinarRegistrantCreateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddBatchWebinarRegistrantsRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20659,7 +20750,7 @@ pub struct AddBatchWebinarRegistrantsRequest {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20668,7 +20759,7 @@ pub struct AddBatchWebinarRegistrantsRequest {
     )]
     pub first_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20681,7 +20772,7 @@ pub struct AddBatchWebinarRegistrantsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddBatchRegistrantsRequest {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_approve: Option<bool>,
@@ -20696,7 +20787,7 @@ pub struct AddBatchRegistrantsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddBatchWebinarRegistrantsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20705,7 +20796,7 @@ pub struct AddBatchWebinarRegistrantsResponse {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20714,7 +20805,7 @@ pub struct AddBatchWebinarRegistrantsResponse {
     )]
     pub join_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20737,7 +20828,7 @@ pub struct AddBatchRegistrantsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendchatbotRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20747,12 +20838,12 @@ pub struct SendchatbotRequest {
     pub account_id: String,
     pub content: Domains,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_markdown_support: Option<bool>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20761,7 +20852,7 @@ pub struct SendchatbotRequest {
     )]
     pub robot_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20770,7 +20861,7 @@ pub struct SendchatbotRequest {
     )]
     pub to_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20779,7 +20870,7 @@ pub struct SendchatbotRequest {
     )]
     pub user_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20792,7 +20883,7 @@ pub struct SendchatbotRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EditChatbotMessageRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20802,12 +20893,12 @@ pub struct EditChatbotMessageRequest {
     pub account_id: String,
     pub content: Domains,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_markdown_support: Option<bool>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20816,7 +20907,7 @@ pub struct EditChatbotMessageRequest {
     )]
     pub robot_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20829,7 +20920,7 @@ pub struct EditChatbotMessageRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EditChatbotMessageResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20838,7 +20929,7 @@ pub struct EditChatbotMessageResponse {
     )]
     pub message_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20847,7 +20938,7 @@ pub struct EditChatbotMessageResponse {
     )]
     pub robot_jid: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -20856,7 +20947,7 @@ pub struct EditChatbotMessageResponse {
     )]
     pub sent_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20865,7 +20956,7 @@ pub struct EditChatbotMessageResponse {
     )]
     pub to_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20878,7 +20969,7 @@ pub struct EditChatbotMessageResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteChatbotMessageRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20887,7 +20978,7 @@ pub struct DeleteChatbotMessageRequest {
     )]
     pub account_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20896,7 +20987,7 @@ pub struct DeleteChatbotMessageRequest {
     )]
     pub robot_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20909,7 +21000,7 @@ pub struct DeleteChatbotMessageRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteChatbotMessageResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20918,7 +21009,7 @@ pub struct DeleteChatbotMessageResponse {
     )]
     pub message_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20927,7 +21018,7 @@ pub struct DeleteChatbotMessageResponse {
     )]
     pub robot_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20936,7 +21027,7 @@ pub struct DeleteChatbotMessageResponse {
     )]
     pub sent_time: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20945,7 +21036,7 @@ pub struct DeleteChatbotMessageResponse {
     )]
     pub to_jid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20958,7 +21049,7 @@ pub struct DeleteChatbotMessageResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLiveStreamDetailsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20967,7 +21058,7 @@ pub struct GetLiveStreamDetailsResponse {
     )]
     pub page_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20976,7 +21067,7 @@ pub struct GetLiveStreamDetailsResponse {
     )]
     pub stream_key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20989,7 +21080,7 @@ pub struct GetLiveStreamDetailsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClientFeedbackDetails {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -20998,7 +21089,7 @@ pub struct ClientFeedbackDetails {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21007,7 +21098,7 @@ pub struct ClientFeedbackDetails {
     )]
     pub meeting_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21016,7 +21107,7 @@ pub struct ClientFeedbackDetails {
     )]
     pub participant_name: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -21045,7 +21136,7 @@ pub struct DashboardClientFeedbackDetailResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardClientFeedbackDetailResponseAllOf {
     /**
-     * Pagination object.
+    * Pagination object.
      */
     #[serde(flatten)]
     pub pagination_token_4_im_chat: PaginationToken4ImChat,
@@ -21058,7 +21149,7 @@ pub struct DashboardClientFeedbackDetailResponseAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListimmessagesResponseMessages {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -21067,7 +21158,7 @@ pub struct ListimmessagesResponseMessages {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21076,7 +21167,7 @@ pub struct ListimmessagesResponseMessages {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21085,7 +21176,7 @@ pub struct ListimmessagesResponseMessages {
     )]
     pub message: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21094,7 +21185,7 @@ pub struct ListimmessagesResponseMessages {
     )]
     pub sender: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -21107,7 +21198,7 @@ pub struct ListimmessagesResponseMessages {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListimmessagesResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -21116,7 +21207,7 @@ pub struct ListimmessagesResponse {
     )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Array of im messages.
+    * Array of im messages.
      */
     #[serde(
         default,
@@ -21125,7 +21216,7 @@ pub struct ListimmessagesResponse {
     )]
     pub messages: Vec<ListimmessagesResponseMessages>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21134,7 +21225,7 @@ pub struct ListimmessagesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -21147,7 +21238,7 @@ pub struct ListimmessagesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendimmessagesRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21160,7 +21251,7 @@ pub struct SendimmessagesRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CallingPlan {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -21174,7 +21265,7 @@ pub struct CallingPlan {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneUserResponseNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21183,7 +21274,7 @@ pub struct PhoneUserResponseNumbers {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21197,7 +21288,7 @@ pub struct PhoneUserResponseNumbers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Policy {
     /**
-     * A list of the user's policies. Policies are exceptions to the user's calling plan restrictions.
+    * A list of the user's policies. Policies are exceptions to the user's calling plan restrictions.
      */
     #[serde(
         default,
@@ -21210,7 +21301,7 @@ pub struct Policy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneUserResponse {
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21219,7 +21310,7 @@ pub struct PhoneUserResponse {
     )]
     pub calling_plan: Vec<CallingPlan>,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21228,7 +21319,7 @@ pub struct PhoneUserResponse {
     )]
     pub email: String,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21237,7 +21328,7 @@ pub struct PhoneUserResponse {
     )]
     pub extension_number: i64,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21246,7 +21337,7 @@ pub struct PhoneUserResponse {
     )]
     pub id: String,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21255,7 +21346,7 @@ pub struct PhoneUserResponse {
     )]
     pub phone_numbers: Vec<PhoneUserResponseNumbers>,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21264,12 +21355,12 @@ pub struct PhoneUserResponse {
     )]
     pub phone_user_id: String,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub policy: Option<Policy>,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21277,7 +21368,7 @@ pub struct PhoneUserResponse {
     )]
     pub site_admin: bool,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(
         default,
@@ -21286,7 +21377,7 @@ pub struct PhoneUserResponse {
     )]
     pub site_id: String,
     /**
-     * Zoom User Profile
+    * Zoom User Profile
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<UserStatusRequestAction>,
@@ -21296,7 +21387,7 @@ pub struct PhoneUserResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateUserProfileRequestPolicy {
     /**
-     * A list of the user's policies.
+    * A list of the user's policies.
      */
     #[serde(
         default,
@@ -21308,7 +21399,7 @@ pub struct UpdateUserProfileRequestPolicy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateUserProfileRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21317,12 +21408,12 @@ pub struct UpdateUserProfileRequest {
     )]
     pub extension_number: String,
     /**
-     * A list of the user's policies.
+    * A list of the user's policies.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub policy: Option<UpdateUserProfileRequestPolicy>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21336,7 +21427,7 @@ pub struct UpdateUserProfileRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneSettingResponseCountry {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -21345,7 +21436,7 @@ pub struct PhoneSettingResponseCountry {
     )]
     pub code: String,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -21359,7 +21450,7 @@ pub struct PhoneSettingResponseCountry {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MultipleSites {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -21367,7 +21458,7 @@ pub struct MultipleSites {
     )]
     pub enabled: bool,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -21381,7 +21472,7 @@ pub struct MultipleSites {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Byoc {
     /**
-     * BYOC setting
+    * BYOC setting
      */
     #[serde(
         default,
@@ -21393,7 +21484,7 @@ pub struct Byoc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShowDeviceIpCallLog {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -21406,22 +21497,22 @@ pub struct ShowDeviceIpCallLog {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneSettingResponse {
     /**
-     * Zoom Account Setting
+    * Zoom Account Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub byoc: Option<Byoc>,
     /**
-     * Zoom Account Setting
+    * Zoom Account Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub country: Option<PhoneSettingResponseCountry>,
     /**
-     * Zoom Account Setting
+    * Zoom Account Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub multiple_sites: Option<MultipleSites>,
     /**
-     * Zoom Account Setting
+    * Zoom Account Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub show_device_ip_for_call_log: Option<ShowDeviceIpCallLog>,
@@ -21437,7 +21528,7 @@ pub struct PhoneSettingResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneSettingsRequestByoc {
     /**
-     * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
+    * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
      *  
      *  \*\*Scope\*\*:<br>
      *  \* `phone:master` <br>
@@ -21455,7 +21546,7 @@ pub struct UpdatePhoneSettingsRequestByoc {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneSettingsRequest {
     /**
-     * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
+    * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
      *  
      *  \*\*Scope\*\*:<br>
      *  \* `phone:master` <br>
@@ -21473,7 +21564,7 @@ pub struct UpdatePhoneSettingsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OutboundCaller {
     /**
-     * Outbound Caller Info
+    * Outbound Caller Info
      */
     #[serde(
         default,
@@ -21486,7 +21577,7 @@ pub struct OutboundCaller {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct KeysPositions {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21500,7 +21591,7 @@ pub struct KeysPositions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeskPhone {
     /**
-     * Contains information on phones or devices provisioned for the user.
+    * Contains information on phones or devices provisioned for the user.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub keys_positions: Option<KeysPositions>,
@@ -21510,7 +21601,7 @@ pub struct DeskPhone {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VoiceMail {
     /**
-     * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
+    * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
      */
     #[serde(
         default,
@@ -21519,7 +21610,7 @@ pub struct VoiceMail {
     )]
     pub access_user_id: String,
     /**
-     * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
+    * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
      */
     #[serde(
         default,
@@ -21527,7 +21618,7 @@ pub struct VoiceMail {
     )]
     pub delete: bool,
     /**
-     * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
+    * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
      */
     #[serde(
         default,
@@ -21535,7 +21626,7 @@ pub struct VoiceMail {
     )]
     pub download: bool,
     /**
-     * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
+    * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
      */
     #[serde(
         default,
@@ -21548,7 +21639,7 @@ pub struct VoiceMail {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OutboundCallerIds {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -21556,7 +21647,7 @@ pub struct OutboundCallerIds {
     )]
     pub is_default: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21565,7 +21656,7 @@ pub struct OutboundCallerIds {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21579,7 +21670,7 @@ pub struct OutboundCallerIds {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneUserSettingsResponseCountry {
     /**
-     * The site's country.
+    * The site's country.
      */
     #[serde(
         default,
@@ -21588,7 +21679,7 @@ pub struct PhoneUserSettingsResponseCountry {
     )]
     pub code: String,
     /**
-     * The site's country.
+    * The site's country.
      */
     #[serde(
         default,
@@ -21597,7 +21688,7 @@ pub struct PhoneUserSettingsResponseCountry {
     )]
     pub country_code: String,
     /**
-     * The site's country.
+    * The site's country.
      */
     #[serde(
         default,
@@ -21611,7 +21702,7 @@ pub struct PhoneUserSettingsResponseCountry {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneUserSettingsResponse {
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(
         default,
@@ -21620,7 +21711,7 @@ pub struct PhoneUserSettingsResponse {
     )]
     pub area_code: String,
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(
         default,
@@ -21629,17 +21720,17 @@ pub struct PhoneUserSettingsResponse {
     )]
     pub company_number: String,
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub country: Option<PhoneUserSettingsResponseCountry>,
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub desk_phone: Option<DeskPhone>,
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(
         default,
@@ -21648,17 +21739,17 @@ pub struct PhoneUserSettingsResponse {
     )]
     pub extension_number: i64,
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outbound_caller: Option<OutboundCaller>,
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outbound_caller_ids: Option<OutboundCallerIds>,
     /**
-     * Phone User Setting
+    * Phone User Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub voice_mail: Option<VoiceMail>,
@@ -21674,7 +21765,8 @@ pub struct PhoneUserSettingsResponse {
  *   * `zr`<br>
  *   * `interop`<br>
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListSettingTemplatesResponseType {
     #[serde(rename = "autReceptionist")]
     AutReceptionist,
@@ -21720,7 +21812,7 @@ impl ListSettingTemplatesResponseType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Templates {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21729,7 +21821,7 @@ pub struct Templates {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21738,7 +21830,7 @@ pub struct Templates {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21747,7 +21839,7 @@ pub struct Templates {
     )]
     pub name: String,
     /**
-     * Template type.<br>
+    * Template type.<br>
      *  The value of this field can be one of the following:<br>
      *  \* `user`<br>
      *  \* `group`<br>
@@ -21763,7 +21855,7 @@ pub struct Templates {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSettingTemplatesResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21772,7 +21864,7 @@ pub struct ListSettingTemplatesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -21787,7 +21879,7 @@ pub struct ListSettingTemplatesResponse {
     )]
     pub templates: Vec<Templates>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -21800,7 +21892,8 @@ pub struct ListSettingTemplatesResponse {
 /**
  * The type of template. Values include `user`, `group`, `autoReceptionist`, `commonarea`, or `interop`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AddSettingTemplateRequestType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -21843,7 +21936,7 @@ impl AddSettingTemplateRequestType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddSettingTemplateRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21852,7 +21945,7 @@ pub struct AddSettingTemplateRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21861,7 +21954,7 @@ pub struct AddSettingTemplateRequest {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21870,7 +21963,7 @@ pub struct AddSettingTemplateRequest {
     )]
     pub site_id: String,
     /**
-     * The type of template. Values include `user`, `group`, `autoReceptionist`, `commonarea`, or `interop`.
+    * The type of template. Values include `user`, `group`, `autoReceptionist`, `commonarea`, or `interop`.
      */
     #[serde(
         default,
@@ -21883,7 +21976,7 @@ pub struct AddSettingTemplateRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddSettingTemplateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21892,7 +21985,7 @@ pub struct AddSettingTemplateResponse {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21901,7 +21994,7 @@ pub struct AddSettingTemplateResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21910,7 +22003,7 @@ pub struct AddSettingTemplateResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21924,7 +22017,7 @@ pub struct AddSettingTemplateResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchAddLocationsRequestEmergencyAddress {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21934,7 +22027,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     )]
     pub address_line_1: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21944,7 +22037,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     )]
     pub address_line_2: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21953,7 +22046,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     )]
     pub city: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21962,7 +22055,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     )]
     pub country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21971,7 +22064,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     )]
     pub state_code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21980,7 +22073,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     )]
     pub vat_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -21993,7 +22086,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NetworkSwitches {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22002,7 +22095,7 @@ pub struct NetworkSwitches {
     )]
     pub mac_address: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22011,7 +22104,7 @@ pub struct NetworkSwitches {
     )]
     pub port: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22020,7 +22113,7 @@ pub struct NetworkSwitches {
     )]
     pub port_prefix: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22029,7 +22122,7 @@ pub struct NetworkSwitches {
     )]
     pub port_range_from: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22042,7 +22135,7 @@ pub struct NetworkSwitches {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Locations {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22051,7 +22144,7 @@ pub struct Locations {
     )]
     pub bssid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22060,7 +22153,7 @@ pub struct Locations {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22070,7 +22163,7 @@ pub struct Locations {
     pub elin: String,
     pub emergency_address: BatchAddLocationsRequestEmergencyAddress,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22085,7 +22178,7 @@ pub struct Locations {
     )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22094,7 +22187,7 @@ pub struct Locations {
     )]
     pub parent_identifier: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22103,7 +22196,7 @@ pub struct Locations {
     )]
     pub private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22112,7 +22205,7 @@ pub struct Locations {
     )]
     pub public_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22131,7 +22224,7 @@ pub struct BatchAddLocationsRequest {
     )]
     pub locations: Vec<Locations>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22144,7 +22237,7 @@ pub struct BatchAddLocationsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchAddLocationsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22153,7 +22246,7 @@ pub struct BatchAddLocationsResponse {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22167,7 +22260,7 @@ pub struct BatchAddLocationsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Elin {
     /**
-     * The emergency service location's ELIN (Emergency Location Identification Number).
+    * The emergency service location's ELIN (Emergency Location Identification Number).
      */
     #[serde(
         default,
@@ -22176,7 +22269,7 @@ pub struct Elin {
     )]
     pub phone_number: String,
     /**
-     * The emergency service location's ELIN (Emergency Location Identification Number).
+    * The emergency service location's ELIN (Emergency Location Identification Number).
      */
     #[serde(
         default,
@@ -22190,7 +22283,7 @@ pub struct Elin {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponseSipGroup {
     /**
-     * The emergency service location's SIP group information.
+    * The emergency service location's SIP group information.
      */
     #[serde(
         default,
@@ -22199,7 +22292,7 @@ pub struct ListLocationsResponseSipGroup {
     )]
     pub display_name: String,
     /**
-     * The emergency service location's SIP group information.
+    * The emergency service location's SIP group information.
      */
     #[serde(
         default,
@@ -22213,7 +22306,7 @@ pub struct ListLocationsResponseSipGroup {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponseSite {
     /**
-     * The emergency service location's site information.
+    * The emergency service location's site information.
      */
     #[serde(
         default,
@@ -22222,7 +22315,7 @@ pub struct ListLocationsResponseSite {
     )]
     pub id: String,
     /**
-     * The emergency service location's site information.
+    * The emergency service location's site information.
      */
     #[serde(
         default,
@@ -22235,7 +22328,7 @@ pub struct ListLocationsResponseSite {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22244,12 +22337,12 @@ pub struct ListLocationsResponse {
     )]
     pub bssid: String,
     /**
-     * The emergency service location's ELIN (Emergency Location Identification Number).
+    * The emergency service location's ELIN (Emergency Location Identification Number).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub elin: Option<Elin>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22258,7 +22351,7 @@ pub struct ListLocationsResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22267,7 +22360,7 @@ pub struct ListLocationsResponse {
     )]
     pub identifier: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22282,7 +22375,7 @@ pub struct ListLocationsResponse {
     )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22291,7 +22384,7 @@ pub struct ListLocationsResponse {
     )]
     pub parent_location_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22300,7 +22393,7 @@ pub struct ListLocationsResponse {
     )]
     pub private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22309,12 +22402,12 @@ pub struct ListLocationsResponse {
     )]
     pub public_ip: String,
     /**
-     * The emergency service location's SIP group information.
+    * The emergency service location's SIP group information.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sip_group: Option<ListLocationsResponseSipGroup>,
     /**
-     * The emergency service location's site information.
+    * The emergency service location's site information.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<ListLocationsResponseSite>,
@@ -22323,7 +22416,7 @@ pub struct ListLocationsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponseData {
     /**
-     * Information about emergency service locations.
+    * Information about emergency service locations.
      */
     #[serde(
         default,
@@ -22332,7 +22425,7 @@ pub struct ListLocationsResponseData {
     )]
     pub locations: Vec<ListLocationsResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22341,7 +22434,7 @@ pub struct ListLocationsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -22354,7 +22447,7 @@ pub struct ListLocationsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddLocationRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22363,7 +22456,7 @@ pub struct AddLocationRequest {
     )]
     pub bssid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22372,7 +22465,7 @@ pub struct AddLocationRequest {
     )]
     pub elin_phone_number_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22381,7 +22474,7 @@ pub struct AddLocationRequest {
     )]
     pub emergency_address_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22390,7 +22483,7 @@ pub struct AddLocationRequest {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22399,7 +22492,7 @@ pub struct AddLocationRequest {
     )]
     pub parent_location_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22408,7 +22501,7 @@ pub struct AddLocationRequest {
     )]
     pub private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22417,7 +22510,7 @@ pub struct AddLocationRequest {
     )]
     pub public_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22426,7 +22519,7 @@ pub struct AddLocationRequest {
     )]
     pub sip_group_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22440,7 +22533,7 @@ pub struct AddLocationRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseElin {
     /**
-     * The ELIN (Emergency Location Identification Number).
+    * The ELIN (Emergency Location Identification Number).
      */
     #[serde(
         default,
@@ -22449,7 +22542,7 @@ pub struct GetLocationResponseElin {
     )]
     pub phone_number: String,
     /**
-     * The ELIN (Emergency Location Identification Number).
+    * The ELIN (Emergency Location Identification Number).
      */
     #[serde(
         default,
@@ -22463,7 +22556,7 @@ pub struct GetLocationResponseElin {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseEmergencyAddress {
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(
         default,
@@ -22473,7 +22566,7 @@ pub struct GetLocationResponseEmergencyAddress {
     )]
     pub address_line_1: String,
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(
         default,
@@ -22483,7 +22576,7 @@ pub struct GetLocationResponseEmergencyAddress {
     )]
     pub address_line_2: String,
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(
         default,
@@ -22492,7 +22585,7 @@ pub struct GetLocationResponseEmergencyAddress {
     )]
     pub city: String,
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(
         default,
@@ -22501,7 +22594,7 @@ pub struct GetLocationResponseEmergencyAddress {
     )]
     pub country: String,
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(
         default,
@@ -22510,7 +22603,7 @@ pub struct GetLocationResponseEmergencyAddress {
     )]
     pub id: String,
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(
         default,
@@ -22519,7 +22612,7 @@ pub struct GetLocationResponseEmergencyAddress {
     )]
     pub state_code: String,
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(
         default,
@@ -22533,7 +22626,7 @@ pub struct GetLocationResponseEmergencyAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseSipGroup {
     /**
-     * The emergency location's SIP group information.
+    * The emergency location's SIP group information.
      */
     #[serde(
         default,
@@ -22542,7 +22635,7 @@ pub struct GetLocationResponseSipGroup {
     )]
     pub display_name: String,
     /**
-     * The emergency location's SIP group information.
+    * The emergency location's SIP group information.
      */
     #[serde(
         default,
@@ -22556,7 +22649,7 @@ pub struct GetLocationResponseSipGroup {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseSite {
     /**
-     * The emergency location's site information.
+    * The emergency location's site information.
      */
     #[serde(
         default,
@@ -22565,7 +22658,7 @@ pub struct GetLocationResponseSite {
     )]
     pub id: String,
     /**
-     * The emergency location's site information.
+    * The emergency location's site information.
      */
     #[serde(
         default,
@@ -22578,7 +22671,7 @@ pub struct GetLocationResponseSite {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22587,17 +22680,17 @@ pub struct GetLocationResponse {
     )]
     pub bssid: String,
     /**
-     * The ELIN (Emergency Location Identification Number).
+    * The ELIN (Emergency Location Identification Number).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub elin: Option<GetLocationResponseElin>,
     /**
-     * The emergency location's address information.
+    * The emergency location's address information.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub emergency_address: Option<GetLocationResponseEmergencyAddress>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22606,7 +22699,7 @@ pub struct GetLocationResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22621,7 +22714,7 @@ pub struct GetLocationResponse {
     )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22630,7 +22723,7 @@ pub struct GetLocationResponse {
     )]
     pub parent_location_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22639,7 +22732,7 @@ pub struct GetLocationResponse {
     )]
     pub private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22648,12 +22741,12 @@ pub struct GetLocationResponse {
     )]
     pub public_ip: String,
     /**
-     * The emergency location's SIP group information.
+    * The emergency location's SIP group information.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sip_group: Option<GetLocationResponseSipGroup>,
     /**
-     * The emergency location's site information.
+    * The emergency location's site information.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<GetLocationResponseSite>,
@@ -22662,7 +22755,7 @@ pub struct GetLocationResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateLocationRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22671,7 +22764,7 @@ pub struct UpdateLocationRequest {
     )]
     pub bssid: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22680,7 +22773,7 @@ pub struct UpdateLocationRequest {
     )]
     pub elin_phone_number_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22689,7 +22782,7 @@ pub struct UpdateLocationRequest {
     )]
     pub emergency_address_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22704,7 +22797,7 @@ pub struct UpdateLocationRequest {
     )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22713,7 +22806,7 @@ pub struct UpdateLocationRequest {
     )]
     pub private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22722,7 +22815,7 @@ pub struct UpdateLocationRequest {
     )]
     pub public_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22736,7 +22829,7 @@ pub struct UpdateLocationRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SipTrunk {
     /**
-     * The SIP trunk group.
+    * The SIP trunk group.
      */
     #[serde(
         default,
@@ -22745,7 +22838,7 @@ pub struct SipTrunk {
     )]
     pub id: String,
     /**
-     * The SIP trunk group.
+    * The SIP trunk group.
      */
     #[serde(
         default,
@@ -22758,7 +22851,7 @@ pub struct SipTrunk {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SipGroups {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22767,7 +22860,7 @@ pub struct SipGroups {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22776,7 +22869,7 @@ pub struct SipGroups {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22785,7 +22878,7 @@ pub struct SipGroups {
     )]
     pub id: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22793,7 +22886,7 @@ pub struct SipGroups {
     )]
     pub send_sip_group_name: bool,
     /**
-     * The SIP trunk group.
+    * The SIP trunk group.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sip_trunk: Option<SipTrunk>,
@@ -22802,7 +22895,7 @@ pub struct SipGroups {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSipGroupsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22811,7 +22904,7 @@ pub struct ListSipGroupsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -22820,7 +22913,7 @@ pub struct ListSipGroupsResponse {
     )]
     pub page_size: i64,
     /**
-     * SIP group information.
+    * SIP group information.
      */
     #[serde(
         default,
@@ -22833,7 +22926,8 @@ pub struct ListSipGroupsResponse {
 /**
  * The type of template being queried. Values: `user`, `group`, `auto receptionist` `common area`,`zr`, `interop`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetSettingTemplateResponseType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -22879,7 +22973,7 @@ impl GetSettingTemplateResponseType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponseProfile {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22888,7 +22982,7 @@ pub struct GetSettingTemplateResponseProfile {
     )]
     pub area_code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22901,7 +22995,7 @@ pub struct GetSettingTemplateResponseProfile {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutoCallRecording {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22909,7 +23003,7 @@ pub struct AutoCallRecording {
     )]
     pub enable: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -22918,7 +23012,7 @@ pub struct AutoCallRecording {
     )]
     pub recording_calls: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22926,7 +23020,7 @@ pub struct AutoCallRecording {
     )]
     pub recording_start_prompt: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22938,7 +23032,7 @@ pub struct AutoCallRecording {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdHocCallRecording {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22946,7 +23040,7 @@ pub struct AdHocCallRecording {
     )]
     pub enable: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22954,7 +23048,7 @@ pub struct AdHocCallRecording {
     )]
     pub recording_start_prompt: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22966,7 +23060,7 @@ pub struct AdHocCallRecording {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sms {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22974,7 +23068,7 @@ pub struct Sms {
     )]
     pub enable: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22986,7 +23080,7 @@ pub struct Sms {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Voicemail {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -22994,7 +23088,7 @@ pub struct Voicemail {
     )]
     pub allow_transcription: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -23018,19 +23112,19 @@ pub struct GetSettingTemplateResponsePolicy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomHours {
     /**
-     * Values:<br>
+    * Values:<br>
      *  hh:mm
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub from: Option<chrono::NaiveTime>,
     /**
-     * Values:<br>
+    * Values:<br>
      *  hh:mm
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub to: Option<chrono::NaiveTime>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -23040,7 +23134,7 @@ pub struct CustomHours {
     )]
     pub type_: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -23059,7 +23153,8 @@ pub struct CustomHours {
  *   5-zoomRoom, <br>
  *   7-sharedLineGroup
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -23108,7 +23203,7 @@ impl GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOpera
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectOperator {
     /**
-     * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
+    * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
      */
     #[serde(
         default,
@@ -23116,7 +23211,7 @@ pub struct ConnectOperator {
     )]
     pub enable: bool,
     /**
-     * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
+    * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
      */
     #[serde(
         default,
@@ -23125,7 +23220,7 @@ pub struct ConnectOperator {
     )]
     pub id: String,
     /**
-     * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
+    * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_:
@@ -23135,7 +23230,7 @@ pub struct ConnectOperator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BusinessHours {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -23144,7 +23239,7 @@ pub struct BusinessHours {
     )]
     pub business_hour_action: i64,
     /**
-     * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
+    * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub connect_to_operator: Option<ConnectOperator>,
@@ -23155,19 +23250,19 @@ pub struct BusinessHours {
     )]
     pub custom_hours: Vec<CustomHours>,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ring_type: Option<serde_json::Value>,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ringing_duration: Option<serde_json::Value>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -23181,7 +23276,7 @@ pub struct BusinessHours {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CloseHours {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -23190,12 +23285,12 @@ pub struct CloseHours {
     )]
     pub close_hour_action: i64,
     /**
-     * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
+    * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub connect_to_operator: Option<ConnectOperator>,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23213,7 +23308,7 @@ pub struct CallHandling {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponseUserSettingsDeskPhone {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23230,7 +23325,8 @@ pub struct GetSettingTemplateResponseUserSettingsDeskPhone {
  *   
  *   * `disable`: This means that the hold music is disabled.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum HoldMusic {
     #[serde(rename = "default")]
     Default,
@@ -23264,7 +23360,7 @@ impl HoldMusic {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponseUserSettings {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23273,7 +23369,7 @@ pub struct GetSettingTemplateResponseUserSettings {
     )]
     pub audio_prompt_language: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -23285,7 +23381,7 @@ pub struct GetSettingTemplateResponseUserSettings {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub desk_phone: Option<GetSettingTemplateResponseUserSettingsDeskPhone>,
     /**
-     * The value of this field can be either `default` or `disable`.
+    * The value of this field can be either `default` or `disable`.
      *  
      *  \* `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
      *  
@@ -23298,7 +23394,7 @@ pub struct GetSettingTemplateResponseUserSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23307,7 +23403,7 @@ pub struct GetSettingTemplateResponse {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23316,7 +23412,7 @@ pub struct GetSettingTemplateResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23329,7 +23425,7 @@ pub struct GetSettingTemplateResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub profile: Option<GetSettingTemplateResponseProfile>,
     /**
-     * The type of template being queried. Values: `user`, `group`, `auto receptionist` `common area`,`zr`, `interop`.
+    * The type of template being queried. Values: `user`, `group`, `auto receptionist` `common area`,`zr`, `interop`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GetSettingTemplateResponseType>,
@@ -23340,7 +23436,8 @@ pub struct GetSettingTemplateResponse {
 /**
  * Values: inbound, outbound, both.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RecordingCalls {
     #[serde(rename = "both")]
     Both,
@@ -23377,7 +23474,7 @@ impl RecordingCalls {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestPolicyAutoCallRecording {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -23385,12 +23482,12 @@ pub struct UpdateSettingTemplateRequestPolicyAutoCallRecording {
     )]
     pub enable: bool,
     /**
-     * Values: inbound, outbound, both.
+    * Values: inbound, outbound, both.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recording_calls: Option<RecordingCalls>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -23398,7 +23495,7 @@ pub struct UpdateSettingTemplateRequestPolicyAutoCallRecording {
     )]
     pub recording_start_prompt: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -23422,7 +23519,7 @@ pub struct UpdateSettingTemplateRequestPolicy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23431,7 +23528,7 @@ pub struct UpdateSettingTemplateRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23447,7 +23544,8 @@ pub struct UpdateSettingTemplateRequest {
     pub user_settings: Option<GetSettingTemplateResponseUserSettings>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PhoneUserCallLogsType {
     #[serde(rename = "all")]
     All,
@@ -23481,7 +23579,8 @@ impl PhoneUserCallLogsType {
 /**
  * Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TimeType {
     #[serde(rename = "endTime")]
     EndTime,
@@ -23503,11 +23602,12 @@ impl std::fmt::Display for TimeType {
     }
 }
 
+
 /// Indicates who the call was forwarded to.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ForwardedTo {
     /**
-     * Indicates who the call was forwarded to.
+    * Indicates who the call was forwarded to.
      */
     #[serde(
         default,
@@ -23516,7 +23616,7 @@ pub struct ForwardedTo {
     )]
     pub extension_number: String,
     /**
-     * Indicates who the call was forwarded to.
+    * Indicates who the call was forwarded to.
      */
     #[serde(
         default,
@@ -23525,7 +23625,7 @@ pub struct ForwardedTo {
     )]
     pub location: String,
     /**
-     * Indicates who the call was forwarded to.
+    * Indicates who the call was forwarded to.
      */
     #[serde(
         default,
@@ -23534,7 +23634,7 @@ pub struct ForwardedTo {
     )]
     pub name: String,
     /**
-     * Indicates who the call was forwarded to.
+    * Indicates who the call was forwarded to.
      */
     #[serde(
         default,
@@ -23543,7 +23643,7 @@ pub struct ForwardedTo {
     )]
     pub number_type: String,
     /**
-     * Indicates who the call was forwarded to.
+    * Indicates who the call was forwarded to.
      */
     #[serde(
         default,
@@ -23553,7 +23653,8 @@ pub struct ForwardedTo {
     pub phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PhoneUserCallLogsResponseForwardedByExtensionType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
@@ -23602,7 +23703,7 @@ impl PhoneUserCallLogsResponseForwardedByExtensionType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ForwardedBy {
     /**
-     * Indicates where the call was forwarded from.
+    * Indicates where the call was forwarded from.
      */
     #[serde(
         default,
@@ -23611,12 +23712,12 @@ pub struct ForwardedBy {
     )]
     pub extension_number: String,
     /**
-     * Indicates where the call was forwarded from.
+    * Indicates where the call was forwarded from.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub extension_type: Option<PhoneUserCallLogsResponseForwardedByExtensionType>,
     /**
-     * Indicates where the call was forwarded from.
+    * Indicates where the call was forwarded from.
      */
     #[serde(
         default,
@@ -23625,7 +23726,7 @@ pub struct ForwardedBy {
     )]
     pub location: String,
     /**
-     * Indicates where the call was forwarded from.
+    * Indicates where the call was forwarded from.
      */
     #[serde(
         default,
@@ -23634,7 +23735,7 @@ pub struct ForwardedBy {
     )]
     pub name: String,
     /**
-     * Indicates where the call was forwarded from.
+    * Indicates where the call was forwarded from.
      */
     #[serde(
         default,
@@ -23643,7 +23744,7 @@ pub struct ForwardedBy {
     )]
     pub number_type: String,
     /**
-     * Indicates where the call was forwarded from.
+    * Indicates where the call was forwarded from.
      */
     #[serde(
         default,
@@ -23657,7 +23758,7 @@ pub struct ForwardedBy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AcceptedBy {
     /**
-     * Indicates who accepted the call.
+    * Indicates who accepted the call.
      */
     #[serde(
         default,
@@ -23666,7 +23767,7 @@ pub struct AcceptedBy {
     )]
     pub extension_number: String,
     /**
-     * Indicates who accepted the call.
+    * Indicates who accepted the call.
      */
     #[serde(
         default,
@@ -23675,7 +23776,7 @@ pub struct AcceptedBy {
     )]
     pub location: String,
     /**
-     * Indicates who accepted the call.
+    * Indicates who accepted the call.
      */
     #[serde(
         default,
@@ -23684,7 +23785,7 @@ pub struct AcceptedBy {
     )]
     pub name: String,
     /**
-     * Indicates who accepted the call.
+    * Indicates who accepted the call.
      */
     #[serde(
         default,
@@ -23693,7 +23794,7 @@ pub struct AcceptedBy {
     )]
     pub number_type: String,
     /**
-     * Indicates who accepted the call.
+    * Indicates who accepted the call.
      */
     #[serde(
         default,
@@ -23706,7 +23807,7 @@ pub struct AcceptedBy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OutgoingBy {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23715,7 +23816,7 @@ pub struct OutgoingBy {
     )]
     pub extension_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23724,7 +23825,7 @@ pub struct OutgoingBy {
     )]
     pub location: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23733,7 +23834,7 @@ pub struct OutgoingBy {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23742,7 +23843,7 @@ pub struct OutgoingBy {
     )]
     pub number_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23755,12 +23856,12 @@ pub struct OutgoingBy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CallLogs {
     /**
-     * Indicates who accepted the call.
+    * Indicates who accepted the call.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub accepted_by: Option<AcceptedBy>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23769,7 +23870,7 @@ pub struct CallLogs {
     )]
     pub answer_start_time: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23778,7 +23879,7 @@ pub struct CallLogs {
     )]
     pub call_end_time: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23787,7 +23888,7 @@ pub struct CallLogs {
     )]
     pub call_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23796,7 +23897,7 @@ pub struct CallLogs {
     )]
     pub callee_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23805,13 +23906,13 @@ pub struct CallLogs {
     )]
     pub callee_number: String,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callee_number_type: Option<serde_json::Value>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23820,7 +23921,7 @@ pub struct CallLogs {
     )]
     pub caller_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23829,7 +23930,7 @@ pub struct CallLogs {
     )]
     pub caller_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23838,7 +23939,7 @@ pub struct CallLogs {
     )]
     pub caller_number_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23847,7 +23948,7 @@ pub struct CallLogs {
     )]
     pub charge: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23856,7 +23957,7 @@ pub struct CallLogs {
     )]
     pub client_code: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -23865,7 +23966,7 @@ pub struct CallLogs {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23874,7 +23975,7 @@ pub struct CallLogs {
     )]
     pub direction: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -23883,17 +23984,17 @@ pub struct CallLogs {
     )]
     pub duration: i64,
     /**
-     * Indicates where the call was forwarded from.
+    * Indicates where the call was forwarded from.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub forwarded_by: Option<ForwardedBy>,
     /**
-     * Indicates who the call was forwarded to.
+    * Indicates who the call was forwarded to.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub forwarded_to: Option<ForwardedTo>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -23901,7 +24002,7 @@ pub struct CallLogs {
     )]
     pub has_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -23909,7 +24010,7 @@ pub struct CallLogs {
     )]
     pub has_voicemail: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23920,7 +24021,7 @@ pub struct CallLogs {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outgoing_by: Option<OutgoingBy>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23929,7 +24030,7 @@ pub struct CallLogs {
     )]
     pub path: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23938,7 +24039,7 @@ pub struct CallLogs {
     )]
     pub rate: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23947,7 +24048,7 @@ pub struct CallLogs {
     )]
     pub recording_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23958,7 +24059,7 @@ pub struct CallLogs {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -23967,7 +24068,7 @@ pub struct CallLogs {
     )]
     pub user_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -23981,7 +24082,7 @@ pub struct CallLogs {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneUserCallLogsResponse {
     /**
-     * Phone User Call Logs
+    * Phone User Call Logs
      */
     #[serde(
         default,
@@ -23990,7 +24091,7 @@ pub struct PhoneUserCallLogsResponse {
     )]
     pub call_logs: Vec<CallLogs>,
     /**
-     * Phone User Call Logs
+    * Phone User Call Logs
      */
     #[serde(
         default,
@@ -23999,7 +24100,7 @@ pub struct PhoneUserCallLogsResponse {
     )]
     pub from: String,
     /**
-     * Phone User Call Logs
+    * Phone User Call Logs
      */
     #[serde(
         default,
@@ -24008,7 +24109,7 @@ pub struct PhoneUserCallLogsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Phone User Call Logs
+    * Phone User Call Logs
      */
     #[serde(
         default,
@@ -24017,7 +24118,7 @@ pub struct PhoneUserCallLogsResponse {
     )]
     pub page_count: i64,
     /**
-     * Phone User Call Logs
+    * Phone User Call Logs
      */
     #[serde(
         default,
@@ -24026,7 +24127,7 @@ pub struct PhoneUserCallLogsResponse {
     )]
     pub page_size: i64,
     /**
-     * Phone User Call Logs
+    * Phone User Call Logs
      */
     #[serde(
         default,
@@ -24035,7 +24136,7 @@ pub struct PhoneUserCallLogsResponse {
     )]
     pub to: String,
     /**
-     * Phone User Call Logs
+    * Phone User Call Logs
      */
     #[serde(
         default,
@@ -24048,7 +24149,7 @@ pub struct PhoneUserCallLogsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Recordings {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24057,7 +24158,7 @@ pub struct Recordings {
     )]
     pub call_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24066,7 +24167,7 @@ pub struct Recordings {
     )]
     pub call_log_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24075,7 +24176,7 @@ pub struct Recordings {
     )]
     pub callee_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24084,7 +24185,7 @@ pub struct Recordings {
     )]
     pub callee_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24093,7 +24194,7 @@ pub struct Recordings {
     )]
     pub callee_number_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24102,7 +24203,7 @@ pub struct Recordings {
     )]
     pub caller_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24111,7 +24212,7 @@ pub struct Recordings {
     )]
     pub caller_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24120,7 +24221,7 @@ pub struct Recordings {
     )]
     pub caller_number_type: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -24129,7 +24230,7 @@ pub struct Recordings {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24138,7 +24239,7 @@ pub struct Recordings {
     )]
     pub direction: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24147,7 +24248,7 @@ pub struct Recordings {
     )]
     pub download_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24156,7 +24257,7 @@ pub struct Recordings {
     )]
     pub duration: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24170,7 +24271,7 @@ pub struct Recordings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneUserRecordingsResponse {
     /**
-     * Phone User Recordings
+    * Phone User Recordings
      */
     #[serde(
         default,
@@ -24179,7 +24280,7 @@ pub struct PhoneUserRecordingsResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * Phone User Recordings
+    * Phone User Recordings
      */
     #[serde(
         default,
@@ -24188,7 +24289,7 @@ pub struct PhoneUserRecordingsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Phone User Recordings
+    * Phone User Recordings
      */
     #[serde(
         default,
@@ -24197,7 +24298,7 @@ pub struct PhoneUserRecordingsResponse {
     )]
     pub page_count: i64,
     /**
-     * Phone User Recordings
+    * Phone User Recordings
      */
     #[serde(
         default,
@@ -24206,7 +24307,7 @@ pub struct PhoneUserRecordingsResponse {
     )]
     pub page_size: i64,
     /**
-     * Phone User Recordings
+    * Phone User Recordings
      */
     #[serde(
         default,
@@ -24215,7 +24316,7 @@ pub struct PhoneUserRecordingsResponse {
     )]
     pub recordings: Vec<Recordings>,
     /**
-     * Phone User Recordings
+    * Phone User Recordings
      */
     #[serde(
         default,
@@ -24224,7 +24325,7 @@ pub struct PhoneUserRecordingsResponse {
     )]
     pub to: Option<chrono::NaiveDate>,
     /**
-     * Phone User Recordings
+    * Phone User Recordings
      */
     #[serde(
         default,
@@ -24237,7 +24338,8 @@ pub struct PhoneUserRecordingsResponse {
 /**
  * Status of the voice mail
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PhoneUserVoiceMailsStatus {
     #[serde(rename = "all")]
     #[default]
@@ -24262,10 +24364,12 @@ impl std::fmt::Display for PhoneUserVoiceMailsStatus {
     }
 }
 
+
 /**
  * Status of the voice mail. Can be either 'read' or 'unread'
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PhoneUserVoiceMailsResponseStatus {
     #[serde(rename = "read")]
     Read,
@@ -24299,7 +24403,7 @@ impl PhoneUserVoiceMailsResponseStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VoiceMails {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24308,7 +24412,7 @@ pub struct VoiceMails {
     )]
     pub callee_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24317,7 +24421,7 @@ pub struct VoiceMails {
     )]
     pub callee_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24326,7 +24430,7 @@ pub struct VoiceMails {
     )]
     pub callee_number_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24335,7 +24439,7 @@ pub struct VoiceMails {
     )]
     pub caller_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24344,7 +24448,7 @@ pub struct VoiceMails {
     )]
     pub caller_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24353,7 +24457,7 @@ pub struct VoiceMails {
     )]
     pub caller_number_type: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -24362,7 +24466,7 @@ pub struct VoiceMails {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24371,7 +24475,7 @@ pub struct VoiceMails {
     )]
     pub download_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24380,7 +24484,7 @@ pub struct VoiceMails {
     )]
     pub duration: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24389,7 +24493,7 @@ pub struct VoiceMails {
     )]
     pub id: String,
     /**
-     * Status of the voice mail. Can be either 'read' or 'unread'
+    * Status of the voice mail. Can be either 'read' or 'unread'
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<PhoneUserVoiceMailsResponseStatus>,
@@ -24399,7 +24503,7 @@ pub struct VoiceMails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneUserVoiceMailsResponse {
     /**
-     * Phone User Voice Mails
+    * Phone User Voice Mails
      */
     #[serde(
         default,
@@ -24408,7 +24512,7 @@ pub struct PhoneUserVoiceMailsResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * Phone User Voice Mails
+    * Phone User Voice Mails
      */
     #[serde(
         default,
@@ -24417,7 +24521,7 @@ pub struct PhoneUserVoiceMailsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Phone User Voice Mails
+    * Phone User Voice Mails
      */
     #[serde(
         default,
@@ -24426,7 +24530,7 @@ pub struct PhoneUserVoiceMailsResponse {
     )]
     pub page_count: i64,
     /**
-     * Phone User Voice Mails
+    * Phone User Voice Mails
      */
     #[serde(
         default,
@@ -24435,7 +24539,7 @@ pub struct PhoneUserVoiceMailsResponse {
     )]
     pub page_size: i64,
     /**
-     * Phone User Voice Mails
+    * Phone User Voice Mails
      */
     #[serde(
         default,
@@ -24444,7 +24548,7 @@ pub struct PhoneUserVoiceMailsResponse {
     )]
     pub to: Option<chrono::NaiveDate>,
     /**
-     * Phone User Voice Mails
+    * Phone User Voice Mails
      */
     #[serde(
         default,
@@ -24453,7 +24557,7 @@ pub struct PhoneUserVoiceMailsResponse {
     )]
     pub total_records: i64,
     /**
-     * Phone User Voice Mails
+    * Phone User Voice Mails
      */
     #[serde(
         default,
@@ -24467,7 +24571,7 @@ pub struct PhoneUserVoiceMailsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddUserSettingRequestVoiceMail {
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(
         default,
@@ -24476,7 +24580,7 @@ pub struct AddUserSettingRequestVoiceMail {
     )]
     pub access_user_id: String,
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(
         default,
@@ -24484,7 +24588,7 @@ pub struct AddUserSettingRequestVoiceMail {
     )]
     pub delete: bool,
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(
         default,
@@ -24496,7 +24600,7 @@ pub struct AddUserSettingRequestVoiceMail {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddUserSettingRequest {
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub voice_mail: Option<AddUserSettingRequestVoiceMail>,
@@ -24505,7 +24609,7 @@ pub struct AddUserSettingRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddUserSettingResponseVoiceMail {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24514,7 +24618,7 @@ pub struct AddUserSettingResponseVoiceMail {
     )]
     pub access_user_id: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -24522,7 +24626,7 @@ pub struct AddUserSettingResponseVoiceMail {
     )]
     pub delete: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -24530,7 +24634,7 @@ pub struct AddUserSettingResponseVoiceMail {
     )]
     pub download: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24550,7 +24654,7 @@ pub struct AddUserSettingResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateUserSettingRequestVoiceMail {
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(
         default,
@@ -24559,7 +24663,7 @@ pub struct UpdateUserSettingRequestVoiceMail {
     )]
     pub access_user_id: String,
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(
         default,
@@ -24567,7 +24671,7 @@ pub struct UpdateUserSettingRequestVoiceMail {
     )]
     pub delete: bool,
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(
         default,
@@ -24575,7 +24679,7 @@ pub struct UpdateUserSettingRequestVoiceMail {
     )]
     pub download: bool,
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(
         default,
@@ -24588,7 +24692,7 @@ pub struct UpdateUserSettingRequestVoiceMail {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateUserSettingRequest {
     /**
-     * Update the voicemail setting.
+    * Update the voicemail setting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub voice_mail: Option<UpdateUserSettingRequestVoiceMail>,
@@ -24602,7 +24706,8 @@ pub struct UpdateUserSettingRequest {
  *   *`international`
  *   *`contactCenter`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CallType {
     #[serde(rename = "contactCenter")]
     ContactCenter,
@@ -24645,7 +24750,7 @@ impl CallType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Owner {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -24654,7 +24759,7 @@ pub struct Owner {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24663,7 +24768,7 @@ pub struct Owner {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24678,7 +24783,7 @@ pub struct Owner {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountCallLogsResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -24687,7 +24792,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub answer_start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24696,7 +24801,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub call_id: String,
     /**
-     * The type of call:
+    * The type of call:
      *  \*`voip` (Voice over IP)
      *  \*`pstn` (Public Switched Telephone Network)
      *  \*`tollfree`
@@ -24706,7 +24811,7 @@ pub struct AccountCallLogsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub call_type: Option<CallType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24715,7 +24820,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub callee_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24724,13 +24829,13 @@ pub struct AccountCallLogsResponse {
     )]
     pub callee_number: String,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callee_number_type: Option<serde_json::Value>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24739,7 +24844,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub caller_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24748,7 +24853,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub caller_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24757,7 +24862,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub caller_number_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24766,7 +24871,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub charge: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24775,7 +24880,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub client_code: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -24784,7 +24889,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24793,7 +24898,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub device_private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24802,7 +24907,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub device_public_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24811,7 +24916,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub direction: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -24820,7 +24925,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub duration: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24831,7 +24936,7 @@ pub struct AccountCallLogsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<Owner>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24840,7 +24945,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub path: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24849,7 +24954,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub rate: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24858,13 +24963,13 @@ pub struct AccountCallLogsResponse {
     )]
     pub recording_id: String,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recording_type: Option<serde_json::Value>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24875,7 +24980,7 @@ pub struct AccountCallLogsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24884,7 +24989,7 @@ pub struct AccountCallLogsResponse {
     )]
     pub user_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24898,7 +25003,7 @@ pub struct AccountCallLogsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountCallLogsResponseData {
     /**
-     * Account Call Logs
+    * Account Call Logs
      */
     #[serde(
         default,
@@ -24907,7 +25012,7 @@ pub struct AccountCallLogsResponseData {
     )]
     pub call_logs: Vec<AccountCallLogsResponse>,
     /**
-     * Account Call Logs
+    * Account Call Logs
      */
     #[serde(
         default,
@@ -24916,7 +25021,7 @@ pub struct AccountCallLogsResponseData {
     )]
     pub from: String,
     /**
-     * Account Call Logs
+    * Account Call Logs
      */
     #[serde(
         default,
@@ -24925,7 +25030,7 @@ pub struct AccountCallLogsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account Call Logs
+    * Account Call Logs
      */
     #[serde(
         default,
@@ -24934,7 +25039,7 @@ pub struct AccountCallLogsResponseData {
     )]
     pub page_count: i64,
     /**
-     * Account Call Logs
+    * Account Call Logs
      */
     #[serde(
         default,
@@ -24943,7 +25048,7 @@ pub struct AccountCallLogsResponseData {
     )]
     pub page_size: i64,
     /**
-     * Account Call Logs
+    * Account Call Logs
      */
     #[serde(
         default,
@@ -24952,7 +25057,7 @@ pub struct AccountCallLogsResponseData {
     )]
     pub to: String,
     /**
-     * Account Call Logs
+    * Account Call Logs
      */
     #[serde(
         default,
@@ -24975,7 +25080,7 @@ pub struct AddByocNumberResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CallingPlans {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -24999,7 +25104,8 @@ pub struct AssignCallingPlanRequest {
 /**
  * The owner type: `user` or `call queue`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetPhoneRecordingsResponseOwnerType {
     #[serde(rename = "call queue")]
     CallQueue,
@@ -25034,7 +25140,7 @@ impl GetPhoneRecordingsResponseOwnerType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetPhoneRecordingsResponseOwner {
     /**
-     * The owner of the recording.
+    * The owner of the recording.
      */
     #[serde(
         default,
@@ -25043,7 +25149,7 @@ pub struct GetPhoneRecordingsResponseOwner {
     )]
     pub extension_number: String,
     /**
-     * The owner of the recording.
+    * The owner of the recording.
      */
     #[serde(
         default,
@@ -25052,7 +25158,7 @@ pub struct GetPhoneRecordingsResponseOwner {
     )]
     pub id: String,
     /**
-     * The owner of the recording.
+    * The owner of the recording.
      */
     #[serde(
         default,
@@ -25061,7 +25167,7 @@ pub struct GetPhoneRecordingsResponseOwner {
     )]
     pub name: String,
     /**
-     * The owner of the recording.
+    * The owner of the recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GetPhoneRecordingsResponseOwnerType>,
@@ -25070,7 +25176,8 @@ pub struct GetPhoneRecordingsResponseOwner {
 /**
  * The direction of the call. Values: `inbound` or `outbound`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Direction {
     #[serde(rename = "inbound")]
     Inbound,
@@ -25104,7 +25211,7 @@ impl Direction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetPhoneRecordingsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25113,7 +25220,7 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub call_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25122,7 +25229,7 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub call_log_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25131,7 +25238,7 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub callee_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25140,13 +25247,13 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub callee_number: String,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callee_number_type: Option<serde_json::Value>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25155,7 +25262,7 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub caller_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25164,13 +25271,13 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub caller_number: String,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub caller_number_type: Option<serde_json::Value>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -25179,12 +25286,12 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The direction of the call. Values: `inbound` or `outbound`.
+    * The direction of the call. Values: `inbound` or `outbound`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub direction: Option<Direction>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25193,7 +25300,7 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub download_url: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -25202,7 +25309,7 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub duration: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -25211,7 +25318,7 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25220,12 +25327,12 @@ pub struct GetPhoneRecordingsResponse {
     )]
     pub id: String,
     /**
-     * The owner of the recording.
+    * The owner of the recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<GetPhoneRecordingsResponseOwner>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25240,7 +25347,7 @@ pub struct GetPhoneRecordingsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetPhoneRecordingsResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25249,7 +25356,7 @@ pub struct GetPhoneRecordingsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -25264,7 +25371,7 @@ pub struct GetPhoneRecordingsResponseData {
     )]
     pub recordings: Vec<GetPhoneRecordingsResponse>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -25277,7 +25384,7 @@ pub struct GetPhoneRecordingsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ByocSipTrunk {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25286,7 +25393,7 @@ pub struct ByocSipTrunk {
     )]
     pub carrier: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25295,7 +25402,7 @@ pub struct ByocSipTrunk {
     )]
     pub carrier_account: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25304,7 +25411,7 @@ pub struct ByocSipTrunk {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25313,7 +25420,7 @@ pub struct ByocSipTrunk {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25322,7 +25429,7 @@ pub struct ByocSipTrunk {
     )]
     pub region: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25341,7 +25448,7 @@ pub struct ListByocsipTrunkResponse {
     )]
     pub byoc_sip_trunk: Vec<ByocSipTrunk>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25350,7 +25457,7 @@ pub struct ListByocsipTrunkResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -25363,7 +25470,7 @@ pub struct ListByocsipTrunkResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SipTrunks {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25372,7 +25479,7 @@ pub struct SipTrunks {
     )]
     pub carrier_account: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25381,7 +25488,7 @@ pub struct SipTrunks {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25394,7 +25501,7 @@ pub struct SipTrunks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostPhoneSipTrunkRequest {
     /**
-     * SIP trunk configurations.
+    * SIP trunk configurations.
      */
     #[serde(
         default,
@@ -25407,7 +25514,7 @@ pub struct PostPhoneSipTrunkRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneSipTrunkRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25416,7 +25523,7 @@ pub struct UpdatePhoneSipTrunkRequest {
     )]
     pub carrier_account: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25429,7 +25536,7 @@ pub struct UpdatePhoneSipTrunkRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlanBaseDeleteRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25438,7 +25545,7 @@ pub struct AccountPlanBaseDeleteRequest {
     )]
     pub action: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25447,7 +25554,7 @@ pub struct AccountPlanBaseDeleteRequest {
     )]
     pub comment: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -25460,7 +25567,8 @@ pub struct AccountPlanBaseDeleteRequest {
 /**
  * The action that needs to be taken for this sub account. Value must be set to "cancel".
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountPlanAddonCancelRequestAction {
     #[serde(rename = "cancel")]
     Cancel,
@@ -25492,12 +25600,12 @@ impl AccountPlanAddonCancelRequestAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlanAddonCancelRequest {
     /**
-     * Account plan object
+    * Account plan object
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<AccountPlanAddonCancelRequestAction>,
     /**
-     * Account plan object
+    * Account plan object
      */
     #[serde(
         default,
@@ -25506,7 +25614,7 @@ pub struct AccountPlanAddonCancelRequest {
     )]
     pub comment: String,
     /**
-     * Account plan object
+    * Account plan object
      */
     #[serde(
         default,
@@ -25515,7 +25623,7 @@ pub struct AccountPlanAddonCancelRequest {
     )]
     pub reason: i64,
     /**
-     * Account plan object
+    * Account plan object
      */
     #[serde(
         default,
@@ -25529,7 +25637,7 @@ pub struct AccountPlanAddonCancelRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActivityLogs {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25538,7 +25646,7 @@ pub struct ActivityLogs {
     )]
     pub client_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25547,7 +25655,7 @@ pub struct ActivityLogs {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25556,7 +25664,7 @@ pub struct ActivityLogs {
     )]
     pub ip_address: String,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -25565,7 +25673,7 @@ pub struct ActivityLogs {
     )]
     pub time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25575,7 +25683,7 @@ pub struct ActivityLogs {
     )]
     pub type_: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25589,7 +25697,7 @@ pub struct ActivityLogs {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportSignInOutActivitiesResponse {
     /**
-     * Report object
+    * Report object
      */
     #[serde(
         default,
@@ -25598,7 +25706,7 @@ pub struct ReportSignInOutActivitiesResponse {
     )]
     pub activity_logs: Vec<ActivityLogs>,
     /**
-     * Report object
+    * Report object
      */
     #[serde(
         default,
@@ -25607,7 +25715,7 @@ pub struct ReportSignInOutActivitiesResponse {
     )]
     pub from: String,
     /**
-     * Report object
+    * Report object
      */
     #[serde(
         default,
@@ -25616,7 +25724,7 @@ pub struct ReportSignInOutActivitiesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Report object
+    * Report object
      */
     #[serde(
         default,
@@ -25625,7 +25733,7 @@ pub struct ReportSignInOutActivitiesResponse {
     )]
     pub page_size: String,
     /**
-     * Report object
+    * Report object
      */
     #[serde(
         default,
@@ -25638,7 +25746,7 @@ pub struct ReportSignInOutActivitiesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseScheduleMeeting {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25647,7 +25755,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub audio_type: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25655,7 +25763,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub embed_password_in_join_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25663,7 +25771,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub force_pmi_jbh_password: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25671,7 +25779,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub host_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25679,7 +25787,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub join_before_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25687,7 +25795,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub mute_upon_entry: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25695,7 +25803,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub participant_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25703,7 +25811,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub personal_meeting: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25711,7 +25819,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub pstn_password_protected: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25719,13 +25827,13 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub require_password_for_instant_meetings: bool,
     /**
-     * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
+    * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub require_password_for_pmi_meetings: Option<RequirePasswordPmiMeetings>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25733,7 +25841,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub require_password_for_scheduled_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25741,7 +25849,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub require_password_for_scheduling_new_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25749,7 +25857,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub upcoming_meeting_reminder: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25757,7 +25865,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     )]
     pub use_pmi_for_instant_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25769,7 +25877,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseInMeeting {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25777,7 +25885,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub alert_guest_join: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25785,7 +25893,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub allow_show_zoom_windows: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25793,7 +25901,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub annotation: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25801,7 +25909,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub attendee_on_hold: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25809,7 +25917,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub auto_answer: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25817,7 +25925,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub auto_saving_chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25825,7 +25933,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub breakout_room: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25833,7 +25941,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25841,7 +25949,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub closed_caption: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25849,7 +25957,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub co_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25857,7 +25965,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub custom_data_center_regions: bool,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -25869,7 +25977,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub data_center_regions: Vec<String>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25878,7 +25986,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub e_2e_encryption: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -25887,7 +25995,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub entry_exit_chime: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25895,7 +26003,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub far_end_camera_control: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25903,7 +26011,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25911,7 +26019,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub file_transfer: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25919,7 +26027,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub group_hd: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25927,7 +26035,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub join_from_desktop: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25935,7 +26043,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub join_from_mobile: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25943,7 +26051,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub non_verbal_feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25951,7 +26059,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub only_host_view_device_list: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25959,7 +26067,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub original_audio: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25967,7 +26075,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub polling: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25975,7 +26083,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub post_meeting_feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25983,7 +26091,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub private_chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25991,7 +26099,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub record_play_own_voice: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -25999,7 +26107,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub remote_control: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26007,7 +26115,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub remote_support: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26015,7 +26123,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub request_permission_to_unmute: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26023,7 +26131,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub screen_sharing: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26031,7 +26139,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub sending_default_email_invites: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26039,7 +26147,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub show_a_join_from_your_browser_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26047,7 +26155,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub show_browser_join_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26055,7 +26163,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub show_device_list: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26063,7 +26171,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub show_meeting_control_toolbar: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26071,7 +26179,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub stereo_audio: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26079,7 +26187,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub use_html_format_email: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26087,12 +26195,12 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub virtual_background: bool,
     /**
-     * Settings to manage virtual background.
+    * Settings to manage virtual background.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub virtual_background_settings: Option<VirtualBackgroundSettings>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26100,7 +26208,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub waiting_room: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26108,7 +26216,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     )]
     pub whiteboard: bool,
     /**
-     * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
+    * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
      *  `host`: Only host can share the screen.<br>
      *  `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
      *
@@ -26116,7 +26224,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub who_can_share_screen: Option<WhoCanShareScreen>,
     /**
-     * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
+    * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
      *  `host`: Only host can share the screen.<br>
      *  `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
      *
@@ -26128,7 +26236,7 @@ pub struct GetGroupSettingsResponseInMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseEmailNotification {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26136,7 +26244,7 @@ pub struct GetGroupSettingsResponseEmailNotification {
     )]
     pub alternative_host_reminder: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26144,7 +26252,7 @@ pub struct GetGroupSettingsResponseEmailNotification {
     )]
     pub cancel_meeting_reminder: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26152,7 +26260,7 @@ pub struct GetGroupSettingsResponseEmailNotification {
     )]
     pub cloud_recording_available_reminder: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26160,7 +26268,7 @@ pub struct GetGroupSettingsResponseEmailNotification {
     )]
     pub jbh_reminder: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26173,7 +26281,7 @@ pub struct GetGroupSettingsResponseEmailNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseRecordingArchive {
     /**
-     * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
+    * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
      */
     #[serde(
         default,
@@ -26181,12 +26289,12 @@ pub struct GetGroupSettingsResponseRecordingArchive {
     )]
     pub enable: bool,
     /**
-     * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
+    * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<Settings>,
     /**
-     * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
+    * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
      */
     #[serde(
         default,
@@ -26200,7 +26308,7 @@ pub struct GetGroupSettingsResponseRecordingArchive {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseRecording {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26208,12 +26316,12 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub account_user_access_recording: bool,
     /**
-     * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
+    * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive: Option<GetGroupSettingsResponseRecordingArchive>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -26222,7 +26330,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub auto_recording: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26230,7 +26338,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub cloud_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26238,7 +26346,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub cloud_recording_download: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26246,7 +26354,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub cloud_recording_download_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26254,13 +26362,13 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub host_delete_cloud_recording: bool,
     /**
-     * Setting to allow cloud recording access only from specific IP address ranges.
+    * Setting to allow cloud recording access only from specific IP address ranges.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ip_address_access_control: Option<IpAddressAccessControl>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26268,7 +26376,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub local_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26276,7 +26384,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub prevent_host_access_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26284,7 +26392,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub record_audio_file: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26292,7 +26400,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub record_audio_file_each_participant: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26300,7 +26408,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub record_gallery_view: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26308,7 +26416,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub record_speaker_view: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26316,7 +26424,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub recording_audio_transcript: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26324,7 +26432,7 @@ pub struct GetGroupSettingsResponseRecording {
     )]
     pub save_chat_text: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26336,7 +26444,7 @@ pub struct GetGroupSettingsResponseRecording {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseTelephony {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -26345,12 +26453,12 @@ pub struct GetGroupSettingsResponseTelephony {
     )]
     pub audio_conference_info: String,
     /**
-     * Indicates where most of the participants call into or call from duriing a meeting.
+    * Indicates where most of the participants call into or call from duriing a meeting.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub telephony_regions: Option<UpdateAccountSettingsTelephonyRegions>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26417,7 +26525,7 @@ impl GetGroupSettingsResponseOneOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestScheduleMeeting {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -26426,7 +26534,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub audio_type: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26434,7 +26542,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub embed_password_in_join_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26442,7 +26550,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub force_pmi_jbh_password: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26450,7 +26558,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub host_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26458,7 +26566,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub join_before_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26466,7 +26574,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub mute_upon_entry: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26474,7 +26582,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub participant_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26482,7 +26590,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub pstn_password_protected: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26490,7 +26598,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub require_password_for_all_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26498,13 +26606,13 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub require_password_for_instant_meetings: bool,
     /**
-     * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
+    * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub require_password_for_pmi_meetings: Option<RequirePasswordPmiMeetings>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26512,7 +26620,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub require_password_for_scheduled_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26520,7 +26628,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     )]
     pub require_password_for_scheduling_new_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26532,7 +26640,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestInMeeting {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26540,7 +26648,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub alert_guest_join: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26548,7 +26656,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub allow_show_zoom_windows: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26556,7 +26664,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub annotation: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26564,7 +26672,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub attendee_on_hold: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26572,7 +26680,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub auto_answer: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26580,7 +26688,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub auto_saving_chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26588,7 +26696,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub breakout_room: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26596,7 +26704,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26604,7 +26712,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub closed_caption: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26612,7 +26720,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub co_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26620,7 +26728,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub custom_data_center_regions: bool,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -26632,7 +26740,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub data_center_regions: Vec<String>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26641,7 +26749,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub e_2e_encryption: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -26650,7 +26758,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub entry_exit_chime: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26658,7 +26766,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub far_end_camera_control: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26666,7 +26774,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26674,7 +26782,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub file_transfer: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26682,7 +26790,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub group_hd: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26690,7 +26798,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub join_from_desktop: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26698,7 +26806,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub join_from_mobile: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26706,7 +26814,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub non_verbal_feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26714,7 +26822,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub only_host_view_device_list: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26722,7 +26830,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub original_audio: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26730,7 +26838,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub polling: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26738,7 +26846,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub post_meeting_feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26746,7 +26854,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub private_chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26754,7 +26862,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub record_play_own_voice: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26762,7 +26870,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub remote_control: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26770,7 +26878,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub remote_support: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26778,7 +26886,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub request_permission_to_unmute: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26786,7 +26894,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub screen_sharing: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26794,7 +26902,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub sending_default_email_invites: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26802,7 +26910,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub show_a_join_from_your_browser_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26810,7 +26918,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub show_browser_join_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26818,7 +26926,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub show_device_list: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26826,7 +26934,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub show_meeting_control_toolbar: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26834,7 +26942,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub stereo_audio: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26842,7 +26950,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub use_html_format_email: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26850,7 +26958,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub virtual_background: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26858,7 +26966,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub waiting_room: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26866,7 +26974,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     )]
     pub whiteboard: bool,
     /**
-     * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
+    * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
      *  `host`: Only host can share the screen.<br>
      *  `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
      *
@@ -26874,7 +26982,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub who_can_share_screen: Option<WhoCanShareScreen>,
     /**
-     * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
+    * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
      *  `host`: Only host can share the screen.<br>
      *  `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
      *
@@ -26886,7 +26994,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestTelephony {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -26895,7 +27003,7 @@ pub struct UpdateGroupSettingsRequestTelephony {
     )]
     pub audio_conference_info: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -26959,7 +27067,8 @@ impl UpdateGroupSettingsRequestOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UpdateGroupSettingsOption {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
@@ -26996,7 +27105,7 @@ impl UpdateGroupSettingsOption {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseScheduleMeeting {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27004,7 +27113,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub audio_type: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27012,7 +27121,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub embed_password_in_join_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27020,7 +27129,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub force_pmi_jbh_password: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27028,7 +27137,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub host_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27036,7 +27145,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub join_before_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27044,7 +27153,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub meeting_authentication: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27052,7 +27161,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub mute_upon_entry: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27060,7 +27169,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub participant_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27068,7 +27177,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub pstn_password_protected: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27076,7 +27185,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub require_password_for_instant_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27084,7 +27193,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub require_password_for_pmi_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27092,7 +27201,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     )]
     pub require_password_for_scheduling_new_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27104,7 +27213,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseInMeeting {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27112,7 +27221,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub alert_guest_join: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27120,7 +27229,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub allow_show_zoom_windows: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27128,7 +27237,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub annotation: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27136,7 +27245,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub attendee_on_hold: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27144,7 +27253,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub auto_answer: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27152,7 +27261,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub auto_saving_chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27160,7 +27269,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub breakout_room: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27168,7 +27277,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27176,7 +27285,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub closed_caption: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27184,7 +27293,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub co_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27192,7 +27301,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub custom_data_center_regions: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27201,7 +27310,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub e_2e_encryption: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27210,7 +27319,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub entry_exit_chime: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27218,7 +27327,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub far_end_camera_control: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27226,7 +27335,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27234,7 +27343,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub file_transfer: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27242,7 +27351,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub group_hd: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27250,7 +27359,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub non_verbal_feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27258,7 +27367,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub original_audio: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27266,7 +27375,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub polling: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27274,7 +27383,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub post_meeting_feedback: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27282,7 +27391,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub private_chat: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27290,7 +27399,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub remote_control: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27298,7 +27407,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub remote_support: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27306,7 +27415,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub request_permission_to_unmute: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27314,7 +27423,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub screen_sharing: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27322,7 +27431,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub sending_default_email_invites: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27330,7 +27439,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub show_a_join_from_your_browser_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27338,7 +27447,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub show_browser_join_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27346,7 +27455,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub show_meeting_control_toolbar: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27354,7 +27463,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub stereo_audio: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27362,7 +27471,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub use_html_format_email: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27370,7 +27479,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub virtual_background: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27378,7 +27487,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     )]
     pub waiting_room: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27390,7 +27499,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseRecording {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27398,7 +27507,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub account_user_access_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27406,7 +27515,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub auto_delete_cmr: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27415,7 +27524,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub auto_recording: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27423,7 +27532,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub cloud_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27431,7 +27540,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub cloud_recording_download: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27439,13 +27548,13 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub host_delete_cloud_recording: bool,
     /**
-     * Setting to allow cloud recording access only from specific IP address ranges.
+    * Setting to allow cloud recording access only from specific IP address ranges.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ip_address_access_control: Option<IpAddressAccessControl>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27453,7 +27562,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub local_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27461,7 +27570,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     )]
     pub prevent_host_access_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27473,7 +27582,7 @@ pub struct GetGroupLockSettingsResponseRecording {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseTelephony {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27481,7 +27590,7 @@ pub struct GetGroupLockSettingsResponseTelephony {
     )]
     pub telephony_regions: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27537,7 +27646,7 @@ impl GetGroupLockSettingsResponseOneOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupLockedSettingsRequestScheduleMeeting {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27545,7 +27654,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub audio_type: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27553,7 +27662,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub embed_password_in_join_link: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27561,7 +27670,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub force_pmi_jbh_password: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27569,7 +27678,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub host_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27577,7 +27686,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub join_before_host: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27585,7 +27694,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub meeting_authentication: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27593,7 +27702,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub mute_upon_entry: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27601,7 +27710,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub participant_video: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27609,7 +27718,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub personal_meeting: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27617,7 +27726,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub pstn_password_protected: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27625,7 +27734,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub require_password_for_instant_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27633,7 +27742,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub require_password_for_pmi_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27641,7 +27750,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     )]
     pub require_password_for_scheduling_new_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27653,7 +27762,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupLockedSettingsRequestRecording {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27661,7 +27770,7 @@ pub struct GroupLockedSettingsRequestRecording {
     )]
     pub account_user_access_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27669,7 +27778,7 @@ pub struct GroupLockedSettingsRequestRecording {
     )]
     pub auto_delete_cmr: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27678,7 +27787,7 @@ pub struct GroupLockedSettingsRequestRecording {
     )]
     pub auto_recording: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27686,7 +27795,7 @@ pub struct GroupLockedSettingsRequestRecording {
     )]
     pub cloud_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27694,7 +27803,7 @@ pub struct GroupLockedSettingsRequestRecording {
     )]
     pub cloud_recording_download: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27702,13 +27811,13 @@ pub struct GroupLockedSettingsRequestRecording {
     )]
     pub host_delete_cloud_recording: bool,
     /**
-     * Setting to allow cloud recording access only from specific IP address ranges.
+    * Setting to allow cloud recording access only from specific IP address ranges.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ip_address_access_control: Option<IpAddressAccessControl>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -27716,7 +27825,7 @@ pub struct GroupLockedSettingsRequestRecording {
     )]
     pub local_recording: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27774,7 +27883,7 @@ impl GroupLockedSettingsRequestOneOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubAccountPrivileges {
     /**
-     * This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
+    * This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
      */
     #[serde(
         default,
@@ -27787,7 +27896,7 @@ pub struct SubAccountPrivileges {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetRoleInformationResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27796,7 +27905,7 @@ pub struct GetRoleInformationResponse {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27805,7 +27914,7 @@ pub struct GetRoleInformationResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27814,7 +27923,7 @@ pub struct GetRoleInformationResponse {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -27826,12 +27935,12 @@ pub struct GetRoleInformationResponse {
     )]
     pub privileges: Vec<String>,
     /**
-     * This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
+    * This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sub_account_privileges: Option<SubAccountPrivileges>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -27845,7 +27954,7 @@ pub struct GetRoleInformationResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateRoleRequestSubAccountPrivileges {
     /**
-     * This field will only be displayed to accounts that are enrolled in the partner plan and follow master accounts and sub accounts structure.
+    * This field will only be displayed to accounts that are enrolled in the partner plan and follow master accounts and sub accounts structure.
      */
     #[serde(
         default,
@@ -27858,7 +27967,7 @@ pub struct UpdateRoleRequestSubAccountPrivileges {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateRoleRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27867,7 +27976,7 @@ pub struct UpdateRoleRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27876,7 +27985,7 @@ pub struct UpdateRoleRequest {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27885,7 +27994,7 @@ pub struct UpdateRoleRequest {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -27897,12 +28006,12 @@ pub struct UpdateRoleRequest {
     )]
     pub privileges: Vec<String>,
     /**
-     * This field will only be displayed to accounts that are enrolled in the partner plan and follow master accounts and sub accounts structure.
+    * This field will only be displayed to accounts that are enrolled in the partner plan and follow master accounts and sub accounts structure.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sub_account_privileges: Option<UpdateRoleRequestSubAccountPrivileges>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -27915,7 +28024,7 @@ pub struct UpdateRoleRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetPlanUsageResponseBase {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -27924,7 +28033,7 @@ pub struct GetPlanUsageResponseBase {
     )]
     pub hosts: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -27934,7 +28043,7 @@ pub struct GetPlanUsageResponseBase {
     )]
     pub type_: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -27948,7 +28057,7 @@ pub struct GetPlanUsageResponseBase {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanRecording {
     /**
-     * Recording Plan
+    * Recording Plan
      */
     #[serde(
         default,
@@ -27957,7 +28066,7 @@ pub struct PlanRecording {
     )]
     pub free_storage: String,
     /**
-     * Recording Plan
+    * Recording Plan
      */
     #[serde(
         default,
@@ -27966,7 +28075,7 @@ pub struct PlanRecording {
     )]
     pub free_storage_usage: String,
     /**
-     * Recording Plan
+    * Recording Plan
      */
     #[serde(
         default,
@@ -27975,7 +28084,7 @@ pub struct PlanRecording {
     )]
     pub plan_storage: String,
     /**
-     * Recording Plan
+    * Recording Plan
      */
     #[serde(
         default,
@@ -27984,7 +28093,7 @@ pub struct PlanRecording {
     )]
     pub plan_storage_exceed: String,
     /**
-     * Recording Plan
+    * Recording Plan
      */
     #[serde(
         default,
@@ -27993,7 +28102,7 @@ pub struct PlanRecording {
     )]
     pub plan_storage_usage: String,
     /**
-     * Recording Plan
+    * Recording Plan
      */
     #[serde(
         default,
@@ -28008,7 +28117,7 @@ pub struct PlanRecording {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanUnited {
     /**
-     * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
+    * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
      */
     #[serde(
         default,
@@ -28017,7 +28126,7 @@ pub struct PlanUnited {
     )]
     pub hosts: i64,
     /**
-     * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
+    * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
      */
     #[serde(
         default,
@@ -28026,7 +28135,7 @@ pub struct PlanUnited {
     )]
     pub name: String,
     /**
-     * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
+    * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
      */
     #[serde(
         default,
@@ -28036,7 +28145,7 @@ pub struct PlanUnited {
     )]
     pub type_: String,
     /**
-     * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
+    * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
      */
     #[serde(
         default,
@@ -28049,7 +28158,7 @@ pub struct PlanUnited {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetPlanUsageResponse {
     /**
-     * The base plan subscribed for the sub account.
+    * The base plan subscribed for the sub account.
      */
     #[serde(
         default,
@@ -28058,7 +28167,7 @@ pub struct GetPlanUsageResponse {
     )]
     pub plan_base: Vec<GetPlanUsageResponseBase>,
     /**
-     * The base plan subscribed for the sub account.
+    * The base plan subscribed for the sub account.
      */
     #[serde(
         default,
@@ -28067,17 +28176,17 @@ pub struct GetPlanUsageResponse {
     )]
     pub plan_large_meeting: Vec<GetPlanUsageResponseBase>,
     /**
-     * Recording Plan
+    * Recording Plan
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_recording: Option<PlanRecording>,
     /**
-     * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
+    * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_united: Option<PlanUnited>,
     /**
-     * The base plan subscribed for the sub account.
+    * The base plan subscribed for the sub account.
      */
     #[serde(
         default,
@@ -28086,7 +28195,7 @@ pub struct GetPlanUsageResponse {
     )]
     pub plan_webinar: Vec<GetPlanUsageResponseBase>,
     /**
-     * The base plan subscribed for the sub account.
+    * The base plan subscribed for the sub account.
      */
     #[serde(
         default,
@@ -28099,7 +28208,7 @@ pub struct GetPlanUsageResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SwitchUserAccountRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28122,7 +28231,8 @@ pub struct SwitchUserAccountRequest {
  *   A recording file object with file type of either `CC` or `TB` **does not have** the following properties:<br>
  *   	`id`, `status`, `file_size`, `recording_type`, and `play_url`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesFileType {
     #[serde(rename = "CC")]
     Cc,
@@ -28174,7 +28284,8 @@ impl GetAccountCloudRecordingResponseMeetingsFilesFileType {
 /**
  * The status of the recording, either `completed` or `processing`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -28226,7 +28337,8 @@ impl GetAccountCloudRecordingResponseMeetingsFilesStatus {
  *   * `thumbnail`
  *   
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesType {
     #[serde(rename = "active_speaker")]
     ActiveSpeaker,
@@ -28307,7 +28419,7 @@ impl GetAccountCloudRecordingResponseMeetingsFilesType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingFiles {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28316,7 +28428,7 @@ pub struct RecordingFiles {
     )]
     pub download_url: String,
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -28325,7 +28437,7 @@ pub struct RecordingFiles {
     )]
     pub file_size: f64,
     /**
-     * The recording file type. The value of this field could be one of the following:<br>
+    * The recording file type. The value of this field could be one of the following:<br>
      *  \* `MP4`: Video file of the recording.<br>
      *  \* `M4A` Audio-only file of the recording.<br>
      *  \* `TB`: Timestamp file of the recording in JSON format.<br>
@@ -28340,7 +28452,7 @@ pub struct RecordingFiles {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub file_type: Option<GetAccountCloudRecordingResponseMeetingsFilesFileType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28349,7 +28461,7 @@ pub struct RecordingFiles {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28358,7 +28470,7 @@ pub struct RecordingFiles {
     )]
     pub meeting_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28367,7 +28479,7 @@ pub struct RecordingFiles {
     )]
     pub play_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28376,7 +28488,7 @@ pub struct RecordingFiles {
     )]
     pub recording_end: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28385,7 +28497,7 @@ pub struct RecordingFiles {
     )]
     pub recording_start: String,
     /**
-     * The recording type. The value of this field can be one of the following:<br>
+    * The recording type. The value of this field can be one of the following:<br>
      *  \* `shared_screen_with_speaker_view(CC)`
      *  \* `shared_screen_with_speaker_view`
      *  \* `shared_screen_with_gallery_view`
@@ -28405,7 +28517,7 @@ pub struct RecordingFiles {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recording_type: Option<GetAccountCloudRecordingResponseMeetingsFilesType>,
     /**
-     * The status of the recording, either `completed` or `processing`.
+    * The status of the recording, either `completed` or `processing`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<GetAccountCloudRecordingResponseMeetingsFilesStatus>,
@@ -28414,7 +28526,7 @@ pub struct RecordingFiles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAccountCloudRecordingResponseMeetings {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28423,7 +28535,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub duration: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28432,7 +28544,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub host_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28441,7 +28553,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28450,7 +28562,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub recording_count: i64,
     /**
-     * Recording files object
+    * Recording files object
      */
     #[serde(
         default,
@@ -28459,7 +28571,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub recording_files: Vec<RecordingFiles>,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -28468,7 +28580,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28477,7 +28589,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub topic: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28486,7 +28598,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     )]
     pub total_size: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28499,7 +28611,7 @@ pub struct GetAccountCloudRecordingResponseMeetings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAccountCloudRecordingResponse {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -28508,7 +28620,7 @@ pub struct GetAccountCloudRecordingResponse {
     )]
     pub from: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meetings Object
+    * Meetings Object
      */
     #[serde(
         default,
@@ -28517,7 +28629,7 @@ pub struct GetAccountCloudRecordingResponse {
     )]
     pub meetings: Vec<GetAccountCloudRecordingResponseMeetings>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28526,7 +28638,7 @@ pub struct GetAccountCloudRecordingResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28535,7 +28647,7 @@ pub struct GetAccountCloudRecordingResponse {
     )]
     pub page_size: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -28544,7 +28656,7 @@ pub struct GetAccountCloudRecordingResponse {
     )]
     pub to: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28557,7 +28669,7 @@ pub struct GetAccountCloudRecordingResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackingSources {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28566,7 +28678,7 @@ pub struct TrackingSources {
     )]
     pub id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28575,7 +28687,7 @@ pub struct TrackingSources {
     )]
     pub registration_count: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28584,7 +28696,7 @@ pub struct TrackingSources {
     )]
     pub source_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28593,7 +28705,7 @@ pub struct TrackingSources {
     )]
     pub tracking_url: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28606,7 +28718,7 @@ pub struct TrackingSources {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTrackingSourcesResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28615,7 +28727,7 @@ pub struct GetTrackingSourcesResponse {
     )]
     pub total_records: i64,
     /**
-     * Tracking Sources object.
+    * Tracking Sources object.
      */
     #[serde(
         default,
@@ -28628,7 +28740,7 @@ pub struct GetTrackingSourcesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Basic {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -28636,7 +28748,7 @@ pub struct Basic {
     )]
     pub required_code_to_ext: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28645,7 +28757,7 @@ pub struct Basic {
     )]
     pub room_passcode: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28654,7 +28766,7 @@ pub struct Basic {
     )]
     pub support_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28675,7 +28787,8 @@ pub struct UpdateZrAccProfileRequest {
  *   `meeting`: Meeting settings of the Zoom Rooms Account. <br>
  *   `signage`: View digital signage settings of the Zoom Rooms Account.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SettingType {
     #[serde(rename = "alert")]
     Alert,
@@ -28697,11 +28810,13 @@ impl std::fmt::Display for SettingType {
     }
 }
 
+
 /**
  * The type of location. The value can be one of the following:
  *   `country`, `states`, `city`, `campus`, `building`, `floor`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListZrLocationsResponseType {
     #[serde(rename = "building")]
     Building,
@@ -28747,7 +28862,7 @@ impl ListZrLocationsResponseType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddAzrLocationResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28756,7 +28871,7 @@ pub struct AddAzrLocationResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28765,7 +28880,7 @@ pub struct AddAzrLocationResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28774,7 +28889,7 @@ pub struct AddAzrLocationResponse {
     )]
     pub parent_location_id: String,
     /**
-     * The type of location. The value can be one of the following:
+    * The type of location. The value can be one of the following:
      *  `country`, `states`, `city`, `campus`, `building`, `floor`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
@@ -28790,7 +28905,7 @@ pub struct ListZrLocationsResponseData {
     )]
     pub locations: Vec<AddAzrLocationResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28799,7 +28914,7 @@ pub struct ListZrLocationsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -28812,7 +28927,7 @@ pub struct ListZrLocationsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddAzrLocationRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28821,7 +28936,7 @@ pub struct AddAzrLocationRequest {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28834,7 +28949,7 @@ pub struct AddAzrLocationRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetZrLocationProfileResponseBasic {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28843,7 +28958,7 @@ pub struct GetZrLocationProfileResponseBasic {
     )]
     pub address: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28853,7 +28968,7 @@ pub struct GetZrLocationProfileResponseBasic {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28862,7 +28977,7 @@ pub struct GetZrLocationProfileResponseBasic {
     )]
     pub name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -28870,7 +28985,7 @@ pub struct GetZrLocationProfileResponseBasic {
     )]
     pub required_code_to_ext: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28879,7 +28994,7 @@ pub struct GetZrLocationProfileResponseBasic {
     )]
     pub room_passcode: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28888,7 +29003,7 @@ pub struct GetZrLocationProfileResponseBasic {
     )]
     pub support_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28897,7 +29012,7 @@ pub struct GetZrLocationProfileResponseBasic {
     )]
     pub support_phone: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28916,7 +29031,7 @@ pub struct GetZrLocationProfileResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetZrLocationStructureResponse {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -28932,7 +29047,7 @@ pub struct GetZrLocationStructureResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetZrProfileResponseBasic {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28941,7 +29056,7 @@ pub struct GetZrProfileResponseBasic {
     )]
     pub activation_code: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -28949,7 +29064,7 @@ pub struct GetZrProfileResponseBasic {
     )]
     pub hide_room_in_contacts: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28958,7 +29073,7 @@ pub struct GetZrProfileResponseBasic {
     )]
     pub name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -28966,7 +29081,7 @@ pub struct GetZrProfileResponseBasic {
     )]
     pub required_code_to_ext: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28975,7 +29090,7 @@ pub struct GetZrProfileResponseBasic {
     )]
     pub room_passcode: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -28984,7 +29099,7 @@ pub struct GetZrProfileResponseBasic {
     )]
     pub support_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29003,7 +29118,7 @@ pub struct GetZrProfileResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateRoomProfileRequestBasic {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -29011,7 +29126,7 @@ pub struct UpdateRoomProfileRequestBasic {
     )]
     pub hide_room_in_contacts: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29020,7 +29135,7 @@ pub struct UpdateRoomProfileRequestBasic {
     )]
     pub name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -29028,7 +29143,7 @@ pub struct UpdateRoomProfileRequestBasic {
     )]
     pub required_code_to_ext: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29037,7 +29152,7 @@ pub struct UpdateRoomProfileRequestBasic {
     )]
     pub room_passcode: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29046,7 +29161,7 @@ pub struct UpdateRoomProfileRequestBasic {
     )]
     pub support_email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29065,7 +29180,8 @@ pub struct UpdateRoomProfileRequest {
 /**
  * Type of the device. The value of this field can be one of the following:<br>`Zoom Rooms Computer`,<br> `Controller`, `Scheduling Display`, `Zoom Rooms Control System`, `Companion Whiteboard`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeviceType {
     #[serde(rename = "Companion Whiteboard")]
     CompanionWhiteboard,
@@ -29108,7 +29224,8 @@ impl DeviceType {
 /**
  * Status of the device. The value can be either `Online` or `Offline`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListZrDevicesResponseStatus {
     #[serde(rename = "Offline")]
     Offline,
@@ -29142,7 +29259,7 @@ impl ListZrDevicesResponseStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Devices {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29151,7 +29268,7 @@ pub struct Devices {
     )]
     pub app_version: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29160,12 +29277,12 @@ pub struct Devices {
     )]
     pub device_system: String,
     /**
-     * Type of the device. The value of this field can be one of the following:<br>`Zoom Rooms Computer`,<br> `Controller`, `Scheduling Display`, `Zoom Rooms Control System`, `Companion Whiteboard`
+    * Type of the device. The value of this field can be one of the following:<br>`Zoom Rooms Computer`,<br> `Controller`, `Scheduling Display`, `Zoom Rooms Control System`, `Companion Whiteboard`
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub device_type: Option<DeviceType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29174,7 +29291,7 @@ pub struct Devices {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29183,7 +29300,7 @@ pub struct Devices {
     )]
     pub room_name: String,
     /**
-     * Status of the device. The value can be either `Online` or `Offline`.
+    * Status of the device. The value can be either `Online` or `Offline`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ListZrDevicesResponseStatus>,
@@ -29202,7 +29319,7 @@ pub struct ListZrDevicesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSipTrunkNumbersResponse {
     /**
-     * List of dedicated dial-in numbers.
+    * List of dedicated dial-in numbers.
      */
     #[serde(
         default,
@@ -29211,7 +29328,7 @@ pub struct ListSipTrunkNumbersResponse {
     )]
     pub phone_numbers: Vec<DedicatedDialInNumber>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29224,17 +29341,17 @@ pub struct ListSipTrunkNumbersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignSipConfigRequest {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enable: Option<bool>,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub show_callout_internal_number: Option<bool>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29243,7 +29360,7 @@ pub struct AssignSipConfigRequest {
     )]
     pub show_zoom_provided_callout_countries: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29256,7 +29373,7 @@ pub struct AssignSipConfigRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunkNumbersRequest {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -29272,7 +29389,7 @@ pub struct AssignSipTrunkNumbersRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InMeetingFiles {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29281,7 +29398,7 @@ pub struct InMeetingFiles {
     )]
     pub download_url: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29290,7 +29407,7 @@ pub struct InMeetingFiles {
     )]
     pub file_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29309,7 +29426,7 @@ pub struct ListPastMeetingFilesResponse {
     )]
     pub in_meeting_files: Vec<InMeetingFiles>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29322,7 +29439,7 @@ pub struct ListPastMeetingFilesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClientSatisfaction {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -29331,7 +29448,7 @@ pub struct ClientSatisfaction {
     )]
     pub date: Option<chrono::NaiveDate>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29340,7 +29457,7 @@ pub struct ClientSatisfaction {
     )]
     pub good_count: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29349,7 +29466,7 @@ pub struct ClientSatisfaction {
     )]
     pub none_count: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29358,7 +29475,7 @@ pub struct ClientSatisfaction {
     )]
     pub not_good_count: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29377,7 +29494,7 @@ pub struct ListMeetingSatisfactionResponse {
     )]
     pub client_satisfaction: Vec<ClientSatisfaction>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -29386,7 +29503,7 @@ pub struct ListMeetingSatisfactionResponse {
     )]
     pub from: Option<chrono::NaiveDate>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -29395,7 +29512,7 @@ pub struct ListMeetingSatisfactionResponse {
     )]
     pub to: Option<chrono::NaiveDate>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29408,7 +29525,8 @@ pub struct ListMeetingSatisfactionResponse {
 /**
  * State of the device. The value should be either `assigned` to list devices that have been assigned to user(s) or `unassigned` to list devices that have not yet been assigned to any user in the Zoom account.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListPhoneDevicesType {
     #[serde(rename = "assigned")]
     Assigned,
@@ -29442,7 +29560,7 @@ impl ListPhoneDevicesType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddAutoReceptionistResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29451,7 +29569,7 @@ pub struct AddAutoReceptionistResponse {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29460,7 +29578,7 @@ pub struct AddAutoReceptionistResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29473,7 +29591,8 @@ pub struct AddAutoReceptionistResponse {
 /**
  * Status of the device. The value is either `online` or `offline`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListPhoneDevicesResponseStatus {
     #[serde(rename = "offline")]
     Offline,
@@ -29509,7 +29628,7 @@ pub struct ListPhoneDevicesResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<AddAutoReceptionistResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29518,7 +29637,7 @@ pub struct ListPhoneDevicesResponse {
     )]
     pub device_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29527,7 +29646,7 @@ pub struct ListPhoneDevicesResponse {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29536,7 +29655,7 @@ pub struct ListPhoneDevicesResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29547,7 +29666,7 @@ pub struct ListPhoneDevicesResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * Status of the device. The value is either `online` or `offline`.
+    * Status of the device. The value is either `online` or `offline`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ListPhoneDevicesResponseStatus>,
@@ -29562,7 +29681,7 @@ pub struct ListPhoneDevicesResponseData {
     )]
     pub devices: Vec<ListPhoneDevicesResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29571,7 +29690,7 @@ pub struct ListPhoneDevicesResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -29580,7 +29699,7 @@ pub struct ListPhoneDevicesResponseData {
     )]
     pub page_size: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29593,7 +29712,7 @@ pub struct ListPhoneDevicesResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddPhoneDeviceRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29602,7 +29721,7 @@ pub struct AddPhoneDeviceRequest {
     )]
     pub assigned_to: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29611,7 +29730,7 @@ pub struct AddPhoneDeviceRequest {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29620,7 +29739,7 @@ pub struct AddPhoneDeviceRequest {
     )]
     pub mac_address: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29629,7 +29748,7 @@ pub struct AddPhoneDeviceRequest {
     )]
     pub model: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29644,7 +29763,7 @@ pub struct AddPhoneDeviceRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetDeviceResponseAssignee {
     /**
-     * User to whom the device has been assigned.
+    * User to whom the device has been assigned.
      */
     #[serde(
         default,
@@ -29653,7 +29772,7 @@ pub struct GetDeviceResponseAssignee {
     )]
     pub extension_number: i64,
     /**
-     * User to whom the device has been assigned.
+    * User to whom the device has been assigned.
      */
     #[serde(
         default,
@@ -29662,7 +29781,7 @@ pub struct GetDeviceResponseAssignee {
     )]
     pub id: String,
     /**
-     * User to whom the device has been assigned.
+    * User to whom the device has been assigned.
      */
     #[serde(
         default,
@@ -29681,7 +29800,8 @@ pub struct GetDeviceResponseAssignee {
  *   
  *   
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetDeviceResponseProvisionType {
     #[serde(rename = "assisted")]
     Assisted,
@@ -29719,7 +29839,7 @@ impl GetDeviceResponseProvisionType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LineSubscription {
     /**
-     * Line subscription.
+    * Line subscription.
      */
     #[serde(
         default,
@@ -29728,7 +29848,7 @@ pub struct LineSubscription {
     )]
     pub display_name: String,
     /**
-     * Line subscription.
+    * Line subscription.
      */
     #[serde(
         default,
@@ -29737,7 +29857,7 @@ pub struct LineSubscription {
     )]
     pub extension_number: i64,
     /**
-     * Line subscription.
+    * Line subscription.
      */
     #[serde(
         default,
@@ -29751,7 +29871,7 @@ pub struct LineSubscription {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SharedLine {
     /**
-     * Return additional provisioning information with generic device SIP credentials.
+    * Return additional provisioning information with generic device SIP credentials.
      */
     #[serde(
         default,
@@ -29760,12 +29880,12 @@ pub struct SharedLine {
     )]
     pub alias: String,
     /**
-     * Return additional provisioning information with generic device SIP credentials.
+    * Return additional provisioning information with generic device SIP credentials.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub line_subscription: Option<LineSubscription>,
     /**
-     * Return additional provisioning information with generic device SIP credentials.
+    * Return additional provisioning information with generic device SIP credentials.
      */
     #[serde(
         default,
@@ -29778,7 +29898,7 @@ pub struct SharedLine {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SipAccounts {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29787,7 +29907,7 @@ pub struct SipAccounts {
     )]
     pub authorization_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29796,7 +29916,7 @@ pub struct SipAccounts {
     )]
     pub outbound_proxy: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29805,7 +29925,7 @@ pub struct SipAccounts {
     )]
     pub password: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29814,12 +29934,12 @@ pub struct SipAccounts {
     )]
     pub secondary_outbound_proxy: String,
     /**
-     * Return additional provisioning information with generic device SIP credentials.
+    * Return additional provisioning information with generic device SIP credentials.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shared_line: Option<SharedLine>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29828,7 +29948,7 @@ pub struct SipAccounts {
     )]
     pub sip_domain: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29842,7 +29962,7 @@ pub struct SipAccounts {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Provision {
     /**
-     * Provisioning information of a device.
+    * Provisioning information of a device.
      */
     #[serde(
         default,
@@ -29851,12 +29971,12 @@ pub struct Provision {
     )]
     pub sip_accounts: Vec<SipAccounts>,
     /**
-     * Provisioning information of a device.
+    * Provisioning information of a device.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GetDeviceResponseProvisionType>,
     /**
-     * Provisioning information of a device.
+    * Provisioning information of a device.
      */
     #[serde(
         default,
@@ -29869,12 +29989,12 @@ pub struct Provision {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetDeviceResponse {
     /**
-     * User to whom the device has been assigned.
+    * User to whom the device has been assigned.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<GetDeviceResponseAssignee>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29883,7 +30003,7 @@ pub struct GetDeviceResponse {
     )]
     pub device_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29892,7 +30012,7 @@ pub struct GetDeviceResponse {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29901,7 +30021,7 @@ pub struct GetDeviceResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29910,14 +30030,14 @@ pub struct GetDeviceResponse {
     )]
     pub mac_address: String,
     /**
-     * Provisioning information of a device.
+    * Provisioning information of a device.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub provision: Option<Provision>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * Status of the device. The value is either `online` or `offline`.
+    * Status of the device. The value is either `online` or `offline`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ListPhoneDevicesResponseStatus>,
@@ -29926,7 +30046,7 @@ pub struct GetDeviceResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateDeviceRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29935,7 +30055,7 @@ pub struct UpdateDeviceRequest {
     )]
     pub assigned_to: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29944,7 +30064,7 @@ pub struct UpdateDeviceRequest {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29957,7 +30077,7 @@ pub struct UpdateDeviceRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExternalContacts {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29966,7 +30086,7 @@ pub struct ExternalContacts {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29975,7 +30095,7 @@ pub struct ExternalContacts {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29984,7 +30104,7 @@ pub struct ExternalContacts {
     )]
     pub extension_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -29993,7 +30113,7 @@ pub struct ExternalContacts {
     )]
     pub external_contact_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30002,7 +30122,7 @@ pub struct ExternalContacts {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30011,7 +30131,7 @@ pub struct ExternalContacts {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -30027,7 +30147,7 @@ pub struct ExternalContacts {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListExternalContactsResponse {
     /**
-     * External contacts information.
+    * External contacts information.
      */
     #[serde(
         default,
@@ -30036,7 +30156,7 @@ pub struct ListExternalContactsResponse {
     )]
     pub external_contacts: Vec<ExternalContacts>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30045,7 +30165,7 @@ pub struct ListExternalContactsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30058,7 +30178,7 @@ pub struct ListExternalContactsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddExternalContactRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30067,7 +30187,7 @@ pub struct AddExternalContactRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30076,7 +30196,7 @@ pub struct AddExternalContactRequest {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30085,7 +30205,7 @@ pub struct AddExternalContactRequest {
     )]
     pub extension_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30094,7 +30214,7 @@ pub struct AddExternalContactRequest {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30103,7 +30223,7 @@ pub struct AddExternalContactRequest {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -30115,7 +30235,7 @@ pub struct AddExternalContactRequest {
     )]
     pub phone_numbers: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30128,7 +30248,7 @@ pub struct AddExternalContactRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateExternalContactRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30137,7 +30257,7 @@ pub struct UpdateExternalContactRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30146,7 +30266,7 @@ pub struct UpdateExternalContactRequest {
     )]
     pub email: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30155,7 +30275,7 @@ pub struct UpdateExternalContactRequest {
     )]
     pub extension_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30164,7 +30284,7 @@ pub struct UpdateExternalContactRequest {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30173,7 +30293,7 @@ pub struct UpdateExternalContactRequest {
     )]
     pub name: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -30185,7 +30305,7 @@ pub struct UpdateExternalContactRequest {
     )]
     pub phone_numbers: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30198,7 +30318,7 @@ pub struct UpdateExternalContactRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChangeZrLocationRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30211,7 +30331,7 @@ pub struct ChangeZrLocationRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChangeParentLocationRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30224,7 +30344,7 @@ pub struct ChangeParentLocationRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCallQueuesResponsePhoneNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30233,7 +30353,7 @@ pub struct ListCallQueuesResponsePhoneNumbers {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30242,7 +30362,7 @@ pub struct ListCallQueuesResponsePhoneNumbers {
     )]
     pub number: String,
     /**
-     * Source of phone number.
+    * Source of phone number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
@@ -30251,7 +30371,7 @@ pub struct ListCallQueuesResponsePhoneNumbers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CallQueues {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30260,7 +30380,7 @@ pub struct CallQueues {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30269,7 +30389,7 @@ pub struct CallQueues {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30278,7 +30398,7 @@ pub struct CallQueues {
     )]
     pub name: String,
     /**
-     * Phone number(s) assigned to the call queue.
+    * Phone number(s) assigned to the call queue.
      */
     #[serde(
         default,
@@ -30289,7 +30409,7 @@ pub struct CallQueues {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
@@ -30304,7 +30424,7 @@ pub struct ListCallQueuesResponse {
     )]
     pub call_queues: Vec<CallQueues>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30313,7 +30433,7 @@ pub struct ListCallQueuesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30322,7 +30442,7 @@ pub struct ListCallQueuesResponse {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30336,7 +30456,7 @@ pub struct ListCallQueuesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateCallQueueRequestMembers {
     /**
-     * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
+    * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
      */
     #[serde(
         default,
@@ -30345,7 +30465,7 @@ pub struct CreateCallQueueRequestMembers {
     )]
     pub common_area_phone_ids: Vec<String>,
     /**
-     * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
+    * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
      */
     #[serde(
         default,
@@ -30358,7 +30478,7 @@ pub struct CreateCallQueueRequestMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateCallQueueRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30367,7 +30487,7 @@ pub struct CreateCallQueueRequest {
     )]
     pub description: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30376,12 +30496,12 @@ pub struct CreateCallQueueRequest {
     )]
     pub extension_number: i64,
     /**
-     * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
+    * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<CreateCallQueueRequestMembers>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30390,7 +30510,7 @@ pub struct CreateCallQueueRequest {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30403,7 +30523,7 @@ pub struct CreateCallQueueRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateCallQueueResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30412,7 +30532,7 @@ pub struct CreateCallQueueResponse {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30421,7 +30541,7 @@ pub struct CreateCallQueueResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30430,7 +30550,7 @@ pub struct CreateCallQueueResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30445,7 +30565,8 @@ pub struct CreateCallQueueResponse {
  *   `manager`: A call queue manager has the privilege to change call queue settings, policy settings and manage recordings and voicemail inbox. There can only be one manager for each call queue.<br><br>
  *   `user`: Regular user without the privileges of a manager.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Level {
     #[serde(rename = "manager")]
     Manager,
@@ -30479,7 +30600,7 @@ impl Level {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponseMembersUsers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30488,14 +30609,14 @@ pub struct GetCallQueueResponseMembersUsers {
     )]
     pub id: String,
     /**
-     * Level of the user. The value can be one of the following:<br>
+    * Level of the user. The value can be one of the following:<br>
      *  `manager`: A call queue manager has the privilege to change call queue settings, policy settings and manage recordings and voicemail inbox. There can only be one manager for each call queue.<br><br>
      *  `user`: Regular user without the privileges of a manager.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub level: Option<Level>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30504,7 +30625,7 @@ pub struct GetCallQueueResponseMembersUsers {
     )]
     pub name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -30532,7 +30653,7 @@ pub struct GetCallQueueResponseMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30541,7 +30662,7 @@ pub struct GetCallQueueResponse {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30552,7 +30673,7 @@ pub struct GetCallQueueResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<GetCallQueueResponseMembers>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30561,7 +30682,7 @@ pub struct GetCallQueueResponse {
     )]
     pub name: String,
     /**
-     * Phone number(s) assigned to the call queue.
+    * Phone number(s) assigned to the call queue.
      */
     #[serde(
         default,
@@ -30572,7 +30693,7 @@ pub struct GetCallQueueResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
@@ -30581,7 +30702,7 @@ pub struct GetCallQueueResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateCallQueueRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30590,7 +30711,7 @@ pub struct UpdateCallQueueRequest {
     )]
     pub description: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30599,7 +30720,7 @@ pub struct UpdateCallQueueRequest {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30608,7 +30729,7 @@ pub struct UpdateCallQueueRequest {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30617,12 +30738,12 @@ pub struct UpdateCallQueueRequest {
     )]
     pub site_id: String,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30636,7 +30757,7 @@ pub struct UpdateCallQueueRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddMembersCallQueueRequest {
     /**
-     * A maximum of 10 members can be added at a time.
+    * A maximum of 10 members can be added at a time.
      */
     #[serde(
         default,
@@ -30645,7 +30766,7 @@ pub struct AddMembersCallQueueRequest {
     )]
     pub common_area_phone_ids: Vec<String>,
     /**
-     * A maximum of 10 members can be added at a time.
+    * A maximum of 10 members can be added at a time.
      */
     #[serde(
         default,
@@ -30658,7 +30779,7 @@ pub struct AddMembersCallQueueRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddMembersCallQueueRequestData {
     /**
-     * A maximum of 10 members can be added at a time.
+    * A maximum of 10 members can be added at a time.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<AddMembersCallQueueRequest>,
@@ -30667,7 +30788,7 @@ pub struct AddMembersCallQueueRequestData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChangeCallQueueManagerRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30680,7 +30801,7 @@ pub struct ChangeCallQueueManagerRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetPhoneNumberDetailsResponseCarrier {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30689,7 +30810,7 @@ pub struct GetPhoneNumberDetailsResponseCarrier {
     )]
     pub code: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30702,7 +30823,7 @@ pub struct GetPhoneNumberDetailsResponseCarrier {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddCommonAreaPhoneResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30711,7 +30832,7 @@ pub struct AddCommonAreaPhoneResponse {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30726,7 +30847,7 @@ pub struct GetPhoneNumberDetailsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<Assignee>,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -30740,7 +30861,7 @@ pub struct GetPhoneNumberDetailsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub carrier: Option<GetPhoneNumberDetailsResponseCarrier>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30749,7 +30870,7 @@ pub struct GetPhoneNumberDetailsResponse {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30758,7 +30879,7 @@ pub struct GetPhoneNumberDetailsResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30767,7 +30888,7 @@ pub struct GetPhoneNumberDetailsResponse {
     )]
     pub location: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30776,7 +30897,7 @@ pub struct GetPhoneNumberDetailsResponse {
     )]
     pub number: String,
     /**
-     * Type of number.
+    * Type of number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub number_type: Option<Type>,
@@ -30785,12 +30906,12 @@ pub struct GetPhoneNumberDetailsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * Source of phone number.
+    * Source of phone number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
     /**
-     * Status of the number.
+    * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ListAccountPhoneNumbersResponseStatus>,
@@ -30799,7 +30920,7 @@ pub struct GetPhoneNumberDetailsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneNumberDetailsRequest {
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -30811,7 +30932,7 @@ pub struct UpdatePhoneNumberDetailsRequest {
     )]
     pub capability: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30820,7 +30941,7 @@ pub struct UpdatePhoneNumberDetailsRequest {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30833,7 +30954,7 @@ pub struct UpdatePhoneNumberDetailsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChangeMainCompanyNumberRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30846,7 +30967,7 @@ pub struct ChangeMainCompanyNumberRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCallingPlansResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30855,7 +30976,7 @@ pub struct ListCallingPlansResponse {
     )]
     pub assigned: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30864,7 +30985,7 @@ pub struct ListCallingPlansResponse {
     )]
     pub available: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30873,7 +30994,7 @@ pub struct ListCallingPlansResponse {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30882,7 +31003,7 @@ pub struct ListCallingPlansResponse {
     )]
     pub subscribed: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30906,7 +31027,7 @@ pub struct ListCallingPlansResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPhoneUsersResponseCallingPlans {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30915,7 +31036,7 @@ pub struct ListPhoneUsersResponseCallingPlans {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30935,7 +31056,7 @@ pub struct ListPhoneUsersResponse {
     )]
     pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30944,7 +31065,7 @@ pub struct ListPhoneUsersResponse {
     )]
     pub email: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -30953,7 +31074,7 @@ pub struct ListPhoneUsersResponse {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30962,7 +31083,7 @@ pub struct ListPhoneUsersResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30971,7 +31092,7 @@ pub struct ListPhoneUsersResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30982,7 +31103,7 @@ pub struct ListPhoneUsersResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -30995,7 +31116,7 @@ pub struct ListPhoneUsersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPhoneUsersResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31004,7 +31125,7 @@ pub struct ListPhoneUsersResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31013,7 +31134,7 @@ pub struct ListPhoneUsersResponseData {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31032,7 +31153,7 @@ pub struct ListPhoneUsersResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateAutoReceptionistRequest {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31041,7 +31162,7 @@ pub struct UpdateAutoReceptionistRequest {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31060,7 +31181,7 @@ pub struct CommonAreaPhones {
     )]
     pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31069,7 +31190,7 @@ pub struct CommonAreaPhones {
     )]
     pub device_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31078,7 +31199,7 @@ pub struct CommonAreaPhones {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31087,7 +31208,7 @@ pub struct CommonAreaPhones {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31096,7 +31217,7 @@ pub struct CommonAreaPhones {
     )]
     pub mac_address: String,
     /**
-     * Phone number(s) assigned to the call queue.
+    * Phone number(s) assigned to the call queue.
      */
     #[serde(
         default,
@@ -31107,7 +31228,7 @@ pub struct CommonAreaPhones {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31126,7 +31247,7 @@ pub struct ListCommonAreaPhonesResponse {
     )]
     pub common_area_phones: Vec<CommonAreaPhones>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31135,7 +31256,7 @@ pub struct ListCommonAreaPhonesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31144,7 +31265,7 @@ pub struct ListCommonAreaPhonesResponse {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31157,7 +31278,7 @@ pub struct ListCommonAreaPhonesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddCommonAreaPhoneRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31166,7 +31287,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31175,7 +31296,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub display_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31184,7 +31305,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31193,7 +31314,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub mac_address: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31202,7 +31323,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub model: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31211,7 +31332,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub provision_template_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31220,7 +31341,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub site_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31229,7 +31350,7 @@ pub struct AddCommonAreaPhoneRequest {
     )]
     pub time_zone: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31243,7 +31364,7 @@ pub struct AddCommonAreaPhoneRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31252,7 +31373,7 @@ pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
     )]
     pub authorization_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31261,7 +31382,7 @@ pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
     )]
     pub outbound_proxy: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31270,7 +31391,7 @@ pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
     )]
     pub password: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31279,7 +31400,7 @@ pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
     )]
     pub secondary_outbound_proxy: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31288,7 +31409,7 @@ pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
     )]
     pub sip_domain: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31302,7 +31423,7 @@ pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponseProvision {
     /**
-     * Provisioning information of the common area phone.
+    * Provisioning information of the common area phone.
      */
     #[serde(
         default,
@@ -31311,12 +31432,12 @@ pub struct GetCommonAreaPhoneResponseProvision {
     )]
     pub sip_accounts: Vec<GetCommonAreaPhoneResponseProvisionSipAccounts>,
     /**
-     * Provisioning information of the common area phone.
+    * Provisioning information of the common area phone.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GetDeviceResponseProvisionType>,
     /**
-     * Provisioning information of the common area phone.
+    * Provisioning information of the common area phone.
      */
     #[serde(
         default,
@@ -31329,7 +31450,7 @@ pub struct GetCommonAreaPhoneResponseProvision {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponseNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31338,7 +31459,7 @@ pub struct GetCommonAreaPhoneResponseNumbers {
     )]
     pub display_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31347,7 +31468,7 @@ pub struct GetCommonAreaPhoneResponseNumbers {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31356,7 +31477,7 @@ pub struct GetCommonAreaPhoneResponseNumbers {
     )]
     pub number: String,
     /**
-     * Source of phone number.
+    * Source of phone number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
@@ -31365,7 +31486,7 @@ pub struct GetCommonAreaPhoneResponseNumbers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProvisionTemplate {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31374,7 +31495,7 @@ pub struct ProvisionTemplate {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31383,7 +31504,7 @@ pub struct ProvisionTemplate {
     )]
     pub name: String,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -31396,7 +31517,7 @@ pub struct ProvisionTemplate {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InternationalCall {
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -31408,7 +31529,8 @@ pub struct InternationalCall {
 /**
  * Allow Hot Desking feature to current device.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
     #[serde(rename = "off")]
     Off,
@@ -31446,7 +31568,7 @@ impl GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct HotDesking {
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<GetCommonAreaPhoneResponsePolicyHotDeskingStatus>,
@@ -31455,17 +31577,17 @@ pub struct HotDesking {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponsePolicy {
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hot_desking: Option<HotDesking>,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub international_call: Option<InternationalCall>,
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub select_outbound_caller_id: Option<InternationalCall>,
@@ -31480,7 +31602,7 @@ pub struct GetCommonAreaPhoneResponse {
     )]
     pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31489,7 +31611,7 @@ pub struct GetCommonAreaPhoneResponse {
     )]
     pub device_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31498,7 +31620,7 @@ pub struct GetCommonAreaPhoneResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31507,7 +31629,7 @@ pub struct GetCommonAreaPhoneResponse {
     )]
     pub mac_address: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31524,7 +31646,7 @@ pub struct GetCommonAreaPhoneResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub policy: Option<GetCommonAreaPhoneResponsePolicy>,
     /**
-     * Provisioning information of the common area phone.
+    * Provisioning information of the common area phone.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub provision: Option<GetCommonAreaPhoneResponseProvision>,
@@ -31533,7 +31655,7 @@ pub struct GetCommonAreaPhoneResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31546,7 +31668,7 @@ pub struct GetCommonAreaPhoneResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateCommonAreaPhoneRequestPolicy {
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hot_desking: Option<HotDesking>,
@@ -31559,7 +31681,7 @@ pub struct UpdateCommonAreaPhoneRequestPolicy {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateCommonAreaPhoneRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31568,7 +31690,7 @@ pub struct UpdateCommonAreaPhoneRequest {
     )]
     pub display_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31577,7 +31699,7 @@ pub struct UpdateCommonAreaPhoneRequest {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31588,7 +31710,7 @@ pub struct UpdateCommonAreaPhoneRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub policy: Option<UpdateCommonAreaPhoneRequestPolicy>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31597,7 +31719,7 @@ pub struct UpdateCommonAreaPhoneRequest {
     )]
     pub provision_template_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31620,7 +31742,7 @@ pub struct AssignPhoneNumbersCommonAreaRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersCommonAreaResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31629,7 +31751,7 @@ pub struct AssignPhoneNumbersCommonAreaResponse {
     )]
     pub id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31652,7 +31774,7 @@ pub struct AssignPhoneNumbersCommonAreaResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneRequest {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31676,7 +31798,7 @@ pub struct AssignCallingPlansCommonAreaPhoneRequestData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneResponse {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31685,7 +31807,7 @@ pub struct AssignCallingPlansCommonAreaPhoneResponse {
     )]
     pub name: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31711,7 +31833,8 @@ pub struct AssignCallingPlansCommonAreaPhoneResponseData {
  *   `phoneNumber`: Indicates that only a specific phone number that is shown in the `phone_number` field is blocked.<br><br>
  *   `prefix`: Indicates that all numbers starting with prefix that is shown in the `phone_number` field are blocked.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MatchType {
     #[serde(rename = "phoneNumber")]
     PhoneNumber,
@@ -31745,12 +31868,12 @@ impl MatchType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BlockedList {
     /**
-     * The direction of the call. Values: `inbound` or `outbound`.
+    * The direction of the call. Values: `inbound` or `outbound`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub block_type: Option<Direction>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31759,7 +31882,7 @@ pub struct BlockedList {
     )]
     pub comment: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31768,14 +31891,14 @@ pub struct BlockedList {
     )]
     pub id: String,
     /**
-     * Indicates the match type for the blocked list. The values can be one of the following:<br>
+    * Indicates the match type for the blocked list. The values can be one of the following:<br>
      *  `phoneNumber`: Indicates that only a specific phone number that is shown in the `phone_number` field is blocked.<br><br>
      *  `prefix`: Indicates that all numbers starting with prefix that is shown in the `phone_number` field are blocked.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub match_type: Option<MatchType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31784,7 +31907,7 @@ pub struct BlockedList {
     )]
     pub phone_number: String,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
@@ -31799,7 +31922,7 @@ pub struct ListBlockedResponse {
     )]
     pub blocked_list: Vec<BlockedList>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31808,7 +31931,7 @@ pub struct ListBlockedResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31817,7 +31940,7 @@ pub struct ListBlockedResponse {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31830,12 +31953,12 @@ pub struct ListBlockedResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateBlockedListRequest {
     /**
-     * The direction of the call. Values: `inbound` or `outbound`.
+    * The direction of the call. Values: `inbound` or `outbound`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub block_type: Option<Direction>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31844,14 +31967,14 @@ pub struct UpdateBlockedListRequest {
     )]
     pub comment: String,
     /**
-     * Indicates the match type for the blocked list. The values can be one of the following:<br>
+    * Indicates the match type for the blocked list. The values can be one of the following:<br>
      *  `phoneNumber`: Indicates that only a specific phone number that is shown in the `phone_number` field is blocked.<br><br>
      *  `prefix`: Indicates that all numbers starting with prefix that is shown in the `phone_number` field are blocked.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub match_type: Option<MatchType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31860,7 +31983,7 @@ pub struct UpdateBlockedListRequest {
     )]
     pub phone_number: String,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
@@ -31869,7 +31992,7 @@ pub struct UpdateBlockedListRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingReports {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -31878,7 +32001,7 @@ pub struct BillingReports {
     )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31887,7 +32010,7 @@ pub struct BillingReports {
     )]
     pub id: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -31896,7 +32019,7 @@ pub struct BillingReports {
     )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31905,7 +32028,7 @@ pub struct BillingReports {
     )]
     pub tax_amount: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31914,7 +32037,7 @@ pub struct BillingReports {
     )]
     pub total_amount: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31934,7 +32057,7 @@ pub struct GetBillingReportResponse {
     )]
     pub billing_reports: Vec<BillingReports>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31947,7 +32070,7 @@ pub struct GetBillingReportResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Invoices {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -31956,7 +32079,7 @@ pub struct Invoices {
     )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31965,7 +32088,7 @@ pub struct Invoices {
     )]
     pub invoice_charge_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -31974,7 +32097,7 @@ pub struct Invoices {
     )]
     pub invoice_number: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -31983,7 +32106,7 @@ pub struct Invoices {
     )]
     pub quantity: i64,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -31992,7 +32115,7 @@ pub struct Invoices {
     )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32001,7 +32124,7 @@ pub struct Invoices {
     )]
     pub tax_amount: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32014,7 +32137,7 @@ pub struct Invoices {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetBillingInvoicesReportsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32033,7 +32156,7 @@ pub struct GetBillingInvoicesReportsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSharedLineGroupsResponsePhoneNumbers {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32042,7 +32165,7 @@ pub struct ListSharedLineGroupsResponsePhoneNumbers {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32051,7 +32174,7 @@ pub struct ListSharedLineGroupsResponsePhoneNumbers {
     )]
     pub number: String,
     /**
-     * Status of the number.
+    * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ListAccountPhoneNumbersResponseStatus>,
@@ -32060,7 +32183,7 @@ pub struct ListSharedLineGroupsResponsePhoneNumbers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SharedLineGroups {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32069,7 +32192,7 @@ pub struct SharedLineGroups {
     )]
     pub display_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32078,7 +32201,7 @@ pub struct SharedLineGroups {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32087,7 +32210,7 @@ pub struct SharedLineGroups {
     )]
     pub id: String,
     /**
-     * Phone Numbers Assigned to the Shared Line Group.
+    * Phone Numbers Assigned to the Shared Line Group.
      */
     #[serde(
         default,
@@ -32098,7 +32221,7 @@ pub struct SharedLineGroups {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
@@ -32107,7 +32230,7 @@ pub struct SharedLineGroups {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSharedLineGroupsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32116,7 +32239,7 @@ pub struct ListSharedLineGroupsResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32131,7 +32254,7 @@ pub struct ListSharedLineGroupsResponse {
     )]
     pub shared_line_groups: Vec<SharedLineGroups>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32144,7 +32267,7 @@ pub struct ListSharedLineGroupsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateSharedLineGroupRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32153,7 +32276,7 @@ pub struct CreateSharedLineGroupRequest {
     )]
     pub description: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32162,7 +32285,7 @@ pub struct CreateSharedLineGroupRequest {
     )]
     pub display_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32171,7 +32294,7 @@ pub struct CreateSharedLineGroupRequest {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32185,7 +32308,7 @@ pub struct CreateSharedLineGroupRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponseSite {
     /**
-     * Site assigned to the Shared Line Group.
+    * Site assigned to the Shared Line Group.
      */
     #[serde(
         default,
@@ -32194,7 +32317,7 @@ pub struct GetSharedLineGroupResponseSite {
     )]
     pub id: String,
     /**
-     * Site assigned to the Shared Line Group.
+    * Site assigned to the Shared Line Group.
      */
     #[serde(
         default,
@@ -32208,7 +32331,7 @@ pub struct GetSharedLineGroupResponseSite {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponseMembers {
     /**
-     * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
+    * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
      */
     #[serde(
         default,
@@ -32217,7 +32340,7 @@ pub struct GetSharedLineGroupResponseMembers {
     )]
     pub common_area_phones: Vec<Site>,
     /**
-     * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
+    * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
      */
     #[serde(
         default,
@@ -32230,7 +32353,7 @@ pub struct GetSharedLineGroupResponseMembers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32239,7 +32362,7 @@ pub struct GetSharedLineGroupResponse {
     )]
     pub display_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32248,7 +32371,7 @@ pub struct GetSharedLineGroupResponse {
     )]
     pub extension_number: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32257,7 +32380,7 @@ pub struct GetSharedLineGroupResponse {
     )]
     pub id: String,
     /**
-     * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
+    * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<GetSharedLineGroupResponseMembers>,
@@ -32268,7 +32391,7 @@ pub struct GetSharedLineGroupResponse {
     )]
     pub phone_numbers: Vec<PhoneUserResponseNumbers>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32277,17 +32400,17 @@ pub struct GetSharedLineGroupResponse {
     )]
     pub primary_number: String,
     /**
-     * Site assigned to the Shared Line Group.
+    * Site assigned to the Shared Line Group.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<GetSharedLineGroupResponseSite>,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32301,7 +32424,7 @@ pub struct GetSharedLineGroupResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PrimaryNumber {
     /**
-     * If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
+    * If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
      */
     #[serde(
         default,
@@ -32310,7 +32433,7 @@ pub struct PrimaryNumber {
     )]
     pub id: String,
     /**
-     * If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
+    * If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
      */
     #[serde(
         default,
@@ -32323,7 +32446,7 @@ pub struct PrimaryNumber {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSharedLineGroupRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32332,7 +32455,7 @@ pub struct UpdateSharedLineGroupRequest {
     )]
     pub display_name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32341,17 +32464,17 @@ pub struct UpdateSharedLineGroupRequest {
     )]
     pub extension_number: i64,
     /**
-     * If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
+    * If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub primary_number: Option<PrimaryNumber>,
     /**
-     * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+    * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReportUsersType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32365,7 +32488,7 @@ pub struct UpdateSharedLineGroupRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddMembersSharedLineGroupRequest {
     /**
-     * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
+    * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
      */
     #[serde(
         default,
@@ -32374,7 +32497,7 @@ pub struct AddMembersSharedLineGroupRequest {
     )]
     pub common_area_phone_ids: Vec<String>,
     /**
-     * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
+    * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
      */
     #[serde(
         default,
@@ -32387,7 +32510,7 @@ pub struct AddMembersSharedLineGroupRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddMembersSharedLineGroupRequestData {
     /**
-     * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
+    * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<AddMembersSharedLineGroupRequest>,
@@ -32396,7 +32519,7 @@ pub struct AddMembersSharedLineGroupRequestData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddAutoReceptionistRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32405,7 +32528,7 @@ pub struct AddAutoReceptionistRequest {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32418,7 +32541,7 @@ pub struct AddAutoReceptionistRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueRecordingsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32427,7 +32550,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub callee_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32436,7 +32559,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub callee_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32445,7 +32568,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub callee_number_type: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32454,7 +32577,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub caller_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32463,7 +32586,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub caller_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32472,7 +32595,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub caller_number_type: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -32481,7 +32604,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32490,7 +32613,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub direction: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32499,7 +32622,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub download_url: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32508,7 +32631,7 @@ pub struct GetCallQueueRecordingsResponse {
     )]
     pub duration: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32521,7 +32644,7 @@ pub struct GetCallQueueRecordingsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueRecordingsResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32530,7 +32653,7 @@ pub struct GetCallQueueRecordingsResponseData {
     )]
     pub from: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32539,7 +32662,7 @@ pub struct GetCallQueueRecordingsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32554,7 +32677,7 @@ pub struct GetCallQueueRecordingsResponseData {
     )]
     pub recordings: Vec<GetCallQueueRecordingsResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32563,7 +32686,7 @@ pub struct GetCallQueueRecordingsResponseData {
     )]
     pub to: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32576,7 +32699,7 @@ pub struct GetCallQueueRecordingsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Params {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32585,7 +32708,7 @@ pub struct Params {
     )]
     pub calendar_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32594,7 +32717,7 @@ pub struct Params {
     )]
     pub change_key: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32603,7 +32726,7 @@ pub struct Params {
     )]
     pub event_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32616,7 +32739,7 @@ pub struct Params {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CheckInRoomsRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32631,7 +32754,7 @@ pub struct CheckInRoomsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InMeetingRecordingControlRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32644,7 +32767,7 @@ pub struct InMeetingRecordingControlRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSipTrunksResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32653,7 +32776,7 @@ pub struct ListSipTrunksResponse {
     )]
     pub dnis: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32662,7 +32785,7 @@ pub struct ListSipTrunksResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32671,7 +32794,7 @@ pub struct ListSipTrunksResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32680,7 +32803,7 @@ pub struct ListSipTrunksResponse {
     )]
     pub number_prefix: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32689,7 +32812,7 @@ pub struct ListSipTrunksResponse {
     )]
     pub outbound_caller_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32708,7 +32831,7 @@ pub struct ListSipTrunksResponseData {
     )]
     pub sip_trunks: Vec<ListSipTrunksResponse>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32721,7 +32844,7 @@ pub struct ListSipTrunksResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32730,7 +32853,7 @@ pub struct AssignSipTrunksRequest {
     )]
     pub dnis: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32739,7 +32862,7 @@ pub struct AssignSipTrunksRequest {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32752,7 +32875,7 @@ pub struct AssignSipTrunksRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksRequestData {
     /**
-     * Array of one or more SIP Trunk objects.
+    * Array of one or more SIP Trunk objects.
      */
     #[serde(
         default,
@@ -32765,7 +32888,7 @@ pub struct AssignSipTrunksRequestData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32774,7 +32897,7 @@ pub struct AssignSipTrunksResponse {
     )]
     pub dnis: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32783,7 +32906,7 @@ pub struct AssignSipTrunksResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32792,7 +32915,7 @@ pub struct AssignSipTrunksResponse {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32801,7 +32924,7 @@ pub struct AssignSipTrunksResponse {
     )]
     pub number_prefix: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32824,7 +32947,7 @@ pub struct AssignSipTrunksResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalloutCountries {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32833,7 +32956,7 @@ pub struct CalloutCountries {
     )]
     pub code: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32842,7 +32965,7 @@ pub struct CalloutCountries {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32861,7 +32984,7 @@ pub struct ListInternalCalloutCountriesResponse {
     )]
     pub callout_countries: Vec<CalloutCountries>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -32874,7 +32997,7 @@ pub struct ListInternalCalloutCountriesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddCalloutCountriesRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32887,7 +33010,7 @@ pub struct AddCalloutCountriesRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddCalloutCountriesRequestData {
     /**
-     * List of callout countries.
+    * List of callout countries.
      */
     #[serde(
         default,
@@ -32910,7 +33033,8 @@ pub struct AddCalloutCountriesResponse {
 /**
  * Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Languages {
     #[serde(rename = "de-DE")]
     De,
@@ -32947,7 +33071,7 @@ impl Languages {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InternalNumbers {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -32955,7 +33079,7 @@ pub struct InternalNumbers {
     )]
     pub allow_for_external_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -32963,7 +33087,7 @@ pub struct InternalNumbers {
     )]
     pub allow_join: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32972,7 +33096,7 @@ pub struct InternalNumbers {
     )]
     pub country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32981,7 +33105,7 @@ pub struct InternalNumbers {
     )]
     pub display_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -32990,12 +33114,12 @@ pub struct InternalNumbers {
     )]
     pub labels: String,
     /**
-     * Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
+    * Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
      */
     #[serde(default, skip_serializing_if = "Languages::is_noop")]
     pub languages: Languages,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33004,7 +33128,7 @@ pub struct InternalNumbers {
     )]
     pub number: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33014,7 +33138,7 @@ pub struct InternalNumbers {
     )]
     pub type_: i64,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -33032,7 +33156,7 @@ pub struct ListInternalNumbersResponse {
     )]
     pub internal_numbers: Vec<InternalNumbers>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33041,7 +33165,7 @@ pub struct ListInternalNumbersResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33050,7 +33174,7 @@ pub struct ListInternalNumbersResponse {
     )]
     pub page_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33073,7 +33197,7 @@ pub struct AddInternalNumbersRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddInternalNumbersResponse {
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -33081,7 +33205,7 @@ pub struct AddInternalNumbersResponse {
     )]
     pub allow_for_external_meetings: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -33089,7 +33213,7 @@ pub struct AddInternalNumbersResponse {
     )]
     pub allow_join: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33098,7 +33222,7 @@ pub struct AddInternalNumbersResponse {
     )]
     pub country: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33107,7 +33231,7 @@ pub struct AddInternalNumbersResponse {
     )]
     pub display_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33116,7 +33240,7 @@ pub struct AddInternalNumbersResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33125,12 +33249,12 @@ pub struct AddInternalNumbersResponse {
     )]
     pub labels: String,
     /**
-     * Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
+    * Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
      */
     #[serde(default, skip_serializing_if = "Languages::is_noop")]
     pub languages: Languages,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33139,7 +33263,7 @@ pub struct AddInternalNumbersResponse {
     )]
     pub number: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33149,7 +33273,7 @@ pub struct AddInternalNumbersResponse {
     )]
     pub type_: i64,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -33175,7 +33299,8 @@ pub struct AddInternalNumbersResponseData {
  *   `downgrade`: Downgrade the Zoom Rooms App Version.<br>
  *   `cancel`: Cancel an ongoing upgrade or downgrade process.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ChangeZoomRoomsAppVersionRequestAction {
     #[serde(rename = "cancel")]
     Cancel,
@@ -33212,7 +33337,7 @@ impl ChangeZoomRoomsAppVersionRequestAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChangeZoomRoomsAppVersionRequest {
     /**
-     * Specify one of the following values for this field:
+    * Specify one of the following values for this field:
      *  
      *  `upgrade`: Upgrade to the latest Zoom Rooms App Version.<br>
      *  `downgrade`: Downgrade the Zoom Rooms App Version.<br>
@@ -33231,7 +33356,7 @@ pub struct ListDigitalSignageContentResponse {
     )]
     pub contents: Vec<Site>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33240,7 +33365,7 @@ pub struct ListDigitalSignageContentResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33259,7 +33384,7 @@ pub struct ListWebinarTemplatesResponse {
     )]
     pub templates: Vec<Site>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33289,7 +33414,8 @@ pub struct ListWebinarTemplatesResponse {
  *   * `Available` to `Away`
  *   * `Away` to `Available`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UpdatePresenceStatusRequest {
     #[serde(rename = "Available")]
     Available,
@@ -33338,7 +33464,7 @@ impl UpdatePresenceStatusRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdatePresenceStatusRequestData {
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33347,7 +33473,7 @@ pub struct UpdatePresenceStatusRequestData {
     )]
     pub duration: i64,
     /**
-     * Presence status of the user. The value can be set to one of the following:<br>
+    * Presence status of the user. The value can be set to one of the following:<br>
      *  \* `Away`
      *  \* `Do_Not_Disturb`
      *  \* `Available`
@@ -33374,7 +33500,7 @@ pub struct UpdatePresenceStatusRequestData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Caller {
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33383,7 +33509,7 @@ pub struct Caller {
     )]
     pub codec: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33392,7 +33518,7 @@ pub struct Caller {
     )]
     pub device_private_ip: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33401,7 +33527,7 @@ pub struct Caller {
     )]
     pub device_public_ip: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33410,7 +33536,7 @@ pub struct Caller {
     )]
     pub device_type: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33419,7 +33545,7 @@ pub struct Caller {
     )]
     pub extension_number: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33428,7 +33554,7 @@ pub struct Caller {
     )]
     pub headset: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33437,7 +33563,7 @@ pub struct Caller {
     )]
     pub isp: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33446,7 +33572,7 @@ pub struct Caller {
     )]
     pub microphone: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33455,7 +33581,7 @@ pub struct Caller {
     )]
     pub phone_number: String,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(
         default,
@@ -33469,7 +33595,7 @@ pub struct Caller {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Callee {
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33478,7 +33604,7 @@ pub struct Callee {
     )]
     pub codec: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33487,7 +33613,7 @@ pub struct Callee {
     )]
     pub device_private_ip: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33496,7 +33622,7 @@ pub struct Callee {
     )]
     pub device_public_ip: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33505,7 +33631,7 @@ pub struct Callee {
     )]
     pub device_type: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33514,7 +33640,7 @@ pub struct Callee {
     )]
     pub extension_number: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33523,7 +33649,7 @@ pub struct Callee {
     )]
     pub headset: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33532,7 +33658,7 @@ pub struct Callee {
     )]
     pub isp: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33541,7 +33667,7 @@ pub struct Callee {
     )]
     pub microphone: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33550,7 +33676,7 @@ pub struct Callee {
     )]
     pub phone_number: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(
         default,
@@ -33563,7 +33689,7 @@ pub struct Callee {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCallLogsMetricsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33572,17 +33698,17 @@ pub struct ListCallLogsMetricsResponse {
     )]
     pub call_id: String,
     /**
-     * Callee object contains information of the callee.
+    * Callee object contains information of the callee.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callee: Option<Callee>,
     /**
-     * Caller object contains information of the caller.
+    * Caller object contains information of the caller.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub caller: Option<Caller>,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -33591,7 +33717,7 @@ pub struct ListCallLogsMetricsResponse {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33600,7 +33726,7 @@ pub struct ListCallLogsMetricsResponse {
     )]
     pub direction: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33609,7 +33735,7 @@ pub struct ListCallLogsMetricsResponse {
     )]
     pub duration: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33622,7 +33748,7 @@ pub struct ListCallLogsMetricsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCallLogsMetricsResponseData {
     /**
-     * Call logs.
+    * Call logs.
      */
     #[serde(
         default,
@@ -33631,7 +33757,7 @@ pub struct ListCallLogsMetricsResponseData {
     )]
     pub call_logs: Vec<ListCallLogsMetricsResponse>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33640,7 +33766,7 @@ pub struct ListCallLogsMetricsResponseData {
     )]
     pub from: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33649,7 +33775,7 @@ pub struct ListCallLogsMetricsResponseData {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33658,7 +33784,7 @@ pub struct ListCallLogsMetricsResponseData {
     )]
     pub page_size: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33667,7 +33793,7 @@ pub struct ListCallLogsMetricsResponseData {
     )]
     pub to: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -33680,7 +33806,7 @@ pub struct ListCallLogsMetricsResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Qos {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33689,7 +33815,7 @@ pub struct Qos {
     )]
     pub avg_loss: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33698,7 +33824,7 @@ pub struct Qos {
     )]
     pub bitrate: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33707,7 +33833,7 @@ pub struct Qos {
     )]
     pub jitter: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33716,7 +33842,7 @@ pub struct Qos {
     )]
     pub max_loss: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33725,7 +33851,7 @@ pub struct Qos {
     )]
     pub mos: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33738,7 +33864,7 @@ pub struct Qos {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sending {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -33754,7 +33880,7 @@ pub struct Sending {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CallerQos {
     /**
-     * Quality of Service object that represents the call quality data of the caller.
+    * Quality of Service object that represents the call quality data of the caller.
      */
     #[serde(
         default,
@@ -33763,7 +33889,7 @@ pub struct CallerQos {
     )]
     pub device_private_ip: String,
     /**
-     * Quality of Service object that represents the call quality data of the caller.
+    * Quality of Service object that represents the call quality data of the caller.
      */
     #[serde(
         default,
@@ -33772,7 +33898,7 @@ pub struct CallerQos {
     )]
     pub device_public_ip: String,
     /**
-     * Quality of Service object that represents the call quality data of the caller.
+    * Quality of Service object that represents the call quality data of the caller.
      */
     #[serde(
         default,
@@ -33781,7 +33907,7 @@ pub struct CallerQos {
     )]
     pub receiving: Vec<Sending>,
     /**
-     * Quality of Service object that represents the call quality data of the caller.
+    * Quality of Service object that represents the call quality data of the caller.
      */
     #[serde(
         default,
@@ -33794,7 +33920,7 @@ pub struct CallerQos {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalleeQos {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33803,7 +33929,7 @@ pub struct CalleeQos {
     )]
     pub device_private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33812,7 +33938,7 @@ pub struct CalleeQos {
     )]
     pub device_public_ip: String,
     /**
-     * QoS sent by the caller.
+    * QoS sent by the caller.
      */
     #[serde(
         default,
@@ -33821,7 +33947,7 @@ pub struct CalleeQos {
     )]
     pub receiving: Vec<Sending>,
     /**
-     * QoS sent by the caller.
+    * QoS sent by the caller.
      */
     #[serde(
         default,
@@ -33834,7 +33960,7 @@ pub struct CalleeQos {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCallQoSResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33845,7 +33971,7 @@ pub struct GetCallQoSResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callee_qos: Option<CalleeQos>,
     /**
-     * Quality of Service object that represents the call quality data of the caller.
+    * Quality of Service object that represents the call quality data of the caller.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub caller_qos: Option<CallerQos>,
@@ -33854,7 +33980,7 @@ pub struct GetCallQoSResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateBatchPollsRequest {
     /**
-     * Array of Polls
+    * Array of Polls
      */
     #[serde(
         default,
@@ -33863,7 +33989,7 @@ pub struct CreateBatchPollsRequest {
     )]
     pub questions: Vec<Questions>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33876,7 +34002,7 @@ pub struct CreateBatchPollsRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Polls {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33885,7 +34011,7 @@ pub struct Polls {
     )]
     pub id: String,
     /**
-     * Array of Polls
+    * Array of Polls
      */
     #[serde(
         default,
@@ -33894,12 +34020,12 @@ pub struct Polls {
     )]
     pub questions: Vec<Questions>,
     /**
-     * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
+    * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<MeetingPollCreateResponseStatus>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33922,7 +34048,7 @@ pub struct CreateBatchPollsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ManageE911SignageResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33935,7 +34061,7 @@ pub struct ManageE911SignageResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountBillingInvoicesResponse {
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -33944,7 +34070,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub balance: f64,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -33953,7 +34079,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub due_date: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33962,7 +34088,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub id: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -33971,7 +34097,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub invoice_date: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33980,7 +34106,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub invoice_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -33989,7 +34115,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub status: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -33998,7 +34124,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub target_date: Option<chrono::NaiveDate>,
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -34007,7 +34133,7 @@ pub struct AccountBillingInvoicesResponse {
     )]
     pub tax_amount: f64,
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -34020,7 +34146,7 @@ pub struct AccountBillingInvoicesResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountBillingInvoicesResponseData {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34039,7 +34165,7 @@ pub struct AccountBillingInvoicesResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InvoiceItems {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34048,7 +34174,7 @@ pub struct InvoiceItems {
     )]
     pub charge_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34057,7 +34183,7 @@ pub struct InvoiceItems {
     )]
     pub charge_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34066,7 +34192,7 @@ pub struct InvoiceItems {
     )]
     pub charge_type: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -34075,7 +34201,7 @@ pub struct InvoiceItems {
     )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34084,7 +34210,7 @@ pub struct InvoiceItems {
     )]
     pub quantity: i64,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -34093,7 +34219,7 @@ pub struct InvoiceItems {
     )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -34102,7 +34228,7 @@ pub struct InvoiceItems {
     )]
     pub tax_amount: f64,
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -34115,7 +34241,7 @@ pub struct InvoiceItems {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAccountBillingInvoiceResponse {
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -34124,7 +34250,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub balance: f64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34133,7 +34259,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub currency: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -34142,7 +34268,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub due_date: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34151,7 +34277,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub id: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -34166,7 +34292,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub invoice_items: Vec<InvoiceItems>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34175,7 +34301,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub invoice_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34184,7 +34310,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub status: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -34193,7 +34319,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub target_date: Option<chrono::NaiveDate>,
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -34202,7 +34328,7 @@ pub struct GetAccountBillingInvoiceResponse {
     )]
     pub tax_amount: f64,
     /**
-     * The recording file size.
+    * The recording file size.
      */
     #[serde(
         default,
@@ -34218,7 +34344,8 @@ pub struct GetAccountBillingInvoiceResponse {
  *   * `GOOD`: Thumbs up.
  *   * `NOT GOOD`: Thumbs down.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Quality {
     #[serde(rename = "GOOD")]
     Good,
@@ -34252,7 +34379,7 @@ impl Quality {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ParticipantFeedbackResponseParticipants {
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -34261,7 +34388,7 @@ pub struct ParticipantFeedbackResponseParticipants {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34270,7 +34397,7 @@ pub struct ParticipantFeedbackResponseParticipants {
     )]
     pub email: String,
     /**
-     * Feedback submitted by the participant.
+    * Feedback submitted by the participant.
      *  
      *  \* `GOOD`: Thumbs up.
      *  \* `NOT GOOD`: Thumbs down.
@@ -34278,7 +34405,7 @@ pub struct ParticipantFeedbackResponseParticipants {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub quality: Option<Quality>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34291,7 +34418,7 @@ pub struct ParticipantFeedbackResponseParticipants {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ParticipantFeedbackResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34300,7 +34427,7 @@ pub struct ParticipantFeedbackResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34319,7 +34446,8 @@ pub struct ParticipantFeedbackResponse {
 /**
  * Result of the call: `call_connected` | `recorded` | `no_answer`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Result {
     #[serde(rename = "call_connected")]
     CallConnected,
@@ -34356,7 +34484,7 @@ impl Result {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ForwardTo {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34365,7 +34493,7 @@ pub struct ForwardTo {
     )]
     pub extension_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34374,7 +34502,7 @@ pub struct ForwardTo {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34383,7 +34511,7 @@ pub struct ForwardTo {
     )]
     pub name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34397,7 +34525,7 @@ pub struct ForwardTo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LogDetails {
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -34406,7 +34534,7 @@ pub struct LogDetails {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34415,7 +34543,7 @@ pub struct LogDetails {
     )]
     pub device_private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34424,7 +34552,7 @@ pub struct LogDetails {
     )]
     pub device_public_ip: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34435,7 +34563,7 @@ pub struct LogDetails {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub forward_to: Option<ForwardTo>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34444,7 +34572,7 @@ pub struct LogDetails {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34453,7 +34581,7 @@ pub struct LogDetails {
     )]
     pub path: String,
     /**
-     * Result of the call: `call_connected` | `recorded` | `no_answer`.
+    * Result of the call: `call_connected` | `recorded` | `no_answer`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub result: Option<Result>,
@@ -34464,7 +34592,7 @@ pub struct LogDetails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCallLogDetailsResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34473,7 +34601,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub call_id: String,
     /**
-     * The type of call:
+    * The type of call:
      *  \*`voip` (Voice over IP)
      *  \*`pstn` (Public Switched Telephone Network)
      *  \*`tollfree`
@@ -34483,7 +34611,7 @@ pub struct GetCallLogDetailsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub call_type: Option<CallType>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34492,7 +34620,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub callee_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34501,13 +34629,13 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub callee_number: String,
     /**
-     * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+    * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callee_number_type: Option<serde_json::Value>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34516,7 +34644,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub caller_name: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34525,7 +34653,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub caller_number: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34534,7 +34662,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub caller_number_type: String,
     /**
-     * Start Date.
+    * Start Date.
      */
     #[serde(
         default,
@@ -34543,7 +34671,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34552,7 +34680,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub device_private_ip: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34561,12 +34689,12 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub device_public_ip: String,
     /**
-     * The direction of the call. Values: `inbound` or `outbound`.
+    * The direction of the call. Values: `inbound` or `outbound`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub direction: Option<Direction>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34575,7 +34703,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub duration: i64,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -34583,7 +34711,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub has_recording: bool,
     /**
-     * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+    * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     #[serde(
         default,
@@ -34591,7 +34719,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub has_voicemail: bool,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34600,7 +34728,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub id: String,
     /**
-     * Child records.
+    * Child records.
      */
     #[serde(
         default,
@@ -34609,7 +34737,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub log_details: Vec<LogDetails>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34618,7 +34746,7 @@ pub struct GetCallLogDetailsResponse {
     )]
     pub path: String,
     /**
-     * Result of the call: `call_connected` | `recorded` | `no_answer`.
+    * Result of the call: `call_connected` | `recorded` | `no_answer`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub result: Option<Result>,
@@ -34627,7 +34755,7 @@ pub struct GetCallLogDetailsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddByocNumberRequest {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34636,7 +34764,7 @@ pub struct AddByocNumberRequest {
     )]
     pub carrier: String,
     /**
-     * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
+    * Specify the IP addresses of the Room Connectors that you would like to share with the sub account. Multiple values can be separated by comma. If no value is provided in this field, all the Room Connectors of a master account will be shared with the sub account.
      *  
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
@@ -34648,7 +34776,7 @@ pub struct AddByocNumberRequest {
     )]
     pub phone_numbers: Vec<String>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34657,7 +34785,7 @@ pub struct AddByocNumberRequest {
     )]
     pub sip_group_id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34670,7 +34798,7 @@ pub struct AddByocNumberRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMeetingTemplatesResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34679,7 +34807,7 @@ pub struct ListMeetingTemplatesResponse {
     )]
     pub id: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34688,7 +34816,7 @@ pub struct ListMeetingTemplatesResponse {
     )]
     pub name: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34708,7 +34836,7 @@ pub struct ListMeetingTemplatesResponseData {
     )]
     pub templates: Vec<ListMeetingTemplatesResponse>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34721,7 +34849,8 @@ pub struct ListMeetingTemplatesResponseData {
 /**
  * The query date type for the `from` and `to` parameters.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ListArchivedFilesQueryDateType {
     #[serde(rename = "archive_complete_time")]
     ArchiveCompleteTime,
@@ -34743,11 +34872,12 @@ impl std::fmt::Display for ListArchivedFilesQueryDateType {
     }
 }
 
+
 /// Information about the archived files.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListArchivedFilesResponseMeetingsArchive {
     /**
-     * Information about the archived files.
+    * Information about the archived files.
      */
     #[serde(
         default,
@@ -34756,7 +34886,7 @@ pub struct ListArchivedFilesResponseMeetingsArchive {
     )]
     pub download_url: String,
     /**
-     * Information about the archived files.
+    * Information about the archived files.
      */
     #[serde(
         default,
@@ -34765,7 +34895,7 @@ pub struct ListArchivedFilesResponseMeetingsArchive {
     )]
     pub file_extension: String,
     /**
-     * Information about the archived files.
+    * Information about the archived files.
      */
     #[serde(
         default,
@@ -34774,12 +34904,12 @@ pub struct ListArchivedFilesResponseMeetingsArchive {
     )]
     pub file_size: i64,
     /**
-     * Information about the archived files.
+    * Information about the archived files.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub file_type: Option<FileType>,
     /**
-     * Information about the archived files.
+    * Information about the archived files.
      */
     #[serde(
         default,
@@ -34788,12 +34918,12 @@ pub struct ListArchivedFilesResponseMeetingsArchive {
     )]
     pub id: String,
     /**
-     * Information about the archived files.
+    * Information about the archived files.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recording_type: Option<RecordingType>,
     /**
-     * Information about the archived files.
+    * Information about the archived files.
      */
     #[serde(
         default,
@@ -34812,7 +34942,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub archive_files: Vec<ListArchivedFilesResponseMeetingsArchive>,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34821,7 +34951,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub duration: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34830,7 +34960,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub host_id: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34839,7 +34969,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub id: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34848,7 +34978,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub recording_count: i64,
     /**
-     * Account subscription start date and time.
+    * Account subscription start date and time.
      */
     #[serde(
         default,
@@ -34857,7 +34987,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34866,7 +34996,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub timezone: String,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34875,7 +35005,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub topic: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34884,7 +35014,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub total_size: i64,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34894,7 +35024,7 @@ pub struct ListArchivedFilesResponseMeetings {
     )]
     pub type_: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34907,7 +35037,7 @@ pub struct ListArchivedFilesResponseMeetings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListArchivedFilesResponse {
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34922,7 +35052,7 @@ pub struct ListArchivedFilesResponse {
     )]
     pub meetings: Vec<ListArchivedFilesResponseMeetings>,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,
@@ -34931,7 +35061,7 @@ pub struct ListArchivedFilesResponse {
     )]
     pub next_page_token: String,
     /**
-     * Account seats.
+    * Account seats.
      */
     #[serde(
         default,
@@ -34940,7 +35070,7 @@ pub struct ListArchivedFilesResponse {
     )]
     pub page_size: i64,
     /**
-     * User's first name.
+    * User's first name.
      */
     #[serde(
         default,

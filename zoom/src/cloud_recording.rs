@@ -652,8 +652,8 @@ impl CloudRecording {
      * List [Cloud Recordings](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording) available on an Account.
      *
      * > To access a password protected cloud recording, add an "access_token" parameter to the download URL and provide [JWT](https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-jwt-app) as the value of the "access_token".
-     * <br>
-     * **Prerequisites**:<br>
+     * > <br>
+     * > **Prerequisites**:<br>
      * * A Pro or a higher paid plan with Cloud Recording option enabled.<br>
      * **Scopes**: `recording:read:admin` or `account:read:admin`
      *
@@ -729,8 +729,8 @@ impl CloudRecording {
      * List [Cloud Recordings](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording) available on an Account.
      *
      * > To access a password protected cloud recording, add an "access_token" parameter to the download URL and provide [JWT](https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-jwt-app) as the value of the "access_token".
-     * <br>
-     * **Prerequisites**:<br>
+     * > <br>
+     * > **Prerequisites**:<br>
      * * A Pro or a higher paid plan with Cloud Recording option enabled.<br>
      * **Scopes**: `recording:read:admin` or `account:read:admin`
      *

@@ -22,7 +22,9 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-01/checkouts.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-01/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -44,7 +46,9 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-04/checkouts.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-04/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -66,7 +70,9 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-07/checkouts.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-07/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -88,7 +94,9 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-10/checkouts.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2020-10/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -110,7 +118,9 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2021-01/checkouts.json", None);
+        let url = self
+            .client
+            .url("/admin/api/2021-01/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -132,7 +142,9 @@ impl SalesChannels {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/unstable/checkouts.json", None);
+        let url = self
+            .client
+            .url("/admin/api/unstable/checkouts.json", None);
         self.client
             .post(
                 &url,
@@ -3153,9 +3165,10 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_product_listings_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/product_listings/count.json", None);
+        let url = self.client.url(
+            "/admin/api/2020-01/product_listings/count.json",
+            None,
+        );
         self.client
             .get(
                 &url,
@@ -3366,9 +3379,10 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_product_listings_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/product_listings/count.json", None);
+        let url = self.client.url(
+            "/admin/api/2020-04/product_listings/count.json",
+            None,
+        );
         self.client
             .get(
                 &url,
@@ -3579,9 +3593,10 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_product_listings_count(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/product_listings/count.json", None);
+        let url = self.client.url(
+            "/admin/api/2020-07/product_listings/count.json",
+            None,
+        );
         self.client
             .get(
                 &url,

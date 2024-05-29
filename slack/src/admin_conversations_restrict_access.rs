@@ -19,9 +19,10 @@ impl AdminConversationsRestrictAccess {
      * FROM: <https://api.slack.com/methods/admin.conversations.restrictAccess.addGroup>
      */
     pub async fn add_group(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self
-            .client
-            .url("/admin.conversations.restrictAccess.addGroup", None);
+        let url = self.client.url(
+            "/admin.conversations.restrictAccess.addGroup",
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -80,9 +81,10 @@ impl AdminConversationsRestrictAccess {
      * FROM: <https://api.slack.com/methods/admin.conversations.restrictAccess.removeGroup>
      */
     pub async fn remove_group(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self
-            .client
-            .url("/admin.conversations.restrictAccess.removeGroup", None);
+        let url = self.client.url(
+            "/admin.conversations.restrictAccess.removeGroup",
+            None,
+        );
         self.client
             .post(
                 &url,

@@ -202,7 +202,10 @@ impl Orders {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
-            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/v1/orders/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -229,7 +232,10 @@ impl Orders {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
-            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/v1/orders/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
