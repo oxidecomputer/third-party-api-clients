@@ -1,22 +1,11 @@
-//const X_GITHUB_REQUEST_ID: &str = "x-github-request-id";
-//const X_RATELIMIT_LIMIT: &str = "x-ratelimit-limit";
 const X_RATELIMIT_REMAINING: &str = "x-ratelimit-remaining";
 const X_RATELIMIT_RESET: &str = "x-ratelimit-reset";
 
-#[cfg(not(feature = "httpcache"))]
 type HeaderValues = (Option<u32>, Option<u32>);
-#[cfg(feature = "httpcache")]
-type HeaderValues = (Option<u32>, Option<u32>, Option<Vec<u8>>);
 
 pub fn get_header_values(
     headers: &http::header::HeaderMap<http::header::HeaderValue>,
 ) -> HeaderValues {
-    /*if let Some(value) = headers.get(X_GITHUB_REQUEST_ID) {
-        println!("x-github-request-id: {:?}", value)
-    }
-    if let Some(value) = headers.get(X_RATELIMIT_LIMIT) {
-        println!("x-rate-limit-limit: {:?}", value)
-    }*/
     let remaining = headers
         .get(X_RATELIMIT_REMAINING)
         .and_then(|val| val.to_str().ok())
@@ -25,24 +14,7 @@ pub fn get_header_values(
         .get(X_RATELIMIT_RESET)
         .and_then(|val| val.to_str().ok())
         .and_then(|val| val.parse::<u32>().ok());
-    /*if let Some(value) = remaining {
-        println!("x-rate-limit-remaining: {}", value)
-    }
-    if let Some(value) = reset {
-        println!("x-rate-limit-reset: {}", value)
-    }*/
-    #[cfg(feature = "httpcache")]
-    let etag = headers.get(http::header::ETAG);
-    /*if let Some(value) = etag {
-        println!("etag: {:?}", value)
-    }*/
 
-    #[cfg(feature = "httpcache")]
-    {
-        let etag = etag.map(|etag| etag.as_bytes().to_vec());
-        (remaining, reset, etag)
-    }
-    #[cfg(not(feature = "httpcache"))]
     (remaining, reset)
 }
 
@@ -108,70 +80,6 @@ pub mod date_format {
                         "deserializing {} as NaiveDate failed: {}",
                         s, e
                     ))),
-                }
-            }
-        } else {
-            Ok(None)
-        }
-    }
-}
-
-pub mod date_time_format {
-    use chrono::{DateTime, TimeZone, Utc};
-    use serde::{self, Deserialize, Deserializer};
-
-    // The date format Ramp returns looks like this: "2021-04-24T01:03:21"
-    const FORMAT: &str = "%Y-%m-%dT%H:%M:%S%:z";
-
-    // The signature of a deserialize_with function must follow the pattern:
-    //
-    //    fn deserialize<'de, D>(D) -> Result<T, D::Error>
-    //    where
-    //        D: Deserializer<'de>
-    //
-    // although it may also be generic over the output types T.
-    pub fn deserialize<'de, D>(deserializer: D) -> Result<Option<DateTime<Utc>>, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s: Option<String> = Option::deserialize(deserializer)?;
-        if let Some(mut s) = s {
-            // This is standard.
-            match serde_json::from_str::<DateTime<Utc>>(&format!("\"{}\"", s)) {
-                Ok(t) => Ok(Some(t)),
-                Err(_) => {
-                    // This is google calendar.
-                    match Utc.datetime_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ") {
-                        Ok(t) => Ok(Some(t)),
-                        Err(_) => match Utc.datetime_from_str(&s, FORMAT) {
-                            Ok(t) => Ok(Some(t)),
-                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
-                                Ok(t) => Ok(Some(t)),
-                                Err(_) => match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d") {
-                                    Ok(d) => Ok(Some(DateTime::<Utc>::from_utc(
-                                        chrono::NaiveDateTime::new(
-                                            d,
-                                            chrono::NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
-                                        ),
-                                        Utc,
-                                    ))),
-                                    Err(_) => {
-                                        s = format!("{}+00:00", s);
-                                        match Utc.datetime_from_str(&s, FORMAT) {
-                                            Ok(r) => Ok(Some(r)),
-                                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
-                                                Ok(d) => Ok(Some(d)),
-                                                Err(e) => Err(serde::de::Error::custom(format!(
-                                                    "deserializing {} as DateTime<Utc> failed: {}",
-                                                    s, e
-                                                ))),
-                                            },
-                                        }
-                                    }
-                                },
-                            },
-                        },
-                    }
                 }
             }
         } else {
@@ -624,33 +532,6 @@ pub fn zero_f32(num: &f32) -> bool {
 
 pub fn zero_f64(num: &f64) -> bool {
     *num == 0.0
-}
-
-pub mod google_calendar_date_time_format {
-    use chrono::{DateTime, Utc};
-    use serde::{self, Serializer};
-
-    // Google Calendar doesn't accept actual normal date formats they want this.
-    const FORMAT: &str = "%Y-%m-%dT%H:%M:%S%.3fZ";
-
-    // The signature of a serialize_with function must follow the pattern:
-    //
-    //    fn serialize<S>(&T, S) -> Result<S::Ok, S::Error>
-    //    where
-    //        S: Serializer
-    //
-    // although it may also be generic over the input types T.
-    pub fn serialize<S>(date: &Option<DateTime<Utc>>, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        if date.is_some() {
-            let s = format!("{}", date.unwrap().format(FORMAT));
-            return serializer.serialize_str(&s);
-        }
-
-        serializer.serialize_none()
-    }
 }
 
 struct VectorVisitor<T>(std::marker::PhantomData<fn() -> Vec<T>>);

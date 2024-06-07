@@ -1,9 +1,8 @@
 //! The data types sent to and returned from the API client.
-use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// Simple User
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SimpleUser {
     #[serde(
         default,
@@ -134,7 +133,7 @@ pub struct SimpleUser {
 }
 
 /// The set of permissions for the GitHub app
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Permissions {
     #[serde(
         default,
@@ -169,7 +168,7 @@ pub struct Permissions {
 }
 
 /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitHubApp {
     #[serde(
         default,
@@ -186,7 +185,6 @@ pub struct GitHubApp {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -264,7 +262,6 @@ pub struct GitHubApp {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -276,7 +273,7 @@ pub struct GitHubApp {
 }
 
 /// Basic Error
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BasicError {
     #[serde(
         default,
@@ -305,7 +302,7 @@ pub struct BasicError {
 }
 
 /// Validation Error Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ValidationErrorSimple {
     #[serde(
         default,
@@ -336,7 +333,7 @@ pub struct ValidationErrorSimple {
 /// - `f64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum WebhookConfigInsecureSslOneOf {
     String(String),
@@ -384,7 +381,7 @@ impl std::convert::From<WebhookConfigInsecureSslOneOf> for String {
 }
 
 /// Configuration object of the webhook
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct WebhookConfig {
     #[serde(
         default,
@@ -415,7 +412,7 @@ pub struct WebhookConfig {
 }
 
 /// Delivery made by a webhook, without request and response information.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct HookDeliveryItem {
     #[serde(
         default,
@@ -426,7 +423,6 @@ pub struct HookDeliveryItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub delivered_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -485,7 +481,7 @@ pub struct HookDeliveryItem {
 }
 
 /// Scim Error
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimError {
     #[serde(
         default,
@@ -539,7 +535,7 @@ pub struct ScimError {
 /// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ValueOneOf {
     String(String),
@@ -609,7 +605,7 @@ impl std::convert::From<ValueOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Errors {
     #[serde(
         default,
@@ -646,7 +642,7 @@ pub struct Errors {
 }
 
 /// Validation Error
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ValidationError {
     #[serde(
         default,
@@ -671,10 +667,10 @@ pub struct ValidationError {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Data {}
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Request {
     /**
      * The request headers sent with the webhook delivery.
@@ -688,7 +684,7 @@ pub struct Request {
     pub payload: Option<Data>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Response {
     /**
      * The request headers sent with the webhook delivery.
@@ -704,7 +700,7 @@ pub struct Response {
 }
 
 /// Delivery made by a webhook.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct HookDelivery {
     #[serde(
         default,
@@ -715,7 +711,6 @@ pub struct HookDelivery {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub delivered_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -776,7 +771,7 @@ pub struct HookDelivery {
 }
 
 /// An enterprise account
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Enterprise {
     #[serde(
         default,
@@ -787,7 +782,6 @@ pub struct Enterprise {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -829,7 +823,6 @@ pub struct Enterprise {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -846,7 +839,7 @@ pub struct Enterprise {
 /**
  * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Pages {
     #[serde(rename = "read")]
     Read,
@@ -884,7 +877,7 @@ impl Pages {
 /**
  * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum RepositoryProjects {
     #[serde(rename = "admin")]
     Admin,
@@ -925,7 +918,7 @@ impl RepositoryProjects {
 /**
  * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrganizationPlan {
     #[serde(rename = "read")]
     Read,
@@ -960,7 +953,7 @@ impl OrganizationPlan {
 /**
  * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Workflows {
     #[serde(rename = "write")]
     Write,
@@ -993,7 +986,7 @@ impl Workflows {
 }
 
 /// The permissions granted to the user-to-server access token.
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppPermissions {
     /**
      * The permissions granted to the user-to-server access token.
@@ -1156,7 +1149,7 @@ pub struct AppPermissions {
 ///
 /// - `SimpleUser`
 /// - `Enterprise`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AccountAnyOf {
     /**
      * Simple User
@@ -1173,7 +1166,7 @@ pub struct AccountAnyOf {
 /**
  * Describe whether all repositories have been selected or there's a selection involved
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum RepositorySelection {
     #[serde(rename = "all")]
     All,
@@ -1209,7 +1202,7 @@ impl RepositorySelection {
 }
 
 /// Installation
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Installation {
     #[serde(
         default,
@@ -1239,7 +1232,6 @@ pub struct Installation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1304,7 +1296,6 @@ pub struct Installation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1324,13 +1315,12 @@ pub struct Installation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
 /// License Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LicenseSimple {
     /**
      * License Simple
@@ -1373,7 +1363,7 @@ pub struct LicenseSimple {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RepositoryPermissions {
     #[serde(
         default,
@@ -1402,7 +1392,7 @@ pub struct RepositoryPermissions {
     pub triage: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Users {
     #[serde(
         default,
@@ -1514,7 +1504,7 @@ pub struct Users {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RepositoryTemplatePermissions {
     #[serde(
         default,
@@ -1533,7 +1523,7 @@ pub struct RepositoryTemplatePermissions {
     pub push: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TemplateRepository {
     #[serde(
         default,
@@ -2001,7 +1991,7 @@ pub struct TemplateRepository {
 }
 
 /// A git repository
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Repository {
     /**
      * A git repository
@@ -2109,7 +2099,6 @@ pub struct Repository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -2398,7 +2387,6 @@ pub struct Repository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -2508,7 +2496,6 @@ pub struct Repository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -2538,7 +2525,7 @@ pub struct Repository {
 }
 
 /// Authentication token for a GitHub App installed on a user or org.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct InstallationToken {
     #[serde(
         default,
@@ -2596,7 +2583,7 @@ pub struct InstallationToken {
     pub token: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct App {
     #[serde(
         default,
@@ -2619,13 +2606,12 @@ pub struct App {
 }
 
 /// The authorization associated with an OAuth Access.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ApplicationGrant {
     pub app: App,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -2646,7 +2632,6 @@ pub struct ApplicationGrant {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -2659,7 +2644,7 @@ pub struct ApplicationGrant {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScopedInstallation {
     /**
      * Simple User
@@ -2701,13 +2686,12 @@ pub struct ScopedInstallation {
 }
 
 /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Authorization {
     pub app: App,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -2766,7 +2750,6 @@ pub struct Authorization {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -2780,7 +2763,7 @@ pub struct Authorization {
 }
 
 /// Code Of Conduct
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeOfConduct {
     #[serde(
         default,
@@ -2817,7 +2800,7 @@ pub struct CodeOfConduct {
 /**
  * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum EnabledRepositories {
     #[serde(rename = "all")]
     All,
@@ -2858,7 +2841,7 @@ impl EnabledRepositories {
 /**
  * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum AllowedActions {
     #[serde(rename = "all")]
     All,
@@ -2896,7 +2879,7 @@ impl AllowedActions {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsEnterprisePermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -2922,7 +2905,7 @@ pub struct ActionsEnterprisePermissions {
 }
 
 /// Organization Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrganizationSimple {
     #[serde(
         default,
@@ -2998,7 +2981,7 @@ pub struct OrganizationSimple {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SelectedActions {
     #[serde(
         default,
@@ -3021,7 +3004,7 @@ pub struct SelectedActions {
     pub verified_allowed: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RunnerGroupsEnterprise {
     #[serde(
         default,
@@ -3068,7 +3051,7 @@ pub struct RunnerGroupsEnterprise {
 /**
  * The type of label. Read-only labels are applied automatically when the runner is configured.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Type {
     #[serde(rename = "custom")]
     Custom,
@@ -3103,7 +3086,7 @@ impl Type {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Labels {
     #[serde(
         default,
@@ -3125,7 +3108,7 @@ pub struct Labels {
 }
 
 /// A self hosted runner
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Runner {
     #[serde(
         default,
@@ -3165,7 +3148,7 @@ pub struct Runner {
 }
 
 /// Runner Application
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RunnerApplication {
     #[serde(
         default,
@@ -3207,12 +3190,11 @@ pub struct RunnerApplication {
 }
 
 /// Authentication Token
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AuthenticationToken {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -3248,7 +3230,7 @@ pub struct AuthenticationToken {
     pub token: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActorLocation {
     #[serde(
         default,
@@ -3258,7 +3240,7 @@ pub struct ActorLocation {
     pub country_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AuditLogEvent {
     #[serde(
         default,
@@ -3503,7 +3485,7 @@ pub struct AuditLogEvent {
     pub visibility: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MinutesUsedBreakdown {
     #[serde(
         default,
@@ -3528,7 +3510,7 @@ pub struct MinutesUsedBreakdown {
     pub windows: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsBillingUsage {
     #[serde(
         default,
@@ -3551,7 +3533,7 @@ pub struct ActionsBillingUsage {
     pub total_paid_minutes_used: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PackagesBillingUsage {
     #[serde(
         default,
@@ -3573,7 +3555,7 @@ pub struct PackagesBillingUsage {
     pub total_paid_gigabytes_bandwidth_used: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CombinedBillingUsage {
     #[serde(
         default,
@@ -3596,7 +3578,7 @@ pub struct CombinedBillingUsage {
 }
 
 /// Actor
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct Actor {
     #[serde(
         default,
@@ -3637,7 +3619,7 @@ pub struct Actor {
 }
 
 /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Label {
     #[serde(
         default,
@@ -3685,7 +3667,7 @@ pub struct Label {
 /**
  * The state of the milestone.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum State {
     #[serde(rename = "closed")]
     Closed,
@@ -3713,12 +3695,11 @@ impl Default for State {
 }
 
 /// A collection of related issues and pull requests.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Milestone {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -3730,7 +3711,6 @@ pub struct Milestone {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -3744,7 +3724,6 @@ pub struct Milestone {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub due_on: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -3797,7 +3776,6 @@ pub struct Milestone {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -3811,7 +3789,7 @@ pub struct Milestone {
 /**
  * How the author is associated with the repository.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum AuthorAssociation {
     #[serde(rename = "COLLABORATOR")]
     Collaborator,
@@ -3864,7 +3842,7 @@ impl AuthorAssociation {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequest {
     #[serde(
         default,
@@ -3881,7 +3859,6 @@ pub struct PullRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -3899,7 +3876,7 @@ pub struct PullRequest {
 }
 
 /// Issue Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueSimple {
     #[serde(
         default,
@@ -3940,7 +3917,6 @@ pub struct IssueSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -3958,7 +3934,6 @@ pub struct IssueSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4052,7 +4027,6 @@ pub struct IssueSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4065,7 +4039,7 @@ pub struct IssueSimple {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReactionRollup {
     #[serde(
         default,
@@ -4132,7 +4106,7 @@ pub struct ReactionRollup {
 }
 
 /// Comments provide a way for people to collaborate on an issue.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueComment {
     /**
      * How the author is associated with the repository.
@@ -4159,7 +4133,6 @@ pub struct IssueComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4196,7 +4169,6 @@ pub struct IssueComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4209,7 +4181,7 @@ pub struct IssueComment {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct Repo {
     #[serde(
         default,
@@ -4231,7 +4203,7 @@ pub struct Repo {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EventPayloadPages {
     #[serde(
         default,
@@ -4271,7 +4243,7 @@ pub struct EventPayloadPages {
     pub title: String,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct Payload {
     #[serde(
         default,
@@ -4298,7 +4270,7 @@ pub struct Payload {
 }
 
 /// Event
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct Event {
     /**
      * Actor
@@ -4307,7 +4279,6 @@ pub struct Event {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4339,7 +4310,7 @@ pub struct Event {
 }
 
 /// Hypermedia Link with Type
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LinkWithType {
     #[serde(
         default,
@@ -4356,7 +4327,7 @@ pub struct LinkWithType {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Links {
     /**
      * Hypermedia Link with Type
@@ -4400,7 +4371,7 @@ pub struct Links {
 }
 
 /// Feed
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Feed {
     #[serde(rename = "_links")]
     pub links: Links,
@@ -4457,7 +4428,7 @@ pub struct Feed {
     pub user_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Files {
     #[serde(
         default,
@@ -4493,7 +4464,7 @@ pub struct Files {
 }
 
 /// Base Gist
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BaseGist {
     #[serde(
         default,
@@ -4516,7 +4487,6 @@ pub struct BaseGist {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4598,7 +4568,6 @@ pub struct BaseGist {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4611,7 +4580,7 @@ pub struct BaseGist {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Plan {
     #[serde(
         default,
@@ -4640,7 +4609,7 @@ pub struct Plan {
 }
 
 /// Public User
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PublicUser {
     #[serde(
         default,
@@ -4678,7 +4647,6 @@ pub struct PublicUser {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -4855,7 +4823,6 @@ pub struct PublicUser {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -4883,7 +4850,6 @@ pub struct PublicUser {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4894,7 +4860,7 @@ pub struct PublicUser {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Stats {
     #[serde(
         default,
@@ -4917,7 +4883,7 @@ pub struct Stats {
 }
 
 /// Gist History
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GistHistory {
     /**
      * Gist History
@@ -4930,7 +4896,6 @@ pub struct GistHistory {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub committed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -4955,12 +4920,11 @@ pub struct GistHistory {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Forks {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4972,7 +4936,6 @@ pub struct Forks {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -4989,7 +4952,7 @@ pub struct Forks {
 }
 
 /// Gist
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Gist {
     #[serde(
         default,
@@ -5012,7 +4975,6 @@ pub struct Gist {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -5094,7 +5056,6 @@ pub struct Gist {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -5107,7 +5068,7 @@ pub struct Gist {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FilesAdditionalProperties {
     #[serde(
         default,
@@ -5154,7 +5115,7 @@ pub struct FilesAdditionalProperties {
 }
 
 /// Gist Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GistSimple {
     /**
      * Gist Simple
@@ -5286,7 +5247,7 @@ pub struct GistSimple {
 }
 
 /// A comment made to a gist.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GistComment {
     /**
      * How the author is associated with the repository.
@@ -5301,7 +5262,6 @@ pub struct GistComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -5319,7 +5279,6 @@ pub struct GistComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -5333,13 +5292,12 @@ pub struct GistComment {
 }
 
 /// Gist Commit
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GistCommit {
     pub change_status: Stats,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub committed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -5359,7 +5317,7 @@ pub struct GistCommit {
 }
 
 /// Gitignore Template
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitignoreTemplate {
     #[serde(
         default,
@@ -5375,7 +5333,7 @@ pub struct GitignoreTemplate {
     pub source: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LabelsData {
     #[serde(
         default,
@@ -5426,7 +5384,7 @@ pub struct LabelsData {
 /// - `LabelsData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum LabelsOneOf {
     String(String),
@@ -5462,7 +5420,7 @@ impl std::convert::From<LabelsOneOf> for String {
 }
 
 /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Issue {
     #[serde(
         default,
@@ -5503,7 +5461,6 @@ pub struct Issue {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -5523,7 +5480,6 @@ pub struct Issue {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -5625,7 +5581,6 @@ pub struct Issue {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -5639,7 +5594,7 @@ pub struct Issue {
 }
 
 /// License
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LicenseData {
     #[serde(
         default,
@@ -5730,7 +5685,7 @@ pub struct LicenseData {
 }
 
 /// Marketplace Listing Plan
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MarketplaceListingPlan {
     #[serde(
         default,
@@ -5814,7 +5769,7 @@ pub struct MarketplaceListingPlan {
     pub yearly_price_in_cents: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MarketplacePendingChange {
     #[serde(
         default,
@@ -5843,7 +5798,7 @@ pub struct MarketplacePendingChange {
     pub unit_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MarketplacePurchase {
     #[serde(
         default,
@@ -5893,7 +5848,7 @@ pub struct MarketplacePurchase {
 }
 
 /// Marketplace Purchase
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MarketplacePurchaseData {
     #[serde(
         default,
@@ -5937,7 +5892,7 @@ pub struct MarketplacePurchaseData {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SshKeyFingerprints {
     #[serde(
         default,
@@ -5956,7 +5911,7 @@ pub struct SshKeyFingerprints {
 }
 
 /// Api Overview
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ApiOverview {
     /**
      * Api Overview
@@ -6051,7 +6006,7 @@ pub struct ApiOverview {
     pub web: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MinimalRepositoryPermissions {
     #[serde(
         default,
@@ -6080,7 +6035,7 @@ pub struct MinimalRepositoryPermissions {
     pub triage: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MinimalRepositoryLicense {
     #[serde(
         default,
@@ -6115,7 +6070,7 @@ pub struct MinimalRepositoryLicense {
 }
 
 /// Minimal Repository
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MinimalRepository {
     #[serde(
         default,
@@ -6202,7 +6157,6 @@ pub struct MinimalRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -6516,7 +6470,6 @@ pub struct MinimalRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -6632,7 +6585,6 @@ pub struct MinimalRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -6667,7 +6619,7 @@ pub struct MinimalRepository {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Subject {
     #[serde(
         default,
@@ -6697,7 +6649,7 @@ pub struct Subject {
 }
 
 /// Thread
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Thread {
     #[serde(
         default,
@@ -6748,12 +6700,11 @@ pub struct Thread {
 }
 
 /// Thread Subscription
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ThreadSubscription {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -6798,7 +6749,7 @@ pub struct ThreadSubscription {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrganizationFullPlan {
     #[serde(
         default,
@@ -6833,7 +6784,7 @@ pub struct OrganizationFullPlan {
 }
 
 /// Organization Full
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrganizationFull {
     #[serde(
         default,
@@ -6874,7 +6825,6 @@ pub struct OrganizationFull {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -7136,7 +7086,6 @@ pub struct OrganizationFull {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -7147,7 +7096,7 @@ pub struct OrganizationFull {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsOrganizationPermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -7172,7 +7121,7 @@ pub struct ActionsOrganizationPermissions {
     pub selected_repositories_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RunnerGroupsOrg {
     #[serde(
         default,
@@ -7229,7 +7178,7 @@ pub struct RunnerGroupsOrg {
 /**
  * Visibility of a secret
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Visibility {
     #[serde(rename = "all")]
     All,
@@ -7268,12 +7217,11 @@ impl Visibility {
 }
 
 /// Secrets for GitHub Actions for an organization.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrganizationActionsSecret {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -7294,7 +7242,6 @@ pub struct OrganizationActionsSecret {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -7305,7 +7252,7 @@ pub struct OrganizationActionsSecret {
 }
 
 /// The public key used for setting Actions Secrets.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsPublicKey {
     #[serde(
         default,
@@ -7349,7 +7296,7 @@ pub struct ActionsPublicKey {
 }
 
 /// Credential Authorization
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CredentialAuthorization {
     /**
      * Credential Authorization
@@ -7378,13 +7325,11 @@ pub struct CredentialAuthorization {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub credential_accessed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub credential_authorized_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -7429,7 +7374,7 @@ pub struct CredentialAuthorization {
 }
 
 /// Organization Invitation
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrganizationInvitation {
     #[serde(
         default,
@@ -7498,7 +7443,7 @@ pub struct OrganizationInvitation {
     pub team_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Config {
     #[serde(
         default,
@@ -7527,7 +7472,7 @@ pub struct Config {
 }
 
 /// Org Hook
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgHook {
     #[serde(
         default,
@@ -7538,7 +7483,6 @@ pub struct OrgHook {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -7587,7 +7531,6 @@ pub struct OrgHook {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -7601,7 +7544,7 @@ pub struct OrgHook {
 /**
  * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum InteractionGroup {
     #[serde(rename = "collaborators_only")]
     CollaboratorsOnly,
@@ -7640,12 +7583,11 @@ impl InteractionGroup {
 }
 
 /// Interaction limit settings.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct InteractionLimits {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -7663,7 +7605,7 @@ pub struct InteractionLimits {
 /**
  * The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum InteractionExpiry {
     #[serde(rename = "one_day")]
     OneDay,
@@ -7708,7 +7650,7 @@ impl InteractionExpiry {
 }
 
 /// Limit interactions to a specific type of user for a specified duration
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct InteractionLimit {
     /**
      * Limit interactions to a specific type of user for a specified duration
@@ -7722,7 +7664,7 @@ pub struct InteractionLimit {
 }
 
 /// Groups of organization members that gives permissions on specified repositories.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamSimple {
     #[serde(
         default,
@@ -7798,7 +7740,7 @@ pub struct TeamSimple {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamPermissions {
     #[serde(
         default,
@@ -7828,7 +7770,7 @@ pub struct TeamPermissions {
 }
 
 /// Groups of organization members that gives permissions on specified repositories.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Team {
     #[serde(
         default,
@@ -7908,7 +7850,7 @@ pub struct Team {
 /**
  * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrgMembershipState {
     #[serde(rename = "active")]
     Active,
@@ -7946,7 +7888,7 @@ impl OrgMembershipState {
 /**
  * The user's membership type in the organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Role {
     #[serde(rename = "admin")]
     Admin,
@@ -7984,7 +7926,7 @@ impl Role {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgMembershipPermissions {
     #[serde(
         default,
@@ -7994,7 +7936,7 @@ pub struct OrgMembershipPermissions {
 }
 
 /// Org Membership
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgMembership {
     /**
      * Organization Simple
@@ -8032,7 +7974,7 @@ pub struct OrgMembership {
 }
 
 /// A migration.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Migration {
     /**
      * A migration.
@@ -8046,7 +7988,6 @@ pub struct Migration {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -8103,7 +8044,6 @@ pub struct Migration {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8114,7 +8054,7 @@ pub struct Migration {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PackageType {
     #[serde(rename = "container")]
     Container,
@@ -8161,7 +8101,7 @@ impl PackageType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PackageVisibility {
     #[serde(rename = "private")]
     Private,
@@ -8197,12 +8137,11 @@ impl PackageVisibility {
 }
 
 /// A software package
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Package {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8232,7 +8171,6 @@ pub struct Package {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8251,7 +8189,7 @@ pub struct Package {
     pub visibility: PackageVisibility,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Container {
     /**
      * The list of events for the GitHub app
@@ -8264,7 +8202,7 @@ pub struct Container {
     pub tags: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Docker {
     #[serde(
         default,
@@ -8274,7 +8212,7 @@ pub struct Docker {
     pub tag: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Metadata {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub container: Option<Container>,
@@ -8285,12 +8223,11 @@ pub struct Metadata {
 }
 
 /// A version of a software package
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PackageVersion {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -8299,7 +8236,6 @@ pub struct PackageVersion {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub deleted_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8346,7 +8282,6 @@ pub struct PackageVersion {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8360,7 +8295,7 @@ pub struct PackageVersion {
 /**
  * The baseline permission that all organization members have on this project. Only present if owner is an organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrganizationPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -8402,7 +8337,7 @@ impl OrganizationPermission {
 }
 
 /// Projects are a way to organize columns and cards of work.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Project {
     #[serde(
         default,
@@ -8419,7 +8354,6 @@ pub struct Project {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -8482,7 +8416,6 @@ pub struct Project {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8493,7 +8426,7 @@ pub struct Project {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Groups {
     #[serde(
         default,
@@ -8528,7 +8461,7 @@ pub struct Groups {
 }
 
 /// External Groups to be mapped to a team for membership
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GroupMapping {
     /**
      * External Groups to be mapped to a team for membership
@@ -8544,7 +8477,7 @@ pub struct GroupMapping {
 /**
  * The level of privacy this team should have
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Privacy {
     #[serde(rename = "closed")]
     Closed,
@@ -8580,12 +8513,11 @@ impl Privacy {
 }
 
 /// Groups of organization members that gives permissions on specified repositories.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FullTeam {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8674,7 +8606,6 @@ pub struct FullTeam {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8686,7 +8617,7 @@ pub struct FullTeam {
 }
 
 /// A team discussion is a persistent record of a free-form conversation within a team.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamDiscussion {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<SimpleUser>,
@@ -8723,7 +8654,6 @@ pub struct TeamDiscussion {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8735,7 +8665,6 @@ pub struct TeamDiscussion {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_edited_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8780,7 +8709,6 @@ pub struct TeamDiscussion {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8792,7 +8720,7 @@ pub struct TeamDiscussion {
 }
 
 /// A reply to a discussion within a team.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamDiscussionComment {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<SimpleUser>,
@@ -8817,7 +8745,6 @@ pub struct TeamDiscussionComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8835,7 +8762,6 @@ pub struct TeamDiscussionComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_edited_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8858,7 +8784,6 @@ pub struct TeamDiscussionComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8872,7 +8797,7 @@ pub struct TeamDiscussionComment {
 /**
  * The reaction to use
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Content {
     #[serde(rename = "+1")]
     PlusOne,
@@ -8926,7 +8851,7 @@ impl Content {
 }
 
 /// Reactions to conversations provide a way to help people express their feelings more simply and effectively.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Reaction {
     /**
      * The reaction to use
@@ -8936,7 +8861,6 @@ pub struct Reaction {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -8958,7 +8882,7 @@ pub struct Reaction {
 /**
  * The role of the user in the team.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum TeamMembershipRole {
     #[serde(rename = "maintainer")]
     Maintainer,
@@ -8986,7 +8910,7 @@ impl Default for TeamMembershipRole {
 }
 
 /// Team Membership
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamMembership {
     /**
      * The role of the user in the team.
@@ -9006,7 +8930,7 @@ pub struct TeamMembership {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamProjectPermissions {
     #[serde(
         default,
@@ -9026,7 +8950,7 @@ pub struct TeamProjectPermissions {
 }
 
 /// A team's access to a project.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamProject {
     #[serde(
         default,
@@ -9123,7 +9047,7 @@ pub struct TeamProject {
 }
 
 /// A team's access to a repository.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamRepository {
     /**
      * A team's access to a repository.
@@ -9231,7 +9155,6 @@ pub struct TeamRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -9515,7 +9438,6 @@ pub struct TeamRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -9622,7 +9544,6 @@ pub struct TeamRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -9652,7 +9573,7 @@ pub struct TeamRepository {
 }
 
 /// Project cards represent a scope of work.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectCard {
     /**
      * Project cards represent a scope of work.
@@ -9686,7 +9607,6 @@ pub struct ProjectCard {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -9724,7 +9644,6 @@ pub struct ProjectCard {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -9736,7 +9655,7 @@ pub struct ProjectCard {
 }
 
 /// Project columns contain cards of work.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectColumn {
     #[serde(
         default,
@@ -9747,7 +9666,6 @@ pub struct ProjectColumn {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -9777,7 +9695,6 @@ pub struct ProjectColumn {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -9789,7 +9706,7 @@ pub struct ProjectColumn {
 }
 
 /// Repository Collaborator Permission
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RepositoryCollaboratorPermission {
     #[serde(
         default,
@@ -9801,7 +9718,7 @@ pub struct RepositoryCollaboratorPermission {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RateLimit {
     #[serde(
         default,
@@ -9829,7 +9746,7 @@ pub struct RateLimit {
     pub used: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Resources {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_scanning_upload: Option<RateLimit>,
@@ -9844,14 +9761,14 @@ pub struct Resources {
 }
 
 /// Rate Limit Overview
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RateLimitOverview {
     pub rate: RateLimit,
     pub resources: Resources,
 }
 
 /// Code of Conduct Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeOfConductSimple {
     #[serde(
         default,
@@ -9879,7 +9796,7 @@ pub struct CodeOfConductSimple {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FullRepositoryPermissions {
     #[serde(
         default,
@@ -9898,7 +9815,7 @@ pub struct FullRepositoryPermissions {
     pub push: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Status {
     #[serde(rename = "disabled")]
     Disabled,
@@ -9933,13 +9850,13 @@ impl Status {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SecretScanning {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SecurityAnalysis {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub advanced_security: Option<SecretScanning>,
@@ -9948,7 +9865,7 @@ pub struct SecurityAnalysis {
 }
 
 /// Full Repository
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FullRepository {
     /**
      * Full Repository
@@ -10069,7 +9986,6 @@ pub struct FullRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10360,7 +10276,6 @@ pub struct FullRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10471,7 +10386,6 @@ pub struct FullRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10501,7 +10415,7 @@ pub struct FullRepository {
 }
 
 /// An artifact
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Artifact {
     #[serde(
         default,
@@ -10512,7 +10426,6 @@ pub struct Artifact {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10523,7 +10436,6 @@ pub struct Artifact {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10553,7 +10465,6 @@ pub struct Artifact {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10567,7 +10478,7 @@ pub struct Artifact {
 /**
  * The phase of the lifecycle that the job is currently in.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum JobStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -10605,12 +10516,11 @@ impl JobStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Steps {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10634,7 +10544,6 @@ pub struct Steps {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -10645,7 +10554,7 @@ pub struct Steps {
 }
 
 /// Information of a job execution in a workflow run
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Job {
     #[serde(
         default,
@@ -10656,7 +10565,6 @@ pub struct Job {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10710,7 +10618,6 @@ pub struct Job {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -10735,7 +10642,7 @@ pub struct Job {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsRepositoryPermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -10755,7 +10662,7 @@ pub struct ActionsRepositoryPermissions {
     pub selected_actions_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestMinimalHeadRepo {
     #[serde(
         default,
@@ -10777,7 +10684,7 @@ pub struct PullRequestMinimalHeadRepo {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Head {
     #[serde(
         default,
@@ -10796,7 +10703,7 @@ pub struct Head {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestMinimal {
     pub base: Head,
     pub head: Head,
@@ -10820,7 +10727,7 @@ pub struct PullRequestMinimal {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Author {
     #[serde(
         default,
@@ -10837,7 +10744,7 @@ pub struct Author {
 }
 
 /// Simple Commit
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SimpleCommit {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<Author>,
@@ -10858,7 +10765,6 @@ pub struct SimpleCommit {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -10870,7 +10776,7 @@ pub struct SimpleCommit {
 }
 
 /// An invocation of a workflow
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct WorkflowRun {
     #[serde(
         default,
@@ -10914,7 +10820,6 @@ pub struct WorkflowRun {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11017,7 +10922,6 @@ pub struct WorkflowRun {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11040,12 +10944,11 @@ pub struct WorkflowRun {
     pub workflow_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Environments {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11075,7 +10978,6 @@ pub struct Environments {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11089,7 +10991,7 @@ pub struct Environments {
 /**
  * Whether deployment to the environment(s) was approved or rejected
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum EnvironmentApprovalState {
     #[serde(rename = "approved")]
     Approved,
@@ -11125,7 +11027,7 @@ impl EnvironmentApprovalState {
 }
 
 /// An entry in the reviews log for environment deployments
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnvironmentApproval {
     #[serde(
         default,
@@ -11157,7 +11059,7 @@ pub struct EnvironmentApproval {
 /**
  * The type of reviewer. Must be one of: `User` or `Team`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum DeploymentReviewerType {
     #[serde(rename = "Team")]
     Team,
@@ -11192,7 +11094,7 @@ impl DeploymentReviewerType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Environment {
     #[serde(
         default,
@@ -11230,7 +11132,7 @@ pub struct Environment {
 ///
 /// - `SimpleUser`
 /// - `Team`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReviewerAnyOf {
     /**
      * Simple User
@@ -11244,7 +11146,7 @@ pub struct ReviewerAnyOf {
     pub team: Team,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Reviewers {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reviewer: Option<ReviewerAnyOf>,
@@ -11256,7 +11158,7 @@ pub struct Reviewers {
 }
 
 /// Details of a deployment that is waiting for protection rules to pass
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PendingDeployment {
     #[serde(
         default,
@@ -11282,7 +11184,6 @@ pub struct PendingDeployment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub wait_timer_started_at: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -11293,7 +11194,7 @@ pub struct PendingDeployment {
 /// - `Data`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum PayloadOneOf {
     String(String),
@@ -11329,12 +11230,11 @@ impl std::convert::From<PayloadOneOf> for String {
 }
 
 /// A request for a specific ref(branch,sha,tag) to be deployed
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Deployment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -11422,7 +11322,6 @@ pub struct Deployment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11433,7 +11332,7 @@ pub struct Deployment {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Macos {
     #[serde(
         default,
@@ -11449,7 +11348,7 @@ pub struct Macos {
     pub total_ms: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Billable {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "MACOS")]
     pub macos: Option<Macos>,
@@ -11460,7 +11359,7 @@ pub struct Billable {
 }
 
 /// Workflow Run Usage
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct WorkflowRunUsage {
     pub billable: Billable,
     /**
@@ -11475,12 +11374,11 @@ pub struct WorkflowRunUsage {
 }
 
 /// Set secrets for GitHub Actions.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsSecret {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11492,12 +11390,11 @@ pub struct ActionsSecret {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum WorkflowState {
     #[serde(rename = "active")]
     Active,
@@ -11542,7 +11439,7 @@ impl WorkflowState {
 }
 
 /// A GitHub Actions workflow
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Workflow {
     #[serde(
         default,
@@ -11553,7 +11450,6 @@ pub struct Workflow {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -11562,7 +11458,6 @@ pub struct Workflow {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub deleted_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11600,7 +11495,6 @@ pub struct Workflow {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11611,7 +11505,7 @@ pub struct Workflow {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Windows {
     #[serde(
         default,
@@ -11621,7 +11515,7 @@ pub struct Windows {
     pub total_ms: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct WorkflowUsageBillable {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "MACOS")]
     pub macos: Option<Windows>,
@@ -11632,13 +11526,13 @@ pub struct WorkflowUsageBillable {
 }
 
 /// Workflow Usage
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct WorkflowUsage {
     pub billable: WorkflowUsageBillable,
 }
 
 /// An autolink reference.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Autolink {
     #[serde(
         default,
@@ -11660,7 +11554,7 @@ pub struct Autolink {
     pub url_template: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnforceAdmins {
     #[serde(
         default,
@@ -11675,7 +11569,7 @@ pub struct EnforceAdmins {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct DismissalRestrictions {
     /**
      * The list of teams with review dismissal access.
@@ -11713,7 +11607,7 @@ pub struct DismissalRestrictions {
 }
 
 /// Protected Branch Pull Request Review
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectedBranchPullRequestReview {
     #[serde(
         default,
@@ -11750,7 +11644,7 @@ pub struct ProtectedBranchPullRequestReview {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Teams {
     #[serde(
         default,
@@ -11826,7 +11720,7 @@ pub struct Teams {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BranchRestrictionPolicyAppsOwner {
     #[serde(
         default,
@@ -11968,7 +11862,7 @@ pub struct BranchRestrictionPolicyAppsOwner {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BranchRestrictionPolicyAppsPermissions {
     #[serde(
         default,
@@ -11996,7 +11890,7 @@ pub struct BranchRestrictionPolicyAppsPermissions {
     pub single_file: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Apps {
     #[serde(
         default,
@@ -12068,7 +11962,7 @@ pub struct Apps {
 }
 
 /// Branch Restriction Policy
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BranchRestrictionPolicy {
     #[serde(
         default,
@@ -12114,7 +12008,7 @@ pub struct BranchRestrictionPolicy {
     pub users_url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RequiredStatusChecks {
     /**
      * The list of events for the GitHub app
@@ -12150,7 +12044,7 @@ pub struct RequiredStatusChecks {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AllowDeletions {
     #[serde(
         default,
@@ -12160,7 +12054,7 @@ pub struct AllowDeletions {
 }
 
 /// Branch Protection
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BranchProtection {
     /**
      * Branch Protection
@@ -12235,7 +12129,7 @@ pub struct BranchProtection {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Tree {
     #[serde(
         default,
@@ -12252,7 +12146,7 @@ pub struct Tree {
 }
 
 /// Short Branch
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ShortBranch {
     pub commit: Tree,
     #[serde(
@@ -12282,7 +12176,7 @@ pub struct ShortBranch {
     pub protection_url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Tagger {
     #[serde(
         default,
@@ -12304,7 +12198,7 @@ pub struct Tagger {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Verification {
     #[serde(
         default,
@@ -12331,7 +12225,7 @@ pub struct Verification {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitData {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<Tagger>,
@@ -12360,7 +12254,7 @@ pub struct CommitData {
     pub verification: Option<Verification>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Parents {
     #[serde(
         default,
@@ -12382,7 +12276,7 @@ pub struct Parents {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitFiles {
     #[serde(
         default,
@@ -12453,7 +12347,7 @@ pub struct CommitFiles {
 }
 
 /// Commit
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitDataType {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<SimpleUser>,
@@ -12512,7 +12406,7 @@ pub struct CommitDataType {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BranchWithProtectionLinks {
     #[serde(
         default,
@@ -12530,7 +12424,7 @@ pub struct BranchWithProtectionLinks {
 }
 
 /// Branch With Protection
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BranchWithProtection {
     #[serde(rename = "_links")]
     pub links: BranchWithProtectionLinks,
@@ -12577,7 +12471,7 @@ pub struct BranchWithProtection {
 }
 
 /// Status Check Policy
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct StatusCheckPolicy {
     /**
      * The list of events for the GitHub app
@@ -12607,7 +12501,7 @@ pub struct StatusCheckPolicy {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
     /**
      * The list of teams with review dismissal access.
@@ -12644,7 +12538,7 @@ pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
     pub users_url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RequiredPullRequestReviews {
     #[serde(
         default,
@@ -12673,7 +12567,7 @@ pub struct RequiredPullRequestReviews {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectedBranchRequiredLinearHistory {
     #[serde(
         default,
@@ -12683,7 +12577,7 @@ pub struct ProtectedBranchRequiredLinearHistory {
 }
 
 /// Branch protections protect branches
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectedBranch {
     /**
      * Branch protections protect branches
@@ -12739,12 +12633,11 @@ pub struct ProtectedBranch {
 }
 
 /// A deployment created as the result of an Actions check run from a workflow that references an environment
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct DeploymentSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -12816,7 +12709,6 @@ pub struct DeploymentSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -12827,7 +12719,7 @@ pub struct DeploymentSimple {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Conclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -12877,7 +12769,7 @@ impl Conclusion {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Output {
     #[serde(
         default,
@@ -12911,7 +12803,7 @@ pub struct Output {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CheckSuite {
     #[serde(
         default,
@@ -12922,7 +12814,7 @@ pub struct CheckSuite {
 }
 
 /// A check performed on the code of a given code change
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CheckRun {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub app: Option<GitHubApp>,
@@ -12931,7 +12823,6 @@ pub struct CheckRun {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -12993,7 +12884,6 @@ pub struct CheckRun {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -13010,7 +12900,7 @@ pub struct CheckRun {
 }
 
 /// Check Annotation
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CheckAnnotation {
     #[serde(
         default,
@@ -13075,7 +12965,7 @@ pub struct CheckAnnotation {
 }
 
 /// A suite of checks performed on the code of a given code change
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CheckSuiteData {
     #[serde(
         default,
@@ -13102,7 +12992,6 @@ pub struct CheckSuiteData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -13157,7 +13046,6 @@ pub struct CheckSuiteData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -13168,7 +13056,7 @@ pub struct CheckSuiteData {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AutoTriggerChecks {
     #[serde(
         default,
@@ -13183,7 +13071,7 @@ pub struct AutoTriggerChecks {
     pub setting: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Preferences {
     #[serde(
         default,
@@ -13194,7 +13082,7 @@ pub struct Preferences {
 }
 
 /// Check suite configuration preferences for a repository.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CheckSuitePreference {
     pub preferences: Preferences,
     /**
@@ -13206,7 +13094,7 @@ pub struct CheckSuitePreference {
 /**
  * State of a code scanning alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum CodeScanningAlertState {
     #[serde(rename = "closed")]
     Closed,
@@ -13250,7 +13138,7 @@ impl CodeScanningAlertState {
 /**
  * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum CodeScanningAlertDismissedReason {
     #[serde(rename = "false positive")]
     FalsePositive,
@@ -13291,7 +13179,7 @@ impl CodeScanningAlertDismissedReason {
 /**
  * The severity of the alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Severity {
     #[serde(rename = "error")]
     Error,
@@ -13332,7 +13220,7 @@ impl Severity {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAlertRuleSummary {
     #[serde(
         default,
@@ -13359,7 +13247,7 @@ pub struct CodeScanningAlertRuleSummary {
     pub severity: Option<Severity>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAnalysisTool {
     #[serde(
         default,
@@ -13382,7 +13270,7 @@ pub struct CodeScanningAnalysisTool {
 }
 
 /// Describe a region within a file for the alert.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAlertLocation {
     /**
      * Describe a region within a file for the alert.
@@ -13431,7 +13319,7 @@ pub struct CodeScanningAlertLocation {
 /**
  * A classification of the file. For example to identify it as generated.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum CodeScanningAlertClassification {
     #[serde(rename = "generated")]
     Generated,
@@ -13472,7 +13360,7 @@ impl CodeScanningAlertClassification {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Message {
     #[serde(
         default,
@@ -13482,7 +13370,7 @@ pub struct Message {
     pub text: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAlertInstance {
     #[serde(
         default,
@@ -13539,18 +13427,16 @@ pub struct CodeScanningAlertInstance {
     pub state: Option<CodeScanningAlertState>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAlertItems {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -13599,7 +13485,7 @@ pub struct CodeScanningAlertItems {
 /**
  * The security severity of the alert.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SecuritySeverityLevel {
     #[serde(rename = "critical")]
     Critical,
@@ -13640,7 +13526,7 @@ impl SecuritySeverityLevel {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAlertRule {
     #[serde(
         default,
@@ -13693,18 +13579,16 @@ pub struct CodeScanningAlertRule {
     pub tags: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAlert {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -13755,7 +13639,7 @@ pub struct CodeScanningAlert {
 /**
  * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum CodeScanningAlertSetState {
     #[serde(rename = "dismissed")]
     Dismissed,
@@ -13790,7 +13674,7 @@ impl CodeScanningAlertSetState {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningAnalysis {
     #[serde(
         default,
@@ -13813,7 +13697,6 @@ pub struct CodeScanningAnalysis {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -13886,7 +13769,7 @@ pub struct CodeScanningAnalysis {
 }
 
 /// Successful deletion of a code scanning analysis
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AnalysisDeletion {
     #[serde(
         default,
@@ -13902,7 +13785,7 @@ pub struct AnalysisDeletion {
     pub next_analysis_url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningSarifsReceipt {
     #[serde(
         default,
@@ -13921,7 +13804,7 @@ pub struct CodeScanningSarifsReceipt {
 /**
  * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ProcessingStatus {
     #[serde(rename = "complete")]
     Complete,
@@ -13956,7 +13839,7 @@ impl ProcessingStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningSarifsStatus {
     #[serde(
         default,
@@ -13972,7 +13855,7 @@ pub struct CodeScanningSarifsStatus {
 }
 
 /// Collaborator
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Collaborator {
     #[serde(
         default,
@@ -14104,7 +13987,7 @@ pub struct Collaborator {
 /**
  * The permission associated with the invitation.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum RepositoryInvitationPermissions {
     #[serde(rename = "admin")]
     Admin,
@@ -14149,12 +14032,11 @@ impl RepositoryInvitationPermissions {
 }
 
 /// Repository invitations let you manage who you collaborate with.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RepositoryInvitation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -14208,7 +14090,7 @@ pub struct RepositoryInvitation {
 }
 
 /// Commit Comment
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitComment {
     /**
      * How the author is associated with the repository.
@@ -14229,7 +14111,6 @@ pub struct CommitComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -14276,7 +14157,6 @@ pub struct CommitComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -14290,7 +14170,7 @@ pub struct CommitComment {
 }
 
 /// Short Blob
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ShortBlob {
     #[serde(
         default,
@@ -14307,7 +14187,7 @@ pub struct ShortBlob {
 }
 
 /// Branch Short
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct BranchShort {
     /**
      * Short Blob
@@ -14327,7 +14207,7 @@ pub struct BranchShort {
 }
 
 /// Hypermedia Link
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Link {
     #[serde(
         default,
@@ -14340,7 +14220,7 @@ pub struct Link {
 /**
  * The merge method to use.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum MergeMethod {
     #[serde(rename = "merge")]
     Merge,
@@ -14379,7 +14259,7 @@ impl MergeMethod {
 }
 
 /// The status of auto merging a pull request.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AutoMerge {
     #[serde(
         default,
@@ -14405,7 +14285,7 @@ pub struct AutoMerge {
     pub merge_method: MergeMethod,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestSimpleLabels {
     #[serde(
         default,
@@ -14450,7 +14330,7 @@ pub struct PullRequestSimpleLabels {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestSimpleHead {
     #[serde(
         default,
@@ -14480,7 +14360,7 @@ pub struct PullRequestSimpleHead {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Base {
     #[serde(
         default,
@@ -14510,7 +14390,7 @@ pub struct Base {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestSimpleLinks {
     /**
      * Hypermedia Link
@@ -14548,7 +14428,7 @@ pub struct PullRequestSimpleLinks {
 }
 
 /// Pull Request Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestSimple {
     #[serde(rename = "_links")]
     pub links: PullRequestSimpleLinks,
@@ -14585,7 +14465,6 @@ pub struct PullRequestSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -14603,7 +14482,6 @@ pub struct PullRequestSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -14659,7 +14537,6 @@ pub struct PullRequestSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -14730,7 +14607,6 @@ pub struct PullRequestSimple {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -14743,7 +14619,7 @@ pub struct PullRequestSimple {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SimpleCommitStatus {
     #[serde(
         default,
@@ -14760,7 +14636,6 @@ pub struct SimpleCommitStatus {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -14801,7 +14676,6 @@ pub struct SimpleCommitStatus {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -14813,7 +14687,7 @@ pub struct SimpleCommitStatus {
 }
 
 /// Combined Commit Status
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CombinedCommitStatus {
     #[serde(
         default,
@@ -14858,7 +14732,7 @@ pub struct CombinedCommitStatus {
 }
 
 /// The status of a commit.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct StatusData {
     #[serde(
         default,
@@ -14927,7 +14801,7 @@ pub struct StatusData {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommunityHealthFile {
     #[serde(
         default,
@@ -14943,7 +14817,7 @@ pub struct CommunityHealthFile {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommunityProfileFiles {
     /**
      * Code of Conduct Simple
@@ -14965,7 +14839,7 @@ pub struct CommunityProfileFiles {
 }
 
 /// Community Profile
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommunityProfile {
     /**
      * Community Profile
@@ -14997,13 +14871,12 @@ pub struct CommunityProfile {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
 /// Diff Entry
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct DiffEntry {
     #[serde(
         default,
@@ -15073,7 +14946,7 @@ pub struct DiffEntry {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum CommitComparisonStatus {
     #[serde(rename = "ahead")]
     Ahead,
@@ -15115,7 +14988,7 @@ impl CommitComparisonStatus {
 }
 
 /// Commit Comparison
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitComparison {
     #[serde(
         default,
@@ -15193,7 +15066,7 @@ pub struct CommitComparison {
 }
 
 /// Content Reference attachments allow you to provide context around URLs posted in comments
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ContentReferenceAttachment {
     #[serde(
         default,
@@ -15221,7 +15094,7 @@ pub struct ContentReferenceAttachment {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ContentTreeEntriesLinks {
     #[serde(
         default,
@@ -15244,7 +15117,7 @@ pub struct ContentTreeEntriesLinks {
     pub self_: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Entries {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -15312,7 +15185,7 @@ pub struct Entries {
 }
 
 /// Content Tree
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ContentTree {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -15383,7 +15256,7 @@ pub struct ContentTree {
 }
 
 /// Content File
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ContentFile {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -15469,7 +15342,7 @@ pub struct ContentFile {
 }
 
 /// An object describing a symlink
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SymlinkContent {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -15537,7 +15410,7 @@ pub struct SymlinkContent {
 }
 
 /// An object describing a symlink
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ContentSubmodule {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -15604,7 +15477,7 @@ pub struct ContentSubmodule {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FileCommitContentLinks {
     #[serde(
         default,
@@ -15627,7 +15500,7 @@ pub struct FileCommitContentLinks {
     pub self_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FileCommitContent {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_links")]
     pub links: Option<FileCommitContentLinks>,
@@ -15688,7 +15561,7 @@ pub struct FileCommitContent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FileCommitParents {
     #[serde(
         default,
@@ -15710,7 +15583,7 @@ pub struct FileCommitParents {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FileCommitVerification {
     #[serde(
         default,
@@ -15737,7 +15610,7 @@ pub struct FileCommitVerification {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FileCommit {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<Tagger>,
@@ -15789,7 +15662,7 @@ pub struct FileCommit {
 }
 
 /// File Commit
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FileCommitData {
     pub commit: FileCommit,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -15797,7 +15670,7 @@ pub struct FileCommitData {
 }
 
 /// Contributor
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Contributor {
     /**
      * Contributor
@@ -15960,7 +15833,7 @@ pub struct Contributor {
 /**
  * The state of the status.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum DeploymentStatusState {
     #[serde(rename = "error")]
     Error,
@@ -16011,12 +15884,11 @@ impl DeploymentStatusState {
 }
 
 /// The status of a deployment.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct DeploymentStatus {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -16091,7 +15963,6 @@ pub struct DeploymentStatus {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -16103,7 +15974,7 @@ pub struct DeploymentStatus {
 }
 
 /// The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct DeploymentBranchPolicy {
     #[serde(
         default,
@@ -16117,7 +15988,7 @@ pub struct DeploymentBranchPolicy {
     pub protected_branches: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectionRules {
     #[serde(
         default,
@@ -16146,7 +16017,7 @@ pub struct ProtectionRules {
     pub wait_timer: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectionRulesData {
     #[serde(
         default,
@@ -16178,7 +16049,7 @@ pub struct ProtectionRulesData {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectionRulesDataType {
     #[serde(
         default,
@@ -16206,7 +16077,7 @@ pub struct ProtectionRulesDataType {
 /// - `ProtectionRules`
 /// - `ProtectionRulesData`
 /// - `ProtectionRulesDataType`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProtectionRulesAnyOf {
     #[serde(flatten)]
     pub protection_rules: ProtectionRules,
@@ -16217,12 +16088,11 @@ pub struct ProtectionRulesAnyOf {
 }
 
 /// Details of a deployment environment
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnvironmentData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -16266,7 +16136,6 @@ pub struct EnvironmentData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -16278,7 +16147,7 @@ pub struct EnvironmentData {
 }
 
 /// Blob
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Blob {
     #[serde(
         default,
@@ -16325,12 +16194,11 @@ pub struct Blob {
 }
 
 /// Identifying information for the git-user
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Committer {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -16347,7 +16215,7 @@ pub struct Committer {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCommitParents {
     #[serde(
         default,
@@ -16370,7 +16238,7 @@ pub struct GitCommitParents {
 }
 
 /// Low-level Git commit operations within a repository
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCommit {
     /**
      * Identifying information for the git-user
@@ -16420,7 +16288,7 @@ pub struct GitCommit {
     pub verification: Verification,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Object {
     #[serde(
         default,
@@ -16444,7 +16312,7 @@ pub struct Object {
 }
 
 /// Git references within a repository
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitRef {
     #[serde(
         default,
@@ -16469,7 +16337,7 @@ pub struct GitRef {
 }
 
 /// Metadata for a Git tag
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitTag {
     #[serde(
         default,
@@ -16510,7 +16378,7 @@ pub struct GitTag {
     pub verification: Option<Verification>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitTree {
     #[serde(
         default,
@@ -16552,7 +16420,7 @@ pub struct GitTree {
 }
 
 /// The hierarchy between files in a Git repository.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitTreeData {
     #[serde(
         default,
@@ -16582,7 +16450,7 @@ pub struct GitTreeData {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct HookResponse {
     #[serde(
         default,
@@ -16604,7 +16472,7 @@ pub struct HookResponse {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct HookConfig {
     #[serde(
         default,
@@ -16665,7 +16533,7 @@ pub struct HookConfig {
 }
 
 /// Webhooks for repositories.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Hook {
     #[serde(
         default,
@@ -16676,7 +16544,6 @@ pub struct Hook {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -16732,7 +16599,6 @@ pub struct Hook {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -16743,7 +16609,7 @@ pub struct Hook {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ImportStatus {
     #[serde(rename = "auth")]
     Auth,
@@ -16820,7 +16686,7 @@ impl ImportStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectChoices {
     #[serde(
         default,
@@ -16843,7 +16709,7 @@ pub struct ProjectChoices {
 }
 
 /// A repository import from an external source.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Import {
     /**
      * A repository import from an external source.
@@ -17007,7 +16873,7 @@ pub struct Import {
 }
 
 /// Porter Author
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PorterAuthor {
     #[serde(
         default,
@@ -17054,7 +16920,7 @@ pub struct PorterAuthor {
 }
 
 /// Porter Large File
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PorterLargeFile {
     #[serde(
         default,
@@ -17083,7 +16949,7 @@ pub struct PorterLargeFile {
 }
 
 /// Issue Event Label
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueEventLabel {
     #[serde(
         default,
@@ -17099,7 +16965,7 @@ pub struct IssueEventLabel {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct DismissedReview {
     #[serde(
         default,
@@ -17128,7 +16994,7 @@ pub struct DismissedReview {
 }
 
 /// Issue Event Milestone
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueEventMilestone {
     #[serde(
         default,
@@ -17139,7 +17005,7 @@ pub struct IssueEventMilestone {
 }
 
 /// Issue Event Project Card
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueEventProjectCard {
     #[serde(
         default,
@@ -17179,7 +17045,7 @@ pub struct IssueEventProjectCard {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Rename {
     #[serde(
         default,
@@ -17196,7 +17062,7 @@ pub struct Rename {
 }
 
 /// Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueEvent {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
@@ -17224,7 +17090,6 @@ pub struct IssueEvent {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -17301,7 +17166,7 @@ pub struct IssueEvent {
 }
 
 /// Labeled Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LabeledIssueEvent {
     /**
      * Simple User
@@ -17362,7 +17227,7 @@ pub struct LabeledIssueEvent {
 }
 
 /// Assigned Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AssignedIssueEvent {
     /**
      * Simple User
@@ -17429,7 +17294,7 @@ pub struct AssignedIssueEvent {
 }
 
 /// Milestoned Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MilestonedIssueEvent {
     /**
      * Simple User
@@ -17490,7 +17355,7 @@ pub struct MilestonedIssueEvent {
 }
 
 /// Renamed Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RenamedIssueEvent {
     /**
      * Simple User
@@ -17548,7 +17413,7 @@ pub struct RenamedIssueEvent {
 }
 
 /// Review Requested Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReviewRequestedIssueEvent {
     /**
      * Simple User
@@ -17620,7 +17485,7 @@ pub struct ReviewRequestedIssueEvent {
 }
 
 /// Review Request Removed Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReviewRequestRemovedIssueEvent {
     /**
      * Simple User
@@ -17692,7 +17557,7 @@ pub struct ReviewRequestRemovedIssueEvent {
 }
 
 /// Review Dismissed Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReviewDismissedIssueEvent {
     /**
      * Simple User
@@ -17750,7 +17615,7 @@ pub struct ReviewDismissedIssueEvent {
 }
 
 /// Locked Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LockedIssueEvent {
     /**
      * Simple User
@@ -17813,7 +17678,7 @@ pub struct LockedIssueEvent {
 }
 
 /// Added to Project Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AddedProjectIssueEvent {
     /**
      * Simple User
@@ -17875,7 +17740,7 @@ pub struct AddedProjectIssueEvent {
 }
 
 /// Moved Column in Project Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MovedColumnInProjectIssueEvent {
     /**
      * Simple User
@@ -17937,7 +17802,7 @@ pub struct MovedColumnInProjectIssueEvent {
 }
 
 /// Removed from Project Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RemovedFromProjectIssueEvent {
     /**
      * Simple User
@@ -17999,7 +17864,7 @@ pub struct RemovedFromProjectIssueEvent {
 }
 
 /// Converted Note to Issue Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ConvertedNoteIssueEvent {
     /**
      * Simple User
@@ -18077,7 +17942,7 @@ pub struct ConvertedNoteIssueEvent {
 /// - `MovedColumnInProjectIssueEvent`
 /// - `RemovedFromProjectIssueEvent`
 /// - `ConvertedNoteIssueEvent`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueEventAnyOf {
     /**
      * Labeled Issue Event
@@ -18142,7 +18007,7 @@ pub struct IssueEventAnyOf {
 }
 
 /// Timeline Comment Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineCommentEvent {
     /**
      * Simple User
@@ -18174,7 +18039,6 @@ pub struct TimelineCommentEvent {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -18220,7 +18084,6 @@ pub struct TimelineCommentEvent {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -18236,7 +18099,7 @@ pub struct TimelineCommentEvent {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Source {
     /**
      * Issue Simple
@@ -18253,7 +18116,7 @@ pub struct Source {
 }
 
 /// Timeline Cross Referenced Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineCrossReferencedEvent {
     /**
      * Simple User
@@ -18263,7 +18126,6 @@ pub struct TimelineCrossReferencedEvent {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -18276,13 +18138,12 @@ pub struct TimelineCrossReferencedEvent {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
 /// Timeline Committed Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineCommittedEvent {
     /**
      * Identifying information for the git-user
@@ -18338,7 +18199,7 @@ pub struct TimelineCommittedEvent {
     pub verification: Verification,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineReviewedEventLinks {
     /**
      * Hypermedia Link
@@ -18351,7 +18212,7 @@ pub struct TimelineReviewedEventLinks {
 }
 
 /// Timeline Reviewed Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineReviewedEvent {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
@@ -18425,7 +18286,6 @@ pub struct TimelineReviewedEvent {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -18435,7 +18295,7 @@ pub struct TimelineReviewedEvent {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SelfData {
     #[serde(
         default,
@@ -18445,7 +18305,7 @@ pub struct SelfData {
     pub href: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestReviewCommentLinks {
     pub html: SelfData,
     pub pull_request: SelfData,
@@ -18456,7 +18316,7 @@ pub struct PullRequestReviewCommentLinks {
 /**
  * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Side {
     #[serde(rename = "LEFT")]
     Left,
@@ -18484,7 +18344,7 @@ impl Default for Side {
 }
 
 /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestReviewComment {
     #[serde(rename = "_links")]
     pub links: PullRequestReviewCommentLinks,
@@ -18519,7 +18379,6 @@ pub struct PullRequestReviewComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -18645,7 +18504,6 @@ pub struct PullRequestReviewComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -18662,7 +18520,7 @@ pub struct PullRequestReviewComment {
 }
 
 /// Timeline Line Commented Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineLineCommentedEvent {
     /**
      * Timeline Line Commented Event
@@ -18688,7 +18546,7 @@ pub struct TimelineLineCommentedEvent {
 }
 
 /// Timeline Commit Commented Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineCommitCommentedEvent {
     /**
      * Timeline Commit Commented Event
@@ -18720,7 +18578,7 @@ pub struct TimelineCommitCommentedEvent {
 }
 
 /// Timeline Assigned Issue Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TimelineAssignedIssueEvent {
     /**
      * Simple User
@@ -18782,7 +18640,7 @@ pub struct TimelineAssignedIssueEvent {
 }
 
 /// An SSH key granting access to a single repository.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct DeployKey {
     #[serde(
         default,
@@ -18827,7 +18685,7 @@ pub struct DeployKey {
 }
 
 /// License Content
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LicenseContent {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -18902,7 +18760,7 @@ pub struct LicenseContent {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct PagesSourceHash {
     #[serde(
         default,
@@ -18918,7 +18776,7 @@ pub struct PagesSourceHash {
     pub path: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PagesHttpsCertificateState {
     #[serde(rename = "approved")]
     Approved,
@@ -18983,7 +18841,7 @@ impl PagesHttpsCertificateState {
     }
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct PagesHttpsCertificate {
     #[serde(
         default,
@@ -19013,7 +18871,7 @@ pub struct PagesHttpsCertificate {
 /**
  * The status of the most recent build of the Page.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PageStatus {
     #[serde(rename = "building")]
     Building,
@@ -19052,7 +18910,7 @@ impl PageStatus {
 }
 
 /// The configuration for GitHub Pages for a repository.
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct Page {
     #[serde(
         default,
@@ -19096,7 +18954,7 @@ pub struct Page {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Error {
     #[serde(
         default,
@@ -19107,7 +18965,7 @@ pub struct Error {
 }
 
 /// Page Build
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PageBuild {
     #[serde(
         default,
@@ -19118,7 +18976,6 @@ pub struct PageBuild {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -19139,7 +18996,6 @@ pub struct PageBuild {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -19151,7 +19007,7 @@ pub struct PageBuild {
 }
 
 /// Page Build Status
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PageBuildStatus {
     #[serde(
         default,
@@ -19167,7 +19023,7 @@ pub struct PageBuildStatus {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Domain {
     #[serde(
         default,
@@ -19317,7 +19173,7 @@ pub struct Domain {
     pub uri: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AltDomain {
     #[serde(
         default,
@@ -19468,7 +19324,7 @@ pub struct AltDomain {
 }
 
 /// Pages Health Check Status
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PagesHealthCheck {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub alt_domain: Option<AltDomain>,
@@ -19479,7 +19335,7 @@ pub struct PagesHealthCheck {
     pub domain: Option<Domain>,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct User {
     #[serde(
         default,
@@ -19591,7 +19447,7 @@ pub struct User {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestHeadRepoLicense {
     #[serde(
         default,
@@ -19625,7 +19481,7 @@ pub struct PullRequestHeadRepoLicense {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestHeadRepo {
     #[serde(
         default,
@@ -19716,7 +19572,6 @@ pub struct PullRequestHeadRepo {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -19971,7 +19826,6 @@ pub struct PullRequestHeadRepo {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20061,7 +19915,6 @@ pub struct PullRequestHeadRepo {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20084,7 +19937,7 @@ pub struct PullRequestHeadRepo {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestHead {
     #[serde(
         default,
@@ -20110,7 +19963,7 @@ pub struct PullRequestHead {
     pub user: User,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestBaseRepo {
     #[serde(
         default,
@@ -20201,7 +20054,6 @@ pub struct PullRequestBaseRepo {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20456,7 +20308,6 @@ pub struct PullRequestBaseRepo {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20549,7 +20400,6 @@ pub struct PullRequestBaseRepo {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20572,7 +20422,7 @@ pub struct PullRequestBaseRepo {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestBase {
     #[serde(
         default,
@@ -20599,7 +20449,7 @@ pub struct PullRequestBase {
 }
 
 /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestData {
     #[serde(rename = "_links")]
     pub links: PullRequestSimpleLinks,
@@ -20648,7 +20498,6 @@ pub struct PullRequestData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20678,7 +20527,6 @@ pub struct PullRequestData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20761,7 +20609,6 @@ pub struct PullRequestData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -20844,7 +20691,6 @@ pub struct PullRequestData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -20858,7 +20704,7 @@ pub struct PullRequestData {
 }
 
 /// Pull Request Merge Result
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestMergeResult {
     #[serde(
         default,
@@ -20880,7 +20726,7 @@ pub struct PullRequestMergeResult {
 }
 
 /// Pull Request Review Request
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestReview {
     /**
      * The list of teams with review dismissal access.
@@ -20900,7 +20746,7 @@ pub struct PullRequestReview {
 }
 
 /// Pull Request Reviews are reviews on pull requests.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullRequestReviewData {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
@@ -20968,14 +20814,13 @@ pub struct PullRequestReviewData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReviewCommentLinks {
     /**
      * Hypermedia Link
@@ -20993,7 +20838,7 @@ pub struct ReviewCommentLinks {
 }
 
 /// Legacy Review Comment
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReviewComment {
     #[serde(rename = "_links")]
     pub links: ReviewCommentLinks,
@@ -21028,7 +20873,6 @@ pub struct ReviewComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -21154,7 +20998,6 @@ pub struct ReviewComment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -21170,7 +21013,7 @@ pub struct ReviewComment {
 /**
  * State of the release asset.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReleaseAssetState {
     #[serde(rename = "open")]
     Open,
@@ -21206,7 +21049,7 @@ impl ReleaseAssetState {
 }
 
 /// Data related to a release.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReleaseAsset {
     #[serde(
         default,
@@ -21223,7 +21066,6 @@ pub struct ReleaseAsset {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -21270,7 +21112,6 @@ pub struct ReleaseAsset {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -21284,7 +21125,7 @@ pub struct ReleaseAsset {
 }
 
 /// A release.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Release {
     #[serde(
         default,
@@ -21324,7 +21165,6 @@ pub struct Release {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -21382,7 +21222,6 @@ pub struct Release {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -21431,7 +21270,7 @@ pub struct Release {
 /**
  * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SecretScanningAlertState {
     #[serde(rename = "open")]
     Open,
@@ -21469,7 +21308,7 @@ impl SecretScanningAlertState {
 /**
  * **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SecretScanningAlertResolution {
     #[serde(rename = "false_positive")]
     FalsePositive,
@@ -21510,12 +21349,11 @@ impl SecretScanningAlertResolution {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SecretScanningAlert {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -21538,7 +21376,6 @@ pub struct SecretScanningAlert {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub resolved_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -21572,12 +21409,11 @@ pub struct SecretScanningAlert {
 }
 
 /// Stargazer
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Stargazer {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub starred_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -21585,7 +21421,7 @@ pub struct Stargazer {
 }
 
 /// Commit Activity
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitActivity {
     /**
      * Code Frequency Stat
@@ -21610,7 +21446,7 @@ pub struct CommitActivity {
     pub week: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Weeks {
     #[serde(
         default,
@@ -21639,7 +21475,7 @@ pub struct Weeks {
 }
 
 /// Contributor Activity
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ContributorActivity {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<SimpleUser>,
@@ -21657,7 +21493,7 @@ pub struct ContributorActivity {
     pub weeks: Vec<Weeks>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ParticipationStats {
     /**
      * Code Frequency Stat
@@ -21680,12 +21516,11 @@ pub struct ParticipationStats {
 }
 
 /// Repository invitations let you manage who you collaborate with.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RepositorySubscription {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -21719,7 +21554,7 @@ pub struct RepositorySubscription {
 }
 
 /// Tag
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Tag {
     pub commit: Tree,
     #[serde(
@@ -21749,7 +21584,7 @@ pub struct Tag {
 }
 
 /// A topic aggregates entities that are related to a subject.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Topic {
     /**
      * The list of events for the GitHub app
@@ -21762,7 +21597,7 @@ pub struct Topic {
     pub names: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Traffic {
     #[serde(
         default,
@@ -21773,7 +21608,6 @@ pub struct Traffic {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -21785,7 +21619,7 @@ pub struct Traffic {
 }
 
 /// Clone Traffic
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CloneTraffic {
     #[serde(
         default,
@@ -21808,7 +21642,7 @@ pub struct CloneTraffic {
 }
 
 /// Content Traffic
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ContentTraffic {
     #[serde(
         default,
@@ -21837,7 +21671,7 @@ pub struct ContentTraffic {
 }
 
 /// Referrer Traffic
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReferrerTraffic {
     #[serde(
         default,
@@ -21860,7 +21694,7 @@ pub struct ReferrerTraffic {
 }
 
 /// View Traffic
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ViewTraffic {
     #[serde(
         default,
@@ -21882,7 +21716,7 @@ pub struct ViewTraffic {
     pub views: Vec<Traffic>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Members {
     #[serde(
         default,
@@ -21905,7 +21739,7 @@ pub struct Members {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Meta {
     #[serde(
         default,
@@ -21935,7 +21769,7 @@ pub struct Meta {
     pub resource_type: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimEnterpriseGroup {
     #[serde(
         default,
@@ -21976,7 +21810,7 @@ pub struct ScimEnterpriseGroup {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimGroupListEnterprise {
     #[serde(
         default,
@@ -22017,7 +21851,7 @@ pub struct ScimGroupListEnterprise {
     pub total_results: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Name {
     #[serde(
         default,
@@ -22035,7 +21869,7 @@ pub struct Name {
     pub given_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Emails {
     #[serde(
         default,
@@ -22057,7 +21891,7 @@ pub struct Emails {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUserListEnterpriseResourcesGroups {
     #[serde(
         default,
@@ -22067,7 +21901,7 @@ pub struct ScimUserListEnterpriseResourcesGroups {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimEnterpriseUser {
     #[serde(
         default,
@@ -22121,7 +21955,7 @@ pub struct ScimEnterpriseUser {
     pub user_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUserListEnterprise {
     #[serde(
         default,
@@ -22162,7 +21996,7 @@ pub struct ScimUserListEnterprise {
     pub total_results: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUserName {
     #[serde(
         default,
@@ -22186,7 +22020,7 @@ pub struct ScimUserName {
     pub given_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUserEmails {
     #[serde(
         default,
@@ -22201,18 +22035,16 @@ pub struct ScimUserEmails {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUserMeta {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize",
         rename = "lastModified"
     )]
     pub last_modified: Option<chrono::DateTime<chrono::Utc>>,
@@ -22231,7 +22063,7 @@ pub struct ScimUserMeta {
     pub resource_type: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Op {
     #[serde(rename = "add")]
     Add,
@@ -22276,7 +22108,7 @@ impl Op {
 /// - `Data`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ScimUserOperationsValueOneOf {
     String(String),
@@ -22334,7 +22166,7 @@ impl std::convert::From<ScimUserOperationsValueOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Operations {
     #[serde(default, skip_serializing_if = "Op::is_noop")]
     pub op: Op,
@@ -22349,7 +22181,7 @@ pub struct Operations {
 }
 
 /// SCIM /Users provisioning endpoints
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUser {
     #[serde(
         default,
@@ -22433,7 +22265,7 @@ pub struct ScimUser {
 }
 
 /// SCIM User List
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUserList {
     #[serde(
         default,
@@ -22474,7 +22306,7 @@ pub struct ScimUserList {
     pub total_results: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Matches {
     /**
      * Code Frequency Stat
@@ -22493,7 +22325,7 @@ pub struct Matches {
     pub text: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchResultTextMatches {
     #[serde(
         default,
@@ -22528,7 +22360,7 @@ pub struct SearchResultTextMatches {
 }
 
 /// Code Search Result Item
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeSearchResultItem {
     /**
      * Code Search Result Item
@@ -22563,7 +22395,6 @@ pub struct CodeSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_modified_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -22620,7 +22451,7 @@ pub struct CodeSearchResultItem {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitSearchResultItem {
     /**
      * Identifying information for the git-user
@@ -22652,7 +22483,7 @@ pub struct CommitSearchResultItem {
 }
 
 /// Commit Search Result Item
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CommitSearchResultItemData {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<SimpleUser>,
@@ -22717,7 +22548,7 @@ pub struct CommitSearchResultItemData {
 }
 
 /// Issue Search Result Item
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssueSearchResultItem {
     #[serde(
         default,
@@ -22758,7 +22589,6 @@ pub struct IssueSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -22776,7 +22606,6 @@ pub struct IssueSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -22893,7 +22722,6 @@ pub struct IssueSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -22907,7 +22735,7 @@ pub struct IssueSearchResultItem {
 }
 
 /// Label Search Result Item
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LabelSearchResultItem {
     #[serde(
         default,
@@ -22968,7 +22796,7 @@ pub struct LabelSearchResultItem {
 }
 
 /// Repo Search Result Item
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct RepoSearchResultItem {
     /**
      * Repo Search Result Item
@@ -23076,7 +22904,6 @@ pub struct RepoSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -23343,7 +23170,6 @@ pub struct RepoSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -23451,7 +23277,6 @@ pub struct RepoSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -23474,7 +23299,7 @@ pub struct RepoSearchResultItem {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TopicRelation {
     #[serde(
         default,
@@ -23502,14 +23327,14 @@ pub struct TopicRelation {
     pub topic_id: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Related {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_relation: Option<TopicRelation>,
 }
 
 /// Topic Search Result Item
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TopicSearchResultItem {
     #[serde(
         default,
@@ -23520,7 +23345,6 @@ pub struct TopicSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -23611,13 +23435,12 @@ pub struct TopicSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
 /// User Search Result Item
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct UserSearchResultItem {
     #[serde(
         default,
@@ -23649,7 +23472,6 @@ pub struct UserSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -23815,7 +23637,6 @@ pub struct UserSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -23840,7 +23661,6 @@ pub struct UserSearchResultItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -23852,7 +23672,7 @@ pub struct UserSearchResultItem {
 }
 
 /// Private User
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PrivateUser {
     #[serde(
         default,
@@ -23895,7 +23715,6 @@ pub struct PrivateUser {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -24069,7 +23888,6 @@ pub struct PrivateUser {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -24099,7 +23917,6 @@ pub struct PrivateUser {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -24111,7 +23928,7 @@ pub struct PrivateUser {
 }
 
 /// Email
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Email {
     #[serde(
         default,
@@ -24137,7 +23954,7 @@ pub struct Email {
     pub visibility: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GpgKeyEmails {
     #[serde(
         default,
@@ -24152,7 +23969,7 @@ pub struct GpgKeyEmails {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Subkeys {
     #[serde(
         default,
@@ -24237,7 +24054,7 @@ pub struct Subkeys {
 }
 
 /// A unique encryption key
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GpgKey {
     #[serde(
         default,
@@ -24262,7 +24079,6 @@ pub struct GpgKey {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -24274,7 +24090,6 @@ pub struct GpgKey {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -24316,12 +24131,11 @@ pub struct GpgKey {
 }
 
 /// Key
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Key {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -24360,7 +24174,7 @@ pub struct Key {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MarketplaceAccount {
     #[serde(
         default,
@@ -24408,7 +24222,7 @@ pub struct MarketplaceAccount {
 }
 
 /// User Marketplace Purchase
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct UserMarketplacePurchase {
     pub account: MarketplaceAccount,
     #[serde(
@@ -24420,13 +24234,11 @@ pub struct UserMarketplacePurchase {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub free_trial_ends_on: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub next_billing_date: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -24447,13 +24259,12 @@ pub struct UserMarketplacePurchase {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
 /// Starred Repository
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct StarredRepository {
     /**
      * A git repository
@@ -24463,12 +24274,11 @@ pub struct StarredRepository {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub starred_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Contexts {
     #[serde(
         default,
@@ -24485,7 +24295,7 @@ pub struct Contexts {
 }
 
 /// Hovercard
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Hovercard {
     #[serde(
         default,
@@ -24496,7 +24306,7 @@ pub struct Hovercard {
 }
 
 /// Key Simple
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct KeySimple {
     #[serde(
         default,
@@ -24521,7 +24331,7 @@ pub struct KeySimple {
  *   
  *   The default is `web`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Include {
     #[serde(rename = "all")]
     All,
@@ -24564,7 +24374,7 @@ impl Include {
  *   
  *   The default is `desc`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Order {
     #[serde(rename = "asc")]
     Asc,
@@ -24602,7 +24412,7 @@ impl Order {
 /**
  * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Sort {
     #[serde(rename = "created")]
     Created,
@@ -24632,7 +24442,7 @@ impl Default for Sort {
 /**
  * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum WorkflowRunStatus {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -24706,7 +24516,7 @@ impl WorkflowRunStatus {
 /// - `i64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum TitleOneOf {
     String(String),
@@ -24756,7 +24566,7 @@ impl std::convert::From<TitleOneOf> for String {
 /**
  * Must be one of: `day`, `week`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Per {
     #[serde(rename = "day")]
     Day,
@@ -24783,7 +24593,7 @@ impl Default for Per {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsMergeResponse {
     #[serde(
         default,
@@ -24799,7 +24609,7 @@ pub struct PullsMergeResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ServiceUnavailableResponse {
     #[serde(
         default,
@@ -24821,7 +24631,7 @@ pub struct ServiceUnavailableResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Block {
     #[serde(
         default,
@@ -24843,7 +24653,7 @@ pub struct Block {
     pub reason: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ForbiddenGistResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub block: Option<Block>,
@@ -24861,7 +24671,7 @@ pub struct ForbiddenGistResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MetaRootResponse {
     #[serde(
         default,
@@ -25063,7 +24873,7 @@ pub struct MetaRootResponse {
     pub user_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsCreateFromManifestResponse {
     #[serde(
         default,
@@ -25095,7 +24905,7 @@ pub struct AppsCreateFromManifestResponse {
 ///
 /// - `GitHubApp`
 /// - `AppsCreateFromManifestResponse`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsCreateFromManifestResponseAllOf {
     /**
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
@@ -25106,7 +24916,7 @@ pub struct AppsCreateFromManifestResponseAllOf {
     pub apps_create_from_manifest_response: AppsCreateFromManifestResponse,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsUpdateWebhookConfigAppRequest {
     #[serde(
         default,
@@ -25130,7 +24940,7 @@ pub struct AppsUpdateWebhookConfigAppRequest {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsCreateInstallationAccessTokenRequest {
     /**
      * The permissions granted to the user-to-server access token.
@@ -25157,7 +24967,7 @@ pub struct AppsCreateInstallationAccessTokenRequest {
     pub repository_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsCheckTokenRequest {
     #[serde(
         default,
@@ -25167,7 +24977,7 @@ pub struct AppsCheckTokenRequest {
     pub access_token: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsScopeTokenRequest {
     #[serde(
         default,
@@ -25212,7 +25022,7 @@ pub struct AppsScopeTokenRequest {
     pub target_id: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OauthAuthorizationsCreateAuthorizationRequest {
     #[serde(
         default,
@@ -25255,7 +25065,7 @@ pub struct OauthAuthorizationsCreateAuthorizationRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
     #[serde(
         default,
@@ -25292,7 +25102,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
     #[serde(
         default,
@@ -25323,7 +25133,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     /**
      * The list of events for the GitHub app
@@ -25372,7 +25182,7 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -25385,7 +25195,7 @@ pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
     pub enabled_organizations: EnabledRepositories,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
     #[serde(
         default,
@@ -25401,7 +25211,7 @@ pub struct EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
     /**
      * Code Frequency Stat
@@ -25414,7 +25224,7 @@ pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
     pub selected_organization_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminListSelfHostedRunnerGroupsResponse {
     #[serde(
         default,
@@ -25430,7 +25240,7 @@ pub struct EnterpriseAdminListSelfHostedRunnerGroupsResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
     #[serde(
         default,
@@ -25463,7 +25273,7 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
     pub visibility: Option<RepositorySelection>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
     #[serde(
         default,
@@ -25478,7 +25288,7 @@ pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
     pub visibility: Option<RepositorySelection>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListSelfHostedRunnersInGroupOrgResponse {
     #[serde(
         default,
@@ -25494,7 +25304,7 @@ pub struct ActionsListSelfHostedRunnersInGroupOrgResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
     /**
      * Code Frequency Stat
@@ -25507,7 +25317,7 @@ pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
     pub runners: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminListSelfHostedRunnersResponse {
     #[serde(
         default,
@@ -25524,7 +25334,7 @@ pub struct EnterpriseAdminListSelfHostedRunnersResponse {
 }
 
 /// Names and content for the files that make up the gist
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FilesAdditionalPropertiesData {
     #[serde(
         default,
@@ -25534,7 +25344,7 @@ pub struct FilesAdditionalPropertiesData {
     pub content: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Public {
     #[serde(rename = "false")]
     False,
@@ -25567,7 +25377,7 @@ impl Default for Public {
 /// - `Public`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum PublicOneOf {
     Bool(bool),
@@ -25602,7 +25412,7 @@ impl std::convert::From<PublicOneOf> for bool {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GistsCreateRequest {
     #[serde(
         default,
@@ -25619,7 +25429,7 @@ pub struct GistsCreateRequest {
 }
 
 /// Names of files to be updated
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct FilesAdditionalPropertiesDataType {
     #[serde(
         default,
@@ -25635,7 +25445,7 @@ pub struct FilesAdditionalPropertiesDataType {
     pub filename: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GistsUpdateRequest {
     #[serde(
         default,
@@ -25647,7 +25457,7 @@ pub struct GistsUpdateRequest {
     pub files: Option<FilesAdditionalPropertiesDataType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsUpdateReviewRequest {
     #[serde(
         default,
@@ -25657,7 +25467,7 @@ pub struct PullsUpdateReviewRequest {
     pub body: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsListInstallationReposResponse {
     #[serde(
         default,
@@ -25687,7 +25497,7 @@ pub struct AppsListInstallationReposResponse {
  *   \* `subscribed`: Issues you're subscribed to updates for  
  *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Filter {
     #[serde(rename = "all")]
     All,
@@ -25729,7 +25539,7 @@ impl Default for Filter {
 /**
  * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum IssuesListState {
     #[serde(rename = "all")]
     All,
@@ -25762,7 +25572,7 @@ impl Default for IssuesListState {
 /**
  * What to sort results by. Can be either `created`, `updated`, `comments`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum IssuesListSort {
     #[serde(rename = "comments")]
     Comments,
@@ -25795,7 +25605,7 @@ impl Default for IssuesListSort {
 /**
  * The rendering mode.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Mode {
     #[serde(rename = "gfm")]
     Gfm,
@@ -25822,7 +25632,7 @@ impl Default for Mode {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MarkdownRenderRequest {
     #[serde(
         default,
@@ -25843,19 +25653,18 @@ pub struct MarkdownRenderRequest {
     pub text: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActivityMarkNotificationsAsReadRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_read_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub read: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActivitySetThreadSubscriptionRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ignored: Option<bool>,
@@ -25868,7 +25677,7 @@ pub struct ActivitySetThreadSubscriptionRequest {
  *   \* `none` - only admin members can create repositories.  
  *   **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum MembersAllowedRepositoryCreationType {
     #[serde(rename = "all")]
     All,
@@ -25906,7 +25715,7 @@ impl MembersAllowedRepositoryCreationType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsUpdateRequest {
     #[serde(
         default,
@@ -25996,7 +25805,7 @@ pub struct OrgsUpdateRequest {
 /// - `ValidationError`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum OrgsUpdateResponseOneOf {
     /**
@@ -26025,7 +25834,7 @@ impl OrgsUpdateResponseOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsSetGithubPermissionsOrganizationRequest {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -26038,7 +25847,7 @@ pub struct ActionsSetGithubPermissionsOrganizationRequest {
     pub enabled_repositories: EnabledRepositories,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
     #[serde(
         default,
@@ -26054,7 +25863,7 @@ pub struct ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
     /**
      * Code Frequency Stat
@@ -26067,7 +25876,7 @@ pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
     pub selected_repository_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListSelfHostedRunnerGroupsOrgResponse {
     #[serde(
         default,
@@ -26083,7 +25892,7 @@ pub struct ActionsListSelfHostedRunnerGroupsOrgResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
     #[serde(
         default,
@@ -26116,7 +25925,7 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
     pub visibility: Option<Visibility>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
     #[serde(
         default,
@@ -26131,7 +25940,7 @@ pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
     pub visibility: Option<Visibility>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse {
     #[serde(
         default,
@@ -26147,7 +25956,7 @@ pub struct ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListSelfHostedRunnersOrgResponse {
     #[serde(
         default,
@@ -26163,7 +25972,7 @@ pub struct ActionsListSelfHostedRunnersOrgResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListOrgSecretsResponse {
     #[serde(
         default,
@@ -26179,7 +25988,7 @@ pub struct ActionsListOrgSecretsResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsCreateUpdateOrgSecretRequest {
     #[serde(
         default,
@@ -26209,7 +26018,7 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
     pub visibility: Visibility,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListSelectedReposOrgSecretResponse {
     #[serde(
         default,
@@ -26225,7 +26034,7 @@ pub struct ActionsListSelectedReposOrgSecretResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsSetSelectedReposOrgSecretRequest {
     /**
      * Code Frequency Stat
@@ -26239,7 +26048,7 @@ pub struct ActionsSetSelectedReposOrgSecretRequest {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsCreateWebhookRequestConfig {
     #[serde(
         default,
@@ -26278,7 +26087,7 @@ pub struct OrgsCreateWebhookRequestConfig {
     pub username: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsCreateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
@@ -26304,7 +26113,7 @@ pub struct OrgsCreateWebhookRequest {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsUpdateWebhookRequestConfig {
     #[serde(
         default,
@@ -26331,7 +26140,7 @@ pub struct OrgsUpdateWebhookRequestConfig {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsUpdateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
@@ -26357,7 +26166,7 @@ pub struct OrgsUpdateWebhookRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct AppsListInstallationsResponse {
     #[serde(
         default,
@@ -26377,7 +26186,7 @@ pub struct AppsListInstallationsResponse {
 ///
 /// - `Data`
 /// - `InteractionLimits`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct InteractionsGetRestrictionsResponseAnyOf {
     #[serde(flatten)]
     pub data: Data,
@@ -26394,7 +26203,7 @@ pub struct InteractionsGetRestrictionsResponseAnyOf {
  *   \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
  *   \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrgsCreateInvitationRequestRole {
     #[serde(rename = "admin")]
     Admin,
@@ -26424,7 +26233,7 @@ impl Default for OrgsCreateInvitationRequestRole {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsCreateInvitationRequest {
     #[serde(
         default,
@@ -26462,7 +26271,7 @@ pub struct OrgsCreateInvitationRequest {
  *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
  *   \* `all` - All members the authenticated user can see.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrgsListMembersFilter {
     #[serde(rename = "2fa_disabled")]
     TwoFaDisabled,
@@ -26495,7 +26304,7 @@ impl Default for OrgsListMembersFilter {
  *   \* `admin` - Organization owners.  
  *   \* `member` - Non-owner organization members.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrgsListMembersRole {
     #[serde(rename = "admin")]
     Admin,
@@ -26530,7 +26339,7 @@ impl Default for OrgsListMembersRole {
  *   \* `admin` - The user will become an owner of the organization.  
  *   \* `member` - The user will become a non-owner member of the organization.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrgsSetMembershipUserRequestRole {
     #[serde(rename = "admin")]
     Admin,
@@ -26557,7 +26366,7 @@ impl Default for OrgsSetMembershipUserRequestRole {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsSetMembershipUserRequest {
     /**
      * The role to give the user in the organization. Can be one of:  
@@ -26571,7 +26380,7 @@ pub struct OrgsSetMembershipUserRequest {
 /**
  * Allowed values that can be passed to the exclude param.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Exclude {
     #[serde(rename = "repositories")]
     Repositories,
@@ -26603,7 +26412,7 @@ impl Exclude {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MigrationsStartRequest {
     /**
      * Exclude attributes from the API response to improve performance
@@ -26632,7 +26441,7 @@ pub struct MigrationsStartRequest {
 /**
  * The state of the package, either active or deleted.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
     #[serde(rename = "active")]
     Active,
@@ -26659,7 +26468,7 @@ impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsCreateRequest {
     #[serde(
         default,
@@ -26678,7 +26487,7 @@ pub struct ProjectsCreateRequest {
 /**
  * Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposListOrgType {
     #[serde(rename = "all")]
     All,
@@ -26731,7 +26540,7 @@ impl ReposListOrgType {
 /**
  * Can be one of `created`, `updated`, `pushed`, `full_name`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposListOrgSort {
     #[serde(rename = "created")]
     Created,
@@ -26768,7 +26577,7 @@ impl Default for ReposListOrgSort {
  * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
  *   The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposCreateInOrgRequestVisibility {
     #[serde(rename = "internal")]
     Internal,
@@ -26809,7 +26618,7 @@ impl ReposCreateInOrgRequestVisibility {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateInOrgRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_auto_merge: Option<bool>,
@@ -26883,7 +26692,7 @@ pub struct ReposCreateInOrgRequest {
  *   \* `push` - team members can pull and push, but not administer newly-added repositories.  
  *   \* `admin` - team members can pull, push and administer newly-added repositories.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Permission {
     #[serde(rename = "admin")]
     Admin,
@@ -26913,7 +26722,7 @@ impl Default for Permission {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsCreateRequest {
     #[serde(
         default,
@@ -26966,7 +26775,7 @@ pub struct TeamsCreateRequest {
     pub repo_names: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsUpdateInOrgRequest {
     #[serde(
         default,
@@ -27001,7 +26810,7 @@ pub struct TeamsUpdateInOrgRequest {
     pub privacy: Option<Privacy>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsCreateDiscussionInOrgRequest {
     #[serde(
         default,
@@ -27019,7 +26828,7 @@ pub struct TeamsCreateDiscussionInOrgRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsUpdateDiscussionInOrgRequest {
     #[serde(
         default,
@@ -27035,7 +26844,7 @@ pub struct TeamsUpdateDiscussionInOrgRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReactionsCreateIssueRequest {
     /**
      * The reaction to use
@@ -27050,7 +26859,7 @@ pub struct ReactionsCreateIssueRequest {
  *   \* `maintainer` - team maintainers.  
  *   \* `all` - all members of the team.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum TeamsListMembersInOrgRole {
     #[serde(rename = "all")]
     All,
@@ -27080,7 +26889,7 @@ impl Default for TeamsListMembersInOrgRole {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsAddUpdateMembershipUserInOrgRequest {
     /**
      * The role of the user in the team.
@@ -27089,7 +26898,7 @@ pub struct TeamsAddUpdateMembershipUserInOrgRequest {
     pub role: Option<TeamMembershipRole>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsAddCollaboratorRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<RepositoryProjects>,
@@ -27105,7 +26914,7 @@ pub struct ProjectsAddCollaboratorRequest {
  *     
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -27152,7 +26961,7 @@ impl TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
     /**
      * The permission to grant the team on this repository. Can be one of:  
@@ -27168,7 +26977,7 @@ pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
     pub permission: Option<TeamsAddUpdateRepoPermissionsInOrgRequestPermission>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups {
     #[serde(
         default,
@@ -27190,7 +26999,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups {
     pub group_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
     /**
      * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
@@ -27203,7 +27012,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
     pub groups: Vec<TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsDeleteResponse {
     #[serde(
         default,
@@ -27228,7 +27037,7 @@ pub struct ProjectsDeleteResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsUpdateCardRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archived: Option<bool>,
@@ -27240,7 +27049,7 @@ pub struct ProjectsUpdateCardRequest {
     pub note: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsMoveCardRequest {
     #[serde(
         default,
@@ -27256,7 +27065,7 @@ pub struct ProjectsMoveCardRequest {
     pub position: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsMoveCardResponseErrors {
     #[serde(
         default,
@@ -27284,7 +27093,7 @@ pub struct ProjectsMoveCardResponseErrors {
     pub resource: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsMoveCardResponse {
     #[serde(
         default,
@@ -27306,7 +27115,7 @@ pub struct ProjectsMoveCardResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsMoveCardResponseErrorsData {
     #[serde(
         default,
@@ -27322,7 +27131,7 @@ pub struct ProjectsMoveCardResponseErrorsData {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsCreateCardResponse {
     #[serde(
         default,
@@ -27350,7 +27159,7 @@ pub struct ProjectsCreateCardResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsUpdateColumnRequest {
     #[serde(
         default,
@@ -27363,7 +27172,7 @@ pub struct ProjectsUpdateColumnRequest {
 /**
  * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ArchivedState {
     #[serde(rename = "all")]
     All,
@@ -27393,7 +27202,7 @@ impl Default for ArchivedState {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsCreateCardRequest {
     #[serde(
         default,
@@ -27403,7 +27212,7 @@ pub struct ProjectsCreateCardRequest {
     pub note: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsCreateCardRequestData {
     #[serde(
         default,
@@ -27425,7 +27234,7 @@ pub struct ProjectsCreateCardRequestData {
 /// - `ProjectsCreateCardRequestData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ProjectsCreateCardRequestOneOf {
     ProjectsCreateCardRequest(ProjectsCreateCardRequest),
@@ -27448,7 +27257,7 @@ impl ProjectsCreateCardRequestOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsMoveColumnRequest {
     #[serde(
         default,
@@ -27458,7 +27267,7 @@ pub struct ProjectsMoveColumnRequest {
     pub position: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ProjectsUpdateRequest {
     #[serde(
         default,
@@ -27493,7 +27302,7 @@ pub struct ProjectsUpdateRequest {
  *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
  *   \* `all`: All collaborators the authenticated user can see.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Affiliation {
     #[serde(rename = "all")]
     All,
@@ -27524,7 +27333,7 @@ impl Default for Affiliation {
 }
 
 /// Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
     #[serde(
         default,
@@ -27535,7 +27344,7 @@ pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
 }
 
 /// Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateRequestSecurityAnalysis {
     /**
      * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
@@ -27549,7 +27358,7 @@ pub struct ReposUpdateRequestSecurityAnalysis {
     pub secret_scanning: Option<ReposUpdateRequestSecurityAnalysisAdvanced>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_auto_merge: Option<bool>,
@@ -27610,7 +27419,7 @@ pub struct ReposUpdateRequest {
     pub visibility: Option<ReposCreateInOrgRequestVisibility>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListArtifactsRepoResponse {
     #[serde(
         default,
@@ -27626,7 +27435,7 @@ pub struct ActionsListArtifactsRepoResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsSetGithubPermissionsRepositoryRequest {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -27637,7 +27446,7 @@ pub struct ActionsSetGithubPermissionsRepositoryRequest {
     pub enabled: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListWorkflowRunsResponse {
     #[serde(
         default,
@@ -27658,7 +27467,7 @@ pub struct ActionsListWorkflowRunsResponse {
  *   \* `latest`: Returns jobs from the most recent execution of the workflow run.  
  *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ActionsListJobsWorkflowRunFilter {
     #[serde(rename = "all")]
     All,
@@ -27685,7 +27494,7 @@ impl Default for ActionsListJobsWorkflowRunFilter {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListJobsWorkflowRunResponse {
     #[serde(
         default,
@@ -27701,7 +27510,7 @@ pub struct ActionsListJobsWorkflowRunResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsReviewPendingDeploymentsRunRequest {
     #[serde(
         default,
@@ -27725,7 +27534,7 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
     pub state: EnvironmentApprovalState,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListRepoSecretsResponse {
     #[serde(
         default,
@@ -27741,7 +27550,7 @@ pub struct ActionsListRepoSecretsResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsCreateUpdateRepoSecretRequest {
     #[serde(
         default,
@@ -27757,7 +27566,7 @@ pub struct ActionsCreateUpdateRepoSecretRequest {
     pub key_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsListRepoWorkflowsResponse {
     #[serde(
         default,
@@ -27773,7 +27582,7 @@ pub struct ActionsListRepoWorkflowsResponse {
     pub workflows: Vec<Workflow>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActionsCreateWorkflowDispatchRequest {
     #[serde(
         default,
@@ -27790,7 +27599,7 @@ pub struct ActionsCreateWorkflowDispatchRequest {
     pub ref_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateAutolinkRequest {
     #[serde(
         default,
@@ -27807,7 +27616,7 @@ pub struct ReposCreateAutolinkRequest {
 }
 
 /// Require status checks to pass before merging. Set to `null` to disable.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
     /**
      * The list of events for the GitHub app
@@ -27826,7 +27635,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
 }
 
 /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions {
     /**
      * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
@@ -27849,7 +27658,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestric
 }
 
 /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
     /**
      * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
@@ -27885,7 +27694,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
 }
 
 /// Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Restrictions {
     /**
      * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
@@ -27916,7 +27725,7 @@ pub struct Restrictions {
     pub users: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateBranchProtectionRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_deletions: Option<bool>,
@@ -27946,7 +27755,7 @@ pub struct ReposUpdateBranchProtectionRequest {
     pub restrictions: Option<Restrictions>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdatePullRequestReviewProtection {
     #[serde(
         default,
@@ -27972,7 +27781,7 @@ pub struct ReposUpdatePullRequestReviewProtection {
     pub required_approving_review_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateStatusCheckProtectionRequest {
     /**
      * The list of events for the GitHub app
@@ -27987,7 +27796,7 @@ pub struct ReposUpdateStatusCheckProtectionRequest {
     pub strict: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposAddStatusCheckContextsRequest {
     /**
      * The list of events for the GitHub app
@@ -28006,7 +27815,7 @@ pub struct ReposAddStatusCheckContextsRequest {
 /// - `ReposAddStatusCheckContextsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ReposAddStatusCheckContextsRequestOneOf {
     /**
@@ -28048,7 +27857,7 @@ impl std::convert::From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String>
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposAddAppAccessRestrictionsRequest {
     /**
      * The list of events for the GitHub app
@@ -28067,7 +27876,7 @@ pub struct ReposAddAppAccessRestrictionsRequest {
 /// - `ReposAddAppAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ReposAddAppAccessRestrictionsRequestOneOf {
     /**
@@ -28110,7 +27919,7 @@ impl std::convert::From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<Strin
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposAddTeamAccessRestrictionsRequest {
     /**
      * The list of events for the GitHub app
@@ -28129,7 +27938,7 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
 /// - `ReposAddTeamAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
     /**
@@ -28172,7 +27981,7 @@ impl std::convert::From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<Stri
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposAddUserAccessRestrictionsRequest {
     /**
      * The list of events for the GitHub app
@@ -28191,7 +28000,7 @@ pub struct ReposAddUserAccessRestrictionsRequest {
 /// - `ReposAddUserAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ReposAddUserAccessRestrictionsRequestOneOf {
     /**
@@ -28234,7 +28043,7 @@ impl std::convert::From<ReposAddUserAccessRestrictionsRequestOneOf> for Vec<Stri
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposRenameBranchRequest {
     #[serde(
         default,
@@ -28248,7 +28057,7 @@ pub struct ReposRenameBranchRequest {
  * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ChecksCreateRequestConclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -28304,7 +28113,7 @@ impl ChecksCreateRequestConclusion {
 /**
  * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum AnnotationLevel {
     #[serde(rename = "failure")]
     Failure,
@@ -28342,7 +28151,7 @@ impl AnnotationLevel {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Annotations {
     /**
      * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
@@ -28399,7 +28208,7 @@ pub struct Annotations {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Images {
     #[serde(
         default,
@@ -28422,7 +28231,7 @@ pub struct Images {
 }
 
 /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksCreateRequestOutput {
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
@@ -28462,7 +28271,7 @@ pub struct ChecksCreateRequestOutput {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksCreateRequestActions {
     #[serde(
         default,
@@ -28484,7 +28293,7 @@ pub struct ChecksCreateRequestActions {
     pub label: String,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksCreateRequest {
     /**
      * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
@@ -28498,7 +28307,6 @@ pub struct ChecksCreateRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -28539,7 +28347,6 @@ pub struct ChecksCreateRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -28550,7 +28357,7 @@ pub struct ChecksCreateRequest {
 }
 
 /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksUpdateRequestOutput {
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
@@ -28590,7 +28397,7 @@ pub struct ChecksUpdateRequestOutput {
     pub title: String,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksUpdateRequest {
     /**
      * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
@@ -28604,7 +28411,6 @@ pub struct ChecksUpdateRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -28639,7 +28445,6 @@ pub struct ChecksUpdateRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -28649,7 +28454,7 @@ pub struct ChecksUpdateRequest {
     pub status: Option<JobStatus>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksCreateSuiteRequest {
     #[serde(
         default,
@@ -28659,7 +28464,7 @@ pub struct ChecksCreateSuiteRequest {
     pub head_sha: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksListRefResponse {
     #[serde(
         default,
@@ -28675,7 +28480,7 @@ pub struct ChecksListRefResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningUpdateAlertRequest {
     /**
      * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
@@ -28688,7 +28493,7 @@ pub struct CodeScanningUpdateAlertRequest {
     pub state: CodeScanningAlertSetState,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CodeScanningUploadSarifRequest {
     #[serde(
         default,
@@ -28718,7 +28523,6 @@ pub struct CodeScanningUploadSarifRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -28729,7 +28533,7 @@ pub struct CodeScanningUploadSarifRequest {
     pub tool_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposAddCollaboratorRequest {
     /**
      * The permission to grant the team on this repository. Can be one of:  
@@ -28751,7 +28555,7 @@ pub struct ReposAddCollaboratorRequest {
     pub permissions: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateCommitCommentRequest {
     #[serde(
         default,
@@ -28779,7 +28583,7 @@ pub struct ReposCreateCommitCommentRequest {
     pub position: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ChecksListSuitesRefResponse {
     #[serde(
         default,
@@ -28803,7 +28607,7 @@ pub struct ChecksListSuitesRefResponse {
 /// - `ContentSubmodule`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ReposGetContentResponseOneOf {
     EntriesVector(Vec<Entries>),
@@ -28863,7 +28667,7 @@ impl std::convert::From<ReposGetContentResponseOneOf> for Vec<Entries> {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateUpdateFileContentsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<Tagger>,
@@ -28895,7 +28699,7 @@ pub struct ReposCreateUpdateFileContentsRequest {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposDeleteFileRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<Author>,
@@ -28921,7 +28725,7 @@ pub struct ReposDeleteFileRequest {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateDeploymentRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_merge: Option<bool>,
@@ -28970,7 +28774,7 @@ pub struct ReposCreateDeploymentRequest {
 /**
  * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposCreateDeploymentStatusRequestEnvironment {
     #[serde(rename = "production")]
     Production,
@@ -29008,7 +28812,7 @@ impl ReposCreateDeploymentStatusRequestEnvironment {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateDeploymentStatusRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_inactive: Option<bool>,
@@ -29048,7 +28852,7 @@ pub struct ReposCreateDeploymentStatusRequest {
     pub target_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateDispatchEventRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub client_payload: Option<Data>,
@@ -29060,7 +28864,7 @@ pub struct ReposCreateDispatchEventRequest {
     pub event_type: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposGetAllEnvironmentsResponse {
     #[serde(
         default,
@@ -29076,7 +28880,7 @@ pub struct ReposGetAllEnvironmentsResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateUpdateEnvironmentRequestReviewers {
     #[serde(
         default,
@@ -29091,7 +28895,7 @@ pub struct ReposCreateUpdateEnvironmentRequestReviewers {
     pub type_: Option<DeploymentReviewerType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateUpdateEnvironmentRequest {
     /**
      * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
@@ -29118,7 +28922,7 @@ pub struct ReposCreateUpdateEnvironmentRequest {
 /**
  * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposListForksSort {
     #[serde(rename = "newest")]
     Newest,
@@ -29151,7 +28955,7 @@ impl Default for ReposListForksSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateForkRequest {
     #[serde(
         default,
@@ -29161,7 +28965,7 @@ pub struct ReposCreateForkRequest {
     pub organization: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateBlobRequest {
     #[serde(
         default,
@@ -29178,7 +28982,7 @@ pub struct GitCreateBlobRequest {
 }
 
 /// Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateCommitRequestAuthor {
     /**
      * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
@@ -29186,7 +28990,6 @@ pub struct GitCreateCommitRequestAuthor {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -29204,7 +29007,7 @@ pub struct GitCreateCommitRequestAuthor {
 }
 
 /// Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateCommitRequestCommitter {
     /**
      * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
@@ -29212,7 +29015,6 @@ pub struct GitCreateCommitRequestCommitter {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -29229,7 +29031,7 @@ pub struct GitCreateCommitRequestCommitter {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateCommitRequest {
     /**
      * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
@@ -29270,7 +29072,7 @@ pub struct GitCreateCommitRequest {
     pub tree: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateRefRequest {
     #[serde(
         default,
@@ -29293,7 +29095,7 @@ pub struct GitCreateRefRequest {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitUpdateRefRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub force: Option<bool>,
@@ -29308,7 +29110,7 @@ pub struct GitUpdateRefRequest {
 /**
  * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum GitCreateTagRequestType {
     #[serde(rename = "blob")]
     Blob,
@@ -29347,7 +29149,7 @@ impl GitCreateTagRequestType {
 }
 
 /// An object with information about the individual creating the tag.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateTagRequestTagger {
     /**
      * An object with information about the individual creating the tag.
@@ -29355,7 +29157,6 @@ pub struct GitCreateTagRequestTagger {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -29372,7 +29173,7 @@ pub struct GitCreateTagRequestTagger {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateTagRequest {
     #[serde(
         default,
@@ -29411,7 +29212,7 @@ pub struct GitCreateTagRequest {
 /**
  * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum GitCreateTreeRequestMode {
     #[serde(rename = "040000")]
     SubdirectoryTree,
@@ -29455,7 +29256,7 @@ impl GitCreateTreeRequestMode {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateTreeRequest {
     #[serde(
         default,
@@ -29487,7 +29288,7 @@ pub struct GitCreateTreeRequest {
     pub type_: Option<GitCreateTagRequestType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct GitCreateTreeRequestData {
     #[serde(
         default,
@@ -29507,7 +29308,7 @@ pub struct GitCreateTreeRequestData {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateWebhookRequestConfig {
     #[serde(
         default,
@@ -29549,7 +29350,7 @@ pub struct ReposCreateWebhookRequestConfig {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
@@ -29570,7 +29371,7 @@ pub struct ReposCreateWebhookRequest {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateWebhookRequestConfig {
     #[serde(
         default,
@@ -29609,7 +29410,7 @@ pub struct ReposUpdateWebhookRequestConfig {
     pub url: Option<url::Url>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
@@ -29650,7 +29451,7 @@ pub struct ReposUpdateWebhookRequest {
 /**
  * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Vcs {
     #[serde(rename = "git")]
     Git,
@@ -29691,7 +29492,7 @@ impl Vcs {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MigrationsStartImportRequest {
     #[serde(
         default,
@@ -29724,7 +29525,7 @@ pub struct MigrationsStartImportRequest {
     pub vcs_username: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MigrationsUpdateImportRequest {
     #[serde(
         default,
@@ -29755,7 +29556,7 @@ pub struct MigrationsUpdateImportRequest {
 /**
  * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum UseLfs {
     #[serde(rename = "opt_in")]
     OptIn,
@@ -29790,7 +29591,7 @@ impl UseLfs {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct MigrationsSetLfsPreferenceRequest {
     /**
      * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
@@ -29799,7 +29600,7 @@ pub struct MigrationsSetLfsPreferenceRequest {
     pub use_lfs: UseLfs,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateInvitationRequest {
     /**
      * The permission associated with the invitation.
@@ -29808,7 +29609,7 @@ pub struct ReposUpdateInvitationRequest {
     pub permissions: Option<RepositoryInvitationPermissions>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct LabelsDataType {
     #[serde(
         default,
@@ -29842,7 +29643,7 @@ pub struct LabelsDataType {
 /// - `LabelsDataType`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum IssuesCreateRequestLabelsOneOf {
     String(String),
@@ -29877,7 +29678,7 @@ impl std::convert::From<IssuesCreateRequestLabelsOneOf> for String {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesCreateRequest {
     #[serde(
         default,
@@ -29914,7 +29715,7 @@ pub struct IssuesCreateRequest {
     pub title: TitleOneOf,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesUpdateRequest {
     #[serde(
         default,
@@ -29957,7 +29758,7 @@ pub struct IssuesUpdateRequest {
     pub title: Option<TitleOneOf>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesAddAssigneesRequest {
     /**
      * The list of events for the GitHub app
@@ -29970,7 +29771,7 @@ pub struct IssuesAddAssigneesRequest {
     pub assignees: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesAddLabelsRequest {
     /**
      * The list of events for the GitHub app
@@ -29983,7 +29784,7 @@ pub struct IssuesAddLabelsRequest {
     pub labels: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesSetLabelsRequest {
     #[serde(
         default,
@@ -30002,7 +29803,7 @@ pub struct IssuesSetLabelsRequest {
 /// - `IssuesSetLabelsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum IssuesAddLabelsRequestOneOf {
     String(String),
@@ -30095,7 +29896,7 @@ impl std::convert::From<IssuesAddLabelsRequestOneOf> for Vec<String> {
 /// - `IssuesAddLabelsRequest`
 /// - `Vec<ProjectsUpdateColumnRequest>`
 /// - `IssuesSetLabelsRequest`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesSetLabelsRequestAnyOf {
     #[serde(flatten)]
     pub string: String,
@@ -30119,7 +29920,7 @@ pub struct IssuesSetLabelsRequestAnyOf {
  *   \* `resolved`  
  *   \* `spam`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum LockReason {
     #[serde(rename = "off-topic")]
     OffTopic,
@@ -30160,13 +29961,13 @@ impl LockReason {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesLockRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lock_reason: Option<LockReason>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateDeployKeyRequest {
     #[serde(
         default,
@@ -30184,7 +29985,7 @@ pub struct ReposCreateDeployKeyRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesCreateLabelRequest {
     #[serde(
         default,
@@ -30206,7 +30007,7 @@ pub struct IssuesCreateLabelRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesUpdateLabelRequest {
     #[serde(
         default,
@@ -30228,7 +30029,7 @@ pub struct IssuesUpdateLabelRequest {
     pub new_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposMergeRequest {
     #[serde(
         default,
@@ -30253,7 +30054,7 @@ pub struct ReposMergeRequest {
 /**
  * What to sort results by. Either `due_on` or `completeness`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum IssuesListMilestonesSort {
     #[serde(rename = "completeness")]
     Completeness,
@@ -30280,7 +30081,7 @@ impl Default for IssuesListMilestonesSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct IssuesCreateMilestoneRequest {
     #[serde(
         default,
@@ -30291,7 +30092,6 @@ pub struct IssuesCreateMilestoneRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub due_on: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -30307,17 +30107,16 @@ pub struct IssuesCreateMilestoneRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActivityMarkRepoNotificationsAsReadRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_read_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsUpdateBranchResponse {
     #[serde(
         default,
@@ -30336,7 +30135,7 @@ pub struct PullsUpdateBranchResponse {
 /**
  * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum Path {
     #[serde(rename = "/")]
     Root,
@@ -30364,7 +30163,7 @@ impl Default for Path {
 }
 
 /// The source branch and directory used to publish your Pages site.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreatePagesSiteRequestSource {
     #[serde(
         default,
@@ -30380,7 +30179,7 @@ pub struct ReposCreatePagesSiteRequestSource {
 }
 
 /// The source branch and directory used to publish your Pages site.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreatePagesSiteRequest {
     /**
      * The source branch and directory used to publish your Pages site.
@@ -30391,7 +30190,7 @@ pub struct ReposCreatePagesSiteRequest {
 /**
  * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SourceData {
     #[serde(rename = "gh-pages")]
     GhPages,
@@ -30430,7 +30229,7 @@ impl SourceData {
 }
 
 /// Update the source for the repository. Must include the branch name and path.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SourceDataType {
     #[serde(
         default,
@@ -30449,7 +30248,7 @@ pub struct SourceDataType {
 ///
 /// - `SourceData`
 /// - `SourceDataType`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SourceAnyOf {
     /**
      * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
@@ -30463,7 +30262,7 @@ pub struct SourceAnyOf {
     pub source_data_type: SourceDataType,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateInformationAboutPagesSiteRequest {
     #[serde(
         default,
@@ -30482,7 +30281,7 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
 /**
  * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PullsListSort {
     #[serde(rename = "created")]
     Created,
@@ -30515,7 +30314,7 @@ impl Default for PullsListSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsCreateRequest {
     #[serde(
         default,
@@ -30553,7 +30352,7 @@ pub struct PullsCreateRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PullsListReviewCommentsRepoSort {
     #[serde(rename = "created")]
     Created,
@@ -30591,7 +30390,7 @@ impl PullsListReviewCommentsRepoSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsUpdateRequest {
     #[serde(
         default,
@@ -30623,7 +30422,7 @@ pub struct PullsUpdateRequest {
 /**
  * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PullsCreateReviewCommentRequestStartSide {
     #[serde(rename = "LEFT")]
     Left,
@@ -30661,7 +30460,7 @@ impl PullsCreateReviewCommentRequestStartSide {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsCreateReviewCommentRequest {
     #[serde(
         default,
@@ -30717,7 +30516,7 @@ pub struct PullsCreateReviewCommentRequest {
     pub start_side: Option<PullsCreateReviewCommentRequestStartSide>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsMergeRequest {
     #[serde(
         default,
@@ -30741,7 +30540,7 @@ pub struct PullsMergeRequest {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsRequestReviewers {
     /**
      * The list of events for the GitHub app
@@ -30763,7 +30562,7 @@ pub struct PullsRequestReviewers {
     pub team_reviewers: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsRemoveRequestedReviewersRequest {
     /**
      * The list of events for the GitHub app
@@ -30788,7 +30587,7 @@ pub struct PullsRemoveRequestedReviewersRequest {
 /**
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum PullsCreateReviewRequestEvent {
     #[serde(rename = "APPROVE")]
     Approve,
@@ -30826,7 +30625,7 @@ impl PullsCreateReviewRequestEvent {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Comments {
     #[serde(
         default,
@@ -30872,7 +30671,7 @@ pub struct Comments {
     pub start_side: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsCreateReviewRequest {
     #[serde(
         default,
@@ -30902,7 +30701,7 @@ pub struct PullsCreateReviewRequest {
     pub event: Option<PullsCreateReviewRequestEvent>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsDismissReviewRequest {
     #[serde(
         default,
@@ -30918,7 +30717,7 @@ pub struct PullsDismissReviewRequest {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsSubmitReviewRequest {
     #[serde(
         default,
@@ -30936,7 +30735,7 @@ pub struct PullsSubmitReviewRequest {
     pub event: PullsCreateReviewRequestEvent,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct PullsUpdateBranchRequest {
     #[serde(
         default,
@@ -30946,7 +30745,7 @@ pub struct PullsUpdateBranchRequest {
     pub expected_head_sha: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateReleaseRequest {
     #[serde(
         default,
@@ -30984,7 +30783,7 @@ pub struct ReposCreateReleaseRequest {
     pub target_commitish: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposUpdateReleaseAssetRequest {
     #[serde(
         default,
@@ -31009,7 +30808,7 @@ pub struct ReposUpdateReleaseAssetRequest {
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReactionsCreateReleaseRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -31056,7 +30855,7 @@ impl ReactionsCreateReleaseRequestContent {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReactionsCreateReleaseRequest {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
@@ -31068,7 +30867,7 @@ pub struct ReactionsCreateReleaseRequest {
     pub content: ReactionsCreateReleaseRequestContent,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SecretScanningUpdateAlertRequest {
     /**
      * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
@@ -31085,7 +30884,7 @@ pub struct SecretScanningUpdateAlertRequest {
 ///
 /// - `Vec<SimpleUser>`
 /// - `Vec<Stargazer>`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActivityListStargazersRepoResponseAnyOf {
     #[serde(flatten)]
     pub simple_user_vector: Vec<SimpleUser>,
@@ -31096,7 +30895,7 @@ pub struct ActivityListStargazersRepoResponseAnyOf {
 /**
  * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposCreateCommitStatusRequestState {
     #[serde(rename = "error")]
     Error,
@@ -31137,7 +30936,7 @@ impl ReposCreateCommitStatusRequestState {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateCommitStatusRequest {
     #[serde(
         default,
@@ -31167,7 +30966,7 @@ pub struct ReposCreateCommitStatusRequest {
     pub target_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActivitySetRepoSubscriptionRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ignored: Option<bool>,
@@ -31175,7 +30974,7 @@ pub struct ActivitySetRepoSubscriptionRequest {
     pub subscribed: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposTransferRequest {
     #[serde(
         default,
@@ -31194,7 +30993,7 @@ pub struct ReposTransferRequest {
     pub team_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateUsingTemplateRequest {
     #[serde(
         default,
@@ -31220,7 +31019,7 @@ pub struct ReposCreateUsingTemplateRequest {
     pub private: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminProvisionInviteGroupRequest {
     #[serde(
         default,
@@ -31246,7 +31045,7 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     #[serde(rename = "Add")]
     Add,
@@ -31287,7 +31086,7 @@ impl EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     #[serde(
         default,
@@ -31304,7 +31103,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     pub value: Option<ScimUserOperationsValueOneOf>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
@@ -31327,7 +31126,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
     #[serde(
         default,
@@ -31349,7 +31148,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminProvisionInviteUserRequest {
     /**
      * List of user emails.
@@ -31385,7 +31184,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
     pub user_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct EnterpriseAdminUpdateAttributeUserRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
@@ -31408,7 +31207,7 @@ pub struct EnterpriseAdminUpdateAttributeUserRequest {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimProvisionInviteUserRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
@@ -31460,7 +31259,7 @@ pub struct ScimProvisionInviteUserRequest {
     pub user_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Value {
     #[serde(
         default,
@@ -31504,7 +31303,7 @@ pub struct Value {
 /// - `Value`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
     String(String),
@@ -31567,7 +31366,7 @@ impl std::convert::From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for 
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUpdateAttributeUserRequestOperations {
     #[serde(default, skip_serializing_if = "Op::is_noop")]
     pub op: Op,
@@ -31581,7 +31380,7 @@ pub struct ScimUpdateAttributeUserRequestOperations {
     pub value: Option<ScimUpdateAttributeUserRequestOperationsValueOneOf>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ScimUpdateAttributeUserRequest {
     /**
      * Set of operations to be performed
@@ -31607,7 +31406,7 @@ pub struct ScimUpdateAttributeUserRequest {
 /**
  * Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SearchCodeSort {
     #[serde(rename = "indexed")]
     Indexed,
@@ -31639,7 +31438,7 @@ impl SearchCodeSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchCodeResponse {
     #[serde(
         default,
@@ -31663,7 +31462,7 @@ pub struct SearchCodeResponse {
 /**
  * Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SearchCommitsSort {
     #[serde(rename = "author-date")]
     AuthorDate,
@@ -31698,7 +31497,7 @@ impl SearchCommitsSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchCommitsResponse {
     #[serde(
         default,
@@ -31722,7 +31521,7 @@ pub struct SearchCommitsResponse {
 /**
  * Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SearchIssuesPullRequestsSort {
     #[serde(rename = "comments")]
     Comments,
@@ -31784,7 +31583,7 @@ impl SearchIssuesPullRequestsSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchIssuesPullRequestsResponse {
     #[serde(
         default,
@@ -31805,7 +31604,7 @@ pub struct SearchIssuesPullRequestsResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchLabelsResponse {
     #[serde(
         default,
@@ -31829,7 +31628,7 @@ pub struct SearchLabelsResponse {
 /**
  * Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SearchReposSort {
     #[serde(rename = "forks")]
     Forks,
@@ -31870,7 +31669,7 @@ impl SearchReposSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchReposResponse {
     #[serde(
         default,
@@ -31891,7 +31690,7 @@ pub struct SearchReposResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchTopicsResponse {
     #[serde(
         default,
@@ -31915,7 +31714,7 @@ pub struct SearchTopicsResponse {
 /**
  * Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SearchUsersSort {
     #[serde(rename = "followers")]
     Followers,
@@ -31953,7 +31752,7 @@ impl SearchUsersSort {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct SearchUsersResponse {
     #[serde(
         default,
@@ -31974,7 +31773,7 @@ pub struct SearchUsersResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
     /**
      * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
@@ -31983,7 +31782,7 @@ pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
     pub permission: Option<RepositoryProjects>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
     /**
      * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
@@ -31995,7 +31794,7 @@ pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
     pub permission: Option<Permission>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups {
     #[serde(
         default,
@@ -32035,7 +31834,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
     /**
      * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
@@ -32060,7 +31859,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
 /// - `PrivateUser`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum UsersGetByUsernameResponseOneOf {
     /**
@@ -32089,7 +31888,7 @@ impl UsersGetByUsernameResponseOneOf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct UsersUpdateAuthenticatedRequest {
     #[serde(
         default,
@@ -32137,13 +31936,13 @@ pub struct UsersUpdateAuthenticatedRequest {
     pub twitter_username: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
     #[serde(default, skip_serializing_if = "PackageVisibility::is_noop")]
     pub visibility: PackageVisibility,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct UsersAddEmailAuthenticatedRequest {
     /**
      * The list of events for the GitHub app
@@ -32163,7 +31962,7 @@ pub struct UsersAddEmailAuthenticatedRequest {
 /// - `UsersAddEmailAuthenticatedRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(untagged)]
 pub enum UsersAddEmailAuthenticatedRequestOneOf {
     String(String),
@@ -32225,7 +32024,7 @@ impl std::convert::From<UsersAddEmailAuthenticatedRequestOneOf> for Vec<String> 
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct UsersCreateGpgKeyAuthenticatedRequest {
     #[serde(
         default,
@@ -32235,7 +32034,7 @@ pub struct UsersCreateGpgKeyAuthenticatedRequest {
     pub armored_public_key: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
     #[serde(
         default,
@@ -32254,7 +32053,7 @@ pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
 /**
  * The state that the membership should be in. Only `"active"` will be accepted.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum OrgsUpdateMembershipRequestState {
     #[serde(rename = "active")]
     Active,
@@ -32286,7 +32085,7 @@ impl OrgsUpdateMembershipRequestState {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct OrgsUpdateMembershipRequest {
     /**
      * The state that the membership should be in. Only `"active"` will be accepted.
@@ -32301,7 +32100,7 @@ pub struct OrgsUpdateMembershipRequest {
 /**
  * Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposListVisibility {
     #[serde(rename = "all")]
     All,
@@ -32336,7 +32135,7 @@ impl Default for ReposListVisibility {
  *     
  *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposListType {
     #[serde(rename = "all")]
     All,
@@ -32372,7 +32171,7 @@ impl Default for ReposListType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ReposCreateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_auto_merge: Option<bool>,
@@ -32439,7 +32238,7 @@ pub struct ReposCreateRequest {
 /**
  * Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum SubjectType {
     #[serde(rename = "issue")]
     Issue,
@@ -32483,7 +32282,7 @@ impl SubjectType {
 /**
  * Can be one of `all`, `owner`, `member`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ReposListUserType {
     #[serde(rename = "all")]
     All,
@@ -32517,7 +32316,7 @@ impl Default for ReposListUserType {
 ///
 /// - `Vec<Repository>`
 /// - `Vec<StarredRepository>`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct ActivityListReposStarredByUserResponseAnyOf {
     #[serde(flatten)]
     pub repository_vector: Vec<Repository>,

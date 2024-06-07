@@ -126,11 +126,14 @@ impl Apps {
          * to the caller.  The "next" link provides the "cursor" value for the
          * next page of results.
          */
-        let (links, res) = self.client.request(http::Method::GET,
+        let (url, auth) = self.client.url_and_auth(
             &(self.client.host.clone() + &url),
+            crate::auth::AuthenticationConstraint::Unconstrained).await?;
+        let (links, res) = self.client.request(http::Method::GET,
+            url,
             None,
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained).await?;
+            auth).await?;
         Ok((res, links))
     }
 
@@ -353,7 +356,6 @@ impl Apps {
      *
      * * `installation_id: i64` -- installation_id parameter.
      */
-    #[async_recursion::async_recursion]
     pub async fn create_installation_access_token(
         &self,
         installation_id: i64,
@@ -365,7 +367,7 @@ impl Apps {
         );
 
         self.client
-            .post_media(
+            .post_media_jwt_only(
                 &url,
                 Some(reqwest::Body::from(serde_json::to_vec(body)?)),
                 crate::utils::MediaType::Json,
