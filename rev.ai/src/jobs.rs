@@ -77,6 +77,38 @@ impl Jobs {
             .await
     }
     /**
+     * Submit Local File Transcription Job.
+     *
+     * This function performs a `POST` to the `/jobs` endpoint.
+     *
+     * Starts an asynchronous job to transcribe speech-to-text for a media file. Media files can be specified by uploading a local file as part of a multipart/form request.
+     */
+    pub async fn submit_local_file_transcription_job(
+        &self,
+        crate::types::SubmitLocalFileJob {
+            blob,
+            mime_type,
+            filename,
+        }: &crate::types::SubmitLocalFileJob,
+        options: Option<&crate::types::SubmitJobLocalFileOptionsAllOf>,
+    ) -> ClientResult<crate::Response<crate::types::JobAllOf>> {
+        let url = self.client.url("/jobs", None);
+
+        let mut form = reqwest::multipart::Form::new().part(
+            "media",
+            reqwest::multipart::Part::bytes(blob.to_vec())
+                .mime_str(&mime_type)?
+                .file_name(filename.clone()),
+        );
+
+        if let Some(options) = options {
+            form = form.text("options", serde_json::to_string(&options)?);
+        }
+
+        self.client.post_form(&url, form).await
+    }
+
+    /**
      * Submit Transcription Job.
      *
      * This function performs a `POST` to the `/jobs` endpoint.
