@@ -161,7 +161,10 @@ impl Locations {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
-            &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/locations/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -187,7 +190,10 @@ impl Locations {
         body: &crate::types::PostLocationRequest,
     ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
-            &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/locations/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client

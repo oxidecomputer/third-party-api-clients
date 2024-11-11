@@ -31,7 +31,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -89,7 +89,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         status: crate::types::IssuingAuthorizationStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingAuthorization>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -317,7 +317,7 @@ impl Issuing {
      */
     pub async fn get_cardholders(
         &self,
-        _created: &str,
+        created: &str,
         email: &str,
         ending_before: &str,
         limit: i64,
@@ -379,7 +379,7 @@ impl Issuing {
      */
     pub async fn get_all_cardholders(
         &self,
-        _created: &str,
+        created: &str,
         email: &str,
         phone_number: &str,
         status: crate::types::IssuingCardholderStatus,
@@ -481,7 +481,9 @@ impl Issuing {
     pub async fn post_cardholder(
         &self,
     ) -> ClientResult<crate::Response<crate::types::IssuingCardholder>> {
-        let url = self.client.url("/v1/issuing/cardholders", None);
+        let url = self
+            .client
+            .url("/v1/issuing/cardholders", None);
         self.client
             .post(
                 &url,
@@ -575,7 +577,7 @@ impl Issuing {
     pub async fn get_cards(
         &self,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         exp_month: i64,
         exp_year: i64,
@@ -645,7 +647,7 @@ impl Issuing {
     pub async fn get_all_cards(
         &self,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         exp_month: i64,
         exp_year: i64,
         last_4: &str,
@@ -841,7 +843,7 @@ impl Issuing {
      */
     pub async fn get_disputes(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -895,7 +897,7 @@ impl Issuing {
      */
     pub async fn get_all_disputes(
         &self,
-        _created: &str,
+        created: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingDispute>>> {
@@ -1106,7 +1108,7 @@ impl Issuing {
      */
     pub async fn get_settlements(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -1152,9 +1154,11 @@ impl Issuing {
      */
     pub async fn get_all_settlements(
         &self,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingSettlement>>> {
-        let url = self.client.url("/v1/issuing/settlements", None);
+        let url = self
+            .client
+            .url("/v1/issuing/settlements", None);
         let crate::Response::<crate::types::GetIssuingSettlementsResponse> {
             mut status,
             mut headers,
@@ -1307,7 +1311,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -1365,7 +1369,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         type_: crate::types::IssuingTransactionType,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

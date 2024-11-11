@@ -31,15 +31,15 @@ impl Orders {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         limit: i64,
         starting_after: &str,
         status: &str,
-        _status_transitions: &str,
-        _upstream_ids: &[String],
+        status_transitions: &str,
+        upstream_ids: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -86,12 +86,12 @@ impl Orders {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
-        _ids: &[String],
+        ids: &[String],
         status: &str,
-        _status_transitions: &str,
-        _upstream_ids: &[String],
+        status_transitions: &str,
+        upstream_ids: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -202,7 +202,10 @@ impl Orders {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
-            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/v1/orders/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -229,7 +232,10 @@ impl Orders {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
-            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/v1/orders/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client

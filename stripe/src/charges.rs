@@ -29,7 +29,7 @@ impl Charges {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -85,7 +85,7 @@ impl Charges {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         payment_intent: &str,
         transfer_group: &str,

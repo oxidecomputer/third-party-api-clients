@@ -27,7 +27,10 @@ impl DesignsApi {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -60,7 +63,10 @@ impl DesignsApi {
         body: &crate::types::DesignDuplicateInput,
     ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -87,7 +93,10 @@ impl DesignsApi {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -123,7 +132,10 @@ impl DesignsApi {
         body: &crate::types::PutDesignRequest,
     ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client

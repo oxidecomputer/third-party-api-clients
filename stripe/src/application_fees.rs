@@ -28,7 +28,7 @@ impl ApplicationFees {
     pub async fn get_page(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -78,7 +78,7 @@ impl ApplicationFees {
     pub async fn get_all(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PlatformFee>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {

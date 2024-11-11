@@ -30,7 +30,9 @@ impl SendTestEmail {
         &self,
         body: &crate::types::PostMarketingTestSendEmailRequest,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
-        let url = self.client.url("/marketing/test/send_email", None);
+        let url = self
+            .client
+            .url("/marketing/test/send_email", None);
         self.client
             .post(
                 &url,

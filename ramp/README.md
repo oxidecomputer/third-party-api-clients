@@ -28,7 +28,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-ramp-api = "0.7.1"
+ramp-api = "0.8.0-rc.1"
 ```
 
 ## Basic example

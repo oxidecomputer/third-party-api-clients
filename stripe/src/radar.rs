@@ -215,7 +215,7 @@ impl Radar {
      */
     pub async fn get_value_list_items(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -269,7 +269,7 @@ impl Radar {
      */
     pub async fn get_all_value_list_all_items(
         &self,
-        _created: &str,
+        created: &str,
         value: &str,
         value_list: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarListItem>>> {
@@ -363,7 +363,9 @@ impl Radar {
     pub async fn post_value_list_item(
         &self,
     ) -> ClientResult<crate::Response<crate::types::RadarListItem>> {
-        let url = self.client.url("/v1/radar/value_list_items", None);
+        let url = self
+            .client
+            .url("/v1/radar/value_list_items", None);
         self.client
             .post(
                 &url,
@@ -454,7 +456,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -508,7 +510,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarList>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {

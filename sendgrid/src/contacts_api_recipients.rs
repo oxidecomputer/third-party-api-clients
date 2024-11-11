@@ -310,7 +310,9 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_recipients_count(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ContactdbRecipientCount>> {
-        let url = self.client.url("/contactdb/recipients/count", None);
+        let url = self
+            .client
+            .url("/contactdb/recipients/count", None);
         self.client
             .get(
                 &url,
@@ -418,7 +420,9 @@ impl ContactsApiRecipients {
         body: &crate::types::PostContactdbRecipientsSearchRequest,
     ) -> ClientResult<crate::Response<crate::types::PostContactdbRecipientsSearchResponseData>>
     {
-        let url = self.client.url("/contactdb/recipients/search", None);
+        let url = self
+            .client
+            .url("/contactdb/recipients/search", None);
         self.client
             .post(
                 &url,

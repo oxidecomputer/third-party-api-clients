@@ -225,7 +225,9 @@ impl Users {
         &self,
         body: &crate::types::User,
     ) -> ClientResult<crate::Response<crate::types::User>> {
-        let url = self.client.url("/admin/directory/v1/users", None);
+        let url = self
+            .client
+            .url("/admin/directory/v1/users", None);
         self.client
             .post(
                 &url,

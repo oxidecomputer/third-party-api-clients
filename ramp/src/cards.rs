@@ -157,7 +157,10 @@ impl Cards {
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Card>> {
         let url = self.client.url(
-            &format!("/cards/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/cards/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -187,7 +190,10 @@ impl Cards {
         body: &crate::types::PatchResourcesCardsCardRequest,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!("/cards/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/cards/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
             None,
         );
         self.client
@@ -215,7 +221,9 @@ impl Cards {
         &self,
         body: &crate::types::PostResourcesCardPhysicalRequest,
     ) -> ClientResult<crate::Response<crate::types::TaskResponse>> {
-        let url = self.client.url("/cards/deferred/physical", None);
+        let url = self
+            .client
+            .url("/cards/deferred/physical", None);
         self.client
             .post(
                 &url,
@@ -241,7 +249,9 @@ impl Cards {
         &self,
         body: &crate::types::PostResourcesCardVirtualRequest,
     ) -> ClientResult<crate::Response<crate::types::TaskResponse>> {
-        let url = self.client.url("/cards/deferred/virtual", None);
+        let url = self
+            .client
+            .url("/cards/deferred/virtual", None);
         self.client
             .post(
                 &url,
