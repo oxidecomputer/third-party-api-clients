@@ -1,7 +1,7 @@
 [package]
 name = "mailchimp-api"
 description = "A fully generated & opinionated API client for the MailChimp API."
-version = "0.8.0-rc.1"
+version = "0.8.0-rc.2"
 documentation = "https://docs.rs/mailchimp-api/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/mailchimp"
 readme = "README.md"
@@ -17,7 +17,7 @@ rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 
 [dependencies]
 async-recursion = "^1.0"
-chrono = { version = "0.4.38", default-features = false, features = ["serde"] }
+chrono = { version = "0.4.38", default-features = false, features = ["alloc", "serde"] }
 dirs = { version = "^3.0.2", optional = true }
 http = "1"
 jsonwebtoken = "8"
@@ -28,10 +28,10 @@ parse_link_header = "0.3.3"
 pem = { version = "1.1.0",  default-features = false, optional = true }
 percent-encoding = "2.2"
 reqwest = { version = "0.12", default-features = false, features = ["json", "multipart"] }
-reqwest-conditional-middleware = "0.3"
-reqwest-middleware = { version = "0.3", features = ["multipart"] }
-reqwest-retry = "0.5"
-reqwest-tracing = "0.5"
+reqwest-conditional-middleware = "0.4"
+reqwest-middleware = { version = "0.4", features = ["multipart"] }
+reqwest-retry = "0.7"
+reqwest-tracing = "0.5.4"
 ring = { version = "0.16", default-features = false, optional = true }
 schemars = { version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }
 serde = { version = "1", features = ["derive"] }

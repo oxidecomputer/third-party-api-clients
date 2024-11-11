@@ -36,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.8.0-rc.1"
+//! octorust = "0.8.0-rc.2"
 //! ```
 //!
 //! ## Basic example
@@ -56,7 +56,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host_override](https://docs.rs/octorust/0.8.0-rc.1/octorust/struct.Client.html#method.host_override) method.
+//! [Client#host_override](https://docs.rs/octorust/0.8.0-rc.2/octorust/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -70,7 +70,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.8.0-rc.1", features = ["httpcache"] }
+//! octorust = { version = "0.8.0-rc.2", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -596,34 +596,18 @@ impl Client {
             .await?;
 
         #[cfg(feature = "httpcache")]
-        let (req, cache_out) = {
+        let req = {
             let mut req = self
                 .make_request(method.clone(), uri, message, media_type, authentication)
                 .await?;
 
-            let cache_out = if method == http::Method::GET {
-                let cache_out = if let Ok(body) = self.http_cache.lookup_body(&uri) {
-                    if let Ok(out) = serde_json::from_str::<Out>(&body) {
-                        Some(out)
-                    } else {
-                        None
-                    }
-                } else {
-                    None
-                };
-
-                if cache_out.is_some() {
-                    if let Ok(etag) = self.http_cache.lookup_etag(&uri) {
-                        req = req.header(http::header::IF_NONE_MATCH, etag);
-                    }
+            if method == http::Method::GET {
+                if let Ok(etag) = self.http_cache.lookup_etag(&uri) {
+                    req = req.header(http::header::IF_NONE_MATCH, etag);
                 }
+            }
 
-                cache_out
-            } else {
-                None
-            };
-
-            (req, cache_out)
+            req
         };
 
         let response = req.send().await?;
@@ -680,18 +664,16 @@ impl Client {
                     // header when cargo builds with --cfg feature="httpcache"
                     #[cfg(feature = "httpcache")]
                     {
-                        if let Some(out) = cache_out {
-                            let link = match next_link {
-                                Some(next_link) => Ok(Some(next_link)),
-                                None => self
-                                    .http_cache
-                                    .lookup_next_link(&uri)
-                                    .map(|next_link| next_link.map(crate::utils::NextLink)),
-                            };
-                            link.map(|link| (link, Response::new(status, headers, out)))
-                        } else {
-                            unreachable!("GitHub returned a 304 for a request without an etag: {:?} {}", method, uri);
-                        }
+                        let body = self.http_cache.lookup_body(&uri).unwrap();
+                        let out = serde_json::from_str::<Out>(&body).unwrap();
+                        let link = match next_link {
+                            Some(next_link) => Ok(Some(next_link)),
+                            None => self
+                                .http_cache
+                                .lookup_next_link(&uri)
+                                .map(|next_link| next_link.map(crate::utils::NextLink)),
+                        };
+                        link.map(|link| (link, Response::new(status, headers, out)))
                     }
                     #[cfg(not(feature = "httpcache"))]
                     {
@@ -810,7 +792,7 @@ impl Client {
             uri,
             Message::default(),
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained
+            crate::auth::AuthenticationConstraint::Unconstrained,
         )
         .await
     }
@@ -827,7 +809,7 @@ impl Client {
             url.as_str(),
             Message::default(),
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained
+            crate::auth::AuthenticationConstraint::Unconstrained,
         )
         .await
     }
