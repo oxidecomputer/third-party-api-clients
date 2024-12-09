@@ -28,7 +28,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-tripactions = "0.8.0-rc.1"
+tripactions = "0.8.0-rc.2"
 ```
 
 ## Basic example
