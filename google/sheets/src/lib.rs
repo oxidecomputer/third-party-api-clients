@@ -36,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sheets = "0.9.0"
+//! sheets = "0.9.0-rc.1"
 //! ```
 //!
 //! ## Basic example
