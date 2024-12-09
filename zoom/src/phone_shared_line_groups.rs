@@ -87,9 +87,7 @@ impl PhoneSharedLineGroups {
     pub async fn list_all_shared_line_groups(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SharedLineGroups>>> {
-        let url = self
-            .client
-            .url("/phone/shared_line_groups", None);
+        let url = self.client.url("/phone/shared_line_groups", None);
         let crate::Response::<crate::types::ListSharedLineGroupsResponse> {
             mut status,
             mut headers,
@@ -174,9 +172,7 @@ impl PhoneSharedLineGroups {
         &self,
         body: &crate::types::CreateSharedLineGroupRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/phone/shared_line_groups", None);
+        let url = self.client.url("/phone/shared_line_groups", None);
         self.client
             .post(
                 &url,

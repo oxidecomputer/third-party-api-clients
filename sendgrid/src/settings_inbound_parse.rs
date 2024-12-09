@@ -34,9 +34,7 @@ impl SettingsInboundParse {
         &self,
         body: &crate::types::ParseSetting,
     ) -> ClientResult<crate::Response<crate::types::ParseSetting>> {
-        let url = self
-            .client
-            .url("/user/webhooks/parse/settings", None);
+        let url = self.client.url("/user/webhooks/parse/settings", None);
         self.client
             .post(
                 &url,

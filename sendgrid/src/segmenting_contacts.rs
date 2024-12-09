@@ -196,9 +196,7 @@ impl SegmentingContacts {
         &self,
         body: &crate::types::PostMarketingSegmentsDeleteRequest,
     ) -> ClientResult<crate::Response<crate::types::PostMarketingSegmentsDeleteResponse>> {
-        let url = self
-            .client
-            .url("/marketing/segments/delete", None);
+        let url = self.client.url("/marketing/segments/delete", None);
         self.client
             .post(
                 &url,

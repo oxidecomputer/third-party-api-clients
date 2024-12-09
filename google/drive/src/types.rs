@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DriveThemes {
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -15,7 +15,7 @@ pub struct DriveThemes {
     )]
     pub background_image_link: String,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -25,7 +25,7 @@ pub struct DriveThemes {
     )]
     pub color_rgb: String,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -39,7 +39,7 @@ pub struct DriveThemes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StorageQuota {
     /**
-    * The user's storage quota limits and usage. All fields are measured in bytes.
+     * The user's storage quota limits and usage. All fields are measured in bytes.
      */
     #[serde(
         default,
@@ -48,7 +48,7 @@ pub struct StorageQuota {
     )]
     pub limit: i64,
     /**
-    * The user's storage quota limits and usage. All fields are measured in bytes.
+     * The user's storage quota limits and usage. All fields are measured in bytes.
      */
     #[serde(
         default,
@@ -57,7 +57,7 @@ pub struct StorageQuota {
     )]
     pub usage: i64,
     /**
-    * The user's storage quota limits and usage. All fields are measured in bytes.
+     * The user's storage quota limits and usage. All fields are measured in bytes.
      */
     #[serde(
         default,
@@ -67,7 +67,7 @@ pub struct StorageQuota {
     )]
     pub usage_in_drive: i64,
     /**
-    * The user's storage quota limits and usage. All fields are measured in bytes.
+     * The user's storage quota limits and usage. All fields are measured in bytes.
      */
     #[serde(
         default,
@@ -82,7 +82,7 @@ pub struct StorageQuota {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct About {
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -91,7 +91,7 @@ pub struct About {
     )]
     pub app_installed: Option<bool>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -100,7 +100,7 @@ pub struct About {
     )]
     pub can_create_drives: Option<bool>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -109,7 +109,7 @@ pub struct About {
     )]
     pub can_create_team_drives: Option<bool>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -119,7 +119,7 @@ pub struct About {
     )]
     pub drive_themes: Vec<DriveThemes>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -129,7 +129,7 @@ pub struct About {
     )]
     pub export_formats: Vec<String>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -139,7 +139,7 @@ pub struct About {
     )]
     pub folder_color_palette: Vec<String>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -149,7 +149,7 @@ pub struct About {
     )]
     pub import_formats: Vec<String>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -158,7 +158,7 @@ pub struct About {
     )]
     pub kind: String,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -168,7 +168,7 @@ pub struct About {
     )]
     pub max_import_sizes: i64,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -178,7 +178,7 @@ pub struct About {
     )]
     pub max_upload_size: i64,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -187,7 +187,7 @@ pub struct About {
     )]
     pub storage_quota: Option<StorageQuota>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
@@ -197,7 +197,7 @@ pub struct About {
     )]
     pub team_drive_themes: Vec<DriveThemes>,
     /**
-    * Information about the user, the user's Drive, and system capabilities.
+     * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<User>,
@@ -207,7 +207,7 @@ pub struct About {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Change {
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(
         default,
@@ -217,12 +217,12 @@ pub struct Change {
     )]
     pub change_type: String,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub drive: Option<Drive>,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(
         default,
@@ -232,12 +232,12 @@ pub struct Change {
     )]
     pub drive_id: String,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub file: Option<File>,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(
         default,
@@ -247,7 +247,7 @@ pub struct Change {
     )]
     pub file_id: String,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(
         default,
@@ -256,17 +256,17 @@ pub struct Change {
     )]
     pub kind: String,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub removed: Option<bool>,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "teamDrive")]
     pub team_drive: Option<TeamDrive>,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(
         default,
@@ -276,7 +276,7 @@ pub struct Change {
     )]
     pub team_drive_id: String,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(
         default,
@@ -285,7 +285,7 @@ pub struct Change {
     )]
     pub time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * A change to a file or shared drive.
+     * A change to a file or shared drive.
      */
     #[serde(
         default,
@@ -300,7 +300,7 @@ pub struct Change {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChangeList {
     /**
-    * A list of changes for a user.
+     * A list of changes for a user.
      */
     #[serde(
         default,
@@ -309,7 +309,7 @@ pub struct ChangeList {
     )]
     pub changes: Vec<Change>,
     /**
-    * A list of changes for a user.
+     * A list of changes for a user.
      */
     #[serde(
         default,
@@ -318,7 +318,7 @@ pub struct ChangeList {
     )]
     pub kind: String,
     /**
-    * A list of changes for a user.
+     * A list of changes for a user.
      */
     #[serde(
         default,
@@ -328,7 +328,7 @@ pub struct ChangeList {
     )]
     pub new_start_page_token: String,
     /**
-    * A list of changes for a user.
+     * A list of changes for a user.
      */
     #[serde(
         default,
@@ -343,7 +343,7 @@ pub struct ChangeList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -352,7 +352,7 @@ pub struct Channel {
     )]
     pub address: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -361,7 +361,7 @@ pub struct Channel {
     )]
     pub expiration: i64,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -370,7 +370,7 @@ pub struct Channel {
     )]
     pub id: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -379,7 +379,7 @@ pub struct Channel {
     )]
     pub kind: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -388,12 +388,12 @@ pub struct Channel {
     )]
     pub params: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payload: Option<bool>,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -403,7 +403,7 @@ pub struct Channel {
     )]
     pub resource_id: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -413,7 +413,7 @@ pub struct Channel {
     )]
     pub resource_uri: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -422,7 +422,7 @@ pub struct Channel {
     )]
     pub token: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -437,7 +437,7 @@ pub struct Channel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct QuotedFileContent {
     /**
-    * The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
+     * The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
      */
     #[serde(
         default,
@@ -447,7 +447,7 @@ pub struct QuotedFileContent {
     )]
     pub mime_type: String,
     /**
-    * The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
+     * The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
      */
     #[serde(
         default,
@@ -461,7 +461,7 @@ pub struct QuotedFileContent {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Comment {
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -470,12 +470,12 @@ pub struct Comment {
     )]
     pub anchor: String,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<User>,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -484,7 +484,7 @@ pub struct Comment {
     )]
     pub content: String,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -494,12 +494,12 @@ pub struct Comment {
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deleted: Option<bool>,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -509,7 +509,7 @@ pub struct Comment {
     )]
     pub html_content: String,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -518,7 +518,7 @@ pub struct Comment {
     )]
     pub id: String,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -527,7 +527,7 @@ pub struct Comment {
     )]
     pub kind: String,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -537,7 +537,7 @@ pub struct Comment {
     )]
     pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -546,7 +546,7 @@ pub struct Comment {
     )]
     pub quoted_file_content: Option<QuotedFileContent>,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(
         default,
@@ -555,7 +555,7 @@ pub struct Comment {
     )]
     pub replies: Vec<Reply>,
     /**
-    * A comment on a file.
+     * A comment on a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolved: Option<bool>,
@@ -565,7 +565,7 @@ pub struct Comment {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommentList {
     /**
-    * A list of comments on a file.
+     * A list of comments on a file.
      */
     #[serde(
         default,
@@ -574,7 +574,7 @@ pub struct CommentList {
     )]
     pub comments: Vec<Comment>,
     /**
-    * A list of comments on a file.
+     * A list of comments on a file.
      */
     #[serde(
         default,
@@ -583,7 +583,7 @@ pub struct CommentList {
     )]
     pub kind: String,
     /**
-    * A list of comments on a file.
+     * A list of comments on a file.
      */
     #[serde(
         default,
@@ -598,12 +598,12 @@ pub struct CommentList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContentRestriction {
     /**
-    * A restriction for accessing the content of the file.
+     * A restriction for accessing the content of the file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "readOnly")]
     pub read_only: Option<bool>,
     /**
-    * A restriction for accessing the content of the file.
+     * A restriction for accessing the content of the file.
      */
     #[serde(
         default,
@@ -612,7 +612,7 @@ pub struct ContentRestriction {
     )]
     pub reason: String,
     /**
-    * A restriction for accessing the content of the file.
+     * A restriction for accessing the content of the file.
      */
     #[serde(
         default,
@@ -621,7 +621,7 @@ pub struct ContentRestriction {
     )]
     pub restricting_user: Option<User>,
     /**
-    * A restriction for accessing the content of the file.
+     * A restriction for accessing the content of the file.
      */
     #[serde(
         default,
@@ -631,7 +631,7 @@ pub struct ContentRestriction {
     )]
     pub restriction_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * A restriction for accessing the content of the file.
+     * A restriction for accessing the content of the file.
      */
     #[serde(
         default,
@@ -646,7 +646,7 @@ pub struct ContentRestriction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BackgroundImageFile {
     /**
-    * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -655,7 +655,7 @@ pub struct BackgroundImageFile {
     )]
     pub id: String,
     /**
-    * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -664,7 +664,7 @@ pub struct BackgroundImageFile {
     )]
     pub width: f64,
     /**
-    * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -674,7 +674,7 @@ pub struct BackgroundImageFile {
     )]
     pub x_coordinate: f64,
     /**
-    * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -689,7 +689,7 @@ pub struct BackgroundImageFile {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Capabilities {
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -698,7 +698,7 @@ pub struct Capabilities {
     )]
     pub can_add_children: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -707,7 +707,7 @@ pub struct Capabilities {
     )]
     pub can_change_copy_requires_writer_permission_restriction: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -716,7 +716,7 @@ pub struct Capabilities {
     )]
     pub can_change_domain_users_only_restriction: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -725,7 +725,7 @@ pub struct Capabilities {
     )]
     pub can_change_drive_background: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -734,7 +734,7 @@ pub struct Capabilities {
     )]
     pub can_change_drive_members_only_restriction: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -743,12 +743,12 @@ pub struct Capabilities {
     )]
     pub can_comment: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canCopy")]
     pub can_copy: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -757,7 +757,7 @@ pub struct Capabilities {
     )]
     pub can_delete_children: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -766,7 +766,7 @@ pub struct Capabilities {
     )]
     pub can_delete_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -775,12 +775,12 @@ pub struct Capabilities {
     )]
     pub can_download: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canEdit")]
     pub can_edit: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -789,7 +789,7 @@ pub struct Capabilities {
     )]
     pub can_list_children: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -798,7 +798,7 @@ pub struct Capabilities {
     )]
     pub can_manage_members: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -807,12 +807,12 @@ pub struct Capabilities {
     )]
     pub can_read_revisions: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canRename")]
     pub can_rename: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -821,12 +821,12 @@ pub struct Capabilities {
     )]
     pub can_rename_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canShare")]
     pub can_share: Option<bool>,
     /**
-    * Capabilities the current user has on this shared drive.
+     * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
@@ -840,7 +840,7 @@ pub struct Capabilities {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Restrictions {
     /**
-    * A set of restrictions that apply to this shared drive or items inside this shared drive.
+     * A set of restrictions that apply to this shared drive or items inside this shared drive.
      */
     #[serde(
         default,
@@ -849,7 +849,7 @@ pub struct Restrictions {
     )]
     pub admin_managed_restrictions: Option<bool>,
     /**
-    * A set of restrictions that apply to this shared drive or items inside this shared drive.
+     * A set of restrictions that apply to this shared drive or items inside this shared drive.
      */
     #[serde(
         default,
@@ -858,7 +858,7 @@ pub struct Restrictions {
     )]
     pub copy_requires_writer_permission: Option<bool>,
     /**
-    * A set of restrictions that apply to this shared drive or items inside this shared drive.
+     * A set of restrictions that apply to this shared drive or items inside this shared drive.
      */
     #[serde(
         default,
@@ -867,7 +867,7 @@ pub struct Restrictions {
     )]
     pub domain_users_only: Option<bool>,
     /**
-    * A set of restrictions that apply to this shared drive or items inside this shared drive.
+     * A set of restrictions that apply to this shared drive or items inside this shared drive.
      */
     #[serde(
         default,
@@ -881,7 +881,7 @@ pub struct Restrictions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Drive {
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -890,7 +890,7 @@ pub struct Drive {
     )]
     pub background_image_file: Option<BackgroundImageFile>,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -900,12 +900,12 @@ pub struct Drive {
     )]
     pub background_image_link: String,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capabilities: Option<Capabilities>,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -915,7 +915,7 @@ pub struct Drive {
     )]
     pub color_rgb: String,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -925,12 +925,12 @@ pub struct Drive {
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hidden: Option<bool>,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -939,7 +939,7 @@ pub struct Drive {
     )]
     pub id: String,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -948,7 +948,7 @@ pub struct Drive {
     )]
     pub kind: String,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -957,12 +957,12 @@ pub struct Drive {
     )]
     pub name: String,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub restrictions: Option<Restrictions>,
     /**
-    * Representation of a shared drive.
+     * Representation of a shared drive.
      */
     #[serde(
         default,
@@ -977,7 +977,7 @@ pub struct Drive {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DriveList {
     /**
-    * A list of shared drives.
+     * A list of shared drives.
      */
     #[serde(
         default,
@@ -986,7 +986,7 @@ pub struct DriveList {
     )]
     pub drives: Vec<Drive>,
     /**
-    * A list of shared drives.
+     * A list of shared drives.
      */
     #[serde(
         default,
@@ -995,7 +995,7 @@ pub struct DriveList {
     )]
     pub kind: String,
     /**
-    * A list of shared drives.
+     * A list of shared drives.
      */
     #[serde(
         default,
@@ -1010,7 +1010,7 @@ pub struct DriveList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileCapabilities {
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1019,7 +1019,7 @@ pub struct FileCapabilities {
     )]
     pub can_add_children: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1028,7 +1028,7 @@ pub struct FileCapabilities {
     )]
     pub can_add_folder_from_another_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1037,7 +1037,7 @@ pub struct FileCapabilities {
     )]
     pub can_add_my_drive_parent: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1046,7 +1046,7 @@ pub struct FileCapabilities {
     )]
     pub can_change_copy_requires_writer_permission: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1055,7 +1055,7 @@ pub struct FileCapabilities {
     )]
     pub can_change_security_update_enabled: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1064,7 +1064,7 @@ pub struct FileCapabilities {
     )]
     pub can_change_viewers_can_copy_content: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1073,17 +1073,17 @@ pub struct FileCapabilities {
     )]
     pub can_comment: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canCopy")]
     pub can_copy: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canDelete")]
     pub can_delete: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1092,7 +1092,7 @@ pub struct FileCapabilities {
     )]
     pub can_delete_children: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1101,12 +1101,12 @@ pub struct FileCapabilities {
     )]
     pub can_download: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canEdit")]
     pub can_edit: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1115,7 +1115,7 @@ pub struct FileCapabilities {
     )]
     pub can_list_children: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1124,7 +1124,7 @@ pub struct FileCapabilities {
     )]
     pub can_modify_content: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1133,7 +1133,7 @@ pub struct FileCapabilities {
     )]
     pub can_modify_content_restriction: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1142,7 +1142,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_children_out_of_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1151,7 +1151,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_children_out_of_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1160,7 +1160,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_children_within_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1169,7 +1169,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_children_within_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1178,7 +1178,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_item_into_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1187,7 +1187,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_item_out_of_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1196,7 +1196,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_item_out_of_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1205,7 +1205,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_item_within_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1214,7 +1214,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_item_within_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1223,7 +1223,7 @@ pub struct FileCapabilities {
     )]
     pub can_move_team_drive_item: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1232,7 +1232,7 @@ pub struct FileCapabilities {
     )]
     pub can_read_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1241,7 +1241,7 @@ pub struct FileCapabilities {
     )]
     pub can_read_revisions: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1250,7 +1250,7 @@ pub struct FileCapabilities {
     )]
     pub can_read_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1259,7 +1259,7 @@ pub struct FileCapabilities {
     )]
     pub can_remove_children: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1268,22 +1268,22 @@ pub struct FileCapabilities {
     )]
     pub can_remove_my_drive_parent: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canRename")]
     pub can_rename: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canShare")]
     pub can_share: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canTrash")]
     pub can_trash: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1292,7 +1292,7 @@ pub struct FileCapabilities {
     )]
     pub can_trash_children: Option<bool>,
     /**
-    * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
@@ -1306,12 +1306,12 @@ pub struct FileCapabilities {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Thumbnail {
     /**
-    * A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
+     * A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image: Option<bytes::Bytes>,
     /**
-    * A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
+     * A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
      */
     #[serde(
         default,
@@ -1326,7 +1326,7 @@ pub struct Thumbnail {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContentHints {
     /**
-    * Additional information about the content of the file. These fields are never populated in responses.
+     * Additional information about the content of the file. These fields are never populated in responses.
      */
     #[serde(
         default,
@@ -1336,7 +1336,7 @@ pub struct ContentHints {
     )]
     pub indexable_text: String,
     /**
-    * Additional information about the content of the file. These fields are never populated in responses.
+     * Additional information about the content of the file. These fields are never populated in responses.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub thumbnail: Option<Thumbnail>,
@@ -1346,7 +1346,7 @@ pub struct ContentHints {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
     /**
-    * Geographic location information stored in the image.
+     * Geographic location information stored in the image.
      */
     #[serde(
         default,
@@ -1355,7 +1355,7 @@ pub struct Location {
     )]
     pub altitude: f64,
     /**
-    * Geographic location information stored in the image.
+     * Geographic location information stored in the image.
      */
     #[serde(
         default,
@@ -1364,7 +1364,7 @@ pub struct Location {
     )]
     pub latitude: f64,
     /**
-    * Geographic location information stored in the image.
+     * Geographic location information stored in the image.
      */
     #[serde(
         default,
@@ -1378,7 +1378,7 @@ pub struct Location {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImageMediaMetadata {
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1387,7 +1387,7 @@ pub struct ImageMediaMetadata {
     )]
     pub aperture: f64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1397,7 +1397,7 @@ pub struct ImageMediaMetadata {
     )]
     pub camera_make: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1407,7 +1407,7 @@ pub struct ImageMediaMetadata {
     )]
     pub camera_model: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1417,7 +1417,7 @@ pub struct ImageMediaMetadata {
     )]
     pub color_space: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1427,7 +1427,7 @@ pub struct ImageMediaMetadata {
     )]
     pub exposure_bias: f64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1437,7 +1437,7 @@ pub struct ImageMediaMetadata {
     )]
     pub exposure_mode: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1447,12 +1447,12 @@ pub struct ImageMediaMetadata {
     )]
     pub exposure_time: f64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "flashUsed")]
     pub flash_used: Option<bool>,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1462,7 +1462,7 @@ pub struct ImageMediaMetadata {
     )]
     pub focal_length: f64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1471,7 +1471,7 @@ pub struct ImageMediaMetadata {
     )]
     pub height: i64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1481,7 +1481,7 @@ pub struct ImageMediaMetadata {
     )]
     pub iso_speed: i64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1490,12 +1490,12 @@ pub struct ImageMediaMetadata {
     )]
     pub lens: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1505,7 +1505,7 @@ pub struct ImageMediaMetadata {
     )]
     pub max_aperture_value: f64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1515,7 +1515,7 @@ pub struct ImageMediaMetadata {
     )]
     pub metering_mode: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1524,7 +1524,7 @@ pub struct ImageMediaMetadata {
     )]
     pub rotation: i64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1533,7 +1533,7 @@ pub struct ImageMediaMetadata {
     )]
     pub sensor: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1543,7 +1543,7 @@ pub struct ImageMediaMetadata {
     )]
     pub subject_distance: i64,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1552,7 +1552,7 @@ pub struct ImageMediaMetadata {
     )]
     pub time: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1562,7 +1562,7 @@ pub struct ImageMediaMetadata {
     )]
     pub white_balance: String,
     /**
-    * Additional metadata about image media, if available.
+     * Additional metadata about image media, if available.
      */
     #[serde(
         default,
@@ -1576,7 +1576,7 @@ pub struct ImageMediaMetadata {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LinkShareMetadata {
     /**
-    * Contains details about the link URLs that clients are using to refer to this item.
+     * Contains details about the link URLs that clients are using to refer to this item.
      */
     #[serde(
         default,
@@ -1585,7 +1585,7 @@ pub struct LinkShareMetadata {
     )]
     pub security_update_eligible: Option<bool>,
     /**
-    * Contains details about the link URLs that clients are using to refer to this item.
+     * Contains details about the link URLs that clients are using to refer to this item.
      */
     #[serde(
         default,
@@ -1599,7 +1599,7 @@ pub struct LinkShareMetadata {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShortcutDetails {
     /**
-    * Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
+     * Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
      */
     #[serde(
         default,
@@ -1609,7 +1609,7 @@ pub struct ShortcutDetails {
     )]
     pub target_id: String,
     /**
-    * Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
+     * Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
      */
     #[serde(
         default,
@@ -1619,7 +1619,7 @@ pub struct ShortcutDetails {
     )]
     pub target_mime_type: String,
     /**
-    * Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
+     * Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
      */
     #[serde(
         default,
@@ -1634,7 +1634,7 @@ pub struct ShortcutDetails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VideoMediaMetadata {
     /**
-    * Additional metadata about video media. This may not be available immediately upon upload.
+     * Additional metadata about video media. This may not be available immediately upon upload.
      */
     #[serde(
         default,
@@ -1644,7 +1644,7 @@ pub struct VideoMediaMetadata {
     )]
     pub duration_millis: i64,
     /**
-    * Additional metadata about video media. This may not be available immediately upon upload.
+     * Additional metadata about video media. This may not be available immediately upon upload.
      */
     #[serde(
         default,
@@ -1653,7 +1653,7 @@ pub struct VideoMediaMetadata {
     )]
     pub height: i64,
     /**
-    * Additional metadata about video media. This may not be available immediately upon upload.
+     * Additional metadata about video media. This may not be available immediately upon upload.
      */
     #[serde(
         default,
@@ -1667,7 +1667,7 @@ pub struct VideoMediaMetadata {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct File {
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1677,12 +1677,12 @@ pub struct File {
     )]
     pub app_properties: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capabilities: Option<FileCapabilities>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1691,7 +1691,7 @@ pub struct File {
     )]
     pub content_hints: Option<ContentHints>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1701,7 +1701,7 @@ pub struct File {
     )]
     pub content_restrictions: Vec<ContentRestriction>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1710,7 +1710,7 @@ pub struct File {
     )]
     pub copy_requires_writer_permission: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1720,7 +1720,7 @@ pub struct File {
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1729,7 +1729,7 @@ pub struct File {
     )]
     pub description: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1739,7 +1739,7 @@ pub struct File {
     )]
     pub drive_id: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1748,7 +1748,7 @@ pub struct File {
     )]
     pub explicitly_trashed: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1758,7 +1758,7 @@ pub struct File {
     )]
     pub export_links: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1768,7 +1768,7 @@ pub struct File {
     )]
     pub file_extension: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1778,7 +1778,7 @@ pub struct File {
     )]
     pub folder_color_rgb: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1788,7 +1788,7 @@ pub struct File {
     )]
     pub full_file_extension: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1797,7 +1797,7 @@ pub struct File {
     )]
     pub has_augmented_permissions: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1806,7 +1806,7 @@ pub struct File {
     )]
     pub has_thumbnail: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1816,7 +1816,7 @@ pub struct File {
     )]
     pub head_revision_id: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1826,7 +1826,7 @@ pub struct File {
     )]
     pub icon_link: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1835,7 +1835,7 @@ pub struct File {
     )]
     pub id: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1844,7 +1844,7 @@ pub struct File {
     )]
     pub image_media_metadata: Option<ImageMediaMetadata>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1853,7 +1853,7 @@ pub struct File {
     )]
     pub is_app_authorized: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1862,7 +1862,7 @@ pub struct File {
     )]
     pub kind: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1871,7 +1871,7 @@ pub struct File {
     )]
     pub last_modifying_user: Option<User>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1880,7 +1880,7 @@ pub struct File {
     )]
     pub link_share_metadata: Option<LinkShareMetadata>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1890,7 +1890,7 @@ pub struct File {
     )]
     pub md_5_checksum: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1900,7 +1900,7 @@ pub struct File {
     )]
     pub mime_type: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1909,7 +1909,7 @@ pub struct File {
     )]
     pub modified_by_me: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1919,7 +1919,7 @@ pub struct File {
     )]
     pub modified_by_me_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1929,7 +1929,7 @@ pub struct File {
     )]
     pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1938,7 +1938,7 @@ pub struct File {
     )]
     pub name: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1948,12 +1948,12 @@ pub struct File {
     )]
     pub original_filename: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "ownedByMe")]
     pub owned_by_me: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1962,7 +1962,7 @@ pub struct File {
     )]
     pub owners: Vec<User>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1971,7 +1971,7 @@ pub struct File {
     )]
     pub parents: Vec<String>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1981,7 +1981,7 @@ pub struct File {
     )]
     pub permission_ids: Vec<String>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1990,7 +1990,7 @@ pub struct File {
     )]
     pub permissions: Vec<Permission>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -1999,7 +1999,7 @@ pub struct File {
     )]
     pub properties: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2009,7 +2009,7 @@ pub struct File {
     )]
     pub quota_bytes_used: i64,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2019,12 +2019,12 @@ pub struct File {
     )]
     pub resource_key: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shared: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2034,7 +2034,7 @@ pub struct File {
     )]
     pub shared_with_me_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2043,7 +2043,7 @@ pub struct File {
     )]
     pub sharing_user: Option<User>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2052,7 +2052,7 @@ pub struct File {
     )]
     pub shortcut_details: Option<ShortcutDetails>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2061,7 +2061,7 @@ pub struct File {
     )]
     pub size: i64,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2070,12 +2070,12 @@ pub struct File {
     )]
     pub spaces: Vec<String>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub starred: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2085,7 +2085,7 @@ pub struct File {
     )]
     pub team_drive_id: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2095,7 +2095,7 @@ pub struct File {
     )]
     pub thumbnail_link: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2105,12 +2105,12 @@ pub struct File {
     )]
     pub thumbnail_version: i64,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub trashed: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2120,7 +2120,7 @@ pub struct File {
     )]
     pub trashed_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2129,7 +2129,7 @@ pub struct File {
     )]
     pub trashing_user: Option<User>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2138,7 +2138,7 @@ pub struct File {
     )]
     pub version: i64,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2147,7 +2147,7 @@ pub struct File {
     )]
     pub video_media_metadata: Option<VideoMediaMetadata>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2156,7 +2156,7 @@ pub struct File {
     )]
     pub viewed_by_me: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2166,7 +2166,7 @@ pub struct File {
     )]
     pub viewed_by_me_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2175,7 +2175,7 @@ pub struct File {
     )]
     pub viewers_can_copy_content: Option<bool>,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2185,7 +2185,7 @@ pub struct File {
     )]
     pub web_content_link: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2195,7 +2195,7 @@ pub struct File {
     )]
     pub web_view_link: String,
     /**
-    * The metadata for a file.
+     * The metadata for a file.
      */
     #[serde(
         default,
@@ -2209,7 +2209,7 @@ pub struct File {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileList {
     /**
-    * A list of files.
+     * A list of files.
      */
     #[serde(
         default,
@@ -2218,7 +2218,7 @@ pub struct FileList {
     )]
     pub files: Vec<File>,
     /**
-    * A list of files.
+     * A list of files.
      */
     #[serde(
         default,
@@ -2227,7 +2227,7 @@ pub struct FileList {
     )]
     pub incomplete_search: Option<bool>,
     /**
-    * A list of files.
+     * A list of files.
      */
     #[serde(
         default,
@@ -2236,7 +2236,7 @@ pub struct FileList {
     )]
     pub kind: String,
     /**
-    * A list of files.
+     * A list of files.
      */
     #[serde(
         default,
@@ -2251,7 +2251,7 @@ pub struct FileList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GeneratedIds {
     /**
-    * A list of generated file IDs which can be provided in create requests.
+     * A list of generated file IDs which can be provided in create requests.
      */
     #[serde(
         default,
@@ -2260,7 +2260,7 @@ pub struct GeneratedIds {
     )]
     pub ids: Vec<String>,
     /**
-    * A list of generated file IDs which can be provided in create requests.
+     * A list of generated file IDs which can be provided in create requests.
      */
     #[serde(
         default,
@@ -2269,7 +2269,7 @@ pub struct GeneratedIds {
     )]
     pub kind: String,
     /**
-    * A list of generated file IDs which can be provided in create requests.
+     * A list of generated file IDs which can be provided in create requests.
      */
     #[serde(
         default,
@@ -2282,12 +2282,12 @@ pub struct GeneratedIds {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PermissionDetails {
     /**
-    * Whether the user has installed the requesting app.
+     * Whether the user has installed the requesting app.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub inherited: Option<bool>,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2297,7 +2297,7 @@ pub struct PermissionDetails {
     )]
     pub inherited_from: String,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2307,7 +2307,7 @@ pub struct PermissionDetails {
     )]
     pub permission_type: String,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2320,12 +2320,12 @@ pub struct PermissionDetails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDrivePermissionDetails {
     /**
-    * Whether the user has installed the requesting app.
+     * Whether the user has installed the requesting app.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub inherited: Option<bool>,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2335,7 +2335,7 @@ pub struct TeamDrivePermissionDetails {
     )]
     pub inherited_from: String,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2344,7 +2344,7 @@ pub struct TeamDrivePermissionDetails {
     )]
     pub role: String,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2359,7 +2359,7 @@ pub struct TeamDrivePermissionDetails {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Permission {
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2368,12 +2368,12 @@ pub struct Permission {
     )]
     pub allow_file_discovery: Option<bool>,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deleted: Option<bool>,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2383,7 +2383,7 @@ pub struct Permission {
     )]
     pub display_name: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2392,7 +2392,7 @@ pub struct Permission {
     )]
     pub domain: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2402,7 +2402,7 @@ pub struct Permission {
     )]
     pub email_address: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2412,7 +2412,7 @@ pub struct Permission {
     )]
     pub expiration_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2421,7 +2421,7 @@ pub struct Permission {
     )]
     pub id: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2430,7 +2430,7 @@ pub struct Permission {
     )]
     pub kind: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2440,7 +2440,7 @@ pub struct Permission {
     )]
     pub permission_details: Vec<PermissionDetails>,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2450,7 +2450,7 @@ pub struct Permission {
     )]
     pub photo_link: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2459,7 +2459,7 @@ pub struct Permission {
     )]
     pub role: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2469,7 +2469,7 @@ pub struct Permission {
     )]
     pub team_drive_permission_details: Vec<TeamDrivePermissionDetails>,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2479,7 +2479,7 @@ pub struct Permission {
     )]
     pub type_: String,
     /**
-    * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+     * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
     #[serde(
         default,
@@ -2493,7 +2493,7 @@ pub struct Permission {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PermissionList {
     /**
-    * A list of permissions for a file.
+     * A list of permissions for a file.
      */
     #[serde(
         default,
@@ -2502,7 +2502,7 @@ pub struct PermissionList {
     )]
     pub kind: String,
     /**
-    * A list of permissions for a file.
+     * A list of permissions for a file.
      */
     #[serde(
         default,
@@ -2512,7 +2512,7 @@ pub struct PermissionList {
     )]
     pub next_page_token: String,
     /**
-    * A list of permissions for a file.
+     * A list of permissions for a file.
      */
     #[serde(
         default,
@@ -2526,7 +2526,7 @@ pub struct PermissionList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reply {
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(
         default,
@@ -2535,12 +2535,12 @@ pub struct Reply {
     )]
     pub action: String,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<User>,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(
         default,
@@ -2549,7 +2549,7 @@ pub struct Reply {
     )]
     pub content: String,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(
         default,
@@ -2559,12 +2559,12 @@ pub struct Reply {
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deleted: Option<bool>,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(
         default,
@@ -2574,7 +2574,7 @@ pub struct Reply {
     )]
     pub html_content: String,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(
         default,
@@ -2583,7 +2583,7 @@ pub struct Reply {
     )]
     pub id: String,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(
         default,
@@ -2592,7 +2592,7 @@ pub struct Reply {
     )]
     pub kind: String,
     /**
-    * A reply to a comment on a file.
+     * A reply to a comment on a file.
      */
     #[serde(
         default,
@@ -2607,7 +2607,7 @@ pub struct Reply {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReplyList {
     /**
-    * A list of replies to a comment on a file.
+     * A list of replies to a comment on a file.
      */
     #[serde(
         default,
@@ -2616,7 +2616,7 @@ pub struct ReplyList {
     )]
     pub kind: String,
     /**
-    * A list of replies to a comment on a file.
+     * A list of replies to a comment on a file.
      */
     #[serde(
         default,
@@ -2626,7 +2626,7 @@ pub struct ReplyList {
     )]
     pub next_page_token: String,
     /**
-    * A list of replies to a comment on a file.
+     * A list of replies to a comment on a file.
      */
     #[serde(
         default,
@@ -2640,7 +2640,7 @@ pub struct ReplyList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Revision {
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2650,7 +2650,7 @@ pub struct Revision {
     )]
     pub export_links: String,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2659,7 +2659,7 @@ pub struct Revision {
     )]
     pub id: String,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2668,7 +2668,7 @@ pub struct Revision {
     )]
     pub keep_forever: Option<bool>,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2677,7 +2677,7 @@ pub struct Revision {
     )]
     pub kind: String,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2686,7 +2686,7 @@ pub struct Revision {
     )]
     pub last_modifying_user: Option<User>,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2696,7 +2696,7 @@ pub struct Revision {
     )]
     pub md_5_checksum: String,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2706,7 +2706,7 @@ pub struct Revision {
     )]
     pub mime_type: String,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2716,7 +2716,7 @@ pub struct Revision {
     )]
     pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2726,7 +2726,7 @@ pub struct Revision {
     )]
     pub original_filename: String,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2735,12 +2735,12 @@ pub struct Revision {
     )]
     pub publish_auto: Option<bool>,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub published: Option<bool>,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2750,7 +2750,7 @@ pub struct Revision {
     )]
     pub published_link: String,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2759,7 +2759,7 @@ pub struct Revision {
     )]
     pub published_outside_domain: Option<bool>,
     /**
-    * The metadata for a revision to a file.
+     * The metadata for a revision to a file.
      */
     #[serde(
         default,
@@ -2773,7 +2773,7 @@ pub struct Revision {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RevisionList {
     /**
-    * A list of revisions of a file.
+     * A list of revisions of a file.
      */
     #[serde(
         default,
@@ -2782,7 +2782,7 @@ pub struct RevisionList {
     )]
     pub kind: String,
     /**
-    * A list of revisions of a file.
+     * A list of revisions of a file.
      */
     #[serde(
         default,
@@ -2792,7 +2792,7 @@ pub struct RevisionList {
     )]
     pub next_page_token: String,
     /**
-    * A list of revisions of a file.
+     * A list of revisions of a file.
      */
     #[serde(
         default,
@@ -2805,7 +2805,7 @@ pub struct RevisionList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StartPageToken {
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2814,7 +2814,7 @@ pub struct StartPageToken {
     )]
     pub kind: String,
     /**
-    * A link to this theme's background image.
+     * A link to this theme's background image.
      */
     #[serde(
         default,
@@ -2829,7 +2829,7 @@ pub struct StartPageToken {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveBackgroundImageFile {
     /**
-    * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -2838,7 +2838,7 @@ pub struct TeamDriveBackgroundImageFile {
     )]
     pub id: String,
     /**
-    * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -2847,7 +2847,7 @@ pub struct TeamDriveBackgroundImageFile {
     )]
     pub width: f64,
     /**
-    * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -2857,7 +2857,7 @@ pub struct TeamDriveBackgroundImageFile {
     )]
     pub x_coordinate: f64,
     /**
-    * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+     * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
      */
     #[serde(
         default,
@@ -2872,7 +2872,7 @@ pub struct TeamDriveBackgroundImageFile {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveCapabilities {
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2881,7 +2881,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_add_children: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2890,7 +2890,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_change_copy_requires_writer_permission_restriction: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2899,7 +2899,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_change_domain_users_only_restriction: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2908,7 +2908,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_change_team_drive_background: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2917,7 +2917,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_change_team_members_only_restriction: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2926,12 +2926,12 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_comment: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canCopy")]
     pub can_copy: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2940,7 +2940,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_delete_children: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2949,7 +2949,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_delete_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2958,12 +2958,12 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_download: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canEdit")]
     pub can_edit: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2972,7 +2972,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_list_children: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2981,7 +2981,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_manage_members: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2990,7 +2990,7 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_read_revisions: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -2999,12 +2999,12 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_remove_children: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canRename")]
     pub can_rename: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -3013,12 +3013,12 @@ pub struct TeamDriveCapabilities {
     )]
     pub can_rename_team_drive: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "canShare")]
     pub can_share: Option<bool>,
     /**
-    * Capabilities the current user has on this Team Drive.
+     * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
@@ -3032,7 +3032,7 @@ pub struct TeamDriveCapabilities {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveRestrictions {
     /**
-    * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
+     * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
      */
     #[serde(
         default,
@@ -3041,7 +3041,7 @@ pub struct TeamDriveRestrictions {
     )]
     pub admin_managed_restrictions: Option<bool>,
     /**
-    * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
+     * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
      */
     #[serde(
         default,
@@ -3050,7 +3050,7 @@ pub struct TeamDriveRestrictions {
     )]
     pub copy_requires_writer_permission: Option<bool>,
     /**
-    * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
+     * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
      */
     #[serde(
         default,
@@ -3059,7 +3059,7 @@ pub struct TeamDriveRestrictions {
     )]
     pub domain_users_only: Option<bool>,
     /**
-    * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
+     * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
      */
     #[serde(
         default,
@@ -3073,7 +3073,7 @@ pub struct TeamDriveRestrictions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDrive {
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3082,7 +3082,7 @@ pub struct TeamDrive {
     )]
     pub background_image_file: Option<TeamDriveBackgroundImageFile>,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3092,12 +3092,12 @@ pub struct TeamDrive {
     )]
     pub background_image_link: String,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capabilities: Option<TeamDriveCapabilities>,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3107,7 +3107,7 @@ pub struct TeamDrive {
     )]
     pub color_rgb: String,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3117,7 +3117,7 @@ pub struct TeamDrive {
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3126,7 +3126,7 @@ pub struct TeamDrive {
     )]
     pub id: String,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3135,7 +3135,7 @@ pub struct TeamDrive {
     )]
     pub kind: String,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3144,12 +3144,12 @@ pub struct TeamDrive {
     )]
     pub name: String,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub restrictions: Option<TeamDriveRestrictions>,
     /**
-    * Deprecated: use the drive collection instead.
+     * Deprecated: use the drive collection instead.
      */
     #[serde(
         default,
@@ -3164,7 +3164,7 @@ pub struct TeamDrive {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveList {
     /**
-    * A list of Team Drives.
+     * A list of Team Drives.
      */
     #[serde(
         default,
@@ -3173,7 +3173,7 @@ pub struct TeamDriveList {
     )]
     pub kind: String,
     /**
-    * A list of Team Drives.
+     * A list of Team Drives.
      */
     #[serde(
         default,
@@ -3183,7 +3183,7 @@ pub struct TeamDriveList {
     )]
     pub next_page_token: String,
     /**
-    * A list of Team Drives.
+     * A list of Team Drives.
      */
     #[serde(
         default,
@@ -3198,7 +3198,7 @@ pub struct TeamDriveList {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
-    * Information about a Drive user.
+     * Information about a Drive user.
      */
     #[serde(
         default,
@@ -3208,7 +3208,7 @@ pub struct User {
     )]
     pub display_name: String,
     /**
-    * Information about a Drive user.
+     * Information about a Drive user.
      */
     #[serde(
         default,
@@ -3218,7 +3218,7 @@ pub struct User {
     )]
     pub email_address: String,
     /**
-    * Information about a Drive user.
+     * Information about a Drive user.
      */
     #[serde(
         default,
@@ -3227,12 +3227,12 @@ pub struct User {
     )]
     pub kind: String,
     /**
-    * Information about a Drive user.
+     * Information about a Drive user.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub me: Option<bool>,
     /**
-    * Information about a Drive user.
+     * Information about a Drive user.
      */
     #[serde(
         default,
@@ -3242,7 +3242,7 @@ pub struct User {
     )]
     pub permission_id: String,
     /**
-    * Information about a Drive user.
+     * Information about a Drive user.
      */
     #[serde(
         default,
@@ -3256,8 +3256,7 @@ pub struct User {
 /**
  * Data format for the response.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
@@ -3288,8 +3287,7 @@ impl Alt {
 /**
  * The source of files to list. Deprecated: use 'corpora' instead.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Corpus {
     #[serde(rename = "domain")]
     Domain,

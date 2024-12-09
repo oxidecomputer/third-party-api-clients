@@ -20,9 +20,7 @@ impl Channels {
         &self,
         body: &crate::types::Channel,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/directory_v1/channels/stop", None);
+        let url = self.client.url("/admin/directory_v1/channels/stop", None);
         self.client
             .post(
                 &url,

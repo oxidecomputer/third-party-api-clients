@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Account {
     /**
-    * Rev.ai Account Model
+     * Rev.ai Account Model
      */
     #[serde(
         default,
@@ -15,7 +15,7 @@ pub struct Account {
     )]
     pub balance_seconds: i64,
     /**
-    * Rev.ai Account Model
+     * Rev.ai Account Model
      */
     #[serde(
         default,
@@ -28,7 +28,7 @@ pub struct Account {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptions {
     /**
-    * Email of developer account
+     * Email of developer account
      */
     #[serde(
         default,
@@ -41,7 +41,7 @@ pub struct DescriptionlessJobOptions {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptionsData {
     /**
-    * Email of developer account
+     * Email of developer account
      */
     #[serde(
         default,
@@ -51,8 +51,7 @@ pub struct DescriptionlessJobOptionsData {
     pub callback_url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Language {
     #[serde(rename = "ar")]
     Ar,
@@ -161,11 +160,10 @@ impl std::fmt::Display for Language {
     }
 }
 
-
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptionsDataType {
     /**
-    * Email of developer account
+     * Email of developer account
      */
     #[serde(
         default,
@@ -174,7 +172,7 @@ pub struct DescriptionlessJobOptionsDataType {
     )]
     pub custom_vocabulary_id: String,
     /**
-    * Amount of Rev.ai API credits remaining in seconds
+     * Amount of Rev.ai API credits remaining in seconds
      */
     #[serde(
         default,
@@ -190,7 +188,7 @@ pub struct DescriptionlessJobOptionsDataType {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub language: Option<Language>,
     /**
-    * Email of developer account
+     * Email of developer account
      */
     #[serde(
         default,
@@ -214,7 +212,7 @@ pub struct DescriptionlessJobOptionsDataType {
     )]
     pub skip_punctuation: bool,
     /**
-    * Amount of Rev.ai API credits remaining in seconds
+     * Amount of Rev.ai API credits remaining in seconds
      */
     #[serde(
         default,
@@ -243,8 +241,7 @@ pub struct DescriptionlessJobOptionsAllOf {
 /**
  * Simple reason of why the transcription job failed. Check `failure_detail` for specific details and solutions
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Failure {
     #[serde(rename = "download_failure")]
     DownloadFailure,
@@ -299,8 +296,7 @@ impl Failure {
 /**
  * Current status of the job
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Status {
     #[serde(rename = "failed")]
     Failed,
@@ -337,8 +333,7 @@ impl Status {
 /**
  * Type of speech recognition performed. Currently the only supported values are 'async' for asynchronous jobs and `stream` for streaming jobs
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "async")]
     Async,
@@ -373,7 +368,7 @@ impl Type {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Job {
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -381,7 +376,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callback_url: Option<serde_json::Value>,
     /**
-    * The date and time the job was completed, whether successfully or failing, in ISO-8601 UTC form
+     * The date and time the job was completed, whether successfully or failing, in ISO-8601 UTC form
      */
     #[serde(
         default,
@@ -390,7 +385,7 @@ pub struct Job {
     )]
     pub completed_on: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The date and time the job was completed, whether successfully or failing, in ISO-8601 UTC form
+     * The date and time the job was completed, whether successfully or failing, in ISO-8601 UTC form
      */
     #[serde(
         default,
@@ -399,7 +394,7 @@ pub struct Job {
     )]
     pub created_on: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -407,7 +402,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub custom_vocabulary_id: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -415,7 +410,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delete_after_seconds: Option<serde_json::Value>,
     /**
-    * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
+     * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
      */
     #[serde(
         default,
@@ -424,12 +419,12 @@ pub struct Job {
     )]
     pub duration_seconds: f64,
     /**
-    * Simple reason of why the transcription job failed. Check `failure_detail` for specific details and solutions
+     * Simple reason of why the transcription job failed. Check `failure_detail` for specific details and solutions
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub failure: Option<Failure>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -441,7 +436,7 @@ pub struct Job {
     )]
     pub failure_detail: String,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -449,7 +444,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter_profanity: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -461,7 +456,7 @@ pub struct Job {
     )]
     pub id: String,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -469,7 +464,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub language: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -477,7 +472,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub media_url: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -485,7 +480,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metadata: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -497,7 +492,7 @@ pub struct Job {
     )]
     pub name: String,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -505,7 +500,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub remove_disfluencies: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -513,7 +508,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub skip_diarization: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -521,7 +516,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub skip_punctuation: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -529,7 +524,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub speaker_channels_count: Option<serde_json::Value>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -537,7 +532,7 @@ pub struct Job {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -556,7 +551,7 @@ pub struct JobAllOf {
     #[serde(flatten)]
     pub descriptionless_job_options_all_of: DescriptionlessJobOptionsAllOf,
     /**
-    * Rev.ai Transcription Job
+     * Rev.ai Transcription Job
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *
@@ -568,7 +563,7 @@ pub struct JobAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobMediaUrlOptions {
     /**
-    * Email of developer account
+     * Email of developer account
      */
     #[serde(
         default,
@@ -595,52 +590,52 @@ pub struct SubmitJobMediaUrlOptionsAllOf {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobOptions {
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub callback_url: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub custom_vocabulary_id: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delete_after_seconds: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter_profanity: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub language: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metadata: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub remove_disfluencies: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub skip_diarization: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub skip_punctuation: Option<serde_json::Value>,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub speaker_channels_count: Option<serde_json::Value>,
@@ -650,7 +645,7 @@ pub struct SubmitJobOptions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomVocabularies {
     /**
-    * Array of phrases not found in normal dictionary. Add technical jargon, proper nouns and uncommon phrases as strings in this array to add them to the lexicon for this job.
+     * Array of phrases not found in normal dictionary. Add technical jargon, proper nouns and uncommon phrases as strings in this array to add them to the lexicon for this job.
      *  
      *  A phrase must contain at least 1 alpha character but may contain any non-numeric character from the Basic Latin set. A phrase can contain up to 12 words. Each word can contain up to 34 characters.
      *  
@@ -686,7 +681,7 @@ pub struct SubmitJobOptionsAllOf {
     #[serde(flatten)]
     pub descriptionless_job_options_all_of: DescriptionlessJobOptionsAllOf,
     /**
-    * Rev.ai Job Options Object Model
+     * Rev.ai Job Options Object Model
      */
     #[serde(flatten)]
     pub submit_job_options: SubmitJobOptions,
@@ -697,8 +692,7 @@ pub struct SubmitJobOptionsAllOf {
 /**
  * Type of transcript element. If Rev.ai was unable to determine the spoken word, the `type` will be `unknown`.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TranscriptMonologuesElementsType {
     #[serde(rename = "punct")]
     Punct,
@@ -735,7 +729,7 @@ impl TranscriptMonologuesElementsType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Elements {
     /**
-    * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
+     * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
      */
     #[serde(
         default,
@@ -744,7 +738,7 @@ pub struct Elements {
     )]
     pub confidence: f64,
     /**
-    * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
+     * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
      */
     #[serde(
         default,
@@ -753,7 +747,7 @@ pub struct Elements {
     )]
     pub ts: f64,
     /**
-    * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
+     * Duration of the file in seconds. Null if the file could not be retrieved or there was not a valid media file
      */
     #[serde(
         default,
@@ -762,12 +756,12 @@ pub struct Elements {
     )]
     pub ts_end: f64,
     /**
-    * Type of transcript element. If Rev.ai was unable to determine the spoken word, the `type` will be `unknown`.
+     * Type of transcript element. If Rev.ai was unable to determine the spoken word, the `type` will be `unknown`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<TranscriptMonologuesElementsType>,
     /**
-    * Email of developer account
+     * Email of developer account
      */
     #[serde(
         default,
@@ -780,7 +774,7 @@ pub struct Elements {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Monologues {
     /**
-    * Array of transcript elements
+     * Array of transcript elements
      */
     #[serde(
         default,
@@ -789,7 +783,7 @@ pub struct Monologues {
     )]
     pub elements: Vec<Elements>,
     /**
-    * Amount of Rev.ai API credits remaining in seconds
+     * Amount of Rev.ai API credits remaining in seconds
      */
     #[serde(
         default,
@@ -808,7 +802,7 @@ pub struct Monologues {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Transcript {
     /**
-    * Rev.ai Transcript Model
+     * Rev.ai Transcript Model
      *  \*\*\*
      *  Note: properties are not displayed in the returned object if they are null
      *  
@@ -826,8 +820,7 @@ pub struct Transcript {
 /**
  * MIME type specifying the caption output format
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Accept {
     #[serde(rename = "application/x-subrip")]
     ApplicationXSubrip,
@@ -861,8 +854,7 @@ impl Accept {
 /**
  * MIME type specifying the transcription output format
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AcceptTranscript {
     #[serde(rename = "application/vnd.rev.transcript.v1.0+json")]
     ApplicationVndRevTranscript0Json,

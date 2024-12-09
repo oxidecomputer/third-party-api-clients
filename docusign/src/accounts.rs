@@ -167,9 +167,7 @@ impl Accounts {
     pub async fn get_provisioning(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ProvisioningInformation>> {
-        let url = self
-            .client
-            .url("/v2.1/accounts/provisioning", None);
+        let url = self.client.url("/v2.1/accounts/provisioning", None);
         self.client
             .get(
                 &url,

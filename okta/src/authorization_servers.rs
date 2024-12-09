@@ -90,9 +90,7 @@ impl AuthorizationServers {
         &self,
         body: &crate::types::AuthorizationServer,
     ) -> ClientResult<crate::Response<crate::types::AuthorizationServer>> {
-        let url = self
-            .client
-            .url("/api/v1/authorizationServers", None);
+        let url = self.client.url("/api/v1/authorizationServers", None);
         self.client
             .post(
                 &url,

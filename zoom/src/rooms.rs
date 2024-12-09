@@ -227,10 +227,7 @@ impl Rooms {
         room_id: &str,
     ) -> ClientResult<crate::Response<crate::types::GetZrProfileResponse>> {
         let url = self.client.url(
-            &format!(
-                "/rooms/{}",
-                crate::progenitor_support::encode_path(room_id),
-            ),
+            &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
         );
         self.client
@@ -263,10 +260,7 @@ impl Rooms {
         room_id: &str,
     ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
-            &format!(
-                "/rooms/{}",
-                crate::progenitor_support::encode_path(room_id),
-            ),
+            &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
         );
         self.client
@@ -301,10 +295,7 @@ impl Rooms {
         body: &crate::types::UpdateRoomProfileRequest,
     ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
-            &format!(
-                "/rooms/{}",
-                crate::progenitor_support::encode_path(room_id),
-            ),
+            &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
         );
         self.client

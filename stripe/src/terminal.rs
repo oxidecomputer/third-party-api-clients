@@ -19,9 +19,7 @@ impl Terminal {
     pub async fn post_connection_token(
         &self,
     ) -> ClientResult<crate::Response<crate::types::TerminalConnectionToken>> {
-        let url = self
-            .client
-            .url("/v1/terminal/connection_tokens", None);
+        let url = self.client.url("/v1/terminal/connection_tokens", None);
         self.client
             .post(
                 &url,

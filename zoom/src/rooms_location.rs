@@ -395,9 +395,7 @@ impl RoomsLocation {
     pub async fn get_zr_location_structure(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetZrLocationStructureResponse>> {
-        let url = self
-            .client
-            .url("/rooms/locations/structure", None);
+        let url = self.client.url("/rooms/locations/structure", None);
         self.client
             .get(
                 &url,
@@ -424,9 +422,7 @@ impl RoomsLocation {
         &self,
         body: &crate::types::GetZrLocationStructureResponse,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/rooms/locations/structure", None);
+        let url = self.client.url("/rooms/locations/structure", None);
         self.client
             .patch(
                 &url,

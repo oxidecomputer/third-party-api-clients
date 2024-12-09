@@ -8670,9 +8670,7 @@ impl Repos {
     pub async fn list_all_invitations_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::RepositoryInvitation>>> {
-        let url = self
-            .client
-            .url("/user/repository_invitations", None);
+        let url = self.client.url("/user/repository_invitations", None);
         self.client
             .get_all_pages(
                 &url,

@@ -260,10 +260,7 @@ impl Lists {
      */
     pub async fn delete(&self, list_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!(
-                "/lists/{}",
-                crate::progenitor_support::encode_path(list_id),
-            ),
+            &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
             None,
         );
         self.client
@@ -293,10 +290,7 @@ impl Lists {
         body: &crate::types::SubscriberListData,
     ) -> ClientResult<crate::Response<crate::types::Lists>> {
         let url = self.client.url(
-            &format!(
-                "/lists/{}",
-                crate::progenitor_support::encode_path(list_id),
-            ),
+            &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
             None,
         );
         self.client

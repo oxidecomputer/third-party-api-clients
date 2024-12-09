@@ -11,7 +11,10 @@ pub struct Client {
     host: String,
     host_override: Option<String>,
     agent: String,
+    #[cfg(feature = "middleware")]
     client: reqwest_middleware::ClientWithMiddleware,
+    #[cfg(not(feature = "middleware"))]
+    client: reqwest::Client,
     credentials: Option<crate::auth::Credentials>,
     #[cfg(feature = "httpcache")]
     http_cache: crate::http_cache::BoxedHttpCache,
@@ -24,18 +27,24 @@ impl Client {
         C: Into<Option<crate::auth::Credentials>>,
     {
         let http = reqwest::Client::builder().redirect(reqwest::redirect::Policy::none()).build()?;
-        let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
-        let client = reqwest_middleware::ClientBuilder::new(http)
-            // Trace HTTP requests. See the tracing crate to make use of these traces.
-            .with(reqwest_tracing::TracingMiddleware::default())
-            // Retry failed requests.
-            .with(
-                reqwest_conditional_middleware::ConditionalMiddleware::new(
-                    reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                    |req: &reqwest::Request| req.try_clone().is_some()
+
+        #[cfg(feature = "middleware")]
+        let client = {
+            let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+            reqwest_middleware::ClientBuilder::new(http)
+                // Trace HTTP requests. See the tracing crate to make use of these traces.
+                .with(reqwest_tracing::TracingMiddleware::default())
+                // Retry failed requests.
+                .with(
+                    reqwest_conditional_middleware::ConditionalMiddleware::new(
+                        reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                        |req: &reqwest::Request| req.try_clone().is_some()
+                    )
                 )
-            )
-            .build();
+                .build()
+        };
+        #[cfg(not(feature = "middleware"))]
+        let client = http;
 
         #[cfg(feature = "httpcache")]
         {
@@ -56,7 +65,10 @@ impl Client {
     pub fn custom<A, CR>(
         agent: A,
         credentials: CR,
+        #[cfg(feature = "middleware")]
         http: reqwest_middleware::ClientWithMiddleware,
+        #[cfg(not(feature = "middleware"))]
+        http: reqwest::Client,
         http_cache: crate::http_cache::BoxedHttpCache,
     ) -> Self
     where
@@ -74,7 +86,14 @@ impl Client {
     }
 
     #[cfg(not(feature = "httpcache"))]
-    pub fn custom<A, CR>(agent: A, credentials: CR, http: reqwest_middleware::ClientWithMiddleware) -> Self
+    pub fn custom<A, CR>(
+        agent: A,
+        credentials: CR,
+        #[cfg(feature = "middleware")]
+        http: reqwest_middleware::ClientWithMiddleware,
+        #[cfg(not(feature = "middleware"))]
+        http: reqwest::Client,
+    ) -> Self
     where
         A: Into<String>,
         CR: Into<Option<crate::auth::Credentials>>,
@@ -194,6 +213,7 @@ impl Client {
         }
     }
 
+    #[cfg(feature = "middleware")]
     async fn make_request(
         &self,
         method: http::Method,
@@ -202,6 +222,36 @@ impl Client {
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> ClientResult<reqwest_middleware::RequestBuilder> {
+        let (url, auth) = self.url_and_auth(uri, authentication).await?;
+
+        let mut req = self.client.request(method, url);
+
+        if let Some(content_type) = &message.content_type {
+            req = req.header(http::header::CONTENT_TYPE, content_type.clone());
+        }
+
+        req = req.header(http::header::USER_AGENT, &*self.agent);
+        req = req.header(http::header::ACCEPT, &media_type.to_string());
+
+        if let Some(auth_str) = auth {
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }
+
+        if let Some(body) = message.body {
+            req = req.body(body);
+        }
+
+        Ok(req)
+    }
+    #[cfg(not(feature = "middleware"))]
+    async fn make_request(
+        &self,
+        method: http::Method,
+        uri: &str,
+        message: Message,
+        media_type: crate::utils::MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> ClientResult<reqwest::RequestBuilder> {
         let (url, auth) = self.url_and_auth(uri, authentication).await?;
 
         let mut req = self.client.request(method, url);
@@ -609,7 +659,10 @@ pub struct Client {{
     redirect_uri: String,
     {}
     auto_refresh: bool,
+    #[cfg(feature = "middleware")]
     client: reqwest_middleware::ClientWithMiddleware,
+    #[cfg(not(feature = "middleware"))]
+    client: reqwest::Client,
 }}
 
 {}
@@ -654,17 +707,22 @@ impl Client {{
         let client = reqwest::Client::builder().redirect(reqwest::redirect::Policy::none()).build();
         match client {{
             Ok(c) => {{
-                let client = reqwest_middleware::ClientBuilder::new(c)
-                    // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware::default())
-                    // Retry failed requests.
-                    .with(
-                        reqwest_conditional_middleware::ConditionalMiddleware::new(
-                            reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                            |req: &reqwest::Request| req.try_clone().is_some()
+                #[cfg(feature = "middleware")]
+                let client = {{
+                    reqwest_middleware::ClientBuilder::new(c)
+                        // Trace HTTP requests. See the tracing crate to make use of these traces.
+                        .with(reqwest_tracing::TracingMiddleware::default())
+                        // Retry failed requests.
+                        .with(
+                            reqwest_conditional_middleware::ConditionalMiddleware::new(
+                                reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                                |req: &reqwest::Request| req.try_clone().is_some()
+                            )
                         )
-                    )
-                    .build();
+                        .build()
+                }};
+                #[cfg(not(feature = "middleware"))]
+                let client = c;
 
                 {server_to_host}
 
@@ -873,7 +931,7 @@ const GOOGLE_NEW_FROM_ENV_TEMPLATE: &str = r#"
 ///   * `GOOGLE_KEY_ENCODED` - A base64 encoded version of JSON formatted application secret
 ///
 /// # Panics
-/// 
+///
 /// This function will panic if an application secret can not be parsed from the encoded key
 ///
 /// This function will panic if the internal http client fails to create
@@ -894,18 +952,22 @@ where
 
     match client {
         Ok(c) => {
-            let client = reqwest_middleware::ClientBuilder::new(c)
-                // Trace HTTP requests. See the tracing crate to make use of these traces.
-                .with(reqwest_tracing::TracingMiddleware::default())
-                // Retry failed requests.
-                .with(
-                    reqwest_conditional_middleware::ConditionalMiddleware::new(
-                        reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                        |req: &reqwest::Request| req.try_clone().is_some()
+            #[cfg(feature = "middleware")]
+            let client = {
+                reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware::default())
+                    // Retry failed requests.
+                    .with(
+                        reqwest_conditional_middleware::ConditionalMiddleware::new(
+                            reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                            |req: &reqwest::Request| req.try_clone().is_some()
+                        )
                     )
-                )
-                .build();
-
+                    .build()
+            };
+            #[cfg(not(feature = "middleware"))]
+            let client = c;
             let host = RootDefaultServer::default().default_url().to_string();
 
             Client {
@@ -954,7 +1016,10 @@ pub struct Client {{
     host_override: Option<String>,
     token: String,
 
+    #[cfg(feature = "middleware")]
     client: reqwest_middleware::ClientWithMiddleware,
+    #[cfg(not(feature = "middleware"))]
+    client: reqwest::Client,
 }}
 
 impl Client {{
@@ -974,17 +1039,22 @@ impl Client {{
         let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {{
             Ok(c) => {{
-                let client = reqwest_middleware::ClientBuilder::new(c)
-                    // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware::default())
-                    // Retry failed requests.
-                    .with(
-                        reqwest_conditional_middleware::ConditionalMiddleware::new(
-                            reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                            |req: &reqwest::Request| req.try_clone().is_some()
+                #[cfg(feature = "middleware")]
+                let client = {{
+                    reqwest_middleware::ClientBuilder::new(c)
+                        // Trace HTTP requests. See the tracing crate to make use of these traces.
+                        .with(reqwest_tracing::TracingMiddleware::default())
+                        // Retry failed requests.
+                        .with(
+                            reqwest_conditional_middleware::ConditionalMiddleware::new(
+                                reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                                |req: &reqwest::Request| req.try_clone().is_some()
+                            )
                         )
-                    )
-                    .build();
+                        .build()
+                }};
+                #[cfg(not(feature = "middleware"))]
+                let client = c;
 
                 {server_to_host}
 
@@ -1815,7 +1885,10 @@ pub struct Client {{
     token: String,
     client_id: String,
     client_secret: String,
+    #[cfg(feature = "middleware")]
     client: reqwest_middleware::ClientWithMiddleware,
+    #[cfg(not(feature = "middleware"))]
+    client: reqwest::Client,
 }}
 
 {}
@@ -1842,17 +1915,22 @@ impl Client {{
         let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {{
             Ok(c) => {{
-                let client = reqwest_middleware::ClientBuilder::new(c)
-                    // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware::default())
-                    // Retry failed requests.
-                    .with(
-                        reqwest_conditional_middleware::ConditionalMiddleware::new(
-                            reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                            |req: &reqwest::Request| req.try_clone().is_some()
+                #[cfg(feature = "middleware")]
+                let client = {{
+                    reqwest_middleware::ClientBuilder::new(c)
+                        // Trace HTTP requests. See the tracing crate to make use of these traces.
+                        .with(reqwest_tracing::TracingMiddleware::default())
+                        // Retry failed requests.
+                        .with(
+                            reqwest_conditional_middleware::ConditionalMiddleware::new(
+                                reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                                |req: &reqwest::Request| req.try_clone().is_some()
+                            )
                         )
-                    )
-                    .build();
+                        .build()
+                }};
+                #[cfg(not(feature = "middleware"))]
+                let client = c;
 
                 {server_to_host}
 
@@ -1869,7 +1947,7 @@ impl Client {{
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
         }}
     }}
-    
+
     /// Override the host for all endpoins in the client.
     pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
     where

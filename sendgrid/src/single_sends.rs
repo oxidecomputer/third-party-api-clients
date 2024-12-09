@@ -367,9 +367,7 @@ impl SingleSends {
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetMarketingSinglesendsCategoriesResponse>>
     {
-        let url = self
-            .client
-            .url("/marketing/singlesends/categories", None);
+        let url = self.client.url("/marketing/singlesends/categories", None);
         self.client
             .get(
                 &url,

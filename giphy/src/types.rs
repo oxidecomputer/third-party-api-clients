@@ -12,7 +12,7 @@ pub struct LoopingAllOf {
     #[serde(flatten)]
     pub image: Image,
     /**
-    * Data surrounding a version of this GIF downsized to be under 2mb.
+     * Data surrounding a version of this GIF downsized to be under 2mb.
      */
     #[serde(flatten)]
     pub value: serde_json::Value,
@@ -22,102 +22,102 @@ pub struct LoopingAllOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Images {
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub downsized: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub downsized_large: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub downsized_medium: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub downsized_small: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub downsized_still: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_height: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_height_downsampled: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_height_small: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_height_small_still: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_height_still: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_width: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_width_downsampled: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_width_small: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_width_small_still: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fixed_width_still: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub looping: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub original: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub original_still: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub preview: Option<LoopingAllOf>,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub preview_gif: Option<LoopingAllOf>,
@@ -126,8 +126,7 @@ pub struct Images {
 /**
  * Type of the gif. By default, this is almost always gif
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "gif")]
     #[default]
@@ -146,11 +145,10 @@ impl std::fmt::Display for Type {
     }
 }
 
-
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Gif {
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -159,7 +157,7 @@ pub struct Gif {
     )]
     pub bitly_url: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -168,7 +166,7 @@ pub struct Gif {
     )]
     pub content_url: String,
     /**
-    * The date this GIF was added to the GIPHY database.
+     * The date this GIF was added to the GIPHY database.
      */
     #[serde(
         default,
@@ -177,7 +175,7 @@ pub struct Gif {
     )]
     pub create_datetime: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -186,7 +184,7 @@ pub struct Gif {
     )]
     pub embded_url: String,
     /**
-    * An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
+     * An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
      *
      */
     #[serde(
@@ -196,7 +194,7 @@ pub struct Gif {
     )]
     pub featured_tags: Vec<String>,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -205,12 +203,12 @@ pub struct Gif {
     )]
     pub id: String,
     /**
-    * An object containing data for various available formats and sizes of this GIF.
+     * An object containing data for various available formats and sizes of this GIF.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub images: Option<Images>,
     /**
-    * The date this GIF was added to the GIPHY database.
+     * The date this GIF was added to the GIPHY database.
      */
     #[serde(
         default,
@@ -219,7 +217,7 @@ pub struct Gif {
     )]
     pub import_datetime: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -228,7 +226,7 @@ pub struct Gif {
     )]
     pub rating: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -237,7 +235,7 @@ pub struct Gif {
     )]
     pub slug: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -246,7 +244,7 @@ pub struct Gif {
     )]
     pub source: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -255,7 +253,7 @@ pub struct Gif {
     )]
     pub source_post_url: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -264,7 +262,7 @@ pub struct Gif {
     )]
     pub source_tld: String,
     /**
-    * An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
+     * An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
      *
      */
     #[serde(
@@ -274,7 +272,7 @@ pub struct Gif {
     )]
     pub tags: Vec<String>,
     /**
-    * The date this GIF was added to the GIPHY database.
+     * The date this GIF was added to the GIPHY database.
      */
     #[serde(
         default,
@@ -283,12 +281,12 @@ pub struct Gif {
     )]
     pub trending_datetime: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Type of the gif. By default, this is almost always gif
+     * Type of the gif. By default, this is almost always gif
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
     /**
-    * The date this GIF was added to the GIPHY database.
+     * The date this GIF was added to the GIPHY database.
      */
     #[serde(
         default,
@@ -297,7 +295,7 @@ pub struct Gif {
     )]
     pub update_datetime: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -306,12 +304,12 @@ pub struct Gif {
     )]
     pub url: String,
     /**
-    * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+     * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<User>,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -324,7 +322,7 @@ pub struct Gif {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Image {
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -333,7 +331,7 @@ pub struct Image {
     )]
     pub frames: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -342,7 +340,7 @@ pub struct Image {
     )]
     pub height: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -352,7 +350,7 @@ pub struct Image {
     )]
     pub mp_4: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -362,7 +360,7 @@ pub struct Image {
     )]
     pub mp_4_size: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -371,7 +369,7 @@ pub struct Image {
     )]
     pub size: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -380,7 +378,7 @@ pub struct Image {
     )]
     pub url: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -389,7 +387,7 @@ pub struct Image {
     )]
     pub webp: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -398,7 +396,7 @@ pub struct Image {
     )]
     pub webp_size: String,
     /**
-    * The unique bit.ly URL for this GIF
+     * The unique bit.ly URL for this GIF
      */
     #[serde(
         default,
@@ -413,7 +411,7 @@ pub struct Image {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Meta {
     /**
-    * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
+     * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
      *
      */
     #[serde(
@@ -423,7 +421,7 @@ pub struct Meta {
     )]
     pub msg: String,
     /**
-    * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
+     * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
      *
      */
     #[serde(
@@ -433,7 +431,7 @@ pub struct Meta {
     )]
     pub response_id: String,
     /**
-    * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
+     * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
      *
      */
     #[serde(
@@ -449,7 +447,7 @@ pub struct Meta {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Pagination {
     /**
-    * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
+     * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
      *
      */
     #[serde(
@@ -459,7 +457,7 @@ pub struct Pagination {
     )]
     pub count: i64,
     /**
-    * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
+     * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
      *
      */
     #[serde(
@@ -469,7 +467,7 @@ pub struct Pagination {
     )]
     pub offset: i64,
     /**
-    * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
+     * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
      *
      */
     #[serde(
@@ -484,7 +482,7 @@ pub struct Pagination {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
-    * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+     * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
      */
     #[serde(
         default,
@@ -493,7 +491,7 @@ pub struct User {
     )]
     pub avatar_url: String,
     /**
-    * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+     * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
      */
     #[serde(
         default,
@@ -502,7 +500,7 @@ pub struct User {
     )]
     pub banner_url: String,
     /**
-    * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+     * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
      */
     #[serde(
         default,
@@ -511,7 +509,7 @@ pub struct User {
     )]
     pub display_name: String,
     /**
-    * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+     * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
      */
     #[serde(
         default,
@@ -520,7 +518,7 @@ pub struct User {
     )]
     pub profile_url: String,
     /**
-    * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+     * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
      */
     #[serde(
         default,
@@ -529,7 +527,7 @@ pub struct User {
     )]
     pub twitter: String,
     /**
-    * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
+     * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
      */
     #[serde(
         default,
@@ -548,13 +546,13 @@ pub struct GetGifsByResponse {
     )]
     pub data: Vec<Gif>,
     /**
-    * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
+     * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meta: Option<Meta>,
     /**
-    * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
+     * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -566,7 +564,7 @@ pub struct RandomGifResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<Gif>,
     /**
-    * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
+     * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]

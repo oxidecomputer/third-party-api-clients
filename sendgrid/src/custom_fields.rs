@@ -21,9 +21,7 @@ impl CustomFields {
     pub async fn get_mc_field_definitions(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetMcFieldDefinitionsResponse>> {
-        let url = self
-            .client
-            .url("/marketing/field_definitions", None);
+        let url = self.client.url("/marketing/field_definitions", None);
         self.client
             .get(
                 &url,
@@ -51,9 +49,7 @@ impl CustomFields {
         &self,
         body: &crate::types::PostMcFieldDefinitionsRequest,
     ) -> ClientResult<crate::Response<crate::types::PostMcFieldDefinitionsResponseAllOf>> {
-        let url = self
-            .client
-            .url("/marketing/field_definitions", None);
+        let url = self.client.url("/marketing/field_definitions", None);
         self.client
             .post(
                 &url,
