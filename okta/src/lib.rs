@@ -36,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! okta = "0.8.0-rc.2"
+//! okta = "0.9.0"
 //! ```
 //!
 //! ## Basic example
@@ -139,6 +139,7 @@ pub enum ClientError {
     /// Errors returned by reqwest::header
     #[error(transparent)]
     InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    #[cfg(feature = "middleware")]
     /// Errors returned by reqwest middleware
     #[error(transparent)]
     ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
@@ -197,7 +198,10 @@ pub struct Client {
     host_override: Option<String>,
     token: String,
 
+    #[cfg(feature = "middleware")]
     client: reqwest_middleware::ClientWithMiddleware,
+    #[cfg(not(feature = "middleware"))]
+    client: reqwest::Client,
 }
 
 impl Client {
@@ -217,15 +221,20 @@ impl Client {
             reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {
             Ok(c) => {
-                let client = reqwest_middleware::ClientBuilder::new(c)
-                    // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware::default())
-                    // Retry failed requests.
-                    .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
-                        reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                        |req: &reqwest::Request| req.try_clone().is_some(),
-                    ))
-                    .build();
+                #[cfg(feature = "middleware")]
+                let client = {
+                    reqwest_middleware::ClientBuilder::new(c)
+                        // Trace HTTP requests. See the tracing crate to make use of these traces.
+                        .with(reqwest_tracing::TracingMiddleware::default())
+                        // Retry failed requests.
+                        .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
+                            reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                            |req: &reqwest::Request| req.try_clone().is_some(),
+                        ))
+                        .build()
+                };
+                #[cfg(not(feature = "middleware"))]
+                let client = c;
 
                 let host = RootDefaultServer::default().default_url().to_string();
 

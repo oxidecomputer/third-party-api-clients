@@ -198,10 +198,7 @@ impl Files {
      */
     pub async fn get(&self, file: &str) -> ClientResult<crate::Response<crate::types::File>> {
         let url = self.client.url(
-            &format!(
-                "/v1/files/{}",
-                crate::progenitor_support::encode_path(file),
-            ),
+            &format!("/v1/files/{}", crate::progenitor_support::encode_path(file),),
             None,
         );
         self.client

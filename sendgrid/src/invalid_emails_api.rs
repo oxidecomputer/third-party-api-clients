@@ -119,9 +119,7 @@ impl InvalidEmailsApi {
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
-        let url = self
-            .client
-            .url("/suppression/invalid_emails", None);
+        let url = self.client.url("/suppression/invalid_emails", None);
         self.client
             .delete(
                 &url,

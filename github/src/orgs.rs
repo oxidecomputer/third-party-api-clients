@@ -104,10 +104,7 @@ impl Orgs {
         org: &str,
     ) -> ClientResult<crate::Response<crate::types::OrganizationFull>> {
         let url = self.client.url(
-            &format!(
-                "/orgs/{}",
-                crate::progenitor_support::encode_path(org),
-            ),
+            &format!("/orgs/{}", crate::progenitor_support::encode_path(org),),
             None,
         );
         self.client
@@ -141,10 +138,7 @@ impl Orgs {
         body: &crate::types::OrgsUpdateRequest,
     ) -> ClientResult<crate::Response<crate::types::OrganizationFull>> {
         let url = self.client.url(
-            &format!(
-                "/orgs/{}",
-                crate::progenitor_support::encode_path(org),
-            ),
+            &format!("/orgs/{}", crate::progenitor_support::encode_path(org),),
             None,
         );
         self.client

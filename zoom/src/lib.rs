@@ -39,7 +39,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! zoom-api = "0.8.0-rc.2"
+//! zoom-api = "0.9.0"
 //! ```
 //!
 //! ## Basic example
@@ -200,6 +200,7 @@ pub enum ClientError {
     /// Errors returned by reqwest::header
     #[error(transparent)]
     InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    #[cfg(feature = "middleware")]
     /// Errors returned by reqwest middleware
     #[error(transparent)]
     ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
@@ -261,7 +262,10 @@ pub struct Client {
     redirect_uri: String,
 
     auto_refresh: bool,
+    #[cfg(feature = "middleware")]
     client: reqwest_middleware::ClientWithMiddleware,
+    #[cfg(not(feature = "middleware"))]
+    client: reqwest::Client,
 }
 
 use schemars::JsonSchema;
@@ -342,15 +346,20 @@ impl Client {
             .build();
         match client {
             Ok(c) => {
-                let client = reqwest_middleware::ClientBuilder::new(c)
-                    // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware::default())
-                    // Retry failed requests.
-                    .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
-                        reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                        |req: &reqwest::Request| req.try_clone().is_some(),
-                    ))
-                    .build();
+                #[cfg(feature = "middleware")]
+                let client = {
+                    reqwest_middleware::ClientBuilder::new(c)
+                        // Trace HTTP requests. See the tracing crate to make use of these traces.
+                        .with(reqwest_tracing::TracingMiddleware::default())
+                        // Retry failed requests.
+                        .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
+                            reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                            |req: &reqwest::Request| req.try_clone().is_some(),
+                        ))
+                        .build()
+                };
+                #[cfg(not(feature = "middleware"))]
+                let client = c;
 
                 let host = FALLBACK_HOST.to_string();
 

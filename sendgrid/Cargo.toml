@@ -1,7 +1,7 @@
 [package]
 name = "sendgrid-api"
 description = "A fully generated & opinionated API client for the SendGrid API."
-version = "0.8.0-rc.2"
+version = "0.9.0"
 documentation = "https://docs.rs/sendgrid-api/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/sendgrid"
 readme = "README.md"

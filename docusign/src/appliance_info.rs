@@ -868,9 +868,7 @@ impl ApplianceInfo {
      *
      */
     pub async fn envelope_post_error(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/v2.1/display_appliance_info/error", None);
+        let url = self.client.url("/v2.1/display_appliance_info/error", None);
         self.client
             .post(
                 &url,
@@ -891,9 +889,7 @@ impl ApplianceInfo {
     pub async fn envelope_post_redeem(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ApplianceInfo>> {
-        let url = self
-            .client
-            .url("/v2.1/display_appliance_info/redeem", None);
+        let url = self.client.url("/v2.1/display_appliance_info/redeem", None);
         self.client
             .post(
                 &url,

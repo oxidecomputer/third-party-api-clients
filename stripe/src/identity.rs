@@ -371,9 +371,7 @@ impl Identity {
     pub async fn post_verification_session(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GelatoVerificationSession>> {
-        let url = self
-            .client
-            .url("/v1/identity/verification_sessions", None);
+        let url = self.client.url("/v1/identity/verification_sessions", None);
         self.client
             .post(
                 &url,

@@ -26,9 +26,7 @@ impl AdminInviteRequests {
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self
-            .client
-            .url("/admin.inviteRequests.approve", None);
+        let url = self.client.url("/admin.inviteRequests.approve", None);
         self.client
             .post(
                 &url,
@@ -54,9 +52,7 @@ impl AdminInviteRequests {
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self
-            .client
-            .url("/admin.inviteRequests.deny", None);
+        let url = self.client.url("/admin.inviteRequests.deny", None);
         self.client
             .post(
                 &url,

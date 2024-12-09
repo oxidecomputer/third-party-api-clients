@@ -347,10 +347,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-01
      */
     pub async fn deprecated_202001_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-01/articles/authors.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-01/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -736,10 +735,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-04
      */
     pub async fn deprecated_202004_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-04/articles/authors.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-04/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -1125,10 +1123,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-07
      */
     pub async fn deprecated_202007_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-07/articles/authors.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-07/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -1514,10 +1511,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-10
      */
     pub async fn get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-10/articles/authors.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-10/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -1903,10 +1899,9 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2021-01
      */
     pub async fn deprecated_202101_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2021-01/articles/authors.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2021-01/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -2294,10 +2289,9 @@ impl OnlineStore {
     pub async fn deprecated_unstable_get_articles_author(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/unstable/articles/authors.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/unstable/articles/authors.json", None);
         self.client
             .get(
                 &url,
@@ -3211,9 +3205,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/blogs.json", None);
+        let url = self.client.url("/admin/api/2020-01/blogs.json", None);
         self.client
             .post(
                 &url,
@@ -3232,9 +3224,7 @@ impl OnlineStore {
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/blog#count-2020-01
      */
     pub async fn deprecated_202001_get_blogs_count(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/blogs/count.json", None);
+        let url = self.client.url("/admin/api/2020-01/blogs/count.json", None);
         self.client
             .get(
                 &url,
@@ -3465,9 +3455,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/comments.json", None);
+        let url = self.client.url("/admin/api/2020-01/comments.json", None);
         self.client
             .post(
                 &url,
@@ -3871,9 +3859,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/redirects.json", None);
+        let url = self.client.url("/admin/api/2020-01/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4095,9 +4081,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/redirects.json", None);
+        let url = self.client.url("/admin/api/2020-04/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4319,9 +4303,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/redirects.json", None);
+        let url = self.client.url("/admin/api/2020-07/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4543,9 +4525,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/redirects.json", None);
+        let url = self.client.url("/admin/api/2020-10/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4767,9 +4747,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/redirects.json", None);
+        let url = self.client.url("/admin/api/2021-01/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -4991,9 +4969,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/redirects.json", None);
+        let url = self.client.url("/admin/api/unstable/redirects.json", None);
         self.client
             .post(
                 &url,
@@ -5229,9 +5205,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/script_tags.json", None);
+        let url = self.client.url("/admin/api/2020-01/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -5462,9 +5436,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/script_tags.json", None);
+        let url = self.client.url("/admin/api/2020-04/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -5695,9 +5667,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/script_tags.json", None);
+        let url = self.client.url("/admin/api/2020-07/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -5928,9 +5898,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/script_tags.json", None);
+        let url = self.client.url("/admin/api/2020-10/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -6158,9 +6126,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/script_tags.json", None);
+        let url = self.client.url("/admin/api/2021-01/script_tags.json", None);
         self.client
             .post(
                 &url,
@@ -6590,9 +6556,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/themes.json", None);
+        let url = self.client.url("/admin/api/2020-01/themes.json", None);
         self.client
             .post(
                 &url,
@@ -6755,9 +6719,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/themes.json", None);
+        let url = self.client.url("/admin/api/2020-04/themes.json", None);
         self.client
             .post(
                 &url,
@@ -6920,9 +6882,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/themes.json", None);
+        let url = self.client.url("/admin/api/2020-07/themes.json", None);
         self.client
             .post(
                 &url,
@@ -7082,9 +7042,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/themes.json", None);
+        let url = self.client.url("/admin/api/2020-10/themes.json", None);
         self.client
             .post(
                 &url,
@@ -7247,9 +7205,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/themes.json", None);
+        let url = self.client.url("/admin/api/2021-01/themes.json", None);
         self.client
             .post(
                 &url,
@@ -7412,9 +7368,7 @@ impl OnlineStore {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/themes.json", None);
+        let url = self.client.url("/admin/api/unstable/themes.json", None);
         self.client
             .post(
                 &url,

@@ -1,7 +1,7 @@
 [package]
 name = "google-groups-settings"
 description = "A fully generated & opinionated API client for the Google Groups Settings API."
-version = "0.8.0-rc.2"
+version = "0.9.0"
 documentation = "https://docs.rs/google-groups-settings/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/google/groups-settings"
 readme = "README.md"

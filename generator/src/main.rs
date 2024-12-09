@@ -2460,6 +2460,7 @@ pub enum ClientError {"#);
     /// Errors returned by reqwest::header
     #[error(transparent)]
     InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    #[cfg(feature = "middleware")]
     /// Errors returned by reqwest middleware
     #[error(transparent)]
     ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
