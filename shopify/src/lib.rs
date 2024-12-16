@@ -24,7 +24,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shopify = "0.9.0-rc.1"
+//! shopify = "0.9.0"
 //! ```
 //!
 //! ## Basic example

@@ -1,7 +1,7 @@
 [package]
 name = "revai"
 description = "A fully generated & opinionated API client for the Rev.ai API."
-version = "0.9.0-rc.1"
+version = "0.9.0"
 documentation = "https://docs.rs/revai/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/rev.ai"
 readme = "README.md"

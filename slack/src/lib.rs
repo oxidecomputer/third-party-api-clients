@@ -30,7 +30,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! slack-chat-api = "0.9.0-rc.1"
+//! slack-chat-api = "0.9.0"
 //! ```
 //!
 //! ## Basic example

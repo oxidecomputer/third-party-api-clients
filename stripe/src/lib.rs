@@ -30,7 +30,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! dolladollabills = "0.9.0-rc.1"
+//! dolladollabills = "0.9.0"
 //! ```
 //!
 //! ## Basic example
