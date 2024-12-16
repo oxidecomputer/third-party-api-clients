@@ -38,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-gsuite-api = "0.8.0-rc.2"
+gsuite-api = "0.9.0"
 ```
 
 ## Basic example

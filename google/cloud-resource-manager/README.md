@@ -38,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google-cloud-resource-manager = "0.8.0-rc.2"
+google-cloud-resource-manager = "0.9.0"
 ```
 
 ## Basic example

@@ -575,9 +575,7 @@ impl Phone {
         &self,
         body: &crate::types::AddSettingTemplateRequest,
     ) -> ClientResult<crate::Response<crate::types::AddSettingTemplateResponse>> {
-        let url = self
-            .client
-            .url("/phone/setting_templates", None);
+        let url = self.client.url("/phone/setting_templates", None);
         self.client
             .post(
                 &url,
@@ -2419,9 +2417,7 @@ impl Phone {
     pub async fn list_all_byocsip_trunk(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ByocSipTrunk>>> {
-        let url = self
-            .client
-            .url("/phone/sip_trunk/trunks", None);
+        let url = self.client.url("/phone/sip_trunk/trunks", None);
         let crate::Response::<crate::types::ListByocsipTrunkResponse> {
             mut status,
             mut headers,
@@ -2636,9 +2632,7 @@ impl Phone {
     pub async fn list_all_external_contacts(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ExternalContacts>>> {
-        let url = self
-            .client
-            .url("/phone/external_contacts", None);
+        let url = self.client.url("/phone/external_contacts", None);
         let crate::Response::<crate::types::ListExternalContactsResponse> {
             mut status,
             mut headers,
@@ -2721,9 +2715,7 @@ impl Phone {
         &self,
         body: &crate::types::AddExternalContactRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/phone/external_contacts", None);
+        let url = self.client.url("/phone/external_contacts", None);
         self.client
             .post(
                 &url,

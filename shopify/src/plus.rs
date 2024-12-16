@@ -75,9 +75,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/gift_cards.json", None);
+        let url = self.client.url("/admin/api/2020-01/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -350,9 +348,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/gift_cards.json", None);
+        let url = self.client.url("/admin/api/2020-04/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -625,9 +621,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/gift_cards.json", None);
+        let url = self.client.url("/admin/api/2020-07/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -900,9 +894,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/gift_cards.json", None);
+        let url = self.client.url("/admin/api/2020-10/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -1172,9 +1164,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/gift_cards.json", None);
+        let url = self.client.url("/admin/api/2021-01/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -1447,9 +1437,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/gift_cards.json", None);
+        let url = self.client.url("/admin/api/unstable/gift_cards.json", None);
         self.client
             .post(
                 &url,

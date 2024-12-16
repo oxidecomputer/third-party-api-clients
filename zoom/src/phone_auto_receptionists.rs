@@ -189,9 +189,7 @@ impl PhoneAutoReceptionists {
         &self,
         body: &crate::types::AddAutoReceptionistRequest,
     ) -> ClientResult<crate::Response<crate::types::AddAutoReceptionistResponse>> {
-        let url = self
-            .client
-            .url("/phone/auto_receptionists", None);
+        let url = self.client.url("/phone/auto_receptionists", None);
         self.client
             .post(
                 &url,

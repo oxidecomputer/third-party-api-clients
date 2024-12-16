@@ -2460,6 +2460,7 @@ pub enum ClientError {"#);
     /// Errors returned by reqwest::header
     #[error(transparent)]
     InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    #[cfg(feature = "middleware")]
     /// Errors returned by reqwest middleware
     #[error(transparent)]
     ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
@@ -3361,11 +3362,17 @@ edition = "2021"
 license = "MIT"
 
 [features]
-default = ["rustls-tls"]
+default = ["middleware", "rustls-tls"]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
 native-tls = ["reqwest/default-tls", "openssl"]
 rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
+middleware = [
+    "reqwest-conditional-middleware",
+    "reqwest-middleware",
+    "reqwest-retry",
+    "reqwest-tracing",
+]
 
 [dependencies]
 async-recursion = "^1.0"
@@ -3380,10 +3387,10 @@ parse_link_header = "0.3.3"
 pem = {{ version = "1.1.0",  default-features = false, optional = true }}
 percent-encoding = "2.2"
 reqwest = {{ version = "0.12", default-features = false, features = ["json", "multipart"] }}
-reqwest-conditional-middleware = "0.4"
-reqwest-middleware = {{ version = "0.4", features = ["multipart"] }}
-reqwest-retry = "0.7"
-reqwest-tracing = "0.5.4"
+reqwest-conditional-middleware = {{ version = "0.4", optional = true }}
+reqwest-middleware = {{ version = "0.4", features = ["multipart"], optional = true }}
+reqwest-retry = {{ version = "0.7", optional = true }}
+reqwest-tracing = {{ version = "0.5.4", optional = true }}
 ring = {{ version = "0.16", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}

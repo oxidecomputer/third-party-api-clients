@@ -36,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.8.0-rc.2"
+//! octorust = "0.9.0"
 //! ```
 //!
 //! ## Basic example
@@ -56,7 +56,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host_override](https://docs.rs/octorust/0.8.0-rc.2/octorust/struct.Client.html#method.host_override) method.
+//! [Client#host_override](https://docs.rs/octorust/0.9.0/octorust/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -70,7 +70,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.8.0-rc.2", features = ["httpcache"] }
+//! octorust = { version = "0.9.0", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -294,6 +294,7 @@ pub enum ClientError {
     /// Errors returned by reqwest::header
     #[error(transparent)]
     InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    #[cfg(feature = "middleware")]
     /// Errors returned by reqwest middleware
     #[error(transparent)]
     ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
@@ -349,7 +350,10 @@ pub struct Client {
     host: String,
     host_override: Option<String>,
     agent: String,
+    #[cfg(feature = "middleware")]
     client: reqwest_middleware::ClientWithMiddleware,
+    #[cfg(not(feature = "middleware"))]
+    client: reqwest::Client,
     credentials: Option<crate::auth::Credentials>,
     #[cfg(feature = "httpcache")]
     http_cache: crate::http_cache::BoxedHttpCache,
@@ -364,17 +368,23 @@ impl Client {
         let http = reqwest::Client::builder()
             .redirect(reqwest::redirect::Policy::none())
             .build()?;
-        let retry_policy =
-            reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
-        let client = reqwest_middleware::ClientBuilder::new(http)
-            // Trace HTTP requests. See the tracing crate to make use of these traces.
-            .with(reqwest_tracing::TracingMiddleware::default())
-            // Retry failed requests.
-            .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
-                reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                |req: &reqwest::Request| req.try_clone().is_some(),
-            ))
-            .build();
+
+        #[cfg(feature = "middleware")]
+        let client = {
+            let retry_policy =
+                reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+            reqwest_middleware::ClientBuilder::new(http)
+                // Trace HTTP requests. See the tracing crate to make use of these traces.
+                .with(reqwest_tracing::TracingMiddleware::default())
+                // Retry failed requests.
+                .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
+                    reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                    |req: &reqwest::Request| req.try_clone().is_some(),
+                ))
+                .build()
+        };
+        #[cfg(not(feature = "middleware"))]
+        let client = http;
 
         #[cfg(feature = "httpcache")]
         {
@@ -395,7 +405,8 @@ impl Client {
     pub fn custom<A, CR>(
         agent: A,
         credentials: CR,
-        http: reqwest_middleware::ClientWithMiddleware,
+        #[cfg(feature = "middleware")] http: reqwest_middleware::ClientWithMiddleware,
+        #[cfg(not(feature = "middleware"))] http: reqwest::Client,
         http_cache: crate::http_cache::BoxedHttpCache,
     ) -> Self
     where
@@ -416,7 +427,8 @@ impl Client {
     pub fn custom<A, CR>(
         agent: A,
         credentials: CR,
-        http: reqwest_middleware::ClientWithMiddleware,
+        #[cfg(feature = "middleware")] http: reqwest_middleware::ClientWithMiddleware,
+        #[cfg(not(feature = "middleware"))] http: reqwest::Client,
     ) -> Self
     where
         A: Into<String>,
@@ -549,6 +561,7 @@ impl Client {
         }
     }
 
+    #[cfg(feature = "middleware")]
     async fn make_request(
         &self,
         method: http::Method,
@@ -557,6 +570,36 @@ impl Client {
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> ClientResult<reqwest_middleware::RequestBuilder> {
+        let (url, auth) = self.url_and_auth(uri, authentication).await?;
+
+        let mut req = self.client.request(method, url);
+
+        if let Some(content_type) = &message.content_type {
+            req = req.header(http::header::CONTENT_TYPE, content_type.clone());
+        }
+
+        req = req.header(http::header::USER_AGENT, &*self.agent);
+        req = req.header(http::header::ACCEPT, &media_type.to_string());
+
+        if let Some(auth_str) = auth {
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }
+
+        if let Some(body) = message.body {
+            req = req.body(body);
+        }
+
+        Ok(req)
+    }
+    #[cfg(not(feature = "middleware"))]
+    async fn make_request(
+        &self,
+        method: http::Method,
+        uri: &str,
+        message: Message,
+        media_type: crate::utils::MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> ClientResult<reqwest::RequestBuilder> {
         let (url, auth) = self.url_and_auth(uri, authentication).await?;
 
         let mut req = self.client.request(method, url);

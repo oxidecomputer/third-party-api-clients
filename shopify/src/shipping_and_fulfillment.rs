@@ -1057,10 +1057,9 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-01
      */
     pub async fn deprecated_202001_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-01/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-01/carrier_services.json", None);
         self.client
             .get(
                 &url,
@@ -1082,10 +1081,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-01/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-01/carrier_services.json", None);
         self.client
             .post(
                 &url,
@@ -1201,10 +1199,9 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-04
      */
     pub async fn deprecated_202004_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-04/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-04/carrier_services.json", None);
         self.client
             .get(
                 &url,
@@ -1226,10 +1223,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-04/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-04/carrier_services.json", None);
         self.client
             .post(
                 &url,
@@ -1345,10 +1341,9 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-07
      */
     pub async fn deprecated_202007_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-07/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-07/carrier_services.json", None);
         self.client
             .get(
                 &url,
@@ -1370,10 +1365,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-07/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-07/carrier_services.json", None);
         self.client
             .post(
                 &url,
@@ -1489,10 +1483,9 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-10
      */
     pub async fn get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-10/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-10/carrier_services.json", None);
         self.client
             .get(
                 &url,
@@ -1514,10 +1507,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-10/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-10/carrier_services.json", None);
         self.client
             .post(
                 &url,
@@ -1633,10 +1625,9 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2021-01
      */
     pub async fn deprecated_202101_get_carrier_service(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2021-01/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2021-01/carrier_services.json", None);
         self.client
             .get(
                 &url,
@@ -1658,10 +1649,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2021-01/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2021-01/carrier_services.json", None);
         self.client
             .post(
                 &url,
@@ -1779,10 +1769,9 @@ impl ShippingAndFulfillment {
     pub async fn deprecated_unstable_get_carrier_service(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/unstable/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/unstable/carrier_services.json", None);
         self.client
             .get(
                 &url,
@@ -1804,10 +1793,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/unstable/carrier_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/unstable/carrier_services.json", None);
         self.client
             .post(
                 &url,
@@ -7941,10 +7929,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-01/fulfillment_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-01/fulfillment_services.json", None);
         self.client
             .post(
                 &url,
@@ -8101,10 +8088,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-04/fulfillment_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-04/fulfillment_services.json", None);
         self.client
             .post(
                 &url,
@@ -8261,10 +8247,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-07/fulfillment_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-07/fulfillment_services.json", None);
         self.client
             .post(
                 &url,
@@ -8418,10 +8403,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2020-10/fulfillment_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2020-10/fulfillment_services.json", None);
         self.client
             .post(
                 &url,
@@ -8578,10 +8562,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/2021-01/fulfillment_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/2021-01/fulfillment_services.json", None);
         self.client
             .post(
                 &url,
@@ -8738,10 +8721,9 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            "/admin/api/unstable/fulfillment_services.json",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin/api/unstable/fulfillment_services.json", None);
         self.client
             .post(
                 &url,
