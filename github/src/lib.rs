@@ -250,14 +250,16 @@ pub use reqwest::{header::HeaderMap, StatusCode};
 pub struct Response<T> {
     pub status: reqwest::StatusCode,
     pub headers: reqwest::header::HeaderMap,
+    pub extensions: http::Extensions,
     pub body: T,
 }
 
 impl<T> Response<T> {
-    pub fn new(status: reqwest::StatusCode, headers: reqwest::header::HeaderMap, body: T) -> Self {
+    pub fn new(status: reqwest::StatusCode, headers: reqwest::header::HeaderMap, extensions: http::Extensions, body: T) -> Self {
         Self {
             status,
             headers,
+            extensions,
             body,
         }
     }
@@ -663,6 +665,7 @@ impl Client {
 
         let status = response.status();
         let headers = response.headers().clone();
+        let extensions = response.extensions().to_owned();
         let link = response
             .headers()
             .get(http::header::LINK)
@@ -698,7 +701,7 @@ impl Client {
             };
             Ok((
                 next_link,
-                crate::Response::new(status, headers, parsed_response),
+                crate::Response::new(status, headers, extensions, parsed_response),
             ))
         } else if status.is_redirection() {
             match status {
@@ -716,7 +719,7 @@ impl Client {
                                 .lookup_next_link(&uri)
                                 .map(|next_link| next_link.map(crate::utils::NextLink)),
                         };
-                        link.map(|link| (link, Response::new(status, headers, out)))
+                        link.map(|link| (link, Response::new(status, headers, extensions, out)))
                     }
                     #[cfg(not(feature = "httpcache"))]
                     {
@@ -734,7 +737,7 @@ impl Client {
                         serde_json::from_slice::<Out>(&response_body)?
                     };
 
-                    Ok((None, crate::Response::new(status, headers, body)))
+                    Ok((None, crate::Response::new(status, headers, extensions, body)))
                 }
             }
         } else {
@@ -974,6 +977,7 @@ impl Client {
         Ok(Response::new(
             response.status,
             response.headers,
+            response.extensions.to_owned(),
             global_items,
         ))
     }
