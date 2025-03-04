@@ -342,7 +342,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -350,7 +350,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -380,7 +380,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -388,7 +388,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -678,7 +678,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -686,7 +686,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -716,7 +716,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -724,7 +724,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -755,7 +755,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -763,7 +763,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -794,7 +794,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -802,7 +802,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -833,7 +833,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -841,7 +841,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -872,7 +872,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -880,7 +880,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -911,7 +911,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -919,7 +919,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -1380,13 +1380,14 @@ dependencies = [
 
 [[package]]
 name = "jsonwebtoken"
-version = "8.3.0"
+version = "9.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6971da4d9c3aa03c3d8f3ff0f4155b534aad021292003895a469716b2a230378"
+checksum = "5a87cc7a48537badeae96744432de36f4be2b4a34a05a5ef32e9dd8a1c169dde"
 dependencies = [
- "base64 0.21.7",
- "pem",
- "ring 0.16.20",
+ "base64 0.22.1",
+ "js-sys",
+ "pem 3.0.5",
+ "ring",
  "serde",
  "serde_json",
  "simple_asn1",
@@ -1398,7 +1399,7 @@ version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 dependencies = [
- "spin 0.9.8",
+ "spin",
 ]
 
 [[package]]
@@ -1471,7 +1472,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -1479,7 +1480,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -1685,7 +1686,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -1693,7 +1694,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -1723,7 +1724,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -1731,7 +1732,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -1880,6 +1881,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "pem"
+version = "3.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38af38e8470ac9dee3ce1bae1af9c1671fffc44ddfd8bd1d0a3445bf349a8ef3"
+dependencies = [
+ "base64 0.22.1",
+ "serde",
+]
+
+[[package]]
 name = "pem-rfc7468"
 version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1984,7 +1995,7 @@ checksum = "fadfaed2cd7f389d0161bb73eeb07b7b78f8691047a6f3e73caaeae55310a4a6"
 dependencies = [
  "bytes",
  "rand 0.8.5",
- "ring 0.17.8",
+ "ring",
  "rustc-hash",
  "rustls 0.23.16",
  "slab",
@@ -2033,7 +2044,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -2041,7 +2052,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -2326,7 +2337,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -2334,7 +2345,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -2349,21 +2360,6 @@ dependencies = [
 
 [[package]]
 name = "ring"
-version = "0.16.20"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3053cf52e236a3ed746dfc745aa9cacf1b791d846bdaf412f60a8d7d6e17c8fc"
-dependencies = [
- "cc",
- "libc",
- "once_cell",
- "spin 0.5.2",
- "untrusted 0.7.1",
- "web-sys",
- "winapi",
-]
-
-[[package]]
-name = "ring"
 version = "0.17.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c17fa4cb658e3583423e915b9f3acc01cceaee1860e33d59ebae66adc3a2dc0d"
@@ -2372,8 +2368,8 @@ dependencies = [
  "cfg-if",
  "getrandom 0.2.15",
  "libc",
- "spin 0.9.8",
- "untrusted 0.9.0",
+ "spin",
+ "untrusted",
  "windows-sys 0.52.0",
 ]
 
@@ -2429,7 +2425,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f56a14d1f48b391359b22f731fd4bd7e43c97f3c50eee276f3aa09c94784d3e"
 dependencies = [
  "log",
- "ring 0.17.8",
+ "ring",
  "rustls-webpki 0.101.7",
  "sct",
 ]
@@ -2441,7 +2437,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bf4ef73721ac7bcd79b2b315da7779d8fc09718c6b3d2d1b2d94850eb8c18432"
 dependencies = [
  "log",
- "ring 0.17.8",
+ "ring",
  "rustls-pki-types",
  "rustls-webpki 0.102.8",
  "subtle",
@@ -2455,7 +2451,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eee87ff5d9b36712a58574e12e9f0ea80f915a5b0ac518d322b24a465617925e"
 dependencies = [
  "once_cell",
- "ring 0.17.8",
+ "ring",
  "rustls-pki-types",
  "rustls-webpki 0.102.8",
  "subtle",
@@ -2504,8 +2500,8 @@ version = "0.101.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b6275d1ee7a1cd780b64aca7726599a1dbc893b1e64144529e55c3c2f745765"
 dependencies = [
- "ring 0.17.8",
- "untrusted 0.9.0",
+ "ring",
+ "untrusted",
 ]
 
 [[package]]
@@ -2514,9 +2510,9 @@ version = "0.102.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "64ca1bc8749bd4cf37b5ce386cc146580777b4e8572c7b97baf22c83f444bee9"
 dependencies = [
- "ring 0.17.8",
+ "ring",
  "rustls-pki-types",
- "untrusted 0.9.0",
+ "untrusted",
 ]
 
 [[package]]
@@ -2574,8 +2570,8 @@ version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da046153aa2352493d6cb7da4b6e5c0c057d8a1d0a9aa8560baffdd945acd414"
 dependencies = [
- "ring 0.17.8",
- "untrusted 0.9.0",
+ "ring",
+ "untrusted",
 ]
 
 [[package]]
@@ -2624,7 +2620,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -2632,7 +2628,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -2741,7 +2737,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -2749,7 +2745,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -2780,7 +2776,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -2788,7 +2784,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -2824,7 +2820,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -2832,7 +2828,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -2902,7 +2898,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -2910,7 +2906,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -2938,12 +2934,6 @@ dependencies = [
  "libc",
  "windows-sys 0.52.0",
 ]
-
-[[package]]
-name = "spin"
-version = "0.5.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
 
 [[package]]
 name = "spin"
@@ -3222,7 +3212,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -3230,7 +3220,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
@@ -3278,12 +3268,6 @@ name = "unsafe-libyaml"
 version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "673aac59facbab8a9007c7f6108d11f63b603f7cabff99fabf650fea5c32b861"
-
-[[package]]
-name = "untrusted"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a156c684c91ea7d62626509bce3cb4e1d9ed5c4d978f7b4352658f96a4c26b4a"
 
 [[package]]
 name = "untrusted"
@@ -3777,7 +3761,7 @@ dependencies = [
  "nom_pem",
  "openssl",
  "parse_link_header",
- "pem",
+ "pem 1.1.1",
  "percent-encoding",
  "rand 0.8.5",
  "reqwest",
@@ -3785,7 +3769,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
- "ring 0.16.20",
+ "ring",
  "rsa",
  "schemars",
  "serde",
