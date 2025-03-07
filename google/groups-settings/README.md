@@ -38,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google-groups-settings = "0.9.0"
+google-groups-settings = "0.10.0"
 ```
 
 ## Basic example
