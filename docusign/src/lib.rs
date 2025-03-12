@@ -30,7 +30,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! docusign = "0.9.0"
+//! docusign = "0.10.0"
 //! ```
 //!
 //! ## Basic example

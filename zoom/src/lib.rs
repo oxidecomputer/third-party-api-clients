@@ -39,7 +39,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! zoom-api = "0.9.0"
+//! zoom-api = "0.10.0"
 //! ```
 //!
 //! ## Basic example
