@@ -380,116 +380,72 @@ impl ParameterDataExt for openapiv3::ParameterData {
     }
 }
 
-trait ExtractJsonMediaType {
-    fn is_binary(&self) -> Result<bool>;
+trait HasContent {
+    fn get_content(&self, key: &str) -> Option<&openapiv3::MediaType>;
 }
 
-impl ExtractJsonMediaType for openapiv3::Response {
-    fn is_binary(&self) -> Result<bool> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/octet-stream") {
-            if !mt.encoding.is_empty() {
-                bail!("XXX encoding");
-            }
-
-            if let Some(s) = &mt.schema {
-                use openapiv3::{SchemaKind, StringFormat, Type, VariantOrUnknownOrEmpty::Item};
-
-                if let Ok(s) = s.item() {
-                    if s.schema_data.nullable {
-                        bail!("XXX nullable binary?");
-                    }
-                    if s.schema_data.default.is_some() {
-                        bail!("XXX default binary?");
-                    }
-                    if s.schema_data.discriminator.is_some() {
-                        bail!("XXX binary discriminator?");
-                    }
-                    match &s.schema_kind {
-                        SchemaKind::Type(Type::String(st)) => {
-                            if st.min_length.is_some() || st.max_length.is_some() {
-                                bail!("binary min/max length");
-                            }
-                            if !matches!(st.format, Item(StringFormat::Binary)) {
-                                bail!("expected binary format string, got {:?}", st.format);
-                            }
-                            if st.pattern.is_some() {
-                                bail!("XXX pattern");
-                            }
-                            if !st.enumeration.is_empty() {
-                                bail!("XXX binary enumeration {:?}", st);
-                            }
-                            return Ok(true);
-                        }
-                        x => {
-                            bail!("XXX schemakind type {:?}", x);
-                        }
-                    }
-                } else {
-                    return Ok(false);
-                }
-            } else {
-                bail!("binary thing had no schema?");
-            }
-        }
-
-        Ok(false)
+impl HasContent for openapiv3::Response {
+    fn get_content(&self, key: &str) -> Option<&openapiv3::MediaType> {
+        self.content.get(key)
     }
 }
 
-impl ExtractJsonMediaType for openapiv3::RequestBody {
-    fn is_binary(&self) -> Result<bool> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/octet-stream") {
-            if !mt.encoding.is_empty() {
-                bail!("XXX encoding");
-            }
+impl HasContent for openapiv3::RequestBody {
+    fn get_content(&self, key: &str) -> Option<&openapiv3::MediaType> {
+        self.content.get(key)
+    }
+}
 
-            if let Some(s) = &mt.schema {
-                use openapiv3::{SchemaKind, StringFormat, Type, VariantOrUnknownOrEmpty::Item};
-
-                if let Ok(s) = s.item() {
-                    if s.schema_data.nullable {
-                        bail!("XXX nullable binary?");
-                    }
-                    if s.schema_data.default.is_some() {
-                        bail!("XXX default binary?");
-                    }
-                    if s.schema_data.discriminator.is_some() {
-                        bail!("XXX binary discriminator?");
-                    }
-                    match &s.schema_kind {
-                        SchemaKind::Type(Type::String(st)) => {
-                            if st.min_length.is_some() || st.max_length.is_some() {
-                                bail!("binary min/max length");
-                            }
-                            if !matches!(st.format, Item(StringFormat::Binary)) {
-                                bail!("expected binary format string, got {:?}", st.format);
-                            }
-                            if st.pattern.is_some() {
-                                bail!("XXX pattern");
-                            }
-                            if !st.enumeration.is_empty() {
-                                bail!("XXX enumeration");
-                            }
-                            return Ok(true);
-                        }
-                        x => {
-                            bail!("XXX schemakind type {:?}", x);
-                        }
-                    }
-                } else {
-                    return Ok(false);
-                }
-            } else {
-                bail!("binary thing had no schema?");
-            }
+fn is_binary(this: &impl HasContent) -> Result<bool> {
+    // We do not need to check the length of the content because there might be
+    // more than one. For example, if xml or some other format is also defined.
+    if let Some(mt) = this.get_content("application/octet-stream") {
+        if !mt.encoding.is_empty() {
+            bail!("XXX encoding");
         }
 
-        Ok(false)
+        if let Some(s) = &mt.schema {
+            use openapiv3::{SchemaKind, StringFormat, Type, VariantOrUnknownOrEmpty::Item};
+
+            if let Ok(s) = s.item() {
+                if s.schema_data.nullable {
+                    bail!("XXX nullable binary?");
+                }
+                if s.schema_data.default.is_some() {
+                    bail!("XXX default binary?");
+                }
+                if s.schema_data.discriminator.is_some() {
+                    bail!("XXX binary discriminator?");
+                }
+                match &s.schema_kind {
+                    SchemaKind::Type(Type::String(st)) => {
+                        if st.min_length.is_some() || st.max_length.is_some() {
+                            bail!("binary min/max length");
+                        }
+                        if !matches!(st.format, Item(StringFormat::Binary)) {
+                            bail!("expected binary format string, got {:?}", st.format);
+                        }
+                        if st.pattern.is_some() {
+                            bail!("XXX pattern");
+                        }
+                        if !st.enumeration.is_empty() {
+                            bail!("XXX binary enumeration {:?}", st);
+                        }
+                        return Ok(true);
+                    }
+                    x => {
+                        bail!("XXX schemakind type {:?}", x);
+                    }
+                }
+            } else {
+                return Ok(false);
+            }
+        } else {
+            bail!("binary thing had no schema?");
+        }
     }
+
+    Ok(false)
 }
 
 trait ReferenceOrExt<T> {
