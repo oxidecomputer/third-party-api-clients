@@ -386,13 +386,6 @@ trait ExtractJsonMediaType {
 
 impl ExtractJsonMediaType for openapiv3::Response {
     fn is_binary(&self) -> Result<bool> {
-        if self.content.is_empty() {
-            /*
-             * XXX If there are no content types, I guess it is not binary?
-             */
-            return Ok(false);
-        }
-
         // We do not need to check the length of the content because there might be
         // more than one. For example, if xml or some other format is also defined.
         if let Some(mt) = self.content.get("application/octet-stream") {
@@ -447,13 +440,6 @@ impl ExtractJsonMediaType for openapiv3::Response {
 
 impl ExtractJsonMediaType for openapiv3::RequestBody {
     fn is_binary(&self) -> Result<bool> {
-        if self.content.is_empty() {
-            /*
-             * XXX If there are no content types, I guess it is not binary?
-             */
-            return Ok(false);
-        }
-
         // We do not need to check the length of the content because there might be
         // more than one. For example, if xml or some other format is also defined.
         if let Some(mt) = self.content.get("application/octet-stream") {
