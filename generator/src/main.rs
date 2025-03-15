@@ -382,23 +382,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
 trait ExtractJsonMediaType {
     fn is_binary(&self) -> Result<bool>;
-    fn content_json(&self) -> Result<openapiv3::MediaType>;
 }
 
 impl ExtractJsonMediaType for openapiv3::Response {
-    fn content_json(&self) -> Result<openapiv3::MediaType> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/json") {
-            Ok(mt.clone())
-        } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
-        }
-    }
-
     fn is_binary(&self) -> Result<bool> {
         if self.content.is_empty() {
             /*
@@ -460,19 +446,6 @@ impl ExtractJsonMediaType for openapiv3::Response {
 }
 
 impl ExtractJsonMediaType for openapiv3::RequestBody {
-    fn content_json(&self) -> Result<openapiv3::MediaType> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/json") {
-            Ok(mt.clone())
-        } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
-        }
-    }
-
     fn is_binary(&self) -> Result<bool> {
         if self.content.is_empty() {
             /*
