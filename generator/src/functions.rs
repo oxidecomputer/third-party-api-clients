@@ -5,8 +5,8 @@ use inflector::cases::{pascalcase::to_pascal_case, snakecase::to_snake_case};
 
 use crate::{
     clean_fn_name, clean_name, client::generate_servers, get_parameter_data, make_plural,
-    oid_to_object_name, path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType,
-    ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace,
+    oid_to_object_name, path_to_operation_id, struct_name, template::parse, ParameterDataExt,
+    ReferenceOrExt, TypeId, TypeSpace,
 };
 
 #[derive(Debug, Default)]
@@ -151,7 +151,7 @@ pub fn generate_files(
 
             let (body_param, body_func) = if let Some(b) = &o.request_body {
                 if let Ok(b) = b.item() {
-                    if b.is_binary()? {
+                    if crate::is_binary(b)? {
                         let (ct, _) = b.content.first().unwrap();
                         body_content_type_header = Some(ct.to_string());
 
