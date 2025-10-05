@@ -586,6 +586,23 @@ pub struct SubmitJobMediaUrlOptionsAllOf {
     pub submit_job_options_all_of: SubmitJobOptionsAllOf,
 }
 
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct SubmitLocalFileJob {
+    pub blob: Vec<u8>,
+    pub mime_type: String,
+    pub filename: String,
+}
+
+/// All of the following types are flattened into one object:
+///
+/// - `SubmitJobOptionsAllOf`
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct SubmitJobLocalFileOptionsAllOf {
+    #[serde(flatten)]
+    pub submit_job_options_all_of: SubmitJobOptionsAllOf,
+}
+
 /// Rev.ai Job Options Object Model
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobOptions {
