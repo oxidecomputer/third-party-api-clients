@@ -1,6 +1,7 @@
 //! The data types sent to and returned from the API client.
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Acl {
@@ -1904,8 +1905,7 @@ pub struct FreeBusyResponse {
     /**
      * List of free/busy information for calendars.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub calendars: Option<FreeBusyCalendar>,
+    pub calendars: HashMap<String, FreeBusyCalendar>,
     /**
      * Expansion of groups.
      */
@@ -2040,23 +2040,11 @@ pub struct TimePeriod {
     /**
      * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize",
-        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
-    )]
-    pub end: Option<chrono::DateTime<chrono::Utc>>,
+    pub end: chrono::DateTime<chrono::Utc>,
     /**
      * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize",
-        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
-    )]
-    pub start: Option<chrono::DateTime<chrono::Utc>>,
+    pub start: chrono::DateTime<chrono::Utc>,
 }
 
 /**
