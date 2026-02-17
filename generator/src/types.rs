@@ -97,7 +97,6 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         || sn == "DescriptionlessJobOptionsDataType"
                         || sn == "SubmitJobOptions"
                         || sn == "SubmitJobOptionsData"
-                        || sn == "MinimalRepository"
                         || sn == "WorkflowRun"
                         || sn == "CheckAnnotation"
                     {

@@ -227,7 +227,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 };
 
                                 if st.pattern.is_some() {
-                                    bail!("XXX pattern");
+                                    println!("XXX unsupported pattern detected");
                                 }
 
                                 if !st.enumeration.is_empty() {
@@ -303,6 +303,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "uuid" => "&str".to_string(),
                                         "hostname" => "&str".to_string(),
                                         "time" => "chrono::NaiveTime".to_string(),
+                                        "repo.nwo" => "&str".to_string(),
                                         f => {
                                             bail!("XXX unknown string format {}", f)
                                         }
@@ -436,7 +437,7 @@ impl ExtractJsonMediaType for openapiv3::Response {
                                 bail!("expected binary format string, got {:?}", st.format);
                             }
                             if st.pattern.is_some() {
-                                bail!("XXX pattern");
+                                println!("XXX unsupported pattern detected");
                             }
                             if !st.enumeration.is_empty() {
                                 bail!("XXX binary enumeration {:?}", st);
@@ -734,6 +735,13 @@ impl PartialEq for TypeId {
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct Constraints {
+    pub pattern: Option<String>,
+    pub min_length: Option<usize>,
+    pub max_length: Option<usize>,
+}
+
 #[derive(Debug, Clone)]
 pub struct TypeSpace {
     next_id: u64,
@@ -741,11 +749,12 @@ pub struct TypeSpace {
      * Object types generally have a useful name, which we would like to match
      * with anywhere that name appears in the definition document.  Many other
      * types, though, do not; e.g., an array of strings is just going to become
-     * Vec<String> without necesssarily having a useful distinct type name.
+     * Vec<String> without necessarily having a useful distinct type name.
      */
     name_to_id: BTreeMap<String, TypeId>,
     id_to_entry: BTreeMap<TypeId, TypeEntry>,
     unresolved_refs: HashMap<String, Vec<TypeId>>,
+    constraints: BTreeMap<TypeId, Constraints>,
 }
 
 impl TypeSpace {
@@ -755,6 +764,7 @@ impl TypeSpace {
             name_to_id: BTreeMap::new(),
             id_to_entry: BTreeMap::new(),
             unresolved_refs: HashMap::new(),
+            constraints: BTreeMap::new(),
         }
     }
 
@@ -1478,7 +1488,24 @@ impl TypeSpace {
         let (n, details) =
             self.get_type_name_and_details(name, s, parent_name, additional_description)?;
 
-        self.add_if_not_exists(n, details, parent_name, false)
+        let id = self.add_if_not_exists(n, details, parent_name, false)?;
+
+        // Extract string-type constraints and associate them with the TypeId.
+        if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
+            let constraints = Constraints {
+                pattern: st.pattern.clone(),
+                min_length: st.min_length,
+                max_length: st.max_length,
+            };
+            if constraints.pattern.is_some()
+                || constraints.min_length.is_some()
+                || constraints.max_length.is_some()
+            {
+                self.set_constraints(id.clone(), constraints);
+            }
+        }
+
+        Ok(id)
     }
 
     fn get_type_name_and_details(
@@ -1879,6 +1906,10 @@ impl TypeSpace {
                                     s.schema_data.clone(),
                                 ),
                             )),
+                            "repo.nwo" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
                             f => bail!("XXX unknown string format {}", f),
                         },
                     }
@@ -2214,6 +2245,14 @@ impl TypeSpace {
         }
 
         Ok(())
+    }
+
+    fn set_constraints(&mut self, id: TypeId, constraints: Constraints) {
+        self.constraints.insert(id, constraints);
+    }
+
+    fn get_constraints(&self, id: &TypeId) -> Option<&Constraints> {
+        self.constraints.get(id)
     }
 }
 
