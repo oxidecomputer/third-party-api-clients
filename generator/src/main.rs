@@ -2990,6 +2990,13 @@ fn main() -> Result<()> {
     if let Some(components) = &api.components {
         // Populate a type to describe each entry in the schemas section.
         for (i, (sn, s)) in components.schemas.iter().enumerate() {
+            if args.opt_str("proper-name").unwrap() == "GitHub"
+                && ((sn.starts_with("webhook-") && !sn.starts_with("webhook-config"))
+                    || sn.starts_with("webhooks_"))
+            {
+                debug(&format!("Skipping schema: {}", sn));
+                continue;
+            }
             let name = clean_name(sn);
             debug(&format!(
                 "SCHEMA {}/{}: {}",
