@@ -1319,7 +1319,34 @@ impl TypeSpace {
                         );
                     }
 
-                    // If we don't have anything to append, let's bail.
+                    // Failed to find a unique suffix based on the name. Try
+                    // using unique descriptors from the type's details
+                    let content_suffixes: Vec<String> = match &details {
+                        TypeDetails::Enum(vals, _) => {
+                            // Use enum values as distinguishing suffixes.
+                            vals.iter().map(|v| clean_name(v)).collect()
+                        }
+                        TypeDetails::Object(props, _) => {
+                            // Use property names as distinguishing suffixes.
+                            props.keys().map(|k| clean_name(k)).collect()
+                        }
+                        _ => vec![],
+                    };
+
+                    // Try each content-derived suffix, picking the first one
+                    // that isn't already part of the name.
+                    for suffix in &content_suffixes {
+                        if !name.contains(suffix.as_str()) {
+                            let new_name = format!("{} {}", name, suffix);
+                            return self.add_if_not_exists(
+                                Some(clean_name(&new_name)),
+                                details,
+                                "",
+                                is_reference,
+                            );
+                        }
+                    }
+
                     // WE ARE RUNNING OUT OF NAMES AND WE TRIED.
                     bail!(
                         "we ran out of unique names for this thing {}: {:?}",
@@ -2241,7 +2268,10 @@ impl TypeSpace {
                     }
                 }
             }
-            bail!("parsed API contains {} unresolved references.", self.unresolved_refs.keys().len())
+            bail!(
+                "parsed API contains {} unresolved references.",
+                self.unresolved_refs.keys().len()
+            )
         }
 
         Ok(())
@@ -2452,11 +2482,11 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&to_snake_case(&clean_name(&tag.name)))
-            && (proper_name == "Zoom" || proper_name == "DocuSign")
-        {
+        if !tags.contains(&to_snake_case(&clean_name(&tag.name))) {
+            // This specifically fixes Zoom, GitHub  and DocuSign where they
+            // list tags that have no associated functions, but this should be
+            // safe for all APIs.
             // Return early do nothing!
-            // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
         }
 
@@ -2689,11 +2719,11 @@ pub(crate) struct Message {
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&to_snake_case(&tag.name))
-            && (proper_name == "Zoom" || proper_name == "DocuSign")
-        {
+        if !tags.contains(&to_snake_case(&clean_name(&tag.name))) {
+            // This specifically fixes Zoom, GitHub  and DocuSign where they
+            // list tags that have no associated functions, but this should be
+            // safe for all APIs.
             // Return early do nothing!
-            // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
         }
 
