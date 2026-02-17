@@ -3675,18 +3675,12 @@ rustdoc-args = ["--cfg", "docsrs"]
             save(utilsrs, utils.as_str())?;
 
             /*
-             * Create the Rust source types file containing the generated types:
+             * NOTE: In at least the GitHub API the TypeSpace is changed
+             * during code generation. If moving type generation to after
+             * this step breaks other APIs we may need to do it twice.
              */
-            let types = types::generate_types(&mut ts, &proper_name)?;
-            let mut typesrs = src.clone();
-            typesrs.push("types.rs");
-            save(typesrs, types.as_str())?;
-
-            /*
-             * Create the Rust source files for each of the tags functions:
-             */
-
-            match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
+            // Create the Rust source files for each of the tags functions:
+            let result = match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
                 Ok(files) => {
                     // We have a map of our files, let's write to them.
                     for (f, output) in files {
@@ -3731,7 +3725,17 @@ impl {} {{
                     println!("generate_files fail: {:?}", e);
                     true
                 }
-            }
+            };
+
+            /*
+             * Create the Rust source types file containing the generated types:
+             */
+            let types = types::generate_types(&mut ts, &proper_name)?;
+            let mut typesrs = src.clone();
+            typesrs.push("types.rs");
+            save(typesrs, types.as_str())?;
+
+            result
         }
         Err(e) => {
             println!("gen fail: {:?}", e);
