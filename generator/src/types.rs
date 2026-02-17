@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, HashSet};
 
 use anyhow::{bail, Result};
 use inflector::cases::snakecase::to_snake_case;
@@ -21,9 +21,18 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
     a("    use serde::{Serialize, Deserialize};");
     a("");
 
+    let mut emitted_names: HashSet<String> = HashSet::new();
+
     for te in ts.clone().id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
             let sn = struct_name(sn);
+
+            // Warn about duplicate type names, but keep going
+            if emitted_names.contains(&sn) {
+                eprintln!("[warn] skipping duplicate type name: {}", sn);
+                continue;
+            }
+            emitted_names.insert(sn.clone());
 
             match &te.details {
                 TypeDetails::Enum(vals, schema_data) => {
@@ -80,7 +89,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         || sn == "PagesHttpsCertificate"
                         || sn == "ErrorDetails"
                         || sn == "EnvelopeDefinition"
-                        || (sn == "Event" && proper_name != "Stripe")
+                        || (sn == "Event" && proper_name != "Stripe" && proper_name != "GitHub")
                         || sn == "User"
                         || sn == "Group"
                         || sn == "CalendarResource"

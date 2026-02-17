@@ -138,7 +138,7 @@ impl Client {
         self.credentials = credentials.into();
     }
 
-    fn credentials(&self, authentication: crate::auth::AuthenticationConstraint) -> Option<&crate::auth::Credentials> {
+    fn get_credentials(&self, authentication: crate::auth::AuthenticationConstraint) -> Option<&crate::auth::Credentials> {
         match (authentication, self.credentials.as_ref()) {
             (crate::auth::AuthenticationConstraint::Unconstrained, creds) => creds,
             (crate::auth::AuthenticationConstraint::JWT, creds @ Some(&crate::auth::Credentials::JWT(_))) => creds,
@@ -162,7 +162,7 @@ impl Client {
     ) -> ClientResult<(reqwest::Url, Option<String>)> {
         let mut parsed_url = uri.parse::<reqwest::Url>()?;
 
-        match self.credentials(authentication) {
+        match self.get_credentials(authentication) {
             Some(&crate::auth::Credentials::Client(ref id, ref secret)) => {
                 parsed_url.query_pairs_mut()
                         .append_pair("client_id", id)
