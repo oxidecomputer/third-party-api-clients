@@ -149,6 +149,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || prop == "enum"
                                 || prop == "const"
                                 || prop == "use"
+                                || prop == "async"
                             {
                                 prop = format!("{}_", name);
                             } else if name == "$ref" {
@@ -283,6 +284,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || prop == "enum"
                                 || prop == "const"
                                 || prop == "use"
+                                || prop == "async"
                             {
                                 prop = format!("{}_", prop);
                             }

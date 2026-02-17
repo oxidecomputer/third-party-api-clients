@@ -5,7 +5,7 @@ mod types;
 mod utils;
 
 use std::{
-    collections::{BTreeMap, HashSet},
+    collections::{BTreeMap, HashMap, HashSet},
     ffi::OsStr,
     fs::{File, OpenOptions},
     io::Write,
@@ -745,6 +745,7 @@ pub struct TypeSpace {
      */
     name_to_id: BTreeMap<String, TypeId>,
     id_to_entry: BTreeMap<TypeId, TypeEntry>,
+    unresolved_refs: HashMap<String, Vec<TypeId>>,
 }
 
 impl TypeSpace {
@@ -753,6 +754,7 @@ impl TypeSpace {
             next_id: 1,
             name_to_id: BTreeMap::new(),
             id_to_entry: BTreeMap::new(),
+            unresolved_refs: HashMap::new(),
         }
     }
 
@@ -912,7 +914,26 @@ impl TypeSpace {
         if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
                 TypeDetails::Basic(t, _) => Ok(t.to_string()),
-                TypeDetails::NamedType(itid, _) => self.render_type(itid, in_mod),
+                TypeDetails::NamedType(itid, _) => {
+                    if !self.id_to_entry.contains_key(itid) {
+                        eprintln!(
+                            "[error] {:?} [{:?}] has an unresolvable inner {:?}!",
+                            tid,
+                            te.name.as_deref().unwrap_or("unknown"),
+                            itid
+                        );
+
+                        for (ref_path, ids) in &self.unresolved_refs {
+                            if ids.contains(tid) {
+                                println!("  Referenced as: {}", ref_path);
+                            }
+                        }
+
+                        bail!("could not resolve referenced type ID {:?}", itid);
+                    }
+
+                    self.render_type(itid, in_mod)
+                }
                 TypeDetails::Enum(..) => {
                     if let Some(n) = &te.name {
                         let struct_name = struct_name(n);
@@ -1109,7 +1130,15 @@ impl TypeSpace {
         // Let's make some generic details, assign an id and then later in
         // populate ref we can replace this ID with the real one.
         let details = TypeDetails::NamedType(self.assign(), Default::default());
-        self.add_if_not_exists(Some(ref_), details, "", true)
+        let id = self.add_if_not_exists(Some(ref_.clone()), details, "", true)?;
+
+        // Keep track of this reference until it is resolved to make troubleshooting references easier
+        self.unresolved_refs
+            .entry(ref_)
+            .or_default()
+            .push(id.clone());
+
+        Ok(id)
     }
 
     fn add_if_not_exists(
@@ -1270,7 +1299,7 @@ impl TypeSpace {
                             is_reference,
                         );
                     } else if !name.contains("object") {
-                        // Let's try to append "type" onto the end and see if that helps.
+                        // Let's try to append "object" onto the end and see if that helps.
                         let new_name = format!("{} object", name);
                         return self.add_if_not_exists(
                             Some(clean_name(&new_name)),
@@ -1358,7 +1387,23 @@ impl TypeSpace {
         let details = if let Some(id) = id {
             TypeDetails::NamedType(id, Default::default())
         } else {
-            TypeDetails::NamedType(self.id_for_name("String"), Default::default())
+            let string_id = self.id_for_name("String");
+
+            // NOTE:
+            // In the GitHub API a few response types have no content attribute. There is no
+            // String type defined, resulting in mismatched references. This code is intended to
+            // ensure that a String TypeId exists and is mapped correctly in both directions.
+            if !self.id_to_entry.contains_key(&string_id) {
+                self.id_to_entry.insert(
+                    string_id.clone(),
+                    TypeEntry {
+                        id: string_id.clone(),
+                        name: Some("String".to_string()),
+                        details: TypeDetails::Basic("String".to_string(), Default::default()),
+                    },
+                );
+            }
+            TypeDetails::NamedType(string_id, Default::default())
         };
 
         // Lets check if we already have this reference added.
@@ -1366,7 +1411,7 @@ impl TypeSpace {
         // was referenced that had not yet been parsed.
         if let Some(rid) = self.name_to_id.get(&ref_) {
             // Okay we have the id for the reference.
-            // Let's update it's named type.
+            // Let's update its named type.
             self.id_to_entry.insert(
                 rid.clone(),
                 TypeEntry {
@@ -1375,6 +1420,15 @@ impl TypeSpace {
                     details,
                 },
             );
+
+            // If we are defining an unresolved reference clean it up here
+            if let Some(type_ids) = self.unresolved_refs.remove(&ref_) {
+                println!(
+                    "Resolved reference '{}' used by {} type IDs",
+                    ref_,
+                    type_ids.len()
+                );
+            }
 
             return Ok(rid.clone());
         }
@@ -2133,6 +2187,33 @@ impl TypeSpace {
         } else {
             bail!("could not get parameter_data for {:?}: {:?}", name, p);
         }
+    }
+
+    fn validate_refs(&self) -> Result<()> {
+        if !self.unresolved_refs.is_empty() {
+            eprintln!(
+                "[error]: Found {} unresolved references:",
+                self.unresolved_refs.len()
+            );
+
+            for (reference, ids) in &self.unresolved_refs {
+                eprintln!("  '{}' referenced by {} types:", reference, ids.len());
+
+                for id in ids {
+                    if let Some(entry) = self.id_to_entry.get(id) {
+                        let name = entry.name.as_deref().unwrap_or("unnamed");
+                        eprintln!("    - {:?} [{}]", id, name);
+
+                        if let TypeDetails::NamedType(target_id, _) = &entry.details {
+                            eprintln!("      points to {:?}", target_id);
+                        }
+                    }
+                }
+            }
+            bail!("parsed API contains {} unresolved references.", self.unresolved_refs.keys().len())
+        }
+
+        Ok(())
     }
 }
 
@@ -3303,6 +3384,8 @@ fn main() -> Result<()> {
         tags.push(grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?);
     }
     debug("");
+
+    ts.validate_refs()?;
 
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
