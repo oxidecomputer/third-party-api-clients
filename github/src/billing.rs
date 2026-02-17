@@ -12,144 +12,48 @@ impl Billing {
     }
 
     /**
-     * Get GitHub Actions billing for an enterprise.
+     * Get all budgets for an organization.
      *
-     * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/actions` endpoint.
+     * This function performs a `GET` to the `/organizations/{org}/settings/billing/budgets` endpoint.
      *
-     * Gets the summary of the free and paid GitHub Actions minutes used.
+     * > [!NOTE]
+     * > This endpoint is in public preview and is subject to change.
      *
-     * Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+     * Gets all budgets for an organization. The authenticated user must be an organization admin or billing manager.
+     * Each page returns up to 10 budgets.
      *
-     * The authenticated user must be an enterprise admin.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-enterprise>
-     *
-     * **Parameters:**
-     *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     */
-    pub async fn get_github_actions_billing_ghe(
-        &self,
-        enterprise: &str,
-    ) -> ClientResult<crate::Response<crate::types::ActionsBillingUsage>> {
-        let url = self.client.url(
-            &format!(
-                "/enterprises/{}/settings/billing/actions",
-                crate::progenitor_support::encode_path(enterprise),
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Get GitHub Packages billing for an enterprise.
-     *
-     * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/packages` endpoint.
-     *
-     * Gets the free and paid storage used for GitHub Packages in gigabytes.
-     *
-     * Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
-     *
-     * The authenticated user must be an enterprise admin.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-enterprise>
+     * FROM: <https://docs.github.com/rest/billing/budgets#get-all-budgets-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `page: i64` -- The page number of the results to fetch.
+     * * `per_page: i64` -- The number of results per page (max 10).
+     * * `scope: crate::types::BudgetScope` -- The type of scope for the budget.
      */
-    pub async fn get_github_packages_billing_ghe(
-        &self,
-        enterprise: &str,
-    ) -> ClientResult<crate::Response<crate::types::PackagesBillingUsage>> {
-        let url = self.client.url(
-            &format!(
-                "/enterprises/{}/settings/billing/packages",
-                crate::progenitor_support::encode_path(enterprise),
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Get shared storage billing for an enterprise.
-     *
-     * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/shared-storage` endpoint.
-     *
-     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
-     *
-     * Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
-     *
-     * The authenticated user must be an enterprise admin.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-enterprise>
-     *
-     * **Parameters:**
-     *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     */
-    pub async fn get_shared_storage_billing_ghe(
-        &self,
-        enterprise: &str,
-    ) -> ClientResult<crate::Response<crate::types::CombinedBillingUsage>> {
-        let url = self.client.url(
-            &format!(
-                "/enterprises/{}/settings/billing/shared-storage",
-                crate::progenitor_support::encode_path(enterprise),
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Get GitHub Actions billing for an organization.
-     *
-     * This function performs a `GET` to the `/orgs/{org}/settings/billing/actions` endpoint.
-     *
-     * Gets the summary of the free and paid GitHub Actions minutes used.
-     *
-     * Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
-     *
-     * Access tokens must have the `repo` or `admin:org` scope.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-organization>
-     *
-     * **Parameters:**
-     *
-     * * `org: &str`
-     */
-    pub async fn get_github_actions_billing_org(
+    pub async fn get_all_budgets_org(
         &self,
         org: &str,
-    ) -> ClientResult<crate::Response<crate::types::ActionsBillingUsage>> {
+        page: i64,
+        per_page: i64,
+        scope: crate::types::BudgetScope,
+    ) -> ClientResult<crate::Response<crate::types::GetAllBudgets>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if page > 0 {
+            query_args.push(("page".to_string(), page.to_string()));
+        }
+        if per_page > 0 {
+            query_args.push(("per_page".to_string(), per_page.to_string()));
+        }
+        if !scope.to_string().is_empty() {
+            query_args.push(("scope".to_string(), scope.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/orgs/{}/settings/billing/actions",
-                crate::progenitor_support::encode_path(org),
+                "/organizations/{}/settings/billing/budgets?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                query_
             ),
             None,
         );
@@ -164,30 +68,32 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Packages billing for an organization.
+     * Get a budget by ID for an organization.
      *
-     * This function performs a `GET` to the `/orgs/{org}/settings/billing/packages` endpoint.
+     * This function performs a `GET` to the `/organizations/{org}/settings/billing/budgets/{budget_id}` endpoint.
      *
-     * Gets the free and paid storage used for GitHub Packages in gigabytes.
+     * > [!NOTE]
+     * > This endpoint is in public preview and is subject to change.
      *
-     * Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+     * Gets a budget by ID. The authenticated user must be an organization admin or billing manager.
      *
-     * Access tokens must have the `repo` or `admin:org` scope.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-organization>
+     * FROM: <https://docs.github.com/rest/billing/budgets#get-a-budget-by-id-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `budget_id: &str` -- The ID corresponding to the budget.
      */
-    pub async fn get_github_packages_billing_org(
+    pub async fn get_budget_org(
         &self,
         org: &str,
-    ) -> ClientResult<crate::Response<crate::types::PackagesBillingUsage>> {
+        budget_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::GetBudget>> {
         let url = self.client.url(
             &format!(
-                "/orgs/{}/settings/billing/packages",
-                crate::progenitor_support::encode_path(org),
+                "/organizations/{}/settings/billing/budgets/{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&budget_id.to_string()),
             ),
             None,
         );
@@ -202,30 +108,142 @@ impl Billing {
             .await
     }
     /**
-     * Get shared storage billing for an organization.
+     * Delete a budget for an organization.
      *
-     * This function performs a `GET` to the `/orgs/{org}/settings/billing/shared-storage` endpoint.
+     * This function performs a `DELETE` to the `/organizations/{org}/settings/billing/budgets/{budget_id}` endpoint.
      *
-     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+     * > [!NOTE]
+     * > This endpoint is in public preview and is subject to change.
      *
-     * Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+     * Deletes a budget by ID for an organization. The authenticated user must be an organization admin or billing manager.
      *
-     * Access tokens must have the `repo` or `admin:org` scope.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-organization>
+     * FROM: <https://docs.github.com/rest/billing/budgets#delete-a-budget-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `budget_id: &str` -- The ID corresponding to the budget.
      */
-    pub async fn get_shared_storage_billing_org(
+    pub async fn delete_budget_org(
         &self,
         org: &str,
-    ) -> ClientResult<crate::Response<crate::types::CombinedBillingUsage>> {
+        budget_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::DeleteBudget>> {
         let url = self.client.url(
             &format!(
-                "/orgs/{}/settings/billing/shared-storage",
-                crate::progenitor_support::encode_path(org),
+                "/organizations/{}/settings/billing/budgets/{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&budget_id.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Update a budget for an organization.
+     *
+     * This function performs a `PATCH` to the `/organizations/{org}/settings/billing/budgets/{budget_id}` endpoint.
+     *
+     * > [!NOTE]
+     * > This endpoint is in public preview and is subject to change.
+     *
+     * Updates an existing budget for an organization. The authenticated user must be an organization admin or billing manager.
+     *
+     * FROM: <https://docs.github.com/rest/billing/budgets#update-a-budget-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `budget_id: &str` -- The ID corresponding to the budget.
+     */
+    pub async fn update_budget_org(
+        &self,
+        org: &str,
+        budget_id: &str,
+        body: &crate::types::BillingUpdateBudgetOrgRequest,
+    ) -> ClientResult<crate::Response<crate::types::BillingUpdateBudgetOrgResponseData>> {
+        let url = self.client.url(
+            &format!(
+                "/organizations/{}/settings/billing/budgets/{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&budget_id.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
+    }
+    /**
+     * Get billing premium request usage report for an organization.
+     *
+     * This function performs a `GET` to the `/organizations/{org}/settings/billing/premium_request/usage` endpoint.
+     *
+     * Gets a report of premium request usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account.
+     *
+     * **Note:** Only data from the past 24 months is accessible via this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/billing/usage#get-billing-premium-request-usage-report-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `year: i64` -- If specified, only return results for a single year. The value of `year` is an integer with four digits representing a year. For example, `2025`. Default value is the current year.
+     * * `month: i64` -- If specified, only return results for a single month. The value of `month` is an integer between `1` and `12`. Default value is the current month. If no year is specified the default `year` is used.
+     * * `day: i64` -- If specified, only return results for a single day. The value of `day` is an integer between `1` and `31`. If no `year` or `month` is specified, the default `year` and `month` are used.
+     * * `user: &str` -- The user name to query usage for. The name is not case sensitive.
+     * * `model: &str` -- The model name to query usage for. The name is not case sensitive.
+     * * `product: &str` -- The product name to query usage for. The name is not case sensitive.
+     */
+    pub async fn get_github_billing_premium_request_usage_report_org(
+        &self,
+        org: &str,
+        year: i64,
+        month: i64,
+        day: i64,
+        user: &str,
+        model: &str,
+        product: &str,
+    ) -> ClientResult<crate::Response<crate::types::BillingPremiumRequestUsageReportOrg>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if day > 0 {
+            query_args.push(("day".to_string(), day.to_string()));
+        }
+        if !model.is_empty() {
+            query_args.push(("model".to_string(), model.to_string()));
+        }
+        if month > 0 {
+            query_args.push(("month".to_string(), month.to_string()));
+        }
+        if !product.is_empty() {
+            query_args.push(("product".to_string(), product.to_string()));
+        }
+        if !user.is_empty() {
+            query_args.push(("user".to_string(), user.to_string()));
+        }
+        if year > 0 {
+            query_args.push(("year".to_string(), year.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/organizations/{}/settings/billing/premium_request/usage?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                query_
             ),
             None,
         );
@@ -240,30 +258,46 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Actions billing for a user.
+     * Get billing usage report for an organization.
      *
-     * This function performs a `GET` to the `/users/{username}/settings/billing/actions` endpoint.
+     * This function performs a `GET` to the `/organizations/{org}/settings/billing/usage` endpoint.
      *
-     * Gets the summary of the free and paid GitHub Actions minutes used.
+     * Gets a report of the total usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account.
      *
-     * Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+     * **Note:** This endpoint is only available to organizations with access to the enhanced billing platform. For more information, see "[About the enhanced billing platform](https://docs.github.com/billing/using-the-new-billing-platform)."
      *
-     * Access tokens must have the `user` scope.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-a-user>
+     * FROM: <https://docs.github.com/rest/billing/usage#get-billing-usage-report-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `year: i64` -- If specified, only return results for a single year. The value of `year` is an integer with four digits representing a year. For example, `2025`. Default value is the current year.
+     * * `month: i64` -- If specified, only return results for a single month. The value of `month` is an integer between `1` and `12`. If no year is specified the default `year` is used.
+     * * `day: i64` -- If specified, only return results for a single day. The value of `day` is an integer between `1` and `31`. If no `year` or `month` is specified, the default `year` and `month` are used.
      */
-    pub async fn get_github_actions_billing_user(
+    pub async fn get_github_billing_usage_report_org(
         &self,
-        username: &str,
-    ) -> ClientResult<crate::Response<crate::types::ActionsBillingUsage>> {
+        org: &str,
+        year: i64,
+        month: i64,
+        day: i64,
+    ) -> ClientResult<crate::Response<crate::types::BillingUsageReport>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if day > 0 {
+            query_args.push(("day".to_string(), day.to_string()));
+        }
+        if month > 0 {
+            query_args.push(("month".to_string(), month.to_string()));
+        }
+        if year > 0 {
+            query_args.push(("year".to_string(), year.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/users/{}/settings/billing/actions",
-                crate::progenitor_support::encode_path(username),
+                "/organizations/{}/settings/billing/usage?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                query_
             ),
             None,
         );
@@ -278,30 +312,64 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Packages billing for a user.
+     * Get billing usage summary for an organization.
      *
-     * This function performs a `GET` to the `/users/{username}/settings/billing/packages` endpoint.
+     * This function performs a `GET` to the `/organizations/{org}/settings/billing/usage/summary` endpoint.
      *
-     * Gets the free and paid storage used for GitHub Packages in gigabytes.
+     * > [!NOTE]
+     * > This endpoint is in public preview and is subject to change.
      *
-     * Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+     * Gets a summary report of usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account.
      *
-     * Access tokens must have the `user` scope.
+     * **Note:** Only data from the past 24 months is accessible via this endpoint.
      *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-a-user>
+     * FROM: <https://docs.github.com/rest/billing/usage#get-billing-usage-summary-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `year: i64` -- If specified, only return results for a single year. The value of `year` is an integer with four digits representing a year. For example, `2025`. Default value is the current year.
+     * * `month: i64` -- If specified, only return results for a single month. The value of `month` is an integer between `1` and `12`. Default value is the current month. If no year is specified the default `year` is used.
+     * * `day: i64` -- If specified, only return results for a single day. The value of `day` is an integer between `1` and `31`. If no `year` or `month` is specified, the default `year` and `month` are used.
+     * * `repository: &str` -- The repository name to query for usage in the format owner/repository.
+     * * `product: &str` -- The product name to query usage for. The name is not case sensitive.
+     * * `sku: &str` -- The SKU to query for usage.
      */
-    pub async fn get_github_packages_billing_user(
+    pub async fn get_github_billing_usage_summary_report_org(
         &self,
-        username: &str,
-    ) -> ClientResult<crate::Response<crate::types::PackagesBillingUsage>> {
+        org: &str,
+        year: i64,
+        month: i64,
+        day: i64,
+        repository: &str,
+        product: &str,
+        sku: &str,
+    ) -> ClientResult<crate::Response<crate::types::BillingUsageSummaryReportOrg>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if day > 0 {
+            query_args.push(("day".to_string(), day.to_string()));
+        }
+        if month > 0 {
+            query_args.push(("month".to_string(), month.to_string()));
+        }
+        if !product.is_empty() {
+            query_args.push(("product".to_string(), product.to_string()));
+        }
+        if !repository.is_empty() {
+            query_args.push(("repository".to_string(), repository.to_string()));
+        }
+        if !sku.is_empty() {
+            query_args.push(("sku".to_string(), sku.to_string()));
+        }
+        if year > 0 {
+            query_args.push(("year".to_string(), year.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/users/{}/settings/billing/packages",
-                crate::progenitor_support::encode_path(username),
+                "/organizations/{}/settings/billing/usage/summary?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                query_
             ),
             None,
         );
@@ -316,30 +384,182 @@ impl Billing {
             .await
     }
     /**
-     * Get shared storage billing for a user.
+     * Get billing premium request usage report for a user.
      *
-     * This function performs a `GET` to the `/users/{username}/settings/billing/shared-storage` endpoint.
+     * This function performs a `GET` to the `/users/{username}/settings/billing/premium_request/usage` endpoint.
      *
-     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+     * Gets a report of premium request usage for a user.
      *
-     * Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+     * **Note:** Only data from the past 24 months is accessible via this endpoint.
      *
-     * Access tokens must have the `user` scope.
-     *
-     * FROM: <https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-a-user>
+     * FROM: <https://docs.github.com/rest/billing/usage#get-billing-premium-request-usage-report-for-a-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `year: i64` -- If specified, only return results for a single year. The value of `year` is an integer with four digits representing a year. For example, `2025`. Default value is the current year.
+     * * `month: i64` -- If specified, only return results for a single month. The value of `month` is an integer between `1` and `12`. Default value is the current month. If no year is specified the default `year` is used.
+     * * `day: i64` -- If specified, only return results for a single day. The value of `day` is an integer between `1` and `31`. If no `year` or `month` is specified, the default `year` and `month` are used.
+     * * `model: &str` -- The model name to query usage for. The name is not case sensitive.
+     * * `product: &str` -- The product name to query usage for. The name is not case sensitive.
      */
-    pub async fn get_shared_storage_billing_user(
+    pub async fn get_github_billing_premium_request_usage_report_user(
         &self,
         username: &str,
-    ) -> ClientResult<crate::Response<crate::types::CombinedBillingUsage>> {
+        year: i64,
+        month: i64,
+        day: i64,
+        model: &str,
+        product: &str,
+    ) -> ClientResult<crate::Response<crate::types::BillingPremiumRequestUsageReportUser>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if day > 0 {
+            query_args.push(("day".to_string(), day.to_string()));
+        }
+        if !model.is_empty() {
+            query_args.push(("model".to_string(), model.to_string()));
+        }
+        if month > 0 {
+            query_args.push(("month".to_string(), month.to_string()));
+        }
+        if !product.is_empty() {
+            query_args.push(("product".to_string(), product.to_string()));
+        }
+        if year > 0 {
+            query_args.push(("year".to_string(), year.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/users/{}/settings/billing/shared-storage",
-                crate::progenitor_support::encode_path(username),
+                "/users/{}/settings/billing/premium_request/usage?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Get billing usage report for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/settings/billing/usage` endpoint.
+     *
+     * Gets a report of the total usage for a user.
+     *
+     * **Note:** This endpoint is only available to users with access to the enhanced billing platform.
+     *
+     * FROM: <https://docs.github.com/rest/billing/usage#get-billing-usage-report-for-a-user>
+     *
+     * **Parameters:**
+     *
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `year: i64` -- If specified, only return results for a single year. The value of `year` is an integer with four digits representing a year. For example, `2025`. Default value is the current year.
+     * * `month: i64` -- If specified, only return results for a single month. The value of `month` is an integer between `1` and `12`. If no year is specified the default `year` is used.
+     * * `day: i64` -- If specified, only return results for a single day. The value of `day` is an integer between `1` and `31`. If no `year` or `month` is specified, the default `year` and `month` are used.
+     */
+    pub async fn get_github_billing_usage_report_user(
+        &self,
+        username: &str,
+        year: i64,
+        month: i64,
+        day: i64,
+    ) -> ClientResult<crate::Response<crate::types::BillingUsageReportUser>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if day > 0 {
+            query_args.push(("day".to_string(), day.to_string()));
+        }
+        if month > 0 {
+            query_args.push(("month".to_string(), month.to_string()));
+        }
+        if year > 0 {
+            query_args.push(("year".to_string(), year.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/settings/billing/usage?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Get billing usage summary for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/settings/billing/usage/summary` endpoint.
+     *
+     * > [!NOTE]
+     * > This endpoint is in public preview and is subject to change.
+     *
+     * Gets a summary report of usage for a user.
+     *
+     * **Note:** Only data from the past 24 months is accessible via this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/billing/usage#get-billing-usage-summary-for-a-user>
+     *
+     * **Parameters:**
+     *
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `year: i64` -- If specified, only return results for a single year. The value of `year` is an integer with four digits representing a year. For example, `2025`. Default value is the current year.
+     * * `month: i64` -- If specified, only return results for a single month. The value of `month` is an integer between `1` and `12`. Default value is the current month. If no year is specified the default `year` is used.
+     * * `day: i64` -- If specified, only return results for a single day. The value of `day` is an integer between `1` and `31`. If no `year` or `month` is specified, the default `year` and `month` are used.
+     * * `repository: &str` -- The repository name to query for usage in the format owner/repository.
+     * * `product: &str` -- The product name to query usage for. The name is not case sensitive.
+     * * `sku: &str` -- The SKU to query for usage.
+     */
+    pub async fn get_github_billing_usage_summary_report_user(
+        &self,
+        username: &str,
+        year: i64,
+        month: i64,
+        day: i64,
+        repository: &str,
+        product: &str,
+        sku: &str,
+    ) -> ClientResult<crate::Response<crate::types::BillingUsageSummaryReportUser>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if day > 0 {
+            query_args.push(("day".to_string(), day.to_string()));
+        }
+        if month > 0 {
+            query_args.push(("month".to_string(), month.to_string()));
+        }
+        if !product.is_empty() {
+            query_args.push(("product".to_string(), product.to_string()));
+        }
+        if !repository.is_empty() {
+            query_args.push(("repository".to_string(), repository.to_string()));
+        }
+        if !sku.is_empty() {
+            query_args.push(("sku".to_string(), sku.to_string()));
+        }
+        if year > 0 {
+            query_args.push(("year".to_string(), year.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/settings/billing/usage/summary?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                query_
             ),
             None,
         );

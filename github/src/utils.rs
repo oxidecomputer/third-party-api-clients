@@ -48,13 +48,20 @@ pub fn get_header_values(
 
 /// GitHub defined Media types
 /// See [this doc](https://developer.github.com/v3/media/) for more for more information
-#[derive(Clone, Copy, Default)]
+#[derive(Clone, Copy)]
 pub enum MediaType {
     /// Return json (the default)
-    #[default]
     Json,
     /// Return json in preview form
     Preview(&'static str),
+    /// Return json with media parameter
+    Param(&'static str),
+}
+
+impl Default for MediaType {
+    fn default() -> MediaType {
+        MediaType::Json
+    }
 }
 
 impl std::fmt::Display for MediaType {
@@ -64,6 +71,7 @@ impl std::fmt::Display for MediaType {
             MediaType::Preview(codename) => {
                 write!(f, "application/vnd.github.{}-preview+json", codename)
             }
+            MediaType::Param(codename) => write!(f, "application/vnd.github.v3.{}+json", codename),
         }
     }
 }
@@ -79,6 +87,9 @@ impl From<MediaType> for mime::Mime {
                         panic!("could not parse media type for preview {}", codename)
                     })
             }
+            MediaType::Param(codename) => format!("application/vnd.github.v3.{}+json", codename)
+                .parse()
+                .unwrap_or_else(|_| panic!("could not parse media type for {}", codename)),
         }
     }
 }
@@ -94,6 +105,10 @@ mod github_tests {
             (
                 MediaType::Preview("test-value"),
                 "application/vnd.github.test-value-preview+json",
+            ),
+            (
+                MediaType::Param("test-value"),
+                "application/vnd.github.v3.test-value-preview+json",
             ),
         ];
 
@@ -271,7 +286,7 @@ pub mod deserialize_null_string {
 
 struct BoolVisitor;
 
-impl Visitor<'_> for BoolVisitor {
+impl<'de> Visitor<'de> for BoolVisitor {
     type Value = bool;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -336,7 +351,7 @@ pub mod deserialize_null_boolean {
 
 struct I32Visitor;
 
-impl Visitor<'_> for I32Visitor {
+impl<'de> Visitor<'de> for I32Visitor {
     type Value = i32;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -408,7 +423,7 @@ pub mod deserialize_null_i32 {
 
 struct I64Visitor;
 
-impl Visitor<'_> for I64Visitor {
+impl<'de> Visitor<'de> for I64Visitor {
     type Value = i64;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -475,7 +490,7 @@ pub mod deserialize_null_i64 {
 
 struct F32Visitor;
 
-impl Visitor<'_> for F32Visitor {
+impl<'de> Visitor<'de> for F32Visitor {
     type Value = f32;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -566,7 +581,7 @@ pub mod deserialize_null_f32 {
 
 struct F64Visitor;
 
-impl Visitor<'_> for F64Visitor {
+impl<'de> Visitor<'de> for F64Visitor {
     type Value = f64;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {

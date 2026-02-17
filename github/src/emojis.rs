@@ -18,10 +18,10 @@ impl Emojis {
      *
      * Lists all the emojis available to use on GitHub.
      *
-     * FROM: <https://docs.github.com/rest/reference/emojis#get-emojis>
+     * FROM: <https://docs.github.com/rest/emojis/emojis#get-emojis>
      */
     pub async fn get(&self) -> ClientResult<crate::Response<String>> {
-        let url = self.client.url("/emojis", None);
+        let url = self.client.url(&"/emojis".to_string(), None);
         self.client
             .get(
                 &url,

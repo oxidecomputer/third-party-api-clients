@@ -14,7 +14,7 @@
 //!
 //! | name | url |
 //! |----|----|
-//! | Support | <https://support.github.com/contact?tags=rest-api> |
+//! | Support | <https://support.github.com/contact?tags=dotcom-rest-api> |
 //!
 //! ### License
 //!
@@ -183,22 +183,44 @@ pub mod apps;
 pub mod auth;
 /// Monitor charges and usage from Actions and Packages.
 pub mod billing;
+/// Endpoints to manage campaigns via the REST API.
+pub mod campaigns;
 /// Rich interactions with checks run by your integrations.
 pub mod checks;
+/// Interact with GitHub Classroom.
+pub mod classroom;
 /// Retrieve code scanning alerts from a repository.
 pub mod code_scanning;
+/// Endpoints to manage Code security using the REST API.
+pub mod code_security;
 /// Insight into codes of conduct for your communities.
 pub mod codes_of_conduct;
+/// Endpoints to manage Codespaces using the REST API.
+pub mod codespaces;
+/// Endpoints to manage Copilot using the REST API.
+pub mod copilot;
+/// Revoke compromised or leaked GitHub credentials.
+pub mod credentials;
+/// Endpoints to manage Dependabot.
+pub mod dependabot;
+/// Endpoints to access Dependency Graph features.
+pub mod dependency_graph;
 /// List emojis available to use on GitHub.
 pub mod emojis;
-/// Administer a GitHub enterprise.
-pub mod enterprise_admin;
+/// Endpoints to manage GitHub Enterprise Team memberships.
+pub mod enterprise_team_memberships;
+/// Endpoints to manage GitHub Enterprise Team organization assignments.
+pub mod enterprise_team_organizations;
+/// Endpoints to manage GitHub Enterprise Teams.
+pub mod enterprise_teams;
 /// View, modify your gists.
 pub mod gists;
 /// Raw Git functionality.
 pub mod git;
 /// View gitignore templates.
 pub mod gitignore;
+/// Manage hosted compute networking resources.
+pub mod hosted_compute;
 #[cfg(feature = "httpcache")]
 #[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]
 pub mod http_cache;
@@ -208,19 +230,21 @@ pub mod interactions;
 pub mod issues;
 /// View various OSS licenses.
 pub mod licenses;
-/// Render Github flavored markdown.
+/// Render GitHub flavored Markdown.
 pub mod markdown;
 /// Endpoints that give information about the API.
 pub mod meta;
 /// Move projects to or from GitHub.
 pub mod migrations;
-/// Manage access of OAuth applications.
-pub mod oauth_authorizations;
-/// Interact with GitHub Orgs.
+/// Endpoints to manage GitHub OIDC configuration using the REST API.
+pub mod oidc;
+/// Interact with organizations.
 pub mod orgs;
 /// Manage packages for authenticated users and organizations.
 pub mod packages;
-/// Interact with GitHub Projects.
+/// Manage private registry configurations.
+pub mod private_registries;
+/// Endpoints to manage Projects using the REST API.
 pub mod projects;
 /// Interact with GitHub Pull Requests.
 pub mod pulls;
@@ -230,12 +254,12 @@ pub mod rate_limit;
 pub mod reactions;
 /// Interact with GitHub Repos.
 pub mod repos;
-/// Provisioning of GitHub organization membership for SCIM-enabled providers.
-pub mod scim;
-/// Look for stuff on GitHub.
+/// Search for specific items on GitHub.
 pub mod search;
 /// Retrieve secret scanning alerts from a repository.
 pub mod secret_scanning;
+/// Manage security advisories.
+pub mod security_advisories;
 /// Interact with GitHub Teams.
 pub mod teams;
 pub mod types;
@@ -479,7 +503,7 @@ impl Client {
         self.credentials = credentials.into();
     }
 
-    fn credentials(
+    fn get_credentials(
         &self,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Option<&crate::auth::Credentials> {
@@ -491,7 +515,7 @@ impl Client {
             ) => creds,
             (
                 crate::auth::AuthenticationConstraint::JWT,
-                Some(crate::auth::Credentials::InstallationToken(apptoken)),
+                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
             ) => Some(apptoken.jwt()),
             (crate::auth::AuthenticationConstraint::JWT, _) => {
                 log::info!(
@@ -509,23 +533,23 @@ impl Client {
     ) -> ClientResult<(reqwest::Url, Option<String>)> {
         let mut parsed_url = uri.parse::<reqwest::Url>()?;
 
-        match self.credentials(authentication) {
-            Some(crate::auth::Credentials::Client(id, secret)) => {
+        match self.get_credentials(authentication) {
+            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => {
                 parsed_url
                     .query_pairs_mut()
                     .append_pair("client_id", id)
                     .append_pair("client_secret", secret);
                 Ok((parsed_url, None))
             }
-            Some(crate::auth::Credentials::Token(token)) => {
+            Some(&crate::auth::Credentials::Token(ref token)) => {
                 let auth = format!("token {}", token);
                 Ok((parsed_url, Some(auth)))
             }
-            Some(crate::auth::Credentials::JWT(jwt)) => {
+            Some(&crate::auth::Credentials::JWT(ref jwt)) => {
                 let auth = format!("Bearer {}", jwt.token());
                 Ok((parsed_url, Some(auth)))
             }
-            Some(crate::auth::Credentials::InstallationToken(apptoken)) => {
+            Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
                 let token = if let Some(token) = apptoken.token().await {
                     token
                 } else {
@@ -539,7 +563,7 @@ impl Client {
                         let token = self
                             .apps()
                             .create_installation_access_token(
-                                apptoken.installation_id,
+                                apptoken.installation_id as i64,
                                 &types::AppsCreateInstallationAccessTokenRequest {
                                     permissions: Default::default(),
                                     repositories: Default::default(),
@@ -804,7 +828,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::GET,
-            uri,
+            &uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -832,7 +856,7 @@ impl Client {
     {
         self.request(
             http::Method::GET,
-            uri,
+            &uri,
             Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -880,7 +904,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, uri, message, media, authentication)
+        self.request_entity(http::Method::POST, &uri, message, media, authentication)
             .await
     }
 
@@ -895,7 +919,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::PATCH,
-            uri,
+            &uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -930,7 +954,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::PUT,
-            uri,
+            &uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -944,7 +968,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::DELETE,
-            uri,
+            &uri,
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -1018,9 +1042,14 @@ impl Client {
         emojis::Emojis::new(self.clone())
     }
 
-    /// Administer a GitHub enterprise.
-    pub fn enterprise_admin(&self) -> enterprise_admin::EnterpriseAdmin {
-        enterprise_admin::EnterpriseAdmin::new(self.clone())
+    /// Endpoints to manage Dependabot.
+    pub fn dependabot(&self) -> dependabot::Dependabot {
+        dependabot::Dependabot::new(self.clone())
+    }
+
+    /// Endpoints to access Dependency Graph features.
+    pub fn dependency_graph(&self) -> dependency_graph::DependencyGraph {
+        dependency_graph::DependencyGraph::new(self.clone())
     }
 
     /// View, modify your gists.
@@ -1038,11 +1067,6 @@ impl Client {
         gitignore::Gitignore::new(self.clone())
     }
 
-    /// Owner or admin management of users interactions.
-    pub fn interactions(&self) -> interactions::Interactions {
-        interactions::Interactions::new(self.clone())
-    }
-
     /// Interact with GitHub Issues.
     pub fn issues(&self) -> issues::Issues {
         issues::Issues::new(self.clone())
@@ -1053,7 +1077,7 @@ impl Client {
         licenses::Licenses::new(self.clone())
     }
 
-    /// Render Github flavored markdown.
+    /// Render GitHub flavored Markdown.
     pub fn markdown(&self) -> markdown::Markdown {
         markdown::Markdown::new(self.clone())
     }
@@ -1068,12 +1092,12 @@ impl Client {
         migrations::Migrations::new(self.clone())
     }
 
-    /// Manage access of OAuth applications.
-    pub fn oauth_authorizations(&self) -> oauth_authorizations::OauthAuthorizations {
-        oauth_authorizations::OauthAuthorizations::new(self.clone())
+    /// Endpoints to manage GitHub OIDC configuration using the REST API.
+    pub fn oidc(&self) -> oidc::Oidc {
+        oidc::Oidc::new(self.clone())
     }
 
-    /// Interact with GitHub Orgs.
+    /// Interact with organizations.
     pub fn orgs(&self) -> orgs::Orgs {
         orgs::Orgs::new(self.clone())
     }
@@ -1081,11 +1105,6 @@ impl Client {
     /// Manage packages for authenticated users and organizations.
     pub fn packages(&self) -> packages::Packages {
         packages::Packages::new(self.clone())
-    }
-
-    /// Interact with GitHub Projects.
-    pub fn projects(&self) -> projects::Projects {
-        projects::Projects::new(self.clone())
     }
 
     /// Interact with GitHub Pull Requests.
@@ -1108,12 +1127,7 @@ impl Client {
         repos::Repos::new(self.clone())
     }
 
-    /// Provisioning of GitHub organization membership for SCIM-enabled providers.
-    pub fn scim(&self) -> scim::Scim {
-        scim::Scim::new(self.clone())
-    }
-
-    /// Look for stuff on GitHub.
+    /// Search for specific items on GitHub.
     pub fn search(&self) -> search::Search {
         search::Search::new(self.clone())
     }
@@ -1131,5 +1145,79 @@ impl Client {
     /// Interact with and view information about users and also current user.
     pub fn users(&self) -> users::Users {
         users::Users::new(self.clone())
+    }
+
+    /// Endpoints to manage Codespaces using the REST API.
+    pub fn codespaces(&self) -> codespaces::Codespaces {
+        codespaces::Codespaces::new(self.clone())
+    }
+
+    /// Endpoints to manage Copilot using the REST API.
+    pub fn copilot(&self) -> copilot::Copilot {
+        copilot::Copilot::new(self.clone())
+    }
+
+    /// Manage security advisories.
+    pub fn security_advisories(&self) -> security_advisories::SecurityAdvisories {
+        security_advisories::SecurityAdvisories::new(self.clone())
+    }
+
+    /// Owner or admin management of users interactions.
+    pub fn interactions(&self) -> interactions::Interactions {
+        interactions::Interactions::new(self.clone())
+    }
+
+    /// Interact with GitHub Classroom.
+    pub fn classroom(&self) -> classroom::Classroom {
+        classroom::Classroom::new(self.clone())
+    }
+
+    /// Endpoints to manage GitHub Enterprise Teams.
+    pub fn enterprise_teams(&self) -> enterprise_teams::EnterpriseTeams {
+        enterprise_teams::EnterpriseTeams::new(self.clone())
+    }
+
+    /// Endpoints to manage GitHub Enterprise Team memberships.
+    pub fn enterprise_team_memberships(
+        &self,
+    ) -> enterprise_team_memberships::EnterpriseTeamMemberships {
+        enterprise_team_memberships::EnterpriseTeamMemberships::new(self.clone())
+    }
+
+    /// Endpoints to manage GitHub Enterprise Team organization assignments.
+    pub fn enterprise_team_organizations(
+        &self,
+    ) -> enterprise_team_organizations::EnterpriseTeamOrganizations {
+        enterprise_team_organizations::EnterpriseTeamOrganizations::new(self.clone())
+    }
+
+    /// Endpoints to manage Code security using the REST API.
+    pub fn code_security(&self) -> code_security::CodeSecurity {
+        code_security::CodeSecurity::new(self.clone())
+    }
+
+    /// Manage private registry configurations.
+    pub fn private_registries(&self) -> private_registries::PrivateRegistries {
+        private_registries::PrivateRegistries::new(self.clone())
+    }
+
+    /// Manage hosted compute networking resources.
+    pub fn hosted_compute(&self) -> hosted_compute::HostedCompute {
+        hosted_compute::HostedCompute::new(self.clone())
+    }
+
+    /// Revoke compromised or leaked GitHub credentials.
+    pub fn credentials(&self) -> credentials::Credentials {
+        credentials::Credentials::new(self.clone())
+    }
+
+    /// Endpoints to manage campaigns via the REST API.
+    pub fn campaigns(&self) -> campaigns::Campaigns {
+        campaigns::Campaigns::new(self.clone())
+    }
+
+    /// Endpoints to manage Projects using the REST API.
+    pub fn projects(&self) -> projects::Projects {
+        projects::Projects::new(self.clone())
     }
 }

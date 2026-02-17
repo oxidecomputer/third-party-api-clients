@@ -18,9 +18,9 @@ impl Meta {
      *
      * Get Hypermedia links to resources accessible in GitHub's REST API
      *
-     * FROM: <https://docs.github.com/rest/overview/resources-in-the-rest-api#root-endpoint>
+     * FROM: <https://docs.github.com/rest/meta/meta#github-api-root>
      */
-    pub async fn root(&self) -> ClientResult<crate::Response<crate::types::MetaRootResponse>> {
+    pub async fn root(&self) -> ClientResult<crate::Response<crate::types::Root>> {
         let url = self.client.url("", None);
         self.client
             .get(
@@ -37,14 +37,19 @@ impl Meta {
      *
      * This function performs a `GET` to the `/meta` endpoint.
      *
-     * Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
+     * Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)."
      *
-     * **Note:** The IP addresses shown in the documentation's response are only example values. You must always query the API directly to get the latest list of IP addresses.
+     * The API's response also includes a list of GitHub's domain names.
      *
-     * FROM: <https://docs.github.com/rest/reference/meta#get-github-meta-information>
+     * The values shown in the documentation's response are example values. You must always query the API directly to get the latest values.
+     *
+     * > [!NOTE]
+     * > This endpoint returns both IPv4 and IPv6 addresses. However, not all features support IPv6. You should refer to the specific documentation for each feature to determine if IPv6 is supported.
+     *
+     * FROM: <https://docs.github.com/rest/meta/meta#get-apiname-meta-information>
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::ApiOverview>> {
-        let url = self.client.url("/meta", None);
+        let url = self.client.url(&"/meta".to_string(), None);
         self.client
             .get(
                 &url,
@@ -62,7 +67,7 @@ impl Meta {
      *
      * Get the octocat as ASCII art
      *
-     * FROM: <https://docs.github.com/rest/reference/meta#get-octocat>
+     * FROM: <https://docs.github.com/rest/meta/meta#get-octocat>
      *
      * **Parameters:**
      *
@@ -86,14 +91,64 @@ impl Meta {
             .await
     }
     /**
+     * Get all API versions.
+     *
+     * This function performs a `GET` to the `/versions` endpoint.
+     *
+     * Get all supported GitHub API versions.
+     *
+     * FROM: <https://docs.github.com/rest/meta/meta#get-all-api-versions>
+     */
+    pub async fn get_all_versions(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<Option<chrono::NaiveDate>>>> {
+        let url = self.client.url(&"/versions".to_string(), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Get all API versions.
+     *
+     * This function performs a `GET` to the `/versions` endpoint.
+     *
+     * As opposed to `get_all_versions`, this function returns all the pages of the request at once.
+     *
+     * Get all supported GitHub API versions.
+     *
+     * FROM: <https://docs.github.com/rest/meta/meta#get-all-api-versions>
+     */
+    pub async fn get_all_all_versions(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<Option<chrono::NaiveDate>>>> {
+        let url = self.client.url(&"/versions".to_string(), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
      * Get the Zen of GitHub.
      *
      * This function performs a `GET` to the `/zen` endpoint.
      *
      * Get a random sentence from the Zen of GitHub
+     *
+     * FROM: <https://docs.github.com/rest/meta/meta#get-the-zen-of-github>
      */
     pub async fn get_zen(&self) -> ClientResult<crate::Response<String>> {
-        let url = self.client.url("/zen", None);
+        let url = self.client.url(&"/zen".to_string(), None);
         self.client
             .get(
                 &url,

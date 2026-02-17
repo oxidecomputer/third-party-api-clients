@@ -16,7 +16,7 @@ GitHub's v3 REST API.
 
 | name | url |
 |----|----|
-| Support | <https://support.github.com/contact?tags=rest-api> |
+| Support | <https://support.github.com/contact?tags=dotcom-rest-api> |
 
 ### License
 

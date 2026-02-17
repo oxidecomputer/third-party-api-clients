@@ -12,43 +12,48 @@ impl Projects {
     }
 
     /**
-     * List organization projects.
+     * List projects for organization.
      *
-     * This function performs a `GET` to the `/orgs/{org}/projects` endpoint.
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2` endpoint.
      *
-     * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+     * List all projects owned by a specific organization accessible by the authenticated user.
      *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-organization-projects>
+     * FROM: <https://docs.github.com/rest/projects/projects#list-projects-for-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `q: &str` -- Limit results to projects of the specified type.
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_for_org(
         &self,
         org: &str,
-        state: crate::types::IssuesListState,
+        q: &str,
+        before: &str,
+        after: &str,
         per_page: i64,
-        page: i64,
-    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsV2>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if page > 0 {
-            query_args.push(("page".to_string(), page.to_string()));
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
         }
         if per_page > 0 {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        if !state.to_string().is_empty() {
-            query_args.push(("state".to_string(), state.to_string()));
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/orgs/{}/projects?{}",
-                crate::progenitor_support::encode_path(org),
+                "/orgs/{}/projectsV2?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -64,30 +69,38 @@ impl Projects {
             .await
     }
     /**
-     * List organization projects.
+     * List projects for organization.
      *
-     * This function performs a `GET` to the `/orgs/{org}/projects` endpoint.
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2` endpoint.
      *
      * As opposed to `list_for_org`, this function returns all the pages of the request at once.
      *
-     * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+     * List all projects owned by a specific organization accessible by the authenticated user.
      *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-organization-projects>
+     * FROM: <https://docs.github.com/rest/projects/projects#list-projects-for-organization>
      */
     pub async fn list_all_for_org(
         &self,
         org: &str,
-        state: crate::types::IssuesListState,
-    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
+        q: &str,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsV2>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !state.to_string().is_empty() {
-            query_args.push(("state".to_string(), state.to_string()));
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/orgs/{}/projects?{}",
-                crate::progenitor_support::encode_path(org),
+                "/orgs/{}/projectsV2?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -103,27 +116,67 @@ impl Projects {
             .await
     }
     /**
-     * Create an organization project.
+     * Get project for organization.
      *
-     * This function performs a `POST` to the `/orgs/{org}/projects` endpoint.
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}` endpoint.
      *
-     * Creates an organization project board. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+     * Get a specific organization-owned project.
      *
-     * FROM: <https://docs.github.com/rest/reference/projects#create-an-organization-project>
+     * FROM: <https://docs.github.com/rest/projects/projects#get-project-for-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
      */
-    pub async fn create_for_org(
+    pub async fn get_for_org(
+        &self,
+        project_number: i64,
+        org: &str,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsV2>> {
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Create draft item for organization owned project.
+     *
+     * This function performs a `POST` to the `/orgs/{org}/projectsV2/{project_number}/drafts` endpoint.
+     *
+     * Create draft issue item for the specified organization owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/drafts#create-draft-item-for-organization-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `project_number: i64` -- The project's number.
+     */
+    pub async fn create_draft_item_for_org(
         &self,
         org: &str,
-        body: &crate::types::ProjectsCreateRequest,
-    ) -> ClientResult<crate::Response<crate::types::Project>> {
+        project_number: i64,
+        body: &crate::types::ProjectsCreateDraftItemRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItem>> {
         let url = self.client.url(
             &format!(
-                "/orgs/{}/projects",
-                crate::progenitor_support::encode_path(org),
+                "/orgs/{}/projectsV2/{}/drafts",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
             ),
             None,
         );
@@ -138,26 +191,47 @@ impl Projects {
             .await
     }
     /**
-     * Get a project card.
+     * List project fields for organization.
      *
-     * This function performs a `GET` to the `/projects/columns/cards/{card_id}` endpoint.
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/fields` endpoint.
      *
+     * List all fields for a specific organization-owned project.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#get-a-project-card>
+     * FROM: <https://docs.github.com/rest/projects/fields#list-project-fields-for-organization>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
-    pub async fn get_card(
+    pub async fn list_fields_for_org(
         &self,
-        card_id: i64,
-    ) -> ClientResult<crate::Response<crate::types::ProjectCard>> {
+        project_number: i64,
+        org: &str,
+        per_page: i64,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsField>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if per_page > 0 {
+            query_args.push(("per_page".to_string(), per_page.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/projects/columns/cards/{}",
-                crate::progenitor_support::encode_path(&card_id.to_string()),
+                "/orgs/{}/projectsV2/{}/fields?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
             ),
             None,
         );
@@ -172,23 +246,363 @@ impl Projects {
             .await
     }
     /**
-     * Delete a project card.
+     * List project fields for organization.
      *
-     * This function performs a `DELETE` to the `/projects/columns/cards/{card_id}` endpoint.
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/fields` endpoint.
      *
+     * As opposed to `list_fields_for_org`, this function returns all the pages of the request at once.
      *
+     * List all fields for a specific organization-owned project.
      *
-     * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project-card>
+     * FROM: <https://docs.github.com/rest/projects/fields#list-project-fields-for-organization>
+     */
+    pub async fn list_all_fields_for_org(
+        &self,
+        project_number: i64,
+        org: &str,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsField>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}/fields?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Add a field to an organization-owned project.
+     *
+     * This function performs a `POST` to the `/orgs/{org}/projectsV2/{project_number}/fields` endpoint.
+     *
+     * Add a field to an organization-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/fields#add-a-field-to-an-organization-owned-project>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
      */
-    pub async fn delete_card(&self, card_id: i64) -> ClientResult<crate::Response<()>> {
+    pub async fn add_field_for_org(
+        &self,
+        project_number: i64,
+        org: &str,
+        body: &crate::types::ProjectsAddFieldOrgRequestOneOf,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsField>> {
         let url = self.client.url(
             &format!(
-                "/projects/columns/cards/{}",
-                crate::progenitor_support::encode_path(&card_id.to_string()),
+                "/orgs/{}/projectsV2/{}/fields",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
+    }
+    /**
+     * Get project field for organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/fields/{field_id}` endpoint.
+     *
+     * Get a specific field for an organization-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/fields#get-project-field-for-organization>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `field_id: i64` -- The unique identifier of the field.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     */
+    pub async fn get_field_for_org(
+        &self,
+        project_number: i64,
+        field_id: i64,
+        org: &str,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsField>> {
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}/fields/{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&field_id.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * List items for an organization owned project.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/items` endpoint.
+     *
+     * List all items for a specific organization-owned project accessible by the authenticated user.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-an-organization-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `q: &str` -- Search query to filter items, see [Filtering projects](https://docs.github.com/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/filtering-projects) for more information.
+     * * `fields: &str` -- Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+     *   
+     *   Example: `fields[]=123&fields[]=456&fields[]=789` or `fields=123,456,789`.
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     */
+    pub async fn list_items_for_org(
+        &self,
+        project_number: i64,
+        org: &str,
+        q: &str,
+        fields: &str,
+        before: &str,
+        after: &str,
+        per_page: i64,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        if per_page > 0 {
+            query_args.push(("per_page".to_string(), per_page.to_string()));
+        }
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}/items?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * List items for an organization owned project.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/items` endpoint.
+     *
+     * As opposed to `list_items_for_org`, this function returns all the pages of the request at once.
+     *
+     * List all items for a specific organization-owned project accessible by the authenticated user.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-an-organization-owned-project>
+     */
+    pub async fn list_all_items_for_org(
+        &self,
+        project_number: i64,
+        org: &str,
+        q: &str,
+        fields: &str,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}/items?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Add item to organization owned project.
+     *
+     * This function performs a `POST` to the `/orgs/{org}/projectsV2/{project_number}/items` endpoint.
+     *
+     * Add an issue or pull request item to the specified organization owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#add-item-to-organization-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `project_number: i64` -- The project's number.
+     */
+    pub async fn add_item_for_org(
+        &self,
+        org: &str,
+        project_number: i64,
+        body: &crate::types::ProjectsAddItemOrgRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItem>> {
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}/items",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
+    }
+    /**
+     * Get an item for an organization owned project.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/items/{item_id}` endpoint.
+     *
+     * Get a specific item from an organization-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#get-an-item-for-an-organization-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `item_id: i64` -- The unique identifier of the project item.
+     * * `fields: &str` -- Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+     *   
+     *   Example: fields[]=123&fields[]=456&fields[]=789 or fields=123,456,789.
+     */
+    pub async fn get_org_item(
+        &self,
+        project_number: i64,
+        org: &str,
+        item_id: i64,
+        fields: &str,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItemWithContent>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}/items/{}?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&item_id.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Delete project item for organization.
+     *
+     * This function performs a `DELETE` to the `/orgs/{org}/projectsV2/{project_number}/items/{item_id}` endpoint.
+     *
+     * Delete a specific item from an organization-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#delete-project-item-for-organization>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `item_id: i64` -- The unique identifier of the project item.
+     */
+    pub async fn delete_item_for_org(
+        &self,
+        project_number: i64,
+        org: &str,
+        item_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projectsV2/{}/items/{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&item_id.to_string()),
             ),
             None,
         );
@@ -203,27 +617,33 @@ impl Projects {
             .await
     }
     /**
-     * Update an existing project card.
+     * Update project item for organization.
      *
-     * This function performs a `PATCH` to the `/projects/columns/cards/{card_id}` endpoint.
+     * This function performs a `PATCH` to the `/orgs/{org}/projectsV2/{project_number}/items/{item_id}` endpoint.
      *
+     * Update a specific item in an organization-owned project.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-card>
+     * FROM: <https://docs.github.com/rest/projects/items#update-project-item-for-organization>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `item_id: i64` -- The unique identifier of the project item.
      */
-    pub async fn update_card(
+    pub async fn update_item_for_org(
         &self,
-        card_id: i64,
-        body: &crate::types::ProjectsUpdateCardRequest,
-    ) -> ClientResult<crate::Response<crate::types::ProjectCard>> {
+        project_number: i64,
+        org: &str,
+        item_id: i64,
+        body: &crate::types::ProjectsUpdateItemOrgRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItemWithContent>> {
         let url = self.client.url(
             &format!(
-                "/projects/columns/cards/{}",
-                crate::progenitor_support::encode_path(&card_id.to_string()),
+                "/orgs/{}/projectsV2/{}/items/{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&item_id.to_string()),
             ),
             None,
         );
@@ -238,27 +658,30 @@ impl Projects {
             .await
     }
     /**
-     * Move a project card.
+     * Create a view for an organization-owned project.
      *
-     * This function performs a `POST` to the `/projects/columns/cards/{card_id}/moves` endpoint.
+     * This function performs a `POST` to the `/orgs/{org}/projectsV2/{project_number}/views` endpoint.
      *
+     * Create a new view in an organization-owned project. Views allow you to customize how items in a project are displayed and filtered.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#move-a-project-card>
+     * FROM: <https://docs.github.com/rest/projects/views#create-a-view-for-an-organization-owned-project>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `project_number: i64` -- The project's number.
      */
-    pub async fn move_card(
+    pub async fn create_view_for_org(
         &self,
-        card_id: i64,
-        body: &crate::types::ProjectsMoveCardRequest,
-    ) -> ClientResult<crate::Response<()>> {
+        org: &str,
+        project_number: i64,
+        body: &crate::types::ProjectsCreateViewOrgRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsView>> {
         let url = self.client.url(
             &format!(
-                "/projects/columns/cards/{}/moves",
-                crate::progenitor_support::encode_path(&card_id.to_string()),
+                "/orgs/{}/projectsV2/{}/views",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
             ),
             None,
         );
@@ -273,134 +696,46 @@ impl Projects {
             .await
     }
     /**
-     * Get a project column.
+     * List items for an organization project view.
      *
-     * This function performs a `GET` to the `/projects/columns/{column_id}` endpoint.
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/views/{view_number}/items` endpoint.
      *
+     * List items in an organization project with the saved view's filter applied.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#get-a-project-column>
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-an-organization-project-view>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `project_number: i64` -- The project's number.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `view_number: i64` -- The number that identifies the project view.
+     * * `fields: &str` -- Limit results to specific fields, by their IDs. If not specified, the
+     *   title field will be returned.
+     *   
+     *   Example: `fields[]=123&fields[]=456&fields[]=789` or `fields=123,456,789`.
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
-    pub async fn get_column(
+    pub async fn list_view_items_for_org(
         &self,
-        column_id: i64,
-    ) -> ClientResult<crate::Response<crate::types::ProjectColumn>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/columns/{}",
-                crate::progenitor_support::encode_path(&column_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Delete a project column.
-     *
-     * This function performs a `DELETE` to the `/projects/columns/{column_id}` endpoint.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project-column>
-     *
-     * **Parameters:**
-     *
-     * * `column_id: i64` -- column_id parameter.
-     */
-    pub async fn delete_column(&self, column_id: i64) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/columns/{}",
-                crate::progenitor_support::encode_path(&column_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .delete(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Update an existing project column.
-     *
-     * This function performs a `PATCH` to the `/projects/columns/{column_id}` endpoint.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-column>
-     *
-     * **Parameters:**
-     *
-     * * `column_id: i64` -- column_id parameter.
-     */
-    pub async fn update_column(
-        &self,
-        column_id: i64,
-        body: &crate::types::ProjectsUpdateColumnRequest,
-    ) -> ClientResult<crate::Response<crate::types::ProjectColumn>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/columns/{}",
-                crate::progenitor_support::encode_path(&column_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .patch(
-                &url,
-                crate::Message {
-                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                    content_type: Some("application/json".to_string()),
-                },
-            )
-            .await
-    }
-    /**
-     * List project cards.
-     *
-     * This function performs a `GET` to the `/projects/columns/{column_id}/cards` endpoint.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
-     *
-     * **Parameters:**
-     *
-     * * `column_id: i64` -- column_id parameter.
-     * * `archived_state: crate::types::ArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     */
-    pub async fn list_cards(
-        &self,
-        column_id: i64,
-        archived_state: crate::types::ArchivedState,
+        project_number: i64,
+        org: &str,
+        view_number: i64,
+        fields: &str,
+        before: &str,
+        after: &str,
         per_page: i64,
-        page: i64,
-    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectCard>>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !archived_state.to_string().is_empty() {
-            query_args.push(("archived_state".to_string(), archived_state.to_string()));
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
         }
-        if page > 0 {
-            query_args.push(("page".to_string(), page.to_string()));
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
         }
         if per_page > 0 {
             query_args.push(("per_page".to_string(), per_page.to_string()));
@@ -408,8 +743,10 @@ impl Projects {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/projects/columns/{}/cards?{}",
-                crate::progenitor_support::encode_path(&column_id.to_string()),
+                "/orgs/{}/projectsV2/{}/views/{}/items?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&view_number.to_string()),
                 query_
             ),
             None,
@@ -425,30 +762,42 @@ impl Projects {
             .await
     }
     /**
-     * List project cards.
+     * List items for an organization project view.
      *
-     * This function performs a `GET` to the `/projects/columns/{column_id}/cards` endpoint.
+     * This function performs a `GET` to the `/orgs/{org}/projectsV2/{project_number}/views/{view_number}/items` endpoint.
      *
-     * As opposed to `list_cards`, this function returns all the pages of the request at once.
+     * As opposed to `list_view_items_for_org`, this function returns all the pages of the request at once.
      *
+     * List items in an organization project with the saved view's filter applied.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-an-organization-project-view>
      */
-    pub async fn list_all_cards(
+    pub async fn list_all_view_items_for_org(
         &self,
-        column_id: i64,
-        archived_state: crate::types::ArchivedState,
-    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectCard>>> {
+        project_number: i64,
+        org: &str,
+        view_number: i64,
+        fields: &str,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !archived_state.to_string().is_empty() {
-            query_args.push(("archived_state".to_string(), archived_state.to_string()));
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/projects/columns/{}/cards?{}",
-                crate::progenitor_support::encode_path(&column_id.to_string()),
+                "/orgs/{}/projectsV2/{}/views/{}/items?{}",
+                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&view_number.to_string()),
                 query_
             ),
             None,
@@ -464,27 +813,30 @@ impl Projects {
             .await
     }
     /**
-     * Create a project card.
+     * Create draft item for user owned project.
      *
-     * This function performs a `POST` to the `/projects/columns/{column_id}/cards` endpoint.
+     * This function performs a `POST` to the `/user/{user_id}/projectsV2/{project_number}/drafts` endpoint.
      *
+     * Create draft issue item for the specified user owned project.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-card>
+     * FROM: <https://docs.github.com/rest/projects/drafts#create-draft-item-for-user-owned-project>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `user_id: &str` -- The unique identifier of the user.
+     * * `project_number: i64` -- The project's number.
      */
-    pub async fn create_card(
+    pub async fn create_draft_item_for_authenticated_user(
         &self,
-        column_id: i64,
-        body: &crate::types::ProjectsCreateCardRequestOneOf,
-    ) -> ClientResult<crate::Response<crate::types::ProjectCard>> {
+        user_id: &str,
+        project_number: i64,
+        body: &crate::types::ProjectsCreateDraftItemRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItem>> {
         let url = self.client.url(
             &format!(
-                "/projects/columns/{}/cards",
-                crate::progenitor_support::encode_path(&column_id.to_string()),
+                "/user/{}/projectsV2/{}/drafts",
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
             ),
             None,
         );
@@ -499,27 +851,30 @@ impl Projects {
             .await
     }
     /**
-     * Move a project column.
+     * Create a view for a user-owned project.
      *
-     * This function performs a `POST` to the `/projects/columns/{column_id}/moves` endpoint.
+     * This function performs a `POST` to the `/users/{user_id}/projectsV2/{project_number}/views` endpoint.
      *
+     * Create a new view in a user-owned project. Views allow you to customize how items in a project are displayed and filtered.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#move-a-project-column>
+     * FROM: <https://docs.github.com/rest/projects/views#create-a-view-for-a-user-owned-project>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `user_id: &str` -- The unique identifier of the user.
+     * * `project_number: i64` -- The project's number.
      */
-    pub async fn move_column(
+    pub async fn create_view_for_user(
         &self,
-        column_id: i64,
-        body: &crate::types::ProjectsMoveColumnRequest,
-    ) -> ClientResult<crate::Response<()>> {
+        user_id: &str,
+        project_number: i64,
+        body: &crate::types::ProjectsCreateViewOrgRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsView>> {
         let url = self.client.url(
             &format!(
-                "/projects/columns/{}/moves",
-                crate::progenitor_support::encode_path(&column_id.to_string()),
+                "/users/{}/projectsV2/{}/views",
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
             ),
             None,
         );
@@ -534,621 +889,48 @@ impl Projects {
             .await
     }
     /**
-     * Get a project.
+     * List projects for user.
      *
-     * This function performs a `GET` to the `/projects/{project_id}` endpoint.
+     * This function performs a `GET` to the `/users/{username}/projectsV2` endpoint.
      *
-     * Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+     * List all projects owned by a specific user accessible by the authenticated user.
      *
-     * FROM: <https://docs.github.com/rest/reference/projects#get-a-project>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     */
-    pub async fn get(
-        &self,
-        project_id: i64,
-    ) -> ClientResult<crate::Response<crate::types::Project>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Delete a project.
-     *
-     * This function performs a `DELETE` to the `/projects/{project_id}` endpoint.
-     *
-     * Deletes a project board. Returns a `404 Not Found` status if projects are disabled.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project>
+     * FROM: <https://docs.github.com/rest/projects/projects#list-projects-for-user>
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
-     */
-    pub async fn delete(&self, project_id: i64) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .delete(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Update a project.
-     *
-     * This function performs a `PATCH` to the `/projects/{project_id}` endpoint.
-     *
-     * Updates a project board's information. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     */
-    pub async fn update(
-        &self,
-        project_id: i64,
-        body: &crate::types::ProjectsUpdateRequest,
-    ) -> ClientResult<crate::Response<crate::types::Project>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .patch(
-                &url,
-                crate::Message {
-                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                    content_type: Some("application/json".to_string()),
-                },
-            )
-            .await
-    }
-    /**
-     * List project collaborators.
-     *
-     * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
-     *
-     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
-     *  \\* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
-     *  \\* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
-     *  \\* `all`: All collaborators the authenticated user can see.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     */
-    pub async fn list_collaborators(
-        &self,
-        project_id: i64,
-        affiliation: crate::types::Affiliation,
-        per_page: i64,
-        page: i64,
-    ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !affiliation.to_string().is_empty() {
-            query_args.push(("affiliation".to_string(), affiliation.to_string()));
-        }
-        if page > 0 {
-            query_args.push(("page".to_string(), page.to_string()));
-        }
-        if per_page > 0 {
-            query_args.push(("per_page".to_string(), per_page.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/collaborators?{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-                query_
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * List project collaborators.
-     *
-     * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
-     *
-     * As opposed to `list_collaborators`, this function returns all the pages of the request at once.
-     *
-     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
-     */
-    pub async fn list_all_collaborators(
-        &self,
-        project_id: i64,
-        affiliation: crate::types::Affiliation,
-    ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !affiliation.to_string().is_empty() {
-            query_args.push(("affiliation".to_string(), affiliation.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/collaborators?{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-                query_
-            ),
-            None,
-        );
-        self.client
-            .get_all_pages(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Add project collaborator.
-     *
-     * This function performs a `PUT` to the `/projects/{project_id}/collaborators/{username}` endpoint.
-     *
-     * Adds a collaborator to an organization project and sets their permission level. You must be an organization owner or a project `admin` to add a collaborator.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#add-project-collaborator>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     * * `username: &str`
-     */
-    pub async fn add_collaborator(
-        &self,
-        project_id: i64,
-        username: &str,
-        body: &crate::types::ProjectsAddCollaboratorRequest,
-    ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/collaborators/{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-                crate::progenitor_support::encode_path(username),
-            ),
-            None,
-        );
-        self.client
-            .put(
-                &url,
-                crate::Message {
-                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                    content_type: Some("application/json".to_string()),
-                },
-            )
-            .await
-    }
-    /**
-     * Remove user as a collaborator.
-     *
-     * This function performs a `DELETE` to the `/projects/{project_id}/collaborators/{username}` endpoint.
-     *
-     * Removes a collaborator from an organization project. You must be an organization owner or a project `admin` to remove a collaborator.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#remove-project-collaborator>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     * * `username: &str`
-     */
-    pub async fn remove_collaborator(
-        &self,
-        project_id: i64,
-        username: &str,
-    ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/collaborators/{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-                crate::progenitor_support::encode_path(username),
-            ),
-            None,
-        );
-        self.client
-            .delete(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Get project permission for a user.
-     *
-     * This function performs a `GET` to the `/projects/{project_id}/collaborators/{username}/permission` endpoint.
-     *
-     * Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#get-project-permission-for-a-user>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     * * `username: &str`
-     */
-    pub async fn get_permission_for_user(
-        &self,
-        project_id: i64,
-        username: &str,
-    ) -> ClientResult<crate::Response<crate::types::RepositoryCollaboratorPermission>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/collaborators/{}/permission",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-                crate::progenitor_support::encode_path(username),
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * List project columns.
-     *
-     * This function performs a `GET` to the `/projects/{project_id}/columns` endpoint.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-project-columns>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     */
-    pub async fn list_columns(
-        &self,
-        project_id: i64,
-        per_page: i64,
-        page: i64,
-    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectColumn>>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if page > 0 {
-            query_args.push(("page".to_string(), page.to_string()));
-        }
-        if per_page > 0 {
-            query_args.push(("per_page".to_string(), per_page.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/columns?{}",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-                query_
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * List project columns.
-     *
-     * This function performs a `GET` to the `/projects/{project_id}/columns` endpoint.
-     *
-     * As opposed to `list_columns`, this function returns all the pages of the request at once.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-project-columns>
-     */
-    pub async fn list_all_columns(
-        &self,
-        project_id: i64,
-    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectColumn>>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/columns",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .get_all_pages(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Create a project column.
-     *
-     * This function performs a `POST` to the `/projects/{project_id}/columns` endpoint.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-column>
-     *
-     * **Parameters:**
-     *
-     * * `project_id: i64`
-     */
-    pub async fn create_column(
-        &self,
-        project_id: i64,
-        body: &crate::types::ProjectsUpdateColumnRequest,
-    ) -> ClientResult<crate::Response<crate::types::ProjectColumn>> {
-        let url = self.client.url(
-            &format!(
-                "/projects/{}/columns",
-                crate::progenitor_support::encode_path(&project_id.to_string()),
-            ),
-            None,
-        );
-        self.client
-            .post(
-                &url,
-                crate::Message {
-                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                    content_type: Some("application/json".to_string()),
-                },
-            )
-            .await
-    }
-    /**
-     * List repository projects.
-     *
-     * This function performs a `GET` to the `/repos/{owner}/{repo}/projects` endpoint.
-     *
-     * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-repository-projects>
-     *
-     * **Parameters:**
-     *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     */
-    pub async fn list_for_repo(
-        &self,
-        owner: &str,
-        repo: &str,
-        state: crate::types::IssuesListState,
-        per_page: i64,
-        page: i64,
-    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if page > 0 {
-            query_args.push(("page".to_string(), page.to_string()));
-        }
-        if per_page > 0 {
-            query_args.push(("per_page".to_string(), per_page.to_string()));
-        }
-        if !state.to_string().is_empty() {
-            query_args.push(("state".to_string(), state.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!(
-                "/repos/{}/{}/projects?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
-                query_
-            ),
-            None,
-        );
-        self.client
-            .get(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * List repository projects.
-     *
-     * This function performs a `GET` to the `/repos/{owner}/{repo}/projects` endpoint.
-     *
-     * As opposed to `list_for_repo`, this function returns all the pages of the request at once.
-     *
-     * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-repository-projects>
-     */
-    pub async fn list_all_for_repo(
-        &self,
-        owner: &str,
-        repo: &str,
-        state: crate::types::IssuesListState,
-    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !state.to_string().is_empty() {
-            query_args.push(("state".to_string(), state.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!(
-                "/repos/{}/{}/projects?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
-                query_
-            ),
-            None,
-        );
-        self.client
-            .get_all_pages(
-                &url,
-                crate::Message {
-                    body: None,
-                    content_type: None,
-                },
-            )
-            .await
-    }
-    /**
-     * Create a repository project.
-     *
-     * This function performs a `POST` to the `/repos/{owner}/{repo}/projects` endpoint.
-     *
-     * Creates a repository project board. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#create-a-repository-project>
-     *
-     * **Parameters:**
-     *
-     * * `owner: &str`
-     * * `repo: &str`
-     */
-    pub async fn create_for_repo(
-        &self,
-        owner: &str,
-        repo: &str,
-        body: &crate::types::ProjectsCreateRequest,
-    ) -> ClientResult<crate::Response<crate::types::Project>> {
-        let url = self.client.url(
-            &format!(
-                "/repos/{}/{}/projects",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
-            ),
-            None,
-        );
-        self.client
-            .post(
-                &url,
-                crate::Message {
-                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                    content_type: Some("application/json".to_string()),
-                },
-            )
-            .await
-    }
-    /**
-     * Create a user project.
-     *
-     * This function performs a `POST` to the `/user/projects` endpoint.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#create-a-user-project>
-     */
-    pub async fn create_for_authenticated_user(
-        &self,
-        body: &crate::types::ProjectsCreateRequest,
-    ) -> ClientResult<crate::Response<crate::types::Project>> {
-        let url = self.client.url("/user/projects", None);
-        self.client
-            .post(
-                &url,
-                crate::Message {
-                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                    content_type: Some("application/json".to_string()),
-                },
-            )
-            .await
-    }
-    /**
-     * List user projects.
-     *
-     * This function performs a `GET` to the `/users/{username}/projects` endpoint.
-     *
-     *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
-     *
-     * **Parameters:**
-     *
-     * * `username: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `q: &str` -- Limit results to projects of the specified type.
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_for_user(
         &self,
         username: &str,
-        state: crate::types::IssuesListState,
+        q: &str,
+        before: &str,
+        after: &str,
         per_page: i64,
-        page: i64,
-    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsV2>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if page > 0 {
-            query_args.push(("page".to_string(), page.to_string()));
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
         }
         if per_page > 0 {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        if !state.to_string().is_empty() {
-            query_args.push(("state".to_string(), state.to_string()));
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/users/{}/projects?{}",
-                crate::progenitor_support::encode_path(username),
+                "/users/{}/projectsV2?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -1164,30 +946,659 @@ impl Projects {
             .await
     }
     /**
-     * List user projects.
+     * List projects for user.
      *
-     * This function performs a `GET` to the `/users/{username}/projects` endpoint.
+     * This function performs a `GET` to the `/users/{username}/projectsV2` endpoint.
      *
      * As opposed to `list_for_user`, this function returns all the pages of the request at once.
      *
+     * List all projects owned by a specific user accessible by the authenticated user.
      *
-     *
-     * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
+     * FROM: <https://docs.github.com/rest/projects/projects#list-projects-for-user>
      */
     pub async fn list_all_for_user(
         &self,
         username: &str,
-        state: crate::types::IssuesListState,
-    ) -> ClientResult<crate::Response<Vec<crate::types::Project>>> {
+        q: &str,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsV2>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !state.to_string().is_empty() {
-            query_args.push(("state".to_string(), state.to_string()));
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/users/{}/projects?{}",
-                crate::progenitor_support::encode_path(username),
+                "/users/{}/projectsV2?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Get project for user.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}` endpoint.
+     *
+     * Get a specific user-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/projects#get-project-for-user>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `username: &str` -- The handle for the GitHub user account.
+     */
+    pub async fn get_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsV2>> {
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * List project fields for user.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/fields` endpoint.
+     *
+     * List all fields for a specific user-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/fields#list-project-fields-for-user>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     */
+    pub async fn list_fields_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        per_page: i64,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsField>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if per_page > 0 {
+            query_args.push(("per_page".to_string(), per_page.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/fields?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * List project fields for user.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/fields` endpoint.
+     *
+     * As opposed to `list_fields_for_user`, this function returns all the pages of the request at once.
+     *
+     * List all fields for a specific user-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/fields#list-project-fields-for-user>
+     */
+    pub async fn list_all_fields_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsField>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/fields?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Add field to user owned project.
+     *
+     * This function performs a `POST` to the `/users/{username}/projectsV2/{project_number}/fields` endpoint.
+     *
+     * Add a field to a specified user owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/fields#add-field-to-user-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `project_number: i64` -- The project's number.
+     */
+    pub async fn add_field_for_user(
+        &self,
+        username: &str,
+        project_number: i64,
+        body: &crate::types::ProjectsAddFieldUserRequestOneOf,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsField>> {
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/fields",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
+    }
+    /**
+     * Get project field for user.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/fields/{field_id}` endpoint.
+     *
+     * Get a specific field for a user-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/fields#get-project-field-for-user>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `field_id: i64` -- The unique identifier of the field.
+     * * `username: &str` -- The handle for the GitHub user account.
+     */
+    pub async fn get_field_for_user(
+        &self,
+        project_number: i64,
+        field_id: i64,
+        username: &str,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsField>> {
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/fields/{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&field_id.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * List items for a user owned project.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/items` endpoint.
+     *
+     * List all items for a specific user-owned project accessible by the authenticated user.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-a-user-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `q: &str` -- Search query to filter items, see [Filtering projects](https://docs.github.com/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/filtering-projects) for more information.
+     * * `fields: &str` -- Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+     *   
+     *   Example: `fields[]=123&fields[]=456&fields[]=789` or `fields=123,456,789`.
+     */
+    pub async fn list_items_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        before: &str,
+        after: &str,
+        per_page: i64,
+        q: &str,
+        fields: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        if per_page > 0 {
+            query_args.push(("per_page".to_string(), per_page.to_string()));
+        }
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/items?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * List items for a user owned project.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/items` endpoint.
+     *
+     * As opposed to `list_items_for_user`, this function returns all the pages of the request at once.
+     *
+     * List all items for a specific user-owned project accessible by the authenticated user.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-a-user-owned-project>
+     */
+    pub async fn list_all_items_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        before: &str,
+        after: &str,
+        q: &str,
+        fields: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        if !q.is_empty() {
+            query_args.push(("q".to_string(), q.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/items?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Add item to user owned project.
+     *
+     * This function performs a `POST` to the `/users/{username}/projectsV2/{project_number}/items` endpoint.
+     *
+     * Add an issue or pull request item to the specified user owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#add-item-to-user-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `project_number: i64` -- The project's number.
+     */
+    pub async fn add_item_for_user(
+        &self,
+        username: &str,
+        project_number: i64,
+        body: &crate::types::ProjectsAddItemOrgRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItem>> {
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/items",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
+    }
+    /**
+     * Get an item for a user owned project.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/items/{item_id}` endpoint.
+     *
+     * Get a specific item from a user-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#get-an-item-for-a-user-owned-project>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `item_id: i64` -- The unique identifier of the project item.
+     * * `fields: &str` -- Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+     *   
+     *   Example: fields[]=123&fields[]=456&fields[]=789 or fields=123,456,789.
+     */
+    pub async fn get_user_item(
+        &self,
+        project_number: i64,
+        username: &str,
+        item_id: i64,
+        fields: &str,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItemWithContent>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/items/{}?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&item_id.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Delete project item for user.
+     *
+     * This function performs a `DELETE` to the `/users/{username}/projectsV2/{project_number}/items/{item_id}` endpoint.
+     *
+     * Delete a specific item from a user-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#delete-project-item-for-user>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `item_id: i64` -- The unique identifier of the project item.
+     */
+    pub async fn delete_item_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        item_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/items/{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&item_id.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * Update project item for user.
+     *
+     * This function performs a `PATCH` to the `/users/{username}/projectsV2/{project_number}/items/{item_id}` endpoint.
+     *
+     * Update a specific item in a user-owned project.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#update-project-item-for-user>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `item_id: i64` -- The unique identifier of the project item.
+     */
+    pub async fn update_item_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        item_id: i64,
+        body: &crate::types::ProjectsUpdateItemOrgRequest,
+    ) -> ClientResult<crate::Response<crate::types::ProjectsItemWithContent>> {
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/items/{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&item_id.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
+    }
+    /**
+     * List items for a user project view.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/views/{view_number}/items` endpoint.
+     *
+     * List items in a user project with the saved view's filter applied.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-a-user-project-view>
+     *
+     * **Parameters:**
+     *
+     * * `project_number: i64` -- The project's number.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `view_number: i64` -- The number that identifies the project view.
+     * * `fields: &str` -- Limit results to specific fields, by their IDs. If not specified, the
+     *   title field will be returned.
+     *   
+     *   Example: `fields[]=123&fields[]=456&fields[]=789` or `fields=123,456,789`.
+     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     */
+    pub async fn list_view_items_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        view_number: i64,
+        fields: &str,
+        before: &str,
+        after: &str,
+        per_page: i64,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        if per_page > 0 {
+            query_args.push(("per_page".to_string(), per_page.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/views/{}/items?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&view_number.to_string()),
+                query_
+            ),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
+     * List items for a user project view.
+     *
+     * This function performs a `GET` to the `/users/{username}/projectsV2/{project_number}/views/{view_number}/items` endpoint.
+     *
+     * As opposed to `list_view_items_for_user`, this function returns all the pages of the request at once.
+     *
+     * List items in a user project with the saved view's filter applied.
+     *
+     * FROM: <https://docs.github.com/rest/projects/items#list-items-for-a-user-project-view>
+     */
+    pub async fn list_all_view_items_for_user(
+        &self,
+        project_number: i64,
+        username: &str,
+        view_number: i64,
+        fields: &str,
+        before: &str,
+        after: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::ProjectsItemWithContent>>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !after.is_empty() {
+            query_args.push(("after".to_string(), after.to_string()));
+        }
+        if !before.is_empty() {
+            query_args.push(("before".to_string(), before.to_string()));
+        }
+        if !fields.is_empty() {
+            query_args.push(("fields".to_string(), fields.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projectsV2/{}/views/{}/items?{}",
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&project_number.to_string()),
+                crate::progenitor_support::encode_path(&view_number.to_string()),
                 query_
             ),
             None,

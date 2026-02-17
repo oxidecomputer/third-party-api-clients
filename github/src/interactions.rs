@@ -18,11 +18,11 @@ impl Interactions {
      *
      * Shows which type of GitHub user can interact with this organization and when the restriction expires. If there is no restrictions, you will see an empty response.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-an-organization>
+     * FROM: <https://docs.github.com/rest/interactions/orgs#get-interaction-restrictions-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
      */
     pub async fn get_restrictions_for_org(
         &self,
@@ -31,7 +31,7 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -52,11 +52,11 @@ impl Interactions {
      *
      * Temporarily restricts interactions to a certain type of GitHub user in any public repository in the given organization. You must be an organization owner to set these restrictions. Setting the interaction limit at the organization level will overwrite any interaction limits that are set for individual repositories owned by the organization.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-an-organization>
+     * FROM: <https://docs.github.com/rest/interactions/orgs#set-interaction-restrictions-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
      */
     pub async fn set_restrictions_for_org(
         &self,
@@ -66,7 +66,7 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -87,11 +87,11 @@ impl Interactions {
      *
      * Removes all interaction restrictions from public repositories in the given organization. You must be an organization owner to remove restrictions.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-an-organization>
+     * FROM: <https://docs.github.com/rest/interactions/orgs#remove-interaction-restrictions-for-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
      */
     pub async fn remove_restrictions_for_org(
         &self,
@@ -100,7 +100,7 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/interaction-limits",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -121,12 +121,12 @@ impl Interactions {
      *
      * Shows which type of GitHub user can interact with this repository and when the restriction expires. If there are no restrictions, you will see an empty response.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-a-repository>
+     * FROM: <https://docs.github.com/rest/interactions/repos#get-interaction-restrictions-for-a-repository>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn get_restrictions_for_repo(
         &self,
@@ -136,8 +136,8 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -158,12 +158,12 @@ impl Interactions {
      *
      * Temporarily restricts interactions to a certain type of GitHub user within the given repository. You must have owner or admin access to set these restrictions. If an interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-a-repository>
+     * FROM: <https://docs.github.com/rest/interactions/repos#set-interaction-restrictions-for-a-repository>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn set_restrictions_for_repo(
         &self,
@@ -174,8 +174,8 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -196,12 +196,12 @@ impl Interactions {
      *
      * Removes all interaction restrictions from the given repository. You must have owner or admin access to remove restrictions. If the interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-a-repository>
+     * FROM: <https://docs.github.com/rest/interactions/repos#remove-interaction-restrictions-for-a-repository>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn remove_restrictions_for_repo(
         &self,
@@ -211,8 +211,8 @@ impl Interactions {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/interaction-limits",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -233,12 +233,14 @@ impl Interactions {
      *
      * Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-your-public-repositories>
+     * FROM: <https://docs.github.com/rest/interactions/user#get-interaction-restrictions-for-your-public-repositories>
      */
     pub async fn get_restrictions_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<crate::types::InteractionsGetRestrictionsResponseAnyOf>> {
-        let url = self.client.url("/user/interaction-limits", None);
+        let url = self
+            .client
+            .url(&"/user/interaction-limits".to_string(), None);
         self.client
             .get(
                 &url,
@@ -256,13 +258,15 @@ impl Interactions {
      *
      * Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the interaction limit at the user level will overwrite any interaction limits that are set for individual repositories owned by the user.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-your-public-repositories>
+     * FROM: <https://docs.github.com/rest/interactions/user#set-interaction-restrictions-for-your-public-repositories>
      */
     pub async fn set_restrictions_for_authenticated_user(
         &self,
         body: &crate::types::InteractionLimit,
     ) -> ClientResult<crate::Response<crate::types::InteractionLimits>> {
-        let url = self.client.url("/user/interaction-limits", None);
+        let url = self
+            .client
+            .url(&"/user/interaction-limits".to_string(), None);
         self.client
             .put(
                 &url,
@@ -280,12 +284,14 @@ impl Interactions {
      *
      * Removes any interaction restrictions from your public repositories.
      *
-     * FROM: <https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-from-your-public-repositories>
+     * FROM: <https://docs.github.com/rest/interactions/user#remove-interaction-restrictions-from-your-public-repositories>
      */
     pub async fn remove_restrictions_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/user/interaction-limits", None);
+        let url = self
+            .client
+            .url(&"/user/interaction-limits".to_string(), None);
         self.client
             .delete(
                 &url,
