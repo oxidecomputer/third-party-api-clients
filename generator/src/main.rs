@@ -5,7 +5,7 @@ mod types;
 mod utils;
 
 use std::{
-    collections::{BTreeMap, HashSet},
+    collections::{BTreeMap, HashMap, HashSet},
     ffi::OsStr,
     fs::{File, OpenOptions},
     io::Write,
@@ -227,7 +227,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 };
 
                                 if st.pattern.is_some() {
-                                    bail!("XXX pattern");
+                                    println!("XXX unsupported pattern detected");
                                 }
 
                                 if !st.enumeration.is_empty() {
@@ -303,6 +303,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "uuid" => "&str".to_string(),
                                         "hostname" => "&str".to_string(),
                                         "time" => "chrono::NaiveTime".to_string(),
+                                        "repo.nwo" => "&str".to_string(),
                                         f => {
                                             bail!("XXX unknown string format {}", f)
                                         }
@@ -436,7 +437,7 @@ impl ExtractJsonMediaType for openapiv3::Response {
                                 bail!("expected binary format string, got {:?}", st.format);
                             }
                             if st.pattern.is_some() {
-                                bail!("XXX pattern");
+                                println!("XXX unsupported pattern detected");
                             }
                             if !st.enumeration.is_empty() {
                                 bail!("XXX binary enumeration {:?}", st);
@@ -734,6 +735,13 @@ impl PartialEq for TypeId {
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct Constraints {
+    pub pattern: Option<String>,
+    pub min_length: Option<usize>,
+    pub max_length: Option<usize>,
+}
+
 #[derive(Debug, Clone)]
 pub struct TypeSpace {
     next_id: u64,
@@ -741,10 +749,12 @@ pub struct TypeSpace {
      * Object types generally have a useful name, which we would like to match
      * with anywhere that name appears in the definition document.  Many other
      * types, though, do not; e.g., an array of strings is just going to become
-     * Vec<String> without necesssarily having a useful distinct type name.
+     * Vec<String> without necessarily having a useful distinct type name.
      */
     name_to_id: BTreeMap<String, TypeId>,
     id_to_entry: BTreeMap<TypeId, TypeEntry>,
+    unresolved_refs: HashMap<String, Vec<TypeId>>,
+    constraints: BTreeMap<TypeId, Constraints>,
 }
 
 impl TypeSpace {
@@ -753,6 +763,8 @@ impl TypeSpace {
             next_id: 1,
             name_to_id: BTreeMap::new(),
             id_to_entry: BTreeMap::new(),
+            unresolved_refs: HashMap::new(),
+            constraints: BTreeMap::new(),
         }
     }
 
@@ -912,7 +924,26 @@ impl TypeSpace {
         if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
                 TypeDetails::Basic(t, _) => Ok(t.to_string()),
-                TypeDetails::NamedType(itid, _) => self.render_type(itid, in_mod),
+                TypeDetails::NamedType(itid, _) => {
+                    if !self.id_to_entry.contains_key(itid) {
+                        eprintln!(
+                            "[error] {:?} [{:?}] has an unresolvable inner {:?}!",
+                            tid,
+                            te.name.as_deref().unwrap_or("unknown"),
+                            itid
+                        );
+
+                        for (ref_path, ids) in &self.unresolved_refs {
+                            if ids.contains(tid) {
+                                println!("  Referenced as: {}", ref_path);
+                            }
+                        }
+
+                        bail!("could not resolve referenced type ID {:?}", itid);
+                    }
+
+                    self.render_type(itid, in_mod)
+                }
                 TypeDetails::Enum(..) => {
                     if let Some(n) = &te.name {
                         let struct_name = struct_name(n);
@@ -1109,7 +1140,15 @@ impl TypeSpace {
         // Let's make some generic details, assign an id and then later in
         // populate ref we can replace this ID with the real one.
         let details = TypeDetails::NamedType(self.assign(), Default::default());
-        self.add_if_not_exists(Some(ref_), details, "", true)
+        let id = self.add_if_not_exists(Some(ref_.clone()), details, "", true)?;
+
+        // Keep track of this reference until it is resolved to make troubleshooting references easier
+        self.unresolved_refs
+            .entry(ref_)
+            .or_default()
+            .push(id.clone());
+
+        Ok(id)
     }
 
     fn add_if_not_exists(
@@ -1270,7 +1309,7 @@ impl TypeSpace {
                             is_reference,
                         );
                     } else if !name.contains("object") {
-                        // Let's try to append "type" onto the end and see if that helps.
+                        // Let's try to append "object" onto the end and see if that helps.
                         let new_name = format!("{} object", name);
                         return self.add_if_not_exists(
                             Some(clean_name(&new_name)),
@@ -1280,7 +1319,34 @@ impl TypeSpace {
                         );
                     }
 
-                    // If we don't have anything to append, let's bail.
+                    // Failed to find a unique suffix based on the name. Try
+                    // using unique descriptors from the type's details
+                    let content_suffixes: Vec<String> = match &details {
+                        TypeDetails::Enum(vals, _) => {
+                            // Use enum values as distinguishing suffixes.
+                            vals.iter().map(|v| clean_name(v)).collect()
+                        }
+                        TypeDetails::Object(props, _) => {
+                            // Use property names as distinguishing suffixes.
+                            props.keys().map(|k| clean_name(k)).collect()
+                        }
+                        _ => vec![],
+                    };
+
+                    // Try each content-derived suffix, picking the first one
+                    // that isn't already part of the name.
+                    for suffix in &content_suffixes {
+                        if !name.contains(suffix.as_str()) {
+                            let new_name = format!("{} {}", name, suffix);
+                            return self.add_if_not_exists(
+                                Some(clean_name(&new_name)),
+                                details,
+                                "",
+                                is_reference,
+                            );
+                        }
+                    }
+
                     // WE ARE RUNNING OUT OF NAMES AND WE TRIED.
                     bail!(
                         "we ran out of unique names for this thing {}: {:?}",
@@ -1358,7 +1424,23 @@ impl TypeSpace {
         let details = if let Some(id) = id {
             TypeDetails::NamedType(id, Default::default())
         } else {
-            TypeDetails::NamedType(self.id_for_name("String"), Default::default())
+            let string_id = self.id_for_name("String");
+
+            // NOTE:
+            // In the GitHub API a few response types have no content attribute. There is no
+            // String type defined, resulting in mismatched references. This code is intended to
+            // ensure that a String TypeId exists and is mapped correctly in both directions.
+            if !self.id_to_entry.contains_key(&string_id) {
+                self.id_to_entry.insert(
+                    string_id.clone(),
+                    TypeEntry {
+                        id: string_id.clone(),
+                        name: Some("String".to_string()),
+                        details: TypeDetails::Basic("String".to_string(), Default::default()),
+                    },
+                );
+            }
+            TypeDetails::NamedType(string_id, Default::default())
         };
 
         // Lets check if we already have this reference added.
@@ -1366,7 +1448,7 @@ impl TypeSpace {
         // was referenced that had not yet been parsed.
         if let Some(rid) = self.name_to_id.get(&ref_) {
             // Okay we have the id for the reference.
-            // Let's update it's named type.
+            // Let's update its named type.
             self.id_to_entry.insert(
                 rid.clone(),
                 TypeEntry {
@@ -1375,6 +1457,15 @@ impl TypeSpace {
                     details,
                 },
             );
+
+            // If we are defining an unresolved reference clean it up here
+            if let Some(type_ids) = self.unresolved_refs.remove(&ref_) {
+                println!(
+                    "Resolved reference '{}' used by {} type IDs",
+                    ref_,
+                    type_ids.len()
+                );
+            }
 
             return Ok(rid.clone());
         }
@@ -1424,7 +1515,24 @@ impl TypeSpace {
         let (n, details) =
             self.get_type_name_and_details(name, s, parent_name, additional_description)?;
 
-        self.add_if_not_exists(n, details, parent_name, false)
+        let id = self.add_if_not_exists(n, details, parent_name, false)?;
+
+        // Extract string-type constraints and associate them with the TypeId.
+        if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
+            let constraints = Constraints {
+                pattern: st.pattern.clone(),
+                min_length: st.min_length,
+                max_length: st.max_length,
+            };
+            if constraints.pattern.is_some()
+                || constraints.min_length.is_some()
+                || constraints.max_length.is_some()
+            {
+                self.set_constraints(id.clone(), constraints);
+            }
+        }
+
+        Ok(id)
     }
 
     fn get_type_name_and_details(
@@ -1545,24 +1653,36 @@ impl TypeSpace {
 
                     if o.properties.is_empty() {
                         // TODO: make this work for when there is both.
-                        if let Some(openapiv3::AdditionalProperties::Schema(ad)) =
-                            &o.additional_properties
-                        {
-                            let desc = if let Some(ref d) = s.schema_data.description {
-                                d.to_string()
-                            } else {
-                                "".to_string()
-                            };
-
-                            // If this name already exists add additional properties to it.
-                            if self.name_to_id.get(&clean_name(&name)).is_some() {
-                                name = format!("{} additional properties", name);
+                        match &o.additional_properties {
+                           Some(openapiv3::AdditionalProperties::Any(true)) => {
+                                // Handle free-form objects with additionalProperties: true
+                                // e.g., custom_properties in GitHub API
+                                return Ok((
+                                    Some(name.to_string()),
+                                    TypeDetails::Basic(
+                                        "std::collections::HashMap<String, serde_json::Value>".to_string(),
+                                        s.schema_data.clone(),
+                                    ),
+                                ));
                             }
-                            let id = self.select(Some(&name), ad, &desc)?;
-                            return Ok((
-                                Some(name.to_string()),
-                                TypeDetails::NamedType(id, s.schema_data.clone()),
-                            ));
+                            Some(openapiv3::AdditionalProperties::Schema(ad)) => {
+                                let desc = if let Some(ref d) = s.schema_data.description {
+                                    d.to_string()
+                                } else {
+                                    "".to_string()
+                                };
+
+                                // If this name already exists add additional properties to it.
+                                if self.name_to_id.get(&clean_name(&name)).is_some() {
+                                    name = format!("{} additional properties", name);
+                                }
+                                let id = self.select(Some(&name), ad, &desc)?;
+                                return Ok((
+                                    Some(name.to_string()),
+                                    TypeDetails::NamedType(id, s.schema_data.clone()),
+                                ));
+                            }
+                            _ => {}
                         }
                     }
 
@@ -1824,6 +1944,10 @@ impl TypeSpace {
                                     "Option<chrono::NaiveTime>".to_string(),
                                     s.schema_data.clone(),
                                 ),
+                            )),
+                            "repo.nwo" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                             )),
                             f => bail!("XXX unknown string format {}", f),
                         },
@@ -2134,6 +2258,44 @@ impl TypeSpace {
             bail!("could not get parameter_data for {:?}: {:?}", name, p);
         }
     }
+
+    fn validate_refs(&self) -> Result<()> {
+        if !self.unresolved_refs.is_empty() {
+            eprintln!(
+                "[error]: Found {} unresolved references:",
+                self.unresolved_refs.len()
+            );
+
+            for (reference, ids) in &self.unresolved_refs {
+                eprintln!("  '{}' referenced by {} types:", reference, ids.len());
+
+                for id in ids {
+                    if let Some(entry) = self.id_to_entry.get(id) {
+                        let name = entry.name.as_deref().unwrap_or("unnamed");
+                        eprintln!("    - {:?} [{}]", id, name);
+
+                        if let TypeDetails::NamedType(target_id, _) = &entry.details {
+                            eprintln!("      points to {:?}", target_id);
+                        }
+                    }
+                }
+            }
+            bail!(
+                "parsed API contains {} unresolved references.",
+                self.unresolved_refs.keys().len()
+            )
+        }
+
+        Ok(())
+    }
+
+    fn set_constraints(&mut self, id: TypeId, constraints: Constraints) {
+        self.constraints.insert(id, constraints);
+    }
+
+    fn get_constraints(&self, id: &TypeId) -> Option<&Constraints> {
+        self.constraints.get(id)
+    }
 }
 
 fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::ParameterData> {
@@ -2332,11 +2494,11 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&to_snake_case(&clean_name(&tag.name)))
-            && (proper_name == "Zoom" || proper_name == "DocuSign")
-        {
+        if !tags.contains(&to_snake_case(&clean_name(&tag.name))) {
+            // This specifically fixes Zoom, GitHub  and DocuSign where they
+            // list tags that have no associated functions, but this should be
+            // safe for all APIs.
             // Return early do nothing!
-            // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
         }
 
@@ -2569,11 +2731,11 @@ pub(crate) struct Message {
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&to_snake_case(&tag.name))
-            && (proper_name == "Zoom" || proper_name == "DocuSign")
-        {
+        if !tags.contains(&to_snake_case(&clean_name(&tag.name))) {
+            // This specifically fixes Zoom, GitHub  and DocuSign where they
+            // list tags that have no associated functions, but this should be
+            // safe for all APIs.
             // Return early do nothing!
-            // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
         }
 
@@ -2990,6 +3152,13 @@ fn main() -> Result<()> {
     if let Some(components) = &api.components {
         // Populate a type to describe each entry in the schemas section.
         for (i, (sn, s)) in components.schemas.iter().enumerate() {
+            if args.opt_str("proper-name").unwrap() == "GitHub"
+                && ((sn.starts_with("webhook-") && !sn.starts_with("webhook-config"))
+                    || sn.starts_with("webhooks_"))
+            {
+                debug(&format!("Skipping schema: {}", sn));
+                continue;
+            }
             let name = clean_name(sn);
             debug(&format!(
                 "SCHEMA {}/{}: {}",
@@ -3297,6 +3466,8 @@ fn main() -> Result<()> {
     }
     debug("");
 
+    ts.validate_refs()?;
+
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
     let host = args.opt_str("host").unwrap();
@@ -3379,7 +3550,7 @@ async-recursion = "^1.0"
 chrono = {{ version = "0.4.38", default-features = false, features = ["alloc", "serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
 http = "1"
-jsonwebtoken = "9"
+jsonwebtoken = {{ version = "10", features = ["rust_crypto"] }}
 log = {{ version = "^0.4", features = ["serde"] }}
 mime = "0.3"
 openssl = {{ version = "0.10", default-features = false, optional = true }}
@@ -3516,18 +3687,12 @@ rustdoc-args = ["--cfg", "docsrs"]
             save(utilsrs, utils.as_str())?;
 
             /*
-             * Create the Rust source types file containing the generated types:
+             * NOTE: In at least the GitHub API the TypeSpace is changed
+             * during code generation. If moving type generation to after
+             * this step breaks other APIs we may need to do it twice.
              */
-            let types = types::generate_types(&mut ts, &proper_name)?;
-            let mut typesrs = src.clone();
-            typesrs.push("types.rs");
-            save(typesrs, types.as_str())?;
-
-            /*
-             * Create the Rust source files for each of the tags functions:
-             */
-
-            match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
+            // Create the Rust source files for each of the tags functions:
+            let result = match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
                 Ok(files) => {
                     // We have a map of our files, let's write to them.
                     for (f, output) in files {
@@ -3572,7 +3737,17 @@ impl {} {{
                     println!("generate_files fail: {:?}", e);
                     true
                 }
-            }
+            };
+
+            /*
+             * Create the Rust source types file containing the generated types:
+             */
+            let types = types::generate_types(&mut ts, &proper_name)?;
+            let mut typesrs = src.clone();
+            typesrs.push("types.rs");
+            save(typesrs, types.as_str())?;
+
+            result
         }
         Err(e) => {
             println!("gen fail: {:?}", e);

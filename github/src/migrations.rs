@@ -16,15 +16,17 @@ impl Migrations {
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations` endpoint.
      *
-     * Lists the most recent migrations.
+     * Lists the most recent migrations, including both exports (which can be started through the REST API) and imports (which cannot be started using the REST API).
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-organization-migrations>
+     * A list of `repositories` is only returned for export migrations.
+     *
+     * FROM: <https://docs.github.com/rest/migrations/orgs#list-organization-migrations>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      * * `exclude: &[String]` -- Exclude attributes from the API response to improve performance.
      */
     pub async fn list_for_org(
@@ -48,7 +50,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -70,9 +72,11 @@ impl Migrations {
      *
      * As opposed to `list_for_org`, this function returns all the pages of the request at once.
      *
-     * Lists the most recent migrations.
+     * Lists the most recent migrations, including both exports (which can be started through the REST API) and imports (which cannot be started using the REST API).
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-organization-migrations>
+     * A list of `repositories` is only returned for export migrations.
+     *
+     * FROM: <https://docs.github.com/rest/migrations/orgs#list-organization-migrations>
      */
     pub async fn list_all_for_org(
         &self,
@@ -87,7 +91,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 query_
             ),
             None,
@@ -109,11 +113,11 @@ impl Migrations {
      *
      * Initiates the generation of a migration archive.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#start-an-organization-migration>
+     * FROM: <https://docs.github.com/rest/migrations/orgs#start-an-organization-migration>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org: &str` -- The organization name. The name is not case sensitive.
      */
     pub async fn start_for_org(
         &self,
@@ -123,7 +127,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
             ),
             None,
         );
@@ -151,12 +155,12 @@ impl Migrations {
      * *   `exported`, which means the migration finished successfully.
      * *   `failed`, which means the migration failed.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#get-an-organization-migration-status>
+     * FROM: <https://docs.github.com/rest/migrations/orgs#get-an-organization-migration-status>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `migration_id: i64` -- The unique identifier of the migration.
      * * `exclude: &[String]` -- Exclude attributes from the API response to improve performance.
      */
     pub async fn get_status_for_org(
@@ -173,7 +177,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
@@ -196,12 +200,12 @@ impl Migrations {
      *
      * Fetches the URL to a migration archive.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#download-an-organization-migration-archive>
+     * FROM: <https://docs.github.com/rest/migrations/orgs#download-an-organization-migration-archive>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `migration_id: i64` -- The unique identifier of the migration.
      */
     pub async fn download_archive_for_org(
         &self,
@@ -211,7 +215,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/archive",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
@@ -233,12 +237,12 @@ impl Migrations {
      *
      * Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#delete-an-organization-migration-archive>
+     * FROM: <https://docs.github.com/rest/migrations/orgs#delete-an-organization-migration-archive>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `migration_id: i64` -- The unique identifier of the migration.
      */
     pub async fn delete_archive_for_org(
         &self,
@@ -248,7 +252,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/archive",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
@@ -268,14 +272,14 @@ impl Migrations {
      *
      * This function performs a `DELETE` to the `/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock` endpoint.
      *
-     * Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](https://docs.github.com/rest/reference/repos#delete-a-repository) when the migration is complete and you no longer need the source data.
+     * Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](https://docs.github.com/rest/repos/repos#delete-a-repository) when the migration is complete and you no longer need the source data.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#unlock-an-organization-repository>
+     * FROM: <https://docs.github.com/rest/migrations/orgs#unlock-an-organization-repository>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `migration_id: i64` -- The unique identifier of the migration.
      * * `repo_name: &str` -- repo_name parameter.
      */
     pub async fn unlock_repo_for_org(
@@ -287,9 +291,9 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repos/{}/lock",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
-                crate::progenitor_support::encode_path(repo_name),
+                crate::progenitor_support::encode_path(&repo_name.to_string()),
             ),
             None,
         );
@@ -310,14 +314,14 @@ impl Migrations {
      *
      * List all the repositories for this organization migration.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration>
+     * FROM: <https://docs.github.com/rest/migrations/orgs#list-repositories-in-an-organization-migration>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org: &str` -- The organization name. The name is not case sensitive.
+     * * `migration_id: i64` -- The unique identifier of the migration.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_repos_for_org(
         &self,
@@ -337,7 +341,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repositories?{}",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
@@ -362,7 +366,7 @@ impl Migrations {
      *
      * List all the repositories for this organization migration.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration>
+     * FROM: <https://docs.github.com/rest/migrations/orgs#list-repositories-in-an-organization-migration>
      */
     pub async fn list_all_repos_for_org(
         &self,
@@ -372,7 +376,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repositories",
-                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&org.to_string()),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
@@ -394,6 +398,9 @@ impl Migrations {
      *
      * View the progress of an import.
      *
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
      * **Import status**
      *
      * This section includes details about the possible values of the `status` field of the Import Progress response.
@@ -408,11 +415,11 @@ impl Migrations {
      *
      * If there are problems, you will see one of these in the `status` field:
      *
-     * *   `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
-     * *   `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. Contact [GitHub Support](https://support.github.com/contact?tags=rest-api) for more information.
-     * *   `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
-     * *   `detection_found_nothing` - the importer didn't recognize any source control at the URL. To resolve, [Cancel the import](https://docs.github.com/rest/reference/migrations#cancel-an-import) and [retry](https://docs.github.com/rest/reference/migrations#start-an-import) with the correct URL.
-     * *   `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. To update project choice, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
+     * *   `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/migrations/source-imports#update-an-import) section.
+     * *   `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. Contact [GitHub Support](https://support.github.com/contact?tags=dotcom-rest-api) for more information.
+     * *   `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/migrations/source-imports#update-an-import) section.
+     * *   `detection_found_nothing` - the importer didn't recognize any source control at the URL. To resolve, [Cancel the import](https://docs.github.com/rest/migrations/source-imports#cancel-an-import) and [retry](https://docs.github.com/rest/migrations/source-imports#start-an-import) with the correct URL.
+     * *   `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. To update project choice, please see the [Update an import](https://docs.github.com/rest/migrations/source-imports#update-an-import) section.
      *
      * **The project_choices field**
      *
@@ -427,12 +434,12 @@ impl Migrations {
      * *   `large_files_size` - the total size in gigabytes of files larger than 100MB found in the originating repository.
      * *   `large_files_count` - the total number of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#get-an-import-status>
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#get-an-import-status>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn get_import_status(
         &self,
@@ -442,8 +449,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -463,13 +470,18 @@ impl Migrations {
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/import` endpoint.
      *
      * Start a source import to a GitHub repository using GitHub Importer.
+     * Importing into a GitHub repository with GitHub Actions enabled is not supported and will
+     * return a status `422 Unprocessable Entity` response.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#start-an-import>
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#start-an-import>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn start_import(
         &self,
@@ -480,8 +492,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -502,12 +514,15 @@ impl Migrations {
      *
      * Stop an import for a repository.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#cancel-an-import>
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#cancel-an-import>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn cancel_import(
         &self,
@@ -517,8 +532,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -540,12 +555,19 @@ impl Migrations {
      * An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API
      * request. If no parameters are provided, the import will be restarted.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#update-an-import>
+     * Some servers (e.g. TFS servers) can have several projects at a single URL. In those cases the import progress will
+     * have the status `detection_found_multiple` and the Import Progress response will include a `project_choices` array.
+     * You can select the project to import by providing one of the objects in the `project_choices` array in the update request.
+     *
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#update-an-import>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn update_import(
         &self,
@@ -556,8 +578,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -578,14 +600,17 @@ impl Migrations {
      *
      * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
      *
-     * This endpoint and the [Map a commit author](https://docs.github.com/rest/reference/migrations#map-a-commit-author) endpoint allow you to provide correct Git author information.
+     * This endpoint and the [Map a commit author](https://docs.github.com/rest/migrations/source-imports#map-a-commit-author) endpoint allow you to provide correct Git author information.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#get-commit-authors>
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#get-commit-authors>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      * * `since: i64` -- A user ID. Only return users with an ID greater than this ID.
      */
     pub async fn get_commit_authors(
@@ -602,8 +627,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/authors?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 query_
             ),
             None,
@@ -627,9 +652,12 @@ impl Migrations {
      *
      * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
      *
-     * This endpoint and the [Map a commit author](https://docs.github.com/rest/reference/migrations#map-a-commit-author) endpoint allow you to provide correct Git author information.
+     * This endpoint and the [Map a commit author](https://docs.github.com/rest/migrations/source-imports#map-a-commit-author) endpoint allow you to provide correct Git author information.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#get-commit-authors>
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#get-commit-authors>
      */
     pub async fn get_all_commit_authors(
         &self,
@@ -645,8 +673,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/authors?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 query_
             ),
             None,
@@ -666,14 +694,18 @@ impl Migrations {
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/authors/{author_id}` endpoint.
      *
-     * Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
+     * Update an author's identity for the import. Your application can continue updating authors any time before you push
+     * new commits to the repository.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#map-a-commit-author>
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#map-a-commit-author>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      * * `author_id: i64`
      */
     pub async fn map_commit_author(
@@ -681,13 +713,13 @@ impl Migrations {
         owner: &str,
         repo: &str,
         author_id: i64,
-        body: &crate::types::Author,
+        body: &crate::types::MigrationsMapCommitAuthorRequest,
     ) -> ClientResult<crate::Response<crate::types::PorterAuthor>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/authors/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&author_id.to_string()),
             ),
             None,
@@ -709,12 +741,15 @@ impl Migrations {
      *
      * List files larger than 100MB found during the import
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#get-large-files>
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#get-large-files>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn get_large_files(
         &self,
@@ -724,8 +759,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/large_files",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -748,7 +783,10 @@ impl Migrations {
      *
      * List files larger than 100MB found during the import
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#get-large-files>
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#get-large-files>
      */
     pub async fn get_all_large_files(
         &self,
@@ -758,8 +796,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/large_files",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -778,14 +816,21 @@ impl Migrations {
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/lfs` endpoint.
      *
-     * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
+     * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability
+     * is powered by [Git LFS](https://git-lfs.com).
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#update-git-lfs-preference>
+     * You can learn more about our LFS feature and working with large files [on our help
+     * site](https://docs.github.com/repositories/working-with-files/managing-large-files).
+     *
+     * > [!WARNING]
+     * > **Endpoint closing down notice:** Due to very low levels of usage and available alternatives, this endpoint is closing down and will no longer be available from 00:00 UTC on April 12, 2024. For more details and alternatives, see the [changelog](https://gh.io/source-imports-api-deprecation).
+     *
+     * FROM: <https://docs.github.com/rest/migrations/source-imports#update-git-lfs-preference>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner: &str` -- The account owner of the repository. The name is not case sensitive.
+     * * `repo: &str` -- The name of the repository without the `.git` extension. The name is not case sensitive.
      */
     pub async fn set_lfs_preference(
         &self,
@@ -796,8 +841,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/lfs",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -818,12 +863,12 @@ impl Migrations {
      *
      * Lists all migrations a user has started.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-user-migrations>
+     * FROM: <https://docs.github.com/rest/migrations/users#list-user-migrations>
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_for_authenticated_user(
         &self,
@@ -860,12 +905,12 @@ impl Migrations {
      *
      * Lists all migrations a user has started.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-user-migrations>
+     * FROM: <https://docs.github.com/rest/migrations/users#list-user-migrations>
      */
     pub async fn list_all_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Migration>>> {
-        let url = self.client.url("/user/migrations", None);
+        let url = self.client.url(&"/user/migrations".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -883,13 +928,13 @@ impl Migrations {
      *
      * Initiates the generation of a user migration archive.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#start-a-user-migration>
+     * FROM: <https://docs.github.com/rest/migrations/users#start-a-user-migration>
      */
     pub async fn start_for_authenticated_user(
         &self,
         body: &crate::types::MigrationsStartRequest,
     ) -> ClientResult<crate::Response<crate::types::Migration>> {
-        let url = self.client.url("/user/migrations", None);
+        let url = self.client.url(&"/user/migrations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -912,14 +957,14 @@ impl Migrations {
      * *   `exported` - the migration finished successfully.
      * *   `failed` - the migration failed.
      *
-     * Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive).
+     * Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#get-a-user-migration-status>
+     * FROM: <https://docs.github.com/rest/migrations/users#get-a-user-migration-status>
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `exclude: &[String]` -- The list of events for the GitHub app.
+     * * `migration_id: i64` -- The unique identifier of the migration.
+     * * `exclude: &[String]` -- The functions in the package that are affected by the vulnerability.
      */
     pub async fn get_status_for_authenticated_user(
         &self,
@@ -976,11 +1021,11 @@ impl Migrations {
      *
      * The archive will also contain an `attachments` directory that includes all attachment files uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive>
+     * FROM: <https://docs.github.com/rest/migrations/users#download-a-user-migration-archive>
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `migration_id: i64` -- The unique identifier of the migration.
      */
     pub async fn get_archive_for_authenticated_user(
         &self,
@@ -1008,13 +1053,13 @@ impl Migrations {
      *
      * This function performs a `DELETE` to the `/user/migrations/{migration_id}/archive` endpoint.
      *
-     * Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/reference/migrations#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/reference/migrations#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
+     * Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/migrations/users#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/migrations/users#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#delete-a-user-migration-archive>
+     * FROM: <https://docs.github.com/rest/migrations/users#delete-a-user-migration-archive>
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `migration_id: i64` -- The unique identifier of the migration.
      */
     pub async fn delete_archive_for_authenticated_user(
         &self,
@@ -1042,13 +1087,13 @@ impl Migrations {
      *
      * This function performs a `DELETE` to the `/user/migrations/{migration_id}/repos/{repo_name}/lock` endpoint.
      *
-     * Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/reference/migrations#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/reference/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
+     * Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/migrations/users#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/repos/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#unlock-a-user-repository>
+     * FROM: <https://docs.github.com/rest/migrations/users#unlock-a-user-repository>
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `migration_id: i64` -- The unique identifier of the migration.
      * * `repo_name: &str` -- repo_name parameter.
      */
     pub async fn unlock_repo_for_authenticated_user(
@@ -1060,7 +1105,7 @@ impl Migrations {
             &format!(
                 "/user/migrations/{}/repos/{}/lock",
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
-                crate::progenitor_support::encode_path(repo_name),
+                crate::progenitor_support::encode_path(&repo_name.to_string()),
             ),
             None,
         );
@@ -1081,15 +1126,15 @@ impl Migrations {
      *
      * Lists all the repositories for this user migration.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration>
+     * FROM: <https://docs.github.com/rest/migrations/users#list-repositories-for-a-user-migration>
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `migration_id: i64` -- The unique identifier of the migration.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
-    pub async fn list_repos_for_user(
+    pub async fn list_repos_for_authenticated_user(
         &self,
         migration_id: i64,
         per_page: i64,
@@ -1126,13 +1171,13 @@ impl Migrations {
      *
      * This function performs a `GET` to the `/user/migrations/{migration_id}/repositories` endpoint.
      *
-     * As opposed to `list_repos_for_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_repos_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Lists all the repositories for this user migration.
      *
-     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration>
+     * FROM: <https://docs.github.com/rest/migrations/users#list-repositories-for-a-user-migration>
      */
-    pub async fn list_all_repos_for_user(
+    pub async fn list_all_repos_for_authenticated_user(
         &self,
         migration_id: i64,
     ) -> ClientResult<crate::Response<Vec<crate::types::MinimalRepository>>> {

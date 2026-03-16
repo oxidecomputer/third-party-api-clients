@@ -18,13 +18,13 @@ impl Gists {
      *
      * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gists-for-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `since: chrono::DateTime<chrono::Utc>` -- Only show results that were last updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list(
         &self,
@@ -63,7 +63,7 @@ impl Gists {
      *
      * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gists-for-the-authenticated-user>
      */
     pub async fn list_all(
         &self,
@@ -92,15 +92,16 @@ impl Gists {
      *
      * Allows you to add a new gist with one or more files.
      *
-     * **Note:** Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
+     * > [!NOTE]
+     * > Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#create-a-gist>
+     * FROM: <https://docs.github.com/rest/gists/gists#create-a-gist>
      */
     pub async fn create(
         &self,
         body: &crate::types::GistsCreateRequest,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
-        let url = self.client.url("/gists", None);
+        let url = self.client.url(&"/gists".to_string(), None);
         self.client
             .post(
                 &url,
@@ -118,15 +119,15 @@ impl Gists {
      *
      * List public gists sorted by most recently updated to least recently updated.
      *
-     * Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
+     * Note: With [pagination](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-public-gists>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-public-gists>
      *
      * **Parameters:**
      *
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `since: chrono::DateTime<chrono::Utc>` -- Only show results that were last updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_public(
         &self,
@@ -165,9 +166,9 @@ impl Gists {
      *
      * List public gists sorted by most recently updated to least recently updated.
      *
-     * Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
+     * Note: With [pagination](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-public-gists>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-public-gists>
      */
     pub async fn list_all_public(
         &self,
@@ -196,13 +197,13 @@ impl Gists {
      *
      * List the authenticated user's starred gists:
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-starred-gists>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-starred-gists>
      *
      * **Parameters:**
      *
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `since: chrono::DateTime<chrono::Utc>` -- Only show results that were last updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_starred(
         &self,
@@ -241,7 +242,7 @@ impl Gists {
      *
      * List the authenticated user's starred gists:
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-starred-gists>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-starred-gists>
      */
     pub async fn list_all_starred(
         &self,
@@ -268,20 +269,28 @@ impl Gists {
      *
      * This function performs a `GET` to the `/gists/{gist_id}` endpoint.
      *
+     * Gets a specified gist.
      *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist>
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/gists#get-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn get(
         &self,
         gist_id: &str,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
         let url = self.client.url(
-            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            &format!(
+                "/gists/{}",
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -301,15 +310,18 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#delete-a-gist>
+     * FROM: <https://docs.github.com/rest/gists/gists#delete-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn delete(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            &format!(
+                "/gists/{}",
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -327,13 +339,22 @@ impl Gists {
      *
      * This function performs a `PATCH` to the `/gists/{gist_id}` endpoint.
      *
-     * Allows you to update or delete a gist file and rename gist files. Files from the previous version of the gist that aren't explicitly changed during an edit are unchanged.
+     * Allows you to update a gist's description and to update, delete, or rename gist files. Files
+     * from the previous version of the gist that aren't explicitly changed during an edit
+     * are unchanged.
      *
-     * FROM: <https://docs.github.com/rest/reference/gists/#update-a-gist>
+     * At least one of `description` or `files` is required.
+     *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
+     *
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/gists#update-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn update(
         &self,
@@ -341,7 +362,10 @@ impl Gists {
         body: &crate::types::GistsUpdateRequest,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
         let url = self.client.url(
-            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            &format!(
+                "/gists/{}",
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -359,15 +383,20 @@ impl Gists {
      *
      * This function performs a `GET` to the `/gists/{gist_id}/comments` endpoint.
      *
+     * Lists the comments on a gist.
      *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/comments#list-gist-comments>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `gist_id: &str` -- The unique identifier of the gist.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_comments(
         &self,
@@ -386,7 +415,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments?{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 query_
             ),
             None,
@@ -408,9 +437,14 @@ impl Gists {
      *
      * As opposed to `list_comments`, this function returns all the pages of the request at once.
      *
+     * Lists the comments on a gist.
      *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/comments#list-gist-comments>
      */
     pub async fn list_all_comments(
         &self,
@@ -419,7 +453,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -438,13 +472,18 @@ impl Gists {
      *
      * This function performs a `POST` to the `/gists/{gist_id}/comments` endpoint.
      *
+     * Creates a comment on a gist.
      *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#create-a-gist-comment>
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/comments#create-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn create_comment(
         &self,
@@ -454,7 +493,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -473,14 +512,19 @@ impl Gists {
      *
      * This function performs a `GET` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
      *
+     * Gets a comment on a gist.
      *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist-comment>
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/comments#get-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
+     * * `comment_id: i64` -- The unique identifier of the comment.
      */
     pub async fn get_comment(
         &self,
@@ -490,7 +534,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -512,12 +556,12 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#delete-a-gist-comment>
+     * FROM: <https://docs.github.com/rest/gists/comments#delete-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
+     * * `comment_id: i64` -- The unique identifier of the comment.
      */
     pub async fn delete_comment(
         &self,
@@ -527,7 +571,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -547,14 +591,19 @@ impl Gists {
      *
      * This function performs a `PATCH` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
      *
+     * Updates a comment on a gist.
      *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#update-a-gist-comment>
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/comments#update-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
+     * * `comment_id: i64` -- The unique identifier of the comment.
      */
     pub async fn update_comment(
         &self,
@@ -565,7 +614,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -587,13 +636,13 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gist-commits>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `gist_id: &str` -- The unique identifier of the gist.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_commits(
         &self,
@@ -612,7 +661,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/commits?{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 query_
             ),
             None,
@@ -636,7 +685,7 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gist-commits>
      */
     pub async fn list_all_commits(
         &self,
@@ -645,7 +694,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/commits",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -666,13 +715,13 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gist-forks>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `gist_id: &str` -- The unique identifier of the gist.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_forks(
         &self,
@@ -691,7 +740,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks?{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 query_
             ),
             None,
@@ -715,7 +764,7 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gist-forks>
      */
     pub async fn list_all_forks(
         &self,
@@ -724,7 +773,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -743,13 +792,13 @@ impl Gists {
      *
      * This function performs a `POST` to the `/gists/{gist_id}/forks` endpoint.
      *
-     * **Note**: This was previously `/gists/:gist_id/fork`.
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#fork-a-gist>
+     *
+     * FROM: <https://docs.github.com/rest/gists/gists#fork-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn fork(
         &self,
@@ -758,7 +807,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -779,17 +828,17 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#check-if-a-gist-is-starred>
+     * FROM: <https://docs.github.com/rest/gists/gists#check-if-a-gist-is-starred>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn check_is_starred(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -808,19 +857,19 @@ impl Gists {
      *
      * This function performs a `PUT` to the `/gists/{gist_id}/star` endpoint.
      *
-     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP method](https://docs.github.com/rest/guides/getting-started-with-the-rest-api#http-method)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#star-a-gist>
+     * FROM: <https://docs.github.com/rest/gists/gists#star-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn star(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -841,17 +890,17 @@ impl Gists {
      *
      *
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#unstar-a-gist>
+     * FROM: <https://docs.github.com/rest/gists/gists#unstar-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      */
     pub async fn unstar(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -870,13 +919,18 @@ impl Gists {
      *
      * This function performs a `GET` to the `/gists/{gist_id}/{sha}` endpoint.
      *
+     * Gets a specified gist revision.
      *
+     * This endpoint supports the following custom media types. For more information, see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist-revision>
+     * - **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.
+     * - **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.
+     *
+     * FROM: <https://docs.github.com/rest/gists/gists#get-a-gist-revision>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id: &str` -- The unique identifier of the gist.
      * * `sha: &str`
      */
     pub async fn get_revision(
@@ -887,8 +941,8 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/{}",
-                crate::progenitor_support::encode_path(gist_id),
-                crate::progenitor_support::encode_path(sha),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+                crate::progenitor_support::encode_path(&sha.to_string()),
             ),
             None,
         );
@@ -909,14 +963,14 @@ impl Gists {
      *
      * Lists public gists for the specified user:
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-a-user>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gists-for-a-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username: &str` -- The handle for the GitHub user account.
+     * * `since: chrono::DateTime<chrono::Utc>` -- Only show results that were last updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page: i64` -- The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
+     * * `page: i64` -- The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api).".
      */
     pub async fn list_for_user(
         &self,
@@ -939,7 +993,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/users/{}/gists?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -963,7 +1017,7 @@ impl Gists {
      *
      * Lists public gists for the specified user:
      *
-     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-a-user>
+     * FROM: <https://docs.github.com/rest/gists/gists#list-gists-for-a-user>
      */
     pub async fn list_all_for_user(
         &self,
@@ -978,7 +1032,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/users/{}/gists?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
