@@ -1653,24 +1653,36 @@ impl TypeSpace {
 
                     if o.properties.is_empty() {
                         // TODO: make this work for when there is both.
-                        if let Some(openapiv3::AdditionalProperties::Schema(ad)) =
-                            &o.additional_properties
-                        {
-                            let desc = if let Some(ref d) = s.schema_data.description {
-                                d.to_string()
-                            } else {
-                                "".to_string()
-                            };
-
-                            // If this name already exists add additional properties to it.
-                            if self.name_to_id.get(&clean_name(&name)).is_some() {
-                                name = format!("{} additional properties", name);
+                        match &o.additional_properties {
+                           Some(openapiv3::AdditionalProperties::Any(true)) => {
+                                // Handle free-form objects with additionalProperties: true
+                                // e.g., custom_properties in GitHub API
+                                return Ok((
+                                    Some(name.to_string()),
+                                    TypeDetails::Basic(
+                                        "std::collections::HashMap<String, serde_json::Value>".to_string(),
+                                        s.schema_data.clone(),
+                                    ),
+                                ));
                             }
-                            let id = self.select(Some(&name), ad, &desc)?;
-                            return Ok((
-                                Some(name.to_string()),
-                                TypeDetails::NamedType(id, s.schema_data.clone()),
-                            ));
+                            Some(openapiv3::AdditionalProperties::Schema(ad)) => {
+                                let desc = if let Some(ref d) = s.schema_data.description {
+                                    d.to_string()
+                                } else {
+                                    "".to_string()
+                                };
+
+                                // If this name already exists add additional properties to it.
+                                if self.name_to_id.get(&clean_name(&name)).is_some() {
+                                    name = format!("{} additional properties", name);
+                                }
+                                let id = self.select(Some(&name), ad, &desc)?;
+                                return Ok((
+                                    Some(name.to_string()),
+                                    TypeDetails::NamedType(id, s.schema_data.clone()),
+                                ));
+                            }
+                            _ => {}
                         }
                     }
 
