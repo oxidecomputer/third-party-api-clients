@@ -708,6 +708,8 @@ pub enum MediaType {
     Json,
     /// Return json in preview form
     Preview(&'static str),
+    /// Return json with media parameter
+    Param(&'static str),
 }
 
 impl Default for MediaType {
@@ -720,7 +722,8 @@ impl std::fmt::Display for MediaType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
             MediaType::Json => write!(f, "application/vnd.github.v3+json"),
-            MediaType::Preview(codename) => write!(f, "application/vnd.github.{}-preview+json", codename)
+            MediaType::Preview(codename) => write!(f, "application/vnd.github.{}-preview+json", codename),
+            MediaType::Param(codename) => write!(f, "application/vnd.github.v3.{}+json", codename),
         }
     }
 }
@@ -735,7 +738,14 @@ impl From<MediaType> for mime::Mime {
                     .unwrap_or_else(|_| {
                         panic!("could not parse media type for preview {}", codename)
                     })
-            }
+            },
+            MediaType::Param(codename) => {
+                format!("application/vnd.github.v3.{}+json", codename)
+                    .parse()
+                    .unwrap_or_else(|_| {
+                        panic!("could not parse media type for {}", codename)
+                    })
+            },
         }
     }
 }
@@ -748,7 +758,8 @@ mod github_tests {
     fn test_hyperx_qitem_compat() {
         let tests = [
             (MediaType::Json, "application/vnd.github.v3+json"),
-            (MediaType::Preview("test-value"), "application/vnd.github.test-value-preview+json")
+            (MediaType::Preview("test-value"), "application/vnd.github.test-value-preview+json"),
+            (MediaType::Param("test-value"), "application/vnd.github.v3.test-value-preview+json"),
         ];
 
         for (media_type, header) in tests {

@@ -110,6 +110,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "base16ct"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c7f02d4ea65f2c1853089ffd8d2787bdbc63de2f0d29dedbcf8ccdfa0ccd4cf"
+
+[[package]]
 name = "base64"
 version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -144,6 +150,15 @@ name = "bitflags"
 version = "2.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b048fb63fd8b5923fc5aa7b340d8e156aec7ec02f0c78fa8a6ddc2613f6f71de"
+
+[[package]]
+name = "block-buffer"
+version = "0.10.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71"
+dependencies = [
+ "generic-array",
+]
 
 [[package]]
 name = "bumpalo"
@@ -229,10 +244,31 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
+name = "cpufeatures"
+version = "0.2.17"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "59ed5838eebb26a2bb2e58f6d5b5316989ae9d08bab10e0e6d103e656d1b0280"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "crossbeam-utils"
 version = "0.8.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "22ec99545bb0ed0ea7bb9b8e1e9122ea386ff8a48c0922e43f36d45ab09e0e80"
+
+[[package]]
+name = "crypto-bigint"
+version = "0.5.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0dc92fb57ca44df6db8059111ab3af99a63d5d0f8375d9972e319a379c6bab76"
+dependencies = [
+ "generic-array",
+ "rand_core 0.6.4",
+ "subtle",
+ "zeroize",
+]
 
 [[package]]
 name = "crypto-common"
@@ -242,6 +278,33 @@ checksum = "1bfb12502f3fc46cca1bb51ac28df9d618d813cdc3d2f25b9fe775a34af26bb3"
 dependencies = [
  "generic-array",
  "typenum",
+]
+
+[[package]]
+name = "curve25519-dalek"
+version = "4.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97fb8b7c4503de7d6ae7b42ab72a5a59857b4c937ec27a3d4539dba95b5ab2be"
+dependencies = [
+ "cfg-if",
+ "cpufeatures",
+ "curve25519-dalek-derive",
+ "digest",
+ "fiat-crypto",
+ "rustc_version",
+ "subtle",
+ "zeroize",
+]
+
+[[package]]
+name = "curve25519-dalek-derive"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f46882e17999c6cc590af592290432be3bce0428cb0d5f8b6715e4dc7b383eb3"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -270,7 +333,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f1a467a65c5e759bce6e65eaf91cc29f466cdc57cb65777bd646872a8a1fd4de"
 dependencies = [
  "const-oid",
- "pem-rfc7468",
+ "pem-rfc7468 0.6.0",
+ "zeroize",
+]
+
+[[package]]
+name = "der"
+version = "0.7.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e7c1832837b905bbfb5101e07cc24c8deddf52f93225eee6ead5f4d63d53ddcb"
+dependencies = [
+ "const-oid",
+ "pem-rfc7468 0.7.0",
  "zeroize",
 ]
 
@@ -290,8 +364,10 @@ version = "0.10.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292"
 dependencies = [
+ "block-buffer",
  "const-oid",
  "crypto-common",
+ "subtle",
 ]
 
 [[package]]
@@ -336,7 +412,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -351,7 +427,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -374,7 +450,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -389,7 +465,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -408,10 +484,69 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0d6ef0072f8a535281e4876be788938b528e9a1d43900b82c2569af7da799125"
 
 [[package]]
+name = "ecdsa"
+version = "0.16.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee27f32b5c5292967d2d4a9d7f1e0b0aed2c15daded5a60300e4abb9d8020bca"
+dependencies = [
+ "der 0.7.10",
+ "digest",
+ "elliptic-curve",
+ "rfc6979",
+ "signature",
+ "spki 0.7.3",
+]
+
+[[package]]
+name = "ed25519"
+version = "2.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "115531babc129696a58c64a4fef0a8bf9e9698629fb97e9e40767d235cfbcd53"
+dependencies = [
+ "pkcs8 0.10.2",
+ "signature",
+]
+
+[[package]]
+name = "ed25519-dalek"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "70e796c081cee67dc755e1a36a0a172b897fab85fc3f6bc48307991f64e4eca9"
+dependencies = [
+ "curve25519-dalek",
+ "ed25519",
+ "serde",
+ "sha2",
+ "subtle",
+ "zeroize",
+]
+
+[[package]]
 name = "either"
 version = "1.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "60b1af1c220855b6ceac025d3f6ecdd2b7c4894bfe9cd9bda4fbb4bc7c0d4cf0"
+
+[[package]]
+name = "elliptic-curve"
+version = "0.13.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b5e6043086bf7973472e0c7dff2142ea0b680d30e18d9cc40f267efbf222bd47"
+dependencies = [
+ "base16ct",
+ "crypto-bigint",
+ "digest",
+ "ff",
+ "generic-array",
+ "group",
+ "hkdf",
+ "pem-rfc7468 0.7.0",
+ "pkcs8 0.10.2",
+ "rand_core 0.6.4",
+ "sec1",
+ "subtle",
+ "zeroize",
+]
 
 [[package]]
 name = "english-numbers"
@@ -455,6 +590,22 @@ name = "fastrand"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "486f806e73c5707928240ddc295403b1b93c96a02038563881c4a2fd84b81ac4"
+
+[[package]]
+name = "ff"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c0b50bfb653653f9ca9095b427bed08ab8d75a137839d9ad64eb11810d5b6393"
+dependencies = [
+ "rand_core 0.6.4",
+ "subtle",
+]
+
+[[package]]
+name = "fiat-crypto"
+version = "0.2.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28dea519a9695b9977216879a3ebfddf92f1c08c05d984f8996aecd6ecdc811d"
 
 [[package]]
 name = "fnv"
@@ -620,6 +771,7 @@ checksum = "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a"
 dependencies = [
  "typenum",
  "version_check 0.9.5",
+ "zeroize",
 ]
 
 [[package]]
@@ -672,7 +824,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -687,7 +839,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -710,7 +862,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -725,7 +877,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -749,7 +901,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -764,7 +916,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -788,7 +940,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -803,7 +955,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -827,7 +979,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -842,7 +994,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -856,6 +1008,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "group"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f0f9ef7462f7c099f518d754361858f86d8a07af53ba9af0fe635bbccb151a63"
+dependencies = [
+ "ff",
+ "rand_core 0.6.4",
+ "subtle",
+]
+
+[[package]]
 name = "gsuite-api"
 version = "0.10.0"
 dependencies = [
@@ -866,7 +1029,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -881,7 +1044,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -905,7 +1068,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -920,7 +1083,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -968,6 +1131,24 @@ name = "hermit-abi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d231dfb89cfffdbc30e7fc41579ed6066ad03abda9e567ccafae602b97ec5024"
+
+[[package]]
+name = "hkdf"
+version = "0.12.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b5f8eb2ad728638ea2c7d47a21db23b7b58a72ed6a38256b8a1849f15fbbdf7"
+dependencies = [
+ "hmac",
+]
+
+[[package]]
+name = "hmac"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c49c37c09c17a53d937dfbb742eb3a961d65a994e6bcdcf37e7399d0cc8ab5e"
+dependencies = [
+ "digest",
+]
 
 [[package]]
 name = "http"
@@ -1394,6 +1575,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "jsonwebtoken"
+version = "10.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0529410abe238729a60b108898784df8984c87f6054c9c4fcacc47e4803c1ce1"
+dependencies = [
+ "base64 0.22.1",
+ "ed25519-dalek",
+ "getrandom 0.2.15",
+ "hmac",
+ "js-sys",
+ "p256",
+ "p384",
+ "pem",
+ "rand 0.8.5",
+ "rsa 0.9.9",
+ "serde",
+ "serde_json",
+ "sha2",
+ "signature",
+ "simple_asn1",
+]
+
+[[package]]
 name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1466,7 +1670,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -1481,7 +1685,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -1680,7 +1884,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 10.3.0",
  "log",
  "mime",
  "nom_pem",
@@ -1695,7 +1899,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -1718,7 +1922,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -1733,7 +1937,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -1804,6 +2008,30 @@ dependencies = [
  "libc",
  "pkg-config",
  "vcpkg",
+]
+
+[[package]]
+name = "p256"
+version = "0.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c9863ad85fa8f4460f9c48cb909d38a0d689dba1f6f6988a5e3e0d31071bcd4b"
+dependencies = [
+ "ecdsa",
+ "elliptic-curve",
+ "primeorder",
+ "sha2",
+]
+
+[[package]]
+name = "p384"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fe42f1670a52a47d448f14b6a5c61dd78fce51856e68edaa38f7ae3a46b8d6b6"
+dependencies = [
+ "ecdsa",
+ "elliptic-curve",
+ "primeorder",
+ "sha2",
 ]
 
 [[package]]
@@ -1891,6 +2119,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "pem-rfc7468"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "88b39c9bfcfc231068454382784bb460aae594343fb030d46e9f50a645418412"
+dependencies = [
+ "base64ct",
+]
+
+[[package]]
 name = "percent-encoding"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1914,10 +2151,21 @@ version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eff33bdbdfc54cc98a2eca766ebdec3e1b8fb7387523d5c9c9a2891da856f719"
 dependencies = [
- "der",
- "pkcs8",
- "spki",
+ "der 0.6.1",
+ "pkcs8 0.9.0",
+ "spki 0.6.0",
  "zeroize",
+]
+
+[[package]]
+name = "pkcs1"
+version = "0.7.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c8ffb9f10fa047879315e6625af03c164b16962a5368d724ed16323b68ace47f"
+dependencies = [
+ "der 0.7.10",
+ "pkcs8 0.10.2",
+ "spki 0.7.3",
 ]
 
 [[package]]
@@ -1926,8 +2174,18 @@ version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9eca2c590a5f85da82668fa685c09ce2888b9430e83299debf1f34b65fd4a4ba"
 dependencies = [
- "der",
- "spki",
+ "der 0.6.1",
+ "spki 0.6.0",
+]
+
+[[package]]
+name = "pkcs8"
+version = "0.10.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f950b2377845cebe5cf8b5165cb3cc1a5e0fa5cfa3e1f7f55707d8fd82e0a7b7"
+dependencies = [
+ "der 0.7.10",
+ "spki 0.7.3",
 ]
 
 [[package]]
@@ -1949,6 +2207,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77957b295656769bb8ad2b6a6b09d897d94f05c41b069aede1fcdaa675eaea04"
 dependencies = [
  "zerocopy",
+]
+
+[[package]]
+name = "primeorder"
+version = "0.13.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "353e1ca18966c16d9deb1c69278edbc5f194139612772bd9537af60ac231e1e6"
+dependencies = [
+ "elliptic-curve",
 ]
 
 [[package]]
@@ -2029,7 +2296,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -2044,7 +2311,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -2322,7 +2589,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -2337,7 +2604,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -2347,6 +2614,16 @@ dependencies = [
  "url",
  "uuid",
  "wiremock",
+]
+
+[[package]]
+name = "rfc6979"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f8dd2a808d456c4a54e300a23e9f5a67e122c3024119acbfd73e3bf664491cb2"
+dependencies = [
+ "hmac",
+ "subtle",
 ]
 
 [[package]]
@@ -2376,10 +2653,30 @@ dependencies = [
  "num-integer",
  "num-iter",
  "num-traits",
- "pkcs1",
- "pkcs8",
+ "pkcs1 0.4.1",
+ "pkcs8 0.9.0",
  "rand_core 0.6.4",
  "signature",
+ "subtle",
+ "zeroize",
+]
+
+[[package]]
+name = "rsa"
+version = "0.9.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "40a0376c50d0358279d9d643e4bf7b7be212f1f4ff1da9070a7b54d22ef75c88"
+dependencies = [
+ "const-oid",
+ "digest",
+ "num-bigint-dig",
+ "num-integer",
+ "num-traits",
+ "pkcs1 0.7.5",
+ "pkcs8 0.10.2",
+ "rand_core 0.6.4",
+ "signature",
+ "spki 0.7.3",
  "subtle",
  "zeroize",
 ]
@@ -2395,6 +2692,15 @@ name = "rustc-hash"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "583034fd73374156e66797ed8e5b0d5690409c9226b22d87cb7f19821c05d152"
+
+[[package]]
+name = "rustc_version"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cfcb3a22ef46e85b45de6ee7e79d063319ebb6594faafcf1c225ea92ab6e9b92"
+dependencies = [
+ "semver",
+]
 
 [[package]]
 name = "rustix"
@@ -2572,6 +2878,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 
 [[package]]
+name = "sec1"
+version = "0.7.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d3e97a565f76233a6003f9f5c54be1d9c5bdfa3eccfb189469f11ec4901c47dc"
+dependencies = [
+ "base16ct",
+ "der 0.7.10",
+ "generic-array",
+ "pkcs8 0.10.2",
+ "subtle",
+ "zeroize",
+]
+
+[[package]]
 name = "security-framework"
 version = "2.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2595,6 +2915,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "semver"
+version = "1.0.27"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d767eb0aabc880b29956c35734170f26ed551a859dbd361d140cdbeca61ab1e2"
+
+[[package]]
 name = "sendgrid-api"
 version = "0.10.0"
 dependencies = [
@@ -2605,7 +2931,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -2620,7 +2946,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -2634,18 +2960,28 @@ dependencies = [
 
 [[package]]
 name = "serde"
-version = "1.0.214"
+version = "1.0.228"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f55c3193aca71c12ad7890f1785d2b73e1b9f63a0bbc353c08ef26fe03fc56b5"
+checksum = "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
+dependencies = [
+ "serde_core",
+ "serde_derive",
+]
+
+[[package]]
+name = "serde_core"
+version = "1.0.228"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.214"
+version = "1.0.228"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "de523f781f095e28fa605cdce0f8307e451cc0fd14e2eb4cd2e98a355b147766"
+checksum = "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2712,6 +3048,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "sha2"
+version = "0.10.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283"
+dependencies = [
+ "cfg-if",
+ "cpufeatures",
+ "digest",
+]
+
+[[package]]
 name = "sheets"
 version = "0.10.0"
 dependencies = [
@@ -2722,7 +3069,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -2737,7 +3084,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -2761,7 +3108,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -2776,7 +3123,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -2805,7 +3152,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -2820,7 +3167,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -2883,7 +3230,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -2898,7 +3245,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -2939,7 +3286,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "67cf02bbac7a337dc36e4f5a693db6c21e7863f45070f7064577eb4367a3212b"
 dependencies = [
  "base64ct",
- "der",
+ "der 0.6.1",
+]
+
+[[package]]
+name = "spki"
+version = "0.7.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d91ed6c858b01f942cd56b37a94b3e0a1798290327d1236e4d9cf4eaca44d29d"
+dependencies = [
+ "base64ct",
+ "der 0.7.10",
 ]
 
 [[package]]
@@ -3197,7 +3554,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -3212,7 +3569,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
@@ -3746,7 +4103,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http 1.1.0",
- "jsonwebtoken",
+ "jsonwebtoken 9.3.1",
  "log",
  "mime",
  "nom_pem",
@@ -3761,7 +4118,7 @@ dependencies = [
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
- "rsa",
+ "rsa 0.8.2",
  "schemars",
  "serde",
  "serde_json",
