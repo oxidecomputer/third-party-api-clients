@@ -152,7 +152,7 @@ pub mod date_format {
 }
 
 pub mod date_time_format {
-    use chrono::{DateTime, TimeZone, Utc};
+    use chrono::{DateTime, NaiveDateTime, Utc};
     use serde::{self, Deserialize, Deserializer};
 
     // The date format Ramp returns looks like this: "2021-04-24T01:03:21"
@@ -176,14 +176,15 @@ pub mod date_time_format {
                 Ok(t) => Ok(Some(t)),
                 Err(_) => {
                     // This is google calendar.
-                    match Utc.datetime_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ") {
-                        Ok(t) => Ok(Some(t)),
-                        Err(_) => match Utc.datetime_from_str(&s, FORMAT) {
-                            Ok(t) => Ok(Some(t)),
-                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
-                                Ok(t) => Ok(Some(t)),
+
+                    match NaiveDateTime::parse_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ") {
+                        Ok(t) => Ok(Some(t.and_utc())),
+                        Err(_) => match NaiveDateTime::parse_from_str(&s, FORMAT) {
+                            Ok(t) => Ok(Some(t.and_utc())),
+                            Err(_) => match NaiveDateTime::parse_from_str(&s, "%+") {
+                                Ok(t) => Ok(Some(t.and_utc())),
                                 Err(_) => match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d") {
-                                    Ok(d) => Ok(Some(DateTime::<Utc>::from_utc(
+                                    Ok(d) => Ok(Some(DateTime::from_naive_utc_and_offset(
                                         chrono::NaiveDateTime::new(
                                             d,
                                             chrono::NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
@@ -192,10 +193,11 @@ pub mod date_time_format {
                                     ))),
                                     Err(_) => {
                                         s = format!("{}+00:00", s);
-                                        match Utc.datetime_from_str(&s, FORMAT) {
-                                            Ok(r) => Ok(Some(r)),
-                                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
-                                                Ok(d) => Ok(Some(d)),
+                                        match NaiveDateTime::parse_from_str(&s, FORMAT) {
+                                            Ok(r) => Ok(Some(r.and_utc())),
+                                            Err(_) => match NaiveDateTime::parse_from_str(&s, "%+")
+                                            {
+                                                Ok(d) => Ok(Some(d.and_utc())),
                                                 Err(e) => Err(serde::de::Error::custom(format!(
                                                     "deserializing {} as DateTime<Utc> failed: {}",
                                                     s, e
@@ -240,7 +242,7 @@ pub mod deserialize_empty_url {
                     return Err(serde::de::Error::custom(format!(
                         "error url parsing {}: {}",
                         s, e
-                    )))
+                    )));
                 }
             }
         }
@@ -368,7 +370,6 @@ impl Visitor<'_> for I32Visitor {
     where
         E: de::Error,
     {
-        use std::i32;
         if value >= i64::from(i32::MIN) && value <= i64::from(i32::MAX) {
             Ok(value as i32)
         } else {
@@ -507,7 +508,6 @@ impl Visitor<'_> for F32Visitor {
     where
         E: de::Error,
     {
-        use std::i32;
         if value >= i64::from(i32::MIN) && value <= i64::from(i32::MAX) {
             Ok(value as f32)
         } else {

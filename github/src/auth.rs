@@ -232,22 +232,22 @@ impl PartialEq for InstallationTokenGenerator {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rand::RngCore;
-    use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
+    use rand::Rng;
+    use rsa::{RsaPrivateKey, pkcs1::EncodeRsaPrivateKey};
     use std::time::Duration;
 
     fn app_id() -> i64 {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         rng.next_u32() as i64
     }
 
     fn installation_id() -> i64 {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         rng.next_u32() as i64
     }
 
     fn private_key() -> Vec<u8> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let private_key = RsaPrivateKey::new(&mut rng, 2048)
             .unwrap()
             .to_pkcs1_der()
