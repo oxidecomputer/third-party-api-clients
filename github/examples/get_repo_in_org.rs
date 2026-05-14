@@ -1,11 +1,11 @@
-use base64::{engine::general_purpose::STANDARD, Engine};
+use base64::{Engine, engine::general_purpose::STANDARD};
 use std::env;
 
 #[cfg(feature = "httpcache")]
 use octorust::http_cache::FileBasedCache;
 use octorust::{
-    auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
     Client,
+    auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
 };
 
 #[tokio::main]

@@ -1,31 +1,31 @@
-use rand::RngCore;
-use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
+use rand::Rng;
+use rsa::{RsaPrivateKey, pkcs1::EncodeRsaPrivateKey};
 use std::{mem, time::Duration, time::SystemTime};
 
 use wiremock::{
+    Mock, MockServer, ResponseTemplate,
     http::{HeaderName, HeaderValue},
     matchers::{bearer_token, header, method, path, query_param},
-    Mock, MockServer, ResponseTemplate,
 };
 
 use octorust::{
+    Client, ClientError,
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
     types::InstallationToken,
-    Client, ClientError,
 };
 
 fn app_id() -> i64 {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     rng.next_u32() as i64
 }
 
 fn installation_id() -> i64 {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     rng.next_u32() as i64
 }
 
 fn private_key() -> Vec<u8> {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     let private_key = RsaPrivateKey::new(&mut rng, 2048)
         .unwrap()
         .to_pkcs1_der()
@@ -105,8 +105,8 @@ async fn test_follows_next_links_during_unfold() {
     let with_next = ResponseTemplate::new(200)
         .set_delay(Duration::from_secs(1))
         .append_header(
-            HeaderName::from_bytes("link".as_bytes().to_vec()).unwrap(),
-            HeaderValue::from_bytes(next_url.into_bytes()).unwrap(),
+            HeaderName::from_bytes("link".as_bytes()).unwrap(),
+            HeaderValue::from_bytes(next_url.as_bytes()).unwrap(),
         )
         .set_body_json(vec![empty_issue(), empty_issue()]);
 
@@ -343,9 +343,9 @@ async fn test_does_not_follow_redirects() {
             ResponseTemplate::new(302)
                 .set_delay(Duration::from_secs(1))
                 .append_header(
-                    HeaderName::from_bytes("Location".as_bytes().to_vec()).unwrap(),
+                    HeaderName::from_bytes("Location".as_bytes()).unwrap(),
                     HeaderValue::from_bytes(
-                        format!("{}{}", server.uri(), download_path).into_bytes(),
+                        format!("{}{}", server.uri(), download_path).as_bytes(),
                     )
                     .unwrap(),
                 )
@@ -371,12 +371,13 @@ async fn test_does_not_follow_redirects() {
 
     mem::drop(server);
 
-    assert!(res
-        .unwrap()
-        .headers
-        .get("Location")
-        .unwrap()
-        .to_str()
-        .unwrap()
-        .ends_with("/fake-download-path"));
+    assert!(
+        res.unwrap()
+            .headers
+            .get("Location")
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .ends_with("/fake-download-path")
+    );
 }
