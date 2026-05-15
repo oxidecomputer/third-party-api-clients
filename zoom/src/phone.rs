@@ -326,7 +326,7 @@ impl Phone {
      */
     pub async fn setting(
         &self,
-        account_id: &str,
+        _account_id: &str,
     ) -> ClientResult<crate::Response<crate::types::PhoneSettingResponse>> {
         let url = self.client.url("/phone/settings", None);
         self.client
@@ -357,7 +357,7 @@ impl Phone {
      */
     pub async fn update_settings(
         &self,
-        account_id: &str,
+        _account_id: &str,
         body: &crate::types::UpdatePhoneSettingsRequest,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/phone/settings", None);

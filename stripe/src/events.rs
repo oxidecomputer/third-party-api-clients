@@ -29,13 +29,13 @@ impl Events {
      */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         delivery_success: bool,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
         type_: &str,
-        types: &[String],
+        _types: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delivery_success {
@@ -82,10 +82,10 @@ impl Events {
      */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         delivery_success: bool,
         type_: &str,
-        types: &[String],
+        _types: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delivery_success {

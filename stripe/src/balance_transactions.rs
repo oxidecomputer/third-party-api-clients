@@ -32,7 +32,7 @@ impl BalanceTransactions {
      */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -96,7 +96,7 @@ impl BalanceTransactions {
      */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         currency: &str,
         payout: &str,
         source: &str,

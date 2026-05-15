@@ -27,7 +27,7 @@ impl PaymentIntents {
      */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -77,7 +77,7 @@ impl PaymentIntents {
      */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         customer: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PaymentIntent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

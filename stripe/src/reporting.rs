@@ -26,7 +26,7 @@ impl Reporting {
      */
     pub async fn get_report_runs(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -72,7 +72,7 @@ impl Reporting {
      */
     pub async fn get_all_report_runs(
         &self,
-        created: &str,
+        _created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportRun>>> {
         let url = self.client.url("/v1/reporting/report_runs", None);
         let crate::Response::<crate::types::GetReportingReportRunsResponse> {

@@ -215,7 +215,7 @@ impl Radar {
      */
     pub async fn get_value_list_items(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -269,7 +269,7 @@ impl Radar {
      */
     pub async fn get_all_value_list_all_items(
         &self,
-        created: &str,
+        _created: &str,
         value: &str,
         value_list: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarListItem>>> {
@@ -454,7 +454,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -508,7 +508,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        created: &str,
+        _created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarList>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {

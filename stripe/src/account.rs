@@ -634,7 +634,7 @@ impl Account {
         &self,
         ending_before: &str,
         limit: i64,
-        relationship: &str,
+        _relationship: &str,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -678,7 +678,7 @@ impl Account {
      */
     pub async fn get_all_people(
         &self,
-        relationship: &str,
+        _relationship: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let url = self.client.url("/v1/account/people", None);
         let crate::Response::<crate::types::GetAccountPeopleResponse> {
@@ -877,7 +877,7 @@ impl Account {
         &self,
         ending_before: &str,
         limit: i64,
-        relationship: &str,
+        _relationship: &str,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -921,7 +921,7 @@ impl Account {
      */
     pub async fn get_all_persons(
         &self,
-        relationship: &str,
+        _relationship: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Person>>> {
         let url = self.client.url("/v1/account/persons", None);
         let crate::Response::<crate::types::GetAccountPeopleResponse> {
