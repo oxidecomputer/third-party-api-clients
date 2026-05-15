@@ -31,9 +31,9 @@ impl Products {
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         ending_before: &str,
-        ids: &[String],
+        _ids: &[String],
         limit: i64,
         shippable: bool,
         starting_after: &str,
@@ -88,8 +88,8 @@ impl Products {
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
-        ids: &[String],
+        _created: &str,
+        _ids: &[String],
         shippable: bool,
         url: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Product>>> {

@@ -29,8 +29,8 @@ impl Payouts {
      */
     pub async fn get_page(
         &self,
-        arrival_date: &str,
-        created: &str,
+        _arrival_date: &str,
+        _created: &str,
         destination: &str,
         ending_before: &str,
         limit: i64,
@@ -82,8 +82,8 @@ impl Payouts {
      */
     pub async fn get_all(
         &self,
-        arrival_date: &str,
-        created: &str,
+        _arrival_date: &str,
+        _created: &str,
         destination: &str,
         status: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Payout>>> {

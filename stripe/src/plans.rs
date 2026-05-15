@@ -29,7 +29,7 @@ impl Plans {
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         product: &str,
@@ -81,7 +81,7 @@ impl Plans {
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         product: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PlanData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

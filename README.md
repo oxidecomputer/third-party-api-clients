@@ -24,9 +24,3 @@ A place for keeping all our generated third party API clients.
 - [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
 - [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)
 - [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)
-
-## Generator
-
-The generator lives in the [generator](https://github.com/oxidecomputer/third-party-api-clients/tree/main/generator) directory.
-It generates the entirety of the crates including their `README.md` and `Cargo.toml`.
-This project does not use [progenitor](https://github.com/oxidecomputer/progenitor) or [openapi-generator](https://github.com/oxidecomputer/openapi-generator).

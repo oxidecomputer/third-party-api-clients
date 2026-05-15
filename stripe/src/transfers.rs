@@ -28,7 +28,7 @@ impl Transfers {
      */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         destination: &str,
         ending_before: &str,
         limit: i64,
@@ -80,7 +80,7 @@ impl Transfers {
      */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         destination: &str,
         transfer_group: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Transfer>>> {

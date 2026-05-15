@@ -28,7 +28,7 @@ impl Identity {
      */
     pub async fn get_verification_reports(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -86,7 +86,7 @@ impl Identity {
      */
     pub async fn get_all_verification_reports(
         &self,
-        created: &str,
+        _created: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationReport>>> {
@@ -223,7 +223,7 @@ impl Identity {
      */
     pub async fn get_verification_sessions(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -274,7 +274,7 @@ impl Identity {
      */
     pub async fn get_all_verification_sessions(
         &self,
-        created: &str,
+        _created: &str,
         status: crate::types::GelatoVerificationSessionStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationSession>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

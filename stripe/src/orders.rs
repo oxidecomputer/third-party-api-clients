@@ -31,15 +31,15 @@ impl Orders {
      */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         customer: &str,
         ending_before: &str,
-        ids: &[String],
+        _ids: &[String],
         limit: i64,
         starting_after: &str,
         status: &str,
-        status_transitions: &str,
-        upstream_ids: &[String],
+        _status_transitions: &str,
+        _upstream_ids: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -86,12 +86,12 @@ impl Orders {
      */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         customer: &str,
-        ids: &[String],
+        _ids: &[String],
         status: &str,
-        status_transitions: &str,
-        upstream_ids: &[String],
+        _status_transitions: &str,
+        _upstream_ids: &[String],
     ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
