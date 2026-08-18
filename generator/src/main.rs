@@ -3344,7 +3344,7 @@ uuid = { version = "1.1", features = ["serde", "v4"] }"#
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"
 base64 = "^0.21"
-yup-oauth2 = "^8""#
+yup-oauth2 = {{ version = "12", default-features = false, features = ["hyper-rustls", "aws-lc-rs"] }}"#
                     .to_string();
             }
 
@@ -3366,7 +3366,7 @@ default = ["middleware", "rustls-tls"]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
 native-tls = ["reqwest/native-tls", "openssl"]
-rustls-tls = ["reqwest/default-tls", "ring", "pem"]
+rustls-tls = ["reqwest/rustls", "pem"]
 middleware = [
     "reqwest-conditional-middleware",
     "reqwest-middleware",
@@ -3391,7 +3391,6 @@ reqwest-conditional-middleware = {{ version = "0.5", optional = true }}
 reqwest-middleware = {{ version = "0.5", features = ["multipart"], optional = true }}
 reqwest-retry = {{ version = "0.9", optional = true }}
 reqwest-tracing = {{ version = "0.7", optional = true }}
-ring = {{ version = "0.17", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
