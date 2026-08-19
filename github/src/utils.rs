@@ -250,7 +250,7 @@ pub mod deserialize_empty_url {
                     return Err(serde::de::Error::custom(format!(
                         "error url parsing {}: {}",
                         s, e
-                    )))
+                    )));
                 }
             }
         }

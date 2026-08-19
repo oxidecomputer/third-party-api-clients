@@ -1,11 +1,11 @@
 use std::{mem, time::Duration};
 
 use wiremock::{
-    matchers::{method, path},
     Mock, MockServer, ResponseTemplate,
+    matchers::{method, path},
 };
 
-use sendgrid_api::{types::GetScopesResponse, Client};
+use sendgrid_api::{Client, types::GetScopesResponse};
 
 #[tokio::test]
 async fn test_uses_host_override() {

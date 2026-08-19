@@ -233,7 +233,7 @@ impl PartialEq for InstallationTokenGenerator {
 mod tests {
     use super::*;
     use rand::RngCore;
-    use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
+    use rsa::{RsaPrivateKey, pkcs1::EncodeRsaPrivateKey};
     use std::time::Duration;
 
     fn app_id() -> i64 {

@@ -1,9 +1,9 @@
 use std::collections::BTreeMap;
 
-use anyhow::{bail, Result};
+use anyhow::{Result, bail};
 use inflector::cases::snakecase::to_snake_case;
 
-use crate::{render_param, struct_name, TypeDetails, TypeSpace};
+use crate::{TypeDetails, TypeSpace, render_param, struct_name};
 
 /*
  * Declare named types we know about:
