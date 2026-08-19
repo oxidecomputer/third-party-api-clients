@@ -1,6 +1,6 @@
 use std::collections::BTreeMap;
 
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{Context, Result, anyhow, bail};
 use inflector::cases::{kebabcase::to_kebab_case, snakecase::to_snake_case};
 
 #[derive(Eq, PartialEq, Clone, Debug)]
@@ -825,9 +825,9 @@ pub fn generate_docs_generic_client_credentials(
 
 #[cfg(test)]
 mod test {
-    use anyhow::{anyhow, Context, Result};
+    use anyhow::{Context, Result, anyhow};
 
-    use super::{parse, Component, Template};
+    use super::{Component, Template, parse};
 
     #[test]
     fn basic() -> Result<()> {

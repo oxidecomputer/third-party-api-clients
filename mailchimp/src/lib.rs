@@ -132,7 +132,7 @@ pub mod types;
 pub mod utils;
 pub mod verified_domains;
 
-pub use reqwest::{header::HeaderMap, StatusCode};
+pub use reqwest::{StatusCode, header::HeaderMap};
 
 #[derive(Debug)]
 pub struct Response<T> {
@@ -193,7 +193,7 @@ pub enum ClientError {
 pub const FALLBACK_HOST: &str = "https://us1.api.mailchimp.com";
 
 mod progenitor_support {
-    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
+    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')

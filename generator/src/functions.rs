@@ -1,12 +1,12 @@
 use std::collections::BTreeMap;
 
-use anyhow::{bail, Result};
+use anyhow::{Result, bail};
 use inflector::cases::{pascalcase::to_pascal_case, snakecase::to_snake_case};
 
 use crate::{
-    clean_fn_name, clean_name, client::generate_servers, get_parameter_data, make_plural,
-    oid_to_object_name, path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType,
-    ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace,
+    ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace, clean_fn_name,
+    clean_name, client::generate_servers, get_parameter_data, make_plural, oid_to_object_name,
+    path_to_operation_id, struct_name, template::parse,
 };
 
 #[derive(Debug, Default)]
@@ -855,7 +855,10 @@ fn get_fn_inner(
         .unwrap_or_else(|| String::from("None"));
 
     if all_pages && pagination_property.is_empty() {
-        return Ok(format!("self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await", body));
+        return Ok(format!(
+            "self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await",
+            body
+        ));
     } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
         let inner = format!(

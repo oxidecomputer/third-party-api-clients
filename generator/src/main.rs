@@ -12,7 +12,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use anyhow::{bail, Result};
+use anyhow::{Result, bail};
 use inflector::cases::{
     pascalcase::to_pascal_case, snakecase::to_snake_case, titlecase::to_title_case,
 };
@@ -153,7 +153,10 @@ where
                             }
 
                             if !o.servers.is_empty() {
-                                println!("op {}: servers are only partially supported. Variables are not supported", oid);
+                                println!(
+                                    "op {}: servers are only partially supported. Variables are not supported",
+                                    oid
+                                );
                             }
 
                             if o.security.is_some() {

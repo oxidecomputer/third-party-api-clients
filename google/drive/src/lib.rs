@@ -125,7 +125,7 @@ pub mod types;
 #[doc(hidden)]
 pub mod utils;
 
-pub use reqwest::{header::HeaderMap, StatusCode};
+pub use reqwest::{StatusCode, header::HeaderMap};
 
 #[derive(Debug)]
 pub struct Response<T> {
@@ -193,7 +193,7 @@ pub enum ClientError {
 pub const FALLBACK_HOST: &str = "https://www.googleapis.com/drive/v3";
 
 mod progenitor_support {
-    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
+    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -473,7 +473,7 @@ impl Client {
         T: ToString,
         R: ToString,
     {
-        use base64::{engine::general_purpose::STANDARD, Engine};
+        use base64::{Engine, engine::general_purpose::STANDARD};
 
         let google_key = env::var("GOOGLE_KEY_ENCODED").unwrap_or_default();
         let decoded_google_key = STANDARD.decode(google_key).unwrap();
