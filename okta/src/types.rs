@@ -56,8 +56,7 @@ pub struct ActivateFactorRequest {
     pub state_token: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "APP")]
     App,
@@ -311,8 +310,7 @@ pub struct AppUserPasswordCredential {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Status {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -471,8 +469,7 @@ pub struct ApplicationCredentialsOAuthClient {
     pub token_endpoint_auth_method: Option<OAuthEndpointAuthenticationMethod>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ApplicationCredentialsScheme {
     #[serde(rename = "ADMIN_SETS_CREDENTIALS")]
     AdminSetsCredentials,
@@ -547,8 +544,7 @@ pub struct ApplicationCredentialsSigning {
     pub use_: Option<Use>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Use {
     #[serde(rename = "sig")]
     Sig,
@@ -707,8 +703,7 @@ pub struct ApplicationSettingsNotificationsVpnNetwork {
     pub include: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ApplicationSignOnMode {
     #[serde(rename = "AUTO_LOGIN")]
     AutoLogin,
@@ -811,8 +806,7 @@ pub struct AuthenticationProvider {
     pub type_: Option<AuthenticationProviderType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AuthenticationProviderType {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -855,8 +849,7 @@ impl AuthenticationProviderType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum IssuerMode {
     #[serde(rename = "CUSTOM_URL")]
     CustomUrl,
@@ -887,8 +880,7 @@ impl IssuerMode {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RoleStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -984,8 +976,7 @@ pub struct AuthorizationServerCredentials {
     pub signing: Option<AuthorizationServerCredentialsSigningConfig>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AuthorizationServerCredentialsRotationMode {
     #[serde(rename = "AUTO")]
     Auto,
@@ -1104,8 +1095,7 @@ pub struct AuthorizationServerPolicy {
     pub type_: Option<PolicyType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AuthorizationServerPolicyRuleType {
     #[serde(rename = "RESOURCE_ACCESS")]
     ResourceAccess,
@@ -1625,8 +1615,7 @@ pub struct DnsRecord {
     pub values: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DnsRecordType {
     #[serde(rename = "CNAME")]
     Cname,
@@ -1657,8 +1646,7 @@ impl DnsRecordType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TrustLevel {
     #[serde(rename = "ANY")]
     Any,
@@ -1711,8 +1699,7 @@ pub struct DevicePolicyRuleCondition {
     pub trust_level: Option<TrustLevel>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SupportedMdmFrameworks {
     #[serde(rename = "AFW")]
     Afw,
@@ -1746,8 +1733,7 @@ impl SupportedMdmFrameworks {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Types {
     #[serde(rename = "ANDROID")]
     Android,
@@ -1890,8 +1876,7 @@ pub struct DomainCertificateMetadata {
     pub subject: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DomainCertificateSourceType {
     #[serde(rename = "MANUAL")]
     Manual,
@@ -1919,8 +1904,7 @@ impl DomainCertificateSourceType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DomainCertificateType {
     #[serde(rename = "PEM")]
     Pem,
@@ -1958,8 +1942,7 @@ pub struct DomainListResponse {
     pub domains: Vec<Domain>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DomainValidationStatus {
     #[serde(rename = "COMPLETED")]
     Completed,
@@ -2028,8 +2011,7 @@ pub struct EmailUserFactorProfile {
     pub email: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EnabledStatus {
     #[serde(rename = "DISABLED")]
     Disabled,
@@ -2060,8 +2042,7 @@ impl EnabledStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum VerificationStatus {
     #[serde(rename = "UNVERIFIED")]
     Unverified,
@@ -2142,8 +2123,7 @@ pub struct EventHook {
     pub verification_status: Option<VerificationStatus>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EventHookChannelType {
     #[serde(rename = "HTTP")]
     Http,
@@ -2225,8 +2205,7 @@ pub struct EventHookChannelConfigAuthScheme {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EventHookChannelConfigAuthSchemeType {
     #[serde(rename = "HEADER")]
     Header,
@@ -2270,8 +2249,7 @@ pub struct EventHookChannelConfigHeader {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EventSubscriptionsType {
     #[serde(rename = "EVENT_TYPE")]
     EventType,
@@ -2314,8 +2292,7 @@ pub struct EventSubscriptions {
     pub type_: Option<EventSubscriptionsType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FactorProvider {
     #[serde(rename = "CUSTOM")]
     Custom,
@@ -2364,8 +2341,7 @@ impl FactorProvider {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FactorResultType {
     #[serde(rename = "CANCELLED")]
     Cancelled,
@@ -2420,8 +2396,7 @@ impl FactorResultType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FactorStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -2467,8 +2442,7 @@ impl FactorStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FactorType {
     #[serde(rename = "call")]
     Call,
@@ -2570,8 +2544,7 @@ pub struct FeatureStage {
     pub value: Option<FeatureStageValue>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FeatureStageState {
     #[serde(rename = "CLOSED")]
     Closed,
@@ -2602,8 +2575,7 @@ impl FeatureStageState {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FeatureStageValue {
     #[serde(rename = "BETA")]
     Beta,
@@ -2634,8 +2606,7 @@ impl FeatureStageValue {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FeatureType {
     #[serde(rename = "self-service")]
     SelfService,
@@ -2847,8 +2818,7 @@ pub struct GroupRulePeopleCondition {
     pub users: Option<GroupRuleCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GroupRuleStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -2882,8 +2852,7 @@ impl GroupRuleStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GroupType {
     #[serde(rename = "APP_GROUP")]
     AppGroup,
@@ -2934,8 +2903,7 @@ pub struct WebUserFactorProfile {
     pub credential_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum IdentityProviderIssuerMode {
     #[serde(rename = "CUSTOM_URL_DOMAIN")]
     CustomUrlDomain,
@@ -2966,8 +2934,7 @@ impl IdentityProviderIssuerMode {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum IdentityProviderType {
     #[serde(rename = "AgentlessDSSO")]
     AgentlessDsso,
@@ -3139,8 +3106,7 @@ pub struct IdentityProviderCredentialsSigning {
     pub kid: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Revocation {
     #[serde(rename = "CRL")]
     Crl,
@@ -3226,8 +3192,7 @@ pub struct IdentityProviderPolicy {
     pub subject: Option<PolicySubject>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Provider {
     #[serde(rename = "ANY")]
     Any,
@@ -3447,8 +3412,7 @@ pub struct InlineHookResponseCommands {
     pub value: Vec<InlineHookResponseCommandValue>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum InlineHookType {
     #[serde(rename = "com.okta.import.transform")]
     ComOktaImportTransform,
@@ -3762,8 +3726,7 @@ pub struct LinkedObjectDetails {
     pub type_: Option<LinkedObjectDetailsType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LinkedObjectDetailsType {
     #[serde(rename = "USER")]
     User,
@@ -3868,8 +3831,7 @@ pub struct LogAuthenticationContext {
     pub issuer: Option<LogIssuer>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LogAuthenticationProvider {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -3949,8 +3911,7 @@ pub struct LogClient {
     pub zone: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LogCredentialProvider {
     #[serde(rename = "DUO")]
     Duo,
@@ -3996,8 +3957,7 @@ impl LogCredentialProvider {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LogCredentialType {
     #[serde(rename = "ASSERTION")]
     Assertion,
@@ -4286,8 +4246,7 @@ pub struct LogSecurityContext {
     pub isp: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LogSeverity {
     #[serde(rename = "DEBUG")]
     Debug,
@@ -4403,8 +4362,7 @@ pub struct LogUserAgent {
     pub raw_user_agent: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Enrollment {
     #[serde(rename = "ANY_OR_NONE")]
     AnyOrNone,
@@ -4532,8 +4490,7 @@ pub struct NetworkZoneAddress {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum NetworkZoneAddressType {
     #[serde(rename = "CIDR")]
     Cidr,
@@ -4580,8 +4537,7 @@ pub struct NetworkZoneLocation {
     pub region: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum NetworkZoneType {
     #[serde(rename = "DYNAMIC")]
     Dynamic,
@@ -4612,8 +4568,7 @@ impl NetworkZoneType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum NetworkZoneUsage {
     #[serde(rename = "BLOCKLIST")]
     Blocklist,
@@ -4661,8 +4616,7 @@ pub struct OAuth2Actor {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ClaimType {
     #[serde(rename = "IDENTITY")]
     Identity,
@@ -4693,8 +4647,7 @@ impl ClaimType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GroupFilterType {
     #[serde(rename = "CONTAINS")]
     Contains,
@@ -4731,8 +4684,7 @@ impl GroupFilterType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ValueType {
     #[serde(rename = "EXPRESSION")]
     Expression,
@@ -4851,8 +4803,7 @@ pub struct OAuth2Client {
     pub logo_uri: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OAuth2RefreshTokenStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -4947,8 +4898,7 @@ pub struct OAuth2RefreshToken {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Consent {
     #[serde(rename = "ADMIN")]
     Admin,
@@ -4982,8 +4932,7 @@ impl Consent {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MetadataPublish {
     #[serde(rename = "ALL_CLIENTS")]
     AllClients,
@@ -5121,8 +5070,7 @@ pub struct OAuth2ScopeConsentGrant {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OAuth2ScopeConsentGrantSource {
     #[serde(rename = "ADMIN")]
     Admin,
@@ -5235,8 +5183,7 @@ pub struct OAuthApplicationCredentials {
     pub oauth_client: Option<ApplicationCredentialsOAuthClient>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OAuthEndpointAuthenticationMethod {
     #[serde(rename = "client_secret_basic")]
     ClientSecretBasic,
@@ -5276,8 +5223,7 @@ impl OAuthEndpointAuthenticationMethod {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OAuthGrantType {
     #[serde(rename = "authorization_code")]
     AuthorizationCode,
@@ -5317,8 +5263,7 @@ impl OAuthGrantType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OAuthResponseType {
     #[serde(rename = "code")]
     Code,
@@ -5398,8 +5343,7 @@ pub struct OktaSignOnPolicyRuleConditions {
     pub people: Option<PolicyPeopleCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Access {
     #[serde(rename = "ALLOW")]
     Allow,
@@ -5430,8 +5374,7 @@ impl Access {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FactorPromptMode {
     #[serde(rename = "ALWAYS")]
     Always,
@@ -5532,8 +5475,7 @@ pub struct OpenConnectApplication {
     pub settings: Option<OpenConnectApplicationSettings>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OpenConnectApplicationConsentMethod {
     #[serde(rename = "REQUIRED")]
     Required,
@@ -5688,8 +5630,7 @@ pub struct OpenConnectApplicationSettingsRefreshToken {
     pub rotation_type: Option<OpenConnectRefreshTokenRotationType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OpenConnectApplicationType {
     #[serde(rename = "browser")]
     Browser,
@@ -5726,8 +5667,7 @@ impl OpenConnectApplicationType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OpenConnectRefreshTokenRotationType {
     #[serde(rename = "rotate")]
     Rotate,
@@ -5804,8 +5744,7 @@ pub struct PasswordCredentialHash {
     pub work_factor: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PasswordCredentialHashAlgorithm {
     #[serde(rename = "BCRYPT")]
     Bcrypt,
@@ -5879,8 +5818,7 @@ pub struct PasswordPolicy {
     pub settings: Option<PasswordPolicySettingsData>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PasswordPolicyAuthenticationProviderCondition {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -6222,8 +6160,7 @@ pub struct PasswordPolicySettingsData {
     pub recovery: Option<PasswordPolicyRecoverySettings>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PlatformConditionEvaluatorType {
     #[serde(rename = "ANY")]
     Any,
@@ -6268,8 +6205,7 @@ pub struct PlatformConditionEvaluator {
     pub type_: Option<PlatformConditionEvaluatorType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PlatformConditionEvaluatorOperatingSystemType {
     #[serde(rename = "ANDROID")]
     Android,
@@ -6326,8 +6262,7 @@ pub struct PlatformConditionEvaluatorOperatingSystem {
     pub version: Option<PlatformConditionEvaluatorOperatingSystemVersion>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MatchType {
     #[serde(rename = "EXPRESSION")]
     Expression,
@@ -6442,8 +6377,7 @@ pub struct Policy {
     pub type_: Option<PolicyType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Action {
     #[serde(rename = "AUTO")]
     Auto,
@@ -6488,8 +6422,7 @@ pub struct PolicyAccountLinkFilter {
     pub groups: Option<ClientPolicyCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Connection {
     #[serde(rename = "ANYWHERE")]
     Anywhere,
@@ -6546,8 +6479,7 @@ pub struct PolicyPeopleCondition {
     pub users: Option<UserCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PolicyRuleType {
     #[serde(rename = "PASSWORD")]
     Password,
@@ -6658,8 +6590,7 @@ pub struct PolicyRuleActionsEnroll {
     pub self_: Option<PolicyRuleActionsEnrollSelf>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PolicyRuleActionsEnrollSelf {
     #[serde(rename = "CHALLENGE")]
     Challenge,
@@ -6693,8 +6624,7 @@ impl PolicyRuleActionsEnrollSelf {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AuthType {
     #[serde(rename = "ANY")]
     Any,
@@ -6840,8 +6770,7 @@ pub struct PolicySubject {
     pub user_name_template: Option<PolicyUserNameTemplate>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PolicySubjectMatchType {
     #[serde(rename = "CUSTOM_ATTRIBUTE")]
     CustomAttribute,
@@ -6878,8 +6807,7 @@ impl PolicySubjectMatchType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PolicyType {
     #[serde(rename = "IDP_DISCOVERY")]
     IdpDiscovery,
@@ -6985,8 +6913,7 @@ pub struct ProfileMappingSource {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ProtocolType {
     #[serde(rename = "MTLS")]
     Mtls,
@@ -7057,8 +6984,7 @@ pub struct ProtocolAlgorithmType {
     pub signature: Option<ProtocolAlgorithmTypeSignature>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Scope {
     #[serde(rename = "ANY")]
     Any,
@@ -7118,8 +7044,7 @@ pub struct ProtocolAlgorithms {
     pub response: Option<ProtocolAlgorithmType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Binding {
     #[serde(rename = "HTTP-POST")]
     HttpPost,
@@ -7150,8 +7075,7 @@ impl Binding {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ProtocolEndpointType {
     #[serde(rename = "INSTANCE")]
     Instance,
@@ -7228,8 +7152,7 @@ pub struct ProtocolRelayState {
     pub format: Option<ProtocolRelayStateFormat>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ProtocolRelayStateFormat {
     #[serde(rename = "FROM_URL")]
     FromUrl,
@@ -7271,8 +7194,7 @@ pub struct ProtocolSettings {
     pub name_format: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ProvisioningAction {
     #[serde(rename = "AUTO")]
     Auto,
@@ -7330,8 +7252,7 @@ pub struct ProvisioningConditions {
     pub suspended: Option<ProvisioningSuspendedCondition>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ProvisioningDeprovisionedConditionAction {
     #[serde(rename = "NONE")]
     None,
@@ -7368,8 +7289,7 @@ pub struct ProvisioningDeprovisionedCondition {
     pub action: Option<ProvisioningDeprovisionedConditionAction>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ProvisioningGroupsAction {
     #[serde(rename = "APPEND")]
     Append,
@@ -7431,8 +7351,7 @@ pub struct ProvisioningGroups {
     pub source_attribute_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ProvisioningSuspendedConditionAction {
     #[serde(rename = "NONE")]
     None,
@@ -7616,8 +7535,7 @@ pub struct Role {
     pub type_: Option<RoleType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RoleAssignmentType {
     #[serde(rename = "GROUP")]
     Group,
@@ -7648,8 +7566,7 @@ impl RoleAssignmentType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum RoleType {
     #[serde(rename = "API_ACCESS_MANAGEMENT_ADMIN")]
     ApiAccessManagementAdmin,
@@ -7928,8 +7845,7 @@ pub struct SamlAttributeStatement {
     pub values: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Value {
     #[serde(rename = "ACTIVATING")]
     Activating,
@@ -8020,8 +7936,7 @@ pub struct ScopeData {
     pub type_: Option<ScopeType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ScopeType {
     #[serde(rename = "CORS")]
     Cors,
@@ -8226,8 +8141,7 @@ pub struct Session {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SessionAuthenticationMethod {
     #[serde(rename = "fpt")]
     Fpt,
@@ -8294,8 +8208,7 @@ pub struct SessionIdentityProvider {
     pub type_: Option<SessionIdentityProviderType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SessionIdentityProviderType {
     #[serde(rename = "ACTIVE_DIRECTORY")]
     ActiveDirectory,
@@ -8335,8 +8248,7 @@ impl SessionIdentityProviderType {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SessionStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -8441,8 +8353,7 @@ pub struct SmsTemplate {
     pub type_: Option<SmsTemplateType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SmsTemplateType {
     #[serde(rename = "SMS_VERIFY_CODE")]
     SmsVerifyCode,
@@ -8487,8 +8398,7 @@ pub struct SmsUserFactorProfile {
     pub phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TokenType {
     #[serde(rename = "ACCESS")]
     Access,
@@ -8987,8 +8897,7 @@ pub struct UserFactor {
     pub verify: Option<VerifyFactorRequest>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserIdentifierConditionEvaluatorPatternMatchType {
     #[serde(rename = "CONTAINS")]
     Contains,
@@ -9040,8 +8949,7 @@ pub struct UserIdentifierConditionEvaluatorPattern {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserIdentifierPolicyRuleConditionType {
     #[serde(rename = "ATTRIBUTE")]
     Attribute,
@@ -9119,8 +9027,7 @@ pub struct UserLifecycleAttributePolicyRuleCondition {
     pub matching_value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserNextLogin {
     #[serde(rename = "changePassword")]
     ChangePassword,
@@ -9700,8 +9607,7 @@ pub struct UserSchemaAttributeMasterPriority {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserSchemaAttributeMasterType {
     #[serde(rename = "OKTA")]
     Okta,
@@ -9751,8 +9657,7 @@ pub struct UserSchemaAttributePermission {
     pub principal: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserSchemaAttributeType {
     #[serde(rename = "array")]
     Array,
@@ -10000,8 +9905,7 @@ pub struct UserSchemaPublic {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserStatus {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -10177,8 +10081,7 @@ pub struct VerifyFactorRequest {
     pub state_token: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FactorResult {
     #[serde(rename = "CHALLENGE")]
     Challenge,

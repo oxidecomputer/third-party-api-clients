@@ -217,10 +217,7 @@ impl Folders {
      */
     pub async fn get(&self, name: &str) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
-            &format!(
-                "/v2/{}",
-                crate::progenitor_support::encode_path(name),
-            ),
+            &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
             None,
         );
         self.client
@@ -244,10 +241,7 @@ impl Folders {
      */
     pub async fn delete(&self, name: &str) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
-            &format!(
-                "/v2/{}",
-                crate::progenitor_support::encode_path(name),
-            ),
+            &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
             None,
         );
         self.client
@@ -314,10 +308,7 @@ impl Folders {
         body: &crate::types::MoveFolderRequest,
     ) -> ClientResult<crate::Response<crate::types::Operation>> {
         let url = self.client.url(
-            &format!(
-                "/v2/{}:move",
-                crate::progenitor_support::encode_path(name),
-            ),
+            &format!("/v2/{}:move", crate::progenitor_support::encode_path(name),),
             None,
         );
         self.client

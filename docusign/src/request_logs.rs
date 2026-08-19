@@ -56,9 +56,7 @@ impl RequestLogs {
      * Deletes the request log files.
      */
     pub async fn api_delete_logs(&self) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/v2.1/diagnostics/request_logs", None);
+        let url = self.client.url("/v2.1/diagnostics/request_logs", None);
         self.client
             .delete(
                 &url,
@@ -120,9 +118,7 @@ impl RequestLogs {
     pub async fn api_get_setting(
         &self,
     ) -> ClientResult<crate::Response<crate::types::DiagnosticsSettingsInformation>> {
-        let url = self
-            .client
-            .url("/v2.1/diagnostics/settings", None);
+        let url = self.client.url("/v2.1/diagnostics/settings", None);
         self.client
             .get(
                 &url,
@@ -155,9 +151,7 @@ impl RequestLogs {
         &self,
         body: &crate::types::DiagnosticsSettingsInformation,
     ) -> ClientResult<crate::Response<crate::types::DiagnosticsSettingsInformation>> {
-        let url = self
-            .client
-            .url("/v2.1/diagnostics/settings", None);
+        let url = self.client.url("/v2.1/diagnostics/settings", None);
         self.client
             .put(
                 &url,

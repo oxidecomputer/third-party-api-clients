@@ -552,9 +552,7 @@ impl Orders {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/orders.json", None);
+        let url = self.client.url("/admin/api/2020-01/orders.json", None);
         self.client
             .post(
                 &url,
@@ -1063,9 +1061,7 @@ impl Orders {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/orders.json", None);
+        let url = self.client.url("/admin/api/2020-04/orders.json", None);
         self.client
             .post(
                 &url,

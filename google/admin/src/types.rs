@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Alias {
     /**
-    * JSON template for Alias object in Directory API.
+     * JSON template for Alias object in Directory API.
      */
     #[serde(
         default,
@@ -15,7 +15,7 @@ pub struct Alias {
     )]
     pub alias: String,
     /**
-    * JSON template for Alias object in Directory API.
+     * JSON template for Alias object in Directory API.
      */
     #[serde(
         default,
@@ -24,7 +24,7 @@ pub struct Alias {
     )]
     pub etag: String,
     /**
-    * JSON template for Alias object in Directory API.
+     * JSON template for Alias object in Directory API.
      */
     #[serde(
         default,
@@ -33,7 +33,7 @@ pub struct Alias {
     )]
     pub id: String,
     /**
-    * JSON template for Alias object in Directory API.
+     * JSON template for Alias object in Directory API.
      */
     #[serde(
         default,
@@ -42,7 +42,7 @@ pub struct Alias {
     )]
     pub kind: String,
     /**
-    * JSON template for Alias object in Directory API.
+     * JSON template for Alias object in Directory API.
      */
     #[serde(
         default,
@@ -57,7 +57,7 @@ pub struct Alias {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Aliases {
     /**
-    * JSON response template to list aliases in Directory API.
+     * JSON response template to list aliases in Directory API.
      */
     #[serde(
         default,
@@ -66,7 +66,7 @@ pub struct Aliases {
     )]
     pub aliases: Vec<String>,
     /**
-    * JSON response template to list aliases in Directory API.
+     * JSON response template to list aliases in Directory API.
      */
     #[serde(
         default,
@@ -75,7 +75,7 @@ pub struct Aliases {
     )]
     pub etag: String,
     /**
-    * JSON response template to list aliases in Directory API.
+     * JSON response template to list aliases in Directory API.
      */
     #[serde(
         default,
@@ -89,7 +89,7 @@ pub struct Aliases {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Asp {
     /**
-    * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
+     * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
      */
     #[serde(
         default,
@@ -99,7 +99,7 @@ pub struct Asp {
     )]
     pub code_id: i64,
     /**
-    * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
+     * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
      */
     #[serde(
         default,
@@ -109,7 +109,7 @@ pub struct Asp {
     )]
     pub creation_time: i64,
     /**
-    * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
+     * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
      */
     #[serde(
         default,
@@ -118,7 +118,7 @@ pub struct Asp {
     )]
     pub etag: String,
     /**
-    * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
+     * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
      */
     #[serde(
         default,
@@ -127,7 +127,7 @@ pub struct Asp {
     )]
     pub kind: String,
     /**
-    * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
+     * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
      */
     #[serde(
         default,
@@ -137,7 +137,7 @@ pub struct Asp {
     )]
     pub last_time_used: i64,
     /**
-    * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
+     * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
      */
     #[serde(
         default,
@@ -146,7 +146,7 @@ pub struct Asp {
     )]
     pub name: String,
     /**
-    * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
+     * An application-specific password (ASP) is used with applications that do not accept a verification code when logging into the application on certain devices. The ASP access code is used instead of the login and password you commonly use when accessing an application through a browser. For more information about ASPs and how to create one, see the [help center](https://support.google.com/a/answer/2537800#asp).
      */
     #[serde(
         default,
@@ -166,7 +166,7 @@ pub struct Asps {
     )]
     pub etag: String,
     /**
-    * A list of ASP resources.
+     * A list of ASP resources.
      */
     #[serde(
         default,
@@ -185,8 +185,7 @@ pub struct Asps {
 /**
  * Message severity
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Severity {
     #[serde(rename = "SEVERITY_ERROR")]
     SeverityError,
@@ -227,7 +226,7 @@ impl Severity {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuxiliaryMessage {
     /**
-    * Auxiliary message about issues with printers or settings. Example: {message_type:AUXILIARY_MESSAGE_WARNING, field_mask:make_and_model, message:"Given printer is invalid or no longer supported."}
+     * Auxiliary message about issues with printers or settings. Example: {message_type:AUXILIARY_MESSAGE_WARNING, field_mask:make_and_model, message:"Given printer is invalid or no longer supported."}
      */
     #[serde(
         default,
@@ -237,7 +236,7 @@ pub struct AuxiliaryMessage {
     )]
     pub auxiliary_message: String,
     /**
-    * Auxiliary message about issues with printers or settings. Example: {message_type:AUXILIARY_MESSAGE_WARNING, field_mask:make_and_model, message:"Given printer is invalid or no longer supported."}
+     * Auxiliary message about issues with printers or settings. Example: {message_type:AUXILIARY_MESSAGE_WARNING, field_mask:make_and_model, message:"Given printer is invalid or no longer supported."}
      */
     #[serde(
         default,
@@ -247,7 +246,7 @@ pub struct AuxiliaryMessage {
     )]
     pub field_mask: String,
     /**
-    * Auxiliary message about issues with printers or settings. Example: {message_type:AUXILIARY_MESSAGE_WARNING, field_mask:make_and_model, message:"Given printer is invalid or no longer supported."}
+     * Auxiliary message about issues with printers or settings. Example: {message_type:AUXILIARY_MESSAGE_WARNING, field_mask:make_and_model, message:"Given printer is invalid or no longer supported."}
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub severity: Option<Severity>,
@@ -257,7 +256,7 @@ pub struct AuxiliaryMessage {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchCreatePrintersRequest {
     /**
-    * Request for adding new printers in batch.
+     * Request for adding new printers in batch.
      */
     #[serde(
         default,
@@ -271,7 +270,7 @@ pub struct BatchCreatePrintersRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchCreatePrintersResponse {
     /**
-    * Response for adding new printers in batch.
+     * Response for adding new printers in batch.
      */
     #[serde(
         default,
@@ -280,7 +279,7 @@ pub struct BatchCreatePrintersResponse {
     )]
     pub failures: Vec<FailureInfo>,
     /**
-    * Response for adding new printers in batch.
+     * Response for adding new printers in batch.
      */
     #[serde(
         default,
@@ -294,7 +293,7 @@ pub struct BatchCreatePrintersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchDeletePrintersRequest {
     /**
-    * Request for deleting existing printers in batch.
+     * Request for deleting existing printers in batch.
      */
     #[serde(
         default,
@@ -309,7 +308,7 @@ pub struct BatchDeletePrintersRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchDeletePrintersResponse {
     /**
-    * Response for deleting existing printers in batch.
+     * Response for deleting existing printers in batch.
      */
     #[serde(
         default,
@@ -319,7 +318,7 @@ pub struct BatchDeletePrintersResponse {
     )]
     pub failed_printers: Vec<FailureInfo>,
     /**
-    * Response for deleting existing printers in batch.
+     * Response for deleting existing printers in batch.
      */
     #[serde(
         default,
@@ -334,12 +333,12 @@ pub struct BatchDeletePrintersResponse {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Building {
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<BuildingAddress>,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -349,7 +348,7 @@ pub struct Building {
     )]
     pub building_id: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -359,12 +358,12 @@ pub struct Building {
     )]
     pub building_name: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub coordinates: Option<BuildingCoordinates>,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -373,7 +372,7 @@ pub struct Building {
     )]
     pub description: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -382,7 +381,7 @@ pub struct Building {
     )]
     pub etags: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -392,7 +391,7 @@ pub struct Building {
     )]
     pub floor_names: Vec<String>,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -406,7 +405,7 @@ pub struct Building {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BuildingAddress {
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -416,7 +415,7 @@ pub struct BuildingAddress {
     )]
     pub address_lines: Vec<String>,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -426,7 +425,7 @@ pub struct BuildingAddress {
     )]
     pub administrative_area: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -436,7 +435,7 @@ pub struct BuildingAddress {
     )]
     pub language_code: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -445,7 +444,7 @@ pub struct BuildingAddress {
     )]
     pub locality: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -455,7 +454,7 @@ pub struct BuildingAddress {
     )]
     pub postal_code: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -465,7 +464,7 @@ pub struct BuildingAddress {
     )]
     pub region_code: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -479,7 +478,7 @@ pub struct BuildingAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BuildingCoordinates {
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -488,7 +487,7 @@ pub struct BuildingCoordinates {
     )]
     pub latitude: f64,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -502,7 +501,7 @@ pub struct BuildingCoordinates {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Buildings {
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -511,7 +510,7 @@ pub struct Buildings {
     )]
     pub buildings: Vec<Building>,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -520,7 +519,7 @@ pub struct Buildings {
     )]
     pub etag: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -529,7 +528,7 @@ pub struct Buildings {
     )]
     pub kind: String,
     /**
-    * Public API: Resources.buildings
+     * Public API: Resources.buildings
      */
     #[serde(
         default,
@@ -544,7 +543,7 @@ pub struct Buildings {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarResource {
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -554,7 +553,7 @@ pub struct CalendarResource {
     )]
     pub building_id: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -563,7 +562,7 @@ pub struct CalendarResource {
     )]
     pub capacity: i64,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -572,7 +571,7 @@ pub struct CalendarResource {
     )]
     pub etags: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -581,7 +580,7 @@ pub struct CalendarResource {
     )]
     pub feature_instances: Option<serde_json::Value>,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -591,7 +590,7 @@ pub struct CalendarResource {
     )]
     pub floor_name: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -601,7 +600,7 @@ pub struct CalendarResource {
     )]
     pub floor_section: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -611,7 +610,7 @@ pub struct CalendarResource {
     )]
     pub generated_resource_name: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -620,7 +619,7 @@ pub struct CalendarResource {
     )]
     pub kind: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -630,7 +629,7 @@ pub struct CalendarResource {
     )]
     pub resource_category: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -640,7 +639,7 @@ pub struct CalendarResource {
     )]
     pub resource_description: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -650,7 +649,7 @@ pub struct CalendarResource {
     )]
     pub resource_email: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -660,7 +659,7 @@ pub struct CalendarResource {
     )]
     pub resource_id: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -670,7 +669,7 @@ pub struct CalendarResource {
     )]
     pub resource_name: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -680,7 +679,7 @@ pub struct CalendarResource {
     )]
     pub resource_type: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -695,7 +694,7 @@ pub struct CalendarResource {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarResources {
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -704,7 +703,7 @@ pub struct CalendarResources {
     )]
     pub etag: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -713,7 +712,7 @@ pub struct CalendarResources {
     )]
     pub items: Vec<CalendarResource>,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -722,7 +721,7 @@ pub struct CalendarResources {
     )]
     pub kind: String,
     /**
-    * Public API: Resources.calendars
+     * Public API: Resources.calendars
      */
     #[serde(
         default,
@@ -737,7 +736,7 @@ pub struct CalendarResources {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -746,7 +745,7 @@ pub struct Channel {
     )]
     pub address: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -755,7 +754,7 @@ pub struct Channel {
     )]
     pub expiration: i64,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -764,7 +763,7 @@ pub struct Channel {
     )]
     pub id: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -773,7 +772,7 @@ pub struct Channel {
     )]
     pub kind: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -782,7 +781,7 @@ pub struct Channel {
     )]
     pub params: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -790,7 +789,7 @@ pub struct Channel {
     )]
     pub payload: bool,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -800,7 +799,7 @@ pub struct Channel {
     )]
     pub resource_id: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -810,7 +809,7 @@ pub struct Channel {
     )]
     pub resource_uri: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -819,7 +818,7 @@ pub struct Channel {
     )]
     pub token: String,
     /**
-    * An notification channel used to watch for resource changes.
+     * An notification channel used to watch for resource changes.
      */
     #[serde(
         default,
@@ -833,7 +832,7 @@ pub struct Channel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActiveTimeRanges {
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -843,7 +842,7 @@ pub struct ActiveTimeRanges {
     )]
     pub active_time: i64,
     /**
-    * Date of usage
+     * Date of usage
      */
     #[serde(
         default,
@@ -862,7 +861,7 @@ pub struct CpuTemperatureInfo {
     )]
     pub label: String,
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -875,7 +874,7 @@ pub struct CpuTemperatureInfo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CpuStatusReports {
     /**
-    * List of CPU temperature samples.
+     * List of CPU temperature samples.
      */
     #[serde(
         default,
@@ -892,7 +891,7 @@ pub struct CpuStatusReports {
     )]
     pub cpu_utilization_percentage_info: Vec<i64>,
     /**
-    * Date and time the report was received.
+     * Date and time the report was received.
      */
     #[serde(
         default,
@@ -906,7 +905,7 @@ pub struct CpuStatusReports {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeviceFiles {
     /**
-    * Date and time the report was received.
+     * Date and time the report was received.
      */
     #[serde(
         default,
@@ -940,7 +939,7 @@ pub struct DeviceFiles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VolumeInfo {
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -950,7 +949,7 @@ pub struct VolumeInfo {
     )]
     pub storage_free: i64,
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -971,7 +970,7 @@ pub struct VolumeInfo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DiskVolumeReports {
     /**
-    * Disk volumes
+     * Disk volumes
      */
     #[serde(
         default,
@@ -986,7 +985,7 @@ pub struct DiskVolumeReports {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LastKnownNetwork {
     /**
-    * Information for an ip address.
+     * Information for an ip address.
      */
     #[serde(
         default,
@@ -996,7 +995,7 @@ pub struct LastKnownNetwork {
     )]
     pub ip_address: String,
     /**
-    * Information for an ip address.
+     * Information for an ip address.
      */
     #[serde(
         default,
@@ -1011,7 +1010,7 @@ pub struct LastKnownNetwork {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecentUsers {
     /**
-    * List of recent device users, in descending order, by last login time.
+     * List of recent device users, in descending order, by last login time.
      */
     #[serde(
         default,
@@ -1020,7 +1019,7 @@ pub struct RecentUsers {
     )]
     pub email: String,
     /**
-    * List of recent device users, in descending order, by last login time.
+     * List of recent device users, in descending order, by last login time.
      */
     #[serde(
         default,
@@ -1034,7 +1033,7 @@ pub struct RecentUsers {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SystemRamFreeReports {
     /**
-    * Date and time the report was received.
+     * Date and time the report was received.
      */
     #[serde(
         default,
@@ -1056,7 +1055,7 @@ pub struct SystemRamFreeReports {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TpmVersionInfo {
     /**
-    * Trusted Platform Module (TPM) (Read-only)
+     * Trusted Platform Module (TPM) (Read-only)
      */
     #[serde(
         default,
@@ -1065,7 +1064,7 @@ pub struct TpmVersionInfo {
     )]
     pub family: String,
     /**
-    * Trusted Platform Module (TPM) (Read-only)
+     * Trusted Platform Module (TPM) (Read-only)
      */
     #[serde(
         default,
@@ -1075,7 +1074,7 @@ pub struct TpmVersionInfo {
     )]
     pub firmware_version: String,
     /**
-    * Trusted Platform Module (TPM) (Read-only)
+     * Trusted Platform Module (TPM) (Read-only)
      */
     #[serde(
         default,
@@ -1084,7 +1083,7 @@ pub struct TpmVersionInfo {
     )]
     pub manufacturer: String,
     /**
-    * Trusted Platform Module (TPM) (Read-only)
+     * Trusted Platform Module (TPM) (Read-only)
      */
     #[serde(
         default,
@@ -1094,7 +1093,7 @@ pub struct TpmVersionInfo {
     )]
     pub spec_level: String,
     /**
-    * Trusted Platform Module (TPM) (Read-only)
+     * Trusted Platform Module (TPM) (Read-only)
      */
     #[serde(
         default,
@@ -1104,7 +1103,7 @@ pub struct TpmVersionInfo {
     )]
     pub tpm_model: String,
     /**
-    * Trusted Platform Module (TPM) (Read-only)
+     * Trusted Platform Module (TPM) (Read-only)
      */
     #[serde(
         default,
@@ -1119,7 +1118,7 @@ pub struct TpmVersionInfo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChromeOsDevice {
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1129,7 +1128,7 @@ pub struct ChromeOsDevice {
     )]
     pub active_time_ranges: Vec<ActiveTimeRanges>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1139,7 +1138,7 @@ pub struct ChromeOsDevice {
     )]
     pub annotated_asset_id: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1149,7 +1148,7 @@ pub struct ChromeOsDevice {
     )]
     pub annotated_location: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1159,7 +1158,7 @@ pub struct ChromeOsDevice {
     )]
     pub annotated_user: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1169,7 +1168,7 @@ pub struct ChromeOsDevice {
     )]
     pub auto_update_expiration: i64,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1179,7 +1178,7 @@ pub struct ChromeOsDevice {
     )]
     pub boot_mode: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1189,7 +1188,7 @@ pub struct ChromeOsDevice {
     )]
     pub cpu_status_reports: Vec<CpuStatusReports>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1199,7 +1198,7 @@ pub struct ChromeOsDevice {
     )]
     pub device_files: Vec<DeviceFiles>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1209,7 +1208,7 @@ pub struct ChromeOsDevice {
     )]
     pub device_id: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1219,7 +1218,7 @@ pub struct ChromeOsDevice {
     )]
     pub disk_volume_reports: Vec<DiskVolumeReports>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1229,7 +1228,7 @@ pub struct ChromeOsDevice {
     )]
     pub dock_mac_address: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1238,7 +1237,7 @@ pub struct ChromeOsDevice {
     )]
     pub etag: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1248,7 +1247,7 @@ pub struct ChromeOsDevice {
     )]
     pub ethernet_mac_address: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1258,7 +1257,7 @@ pub struct ChromeOsDevice {
     )]
     pub ethernet_mac_address_0: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1268,7 +1267,7 @@ pub struct ChromeOsDevice {
     )]
     pub firmware_version: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1277,7 +1276,7 @@ pub struct ChromeOsDevice {
     )]
     pub kind: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1287,7 +1286,7 @@ pub struct ChromeOsDevice {
     )]
     pub last_enrollment_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1297,7 +1296,7 @@ pub struct ChromeOsDevice {
     )]
     pub last_known_network: Vec<LastKnownNetwork>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1307,7 +1306,7 @@ pub struct ChromeOsDevice {
     )]
     pub last_sync: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1317,7 +1316,7 @@ pub struct ChromeOsDevice {
     )]
     pub mac_address: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1327,7 +1326,7 @@ pub struct ChromeOsDevice {
     )]
     pub manufacture_date: Option<chrono::NaiveDate>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1336,7 +1335,7 @@ pub struct ChromeOsDevice {
     )]
     pub meid: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1345,7 +1344,7 @@ pub struct ChromeOsDevice {
     )]
     pub model: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1354,7 +1353,7 @@ pub struct ChromeOsDevice {
     )]
     pub notes: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1364,7 +1363,7 @@ pub struct ChromeOsDevice {
     )]
     pub order_number: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1374,7 +1373,7 @@ pub struct ChromeOsDevice {
     )]
     pub org_unit_path: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1384,7 +1383,7 @@ pub struct ChromeOsDevice {
     )]
     pub os_version: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1394,7 +1393,7 @@ pub struct ChromeOsDevice {
     )]
     pub platform_version: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1404,7 +1403,7 @@ pub struct ChromeOsDevice {
     )]
     pub recent_users: Vec<RecentUsers>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1414,7 +1413,7 @@ pub struct ChromeOsDevice {
     )]
     pub screenshot_files: Vec<DeviceFiles>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1424,7 +1423,7 @@ pub struct ChromeOsDevice {
     )]
     pub serial_number: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1433,7 +1432,7 @@ pub struct ChromeOsDevice {
     )]
     pub status: String,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1443,7 +1442,7 @@ pub struct ChromeOsDevice {
     )]
     pub support_end_date: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1453,7 +1452,7 @@ pub struct ChromeOsDevice {
     )]
     pub system_ram_free_reports: Vec<SystemRamFreeReports>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1463,7 +1462,7 @@ pub struct ChromeOsDevice {
     )]
     pub system_ram_total: i64,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1472,7 +1471,7 @@ pub struct ChromeOsDevice {
     )]
     pub tpm_version_info: Option<TpmVersionInfo>,
     /**
-    * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
+     * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
@@ -1502,7 +1501,7 @@ pub struct ChromeOsDeviceAction {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChromeOsDevices {
     /**
-    * List of Chrome OS Device objects.
+     * List of Chrome OS Device objects.
      */
     #[serde(
         default,
@@ -1546,7 +1545,7 @@ pub struct ChromeOsMoveDevicesOu {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatePrinterRequest {
     /**
-    * Request for adding a new printer.
+     * Request for adding a new printer.
      */
     #[serde(
         default,
@@ -1555,7 +1554,7 @@ pub struct CreatePrinterRequest {
     )]
     pub parent: String,
     /**
-    * Request for adding a new printer.
+     * Request for adding a new printer.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub printer: Option<Printer>,
@@ -1571,7 +1570,7 @@ pub struct Customer {
     )]
     pub alternate_email: String,
     /**
-    * Date and time the report was received.
+     * Date and time the report was received.
      */
     #[serde(
         default,
@@ -1694,8 +1693,7 @@ pub struct CustomerPostalAddress {
 /**
  * Indicates the command state.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum State {
     #[serde(rename = "ACKED_BY_CLIENT")]
     AckedByClient,
@@ -1744,8 +1742,7 @@ impl State {
 /**
  * The type of the command.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "COMMAND_TYPE_UNSPECIFIED")]
     CommandTypeUnspecified,
@@ -1792,7 +1789,7 @@ impl Type {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DirectoryChromeosdevicesCommand {
     /**
-    * Information regarding a command that was issued to a device.
+     * Information regarding a command that was issued to a device.
      */
     #[serde(
         default,
@@ -1802,7 +1799,7 @@ pub struct DirectoryChromeosdevicesCommand {
     )]
     pub command_expire_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Information regarding a command that was issued to a device.
+     * Information regarding a command that was issued to a device.
      */
     #[serde(
         default,
@@ -1812,7 +1809,7 @@ pub struct DirectoryChromeosdevicesCommand {
     )]
     pub command_id: i64,
     /**
-    * Information regarding a command that was issued to a device.
+     * Information regarding a command that was issued to a device.
      */
     #[serde(
         default,
@@ -1821,7 +1818,7 @@ pub struct DirectoryChromeosdevicesCommand {
     )]
     pub command_result: Option<DirectoryChromeosdevicesCommandResult>,
     /**
-    * Information regarding a command that was issued to a device.
+     * Information regarding a command that was issued to a device.
      */
     #[serde(
         default,
@@ -1831,7 +1828,7 @@ pub struct DirectoryChromeosdevicesCommand {
     )]
     pub issue_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Information regarding a command that was issued to a device.
+     * Information regarding a command that was issued to a device.
      */
     #[serde(
         default,
@@ -1840,12 +1837,12 @@ pub struct DirectoryChromeosdevicesCommand {
     )]
     pub payload: String,
     /**
-    * Information regarding a command that was issued to a device.
+     * Information regarding a command that was issued to a device.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
     /**
-    * Information regarding a command that was issued to a device.
+     * Information regarding a command that was issued to a device.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
@@ -1854,8 +1851,7 @@ pub struct DirectoryChromeosdevicesCommand {
 /**
  * The result of the command.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Result {
     #[serde(rename = "COMMAND_RESULT_TYPE_UNSPECIFIED")]
     CommandResultTypeUnspecified,
@@ -1896,7 +1892,7 @@ impl Result {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DirectoryChromeosdevicesCommandResult {
     /**
-    * The result of executing a command.
+     * The result of executing a command.
      */
     #[serde(
         default,
@@ -1906,7 +1902,7 @@ pub struct DirectoryChromeosdevicesCommandResult {
     )]
     pub error_message: String,
     /**
-    * The result of executing a command.
+     * The result of executing a command.
      */
     #[serde(
         default,
@@ -1916,7 +1912,7 @@ pub struct DirectoryChromeosdevicesCommandResult {
     )]
     pub execute_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The result of executing a command.
+     * The result of executing a command.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub result: Option<Result>,
@@ -1926,7 +1922,7 @@ pub struct DirectoryChromeosdevicesCommandResult {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DirectoryChromeosdevicesIssueCommandRequest {
     /**
-    * A request for issuing a command.
+     * A request for issuing a command.
      */
     #[serde(
         default,
@@ -1935,7 +1931,7 @@ pub struct DirectoryChromeosdevicesIssueCommandRequest {
     )]
     pub command_type: Option<Type>,
     /**
-    * A request for issuing a command.
+     * A request for issuing a command.
      */
     #[serde(
         default,
@@ -1949,7 +1945,7 @@ pub struct DirectoryChromeosdevicesIssueCommandRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DirectoryChromeosdevicesIssueCommandResponse {
     /**
-    * A response for issuing a command.
+     * A response for issuing a command.
      */
     #[serde(
         default,
@@ -1963,7 +1959,7 @@ pub struct DirectoryChromeosdevicesIssueCommandResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainAlias {
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -1999,7 +1995,7 @@ pub struct DomainAlias {
     )]
     pub parent_domain_name: String,
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -2011,7 +2007,7 @@ pub struct DomainAlias {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainAliases {
     /**
-    * List of domain alias objects.
+     * List of domain alias objects.
      */
     #[serde(
         default,
@@ -2037,7 +2033,7 @@ pub struct DomainAliases {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Domains {
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -2047,7 +2043,7 @@ pub struct Domains {
     )]
     pub creation_time: i64,
     /**
-    * List of domain alias objects.
+     * List of domain alias objects.
      */
     #[serde(
         default,
@@ -2070,7 +2066,7 @@ pub struct Domains {
     )]
     pub etag: String,
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -2085,7 +2081,7 @@ pub struct Domains {
     )]
     pub kind: String,
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -2097,7 +2093,7 @@ pub struct Domains {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Domains2 {
     /**
-    * List of domain objects.
+     * List of domain objects.
      */
     #[serde(
         default,
@@ -2126,8 +2122,7 @@ pub struct Empty {}
 /**
  * Canonical code for why the update failed to apply.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ErrorCode {
     #[serde(rename = "ABORTED")]
     Aborted,
@@ -2207,12 +2202,12 @@ impl ErrorCode {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FailureInfo {
     /**
-    * Info about failures
+     * Info about failures
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "errorCode")]
     pub error_code: Option<ErrorCode>,
     /**
-    * Info about failures
+     * Info about failures
      */
     #[serde(
         default,
@@ -2222,12 +2217,12 @@ pub struct FailureInfo {
     )]
     pub error_message: String,
     /**
-    * Info about failures
+     * Info about failures
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub printer: Option<Printer>,
     /**
-    * Info about failures
+     * Info about failures
      */
     #[serde(
         default,
@@ -2242,7 +2237,7 @@ pub struct FailureInfo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Feature {
     /**
-    * JSON template for Feature object in Directory API.
+     * JSON template for Feature object in Directory API.
      */
     #[serde(
         default,
@@ -2251,7 +2246,7 @@ pub struct Feature {
     )]
     pub etags: String,
     /**
-    * JSON template for Feature object in Directory API.
+     * JSON template for Feature object in Directory API.
      */
     #[serde(
         default,
@@ -2260,7 +2255,7 @@ pub struct Feature {
     )]
     pub kind: String,
     /**
-    * JSON template for Feature object in Directory API.
+     * JSON template for Feature object in Directory API.
      */
     #[serde(
         default,
@@ -2274,7 +2269,7 @@ pub struct Feature {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FeatureInstance {
     /**
-    * JSON template for a feature instance.
+     * JSON template for a feature instance.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub feature: Option<Feature>,
@@ -2295,7 +2290,7 @@ pub struct FeatureRename {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Features {
     /**
-    * Public API: Resources.features
+     * Public API: Resources.features
      */
     #[serde(
         default,
@@ -2304,7 +2299,7 @@ pub struct Features {
     )]
     pub etag: String,
     /**
-    * Public API: Resources.features
+     * Public API: Resources.features
      */
     #[serde(
         default,
@@ -2313,7 +2308,7 @@ pub struct Features {
     )]
     pub features: Vec<Feature>,
     /**
-    * Public API: Resources.features
+     * Public API: Resources.features
      */
     #[serde(
         default,
@@ -2322,7 +2317,7 @@ pub struct Features {
     )]
     pub kind: String,
     /**
-    * Public API: Resources.features
+     * Public API: Resources.features
      */
     #[serde(
         default,
@@ -2337,7 +2332,7 @@ pub struct Features {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Group {
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2346,7 +2341,7 @@ pub struct Group {
     )]
     pub admin_created: bool,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2355,7 +2350,7 @@ pub struct Group {
     )]
     pub aliases: Vec<String>,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2364,7 +2359,7 @@ pub struct Group {
     )]
     pub description: String,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2374,7 +2369,7 @@ pub struct Group {
     )]
     pub direct_members_count: i64,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2383,7 +2378,7 @@ pub struct Group {
     )]
     pub email: String,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2392,7 +2387,7 @@ pub struct Group {
     )]
     pub etag: String,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2401,7 +2396,7 @@ pub struct Group {
     )]
     pub id: String,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2410,7 +2405,7 @@ pub struct Group {
     )]
     pub kind: String,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2419,7 +2414,7 @@ pub struct Group {
     )]
     pub name: String,
     /**
-    * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+     * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
     #[serde(
         default,
@@ -2439,7 +2434,7 @@ pub struct Groups {
     )]
     pub etag: String,
     /**
-    * List of group objects.
+     * List of group objects.
      */
     #[serde(
         default,
@@ -2466,7 +2461,7 @@ pub struct Groups {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPrinterModelsResponse {
     /**
-    * Response for listing allowed printer models.
+     * Response for listing allowed printer models.
      */
     #[serde(
         default,
@@ -2476,7 +2471,7 @@ pub struct ListPrinterModelsResponse {
     )]
     pub next_page_token: String,
     /**
-    * Response for listing allowed printer models.
+     * Response for listing allowed printer models.
      */
     #[serde(
         default,
@@ -2491,7 +2486,7 @@ pub struct ListPrinterModelsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPrintersResponse {
     /**
-    * Response for listing printers.
+     * Response for listing printers.
      */
     #[serde(
         default,
@@ -2501,7 +2496,7 @@ pub struct ListPrintersResponse {
     )]
     pub next_page_token: String,
     /**
-    * Response for listing printers.
+     * Response for listing printers.
      */
     #[serde(
         default,
@@ -2515,7 +2510,7 @@ pub struct ListPrintersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Member {
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2524,7 +2519,7 @@ pub struct Member {
     )]
     pub delivery_settings: String,
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2533,7 +2528,7 @@ pub struct Member {
     )]
     pub email: String,
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2542,7 +2537,7 @@ pub struct Member {
     )]
     pub etag: String,
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2551,7 +2546,7 @@ pub struct Member {
     )]
     pub id: String,
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2560,7 +2555,7 @@ pub struct Member {
     )]
     pub kind: String,
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2569,7 +2564,7 @@ pub struct Member {
     )]
     pub role: String,
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2578,7 +2573,7 @@ pub struct Member {
     )]
     pub status: String,
     /**
-    * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
+     * A Google Groups member can be a user or another group. This member can be inside or outside of your account's domains. For more information about common group member tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-group-members).
      */
     #[serde(
         default,
@@ -2604,7 +2599,7 @@ pub struct Members {
     )]
     pub kind: String,
     /**
-    * List of member objects.
+     * List of member objects.
      */
     #[serde(
         default,
@@ -2625,7 +2620,7 @@ pub struct Members {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MembersHasMember {
     /**
-    * JSON template for Has Member response in Directory API.
+     * JSON template for Has Member response in Directory API.
      */
     #[serde(
         default,
@@ -2658,7 +2653,7 @@ pub struct Applications {
     )]
     pub permission: Vec<String>,
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -2680,7 +2675,7 @@ pub struct Applications {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MobileDevice {
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2689,7 +2684,7 @@ pub struct MobileDevice {
     )]
     pub adb_status: bool,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2698,7 +2693,7 @@ pub struct MobileDevice {
     )]
     pub applications: Vec<Applications>,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2708,7 +2703,7 @@ pub struct MobileDevice {
     )]
     pub baseband_version: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2718,7 +2713,7 @@ pub struct MobileDevice {
     )]
     pub bootloader_version: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2727,7 +2722,7 @@ pub struct MobileDevice {
     )]
     pub brand: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2737,7 +2732,7 @@ pub struct MobileDevice {
     )]
     pub build_number: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2747,7 +2742,7 @@ pub struct MobileDevice {
     )]
     pub default_language: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2756,7 +2751,7 @@ pub struct MobileDevice {
     )]
     pub developer_options_status: bool,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2766,7 +2761,7 @@ pub struct MobileDevice {
     )]
     pub device_compromised_status: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2776,7 +2771,7 @@ pub struct MobileDevice {
     )]
     pub device_id: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2786,7 +2781,7 @@ pub struct MobileDevice {
     )]
     pub device_password_status: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2795,7 +2790,7 @@ pub struct MobileDevice {
     )]
     pub email: Vec<String>,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2805,7 +2800,7 @@ pub struct MobileDevice {
     )]
     pub encryption_status: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2814,7 +2809,7 @@ pub struct MobileDevice {
     )]
     pub etag: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2824,7 +2819,7 @@ pub struct MobileDevice {
     )]
     pub first_sync: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2833,7 +2828,7 @@ pub struct MobileDevice {
     )]
     pub hardware: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2843,7 +2838,7 @@ pub struct MobileDevice {
     )]
     pub hardware_id: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2852,7 +2847,7 @@ pub struct MobileDevice {
     )]
     pub imei: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2862,7 +2857,7 @@ pub struct MobileDevice {
     )]
     pub kernel_version: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2871,7 +2866,7 @@ pub struct MobileDevice {
     )]
     pub kind: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2881,7 +2876,7 @@ pub struct MobileDevice {
     )]
     pub last_sync: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2890,7 +2885,7 @@ pub struct MobileDevice {
     )]
     pub managed_account_is_on_owner_profile: bool,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2899,7 +2894,7 @@ pub struct MobileDevice {
     )]
     pub manufacturer: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2908,7 +2903,7 @@ pub struct MobileDevice {
     )]
     pub meid: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2917,7 +2912,7 @@ pub struct MobileDevice {
     )]
     pub model: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2926,7 +2921,7 @@ pub struct MobileDevice {
     )]
     pub name: Vec<String>,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2936,7 +2931,7 @@ pub struct MobileDevice {
     )]
     pub network_operator: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2945,7 +2940,7 @@ pub struct MobileDevice {
     )]
     pub os: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2955,7 +2950,7 @@ pub struct MobileDevice {
     )]
     pub other_accounts_info: Vec<String>,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2964,7 +2959,7 @@ pub struct MobileDevice {
     )]
     pub privilege: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2974,7 +2969,7 @@ pub struct MobileDevice {
     )]
     pub release_version: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2984,7 +2979,7 @@ pub struct MobileDevice {
     )]
     pub resource_id: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -2994,7 +2989,7 @@ pub struct MobileDevice {
     )]
     pub security_patch_level: i64,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -3004,7 +2999,7 @@ pub struct MobileDevice {
     )]
     pub serial_number: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -3013,7 +3008,7 @@ pub struct MobileDevice {
     )]
     pub status: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -3022,7 +3017,7 @@ pub struct MobileDevice {
     )]
     pub supports_work_profile: bool,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -3032,7 +3027,7 @@ pub struct MobileDevice {
     )]
     pub type_: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -3041,7 +3036,7 @@ pub struct MobileDevice {
     )]
     pub unknown_sources_status: bool,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -3051,7 +3046,7 @@ pub struct MobileDevice {
     )]
     pub user_agent: String,
     /**
-    * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+     * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
     #[serde(
         default,
@@ -3087,7 +3082,7 @@ pub struct MobileDevices {
     )]
     pub kind: String,
     /**
-    * List of Mobile Device objects.
+     * List of Mobile Device objects.
      */
     #[serde(
         default,
@@ -3108,7 +3103,7 @@ pub struct MobileDevices {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgUnit {
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3117,7 +3112,7 @@ pub struct OrgUnit {
     )]
     pub block_inheritance: bool,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3126,7 +3121,7 @@ pub struct OrgUnit {
     )]
     pub description: String,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3135,7 +3130,7 @@ pub struct OrgUnit {
     )]
     pub etag: String,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3144,7 +3139,7 @@ pub struct OrgUnit {
     )]
     pub kind: String,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3153,7 +3148,7 @@ pub struct OrgUnit {
     )]
     pub name: String,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3163,7 +3158,7 @@ pub struct OrgUnit {
     )]
     pub org_unit_id: String,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3173,7 +3168,7 @@ pub struct OrgUnit {
     )]
     pub org_unit_path: String,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3183,7 +3178,7 @@ pub struct OrgUnit {
     )]
     pub parent_org_unit_id: String,
     /**
-    * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
+     * Managing your account's organizational units allows you to configure your users' access to services and custom settings. For more information about common organizational unit tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-org-units.html).
      */
     #[serde(
         default,
@@ -3209,7 +3204,7 @@ pub struct OrgUnits {
     )]
     pub kind: String,
     /**
-    * List of organizational unit objects.
+     * List of organizational unit objects.
      */
     #[serde(
         default,
@@ -3224,7 +3219,7 @@ pub struct OrgUnits {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Printer {
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3234,7 +3229,7 @@ pub struct Printer {
     )]
     pub auxiliary_messages: Vec<AuxiliaryMessage>,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3244,7 +3239,7 @@ pub struct Printer {
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3253,7 +3248,7 @@ pub struct Printer {
     )]
     pub description: String,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3263,7 +3258,7 @@ pub struct Printer {
     )]
     pub display_name: String,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3272,7 +3267,7 @@ pub struct Printer {
     )]
     pub id: String,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3282,7 +3277,7 @@ pub struct Printer {
     )]
     pub make_and_model: String,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3291,7 +3286,7 @@ pub struct Printer {
     )]
     pub name: String,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3301,7 +3296,7 @@ pub struct Printer {
     )]
     pub org_unit_id: String,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3310,7 +3305,7 @@ pub struct Printer {
     )]
     pub uri: String,
     /**
-    * Printer configuration.
+     * Printer configuration.
      */
     #[serde(
         default,
@@ -3324,7 +3319,7 @@ pub struct Printer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PrinterModel {
     /**
-    * Printer manufacturer and model
+     * Printer manufacturer and model
      */
     #[serde(
         default,
@@ -3334,7 +3329,7 @@ pub struct PrinterModel {
     )]
     pub display_name: String,
     /**
-    * Printer manufacturer and model
+     * Printer manufacturer and model
      */
     #[serde(
         default,
@@ -3344,7 +3339,7 @@ pub struct PrinterModel {
     )]
     pub make_and_model: String,
     /**
-    * Printer manufacturer and model
+     * Printer manufacturer and model
      */
     #[serde(
         default,
@@ -3357,7 +3352,7 @@ pub struct PrinterModel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Privilege {
     /**
-    * A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
+     * A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
      */
     #[serde(
         default,
@@ -3373,7 +3368,7 @@ pub struct Privilege {
     )]
     pub etag: String,
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -3419,7 +3414,7 @@ pub struct Privileges {
     )]
     pub etag: String,
     /**
-    * A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
+     * A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
      */
     #[serde(
         default,
@@ -3462,7 +3457,7 @@ pub struct Role {
     )]
     pub etag: String,
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -3471,7 +3466,7 @@ pub struct Role {
     )]
     pub is_super_admin_role: bool,
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -3493,7 +3488,7 @@ pub struct Role {
     )]
     pub role_description: String,
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -3510,7 +3505,7 @@ pub struct Role {
     )]
     pub role_name: String,
     /**
-    * The set of privileges that are granted to this role.
+     * The set of privileges that are granted to this role.
      */
     #[serde(
         default,
@@ -3525,7 +3520,7 @@ pub struct Role {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RoleAssignment {
     /**
-    * Defines an assignment of a role.
+     * Defines an assignment of a role.
      */
     #[serde(
         default,
@@ -3535,7 +3530,7 @@ pub struct RoleAssignment {
     )]
     pub assigned_to: String,
     /**
-    * Defines an assignment of a role.
+     * Defines an assignment of a role.
      */
     #[serde(
         default,
@@ -3544,7 +3539,7 @@ pub struct RoleAssignment {
     )]
     pub etag: String,
     /**
-    * Defines an assignment of a role.
+     * Defines an assignment of a role.
      */
     #[serde(
         default,
@@ -3553,7 +3548,7 @@ pub struct RoleAssignment {
     )]
     pub kind: String,
     /**
-    * Defines an assignment of a role.
+     * Defines an assignment of a role.
      */
     #[serde(
         default,
@@ -3563,7 +3558,7 @@ pub struct RoleAssignment {
     )]
     pub org_unit_id: String,
     /**
-    * Defines an assignment of a role.
+     * Defines an assignment of a role.
      */
     #[serde(
         default,
@@ -3573,7 +3568,7 @@ pub struct RoleAssignment {
     )]
     pub role_assignment_id: i64,
     /**
-    * Defines an assignment of a role.
+     * Defines an assignment of a role.
      */
     #[serde(
         default,
@@ -3583,7 +3578,7 @@ pub struct RoleAssignment {
     )]
     pub role_id: i64,
     /**
-    * Defines an assignment of a role.
+     * Defines an assignment of a role.
      */
     #[serde(
         default,
@@ -3603,7 +3598,7 @@ pub struct RoleAssignments {
     )]
     pub etag: String,
     /**
-    * A list of RoleAssignment resources.
+     * A list of RoleAssignment resources.
      */
     #[serde(
         default,
@@ -3635,7 +3630,7 @@ pub struct Roles {
     )]
     pub etag: String,
     /**
-    * A list of Role resources.
+     * A list of Role resources.
      */
     #[serde(
         default,
@@ -3662,7 +3657,7 @@ pub struct Roles {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Schema {
     /**
-    * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
+     * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
      */
     #[serde(
         default,
@@ -3672,7 +3667,7 @@ pub struct Schema {
     )]
     pub display_name: String,
     /**
-    * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
+     * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
      */
     #[serde(
         default,
@@ -3681,7 +3676,7 @@ pub struct Schema {
     )]
     pub etag: String,
     /**
-    * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
+     * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
      */
     #[serde(
         default,
@@ -3690,7 +3685,7 @@ pub struct Schema {
     )]
     pub fields: Vec<SchemaFieldSpec>,
     /**
-    * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
+     * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
      */
     #[serde(
         default,
@@ -3699,7 +3694,7 @@ pub struct Schema {
     )]
     pub kind: String,
     /**
-    * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
+     * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
      */
     #[serde(
         default,
@@ -3709,7 +3704,7 @@ pub struct Schema {
     )]
     pub schema_id: String,
     /**
-    * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
+     * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
      */
     #[serde(
         default,
@@ -3724,7 +3719,7 @@ pub struct Schema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NumericIndexingSpec {
     /**
-    * Indexing spec for a numeric field. By default, only exact match queries will be supported for numeric fields. Setting the `numericIndexingSpec` allows range queries to be supported.
+     * Indexing spec for a numeric field. By default, only exact match queries will be supported for numeric fields. Setting the `numericIndexingSpec` allows range queries to be supported.
      */
     #[serde(
         default,
@@ -3734,7 +3729,7 @@ pub struct NumericIndexingSpec {
     )]
     pub max_value: f64,
     /**
-    * Indexing spec for a numeric field. By default, only exact match queries will be supported for numeric fields. Setting the `numericIndexingSpec` allows range queries to be supported.
+     * Indexing spec for a numeric field. By default, only exact match queries will be supported for numeric fields. Setting the `numericIndexingSpec` allows range queries to be supported.
      */
     #[serde(
         default,
@@ -3749,7 +3744,7 @@ pub struct NumericIndexingSpec {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SchemaFieldSpec {
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3759,7 +3754,7 @@ pub struct SchemaFieldSpec {
     )]
     pub display_name: String,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3768,7 +3763,7 @@ pub struct SchemaFieldSpec {
     )]
     pub etag: String,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3778,7 +3773,7 @@ pub struct SchemaFieldSpec {
     )]
     pub field_id: String,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3788,7 +3783,7 @@ pub struct SchemaFieldSpec {
     )]
     pub field_name: String,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3798,7 +3793,7 @@ pub struct SchemaFieldSpec {
     )]
     pub field_type: String,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3806,7 +3801,7 @@ pub struct SchemaFieldSpec {
     )]
     pub indexed: bool,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3815,7 +3810,7 @@ pub struct SchemaFieldSpec {
     )]
     pub kind: String,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3824,7 +3819,7 @@ pub struct SchemaFieldSpec {
     )]
     pub multi_valued: bool,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3833,7 +3828,7 @@ pub struct SchemaFieldSpec {
     )]
     pub numeric_indexing_spec: Option<NumericIndexingSpec>,
     /**
-    * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
+     * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
     #[serde(
         default,
@@ -3848,7 +3843,7 @@ pub struct SchemaFieldSpec {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Schemas {
     /**
-    * JSON response template for List Schema operation in Directory API.
+     * JSON response template for List Schema operation in Directory API.
      */
     #[serde(
         default,
@@ -3857,7 +3852,7 @@ pub struct Schemas {
     )]
     pub etag: String,
     /**
-    * JSON response template for List Schema operation in Directory API.
+     * JSON response template for List Schema operation in Directory API.
      */
     #[serde(
         default,
@@ -3866,7 +3861,7 @@ pub struct Schemas {
     )]
     pub kind: String,
     /**
-    * JSON response template for List Schema operation in Directory API.
+     * JSON response template for List Schema operation in Directory API.
      */
     #[serde(
         default,
@@ -3880,7 +3875,7 @@ pub struct Schemas {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Token {
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3888,7 +3883,7 @@ pub struct Token {
     )]
     pub anonymous: bool,
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3898,7 +3893,7 @@ pub struct Token {
     )]
     pub client_id: String,
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3908,7 +3903,7 @@ pub struct Token {
     )]
     pub display_text: String,
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3917,7 +3912,7 @@ pub struct Token {
     )]
     pub etag: String,
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3926,7 +3921,7 @@ pub struct Token {
     )]
     pub kind: String,
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3935,7 +3930,7 @@ pub struct Token {
     )]
     pub native_app: bool,
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3944,7 +3939,7 @@ pub struct Token {
     )]
     pub scopes: Vec<String>,
     /**
-    * JSON template for token resource in Directory API.
+     * JSON template for token resource in Directory API.
      */
     #[serde(
         default,
@@ -3959,7 +3954,7 @@ pub struct Token {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tokens {
     /**
-    * JSON response template for List tokens operation in Directory API.
+     * JSON response template for List tokens operation in Directory API.
      */
     #[serde(
         default,
@@ -3968,7 +3963,7 @@ pub struct Tokens {
     )]
     pub etag: String,
     /**
-    * JSON response template for List tokens operation in Directory API.
+     * JSON response template for List tokens operation in Directory API.
      */
     #[serde(
         default,
@@ -3977,7 +3972,7 @@ pub struct Tokens {
     )]
     pub items: Vec<Token>,
     /**
-    * JSON response template for List tokens operation in Directory API.
+     * JSON response template for List tokens operation in Directory API.
      */
     #[serde(
         default,
@@ -4010,7 +4005,7 @@ pub struct Ims {
     )]
     pub im: String,
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -4036,7 +4031,7 @@ pub struct Ims {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4045,7 +4040,7 @@ pub struct User {
     )]
     pub addresses: Vec<UserAddress>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4054,7 +4049,7 @@ pub struct User {
     )]
     pub agreed_to_terms: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4063,7 +4058,7 @@ pub struct User {
     )]
     pub aliases: Vec<String>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4071,7 +4066,7 @@ pub struct User {
     )]
     pub archived: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4080,7 +4075,7 @@ pub struct User {
     )]
     pub change_password_at_next_login: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4090,7 +4085,7 @@ pub struct User {
     )]
     pub creation_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4100,7 +4095,7 @@ pub struct User {
     pub custom_schemas:
         std::collections::HashMap<String, std::collections::HashMap<String, serde_json::Value>>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4110,7 +4105,7 @@ pub struct User {
     )]
     pub customer_id: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4120,7 +4115,7 @@ pub struct User {
     )]
     pub deletion_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4129,7 +4124,7 @@ pub struct User {
     )]
     pub emails: Vec<UserEmail>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4138,7 +4133,7 @@ pub struct User {
     )]
     pub etag: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4147,12 +4142,12 @@ pub struct User {
     )]
     pub external_ids: Option<serde_json::Value>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub gender: Option<UserGender>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4162,7 +4157,7 @@ pub struct User {
     )]
     pub hash_function: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4171,7 +4166,7 @@ pub struct User {
     )]
     pub id: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4180,7 +4175,7 @@ pub struct User {
     )]
     pub ims: Vec<Ims>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4189,7 +4184,7 @@ pub struct User {
     )]
     pub include_in_global_address_list: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4198,7 +4193,7 @@ pub struct User {
     )]
     pub ip_whitelisted: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4207,7 +4202,7 @@ pub struct User {
     )]
     pub is_admin: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4216,7 +4211,7 @@ pub struct User {
     )]
     pub is_delegated_admin: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4225,7 +4220,7 @@ pub struct User {
     )]
     pub is_enforced_in_2_sv: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4234,7 +4229,7 @@ pub struct User {
     )]
     pub is_enrolled_in_2_sv: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4243,12 +4238,12 @@ pub struct User {
     )]
     pub is_mailbox_setup: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub keywords: Option<serde_json::Value>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4257,12 +4252,12 @@ pub struct User {
     )]
     pub kind: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub languages: Option<serde_json::Value>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4272,7 +4267,7 @@ pub struct User {
     )]
     pub last_login_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4281,12 +4276,12 @@ pub struct User {
     )]
     pub locations: Vec<UserLocation>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub name: Option<UserName>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4296,12 +4291,12 @@ pub struct User {
     )]
     pub non_editable_aliases: Vec<String>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub notes: Option<serde_json::Value>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4311,12 +4306,12 @@ pub struct User {
     )]
     pub org_unit_path: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organizations: Option<serde_json::Value>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4325,7 +4320,7 @@ pub struct User {
     )]
     pub password: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4334,7 +4329,7 @@ pub struct User {
     )]
     pub phones: Vec<UserPhone>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4343,7 +4338,7 @@ pub struct User {
     )]
     pub posix_accounts: Option<serde_json::Value>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4353,7 +4348,7 @@ pub struct User {
     )]
     pub primary_email: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4363,7 +4358,7 @@ pub struct User {
     )]
     pub recovery_email: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4373,12 +4368,12 @@ pub struct User {
     )]
     pub recovery_phone: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub relations: Option<serde_json::Value>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4388,7 +4383,7 @@ pub struct User {
     )]
     pub ssh_public_keys: Vec<UserSshPublicKey>,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4396,7 +4391,7 @@ pub struct User {
     )]
     pub suspended: bool,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4406,7 +4401,7 @@ pub struct User {
     )]
     pub suspension_reason: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4416,7 +4411,7 @@ pub struct User {
     )]
     pub thumbnail_photo_etag: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(
         default,
@@ -4426,7 +4421,7 @@ pub struct User {
     )]
     pub thumbnail_photo_url: String,
     /**
-    * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+     * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub websites: Option<serde_json::Value>,
@@ -4436,7 +4431,7 @@ pub struct User {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserAbout {
     /**
-    * JSON template for About (notes) of a user in Directory API.
+     * JSON template for About (notes) of a user in Directory API.
      */
     #[serde(
         default,
@@ -4446,7 +4441,7 @@ pub struct UserAbout {
     )]
     pub content_type: String,
     /**
-    * JSON template for About (notes) of a user in Directory API.
+     * JSON template for About (notes) of a user in Directory API.
      */
     #[serde(
         default,
@@ -4460,7 +4455,7 @@ pub struct UserAbout {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserAddress {
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4469,7 +4464,7 @@ pub struct UserAddress {
     )]
     pub country: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4479,7 +4474,7 @@ pub struct UserAddress {
     )]
     pub country_code: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4489,7 +4484,7 @@ pub struct UserAddress {
     )]
     pub custom_type: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4499,7 +4494,7 @@ pub struct UserAddress {
     )]
     pub extended_address: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4508,7 +4503,7 @@ pub struct UserAddress {
     )]
     pub formatted: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4517,7 +4512,7 @@ pub struct UserAddress {
     )]
     pub locality: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4527,7 +4522,7 @@ pub struct UserAddress {
     )]
     pub po_box: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4537,7 +4532,7 @@ pub struct UserAddress {
     )]
     pub postal_code: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4545,7 +4540,7 @@ pub struct UserAddress {
     )]
     pub primary: bool,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4554,7 +4549,7 @@ pub struct UserAddress {
     )]
     pub region: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4563,7 +4558,7 @@ pub struct UserAddress {
     )]
     pub source_is_structured: bool,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4573,7 +4568,7 @@ pub struct UserAddress {
     )]
     pub street_address: String,
     /**
-    * JSON template for address.
+     * JSON template for address.
      */
     #[serde(
         default,
@@ -4588,7 +4583,7 @@ pub struct UserAddress {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserEmail {
     /**
-    * JSON template for an email.
+     * JSON template for an email.
      */
     #[serde(
         default,
@@ -4597,7 +4592,7 @@ pub struct UserEmail {
     )]
     pub address: String,
     /**
-    * JSON template for an email.
+     * JSON template for an email.
      */
     #[serde(
         default,
@@ -4607,7 +4602,7 @@ pub struct UserEmail {
     )]
     pub custom_type: String,
     /**
-    * JSON template for an email.
+     * JSON template for an email.
      */
     #[serde(
         default,
@@ -4615,7 +4610,7 @@ pub struct UserEmail {
     )]
     pub primary: bool,
     /**
-    * JSON template for an email.
+     * JSON template for an email.
      */
     #[serde(
         default,
@@ -4630,7 +4625,7 @@ pub struct UserEmail {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserExternalId {
     /**
-    * JSON template for an externalId entry.
+     * JSON template for an externalId entry.
      */
     #[serde(
         default,
@@ -4640,7 +4635,7 @@ pub struct UserExternalId {
     )]
     pub custom_type: String,
     /**
-    * JSON template for an externalId entry.
+     * JSON template for an externalId entry.
      */
     #[serde(
         default,
@@ -4650,7 +4645,7 @@ pub struct UserExternalId {
     )]
     pub type_: String,
     /**
-    * JSON template for an externalId entry.
+     * JSON template for an externalId entry.
      */
     #[serde(
         default,
@@ -4689,7 +4684,7 @@ pub struct UserGender {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserIm {
     /**
-    * JSON template for instant messenger of an user.
+     * JSON template for instant messenger of an user.
      */
     #[serde(
         default,
@@ -4699,7 +4694,7 @@ pub struct UserIm {
     )]
     pub custom_protocol: String,
     /**
-    * JSON template for instant messenger of an user.
+     * JSON template for instant messenger of an user.
      */
     #[serde(
         default,
@@ -4709,7 +4704,7 @@ pub struct UserIm {
     )]
     pub custom_type: String,
     /**
-    * JSON template for instant messenger of an user.
+     * JSON template for instant messenger of an user.
      */
     #[serde(
         default,
@@ -4718,7 +4713,7 @@ pub struct UserIm {
     )]
     pub im: String,
     /**
-    * JSON template for instant messenger of an user.
+     * JSON template for instant messenger of an user.
      */
     #[serde(
         default,
@@ -4726,7 +4721,7 @@ pub struct UserIm {
     )]
     pub primary: bool,
     /**
-    * JSON template for instant messenger of an user.
+     * JSON template for instant messenger of an user.
      */
     #[serde(
         default,
@@ -4735,7 +4730,7 @@ pub struct UserIm {
     )]
     pub protocol: String,
     /**
-    * JSON template for instant messenger of an user.
+     * JSON template for instant messenger of an user.
      */
     #[serde(
         default,
@@ -4750,7 +4745,7 @@ pub struct UserIm {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserKeyword {
     /**
-    * JSON template for a keyword entry.
+     * JSON template for a keyword entry.
      */
     #[serde(
         default,
@@ -4760,7 +4755,7 @@ pub struct UserKeyword {
     )]
     pub custom_type: String,
     /**
-    * JSON template for a keyword entry.
+     * JSON template for a keyword entry.
      */
     #[serde(
         default,
@@ -4770,7 +4765,7 @@ pub struct UserKeyword {
     )]
     pub type_: String,
     /**
-    * JSON template for a keyword entry.
+     * JSON template for a keyword entry.
      */
     #[serde(
         default,
@@ -4784,7 +4779,7 @@ pub struct UserKeyword {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserLanguage {
     /**
-    * JSON template for a language entry.
+     * JSON template for a language entry.
      */
     #[serde(
         default,
@@ -4794,7 +4789,7 @@ pub struct UserLanguage {
     )]
     pub custom_language: String,
     /**
-    * JSON template for a language entry.
+     * JSON template for a language entry.
      */
     #[serde(
         default,
@@ -4809,7 +4804,7 @@ pub struct UserLanguage {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserLocation {
     /**
-    * JSON template for a location entry.
+     * JSON template for a location entry.
      */
     #[serde(
         default,
@@ -4818,7 +4813,7 @@ pub struct UserLocation {
     )]
     pub area: String,
     /**
-    * JSON template for a location entry.
+     * JSON template for a location entry.
      */
     #[serde(
         default,
@@ -4828,7 +4823,7 @@ pub struct UserLocation {
     )]
     pub building_id: String,
     /**
-    * JSON template for a location entry.
+     * JSON template for a location entry.
      */
     #[serde(
         default,
@@ -4838,7 +4833,7 @@ pub struct UserLocation {
     )]
     pub custom_type: String,
     /**
-    * JSON template for a location entry.
+     * JSON template for a location entry.
      */
     #[serde(
         default,
@@ -4848,7 +4843,7 @@ pub struct UserLocation {
     )]
     pub desk_code: String,
     /**
-    * JSON template for a location entry.
+     * JSON template for a location entry.
      */
     #[serde(
         default,
@@ -4858,7 +4853,7 @@ pub struct UserLocation {
     )]
     pub floor_name: String,
     /**
-    * JSON template for a location entry.
+     * JSON template for a location entry.
      */
     #[serde(
         default,
@@ -4868,7 +4863,7 @@ pub struct UserLocation {
     )]
     pub floor_section: String,
     /**
-    * JSON template for a location entry.
+     * JSON template for a location entry.
      */
     #[serde(
         default,
@@ -4882,7 +4877,7 @@ pub struct UserLocation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserMakeAdmin {
     /**
-    * A Boolean value to indicate whether payload is wanted. Optional.
+     * A Boolean value to indicate whether payload is wanted. Optional.
      */
     #[serde(
         default,
@@ -4920,7 +4915,7 @@ pub struct UserName {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserOrganization {
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4930,7 +4925,7 @@ pub struct UserOrganization {
     )]
     pub cost_center: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4940,7 +4935,7 @@ pub struct UserOrganization {
     )]
     pub custom_type: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4949,7 +4944,7 @@ pub struct UserOrganization {
     )]
     pub department: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4958,7 +4953,7 @@ pub struct UserOrganization {
     )]
     pub description: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4967,7 +4962,7 @@ pub struct UserOrganization {
     )]
     pub domain: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4977,7 +4972,7 @@ pub struct UserOrganization {
     )]
     pub full_time_equivalent: i64,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4986,7 +4981,7 @@ pub struct UserOrganization {
     )]
     pub location: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -4995,7 +4990,7 @@ pub struct UserOrganization {
     )]
     pub name: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -5003,7 +4998,7 @@ pub struct UserOrganization {
     )]
     pub primary: bool,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -5012,7 +5007,7 @@ pub struct UserOrganization {
     )]
     pub symbol: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -5021,7 +5016,7 @@ pub struct UserOrganization {
     )]
     pub title: String,
     /**
-    * JSON template for an organization entry.
+     * JSON template for an organization entry.
      */
     #[serde(
         default,
@@ -5036,7 +5031,7 @@ pub struct UserOrganization {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserPhone {
     /**
-    * JSON template for a phone entry.
+     * JSON template for a phone entry.
      */
     #[serde(
         default,
@@ -5046,7 +5041,7 @@ pub struct UserPhone {
     )]
     pub custom_type: String,
     /**
-    * JSON template for a phone entry.
+     * JSON template for a phone entry.
      */
     #[serde(
         default,
@@ -5054,7 +5049,7 @@ pub struct UserPhone {
     )]
     pub primary: bool,
     /**
-    * JSON template for a phone entry.
+     * JSON template for a phone entry.
      */
     #[serde(
         default,
@@ -5064,7 +5059,7 @@ pub struct UserPhone {
     )]
     pub type_: String,
     /**
-    * JSON template for a phone entry.
+     * JSON template for a phone entry.
      */
     #[serde(
         default,
@@ -5083,7 +5078,7 @@ pub struct UserPhoto {
     )]
     pub etag: String,
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -5111,7 +5106,7 @@ pub struct UserPhoto {
     )]
     pub mime_type: String,
     /**
-    * The user photo's upload data in [web-safe Base64](https://en.wikipedia.org/wiki/Base64#URL_applications) format in bytes. This means: \* The slash (/) character is replaced with the underscore (_) character. \* The plus sign (+) character is replaced with the hyphen (-) character. \* The equals sign (=) character is replaced with the asterisk (\*). \* For padding, the period (.) character is used instead of the RFC-4648 baseURL definition which uses the equals sign (=) for padding. This is done to simplify URL-parsing. \* Whatever the size of the photo being uploaded, the API downsizes it to 96x96 pixels.
+     * The user photo's upload data in [web-safe Base64](https://en.wikipedia.org/wiki/Base64#URL_applications) format in bytes. This means: \* The slash (/) character is replaced with the underscore (_) character. \* The plus sign (+) character is replaced with the hyphen (-) character. \* The equals sign (=) character is replaced with the asterisk (\*). \* For padding, the period (.) character is used instead of the RFC-4648 baseURL definition which uses the equals sign (=) for padding. This is done to simplify URL-parsing. \* Whatever the size of the photo being uploaded, the API downsizes it to 96x96 pixels.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "photoData")]
     pub photo_data: Option<bytes::Bytes>,
@@ -5123,7 +5118,7 @@ pub struct UserPhoto {
     )]
     pub primary_email: String,
     /**
-    * The unique ID of the ASP.
+     * The unique ID of the ASP.
      */
     #[serde(
         default,
@@ -5137,7 +5132,7 @@ pub struct UserPhoto {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserPosixAccount {
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5147,7 +5142,7 @@ pub struct UserPosixAccount {
     )]
     pub account_id: String,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5156,12 +5151,12 @@ pub struct UserPosixAccount {
     )]
     pub gecos: String,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub gid: Option<u64>,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5171,7 +5166,7 @@ pub struct UserPosixAccount {
     )]
     pub home_directory: String,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5181,7 +5176,7 @@ pub struct UserPosixAccount {
     )]
     pub operating_system_type: String,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5189,7 +5184,7 @@ pub struct UserPosixAccount {
     )]
     pub primary: bool,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5198,7 +5193,7 @@ pub struct UserPosixAccount {
     )]
     pub shell: String,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5208,12 +5203,12 @@ pub struct UserPosixAccount {
     )]
     pub system_id: String,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub uid: Option<u64>,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5227,7 +5222,7 @@ pub struct UserPosixAccount {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserRelation {
     /**
-    * JSON template for a relation entry.
+     * JSON template for a relation entry.
      */
     #[serde(
         default,
@@ -5237,7 +5232,7 @@ pub struct UserRelation {
     )]
     pub custom_type: String,
     /**
-    * JSON template for a relation entry.
+     * JSON template for a relation entry.
      */
     #[serde(
         default,
@@ -5247,7 +5242,7 @@ pub struct UserRelation {
     )]
     pub type_: String,
     /**
-    * JSON template for a relation entry.
+     * JSON template for a relation entry.
      */
     #[serde(
         default,
@@ -5261,7 +5256,7 @@ pub struct UserRelation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSshPublicKey {
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5271,7 +5266,7 @@ pub struct UserSshPublicKey {
     )]
     pub expiration_time_usec: i64,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5280,7 +5275,7 @@ pub struct UserSshPublicKey {
     )]
     pub fingerprint: String,
     /**
-    * JSON template for a POSIX account entry.
+     * JSON template for a POSIX account entry.
      */
     #[serde(
         default,
@@ -5305,7 +5300,7 @@ pub struct UserUndelete {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserWebsite {
     /**
-    * JSON template for a website entry.
+     * JSON template for a website entry.
      */
     #[serde(
         default,
@@ -5315,7 +5310,7 @@ pub struct UserWebsite {
     )]
     pub custom_type: String,
     /**
-    * JSON template for a website entry.
+     * JSON template for a website entry.
      */
     #[serde(
         default,
@@ -5323,7 +5318,7 @@ pub struct UserWebsite {
     )]
     pub primary: bool,
     /**
-    * JSON template for a website entry.
+     * JSON template for a website entry.
      */
     #[serde(
         default,
@@ -5333,7 +5328,7 @@ pub struct UserWebsite {
     )]
     pub type_: String,
     /**
-    * JSON template for a website entry.
+     * JSON template for a website entry.
      */
     #[serde(
         default,
@@ -5371,7 +5366,7 @@ pub struct Users {
     )]
     pub trigger_event: String,
     /**
-    * List of user objects.
+     * List of user objects.
      */
     #[serde(
         default,
@@ -5385,7 +5380,7 @@ pub struct Users {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerificationCode {
     /**
-    * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
+     * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
      */
     #[serde(
         default,
@@ -5394,7 +5389,7 @@ pub struct VerificationCode {
     )]
     pub etag: String,
     /**
-    * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
+     * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
      */
     #[serde(
         default,
@@ -5403,7 +5398,7 @@ pub struct VerificationCode {
     )]
     pub kind: String,
     /**
-    * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
+     * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
      */
     #[serde(
         default,
@@ -5413,7 +5408,7 @@ pub struct VerificationCode {
     )]
     pub user_id: String,
     /**
-    * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
+     * The Directory API allows you to view, generate, and invalidate backup verification codes for a user.
      */
     #[serde(
         default,
@@ -5428,7 +5423,7 @@ pub struct VerificationCode {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerificationCodes {
     /**
-    * JSON response template for List verification codes operation in Directory API.
+     * JSON response template for List verification codes operation in Directory API.
      */
     #[serde(
         default,
@@ -5437,7 +5432,7 @@ pub struct VerificationCodes {
     )]
     pub etag: String,
     /**
-    * JSON response template for List verification codes operation in Directory API.
+     * JSON response template for List verification codes operation in Directory API.
      */
     #[serde(
         default,
@@ -5446,7 +5441,7 @@ pub struct VerificationCodes {
     )]
     pub items: Vec<VerificationCode>,
     /**
-    * JSON response template for List verification codes operation in Directory API.
+     * JSON response template for List verification codes operation in Directory API.
      */
     #[serde(
         default,
@@ -5459,8 +5454,7 @@ pub struct VerificationCodes {
 /**
  * V1 error format.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Xgafv {
     #[serde(rename = "1")]
     One,
@@ -5494,8 +5488,7 @@ impl Xgafv {
 /**
  * Data format for response.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
@@ -5532,8 +5525,7 @@ impl Alt {
 /**
  * Device property to use for sorting results.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OrderBy {
     #[serde(rename = "annotatedLocation")]
     AnnotatedLocation,
@@ -5582,8 +5574,7 @@ impl OrderBy {
 /**
  * Restrict information returned to a set of selected fields.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Projection {
     #[serde(rename = "BASIC")]
     Basic,
@@ -5617,8 +5608,7 @@ impl Projection {
 /**
  * Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SortOrder {
     #[serde(rename = "ASCENDING")]
     Ascending,
@@ -5652,8 +5642,7 @@ impl SortOrder {
 /**
  * Device property to use for sorting results.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryMobiledevicesListOrderBy {
     #[serde(rename = "deviceId")]
     DeviceId,
@@ -5705,8 +5694,7 @@ impl DirectoryMobiledevicesListOrderBy {
 /**
  * Whether to return all sub-organizations or just immediate children.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryOrgunitsListType {
     #[serde(rename = "all")]
     All,
@@ -5740,8 +5728,7 @@ impl DirectoryOrgunitsListType {
 /**
  * Source from which Building.coordinates are derived.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum CoordinatesSource {
     #[serde(rename = "CLIENT_SPECIFIED")]
     ClientSpecified,
@@ -5778,8 +5765,7 @@ impl CoordinatesSource {
 /**
  * Column to use for sorting results
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryGroupsListOrderBy {
     #[serde(rename = "email")]
     Email,
@@ -5810,8 +5796,7 @@ impl DirectoryGroupsListOrderBy {
 /**
  * Event on which subscription is intended (if subscribing)
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Event {
     #[serde(rename = "add")]
     Add,
@@ -5854,8 +5839,7 @@ impl Event {
 /**
  * Property to use for sorting results.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryUsersListOrderBy {
     #[serde(rename = "email")]
     Email,
@@ -5892,8 +5876,7 @@ impl DirectoryUsersListOrderBy {
 /**
  * What subset of fields to fetch for this user.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryUsersListProjection {
     #[serde(rename = "basic")]
     Basic,
@@ -5930,8 +5913,7 @@ impl DirectoryUsersListProjection {
 /**
  * Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ViewType {
     #[serde(rename = "admin_view")]
     AdminView,
@@ -5965,8 +5947,7 @@ impl ViewType {
 /**
  * Events to watch for.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[derive(Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryUsersAliasesListEvent {
     #[serde(rename = "add")]
     Add,

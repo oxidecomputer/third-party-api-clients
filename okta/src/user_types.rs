@@ -17,9 +17,7 @@ impl UserTypes {
      * Fetches all User Types in your org
      */
     pub async fn list(&self) -> ClientResult<crate::Response<Vec<crate::types::UserType>>> {
-        let url = self
-            .client
-            .url("/api/v1/meta/types/user", None);
+        let url = self.client.url("/api/v1/meta/types/user", None);
         self.client
             .get(
                 &url,
@@ -38,9 +36,7 @@ impl UserTypes {
      * Fetches all User Types in your org
      */
     pub async fn list_all(&self) -> ClientResult<crate::Response<Vec<crate::types::UserType>>> {
-        let url = self
-            .client
-            .url("/api/v1/meta/types/user", None);
+        let url = self.client.url("/api/v1/meta/types/user", None);
         self.client
             .get_all_pages(
                 &url,
@@ -60,9 +56,7 @@ impl UserTypes {
         &self,
         body: &crate::types::UserType,
     ) -> ClientResult<crate::Response<crate::types::UserType>> {
-        let url = self
-            .client
-            .url("/api/v1/meta/types/user", None);
+        let url = self.client.url("/api/v1/meta/types/user", None);
         self.client
             .post(
                 &url,

@@ -183,9 +183,7 @@ impl SubscriptionSchedules {
      * <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SubscriptionSchedule>> {
-        let url = self
-            .client
-            .url("/v1/subscription_schedules", None);
+        let url = self.client.url("/v1/subscription_schedules", None);
         self.client
             .post(
                 &url,

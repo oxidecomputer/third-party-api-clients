@@ -281,10 +281,7 @@ impl Gists {
         gist_id: &str,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
         let url = self.client.url(
-            &format!(
-                "/gists/{}",
-                crate::progenitor_support::encode_path(gist_id),
-            ),
+            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
             None,
         );
         self.client
@@ -312,10 +309,7 @@ impl Gists {
      */
     pub async fn delete(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!(
-                "/gists/{}",
-                crate::progenitor_support::encode_path(gist_id),
-            ),
+            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
             None,
         );
         self.client
@@ -347,10 +341,7 @@ impl Gists {
         body: &crate::types::GistsUpdateRequest,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
         let url = self.client.url(
-            &format!(
-                "/gists/{}",
-                crate::progenitor_support::encode_path(gist_id),
-            ),
+            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
             None,
         );
         self.client

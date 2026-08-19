@@ -55,10 +55,9 @@ impl AdminTeamsSettings {
     pub async fn set_default_channels(
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(
-            "/admin.teams.settings.setDefaultChannels",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin.teams.settings.setDefaultChannels", None);
         self.client
             .post(
                 &url,
@@ -110,10 +109,9 @@ impl AdminTeamsSettings {
     pub async fn set_discoverability(
         &self,
     ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(
-            "/admin.teams.settings.setDiscoverability",
-            None,
-        );
+        let url = self
+            .client
+            .url("/admin.teams.settings.setDiscoverability", None);
         self.client
             .post(
                 &url,
@@ -132,9 +130,7 @@ impl AdminTeamsSettings {
      * FROM: <https://api.slack.com/methods/admin.teams.settings.setIcon>
      */
     pub async fn set_icon(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self
-            .client
-            .url("/admin.teams.settings.setIcon", None);
+        let url = self.client.url("/admin.teams.settings.setIcon", None);
         self.client
             .post(
                 &url,
@@ -157,9 +153,7 @@ impl AdminTeamsSettings {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
     pub async fn set_name(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self
-            .client
-            .url("/admin.teams.settings.setName", None);
+        let url = self.client.url("/admin.teams.settings.setName", None);
         self.client
             .post(
                 &url,
