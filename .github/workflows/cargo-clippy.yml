@@ -4,6 +4,7 @@ on:
       - '**.rs'
       - Cargo.toml
       - Cargo.lock
+      - rust-toolchain.toml
       - '**/Cargo.toml'
       - '**/Cargo.lock'
       - .github/workflows/cargo-clippy.yml
@@ -14,12 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Install latest rust
-        uses: actions-rs/toolchain@v1
-        with:
-            toolchain: nightly
-            override: true
-            components: rustfmt, clippy
+      - name: Install pinned Rust
+        run: rustup toolchain install
       - name: Cache cargo registry
         uses: actions/cache@v3
         with:
@@ -35,7 +32,5 @@ jobs:
         with:
           path: target
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features
+      - name: Run cargo clippy
+        run: cargo clippy --all-features

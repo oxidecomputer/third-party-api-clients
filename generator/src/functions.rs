@@ -40,7 +40,7 @@ pub fn generate_files(
     for (pn, p) in api.paths.iter() {
         let op = p.item().unwrap_or_else(|e| panic!("bad path: {}", e));
 
-        let mut gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
+        let mut r#gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
             let o = if let Some(o) = o {
                 o
             } else {
@@ -470,14 +470,14 @@ pub fn generate_files(
             Ok(())
         };
 
-        gen(pn.as_str(), "GET", op.get.as_ref())?;
-        gen(pn.as_str(), "PUT", op.put.as_ref())?;
-        gen(pn.as_str(), "POST", op.post.as_ref())?;
-        gen(pn.as_str(), "DELETE", op.delete.as_ref())?;
-        gen(pn.as_str(), "OPTIONS", op.options.as_ref())?;
-        gen(pn.as_str(), "HEAD", op.head.as_ref())?;
-        gen(pn.as_str(), "PATCH", op.patch.as_ref())?;
-        gen(pn.as_str(), "TRACE", op.trace.as_ref())?;
+        r#gen(pn.as_str(), "GET", op.get.as_ref())?;
+        r#gen(pn.as_str(), "PUT", op.put.as_ref())?;
+        r#gen(pn.as_str(), "POST", op.post.as_ref())?;
+        r#gen(pn.as_str(), "DELETE", op.delete.as_ref())?;
+        r#gen(pn.as_str(), "OPTIONS", op.options.as_ref())?;
+        r#gen(pn.as_str(), "HEAD", op.head.as_ref())?;
+        r#gen(pn.as_str(), "PATCH", op.patch.as_ref())?;
+        r#gen(pn.as_str(), "TRACE", op.trace.as_ref())?;
     }
 
     Ok(tag_files)
