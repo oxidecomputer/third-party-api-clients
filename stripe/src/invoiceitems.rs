@@ -29,7 +29,7 @@ impl Invoiceitems {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         invoice: &str,
@@ -87,7 +87,7 @@ impl Invoiceitems {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         invoice: &str,
         pending: bool,
@@ -183,7 +183,7 @@ impl Invoiceitems {
      * <p>Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::InvoiceItem>> {
-        let url = self.client.url("/v1/invoiceitems", None);
+        let url = self.client.url(&"/v1/invoiceitems".to_string(), None);
         self.client
             .post(
                 &url,
@@ -211,7 +211,7 @@ impl Invoiceitems {
         let url = self.client.url(
             &format!(
                 "/v1/invoiceitems/{}",
-                crate::progenitor_support::encode_path(invoiceitem),
+                crate::progenitor_support::encode_path(&invoiceitem.to_string()),
             ),
             None,
         );
@@ -241,7 +241,7 @@ impl Invoiceitems {
         let url = self.client.url(
             &format!(
                 "/v1/invoiceitems/{}",
-                crate::progenitor_support::encode_path(invoiceitem),
+                crate::progenitor_support::encode_path(&invoiceitem.to_string()),
             ),
             None,
         );
@@ -271,7 +271,7 @@ impl Invoiceitems {
         let url = self.client.url(
             &format!(
                 "/v1/invoiceitems/{}",
-                crate::progenitor_support::encode_path(invoiceitem),
+                crate::progenitor_support::encode_path(&invoiceitem.to_string()),
             ),
             None,
         );

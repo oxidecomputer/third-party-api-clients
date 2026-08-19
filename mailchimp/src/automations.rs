@@ -93,7 +93,7 @@ impl Automations {
         &self,
         body: &crate::types::AutomationWorkflow,
     ) -> ClientResult<crate::Response<crate::types::Automations>> {
-        let url = self.client.url("/automations", None);
+        let url = self.client.url(&"/automations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -134,7 +134,7 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}?{}",
-                crate::progenitor_support::encode_path(workflow_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
                 query_
             ),
             None,
@@ -167,7 +167,7 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/actions/pause-all-emails",
-                crate::progenitor_support::encode_path(workflow_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
             ),
             None,
         );
@@ -199,7 +199,7 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/actions/start-all-emails",
-                crate::progenitor_support::encode_path(workflow_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
             ),
             None,
         );
@@ -228,7 +228,7 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/actions/archive",
-                crate::progenitor_support::encode_path(workflow_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
             ),
             None,
         );
@@ -260,7 +260,7 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails",
-                crate::progenitor_support::encode_path(workflow_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
             ),
             None,
         );
@@ -294,8 +294,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
             ),
             None,
         );
@@ -329,8 +329,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
             ),
             None,
         );
@@ -365,8 +365,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
             ),
             None,
         );
@@ -400,8 +400,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/queue",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
             ),
             None,
         );
@@ -436,8 +436,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/queue",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
             ),
             None,
         );
@@ -473,9 +473,9 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/queue/{}",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );
@@ -509,8 +509,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/actions/pause",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
             ),
             None,
         );
@@ -544,8 +544,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/actions/start",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(workflow_email_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&workflow_email_id.to_string()),
             ),
             None,
         );
@@ -577,7 +577,7 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/removed-subscribers",
-                crate::progenitor_support::encode_path(workflow_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
             ),
             None,
         );
@@ -610,7 +610,7 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/removed-subscribers",
-                crate::progenitor_support::encode_path(workflow_id),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
             ),
             None,
         );
@@ -644,8 +644,8 @@ impl Automations {
         let url = self.client.url(
             &format!(
                 "/automations/{}/removed-subscribers/{}",
-                crate::progenitor_support::encode_path(workflow_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&workflow_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );

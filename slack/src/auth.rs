@@ -55,7 +55,7 @@ impl Auth {
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
     pub async fn test(&self) -> ClientResult<crate::Response<crate::types::AuthTestSuccessSchema>> {
-        let url = self.client.url("/auth.test", None);
+        let url = self.client.url(&"/auth.test".to_string(), None);
         self.client
             .get(
                 &url,

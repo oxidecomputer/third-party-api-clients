@@ -67,7 +67,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-01/collects.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-01/collects.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -103,7 +105,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collects/{}/json?{}",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
                 query_
             ),
             None,
@@ -136,7 +138,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collects/{}/json",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
             ),
             None,
         );
@@ -240,7 +242,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-04/collects.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-04/collects.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -276,7 +280,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collects/{}/json?{}",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
                 query_
             ),
             None,
@@ -309,7 +313,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collects/{}/json",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
             ),
             None,
         );
@@ -413,7 +417,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-07/collects.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-07/collects.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -449,7 +455,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collects/{}/json?{}",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
                 query_
             ),
             None,
@@ -482,7 +488,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collects/{}/json",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
             ),
             None,
         );
@@ -586,7 +592,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-10/collects.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-10/collects.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -622,7 +630,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collects/{}/json?{}",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
                 query_
             ),
             None,
@@ -655,7 +663,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collects/{}/json",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
             ),
             None,
         );
@@ -759,7 +767,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2021-01/collects.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2021-01/collects.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -795,7 +805,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collects/{}/json?{}",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
                 query_
             ),
             None,
@@ -828,7 +838,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collects/{}/json",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
             ),
             None,
         );
@@ -932,7 +942,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/unstable/collects.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/unstable/collects.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -968,7 +980,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collects/{}/json?{}",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
                 query_
             ),
             None,
@@ -1001,7 +1013,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collects/{}/json",
-                crate::progenitor_support::encode_path(collect_id),
+                crate::progenitor_support::encode_path(&collect_id.to_string()),
             ),
             None,
         );
@@ -1074,7 +1086,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collections/{}/json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1115,7 +1127,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collections/{}/products.json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1155,7 +1167,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collections/{}/json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1196,7 +1208,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collections/{}/products.json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1236,7 +1248,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collections/{}/json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1277,7 +1289,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collections/{}/products.json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1317,7 +1329,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collections/{}/json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1358,7 +1370,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collections/{}/products.json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1398,7 +1410,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collections/{}/json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1439,7 +1451,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collections/{}/products.json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1479,7 +1491,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collections/{}/json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1520,7 +1532,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collections/{}/products.json?{}",
-                crate::progenitor_support::encode_path(collection_id),
+                crate::progenitor_support::encode_path(&collection_id.to_string()),
                 query_
             ),
             None,
@@ -1641,9 +1653,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/custom_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-01/custom_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1751,7 +1764,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/custom_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
                 query_
             ),
             None,
@@ -1785,7 +1798,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -1817,7 +1830,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -1937,9 +1950,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/custom_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-04/custom_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -2047,7 +2061,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/custom_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
                 query_
             ),
             None,
@@ -2081,7 +2095,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -2113,7 +2127,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -2233,9 +2247,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/custom_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-07/custom_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -2343,7 +2358,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/custom_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
                 query_
             ),
             None,
@@ -2377,7 +2392,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -2409,7 +2424,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -2529,9 +2544,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/custom_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-10/custom_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -2639,7 +2655,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/custom_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
                 query_
             ),
             None,
@@ -2673,7 +2689,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -2705,7 +2721,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -2825,9 +2841,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/custom_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2021-01/custom_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -2935,7 +2952,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/custom_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
                 query_
             ),
             None,
@@ -2969,7 +2986,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -3001,7 +3018,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -3121,9 +3138,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/custom_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/unstable/custom_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -3231,7 +3249,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/custom_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
                 query_
             ),
             None,
@@ -3265,7 +3283,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -3297,7 +3315,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/custom_collections/{}/json",
-                crate::progenitor_support::encode_path(custom_collection_id),
+                crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             ),
             None,
         );
@@ -3459,7 +3477,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-01/products.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-01/products.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -3579,7 +3599,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -3617,7 +3637,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -3649,7 +3669,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -3811,7 +3831,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-04/products.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-04/products.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -3931,7 +3953,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -3969,7 +3991,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -4001,7 +4023,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -4163,7 +4185,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-07/products.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-07/products.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -4283,7 +4307,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -4321,7 +4345,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -4353,7 +4377,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -4512,7 +4536,9 @@ impl Products {
     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-10
     */
     pub async fn create(&self, body: &serde_json::Value) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2020-10/products.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2020-10/products.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -4632,7 +4658,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -4670,7 +4696,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -4699,7 +4725,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -4861,7 +4887,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/2021-01/products.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/2021-01/products.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -4981,7 +5009,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -5019,7 +5047,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -5051,7 +5079,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -5213,7 +5241,9 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/admin/api/unstable/products.json", None);
+        let url = self
+            .client
+            .url(&"/admin/api/unstable/products.json".to_string(), None);
         self.client
             .post(
                 &url,
@@ -5333,7 +5363,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -5371,7 +5401,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -5403,7 +5433,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -5447,7 +5477,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -5481,7 +5511,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images.json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -5520,7 +5550,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images/count.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -5562,8 +5592,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
                 query_
             ),
             None,
@@ -5599,8 +5629,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -5634,8 +5664,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -5679,7 +5709,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -5713,7 +5743,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images.json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -5752,7 +5782,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images/count.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -5794,8 +5824,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
                 query_
             ),
             None,
@@ -5831,8 +5861,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -5866,8 +5896,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -5911,7 +5941,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -5945,7 +5975,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images.json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -5984,7 +6014,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images/count.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -6026,8 +6056,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
                 query_
             ),
             None,
@@ -6063,8 +6093,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6098,8 +6128,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6143,7 +6173,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -6177,7 +6207,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images.json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -6216,7 +6246,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images/count.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -6258,8 +6288,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
                 query_
             ),
             None,
@@ -6295,8 +6325,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6330,8 +6360,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6375,7 +6405,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -6409,7 +6439,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images.json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -6448,7 +6478,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images/count.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -6490,8 +6520,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
                 query_
             ),
             None,
@@ -6527,8 +6557,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6562,8 +6592,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6607,7 +6637,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -6641,7 +6671,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images.json",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -6680,7 +6710,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images/count.json?{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
                 query_
             ),
             None,
@@ -6722,8 +6752,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images/{}/json?{}",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
                 query_
             ),
             None,
@@ -6759,8 +6789,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6794,8 +6824,8 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images/{}/json",
-                crate::progenitor_support::encode_path(product_id),
-                crate::progenitor_support::encode_path(image_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+                crate::progenitor_support::encode_path(&image_id.to_string()),
             ),
             None,
         );
@@ -6915,9 +6945,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/smart_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-01/smart_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -7022,7 +7053,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/smart_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -7056,7 +7087,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -7088,7 +7119,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -7135,7 +7166,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/smart_collections/{}/order.json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -7256,9 +7287,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/smart_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-04/smart_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -7363,7 +7395,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/smart_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -7397,7 +7429,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -7429,7 +7461,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -7476,7 +7508,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/smart_collections/{}/order.json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -7597,9 +7629,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/smart_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-07/smart_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -7704,7 +7737,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/smart_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -7738,7 +7771,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -7770,7 +7803,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -7817,7 +7850,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/smart_collections/{}/order.json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -7938,9 +7971,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/smart_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-10/smart_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -8045,7 +8079,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/smart_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -8079,7 +8113,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -8111,7 +8145,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -8158,7 +8192,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/smart_collections/{}/order.json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -8279,9 +8313,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/smart_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/2021-01/smart_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -8386,7 +8421,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/smart_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -8420,7 +8455,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -8452,7 +8487,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -8499,7 +8534,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/smart_collections/{}/order.json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -8620,9 +8655,10 @@ impl Products {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/smart_collections.json", None);
+        let url = self.client.url(
+            &"/admin/api/unstable/smart_collections.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -8730,7 +8766,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/smart_collections/{}/json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,
@@ -8764,7 +8800,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -8796,7 +8832,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/smart_collections/{}/json",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             ),
             None,
         );
@@ -8843,7 +8879,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/smart_collections/{}/order.json?{}",
-                crate::progenitor_support::encode_path(smart_collection_id),
+                crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
                 query_
             ),
             None,

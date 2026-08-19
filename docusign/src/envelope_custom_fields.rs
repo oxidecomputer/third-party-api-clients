@@ -33,8 +33,8 @@ impl EnvelopeCustomFields {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );
@@ -72,8 +72,8 @@ impl EnvelopeCustomFields {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );
@@ -111,8 +111,8 @@ impl EnvelopeCustomFields {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );
@@ -147,8 +147,8 @@ impl EnvelopeCustomFields {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );

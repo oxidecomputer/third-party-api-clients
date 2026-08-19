@@ -27,7 +27,10 @@ impl DesignsApi {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client
@@ -60,7 +63,10 @@ impl DesignsApi {
         body: &crate::types::DesignDuplicateInput,
     ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client
@@ -87,7 +93,10 @@ impl DesignsApi {
         id: &str,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client
@@ -123,7 +132,10 @@ impl DesignsApi {
         body: &crate::types::PutDesignRequest,
     ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
-            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/designs/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client
@@ -198,7 +210,7 @@ impl DesignsApi {
         &self,
         body: &crate::types::DesignInputAllOf,
     ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
-        let url = self.client.url("/designs", None);
+        let url = self.client.url(&"/designs".to_string(), None);
         self.client
             .post(
                 &url,
@@ -227,7 +239,7 @@ impl DesignsApi {
         let url = self.client.url(
             &format!(
                 "/designs/pre-builts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -261,7 +273,7 @@ impl DesignsApi {
         let url = self.client.url(
             &format!(
                 "/designs/pre-builts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

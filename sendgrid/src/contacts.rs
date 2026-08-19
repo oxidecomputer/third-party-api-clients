@@ -27,7 +27,7 @@ impl Contacts {
     pub async fn get_mc_contats(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetMcContatsResponse>> {
-        let url = self.client.url("/marketing/contacts", None);
+        let url = self.client.url(&"/marketing/contacts".to_string(), None);
         self.client
             .get(
                 &url,
@@ -59,7 +59,7 @@ impl Contacts {
         &self,
         body: &crate::types::PutMcContactsRequest,
     ) -> ClientResult<crate::Response<crate::types::PutMcContactsResponse>> {
-        let url = self.client.url("/marketing/contacts", None);
+        let url = self.client.url(&"/marketing/contacts".to_string(), None);
         self.client
             .put(
                 &url,
@@ -129,7 +129,9 @@ impl Contacts {
     pub async fn get_mc_count(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetMcContactsCountResponse>> {
-        let url = self.client.url("/marketing/contacts/count", None);
+        let url = self
+            .client
+            .url(&"/marketing/contacts/count".to_string(), None);
         self.client
             .get(
                 &url,
@@ -156,7 +158,9 @@ impl Contacts {
     pub async fn get_marketing_exports(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetMarketingContactsExportsResponse>> {
-        let url = self.client.url("/marketing/contacts/exports", None);
+        let url = self
+            .client
+            .url(&"/marketing/contacts/exports".to_string(), None);
         self.client
             .get(
                 &url,
@@ -188,7 +192,9 @@ impl Contacts {
         &self,
         body: &crate::types::PostMcContactsExportsRequest,
     ) -> ClientResult<crate::Response<crate::types::PostMcContactsExportsResponse>> {
-        let url = self.client.url("/marketing/contacts/exports", None);
+        let url = self
+            .client
+            .url(&"/marketing/contacts/exports".to_string(), None);
         self.client
             .post(
                 &url,
@@ -215,7 +221,7 @@ impl Contacts {
         let url = self.client.url(
             &format!(
                 "/marketing/contacts/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -250,7 +256,9 @@ impl Contacts {
         &self,
         body: &crate::types::PostMcContactsSearchRequest,
     ) -> ClientResult<crate::Response<crate::types::PostMcContactsSearchResponse>> {
-        let url = self.client.url("/marketing/contacts/search", None);
+        let url = self
+            .client
+            .url(&"/marketing/contacts/search".to_string(), None);
         self.client
             .post(
                 &url,
@@ -288,7 +296,9 @@ impl Contacts {
         &self,
         body: &crate::types::PutMcContactsImportsRequest,
     ) -> ClientResult<crate::Response<crate::types::PutMcContactsImportsResponse>> {
-        let url = self.client.url("/marketing/contacts/imports", None);
+        let url = self
+            .client
+            .url(&"/marketing/contacts/imports".to_string(), None);
         self.client
             .put(
                 &url,
@@ -323,7 +333,7 @@ impl Contacts {
         let url = self.client.url(
             &format!(
                 "/marketing/contacts/imports/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -355,7 +365,7 @@ impl Contacts {
         let url = self.client.url(
             &format!(
                 "/marketing/contacts/exports/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -384,7 +394,9 @@ impl Contacts {
         &self,
         body: &crate::types::PostMarketingContactsBatchRequest,
     ) -> ClientResult<crate::Response<crate::types::PostMarketingContactsBatchResponse>> {
-        let url = self.client.url("/marketing/contacts/batch", None);
+        let url = self
+            .client
+            .url(&"/marketing/contacts/batch".to_string(), None);
         self.client
             .post(
                 &url,
@@ -421,7 +433,9 @@ impl Contacts {
         body: &crate::types::PostMarketingContactsSearchEmailsRequest,
     ) -> ClientResult<crate::Response<crate::types::PostMarketingContactsSearchEmailsResponse>>
     {
-        let url = self.client.url("/marketing/contacts/search/emails", None);
+        let url = self
+            .client
+            .url(&"/marketing/contacts/search/emails".to_string(), None);
         self.client
             .post(
                 &url,

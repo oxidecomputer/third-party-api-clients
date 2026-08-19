@@ -35,7 +35,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/{}?{}",
-                crate::progenitor_support::encode_path(group_unique_id),
+                crate::progenitor_support::encode_path(&group_unique_id.to_string()),
                 query_
             ),
             None,
@@ -75,7 +75,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/{}?{}",
-                crate::progenitor_support::encode_path(group_unique_id),
+                crate::progenitor_support::encode_path(&group_unique_id.to_string()),
                 query_
             ),
             None,
@@ -115,7 +115,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/{}?{}",
-                crate::progenitor_support::encode_path(group_unique_id),
+                crate::progenitor_support::encode_path(&group_unique_id.to_string()),
                 query_
             ),
             None,

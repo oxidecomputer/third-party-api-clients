@@ -197,7 +197,9 @@ impl Groups {
         &self,
         body: &crate::types::Group,
     ) -> ClientResult<crate::Response<crate::types::Group>> {
-        let url = self.client.url("/admin/directory/v1/groups", None);
+        let url = self
+            .client
+            .url(&"/admin/directory/v1/groups".to_string(), None);
         self.client
             .post(
                 &url,
@@ -221,7 +223,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
             ),
             None,
         );
@@ -252,7 +254,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
             ),
             None,
         );
@@ -279,7 +281,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
             ),
             None,
         );
@@ -310,7 +312,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
             ),
             None,
         );
@@ -340,7 +342,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
             ),
             None,
         );
@@ -371,7 +373,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases",
-                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
             ),
             None,
         );
@@ -403,8 +405,8 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases/{}",
-                crate::progenitor_support::encode_path(group_key),
-                crate::progenitor_support::encode_path(alias),
+                crate::progenitor_support::encode_path(&group_key.to_string()),
+                crate::progenitor_support::encode_path(&alias.to_string()),
             ),
             None,
         );

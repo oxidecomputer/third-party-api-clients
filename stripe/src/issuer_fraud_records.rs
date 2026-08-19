@@ -175,7 +175,7 @@ impl IssuerFraudRecords {
         let url = self.client.url(
             &format!(
                 "/v1/issuer_fraud_records/{}",
-                crate::progenitor_support::encode_path(issuer_fraud_record),
+                crate::progenitor_support::encode_path(&issuer_fraud_record.to_string()),
             ),
             None,
         );

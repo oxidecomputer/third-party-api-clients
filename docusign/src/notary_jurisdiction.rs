@@ -24,7 +24,7 @@ impl NotaryJurisdiction {
     ) -> ClientResult<crate::Response<crate::types::NotaryJurisdictionList>> {
         let url = self
             .client
-            .url("/v2.1/current_user/notary/jurisdictions", None);
+            .url(&"/v2.1/current_user/notary/jurisdictions".to_string(), None);
         self.client
             .get(
                 &url,
@@ -48,7 +48,7 @@ impl NotaryJurisdiction {
     ) -> ClientResult<crate::Response<crate::types::NotaryJurisdictionData>> {
         let url = self
             .client
-            .url("/v2.1/current_user/notary/jurisdictions", None);
+            .url(&"/v2.1/current_user/notary/jurisdictions".to_string(), None);
         self.client
             .post(
                 &url,
@@ -109,7 +109,7 @@ impl NotaryJurisdiction {
         let url = self.client.url(
             &format!(
                 "/v2.1/current_user/notary/jurisdictions/{}",
-                crate::progenitor_support::encode_path(jurisdiction_id),
+                crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
             ),
             None,
         );
@@ -228,7 +228,7 @@ impl NotaryJurisdiction {
         let url = self.client.url(
             &format!(
                 "/v2.1/current_user/notary/jurisdictions/{}",
-                crate::progenitor_support::encode_path(jurisdiction_id),
+                crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
             ),
             None,
         );
@@ -288,7 +288,7 @@ impl NotaryJurisdiction {
         let url = self.client.url(
             &format!(
                 "/v2.1/current_user/notary/jurisdictions/{}",
-                crate::progenitor_support::encode_path(jurisdiction_id),
+                crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
             ),
             None,
         );

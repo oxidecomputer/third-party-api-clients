@@ -20,7 +20,7 @@ impl Calendars {
         &self,
         body: &crate::types::Calendar,
     ) -> ClientResult<crate::Response<crate::types::Calendar>> {
-        let url = self.client.url("/calendars", None);
+        let url = self.client.url(&"/calendars".to_string(), None);
         self.client
             .post(
                 &url,
@@ -47,7 +47,7 @@ impl Calendars {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
             ),
             None,
         );
@@ -78,7 +78,7 @@ impl Calendars {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
             ),
             None,
         );
@@ -105,7 +105,7 @@ impl Calendars {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
             ),
             None,
         );
@@ -136,7 +136,7 @@ impl Calendars {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
             ),
             None,
         );
@@ -163,7 +163,7 @@ impl Calendars {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/clear",
-                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(&calendar_id.to_string()),
             ),
             None,
         );

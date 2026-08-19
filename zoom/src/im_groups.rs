@@ -22,7 +22,7 @@ impl ImGroups {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Domains>> {
-        let url = self.client.url("/im/groups", None);
+        let url = self.client.url(&"/im/groups".to_string(), None);
         self.client
             .get(
                 &url,
@@ -47,7 +47,7 @@ impl ImGroups {
         &self,
         body: &crate::types::ImGroupCreateRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/im/groups", None);
+        let url = self.client.url(&"/im/groups".to_string(), None);
         self.client
             .post(
                 &url,
@@ -80,7 +80,7 @@ impl ImGroups {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -113,7 +113,7 @@ impl ImGroups {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -150,7 +150,7 @@ impl ImGroups {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -206,7 +206,7 @@ impl ImGroups {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}/members?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -244,7 +244,7 @@ impl ImGroups {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}/members",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -282,8 +282,8 @@ impl ImGroups {
         let url = self.client.url(
             &format!(
                 "/im/groups/{}/members/{}",
-                crate::progenitor_support::encode_path(group_id),
-                crate::progenitor_support::encode_path(member_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
+                crate::progenitor_support::encode_path(&member_id.to_string()),
             ),
             None,
         );

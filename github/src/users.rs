@@ -25,7 +25,7 @@ impl Users {
     pub async fn get_authenticated_public_user(
         &self,
     ) -> ClientResult<crate::Response<crate::types::PublicUser>> {
-        let url = self.client.url("/user", None);
+        let url = self.client.url(&"/user".to_string(), None);
         self.client
             .get(
                 &url,
@@ -50,7 +50,7 @@ impl Users {
     pub async fn get_authenticated_private_user(
         &self,
     ) -> ClientResult<crate::Response<crate::types::PrivateUser>> {
-        let url = self.client.url("/user", None);
+        let url = self.client.url(&"/user".to_string(), None);
         self.client
             .get(
                 &url,
@@ -75,7 +75,7 @@ impl Users {
     pub async fn get_authenticated(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UsersGetByUsernameResponseOneOf>> {
-        let url = self.client.url("/user", None);
+        let url = self.client.url(&"/user".to_string(), None);
         self.client
             .get(
                 &url,
@@ -99,7 +99,7 @@ impl Users {
         &self,
         body: &crate::types::UsersUpdateAuthenticatedRequest,
     ) -> ClientResult<crate::Response<crate::types::PrivateUser>> {
-        let url = self.client.url("/user", None);
+        let url = self.client.url(&"/user".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -122,7 +122,7 @@ impl Users {
     pub async fn list_blocked_by_authenticated(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
-        let url = self.client.url("/user/blocks", None);
+        let url = self.client.url(&"/user/blocks".to_string(), None);
         self.client
             .get(
                 &url,
@@ -147,7 +147,7 @@ impl Users {
     pub async fn list_all_blocked_by_authenticated(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
-        let url = self.client.url("/user/blocks", None);
+        let url = self.client.url(&"/user/blocks".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -175,7 +175,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/blocks/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -206,7 +206,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/blocks/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -237,7 +237,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/blocks/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -264,7 +264,7 @@ impl Users {
         &self,
         body: &crate::types::UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
     ) -> ClientResult<crate::Response<Vec<crate::types::Email>>> {
-        let url = self.client.url("/user/email/visibility", None);
+        let url = self.client.url(&"/user/email/visibility".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -327,7 +327,7 @@ impl Users {
     pub async fn list_all_emails_for_authenticated(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Email>>> {
-        let url = self.client.url("/user/emails", None);
+        let url = self.client.url(&"/user/emails".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -351,7 +351,7 @@ impl Users {
         &self,
         body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
     ) -> ClientResult<crate::Response<Vec<crate::types::Email>>> {
-        let url = self.client.url("/user/emails", None);
+        let url = self.client.url(&"/user/emails".to_string(), None);
         self.client
             .post(
                 &url,
@@ -375,7 +375,7 @@ impl Users {
         &self,
         body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/user/emails", None);
+        let url = self.client.url(&"/user/emails".to_string(), None);
         self.client
             .delete(
                 &url,
@@ -440,7 +440,7 @@ impl Users {
     pub async fn list_all_followers_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
-        let url = self.client.url("/user/followers", None);
+        let url = self.client.url(&"/user/followers".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -505,7 +505,7 @@ impl Users {
     pub async fn list_all_followed_by_authenticated(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SimpleUser>>> {
-        let url = self.client.url("/user/following", None);
+        let url = self.client.url(&"/user/following".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -536,7 +536,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/following/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -569,7 +569,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/following/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -600,7 +600,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/following/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -666,7 +666,7 @@ impl Users {
     pub async fn list_all_gpg_keys_for_authenticated(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::GpgKey>>> {
-        let url = self.client.url("/user/gpg_keys", None);
+        let url = self.client.url(&"/user/gpg_keys".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -690,7 +690,7 @@ impl Users {
         &self,
         body: &crate::types::UsersCreateGpgKeyAuthenticatedRequest,
     ) -> ClientResult<crate::Response<crate::types::GpgKey>> {
-        let url = self.client.url("/user/gpg_keys", None);
+        let url = self.client.url(&"/user/gpg_keys".to_string(), None);
         self.client
             .post(
                 &url,
@@ -821,7 +821,7 @@ impl Users {
     pub async fn list_all_public_ssh_keys_for_authenticated(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Key>>> {
-        let url = self.client.url("/user/keys", None);
+        let url = self.client.url(&"/user/keys".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -845,7 +845,7 @@ impl Users {
         &self,
         body: &crate::types::UsersCreatePublicSshKeyAuthenticatedRequest,
     ) -> ClientResult<crate::Response<crate::types::Key>> {
-        let url = self.client.url("/user/keys", None);
+        let url = self.client.url(&"/user/keys".to_string(), None);
         self.client
             .post(
                 &url,
@@ -978,7 +978,7 @@ impl Users {
     pub async fn list_all_public_emails_for_authenticated(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Email>>> {
-        let url = self.client.url("/user/public_emails", None);
+        let url = self.client.url(&"/user/public_emails".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -1088,7 +1088,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1128,7 +1128,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1168,7 +1168,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1214,7 +1214,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/followers?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -1247,7 +1247,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/followers",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1293,7 +1293,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/following?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -1326,7 +1326,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/following",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1362,8 +1362,8 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/following/{}",
-                crate::progenitor_support::encode_path(username),
-                crate::progenitor_support::encode_path(target_user),
+                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(&target_user.to_string()),
             ),
             None,
         );
@@ -1409,7 +1409,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/gpg_keys?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -1442,7 +1442,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/gpg_keys",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );
@@ -1495,7 +1495,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/hovercard?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -1542,7 +1542,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/keys?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -1575,7 +1575,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/keys",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
             ),
             None,
         );

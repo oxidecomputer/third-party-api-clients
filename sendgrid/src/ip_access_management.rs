@@ -27,7 +27,9 @@ impl IpAccessManagement {
     pub async fn get_access_settings_whitelist(
         &self,
     ) -> ClientResult<crate::Response<crate::types::IpAccessResponse>> {
-        let url = self.client.url("/access_settings/whitelist", None);
+        let url = self
+            .client
+            .url(&"/access_settings/whitelist".to_string(), None);
         self.client
             .get(
                 &url,
@@ -55,7 +57,9 @@ impl IpAccessManagement {
         &self,
         body: &crate::types::PostAccessSettingsWhitelistRequest,
     ) -> ClientResult<crate::Response<crate::types::IpAccessResponse>> {
-        let url = self.client.url("/access_settings/whitelist", None);
+        let url = self
+            .client
+            .url(&"/access_settings/whitelist".to_string(), None);
         self.client
             .post(
                 &url,
@@ -85,7 +89,9 @@ impl IpAccessManagement {
         &self,
         body: &crate::types::DeleteAccessSettingsWhitelistRequest,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
-        let url = self.client.url("/access_settings/whitelist", None);
+        let url = self
+            .client
+            .url(&"/access_settings/whitelist".to_string(), None);
         self.client
             .delete(
                 &url,
@@ -150,7 +156,7 @@ impl IpAccessManagement {
         let url = self.client.url(
             &format!(
                 "/access_settings/whitelist/{}",
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -184,7 +190,7 @@ impl IpAccessManagement {
         let url = self.client.url(
             &format!(
                 "/access_settings/whitelist/{}",
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );

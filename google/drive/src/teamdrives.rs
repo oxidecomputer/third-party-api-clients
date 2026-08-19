@@ -210,7 +210,7 @@ impl Teamdrives {
         let url = self.client.url(
             &format!(
                 "/teamdrives/{}?{}",
-                crate::progenitor_support::encode_path(team_drive_id),
+                crate::progenitor_support::encode_path(&team_drive_id.to_string()),
                 query_
             ),
             None,
@@ -238,7 +238,7 @@ impl Teamdrives {
         let url = self.client.url(
             &format!(
                 "/teamdrives/{}",
-                crate::progenitor_support::encode_path(team_drive_id),
+                crate::progenitor_support::encode_path(&team_drive_id.to_string()),
             ),
             None,
         );
@@ -279,7 +279,7 @@ impl Teamdrives {
         let url = self.client.url(
             &format!(
                 "/teamdrives/{}?{}",
-                crate::progenitor_support::encode_path(team_drive_id),
+                crate::progenitor_support::encode_path(&team_drive_id.to_string()),
                 query_
             ),
             None,

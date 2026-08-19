@@ -27,7 +27,7 @@ impl AdminsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",
-                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(&company_id.to_string()),
             ),
             None,
         );
@@ -59,7 +59,7 @@ impl AdminsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",
-                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(&company_id.to_string()),
             ),
             None,
         );
@@ -90,7 +90,7 @@ impl AdminsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",
-                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(&company_id.to_string()),
             ),
             None,
         );

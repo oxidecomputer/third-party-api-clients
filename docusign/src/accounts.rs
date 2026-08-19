@@ -146,7 +146,7 @@ impl Accounts {
         &self,
         body: &crate::types::NewAccountDefinition,
     ) -> ClientResult<crate::Response<crate::types::NewAccountSummary>> {
-        let url = self.client.url("/v2.1/accounts", None);
+        let url = self.client.url(&"/v2.1/accounts".to_string(), None);
         self.client
             .post(
                 &url,
@@ -167,7 +167,9 @@ impl Accounts {
     pub async fn get_provisioning(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ProvisioningInformation>> {
-        let url = self.client.url("/v2.1/accounts/provisioning", None);
+        let url = self
+            .client
+            .url(&"/v2.1/accounts/provisioning".to_string(), None);
         self.client
             .get(
                 &url,
@@ -210,7 +212,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -240,7 +242,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -286,7 +288,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_charges?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -322,8 +324,8 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/captive_recipients/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(recipient_part),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_part.to_string()),
             ),
             None,
         );
@@ -362,7 +364,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/recipient_names?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -395,7 +397,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -428,7 +430,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -462,7 +464,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/envelope_purge_configuration",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -499,7 +501,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/envelope_purge_configuration",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -531,7 +533,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/notification_defaults",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -564,7 +566,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/notification_defaults",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -663,7 +665,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/shared_access?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -733,7 +735,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/shared_access?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -772,7 +774,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/supported_languages",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -804,7 +806,7 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/unsupported_file_types",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -838,8 +840,8 @@ impl Accounts {
         let url = self.client.url(
             &format!(
                 "/v2.1/organization_exports/{}/account_settings/{}",
-                crate::progenitor_support::encode_path(organization_id),
-                crate::progenitor_support::encode_path(result_id),
+                crate::progenitor_support::encode_path(&organization_id.to_string()),
+                crate::progenitor_support::encode_path(&result_id.to_string()),
             ),
             None,
         );

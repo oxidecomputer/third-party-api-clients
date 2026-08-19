@@ -25,7 +25,7 @@ impl Tsp {
      * * A Pro or a higher plan.
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::TspResponse>> {
-        let url = self.client.url("/tsp", None);
+        let url = self.client.url(&"/tsp".to_string(), None);
         self.client
             .get(
                 &url,
@@ -53,7 +53,7 @@ impl Tsp {
         &self,
         body: &crate::types::TspUpdateRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/tsp", None);
+        let url = self.client.url(&"/tsp".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -85,7 +85,7 @@ impl Tsp {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -122,7 +122,7 @@ impl Tsp {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -161,8 +161,8 @@ impl Tsp {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(tsp_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&tsp_id.to_string()),
             ),
             None,
         );
@@ -201,8 +201,8 @@ impl Tsp {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(tsp_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&tsp_id.to_string()),
             ),
             None,
         );
@@ -242,8 +242,8 @@ impl Tsp {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(tsp_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&tsp_id.to_string()),
             ),
             None,
         );
@@ -280,7 +280,7 @@ impl Tsp {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/settings",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );

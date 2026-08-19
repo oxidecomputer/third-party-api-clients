@@ -29,7 +29,7 @@ impl ShippingRates {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -83,7 +83,7 @@ impl ShippingRates {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::ShippingRate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -174,7 +174,7 @@ impl ShippingRates {
      * <p>Creates a new shipping rate object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::ShippingRate>> {
-        let url = self.client.url("/v1/shipping_rates", None);
+        let url = self.client.url(&"/v1/shipping_rates".to_string(), None);
         self.client
             .post(
                 &url,
@@ -202,7 +202,7 @@ impl ShippingRates {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",
-                crate::progenitor_support::encode_path(shipping_rate_token),
+                crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
             ),
             None,
         );
@@ -232,7 +232,7 @@ impl ShippingRates {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",
-                crate::progenitor_support::encode_path(shipping_rate_token),
+                crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
             ),
             None,
         );

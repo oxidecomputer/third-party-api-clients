@@ -39,7 +39,7 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -76,7 +76,7 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -161,7 +161,7 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -193,8 +193,8 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&role_id.to_string()),
             ),
             None,
         );
@@ -227,8 +227,8 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&role_id.to_string()),
             ),
             None,
         );
@@ -256,8 +256,8 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&role_id.to_string()),
             ),
             None,
         );
@@ -290,8 +290,8 @@ impl Roles {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&role_id.to_string()),
             ),
             None,
         );

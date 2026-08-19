@@ -37,7 +37,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/setup",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -262,7 +262,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -297,7 +297,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -326,9 +326,9 @@ impl Phone {
      */
     pub async fn setting(
         &self,
-        _account_id: &str,
+        account_id: &str,
     ) -> ClientResult<crate::Response<crate::types::PhoneSettingResponse>> {
-        let url = self.client.url("/phone/settings", None);
+        let url = self.client.url(&"/phone/settings".to_string(), None);
         self.client
             .get(
                 &url,
@@ -357,10 +357,10 @@ impl Phone {
      */
     pub async fn update_settings(
         &self,
-        _account_id: &str,
+        account_id: &str,
         body: &crate::types::UpdatePhoneSettingsRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/phone/settings", None);
+        let url = self.client.url(&"/phone/settings".to_string(), None);
         self.client
             .patch(
                 &url,
@@ -395,7 +395,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -575,7 +575,9 @@ impl Phone {
         &self,
         body: &crate::types::AddSettingTemplateRequest,
     ) -> ClientResult<crate::Response<crate::types::AddSettingTemplateResponse>> {
-        let url = self.client.url("/phone/setting_templates", None);
+        let url = self
+            .client
+            .url(&"/phone/setting_templates".to_string(), None);
         self.client
             .post(
                 &url,
@@ -597,7 +599,7 @@ impl Phone {
         &self,
         body: &crate::types::BatchAddLocationsRequest,
     ) -> ClientResult<crate::Response<Vec<crate::types::BatchAddLocationsResponse>>> {
-        let url = self.client.url("/phone/batch_locations", None);
+        let url = self.client.url(&"/phone/batch_locations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -678,7 +680,7 @@ impl Phone {
     pub async fn list_all_locations(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ListLocationsResponse>>> {
-        let url = self.client.url("/phone/locations", None);
+        let url = self.client.url(&"/phone/locations".to_string(), None);
         let crate::Response::<crate::types::ListLocationsResponseData> {
             mut status,
             mut headers,
@@ -761,7 +763,7 @@ impl Phone {
         &self,
         body: &crate::types::AddLocationRequest,
     ) -> ClientResult<crate::Response<Vec<crate::types::Site>>> {
-        let url = self.client.url("/phone/locations", None);
+        let url = self.client.url(&"/phone/locations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -796,7 +798,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
             ),
             None,
         );
@@ -831,7 +833,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
             ),
             None,
         );
@@ -866,7 +868,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
-                crate::progenitor_support::encode_path(location_id),
+                crate::progenitor_support::encode_path(&location_id.to_string()),
             ),
             None,
         );
@@ -950,7 +952,7 @@ impl Phone {
     pub async fn list_all_sip_groups(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SipGroups>>> {
-        let url = self.client.url("/phone/sip_groups", None);
+        let url = self.client.url(&"/phone/sip_groups".to_string(), None);
         let crate::Response::<crate::types::ListSipGroupsResponse> {
             mut status,
             mut headers,
@@ -1050,7 +1052,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/setting_templates/{}?{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
                 query_
             ),
             None,
@@ -1090,7 +1092,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/setting_templates/{}",
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );
@@ -1165,7 +1167,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/call_logs?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -1232,7 +1234,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/call_logs?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -1348,7 +1350,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/recordings?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -1403,7 +1405,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/recordings?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -1524,7 +1526,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/voice_mails?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -1583,7 +1585,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/voice_mails?{}",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -1683,8 +1685,8 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(setting_type),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&setting_type.to_string()),
             ),
             None,
         );
@@ -1732,8 +1734,8 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings/{}?{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(setting_type),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&setting_type.to_string()),
                 query_
             ),
             None,
@@ -1778,8 +1780,8 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(setting_type),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&setting_type.to_string()),
             ),
             None,
         );
@@ -2014,7 +2016,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/phone_numbers",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -2057,8 +2059,8 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/phone_numbers/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(phone_number_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&phone_number_id.to_string()),
             ),
             None,
         );
@@ -2093,7 +2095,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/calling_plans",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -2133,8 +2135,8 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/calling_plans/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(type_),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&type_.to_string()),
             ),
             None,
         );
@@ -2417,7 +2419,9 @@ impl Phone {
     pub async fn list_all_byocsip_trunk(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ByocSipTrunk>>> {
-        let url = self.client.url("/phone/sip_trunk/trunks", None);
+        let url = self
+            .client
+            .url(&"/phone/sip_trunk/trunks".to_string(), None);
         let crate::Response::<crate::types::ListByocsipTrunkResponse> {
             mut status,
             mut headers,
@@ -2507,7 +2511,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/sip_trunk/trunks",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -2547,8 +2551,8 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/sip_trunk/trunks/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(sip_trunk_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&sip_trunk_id.to_string()),
             ),
             None,
         );
@@ -2632,7 +2636,9 @@ impl Phone {
     pub async fn list_all_external_contacts(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::ExternalContacts>>> {
-        let url = self.client.url("/phone/external_contacts", None);
+        let url = self
+            .client
+            .url(&"/phone/external_contacts".to_string(), None);
         let crate::Response::<crate::types::ListExternalContactsResponse> {
             mut status,
             mut headers,
@@ -2715,7 +2721,9 @@ impl Phone {
         &self,
         body: &crate::types::AddExternalContactRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/phone/external_contacts", None);
+        let url = self
+            .client
+            .url(&"/phone/external_contacts".to_string(), None);
         self.client
             .post(
                 &url,
@@ -2750,7 +2758,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
-                crate::progenitor_support::encode_path(external_contact_id),
+                crate::progenitor_support::encode_path(&external_contact_id.to_string()),
             ),
             None,
         );
@@ -2788,7 +2796,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
-                crate::progenitor_support::encode_path(external_contact_id),
+                crate::progenitor_support::encode_path(&external_contact_id.to_string()),
             ),
             None,
         );
@@ -2827,7 +2835,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
-                crate::progenitor_support::encode_path(external_contact_id),
+                crate::progenitor_support::encode_path(&external_contact_id.to_string()),
             ),
             None,
         );
@@ -2865,7 +2873,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/numbers/{}",
-                crate::progenitor_support::encode_path(number_id),
+                crate::progenitor_support::encode_path(&number_id.to_string()),
             ),
             None,
         );
@@ -2903,7 +2911,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/numbers/{}",
-                crate::progenitor_support::encode_path(number_id),
+                crate::progenitor_support::encode_path(&number_id.to_string()),
             ),
             None,
         );
@@ -2936,7 +2944,7 @@ impl Phone {
         &self,
         body: &crate::types::ChangeMainCompanyNumberRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/phone/company_number", None);
+        let url = self.client.url(&"/phone/company_number".to_string(), None);
         self.client
             .put(
                 &url,
@@ -2963,7 +2971,7 @@ impl Phone {
     pub async fn list_calling_plan(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ListCallingPlansResponseData>> {
-        let url = self.client.url("/phone/calling_plans", None);
+        let url = self.client.url(&"/phone/calling_plans".to_string(), None);
         self.client
             .get(
                 &url,
@@ -3143,7 +3151,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/call_logs/{}",
-                crate::progenitor_support::encode_path(call_log_id),
+                crate::progenitor_support::encode_path(&call_log_id.to_string()),
             ),
             None,
         );
@@ -3183,8 +3191,8 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/call_logs/{}",
-                crate::progenitor_support::encode_path(user_id),
-                crate::progenitor_support::encode_path(call_log_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(&call_log_id.to_string()),
             ),
             None,
         );
@@ -3215,7 +3223,7 @@ impl Phone {
         &self,
         body: &crate::types::AddByocNumberRequest,
     ) -> ClientResult<crate::Response<crate::types::AddByocNumberResponse>> {
-        let url = self.client.url("/phone/byoc_numbers", None);
+        let url = self.client.url(&"/phone/byoc_numbers".to_string(), None);
         self.client
             .post(
                 &url,
@@ -3246,7 +3254,7 @@ impl Phone {
         let url = self.client.url(
             &format!(
                 "/phone/voice_mails/{}",
-                crate::progenitor_support::encode_path(voicemail_id),
+                crate::progenitor_support::encode_path(&voicemail_id.to_string()),
             ),
             None,
         );

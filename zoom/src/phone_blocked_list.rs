@@ -81,7 +81,7 @@ impl PhoneBlockedList {
     pub async fn list_all_blocked(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::BlockedList>>> {
-        let url = self.client.url("/phone/blocked_list", None);
+        let url = self.client.url(&"/phone/blocked_list".to_string(), None);
         let crate::Response::<crate::types::ListBlockedResponse> {
             mut status,
             mut headers,
@@ -164,7 +164,7 @@ impl PhoneBlockedList {
         &self,
         body: &crate::types::UpdateBlockedListRequest,
     ) -> ClientResult<crate::Response<crate::types::Groups>> {
-        let url = self.client.url("/phone/blocked_list", None);
+        let url = self.client.url(&"/phone/blocked_list".to_string(), None);
         self.client
             .post(
                 &url,
@@ -198,7 +198,7 @@ impl PhoneBlockedList {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",
-                crate::progenitor_support::encode_path(blocked_list_id),
+                crate::progenitor_support::encode_path(&blocked_list_id.to_string()),
             ),
             None,
         );
@@ -237,7 +237,7 @@ impl PhoneBlockedList {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",
-                crate::progenitor_support::encode_path(blocked_list_id),
+                crate::progenitor_support::encode_path(&blocked_list_id.to_string()),
             ),
             None,
         );
@@ -276,7 +276,7 @@ impl PhoneBlockedList {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",
-                crate::progenitor_support::encode_path(blocked_list_id),
+                crate::progenitor_support::encode_path(&blocked_list_id.to_string()),
             ),
             None,
         );

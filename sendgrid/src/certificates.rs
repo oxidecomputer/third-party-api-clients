@@ -22,7 +22,7 @@ impl Certificates {
         &self,
         body: &crate::types::PostSsoCertificatesRequest,
     ) -> ClientResult<crate::Response<crate::types::SsoCertificateBody>> {
-        let url = self.client.url("/sso/certificates", None);
+        let url = self.client.url(&"/sso/certificates".to_string(), None);
         self.client
             .post(
                 &url,
@@ -49,7 +49,7 @@ impl Certificates {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}/certificates",
-                crate::progenitor_support::encode_path(integration_id),
+                crate::progenitor_support::encode_path(&integration_id.to_string()),
             ),
             None,
         );
@@ -81,7 +81,7 @@ impl Certificates {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}/certificates",
-                crate::progenitor_support::encode_path(integration_id),
+                crate::progenitor_support::encode_path(&integration_id.to_string()),
             ),
             None,
         );
@@ -109,7 +109,7 @@ impl Certificates {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",
-                crate::progenitor_support::encode_path(cert_id),
+                crate::progenitor_support::encode_path(&cert_id.to_string()),
             ),
             None,
         );
@@ -139,7 +139,7 @@ impl Certificates {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",
-                crate::progenitor_support::encode_path(cert_id),
+                crate::progenitor_support::encode_path(&cert_id.to_string()),
             ),
             None,
         );
@@ -170,7 +170,7 @@ impl Certificates {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",
-                crate::progenitor_support::encode_path(cert_id),
+                crate::progenitor_support::encode_path(&cert_id.to_string()),
             ),
             None,
         );

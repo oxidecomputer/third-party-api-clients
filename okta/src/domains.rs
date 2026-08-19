@@ -19,7 +19,7 @@ impl Domains {
      * List all verified custom Domains for the org.
      */
     pub async fn list(&self) -> ClientResult<crate::Response<crate::types::DomainListResponse>> {
-        let url = self.client.url("/api/v1/domains", None);
+        let url = self.client.url(&"/api/v1/domains".to_string(), None);
         self.client
             .get(
                 &url,
@@ -41,7 +41,7 @@ impl Domains {
         &self,
         body: &crate::types::Domain,
     ) -> ClientResult<crate::Response<crate::types::Domain>> {
-        let url = self.client.url("/api/v1/domains", None);
+        let url = self.client.url(&"/api/v1/domains".to_string(), None);
         self.client
             .post(
                 &url,
@@ -70,7 +70,7 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );
@@ -99,7 +99,7 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );
@@ -132,7 +132,7 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}/certificate",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );
@@ -164,7 +164,7 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}/verify",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );

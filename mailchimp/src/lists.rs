@@ -131,7 +131,7 @@ impl Lists {
         &self,
         body: &crate::types::SubscriberList,
     ) -> ClientResult<crate::Response<crate::types::Lists>> {
-        let url = self.client.url("/lists", None);
+        let url = self.client.url(&"/lists".to_string(), None);
         self.client
             .post(
                 &url,
@@ -180,7 +180,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -232,7 +232,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -260,7 +260,10 @@ impl Lists {
      */
     pub async fn delete(&self, list_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
+            &format!(
+                "/lists/{}",
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -290,7 +293,10 @@ impl Lists {
         body: &crate::types::SubscriberListData,
     ) -> ClientResult<crate::Response<crate::types::Lists>> {
         let url = self.client.url(
-            &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
+            &format!(
+                "/lists/{}",
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -343,7 +349,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/abuse-reports?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -400,8 +406,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/abuse-reports/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
                 query_
             ),
             None,
@@ -446,7 +452,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/activity?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -491,7 +497,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/clients?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -556,7 +562,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/growth-history?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -603,8 +609,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/growth-history/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(month),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&month.to_string()),
                 query_
             ),
             None,
@@ -664,7 +670,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -698,7 +704,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -744,8 +750,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
                 query_
             ),
             None,
@@ -780,8 +786,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
             ),
             None,
         );
@@ -816,8 +822,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
             ),
             None,
         );
@@ -873,8 +879,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
                 query_
             ),
             None,
@@ -910,8 +916,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
             ),
             None,
         );
@@ -959,9 +965,9 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
-                crate::progenitor_support::encode_path(interest_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_id.to_string()),
                 query_
             ),
             None,
@@ -998,9 +1004,9 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
-                crate::progenitor_support::encode_path(interest_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_id.to_string()),
             ),
             None,
         );
@@ -1037,9 +1043,9 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(interest_category_id),
-                crate::progenitor_support::encode_path(interest_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+                crate::progenitor_support::encode_path(&interest_id.to_string()),
             ),
             None,
         );
@@ -1145,7 +1151,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -1179,7 +1185,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -1246,8 +1252,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
                 query_
             ),
             None,
@@ -1284,8 +1290,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
             ),
             None,
         );
@@ -1319,8 +1325,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
             ),
             None,
         );
@@ -1355,8 +1361,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
             ),
             None,
         );
@@ -1433,8 +1439,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}/members?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
                 query_
             ),
             None,
@@ -1470,8 +1476,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}/members",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
             ),
             None,
         );
@@ -1507,9 +1513,9 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}/members/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(segment_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );
@@ -1548,7 +1554,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/tag-search?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -1699,7 +1705,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -1743,7 +1749,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -1790,8 +1796,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -1837,8 +1843,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -1873,8 +1879,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );
@@ -1919,8 +1925,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -1972,8 +1978,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/activity?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -2035,8 +2041,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/activity-feed?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -2093,8 +2099,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/tags?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -2130,8 +2136,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/tags",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );
@@ -2187,8 +2193,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/events?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -2224,8 +2230,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/events",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );
@@ -2271,8 +2277,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/goals?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -2339,8 +2345,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
                 query_
             ),
             None,
@@ -2376,8 +2382,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );
@@ -2425,9 +2431,9 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
-                crate::progenitor_support::encode_path(note_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(&note_id.to_string()),
                 query_
             ),
             None,
@@ -2464,9 +2470,9 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
-                crate::progenitor_support::encode_path(note_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(&note_id.to_string()),
             ),
             None,
         );
@@ -2503,9 +2509,9 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
-                crate::progenitor_support::encode_path(note_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(&note_id.to_string()),
             ),
             None,
         );
@@ -2539,8 +2545,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/actions/delete-permanent",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
             ),
             None,
         );
@@ -2604,7 +2610,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -2638,7 +2644,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -2684,8 +2690,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields/{}?{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(merge_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&merge_id.to_string()),
                 query_
             ),
             None,
@@ -2720,8 +2726,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(merge_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&merge_id.to_string()),
             ),
             None,
         );
@@ -2756,8 +2762,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(merge_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&merge_id.to_string()),
             ),
             None,
         );
@@ -2789,7 +2795,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -2822,7 +2828,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -2856,8 +2862,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -2891,8 +2897,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -2927,8 +2933,8 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks/{}",
-                crate::progenitor_support::encode_path(list_id),
-                crate::progenitor_support::encode_path(webhook_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(&webhook_id.to_string()),
             ),
             None,
         );
@@ -2960,7 +2966,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/signup-forms",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -2993,7 +2999,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/signup-forms",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -3037,7 +3043,7 @@ impl Lists {
         let url = self.client.url(
             &format!(
                 "/lists/{}/locations?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,

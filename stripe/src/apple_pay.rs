@@ -162,7 +162,7 @@ impl ApplePay {
      * <p>Create an apple pay domain.</p>
      */
     pub async fn post_domain(&self) -> ClientResult<crate::Response<crate::types::ApplePayDomain>> {
-        let url = self.client.url("/v1/apple_pay/domains", None);
+        let url = self.client.url(&"/v1/apple_pay/domains".to_string(), None);
         self.client
             .post(
                 &url,
@@ -190,7 +190,7 @@ impl ApplePay {
         let url = self.client.url(
             &format!(
                 "/v1/apple_pay/domains/{}",
-                crate::progenitor_support::encode_path(domain),
+                crate::progenitor_support::encode_path(&domain.to_string()),
             ),
             None,
         );
@@ -220,7 +220,7 @@ impl ApplePay {
         let url = self.client.url(
             &format!(
                 "/v1/apple_pay/domains/{}",
-                crate::progenitor_support::encode_path(domain),
+                crate::progenitor_support::encode_path(&domain.to_string()),
             ),
             None,
         );

@@ -24,7 +24,7 @@ impl Markdown {
         &self,
         body: &crate::types::MarkdownRenderRequest,
     ) -> ClientResult<crate::Response<String>> {
-        let url = self.client.url("/markdown", None);
+        let url = self.client.url(&"/markdown".to_string(), None);
         self.client
             .post(
                 &url,
@@ -48,7 +48,7 @@ impl Markdown {
         &self,
         body: T,
     ) -> ClientResult<crate::Response<String>> {
-        let url = self.client.url("/markdown/raw", None);
+        let url = self.client.url(&"/markdown/raw".to_string(), None);
         self.client
             .post(
                 &url,

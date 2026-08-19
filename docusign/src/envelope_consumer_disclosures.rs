@@ -90,9 +90,9 @@ impl EnvelopeConsumerDisclosures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
                 query_
             ),
             None,
@@ -226,10 +226,10 @@ impl EnvelopeConsumerDisclosures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
-                crate::progenitor_support::encode_path(recipient_id),
-                crate::progenitor_support::encode_path(lang_code),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
+                crate::progenitor_support::encode_path(&lang_code.to_string()),
             ),
             None,
         );

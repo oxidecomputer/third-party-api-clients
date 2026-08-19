@@ -22,7 +22,7 @@ impl Sessions {
         &self,
         body: &crate::types::CreateSessionRequest,
     ) -> ClientResult<crate::Response<crate::types::Session>> {
-        let url = self.client.url("/api/v1/sessions", None);
+        let url = self.client.url(&"/api/v1/sessions".to_string(), None);
         self.client
             .post(
                 &url,
@@ -49,7 +49,7 @@ impl Sessions {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}",
-                crate::progenitor_support::encode_path(session_id),
+                crate::progenitor_support::encode_path(&session_id.to_string()),
             ),
             None,
         );
@@ -78,7 +78,7 @@ impl Sessions {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}",
-                crate::progenitor_support::encode_path(session_id),
+                crate::progenitor_support::encode_path(&session_id.to_string()),
             ),
             None,
         );
@@ -110,7 +110,7 @@ impl Sessions {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}/lifecycle/refresh",
-                crate::progenitor_support::encode_path(session_id),
+                crate::progenitor_support::encode_path(&session_id.to_string()),
             ),
             None,
         );

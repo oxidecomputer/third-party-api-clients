@@ -69,7 +69,7 @@ impl CsvUiOnly {
         let url = self.client.url(
             &format!(
                 "/messages/download/{}",
-                crate::progenitor_support::encode_path(download_uuid),
+                crate::progenitor_support::encode_path(&download_uuid.to_string()),
             ),
             None,
         );

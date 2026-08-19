@@ -24,7 +24,7 @@ impl Groups {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::GroupList>> {
-        let url = self.client.url("/groups", None);
+        let url = self.client.url(&"/groups".to_string(), None);
         self.client
             .get(
                 &url,
@@ -53,7 +53,7 @@ impl Groups {
         &self,
         body: &crate::types::GroupCreateRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/groups", None);
+        let url = self.client.url(&"/groups".to_string(), None);
         self.client
             .post(
                 &url,
@@ -88,7 +88,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -123,7 +123,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -162,7 +162,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -220,7 +220,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -264,7 +264,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -358,7 +358,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -398,8 +398,8 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members/{}",
-                crate::progenitor_support::encode_path(group_id),
-                crate::progenitor_support::encode_path(member_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
+                crate::progenitor_support::encode_path(&member_id.to_string()),
             ),
             None,
         );
@@ -445,8 +445,8 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/members/{}",
-                crate::progenitor_support::encode_path(group_id),
-                crate::progenitor_support::encode_path(member_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
+                crate::progenitor_support::encode_path(&member_id.to_string()),
             ),
             None,
         );
@@ -499,7 +499,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -553,7 +553,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -607,7 +607,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -661,7 +661,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -713,7 +713,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -765,7 +765,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/lock_settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -817,7 +817,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/lock_settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -869,7 +869,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/lock_settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -922,7 +922,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/lock_settings?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -971,7 +971,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/settings/virtual_backgrounds?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -1018,7 +1018,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/groups/{}/settings/virtual_backgrounds?{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,

@@ -67,7 +67,7 @@ impl Settings {
      * Returns all user settings for the authenticated user.
      */
     pub async fn list_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Setting>>> {
-        let url = self.client.url("/users/me/settings", None);
+        let url = self.client.url(&"/users/me/settings".to_string(), None);
         let crate::Response::<crate::types::Settings> {
             mut status,
             mut headers,
@@ -186,7 +186,7 @@ impl Settings {
         let url = self.client.url(
             &format!(
                 "/users/me/settings/{}",
-                crate::progenitor_support::encode_path(setting),
+                crate::progenitor_support::encode_path(&setting.to_string()),
             ),
             None,
         );

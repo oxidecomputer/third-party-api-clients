@@ -180,7 +180,7 @@ impl SipPhone {
         &self,
         body: &crate::types::CreateSipPhoneRequest,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url("/sip_phones", None);
+        let url = self.client.url(&"/sip_phones".to_string(), None);
         self.client
             .post(
                 &url,
@@ -211,7 +211,7 @@ impl SipPhone {
         let url = self.client.url(
             &format!(
                 "/sip_phones/{}",
-                crate::progenitor_support::encode_path(phone_id),
+                crate::progenitor_support::encode_path(&phone_id.to_string()),
             ),
             None,
         );
@@ -249,7 +249,7 @@ impl SipPhone {
         let url = self.client.url(
             &format!(
                 "/sip_phones/{}",
-                crate::progenitor_support::encode_path(phone_id),
+                crate::progenitor_support::encode_path(&phone_id.to_string()),
             ),
             None,
         );

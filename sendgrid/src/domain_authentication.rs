@@ -129,7 +129,7 @@ impl DomainAuthentication {
         &self,
         body: &crate::types::PostWhitelabelDomainsRequest,
     ) -> ClientResult<crate::Response<crate::types::AuthenticationDomain>> {
-        let url = self.client.url("/whitelabel/domains", None);
+        let url = self.client.url(&"/whitelabel/domains".to_string(), None);
         self.client
             .post(
                 &url,
@@ -158,7 +158,7 @@ impl DomainAuthentication {
         let url = self.client.url(
             &format!(
                 "/whitelabel/domains/{}",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );
@@ -190,7 +190,7 @@ impl DomainAuthentication {
         let url = self.client.url(
             &format!(
                 "/whitelabel/domains/{}",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );
@@ -224,7 +224,7 @@ impl DomainAuthentication {
         let url = self.client.url(
             &format!(
                 "/whitelabel/domains/{}",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );
@@ -366,7 +366,7 @@ impl DomainAuthentication {
             &format!(
                 "/whitelabel/domains/{}/ips/{}",
                 crate::progenitor_support::encode_path(&id.to_string()),
-                crate::progenitor_support::encode_path(ip),
+                crate::progenitor_support::encode_path(&ip.to_string()),
             ),
             None,
         );

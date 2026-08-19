@@ -27,7 +27,7 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -58,7 +58,7 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -90,8 +90,8 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(domain_name),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&domain_name.to_string()),
             ),
             None,
         );
@@ -123,8 +123,8 @@ impl Domains {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domains/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(domain_name),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&domain_name.to_string()),
             ),
             None,
         );

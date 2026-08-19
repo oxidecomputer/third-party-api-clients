@@ -25,7 +25,7 @@ impl CustomFields {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/custom_fields",
-                crate::progenitor_support::encode_path(employee_id),
+                crate::progenitor_support::encode_path(&employee_id.to_string()),
             ),
             None,
         );
@@ -53,7 +53,7 @@ impl CustomFields {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/custom_fields",
-                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(&company_id.to_string()),
             ),
             None,
         );

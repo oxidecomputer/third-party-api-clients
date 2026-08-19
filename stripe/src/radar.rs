@@ -184,7 +184,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/early_fraud_warnings/{}",
-                crate::progenitor_support::encode_path(early_fraud_warning),
+                crate::progenitor_support::encode_path(&early_fraud_warning.to_string()),
             ),
             None,
         );
@@ -215,7 +215,7 @@ impl Radar {
      */
     pub async fn get_value_list_items(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -269,7 +269,7 @@ impl Radar {
      */
     pub async fn get_all_value_list_all_items(
         &self,
-        _created: &str,
+        created: &str,
         value: &str,
         value_list: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarListItem>>> {
@@ -363,7 +363,9 @@ impl Radar {
     pub async fn post_value_list_item(
         &self,
     ) -> ClientResult<crate::Response<crate::types::RadarListItem>> {
-        let url = self.client.url("/v1/radar/value_list_items", None);
+        let url = self
+            .client
+            .url(&"/v1/radar/value_list_items".to_string(), None);
         self.client
             .post(
                 &url,
@@ -391,7 +393,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
-                crate::progenitor_support::encode_path(item),
+                crate::progenitor_support::encode_path(&item.to_string()),
             ),
             None,
         );
@@ -421,7 +423,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
-                crate::progenitor_support::encode_path(item),
+                crate::progenitor_support::encode_path(&item.to_string()),
             ),
             None,
         );
@@ -454,7 +456,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -508,7 +510,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        _created: &str,
+        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarList>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
@@ -598,7 +600,7 @@ impl Radar {
      * <p>Creates a new <code>ValueList</code> object, which can then be referenced in rules.</p>
      */
     pub async fn post_value_list(&self) -> ClientResult<crate::Response<crate::types::RadarList>> {
-        let url = self.client.url("/v1/radar/value_lists", None);
+        let url = self.client.url(&"/v1/radar/value_lists".to_string(), None);
         self.client
             .post(
                 &url,
@@ -626,7 +628,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
-                crate::progenitor_support::encode_path(value_list),
+                crate::progenitor_support::encode_path(&value_list.to_string()),
             ),
             None,
         );
@@ -656,7 +658,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
-                crate::progenitor_support::encode_path(value_list),
+                crate::progenitor_support::encode_path(&value_list.to_string()),
             ),
             None,
         );
@@ -686,7 +688,7 @@ impl Radar {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
-                crate::progenitor_support::encode_path(value_list),
+                crate::progenitor_support::encode_path(&value_list.to_string()),
             ),
             None,
         );

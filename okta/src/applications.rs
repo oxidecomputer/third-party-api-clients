@@ -172,7 +172,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -206,7 +206,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -235,7 +235,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -267,7 +267,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -297,7 +297,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -330,7 +330,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -360,8 +360,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(csr_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&csr_id.to_string()),
             ),
             None,
         );
@@ -391,8 +391,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(csr_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&csr_id.to_string()),
             ),
             None,
         );
@@ -422,8 +422,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs/{}/lifecycle/publish",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(csr_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&csr_id.to_string()),
             ),
             None,
         );
@@ -455,7 +455,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -485,7 +485,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -522,7 +522,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys/generate?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -557,8 +557,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
             ),
             None,
         );
@@ -599,8 +599,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys/{}/clone?{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
                 query_
             ),
             None,
@@ -638,7 +638,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/grants?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -673,7 +673,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/grants?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -705,7 +705,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/grants",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -744,8 +744,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/grants/{}?{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(grant_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&grant_id.to_string()),
                 query_
             ),
             None,
@@ -778,8 +778,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/grants/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(grant_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&grant_id.to_string()),
             ),
             None,
         );
@@ -833,7 +833,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/groups?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -874,7 +874,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/groups?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -916,8 +916,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/groups/{}?{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
                 query_
             ),
             None,
@@ -953,8 +953,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/groups/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -988,8 +988,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/groups/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -1018,7 +1018,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -1047,7 +1047,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -1094,7 +1094,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/tokens?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -1129,7 +1129,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/tokens?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -1160,7 +1160,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/tokens",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -1199,8 +1199,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/tokens/{}?{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(token_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&token_id.to_string()),
                 query_
             ),
             None,
@@ -1233,8 +1233,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/tokens/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(token_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&token_id.to_string()),
             ),
             None,
         );
@@ -1298,7 +1298,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -1347,7 +1347,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users?{}",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
                 query_
             ),
             None,
@@ -1381,7 +1381,7 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users",
-                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
             ),
             None,
         );
@@ -1422,8 +1422,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users/{}?{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,
@@ -1459,8 +1459,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users/{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );
@@ -1501,8 +1501,8 @@ impl Applications {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users/{}?{}",
-                crate::progenitor_support::encode_path(app_id),
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
                 query_
             ),
             None,

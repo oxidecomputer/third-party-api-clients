@@ -90,7 +90,7 @@ impl SingleSignOnSettings {
         &self,
         body: &crate::types::CreateIntegrationRequest,
     ) -> ClientResult<crate::Response<crate::types::SsoIntegrationAllOf>> {
-        let url = self.client.url("/sso/integrations", None);
+        let url = self.client.url(&"/sso/integrations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -127,7 +127,7 @@ impl SingleSignOnSettings {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}?{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
                 query_
             ),
             None,
@@ -155,7 +155,7 @@ impl SingleSignOnSettings {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -196,7 +196,7 @@ impl SingleSignOnSettings {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}?{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
                 query_
             ),
             None,

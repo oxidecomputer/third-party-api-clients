@@ -184,7 +184,7 @@ impl CreditNotes {
      * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::CreditNote>> {
-        let url = self.client.url("/v1/credit_notes", None);
+        let url = self.client.url(&"/v1/credit_notes".to_string(), None);
         self.client
             .post(
                 &url,
@@ -219,9 +219,9 @@ impl CreditNotes {
         amount: i64,
         credit_amount: i64,
         invoice: &str,
-        _lines: &[String],
+        lines: &[String],
         memo: &str,
-        _metadata: &str,
+        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -298,9 +298,9 @@ impl CreditNotes {
         ending_before: &str,
         invoice: &str,
         limit: i64,
-        _lines: &[String],
+        lines: &[String],
         memo: &str,
-        _metadata: &str,
+        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -378,9 +378,9 @@ impl CreditNotes {
         amount: i64,
         credit_amount: i64,
         invoice: &str,
-        _lines: &[String],
+        lines: &[String],
         memo: &str,
-        _metadata: &str,
+        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -523,7 +523,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/lines?{}",
-                crate::progenitor_support::encode_path(credit_note),
+                crate::progenitor_support::encode_path(&credit_note.to_string()),
                 query_
             ),
             None,
@@ -560,7 +560,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/lines",
-                crate::progenitor_support::encode_path(credit_note),
+                crate::progenitor_support::encode_path(&credit_note.to_string()),
             ),
             None,
         );
@@ -649,7 +649,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -679,7 +679,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -709,7 +709,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/void",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

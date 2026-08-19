@@ -352,7 +352,7 @@ impl Contacts {
         let url = self.client.url(
             &format!(
                 "/chat/users/me/contacts/{}?{}",
-                crate::progenitor_support::encode_path(contact_id),
+                crate::progenitor_support::encode_path(&contact_id.to_string()),
                 query_
             ),
             None,

@@ -134,7 +134,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/reports/{}/json?{}",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
                 query_
             ),
             None,
@@ -168,7 +168,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -200,7 +200,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -337,7 +337,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/reports/{}/json?{}",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
                 query_
             ),
             None,
@@ -371,7 +371,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -403,7 +403,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -540,7 +540,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/reports/{}/json?{}",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
                 query_
             ),
             None,
@@ -574,7 +574,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -606,7 +606,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -743,7 +743,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/reports/{}/json?{}",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
                 query_
             ),
             None,
@@ -777,7 +777,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -809,7 +809,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -946,7 +946,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/reports/{}/json?{}",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
                 query_
             ),
             None,
@@ -980,7 +980,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -1012,7 +1012,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -1151,7 +1151,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/reports/{}/json?{}",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
                 query_
             ),
             None,
@@ -1185,7 +1185,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );
@@ -1217,7 +1217,7 @@ impl Analytics {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/reports/{}/json",
-                crate::progenitor_support::encode_path(report_id),
+                crate::progenitor_support::encode_path(&report_id.to_string()),
             ),
             None,
         );

@@ -72,8 +72,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 query_
             ),
             None,
@@ -129,8 +129,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 query_
             ),
             None,
@@ -174,8 +174,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
             ),
             None,
         );
@@ -240,8 +240,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 query_
             ),
             None,
@@ -289,8 +289,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 query_
             ),
             None,
@@ -329,8 +329,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -369,8 +369,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -410,8 +410,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -464,8 +464,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -507,8 +507,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -576,8 +576,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/comments?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
@@ -627,8 +627,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/comments?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
@@ -676,8 +676,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/comments",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -721,8 +721,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/comments/{}/replies",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
@@ -774,8 +774,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/commits?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
@@ -811,8 +811,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/commits",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -863,8 +863,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/files?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
@@ -900,8 +900,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/files",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -940,8 +940,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/merge",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -981,8 +981,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/merge",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -1033,8 +1033,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/requested_reviewers?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
@@ -1075,8 +1075,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/requested_reviewers",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -1116,8 +1116,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/requested_reviewers",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -1168,8 +1168,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
@@ -1205,8 +1205,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -1252,8 +1252,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
@@ -1294,8 +1294,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
@@ -1338,8 +1338,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
@@ -1381,8 +1381,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
@@ -1436,8 +1436,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}/comments?{}",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&review_id.to_string()),
                 query_
@@ -1475,8 +1475,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}/comments",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
@@ -1519,8 +1519,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
@@ -1563,8 +1563,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}/events",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
                 crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
@@ -1605,8 +1605,8 @@ impl Pulls {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/update-branch",
-                crate::progenitor_support::encode_path(owner),
-                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&owner.to_string()),
+                crate::progenitor_support::encode_path(&repo.to_string()),
                 crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,

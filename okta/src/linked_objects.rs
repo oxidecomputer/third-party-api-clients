@@ -21,7 +21,7 @@ impl LinkedObjects {
     ) -> ClientResult<crate::Response<Vec<crate::types::LinkedObject>>> {
         let url = self
             .client
-            .url("/api/v1/meta/schemas/user/linkedObjects", None);
+            .url(&"/api/v1/meta/schemas/user/linkedObjects".to_string(), None);
         self.client
             .get(
                 &url,
@@ -44,7 +44,7 @@ impl LinkedObjects {
     ) -> ClientResult<crate::Response<Vec<crate::types::LinkedObject>>> {
         let url = self
             .client
-            .url("/api/v1/meta/schemas/user/linkedObjects", None);
+            .url(&"/api/v1/meta/schemas/user/linkedObjects".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -66,7 +66,7 @@ impl LinkedObjects {
     ) -> ClientResult<crate::Response<crate::types::LinkedObject>> {
         let url = self
             .client
-            .url("/api/v1/meta/schemas/user/linkedObjects", None);
+            .url(&"/api/v1/meta/schemas/user/linkedObjects".to_string(), None);
         self.client
             .post(
                 &url,
@@ -93,7 +93,7 @@ impl LinkedObjects {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/linkedObjects/{}",
-                crate::progenitor_support::encode_path(linked_object_name),
+                crate::progenitor_support::encode_path(&linked_object_name.to_string()),
             ),
             None,
         );
@@ -123,7 +123,7 @@ impl LinkedObjects {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/linkedObjects/{}",
-                crate::progenitor_support::encode_path(linked_object_name),
+                crate::progenitor_support::encode_path(&linked_object_name.to_string()),
             ),
             None,
         );

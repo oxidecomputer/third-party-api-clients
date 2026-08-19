@@ -52,7 +52,7 @@ impl Comments {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments?{}",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
                 query_
             ),
             None,
@@ -102,7 +102,7 @@ impl Comments {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments?{}",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
                 query_
             ),
             None,
@@ -188,7 +188,7 @@ impl Comments {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
             ),
             None,
         );
@@ -227,8 +227,8 @@ impl Comments {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}?{}",
-                crate::progenitor_support::encode_path(file_id),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
                 query_
             ),
             None,
@@ -261,8 +261,8 @@ impl Comments {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}",
-                crate::progenitor_support::encode_path(file_id),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -295,8 +295,8 @@ impl Comments {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}",
-                crate::progenitor_support::encode_path(file_id),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );

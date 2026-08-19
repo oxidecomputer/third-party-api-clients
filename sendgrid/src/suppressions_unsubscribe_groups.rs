@@ -93,7 +93,7 @@ impl SuppressionsUnsubscribeGroups {
         &self,
         body: &crate::types::SuppressionGroupRequestBase,
     ) -> ClientResult<crate::Response<crate::types::PostAsmGroupsResponse>> {
-        let url = self.client.url("/asm/groups", None);
+        let url = self.client.url(&"/asm/groups".to_string(), None);
         self.client
             .post(
                 &url,
@@ -122,7 +122,7 @@ impl SuppressionsUnsubscribeGroups {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -158,7 +158,7 @@ impl SuppressionsUnsubscribeGroups {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );
@@ -191,7 +191,7 @@ impl SuppressionsUnsubscribeGroups {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}",
-                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(&group_id.to_string()),
             ),
             None,
         );

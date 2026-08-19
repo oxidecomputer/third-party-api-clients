@@ -49,7 +49,7 @@ impl RoleAssignments {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -96,7 +96,7 @@ impl RoleAssignments {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -182,7 +182,7 @@ impl RoleAssignments {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -214,8 +214,8 @@ impl RoleAssignments {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(role_assignment_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&role_assignment_id.to_string()),
             ),
             None,
         );
@@ -247,8 +247,8 @@ impl RoleAssignments {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(role_assignment_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&role_assignment_id.to_string()),
             ),
             None,
         );

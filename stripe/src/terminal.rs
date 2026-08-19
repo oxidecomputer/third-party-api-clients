@@ -19,7 +19,9 @@ impl Terminal {
     pub async fn post_connection_token(
         &self,
     ) -> ClientResult<crate::Response<crate::types::TerminalConnectionToken>> {
-        let url = self.client.url("/v1/terminal/connection_tokens", None);
+        let url = self
+            .client
+            .url(&"/v1/terminal/connection_tokens".to_string(), None);
         self.client
             .post(
                 &url,
@@ -90,7 +92,7 @@ impl Terminal {
     pub async fn get_all_locations(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::TerminalLocation>>> {
-        let url = self.client.url("/v1/terminal/locations", None);
+        let url = self.client.url(&"/v1/terminal/locations".to_string(), None);
         let crate::Response::<crate::types::TerminalLocationList> {
             mut status,
             mut headers,
@@ -171,7 +173,7 @@ impl Terminal {
     pub async fn post_location(
         &self,
     ) -> ClientResult<crate::Response<crate::types::TerminalLocation>> {
-        let url = self.client.url("/v1/terminal/locations", None);
+        let url = self.client.url(&"/v1/terminal/locations".to_string(), None);
         self.client
             .post(
                 &url,
@@ -199,7 +201,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/locations/{}",
-                crate::progenitor_support::encode_path(location),
+                crate::progenitor_support::encode_path(&location.to_string()),
             ),
             None,
         );
@@ -229,7 +231,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/locations/{}",
-                crate::progenitor_support::encode_path(location),
+                crate::progenitor_support::encode_path(&location.to_string()),
             ),
             None,
         );
@@ -259,7 +261,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/locations/{}",
-                crate::progenitor_support::encode_path(location),
+                crate::progenitor_support::encode_path(&location.to_string()),
             ),
             None,
         );
@@ -442,7 +444,7 @@ impl Terminal {
      * <p>Creates a new <code>Reader</code> object.</p>
      */
     pub async fn post_reader(&self) -> ClientResult<crate::Response<crate::types::TerminalReader>> {
-        let url = self.client.url("/v1/terminal/readers", None);
+        let url = self.client.url(&"/v1/terminal/readers".to_string(), None);
         self.client
             .post(
                 &url,
@@ -470,7 +472,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );
@@ -500,7 +502,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );
@@ -530,7 +532,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );
@@ -560,7 +562,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/cancel_action",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );
@@ -590,7 +592,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/process_payment_intent",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );
@@ -620,7 +622,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/process_setup_intent",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );
@@ -650,7 +652,7 @@ impl Terminal {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/set_reader_display",
-                crate::progenitor_support::encode_path(reader),
+                crate::progenitor_support::encode_path(&reader.to_string()),
             ),
             None,
         );

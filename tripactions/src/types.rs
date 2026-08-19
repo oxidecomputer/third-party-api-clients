@@ -2,14 +2,13 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TravelerType {
     #[serde(rename = "GUEST")]
     Guest,
     #[serde(rename = "PASSENGER")]
     Passenger,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27,13 +26,18 @@ impl std::fmt::Display for TravelerType {
     }
 }
 
+impl Default for TravelerType {
+    fn default() -> TravelerType {
+        TravelerType::Noop
+    }
+}
 impl TravelerType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TravelerType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BookingStatus {
     #[serde(rename = "ACCEPTED")]
     Accepted,
@@ -46,7 +50,6 @@ pub enum BookingStatus {
     #[serde(rename = "VOIDED")]
     Voided,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -67,13 +70,18 @@ impl std::fmt::Display for BookingStatus {
     }
 }
 
+impl Default for BookingStatus {
+    fn default() -> BookingStatus {
+        BookingStatus::Noop
+    }
+}
 impl BookingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, BookingStatus::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BookingType {
     #[serde(rename = "BLACK_CAR")]
     BlackCar,
@@ -88,7 +96,6 @@ pub enum BookingType {
     #[serde(rename = "TRANSPORTATION")]
     Transportation,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -110,13 +117,18 @@ impl std::fmt::Display for BookingType {
     }
 }
 
+impl Default for BookingType {
+    fn default() -> BookingType {
+        BookingType::Noop
+    }
+}
 impl BookingType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BookingType::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentSchedule {
     #[serde(rename = "LATER")]
     Later,
@@ -127,7 +139,6 @@ pub enum PaymentSchedule {
     #[serde(rename = "UNKNOWN")]
     Unknown,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -147,20 +158,24 @@ impl std::fmt::Display for PaymentSchedule {
     }
 }
 
+impl Default for PaymentSchedule {
+    fn default() -> PaymentSchedule {
+        PaymentSchedule::Noop
+    }
+}
 impl PaymentSchedule {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentSchedule::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PassengerStatus {
     #[serde(rename = "DISABLED")]
     Disabled,
     #[serde(rename = "ENABLED")]
     Enabled,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -178,6 +193,11 @@ impl std::fmt::Display for PassengerStatus {
     }
 }
 
+impl Default for PassengerStatus {
+    fn default() -> PassengerStatus {
+        PassengerStatus::Noop
+    }
+}
 impl PassengerStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PassengerStatus::Noop)
@@ -542,7 +562,7 @@ pub struct BookingReport {
     )]
     pub cancellation_reason: String,
     /**
-     * Time at which the object was created.
+    * Time at which the object was created.
      */
     #[serde(
         default,
@@ -593,7 +613,7 @@ pub struct BookingReport {
     )]
     pub corporate_discount_used: String,
     /**
-     * Time at which the object was created.
+    * Time at which the object was created.
      */
     #[serde(
         default,
@@ -624,7 +644,7 @@ pub struct BookingReport {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub destination: Option<Location>,
     /**
-     * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
+    * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
      */
     #[serde(
         default,
@@ -716,7 +736,7 @@ pub struct BookingReport {
     )]
     pub invoice: String,
     /**
-     * Time at which the object was created.
+    * Time at which the object was created.
      */
     #[serde(
         default,
@@ -898,7 +918,7 @@ pub struct BookingReport {
     )]
     pub segments: Vec<Segment>,
     /**
-     * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
+    * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
      */
     #[serde(
         default,

@@ -9,12 +9,12 @@ pub struct Details {}
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Error {
     /**
-     * Extra metadata about the error, may be empty. Usually depends on the error type.
+    * Extra metadata about the error, may be empty. Usually depends on the error type.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub details: Option<Details>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -33,7 +33,7 @@ pub struct ErrorResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TaskResponse {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -43,7 +43,7 @@ pub struct TaskResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Role {
     #[serde(rename = "BUSINESS_ADMIN")]
     BusinessAdmin,
@@ -54,7 +54,6 @@ pub enum Role {
     #[serde(rename = "BUSINESS_USER")]
     BusinessUser,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -74,6 +73,11 @@ impl std::fmt::Display for Role {
     }
 }
 
+impl Default for Role {
+    fn default() -> Role {
+        Role::Noop
+    }
+}
 impl Role {
     pub fn is_noop(&self) -> bool {
         matches!(self, Role::Noop)
@@ -84,7 +88,7 @@ impl Role {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -93,7 +97,7 @@ pub struct User {
     )]
     pub amount_limit: String,
     /**
-     * Ramp User
+    * Ramp User
      */
     #[serde(
         default,
@@ -102,7 +106,7 @@ pub struct User {
     )]
     pub business_id: String,
     /**
-     * Ramp User
+    * Ramp User
      */
     #[serde(
         default,
@@ -111,7 +115,7 @@ pub struct User {
     )]
     pub department_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -120,7 +124,7 @@ pub struct User {
     )]
     pub email: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -129,7 +133,7 @@ pub struct User {
     )]
     pub first_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -138,7 +142,7 @@ pub struct User {
     )]
     pub id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -147,7 +151,7 @@ pub struct User {
     )]
     pub last_name: String,
     /**
-     * Ramp User
+    * Ramp User
      */
     #[serde(
         default,
@@ -156,7 +160,7 @@ pub struct User {
     )]
     pub location_id: String,
     /**
-     * Ramp User
+    * Ramp User
      */
     #[serde(
         default,
@@ -165,7 +169,7 @@ pub struct User {
     )]
     pub manager_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -180,7 +184,7 @@ pub struct User {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchUsersRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -189,7 +193,7 @@ pub struct PatchUsersRequest {
     )]
     pub department_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -198,7 +202,7 @@ pub struct PatchUsersRequest {
     )]
     pub direct_manager_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -213,7 +217,7 @@ pub struct PatchUsersRequest {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -226,7 +230,7 @@ pub struct Page {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CardHolder {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -235,7 +239,7 @@ pub struct CardHolder {
     )]
     pub department_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -244,7 +248,7 @@ pub struct CardHolder {
     )]
     pub department_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -253,7 +257,7 @@ pub struct CardHolder {
     )]
     pub first_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -262,7 +266,7 @@ pub struct CardHolder {
     )]
     pub last_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -271,7 +275,7 @@ pub struct CardHolder {
     )]
     pub location_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -284,7 +288,7 @@ pub struct CardHolder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountingCategories {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -293,7 +297,7 @@ pub struct AccountingCategories {
     )]
     pub category_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -303,14 +307,13 @@ pub struct AccountingCategories {
     pub category_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "POLICY_VIOLATION_FROM_ADMIN")]
     PolicyViolationFromAdmin,
     #[serde(rename = "POLICY_VIOLATION_FROM_USER")]
     PolicyViolationFromUser,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -328,6 +331,11 @@ impl std::fmt::Display for Type {
     }
 }
 
+impl Default for Type {
+    fn default() -> Type {
+        Type::Noop
+    }
+}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -343,7 +351,7 @@ pub struct PolicyViolations {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -352,7 +360,7 @@ pub struct PolicyViolations {
     )]
     pub id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -364,7 +372,7 @@ pub struct PolicyViolations {
     pub type_: Option<Type>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetTransactionResponseDataDisputesType {
     #[serde(rename = "DISPUTE_CANCELLED")]
     DisputeCancelled,
@@ -375,7 +383,6 @@ pub enum GetTransactionResponseDataDisputesType {
     #[serde(rename = "UNRECOGNIZED_CHARGE")]
     UnrecognizedCharge,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -395,6 +402,11 @@ impl std::fmt::Display for GetTransactionResponseDataDisputesType {
     }
 }
 
+impl Default for GetTransactionResponseDataDisputesType {
+    fn default() -> GetTransactionResponseDataDisputesType {
+        GetTransactionResponseDataDisputesType::Noop
+    }
+}
 impl GetTransactionResponseDataDisputesType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetTransactionResponseDataDisputesType::Noop)
@@ -410,7 +422,7 @@ pub struct Disputes {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -419,7 +431,7 @@ pub struct Disputes {
     )]
     pub id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -435,7 +447,7 @@ pub struct Disputes {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Data {
     /**
-     * Ramp transaction
+    * Ramp transaction
      */
     #[serde(
         default,
@@ -444,7 +456,7 @@ pub struct Data {
     )]
     pub accounting_categories: Vec<AccountingCategories>,
     /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     #[serde(
         default,
@@ -454,7 +466,7 @@ pub struct Data {
     pub amount: f64,
     pub card_holder: CardHolder,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -463,7 +475,7 @@ pub struct Data {
     )]
     pub card_id: String,
     /**
-     * Ramp transaction
+    * Ramp transaction
      */
     #[serde(
         default,
@@ -472,7 +484,7 @@ pub struct Data {
     )]
     pub disputes: Vec<Disputes>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -481,7 +493,7 @@ pub struct Data {
     )]
     pub id: String,
     /**
-     * Ramp transaction
+    * Ramp transaction
      */
     #[serde(
         default,
@@ -490,7 +502,7 @@ pub struct Data {
     )]
     pub memo: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -499,7 +511,7 @@ pub struct Data {
     )]
     pub merchant_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -508,7 +520,7 @@ pub struct Data {
     )]
     pub merchant_name: String,
     /**
-     * Ramp transaction
+    * Ramp transaction
      */
     #[serde(
         default,
@@ -517,7 +529,7 @@ pub struct Data {
     )]
     pub policy_violations: Vec<PolicyViolations>,
     /**
-     * Ramp transaction
+    * Ramp transaction
      */
     #[serde(
         default,
@@ -526,7 +538,7 @@ pub struct Data {
     )]
     pub receipts: Vec<String>,
     /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     #[serde(
         default,
@@ -535,7 +547,7 @@ pub struct Data {
     )]
     pub sk_category_id: f64,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -544,7 +556,7 @@ pub struct Data {
     )]
     pub sk_category_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -576,7 +588,7 @@ pub struct GetTransactionResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
     /**
-     * Ramp location
+    * Ramp location
      */
     #[serde(
         default,
@@ -585,7 +597,7 @@ pub struct Location {
     )]
     pub id: String,
     /**
-     * Ramp location
+    * Ramp location
      */
     #[serde(
         default,
@@ -611,7 +623,7 @@ pub struct GetLocationResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostLocationRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -638,7 +650,7 @@ pub struct GetUsersResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Department {
     /**
-     * Ramp Department
+    * Ramp Department
      */
     #[serde(
         default,
@@ -647,7 +659,7 @@ pub struct Department {
     )]
     pub id: String,
     /**
-     * Ramp Department
+    * Ramp Department
      */
     #[serde(
         default,
@@ -672,7 +684,7 @@ pub struct GetDepartmentsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientAddress {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -682,7 +694,7 @@ pub struct RecipientAddress {
     )]
     pub address_1: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -691,7 +703,7 @@ pub struct RecipientAddress {
     )]
     pub city: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -700,7 +712,7 @@ pub struct RecipientAddress {
     )]
     pub country: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -709,7 +721,7 @@ pub struct RecipientAddress {
     )]
     pub first_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -718,7 +730,7 @@ pub struct RecipientAddress {
     )]
     pub last_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -727,7 +739,7 @@ pub struct RecipientAddress {
     )]
     pub postal_code: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -747,7 +759,7 @@ pub struct Shipping {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Fulfillment {
     /**
-     * Details for shipping physical cards
+    * Details for shipping physical cards
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping: Option<Shipping>,
@@ -756,7 +768,7 @@ pub struct Fulfillment {
 /**
  * Time interval to apply limit to.
  */
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Interval {
     #[serde(rename = "DAILY")]
     Daily,
@@ -767,7 +779,6 @@ pub enum Interval {
     #[serde(rename = "YEARLY")]
     Yearly,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -787,6 +798,11 @@ impl std::fmt::Display for Interval {
     }
 }
 
+impl Default for Interval {
+    fn default() -> Interval {
+        Interval::Noop
+    }
+}
 impl Interval {
     pub fn is_noop(&self) -> bool {
         matches!(self, Interval::Noop)
@@ -797,7 +813,7 @@ impl Interval {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SpendingRestrictions {
     /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     #[serde(
         default,
@@ -806,7 +822,7 @@ pub struct SpendingRestrictions {
     )]
     pub amount: f64,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(
         default,
@@ -815,7 +831,7 @@ pub struct SpendingRestrictions {
     )]
     pub blocked_categories: Vec<f64>,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(
         default,
@@ -824,12 +840,12 @@ pub struct SpendingRestrictions {
     )]
     pub categories: Vec<f64>,
     /**
-     * Time interval to apply limit to.
+    * Time interval to apply limit to.
      */
     #[serde(default, skip_serializing_if = "Interval::is_noop")]
     pub interval: Interval,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(
         default,
@@ -838,7 +854,7 @@ pub struct SpendingRestrictions {
     )]
     pub lock_date: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(
         default,
@@ -846,7 +862,7 @@ pub struct SpendingRestrictions {
     )]
     pub suspended: bool,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(
         default,
@@ -860,7 +876,7 @@ pub struct SpendingRestrictions {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Card {
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(
         default,
@@ -869,7 +885,7 @@ pub struct Card {
     )]
     pub card_program_id: String,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(
         default,
@@ -878,7 +894,7 @@ pub struct Card {
     )]
     pub cardholder_id: String,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(
         default,
@@ -887,7 +903,7 @@ pub struct Card {
     )]
     pub cardholder_name: String,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(
         default,
@@ -896,12 +912,12 @@ pub struct Card {
     )]
     pub display_name: String,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fulfillment: Option<Fulfillment>,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(
         default,
@@ -910,7 +926,7 @@ pub struct Card {
     )]
     pub id: String,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(
         default,
@@ -918,7 +934,7 @@ pub struct Card {
     )]
     pub is_physical: bool,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(
         default,
@@ -927,7 +943,7 @@ pub struct Card {
     )]
     pub last_four: String,
     /**
-     * Card data that holds mostly static information about a card.
+    * Card data that holds mostly static information about a card.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
@@ -948,7 +964,7 @@ pub struct GetCardsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchResourcesCardsCardRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -957,7 +973,7 @@ pub struct PatchResourcesCardsCardRequest {
     )]
     pub card_program_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -968,7 +984,7 @@ pub struct PatchResourcesCardsCardRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub has_notifications_enabled: Option<bool>,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
@@ -977,7 +993,7 @@ pub struct PatchResourcesCardsCardRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCustomProviderResponse {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -990,7 +1006,7 @@ pub struct GetCustomProviderResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostcustomProviderResponse {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1003,7 +1019,7 @@ pub struct PostcustomProviderResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingAddress {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1013,7 +1029,7 @@ pub struct BillingAddress {
     )]
     pub address_1: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1022,7 +1038,7 @@ pub struct BillingAddress {
     )]
     pub city: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1031,7 +1047,7 @@ pub struct BillingAddress {
     )]
     pub country: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1040,7 +1056,7 @@ pub struct BillingAddress {
     )]
     pub postal_code: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1060,7 +1076,7 @@ pub struct Business {
     pub active: bool,
     pub billing_address: BillingAddress,
     /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     #[serde(
         default,
@@ -1069,7 +1085,7 @@ pub struct Business {
     )]
     pub business_memo_required_threshold: f64,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1078,7 +1094,7 @@ pub struct Business {
     )]
     pub business_name_legal: String,
     /**
-     * Mostly static information about a business that doesn't change often.
+    * Mostly static information about a business that doesn't change often.
      */
     #[serde(
         default,
@@ -1087,7 +1103,7 @@ pub struct Business {
     )]
     pub business_name_on_card: String,
     /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     #[serde(
         default,
@@ -1096,7 +1112,7 @@ pub struct Business {
     )]
     pub business_receipt_required_threshold: f64,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1110,7 +1126,7 @@ pub struct Business {
     )]
     pub enforce_sso: bool,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1119,7 +1135,7 @@ pub struct Business {
     )]
     pub id: String,
     /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     #[serde(
         default,
@@ -1143,7 +1159,7 @@ pub struct Business {
     )]
     pub limit_locked: bool,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1152,7 +1168,7 @@ pub struct Business {
     )]
     pub phone: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1165,7 +1181,7 @@ pub struct Business {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardPhysicalRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1174,7 +1190,7 @@ pub struct PostResourcesCardPhysicalRequest {
     )]
     pub card_program_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1183,12 +1199,12 @@ pub struct PostResourcesCardPhysicalRequest {
     )]
     pub display_name: String,
     /**
-     * Details for shipping physical cards
+    * Details for shipping physical cards
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fulfillment: Option<Fulfillment>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1197,12 +1213,12 @@ pub struct PostResourcesCardPhysicalRequest {
     )]
     pub idempotency_key: String,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1215,7 +1231,7 @@ pub struct PostResourcesCardPhysicalRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardVirtualRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1224,7 +1240,7 @@ pub struct PostResourcesCardVirtualRequest {
     )]
     pub card_program_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1233,7 +1249,7 @@ pub struct PostResourcesCardVirtualRequest {
     )]
     pub display_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1242,12 +1258,12 @@ pub struct PostResourcesCardVirtualRequest {
     )]
     pub idempotency_key: String,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1257,12 +1273,11 @@ pub struct PostResourcesCardVirtualRequest {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TokenType {
     #[serde(rename = "Bearer")]
     Bearer,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1279,6 +1294,11 @@ impl std::fmt::Display for TokenType {
     }
 }
 
+impl Default for TokenType {
+    fn default() -> TokenType {
+        TokenType::Noop
+    }
+}
 impl TokenType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TokenType::Noop)
@@ -1289,7 +1309,7 @@ impl TokenType {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OAuth2Token {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1298,7 +1318,7 @@ pub struct OAuth2Token {
     )]
     pub access_token: String,
     /**
-     * Expiration time for access token in seconds
+    * Expiration time for access token in seconds
      */
     #[serde(
         default,
@@ -1307,7 +1327,7 @@ pub struct OAuth2Token {
     )]
     pub expires_in: i64,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -1316,7 +1336,7 @@ pub struct OAuth2Token {
     )]
     pub refresh_token: String,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -1325,7 +1345,7 @@ pub struct OAuth2Token {
     )]
     pub refresh_token_expires_in: i64,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1341,7 +1361,7 @@ pub struct OAuth2Token {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BusinessCurrentStatus {
     /**
-     * Current data about the business.
+    * Current data about the business.
      */
     #[serde(
         default,
@@ -1350,7 +1370,7 @@ pub struct BusinessCurrentStatus {
     )]
     pub balance_including_pending: f64,
     /**
-     * Current data about the business.
+    * Current data about the business.
      */
     #[serde(
         default,
@@ -1359,7 +1379,7 @@ pub struct BusinessCurrentStatus {
     )]
     pub max_balance: f64,
     /**
-     * Current data about the business.
+    * Current data about the business.
      */
     #[serde(
         default,
@@ -1368,7 +1388,7 @@ pub struct BusinessCurrentStatus {
     )]
     pub next_billing_date: Option<chrono::NaiveDate>,
     /**
-     * Current data about the business.
+    * Current data about the business.
      */
     #[serde(
         default,
@@ -1377,7 +1397,7 @@ pub struct BusinessCurrentStatus {
     )]
     pub prev_billing_date: Option<chrono::NaiveDate>,
     /**
-     * Current data about the business.
+    * Current data about the business.
      */
     #[serde(
         default,
@@ -1390,7 +1410,7 @@ pub struct BusinessCurrentStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardsCardSuspensionRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1403,7 +1423,7 @@ pub struct PostResourcesCardsCardSuspensionRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeCustomRampResponse {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1416,7 +1436,7 @@ pub struct GetEntityTypeCustomRampResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeRampCustomResponse {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1429,7 +1449,7 @@ pub struct GetEntityTypeRampCustomResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetResourcesCardsDeferredResponseData {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1438,7 +1458,7 @@ pub struct GetResourcesCardsDeferredResponseData {
     )]
     pub card_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1447,7 +1467,7 @@ pub struct GetResourcesCardsDeferredResponseData {
     )]
     pub error: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1456,7 +1476,7 @@ pub struct GetResourcesCardsDeferredResponseData {
     )]
     pub id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1466,7 +1486,7 @@ pub struct GetResourcesCardsDeferredResponseData {
     pub misc: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "ERROR")]
     Error,
@@ -1477,7 +1497,6 @@ pub enum Status {
     #[serde(rename = "SUCCESS")]
     Success,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1497,6 +1516,11 @@ impl std::fmt::Display for Status {
     }
 }
 
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
+    }
+}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -1508,7 +1532,7 @@ pub struct GetResourcesCardsDeferredResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<GetResourcesCardsDeferredResponseData>,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1520,7 +1544,7 @@ pub struct GetResourcesCardsDeferredResponse {
     pub status: Option<Status>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Icon {
     #[serde(rename = "AdvertisingIcon")]
     AdvertisingIcon,
@@ -1543,7 +1567,6 @@ pub enum Icon {
     #[serde(rename = "WellnessIcon")]
     WellnessIcon,
     #[serde(rename = "")]
-    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1569,6 +1592,11 @@ impl std::fmt::Display for Icon {
     }
 }
 
+impl Default for Icon {
+    fn default() -> Icon {
+        Icon::Noop
+    }
+}
 impl Icon {
     pub fn is_noop(&self) -> bool {
         matches!(self, Icon::Noop)
@@ -1579,7 +1607,7 @@ impl Icon {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CardProgram {
     /**
-     * Card Program data that serves as a template for creating new cards.
+    * Card Program data that serves as a template for creating new cards.
      */
     #[serde(
         default,
@@ -1588,7 +1616,7 @@ pub struct CardProgram {
     )]
     pub description: String,
     /**
-     * Card Program data that serves as a template for creating new cards.
+    * Card Program data that serves as a template for creating new cards.
      */
     #[serde(
         default,
@@ -1597,12 +1625,12 @@ pub struct CardProgram {
     )]
     pub display_name: String,
     /**
-     * Card Program data that serves as a template for creating new cards.
+    * Card Program data that serves as a template for creating new cards.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub icon: Option<Icon>,
     /**
-     * Card Program data that serves as a template for creating new cards.
+    * Card Program data that serves as a template for creating new cards.
      */
     #[serde(
         default,
@@ -1611,7 +1639,7 @@ pub struct CardProgram {
     )]
     pub id: String,
     /**
-     * Card Program data that serves as a template for creating new cards.
+    * Card Program data that serves as a template for creating new cards.
      */
     #[serde(
         default,
@@ -1619,7 +1647,7 @@ pub struct CardProgram {
     )]
     pub is_default: bool,
     /**
-     * Card Program data that serves as a template for creating new cards.
+    * Card Program data that serves as a template for creating new cards.
      */
     #[serde(
         default,
@@ -1627,7 +1655,7 @@ pub struct CardProgram {
     )]
     pub is_physical: bool,
     /**
-     * Card Program data that serves as a template for creating new cards.
+    * Card Program data that serves as a template for creating new cards.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
@@ -1649,7 +1677,7 @@ pub struct GetCardProgramsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardProgramRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1658,7 +1686,7 @@ pub struct PostResourcesCardProgramRequest {
     )]
     pub description: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1673,7 +1701,7 @@ pub struct PostResourcesCardProgramRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_physical: Option<bool>,
     /**
-     * Specifies the spend restrictions on a Ramp card.
+    * Specifies the spend restrictions on a Ramp card.
      */
     pub spending_restrictions: SpendingRestrictions,
 }
@@ -1681,7 +1709,7 @@ pub struct PostResourcesCardProgramRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostUsersDeferredRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1690,7 +1718,7 @@ pub struct PostUsersDeferredRequest {
     )]
     pub department_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1699,7 +1727,7 @@ pub struct PostUsersDeferredRequest {
     )]
     pub direct_manager_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1708,7 +1736,7 @@ pub struct PostUsersDeferredRequest {
     )]
     pub email: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1717,7 +1745,7 @@ pub struct PostUsersDeferredRequest {
     )]
     pub first_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1726,7 +1754,7 @@ pub struct PostUsersDeferredRequest {
     )]
     pub last_name: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1735,7 +1763,7 @@ pub struct PostUsersDeferredRequest {
     )]
     pub location_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1750,7 +1778,7 @@ pub struct PostUsersDeferredRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseData {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1759,7 +1787,7 @@ pub struct GetUsersDeferredStatusResponseData {
     )]
     pub error: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1768,7 +1796,7 @@ pub struct GetUsersDeferredStatusResponseData {
     )]
     pub id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1777,7 +1805,7 @@ pub struct GetUsersDeferredStatusResponseData {
     )]
     pub misc: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1791,12 +1819,12 @@ pub struct GetUsersDeferredStatusResponseData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponse {
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<GetUsersDeferredStatusResponseData>,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -1805,7 +1833,7 @@ pub struct GetUsersDeferredStatusResponse {
     )]
     pub id: String,
     /**
-     *
+    *
      */
     #[serde(
         default,
@@ -1819,7 +1847,7 @@ pub struct GetUsersDeferredStatusResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseDataType {
     /**
-     *
+    *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error: Option<Error>,
@@ -1938,7 +1966,7 @@ pub struct GetReimbursementsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCustomProviderEntityTypeLinkRequest {
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,
@@ -1947,7 +1975,7 @@ pub struct PostCustomProviderEntityTypeLinkRequest {
     )]
     pub custom_id: String,
     /**
-     * The OAuth2 token header
+    * The OAuth2 token header
      */
     #[serde(
         default,

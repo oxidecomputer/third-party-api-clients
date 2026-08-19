@@ -25,7 +25,7 @@ impl Usergroups {
     pub async fn create(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UsergroupsCreateSchema>> {
-        let url = self.client.url("/usergroups.create", None);
+        let url = self.client.url(&"/usergroups.create".to_string(), None);
         self.client
             .post(
                 &url,
@@ -50,7 +50,7 @@ impl Usergroups {
     pub async fn disable(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UsergroupsCreateSchema>> {
-        let url = self.client.url("/usergroups.disable", None);
+        let url = self.client.url(&"/usergroups.disable".to_string(), None);
         self.client
             .post(
                 &url,
@@ -75,7 +75,7 @@ impl Usergroups {
     pub async fn enable(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UsergroupsCreateSchema>> {
-        let url = self.client.url("/usergroups.enable", None);
+        let url = self.client.url(&"/usergroups.enable".to_string(), None);
         self.client
             .post(
                 &url,
@@ -144,7 +144,7 @@ impl Usergroups {
     pub async fn update(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UsergroupsCreateSchema>> {
-        let url = self.client.url("/usergroups.update", None);
+        let url = self.client.url(&"/usergroups.update".to_string(), None);
         self.client
             .post(
                 &url,

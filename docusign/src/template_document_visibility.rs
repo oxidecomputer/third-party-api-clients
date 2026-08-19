@@ -35,8 +35,8 @@ impl TemplateDocumentVisibility {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
             ),
             None,
         );
@@ -72,9 +72,9 @@ impl TemplateDocumentVisibility {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(template_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );
@@ -113,9 +113,9 @@ impl TemplateDocumentVisibility {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(template_id),
-                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(&recipient_id.to_string()),
             ),
             None,
         );

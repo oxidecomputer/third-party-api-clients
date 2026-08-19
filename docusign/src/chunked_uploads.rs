@@ -30,7 +30,7 @@ impl ChunkedUploads {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -73,8 +73,8 @@ impl ChunkedUploads {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(chunked_upload_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
                 query_
             ),
             None,
@@ -120,8 +120,8 @@ impl ChunkedUploads {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(chunked_upload_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
                 query_
             ),
             None,
@@ -164,8 +164,8 @@ impl ChunkedUploads {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(chunked_upload_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
             ),
             None,
         );
@@ -218,9 +218,9 @@ impl ChunkedUploads {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/chunked_uploads/{}/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(chunked_upload_id),
-                crate::progenitor_support::encode_path(chunked_upload_part_seq),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
+                crate::progenitor_support::encode_path(&chunked_upload_part_seq.to_string()),
             ),
             None,
         );

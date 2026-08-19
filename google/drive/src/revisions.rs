@@ -39,7 +39,7 @@ impl Revisions {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions?{}",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
                 query_
             ),
             None,
@@ -76,7 +76,7 @@ impl Revisions {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions",
-                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
             ),
             None,
         );
@@ -172,8 +172,8 @@ impl Revisions {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions/{}?{}",
-                crate::progenitor_support::encode_path(file_id),
-                crate::progenitor_support::encode_path(revision_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(&revision_id.to_string()),
                 query_
             ),
             None,
@@ -206,8 +206,8 @@ impl Revisions {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions/{}",
-                crate::progenitor_support::encode_path(file_id),
-                crate::progenitor_support::encode_path(revision_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(&revision_id.to_string()),
             ),
             None,
         );
@@ -240,8 +240,8 @@ impl Revisions {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions/{}",
-                crate::progenitor_support::encode_path(file_id),
-                crate::progenitor_support::encode_path(revision_id),
+                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(&revision_id.to_string()),
             ),
             None,
         );

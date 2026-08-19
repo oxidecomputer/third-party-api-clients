@@ -59,7 +59,7 @@ impl Mobiledevices {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile?{}",
-                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
                 query_
             ),
             None,
@@ -114,7 +114,7 @@ impl Mobiledevices {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile?{}",
-                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
                 query_
             ),
             None,
@@ -208,8 +208,8 @@ impl Mobiledevices {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile/{}?{}",
-                crate::progenitor_support::encode_path(customer_id),
-                crate::progenitor_support::encode_path(resource_id),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(&resource_id.to_string()),
                 query_
             ),
             None,
@@ -242,8 +242,8 @@ impl Mobiledevices {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile/{}",
-                crate::progenitor_support::encode_path(customer_id),
-                crate::progenitor_support::encode_path(resource_id),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(&resource_id.to_string()),
             ),
             None,
         );
@@ -276,8 +276,8 @@ impl Mobiledevices {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile/{}/action",
-                crate::progenitor_support::encode_path(customer_id),
-                crate::progenitor_support::encode_path(resource_id),
+                crate::progenitor_support::encode_path(&customer_id.to_string()),
+                crate::progenitor_support::encode_path(&resource_id.to_string()),
             ),
             None,
         );

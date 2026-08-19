@@ -90,7 +90,9 @@ impl AuthorizationServers {
         &self,
         body: &crate::types::AuthorizationServer,
     ) -> ClientResult<crate::Response<crate::types::AuthorizationServer>> {
-        let url = self.client.url("/api/v1/authorizationServers", None);
+        let url = self
+            .client
+            .url(&"/api/v1/authorizationServers".to_string(), None);
         self.client
             .post(
                 &url,
@@ -117,7 +119,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -148,7 +150,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -175,7 +177,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -205,7 +207,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -233,7 +235,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -264,7 +266,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -296,8 +298,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(claim_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&claim_id.to_string()),
             ),
             None,
         );
@@ -330,8 +332,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(claim_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&claim_id.to_string()),
             ),
             None,
         );
@@ -363,8 +365,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(claim_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&claim_id.to_string()),
             ),
             None,
         );
@@ -394,7 +396,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -422,7 +424,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -471,8 +473,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients/{}/tokens?{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&client_id.to_string()),
                 query_
             ),
             None,
@@ -508,8 +510,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients/{}/tokens?{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&client_id.to_string()),
                 query_
             ),
             None,
@@ -542,8 +544,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients/{}/tokens",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&client_id.to_string()),
             ),
             None,
         );
@@ -584,9 +586,9 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients/{}/tokens/{}?{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(client_id),
-                crate::progenitor_support::encode_path(token_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(&token_id.to_string()),
                 query_
             ),
             None,
@@ -621,9 +623,9 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients/{}/tokens/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(client_id),
-                crate::progenitor_support::encode_path(token_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(&token_id.to_string()),
             ),
             None,
         );
@@ -653,7 +655,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/credentials/keys",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -681,7 +683,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/credentials/keys",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -712,7 +714,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/credentials/lifecycle/keyRotate",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -739,7 +741,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -766,7 +768,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -796,7 +798,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -824,7 +826,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -855,7 +857,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -887,8 +889,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -921,8 +923,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -954,8 +956,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -987,8 +989,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -1020,8 +1022,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -1053,8 +1055,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -1083,8 +1085,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -1117,8 +1119,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
             ),
             None,
         );
@@ -1152,9 +1154,9 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -1189,9 +1191,9 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -1225,9 +1227,9 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -1261,9 +1263,9 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -1297,9 +1299,9 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(policy_id),
-                crate::progenitor_support::encode_path(rule_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(&rule_id.to_string()),
             ),
             None,
         );
@@ -1351,7 +1353,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes?{}",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
                 query_
             ),
             None,
@@ -1394,7 +1396,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes?{}",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
                 query_
             ),
             None,
@@ -1426,7 +1428,7 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes",
-                crate::progenitor_support::encode_path(auth_server_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             ),
             None,
         );
@@ -1458,8 +1460,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(scope_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&scope_id.to_string()),
             ),
             None,
         );
@@ -1492,8 +1494,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(scope_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&scope_id.to_string()),
             ),
             None,
         );
@@ -1525,8 +1527,8 @@ impl AuthorizationServers {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes/{}",
-                crate::progenitor_support::encode_path(auth_server_id),
-                crate::progenitor_support::encode_path(scope_id),
+                crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+                crate::progenitor_support::encode_path(&scope_id.to_string()),
             ),
             None,
         );

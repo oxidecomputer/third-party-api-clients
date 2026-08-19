@@ -31,7 +31,7 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/envelopes/retry_queue",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -65,8 +65,8 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/envelopes/{}/retry_queue",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&envelope_id.to_string()),
             ),
             None,
         );
@@ -114,7 +114,7 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/failures?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -149,8 +149,8 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/failures/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(failure_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&failure_id.to_string()),
             ),
             None,
         );
@@ -200,7 +200,7 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/logs?{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
                 query_
             ),
             None,
@@ -233,7 +233,7 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/logs",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -276,8 +276,8 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/logs/{}?{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(log_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&log_id.to_string()),
                 query_
             ),
             None,
@@ -313,8 +313,8 @@ impl ConnectEvents {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/logs/{}",
-                crate::progenitor_support::encode_path(account_id),
-                crate::progenitor_support::encode_path(log_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(&log_id.to_string()),
             ),
             None,
         );

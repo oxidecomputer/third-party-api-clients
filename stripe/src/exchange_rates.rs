@@ -69,7 +69,7 @@ impl ExchangeRates {
      * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
      */
     pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::ExchangeRate>>> {
-        let url = self.client.url("/v1/exchange_rates", None);
+        let url = self.client.url(&"/v1/exchange_rates".to_string(), None);
         let crate::Response::<crate::types::GetExchangeRatesResponse> {
             mut status,
             mut headers,
@@ -158,7 +158,7 @@ impl ExchangeRates {
         let url = self.client.url(
             &format!(
                 "/v1/exchange_rates/{}",
-                crate::progenitor_support::encode_path(rate_id),
+                crate::progenitor_support::encode_path(&rate_id.to_string()),
             ),
             None,
         );

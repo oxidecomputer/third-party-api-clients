@@ -29,7 +29,7 @@ impl UserSchemas {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/apps/{}/default",
-                crate::progenitor_support::encode_path(app_instance_id),
+                crate::progenitor_support::encode_path(&app_instance_id.to_string()),
             ),
             None,
         );
@@ -62,7 +62,7 @@ impl UserSchemas {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/apps/{}/default",
-                crate::progenitor_support::encode_path(app_instance_id),
+                crate::progenitor_support::encode_path(&app_instance_id.to_string()),
             ),
             None,
         );
@@ -94,7 +94,7 @@ impl UserSchemas {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/{}",
-                crate::progenitor_support::encode_path(schema_id),
+                crate::progenitor_support::encode_path(&schema_id.to_string()),
             ),
             None,
         );
@@ -125,7 +125,7 @@ impl UserSchemas {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/{}",
-                crate::progenitor_support::encode_path(schema_id),
+                crate::progenitor_support::encode_path(&schema_id.to_string()),
             ),
             None,
         );

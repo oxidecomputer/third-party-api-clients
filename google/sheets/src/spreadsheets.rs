@@ -20,7 +20,7 @@ impl Spreadsheets {
         &self,
         body: &crate::types::Spreadsheet,
     ) -> ClientResult<crate::Response<crate::types::Spreadsheet>> {
-        let url = self.client.url("/v4/spreadsheets", None);
+        let url = self.client.url(&"/v4/spreadsheets".to_string(), None);
         self.client
             .post(
                 &url,
@@ -59,7 +59,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}?{}",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
                 query_
             ),
             None,
@@ -92,7 +92,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/developerMetadata/{}",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
                 crate::progenitor_support::encode_path(&metadata_id.to_string()),
             ),
             None,
@@ -124,7 +124,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/developerMetadata:search",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );
@@ -157,7 +157,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/sheets/{}:copyTo",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
                 crate::progenitor_support::encode_path(&sheet_id.to_string()),
             ),
             None,
@@ -213,8 +213,8 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values/{}?{}",
-                crate::progenitor_support::encode_path(spreadsheet_id),
-                crate::progenitor_support::encode_path(range),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
+                crate::progenitor_support::encode_path(&range.to_string()),
                 query_
             ),
             None,
@@ -282,8 +282,8 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values/{}?{}",
-                crate::progenitor_support::encode_path(spreadsheet_id),
-                crate::progenitor_support::encode_path(range),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
+                crate::progenitor_support::encode_path(&range.to_string()),
                 query_
             ),
             None,
@@ -359,8 +359,8 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values/{}:append?{}",
-                crate::progenitor_support::encode_path(spreadsheet_id),
-                crate::progenitor_support::encode_path(range),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
+                crate::progenitor_support::encode_path(&range.to_string()),
                 query_
             ),
             None,
@@ -394,8 +394,8 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values/{}:clear",
-                crate::progenitor_support::encode_path(spreadsheet_id),
-                crate::progenitor_support::encode_path(range),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
+                crate::progenitor_support::encode_path(&range.to_string()),
             ),
             None,
         );
@@ -426,7 +426,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchClear",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );
@@ -457,7 +457,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchClearByDataFilter",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );
@@ -515,7 +515,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchGet?{}",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
                 query_
             ),
             None,
@@ -547,7 +547,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchGetByDataFilter",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );
@@ -578,7 +578,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchUpdate",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );
@@ -609,7 +609,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchUpdateByDataFilter",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );
@@ -640,7 +640,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}:batchUpdate",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );
@@ -671,7 +671,7 @@ impl Spreadsheets {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}:getByDataFilter",
-                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&spreadsheet_id.to_string()),
             ),
             None,
         );

@@ -22,7 +22,7 @@ impl Jobs {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}",
-                crate::progenitor_support::encode_path(job_id),
+                crate::progenitor_support::encode_path(&job_id.to_string()),
             ),
             None,
         );
@@ -51,7 +51,7 @@ impl Jobs {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}",
-                crate::progenitor_support::encode_path(job_id),
+                crate::progenitor_support::encode_path(&job_id.to_string()),
             ),
             None,
         );
@@ -76,7 +76,7 @@ impl Jobs {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}",
-                crate::progenitor_support::encode_path(job_id),
+                crate::progenitor_support::encode_path(&job_id.to_string()),
             ),
             None,
         );
@@ -104,7 +104,7 @@ impl Jobs {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/jobs",
-                crate::progenitor_support::encode_path(employee_id),
+                crate::progenitor_support::encode_path(&employee_id.to_string()),
             ),
             None,
         );
@@ -134,7 +134,7 @@ impl Jobs {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/jobs",
-                crate::progenitor_support::encode_path(employee_id),
+                crate::progenitor_support::encode_path(&employee_id.to_string()),
             ),
             None,
         );
@@ -163,7 +163,7 @@ impl Jobs {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/jobs",
-                crate::progenitor_support::encode_path(employee_id),
+                crate::progenitor_support::encode_path(&employee_id.to_string()),
             ),
             None,
         );
@@ -194,7 +194,7 @@ impl Jobs {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}/compensations",
-                crate::progenitor_support::encode_path(job_id),
+                crate::progenitor_support::encode_path(&job_id.to_string()),
             ),
             None,
         );

@@ -100,7 +100,7 @@ impl Gists {
         &self,
         body: &crate::types::GistsCreateRequest,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
-        let url = self.client.url("/gists", None);
+        let url = self.client.url(&"/gists".to_string(), None);
         self.client
             .post(
                 &url,
@@ -281,7 +281,10 @@ impl Gists {
         gist_id: &str,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
         let url = self.client.url(
-            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            &format!(
+                "/gists/{}",
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -309,7 +312,10 @@ impl Gists {
      */
     pub async fn delete(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            &format!(
+                "/gists/{}",
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -341,7 +347,10 @@ impl Gists {
         body: &crate::types::GistsUpdateRequest,
     ) -> ClientResult<crate::Response<crate::types::GistSimple>> {
         let url = self.client.url(
-            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            &format!(
+                "/gists/{}",
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+            ),
             None,
         );
         self.client
@@ -386,7 +395,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments?{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 query_
             ),
             None,
@@ -419,7 +428,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -454,7 +463,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -490,7 +499,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -527,7 +536,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -565,7 +574,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
@@ -612,7 +621,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/commits?{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 query_
             ),
             None,
@@ -645,7 +654,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/commits",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -691,7 +700,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks?{}",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
                 query_
             ),
             None,
@@ -724,7 +733,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -758,7 +767,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -789,7 +798,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -820,7 +829,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -851,7 +860,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
-                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
             ),
             None,
         );
@@ -887,8 +896,8 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/gists/{}/{}",
-                crate::progenitor_support::encode_path(gist_id),
-                crate::progenitor_support::encode_path(sha),
+                crate::progenitor_support::encode_path(&gist_id.to_string()),
+                crate::progenitor_support::encode_path(&sha.to_string()),
             ),
             None,
         );
@@ -939,7 +948,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/users/{}/gists?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,
@@ -978,7 +987,7 @@ impl Gists {
         let url = self.client.url(
             &format!(
                 "/users/{}/gists?{}",
-                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(&username.to_string()),
                 query_
             ),
             None,

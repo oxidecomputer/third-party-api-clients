@@ -61,7 +61,7 @@ impl LinkBranding {
     pub async fn get_all_whitelabel_links(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::LinkBranding200Response>>> {
-        let url = self.client.url("/whitelabel/links", None);
+        let url = self.client.url(&"/whitelabel/links".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -91,7 +91,7 @@ impl LinkBranding {
         &self,
         body: &crate::types::PostWhitelabelLinksRequest,
     ) -> ClientResult<crate::Response<crate::types::LinkBranding200Response>> {
-        let url = self.client.url("/whitelabel/links", None);
+        let url = self.client.url(&"/whitelabel/links".to_string(), None);
         self.client
             .post(
                 &url,

@@ -28,7 +28,7 @@ impl Transfers {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         destination: &str,
         ending_before: &str,
         limit: i64,
@@ -80,7 +80,7 @@ impl Transfers {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         destination: &str,
         transfer_group: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Transfer>>> {
@@ -170,7 +170,7 @@ impl Transfers {
      * <p>To send funds from your Stripe account to a connected account, you create a new transfer object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Transfer>> {
-        let url = self.client.url("/v1/transfers", None);
+        let url = self.client.url(&"/v1/transfers".to_string(), None);
         self.client
             .post(
                 &url,
@@ -215,7 +215,7 @@ impl Transfers {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals?{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
                 query_
             ),
             None,
@@ -252,7 +252,7 @@ impl Transfers {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -347,7 +347,7 @@ impl Transfers {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -378,7 +378,7 @@ impl Transfers {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}",
-                crate::progenitor_support::encode_path(transfer),
+                crate::progenitor_support::encode_path(&transfer.to_string()),
             ),
             None,
         );
@@ -410,7 +410,7 @@ impl Transfers {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}",
-                crate::progenitor_support::encode_path(transfer),
+                crate::progenitor_support::encode_path(&transfer.to_string()),
             ),
             None,
         );
@@ -443,8 +443,8 @@ impl Transfers {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals/{}",
-                crate::progenitor_support::encode_path(transfer),
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&transfer.to_string()),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -478,8 +478,8 @@ impl Transfers {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals/{}",
-                crate::progenitor_support::encode_path(transfer),
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&transfer.to_string()),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

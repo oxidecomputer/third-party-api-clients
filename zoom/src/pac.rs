@@ -37,7 +37,7 @@ impl Pac {
         let url = self.client.url(
             &format!(
                 "/users/{}/pac",
-                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(&user_id.to_string()),
             ),
             None,
         );

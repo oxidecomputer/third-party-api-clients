@@ -31,9 +31,9 @@ impl Products {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         limit: i64,
         shippable: bool,
         starting_after: &str,
@@ -88,8 +88,8 @@ impl Products {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
-        _ids: &[String],
+        created: &str,
+        ids: &[String],
         shippable: bool,
         url: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Product>>> {
@@ -182,7 +182,7 @@ impl Products {
      * <p>Creates a new product object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Product>> {
-        let url = self.client.url("/v1/products", None);
+        let url = self.client.url(&"/v1/products".to_string(), None);
         self.client
             .post(
                 &url,
@@ -353,7 +353,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -383,7 +383,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -413,7 +413,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

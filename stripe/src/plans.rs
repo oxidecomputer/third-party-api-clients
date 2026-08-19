@@ -29,7 +29,7 @@ impl Plans {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         product: &str,
@@ -81,7 +81,7 @@ impl Plans {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         product: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PlanData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -170,7 +170,7 @@ impl Plans {
      * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PlanData>> {
-        let url = self.client.url("/v1/plans", None);
+        let url = self.client.url(&"/v1/plans".to_string(), None);
         self.client
             .post(
                 &url,
@@ -193,7 +193,10 @@ impl Plans {
      */
     pub async fn get(&self, plan: &str) -> ClientResult<crate::Response<crate::types::PlanData>> {
         let url = self.client.url(
-            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            &format!(
+                "/v1/plans/{}",
+                crate::progenitor_support::encode_path(&plan.to_string()),
+            ),
             None,
         );
         self.client
@@ -220,7 +223,10 @@ impl Plans {
         plan: &str,
     ) -> ClientResult<crate::Response<crate::types::PlanData>> {
         let url = self.client.url(
-            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            &format!(
+                "/v1/plans/{}",
+                crate::progenitor_support::encode_path(&plan.to_string()),
+            ),
             None,
         );
         self.client
@@ -247,7 +253,10 @@ impl Plans {
         plan: &str,
     ) -> ClientResult<crate::Response<crate::types::DeletedPlan>> {
         let url = self.client.url(
-            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            &format!(
+                "/v1/plans/{}",
+                crate::progenitor_support::encode_path(&plan.to_string()),
+            ),
             None,
         );
         self.client

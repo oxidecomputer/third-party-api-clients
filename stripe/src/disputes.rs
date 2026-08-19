@@ -29,7 +29,7 @@ impl Disputes {
     pub async fn get_page(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         payment_intent: &str,
@@ -81,7 +81,7 @@ impl Disputes {
     pub async fn get_all(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
         payment_intent: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Dispute>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -178,7 +178,7 @@ impl Disputes {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}",
-                crate::progenitor_support::encode_path(dispute),
+                crate::progenitor_support::encode_path(&dispute.to_string()),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl Disputes {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}",
-                crate::progenitor_support::encode_path(dispute),
+                crate::progenitor_support::encode_path(&dispute.to_string()),
             ),
             None,
         );
@@ -242,7 +242,7 @@ impl Disputes {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}/close",
-                crate::progenitor_support::encode_path(dispute),
+                crate::progenitor_support::encode_path(&dispute.to_string()),
             ),
             None,
         );

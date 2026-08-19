@@ -61,9 +61,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/application_charges.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-01/application_charges.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -99,7 +100,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
                 query_
             ),
             None,
@@ -120,16 +121,16 @@ impl Billing {
       API version 2021-01.
 
     "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-01/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-01
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-01/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-01
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn deprecated_202001_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -138,7 +139,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
             ),
             None,
         );
@@ -202,9 +203,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/application_charges.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-04/application_charges.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -240,7 +242,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
                 query_
             ),
             None,
@@ -261,16 +263,16 @@ impl Billing {
       API version 2021-01.
 
     "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-04/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-04
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-04/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-04
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn deprecated_202004_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -279,7 +281,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
             ),
             None,
         );
@@ -343,9 +345,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/application_charges.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-07/application_charges.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -381,7 +384,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
                 query_
             ),
             None,
@@ -402,16 +405,16 @@ impl Billing {
       API version 2021-01.
 
     "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-07/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-07
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-07/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-07
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn deprecated_202007_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -420,7 +423,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
             ),
             None,
         );
@@ -484,9 +487,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/application_charges.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-10/application_charges.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -522,7 +526,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
                 query_
             ),
             None,
@@ -543,16 +547,16 @@ impl Billing {
       API version 2021-01.
 
     "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-10/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-10
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-10/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-10
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -561,7 +565,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
             ),
             None,
         );
@@ -625,9 +629,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/application_charges.json", None);
+        let url = self.client.url(
+            &"/admin/api/2021-01/application_charges.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -663,7 +668,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
                 query_
             ),
             None,
@@ -728,9 +733,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/application_charges.json", None);
+        let url = self.client.url(
+            &"/admin/api/unstable/application_charges.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -766,7 +772,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(application_charge_id),
+                crate::progenitor_support::encode_path(&application_charge_id.to_string()),
                 query_
             ),
             None,
@@ -826,9 +832,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-01/application_credits.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-01/application_credits.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -864,7 +871,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/application_credits/{}/json?{}",
-                crate::progenitor_support::encode_path(application_credit_id),
+                crate::progenitor_support::encode_path(&application_credit_id.to_string()),
                 query_
             ),
             None,
@@ -924,9 +931,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-04/application_credits.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-04/application_credits.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -962,7 +970,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/application_credits/{}/json?{}",
-                crate::progenitor_support::encode_path(application_credit_id),
+                crate::progenitor_support::encode_path(&application_credit_id.to_string()),
                 query_
             ),
             None,
@@ -1022,9 +1030,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-07/application_credits.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-07/application_credits.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1060,7 +1069,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/application_credits/{}/json?{}",
-                crate::progenitor_support::encode_path(application_credit_id),
+                crate::progenitor_support::encode_path(&application_credit_id.to_string()),
                 query_
             ),
             None,
@@ -1117,9 +1126,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2020-10/application_credits.json", None);
+        let url = self.client.url(
+            &"/admin/api/2020-10/application_credits.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1155,7 +1165,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/application_credits/{}/json?{}",
-                crate::progenitor_support::encode_path(application_credit_id),
+                crate::progenitor_support::encode_path(&application_credit_id.to_string()),
                 query_
             ),
             None,
@@ -1215,9 +1225,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/2021-01/application_credits.json", None);
+        let url = self.client.url(
+            &"/admin/api/2021-01/application_credits.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1253,7 +1264,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/application_credits/{}/json?{}",
-                crate::progenitor_support::encode_path(application_credit_id),
+                crate::progenitor_support::encode_path(&application_credit_id.to_string()),
                 query_
             ),
             None,
@@ -1313,9 +1324,10 @@ impl Billing {
         &self,
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
-        let url = self
-            .client
-            .url("/admin/api/unstable/application_credits.json", None);
+        let url = self.client.url(
+            &"/admin/api/unstable/application_credits.json".to_string(),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1351,7 +1363,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/application_credits/{}/json?{}",
-                crate::progenitor_support::encode_path(application_credit_id),
+                crate::progenitor_support::encode_path(&application_credit_id.to_string()),
                 query_
             ),
             None,
@@ -1420,7 +1432,7 @@ impl Billing {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-01/recurring_application_charges.json",
+            &"/admin/api/2020-01/recurring_application_charges.json".to_string(),
             None,
         );
         self.client
@@ -1458,7 +1470,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -1491,7 +1505,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -1529,7 +1545,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -1571,7 +1589,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/customize.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -1640,7 +1660,7 @@ impl Billing {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-04/recurring_application_charges.json",
+            &"/admin/api/2020-04/recurring_application_charges.json".to_string(),
             None,
         );
         self.client
@@ -1678,7 +1698,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -1711,7 +1733,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -1749,7 +1773,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -1791,7 +1817,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/customize.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -1860,7 +1888,7 @@ impl Billing {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-07/recurring_application_charges.json",
+            &"/admin/api/2020-07/recurring_application_charges.json".to_string(),
             None,
         );
         self.client
@@ -1898,7 +1926,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -1931,7 +1961,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -1969,7 +2001,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2011,7 +2045,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/customize.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2080,7 +2116,7 @@ impl Billing {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2020-10/recurring_application_charges.json",
+            &"/admin/api/2020-10/recurring_application_charges.json".to_string(),
             None,
         );
         self.client
@@ -2118,7 +2154,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2151,7 +2189,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2189,7 +2229,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/activate.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2231,7 +2273,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/customize.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2300,7 +2344,7 @@ impl Billing {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/2021-01/recurring_application_charges.json",
+            &"/admin/api/2021-01/recurring_application_charges.json".to_string(),
             None,
         );
         self.client
@@ -2338,7 +2382,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2371,7 +2417,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2413,7 +2461,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/customize.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2482,7 +2532,7 @@ impl Billing {
         body: &serde_json::Value,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            "/admin/api/unstable/recurring_application_charges.json",
+            &"/admin/api/unstable/recurring_application_charges.json".to_string(),
             None,
         );
         self.client
@@ -2520,7 +2570,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2553,7 +2605,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2595,7 +2649,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/customize.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2635,7 +2691,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/usage_charges.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2669,7 +2727,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/usage_charges.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2710,8 +2770,10 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/usage_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
-                crate::progenitor_support::encode_path(usage_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
+                crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
                 query_
             ),
             None,
@@ -2751,7 +2813,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/usage_charges.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2785,7 +2849,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/usage_charges.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2826,8 +2892,10 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/usage_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
-                crate::progenitor_support::encode_path(usage_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
+                crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
                 query_
             ),
             None,
@@ -2867,7 +2935,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/usage_charges.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -2901,7 +2971,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/usage_charges.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -2942,8 +3014,10 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/usage_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
-                crate::progenitor_support::encode_path(usage_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
+                crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
                 query_
             ),
             None,
@@ -2983,7 +3057,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/usage_charges.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -3017,7 +3093,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/usage_charges.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -3058,8 +3136,10 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/usage_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
-                crate::progenitor_support::encode_path(usage_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
+                crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
                 query_
             ),
             None,
@@ -3099,7 +3179,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/usage_charges.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -3133,7 +3215,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/usage_charges.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -3174,8 +3258,10 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/usage_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
-                crate::progenitor_support::encode_path(usage_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
+                crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
                 query_
             ),
             None,
@@ -3215,7 +3301,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/usage_charges.json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
                 query_
             ),
             None,
@@ -3249,7 +3337,9 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/usage_charges.json",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
             ),
             None,
         );
@@ -3290,8 +3380,10 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/usage_charges/{}/json?{}",
-                crate::progenitor_support::encode_path(recurring_application_charge_id),
-                crate::progenitor_support::encode_path(usage_charge_id),
+                crate::progenitor_support::encode_path(
+                    &recurring_application_charge_id.to_string()
+                ),
+                crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
                 query_
             ),
             None,

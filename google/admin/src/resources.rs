@@ -39,7 +39,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -76,7 +76,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -171,7 +171,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -204,8 +204,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(building_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&building_id.to_string()),
             ),
             None,
         );
@@ -248,8 +248,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(building_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&building_id.to_string()),
                 query_
             ),
             None,
@@ -282,8 +282,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(building_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&building_id.to_string()),
             ),
             None,
         );
@@ -326,8 +326,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(building_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&building_id.to_string()),
                 query_
             ),
             None,
@@ -380,7 +380,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -427,7 +427,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -513,7 +513,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -545,8 +545,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(calendar_resource_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
             ),
             None,
         );
@@ -579,8 +579,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(calendar_resource_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
             ),
             None,
         );
@@ -612,8 +612,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(calendar_resource_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
             ),
             None,
         );
@@ -646,8 +646,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(calendar_resource_id),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
             ),
             None,
         );
@@ -689,7 +689,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features?{}",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
                 query_
             ),
             None,
@@ -726,7 +726,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -811,7 +811,7 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features",
-                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(&customer.to_string()),
             ),
             None,
         );
@@ -843,8 +843,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(feature_key),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&feature_key.to_string()),
             ),
             None,
         );
@@ -877,8 +877,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(feature_key),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&feature_key.to_string()),
             ),
             None,
         );
@@ -910,8 +910,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(feature_key),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&feature_key.to_string()),
             ),
             None,
         );
@@ -944,8 +944,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(feature_key),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&feature_key.to_string()),
             ),
             None,
         );
@@ -978,8 +978,8 @@ impl Resources {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}/rename",
-                crate::progenitor_support::encode_path(customer),
-                crate::progenitor_support::encode_path(old_name),
+                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(&old_name.to_string()),
             ),
             None,
         );

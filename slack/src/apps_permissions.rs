@@ -25,7 +25,7 @@ impl AppsPermissions {
     pub async fn info(
         &self,
     ) -> ClientResult<crate::Response<crate::types::AppsPermissionsInfoSchema>> {
-        let url = self.client.url("/apps.permissions.info", None);
+        let url = self.client.url(&"/apps.permissions.info".to_string(), None);
         self.client
             .get(
                 &url,

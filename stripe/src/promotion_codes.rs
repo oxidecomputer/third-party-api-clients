@@ -33,7 +33,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -95,7 +95,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        _created: &str,
+        created: &str,
         customer: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PromotionCode>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -192,7 +192,7 @@ impl PromotionCodes {
      * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PromotionCode>> {
-        let url = self.client.url("/v1/promotion_codes", None);
+        let url = self.client.url(&"/v1/promotion_codes".to_string(), None);
         self.client
             .post(
                 &url,
@@ -220,7 +220,7 @@ impl PromotionCodes {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",
-                crate::progenitor_support::encode_path(promotion_code),
+                crate::progenitor_support::encode_path(&promotion_code.to_string()),
             ),
             None,
         );
@@ -250,7 +250,7 @@ impl PromotionCodes {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",
-                crate::progenitor_support::encode_path(promotion_code),
+                crate::progenitor_support::encode_path(&promotion_code.to_string()),
             ),
             None,
         );

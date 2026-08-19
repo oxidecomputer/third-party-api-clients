@@ -32,7 +32,7 @@ impl Alerts {
     pub async fn get_page(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::GetAlertsResponse>>> {
-        let url = self.client.url("/alerts", None);
+        let url = self.client.url(&"/alerts".to_string(), None);
         self.client
             .get(
                 &url,
@@ -61,7 +61,7 @@ impl Alerts {
     pub async fn get_all(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::GetAlertsResponse>>> {
-        let url = self.client.url("/alerts", None);
+        let url = self.client.url(&"/alerts".to_string(), None);
         self.client
             .get_all_pages(
                 &url,
@@ -95,7 +95,7 @@ impl Alerts {
         &self,
         body: &crate::types::PostAlertsRequest,
     ) -> ClientResult<crate::Response<crate::types::PostAlertsResponse>> {
-        let url = self.client.url("/alerts", None);
+        let url = self.client.url(&"/alerts".to_string(), None);
         self.client
             .post(
                 &url,

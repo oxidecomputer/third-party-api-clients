@@ -19,7 +19,7 @@ impl Ping {
      * A health check for the API that won't return any account-specific information.
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::ApiHealthStatus>> {
-        let url = self.client.url("/ping", None);
+        let url = self.client.url(&"/ping".to_string(), None);
         self.client
             .get(
                 &url,
