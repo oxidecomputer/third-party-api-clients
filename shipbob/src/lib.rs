@@ -28,7 +28,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shipbob = "0.11.0-rc.0"
+//! shipbob = "0.11.0-rc.1"
 //! ```
 //!
 //! ## Basic example
@@ -67,7 +67,7 @@
 
 /// Use the Channel Resource to list “channels” which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints.
 ///
-/// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.  
+/// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.
 ///
 /// Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.
 pub mod channels;
@@ -877,7 +877,7 @@ impl Client {
 
     /// Use the Channel Resource to list “channels” which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints.
     ///
-    /// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.  
+    /// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.
     ///
     /// Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.
     pub fn channels(&self) -> channels::Channels {
