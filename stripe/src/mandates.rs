@@ -25,7 +25,7 @@ impl Mandates {
         let url = self.client.url(
             &format!(
                 "/v1/mandates/{}",
-                crate::progenitor_support::encode_path(&mandate.to_string()),
+                crate::progenitor_support::encode_path(mandate),
             ),
             None,
         );

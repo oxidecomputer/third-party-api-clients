@@ -27,7 +27,7 @@ impl Locations {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/locations",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );
@@ -59,7 +59,7 @@ impl Locations {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/locations",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );
@@ -90,7 +90,7 @@ impl Locations {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/locations",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );
@@ -118,7 +118,7 @@ impl Locations {
         let url = self.client.url(
             &format!(
                 "/v1/locations/{}",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );
@@ -147,7 +147,7 @@ impl Locations {
         let url = self.client.url(
             &format!(
                 "/v1/locations/{}",
-                crate::progenitor_support::encode_path(&location_id.to_string()),
+                crate::progenitor_support::encode_path(location_id),
             ),
             None,
         );

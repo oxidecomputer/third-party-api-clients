@@ -29,7 +29,7 @@ impl Suppressions {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}/suppressions",
-                crate::progenitor_support::encode_path(&group_id.to_string()),
+                crate::progenitor_support::encode_path(group_id),
             ),
             None,
         );
@@ -59,7 +59,7 @@ impl Suppressions {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}/suppressions",
-                crate::progenitor_support::encode_path(&group_id.to_string()),
+                crate::progenitor_support::encode_path(group_id),
             ),
             None,
         );
@@ -94,7 +94,7 @@ impl Suppressions {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}/suppressions",
-                crate::progenitor_support::encode_path(&group_id.to_string()),
+                crate::progenitor_support::encode_path(group_id),
             ),
             None,
         );
@@ -129,7 +129,7 @@ impl Suppressions {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}/suppressions/search",
-                crate::progenitor_support::encode_path(&group_id.to_string()),
+                crate::progenitor_support::encode_path(group_id),
             ),
             None,
         );
@@ -157,7 +157,7 @@ impl Suppressions {
     pub async fn get_asm(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::GetAsmSuppressionsResponse>>> {
-        let url = self.client.url(&"/asm/suppressions".to_string(), None);
+        let url = self.client.url("/asm/suppressions", None);
         self.client
             .get(
                 &url,
@@ -180,7 +180,7 @@ impl Suppressions {
     pub async fn get_all_asm(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::GetAsmSuppressionsResponse>>> {
-        let url = self.client.url(&"/asm/suppressions".to_string(), None);
+        let url = self.client.url("/asm/suppressions", None);
         self.client
             .get_all_pages(
                 &url,
@@ -209,7 +209,7 @@ impl Suppressions {
         let url = self.client.url(
             &format!(
                 "/asm/suppressions/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );
@@ -244,8 +244,8 @@ impl Suppressions {
         let url = self.client.url(
             &format!(
                 "/asm/groups/{}/suppressions/{}",
-                crate::progenitor_support::encode_path(&group_id.to_string()),
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );

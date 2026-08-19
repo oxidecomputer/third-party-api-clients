@@ -108,7 +108,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/meetings/{}?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
                 query_
             ),
             None,
@@ -173,7 +173,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/meetings/{}/participants?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
                 query_
             ),
             None,
@@ -224,8 +224,8 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/meetings/{}/participants/{}/qos?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
-                crate::progenitor_support::encode_path(&participant_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(participant_id),
                 query_
             ),
             None,
@@ -283,7 +283,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/meetings/{}/participants/qos?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
                 query_
             ),
             None,
@@ -342,7 +342,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/meetings/{}/participants/sharing?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
                 query_
             ),
             None,
@@ -450,7 +450,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/webinars/{}?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -514,7 +514,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/webinars/{}/participants?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -563,8 +563,8 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/webinars/{}/participants/{}/qos?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
-                crate::progenitor_support::encode_path(&participant_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
+                crate::progenitor_support::encode_path(participant_id),
                 query_
             ),
             None,
@@ -622,7 +622,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/webinars/{}/participants/qos?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -681,7 +681,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/webinars/{}/participants/sharing?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -794,7 +794,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/zoomrooms/{}?{}",
-                crate::progenitor_support::encode_path(&zoomroom_id.to_string()),
+                crate::progenitor_support::encode_path(zoomroom_id),
                 query_
             ),
             None,
@@ -1143,7 +1143,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/issues/zoomrooms/{}?{}",
-                crate::progenitor_support::encode_path(&zoomroom_id.to_string()),
+                crate::progenitor_support::encode_path(zoomroom_id),
                 query_
             ),
             None,
@@ -1208,7 +1208,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/client/feedback/{}?{}",
-                crate::progenitor_support::encode_path(&feedback_id.to_string()),
+                crate::progenitor_support::encode_path(feedback_id),
                 query_
             ),
             None,
@@ -1482,7 +1482,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/phone/metrics/call_logs/{}",
-                crate::progenitor_support::encode_path(&call_id.to_string()),
+                crate::progenitor_support::encode_path(call_id),
             ),
             None,
         );
@@ -1520,7 +1520,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/phone/metrics/call_logs/{}/qos",
-                crate::progenitor_support::encode_path(&call_id.to_string()),
+                crate::progenitor_support::encode_path(call_id),
             ),
             None,
         );
@@ -1582,7 +1582,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/meetings/{}/participants/satisfaction?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
                 query_
             ),
             None,
@@ -1636,7 +1636,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/meetings/{}/participants/satisfaction?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
                 query_
             ),
             None,
@@ -1755,7 +1755,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/webinars/{}/participants/satisfaction?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -1810,7 +1810,7 @@ impl Dashboards {
         let url = self.client.url(
             &format!(
                 "/metrics/webinars/{}/participants/satisfaction?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,

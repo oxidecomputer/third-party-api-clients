@@ -25,7 +25,7 @@ impl AdminUsersSession {
     pub async fn invalidate(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url(&"/admin.users.session.invalidate".to_string(), None);
+            .url("/admin.users.session.invalidate", None);
         self.client
             .post(
                 &url,
@@ -50,7 +50,7 @@ impl AdminUsersSession {
     pub async fn reset(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self
             .client
-            .url(&"/admin.users.session.reset".to_string(), None);
+            .url("/admin.users.session.reset", None);
         self.client
             .post(
                 &url,

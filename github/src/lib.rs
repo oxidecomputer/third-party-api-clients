@@ -491,7 +491,7 @@ impl Client {
             ) => creds,
             (
                 crate::auth::AuthenticationConstraint::JWT,
-                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
+                Some(crate::auth::Credentials::InstallationToken(apptoken)),
             ) => Some(apptoken.jwt()),
             (crate::auth::AuthenticationConstraint::JWT, _) => {
                 log::info!(
@@ -510,22 +510,22 @@ impl Client {
         let mut parsed_url = uri.parse::<reqwest::Url>()?;
 
         match self.credentials(authentication) {
-            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => {
+            Some(crate::auth::Credentials::Client(id, secret)) => {
                 parsed_url
                     .query_pairs_mut()
                     .append_pair("client_id", id)
                     .append_pair("client_secret", secret);
                 Ok((parsed_url, None))
             }
-            Some(&crate::auth::Credentials::Token(ref token)) => {
+            Some(crate::auth::Credentials::Token(token)) => {
                 let auth = format!("token {}", token);
                 Ok((parsed_url, Some(auth)))
             }
-            Some(&crate::auth::Credentials::JWT(ref jwt)) => {
+            Some(crate::auth::Credentials::JWT(jwt)) => {
                 let auth = format!("Bearer {}", jwt.token());
                 Ok((parsed_url, Some(auth)))
             }
-            Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
+            Some(crate::auth::Credentials::InstallationToken(apptoken)) => {
                 let token = if let Some(token) = apptoken.token().await {
                     token
                 } else {
@@ -539,7 +539,7 @@ impl Client {
                         let token = self
                             .apps()
                             .create_installation_access_token(
-                                apptoken.installation_id as i64,
+                                apptoken.installation_id,
                                 &types::AppsCreateInstallationAccessTokenRequest {
                                     permissions: Default::default(),
                                     repositories: Default::default(),
@@ -645,7 +645,7 @@ impl Client {
                 .await?;
 
             if method == http::Method::GET {
-                if let Ok(etag) = self.http_cache.lookup_etag(&uri) {
+                if let Ok(etag) = self.http_cache.lookup_etag(uri) {
                     req = req.header(http::header::IF_NONE_MATCH, etag);
                 }
             }
@@ -678,7 +678,7 @@ impl Client {
             {
                 if let Some(etag) = etag {
                     if let Err(e) = self.http_cache.cache_response(
-                        &uri,
+                        uri,
                         &response_body,
                         &etag,
                         &next_link.as_ref().map(|n| n.0.clone()),
@@ -707,13 +707,13 @@ impl Client {
                     // header when cargo builds with --cfg feature="httpcache"
                     #[cfg(feature = "httpcache")]
                     {
-                        let body = self.http_cache.lookup_body(&uri).unwrap();
+                        let body = self.http_cache.lookup_body(uri).unwrap();
                         let out = serde_json::from_str::<Out>(&body).unwrap();
                         let link = match next_link {
                             Some(next_link) => Ok(Some(next_link)),
                             None => self
                                 .http_cache
-                                .lookup_next_link(&uri)
+                                .lookup_next_link(uri)
                                 .map(|next_link| next_link.map(crate::utils::NextLink)),
                         };
                         link.map(|link| (link, Response::new(status, headers, out)))
@@ -804,7 +804,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::GET,
-            &uri,
+            uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -832,7 +832,7 @@ impl Client {
     {
         self.request(
             http::Method::GET,
-            &uri,
+            uri,
             Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -880,7 +880,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, &uri, message, media, authentication)
+        self.request_entity(http::Method::POST, uri, message, media, authentication)
             .await
     }
 
@@ -895,7 +895,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::PATCH,
-            &uri,
+            uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -930,7 +930,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::PUT,
-            &uri,
+            uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -944,7 +944,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::DELETE,
-            &uri,
+            uri,
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,

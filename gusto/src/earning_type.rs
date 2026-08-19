@@ -31,7 +31,7 @@ impl EarningType {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -62,7 +62,7 @@ impl EarningType {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -92,8 +92,8 @@ impl EarningType {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types/{}",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&earning_type_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(earning_type_uuid),
             ),
             None,
         );
@@ -122,8 +122,8 @@ impl EarningType {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types/{}",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&earning_type_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(earning_type_uuid),
             ),
             None,
         );

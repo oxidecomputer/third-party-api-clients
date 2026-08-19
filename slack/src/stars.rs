@@ -23,7 +23,7 @@ impl Stars {
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/stars.add".to_string(), None);
+        let url = self.client.url("/stars.add", None);
         self.client
             .post(
                 &url,
@@ -93,7 +93,7 @@ impl Stars {
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/stars.remove".to_string(), None);
+        let url = self.client.url("/stars.remove", None);
         self.client
             .post(
                 &url,

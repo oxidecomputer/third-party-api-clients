@@ -194,7 +194,7 @@ impl Prices {
      * <p>Creates a new price for an existing product. The price can be recurring or one-time.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PriceData>> {
-        let url = self.client.url(&"/v1/prices".to_string(), None);
+        let url = self.client.url("/v1/prices", None);
         self.client
             .post(
                 &url,
@@ -365,7 +365,7 @@ impl Prices {
         let url = self.client.url(
             &format!(
                 "/v1/prices/{}",
-                crate::progenitor_support::encode_path(&price.to_string()),
+                crate::progenitor_support::encode_path(price),
             ),
             None,
         );
@@ -395,7 +395,7 @@ impl Prices {
         let url = self.client.url(
             &format!(
                 "/v1/prices/{}",
-                crate::progenitor_support::encode_path(&price.to_string()),
+                crate::progenitor_support::encode_path(price),
             ),
             None,
         );

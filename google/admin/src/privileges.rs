@@ -27,7 +27,7 @@ impl Privileges {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/ALL/privileges",
-                crate::progenitor_support::encode_path(&customer.to_string()),
+                crate::progenitor_support::encode_path(customer),
             ),
             None,
         );

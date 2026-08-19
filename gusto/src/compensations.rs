@@ -28,7 +28,7 @@ impl Compensations {
         let url = self.client.url(
             &format!(
                 "/v1/compensations/{}",
-                crate::progenitor_support::encode_path(&compensation_id.to_string()),
+                crate::progenitor_support::encode_path(compensation_id),
             ),
             None,
         );
@@ -59,7 +59,7 @@ impl Compensations {
         let url = self.client.url(
             &format!(
                 "/v1/compensations/{}",
-                crate::progenitor_support::encode_path(&compensation_id.to_string()),
+                crate::progenitor_support::encode_path(compensation_id),
             ),
             None,
         );
@@ -91,7 +91,7 @@ impl Compensations {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}/compensations",
-                crate::progenitor_support::encode_path(&job_id.to_string()),
+                crate::progenitor_support::encode_path(job_id),
             ),
             None,
         );
@@ -125,7 +125,7 @@ impl Compensations {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}/compensations",
-                crate::progenitor_support::encode_path(&job_id.to_string()),
+                crate::progenitor_support::encode_path(job_id),
             ),
             None,
         );

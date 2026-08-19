@@ -76,7 +76,7 @@ impl Reporting {
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportRun>>> {
         let url = self
             .client
-            .url(&"/v1/reporting/report_runs".to_string(), None);
+            .url("/v1/reporting/report_runs", None);
         let crate::Response::<crate::types::GetReportingReportRunsResponse> {
             mut status,
             mut headers,
@@ -158,7 +158,7 @@ impl Reporting {
     ) -> ClientResult<crate::Response<crate::types::ReportingReportRun>> {
         let url = self
             .client
-            .url(&"/v1/reporting/report_runs".to_string(), None);
+            .url("/v1/reporting/report_runs", None);
         self.client
             .post(
                 &url,
@@ -186,7 +186,7 @@ impl Reporting {
         let url = self.client.url(
             &format!(
                 "/v1/reporting/report_runs/{}",
-                crate::progenitor_support::encode_path(&report_run.to_string()),
+                crate::progenitor_support::encode_path(report_run),
             ),
             None,
         );
@@ -214,7 +214,7 @@ impl Reporting {
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportType>>> {
         let url = self
             .client
-            .url(&"/v1/reporting/report_types".to_string(), None);
+            .url("/v1/reporting/report_types", None);
         let resp: crate::Response<crate::types::FinancialReportingFinanceReportTypeList> = self
             .client
             .get(
@@ -245,7 +245,7 @@ impl Reporting {
     ) -> ClientResult<crate::Response<Vec<crate::types::ReportingReportType>>> {
         let url = self
             .client
-            .url(&"/v1/reporting/report_types".to_string(), None);
+            .url("/v1/reporting/report_types", None);
         let crate::Response::<crate::types::FinancialReportingFinanceReportTypeList> {
             mut status,
             mut headers,
@@ -334,7 +334,7 @@ impl Reporting {
         let url = self.client.url(
             &format!(
                 "/v1/reporting/report_types/{}",
-                crate::progenitor_support::encode_path(&report_type.to_string()),
+                crate::progenitor_support::encode_path(report_type),
             ),
             None,
         );

@@ -181,7 +181,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/v1/events/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

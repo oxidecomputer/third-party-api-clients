@@ -51,8 +51,8 @@ impl TemplateRecipients {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
                 query_
             ),
             None,
@@ -99,8 +99,8 @@ impl TemplateRecipients {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
                 query_
             ),
             None,
@@ -145,8 +145,8 @@ impl TemplateRecipients {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
                 query_
             ),
             None,
@@ -182,8 +182,8 @@ impl TemplateRecipients {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
             ),
             None,
         );
@@ -220,9 +220,9 @@ impl TemplateRecipients {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&template_id.to_string()),
-                crate::progenitor_support::encode_path(&recipient_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
             ),
             None,
         );
@@ -259,8 +259,8 @@ impl TemplateRecipients {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/views/recipient_preview",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&template_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
             ),
             None,
         );

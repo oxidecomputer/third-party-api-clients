@@ -144,7 +144,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}?{}",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
                 query_
             ),
             None,
@@ -176,7 +176,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
             ),
             None,
         );
@@ -203,7 +203,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
             ),
             None,
         );
@@ -230,7 +230,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
             ),
             None,
         );
@@ -257,7 +257,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
             ),
             None,
         );
@@ -287,7 +287,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
             ),
             None,
         );
@@ -315,7 +315,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
             ),
             None,
         );
@@ -346,7 +346,7 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
             ),
             None,
         );
@@ -378,8 +378,8 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
-                crate::progenitor_support::encode_path(&rule_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(rule_id),
             ),
             None,
         );
@@ -412,8 +412,8 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
-                crate::progenitor_support::encode_path(&rule_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(rule_id),
             ),
             None,
         );
@@ -445,8 +445,8 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
-                crate::progenitor_support::encode_path(&rule_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(rule_id),
             ),
             None,
         );
@@ -478,8 +478,8 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
-                crate::progenitor_support::encode_path(&rule_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(rule_id),
             ),
             None,
         );
@@ -511,8 +511,8 @@ impl Policies {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(&policy_id.to_string()),
-                crate::progenitor_support::encode_path(&rule_id.to_string()),
+                crate::progenitor_support::encode_path(policy_id),
+                crate::progenitor_support::encode_path(rule_id),
             ),
             None,
         );

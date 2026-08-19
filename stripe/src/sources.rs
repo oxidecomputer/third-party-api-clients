@@ -17,7 +17,7 @@ impl Sources {
      * <p>Creates a new source object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SourceData>> {
-        let url = self.client.url(&"/v1/sources".to_string(), None);
+        let url = self.client.url("/v1/sources", None);
         self.client
             .post(
                 &url,
@@ -52,7 +52,7 @@ impl Sources {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}?{}",
-                crate::progenitor_support::encode_path(&source.to_string()),
+                crate::progenitor_support::encode_path(source),
                 query_
             ),
             None,
@@ -85,7 +85,7 @@ impl Sources {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}",
-                crate::progenitor_support::encode_path(&source.to_string()),
+                crate::progenitor_support::encode_path(source),
             ),
             None,
         );
@@ -118,8 +118,8 @@ impl Sources {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/mandate_notifications/{}",
-                crate::progenitor_support::encode_path(&source.to_string()),
-                crate::progenitor_support::encode_path(&mandate_notification.to_string()),
+                crate::progenitor_support::encode_path(source),
+                crate::progenitor_support::encode_path(mandate_notification),
             ),
             None,
         );
@@ -167,7 +167,7 @@ impl Sources {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/source_transactions?{}",
-                crate::progenitor_support::encode_path(&source.to_string()),
+                crate::progenitor_support::encode_path(source),
                 query_
             ),
             None,
@@ -204,7 +204,7 @@ impl Sources {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/source_transactions",
-                crate::progenitor_support::encode_path(&source.to_string()),
+                crate::progenitor_support::encode_path(source),
             ),
             None,
         );
@@ -298,8 +298,8 @@ impl Sources {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/source_transactions/{}",
-                crate::progenitor_support::encode_path(&source.to_string()),
-                crate::progenitor_support::encode_path(&source_transaction.to_string()),
+                crate::progenitor_support::encode_path(source),
+                crate::progenitor_support::encode_path(source_transaction),
             ),
             None,
         );
@@ -329,7 +329,7 @@ impl Sources {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/verify",
-                crate::progenitor_support::encode_path(&source.to_string()),
+                crate::progenitor_support::encode_path(source),
             ),
             None,
         );

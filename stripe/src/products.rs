@@ -182,7 +182,7 @@ impl Products {
      * <p>Creates a new product object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Product>> {
-        let url = self.client.url(&"/v1/products".to_string(), None);
+        let url = self.client.url("/v1/products", None);
         self.client
             .post(
                 &url,
@@ -353,7 +353,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -383,7 +383,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -413,7 +413,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

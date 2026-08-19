@@ -123,7 +123,7 @@ impl Campaigns {
         &self,
         body: &crate::types::CreatedCampaign,
     ) -> ClientResult<crate::Response<crate::types::Campaign>> {
-        let url = self.client.url(&"/campaigns".to_string(), None);
+        let url = self.client.url("/campaigns", None);
         self.client
             .post(
                 &url,
@@ -164,7 +164,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -194,7 +194,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -227,7 +227,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -259,7 +259,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/cancel-send",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -291,7 +291,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/replicate",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -320,7 +320,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/send",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -353,7 +353,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/schedule",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -385,7 +385,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/unschedule",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -418,7 +418,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/test",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -447,7 +447,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/pause",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -479,7 +479,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/resume",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -511,7 +511,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/create-resend",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -555,7 +555,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/content?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -589,7 +589,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/content",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -633,7 +633,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -667,7 +667,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
             ),
             None,
         );
@@ -713,8 +713,8 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&feedback_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(feedback_id),
                 query_
             ),
             None,
@@ -749,8 +749,8 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback/{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&feedback_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(feedback_id),
             ),
             None,
         );
@@ -785,8 +785,8 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback/{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&feedback_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(feedback_id),
             ),
             None,
         );
@@ -830,7 +830,7 @@ impl Campaigns {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/send-checklist?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,

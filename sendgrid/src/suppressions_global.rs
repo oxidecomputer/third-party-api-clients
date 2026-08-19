@@ -28,7 +28,7 @@ impl SuppressionsGlobal {
     ) -> ClientResult<crate::Response<crate::types::SuppressionsRequestBody>> {
         let url = self
             .client
-            .url(&"/asm/suppressions/global".to_string(), None);
+            .url("/asm/suppressions/global", None);
         self.client
             .post(
                 &url,
@@ -147,7 +147,7 @@ impl SuppressionsGlobal {
         let url = self.client.url(
             &format!(
                 "/asm/suppressions/global/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );
@@ -181,7 +181,7 @@ impl SuppressionsGlobal {
         let url = self.client.url(
             &format!(
                 "/asm/suppressions/global/{}",
-                crate::progenitor_support::encode_path(&email.to_string()),
+                crate::progenitor_support::encode_path(email),
             ),
             None,
         );

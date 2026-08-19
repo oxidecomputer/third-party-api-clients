@@ -19,7 +19,7 @@ impl FilesRemote {
      * FROM: <https://api.slack.com/methods/files.remote.add>
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/files.remote.add".to_string(), None);
+        let url = self.client.url("/files.remote.add", None);
         self.client
             .post(
                 &url,
@@ -131,7 +131,7 @@ impl FilesRemote {
      * FROM: <https://api.slack.com/methods/files.remote.remove>
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/files.remote.remove".to_string(), None);
+        let url = self.client.url("/files.remote.remove", None);
         self.client
             .post(
                 &url,
@@ -194,7 +194,7 @@ impl FilesRemote {
      * FROM: <https://api.slack.com/methods/files.remote.update>
      */
     pub async fn update(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/files.remote.update".to_string(), None);
+        let url = self.client.url("/files.remote.update", None);
         self.client
             .post(
                 &url,

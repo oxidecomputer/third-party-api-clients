@@ -29,7 +29,7 @@ impl Workspaces {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -62,7 +62,7 @@ impl Workspaces {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -96,8 +96,8 @@ impl Workspaces {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
             ),
             None,
         );
@@ -132,8 +132,8 @@ impl Workspaces {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
             ),
             None,
         );
@@ -167,8 +167,8 @@ impl Workspaces {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&workspace_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
             ),
             None,
         );

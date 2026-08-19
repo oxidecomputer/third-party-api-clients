@@ -27,7 +27,7 @@ impl Tokens {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/tokens",
-                crate::progenitor_support::encode_path(&user_key.to_string()),
+                crate::progenitor_support::encode_path(user_key),
             ),
             None,
         );
@@ -59,8 +59,8 @@ impl Tokens {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/tokens/{}",
-                crate::progenitor_support::encode_path(&user_key.to_string()),
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );
@@ -92,8 +92,8 @@ impl Tokens {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/tokens/{}",
-                crate::progenitor_support::encode_path(&user_key.to_string()),
-                crate::progenitor_support::encode_path(&client_id.to_string()),
+                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(client_id),
             ),
             None,
         );

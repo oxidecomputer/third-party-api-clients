@@ -37,7 +37,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/billing",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -79,7 +79,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/billing",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -116,7 +116,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -151,7 +151,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -191,7 +191,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/base",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -235,7 +235,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/addons",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -274,7 +274,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/addons",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -315,7 +315,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/base/status",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -354,7 +354,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/addons/status",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -387,7 +387,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/usage",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -439,7 +439,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/billing/invoices?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
                 query_
             ),
             None,
@@ -476,8 +476,8 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/billing/invoices/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&invoice_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(invoice_id),
             ),
             None,
         );
@@ -509,7 +509,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/api/download/billing/invoices/{}",
-                crate::progenitor_support::encode_path(&invoice_id.to_string()),
+                crate::progenitor_support::encode_path(invoice_id),
             ),
             None,
         );

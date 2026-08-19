@@ -170,7 +170,7 @@ impl FileLinks {
      * <p>Creates a new file link object.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::FileLink>> {
-        let url = self.client.url(&"/v1/file_links".to_string(), None);
+        let url = self.client.url("/v1/file_links", None);
         self.client
             .post(
                 &url,
@@ -198,7 +198,7 @@ impl FileLinks {
         let url = self.client.url(
             &format!(
                 "/v1/file_links/{}",
-                crate::progenitor_support::encode_path(&link.to_string()),
+                crate::progenitor_support::encode_path(link),
             ),
             None,
         );
@@ -228,7 +228,7 @@ impl FileLinks {
         let url = self.client.url(
             &format!(
                 "/v1/file_links/{}",
-                crate::progenitor_support::encode_path(&link.to_string()),
+                crate::progenitor_support::encode_path(link),
             ),
             None,
         );

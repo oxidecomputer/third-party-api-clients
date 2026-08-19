@@ -47,7 +47,7 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/team-sync/groups?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -94,7 +94,7 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -127,7 +127,7 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -164,7 +164,7 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -202,8 +202,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -243,8 +243,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -283,8 +283,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -346,8 +346,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -393,8 +393,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -436,8 +436,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -477,8 +477,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
             ),
             None,
@@ -519,8 +519,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
             ),
             None,
@@ -562,8 +562,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
             ),
             None,
@@ -623,8 +623,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 query_
             ),
@@ -668,8 +668,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 query_
             ),
@@ -714,8 +714,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
             ),
             None,
@@ -758,8 +758,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 crate::progenitor_support::encode_path(&comment_number.to_string()),
             ),
@@ -803,8 +803,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 crate::progenitor_support::encode_path(&comment_number.to_string()),
             ),
@@ -849,8 +849,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 crate::progenitor_support::encode_path(&comment_number.to_string()),
             ),
@@ -902,8 +902,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/invitations?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -939,8 +939,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/invitations",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -998,8 +998,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/members?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -1041,8 +1041,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/members?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -1090,9 +1090,9 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/memberships/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -1141,9 +1141,9 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/memberships/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -1187,9 +1187,9 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/memberships/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -1239,8 +1239,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -1276,8 +1276,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -1317,8 +1317,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
@@ -1360,8 +1360,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
@@ -1402,8 +1402,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
@@ -1454,8 +1454,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -1491,8 +1491,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -1538,10 +1538,10 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos/{}/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1586,10 +1586,10 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos/{}/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1631,10 +1631,10 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos/{}/{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1674,8 +1674,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/team-sync/group-mappings",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -1716,8 +1716,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/team-sync/group-mappings",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -1767,8 +1767,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/teams?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
                 query_
             ),
             None,
@@ -1804,8 +1804,8 @@ impl Teams {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/teams",
-                crate::progenitor_support::encode_path(&org.to_string()),
-                crate::progenitor_support::encode_path(&team_slug.to_string()),
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
             ),
             None,
         );
@@ -2660,7 +2660,7 @@ impl Teams {
             &format!(
                 "/teams/{}/members/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -2707,7 +2707,7 @@ impl Teams {
             &format!(
                 "/teams/{}/members/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -2752,7 +2752,7 @@ impl Teams {
             &format!(
                 "/teams/{}/members/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -2798,7 +2798,7 @@ impl Teams {
             &format!(
                 "/teams/{}/memberships/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -2846,7 +2846,7 @@ impl Teams {
             &format!(
                 "/teams/{}/memberships/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -2889,7 +2889,7 @@ impl Teams {
             &format!(
                 "/teams/{}/memberships/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -3212,8 +3212,8 @@ impl Teams {
             &format!(
                 "/teams/{}/repos/{}/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -3257,8 +3257,8 @@ impl Teams {
             &format!(
                 "/teams/{}/repos/{}/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -3299,8 +3299,8 @@ impl Teams {
             &format!(
                 "/teams/{}/repos/{}/{}",
                 crate::progenitor_support::encode_path(&team_id.to_string()),
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -3522,7 +3522,7 @@ impl Teams {
     pub async fn list_all_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::FullTeam>>> {
-        let url = self.client.url(&"/user/teams".to_string(), None);
+        let url = self.client.url("/user/teams", None);
         self.client
             .get_all_pages(
                 &url,

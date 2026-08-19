@@ -68,7 +68,7 @@ impl Batches {
         &self,
         body: &crate::types::PostBatchesRequest,
     ) -> ClientResult<crate::Response<crate::types::Batch>> {
-        let url = self.client.url(&"/batches".to_string(), None);
+        let url = self.client.url("/batches", None);
         self.client
             .post(
                 &url,
@@ -109,7 +109,7 @@ impl Batches {
         let url = self.client.url(
             &format!(
                 "/batches/{}?{}",
-                crate::progenitor_support::encode_path(&batch_id.to_string()),
+                crate::progenitor_support::encode_path(batch_id),
                 query_
             ),
             None,
@@ -139,7 +139,7 @@ impl Batches {
         let url = self.client.url(
             &format!(
                 "/batches/{}",
-                crate::progenitor_support::encode_path(&batch_id.to_string()),
+                crate::progenitor_support::encode_path(batch_id),
             ),
             None,
         );

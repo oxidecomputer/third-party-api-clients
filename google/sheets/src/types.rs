@@ -284,6 +284,7 @@ pub struct AppendCellsRequest {
  * Whether rows or columns should be appended.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Dimension {
     #[serde(rename = "COLUMNS")]
     Columns,
@@ -292,6 +293,7 @@ pub enum Dimension {
     #[serde(rename = "ROWS")]
     Rows,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -310,11 +312,6 @@ impl std::fmt::Display for Dimension {
     }
 }
 
-impl Default for Dimension {
-    fn default() -> Dimension {
-        Dimension::Noop
-    }
-}
 impl Dimension {
     pub fn is_noop(&self) -> bool {
         matches!(self, Dimension::Noop)
@@ -546,6 +543,7 @@ pub struct BandingProperties {
  * The comparison type of key value with baseline value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ComparisonType {
     #[serde(rename = "ABSOLUTE_DIFFERENCE")]
     AbsoluteDifference,
@@ -554,6 +552,7 @@ pub enum ComparisonType {
     #[serde(rename = "PERCENTAGE_DIFFERENCE")]
     PercentageDifference,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -572,11 +571,6 @@ impl std::fmt::Display for ComparisonType {
     }
 }
 
-impl Default for ComparisonType {
-    fn default() -> ComparisonType {
-        ComparisonType::Noop
-    }
-}
 impl ComparisonType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ComparisonType::Noop)
@@ -660,6 +654,7 @@ pub struct BaselineValueFormat {
  * The position of this axis.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Position {
     #[serde(rename = "BASIC_CHART_AXIS_POSITION_UNSPECIFIED")]
     BasicChartAxisPositionUnspecified,
@@ -670,6 +665,7 @@ pub enum Position {
     #[serde(rename = "RIGHT_AXIS")]
     RightAxis,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -689,11 +685,6 @@ impl std::fmt::Display for Position {
     }
 }
 
-impl Default for Position {
-    fn default() -> Position {
-        Position::Noop
-    }
-}
 impl Position {
     pub fn is_noop(&self) -> bool {
         matches!(self, Position::Noop)
@@ -764,6 +755,7 @@ pub struct BasicChartDomain {
  * The type of this series. Valid only if the chartType is COMBO. Different types will change the way the series is visualized. Only LINE, AREA, and COLUMN are supported.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "AREA")]
     Area,
@@ -782,6 +774,7 @@ pub enum Type {
     #[serde(rename = "STEPPED_AREA")]
     SteppedArea,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -805,11 +798,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -887,6 +875,7 @@ pub struct BasicChartSeries {
  * The behavior of tooltips and data highlighting when hovering on data and chart area.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CompareMode {
     #[serde(rename = "BASIC_CHART_COMPARE_MODE_UNSPECIFIED")]
     BasicChartCompareModeUnspecified,
@@ -895,6 +884,7 @@ pub enum CompareMode {
     #[serde(rename = "DATUM")]
     Datum,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -913,11 +903,6 @@ impl std::fmt::Display for CompareMode {
     }
 }
 
-impl Default for CompareMode {
-    fn default() -> CompareMode {
-        CompareMode::Noop
-    }
-}
 impl CompareMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, CompareMode::Noop)
@@ -928,6 +913,7 @@ impl CompareMode {
  * The position of the chart legend.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LegendPosition {
     #[serde(rename = "BASIC_CHART_LEGEND_POSITION_UNSPECIFIED")]
     BasicChartLegendPositionUnspecified,
@@ -942,6 +928,7 @@ pub enum LegendPosition {
     #[serde(rename = "TOP_LEGEND")]
     TopLegend,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -965,11 +952,6 @@ impl std::fmt::Display for LegendPosition {
     }
 }
 
-impl Default for LegendPosition {
-    fn default() -> LegendPosition {
-        LegendPosition::Noop
-    }
-}
 impl LegendPosition {
     pub fn is_noop(&self) -> bool {
         matches!(self, LegendPosition::Noop)
@@ -980,6 +962,7 @@ impl LegendPosition {
  * The stacked type for charts that support vertical stacking. Applies to Area, Bar, Column, Combo, and Stepped Area charts.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum StackedType {
     #[serde(rename = "BASIC_CHART_STACKED_TYPE_UNSPECIFIED")]
     BasicChartStackedTypeUnspecified,
@@ -990,6 +973,7 @@ pub enum StackedType {
     #[serde(rename = "STACKED")]
     Stacked,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1009,11 +993,6 @@ impl std::fmt::Display for StackedType {
     }
 }
 
-impl Default for StackedType {
-    fn default() -> StackedType {
-        StackedType::Noop
-    }
-}
 impl StackedType {
     pub fn is_noop(&self) -> bool {
         matches!(self, StackedType::Noop)
@@ -1285,12 +1264,14 @@ pub struct BatchClearValuesResponse {
  * How dates, times, and durations should be represented in the output. This is ignored if value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DateTimeRenderOption {
     #[serde(rename = "FORMATTED_STRING")]
     FormattedString,
     #[serde(rename = "SERIAL_NUMBER")]
     SerialNumber,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1308,11 +1289,6 @@ impl std::fmt::Display for DateTimeRenderOption {
     }
 }
 
-impl Default for DateTimeRenderOption {
-    fn default() -> DateTimeRenderOption {
-        DateTimeRenderOption::Noop
-    }
-}
 impl DateTimeRenderOption {
     pub fn is_noop(&self) -> bool {
         matches!(self, DateTimeRenderOption::Noop)
@@ -1323,6 +1299,7 @@ impl DateTimeRenderOption {
  * How values should be represented in the output. The default render option is FORMATTED_VALUE.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ValueRenderOption {
     #[serde(rename = "FORMATTED_VALUE")]
     FormattedValue,
@@ -1331,6 +1308,7 @@ pub enum ValueRenderOption {
     #[serde(rename = "UNFORMATTED_VALUE")]
     UnformattedValue,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1349,11 +1327,6 @@ impl std::fmt::Display for ValueRenderOption {
     }
 }
 
-impl Default for ValueRenderOption {
-    fn default() -> ValueRenderOption {
-        ValueRenderOption::Noop
-    }
-}
 impl ValueRenderOption {
     pub fn is_noop(&self) -> bool {
         matches!(self, ValueRenderOption::Noop)
@@ -1531,6 +1504,7 @@ pub struct BatchUpdateSpreadsheetResponse {
  * How the input data should be interpreted.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ValueInputOption {
     #[serde(rename = "INPUT_VALUE_OPTION_UNSPECIFIED")]
     InputValueOptionUnspecified,
@@ -1539,6 +1513,7 @@ pub enum ValueInputOption {
     #[serde(rename = "USER_ENTERED")]
     UserEntered,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1557,11 +1532,6 @@ impl std::fmt::Display for ValueInputOption {
     }
 }
 
-impl Default for ValueInputOption {
-    fn default() -> ValueInputOption {
-        ValueInputOption::Noop
-    }
-}
 impl ValueInputOption {
     pub fn is_noop(&self) -> bool {
         matches!(self, ValueInputOption::Noop)
@@ -1875,6 +1845,7 @@ pub struct BigQueryTableSpec {
  * The type of condition.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BooleanConditionType {
     #[serde(rename = "BLANK")]
     Blank,
@@ -1941,6 +1912,7 @@ pub enum BooleanConditionType {
     #[serde(rename = "TEXT_STARTS_WITH")]
     TextStartsWith,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1988,11 +1960,6 @@ impl std::fmt::Display for BooleanConditionType {
     }
 }
 
-impl Default for BooleanConditionType {
-    fn default() -> BooleanConditionType {
-        BooleanConditionType::Noop
-    }
-}
 impl BooleanConditionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BooleanConditionType::Noop)
@@ -2037,6 +2004,7 @@ pub struct BooleanRule {
  * The style of the border.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Style {
     #[serde(rename = "DASHED")]
     Dashed,
@@ -2055,6 +2023,7 @@ pub enum Style {
     #[serde(rename = "STYLE_UNSPECIFIED")]
     StyleUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2078,11 +2047,6 @@ impl std::fmt::Display for Style {
     }
 }
 
-impl Default for Style {
-    fn default() -> Style {
-        Style::Noop
-    }
-}
 impl Style {
     pub fn is_noop(&self) -> bool {
         matches!(self, Style::Noop)
@@ -2151,6 +2115,7 @@ pub struct Borders {
  * Where the legend of the chart should be drawn.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BubbleChartSpecLegendPosition {
     #[serde(rename = "BOTTOM_LEGEND")]
     BottomLegend,
@@ -2167,6 +2132,7 @@ pub enum BubbleChartSpecLegendPosition {
     #[serde(rename = "TOP_LEGEND")]
     TopLegend,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2191,11 +2157,6 @@ impl std::fmt::Display for BubbleChartSpecLegendPosition {
     }
 }
 
-impl Default for BubbleChartSpecLegendPosition {
-    fn default() -> BubbleChartSpecLegendPosition {
-        BubbleChartSpecLegendPosition::Noop
-    }
-}
 impl BubbleChartSpecLegendPosition {
     pub fn is_noop(&self) -> bool {
         matches!(self, BubbleChartSpecLegendPosition::Noop)
@@ -2509,6 +2470,7 @@ pub struct CellData {
  * The horizontal alignment of the value in the cell.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum HorizontalAlignment {
     #[serde(rename = "CENTER")]
     Center,
@@ -2519,6 +2481,7 @@ pub enum HorizontalAlignment {
     #[serde(rename = "RIGHT")]
     Right,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2538,11 +2501,6 @@ impl std::fmt::Display for HorizontalAlignment {
     }
 }
 
-impl Default for HorizontalAlignment {
-    fn default() -> HorizontalAlignment {
-        HorizontalAlignment::Noop
-    }
-}
 impl HorizontalAlignment {
     pub fn is_noop(&self) -> bool {
         matches!(self, HorizontalAlignment::Noop)
@@ -2553,6 +2511,7 @@ impl HorizontalAlignment {
  * How a hyperlink, if it exists, should be displayed in the cell.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum HyperlinkDisplayType {
     #[serde(rename = "HYPERLINK_DISPLAY_TYPE_UNSPECIFIED")]
     HyperlinkDisplayTypeUnspecified,
@@ -2561,6 +2520,7 @@ pub enum HyperlinkDisplayType {
     #[serde(rename = "PLAIN_TEXT")]
     PlainText,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2581,11 +2541,6 @@ impl std::fmt::Display for HyperlinkDisplayType {
     }
 }
 
-impl Default for HyperlinkDisplayType {
-    fn default() -> HyperlinkDisplayType {
-        HyperlinkDisplayType::Noop
-    }
-}
 impl HyperlinkDisplayType {
     pub fn is_noop(&self) -> bool {
         matches!(self, HyperlinkDisplayType::Noop)
@@ -2596,6 +2551,7 @@ impl HyperlinkDisplayType {
  * The direction of the text in the cell.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TextDirection {
     #[serde(rename = "LEFT_TO_RIGHT")]
     LeftToRight,
@@ -2604,6 +2560,7 @@ pub enum TextDirection {
     #[serde(rename = "TEXT_DIRECTION_UNSPECIFIED")]
     TextDirectionUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2622,11 +2579,6 @@ impl std::fmt::Display for TextDirection {
     }
 }
 
-impl Default for TextDirection {
-    fn default() -> TextDirection {
-        TextDirection::Noop
-    }
-}
 impl TextDirection {
     pub fn is_noop(&self) -> bool {
         matches!(self, TextDirection::Noop)
@@ -2637,6 +2589,7 @@ impl TextDirection {
  * The vertical alignment of the value in the cell.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum VerticalAlignment {
     #[serde(rename = "BOTTOM")]
     Bottom,
@@ -2647,6 +2600,7 @@ pub enum VerticalAlignment {
     #[serde(rename = "VERTICAL_ALIGN_UNSPECIFIED")]
     VerticalAlignUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2666,11 +2620,6 @@ impl std::fmt::Display for VerticalAlignment {
     }
 }
 
-impl Default for VerticalAlignment {
-    fn default() -> VerticalAlignment {
-        VerticalAlignment::Noop
-    }
-}
 impl VerticalAlignment {
     pub fn is_noop(&self) -> bool {
         matches!(self, VerticalAlignment::Noop)
@@ -2681,6 +2630,7 @@ impl VerticalAlignment {
  * The wrap strategy for the value in the cell.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WrapStrategy {
     #[serde(rename = "CLIP")]
     Clip,
@@ -2693,6 +2643,7 @@ pub enum WrapStrategy {
     #[serde(rename = "WRAP_STRATEGY_UNSPECIFIED")]
     WrapStrategyUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2713,11 +2664,6 @@ impl std::fmt::Display for WrapStrategy {
     }
 }
 
-impl Default for WrapStrategy {
-    fn default() -> WrapStrategy {
-        WrapStrategy::Noop
-    }
-}
 impl WrapStrategy {
     pub fn is_noop(&self) -> bool {
         matches!(self, WrapStrategy::Noop)
@@ -2833,6 +2779,7 @@ pub struct CellFormat {
  * The view window's mode.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ViewWindowMode {
     #[serde(rename = "DEFAULT_VIEW_WINDOW_MODE")]
     DefaultViewWindowMode,
@@ -2843,6 +2790,7 @@ pub enum ViewWindowMode {
     #[serde(rename = "VIEW_WINDOW_MODE_UNSUPPORTED")]
     ViewWindowModeUnsupported,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2862,11 +2810,6 @@ impl std::fmt::Display for ViewWindowMode {
     }
 }
 
-impl Default for ViewWindowMode {
-    fn default() -> ViewWindowMode {
-        ViewWindowMode::Noop
-    }
-}
 impl ViewWindowMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, ViewWindowMode::Noop)
@@ -2934,6 +2877,7 @@ pub struct ChartCustomNumberFormatOptions {
  * The aggregation type for the series of a data source chart. Only supported for data source charts.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AggregateType {
     #[serde(rename = "AVERAGE")]
     Average,
@@ -2950,6 +2894,7 @@ pub enum AggregateType {
     #[serde(rename = "SUM")]
     Sum,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2972,11 +2917,6 @@ impl std::fmt::Display for AggregateType {
     }
 }
 
-impl Default for AggregateType {
-    fn default() -> AggregateType {
-        AggregateType::Noop
-    }
-}
 impl AggregateType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AggregateType::Noop)
@@ -3024,6 +2964,7 @@ pub struct ChartData {
  * The type of date-time grouping to apply.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ChartDateTimeRuleType {
     #[serde(rename = "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED")]
     ChartDateTimeRuleTypeUnspecified,
@@ -3058,6 +2999,7 @@ pub enum ChartDateTimeRuleType {
     #[serde(rename = "YEAR_QUARTER")]
     YearQuarter,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3091,11 +3033,6 @@ impl std::fmt::Display for ChartDateTimeRuleType {
     }
 }
 
-impl Default for ChartDateTimeRuleType {
-    fn default() -> ChartDateTimeRuleType {
-        ChartDateTimeRuleType::Noop
-    }
-}
 impl ChartDateTimeRuleType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ChartDateTimeRuleType::Noop)
@@ -3188,6 +3125,7 @@ pub struct ChartSourceRange {
  * Determines how the charts will use hidden rows or columns.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum HiddenDimensionStrategy {
     #[serde(rename = "CHART_HIDDEN_DIMENSION_STRATEGY_UNSPECIFIED")]
     ChartHiddenDimensionStrategyUnspecified,
@@ -3200,6 +3138,7 @@ pub enum HiddenDimensionStrategy {
     #[serde(rename = "SKIP_HIDDEN_ROWS_AND_COLUMNS")]
     SkipHiddenRowsAndColumns,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3222,11 +3161,6 @@ impl std::fmt::Display for HiddenDimensionStrategy {
     }
 }
 
-impl Default for HiddenDimensionStrategy {
-    fn default() -> HiddenDimensionStrategy {
-        HiddenDimensionStrategy::Noop
-    }
-}
 impl HiddenDimensionStrategy {
     pub fn is_noop(&self) -> bool {
         matches!(self, HiddenDimensionStrategy::Noop)
@@ -3538,6 +3472,7 @@ pub struct Color {
  * The type of the spreadsheet theme color.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ColorType {
     #[serde(rename = "ACCENT1")]
     Accent1,
@@ -3560,6 +3495,7 @@ pub enum ColorType {
     #[serde(rename = "THEME_COLOR_TYPE_UNSPECIFIED")]
     ThemeColorTypeUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3585,11 +3521,6 @@ impl std::fmt::Display for ColorType {
     }
 }
 
-impl Default for ColorType {
-    fn default() -> ColorType {
-        ColorType::Noop
-    }
-}
 impl ColorType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ColorType::Noop)
@@ -3619,6 +3550,7 @@ pub struct ColorStyle {
  * A relative date (based on the current date). Valid only if the type is DATE_BEFORE, DATE_AFTER, DATE_ON_OR_BEFORE or DATE_ON_OR_AFTER. Relative dates are not supported in data validation. They are supported only in conditional formatting and conditional filters.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RelativeDate {
     #[serde(rename = "PAST_MONTH")]
     PastMonth,
@@ -3635,6 +3567,7 @@ pub enum RelativeDate {
     #[serde(rename = "YESTERDAY")]
     Yesterday,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3657,11 +3590,6 @@ impl std::fmt::Display for RelativeDate {
     }
 }
 
-impl Default for RelativeDate {
-    fn default() -> RelativeDate {
-        RelativeDate::Noop
-    }
-}
 impl RelativeDate {
     pub fn is_noop(&self) -> bool {
         matches!(self, RelativeDate::Noop)
@@ -3728,12 +3656,14 @@ pub struct ConditionalFormatRule {
  * How that data should be oriented when pasting.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PasteOrientation {
     #[serde(rename = "NORMAL")]
     Normal,
     #[serde(rename = "TRANSPOSE")]
     Transpose,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3751,11 +3681,6 @@ impl std::fmt::Display for PasteOrientation {
     }
 }
 
-impl Default for PasteOrientation {
-    fn default() -> PasteOrientation {
-        PasteOrientation::Noop
-    }
-}
 impl PasteOrientation {
     pub fn is_noop(&self) -> bool {
         matches!(self, PasteOrientation::Noop)
@@ -3766,6 +3691,7 @@ impl PasteOrientation {
  * What kind of data to paste.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PasteType {
     #[serde(rename = "PASTE_CONDITIONAL_FORMATTING")]
     PasteConditionalFormatting,
@@ -3782,6 +3708,7 @@ pub enum PasteType {
     #[serde(rename = "PASTE_VALUES")]
     PasteValues,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3804,11 +3731,6 @@ impl std::fmt::Display for PasteType {
     }
 }
 
-impl Default for PasteType {
-    fn default() -> PasteType {
-        PasteType::Noop
-    }
-}
 impl PasteType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PasteType::Noop)
@@ -3911,6 +3833,7 @@ pub struct CutPasteRequest {
  * The error code.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ErrorCode {
     #[serde(rename = "CONCURRENT_QUERY")]
     ConcurrentQuery,
@@ -3949,6 +3872,7 @@ pub enum ErrorCode {
     #[serde(rename = "UNSUPPORTED_DATA_TYPE")]
     UnsupportedDataType,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3982,11 +3906,6 @@ impl std::fmt::Display for ErrorCode {
     }
 }
 
-impl Default for ErrorCode {
-    fn default() -> ErrorCode {
-        ErrorCode::Noop
-    }
-}
 impl ErrorCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, ErrorCode::Noop)
@@ -3997,6 +3916,7 @@ impl ErrorCode {
  * The state of the data execution.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum State {
     #[serde(rename = "DATA_EXECUTION_STATE_UNSPECIFIED")]
     DataExecutionStateUnspecified,
@@ -4009,6 +3929,7 @@ pub enum State {
     #[serde(rename = "SUCCEEDED")]
     Succeeded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4029,11 +3950,6 @@ impl std::fmt::Display for State {
     }
 }
 
-impl Default for State {
-    fn default() -> State {
-        State::Noop
-    }
-}
 impl State {
     pub fn is_noop(&self) -> bool {
         matches!(self, State::Noop)
@@ -4140,6 +4056,7 @@ pub struct DataFilterValueRange {
  * The placement of the data label relative to the labeled data.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Placement {
     #[serde(rename = "ABOVE")]
     Above,
@@ -4160,6 +4077,7 @@ pub enum Placement {
     #[serde(rename = "RIGHT")]
     Right,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4184,11 +4102,6 @@ impl std::fmt::Display for Placement {
     }
 }
 
-impl Default for Placement {
-    fn default() -> Placement {
-        Placement::Noop
-    }
-}
 impl Placement {
     pub fn is_noop(&self) -> bool {
         matches!(self, Placement::Noop)
@@ -4199,6 +4112,7 @@ impl Placement {
  * The type of the data label.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DataLabelType {
     #[serde(rename = "CUSTOM")]
     Custom,
@@ -4209,6 +4123,7 @@ pub enum DataLabelType {
     #[serde(rename = "NONE")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4228,11 +4143,6 @@ impl std::fmt::Display for DataLabelType {
     }
 }
 
-impl Default for DataLabelType {
-    fn default() -> DataLabelType {
-        DataLabelType::Noop
-    }
-}
 impl DataLabelType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DataLabelType::Noop)
@@ -4522,12 +4432,14 @@ pub struct DataSourceRefreshMonthlySchedule {
  * The scope of the refresh. Must be ALL_DATA_SOURCES.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RefreshScope {
     #[serde(rename = "ALL_DATA_SOURCES")]
     AllDataSources,
     #[serde(rename = "DATA_SOURCE_REFRESH_SCOPE_UNSPECIFIED")]
     DataSourceRefreshScopeUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4547,11 +4459,6 @@ impl std::fmt::Display for RefreshScope {
     }
 }
 
-impl Default for RefreshScope {
-    fn default() -> RefreshScope {
-        RefreshScope::Noop
-    }
-}
 impl RefreshScope {
     pub fn is_noop(&self) -> bool {
         matches!(self, RefreshScope::Noop)
@@ -4613,6 +4520,7 @@ pub struct DataSourceRefreshSchedule {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DaysOfWeek {
     #[serde(rename = "DAY_OF_WEEK_UNSPECIFIED")]
     DayOfWeekUnspecified,
@@ -4631,6 +4539,7 @@ pub enum DaysOfWeek {
     #[serde(rename = "WEDNESDAY")]
     Wednesday,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4654,11 +4563,6 @@ impl std::fmt::Display for DaysOfWeek {
     }
 }
 
-impl Default for DaysOfWeek {
-    fn default() -> DaysOfWeek {
-        DaysOfWeek::Noop
-    }
-}
 impl DaysOfWeek {
     pub fn is_noop(&self) -> bool {
         matches!(self, DaysOfWeek::Noop)
@@ -4766,6 +4670,7 @@ pub struct DataSourceSpec {
  * The type to select columns for the data source table. Defaults to SELECTED.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ColumnSelectionType {
     #[serde(rename = "DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED")]
     DataSourceTableColumnSelectionTypeUnspecified,
@@ -4774,6 +4679,7 @@ pub enum ColumnSelectionType {
     #[serde(rename = "SYNC_ALL")]
     SyncAll,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4794,11 +4700,6 @@ impl std::fmt::Display for ColumnSelectionType {
     }
 }
 
-impl Default for ColumnSelectionType {
-    fn default() -> ColumnSelectionType {
-        ColumnSelectionType::Noop
-    }
-}
 impl ColumnSelectionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ColumnSelectionType::Noop)
@@ -4918,6 +4819,7 @@ pub struct DataValidationRule {
  * The type of date-time grouping to apply.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DateTimeRuleType {
     #[serde(rename = "DATE_TIME_RULE_TYPE_UNSPECIFIED")]
     DateTimeRuleTypeUnspecified,
@@ -4952,6 +4854,7 @@ pub enum DateTimeRuleType {
     #[serde(rename = "YEAR_QUARTER")]
     YearQuarter,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4983,11 +4886,6 @@ impl std::fmt::Display for DateTimeRuleType {
     }
 }
 
-impl Default for DateTimeRuleType {
-    fn default() -> DateTimeRuleType {
-        DateTimeRuleType::Noop
-    }
-}
 impl DateTimeRuleType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DateTimeRuleType::Noop)
@@ -5265,6 +5163,7 @@ pub struct DeleteSheetRequest {
  * The metadata visibility. Developer metadata must always have a visibility specified.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Visibility {
     #[serde(rename = "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED")]
     DeveloperMetadataVisibilityUnspecified,
@@ -5273,6 +5172,7 @@ pub enum Visibility {
     #[serde(rename = "PROJECT")]
     Project,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5293,11 +5193,6 @@ impl std::fmt::Display for Visibility {
     }
 }
 
-impl Default for Visibility {
-    fn default() -> Visibility {
-        Visibility::Noop
-    }
-}
 impl Visibility {
     pub fn is_noop(&self) -> bool {
         matches!(self, Visibility::Noop)
@@ -5353,6 +5248,7 @@ pub struct DeveloperMetadata {
  * The type of location this object represents. This field is read-only.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LocationType {
     #[serde(rename = "COLUMN")]
     Column,
@@ -5365,6 +5261,7 @@ pub enum LocationType {
     #[serde(rename = "SPREADSHEET")]
     Spreadsheet,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5387,11 +5284,6 @@ impl std::fmt::Display for LocationType {
     }
 }
 
-impl Default for LocationType {
-    fn default() -> LocationType {
-        LocationType::Noop
-    }
-}
 impl LocationType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LocationType::Noop)
@@ -5443,6 +5335,7 @@ pub struct DeveloperMetadataLocation {
  * Determines how this lookup matches the location. If this field is specified as EXACT, only developer metadata associated on the exact location specified is matched. If this field is specified to INTERSECTING, developer metadata associated on intersecting locations is also matched. If left unspecified, this field assumes a default value of INTERSECTING. If this field is specified, a metadataLocation must also be specified.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LocationMatchingStrategy {
     #[serde(rename = "DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED")]
     DeveloperMetadataLocationMatchingStrategyUnspecified,
@@ -5451,6 +5344,7 @@ pub enum LocationMatchingStrategy {
     #[serde(rename = "INTERSECTING_LOCATION")]
     IntersectingLocation,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5471,11 +5365,6 @@ impl std::fmt::Display for LocationMatchingStrategy {
     }
 }
 
-impl Default for LocationMatchingStrategy {
-    fn default() -> LocationMatchingStrategy {
-        LocationMatchingStrategy::Noop
-    }
-}
 impl LocationMatchingStrategy {
     pub fn is_noop(&self) -> bool {
         matches!(self, LocationMatchingStrategy::Noop)
@@ -5866,6 +5755,7 @@ pub struct EmbeddedObjectPosition {
  * The type of error.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ErrorValueType {
     #[serde(rename = "DIVIDE_BY_ZERO")]
     DivideByZero,
@@ -5888,6 +5778,7 @@ pub enum ErrorValueType {
     #[serde(rename = "VALUE")]
     Value,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5913,11 +5804,6 @@ impl std::fmt::Display for ErrorValueType {
     }
 }
 
-impl Default for ErrorValueType {
-    fn default() -> ErrorValueType {
-        ErrorValueType::Noop
-    }
-}
 impl ErrorValueType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ErrorValueType::Noop)
@@ -6544,6 +6430,7 @@ pub struct GridRange {
  * The position of the chart legend.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum HistogramChartSpecLegendPosition {
     #[serde(rename = "BOTTOM_LEGEND")]
     BottomLegend,
@@ -6560,6 +6447,7 @@ pub enum HistogramChartSpecLegendPosition {
     #[serde(rename = "TOP_LEGEND")]
     TopLegend,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6584,11 +6472,6 @@ impl std::fmt::Display for HistogramChartSpecLegendPosition {
     }
 }
 
-impl Default for HistogramChartSpecLegendPosition {
-    fn default() -> HistogramChartSpecLegendPosition {
-        HistogramChartSpecLegendPosition::Noop
-    }
-}
 impl HistogramChartSpecLegendPosition {
     pub fn is_noop(&self) -> bool {
         matches!(self, HistogramChartSpecLegendPosition::Noop)
@@ -6745,6 +6628,7 @@ pub struct InsertRangeRequest {
  * How the value should be interpreted.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InterpolationPointType {
     #[serde(rename = "INTERPOLATION_POINT_TYPE_UNSPECIFIED")]
     InterpolationPointTypeUnspecified,
@@ -6759,6 +6643,7 @@ pub enum InterpolationPointType {
     #[serde(rename = "PERCENTILE")]
     Percentile,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6782,11 +6667,6 @@ impl std::fmt::Display for InterpolationPointType {
     }
 }
 
-impl Default for InterpolationPointType {
-    fn default() -> InterpolationPointType {
-        InterpolationPointType::Noop
-    }
-}
 impl InterpolationPointType {
     pub fn is_noop(&self) -> bool {
         matches!(self, InterpolationPointType::Noop)
@@ -6899,6 +6779,7 @@ pub struct KeyValueFormat {
  * The dash type of the line.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LineStyleType {
     #[serde(rename = "CUSTOM")]
     Custom,
@@ -6919,6 +6800,7 @@ pub enum LineStyleType {
     #[serde(rename = "SOLID")]
     Solid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6943,11 +6825,6 @@ impl std::fmt::Display for LineStyleType {
     }
 }
 
-impl Default for LineStyleType {
-    fn default() -> LineStyleType {
-        LineStyleType::Noop
-    }
-}
 impl LineStyleType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LineStyleType::Noop)
@@ -7072,6 +6949,7 @@ pub struct MatchedValueRange {
  * How the cells should be merged.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MergeType {
     #[serde(rename = "MERGE_ALL")]
     MergeAll,
@@ -7080,6 +6958,7 @@ pub enum MergeType {
     #[serde(rename = "MERGE_ROWS")]
     MergeRows,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7098,11 +6977,6 @@ impl std::fmt::Display for MergeType {
     }
 }
 
-impl Default for MergeType {
-    fn default() -> MergeType {
-        MergeType::Noop
-    }
-}
 impl MergeType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MergeType::Noop)
@@ -7177,6 +7051,7 @@ pub struct NamedRange {
  * The type of the number format. When writing, this field must be set.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NumberFormatType {
     #[serde(rename = "CURRENCY")]
     Currency,
@@ -7197,6 +7072,7 @@ pub enum NumberFormatType {
     #[serde(rename = "TIME")]
     Time,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7221,11 +7097,6 @@ impl std::fmt::Display for NumberFormatType {
     }
 }
 
-impl Default for NumberFormatType {
-    fn default() -> NumberFormatType {
-        NumberFormatType::Noop
-    }
-}
 impl NumberFormatType {
     pub fn is_noop(&self) -> bool {
         matches!(self, NumberFormatType::Noop)
@@ -7255,6 +7126,7 @@ pub struct NumberFormat {
  * The size of the org chart nodes.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NodeSize {
     #[serde(rename = "LARGE")]
     Large,
@@ -7265,6 +7137,7 @@ pub enum NodeSize {
     #[serde(rename = "SMALL")]
     Small,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7284,11 +7157,6 @@ impl std::fmt::Display for NodeSize {
     }
 }
 
-impl Default for NodeSize {
-    fn default() -> NodeSize {
-        NodeSize::Noop
-    }
-}
 impl NodeSize {
     pub fn is_noop(&self) -> bool {
         matches!(self, NodeSize::Noop)
@@ -7493,6 +7361,7 @@ pub struct PasteDataRequest {
  * Where the legend of the pie chart should be drawn.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PieChartSpecLegendPosition {
     #[serde(rename = "BOTTOM_LEGEND")]
     BottomLegend,
@@ -7509,6 +7378,7 @@ pub enum PieChartSpecLegendPosition {
     #[serde(rename = "TOP_LEGEND")]
     TopLegend,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7533,11 +7403,6 @@ impl std::fmt::Display for PieChartSpecLegendPosition {
     }
 }
 
-impl Default for PieChartSpecLegendPosition {
-    fn default() -> PieChartSpecLegendPosition {
-        PieChartSpecLegendPosition::Noop
-    }
-}
 impl PieChartSpecLegendPosition {
     pub fn is_noop(&self) -> bool {
         matches!(self, PieChartSpecLegendPosition::Noop)
@@ -7653,6 +7518,7 @@ pub struct PivotFilterSpec {
  * The order the values in this group should be sorted.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SortOrder {
     #[serde(rename = "ASCENDING")]
     Ascending,
@@ -7661,6 +7527,7 @@ pub enum SortOrder {
     #[serde(rename = "SORT_ORDER_UNSPECIFIED")]
     SortOrderUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7679,11 +7546,6 @@ impl std::fmt::Display for SortOrder {
     }
 }
 
-impl Default for SortOrder {
-    fn default() -> SortOrder {
-        SortOrder::Noop
-    }
-}
 impl SortOrder {
     pub fn is_noop(&self) -> bool {
         matches!(self, SortOrder::Noop)
@@ -7882,12 +7744,14 @@ pub struct PivotGroupValueMetadata {
  * Whether values should be listed horizontally (as columns) or vertically (as rows).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ValueLayout {
     #[serde(rename = "HORIZONTAL")]
     Horizontal,
     #[serde(rename = "VERTICAL")]
     Vertical,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7905,11 +7769,6 @@ impl std::fmt::Display for ValueLayout {
     }
 }
 
-impl Default for ValueLayout {
-    fn default() -> ValueLayout {
-        ValueLayout::Noop
-    }
-}
 impl ValueLayout {
     pub fn is_noop(&self) -> bool {
         matches!(self, ValueLayout::Noop)
@@ -8000,6 +7859,7 @@ pub struct PivotTable {
  * If specified, indicates that pivot values should be displayed as the result of a calculation with another pivot value. For example, if calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the pivot values are displayed as the percentage of the grand total. In the Sheets editor, this is referred to as "Show As" in the value section of a pivot table.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CalculatedDisplayType {
     #[serde(rename = "PERCENT_OF_COLUMN_TOTAL")]
     PercentOfColumnTotal,
@@ -8010,6 +7870,7 @@ pub enum CalculatedDisplayType {
     #[serde(rename = "PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED")]
     PivotValueCalculatedDisplayTypeUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8031,11 +7892,6 @@ impl std::fmt::Display for CalculatedDisplayType {
     }
 }
 
-impl Default for CalculatedDisplayType {
-    fn default() -> CalculatedDisplayType {
-        CalculatedDisplayType::Noop
-    }
-}
 impl CalculatedDisplayType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CalculatedDisplayType::Noop)
@@ -8046,6 +7902,7 @@ impl CalculatedDisplayType {
  * A function to summarize the value. If formula is set, the only supported values are SUM and CUSTOM. If sourceColumnOffset is set, then `CUSTOM` is not supported.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SummarizeFunction {
     #[serde(rename = "AVERAGE")]
     Average,
@@ -8078,6 +7935,7 @@ pub enum SummarizeFunction {
     #[serde(rename = "VARP")]
     Varp,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8110,11 +7968,6 @@ impl std::fmt::Display for SummarizeFunction {
     }
 }
 
-impl Default for SummarizeFunction {
-    fn default() -> SummarizeFunction {
-        SummarizeFunction::Noop
-    }
-}
 impl SummarizeFunction {
     pub fn is_noop(&self) -> bool {
         matches!(self, SummarizeFunction::Noop)
@@ -8185,6 +8038,7 @@ pub struct PivotValue {
  * The point shape. If empty or unspecified, a default shape is used.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Shape {
     #[serde(rename = "CIRCLE")]
     Circle,
@@ -8205,6 +8059,7 @@ pub enum Shape {
     #[serde(rename = "X_MARK")]
     XMark,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8229,11 +8084,6 @@ impl std::fmt::Display for Shape {
     }
 }
 
-impl Default for Shape {
-    fn default() -> Shape {
-        Shape::Noop
-    }
-}
 impl Shape {
     pub fn is_noop(&self) -> bool {
         matches!(self, Shape::Noop)
@@ -9204,6 +9054,7 @@ pub struct RowData {
  * The number format source used in the scorecard chart. This field is optional.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NumberFormatSource {
     #[serde(rename = "CHART_NUMBER_FORMAT_SOURCE_UNDEFINED")]
     ChartNumberFormatSourceUndefined,
@@ -9212,6 +9063,7 @@ pub enum NumberFormatSource {
     #[serde(rename = "FROM_DATA")]
     FromData,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9232,11 +9084,6 @@ impl std::fmt::Display for NumberFormatSource {
     }
 }
 
-impl Default for NumberFormatSource {
-    fn default() -> NumberFormatSource {
-        NumberFormatSource::Noop
-    }
-}
 impl NumberFormatSource {
     pub fn is_noop(&self) -> bool {
         matches!(self, NumberFormatSource::Noop)
@@ -9505,6 +9352,7 @@ pub struct Sheet {
  * The type of sheet. Defaults to GRID. This field cannot be changed once set.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SheetType {
     #[serde(rename = "DATA_SOURCE")]
     DataSource,
@@ -9515,6 +9363,7 @@ pub enum SheetType {
     #[serde(rename = "SHEET_TYPE_UNSPECIFIED")]
     SheetTypeUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9534,11 +9383,6 @@ impl std::fmt::Display for SheetType {
     }
 }
 
-impl Default for SheetType {
-    fn default() -> SheetType {
-        SheetType::Noop
-    }
-}
 impl SheetType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SheetType::Noop)
@@ -9933,6 +9777,7 @@ pub struct Spreadsheet {
  * The amount of time to wait before volatile functions are recalculated.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AutoRecalc {
     #[serde(rename = "HOUR")]
     Hour,
@@ -9943,6 +9788,7 @@ pub enum AutoRecalc {
     #[serde(rename = "RECALCULATION_INTERVAL_UNSPECIFIED")]
     RecalculationIntervalUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9962,11 +9808,6 @@ impl std::fmt::Display for AutoRecalc {
     }
 }
 
-impl Default for AutoRecalc {
-    fn default() -> AutoRecalc {
-        AutoRecalc::Noop
-    }
-}
 impl AutoRecalc {
     pub fn is_noop(&self) -> bool {
         matches!(self, AutoRecalc::Noop)
@@ -10207,6 +10048,7 @@ pub struct TextRotation {
  * The delimiter type to use.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DelimiterType {
     #[serde(rename = "AUTODETECT")]
     Autodetect,
@@ -10223,6 +10065,7 @@ pub enum DelimiterType {
     #[serde(rename = "SPACE")]
     Space,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10245,11 +10088,6 @@ impl std::fmt::Display for DelimiterType {
     }
 }
 
-impl Default for DelimiterType {
-    fn default() -> DelimiterType {
-        DelimiterType::Noop
-    }
-}
 impl DelimiterType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DelimiterType::Noop)
@@ -11420,6 +11258,7 @@ pub struct WaterfallChartSeries {
  * The stacked type.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WaterfallChartSpecStackedType {
     #[serde(rename = "SEQUENTIAL")]
     Sequential,
@@ -11428,6 +11267,7 @@ pub enum WaterfallChartSpecStackedType {
     #[serde(rename = "WATERFALL_STACKED_TYPE_UNSPECIFIED")]
     WaterfallStackedTypeUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11448,11 +11288,6 @@ impl std::fmt::Display for WaterfallChartSpecStackedType {
     }
 }
 
-impl Default for WaterfallChartSpecStackedType {
-    fn default() -> WaterfallChartSpecStackedType {
-        WaterfallChartSpecStackedType::Noop
-    }
-}
 impl WaterfallChartSpecStackedType {
     pub fn is_noop(&self) -> bool {
         matches!(self, WaterfallChartSpecStackedType::Noop)
@@ -11527,12 +11362,14 @@ pub struct WaterfallChartSpec {
  * V1 error format.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Xgafv {
     #[serde(rename = "1")]
     One,
     #[serde(rename = "2")]
     Two,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11550,11 +11387,6 @@ impl std::fmt::Display for Xgafv {
     }
 }
 
-impl Default for Xgafv {
-    fn default() -> Xgafv {
-        Xgafv::Noop
-    }
-}
 impl Xgafv {
     pub fn is_noop(&self) -> bool {
         matches!(self, Xgafv::Noop)
@@ -11565,6 +11397,7 @@ impl Xgafv {
  * Data format for response.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
@@ -11573,6 +11406,7 @@ pub enum Alt {
     #[serde(rename = "proto")]
     Proto,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11591,11 +11425,6 @@ impl std::fmt::Display for Alt {
     }
 }
 
-impl Default for Alt {
-    fn default() -> Alt {
-        Alt::Noop
-    }
-}
 impl Alt {
     pub fn is_noop(&self) -> bool {
         matches!(self, Alt::Noop)
@@ -11606,12 +11435,14 @@ impl Alt {
  * How the input data should be inserted.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InsertDataOption {
     #[serde(rename = "INSERT_ROWS")]
     InsertRows,
     #[serde(rename = "OVERWRITE")]
     Overwrite,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11629,11 +11460,6 @@ impl std::fmt::Display for InsertDataOption {
     }
 }
 
-impl Default for InsertDataOption {
-    fn default() -> InsertDataOption {
-        InsertDataOption::Noop
-    }
-}
 impl InsertDataOption {
     pub fn is_noop(&self) -> bool {
         matches!(self, InsertDataOption::Noop)

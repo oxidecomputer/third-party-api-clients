@@ -37,8 +37,8 @@ impl ChatChannelsAccountLevel {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&channel_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
             ),
             None,
         );
@@ -77,8 +77,8 @@ impl ChatChannelsAccountLevel {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&channel_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
             ),
             None,
         );
@@ -119,8 +119,8 @@ impl ChatChannelsAccountLevel {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&channel_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
             ),
             None,
         );
@@ -170,8 +170,8 @@ impl ChatChannelsAccountLevel {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&channel_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
                 query_
             ),
             None,
@@ -215,8 +215,8 @@ impl ChatChannelsAccountLevel {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&channel_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
             ),
             None,
         );
@@ -310,8 +310,8 @@ impl ChatChannelsAccountLevel {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&channel_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
             ),
             None,
         );
@@ -353,9 +353,9 @@ impl ChatChannelsAccountLevel {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members/{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&channel_id.to_string()),
-                crate::progenitor_support::encode_path(&member_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+                crate::progenitor_support::encode_path(member_id),
             ),
             None,
         );

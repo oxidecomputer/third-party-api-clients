@@ -27,7 +27,7 @@ impl JobApplicantsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -59,7 +59,7 @@ impl JobApplicantsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -90,7 +90,7 @@ impl JobApplicantsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -121,8 +121,8 @@ impl JobApplicantsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&job_applicant_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(job_applicant_uuid),
             ),
             None,
         );
@@ -154,8 +154,8 @@ impl JobApplicantsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&job_applicant_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(job_applicant_uuid),
             ),
             None,
         );
@@ -186,8 +186,8 @@ impl JobApplicantsBeta {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
-                crate::progenitor_support::encode_path(&job_applicant_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(job_applicant_uuid),
             ),
             None,
         );

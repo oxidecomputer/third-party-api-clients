@@ -27,7 +27,7 @@ impl Terminations {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -59,7 +59,7 @@ impl Terminations {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -90,7 +90,7 @@ impl Terminations {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );

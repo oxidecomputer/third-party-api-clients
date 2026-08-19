@@ -194,7 +194,7 @@ impl Users {
         &self,
         body: &crate::types::UserCreateRequest,
     ) -> ClientResult<crate::Response<crate::types::UserCreateResponse>> {
-        let url = self.client.url(&"/users".to_string(), None);
+        let url = self.client.url("/users", None);
         self.client
             .post(
                 &url,
@@ -245,7 +245,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -314,7 +314,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -363,7 +363,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -391,7 +391,7 @@ impl Users {
      *
      */
     pub async fn zak(&self) -> ClientResult<crate::Response<crate::types::UserZakResponse>> {
-        let url = self.client.url(&"/users/me/zak".to_string(), None);
+        let url = self.client.url("/users/me/zak", None);
         self.client
             .get(
                 &url,
@@ -428,7 +428,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -469,7 +469,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -506,7 +506,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -548,8 +548,8 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/assistants/{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&assistant_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(assistant_id),
             ),
             None,
         );
@@ -588,7 +588,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/schedulers",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -624,7 +624,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/schedulers",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -665,8 +665,8 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/schedulers/{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&scheduler_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(scheduler_id),
             ),
             None,
         );
@@ -699,7 +699,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/picture",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -769,7 +769,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -840,7 +840,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -911,7 +911,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -982,7 +982,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -1025,7 +1025,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -1063,7 +1063,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/status",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1103,7 +1103,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/password",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1139,7 +1139,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/permissions",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1187,7 +1187,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/token?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -1221,7 +1221,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/token",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1301,7 +1301,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/email",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1385,8 +1385,8 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/users/{}/account",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1430,7 +1430,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/presence_status",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1471,7 +1471,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/virtual_backgrounds",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -1511,7 +1511,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/virtual_backgrounds?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,

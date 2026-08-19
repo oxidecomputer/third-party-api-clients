@@ -19,7 +19,7 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.add>
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/admin.emoji.add".to_string(), None);
+        let url = self.client.url("/admin.emoji.add", None);
         self.client
             .post(
                 &url,
@@ -38,7 +38,7 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.addAlias>
      */
     pub async fn add_alias(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/admin.emoji.addAlias".to_string(), None);
+        let url = self.client.url("/admin.emoji.addAlias", None);
         self.client
             .post(
                 &url,
@@ -96,7 +96,7 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.remove>
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/admin.emoji.remove".to_string(), None);
+        let url = self.client.url("/admin.emoji.remove", None);
         self.client
             .post(
                 &url,
@@ -115,7 +115,7 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.rename>
      */
     pub async fn rename(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
-        let url = self.client.url(&"/admin.emoji.rename".to_string(), None);
+        let url = self.client.url("/admin.emoji.rename", None);
         self.client
             .post(
                 &url,

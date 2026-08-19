@@ -20,7 +20,7 @@ impl AdminConversationsRestrictAccess {
      */
     pub async fn add_group(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url(
-            &"/admin.conversations.restrictAccess.addGroup".to_string(),
+            "/admin.conversations.restrictAccess.addGroup",
             None,
         );
         self.client
@@ -82,7 +82,7 @@ impl AdminConversationsRestrictAccess {
      */
     pub async fn remove_group(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url(
-            &"/admin.conversations.restrictAccess.removeGroup".to_string(),
+            "/admin.conversations.restrictAccess.removeGroup",
             None,
         );
         self.client

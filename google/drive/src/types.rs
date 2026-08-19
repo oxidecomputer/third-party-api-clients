@@ -3257,10 +3257,12 @@ pub struct User {
  * Data format for the response.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3277,11 +3279,6 @@ impl std::fmt::Display for Alt {
     }
 }
 
-impl Default for Alt {
-    fn default() -> Alt {
-        Alt::Noop
-    }
-}
 impl Alt {
     pub fn is_noop(&self) -> bool {
         matches!(self, Alt::Noop)
@@ -3292,12 +3289,14 @@ impl Alt {
  * The source of files to list. Deprecated: use 'corpora' instead.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Corpus {
     #[serde(rename = "domain")]
     Domain,
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3315,11 +3314,6 @@ impl std::fmt::Display for Corpus {
     }
 }
 
-impl Default for Corpus {
-    fn default() -> Corpus {
-        Corpus::Noop
-    }
-}
 impl Corpus {
     pub fn is_noop(&self) -> bool {
         matches!(self, Corpus::Noop)

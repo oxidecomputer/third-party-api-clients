@@ -170,7 +170,7 @@ impl TaxRates {
      * <p>Creates a new tax rate.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::TaxRate>> {
-        let url = self.client.url(&"/v1/tax_rates".to_string(), None);
+        let url = self.client.url("/v1/tax_rates", None);
         self.client
             .post(
                 &url,
@@ -198,7 +198,7 @@ impl TaxRates {
         let url = self.client.url(
             &format!(
                 "/v1/tax_rates/{}",
-                crate::progenitor_support::encode_path(&tax_rate.to_string()),
+                crate::progenitor_support::encode_path(tax_rate),
             ),
             None,
         );
@@ -228,7 +228,7 @@ impl TaxRates {
         let url = self.client.url(
             &format!(
                 "/v1/tax_rates/{}",
-                crate::progenitor_support::encode_path(&tax_rate.to_string()),
+                crate::progenitor_support::encode_path(tax_rate),
             ),
             None,
         );

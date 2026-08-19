@@ -38,8 +38,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -79,8 +79,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&check_run_id.to_string()),
             ),
             None,
@@ -122,8 +122,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&check_run_id.to_string()),
             ),
             None,
@@ -174,8 +174,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs/{}/annotations?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&check_run_id.to_string()),
                 query_
             ),
@@ -211,8 +211,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-runs/{}/annotations",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&check_run_id.to_string()),
             ),
             None,
@@ -252,8 +252,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -290,8 +290,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites/preferences",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -331,8 +331,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&check_suite_id.to_string()),
             ),
             None,
@@ -402,8 +402,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites/{}/check-runs?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&check_suite_id.to_string()),
                 query_
             ),
@@ -445,8 +445,8 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/check-suites/{}/rerequest",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&check_suite_id.to_string()),
             ),
             None,
@@ -521,9 +521,9 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/check-runs?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&ref_.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
                 query_
             ),
             None,
@@ -586,9 +586,9 @@ impl Checks {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/check-suites?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&ref_.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
                 query_
             ),
             None,

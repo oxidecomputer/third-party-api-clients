@@ -30,6 +30,7 @@ pub struct AuditConfig {
  * The log type that this config enables.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LogType {
     #[serde(rename = "ADMIN_READ")]
     AdminRead,
@@ -40,6 +41,7 @@ pub enum LogType {
     #[serde(rename = "LOG_TYPE_UNSPECIFIED")]
     LogTypeUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -59,11 +61,6 @@ impl std::fmt::Display for LogType {
     }
 }
 
-impl Default for LogType {
-    fn default() -> LogType {
-        LogType::Noop
-    }
-}
 impl LogType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LogType::Noop)
@@ -122,6 +119,7 @@ pub struct Binding {
  * The type of this operation.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OperationType {
     #[serde(rename = "CREATE")]
     Create,
@@ -130,6 +128,7 @@ pub enum OperationType {
     #[serde(rename = "OPERATION_TYPE_UNSPECIFIED")]
     OperationTypeUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -148,11 +147,6 @@ impl std::fmt::Display for OperationType {
     }
 }
 
-impl Default for OperationType {
-    fn default() -> OperationType {
-        OperationType::Noop
-    }
-}
 impl OperationType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OperationType::Noop)
@@ -307,6 +301,7 @@ pub struct Expr {
  * Output only. The lifecycle state of the folder. Updates to the lifecycle_state must be performed via DeleteFolder and UndeleteFolder.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LifecycleState {
     #[serde(rename = "ACTIVE")]
     Active,
@@ -315,6 +310,7 @@ pub enum LifecycleState {
     #[serde(rename = "LIFECYCLE_STATE_UNSPECIFIED")]
     LifecycleStateUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -333,11 +329,6 @@ impl std::fmt::Display for LifecycleState {
     }
 }
 
-impl Default for LifecycleState {
-    fn default() -> LifecycleState {
-        LifecycleState::Noop
-    }
-}
 impl LifecycleState {
     pub fn is_noop(&self) -> bool {
         matches!(self, LifecycleState::Noop)
@@ -400,6 +391,7 @@ pub struct Folder {
  * The type of operation error experienced.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ErrorMessageId {
     #[serde(rename = "ACTIVE_FOLDER_HEIGHT_VIOLATION")]
     ActiveFolderHeightViolation,
@@ -422,6 +414,7 @@ pub enum ErrorMessageId {
     #[serde(rename = "RESOURCE_DELETED_VIOLATION")]
     ResourceDeletedViolation,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -449,11 +442,6 @@ impl std::fmt::Display for ErrorMessageId {
     }
 }
 
-impl Default for ErrorMessageId {
-    fn default() -> ErrorMessageId {
-        ErrorMessageId::Noop
-    }
-}
 impl ErrorMessageId {
     pub fn is_noop(&self) -> bool {
         matches!(self, ErrorMessageId::Noop)
@@ -790,12 +778,14 @@ pub struct TestIamPermissionsResponse {
  * V1 error format.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Xgafv {
     #[serde(rename = "1")]
     One,
     #[serde(rename = "2")]
     Two,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -813,11 +803,6 @@ impl std::fmt::Display for Xgafv {
     }
 }
 
-impl Default for Xgafv {
-    fn default() -> Xgafv {
-        Xgafv::Noop
-    }
-}
 impl Xgafv {
     pub fn is_noop(&self) -> bool {
         matches!(self, Xgafv::Noop)
@@ -828,6 +813,7 @@ impl Xgafv {
  * Data format for response.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
@@ -836,6 +822,7 @@ pub enum Alt {
     #[serde(rename = "proto")]
     Proto,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -854,11 +841,6 @@ impl std::fmt::Display for Alt {
     }
 }
 
-impl Default for Alt {
-    fn default() -> Alt {
-        Alt::Noop
-    }
-}
 impl Alt {
     pub fn is_noop(&self) -> bool {
         matches!(self, Alt::Noop)

@@ -18,7 +18,7 @@ impl Tokens {
      * This token can be used with any API method in place of a bank account dictionary. This token can be used only once, by attaching it to a <a href="#accounts">Custom account</a>.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Token>> {
-        let url = self.client.url(&"/v1/tokens".to_string(), None);
+        let url = self.client.url("/v1/tokens", None);
         self.client
             .post(
                 &url,
@@ -43,7 +43,7 @@ impl Tokens {
         let url = self.client.url(
             &format!(
                 "/v1/tokens/{}",
-                crate::progenitor_support::encode_path(&token.to_string()),
+                crate::progenitor_support::encode_path(token),
             ),
             None,
         );

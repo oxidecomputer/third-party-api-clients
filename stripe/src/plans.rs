@@ -170,7 +170,7 @@ impl Plans {
      * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PlanData>> {
-        let url = self.client.url(&"/v1/plans".to_string(), None);
+        let url = self.client.url("/v1/plans", None);
         self.client
             .post(
                 &url,
@@ -195,7 +195,7 @@ impl Plans {
         let url = self.client.url(
             &format!(
                 "/v1/plans/{}",
-                crate::progenitor_support::encode_path(&plan.to_string()),
+                crate::progenitor_support::encode_path(plan),
             ),
             None,
         );
@@ -225,7 +225,7 @@ impl Plans {
         let url = self.client.url(
             &format!(
                 "/v1/plans/{}",
-                crate::progenitor_support::encode_path(&plan.to_string()),
+                crate::progenitor_support::encode_path(plan),
             ),
             None,
         );
@@ -255,7 +255,7 @@ impl Plans {
         let url = self.client.url(
             &format!(
                 "/v1/plans/{}",
-                crate::progenitor_support::encode_path(&plan.to_string()),
+                crate::progenitor_support::encode_path(plan),
             ),
             None,
         );

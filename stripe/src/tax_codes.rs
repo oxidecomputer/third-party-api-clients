@@ -67,7 +67,7 @@ impl TaxCodes {
      * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
      */
     pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::TaxCode>>> {
-        let url = self.client.url(&"/v1/tax_codes".to_string(), None);
+        let url = self.client.url("/v1/tax_codes", None);
         let crate::Response::<crate::types::TaxProductResourceCodeList> {
             mut status,
             mut headers,
@@ -153,7 +153,7 @@ impl TaxCodes {
         let url = self.client.url(
             &format!(
                 "/v1/tax_codes/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

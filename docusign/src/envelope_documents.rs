@@ -69,8 +69,8 @@ impl EnvelopeDocuments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
                 query_
             ),
             None,
@@ -115,8 +115,8 @@ impl EnvelopeDocuments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
             ),
             None,
         );
@@ -174,8 +174,8 @@ impl EnvelopeDocuments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&envelope_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
             ),
             None,
         );
@@ -265,9 +265,9 @@ impl EnvelopeDocuments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&envelope_id.to_string()),
-                crate::progenitor_support::encode_path(&document_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
                 query_
             ),
             None,
@@ -320,9 +320,9 @@ impl EnvelopeDocuments {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&envelope_id.to_string()),
-                crate::progenitor_support::encode_path(&document_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
             ),
             None,
         );

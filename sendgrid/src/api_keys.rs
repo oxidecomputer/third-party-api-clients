@@ -76,7 +76,7 @@ impl ApiKeys {
         &self,
         body: &crate::types::CreateApiKeysRequest,
     ) -> ClientResult<crate::Response<crate::types::CreateApiKeysResponse>> {
-        let url = self.client.url(&"/api_keys".to_string(), None);
+        let url = self.client.url("/api_keys", None);
         self.client
             .post(
                 &url,
@@ -109,7 +109,7 @@ impl ApiKeys {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",
-                crate::progenitor_support::encode_path(&api_key_id.to_string()),
+                crate::progenitor_support::encode_path(api_key_id),
             ),
             None,
         );
@@ -148,7 +148,7 @@ impl ApiKeys {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",
-                crate::progenitor_support::encode_path(&api_key_id.to_string()),
+                crate::progenitor_support::encode_path(api_key_id),
             ),
             None,
         );
@@ -179,7 +179,7 @@ impl ApiKeys {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",
-                crate::progenitor_support::encode_path(&api_key_id.to_string()),
+                crate::progenitor_support::encode_path(api_key_id),
             ),
             None,
         );
@@ -214,7 +214,7 @@ impl ApiKeys {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",
-                crate::progenitor_support::encode_path(&api_key_id.to_string()),
+                crate::progenitor_support::encode_path(api_key_id),
             ),
             None,
         );

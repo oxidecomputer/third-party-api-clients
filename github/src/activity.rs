@@ -63,7 +63,7 @@ impl Activity {
     pub async fn list_all_public_events(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Event>>> {
-        let url = self.client.url(&"/events".to_string(), None);
+        let url = self.client.url("/events", None);
         self.client
             .get_all_pages(
                 &url,
@@ -94,7 +94,7 @@ impl Activity {
      * FROM: <https://docs.github.com/rest/reference/activity#get-feeds>
      */
     pub async fn get_feeds(&self) -> ClientResult<crate::Response<crate::types::Feed>> {
-        let url = self.client.url(&"/feeds".to_string(), None);
+        let url = self.client.url("/feeds", None);
         self.client
             .get(
                 &url,
@@ -139,8 +139,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/networks/{}/{}/events?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -174,8 +174,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/networks/{}/{}/events",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -303,7 +303,7 @@ impl Activity {
         &self,
         body: &crate::types::ActivityMarkNotificationsAsReadRequest,
     ) -> ClientResult<crate::Response<crate::types::Error>> {
-        let url = self.client.url(&"/notifications".to_string(), None);
+        let url = self.client.url("/notifications", None);
         self.client
             .put(
                 &url,
@@ -520,7 +520,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/events?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -553,7 +553,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/events",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -601,8 +601,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/events?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -636,8 +636,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/events",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -705,8 +705,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/notifications?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -758,8 +758,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/notifications?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -797,8 +797,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/notifications",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -848,8 +848,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stargazers?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -898,8 +898,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscribers?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -933,8 +933,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscribers",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -970,8 +970,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscription",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1008,8 +1008,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscription",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1045,8 +1045,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/subscription",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1171,8 +1171,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/user/starred/{}/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1208,8 +1208,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/user/starred/{}/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1245,8 +1245,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/user/starred/{}/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -1314,7 +1314,7 @@ impl Activity {
     pub async fn list_all_watched_repos_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::MinimalRepository>>> {
-        let url = self.client.url(&"/user/subscriptions".to_string(), None);
+        let url = self.client.url("/user/subscriptions", None);
         self.client
             .get_all_pages(
                 &url,
@@ -1357,7 +1357,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/events?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,
@@ -1390,7 +1390,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/events",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -1438,8 +1438,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/events/orgs/{}?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -1473,8 +1473,8 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/events/orgs/{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -1520,7 +1520,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/events/public?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,
@@ -1553,7 +1553,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/events/public",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -1599,7 +1599,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/received_events?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,
@@ -1632,7 +1632,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/received_events",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -1678,7 +1678,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/received_events/public?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,
@@ -1711,7 +1711,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/received_events/public",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -1772,7 +1772,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/starred?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,
@@ -1819,7 +1819,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/subscriptions?{}",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
                 query_
             ),
             None,
@@ -1852,7 +1852,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/users/{}/subscriptions",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );

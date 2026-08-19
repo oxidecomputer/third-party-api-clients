@@ -19,7 +19,7 @@ impl ThreeDSecure {
     pub async fn post_3d_secure(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ThreeDSecure>> {
-        let url = self.client.url(&"/v1/3d_secure".to_string(), None);
+        let url = self.client.url("/v1/3d_secure", None);
         self.client
             .post(
                 &url,
@@ -47,7 +47,7 @@ impl ThreeDSecure {
         let url = self.client.url(
             &format!(
                 "/v1/3d_secure/{}",
-                crate::progenitor_support::encode_path(&three_d_secure.to_string()),
+                crate::progenitor_support::encode_path(three_d_secure),
             ),
             None,
         );

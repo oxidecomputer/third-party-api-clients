@@ -49,8 +49,8 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -87,8 +87,8 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -142,8 +142,8 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
             ),
             None,
         );
@@ -186,9 +186,9 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&signature_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(signature_id),
             ),
             None,
         );
@@ -244,9 +244,9 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&signature_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(signature_id),
                 query_
             ),
             None,
@@ -290,9 +290,9 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&signature_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(signature_id),
             ),
             None,
         );
@@ -349,10 +349,10 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&signature_id.to_string()),
-                crate::progenitor_support::encode_path(&image_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(signature_id),
+                crate::progenitor_support::encode_path(image_type),
                 query_
             ),
             None,
@@ -409,10 +409,10 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&signature_id.to_string()),
-                crate::progenitor_support::encode_path(&image_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(signature_id),
+                crate::progenitor_support::encode_path(image_type),
                 query_
             ),
             None,
@@ -463,10 +463,10 @@ impl UserSignatures {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&user_id.to_string()),
-                crate::progenitor_support::encode_path(&signature_id.to_string()),
-                crate::progenitor_support::encode_path(&image_type.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(signature_id),
+                crate::progenitor_support::encode_path(image_type),
             ),
             None,
         );

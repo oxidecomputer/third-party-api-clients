@@ -35,7 +35,7 @@ impl Employees {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}?{}",
-                crate::progenitor_support::encode_path(&employee_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(employee_id_or_uuid),
                 query_
             ),
             None,
@@ -65,7 +65,7 @@ impl Employees {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}",
-                crate::progenitor_support::encode_path(&employee_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(employee_id_or_uuid),
             ),
             None,
         );
@@ -118,7 +118,7 @@ impl Employees {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/employees?{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
                 query_
             ),
             None,
@@ -159,7 +159,7 @@ impl Employees {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/employees?{}",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
                 query_
             ),
             None,
@@ -189,7 +189,7 @@ impl Employees {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/employees",
-                crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+                crate::progenitor_support::encode_path(company_id_or_uuid),
             ),
             None,
         );
@@ -217,7 +217,7 @@ impl Employees {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/home_address",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -246,7 +246,7 @@ impl Employees {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/home_address",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );

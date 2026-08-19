@@ -59,7 +59,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
                 query_
             ),
             None,
@@ -93,7 +93,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -128,7 +128,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -175,7 +175,7 @@ impl Groups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );

@@ -182,7 +182,7 @@ impl Skus {
      * <p>Creates a new SKU associated with a product.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Sku>> {
-        let url = self.client.url(&"/v1/skus".to_string(), None);
+        let url = self.client.url("/v1/skus", None);
         self.client
             .post(
                 &url,
@@ -210,7 +210,7 @@ impl Skus {
         let url = self.client.url(
             &format!(
                 "/v1/skus/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -239,7 +239,7 @@ impl Skus {
         let url = self.client.url(
             &format!(
                 "/v1/skus/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -269,7 +269,7 @@ impl Skus {
         let url = self.client.url(
             &format!(
                 "/v1/skus/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

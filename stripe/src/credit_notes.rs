@@ -184,7 +184,7 @@ impl CreditNotes {
      * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::CreditNote>> {
-        let url = self.client.url(&"/v1/credit_notes".to_string(), None);
+        let url = self.client.url("/v1/credit_notes", None);
         self.client
             .post(
                 &url,
@@ -523,7 +523,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/lines?{}",
-                crate::progenitor_support::encode_path(&credit_note.to_string()),
+                crate::progenitor_support::encode_path(credit_note),
                 query_
             ),
             None,
@@ -560,7 +560,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/lines",
-                crate::progenitor_support::encode_path(&credit_note.to_string()),
+                crate::progenitor_support::encode_path(credit_note),
             ),
             None,
         );
@@ -649,7 +649,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -679,7 +679,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -709,7 +709,7 @@ impl CreditNotes {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/void",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

@@ -166,7 +166,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/users/{}/meetings?{}",
-                crate::progenitor_support::encode_path(&user_id.to_string()),
+                crate::progenitor_support::encode_path(user_id),
                 query_
             ),
             None,
@@ -207,7 +207,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/meetings/{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
             ),
             None,
         );
@@ -265,7 +265,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/meetings/{}/participants?{}",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
                 query_
             ),
             None,
@@ -306,7 +306,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/meetings/{}/polls",
-                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(meeting_id),
             ),
             None,
         );
@@ -345,7 +345,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/webinars/{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -401,7 +401,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/webinars/{}/participants?{}",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
                 query_
             ),
             None,
@@ -441,7 +441,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/webinars/{}/polls",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -482,7 +482,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/report/webinars/{}/qa",
-                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(webinar_id),
             ),
             None,
         );
@@ -845,7 +845,7 @@ impl Reports {
     pub async fn get_billing(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetBillingReportResponse>> {
-        let url = self.client.url(&"/report/billing".to_string(), None);
+        let url = self.client.url("/report/billing", None);
         self.client
             .get(
                 &url,

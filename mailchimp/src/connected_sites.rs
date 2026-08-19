@@ -70,7 +70,7 @@ impl ConnectedSites {
         &self,
         body: &crate::types::ConnectedSite,
     ) -> ClientResult<crate::Response<crate::types::Sites>> {
-        let url = self.client.url(&"/connected-sites".to_string(), None);
+        let url = self.client.url("/connected-sites", None);
         self.client
             .post(
                 &url,
@@ -111,7 +111,7 @@ impl ConnectedSites {
         let url = self.client.url(
             &format!(
                 "/connected-sites/{}?{}",
-                crate::progenitor_support::encode_path(&connected_site_id.to_string()),
+                crate::progenitor_support::encode_path(connected_site_id),
                 query_
             ),
             None,
@@ -141,7 +141,7 @@ impl ConnectedSites {
         let url = self.client.url(
             &format!(
                 "/connected-sites/{}",
-                crate::progenitor_support::encode_path(&connected_site_id.to_string()),
+                crate::progenitor_support::encode_path(connected_site_id),
             ),
             None,
         );
@@ -173,7 +173,7 @@ impl ConnectedSites {
         let url = self.client.url(
             &format!(
                 "/connected-sites/{}/actions/verify-script-installation",
-                crate::progenitor_support::encode_path(&connected_site_id.to_string()),
+                crate::progenitor_support::encode_path(connected_site_id),
             ),
             None,
         );

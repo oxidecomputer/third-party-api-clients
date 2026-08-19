@@ -71,7 +71,7 @@ impl WebhookEndpoints {
     pub async fn get_all(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::WebhookEndpoint>>> {
-        let url = self.client.url(&"/v1/webhook_endpoints".to_string(), None);
+        let url = self.client.url("/v1/webhook_endpoints", None);
         let crate::Response::<crate::types::GetWebhookEndpointsResponse> {
             mut status,
             mut headers,
@@ -149,7 +149,7 @@ impl WebhookEndpoints {
      * <p>A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a Connect webhook endpoint that notifies the specified <code>url</code> about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified <code>url</code> only about events from your account is created. You can also create webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of the Dashboard.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::WebhookEndpoint>> {
-        let url = self.client.url(&"/v1/webhook_endpoints".to_string(), None);
+        let url = self.client.url("/v1/webhook_endpoints", None);
         self.client
             .post(
                 &url,
@@ -177,7 +177,7 @@ impl WebhookEndpoints {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",
-                crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
+                crate::progenitor_support::encode_path(webhook_endpoint),
             ),
             None,
         );
@@ -207,7 +207,7 @@ impl WebhookEndpoints {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",
-                crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
+                crate::progenitor_support::encode_path(webhook_endpoint),
             ),
             None,
         );
@@ -237,7 +237,7 @@ impl WebhookEndpoints {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",
-                crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
+                crate::progenitor_support::encode_path(webhook_endpoint),
             ),
             None,
         );

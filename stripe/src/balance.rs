@@ -22,7 +22,7 @@ impl Balance {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Balance>> {
-        let url = self.client.url(&"/v1/balance".to_string(), None);
+        let url = self.client.url("/v1/balance", None);
         self.client
             .get(
                 &url,
@@ -231,7 +231,7 @@ impl Balance {
         let url = self.client.url(
             &format!(
                 "/v1/balance/history/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

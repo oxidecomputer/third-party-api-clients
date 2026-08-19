@@ -17,7 +17,7 @@ impl About {
      * Gets information about the user, the user's Drive, and system capabilities.
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::About>> {
-        let url = self.client.url(&"/about".to_string(), None);
+        let url = self.client.url("/about", None);
         self.client
             .get(
                 &url,

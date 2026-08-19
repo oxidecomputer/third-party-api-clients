@@ -69,7 +69,7 @@ impl Metafield {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-01/metafields.json".to_string(), None);
+            .url("/admin/api/2020-01/metafields.json", None);
         self.client
             .post(
                 &url,
@@ -89,7 +89,7 @@ impl Metafield {
      */
     pub async fn deprecated_202001_get_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/2020-01/metafields/count.json".to_string(),
+            "/admin/api/2020-01/metafields/count.json",
             None,
         );
         self.client
@@ -127,7 +127,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/metafields/{}/json?{}",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
                 query_
             ),
             None,
@@ -161,7 +161,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -193,7 +193,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -265,7 +265,7 @@ impl Metafield {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-04/metafields.json".to_string(), None);
+            .url("/admin/api/2020-04/metafields.json", None);
         self.client
             .post(
                 &url,
@@ -285,7 +285,7 @@ impl Metafield {
      */
     pub async fn deprecated_202004_get_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/2020-04/metafields/count.json".to_string(),
+            "/admin/api/2020-04/metafields/count.json",
             None,
         );
         self.client
@@ -323,7 +323,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/metafields/{}/json?{}",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
                 query_
             ),
             None,
@@ -357,7 +357,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -389,7 +389,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -461,7 +461,7 @@ impl Metafield {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-07/metafields.json".to_string(), None);
+            .url("/admin/api/2020-07/metafields.json", None);
         self.client
             .post(
                 &url,
@@ -481,7 +481,7 @@ impl Metafield {
      */
     pub async fn deprecated_202007_get_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/2020-07/metafields/count.json".to_string(),
+            "/admin/api/2020-07/metafields/count.json",
             None,
         );
         self.client
@@ -519,7 +519,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/metafields/{}/json?{}",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
                 query_
             ),
             None,
@@ -553,7 +553,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -585,7 +585,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -654,7 +654,7 @@ impl Metafield {
     pub async fn create(&self, body: &serde_json::Value) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2020-10/metafields.json".to_string(), None);
+            .url("/admin/api/2020-10/metafields.json", None);
         self.client
             .post(
                 &url,
@@ -674,7 +674,7 @@ impl Metafield {
      */
     pub async fn get_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/2020-10/metafields/count.json".to_string(),
+            "/admin/api/2020-10/metafields/count.json",
             None,
         );
         self.client
@@ -712,7 +712,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/metafields/{}/json?{}",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
                 query_
             ),
             None,
@@ -746,7 +746,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -775,7 +775,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -847,7 +847,7 @@ impl Metafield {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/2021-01/metafields.json".to_string(), None);
+            .url("/admin/api/2021-01/metafields.json", None);
         self.client
             .post(
                 &url,
@@ -867,7 +867,7 @@ impl Metafield {
      */
     pub async fn deprecated_202101_get_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/2021-01/metafields/count.json".to_string(),
+            "/admin/api/2021-01/metafields/count.json",
             None,
         );
         self.client
@@ -905,7 +905,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/metafields/{}/json?{}",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
                 query_
             ),
             None,
@@ -939,7 +939,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -971,7 +971,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -1043,7 +1043,7 @@ impl Metafield {
     ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
-            .url(&"/admin/api/unstable/metafields.json".to_string(), None);
+            .url("/admin/api/unstable/metafields.json", None);
         self.client
             .post(
                 &url,
@@ -1063,7 +1063,7 @@ impl Metafield {
      */
     pub async fn deprecated_unstable_get_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/unstable/metafields/count.json".to_string(),
+            "/admin/api/unstable/metafields/count.json",
             None,
         );
         self.client
@@ -1101,7 +1101,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/metafields/{}/json?{}",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
                 query_
             ),
             None,
@@ -1135,7 +1135,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );
@@ -1167,7 +1167,7 @@ impl Metafield {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/metafields/{}/json",
-                crate::progenitor_support::encode_path(&metafield_id.to_string()),
+                crate::progenitor_support::encode_path(metafield_id),
             ),
             None,
         );

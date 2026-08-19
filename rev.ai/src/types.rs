@@ -52,6 +52,7 @@ pub struct DescriptionlessJobOptionsData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Language {
     #[serde(rename = "ar")]
     Ar,
@@ -70,6 +71,7 @@ pub enum Language {
     #[serde(rename = "el")]
     El,
     #[serde(rename = "en")]
+    #[default]
     En,
     #[serde(rename = "es")]
     Es,
@@ -159,11 +161,6 @@ impl std::fmt::Display for Language {
     }
 }
 
-impl Default for Language {
-    fn default() -> Language {
-        Language::En
-    }
-}
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptionsDataType {
@@ -247,6 +244,7 @@ pub struct DescriptionlessJobOptionsAllOf {
  * Simple reason of why the transcription job failed. Check `failure_detail` for specific details and solutions
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Failure {
     #[serde(rename = "download_failure")]
     DownloadFailure,
@@ -267,6 +265,7 @@ pub enum Failure {
     #[serde(rename = "transcription")]
     Transcription,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -291,11 +290,6 @@ impl std::fmt::Display for Failure {
     }
 }
 
-impl Default for Failure {
-    fn default() -> Failure {
-        Failure::Noop
-    }
-}
 impl Failure {
     pub fn is_noop(&self) -> bool {
         matches!(self, Failure::Noop)
@@ -306,6 +300,7 @@ impl Failure {
  * Current status of the job
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "failed")]
     Failed,
@@ -314,6 +309,7 @@ pub enum Status {
     #[serde(rename = "transcribed")]
     Transcribed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -332,11 +328,6 @@ impl std::fmt::Display for Status {
     }
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Status::Noop
-    }
-}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -347,10 +338,12 @@ impl Status {
  * Type of speech recognition performed. Currently the only supported values are 'async' for asynchronous jobs and `stream` for streaming jobs
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "async")]
     Async,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -367,11 +360,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -710,6 +698,7 @@ pub struct SubmitJobOptionsAllOf {
  * Type of transcript element. If Rev.ai was unable to determine the spoken word, the `type` will be `unknown`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TranscriptMonologuesElementsType {
     #[serde(rename = "punct")]
     Punct,
@@ -718,6 +707,7 @@ pub enum TranscriptMonologuesElementsType {
     #[serde(rename = "unknown")]
     Unknown,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -736,11 +726,6 @@ impl std::fmt::Display for TranscriptMonologuesElementsType {
     }
 }
 
-impl Default for TranscriptMonologuesElementsType {
-    fn default() -> TranscriptMonologuesElementsType {
-        TranscriptMonologuesElementsType::Noop
-    }
-}
 impl TranscriptMonologuesElementsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TranscriptMonologuesElementsType::Noop)
@@ -842,12 +827,14 @@ pub struct Transcript {
  * MIME type specifying the caption output format
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Accept {
     #[serde(rename = "application/x-subrip")]
     ApplicationXSubrip,
     #[serde(rename = "text/vtt")]
     TextVtt,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -865,11 +852,6 @@ impl std::fmt::Display for Accept {
     }
 }
 
-impl Default for Accept {
-    fn default() -> Accept {
-        Accept::Noop
-    }
-}
 impl Accept {
     pub fn is_noop(&self) -> bool {
         matches!(self, Accept::Noop)
@@ -880,12 +862,14 @@ impl Accept {
  * MIME type specifying the transcription output format
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AcceptTranscript {
     #[serde(rename = "application/vnd.rev.transcript.v1.0+json")]
     ApplicationVndRevTranscript0Json,
     #[serde(rename = "text/plain")]
     TextPlain,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -905,11 +889,6 @@ impl std::fmt::Display for AcceptTranscript {
     }
 }
 
-impl Default for AcceptTranscript {
-    fn default() -> AcceptTranscript {
-        AcceptTranscript::Noop
-    }
-}
 impl AcceptTranscript {
     pub fn is_noop(&self) -> bool {
         matches!(self, AcceptTranscript::Noop)

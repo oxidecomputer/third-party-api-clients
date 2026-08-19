@@ -99,7 +99,7 @@ impl TrustedOrigins {
         &self,
         body: &crate::types::TrustedOrigin,
     ) -> ClientResult<crate::Response<crate::types::TrustedOrigin>> {
-        let url = self.client.url(&"/api/v1/trustedOrigins".to_string(), None);
+        let url = self.client.url("/api/v1/trustedOrigins", None);
         self.client
             .post(
                 &url,
@@ -126,7 +126,7 @@ impl TrustedOrigins {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}",
-                crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+                crate::progenitor_support::encode_path(trusted_origin_id),
             ),
             None,
         );
@@ -157,7 +157,7 @@ impl TrustedOrigins {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}",
-                crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+                crate::progenitor_support::encode_path(trusted_origin_id),
             ),
             None,
         );
@@ -187,7 +187,7 @@ impl TrustedOrigins {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}",
-                crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+                crate::progenitor_support::encode_path(trusted_origin_id),
             ),
             None,
         );
@@ -217,7 +217,7 @@ impl TrustedOrigins {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}/lifecycle/activate",
-                crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+                crate::progenitor_support::encode_path(trusted_origin_id),
             ),
             None,
         );
@@ -247,7 +247,7 @@ impl TrustedOrigins {
         let url = self.client.url(
             &format!(
                 "/api/v1/trustedOrigins/{}/lifecycle/deactivate",
-                crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+                crate::progenitor_support::encode_path(trusted_origin_id),
             ),
             None,
         );

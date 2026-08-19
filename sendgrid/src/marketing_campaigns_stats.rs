@@ -123,7 +123,7 @@ impl MarketingCampaignsStats {
         let url = self.client.url(
             &format!(
                 "/marketing/stats/automations/{}?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,
@@ -245,7 +245,7 @@ impl MarketingCampaignsStats {
         let url = self.client.url(
             &format!(
                 "/marketing/stats/singlesends/{}?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,
@@ -305,7 +305,7 @@ impl MarketingCampaignsStats {
         let url = self.client.url(
             &format!(
                 "/marketing/stats/automations/{}/links?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,
@@ -370,7 +370,7 @@ impl MarketingCampaignsStats {
         let url = self.client.url(
             &format!(
                 "/marketing/stats/singlesends/{}/links?{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
                 query_
             ),
             None,

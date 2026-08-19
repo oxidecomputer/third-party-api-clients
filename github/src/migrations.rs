@@ -48,7 +48,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -87,7 +87,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 query_
             ),
             None,
@@ -123,7 +123,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -173,7 +173,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
@@ -211,7 +211,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/archive",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
@@ -248,7 +248,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/archive",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
@@ -287,9 +287,9 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repos/{}/lock",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
-                crate::progenitor_support::encode_path(&repo_name.to_string()),
+                crate::progenitor_support::encode_path(repo_name),
             ),
             None,
         );
@@ -337,7 +337,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repositories?{}",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
@@ -372,7 +372,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repositories",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
@@ -442,8 +442,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -480,8 +480,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -517,8 +517,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -556,8 +556,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -602,8 +602,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/authors?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -645,8 +645,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/authors?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 query_
             ),
             None,
@@ -686,8 +686,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/authors/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
                 crate::progenitor_support::encode_path(&author_id.to_string()),
             ),
             None,
@@ -724,8 +724,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/large_files",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -758,8 +758,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/large_files",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -796,8 +796,8 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/lfs",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -865,7 +865,7 @@ impl Migrations {
     pub async fn list_all_for_authenticated_user(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::Migration>>> {
-        let url = self.client.url(&"/user/migrations".to_string(), None);
+        let url = self.client.url("/user/migrations", None);
         self.client
             .get_all_pages(
                 &url,
@@ -889,7 +889,7 @@ impl Migrations {
         &self,
         body: &crate::types::MigrationsStartRequest,
     ) -> ClientResult<crate::Response<crate::types::Migration>> {
-        let url = self.client.url(&"/user/migrations".to_string(), None);
+        let url = self.client.url("/user/migrations", None);
         self.client
             .post(
                 &url,
@@ -1060,7 +1060,7 @@ impl Migrations {
             &format!(
                 "/user/migrations/{}/repos/{}/lock",
                 crate::progenitor_support::encode_path(&migration_id.to_string()),
-                crate::progenitor_support::encode_path(&repo_name.to_string()),
+                crate::progenitor_support::encode_path(repo_name),
             ),
             None,
         );

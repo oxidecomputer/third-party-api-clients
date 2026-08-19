@@ -2063,10 +2063,12 @@ pub struct TimePeriod {
  * Data format for the response.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2083,11 +2085,6 @@ impl std::fmt::Display for Alt {
     }
 }
 
-impl Default for Alt {
-    fn default() -> Alt {
-        Alt::Noop
-    }
-}
 impl Alt {
     pub fn is_noop(&self) -> bool {
         matches!(self, Alt::Noop)
@@ -2098,12 +2095,14 @@ impl Alt {
  * The order of the events returned in the result. Optional. The default is an unspecified, stable order.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrderBy {
     #[serde(rename = "startTime")]
     StartTime,
     #[serde(rename = "updated")]
     Updated,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2121,11 +2120,6 @@ impl std::fmt::Display for OrderBy {
     }
 }
 
-impl Default for OrderBy {
-    fn default() -> OrderBy {
-        OrderBy::Noop
-    }
-}
 impl OrderBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderBy::Noop)
@@ -2136,6 +2130,7 @@ impl OrderBy {
  * Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SendUpdates {
     #[serde(rename = "all")]
     All,
@@ -2144,6 +2139,7 @@ pub enum SendUpdates {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2162,11 +2158,6 @@ impl std::fmt::Display for SendUpdates {
     }
 }
 
-impl Default for SendUpdates {
-    fn default() -> SendUpdates {
-        SendUpdates::Noop
-    }
-}
 impl SendUpdates {
     pub fn is_noop(&self) -> bool {
         matches!(self, SendUpdates::Noop)
@@ -2177,6 +2168,7 @@ impl SendUpdates {
  * The minimum access role for the user in the returned entries. Optional. The default is no restriction.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MinAccessRole {
     #[serde(rename = "freeBusyReader")]
     FreeBusyReader,
@@ -2187,6 +2179,7 @@ pub enum MinAccessRole {
     #[serde(rename = "writer")]
     Writer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2206,11 +2199,6 @@ impl std::fmt::Display for MinAccessRole {
     }
 }
 
-impl Default for MinAccessRole {
-    fn default() -> MinAccessRole {
-        MinAccessRole::Noop
-    }
-}
 impl MinAccessRole {
     pub fn is_noop(&self) -> bool {
         matches!(self, MinAccessRole::Noop)

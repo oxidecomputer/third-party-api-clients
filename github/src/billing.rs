@@ -35,7 +35,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/settings/billing/actions",
-                crate::progenitor_support::encode_path(&enterprise.to_string()),
+                crate::progenitor_support::encode_path(enterprise),
             ),
             None,
         );
@@ -73,7 +73,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/settings/billing/packages",
-                crate::progenitor_support::encode_path(&enterprise.to_string()),
+                crate::progenitor_support::encode_path(enterprise),
             ),
             None,
         );
@@ -111,7 +111,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/settings/billing/shared-storage",
-                crate::progenitor_support::encode_path(&enterprise.to_string()),
+                crate::progenitor_support::encode_path(enterprise),
             ),
             None,
         );
@@ -149,7 +149,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/settings/billing/actions",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -187,7 +187,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/settings/billing/packages",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -225,7 +225,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/settings/billing/shared-storage",
-                crate::progenitor_support::encode_path(&org.to_string()),
+                crate::progenitor_support::encode_path(org),
             ),
             None,
         );
@@ -263,7 +263,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/billing/actions",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -301,7 +301,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/billing/packages",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );
@@ -339,7 +339,7 @@ impl Billing {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/billing/shared-storage",
-                crate::progenitor_support::encode_path(&username.to_string()),
+                crate::progenitor_support::encode_path(username),
             ),
             None,
         );

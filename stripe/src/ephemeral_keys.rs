@@ -17,7 +17,7 @@ impl EphemeralKeys {
      * <p>Creates a short-lived API key for a given resource.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::EphemeralKey>> {
-        let url = self.client.url(&"/v1/ephemeral_keys".to_string(), None);
+        let url = self.client.url("/v1/ephemeral_keys", None);
         self.client
             .post(
                 &url,
@@ -44,7 +44,7 @@ impl EphemeralKeys {
         let url = self.client.url(
             &format!(
                 "/v1/ephemeral_keys/{}",
-                crate::progenitor_support::encode_path(&key.to_string()),
+                crate::progenitor_support::encode_path(key),
             ),
             None,
         );

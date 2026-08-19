@@ -102,7 +102,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -147,7 +147,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/abuse-reports?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -194,8 +194,8 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/abuse-reports/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&report_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(report_id),
                 query_
             ),
             None,
@@ -240,7 +240,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/advice?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -295,7 +295,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/click-details?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -342,8 +342,8 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/click-details/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&link_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(link_id),
                 query_
             ),
             None,
@@ -400,8 +400,8 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/click-details/{}/members?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&link_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(link_id),
                 query_
             ),
             None,
@@ -450,9 +450,9 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/click-details/{}/members/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&link_id.to_string()),
-                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(link_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
                 query_
             ),
             None,
@@ -512,7 +512,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/open-details?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -559,8 +559,8 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/open-details/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
                 query_
             ),
             None,
@@ -605,7 +605,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/domain-performance?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -650,7 +650,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/eepurl?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -710,7 +710,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/email-activity?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -762,8 +762,8 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/email-activity/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
                 query_
             ),
             None,
@@ -818,7 +818,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/locations?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -873,7 +873,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/sent-to?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -920,8 +920,8 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/sent-to/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
                 query_
             ),
             None,
@@ -966,7 +966,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/sub-reports?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -1021,7 +1021,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/unsubscribed?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,
@@ -1068,8 +1068,8 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/unsubscribed/{}?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
-                crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
                 query_
             ),
             None,
@@ -1130,7 +1130,7 @@ impl Reports {
         let url = self.client.url(
             &format!(
                 "/reports/{}/ecommerce-product-activity?{}",
-                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+                crate::progenitor_support::encode_path(campaign_id),
                 query_
             ),
             None,

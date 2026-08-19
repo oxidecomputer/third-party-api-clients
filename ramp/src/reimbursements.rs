@@ -63,7 +63,7 @@ impl Reimbursements {
      * As opposed to `get`, this function returns all the pages of the request at once.
      */
     pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Reimbursement>>> {
-        let url = self.client.url(&"/reimbursements".to_string(), None);
+        let url = self.client.url("/reimbursements", None);
         let crate::Response::<crate::types::GetReimbursementsResponse> {
             mut status,
             mut headers,
@@ -131,7 +131,7 @@ impl Reimbursements {
         let url = self.client.url(
             &format!(
                 "/reimbursements/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

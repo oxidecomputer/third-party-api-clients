@@ -390,7 +390,7 @@ impl Files {
      * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
     pub async fn empty_trash(&self) -> ClientResult<crate::Response<()>> {
-        let url = self.client.url(&"/files/trash".to_string(), None);
+        let url = self.client.url("/files/trash", None);
         self.client
             .delete(
                 &url,
@@ -451,7 +451,7 @@ impl Files {
         let url = self.client.url(
             &format!(
                 "/files/{}?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -501,7 +501,7 @@ impl Files {
         let url = self.client.url(
             &format!(
                 "/files/{}?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -591,7 +591,7 @@ impl Files {
         let url = self.client.url(
             &format!(
                 "/files/{}?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -671,7 +671,7 @@ impl Files {
         let url = self.client.url(
             &format!(
                 "/files/{}/copy?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -709,7 +709,7 @@ impl Files {
         let url = self.client.url(
             &format!(
                 "/files/{}/export?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,
@@ -775,7 +775,7 @@ impl Files {
         let url = self.client.url(
             &format!(
                 "/files/{}/watch?{}",
-                crate::progenitor_support::encode_path(&file_id.to_string()),
+                crate::progenitor_support::encode_path(file_id),
                 query_
             ),
             None,

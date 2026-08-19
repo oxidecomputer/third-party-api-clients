@@ -194,7 +194,7 @@ pub mod deserialize_null_string {
 
 struct BoolVisitor;
 
-impl<'de> Visitor<'de> for BoolVisitor {
+impl Visitor<'_> for BoolVisitor {
     type Value = bool;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -259,7 +259,7 @@ pub mod deserialize_null_boolean {
 
 struct I32Visitor;
 
-impl<'de> Visitor<'de> for I32Visitor {
+impl Visitor<'_> for I32Visitor {
     type Value = i32;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -331,7 +331,7 @@ pub mod deserialize_null_i32 {
 
 struct I64Visitor;
 
-impl<'de> Visitor<'de> for I64Visitor {
+impl Visitor<'_> for I64Visitor {
     type Value = i64;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -398,7 +398,7 @@ pub mod deserialize_null_i64 {
 
 struct F32Visitor;
 
-impl<'de> Visitor<'de> for F32Visitor {
+impl Visitor<'_> for F32Visitor {
     type Value = f32;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -489,7 +489,7 @@ pub mod deserialize_null_f32 {
 
 struct F64Visitor;
 
-impl<'de> Visitor<'de> for F64Visitor {
+impl Visitor<'_> for F64Visitor {
     type Value = f64;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {

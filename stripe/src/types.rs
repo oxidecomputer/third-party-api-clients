@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
  * The business type.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BusinessType {
     #[serde(rename = "company")]
     Company,
@@ -16,6 +17,7 @@ pub enum BusinessType {
     #[serde(rename = "non_profit")]
     NonProfit,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -35,11 +37,6 @@ impl std::fmt::Display for BusinessType {
     }
 }
 
-impl Default for BusinessType {
-    fn default() -> BusinessType {
-        BusinessType::Noop
-    }
-}
 impl BusinessType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BusinessType::Noop)
@@ -96,10 +93,12 @@ impl DataAnyOf {
  * String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Object {
     #[serde(rename = "list")]
     List,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -116,11 +115,6 @@ impl std::fmt::Display for Object {
     }
 }
 
-impl Default for Object {
-    fn default() -> Object {
-        Object::Noop
-    }
-}
 impl Object {
     pub fn is_noop(&self) -> bool {
         matches!(self, Object::Noop)
@@ -162,10 +156,12 @@ pub struct ExternalAccounts {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountObject {
     #[serde(rename = "account")]
     Account,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -182,11 +178,6 @@ impl std::fmt::Display for AccountObject {
     }
 }
 
-impl Default for AccountObject {
-    fn default() -> AccountObject {
-        AccountObject::Noop
-    }
-}
 impl AccountObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountObject::Noop)
@@ -197,6 +188,7 @@ impl AccountObject {
  * The Stripe account type. Can be `standard`, `express`, or `custom`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "custom")]
     Custom,
@@ -205,6 +197,7 @@ pub enum Type {
     #[serde(rename = "standard")]
     Standard,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -223,11 +216,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -648,6 +636,7 @@ pub struct AccountBusinessProfile {
  * The status of the transfers capability of the account, or whether your platform can transfer funds to the account.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Transfers {
     #[serde(rename = "active")]
     Active,
@@ -656,6 +645,7 @@ pub enum Transfers {
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -674,11 +664,6 @@ impl std::fmt::Display for Transfers {
     }
 }
 
-impl Default for Transfers {
-    fn default() -> Transfers {
-        Transfers::Noop
-    }
-}
 impl Transfers {
     pub fn is_noop(&self) -> bool {
         matches!(self, Transfers::Noop)
@@ -1142,10 +1127,12 @@ pub struct AccountFutureRequirements {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountLinkObject {
     #[serde(rename = "account_link")]
     AccountLink,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1162,11 +1149,6 @@ impl std::fmt::Display for AccountLinkObject {
     }
 }
 
-impl Default for AccountLinkObject {
-    fn default() -> AccountLinkObject {
-        AccountLinkObject::Noop
-    }
-}
 impl AccountLinkObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountLinkObject::Noop)
@@ -1375,6 +1357,7 @@ pub struct AccountRequirementsAlternative {
  * The code for the type of error.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Code {
     #[serde(rename = "invalid_address_city_state_postal_code")]
     InvalidAddressCityStatePostalCode,
@@ -1467,6 +1450,7 @@ pub enum Code {
     #[serde(rename = "verification_requires_additional_memorandum_of_associations")]
     VerificationRequiresAdditionalMemorandumOfAssociations,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1537,11 +1521,6 @@ impl std::fmt::Display for Code {
     }
 }
 
-impl Default for Code {
-    fn default() -> Code {
-        Code::Noop
-    }
-}
 impl Code {
     pub fn is_noop(&self) -> bool {
         matches!(self, Code::Noop)
@@ -1676,12 +1655,14 @@ pub struct AccountTosAcceptance {
  * The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountUnificationControllerType {
     #[serde(rename = "account")]
     Account,
     #[serde(rename = "application")]
     Application,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1699,11 +1680,6 @@ impl std::fmt::Display for AccountUnificationControllerType {
     }
 }
 
-impl Default for AccountUnificationControllerType {
-    fn default() -> AccountUnificationControllerType {
-        AccountUnificationControllerType::Noop
-    }
-}
 impl AccountUnificationControllerType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountUnificationControllerType::Noop)
@@ -1859,10 +1835,12 @@ impl std::convert::From<CustomerAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AlipayAccountObject {
     #[serde(rename = "alipay_account")]
     AlipayAccount,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1879,11 +1857,6 @@ impl std::fmt::Display for AlipayAccountObject {
     }
 }
 
-impl Default for AlipayAccountObject {
-    fn default() -> AlipayAccountObject {
-        AlipayAccountObject::Noop
-    }
-}
 impl AlipayAccountObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, AlipayAccountObject::Noop)
@@ -2058,6 +2031,7 @@ impl SourceAnyOf {
  * The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ApiErrorsType {
     #[serde(rename = "api_error")]
     ApiError,
@@ -2068,6 +2042,7 @@ pub enum ApiErrorsType {
     #[serde(rename = "invalid_request_error")]
     InvalidRequestError,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2087,11 +2062,6 @@ impl std::fmt::Display for ApiErrorsType {
     }
 }
 
-impl Default for ApiErrorsType {
-    fn default() -> ApiErrorsType {
-        ApiErrorsType::Noop
-    }
-}
 impl ApiErrorsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ApiErrorsType::Noop)
@@ -2197,10 +2167,12 @@ pub struct ApiErrors {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ApplePayDomainObject {
     #[serde(rename = "apple_pay_domain")]
     ApplePayDomain,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2217,11 +2189,6 @@ impl std::fmt::Display for ApplePayDomainObject {
     }
 }
 
-impl Default for ApplePayDomainObject {
-    fn default() -> ApplePayDomainObject {
-        ApplePayDomainObject::Noop
-    }
-}
 impl ApplePayDomainObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ApplePayDomainObject::Noop)
@@ -2277,10 +2244,12 @@ pub struct ApplePayDomain {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ApplicationObject {
     #[serde(rename = "application")]
     Application,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2297,11 +2266,6 @@ impl std::fmt::Display for ApplicationObject {
     }
 }
 
-impl Default for ApplicationObject {
-    fn default() -> ApplicationObject {
-        ApplicationObject::Noop
-    }
-}
 impl ApplicationObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ApplicationObject::Noop)
@@ -2544,10 +2508,12 @@ impl std::convert::From<ChargeAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PlatformFeeObject {
     #[serde(rename = "application_fee")]
     ApplicationFee,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2564,11 +2530,6 @@ impl std::fmt::Display for PlatformFeeObject {
     }
 }
 
-impl Default for PlatformFeeObject {
-    fn default() -> PlatformFeeObject {
-        PlatformFeeObject::Noop
-    }
-}
 impl PlatformFeeObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlatformFeeObject::Noop)
@@ -2701,6 +2662,7 @@ pub struct PlatformFee {
  * The status of the most recent automated tax calculation for this invoice.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "complete")]
     Complete,
@@ -2709,6 +2671,7 @@ pub enum Status {
     #[serde(rename = "requires_location_inputs")]
     RequiresLocationInputs,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2727,11 +2690,6 @@ impl std::fmt::Display for Status {
     }
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Status::Noop
-    }
-}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -2760,10 +2718,12 @@ pub struct AutomaticTax {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BalanceObject {
     #[serde(rename = "balance")]
     Balance,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2780,11 +2740,6 @@ impl std::fmt::Display for BalanceObject {
     }
 }
 
-impl Default for BalanceObject {
-    fn default() -> BalanceObject {
-        BalanceObject::Noop
-    }
-}
 impl BalanceObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, BalanceObject::Noop)
@@ -2968,10 +2923,12 @@ pub struct BalanceDetail {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BalanceTransactionObject {
     #[serde(rename = "balance_transaction")]
     BalanceTransaction,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2988,11 +2945,6 @@ impl std::fmt::Display for BalanceTransactionObject {
     }
 }
 
-impl Default for BalanceTransactionObject {
-    fn default() -> BalanceTransactionObject {
-        BalanceTransactionObject::Noop
-    }
-}
 impl BalanceTransactionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, BalanceTransactionObject::Noop)
@@ -3291,6 +3243,7 @@ impl std::convert::From<BalanceTransactionSourceAnyOf> for String {
  * Transaction type: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `contribution`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction types and what they represent. If you are looking to classify transactions for accounting purposes, you might want to consider `reporting_category` instead.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BalanceTransactionType {
     #[serde(rename = "adjustment")]
     Adjustment,
@@ -3357,6 +3310,7 @@ pub enum BalanceTransactionType {
     #[serde(rename = "transfer_refund")]
     TransferRefund,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3404,11 +3358,6 @@ impl std::fmt::Display for BalanceTransactionType {
     }
 }
 
-impl Default for BalanceTransactionType {
-    fn default() -> BalanceTransactionType {
-        BalanceTransactionType::Noop
-    }
-}
 impl BalanceTransactionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BalanceTransactionType::Noop)
@@ -3556,12 +3505,14 @@ pub struct BalanceTransaction {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AvailablePayoutMethods {
     #[serde(rename = "instant")]
     Instant,
     #[serde(rename = "standard")]
     Standard,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3579,11 +3530,6 @@ impl std::fmt::Display for AvailablePayoutMethods {
     }
 }
 
-impl Default for AvailablePayoutMethods {
-    fn default() -> AvailablePayoutMethods {
-        AvailablePayoutMethods::Noop
-    }
-}
 impl AvailablePayoutMethods {
     pub fn is_noop(&self) -> bool {
         matches!(self, AvailablePayoutMethods::Noop)
@@ -3594,10 +3540,12 @@ impl AvailablePayoutMethods {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BankAccountObject {
     #[serde(rename = "bank_account")]
     BankAccount,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3614,11 +3562,6 @@ impl std::fmt::Display for BankAccountObject {
     }
 }
 
-impl Default for BankAccountObject {
-    fn default() -> BankAccountObject {
-        BankAccountObject::Noop
-    }
-}
 impl BankAccountObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, BankAccountObject::Noop)
@@ -3876,10 +3819,12 @@ pub struct BillingDetails {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PortalConfigurationObject {
     #[serde(rename = "billing_portal.configuration")]
     BillingPortalConfiguration,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3896,11 +3841,6 @@ impl std::fmt::Display for PortalConfigurationObject {
     }
 }
 
-impl Default for PortalConfigurationObject {
-    fn default() -> PortalConfigurationObject {
-        PortalConfigurationObject::Noop
-    }
-}
 impl PortalConfigurationObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PortalConfigurationObject::Noop)
@@ -4055,6 +3995,7 @@ impl std::convert::From<ConfigurationAnyOf> for String {
  * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Locale {
     #[serde(rename = "auto")]
     Auto,
@@ -4151,6 +4092,7 @@ pub enum Locale {
     #[serde(rename = "zh-TW")]
     ZhTw,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4213,11 +4155,6 @@ impl std::fmt::Display for Locale {
     }
 }
 
-impl Default for Locale {
-    fn default() -> Locale {
-        Locale::Noop
-    }
-}
 impl Locale {
     pub fn is_noop(&self) -> bool {
         matches!(self, Locale::Noop)
@@ -4228,10 +4165,12 @@ impl Locale {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PortalSessionObject {
     #[serde(rename = "billing_portal.session")]
     BillingPortalSession,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4248,11 +4187,6 @@ impl std::fmt::Display for PortalSessionObject {
     }
 }
 
-impl Default for PortalSessionObject {
-    fn default() -> PortalSessionObject {
-        PortalSessionObject::Noop
-    }
-}
 impl PortalSessionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PortalSessionObject::Noop)
@@ -4367,10 +4301,12 @@ pub struct PortalSession {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BitcoinReceiverObject {
     #[serde(rename = "bitcoin_receiver")]
     BitcoinReceiver,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4387,11 +4323,6 @@ impl std::fmt::Display for BitcoinReceiverObject {
     }
 }
 
-impl Default for BitcoinReceiverObject {
-    fn default() -> BitcoinReceiverObject {
-        BitcoinReceiverObject::Noop
-    }
-}
 impl BitcoinReceiverObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, BitcoinReceiverObject::Noop)
@@ -4628,10 +4559,12 @@ pub struct BitcoinReceiver {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BitcoinTransactionObject {
     #[serde(rename = "bitcoin_transaction")]
     BitcoinTransaction,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4648,11 +4581,6 @@ impl std::fmt::Display for BitcoinTransactionObject {
     }
 }
 
-impl Default for BitcoinTransactionObject {
-    fn default() -> BitcoinTransactionObject {
-        BitcoinTransactionObject::Noop
-    }
-}
 impl BitcoinTransactionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, BitcoinTransactionObject::Noop)
@@ -4727,10 +4655,12 @@ pub struct BitcoinTransaction {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CapabilityObject {
     #[serde(rename = "capability")]
     Capability,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4747,11 +4677,6 @@ impl std::fmt::Display for CapabilityObject {
     }
 }
 
-impl Default for CapabilityObject {
-    fn default() -> CapabilityObject {
-        CapabilityObject::Noop
-    }
-}
 impl CapabilityObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CapabilityObject::Noop)
@@ -4762,6 +4687,7 @@ impl CapabilityObject {
  * The status of the capability. Can be `active`, `inactive`, `pending`, or `unrequested`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CapabilityStatus {
     #[serde(rename = "active")]
     Active,
@@ -4774,6 +4700,7 @@ pub enum CapabilityStatus {
     #[serde(rename = "unrequested")]
     Unrequested,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4794,11 +4721,6 @@ impl std::fmt::Display for CapabilityStatus {
     }
 }
 
-impl Default for CapabilityStatus {
-    fn default() -> CapabilityStatus {
-        CapabilityStatus::Noop
-    }
-}
 impl CapabilityStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, CapabilityStatus::Noop)
@@ -4869,10 +4791,12 @@ pub struct Capability {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CardObject {
     #[serde(rename = "card")]
     Card,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4889,11 +4813,6 @@ impl std::fmt::Display for CardObject {
     }
 }
 
-impl Default for CardObject {
-    fn default() -> CardObject {
-        CardObject::Noop
-    }
-}
 impl CardObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CardObject::Noop)
@@ -5483,10 +5402,12 @@ impl std::convert::From<InvoiceAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ChargeObject {
     #[serde(rename = "charge")]
     Charge,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5503,11 +5424,6 @@ impl std::fmt::Display for ChargeObject {
     }
 }
 
-impl Default for ChargeObject {
-    fn default() -> ChargeObject {
-        ChargeObject::Noop
-    }
-}
 impl ChargeObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ChargeObject::Noop)
@@ -5772,6 +5688,7 @@ impl std::convert::From<TransferAnyOf> for String {
  * The status of the payment is either `succeeded`, `pending`, or `failed`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ChargeStatus {
     #[serde(rename = "failed")]
     Failed,
@@ -5780,6 +5697,7 @@ pub enum ChargeStatus {
     #[serde(rename = "succeeded")]
     Succeeded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5798,11 +5716,6 @@ impl std::fmt::Display for ChargeStatus {
     }
 }
 
-impl Default for ChargeStatus {
-    fn default() -> ChargeStatus {
-        ChargeStatus::Noop
-    }
-}
 impl ChargeStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ChargeStatus::Noop)
@@ -6370,12 +6283,14 @@ pub struct ChargeTransferData {
  * Describes whether Checkout should collect the customer's billing address.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BillingAddressCollection {
     #[serde(rename = "auto")]
     Auto,
     #[serde(rename = "required")]
     Required,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6393,11 +6308,6 @@ impl std::fmt::Display for BillingAddressCollection {
     }
 }
 
-impl Default for BillingAddressCollection {
-    fn default() -> BillingAddressCollection {
-        BillingAddressCollection::Noop
-    }
-}
 impl BillingAddressCollection {
     pub fn is_noop(&self) -> bool {
         matches!(self, BillingAddressCollection::Noop)
@@ -6408,12 +6318,14 @@ impl BillingAddressCollection {
  * Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CustomerCreation {
     #[serde(rename = "always")]
     Always,
     #[serde(rename = "if_required")]
     IfRequired,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6431,11 +6343,6 @@ impl std::fmt::Display for CustomerCreation {
     }
 }
 
-impl Default for CustomerCreation {
-    fn default() -> CustomerCreation {
-        CustomerCreation::Noop
-    }
-}
 impl CustomerCreation {
     pub fn is_noop(&self) -> bool {
         matches!(self, CustomerCreation::Noop)
@@ -6482,6 +6389,7 @@ pub struct LineItems {
  * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SessionLocale {
     #[serde(rename = "auto")]
     Auto,
@@ -6566,6 +6474,7 @@ pub enum SessionLocale {
     #[serde(rename = "zh-TW")]
     ZhTw,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6622,11 +6531,6 @@ impl std::fmt::Display for SessionLocale {
     }
 }
 
-impl Default for SessionLocale {
-    fn default() -> SessionLocale {
-        SessionLocale::Noop
-    }
-}
 impl SessionLocale {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionLocale::Noop)
@@ -6637,6 +6541,7 @@ impl SessionLocale {
  * The mode of the Checkout Session.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Mode {
     #[serde(rename = "payment")]
     Payment,
@@ -6645,6 +6550,7 @@ pub enum Mode {
     #[serde(rename = "subscription")]
     Subscription,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6663,11 +6569,6 @@ impl std::fmt::Display for Mode {
     }
 }
 
-impl Default for Mode {
-    fn default() -> Mode {
-        Mode::Noop
-    }
-}
 impl Mode {
     pub fn is_noop(&self) -> bool {
         matches!(self, Mode::Noop)
@@ -6678,10 +6579,12 @@ impl Mode {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SessionObject {
     #[serde(rename = "checkout.session")]
     CheckoutSession,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6698,11 +6601,6 @@ impl std::fmt::Display for SessionObject {
     }
 }
 
-impl Default for SessionObject {
-    fn default() -> SessionObject {
-        SessionObject::Noop
-    }
-}
 impl SessionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionObject::Noop)
@@ -6766,6 +6664,7 @@ impl std::convert::From<PaymentLinkAnyOf> for String {
  *   You can use this value to decide when to fulfill your customer's order.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentStatus {
     #[serde(rename = "no_payment_required")]
     NoPaymentRequired,
@@ -6774,6 +6673,7 @@ pub enum PaymentStatus {
     #[serde(rename = "unpaid")]
     Unpaid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6792,11 +6692,6 @@ impl std::fmt::Display for PaymentStatus {
     }
 }
 
-impl Default for PaymentStatus {
-    fn default() -> PaymentStatus {
-        PaymentStatus::Noop
-    }
-}
 impl PaymentStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentStatus::Noop)
@@ -6925,6 +6820,7 @@ impl std::convert::From<ShippingRateAnyOf> for String {
  * The status of the Checkout Session, one of `open`, `complete`, or `expired`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SessionStatus {
     #[serde(rename = "complete")]
     Complete,
@@ -6933,6 +6829,7 @@ pub enum SessionStatus {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6951,11 +6848,6 @@ impl std::fmt::Display for SessionStatus {
     }
 }
 
-impl Default for SessionStatus {
-    fn default() -> SessionStatus {
-        SessionStatus::Noop
-    }
-}
 impl SessionStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, SessionStatus::Noop)
@@ -6969,6 +6861,7 @@ impl SessionStatus {
  *   in `subscription` or `setup` mode.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubmitType {
     #[serde(rename = "auto")]
     Auto,
@@ -6979,6 +6872,7 @@ pub enum SubmitType {
     #[serde(rename = "pay")]
     Pay,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6998,11 +6892,6 @@ impl std::fmt::Display for SubmitType {
     }
 }
 
-impl Default for SubmitType {
-    fn default() -> SubmitType {
-        SubmitType::Noop
-    }
-}
 impl SubmitType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubmitType::Noop)
@@ -7581,12 +7470,14 @@ pub struct Session {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DefaultFor {
     #[serde(rename = "invoice")]
     Invoice,
     #[serde(rename = "subscription")]
     Subscription,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7604,11 +7495,6 @@ impl std::fmt::Display for DefaultFor {
     }
 }
 
-impl Default for DefaultFor {
-    fn default() -> DefaultFor {
-        DefaultFor::Noop
-    }
-}
 impl DefaultFor {
     pub fn is_noop(&self) -> bool {
         matches!(self, DefaultFor::Noop)
@@ -7619,6 +7505,7 @@ impl DefaultFor {
  * Payment schedule for the mandate.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentSchedule {
     #[serde(rename = "combined")]
     Combined,
@@ -7627,6 +7514,7 @@ pub enum PaymentSchedule {
     #[serde(rename = "sporadic")]
     Sporadic,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7645,11 +7533,6 @@ impl std::fmt::Display for PaymentSchedule {
     }
 }
 
-impl Default for PaymentSchedule {
-    fn default() -> PaymentSchedule {
-        PaymentSchedule::Noop
-    }
-}
 impl PaymentSchedule {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentSchedule::Noop)
@@ -7660,12 +7543,14 @@ impl PaymentSchedule {
  * Transaction type of the mandate.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TransactionType {
     #[serde(rename = "business")]
     Business,
     #[serde(rename = "personal")]
     Personal,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7683,11 +7568,6 @@ impl std::fmt::Display for TransactionType {
     }
 }
 
-impl Default for TransactionType {
-    fn default() -> TransactionType {
-        TransactionType::Noop
-    }
-}
 impl TransactionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TransactionType::Noop)
@@ -7740,12 +7620,14 @@ pub struct CheckoutAcssDebitMandateOptions {
  * Currency supported by the bank account. Returned when the Session is in `setup` mode.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Currency {
     #[serde(rename = "cad")]
     Cad,
     #[serde(rename = "usd")]
     Usd,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7763,11 +7645,6 @@ impl std::fmt::Display for Currency {
     }
 }
 
-impl Default for Currency {
-    fn default() -> Currency {
-        Currency::Noop
-    }
-}
 impl Currency {
     pub fn is_noop(&self) -> bool {
         matches!(self, Currency::Noop)
@@ -7778,6 +7655,7 @@ impl Currency {
  * Bank account verification method.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum VerificationMethod {
     #[serde(rename = "automatic")]
     Automatic,
@@ -7786,6 +7664,7 @@ pub enum VerificationMethod {
     #[serde(rename = "microdeposits")]
     Microdeposits,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7804,11 +7683,6 @@ impl std::fmt::Display for VerificationMethod {
     }
 }
 
-impl Default for VerificationMethod {
-    fn default() -> VerificationMethod {
-        VerificationMethod::Noop
-    }
-}
 impl VerificationMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, VerificationMethod::Noop)
@@ -7897,12 +7771,14 @@ pub struct CheckoutSessionPaymentMethodOptions {
  * Bank account verification method.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CheckoutUsBankAccountPaymentMethodOptionsVerification {
     #[serde(rename = "automatic")]
     Automatic,
     #[serde(rename = "instant")]
     Instant,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7920,11 +7796,6 @@ impl std::fmt::Display for CheckoutUsBankAccountPaymentMethodOptionsVerification
     }
 }
 
-impl Default for CheckoutUsBankAccountPaymentMethodOptionsVerification {
-    fn default() -> CheckoutUsBankAccountPaymentMethodOptionsVerification {
-        CheckoutUsBankAccountPaymentMethodOptionsVerification::Noop
-    }
-}
 impl CheckoutUsBankAccountPaymentMethodOptionsVerification {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -7948,10 +7819,12 @@ pub struct CheckoutUsBankAccountPaymentMethodOptions {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ConnectCollectionTransferObject {
     #[serde(rename = "connect_collection_transfer")]
     ConnectCollectionTransfer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7970,11 +7843,6 @@ impl std::fmt::Display for ConnectCollectionTransferObject {
     }
 }
 
-impl Default for ConnectCollectionTransferObject {
-    fn default() -> ConnectCollectionTransferObject {
-        ConnectCollectionTransferObject::Noop
-    }
-}
 impl ConnectCollectionTransferObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ConnectCollectionTransferObject::Noop)
@@ -8034,10 +7902,12 @@ pub struct ConnectCollectionTransfer {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CountrySpecObject {
     #[serde(rename = "country_spec")]
     CountrySpec,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8054,11 +7924,6 @@ impl std::fmt::Display for CountrySpecObject {
     }
 }
 
-impl Default for CountrySpecObject {
-    fn default() -> CountrySpecObject {
-        CountrySpecObject::Noop
-    }
-}
 impl CountrySpecObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CountrySpecObject::Noop)
@@ -8178,6 +8043,7 @@ pub struct CountrySpecVerificationFields {
  * One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Duration {
     #[serde(rename = "forever")]
     Forever,
@@ -8186,6 +8052,7 @@ pub enum Duration {
     #[serde(rename = "repeating")]
     Repeating,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8204,11 +8071,6 @@ impl std::fmt::Display for Duration {
     }
 }
 
-impl Default for Duration {
-    fn default() -> Duration {
-        Duration::Noop
-    }
-}
 impl Duration {
     pub fn is_noop(&self) -> bool {
         matches!(self, Duration::Noop)
@@ -8219,10 +8081,12 @@ impl Duration {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CouponObject {
     #[serde(rename = "coupon")]
     Coupon,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8239,11 +8103,6 @@ impl std::fmt::Display for CouponObject {
     }
 }
 
-impl Default for CouponObject {
-    fn default() -> CouponObject {
-        CouponObject::Noop
-    }
-}
 impl CouponObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CouponObject::Noop)
@@ -8510,10 +8369,12 @@ pub struct Lines {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CreditNoteObject {
     #[serde(rename = "credit_note")]
     CreditNote,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8530,11 +8391,6 @@ impl std::fmt::Display for CreditNoteObject {
     }
 }
 
-impl Default for CreditNoteObject {
-    fn default() -> CreditNoteObject {
-        CreditNoteObject::Noop
-    }
-}
 impl CreditNoteObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CreditNoteObject::Noop)
@@ -8545,6 +8401,7 @@ impl CreditNoteObject {
  * Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Reason {
     #[serde(rename = "duplicate")]
     Duplicate,
@@ -8555,6 +8412,7 @@ pub enum Reason {
     #[serde(rename = "product_unsatisfactory")]
     ProductUnsatisfactory,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8574,11 +8432,6 @@ impl std::fmt::Display for Reason {
     }
 }
 
-impl Default for Reason {
-    fn default() -> Reason {
-        Reason::Noop
-    }
-}
 impl Reason {
     pub fn is_noop(&self) -> bool {
         matches!(self, Reason::Noop)
@@ -8641,12 +8494,14 @@ impl std::convert::From<RefundAnyOf> for String {
  * Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CreditNoteStatus {
     #[serde(rename = "issued")]
     Issued,
     #[serde(rename = "void")]
     Void,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8664,11 +8519,6 @@ impl std::fmt::Display for CreditNoteStatus {
     }
 }
 
-impl Default for CreditNoteStatus {
-    fn default() -> CreditNoteStatus {
-        CreditNoteStatus::Noop
-    }
-}
 impl CreditNoteStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, CreditNoteStatus::Noop)
@@ -8679,12 +8529,14 @@ impl CreditNoteStatus {
  * Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CreditNoteType {
     #[serde(rename = "post_payment")]
     PostPayment,
     #[serde(rename = "pre_payment")]
     PrePayment,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8702,11 +8554,6 @@ impl std::fmt::Display for CreditNoteType {
     }
 }
 
-impl Default for CreditNoteType {
-    fn default() -> CreditNoteType {
-        CreditNoteType::Noop
-    }
-}
 impl CreditNoteType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CreditNoteType::Noop)
@@ -8917,10 +8764,12 @@ pub struct CreditNote {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CreditNoteLineItemObject {
     #[serde(rename = "credit_note_line_item")]
     CreditNoteLineItem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8937,11 +8786,6 @@ impl std::fmt::Display for CreditNoteLineItemObject {
     }
 }
 
-impl Default for CreditNoteLineItemObject {
-    fn default() -> CreditNoteLineItemObject {
-        CreditNoteLineItemObject::Noop
-    }
-}
 impl CreditNoteLineItemObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CreditNoteLineItemObject::Noop)
@@ -8952,12 +8796,14 @@ impl CreditNoteLineItemObject {
  * The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CreditNoteLineItemType {
     #[serde(rename = "custom_line_item")]
     CustomLineItem,
     #[serde(rename = "invoice_line_item")]
     InvoiceLineItem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -8975,11 +8821,6 @@ impl std::fmt::Display for CreditNoteLineItemType {
     }
 }
 
-impl Default for CreditNoteLineItemType {
-    fn default() -> CreditNoteLineItemType {
-        CreditNoteLineItemType::Noop
-    }
-}
 impl CreditNoteLineItemType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CreditNoteLineItemType::Noop)
@@ -9300,10 +9141,12 @@ impl std::convert::From<DefaultSourceAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CustomerObject {
     #[serde(rename = "customer")]
     Customer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9320,11 +9163,6 @@ impl std::fmt::Display for CustomerObject {
     }
 }
 
-impl Default for CustomerObject {
-    fn default() -> CustomerObject {
-        CustomerObject::Noop
-    }
-}
 impl CustomerObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CustomerObject::Noop)
@@ -9489,6 +9327,7 @@ pub struct Subscriptions {
  * Describes the customer's tax exemption status. One of `none`, `exempt`, or `reverse`. When set to `reverse`, invoice and receipt PDFs include the text **"Reverse charge"**.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TaxExempt {
     #[serde(rename = "exempt")]
     Exempt,
@@ -9497,6 +9336,7 @@ pub enum TaxExempt {
     #[serde(rename = "reverse")]
     Reverse,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9515,11 +9355,6 @@ impl std::fmt::Display for TaxExempt {
     }
 }
 
-impl Default for TaxExempt {
-    fn default() -> TaxExempt {
-        TaxExempt::Noop
-    }
-}
 impl TaxExempt {
     pub fn is_noop(&self) -> bool {
         matches!(self, TaxExempt::Noop)
@@ -9841,12 +9676,14 @@ pub struct Customer {
  * The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CustomerAcceptanceType {
     #[serde(rename = "offline")]
     Offline,
     #[serde(rename = "online")]
     Online,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9864,11 +9701,6 @@ impl std::fmt::Display for CustomerAcceptanceType {
     }
 }
 
-impl Default for CustomerAcceptanceType {
-    fn default() -> CustomerAcceptanceType {
-        CustomerAcceptanceType::Noop
-    }
-}
 impl CustomerAcceptanceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CustomerAcceptanceType::Noop)
@@ -10012,10 +9844,12 @@ impl std::convert::From<CustomerAnyOfData> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CustomerBalanceTransactionObject {
     #[serde(rename = "customer_balance_transaction")]
     CustomerBalanceTransaction,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10034,11 +9868,6 @@ impl std::fmt::Display for CustomerBalanceTransactionObject {
     }
 }
 
-impl Default for CustomerBalanceTransactionObject {
-    fn default() -> CustomerBalanceTransactionObject {
-        CustomerBalanceTransactionObject::Noop
-    }
-}
 impl CustomerBalanceTransactionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, CustomerBalanceTransactionObject::Noop)
@@ -10049,6 +9878,7 @@ impl CustomerBalanceTransactionObject {
  * Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_too_large`, `invoice_too_small`, `unspent_receiver_credit`, or `unapplied_from_invoice`. See the [Customer Balance page](https://stripe.com/docs/billing/customer/balance#types) to learn more about transaction types.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CustomerBalanceTransactionType {
     #[serde(rename = "adjustment")]
     Adjustment,
@@ -10069,6 +9899,7 @@ pub enum CustomerBalanceTransactionType {
     #[serde(rename = "unspent_receiver_credit")]
     UnspentReceiverCredit,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10093,11 +9924,6 @@ impl std::fmt::Display for CustomerBalanceTransactionType {
     }
 }
 
-impl Default for CustomerBalanceTransactionType {
-    fn default() -> CustomerBalanceTransactionType {
-        CustomerBalanceTransactionType::Noop
-    }
-}
 impl CustomerBalanceTransactionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CustomerBalanceTransactionType::Noop)
@@ -10235,6 +10061,7 @@ pub struct CustomerBalanceTransaction {
  * Surfaces if automatic tax computation is possible given the current customer location information.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CustomerTaxAutomatic {
     #[serde(rename = "failed")]
     Failed,
@@ -10245,6 +10072,7 @@ pub enum CustomerTaxAutomatic {
     #[serde(rename = "unrecognized_location")]
     UnrecognizedLocation,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10264,11 +10092,6 @@ impl std::fmt::Display for CustomerTaxAutomatic {
     }
 }
 
-impl Default for CustomerTaxAutomatic {
-    fn default() -> CustomerTaxAutomatic {
-        CustomerTaxAutomatic::Noop
-    }
-}
 impl CustomerTaxAutomatic {
     pub fn is_noop(&self) -> bool {
         matches!(self, CustomerTaxAutomatic::Noop)
@@ -10303,6 +10126,7 @@ pub struct CustomerTax {
  * The data source used to infer the customer's location.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Source {
     #[serde(rename = "billing_address")]
     BillingAddress,
@@ -10313,6 +10137,7 @@ pub enum Source {
     #[serde(rename = "shipping_destination")]
     ShippingDestination,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10332,11 +10157,6 @@ impl std::fmt::Display for Source {
     }
 }
 
-impl Default for Source {
-    fn default() -> Source {
-        Source::Noop
-    }
-}
 impl Source {
     pub fn is_noop(&self) -> bool {
         matches!(self, Source::Noop)
@@ -10609,10 +10429,12 @@ pub struct DeletedCustomer {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedDiscountObject {
     #[serde(rename = "discount")]
     Discount,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10629,11 +10451,6 @@ impl std::fmt::Display for DeletedDiscountObject {
     }
 }
 
-impl Default for DeletedDiscountObject {
-    fn default() -> DeletedDiscountObject {
-        DeletedDiscountObject::Noop
-    }
-}
 impl DeletedDiscountObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedDiscountObject::Noop)
@@ -10815,10 +10632,12 @@ impl DeletedExternalAccountAnyOf {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedInvoiceObject {
     #[serde(rename = "invoice")]
     Invoice,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10835,11 +10654,6 @@ impl std::fmt::Display for DeletedInvoiceObject {
     }
 }
 
-impl Default for DeletedInvoiceObject {
-    fn default() -> DeletedInvoiceObject {
-        DeletedInvoiceObject::Noop
-    }
-}
 impl DeletedInvoiceObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedInvoiceObject::Noop)
@@ -10877,10 +10691,12 @@ pub struct DeletedInvoice {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedInvoiceItemObject {
     #[serde(rename = "invoiceitem")]
     Invoiceitem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10897,11 +10713,6 @@ impl std::fmt::Display for DeletedInvoiceItemObject {
     }
 }
 
-impl Default for DeletedInvoiceItemObject {
-    fn default() -> DeletedInvoiceItemObject {
-        DeletedInvoiceItemObject::Noop
-    }
-}
 impl DeletedInvoiceItemObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedInvoiceItemObject::Noop)
@@ -10999,10 +10810,12 @@ impl DeletedPaymentSourceAnyOf {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedPersonObject {
     #[serde(rename = "person")]
     Person,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11019,11 +10832,6 @@ impl std::fmt::Display for DeletedPersonObject {
     }
 }
 
-impl Default for DeletedPersonObject {
-    fn default() -> DeletedPersonObject {
-        DeletedPersonObject::Noop
-    }
-}
 impl DeletedPersonObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedPersonObject::Noop)
@@ -11061,10 +10869,12 @@ pub struct DeletedPerson {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedPlanObject {
     #[serde(rename = "plan")]
     Plan,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11081,11 +10891,6 @@ impl std::fmt::Display for DeletedPlanObject {
     }
 }
 
-impl Default for DeletedPlanObject {
-    fn default() -> DeletedPlanObject {
-        DeletedPlanObject::Noop
-    }
-}
 impl DeletedPlanObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedPlanObject::Noop)
@@ -11123,10 +10928,12 @@ pub struct DeletedPlan {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedPriceObject {
     #[serde(rename = "price")]
     Price,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11143,11 +10950,6 @@ impl std::fmt::Display for DeletedPriceObject {
     }
 }
 
-impl Default for DeletedPriceObject {
-    fn default() -> DeletedPriceObject {
-        DeletedPriceObject::Noop
-    }
-}
 impl DeletedPriceObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedPriceObject::Noop)
@@ -11185,10 +10987,12 @@ pub struct DeletedPrice {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedProductObject {
     #[serde(rename = "product")]
     Product,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11205,11 +11009,6 @@ impl std::fmt::Display for DeletedProductObject {
     }
 }
 
-impl Default for DeletedProductObject {
-    fn default() -> DeletedProductObject {
-        DeletedProductObject::Noop
-    }
-}
 impl DeletedProductObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedProductObject::Noop)
@@ -11247,10 +11046,12 @@ pub struct DeletedProduct {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RadarListDeletedObject {
     #[serde(rename = "radar.value_list")]
     RadarValueList,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11267,11 +11068,6 @@ impl std::fmt::Display for RadarListDeletedObject {
     }
 }
 
-impl Default for RadarListDeletedObject {
-    fn default() -> RadarListDeletedObject {
-        RadarListDeletedObject::Noop
-    }
-}
 impl RadarListDeletedObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, RadarListDeletedObject::Noop)
@@ -11309,10 +11105,12 @@ pub struct RadarListDeleted {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RadarListDeletedItemObject {
     #[serde(rename = "radar.value_list_item")]
     RadarValueListItem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11329,11 +11127,6 @@ impl std::fmt::Display for RadarListDeletedItemObject {
     }
 }
 
-impl Default for RadarListDeletedItemObject {
-    fn default() -> RadarListDeletedItemObject {
-        RadarListDeletedItemObject::Noop
-    }
-}
 impl RadarListDeletedItemObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, RadarListDeletedItemObject::Noop)
@@ -11371,10 +11164,12 @@ pub struct RadarListDeletedItem {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedRecipientObject {
     #[serde(rename = "recipient")]
     Recipient,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11391,11 +11186,6 @@ impl std::fmt::Display for DeletedRecipientObject {
     }
 }
 
-impl Default for DeletedRecipientObject {
-    fn default() -> DeletedRecipientObject {
-        DeletedRecipientObject::Noop
-    }
-}
 impl DeletedRecipientObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedRecipientObject::Noop)
@@ -11433,10 +11223,12 @@ pub struct DeletedRecipient {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedSkuObject {
     #[serde(rename = "sku")]
     Sku,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11453,11 +11245,6 @@ impl std::fmt::Display for DeletedSkuObject {
     }
 }
 
-impl Default for DeletedSkuObject {
-    fn default() -> DeletedSkuObject {
-        DeletedSkuObject::Noop
-    }
-}
 impl DeletedSkuObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedSkuObject::Noop)
@@ -11495,10 +11282,12 @@ pub struct DeletedSku {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedSubscriptionItemObject {
     #[serde(rename = "subscription_item")]
     SubscriptionItem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11515,11 +11304,6 @@ impl std::fmt::Display for DeletedSubscriptionItemObject {
     }
 }
 
-impl Default for DeletedSubscriptionItemObject {
-    fn default() -> DeletedSubscriptionItemObject {
-        DeletedSubscriptionItemObject::Noop
-    }
-}
 impl DeletedSubscriptionItemObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedSubscriptionItemObject::Noop)
@@ -11560,10 +11344,12 @@ pub struct DeletedSubscriptionItem {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedTaxObject {
     #[serde(rename = "tax_id")]
     TaxId,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11580,11 +11366,6 @@ impl std::fmt::Display for DeletedTaxObject {
     }
 }
 
-impl Default for DeletedTaxObject {
-    fn default() -> DeletedTaxObject {
-        DeletedTaxObject::Noop
-    }
-}
 impl DeletedTaxObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedTaxObject::Noop)
@@ -11622,10 +11403,12 @@ pub struct DeletedTaxId {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedTerminalLocationObject {
     #[serde(rename = "terminal.location")]
     TerminalLocation,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11642,11 +11425,6 @@ impl std::fmt::Display for DeletedTerminalLocationObject {
     }
 }
 
-impl Default for DeletedTerminalLocationObject {
-    fn default() -> DeletedTerminalLocationObject {
-        DeletedTerminalLocationObject::Noop
-    }
-}
 impl DeletedTerminalLocationObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedTerminalLocationObject::Noop)
@@ -11687,10 +11465,12 @@ pub struct DeletedTerminalLocation {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedTerminalReaderObject {
     #[serde(rename = "terminal.reader")]
     TerminalReader,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11707,11 +11487,6 @@ impl std::fmt::Display for DeletedTerminalReaderObject {
     }
 }
 
-impl Default for DeletedTerminalReaderObject {
-    fn default() -> DeletedTerminalReaderObject {
-        DeletedTerminalReaderObject::Noop
-    }
-}
 impl DeletedTerminalReaderObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedTerminalReaderObject::Noop)
@@ -11749,10 +11524,12 @@ pub struct DeletedTerminalReader {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedTestClockObject {
     #[serde(rename = "test_helpers.test_clock")]
     TestHelpersClock,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11769,11 +11546,6 @@ impl std::fmt::Display for DeletedTestClockObject {
     }
 }
 
-impl Default for DeletedTestClockObject {
-    fn default() -> DeletedTestClockObject {
-        DeletedTestClockObject::Noop
-    }
-}
 impl DeletedTestClockObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedTestClockObject::Noop)
@@ -11811,10 +11583,12 @@ pub struct DeletedTestClock {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeletedWebhookEndpointObject {
     #[serde(rename = "webhook_endpoint")]
     WebhookEndpoint,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11831,11 +11605,6 @@ impl std::fmt::Display for DeletedWebhookEndpointObject {
     }
 }
 
-impl Default for DeletedWebhookEndpointObject {
-    fn default() -> DeletedWebhookEndpointObject {
-        DeletedWebhookEndpointObject::Noop
-    }
-}
 impl DeletedWebhookEndpointObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeletedWebhookEndpointObject::Noop)
@@ -12113,10 +11882,12 @@ pub struct DiscountsResourceDiscountAmount {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DisputeObject {
     #[serde(rename = "dispute")]
     Dispute,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12133,11 +11904,6 @@ impl std::fmt::Display for DisputeObject {
     }
 }
 
-impl Default for DisputeObject {
-    fn default() -> DisputeObject {
-        DisputeObject::Noop
-    }
-}
 impl DisputeObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, DisputeObject::Noop)
@@ -12148,6 +11914,7 @@ impl DisputeObject {
  * Current status of dispute. Possible values are `warning_needs_response`, `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`, `won`, or `lost`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DisputeStatus {
     #[serde(rename = "charge_refunded")]
     ChargeRefunded,
@@ -12166,6 +11933,7 @@ pub enum DisputeStatus {
     #[serde(rename = "won")]
     Won,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12189,11 +11957,6 @@ impl std::fmt::Display for DisputeStatus {
     }
 }
 
-impl Default for DisputeStatus {
-    fn default() -> DisputeStatus {
-        DisputeStatus::Noop
-    }
-}
 impl DisputeStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, DisputeStatus::Noop)
@@ -12588,10 +12351,12 @@ pub struct EmailSent {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EphemeralKeyObject {
     #[serde(rename = "ephemeral_key")]
     EphemeralKey,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12608,11 +12373,6 @@ impl std::fmt::Display for EphemeralKeyObject {
     }
 }
 
-impl Default for EphemeralKeyObject {
-    fn default() -> EphemeralKeyObject {
-        EphemeralKeyObject::Noop
-    }
-}
 impl EphemeralKeyObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, EphemeralKeyObject::Noop)
@@ -12686,10 +12446,12 @@ pub struct Error {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EventObject {
     #[serde(rename = "event")]
     Event,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12706,11 +12468,6 @@ impl std::fmt::Display for EventObject {
     }
 }
 
-impl Default for EventObject {
-    fn default() -> EventObject {
-        EventObject::Noop
-    }
-}
 impl EventObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, EventObject::Noop)
@@ -12887,10 +12644,12 @@ pub struct Event {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ExchangeRateObject {
     #[serde(rename = "exchange_rate")]
     ExchangeRate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12907,11 +12666,6 @@ impl std::fmt::Display for ExchangeRateObject {
     }
 }
 
-impl Default for ExchangeRateObject {
-    fn default() -> ExchangeRateObject {
-        ExchangeRateObject::Noop
-    }
-}
 impl ExchangeRateObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ExchangeRateObject::Noop)
@@ -13011,10 +12765,12 @@ pub struct Fee {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FeeRefundObject {
     #[serde(rename = "fee_refund")]
     FeeRefund,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13031,11 +12787,6 @@ impl std::fmt::Display for FeeRefundObject {
     }
 }
 
-impl Default for FeeRefundObject {
-    fn default() -> FeeRefundObject {
-        FeeRefundObject::Noop
-    }
-}
 impl FeeRefundObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, FeeRefundObject::Noop)
@@ -13154,10 +12905,12 @@ pub struct Links {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FileObject {
     #[serde(rename = "file")]
     File,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13174,11 +12927,6 @@ impl std::fmt::Display for FileObject {
     }
 }
 
-impl Default for FileObject {
-    fn default() -> FileObject {
-        FileObject::Noop
-    }
-}
 impl FileObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, FileObject::Noop)
@@ -13189,6 +12937,7 @@ impl FileObject {
  * The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Purpose {
     #[serde(rename = "account_requirement")]
     AccountRequirement,
@@ -13219,6 +12968,7 @@ pub enum Purpose {
     #[serde(rename = "tax_document_user_upload")]
     TaxDocumentUserUpload,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13248,11 +12998,6 @@ impl std::fmt::Display for Purpose {
     }
 }
 
-impl Default for Purpose {
-    fn default() -> Purpose {
-        Purpose::Noop
-    }
-}
 impl Purpose {
     pub fn is_noop(&self) -> bool {
         matches!(self, Purpose::Noop)
@@ -13392,10 +13137,12 @@ pub struct File {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FileLinkObject {
     #[serde(rename = "file_link")]
     FileLink,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13412,11 +13159,6 @@ impl std::fmt::Display for FileLinkObject {
     }
 }
 
-impl Default for FileLinkObject {
-    fn default() -> FileLinkObject {
-        FileLinkObject::Noop
-    }
-}
 impl FileLinkObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, FileLinkObject::Noop)
@@ -13742,12 +13484,14 @@ pub struct GelatoDataVerifiedOutputsDate {
  * Status of this `document` check.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoDocumentReportStatus {
     #[serde(rename = "unverified")]
     Unverified,
     #[serde(rename = "verified")]
     Verified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13765,11 +13509,6 @@ impl std::fmt::Display for GelatoDocumentReportStatus {
     }
 }
 
-impl Default for GelatoDocumentReportStatus {
-    fn default() -> GelatoDocumentReportStatus {
-        GelatoDocumentReportStatus::Noop
-    }
-}
 impl GelatoDocumentReportStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoDocumentReportStatus::Noop)
@@ -13777,6 +13516,7 @@ impl GelatoDocumentReportStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AllowedTypes {
     #[serde(rename = "driving_license")]
     DrivingLicense,
@@ -13785,6 +13525,7 @@ pub enum AllowedTypes {
     #[serde(rename = "passport")]
     Passport,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13803,11 +13544,6 @@ impl std::fmt::Display for AllowedTypes {
     }
 }
 
-impl Default for AllowedTypes {
-    fn default() -> AllowedTypes {
-        AllowedTypes::Noop
-    }
-}
 impl AllowedTypes {
     pub fn is_noop(&self) -> bool {
         matches!(self, AllowedTypes::Noop)
@@ -13903,6 +13639,7 @@ pub struct GelatoDocumentReport {
  * A short machine-readable string giving the reason for the verification failure.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoDocumentReportErrorCode {
     #[serde(rename = "document_expired")]
     DocumentExpired,
@@ -13911,6 +13648,7 @@ pub enum GelatoDocumentReportErrorCode {
     #[serde(rename = "document_unverified_other")]
     DocumentUnverifiedOther,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13931,11 +13669,6 @@ impl std::fmt::Display for GelatoDocumentReportErrorCode {
     }
 }
 
-impl Default for GelatoDocumentReportErrorCode {
-    fn default() -> GelatoDocumentReportErrorCode {
-        GelatoDocumentReportErrorCode::Noop
-    }
-}
 impl GelatoDocumentReportErrorCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoDocumentReportErrorCode::Noop)
@@ -13965,6 +13698,7 @@ pub struct GelatoDocumentReportErrorData {
  * Type of ID number.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IdNumberType {
     #[serde(rename = "br_cpf")]
     BrCpf,
@@ -13973,6 +13707,7 @@ pub enum IdNumberType {
     #[serde(rename = "us_ssn")]
     UsSsn,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13991,11 +13726,6 @@ impl std::fmt::Display for IdNumberType {
     }
 }
 
-impl Default for IdNumberType {
-    fn default() -> IdNumberType {
-        IdNumberType::Noop
-    }
-}
 impl IdNumberType {
     pub fn is_noop(&self) -> bool {
         matches!(self, IdNumberType::Noop)
@@ -14058,6 +13788,7 @@ pub struct GelatoNumberReport {
  * A short machine-readable string giving the reason for the verification failure.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoNumberReportErrorCode {
     #[serde(rename = "id_number_insufficient_document_data")]
     IdNumberInsufficientDocumentData,
@@ -14066,6 +13797,7 @@ pub enum GelatoNumberReportErrorCode {
     #[serde(rename = "id_number_unverified_other")]
     IdNumberUnverifiedOther,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14086,11 +13818,6 @@ impl std::fmt::Display for GelatoNumberReportErrorCode {
     }
 }
 
-impl Default for GelatoNumberReportErrorCode {
-    fn default() -> GelatoNumberReportErrorCode {
-        GelatoNumberReportErrorCode::Noop
-    }
-}
 impl GelatoNumberReportErrorCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoNumberReportErrorCode::Noop)
@@ -14191,6 +13918,7 @@ pub struct GelatoSelfieReport {
  * A short machine-readable string giving the reason for the verification failure.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoSelfieReportErrorCode {
     #[serde(rename = "selfie_document_missing_photo")]
     SelfieDocumentMissingPhoto,
@@ -14201,6 +13929,7 @@ pub enum GelatoSelfieReportErrorCode {
     #[serde(rename = "selfie_unverified_other")]
     SelfieUnverifiedOther,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14222,11 +13951,6 @@ impl std::fmt::Display for GelatoSelfieReportErrorCode {
     }
 }
 
-impl Default for GelatoSelfieReportErrorCode {
-    fn default() -> GelatoSelfieReportErrorCode {
-        GelatoSelfieReportErrorCode::Noop
-    }
-}
 impl GelatoSelfieReportErrorCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoSelfieReportErrorCode::Noop)
@@ -14294,6 +14018,7 @@ pub struct GelatoSessionDocumentOptions {
  * A short machine-readable string giving the reason for the verification or user-session failure.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoSessionLastErrorCode {
     #[serde(rename = "abandoned")]
     Abandoned,
@@ -14326,6 +14051,7 @@ pub enum GelatoSessionLastErrorCode {
     #[serde(rename = "under_supported_age")]
     UnderSupportedAge,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14360,11 +14086,6 @@ impl std::fmt::Display for GelatoSessionLastErrorCode {
     }
 }
 
-impl Default for GelatoSessionLastErrorCode {
-    fn default() -> GelatoSessionLastErrorCode {
-        GelatoSessionLastErrorCode::Noop
-    }
-}
 impl GelatoSessionLastErrorCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoSessionLastErrorCode::Noop)
@@ -14471,10 +14192,12 @@ pub struct GelatoVerifiedOutputs {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoVerificationReportObject {
     #[serde(rename = "identity.verification_report")]
     IdentityVerificationReport,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14493,11 +14216,6 @@ impl std::fmt::Display for GelatoVerificationReportObject {
     }
 }
 
-impl Default for GelatoVerificationReportObject {
-    fn default() -> GelatoVerificationReportObject {
-        GelatoVerificationReportObject::Noop
-    }
-}
 impl GelatoVerificationReportObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoVerificationReportObject::Noop)
@@ -14508,12 +14226,14 @@ impl GelatoVerificationReportObject {
  * Type of report.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoVerificationReportType {
     #[serde(rename = "document")]
     Document,
     #[serde(rename = "id_number")]
     IdNumber,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14531,11 +14251,6 @@ impl std::fmt::Display for GelatoVerificationReportType {
     }
 }
 
-impl Default for GelatoVerificationReportType {
-    fn default() -> GelatoVerificationReportType {
-        GelatoVerificationReportType::Noop
-    }
-}
 impl GelatoVerificationReportType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoVerificationReportType::Noop)
@@ -14730,10 +14445,12 @@ impl std::convert::From<LastVerificationReportAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoVerificationSessionObject {
     #[serde(rename = "identity.verification_session")]
     IdentityVerificationSession,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14752,11 +14469,6 @@ impl std::fmt::Display for GelatoVerificationSessionObject {
     }
 }
 
-impl Default for GelatoVerificationSessionObject {
-    fn default() -> GelatoVerificationSessionObject {
-        GelatoVerificationSessionObject::Noop
-    }
-}
 impl GelatoVerificationSessionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoVerificationSessionObject::Noop)
@@ -14767,6 +14479,7 @@ impl GelatoVerificationSessionObject {
  * Status of this VerificationSession. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GelatoVerificationSessionStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -14777,6 +14490,7 @@ pub enum GelatoVerificationSessionStatus {
     #[serde(rename = "verified")]
     Verified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14796,11 +14510,6 @@ impl std::fmt::Display for GelatoVerificationSessionStatus {
     }
 }
 
-impl Default for GelatoVerificationSessionStatus {
-    fn default() -> GelatoVerificationSessionStatus {
-        GelatoVerificationSessionStatus::Noop
-    }
-}
 impl GelatoVerificationSessionStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GelatoVerificationSessionStatus::Noop)
@@ -15020,6 +14729,7 @@ impl std::convert::From<AccountTaxIdsAnyOf> for String {
  * Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice created by a subscription advancing into a new period. `subscription_create` indicates an invoice created due to creating a subscription. `subscription_update` indicates an invoice created due to updating a subscription. `subscription` is set for all old invoices to indicate either a change to a subscription or a period advancement. `manual` is set for all invoices unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold` indicates an invoice created due to a billing threshold being reached.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BillingReason {
     #[serde(rename = "automatic_pending_invoice_item_invoice")]
     AutomaticPendingInvoiceItem,
@@ -15040,6 +14750,7 @@ pub enum BillingReason {
     #[serde(rename = "upcoming")]
     Upcoming,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15064,11 +14775,6 @@ impl std::fmt::Display for BillingReason {
     }
 }
 
-impl Default for BillingReason {
-    fn default() -> BillingReason {
-        BillingReason::Noop
-    }
-}
 impl BillingReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, BillingReason::Noop)
@@ -15079,12 +14785,14 @@ impl BillingReason {
  * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CollectionMethod {
     #[serde(rename = "charge_automatically")]
     ChargeAutomatically,
     #[serde(rename = "send_invoice")]
     SendInvoice,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15102,11 +14810,6 @@ impl std::fmt::Display for CollectionMethod {
     }
 }
 
-impl Default for CollectionMethod {
-    fn default() -> CollectionMethod {
-        CollectionMethod::Noop
-    }
-}
 impl CollectionMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, CollectionMethod::Noop)
@@ -15254,6 +14957,7 @@ impl std::convert::From<QuoteAnyOf> for String {
  * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InvoiceStatus {
     #[serde(rename = "deleted")]
     Deleted,
@@ -15268,6 +14972,7 @@ pub enum InvoiceStatus {
     #[serde(rename = "void")]
     Void,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -15289,11 +14994,6 @@ impl std::fmt::Display for InvoiceStatus {
     }
 }
 
-impl Default for InvoiceStatus {
-    fn default() -> InvoiceStatus {
-        InvoiceStatus::Noop
-    }
-}
 impl InvoiceStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, InvoiceStatus::Noop)
@@ -16914,12 +16614,14 @@ pub struct InvoiceLineItemPeriod {
  * One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AmountType {
     #[serde(rename = "fixed")]
     Fixed,
     #[serde(rename = "maximum")]
     Maximum,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -16937,11 +16639,6 @@ impl std::fmt::Display for AmountType {
     }
 }
 
-impl Default for AmountType {
-    fn default() -> AmountType {
-        AmountType::Noop
-    }
-}
 impl AmountType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AmountType::Noop)
@@ -17005,6 +16702,7 @@ pub struct InvoicePaymentMethodOptionsAcssDebitMandate {
  * Preferred language of the Bancontact authorization page that the customer is redirected to.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PreferredLanguage {
     #[serde(rename = "de")]
     De,
@@ -17015,6 +16713,7 @@ pub enum PreferredLanguage {
     #[serde(rename = "nl")]
     Nl,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17034,11 +16733,6 @@ impl std::fmt::Display for PreferredLanguage {
     }
 }
 
-impl Default for PreferredLanguage {
-    fn default() -> PreferredLanguage {
-        PreferredLanguage::Noop
-    }
-}
 impl PreferredLanguage {
     pub fn is_noop(&self) -> bool {
         matches!(self, PreferredLanguage::Noop)
@@ -17059,12 +16753,14 @@ pub struct InvoicePaymentMethodOptionsBancontact {
  * We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RequestThreeDSecure {
     #[serde(rename = "any")]
     Any,
     #[serde(rename = "automatic")]
     Automatic,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17082,11 +16778,6 @@ impl std::fmt::Display for RequestThreeDSecure {
     }
 }
 
-impl Default for RequestThreeDSecure {
-    fn default() -> RequestThreeDSecure {
-        RequestThreeDSecure::Noop
-    }
-}
 impl RequestThreeDSecure {
     pub fn is_noop(&self) -> bool {
         matches!(self, RequestThreeDSecure::Noop)
@@ -17107,10 +16798,12 @@ pub struct InvoicePaymentMethodOptionsCard {
  * The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum FundingType {
     #[serde(rename = "bank_transfer")]
     BankTransfer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17127,11 +16820,6 @@ impl std::fmt::Display for FundingType {
     }
 }
 
-impl Default for FundingType {
-    fn default() -> FundingType {
-        FundingType::Noop
-    }
-}
 impl FundingType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FundingType::Noop)
@@ -17628,6 +17316,7 @@ pub struct InvoicesPaymentMethodOptions {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodTypes {
     #[serde(rename = "ach_credit_transfer")]
     AchCreditTransfer,
@@ -17668,6 +17357,7 @@ pub enum PaymentMethodTypes {
     #[serde(rename = "wechat_pay")]
     WechatPay,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17702,11 +17392,6 @@ impl std::fmt::Display for PaymentMethodTypes {
     }
 }
 
-impl Default for PaymentMethodTypes {
-    fn default() -> PaymentMethodTypes {
-        PaymentMethodTypes::Noop
-    }
-}
 impl PaymentMethodTypes {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodTypes::Noop)
@@ -17736,6 +17421,7 @@ pub struct InvoicesPaymentSettings {
  * The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, or `unknown`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum InvoicesResourceInvoiceTaxType {
     #[serde(rename = "ae_trn")]
     AeTrn,
@@ -17830,6 +17516,7 @@ pub enum InvoicesResourceInvoiceTaxType {
     #[serde(rename = "za_vat")]
     ZaVat,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17891,11 +17578,6 @@ impl std::fmt::Display for InvoicesResourceInvoiceTaxType {
     }
 }
 
-impl Default for InvoicesResourceInvoiceTaxType {
-    fn default() -> InvoicesResourceInvoiceTaxType {
-        InvoicesResourceInvoiceTaxType::Noop
-    }
-}
 impl InvoicesResourceInvoiceTaxType {
     pub fn is_noop(&self) -> bool {
         matches!(self, InvoicesResourceInvoiceTaxType::Noop)
@@ -17970,10 +17652,12 @@ pub struct InvoicesStatusTransitions {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuerFraudRecordObject {
     #[serde(rename = "issuer_fraud_record")]
     IssuerFraudRecord,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -17990,11 +17674,6 @@ impl std::fmt::Display for IssuerFraudRecordObject {
     }
 }
 
-impl Default for IssuerFraudRecordObject {
-    fn default() -> IssuerFraudRecordObject {
-        IssuerFraudRecordObject::Noop
-    }
-}
 impl IssuerFraudRecordObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuerFraudRecordObject::Noop)
@@ -18078,6 +17757,7 @@ pub struct IssuerFraudRecord {
  * How the card details were provided.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AuthorizationMethod {
     #[serde(rename = "chip")]
     Chip,
@@ -18090,6 +17770,7 @@ pub enum AuthorizationMethod {
     #[serde(rename = "swipe")]
     Swipe,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18110,11 +17791,6 @@ impl std::fmt::Display for AuthorizationMethod {
     }
 }
 
-impl Default for AuthorizationMethod {
-    fn default() -> AuthorizationMethod {
-        AuthorizationMethod::Noop
-    }
-}
 impl AuthorizationMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthorizationMethod::Noop)
@@ -18175,10 +17851,12 @@ impl std::convert::From<CardholderAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingAuthorizationObject {
     #[serde(rename = "issuing.authorization")]
     IssuingAuthorization,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18195,11 +17873,6 @@ impl std::fmt::Display for IssuingAuthorizationObject {
     }
 }
 
-impl Default for IssuingAuthorizationObject {
-    fn default() -> IssuingAuthorizationObject {
-        IssuingAuthorizationObject::Noop
-    }
-}
 impl IssuingAuthorizationObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingAuthorizationObject::Noop)
@@ -18210,6 +17883,7 @@ impl IssuingAuthorizationObject {
  * The current status of the authorization in its lifecycle.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingAuthorizationStatus {
     #[serde(rename = "closed")]
     Closed,
@@ -18218,6 +17892,7 @@ pub enum IssuingAuthorizationStatus {
     #[serde(rename = "reversed")]
     Reversed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18236,11 +17911,6 @@ impl std::fmt::Display for IssuingAuthorizationStatus {
     }
 }
 
-impl Default for IssuingAuthorizationStatus {
-    fn default() -> IssuingAuthorizationStatus {
-        IssuingAuthorizationStatus::Noop
-    }
-}
 impl IssuingAuthorizationStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingAuthorizationStatus::Noop)
@@ -18424,12 +18094,14 @@ pub struct IssuingAuthorization {
  * The reason why the card was canceled.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CancellationReason {
     #[serde(rename = "lost")]
     Lost,
     #[serde(rename = "stolen")]
     Stolen,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18447,11 +18119,6 @@ impl std::fmt::Display for CancellationReason {
     }
 }
 
-impl Default for CancellationReason {
-    fn default() -> CancellationReason {
-        CancellationReason::Noop
-    }
-}
 impl CancellationReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, CancellationReason::Noop)
@@ -18462,10 +18129,12 @@ impl CancellationReason {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingCardObject {
     #[serde(rename = "issuing.card")]
     IssuingCard,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18482,11 +18151,6 @@ impl std::fmt::Display for IssuingCardObject {
     }
 }
 
-impl Default for IssuingCardObject {
-    fn default() -> IssuingCardObject {
-        IssuingCardObject::Noop
-    }
-}
 impl IssuingCardObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingCardObject::Noop)
@@ -18545,6 +18209,7 @@ impl std::convert::From<CardAnyOf> for String {
  * The reason why the previous card needed to be replaced.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReplacementReason {
     #[serde(rename = "damaged")]
     Damaged,
@@ -18555,6 +18220,7 @@ pub enum ReplacementReason {
     #[serde(rename = "stolen")]
     Stolen,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18574,11 +18240,6 @@ impl std::fmt::Display for ReplacementReason {
     }
 }
 
-impl Default for ReplacementReason {
-    fn default() -> ReplacementReason {
-        ReplacementReason::Noop
-    }
-}
 impl ReplacementReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReplacementReason::Noop)
@@ -18589,6 +18250,7 @@ impl ReplacementReason {
  * Whether authorizations can be approved on this card.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingCardStatus {
     #[serde(rename = "active")]
     Active,
@@ -18597,6 +18259,7 @@ pub enum IssuingCardStatus {
     #[serde(rename = "inactive")]
     Inactive,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18615,11 +18278,6 @@ impl std::fmt::Display for IssuingCardStatus {
     }
 }
 
-impl Default for IssuingCardStatus {
-    fn default() -> IssuingCardStatus {
-        IssuingCardStatus::Noop
-    }
-}
 impl IssuingCardStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingCardStatus::Noop)
@@ -18630,12 +18288,14 @@ impl IssuingCardStatus {
  * The type of the card.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingCardType {
     #[serde(rename = "physical")]
     Physical,
     #[serde(rename = "virtual")]
     Virtual,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18653,11 +18313,6 @@ impl std::fmt::Display for IssuingCardType {
     }
 }
 
-impl Default for IssuingCardType {
-    fn default() -> IssuingCardType {
-        IssuingCardType::Noop
-    }
-}
 impl IssuingCardType {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingCardType::Noop)
@@ -18829,10 +18484,12 @@ pub struct IssuingCard {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingCardholderObject {
     #[serde(rename = "issuing.cardholder")]
     IssuingCardholder,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18849,11 +18506,6 @@ impl std::fmt::Display for IssuingCardholderObject {
     }
 }
 
-impl Default for IssuingCardholderObject {
-    fn default() -> IssuingCardholderObject {
-        IssuingCardholderObject::Noop
-    }
-}
 impl IssuingCardholderObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingCardholderObject::Noop)
@@ -18864,6 +18516,7 @@ impl IssuingCardholderObject {
  * Specifies whether to permit authorizations on this cardholder's cards.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingCardholderStatus {
     #[serde(rename = "active")]
     Active,
@@ -18872,6 +18525,7 @@ pub enum IssuingCardholderStatus {
     #[serde(rename = "inactive")]
     Inactive,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18890,11 +18544,6 @@ impl std::fmt::Display for IssuingCardholderStatus {
     }
 }
 
-impl Default for IssuingCardholderStatus {
-    fn default() -> IssuingCardholderStatus {
-        IssuingCardholderStatus::Noop
-    }
-}
 impl IssuingCardholderStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingCardholderStatus::Noop)
@@ -18905,12 +18554,14 @@ impl IssuingCardholderStatus {
  * Type of entity that holds the account. This can be either `individual` or `company`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountHolderType {
     #[serde(rename = "company")]
     Company,
     #[serde(rename = "individual")]
     Individual,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -18928,11 +18579,6 @@ impl std::fmt::Display for AccountHolderType {
     }
 }
 
-impl Default for AccountHolderType {
-    fn default() -> AccountHolderType {
-        AccountHolderType::Noop
-    }
-}
 impl AccountHolderType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountHolderType::Noop)
@@ -19058,10 +18704,12 @@ pub struct IssuingCardholder {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingDisputeObject {
     #[serde(rename = "issuing.dispute")]
     IssuingDispute,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19078,11 +18726,6 @@ impl std::fmt::Display for IssuingDisputeObject {
     }
 }
 
-impl Default for IssuingDisputeObject {
-    fn default() -> IssuingDisputeObject {
-        IssuingDisputeObject::Noop
-    }
-}
 impl IssuingDisputeObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingDisputeObject::Noop)
@@ -19093,6 +18736,7 @@ impl IssuingDisputeObject {
  * Current status of the dispute.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingDisputeStatus {
     #[serde(rename = "expired")]
     Expired,
@@ -19105,6 +18749,7 @@ pub enum IssuingDisputeStatus {
     #[serde(rename = "won")]
     Won,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19125,11 +18770,6 @@ impl std::fmt::Display for IssuingDisputeStatus {
     }
 }
 
-impl Default for IssuingDisputeStatus {
-    fn default() -> IssuingDisputeStatus {
-        IssuingDisputeStatus::Noop
-    }
-}
 impl IssuingDisputeStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingDisputeStatus::Noop)
@@ -19278,10 +18918,12 @@ pub struct IssuingDispute {
  * The card network for this settlement report. One of ["visa"]
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Network {
     #[serde(rename = "visa")]
     Visa,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19298,11 +18940,6 @@ impl std::fmt::Display for Network {
     }
 }
 
-impl Default for Network {
-    fn default() -> Network {
-        Network::Noop
-    }
-}
 impl Network {
     pub fn is_noop(&self) -> bool {
         matches!(self, Network::Noop)
@@ -19313,10 +18950,12 @@ impl Network {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingSettlementObject {
     #[serde(rename = "issuing.settlement")]
     IssuingSettlement,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19333,11 +18972,6 @@ impl std::fmt::Display for IssuingSettlementObject {
     }
 }
 
-impl Default for IssuingSettlementObject {
-    fn default() -> IssuingSettlementObject {
-        IssuingSettlementObject::Noop
-    }
-}
 impl IssuingSettlementObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingSettlementObject::Noop)
@@ -19590,10 +19224,12 @@ impl std::convert::From<DisputeAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingTransactionObject {
     #[serde(rename = "issuing.transaction")]
     IssuingTransaction,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19610,11 +19246,6 @@ impl std::fmt::Display for IssuingTransactionObject {
     }
 }
 
-impl Default for IssuingTransactionObject {
-    fn default() -> IssuingTransactionObject {
-        IssuingTransactionObject::Noop
-    }
-}
 impl IssuingTransactionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingTransactionObject::Noop)
@@ -19625,12 +19256,14 @@ impl IssuingTransactionObject {
  * The nature of the transaction.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingTransactionType {
     #[serde(rename = "capture")]
     Capture,
     #[serde(rename = "refund")]
     Refund,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19648,11 +19281,6 @@ impl std::fmt::Display for IssuingTransactionType {
     }
 }
 
-impl Default for IssuingTransactionType {
-    fn default() -> IssuingTransactionType {
-        IssuingTransactionType::Noop
-    }
-}
 impl IssuingTransactionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingTransactionType::Noop)
@@ -19663,6 +19291,7 @@ impl IssuingTransactionType {
  * The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Wallet {
     #[serde(rename = "apple_pay")]
     ApplePay,
@@ -19671,6 +19300,7 @@ pub enum Wallet {
     #[serde(rename = "samsung_pay")]
     SamsungPay,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -19689,11 +19319,6 @@ impl std::fmt::Display for Wallet {
     }
 }
 
-impl Default for Wallet {
-    fn default() -> Wallet {
-        Wallet::Noop
-    }
-}
 impl Wallet {
     pub fn is_noop(&self) -> bool {
         matches!(self, Wallet::Noop)
@@ -19992,6 +19617,7 @@ pub struct IssuingAuthorizationPendingRequest {
  * The reason for the approval or decline.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingAuthorizationRequestReason {
     #[serde(rename = "account_disabled")]
     AccountDisabled,
@@ -20020,6 +19646,7 @@ pub enum IssuingAuthorizationRequestReason {
     #[serde(rename = "webhook_timeout")]
     WebhookTimeout,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20050,11 +19677,6 @@ impl std::fmt::Display for IssuingAuthorizationRequestReason {
     }
 }
 
-impl Default for IssuingAuthorizationRequestReason {
-    fn default() -> IssuingAuthorizationRequestReason {
-        IssuingAuthorizationRequestReason::Noop
-    }
-}
 impl IssuingAuthorizationRequestReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingAuthorizationRequestReason::Noop)
@@ -20133,6 +19755,7 @@ pub struct IssuingAuthorizationRequest {
  * Whether the cardholder provided a CVC and if it matched Stripe’s record.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CvcCheck {
     #[serde(rename = "match")]
     Match,
@@ -20141,6 +19764,7 @@ pub enum CvcCheck {
     #[serde(rename = "not_provided")]
     NotProvided,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20159,11 +19783,6 @@ impl std::fmt::Display for CvcCheck {
     }
 }
 
-impl Default for CvcCheck {
-    fn default() -> CvcCheck {
-        CvcCheck::Noop
-    }
-}
 impl CvcCheck {
     pub fn is_noop(&self) -> bool {
         matches!(self, CvcCheck::Noop)
@@ -20203,6 +19822,7 @@ pub struct IssuingAuthorizationVerificationData {
  * Reason the card is ineligible for Apple Pay
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IneligibleReason {
     #[serde(rename = "missing_agreement")]
     MissingAgreement,
@@ -20211,6 +19831,7 @@ pub enum IneligibleReason {
     #[serde(rename = "unsupported_region")]
     UnsupportedRegion,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -20229,11 +19850,6 @@ impl std::fmt::Display for IneligibleReason {
     }
 }
 
-impl Default for IneligibleReason {
-    fn default() -> IneligibleReason {
-        IneligibleReason::Noop
-    }
-}
 impl IneligibleReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, IneligibleReason::Noop)
@@ -20259,6 +19875,7 @@ pub struct IssuingCardApplePay {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Categories {
     #[serde(rename = "ac_refrigeration_repair")]
     AcRefrigerationRepair,
@@ -20837,6 +20454,7 @@ pub enum Categories {
     #[serde(rename = "wrecking_and_salvage_yards")]
     WreckingAndSalvageYards,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21208,11 +20826,6 @@ impl std::fmt::Display for Categories {
     }
 }
 
-impl Default for Categories {
-    fn default() -> Categories {
-        Categories::Noop
-    }
-}
 impl Categories {
     pub fn is_noop(&self) -> bool {
         matches!(self, Categories::Noop)
@@ -21264,6 +20877,7 @@ pub struct IssuingCardAuthorizationControls {
  * The delivery company that shipped a card.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Carrier {
     #[serde(rename = "dhl")]
     Dhl,
@@ -21274,6 +20888,7 @@ pub enum Carrier {
     #[serde(rename = "usps")]
     Usps,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21293,11 +20908,6 @@ impl std::fmt::Display for Carrier {
     }
 }
 
-impl Default for Carrier {
-    fn default() -> Carrier {
-        Carrier::Noop
-    }
-}
 impl Carrier {
     pub fn is_noop(&self) -> bool {
         matches!(self, Carrier::Noop)
@@ -21308,6 +20918,7 @@ impl Carrier {
  * Shipment service, such as `standard` or `express`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Service {
     #[serde(rename = "express")]
     Express,
@@ -21316,6 +20927,7 @@ pub enum Service {
     #[serde(rename = "standard")]
     Standard,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21334,11 +20946,6 @@ impl std::fmt::Display for Service {
     }
 }
 
-impl Default for Service {
-    fn default() -> Service {
-        Service::Noop
-    }
-}
 impl Service {
     pub fn is_noop(&self) -> bool {
         matches!(self, Service::Noop)
@@ -21349,6 +20956,7 @@ impl Service {
  * The delivery status of the card.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingCardShippingStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -21363,6 +20971,7 @@ pub enum IssuingCardShippingStatus {
     #[serde(rename = "shipped")]
     Shipped,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21384,11 +20993,6 @@ impl std::fmt::Display for IssuingCardShippingStatus {
     }
 }
 
-impl Default for IssuingCardShippingStatus {
-    fn default() -> IssuingCardShippingStatus {
-        IssuingCardShippingStatus::Noop
-    }
-}
 impl IssuingCardShippingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingCardShippingStatus::Noop)
@@ -21399,12 +21003,14 @@ impl IssuingCardShippingStatus {
  * Packaging options.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingCardShippingType {
     #[serde(rename = "bulk")]
     Bulk,
     #[serde(rename = "individual")]
     Individual,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21422,11 +21028,6 @@ impl std::fmt::Display for IssuingCardShippingType {
     }
 }
 
-impl Default for IssuingCardShippingType {
-    fn default() -> IssuingCardShippingType {
-        IssuingCardShippingType::Noop
-    }
-}
 impl IssuingCardShippingType {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingCardShippingType::Noop)
@@ -21506,6 +21107,7 @@ pub struct IssuingCardShippingData {
  * Interval (or event) to which the amount applies.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Interval {
     #[serde(rename = "all_time")]
     AllTime,
@@ -21520,6 +21122,7 @@ pub enum Interval {
     #[serde(rename = "yearly")]
     Yearly,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21541,11 +21144,6 @@ impl std::fmt::Display for Interval {
     }
 }
 
-impl Default for Interval {
-    fn default() -> Interval {
-        Interval::Noop
-    }
-}
 impl Interval {
     pub fn is_noop(&self) -> bool {
         matches!(self, Interval::Noop)
@@ -21747,6 +21345,7 @@ pub struct IssuingCardholderIndividualDobData {
  * If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DisabledReason {
     #[serde(rename = "listed")]
     Listed,
@@ -21755,6 +21354,7 @@ pub enum DisabledReason {
     #[serde(rename = "under_review")]
     UnderReview,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21773,11 +21373,6 @@ impl std::fmt::Display for DisabledReason {
     }
 }
 
-impl Default for DisabledReason {
-    fn default() -> DisabledReason {
-        DisabledReason::Noop
-    }
-}
 impl DisabledReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, DisabledReason::Noop)
@@ -21785,6 +21380,7 @@ impl DisabledReason {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PastDue {
     #[serde(rename = "company.tax_id")]
     CompanyTaxId,
@@ -21801,6 +21397,7 @@ pub enum PastDue {
     #[serde(rename = "individual.verification.document")]
     IndividualVerificationDocument,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21823,11 +21420,6 @@ impl std::fmt::Display for PastDue {
     }
 }
 
-impl Default for PastDue {
-    fn default() -> PastDue {
-        PastDue::Noop
-    }
-}
 impl PastDue {
     pub fn is_noop(&self) -> bool {
         matches!(self, PastDue::Noop)
@@ -21867,12 +21459,14 @@ pub struct IssuingCardholderVerification {
  * Whether the product was a merchandise or service.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProductType {
     #[serde(rename = "merchandise")]
     Merchandise,
     #[serde(rename = "service")]
     Service,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21890,11 +21484,6 @@ impl std::fmt::Display for ProductType {
     }
 }
 
-impl Default for ProductType {
-    fn default() -> ProductType {
-        ProductType::Noop
-    }
-}
 impl ProductType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProductType::Noop)
@@ -21905,12 +21494,14 @@ impl ProductType {
  * Result of cardholder's attempt to return the product.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReturnStatus {
     #[serde(rename = "merchant_rejected")]
     MerchantRejected,
     #[serde(rename = "successful")]
     Successful,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -21928,11 +21519,6 @@ impl std::fmt::Display for ReturnStatus {
     }
 }
 
-impl Default for ReturnStatus {
-    fn default() -> ReturnStatus {
-        ReturnStatus::Noop
-    }
-}
 impl ReturnStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReturnStatus::Noop)
@@ -22063,6 +21649,7 @@ pub struct IssuingDisputeDuplicateEvidence {
  * The reason for filing the dispute. Its value will match the field containing the evidence.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IssuingDisputeEvidenceReason {
     #[serde(rename = "canceled")]
     Canceled,
@@ -22079,6 +21666,7 @@ pub enum IssuingDisputeEvidenceReason {
     #[serde(rename = "service_not_as_described")]
     ServiceNotAsDescribed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -22103,11 +21691,6 @@ impl std::fmt::Display for IssuingDisputeEvidenceReason {
     }
 }
 
-impl Default for IssuingDisputeEvidenceReason {
-    fn default() -> IssuingDisputeEvidenceReason {
-        IssuingDisputeEvidenceReason::Noop
-    }
-}
 impl IssuingDisputeEvidenceReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, IssuingDisputeEvidenceReason::Noop)
@@ -22614,10 +22197,12 @@ pub struct IssuingTransactionReceiptData {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ItemObject {
     #[serde(rename = "item")]
     Item,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -22634,11 +22219,6 @@ impl std::fmt::Display for ItemObject {
     }
 }
 
-impl Default for ItemObject {
-    fn default() -> ItemObject {
-        ItemObject::Noop
-    }
-}
 impl ItemObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ItemObject::Noop)
@@ -22736,6 +22316,7 @@ pub struct Item {
  * The category identifying the legal structure of the company or legal entity. See [Business structure](https://stripe.com/docs/connect/identity-verification#business-structure) for more details.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Structure {
     #[serde(rename = "free_zone_establishment")]
     FreeZoneEstablishment,
@@ -22778,6 +22359,7 @@ pub enum Structure {
     #[serde(rename = "unincorporated_non_profit")]
     UnincorporatedNonProfit,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -22815,11 +22397,6 @@ impl std::fmt::Display for Structure {
     }
 }
 
-impl Default for Structure {
-    fn default() -> Structure {
-        Structure::Noop
-    }
-}
 impl Structure {
     pub fn is_noop(&self) -> bool {
         matches!(self, Structure::Noop)
@@ -23197,10 +22774,12 @@ pub struct LegalEntityUboDeclaration {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LineItemObject {
     #[serde(rename = "line_item")]
     LineItem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23217,11 +22796,6 @@ impl std::fmt::Display for LineItemObject {
     }
 }
 
-impl Default for LineItemObject {
-    fn default() -> LineItemObject {
-        LineItemObject::Noop
-    }
-}
 impl LineItemObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, LineItemObject::Noop)
@@ -23232,12 +22806,14 @@ impl LineItemObject {
  * A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LineItemType {
     #[serde(rename = "invoiceitem")]
     Invoiceitem,
     #[serde(rename = "subscription")]
     Subscription,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23255,11 +22831,6 @@ impl std::fmt::Display for LineItemType {
     }
 }
 
-impl Default for LineItemType {
-    fn default() -> LineItemType {
-        LineItemType::Noop
-    }
-}
 impl LineItemType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LineItemType::Noop)
@@ -23481,10 +23052,12 @@ pub struct LineItemsTaxAmount {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum LoginLinkObject {
     #[serde(rename = "login_link")]
     LoginLink,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23501,11 +23074,6 @@ impl std::fmt::Display for LoginLinkObject {
     }
 }
 
-impl Default for LoginLinkObject {
-    fn default() -> LoginLinkObject {
-        LoginLinkObject::Noop
-    }
-}
 impl LoginLinkObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, LoginLinkObject::Noop)
@@ -23544,10 +23112,12 @@ pub struct LoginLink {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MandateObject {
     #[serde(rename = "mandate")]
     Mandate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23564,11 +23134,6 @@ impl std::fmt::Display for MandateObject {
     }
 }
 
-impl Default for MandateObject {
-    fn default() -> MandateObject {
-        MandateObject::Noop
-    }
-}
 impl MandateObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, MandateObject::Noop)
@@ -23579,12 +23144,14 @@ impl MandateObject {
  * The type of the mandate.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MandateType {
     #[serde(rename = "multi_use")]
     MultiUse,
     #[serde(rename = "single_use")]
     SingleUse,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23602,11 +23169,6 @@ impl std::fmt::Display for MandateType {
     }
 }
 
-impl Default for MandateType {
-    fn default() -> MandateType {
-        MandateType::Noop
-    }
-}
 impl MandateType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MandateType::Noop)
@@ -23720,6 +23282,7 @@ pub struct MandateAuBecsDebit {
  * The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum NetworkStatus {
     #[serde(rename = "accepted")]
     Accepted,
@@ -23730,6 +23293,7 @@ pub enum NetworkStatus {
     #[serde(rename = "revoked")]
     Revoked,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23749,11 +23313,6 @@ impl std::fmt::Display for NetworkStatus {
     }
 }
 
-impl Default for NetworkStatus {
-    fn default() -> NetworkStatus {
-        NetworkStatus::Noop
-    }
-}
 impl NetworkStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, NetworkStatus::Noop)
@@ -23966,10 +23525,12 @@ pub struct OnlineAcceptance {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrderObject {
     #[serde(rename = "order")]
     Order,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -23986,11 +23547,6 @@ impl std::fmt::Display for OrderObject {
     }
 }
 
-impl Default for OrderObject {
-    fn default() -> OrderObject {
-        OrderObject::Noop
-    }
-}
 impl OrderObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderObject::Noop)
@@ -24270,10 +23826,12 @@ pub struct Order {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrderItemObject {
     #[serde(rename = "order_item")]
     OrderItem,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24290,11 +23848,6 @@ impl std::fmt::Display for OrderItemObject {
     }
 }
 
-impl Default for OrderItemObject {
-    fn default() -> OrderItemObject {
-        OrderItemObject::Noop
-    }
-}
 impl OrderItemObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderItemObject::Noop)
@@ -24427,10 +23980,12 @@ pub struct OrderItem {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrderReturnObject {
     #[serde(rename = "order_return")]
     OrderReturn,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24447,11 +24002,6 @@ impl std::fmt::Display for OrderReturnObject {
     }
 }
 
-impl Default for OrderReturnObject {
-    fn default() -> OrderReturnObject {
-        OrderReturnObject::Noop
-    }
-}
 impl OrderReturnObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderReturnObject::Noop)
@@ -24660,6 +24210,7 @@ pub struct PaymentFlowsPrivateMethodsKlarnaDob {
  * Reason for cancellation of this PaymentIntent, either user-provided (`duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`) or generated by Stripe internally (`failed_invoice`, `void_invoice`, or `automatic`).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentCancellationReason {
     #[serde(rename = "abandoned")]
     Abandoned,
@@ -24676,6 +24227,7 @@ pub enum PaymentIntentCancellationReason {
     #[serde(rename = "void_invoice")]
     VoidInvoice,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24698,11 +24250,6 @@ impl std::fmt::Display for PaymentIntentCancellationReason {
     }
 }
 
-impl Default for PaymentIntentCancellationReason {
-    fn default() -> PaymentIntentCancellationReason {
-        PaymentIntentCancellationReason::Noop
-    }
-}
 impl PaymentIntentCancellationReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentIntentCancellationReason::Noop)
@@ -24713,12 +24260,14 @@ impl PaymentIntentCancellationReason {
  * Controls when the funds will be captured from the customer's account.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CaptureMethod {
     #[serde(rename = "automatic")]
     Automatic,
     #[serde(rename = "manual")]
     Manual,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24736,11 +24285,6 @@ impl std::fmt::Display for CaptureMethod {
     }
 }
 
-impl Default for CaptureMethod {
-    fn default() -> CaptureMethod {
-        CaptureMethod::Noop
-    }
-}
 impl CaptureMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, CaptureMethod::Noop)
@@ -24787,10 +24331,12 @@ pub struct Charges {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentObject {
     #[serde(rename = "payment_intent")]
     PaymentIntent,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24807,11 +24353,6 @@ impl std::fmt::Display for PaymentIntentObject {
     }
 }
 
-impl Default for PaymentIntentObject {
-    fn default() -> PaymentIntentObject {
-        PaymentIntentObject::Noop
-    }
-}
 impl PaymentIntentObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentIntentObject::Noop)
@@ -24826,12 +24367,14 @@ impl PaymentIntentObject {
  *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SetupFutureUsage {
     #[serde(rename = "off_session")]
     OffSession,
     #[serde(rename = "on_session")]
     OnSession,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24849,11 +24392,6 @@ impl std::fmt::Display for SetupFutureUsage {
     }
 }
 
-impl Default for SetupFutureUsage {
-    fn default() -> SetupFutureUsage {
-        SetupFutureUsage::Noop
-    }
-}
 impl SetupFutureUsage {
     pub fn is_noop(&self) -> bool {
         matches!(self, SetupFutureUsage::Noop)
@@ -24864,6 +24402,7 @@ impl SetupFutureUsage {
  * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -24880,6 +24419,7 @@ pub enum PaymentIntentStatus {
     #[serde(rename = "succeeded")]
     Succeeded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -24902,11 +24442,6 @@ impl std::fmt::Display for PaymentIntentStatus {
     }
 }
 
-impl Default for PaymentIntentStatus {
-    fn default() -> PaymentIntentStatus {
-        PaymentIntentStatus::Noop
-    }
-}
 impl PaymentIntentStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentIntentStatus::Noop)
@@ -25782,12 +25317,14 @@ pub struct PaymentIntentNextActionRedirectUrl {
  * The type of the microdeposit sent to the customer. Used to distinguish between different verification methods.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MicrodepositType {
     #[serde(rename = "amounts")]
     Amounts,
     #[serde(rename = "descriptor_code")]
     DescriptorCode,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -25805,11 +25342,6 @@ impl std::fmt::Display for MicrodepositType {
     }
 }
 
-impl Default for MicrodepositType {
-    fn default() -> MicrodepositType {
-        MicrodepositType::Noop
-    }
-}
 impl MicrodepositType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MicrodepositType::Noop)
@@ -27002,6 +26534,7 @@ pub struct PaymentIntentMethodOptionsData {
  *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
     #[serde(rename = "none")]
     None,
@@ -27010,6 +26543,7 @@ pub enum PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
     #[serde(rename = "on_session")]
     OnSession,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27028,11 +26562,6 @@ impl std::fmt::Display for PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
     }
 }
 
-impl Default for PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
-    fn default() -> PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
-        PaymentIntentMethodOptionsAcssDebitSetupFutureUsage::Noop
-    }
-}
 impl PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -27076,10 +26605,12 @@ pub struct PaymentIntentMethodOptionsAuBecsDebit {
  * Controls when the funds will be captured from the customer's account.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentMethodOptionsCardCapture {
     #[serde(rename = "manual")]
     Manual,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27096,11 +26627,6 @@ impl std::fmt::Display for PaymentIntentMethodOptionsCardCapture {
     }
 }
 
-impl Default for PaymentIntentMethodOptionsCardCapture {
-    fn default() -> PaymentIntentMethodOptionsCardCapture {
-        PaymentIntentMethodOptionsCardCapture::Noop
-    }
-}
 impl PaymentIntentMethodOptionsCardCapture {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentIntentMethodOptionsCardCapture::Noop)
@@ -27111,6 +26637,7 @@ impl PaymentIntentMethodOptionsCardCapture {
  * Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentMethodOptionsCardNetwork {
     #[serde(rename = "amex")]
     Amex,
@@ -27133,6 +26660,7 @@ pub enum PaymentIntentMethodOptionsCardNetwork {
     #[serde(rename = "visa")]
     Visa,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27158,11 +26686,6 @@ impl std::fmt::Display for PaymentIntentMethodOptionsCardNetwork {
     }
 }
 
-impl Default for PaymentIntentMethodOptionsCardNetwork {
-    fn default() -> PaymentIntentMethodOptionsCardNetwork {
-        PaymentIntentMethodOptionsCardNetwork::Noop
-    }
-}
 impl PaymentIntentMethodOptionsCardNetwork {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentIntentMethodOptionsCardNetwork::Noop)
@@ -27173,6 +26696,7 @@ impl PaymentIntentMethodOptionsCardNetwork {
  * We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentMethodOptionsCardRequestThreeDSecure {
     #[serde(rename = "any")]
     Any,
@@ -27181,6 +26705,7 @@ pub enum PaymentIntentMethodOptionsCardRequestThreeDSecure {
     #[serde(rename = "challenge_only")]
     ChallengeOnly,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27199,11 +26724,6 @@ impl std::fmt::Display for PaymentIntentMethodOptionsCardRequestThreeDSecure {
     }
 }
 
-impl Default for PaymentIntentMethodOptionsCardRequestThreeDSecure {
-    fn default() -> PaymentIntentMethodOptionsCardRequestThreeDSecure {
-        PaymentIntentMethodOptionsCardRequestThreeDSecure::Noop
-    }
-}
 impl PaymentIntentMethodOptionsCardRequestThreeDSecure {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -27258,10 +26778,12 @@ pub struct PaymentIntentMethodOptionsCard {
  *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentIntentMethodOptionsEpsSetupFutureUsage {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27278,11 +26800,6 @@ impl std::fmt::Display for PaymentIntentMethodOptionsEpsSetupFutureUsage {
     }
 }
 
-impl Default for PaymentIntentMethodOptionsEpsSetupFutureUsage {
-    fn default() -> PaymentIntentMethodOptionsEpsSetupFutureUsage {
-        PaymentIntentMethodOptionsEpsSetupFutureUsage::Noop
-    }
-}
 impl PaymentIntentMethodOptionsEpsSetupFutureUsage {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentIntentMethodOptionsEpsSetupFutureUsage::Noop)
@@ -27423,10 +26940,12 @@ pub struct PaymentIntentTypeSpecificMethodOptionsClient {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentLinkObject {
     #[serde(rename = "payment_link")]
     PaymentLink,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27443,11 +26962,6 @@ impl std::fmt::Display for PaymentLinkObject {
     }
 }
 
-impl Default for PaymentLinkObject {
-    fn default() -> PaymentLinkObject {
-        PaymentLinkObject::Noop
-    }
-}
 impl PaymentLinkObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentLinkObject::Noop)
@@ -27603,12 +27117,14 @@ pub struct PaymentLink {
  * The specified behavior after the purchase is complete.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentLinksResourceAfterCompletionType {
     #[serde(rename = "hosted_confirmation")]
     HostedConfirmation,
     #[serde(rename = "redirect")]
     Redirect,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -27626,11 +27142,6 @@ impl std::fmt::Display for PaymentLinksResourceAfterCompletionType {
     }
 }
 
-impl Default for PaymentLinksResourceAfterCompletionType {
-    fn default() -> PaymentLinksResourceAfterCompletionType {
-        PaymentLinksResourceAfterCompletionType::Noop
-    }
-}
 impl PaymentLinksResourceAfterCompletionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentLinksResourceAfterCompletionType::Noop)
@@ -27676,6 +27187,7 @@ pub struct PaymentLinksResourceCompletionBehaviorConfirmationPage {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AllowedCountries {
     #[serde(rename = "AC")]
     Ac,
@@ -28152,6 +27664,7 @@ pub enum AllowedCountries {
     #[serde(rename = "ZZ")]
     Zz,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28404,11 +27917,6 @@ impl std::fmt::Display for AllowedCountries {
     }
 }
 
-impl Default for AllowedCountries {
-    fn default() -> AllowedCountries {
-        AllowedCountries::Noop
-    }
-}
 impl AllowedCountries {
     pub fn is_noop(&self) -> bool {
         matches!(self, AllowedCountries::Noop)
@@ -28462,10 +27970,12 @@ pub struct PaymentLinksResourceTransferData {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodObject {
     #[serde(rename = "payment_method")]
     PaymentMethod,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28482,11 +27992,6 @@ impl std::fmt::Display for PaymentMethodObject {
     }
 }
 
-impl Default for PaymentMethodObject {
-    fn default() -> PaymentMethodObject {
-        PaymentMethodObject::Noop
-    }
-}
 impl PaymentMethodObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodObject::Noop)
@@ -28497,6 +28002,7 @@ impl PaymentMethodObject {
  * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodType {
     #[serde(rename = "acss_debit")]
     AcssDebit,
@@ -28547,6 +28053,7 @@ pub enum PaymentMethodType {
     #[serde(rename = "wechat_pay")]
     WechatPay,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -28586,11 +28093,6 @@ impl std::fmt::Display for PaymentMethodType {
     }
 }
 
-impl Default for PaymentMethodType {
-    fn default() -> PaymentMethodType {
-        PaymentMethodType::Noop
-    }
-}
 impl PaymentMethodType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodType::Noop)
@@ -29224,6 +28726,7 @@ pub struct PaymentMethodCardGenerated {
  * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodCardWalletType {
     #[serde(rename = "amex_express_checkout")]
     AmexExpressCheckout,
@@ -29238,6 +28741,7 @@ pub enum PaymentMethodCardWalletType {
     #[serde(rename = "visa_checkout")]
     VisaCheckout,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -29259,11 +28763,6 @@ impl std::fmt::Display for PaymentMethodCardWalletType {
     }
 }
 
-impl Default for PaymentMethodCardWalletType {
-    fn default() -> PaymentMethodCardWalletType {
-        PaymentMethodCardWalletType::Noop
-    }
-}
 impl PaymentMethodCardWalletType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodCardWalletType::Noop)
@@ -30074,10 +29573,12 @@ pub struct PaymentMethodDetailsCardInstallmentsData {
  *   One of `month`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsCardInstallmentsPlanInterval {
     #[serde(rename = "month")]
     Month,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30094,11 +29595,6 @@ impl std::fmt::Display for PaymentMethodDetailsCardInstallmentsPlanInterval {
     }
 }
 
-impl Default for PaymentMethodDetailsCardInstallmentsPlanInterval {
-    fn default() -> PaymentMethodDetailsCardInstallmentsPlanInterval {
-        PaymentMethodDetailsCardInstallmentsPlanInterval::Noop
-    }
-}
 impl PaymentMethodDetailsCardInstallmentsPlanInterval {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodDetailsCardInstallmentsPlanInterval::Noop)
@@ -30109,10 +29605,12 @@ impl PaymentMethodDetailsCardInstallmentsPlanInterval {
  * Type of installment plan, one of `fixed_count`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsCardInstallmentsPlanType {
     #[serde(rename = "fixed_count")]
     FixedCount,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30129,11 +29627,6 @@ impl std::fmt::Display for PaymentMethodDetailsCardInstallmentsPlanType {
     }
 }
 
-impl Default for PaymentMethodDetailsCardInstallmentsPlanType {
-    fn default() -> PaymentMethodDetailsCardInstallmentsPlanType {
-        PaymentMethodDetailsCardInstallmentsPlanType::Noop
-    }
-}
 impl PaymentMethodDetailsCardInstallmentsPlanType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodDetailsCardInstallmentsPlanType::Noop)
@@ -30173,6 +29666,7 @@ pub struct PaymentMethodDetailsCardInstallmentsPlan {
  * How card details were read in this transaction.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReadMethod {
     #[serde(rename = "contact_emv")]
     ContactEmv,
@@ -30185,6 +29679,7 @@ pub enum ReadMethod {
     #[serde(rename = "magnetic_stripe_track2")]
     MagneticStripeTrack2,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30205,11 +29700,6 @@ impl std::fmt::Display for ReadMethod {
     }
 }
 
-impl Default for ReadMethod {
-    fn default() -> ReadMethod {
-        ReadMethod::Noop
-    }
-}
 impl ReadMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReadMethod::Noop)
@@ -30361,6 +29851,7 @@ pub struct PaymentMethodDetailsCardPresent {
  * The type of account being debited or credited
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AccountType {
     #[serde(rename = "checking")]
     Checking,
@@ -30371,6 +29862,7 @@ pub enum AccountType {
     #[serde(rename = "unknown")]
     Unknown,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30390,11 +29882,6 @@ impl std::fmt::Display for AccountType {
     }
 }
 
-impl Default for AccountType {
-    fn default() -> AccountType {
-        AccountType::Noop
-    }
-}
 impl AccountType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AccountType::Noop)
@@ -30607,6 +30094,7 @@ pub struct PaymentMethodDetailsCardWalletVisaCheckout {
  * The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Bank {
     #[serde(rename = "arzte_und_apotheker_bank")]
     ArzteUndApothekerBank,
@@ -30663,6 +30151,7 @@ pub enum Bank {
     #[serde(rename = "vr_bank_braunau")]
     VrBankBraunau,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30705,11 +30194,6 @@ impl std::fmt::Display for Bank {
     }
 }
 
-impl Default for Bank {
-    fn default() -> Bank {
-        Bank::Noop
-    }
-}
 impl Bank {
     pub fn is_noop(&self) -> bool {
         matches!(self, Bank::Noop)
@@ -30739,6 +30223,7 @@ pub struct PaymentMethodDetailsEps {
  * The customer's bank. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, or `pb_enterprise`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsFpxBank {
     #[serde(rename = "affin_bank")]
     AffinBank,
@@ -30783,6 +30268,7 @@ pub enum PaymentMethodDetailsFpxBank {
     #[serde(rename = "uob")]
     Uob,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30819,11 +30305,6 @@ impl std::fmt::Display for PaymentMethodDetailsFpxBank {
     }
 }
 
-impl Default for PaymentMethodDetailsFpxBank {
-    fn default() -> PaymentMethodDetailsFpxBank {
-        PaymentMethodDetailsFpxBank::Noop
-    }
-}
 impl PaymentMethodDetailsFpxBank {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodDetailsFpxBank::Noop)
@@ -30908,6 +30389,7 @@ pub struct PaymentMethodDetailsGrabpay {
  * The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsIdealBank {
     #[serde(rename = "abn_amro")]
     AbnAmro,
@@ -30936,6 +30418,7 @@ pub enum PaymentMethodDetailsIdealBank {
     #[serde(rename = "van_lanschot")]
     VanLanschot,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -30964,11 +30447,6 @@ impl std::fmt::Display for PaymentMethodDetailsIdealBank {
     }
 }
 
-impl Default for PaymentMethodDetailsIdealBank {
-    fn default() -> PaymentMethodDetailsIdealBank {
-        PaymentMethodDetailsIdealBank::Noop
-    }
-}
 impl PaymentMethodDetailsIdealBank {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodDetailsIdealBank::Noop)
@@ -30979,6 +30457,7 @@ impl PaymentMethodDetailsIdealBank {
  * The Bank Identifier Code of the customer's bank.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Bic {
     #[serde(rename = "ABNANL2A")]
     Abnanl2A,
@@ -31007,6 +30486,7 @@ pub enum Bic {
     #[serde(rename = "TRIONL2U")]
     Trionl2U,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31035,11 +30515,6 @@ impl std::fmt::Display for Bic {
     }
 }
 
-impl Default for Bic {
-    fn default() -> Bic {
-        Bic::Noop
-    }
-}
 impl Bic {
     pub fn is_noop(&self) -> bool {
         matches!(self, Bic::Noop)
@@ -31216,6 +30691,7 @@ pub struct PaymentMethodDetailsInteracPresent {
  * The type of account being debited or credited
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsInteracPresentReceiptAccountType {
     #[serde(rename = "checking")]
     Checking,
@@ -31224,6 +30700,7 @@ pub enum PaymentMethodDetailsInteracPresentReceiptAccountType {
     #[serde(rename = "unknown")]
     Unknown,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31242,11 +30719,6 @@ impl std::fmt::Display for PaymentMethodDetailsInteracPresentReceiptAccountType 
     }
 }
 
-impl Default for PaymentMethodDetailsInteracPresentReceiptAccountType {
-    fn default() -> PaymentMethodDetailsInteracPresentReceiptAccountType {
-        PaymentMethodDetailsInteracPresentReceiptAccountType::Noop
-    }
-}
 impl PaymentMethodDetailsInteracPresentReceiptAccountType {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -31375,6 +30847,7 @@ pub struct PaymentMethodDetailsKonbini {
  * The name of the convenience store chain where the payment was completed.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Chain {
     #[serde(rename = "familymart")]
     Familymart,
@@ -31385,6 +30858,7 @@ pub enum Chain {
     #[serde(rename = "seicomart")]
     Seicomart,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31404,11 +30878,6 @@ impl std::fmt::Display for Chain {
     }
 }
 
-impl Default for Chain {
-    fn default() -> Chain {
-        Chain::Noop
-    }
-}
 impl Chain {
     pub fn is_noop(&self) -> bool {
         matches!(self, Chain::Noop)
@@ -31466,6 +30935,7 @@ pub struct PaymentMethodDetailsOxxo {
  * The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsP24Bank {
     #[serde(rename = "alior_bank")]
     AliorBank,
@@ -31518,6 +30988,7 @@ pub enum PaymentMethodDetailsP24Bank {
     #[serde(rename = "volkswagen_bank")]
     VolkswagenBank,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31558,11 +31029,6 @@ impl std::fmt::Display for PaymentMethodDetailsP24Bank {
     }
 }
 
-impl Default for PaymentMethodDetailsP24Bank {
-    fn default() -> PaymentMethodDetailsP24Bank {
-        PaymentMethodDetailsP24Bank::Noop
-    }
-}
 impl PaymentMethodDetailsP24Bank {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodDetailsP24Bank::Noop)
@@ -31676,6 +31142,7 @@ pub struct PaymentMethodDetailsSepaDebit {
  *   Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsSofortPreferredLanguage {
     #[serde(rename = "de")]
     De,
@@ -31692,6 +31159,7 @@ pub enum PaymentMethodDetailsSofortPreferredLanguage {
     #[serde(rename = "pl")]
     Pl,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31714,11 +31182,6 @@ impl std::fmt::Display for PaymentMethodDetailsSofortPreferredLanguage {
     }
 }
 
-impl Default for PaymentMethodDetailsSofortPreferredLanguage {
-    fn default() -> PaymentMethodDetailsSofortPreferredLanguage {
-        PaymentMethodDetailsSofortPreferredLanguage::Noop
-    }
-}
 impl PaymentMethodDetailsSofortPreferredLanguage {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodDetailsSofortPreferredLanguage::Noop)
@@ -31803,12 +31266,14 @@ pub struct PaymentMethodDetailsSofort {
  * Account type: checkings or savings. Defaults to checking if omitted.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodDetailsUsBankAccountType {
     #[serde(rename = "checking")]
     Checking,
     #[serde(rename = "savings")]
     Savings,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -31826,11 +31291,6 @@ impl std::fmt::Display for PaymentMethodDetailsUsBankAccountType {
     }
 }
 
-impl Default for PaymentMethodDetailsUsBankAccountType {
-    fn default() -> PaymentMethodDetailsUsBankAccountType {
-        PaymentMethodDetailsUsBankAccountType::Noop
-    }
-}
 impl PaymentMethodDetailsUsBankAccountType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodDetailsUsBankAccountType::Noop)
@@ -31989,12 +31449,14 @@ pub struct PaymentMethodOptionsAfterpayClearpay {
  *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodOptionsAlipaySetupFutureUsage {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "off_session")]
     OffSession,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32012,11 +31474,6 @@ impl std::fmt::Display for PaymentMethodOptionsAlipaySetupFutureUsage {
     }
 }
 
-impl Default for PaymentMethodOptionsAlipaySetupFutureUsage {
-    fn default() -> PaymentMethodOptionsAlipaySetupFutureUsage {
-        PaymentMethodOptionsAlipaySetupFutureUsage::Noop
-    }
-}
 impl PaymentMethodOptionsAlipaySetupFutureUsage {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodOptionsAlipaySetupFutureUsage::Noop)
@@ -32108,6 +31565,7 @@ pub struct PaymentMethodOptionsCardInstallments {
  * Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentMethodOptionsCardMandateInterval {
     #[serde(rename = "day")]
     Day,
@@ -32120,6 +31578,7 @@ pub enum PaymentMethodOptionsCardMandateInterval {
     #[serde(rename = "year")]
     Year,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32140,11 +31599,6 @@ impl std::fmt::Display for PaymentMethodOptionsCardMandateInterval {
     }
 }
 
-impl Default for PaymentMethodOptionsCardMandateInterval {
-    fn default() -> PaymentMethodOptionsCardMandateInterval {
-        PaymentMethodOptionsCardMandateInterval::Noop
-    }
-}
 impl PaymentMethodOptionsCardMandateInterval {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethodOptionsCardMandateInterval::Noop)
@@ -32152,10 +31606,12 @@ impl PaymentMethodOptionsCardMandateInterval {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SupportedTypes {
     #[serde(rename = "india")]
     India,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32172,11 +31628,6 @@ impl std::fmt::Display for SupportedTypes {
     }
 }
 
-impl Default for SupportedTypes {
-    fn default() -> SupportedTypes {
-        SupportedTypes::Noop
-    }
-}
 impl SupportedTypes {
     pub fn is_noop(&self) -> bool {
         matches!(self, SupportedTypes::Noop)
@@ -32446,6 +31897,7 @@ pub struct PaymentMethodOptionsSofort {
  * The client type that the end customer will pay from
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Client {
     #[serde(rename = "android")]
     Android,
@@ -32454,6 +31906,7 @@ pub enum Client {
     #[serde(rename = "web")]
     Web,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32472,11 +31925,6 @@ impl std::fmt::Display for Client {
     }
 }
 
-impl Default for Client {
-    fn default() -> Client {
-        Client::Noop
-    }
-}
 impl Client {
     pub fn is_noop(&self) -> bool {
         matches!(self, Client::Noop)
@@ -32693,12 +32141,14 @@ pub struct PaymentPagesCheckoutSessionAfterExpirationRecovery {
  *   from the merchant about this Checkout Session.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Promotions {
     #[serde(rename = "opt_in")]
     OptIn,
     #[serde(rename = "opt_out")]
     OptOut,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32716,11 +32166,6 @@ impl std::fmt::Display for Promotions {
     }
 }
 
-impl Default for Promotions {
-    fn default() -> Promotions {
-        Promotions::Noop
-    }
-}
 impl Promotions {
     pub fn is_noop(&self) -> bool {
         matches!(self, Promotions::Noop)
@@ -32744,10 +32189,12 @@ pub struct PaymentPagesCheckoutSessionConsent {
  *   from the merchant depending on the customer's locale. Only available to US merchants.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentPagesCheckoutSessionConsentCollectionPromotions {
     #[serde(rename = "auto")]
     Auto,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -32764,11 +32211,6 @@ impl std::fmt::Display for PaymentPagesCheckoutSessionConsentCollectionPromotion
     }
 }
 
-impl Default for PaymentPagesCheckoutSessionConsentCollectionPromotions {
-    fn default() -> PaymentPagesCheckoutSessionConsentCollectionPromotions {
-        PaymentPagesCheckoutSessionConsentCollectionPromotions::Noop
-    }
-}
 impl PaymentPagesCheckoutSessionConsentCollectionPromotions {
     pub fn is_noop(&self) -> bool {
         matches!(
@@ -33141,10 +32583,12 @@ impl std::convert::From<DestinationAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PayoutObject {
     #[serde(rename = "payout")]
     Payout,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -33161,11 +32605,6 @@ impl std::fmt::Display for PayoutObject {
     }
 }
 
-impl Default for PayoutObject {
-    fn default() -> PayoutObject {
-        PayoutObject::Noop
-    }
-}
 impl PayoutObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PayoutObject::Noop)
@@ -33231,12 +32670,14 @@ impl std::convert::From<ReversedByAnyOf> for String {
  * Can be `bank_account` or `card`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PayoutType {
     #[serde(rename = "bank_account")]
     BankAccount,
     #[serde(rename = "card")]
     Card,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -33254,11 +32695,6 @@ impl std::fmt::Display for PayoutType {
     }
 }
 
-impl Default for PayoutType {
-    fn default() -> PayoutType {
-        PayoutType::Noop
-    }
-}
 impl PayoutType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PayoutType::Noop)
@@ -33537,12 +32973,14 @@ pub struct Period {
  * Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PoliticalExposure {
     #[serde(rename = "existing")]
     Existing,
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -33560,11 +32998,6 @@ impl std::fmt::Display for PoliticalExposure {
     }
 }
 
-impl Default for PoliticalExposure {
-    fn default() -> PoliticalExposure {
-        PoliticalExposure::Noop
-    }
-}
 impl PoliticalExposure {
     pub fn is_noop(&self) -> bool {
         matches!(self, PoliticalExposure::Noop)
@@ -34003,6 +33436,7 @@ pub struct PersonRelationship {
  * Specifies a usage aggregation strategy for plans of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AggregateUsage {
     #[serde(rename = "last_during_period")]
     LastDuringPeriod,
@@ -34013,6 +33447,7 @@ pub enum AggregateUsage {
     #[serde(rename = "sum")]
     Sum,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34032,11 +33467,6 @@ impl std::fmt::Display for AggregateUsage {
     }
 }
 
-impl Default for AggregateUsage {
-    fn default() -> AggregateUsage {
-        AggregateUsage::Noop
-    }
-}
 impl AggregateUsage {
     pub fn is_noop(&self) -> bool {
         matches!(self, AggregateUsage::Noop)
@@ -34047,12 +33477,14 @@ impl AggregateUsage {
  * Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `amount`) will be charged per unit in `quantity` (for plans with `usage_type=licensed`), or per unit of total usage (for plans with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BillingScheme {
     #[serde(rename = "per_unit")]
     PerUnit,
     #[serde(rename = "tiered")]
     Tiered,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34070,11 +33502,6 @@ impl std::fmt::Display for BillingScheme {
     }
 }
 
-impl Default for BillingScheme {
-    fn default() -> BillingScheme {
-        BillingScheme::Noop
-    }
-}
 impl BillingScheme {
     pub fn is_noop(&self) -> bool {
         matches!(self, BillingScheme::Noop)
@@ -34085,6 +33512,7 @@ impl BillingScheme {
  * The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PlanInterval {
     #[serde(rename = "day")]
     Day,
@@ -34095,6 +33523,7 @@ pub enum PlanInterval {
     #[serde(rename = "year")]
     Year,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34114,11 +33543,6 @@ impl std::fmt::Display for PlanInterval {
     }
 }
 
-impl Default for PlanInterval {
-    fn default() -> PlanInterval {
-        PlanInterval::Noop
-    }
-}
 impl PlanInterval {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlanInterval::Noop)
@@ -34196,12 +33620,14 @@ impl std::convert::From<ProductAnyOf> for String {
  * Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TiersMode {
     #[serde(rename = "graduated")]
     Graduated,
     #[serde(rename = "volume")]
     Volume,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34219,11 +33645,6 @@ impl std::fmt::Display for TiersMode {
     }
 }
 
-impl Default for TiersMode {
-    fn default() -> TiersMode {
-        TiersMode::Noop
-    }
-}
 impl TiersMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, TiersMode::Noop)
@@ -34234,12 +33655,14 @@ impl TiersMode {
  * Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UsageType {
     #[serde(rename = "licensed")]
     Licensed,
     #[serde(rename = "metered")]
     Metered,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34257,11 +33680,6 @@ impl std::fmt::Display for UsageType {
     }
 }
 
-impl Default for UsageType {
-    fn default() -> UsageType {
-        UsageType::Noop
-    }
-}
 impl UsageType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UsageType::Noop)
@@ -34521,10 +33939,12 @@ pub struct PlanTier {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PlatformTaxObject {
     #[serde(rename = "platform_tax_fee")]
     PlatformTaxFee,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34541,11 +33961,6 @@ impl std::fmt::Display for PlatformTaxObject {
     }
 }
 
-impl Default for PlatformTaxObject {
-    fn default() -> PlatformTaxObject {
-        PlatformTaxObject::Noop
-    }
-}
 impl PlatformTaxObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PlatformTaxObject::Noop)
@@ -34632,6 +34047,7 @@ pub struct PortalBusinessProfile {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AllowedUpdates {
     #[serde(rename = "address")]
     Address,
@@ -34644,6 +34060,7 @@ pub enum AllowedUpdates {
     #[serde(rename = "tax_id")]
     TaxId,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34664,11 +34081,6 @@ impl std::fmt::Display for AllowedUpdates {
     }
 }
 
-impl Default for AllowedUpdates {
-    fn default() -> AllowedUpdates {
-        AllowedUpdates::Noop
-    }
-}
 impl AllowedUpdates {
     pub fn is_noop(&self) -> bool {
         matches!(self, AllowedUpdates::Noop)
@@ -34730,12 +34142,14 @@ pub struct PortalFeatures {
  * Whether to cancel subscriptions immediately or at the end of the billing period.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PortalSubscriptionCancelMode {
     #[serde(rename = "at_period_end")]
     AtPeriodEnd,
     #[serde(rename = "immediately")]
     Immediately,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34753,11 +34167,6 @@ impl std::fmt::Display for PortalSubscriptionCancelMode {
     }
 }
 
-impl Default for PortalSubscriptionCancelMode {
-    fn default() -> PortalSubscriptionCancelMode {
-        PortalSubscriptionCancelMode::Noop
-    }
-}
 impl PortalSubscriptionCancelMode {
     pub fn is_noop(&self) -> bool {
         matches!(self, PortalSubscriptionCancelMode::Noop)
@@ -34768,6 +34177,7 @@ impl PortalSubscriptionCancelMode {
  * Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProrationBehavior {
     #[serde(rename = "always_invoice")]
     AlwaysInvoice,
@@ -34776,6 +34186,7 @@ pub enum ProrationBehavior {
     #[serde(rename = "none")]
     None,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34794,11 +34205,6 @@ impl std::fmt::Display for ProrationBehavior {
     }
 }
 
-impl Default for ProrationBehavior {
-    fn default() -> ProrationBehavior {
-        ProrationBehavior::Noop
-    }
-}
 impl ProrationBehavior {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProrationBehavior::Noop)
@@ -34833,6 +34239,7 @@ pub struct PortalSubscriptionCancel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Options {
     #[serde(rename = "customer_service")]
     CustomerService,
@@ -34851,6 +34258,7 @@ pub enum Options {
     #[serde(rename = "unused")]
     Unused,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34874,11 +34282,6 @@ impl std::fmt::Display for Options {
     }
 }
 
-impl Default for Options {
-    fn default() -> Options {
-        Options::Noop
-    }
-}
 impl Options {
     pub fn is_noop(&self) -> bool {
         matches!(self, Options::Noop)
@@ -34908,6 +34311,7 @@ pub struct PortalSubscriptionCancellationReason {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DefaultAllowedUpdates {
     #[serde(rename = "price")]
     Price,
@@ -34916,6 +34320,7 @@ pub enum DefaultAllowedUpdates {
     #[serde(rename = "quantity")]
     Quantity,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -34934,11 +34339,6 @@ impl std::fmt::Display for DefaultAllowedUpdates {
     }
 }
 
-impl Default for DefaultAllowedUpdates {
-    fn default() -> DefaultAllowedUpdates {
-        DefaultAllowedUpdates::Noop
-    }
-}
 impl DefaultAllowedUpdates {
     pub fn is_noop(&self) -> bool {
         matches!(self, DefaultAllowedUpdates::Noop)
@@ -35008,6 +34408,7 @@ pub struct PortalSubscriptionUpdateProduct {
  * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TaxBehavior {
     #[serde(rename = "exclusive")]
     Exclusive,
@@ -35016,6 +34417,7 @@ pub enum TaxBehavior {
     #[serde(rename = "unspecified")]
     Unspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -35034,11 +34436,6 @@ impl std::fmt::Display for TaxBehavior {
     }
 }
 
-impl Default for TaxBehavior {
-    fn default() -> TaxBehavior {
-        TaxBehavior::Noop
-    }
-}
 impl TaxBehavior {
     pub fn is_noop(&self) -> bool {
         matches!(self, TaxBehavior::Noop)
@@ -35049,12 +34446,14 @@ impl TaxBehavior {
  * One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PriceType {
     #[serde(rename = "one_time")]
     OneTime,
     #[serde(rename = "recurring")]
     Recurring,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -35072,11 +34471,6 @@ impl std::fmt::Display for PriceType {
     }
 }
 
-impl Default for PriceType {
-    fn default() -> PriceType {
-        PriceType::Noop
-    }
-}
 impl PriceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PriceType::Noop)
@@ -35530,10 +34924,12 @@ pub struct Product {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PromotionCodeObject {
     #[serde(rename = "promotion_code")]
     PromotionCode,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -35550,11 +34946,6 @@ impl std::fmt::Display for PromotionCodeObject {
     }
 }
 
-impl Default for PromotionCodeObject {
-    fn default() -> PromotionCodeObject {
-        PromotionCodeObject::Noop
-    }
-}
 impl PromotionCodeObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, PromotionCodeObject::Noop)
@@ -35795,10 +35186,12 @@ impl std::convert::From<QuoteInvoiceAnyOf> for String {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum QuoteObject {
     #[serde(rename = "quote")]
     Quote,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -35815,11 +35208,6 @@ impl std::fmt::Display for QuoteObject {
     }
 }
 
-impl Default for QuoteObject {
-    fn default() -> QuoteObject {
-        QuoteObject::Noop
-    }
-}
 impl QuoteObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, QuoteObject::Noop)
@@ -35830,6 +35218,7 @@ impl QuoteObject {
  * The status of the quote.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum QuoteStatus {
     #[serde(rename = "accepted")]
     Accepted,
@@ -35840,6 +35229,7 @@ pub enum QuoteStatus {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -35859,11 +35249,6 @@ impl std::fmt::Display for QuoteStatus {
     }
 }
 
-impl Default for QuoteStatus {
-    fn default() -> QuoteStatus {
-        QuoteStatus::Noop
-    }
-}
 impl QuoteStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, QuoteStatus::Noop)
@@ -36373,10 +35758,12 @@ pub struct QuotesResourceUpfront {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RadarEarlyFraudWarningObject {
     #[serde(rename = "radar.early_fraud_warning")]
     RadarEarlyFraudWarning,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -36393,11 +35780,6 @@ impl std::fmt::Display for RadarEarlyFraudWarningObject {
     }
 }
 
-impl Default for RadarEarlyFraudWarningObject {
-    fn default() -> RadarEarlyFraudWarningObject {
-        RadarEarlyFraudWarningObject::Noop
-    }
-}
 impl RadarEarlyFraudWarningObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, RadarEarlyFraudWarningObject::Noop)
@@ -36472,6 +35854,7 @@ pub struct RadarEarlyFraudWarning {
  * The type of items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, or `customer_id`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ItemType {
     #[serde(rename = "card_bin")]
     CardBin,
@@ -36490,6 +35873,7 @@ pub enum ItemType {
     #[serde(rename = "string")]
     String,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -36513,11 +35897,6 @@ impl std::fmt::Display for ItemType {
     }
 }
 
-impl Default for ItemType {
-    fn default() -> ItemType {
-        ItemType::Noop
-    }
-}
 impl ItemType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ItemType::Noop)
@@ -37084,10 +36463,12 @@ pub struct RecurringData {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RefundObject {
     #[serde(rename = "refund")]
     Refund,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37104,11 +36485,6 @@ impl std::fmt::Display for RefundObject {
     }
 }
 
-impl Default for RefundObject {
-    fn default() -> RefundObject {
-        RefundObject::Noop
-    }
-}
 impl RefundObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, RefundObject::Noop)
@@ -37119,6 +36495,7 @@ impl RefundObject {
  * Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum RefundReason {
     #[serde(rename = "duplicate")]
     Duplicate,
@@ -37129,6 +36506,7 @@ pub enum RefundReason {
     #[serde(rename = "requested_by_customer")]
     RequestedByCustomer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37148,11 +36526,6 @@ impl std::fmt::Display for RefundReason {
     }
 }
 
-impl Default for RefundReason {
-    fn default() -> RefundReason {
-        RefundReason::Noop
-    }
-}
 impl RefundReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, RefundReason::Noop)
@@ -37438,10 +36811,12 @@ pub struct RefundNextActionDisplayDetails {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReportingReportRunObject {
     #[serde(rename = "reporting.report_run")]
     ReportingReportRun,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37458,11 +36833,6 @@ impl std::fmt::Display for ReportingReportRunObject {
     }
 }
 
-impl Default for ReportingReportRunObject {
-    fn default() -> ReportingReportRunObject {
-        ReportingReportRunObject::Noop
-    }
-}
 impl ReportingReportRunObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReportingReportRunObject::Noop)
@@ -37576,10 +36946,12 @@ pub struct ReportingReportRun {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReportingReportTypeObject {
     #[serde(rename = "reporting.report_type")]
     ReportingReportType,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37596,11 +36968,6 @@ impl std::fmt::Display for ReportingReportTypeObject {
     }
 }
 
-impl Default for ReportingReportTypeObject {
-    fn default() -> ReportingReportTypeObject {
-        ReportingReportTypeObject::Noop
-    }
-}
 impl ReportingReportTypeObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReportingReportTypeObject::Noop)
@@ -37706,10 +37073,12 @@ pub struct ReportingReportType {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReserveTransactionObject {
     #[serde(rename = "reserve_transaction")]
     ReserveTransaction,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37726,11 +37095,6 @@ impl std::fmt::Display for ReserveTransactionObject {
     }
 }
 
-impl Default for ReserveTransactionObject {
-    fn default() -> ReserveTransactionObject {
-        ReserveTransactionObject::Noop
-    }
-}
 impl ReserveTransactionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReserveTransactionObject::Noop)
@@ -37787,6 +37151,7 @@ pub struct ReserveTransaction {
  * The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ClosedReason {
     #[serde(rename = "approved")]
     Approved,
@@ -37799,6 +37164,7 @@ pub enum ClosedReason {
     #[serde(rename = "refunded_as_fraud")]
     RefundedAsFraud,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37819,11 +37185,6 @@ impl std::fmt::Display for ClosedReason {
     }
 }
 
-impl Default for ClosedReason {
-    fn default() -> ClosedReason {
-        ClosedReason::Noop
-    }
-}
 impl ClosedReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, ClosedReason::Noop)
@@ -37834,10 +37195,12 @@ impl ClosedReason {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReviewObject {
     #[serde(rename = "review")]
     Review,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37854,11 +37217,6 @@ impl std::fmt::Display for ReviewObject {
     }
 }
 
-impl Default for ReviewObject {
-    fn default() -> ReviewObject {
-        ReviewObject::Noop
-    }
-}
 impl ReviewObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReviewObject::Noop)
@@ -37869,12 +37227,14 @@ impl ReviewObject {
  * The reason the review was opened. One of `rule` or `manual`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OpenedReason {
     #[serde(rename = "manual")]
     Manual,
     #[serde(rename = "rule")]
     Rule,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -37892,11 +37252,6 @@ impl std::fmt::Display for OpenedReason {
     }
 }
 
-impl Default for OpenedReason {
-    fn default() -> OpenedReason {
-        OpenedReason::Noop
-    }
-}
 impl OpenedReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, OpenedReason::Noop)
@@ -38053,10 +37408,12 @@ pub struct Rule {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ScheduledQueryRunObject {
     #[serde(rename = "scheduled_query_run")]
     ScheduledQueryRun,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -38073,11 +37430,6 @@ impl std::fmt::Display for ScheduledQueryRunObject {
     }
 }
 
-impl Default for ScheduledQueryRunObject {
-    fn default() -> ScheduledQueryRunObject {
-        ScheduledQueryRunObject::Noop
-    }
-}
 impl ScheduledQueryRunObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ScheduledQueryRunObject::Noop)
@@ -38199,10 +37551,12 @@ pub struct SepaDebitGeneratedFrom {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SetupAttemptObject {
     #[serde(rename = "setup_attempt")]
     SetupAttempt,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -38219,11 +37573,6 @@ impl std::fmt::Display for SetupAttemptObject {
     }
 }
 
-impl Default for SetupAttemptObject {
-    fn default() -> SetupAttemptObject {
-        SetupAttemptObject::Noop
-    }
-}
 impl SetupAttemptObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SetupAttemptObject::Noop)
@@ -38581,6 +37930,7 @@ pub struct SetupAttemptPaymentMethodDetailsSofort {
  * Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SetupIntentCancellationReason {
     #[serde(rename = "abandoned")]
     Abandoned,
@@ -38589,6 +37939,7 @@ pub enum SetupIntentCancellationReason {
     #[serde(rename = "requested_by_customer")]
     RequestedByCustomer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -38607,11 +37958,6 @@ impl std::fmt::Display for SetupIntentCancellationReason {
     }
 }
 
-impl Default for SetupIntentCancellationReason {
-    fn default() -> SetupIntentCancellationReason {
-        SetupIntentCancellationReason::Noop
-    }
-}
 impl SetupIntentCancellationReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, SetupIntentCancellationReason::Noop)
@@ -38622,10 +37968,12 @@ impl SetupIntentCancellationReason {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SetupIntentObject {
     #[serde(rename = "setup_intent")]
     SetupIntent,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -38642,11 +37990,6 @@ impl std::fmt::Display for SetupIntentObject {
     }
 }
 
-impl Default for SetupIntentObject {
-    fn default() -> SetupIntentObject {
-        SetupIntentObject::Noop
-    }
-}
 impl SetupIntentObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SetupIntentObject::Noop)
@@ -38657,6 +38000,7 @@ impl SetupIntentObject {
  * [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SetupIntentStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -38671,6 +38015,7 @@ pub enum SetupIntentStatus {
     #[serde(rename = "succeeded")]
     Succeeded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -38692,11 +38037,6 @@ impl std::fmt::Display for SetupIntentStatus {
     }
 }
 
-impl Default for SetupIntentStatus {
-    fn default() -> SetupIntentStatus {
-        SetupIntentStatus::Noop
-    }
-}
 impl SetupIntentStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, SetupIntentStatus::Noop)
@@ -39561,10 +38901,12 @@ pub struct ShippingMethod {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ShippingRateObject {
     #[serde(rename = "shipping_rate")]
     ShippingRate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -39581,11 +38923,6 @@ impl std::fmt::Display for ShippingRateObject {
     }
 }
 
-impl Default for ShippingRateObject {
-    fn default() -> ShippingRateObject {
-        ShippingRateObject::Noop
-    }
-}
 impl ShippingRateObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ShippingRateObject::Noop)
@@ -39596,10 +38933,12 @@ impl ShippingRateObject {
  * The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ShippingRateType {
     #[serde(rename = "fixed_amount")]
     FixedAmount,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -39616,11 +38955,6 @@ impl std::fmt::Display for ShippingRateType {
     }
 }
 
-impl Default for ShippingRateType {
-    fn default() -> ShippingRateType {
-        ShippingRateType::Noop
-    }
-}
 impl ShippingRateType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ShippingRateType::Noop)
@@ -39740,6 +39074,7 @@ pub struct ShippingRateDeliveryEstimateData {
  * A unit of time.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Unit {
     #[serde(rename = "business_day")]
     BusinessDay,
@@ -39752,6 +39087,7 @@ pub enum Unit {
     #[serde(rename = "week")]
     Week,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -39772,11 +39108,6 @@ impl std::fmt::Display for Unit {
     }
 }
 
-impl Default for Unit {
-    fn default() -> Unit {
-        Unit::Noop
-    }
-}
 impl Unit {
     pub fn is_noop(&self) -> bool {
         matches!(self, Unit::Noop)
@@ -40026,10 +39357,12 @@ pub struct SkuInventory {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SourceObject {
     #[serde(rename = "source")]
     Source,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -40046,11 +39379,6 @@ impl std::fmt::Display for SourceObject {
     }
 }
 
-impl Default for SourceObject {
-    fn default() -> SourceObject {
-        SourceObject::Noop
-    }
-}
 impl SourceObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SourceObject::Noop)
@@ -40061,6 +39389,7 @@ impl SourceObject {
  * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SourceType {
     #[serde(rename = "ach_credit_transfer")]
     AchCreditTransfer,
@@ -40099,6 +39428,7 @@ pub enum SourceType {
     #[serde(rename = "wechat")]
     Wechat,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -40132,11 +39462,6 @@ impl std::fmt::Display for SourceType {
     }
 }
 
-impl Default for SourceType {
-    fn default() -> SourceType {
-        SourceType::Noop
-    }
-}
 impl SourceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SourceType::Noop)
@@ -40552,10 +39877,12 @@ pub struct SourceCodeVerificationFlow {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SourceMandateNotificationObject {
     #[serde(rename = "source_mandate_notification")]
     SourceMandateNotification,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -40574,11 +39901,6 @@ impl std::fmt::Display for SourceMandateNotificationObject {
     }
 }
 
-impl Default for SourceMandateNotificationObject {
-    fn default() -> SourceMandateNotificationObject {
-        SourceMandateNotificationObject::Noop
-    }
-}
 impl SourceMandateNotificationObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SourceMandateNotificationObject::Noop)
@@ -41036,10 +40358,12 @@ pub struct SourceRedirectFlow {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SourceTransactionObject {
     #[serde(rename = "source_transaction")]
     SourceTransaction,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -41056,11 +40380,6 @@ impl std::fmt::Display for SourceTransactionObject {
     }
 }
 
-impl Default for SourceTransactionObject {
-    fn default() -> SourceTransactionObject {
-        SourceTransactionObject::Noop
-    }
-}
 impl SourceTransactionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SourceTransactionObject::Noop)
@@ -41071,6 +40390,7 @@ impl SourceTransactionObject {
  * The type of source this transaction is attached to.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SourceTransactionType {
     #[serde(rename = "ach_credit_transfer")]
     AchCreditTransfer,
@@ -41105,6 +40425,7 @@ pub enum SourceTransactionType {
     #[serde(rename = "wechat")]
     Wechat,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -41136,11 +40457,6 @@ impl std::fmt::Display for SourceTransactionType {
     }
 }
 
-impl Default for SourceTransactionType {
-    fn default() -> SourceTransactionType {
-        SourceTransactionType::Noop
-    }
-}
 impl SourceTransactionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, SourceTransactionType::Noop)
@@ -43043,10 +42359,12 @@ pub struct Items {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubscriptionObject {
     #[serde(rename = "subscription")]
     Subscription,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -43063,11 +42381,6 @@ impl std::fmt::Display for SubscriptionObject {
     }
 }
 
-impl Default for SubscriptionObject {
-    fn default() -> SubscriptionObject {
-        SubscriptionObject::Noop
-    }
-}
 impl SubscriptionObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubscriptionObject::Noop)
@@ -43086,6 +42399,7 @@ impl SubscriptionObject {
  *   If subscription `collection_method=send_invoice` it becomes `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then immediately automatically closed). After receiving updated payment information from a customer, you may choose to reopen and pay their closed invoices.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubscriptionStatus {
     #[serde(rename = "active")]
     Active,
@@ -43102,6 +42416,7 @@ pub enum SubscriptionStatus {
     #[serde(rename = "unpaid")]
     Unpaid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -43124,11 +42439,6 @@ impl std::fmt::Display for SubscriptionStatus {
     }
 }
 
-impl Default for SubscriptionStatus {
-    fn default() -> SubscriptionStatus {
-        SubscriptionStatus::Noop
-    }
-}
 impl SubscriptionStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubscriptionStatus::Noop)
@@ -43579,6 +42889,7 @@ pub struct SubscriptionPendingInvoiceItemInterval {
  * Behavior of the subscription schedule and underlying subscription when it ends. Possible values are `release` and `cancel`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EndBehavior {
     #[serde(rename = "cancel")]
     Cancel,
@@ -43589,6 +42900,7 @@ pub enum EndBehavior {
     #[serde(rename = "renew")]
     Renew,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -43608,11 +42920,6 @@ impl std::fmt::Display for EndBehavior {
     }
 }
 
-impl Default for EndBehavior {
-    fn default() -> EndBehavior {
-        EndBehavior::Noop
-    }
-}
 impl EndBehavior {
     pub fn is_noop(&self) -> bool {
         matches!(self, EndBehavior::Noop)
@@ -43623,10 +42930,12 @@ impl EndBehavior {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubscriptionScheduleObject {
     #[serde(rename = "subscription_schedule")]
     SubscriptionSchedule,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -43643,11 +42952,6 @@ impl std::fmt::Display for SubscriptionScheduleObject {
     }
 }
 
-impl Default for SubscriptionScheduleObject {
-    fn default() -> SubscriptionScheduleObject {
-        SubscriptionScheduleObject::Noop
-    }
-}
 impl SubscriptionScheduleObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubscriptionScheduleObject::Noop)
@@ -43658,6 +42962,7 @@ impl SubscriptionScheduleObject {
  * The present status of the subscription schedule. Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. You can read more about the different states in our [behavior guide](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubscriptionScheduleStatus {
     #[serde(rename = "active")]
     Active,
@@ -43670,6 +42975,7 @@ pub enum SubscriptionScheduleStatus {
     #[serde(rename = "released")]
     Released,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -43690,11 +42996,6 @@ impl std::fmt::Display for SubscriptionScheduleStatus {
     }
 }
 
-impl Default for SubscriptionScheduleStatus {
-    fn default() -> SubscriptionScheduleStatus {
-        SubscriptionScheduleStatus::Noop
-    }
-}
 impl SubscriptionScheduleStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubscriptionScheduleStatus::Noop)
@@ -43980,12 +43281,14 @@ pub struct SubscriptionScheduleCurrentPhase {
  * Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum BillingCycleAnchor {
     #[serde(rename = "automatic")]
     Automatic,
     #[serde(rename = "phase_start")]
     PhaseStart,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44003,11 +43306,6 @@ impl std::fmt::Display for BillingCycleAnchor {
     }
 }
 
-impl Default for BillingCycleAnchor {
-    fn default() -> BillingCycleAnchor {
-        BillingCycleAnchor::Noop
-    }
-}
 impl BillingCycleAnchor {
     pub fn is_noop(&self) -> bool {
         matches!(self, BillingCycleAnchor::Noop)
@@ -44254,6 +43552,7 @@ pub struct SubscriptionTransferDataType {
  * The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Behavior {
     #[serde(rename = "keep_as_draft")]
     KeepAsDraft,
@@ -44262,6 +43561,7 @@ pub enum Behavior {
     #[serde(rename = "void")]
     Void,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44280,11 +43580,6 @@ impl std::fmt::Display for Behavior {
     }
 }
 
-impl Default for Behavior {
-    fn default() -> Behavior {
-        Behavior::Noop
-    }
-}
 impl Behavior {
     pub fn is_noop(&self) -> bool {
         matches!(self, Behavior::Noop)
@@ -44424,10 +43719,12 @@ pub struct SubscriptionsResourcePendingUpdate {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TaxCodeObject {
     #[serde(rename = "tax_code")]
     TaxCode,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44444,11 +43741,6 @@ impl std::fmt::Display for TaxCodeObject {
     }
 }
 
-impl Default for TaxCodeObject {
-    fn default() -> TaxCodeObject {
-        TaxCodeObject::Noop
-    }
-}
 impl TaxCodeObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TaxCodeObject::Noop)
@@ -44496,10 +43788,12 @@ pub struct TaxCode {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TaxDeductedAtSourceObject {
     #[serde(rename = "tax_deducted_at_source")]
     TaxDeductedAtSource,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44516,11 +43810,6 @@ impl std::fmt::Display for TaxDeductedAtSourceObject {
     }
 }
 
-impl Default for TaxDeductedAtSourceObject {
-    fn default() -> TaxDeductedAtSourceObject {
-        TaxDeductedAtSourceObject::Noop
-    }
-}
 impl TaxDeductedAtSourceObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TaxDeductedAtSourceObject::Noop)
@@ -44659,6 +43948,7 @@ pub struct TaxId {
  * Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TaxVerificationStatus {
     #[serde(rename = "pending")]
     Pending,
@@ -44669,6 +43959,7 @@ pub enum TaxVerificationStatus {
     #[serde(rename = "verified")]
     Verified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44688,11 +43979,6 @@ impl std::fmt::Display for TaxVerificationStatus {
     }
 }
 
-impl Default for TaxVerificationStatus {
-    fn default() -> TaxVerificationStatus {
-        TaxVerificationStatus::Noop
-    }
-}
 impl TaxVerificationStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, TaxVerificationStatus::Noop)
@@ -44731,10 +44017,12 @@ pub struct TaxVerificationData {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TaxRateObject {
     #[serde(rename = "tax_rate")]
     TaxRate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44751,11 +44039,6 @@ impl std::fmt::Display for TaxRateObject {
     }
 }
 
-impl Default for TaxRateObject {
-    fn default() -> TaxRateObject {
-        TaxRateObject::Noop
-    }
-}
 impl TaxRateObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TaxRateObject::Noop)
@@ -44766,6 +44049,7 @@ impl TaxRateObject {
  * The high-level tax type, such as `vat` or `sales_tax`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TaxType {
     #[serde(rename = "gst")]
     Gst,
@@ -44784,6 +44068,7 @@ pub enum TaxType {
     #[serde(rename = "vat")]
     Vat,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44807,11 +44092,6 @@ impl std::fmt::Display for TaxType {
     }
 }
 
-impl Default for TaxType {
-    fn default() -> TaxType {
-        TaxType::Noop
-    }
-}
 impl TaxType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TaxType::Noop)
@@ -44954,10 +44234,12 @@ pub struct TaxRate {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TerminalConnectionTokenObject {
     #[serde(rename = "terminal.connection_token")]
     TerminalConnectionToken,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -44974,11 +44256,6 @@ impl std::fmt::Display for TerminalConnectionTokenObject {
     }
 }
 
-impl Default for TerminalConnectionTokenObject {
-    fn default() -> TerminalConnectionTokenObject {
-        TerminalConnectionTokenObject::Noop
-    }
-}
 impl TerminalConnectionTokenObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TerminalConnectionTokenObject::Noop)
@@ -45078,6 +44355,7 @@ pub struct TerminalLocation {
  * Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, or `verifone_P400`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum DeviceType {
     #[serde(rename = "bbpos_chipper2x")]
     BbposChipper2X,
@@ -45090,6 +44368,7 @@ pub enum DeviceType {
     #[serde(rename = "verifone_P400")]
     VerifoneP400,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45110,11 +44389,6 @@ impl std::fmt::Display for DeviceType {
     }
 }
 
-impl Default for DeviceType {
-    fn default() -> DeviceType {
-        DeviceType::Noop
-    }
-}
 impl DeviceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DeviceType::Noop)
@@ -45374,6 +44648,7 @@ pub struct TerminalReaderResourceProcessSetupIntentAction {
  * Status of the action performed by the reader.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TerminalReaderResourceActionStatus {
     #[serde(rename = "failed")]
     Failed,
@@ -45382,6 +44657,7 @@ pub enum TerminalReaderResourceActionStatus {
     #[serde(rename = "succeeded")]
     Succeeded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45400,11 +44676,6 @@ impl std::fmt::Display for TerminalReaderResourceActionStatus {
     }
 }
 
-impl Default for TerminalReaderResourceActionStatus {
-    fn default() -> TerminalReaderResourceActionStatus {
-        TerminalReaderResourceActionStatus::Noop
-    }
-}
 impl TerminalReaderResourceActionStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, TerminalReaderResourceActionStatus::Noop)
@@ -45415,6 +44686,7 @@ impl TerminalReaderResourceActionStatus {
  * Type of action performed by the reader.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TerminalReaderResourceActionType {
     #[serde(rename = "process_payment_intent")]
     ProcessPaymentIntent,
@@ -45423,6 +44695,7 @@ pub enum TerminalReaderResourceActionType {
     #[serde(rename = "set_reader_display")]
     SetReaderDisplay,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45441,11 +44714,6 @@ impl std::fmt::Display for TerminalReaderResourceActionType {
     }
 }
 
-impl Default for TerminalReaderResourceActionType {
-    fn default() -> TerminalReaderResourceActionType {
-        TerminalReaderResourceActionType::Noop
-    }
-}
 impl TerminalReaderResourceActionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TerminalReaderResourceActionType::Noop)
@@ -45511,10 +44779,12 @@ pub struct TerminalReaderResourceAction {
  * Type of information to be displayed by the reader.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TerminalReaderResourceSetDisplayActionType {
     #[serde(rename = "cart")]
     Cart,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45531,11 +44801,6 @@ impl std::fmt::Display for TerminalReaderResourceSetDisplayActionType {
     }
 }
 
-impl Default for TerminalReaderResourceSetDisplayActionType {
-    fn default() -> TerminalReaderResourceSetDisplayActionType {
-        TerminalReaderResourceSetDisplayActionType::Noop
-    }
-}
 impl TerminalReaderResourceSetDisplayActionType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TerminalReaderResourceSetDisplayActionType::Noop)
@@ -45565,6 +44830,7 @@ pub struct TerminalReaderResourceSetDisplayAction {
  * The status of the Test Clock.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TestClockStatus {
     #[serde(rename = "advancing")]
     Advancing,
@@ -45573,6 +44839,7 @@ pub enum TestClockStatus {
     #[serde(rename = "ready")]
     Ready,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45591,11 +44858,6 @@ impl std::fmt::Display for TestClockStatus {
     }
 }
 
-impl Default for TestClockStatus {
-    fn default() -> TestClockStatus {
-        TestClockStatus::Noop
-    }
-}
 impl TestClockStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, TestClockStatus::Noop)
@@ -45678,10 +44940,12 @@ pub struct TestClock {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ThreeDSecureObject {
     #[serde(rename = "three_d_secure")]
     ThreeDSecure,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45698,11 +44962,6 @@ impl std::fmt::Display for ThreeDSecureObject {
     }
 }
 
-impl Default for ThreeDSecureObject {
-    fn default() -> ThreeDSecureObject {
-        ThreeDSecureObject::Noop
-    }
-}
 impl ThreeDSecureObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, ThreeDSecureObject::Noop)
@@ -45806,12 +45065,14 @@ pub struct ThreeDSecure {
  *   the issuing bank.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AuthenticationFlow {
     #[serde(rename = "challenge")]
     Challenge,
     #[serde(rename = "frictionless")]
     Frictionless,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45829,11 +45090,6 @@ impl std::fmt::Display for AuthenticationFlow {
     }
 }
 
-impl Default for AuthenticationFlow {
-    fn default() -> AuthenticationFlow {
-        AuthenticationFlow::Noop
-    }
-}
 impl AuthenticationFlow {
     pub fn is_noop(&self) -> bool {
         matches!(self, AuthenticationFlow::Noop)
@@ -45844,6 +45100,7 @@ impl AuthenticationFlow {
  * Indicates the outcome of 3D Secure authentication.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ThreeDSecureDetailsResult {
     #[serde(rename = "attempt_acknowledged")]
     AttemptAcknowledged,
@@ -45856,6 +45113,7 @@ pub enum ThreeDSecureDetailsResult {
     #[serde(rename = "processing_error")]
     ProcessingError,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45876,11 +45134,6 @@ impl std::fmt::Display for ThreeDSecureDetailsResult {
     }
 }
 
-impl Default for ThreeDSecureDetailsResult {
-    fn default() -> ThreeDSecureDetailsResult {
-        ThreeDSecureDetailsResult::Noop
-    }
-}
 impl ThreeDSecureDetailsResult {
     pub fn is_noop(&self) -> bool {
         matches!(self, ThreeDSecureDetailsResult::Noop)
@@ -45892,6 +45145,7 @@ impl ThreeDSecureDetailsResult {
  *   on the `result`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ResultReason {
     #[serde(rename = "abandoned")]
     Abandoned,
@@ -45908,6 +45162,7 @@ pub enum ResultReason {
     #[serde(rename = "rejected")]
     Rejected,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45930,11 +45185,6 @@ impl std::fmt::Display for ResultReason {
     }
 }
 
-impl Default for ResultReason {
-    fn default() -> ResultReason {
-        ResultReason::Noop
-    }
-}
 impl ResultReason {
     pub fn is_noop(&self) -> bool {
         matches!(self, ResultReason::Noop)
@@ -45945,6 +45195,7 @@ impl ResultReason {
  * The version of 3D Secure that was used.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Version {
     #[serde(rename = "1.0.2")]
     OneHundredAndTwo,
@@ -45953,6 +45204,7 @@ pub enum Version {
     #[serde(rename = "2.2.0")]
     Twenty,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -45971,11 +45223,6 @@ impl std::fmt::Display for Version {
     }
 }
 
-impl Default for Version {
-    fn default() -> Version {
-        Version::Noop
-    }
-}
 impl Version {
     pub fn is_noop(&self) -> bool {
         matches!(self, Version::Noop)
@@ -46026,10 +45273,12 @@ pub struct ThreeDSecureUsage {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TokenObject {
     #[serde(rename = "token")]
     Token,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -46046,11 +45295,6 @@ impl std::fmt::Display for TokenObject {
     }
 }
 
-impl Default for TokenObject {
-    fn default() -> TokenObject {
-        TokenObject::Noop
-    }
-}
 impl TokenObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TokenObject::Noop)
@@ -46218,10 +45462,12 @@ pub struct Token {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TopupObject {
     #[serde(rename = "topup")]
     Topup,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -46238,11 +45484,6 @@ impl std::fmt::Display for TopupObject {
     }
 }
 
-impl Default for TopupObject {
-    fn default() -> TopupObject {
-        TopupObject::Noop
-    }
-}
 impl TopupObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TopupObject::Noop)
@@ -46253,6 +45494,7 @@ impl TopupObject {
  * The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TopupStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -46265,6 +45507,7 @@ pub enum TopupStatus {
     #[serde(rename = "succeeded")]
     Succeeded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -46285,11 +45528,6 @@ impl std::fmt::Display for TopupStatus {
     }
 }
 
-impl Default for TopupStatus {
-    fn default() -> TopupStatus {
-        TopupStatus::Noop
-    }
-}
 impl TopupStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, TopupStatus::Noop)
@@ -46467,10 +45705,12 @@ pub struct Topup {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TransferObject {
     #[serde(rename = "transfer")]
     Transfer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -46487,11 +45727,6 @@ impl std::fmt::Display for TransferObject {
     }
 }
 
-impl Default for TransferObject {
-    fn default() -> TransferObject {
-        TransferObject::Noop
-    }
-}
 impl TransferObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TransferObject::Noop)
@@ -46752,10 +45987,12 @@ pub struct TransferData {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum TransferReversalObject {
     #[serde(rename = "transfer_reversal")]
     TransferReversal,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -46772,11 +46009,6 @@ impl std::fmt::Display for TransferReversalObject {
     }
 }
 
-impl Default for TransferReversalObject {
-    fn default() -> TransferReversalObject {
-        TransferReversalObject::Noop
-    }
-}
 impl TransferReversalObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, TransferReversalObject::Noop)
@@ -46956,12 +46188,14 @@ pub struct TransferSchedule {
  * After division, either round the result `up` or `down`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Round {
     #[serde(rename = "down")]
     Down,
     #[serde(rename = "up")]
     Up,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -46979,11 +46213,6 @@ impl std::fmt::Display for Round {
     }
 }
 
-impl Default for Round {
-    fn default() -> Round {
-        Round::Noop
-    }
-}
 impl Round {
     pub fn is_noop(&self) -> bool {
         matches!(self, Round::Noop)
@@ -47013,10 +46242,12 @@ pub struct TransformUsage {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UsageRecordObject {
     #[serde(rename = "usage_record")]
     UsageRecord,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -47033,11 +46264,6 @@ impl std::fmt::Display for UsageRecordObject {
     }
 }
 
-impl Default for UsageRecordObject {
-    fn default() -> UsageRecordObject {
-        UsageRecordObject::Noop
-    }
-}
 impl UsageRecordObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, UsageRecordObject::Noop)
@@ -47105,10 +46331,12 @@ pub struct UsageRecord {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum UsageRecordSummaryObject {
     #[serde(rename = "usage_record_summary")]
     UsageRecordSummary,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -47125,11 +46353,6 @@ impl std::fmt::Display for UsageRecordSummaryObject {
     }
 }
 
-impl Default for UsageRecordSummaryObject {
-    fn default() -> UsageRecordSummaryObject {
-        UsageRecordSummaryObject::Noop
-    }
-}
 impl UsageRecordSummaryObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, UsageRecordSummaryObject::Noop)
@@ -47198,12 +46421,14 @@ pub struct UsageRecordSummary {
  * Indicates whether this object and its related objects have been redacted or not.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum VerificationSessionRedactionStatus {
     #[serde(rename = "processing")]
     Processing,
     #[serde(rename = "redacted")]
     Redacted,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -47221,11 +46446,6 @@ impl std::fmt::Display for VerificationSessionRedactionStatus {
     }
 }
 
-impl Default for VerificationSessionRedactionStatus {
-    fn default() -> VerificationSessionRedactionStatus {
-        VerificationSessionRedactionStatus::Noop
-    }
-}
 impl VerificationSessionRedactionStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, VerificationSessionRedactionStatus::Noop)
@@ -47764,10 +46984,12 @@ pub struct GetBitcoinReceiversResponse {
  * String representing the object's type. Objects of the same type share the same value.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SearchResultObject {
     #[serde(rename = "search_result")]
     SearchResult,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -47784,11 +47006,6 @@ impl std::fmt::Display for SearchResultObject {
     }
 }
 
-impl Default for SearchResultObject {
-    fn default() -> SearchResultObject {
-        SearchResultObject::Noop
-    }
-}
 impl SearchResultObject {
     pub fn is_noop(&self) -> bool {
         matches!(self, SearchResultObject::Noop)
@@ -47982,8 +47199,10 @@ pub struct CreditNotesList {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Shipping {
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -47999,11 +47218,6 @@ impl std::fmt::Display for Shipping {
     }
 }
 
-impl Default for Shipping {
-    fn default() -> Shipping {
-        Shipping::Noop
-    }
-}
 impl Shipping {
     pub fn is_noop(&self) -> bool {
         matches!(self, Shipping::Noop)
@@ -48285,6 +47499,7 @@ impl DeleteCustomersCustomerCardsResponseAnyOf {
  * A required filter on the list, based on the object `type` field.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetCustomersCustomerPaymentMethodsType {
     #[serde(rename = "acss_debit")]
     AcssDebit,
@@ -48331,6 +47546,7 @@ pub enum GetCustomersCustomerPaymentMethodsType {
     #[serde(rename = "wechat_pay")]
     WechatPay,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -48368,11 +47584,6 @@ impl std::fmt::Display for GetCustomersCustomerPaymentMethodsType {
     }
 }
 
-impl Default for GetCustomersCustomerPaymentMethodsType {
-    fn default() -> GetCustomersCustomerPaymentMethodsType {
-        GetCustomersCustomerPaymentMethodsType::Noop
-    }
-}
 impl GetCustomersCustomerPaymentMethodsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetCustomersCustomerPaymentMethodsType::Noop)
@@ -48647,6 +47858,7 @@ pub struct GetInvoiceitemsResponse {
  * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetInvoicesStatus {
     #[serde(rename = "draft")]
     Draft,
@@ -48659,6 +47871,7 @@ pub enum GetInvoicesStatus {
     #[serde(rename = "void")]
     Void,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -48679,11 +47892,6 @@ impl std::fmt::Display for GetInvoicesStatus {
     }
 }
 
-impl Default for GetInvoicesStatus {
-    fn default() -> GetInvoicesStatus {
-        GetInvoicesStatus::Noop
-    }
-}
 impl GetInvoicesStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetInvoicesStatus::Noop)
@@ -48896,6 +48104,7 @@ pub struct Tax {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetInvoicesUpcomingCustomerDetailsTaxExempt {
     #[serde(rename = "exempt")]
     Exempt,
@@ -48904,6 +48113,7 @@ pub enum GetInvoicesUpcomingCustomerDetailsTaxExempt {
     #[serde(rename = "reverse")]
     Reverse,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -48922,11 +48132,6 @@ impl std::fmt::Display for GetInvoicesUpcomingCustomerDetailsTaxExempt {
     }
 }
 
-impl Default for GetInvoicesUpcomingCustomerDetailsTaxExempt {
-    fn default() -> GetInvoicesUpcomingCustomerDetailsTaxExempt {
-        GetInvoicesUpcomingCustomerDetailsTaxExempt::Noop
-    }
-}
 impl GetInvoicesUpcomingCustomerDetailsTaxExempt {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetInvoicesUpcomingCustomerDetailsTaxExempt::Noop)
@@ -48934,6 +48139,7 @@ impl GetInvoicesUpcomingCustomerDetailsTaxExempt {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetInvoicesUpcomingCustomerDetailsDataParamsType {
     #[serde(rename = "ae_trn")]
     AeTrn,
@@ -49026,6 +48232,7 @@ pub enum GetInvoicesUpcomingCustomerDetailsDataParamsType {
     #[serde(rename = "za_vat")]
     ZaVat,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -49086,11 +48293,6 @@ impl std::fmt::Display for GetInvoicesUpcomingCustomerDetailsDataParamsType {
     }
 }
 
-impl Default for GetInvoicesUpcomingCustomerDetailsDataParamsType {
-    fn default() -> GetInvoicesUpcomingCustomerDetailsDataParamsType {
-        GetInvoicesUpcomingCustomerDetailsDataParamsType::Noop
-    }
-}
 impl GetInvoicesUpcomingCustomerDetailsDataParamsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetInvoicesUpcomingCustomerDetailsDataParamsType::Noop)
@@ -49367,12 +48569,14 @@ pub struct InvoiceItems {
  * For new subscriptions, a future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubscriptionBillingCycleAnchor {
     #[serde(rename = "now")]
     Now,
     #[serde(rename = "unchanged")]
     Unchanged,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -49390,11 +48594,6 @@ impl std::fmt::Display for SubscriptionBillingCycleAnchor {
     }
 }
 
-impl Default for SubscriptionBillingCycleAnchor {
-    fn default() -> SubscriptionBillingCycleAnchor {
-        SubscriptionBillingCycleAnchor::Noop
-    }
-}
 impl SubscriptionBillingCycleAnchor {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubscriptionBillingCycleAnchor::Noop)
@@ -49636,10 +48835,12 @@ pub struct SubscriptionItems {
  * If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SubscriptionTrialEnd {
     #[serde(rename = "now")]
     Now,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -49656,11 +48857,6 @@ impl std::fmt::Display for SubscriptionTrialEnd {
     }
 }
 
-impl Default for SubscriptionTrialEnd {
-    fn default() -> SubscriptionTrialEnd {
-        SubscriptionTrialEnd::Noop
-    }
-}
 impl SubscriptionTrialEnd {
     pub fn is_noop(&self) -> bool {
         matches!(self, SubscriptionTrialEnd::Noop)
@@ -50358,12 +49554,14 @@ pub struct GetRadarValueListsResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetRecipientsType {
     #[serde(rename = "corporation")]
     Corporation,
     #[serde(rename = "individual")]
     Individual,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -50381,11 +49579,6 @@ impl std::fmt::Display for GetRecipientsType {
     }
 }
 
-impl Default for GetRecipientsType {
-    fn default() -> GetRecipientsType {
-        GetRecipientsType::Noop
-    }
-}
 impl GetRecipientsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetRecipientsType::Noop)
@@ -50878,6 +50071,7 @@ pub struct GetSubscriptionSchedulesResponse {
  * The status of the subscriptions to retrieve. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Pass `ended` to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of `all` will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetSubscriptionsStatus {
     #[serde(rename = "active")]
     Active,
@@ -50898,6 +50092,7 @@ pub enum GetSubscriptionsStatus {
     #[serde(rename = "unpaid")]
     Unpaid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -50922,11 +50117,6 @@ impl std::fmt::Display for GetSubscriptionsStatus {
     }
 }
 
-impl Default for GetSubscriptionsStatus {
-    fn default() -> GetSubscriptionsStatus {
-        GetSubscriptionsStatus::Noop
-    }
-}
 impl GetSubscriptionsStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetSubscriptionsStatus::Noop)
@@ -51184,6 +50374,7 @@ pub struct GetTestHelpersClocksResponse {
  * Only return top-ups that have the given status. One of `canceled`, `failed`, `pending` or `succeeded`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum GetTopupsStatus {
     #[serde(rename = "canceled")]
     Canceled,
@@ -51194,6 +50385,7 @@ pub enum GetTopupsStatus {
     #[serde(rename = "succeeded")]
     Succeeded,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -51213,11 +50405,6 @@ impl std::fmt::Display for GetTopupsStatus {
     }
 }
 
-impl Default for GetTopupsStatus {
-    fn default() -> GetTopupsStatus {
-        GetTopupsStatus::Noop
-    }
-}
 impl GetTopupsStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetTopupsStatus::Noop)

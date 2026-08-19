@@ -25,7 +25,7 @@ impl ContactsApiSegments {
     pub async fn get_contactdb_segments(
         &self,
     ) -> ClientResult<crate::Response<crate::types::ListAllSegmentsResponse>> {
-        let url = self.client.url(&"/contactdb/segments".to_string(), None);
+        let url = self.client.url("/contactdb/segments", None);
         self.client
             .get(
                 &url,
@@ -90,7 +90,7 @@ impl ContactsApiSegments {
         &self,
         body: &crate::types::ContactdbSegments,
     ) -> ClientResult<crate::Response<crate::types::ContactdbSegmentsWithAllOf>> {
-        let url = self.client.url(&"/contactdb/segments".to_string(), None);
+        let url = self.client.url("/contactdb/segments", None);
         self.client
             .post(
                 &url,
@@ -120,7 +120,7 @@ impl ContactsApiSegments {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}",
-                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                crate::progenitor_support::encode_path(segment_id),
             ),
             None,
         );
@@ -162,7 +162,7 @@ impl ContactsApiSegments {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}?{}",
-                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                crate::progenitor_support::encode_path(segment_id),
                 query_
             ),
             None,
@@ -197,7 +197,7 @@ impl ContactsApiSegments {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}",
-                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                crate::progenitor_support::encode_path(segment_id),
             ),
             None,
         );

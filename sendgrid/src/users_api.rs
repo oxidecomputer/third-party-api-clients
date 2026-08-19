@@ -23,7 +23,7 @@ impl UsersApi {
     pub async fn get_user_profile(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetUserProfileResponse>> {
-        let url = self.client.url(&"/user/profile".to_string(), None);
+        let url = self.client.url("/user/profile", None);
         self.client
             .get(
                 &url,
@@ -51,7 +51,7 @@ impl UsersApi {
         &self,
         body: &crate::types::UserProfile,
     ) -> ClientResult<crate::Response<crate::types::UserProfile>> {
-        let url = self.client.url(&"/user/profile".to_string(), None);
+        let url = self.client.url("/user/profile", None);
         self.client
             .patch(
                 &url,
@@ -78,7 +78,7 @@ impl UsersApi {
     pub async fn get_user_account(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetUserAccountResponse>> {
-        let url = self.client.url(&"/user/account".to_string(), None);
+        let url = self.client.url("/user/account", None);
         self.client
             .get(
                 &url,
@@ -103,7 +103,7 @@ impl UsersApi {
     pub async fn get_user_email(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetUserEmailResponse>> {
-        let url = self.client.url(&"/user/email".to_string(), None);
+        let url = self.client.url("/user/email", None);
         self.client
             .get(
                 &url,
@@ -129,7 +129,7 @@ impl UsersApi {
         &self,
         body: &crate::types::PutUserEmailRequest,
     ) -> ClientResult<crate::Response<crate::types::GetUserEmailResponse>> {
-        let url = self.client.url(&"/user/email".to_string(), None);
+        let url = self.client.url("/user/email", None);
         self.client
             .put(
                 &url,
@@ -152,7 +152,7 @@ impl UsersApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_username(&self) -> ClientResult<crate::Response<crate::types::Users>> {
-        let url = self.client.url(&"/user/username".to_string(), None);
+        let url = self.client.url("/user/username", None);
         self.client
             .get(
                 &url,
@@ -178,7 +178,7 @@ impl UsersApi {
         &self,
         body: &crate::types::PutUserUsernameRequest,
     ) -> ClientResult<crate::Response<crate::types::PutUserUsernameResponse>> {
-        let url = self.client.url(&"/user/username".to_string(), None);
+        let url = self.client.url("/user/username", None);
         self.client
             .put(
                 &url,
@@ -205,7 +205,7 @@ impl UsersApi {
     pub async fn get_user_credits(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetUserCreditsResponse>> {
-        let url = self.client.url(&"/user/credits".to_string(), None);
+        let url = self.client.url("/user/credits", None);
         self.client
             .get(
                 &url,
@@ -231,7 +231,7 @@ impl UsersApi {
         &self,
         body: &crate::types::PutUserPasswordRequest,
     ) -> ClientResult<crate::Response<crate::types::Help>> {
-        let url = self.client.url(&"/user/password".to_string(), None);
+        let url = self.client.url("/user/password", None);
         self.client
             .put(
                 &url,

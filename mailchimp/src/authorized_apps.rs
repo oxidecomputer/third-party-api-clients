@@ -89,7 +89,7 @@ impl AuthorizedApps {
         let url = self.client.url(
             &format!(
                 "/authorized-apps/{}?{}",
-                crate::progenitor_support::encode_path(&app_id.to_string()),
+                crate::progenitor_support::encode_path(app_id),
                 query_
             ),
             None,

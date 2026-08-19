@@ -20,7 +20,7 @@ impl DeprecatedApiCalls {
      */
     pub async fn deprecated_202101_get_call(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/2021-01/deprecated_api_calls.json".to_string(),
+            "/admin/api/2021-01/deprecated_api_calls.json",
             None,
         );
         self.client
@@ -42,7 +42,7 @@ impl DeprecatedApiCalls {
      */
     pub async fn deprecated_unstable_get_call(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
-            &"/admin/api/unstable/deprecated_api_calls.json".to_string(),
+            "/admin/api/unstable/deprecated_api_calls.json",
             None,
         );
         self.client

@@ -128,7 +128,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
                 query_
             ),
             None,
@@ -228,7 +228,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
                 query_
             ),
             None,
@@ -352,7 +352,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
                 query_
             ),
             None,
@@ -402,7 +402,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/import?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
                 query_
             ),
             None,
@@ -455,7 +455,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/quickAdd?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
                 query_
             ),
             None,
@@ -588,7 +588,7 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/watch?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
                 query_
             ),
             None,
@@ -634,8 +634,8 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/{}?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
-                crate::progenitor_support::encode_path(&event_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
                 query_
             ),
             None,
@@ -708,8 +708,8 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/{}?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
-                crate::progenitor_support::encode_path(&event_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
                 query_
             ),
             None,
@@ -759,8 +759,8 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/{}?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
-                crate::progenitor_support::encode_path(&event_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
                 query_
             ),
             None,
@@ -833,8 +833,8 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/{}?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
-                crate::progenitor_support::encode_path(&event_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
                 query_
             ),
             None,
@@ -910,8 +910,8 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/{}/instances?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
-                crate::progenitor_support::encode_path(&event_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
                 query_
             ),
             None,
@@ -975,8 +975,8 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/{}/instances?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
-                crate::progenitor_support::encode_path(&event_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
                 query_
             ),
             None,
@@ -1085,8 +1085,8 @@ impl Events {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/events/{}/move?{}",
-                crate::progenitor_support::encode_path(&calendar_id.to_string()),
-                crate::progenitor_support::encode_path(&event_id.to_string()),
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
                 query_
             ),
             None,

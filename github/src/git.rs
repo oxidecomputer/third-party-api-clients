@@ -34,8 +34,8 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/blobs",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -75,9 +75,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/blobs/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&file_sha.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(file_sha),
             ),
             None,
         );
@@ -143,8 +143,8 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/commits",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -211,9 +211,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/commits/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&commit_sha.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(commit_sha),
             ),
             None,
         );
@@ -269,9 +269,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/matching-refs/{}?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&ref_.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
                 query_
             ),
             None,
@@ -312,9 +312,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/matching-refs/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&ref_.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
             ),
             None,
         );
@@ -354,9 +354,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/ref/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&ref_.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
             ),
             None,
         );
@@ -393,8 +393,8 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/refs",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -432,9 +432,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/refs/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&ref_.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
             ),
             None,
         );
@@ -473,9 +473,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/refs/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&ref_.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
             ),
             None,
         );
@@ -541,8 +541,8 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/tags",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -607,9 +607,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/tags/{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&tag_sha.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(tag_sha),
             ),
             None,
         );
@@ -648,8 +648,8 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/trees",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
             ),
             None,
         );
@@ -696,9 +696,9 @@ impl Git {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/trees/{}?{}",
-                crate::progenitor_support::encode_path(&owner.to_string()),
-                crate::progenitor_support::encode_path(&repo.to_string()),
-                crate::progenitor_support::encode_path(&tree_sha.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(tree_sha),
                 query_
             ),
             None,

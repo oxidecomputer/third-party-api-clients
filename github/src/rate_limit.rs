@@ -23,7 +23,7 @@ impl RateLimit {
      * FROM: <https://docs.github.com/rest/reference/rate-limit#get-rate-limit-status-for-the-authenticated-user>
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::RateLimitOverview>> {
-        let url = self.client.url(&"/rate_limit".to_string(), None);
+        let url = self.client.url("/rate_limit", None);
         self.client
             .get(
                 &url,

@@ -2121,10 +2121,12 @@ pub struct NewPagingStyle {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Warnings {
     #[serde(rename = "method_deprecated")]
     MethodDeprecated,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2141,11 +2143,6 @@ impl std::fmt::Display for Warnings {
     }
 }
 
-impl Default for Warnings {
-    fn default() -> Warnings {
-        Warnings::Noop
-    }
-}
 impl Warnings {
     pub fn is_noop(&self) -> bool {
         matches!(self, Warnings::Noop)
@@ -2207,12 +2204,14 @@ pub struct ObjsResponseMetadataAnyOf {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum AutoType {
     #[serde(rename = "admin")]
     Admin,
     #[serde(rename = "owner")]
     Owner,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2230,11 +2229,6 @@ impl std::fmt::Display for AutoType {
     }
 }
 
-impl Default for AutoType {
-    fn default() -> AutoType {
-        AutoType::Noop
-    }
-}
 impl AutoType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AutoType::Noop)
@@ -2418,6 +2412,7 @@ pub struct TzAnyOf {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Plan {
     #[serde(rename = "compliance")]
     Compliance,
@@ -2428,6 +2423,7 @@ pub enum Plan {
     #[serde(rename = "std")]
     Std,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2447,11 +2443,6 @@ impl std::fmt::Display for Plan {
     }
 }
 
-impl Default for Plan {
-    fn default() -> Plan {
-        Plan::Noop
-    }
-}
 impl Plan {
     pub fn is_noop(&self) -> bool {
         matches!(self, Plan::Noop)
@@ -2645,6 +2636,7 @@ pub struct OptionsAnyOf {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "date")]
     Date,
@@ -2659,6 +2651,7 @@ pub enum Type {
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2680,11 +2673,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -4797,10 +4785,12 @@ pub struct MigrationExchangeSuccessSchema {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ItemsType {
     #[serde(rename = "file")]
     File,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4817,11 +4807,6 @@ impl std::fmt::Display for ItemsType {
     }
 }
 
-impl Default for ItemsType {
-    fn default() -> ItemsType {
-        ItemsType::Noop
-    }
-}
 impl ItemsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ItemsType::Noop)
@@ -4849,10 +4834,12 @@ pub struct Items {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum MessagePinType {
     #[serde(rename = "message")]
     Message,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4869,11 +4856,6 @@ impl std::fmt::Display for MessagePinType {
     }
 }
 
-impl Default for MessagePinType {
-    fn default() -> MessagePinType {
-        MessagePinType::Noop
-    }
-}
 impl MessagePinType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MessagePinType::Noop)

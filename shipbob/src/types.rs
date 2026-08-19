@@ -232,6 +232,7 @@ pub struct InventoryLotQuantity {
  * Attribute influencing the packaging requirements of this inventory item
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PackagingAttribute {
     #[serde(rename = "Book")]
     Book,
@@ -252,6 +253,7 @@ pub enum PackagingAttribute {
     #[serde(rename = "Stackable")]
     Stackable,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -276,11 +278,6 @@ impl std::fmt::Display for PackagingAttribute {
     }
 }
 
-impl Default for PackagingAttribute {
-    fn default() -> PackagingAttribute {
-        PackagingAttribute::Noop
-    }
-}
 impl PackagingAttribute {
     pub fn is_noop(&self) -> bool {
         matches!(self, PackagingAttribute::Noop)
@@ -657,12 +654,14 @@ pub struct OrdersChannelInfo {
  *   MarkFor
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Type {
     #[serde(rename = "MarkFor")]
     MarkFor,
     #[serde(rename = "ShipFrom")]
     ShipFrom,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -680,11 +679,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -1164,6 +1158,7 @@ pub struct OrdersMeasurements {
  * The shipment status
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "Cancelled")]
     Cancelled,
@@ -1186,6 +1181,7 @@ pub enum Status {
     #[serde(rename = "Processing")]
     Processing,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1211,11 +1207,6 @@ impl std::fmt::Display for Status {
     }
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Status::Noop
-    }
-}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -1226,6 +1217,7 @@ impl Status {
  * Container type for the shipment
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PackageMaterialType {
     #[serde(rename = "Bookfold")]
     Bookfold,
@@ -1248,6 +1240,7 @@ pub enum PackageMaterialType {
     #[serde(rename = "Unknown")]
     Unknown,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1273,11 +1266,6 @@ impl std::fmt::Display for PackageMaterialType {
     }
 }
 
-impl Default for PackageMaterialType {
-    fn default() -> PackageMaterialType {
-        PackageMaterialType::Noop
-    }
-}
 impl PackageMaterialType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PackageMaterialType::Noop)
@@ -1288,6 +1276,7 @@ impl PackageMaterialType {
  * Status of ShipBob’s completion of the fulfillment operation.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum EstimatedFulfillmentDateStatus {
     #[serde(rename = "AwaitingInventoryAllocation")]
     AwaitingInventoryAllocation,
@@ -1304,6 +1293,7 @@ pub enum EstimatedFulfillmentDateStatus {
     #[serde(rename = "Unavailable")]
     Unavailable,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1328,11 +1318,6 @@ impl std::fmt::Display for EstimatedFulfillmentDateStatus {
     }
 }
 
-impl Default for EstimatedFulfillmentDateStatus {
-    fn default() -> EstimatedFulfillmentDateStatus {
-        EstimatedFulfillmentDateStatus::Noop
-    }
-}
 impl EstimatedFulfillmentDateStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, EstimatedFulfillmentDateStatus::Noop)
@@ -1520,12 +1505,14 @@ pub struct OrdersShipment {
  *   Freight: Larger boxes, usually transported by truckload.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum CarrierType {
     #[serde(rename = "Freight")]
     Freight,
     #[serde(rename = "Parcel")]
     Parcel,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1543,11 +1530,6 @@ impl std::fmt::Display for CarrierType {
     }
 }
 
-impl Default for CarrierType {
-    fn default() -> CarrierType {
-        CarrierType::Noop
-    }
-}
 impl CarrierType {
     pub fn is_noop(&self) -> bool {
         matches!(self, CarrierType::Noop)
@@ -1564,6 +1546,7 @@ impl CarrierType {
  *   Prepaid: The shipper pays the shipping charges (Shipbob or merchant).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum PaymentTerm {
     #[serde(rename = "Collect")]
     Collect,
@@ -1572,6 +1555,7 @@ pub enum PaymentTerm {
     #[serde(rename = "ThirdParty")]
     ThirdParty,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1590,11 +1574,6 @@ impl std::fmt::Display for PaymentTerm {
     }
 }
 
-impl Default for PaymentTerm {
-    fn default() -> PaymentTerm {
-        PaymentTerm::Noop
-    }
-}
 impl PaymentTerm {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentTerm::Noop)
@@ -1680,6 +1659,7 @@ pub struct OrdersRetailerProgramData {
  * The order status
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrderStatus {
     #[serde(rename = "Cancelled")]
     Cancelled,
@@ -1694,6 +1674,7 @@ pub enum OrderStatus {
     #[serde(rename = "Processing")]
     Processing,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1715,11 +1696,6 @@ impl std::fmt::Display for OrderStatus {
     }
 }
 
-impl Default for OrderStatus {
-    fn default() -> OrderStatus {
-        OrderStatus::Noop
-    }
-}
 impl OrderStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderStatus::Noop)
@@ -1730,6 +1706,7 @@ impl OrderStatus {
  * Shipment type of the order
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrderType {
     #[serde(rename = "B2B")]
     B2B,
@@ -1738,6 +1715,7 @@ pub enum OrderType {
     #[serde(rename = "DropShip")]
     DropShip,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1756,11 +1734,6 @@ impl std::fmt::Display for OrderType {
     }
 }
 
-impl Default for OrderType {
-    fn default() -> OrderType {
-        OrderType::Noop
-    }
-}
 impl OrderType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderType::Noop)
@@ -2072,10 +2045,12 @@ pub struct OrdersCreateOrderModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum Action {
     #[serde(rename = "Cancel")]
     Cancel,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2092,11 +2067,6 @@ impl std::fmt::Display for Action {
     }
 }
 
-impl Default for Action {
-    fn default() -> Action {
-        Action::Noop
-    }
-}
 impl Action {
     pub fn is_noop(&self) -> bool {
         matches!(self, Action::Noop)
@@ -2143,6 +2113,7 @@ pub struct OrdersCanceledShipment {
  * The overall result of canceling the shipments associated with the order
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum OrdersCanceledOrderStatus {
     #[serde(rename = "Failure")]
     Failure,
@@ -2151,6 +2122,7 @@ pub enum OrdersCanceledOrderStatus {
     #[serde(rename = "Success")]
     Success,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2169,11 +2141,6 @@ impl std::fmt::Display for OrdersCanceledOrderStatus {
     }
 }
 
-impl Default for OrdersCanceledOrderStatus {
-    fn default() -> OrdersCanceledOrderStatus {
-        OrdersCanceledOrderStatus::Noop
-    }
-}
 impl OrdersCanceledOrderStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrdersCanceledOrderStatus::Noop)
@@ -2367,6 +2334,7 @@ pub struct OrdersShipMethodDetail {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProductActiveStatus {
     #[serde(rename = "Active")]
     Active,
@@ -2375,6 +2343,7 @@ pub enum ProductActiveStatus {
     #[serde(rename = "Inactive")]
     Inactive,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2393,11 +2362,6 @@ impl std::fmt::Display for ProductActiveStatus {
     }
 }
 
-impl Default for ProductActiveStatus {
-    fn default() -> ProductActiveStatus {
-        ProductActiveStatus::Noop
-    }
-}
 impl ProductActiveStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProductActiveStatus::Noop)
@@ -2405,6 +2369,7 @@ impl ProductActiveStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ProductBundleStatus {
     #[serde(rename = "Any")]
     Any,
@@ -2413,6 +2378,7 @@ pub enum ProductBundleStatus {
     #[serde(rename = "NotBundle")]
     NotBundle,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2431,11 +2397,6 @@ impl std::fmt::Display for ProductBundleStatus {
     }
 }
 
-impl Default for ProductBundleStatus {
-    fn default() -> ProductBundleStatus {
-        ProductBundleStatus::Noop
-    }
-}
 impl ProductBundleStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ProductBundleStatus::Noop)
@@ -2918,6 +2879,7 @@ pub struct ReceivingFulfillmentCenter {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReceivingStatus {
     #[serde(rename = "Arrived")]
     Arrived,
@@ -2934,6 +2896,7 @@ pub enum ReceivingStatus {
     #[serde(rename = "Processing")]
     Processing,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2956,11 +2919,6 @@ impl std::fmt::Display for ReceivingStatus {
     }
 }
 
-impl Default for ReceivingStatus {
-    fn default() -> ReceivingStatus {
-        ReceivingStatus::Noop
-    }
-}
 impl ReceivingStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReceivingStatus::Noop)
@@ -2968,6 +2926,7 @@ impl ReceivingStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReceivingPackageType {
     #[serde(rename = "FloorLoadedContainer")]
     FloorLoadedContainer,
@@ -2976,6 +2935,7 @@ pub enum ReceivingPackageType {
     #[serde(rename = "Pallet")]
     Pallet,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2994,11 +2954,6 @@ impl std::fmt::Display for ReceivingPackageType {
     }
 }
 
-impl Default for ReceivingPackageType {
-    fn default() -> ReceivingPackageType {
-        ReceivingPackageType::Noop
-    }
-}
 impl ReceivingPackageType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReceivingPackageType::Noop)
@@ -3006,6 +2961,7 @@ impl ReceivingPackageType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReceivingPackingType {
     #[serde(rename = "EverythingInOneBox")]
     EverythingInOneBox,
@@ -3014,6 +2970,7 @@ pub enum ReceivingPackingType {
     #[serde(rename = "OneSkuPerBox")]
     OneSkuPerBox,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3032,11 +2989,6 @@ impl std::fmt::Display for ReceivingPackingType {
     }
 }
 
-impl Default for ReceivingPackingType {
-    fn default() -> ReceivingPackingType {
-        ReceivingPackingType::Noop
-    }
-}
 impl ReceivingPackingType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReceivingPackingType::Noop)
@@ -3044,6 +2996,7 @@ impl ReceivingPackingType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReceivingBoxStatus {
     #[serde(rename = "Arrived")]
     Arrived,
@@ -3058,6 +3011,7 @@ pub enum ReceivingBoxStatus {
     #[serde(rename = "Stowing")]
     Stowing,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3079,11 +3033,6 @@ impl std::fmt::Display for ReceivingBoxStatus {
     }
 }
 
-impl Default for ReceivingBoxStatus {
-    fn default() -> ReceivingBoxStatus {
-        ReceivingBoxStatus::Noop
-    }
-}
 impl ReceivingBoxStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReceivingBoxStatus::Noop)
@@ -3452,6 +3401,7 @@ pub struct ReceivingCreateOrderModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReturnStatus {
     #[serde(rename = "Arrived")]
     Arrived,
@@ -3464,6 +3414,7 @@ pub enum ReturnStatus {
     #[serde(rename = "Processing")]
     Processing,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3484,11 +3435,6 @@ impl std::fmt::Display for ReturnStatus {
     }
 }
 
-impl Default for ReturnStatus {
-    fn default() -> ReturnStatus {
-        ReturnStatus::Noop
-    }
-}
 impl ReturnStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReturnStatus::Noop)
@@ -3496,6 +3442,7 @@ impl ReturnStatus {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReturnsTransactionLogSource {
     #[serde(rename = "ReturnLabelInvoice")]
     ReturnLabelInvoice,
@@ -3504,6 +3451,7 @@ pub enum ReturnsTransactionLogSource {
     #[serde(rename = "ReturnToSenderFee")]
     ReturnToSenderFee,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3522,11 +3470,6 @@ impl std::fmt::Display for ReturnsTransactionLogSource {
     }
 }
 
-impl Default for ReturnsTransactionLogSource {
-    fn default() -> ReturnsTransactionLogSource {
-        ReturnsTransactionLogSource::Noop
-    }
-}
 impl ReturnsTransactionLogSource {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReturnsTransactionLogSource::Noop)
@@ -3572,6 +3515,7 @@ pub struct ReturnsFulfillmentCenter {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReturnAction {
     #[serde(rename = "Default")]
     Default,
@@ -3582,6 +3526,7 @@ pub enum ReturnAction {
     #[serde(rename = "Restock")]
     Restock,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3601,11 +3546,6 @@ impl std::fmt::Display for ReturnAction {
     }
 }
 
-impl Default for ReturnAction {
-    fn default() -> ReturnAction {
-        ReturnAction::Noop
-    }
-}
 impl ReturnAction {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReturnAction::Noop)
@@ -3613,12 +3553,14 @@ impl ReturnAction {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReturnActionSource {
     #[serde(rename = "InventoryDefault")]
     InventoryDefault,
     #[serde(rename = "Override")]
     Override,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3636,11 +3578,6 @@ impl std::fmt::Display for ReturnActionSource {
     }
 }
 
-impl Default for ReturnActionSource {
-    fn default() -> ReturnActionSource {
-        ReturnActionSource::Noop
-    }
-}
 impl ReturnActionSource {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReturnActionSource::Noop)
@@ -3731,12 +3668,14 @@ pub struct ReturnsInventoryItem {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum ReturnType {
     #[serde(rename = "Regular")]
     Regular,
     #[serde(rename = "ReturnToSender")]
     ReturnToSender,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3754,11 +3693,6 @@ impl std::fmt::Display for ReturnType {
     }
 }
 
-impl Default for ReturnType {
-    fn default() -> ReturnType {
-        ReturnType::Noop
-    }
-}
 impl ReturnType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ReturnType::Noop)
@@ -3927,12 +3861,14 @@ pub struct ReturnsCreateReturn {
  * Order to sort results in
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum SortOrder {
     #[serde(rename = "Newest")]
     Newest,
     #[serde(rename = "Oldest")]
     Oldest,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3950,11 +3886,6 @@ impl std::fmt::Display for SortOrder {
     }
 }
 
-impl Default for SortOrder {
-    fn default() -> SortOrder {
-        SortOrder::Noop
-    }
-}
 impl SortOrder {
     pub fn is_noop(&self) -> bool {
         matches!(self, SortOrder::Noop)
@@ -3977,6 +3908,7 @@ pub struct ReturnOrderStatusHistory {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum WebhooksTopics {
     #[serde(rename = "order_shipped")]
     OrderShipped,
@@ -3987,6 +3919,7 @@ pub enum WebhooksTopics {
     #[serde(rename = "shipment_onhold")]
     ShipmentOnhold,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4006,11 +3939,6 @@ impl std::fmt::Display for WebhooksTopics {
     }
 }
 
-impl Default for WebhooksTopics {
-    fn default() -> WebhooksTopics {
-        WebhooksTopics::Noop
-    }
-}
 impl WebhooksTopics {
     pub fn is_noop(&self) -> bool {
         matches!(self, WebhooksTopics::Noop)
@@ -4124,12 +4052,14 @@ pub struct MicrosoftAspNetCoreMvcProblemDetails {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Default)]
 pub enum IntegrationsLocationServiceTypeEnum {
     #[serde(rename = "Receiving")]
     Receiving,
     #[serde(rename = "Returns")]
     Returns,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4147,11 +4077,6 @@ impl std::fmt::Display for IntegrationsLocationServiceTypeEnum {
     }
 }
 
-impl Default for IntegrationsLocationServiceTypeEnum {
-    fn default() -> IntegrationsLocationServiceTypeEnum {
-        IntegrationsLocationServiceTypeEnum::Noop
-    }
-}
 impl IntegrationsLocationServiceTypeEnum {
     pub fn is_noop(&self) -> bool {
         matches!(self, IntegrationsLocationServiceTypeEnum::Noop)

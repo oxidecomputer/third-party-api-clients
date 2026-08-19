@@ -27,7 +27,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
-                crate::progenitor_support::encode_path(&customer_key.to_string()),
+                crate::progenitor_support::encode_path(customer_key),
             ),
             None,
         );
@@ -58,7 +58,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
-                crate::progenitor_support::encode_path(&customer_key.to_string()),
+                crate::progenitor_support::encode_path(customer_key),
             ),
             None,
         );
@@ -89,7 +89,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
-                crate::progenitor_support::encode_path(&customer_key.to_string()),
+                crate::progenitor_support::encode_path(customer_key),
             ),
             None,
         );
@@ -119,7 +119,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}",
-                crate::progenitor_support::encode_path(&name.to_string()),
+                crate::progenitor_support::encode_path(name),
             ),
             None,
         );
@@ -149,7 +149,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}",
-                crate::progenitor_support::encode_path(&name.to_string()),
+                crate::progenitor_support::encode_path(name),
             ),
             None,
         );
@@ -192,7 +192,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}?{}",
-                crate::progenitor_support::encode_path(&name.to_string()),
+                crate::progenitor_support::encode_path(name),
                 query_
             ),
             None,
@@ -245,7 +245,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers?{}",
-                crate::progenitor_support::encode_path(&parent.to_string()),
+                crate::progenitor_support::encode_path(parent),
                 query_
             ),
             None,
@@ -292,7 +292,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers?{}",
-                crate::progenitor_support::encode_path(&parent.to_string()),
+                crate::progenitor_support::encode_path(parent),
                 query_
             ),
             None,
@@ -378,7 +378,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers",
-                crate::progenitor_support::encode_path(&parent.to_string()),
+                crate::progenitor_support::encode_path(parent),
             ),
             None,
         );
@@ -409,7 +409,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters",
-                crate::progenitor_support::encode_path(&parent.to_string()),
+                crate::progenitor_support::encode_path(parent),
             ),
             None,
         );
@@ -440,7 +440,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters",
-                crate::progenitor_support::encode_path(&parent.to_string()),
+                crate::progenitor_support::encode_path(parent),
             ),
             None,
         );
@@ -487,7 +487,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
-                crate::progenitor_support::encode_path(&parent.to_string()),
+                crate::progenitor_support::encode_path(parent),
                 query_
             ),
             None,
@@ -530,7 +530,7 @@ impl Customers {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
-                crate::progenitor_support::encode_path(&parent.to_string()),
+                crate::progenitor_support::encode_path(parent),
                 query_
             ),
             None,

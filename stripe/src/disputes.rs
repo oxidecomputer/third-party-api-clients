@@ -178,7 +178,7 @@ impl Disputes {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}",
-                crate::progenitor_support::encode_path(&dispute.to_string()),
+                crate::progenitor_support::encode_path(dispute),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl Disputes {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}",
-                crate::progenitor_support::encode_path(&dispute.to_string()),
+                crate::progenitor_support::encode_path(dispute),
             ),
             None,
         );
@@ -242,7 +242,7 @@ impl Disputes {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}/close",
-                crate::progenitor_support::encode_path(&dispute.to_string()),
+                crate::progenitor_support::encode_path(dispute),
             ),
             None,
         );

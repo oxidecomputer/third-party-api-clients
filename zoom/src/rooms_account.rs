@@ -27,7 +27,7 @@ impl RoomsAccount {
     pub async fn get_zr_account_profile(
         &self,
     ) -> ClientResult<crate::Response<crate::types::UpdateZrAccProfileRequest>> {
-        let url = self.client.url(&"/rooms/account_profile".to_string(), None);
+        let url = self.client.url("/rooms/account_profile", None);
         self.client
             .get(
                 &url,
@@ -55,7 +55,7 @@ impl RoomsAccount {
         &self,
         body: &crate::types::UpdateZrAccProfileRequest,
     ) -> ClientResult<crate::Response<crate::types::Domains>> {
-        let url = self.client.url(&"/rooms/account_profile".to_string(), None);
+        let url = self.client.url("/rooms/account_profile", None);
         self.client
             .patch(
                 &url,

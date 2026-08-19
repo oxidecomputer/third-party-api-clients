@@ -41,7 +41,7 @@ impl SigningGroups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups?{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
                 query_
             ),
             None,
@@ -75,7 +75,7 @@ impl SigningGroups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -114,7 +114,7 @@ impl SigningGroups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -147,7 +147,7 @@ impl SigningGroups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
             ),
             None,
         );
@@ -183,8 +183,8 @@ impl SigningGroups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&signing_group_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
             ),
             None,
         );
@@ -221,8 +221,8 @@ impl SigningGroups {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}",
-                crate::progenitor_support::encode_path(&account_id.to_string()),
-                crate::progenitor_support::encode_path(&signing_group_id.to_string()),
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
             ),
             None,
         );

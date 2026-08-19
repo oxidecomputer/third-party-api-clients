@@ -66,7 +66,7 @@ impl Departments {
      * Retrieve all departments.
      */
     pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Department>>> {
-        let url = self.client.url(&"/departments".to_string(), None);
+        let url = self.client.url("/departments", None);
         let crate::Response::<crate::types::GetDepartmentsResponse> {
             mut status,
             mut headers,
@@ -133,7 +133,7 @@ impl Departments {
         &self,
         body: &crate::types::PostLocationRequest,
     ) -> ClientResult<crate::Response<crate::types::Department>> {
-        let url = self.client.url(&"/departments".to_string(), None);
+        let url = self.client.url("/departments", None);
         self.client
             .post(
                 &url,
@@ -159,7 +159,7 @@ impl Departments {
         let url = self.client.url(
             &format!(
                 "/departments/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -188,7 +188,7 @@ impl Departments {
         let url = self.client.url(
             &format!(
                 "/departments/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

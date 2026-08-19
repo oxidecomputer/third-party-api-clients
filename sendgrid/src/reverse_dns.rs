@@ -117,7 +117,7 @@ impl ReverseDns {
         &self,
         body: &crate::types::PostWhitelabelIpsRequest,
     ) -> ClientResult<crate::Response<crate::types::ReverseDns>> {
-        let url = self.client.url(&"/whitelabel/ips".to_string(), None);
+        let url = self.client.url("/whitelabel/ips", None);
         self.client
             .post(
                 &url,
@@ -152,7 +152,7 @@ impl ReverseDns {
         let url = self.client.url(
             &format!(
                 "/whitelabel/ips/{}/validate",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -186,7 +186,7 @@ impl ReverseDns {
         let url = self.client.url(
             &format!(
                 "/whitelabel/ips/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );
@@ -222,7 +222,7 @@ impl ReverseDns {
         let url = self.client.url(
             &format!(
                 "/whitelabel/ips/{}",
-                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(id),
             ),
             None,
         );

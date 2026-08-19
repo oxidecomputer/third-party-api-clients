@@ -143,7 +143,7 @@ impl IpAddresses {
         &self,
         body: &crate::types::PostIpsRequest,
     ) -> ClientResult<crate::Response<crate::types::PostIpsResponseData>> {
-        let url = self.client.url(&"/ips".to_string(), None);
+        let url = self.client.url("/ips", None);
         self.client
             .post(
                 &url,
@@ -164,7 +164,7 @@ impl IpAddresses {
     pub async fn get_ips_remaining(
         &self,
     ) -> ClientResult<crate::Response<crate::types::GetIpsRemainingResponse>> {
-        let url = self.client.url(&"/ips/remaining".to_string(), None);
+        let url = self.client.url("/ips/remaining", None);
         self.client
             .get(
                 &url,
@@ -187,7 +187,7 @@ impl IpAddresses {
     pub async fn get_ips_assigned(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::GetIpsAssignedResponse>>> {
-        let url = self.client.url(&"/ips/assigned".to_string(), None);
+        let url = self.client.url("/ips/assigned", None);
         self.client
             .get(
                 &url,
@@ -212,7 +212,7 @@ impl IpAddresses {
     pub async fn get_all_ips_assigned(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::GetIpsAssignedResponse>>> {
-        let url = self.client.url(&"/ips/assigned".to_string(), None);
+        let url = self.client.url("/ips/assigned", None);
         self.client
             .get_all_pages(
                 &url,
@@ -241,7 +241,7 @@ impl IpAddresses {
         let url = self.client.url(
             &format!(
                 "/ips/{}",
-                crate::progenitor_support::encode_path(&ip_address.to_string()),
+                crate::progenitor_support::encode_path(ip_address),
             ),
             None,
         );

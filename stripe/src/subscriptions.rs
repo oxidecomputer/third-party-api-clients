@@ -219,7 +219,7 @@ impl Subscriptions {
      * Schedules provide the flexibility to model more complex billing configurations that change over time.</p>
      */
     pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Subscription>> {
-        let url = self.client.url(&"/v1/subscriptions".to_string(), None);
+        let url = self.client.url("/v1/subscriptions", None);
         self.client
             .post(
                 &url,
@@ -393,7 +393,7 @@ impl Subscriptions {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -423,7 +423,7 @@ impl Subscriptions {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -457,7 +457,7 @@ impl Subscriptions {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );
@@ -487,7 +487,7 @@ impl Subscriptions {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}/discount",
-                crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+                crate::progenitor_support::encode_path(subscription_exposed_id),
             ),
             None,
         );

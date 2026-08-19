@@ -29,7 +29,7 @@ impl CancelScheduledSends {
     pub async fn post_mail_batch(
         &self,
     ) -> ClientResult<crate::Response<crate::types::MailBatchId>> {
-        let url = self.client.url(&"/mail/batch".to_string(), None);
+        let url = self.client.url("/mail/batch", None);
         self.client
             .post(
                 &url,
@@ -56,7 +56,7 @@ impl CancelScheduledSends {
     pub async fn get_user_scheduled_sends(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UserScheduledSendStatusAllOf>>> {
-        let url = self.client.url(&"/user/scheduled_sends".to_string(), None);
+        let url = self.client.url("/user/scheduled_sends", None);
         self.client
             .get(
                 &url,
@@ -81,7 +81,7 @@ impl CancelScheduledSends {
     pub async fn get_all_user_scheduled_sends(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::UserScheduledSendStatusAllOf>>> {
-        let url = self.client.url(&"/user/scheduled_sends".to_string(), None);
+        let url = self.client.url("/user/scheduled_sends", None);
         self.client
             .get_all_pages(
                 &url,
@@ -113,7 +113,7 @@ impl CancelScheduledSends {
         &self,
         body: &crate::types::CancelPauseAScheduledSendRequest,
     ) -> ClientResult<crate::Response<crate::types::UserScheduledSendStatusAllOf>> {
-        let url = self.client.url(&"/user/scheduled_sends".to_string(), None);
+        let url = self.client.url("/user/scheduled_sends", None);
         self.client
             .post(
                 &url,
@@ -148,7 +148,7 @@ impl CancelScheduledSends {
         let url = self.client.url(
             &format!(
                 "/mail/batch/{}",
-                crate::progenitor_support::encode_path(&batch_id.to_string()),
+                crate::progenitor_support::encode_path(batch_id),
             ),
             None,
         );
@@ -180,7 +180,7 @@ impl CancelScheduledSends {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",
-                crate::progenitor_support::encode_path(&batch_id.to_string()),
+                crate::progenitor_support::encode_path(batch_id),
             ),
             None,
         );
@@ -210,7 +210,7 @@ impl CancelScheduledSends {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",
-                crate::progenitor_support::encode_path(&batch_id.to_string()),
+                crate::progenitor_support::encode_path(batch_id),
             ),
             None,
         );
@@ -244,7 +244,7 @@ impl CancelScheduledSends {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",
-                crate::progenitor_support::encode_path(&batch_id.to_string()),
+                crate::progenitor_support::encode_path(batch_id),
             ),
             None,
         );
@@ -279,7 +279,7 @@ impl CancelScheduledSends {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",
-                crate::progenitor_support::encode_path(&batch_id.to_string()),
+                crate::progenitor_support::encode_path(batch_id),
             ),
             None,
         );

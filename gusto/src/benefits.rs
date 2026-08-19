@@ -23,7 +23,7 @@ impl Benefits {
     pub async fn get_page(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SupportedBenefit>>> {
-        let url = self.client.url(&"/v1/benefits".to_string(), None);
+        let url = self.client.url("/v1/benefits", None);
         self.client
             .get(
                 &url,
@@ -48,7 +48,7 @@ impl Benefits {
     pub async fn get_all(
         &self,
     ) -> ClientResult<crate::Response<Vec<crate::types::SupportedBenefit>>> {
-        let url = self.client.url(&"/v1/benefits".to_string(), None);
+        let url = self.client.url("/v1/benefits", None);
         self.client
             .get_all_pages(
                 &url,
@@ -75,7 +75,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/benefits/{}",
-                crate::progenitor_support::encode_path(&benefit_id.to_string()),
+                crate::progenitor_support::encode_path(benefit_id),
             ),
             None,
         );
@@ -105,7 +105,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/company_benefits",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -137,7 +137,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/company_benefits",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -168,7 +168,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/company_benefits",
-                crate::progenitor_support::encode_path(&company_id.to_string()),
+                crate::progenitor_support::encode_path(company_id),
             ),
             None,
         );
@@ -198,7 +198,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/company_benefits/{}",
-                crate::progenitor_support::encode_path(&company_benefit_id.to_string()),
+                crate::progenitor_support::encode_path(company_benefit_id),
             ),
             None,
         );
@@ -229,7 +229,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/company_benefits/{}",
-                crate::progenitor_support::encode_path(&company_benefit_id.to_string()),
+                crate::progenitor_support::encode_path(company_benefit_id),
             ),
             None,
         );
@@ -259,7 +259,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/employee_benefits",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -291,7 +291,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/employee_benefits",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -320,7 +320,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/employee_benefits",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -349,7 +349,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/ytd_benefit_amounts_from_different_company",
-                crate::progenitor_support::encode_path(&employee_id.to_string()),
+                crate::progenitor_support::encode_path(employee_id),
             ),
             None,
         );
@@ -377,7 +377,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/employee_benefits/{}",
-                crate::progenitor_support::encode_path(&employee_benefit_id.to_string()),
+                crate::progenitor_support::encode_path(employee_benefit_id),
             ),
             None,
         );
@@ -406,7 +406,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/employee_benefits/{}",
-                crate::progenitor_support::encode_path(&employee_benefit_id.to_string()),
+                crate::progenitor_support::encode_path(employee_benefit_id),
             ),
             None,
         );
@@ -434,7 +434,7 @@ impl Benefits {
         let url = self.client.url(
             &format!(
                 "/v1/employee_benefits/{}",
-                crate::progenitor_support::encode_path(&employee_benefit_id.to_string()),
+                crate::progenitor_support::encode_path(employee_benefit_id),
             ),
             None,
         );
