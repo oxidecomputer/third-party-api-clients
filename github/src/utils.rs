@@ -152,7 +152,7 @@ pub mod date_format {
 }
 
 pub mod date_time_format {
-    use chrono::{DateTime, TimeZone, Utc};
+    use chrono::{DateTime, NaiveDateTime, Utc};
     use serde::{self, Deserialize, Deserializer};
 
     // The date format Ramp returns looks like this: "2021-04-24T01:03:21"
@@ -176,14 +176,20 @@ pub mod date_time_format {
                 Ok(t) => Ok(Some(t)),
                 Err(_) => {
                     // This is google calendar.
-                    match Utc.datetime_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ") {
+                    match NaiveDateTime::parse_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ")
+                        .map(|t| t.and_utc())
+                    {
                         Ok(t) => Ok(Some(t)),
-                        Err(_) => match Utc.datetime_from_str(&s, FORMAT) {
+                        Err(_) => match DateTime::parse_from_str(&s, FORMAT)
+                            .map(|t| t.with_timezone(&Utc))
+                        {
                             Ok(t) => Ok(Some(t)),
-                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
+                            Err(_) => match DateTime::parse_from_str(&s, "%+")
+                                .map(|t| t.with_timezone(&Utc))
+                            {
                                 Ok(t) => Ok(Some(t)),
                                 Err(_) => match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d") {
-                                    Ok(d) => Ok(Some(DateTime::<Utc>::from_utc(
+                                    Ok(d) => Ok(Some(DateTime::<Utc>::from_naive_utc_and_offset(
                                         chrono::NaiveDateTime::new(
                                             d,
                                             chrono::NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
@@ -192,9 +198,13 @@ pub mod date_time_format {
                                     ))),
                                     Err(_) => {
                                         s = format!("{}+00:00", s);
-                                        match Utc.datetime_from_str(&s, FORMAT) {
+                                        match DateTime::parse_from_str(&s, FORMAT)
+                                            .map(|t| t.with_timezone(&Utc))
+                                        {
                                             Ok(r) => Ok(Some(r)),
-                                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
+                                            Err(_) => match DateTime::parse_from_str(&s, "%+")
+                                                .map(|t| t.with_timezone(&Utc))
+                                            {
                                                 Ok(d) => Ok(Some(d)),
                                                 Err(e) => Err(serde::de::Error::custom(format!(
                                                     "deserializing {} as DateTime<Utc> failed: {}",
