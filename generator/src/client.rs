@@ -381,7 +381,7 @@ impl Client {
             }
         } else {
             let error = match (remaining, reset) {
-                (Some(remaining), Some(reset)) if remaining == 0 => {
+                (Some(0), Some(reset)) => {
                     let now = std::time::SystemTime::now()
                         .duration_since(std::time::UNIX_EPOCH)
                         .unwrap()
