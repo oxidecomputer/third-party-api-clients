@@ -2282,7 +2282,7 @@ fn render_param(
 }
 
 #[allow(clippy::too_many_arguments)]
-fn gen(
+fn r#gen(
     api: &OpenAPI,
     proper_name: &str,
     host: &str,
@@ -3311,7 +3311,7 @@ fn main() -> Result<()> {
 
     let add_post_header = args.opt_str("add-post-header").unwrap_or_default();
 
-    let fail = match gen(
+    let fail = match r#gen(
         &api,
         &proper_name,
         &host,
