@@ -73,10 +73,10 @@ fn test_deserialize_recorded_meetings() {
     println!("recorded_meetings = {:?}", deserialized);
 
     assert_eq!(
-        DateTime::<Utc>::from_utc(
+        DateTime::<Utc>::from_naive_utc_and_offset(
             NaiveDateTime::new(
                 NaiveDate::parse_from_str("2021-07-16", "%Y-%m-%d").unwrap(),
-                NaiveTime::from_hms(0, 0, 0),
+                NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
             ),
             Utc,
         ),
