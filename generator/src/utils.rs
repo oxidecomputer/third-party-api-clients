@@ -274,7 +274,6 @@ impl<'de> Visitor<'de> for I32Visitor {
     where
         E: de::Error,
     {
-        use std::i32;
         if value >= i64::from(i32::MIN) && value <= i64::from(i32::MAX) {
             Ok(value as i32)
         } else {
@@ -413,7 +412,6 @@ impl<'de> Visitor<'de> for F32Visitor {
     where
         E: de::Error,
     {
-        use std::i32;
         if value >= i64::from(i32::MIN) && value <= i64::from(i32::MAX) {
             Ok(value as f32)
         } else {

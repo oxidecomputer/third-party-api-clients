@@ -9,6 +9,115 @@ use crate::{
     path_to_operation_id, struct_name, template::parse,
 };
 
+fn render_doc_lines(description: &str) -> String {
+    fn is_list_item(line: &str) -> bool {
+        line.starts_with("- ")
+            || line.starts_with("* ")
+            || line
+                .split_once(". ")
+                .map(|(prefix, _)| prefix.chars().all(|c| c.is_ascii_digit()))
+                .unwrap_or(false)
+    }
+
+    fn strip_leading_breaks(mut line: &str) -> &str {
+        loop {
+            let trimmed = line.trim_start();
+            if let Some(rest) = trimmed.strip_prefix("<br>") {
+                line = rest;
+            } else if let Some(rest) = trimmed.strip_prefix("<br/>") {
+                line = rest;
+            } else if let Some(rest) = trimmed.strip_prefix("</br>") {
+                line = rest;
+            } else {
+                return trimmed;
+            }
+        }
+    }
+
+    fn is_section_label(line: &str) -> bool {
+        strip_leading_breaks(line).starts_with("**")
+    }
+
+    let lines = description.lines().collect::<Vec<_>>();
+
+    let start = lines.iter().position(|line| !line.trim().is_empty());
+    let end = lines.iter().rposition(|line| !line.trim().is_empty());
+    let Some(start) = start else {
+        return String::new();
+    };
+    let end = end.unwrap();
+
+    let first = lines[start].trim();
+    let mut rendered = first.to_string();
+    let mut previous_was_list_item = is_list_item(first);
+    let mut in_list_continuation = false;
+    let mut in_code_block = first.starts_with("```");
+
+    for line in &lines[start + 1..=end] {
+        let trimmed = line.trim();
+        if in_code_block {
+            rendered.push_str("\n * ");
+            rendered.push_str(line.trim_end_matches('\r'));
+            if trimmed.starts_with("```") {
+                in_code_block = false;
+            }
+            continue;
+        }
+
+        let is_list_item = is_list_item(trimmed);
+        if trimmed.is_empty() {
+            rendered.push_str("\n *");
+            previous_was_list_item = false;
+            in_list_continuation = false;
+        } else {
+            if !previous_was_list_item && !in_list_continuation && is_list_item {
+                rendered.push_str("\n *");
+            }
+            if (previous_was_list_item || in_list_continuation)
+                && !is_list_item
+                && is_section_label(trimmed)
+            {
+                rendered.push_str("\n *\n * ");
+                in_list_continuation = false;
+            } else if (previous_was_list_item || in_list_continuation) && !is_list_item {
+                rendered.push_str("\n *     ");
+                in_list_continuation = true;
+            } else {
+                rendered.push_str("\n * ");
+                in_list_continuation = false;
+            }
+            rendered.push_str(trimmed);
+            if trimmed.starts_with("```") {
+                in_code_block = true;
+            }
+            previous_was_list_item = is_list_item;
+        }
+    }
+
+    while rendered.contains("\n *\n *\n") {
+        rendered = rendered.replace("\n *\n *\n", "\n *\n");
+    }
+
+    rendered
+}
+
+fn render_param_doc_lines(description: &str) -> String {
+    format!(
+        " -- {}",
+        render_doc_lines(description).replace("\n * ", "\n *   ")
+    )
+}
+
+fn render_schema_param_doc_lines(docs: &str) -> String {
+    let docs = docs
+        .lines()
+        .map(|line| line.trim().trim_start_matches('*').trim())
+        .collect::<Vec<_>>()
+        .join("\n");
+
+    render_param_doc_lines(&docs)
+}
+
 #[derive(Debug, Default)]
 pub struct FileOutput {
     pub head: String,
@@ -47,11 +156,11 @@ pub fn generate_files(
                 return Ok(());
             };
 
-            let op_id = if o.operation_id.is_none() {
-                // Make the operation id, the function.
-                path_to_operation_id(pn, m)
+            let op_id = if let Some(operation_id) = &o.operation_id {
+                operation_id.to_string()
             } else {
-                o.operation_id.as_ref().unwrap().to_string()
+                // Make the operation id the function.
+                path_to_operation_id(pn, m)
             };
             let od = to_snake_case(&op_id);
 
@@ -545,7 +654,7 @@ fn get_response_type_from_object(
 
         // For Ramp, the pagination values are passed _in_ the resulting
         // struct, so we want to ignore them and just get the data.
-        if p.get("has_more").is_some() {
+        if p.contains_key("has_more") {
             if let Some(did) = p.get("data") {
                 let rt = ts.render_type(did, false)?;
                 return Ok((og_rt, did.clone(), rt, "data".to_string()));
@@ -1174,7 +1283,7 @@ fn get_fn_docs(
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!(" * {}.", summary.trim_end_matches('.')));
+        a(&format!(" * {}", render_doc_lines(summary)));
         a(" *");
     }
     a(&format!(
@@ -1183,7 +1292,7 @@ fn get_fn_docs(
     ));
     if let Some(description) = &o.description {
         a(" *");
-        a(&format!(" * {}", description.replace('\n', "\n * ")));
+        a(&format!(" * {}", render_doc_lines(description)));
     }
     if let Some(external_docs) = &o.external_docs {
         a(" *");
@@ -1196,10 +1305,9 @@ fn get_fn_docs(
     }
     // Iterate over the function parameters and add any data those had as well.
     for par in o.parameters.iter() {
-        let mut param_name = "".to_string();
         let item = match par {
             openapiv3::ReferenceOr::Reference { reference } => {
-                param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                let param_name = struct_name(&reference.replace("#/components/parameters/", ""));
                 // Get the parameter from our BTreeMap.
                 if let Some(param) = parameters.get(&param_name) {
                     param
@@ -1216,22 +1324,15 @@ fn get_fn_docs(
         let mut docs = ts.render_docs(&pid);
         if let Some(d) = &parameter_data.description {
             if !d.is_empty() && d.len() > docs.len() {
-                docs = format!(" -- {}.", d.trim_end_matches('.').replace('\n', "\n  *   "));
+                docs = render_param_doc_lines(d);
             } else if !docs.is_empty() {
-                docs = format!(
-                    " -- {}.",
-                    docs.trim_start_matches('*').trim_end_matches('.').trim()
-                );
+                docs = render_schema_param_doc_lines(&docs);
             }
         } else if !docs.is_empty() {
-            docs = format!(
-                " -- {}.",
-                docs.trim_start_matches('*').trim_end_matches('.').trim()
-            );
+            docs = render_schema_param_doc_lines(&docs);
         }
 
         let nam = &to_snake_case(&clean_name(&parameter_data.name));
-        let typ = parameter_data.render_type(&param_name, ts)?;
 
         if nam == "ref"
             || nam == "type"
@@ -1240,9 +1341,9 @@ fn get_fn_docs(
             || nam == "const"
             || nam == "use"
         {
-            a(&format!(" * * `{}_: {}`{}", nam, typ, docs));
+            a(&format!(" * * `{}_`{}", nam, docs));
         } else {
-            a(&format!(" * * `{}: {}`{}", nam, typ, docs));
+            a(&format!(" * * `{}`{}", nam, docs));
         }
     }
     a(" */");
@@ -1260,7 +1361,7 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!(" * {}.", summary.trim_end_matches('.')));
+        a(&format!(" * {}", render_doc_lines(summary)));
         a(" *");
     }
     a(&format!(
@@ -1274,7 +1375,7 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
     ));
     if let Some(description) = &o.description {
         a(" *");
-        a(&format!(" * {}", description.replace('\n', "\n * ")));
+        a(&format!(" * {}", render_doc_lines(description)));
     }
     if let Some(external_docs) = &o.external_docs {
         a(" *");

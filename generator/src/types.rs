@@ -5,6 +5,20 @@ use inflector::cases::snakecase::to_snake_case;
 
 use crate::{TypeDetails, TypeSpace, render_param, struct_name};
 
+fn render_line_doc_comment(docs: &str) -> String {
+    docs.lines()
+        .map(|line| {
+            let text = line.trim().trim_start_matches('*').trim();
+            if text.is_empty() {
+                "///".to_string()
+            } else {
+                format!("/// {}", text)
+            }
+        })
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
 /*
  * Declare named types we know about:
  */
@@ -63,9 +77,14 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                     }*/
 
                     let desc = if let Some(description) = &schema_data.description {
-                        format!("/// {}", description.replace('\n', "\n/// "))
+                        let description = description.trim();
+                        if description.is_empty() {
+                            String::new()
+                        } else {
+                            format!("/// {}", description.replace('\n', "\n/// "))
+                        }
                     } else {
-                        "".to_string()
+                        String::new()
                     };
 
                     if !desc.is_empty() {
@@ -174,9 +193,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                             // Try to render the docs.
                             let p = ts.render_docs(tid);
                             if !p.is_empty() && p != desc {
-                                a("/**");
-                                a(&p);
-                                a(" */");
+                                a(&render_line_doc_comment(&p));
                             }
 
                             let te = ts.id_to_entry.get(tid).unwrap();
@@ -410,9 +427,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
             // Try to render the docs.
             let p = ts.render_docs(tid);
             if !p.is_empty() && p != description {
-                a("/**");
-                a(&p);
-                a(" */");
+                a(&render_line_doc_comment(&p));
             }
 
             a(&format!("{}({}),", fn_name, name));
@@ -576,9 +591,7 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
             // Try to render the docs.
             let p = ts.render_docs(tid);
             if !p.is_empty() && p != description {
-                a("/**");
-                a(&p);
-                a(" */");
+                a(&render_line_doc_comment(&p));
             }
 
             a("#[serde(flatten)]");
