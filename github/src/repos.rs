@@ -8478,9 +8478,9 @@ impl Repos {
      */
     pub async fn list_for_authenticated_user(
         &self,
-        visibility: crate::types::ReposListVisibility,
+        visibility: Option<crate::types::ReposListVisibility>,
         affiliation: &str,
-        type_: crate::types::ReposListType,
+        type_: Option<crate::types::ReposListType>,
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Order,
         per_page: i64,
@@ -8510,10 +8510,10 @@ impl Repos {
         if !sort.to_string().is_empty() {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
-        if !type_.to_string().is_empty() {
+        if let Some(type_) = type_.filter(|type_| !type_.to_string().is_empty()) {
             query_args.push(("type".to_string(), type_.to_string()));
         }
-        if !visibility.to_string().is_empty() {
+        if let Some(visibility) = visibility.filter(|visibility| !visibility.to_string().is_empty()) {
             query_args.push(("visibility".to_string(), visibility.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
@@ -8543,9 +8543,9 @@ impl Repos {
      */
     pub async fn list_all_for_authenticated_user(
         &self,
-        visibility: crate::types::ReposListVisibility,
+        visibility: Option<crate::types::ReposListVisibility>,
         affiliation: &str,
-        type_: crate::types::ReposListType,
+        type_: Option<crate::types::ReposListType>,
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
@@ -8567,10 +8567,10 @@ impl Repos {
         if !sort.to_string().is_empty() {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
-        if !type_.to_string().is_empty() {
+        if let Some(type_) = type_.filter(|type_| !type_.to_string().is_empty()) {
             query_args.push(("type".to_string(), type_.to_string()));
         }
-        if !visibility.to_string().is_empty() {
+        if let Some(visibility) = visibility.filter(|visibility| !visibility.to_string().is_empty()) {
             query_args.push(("visibility".to_string(), visibility.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
