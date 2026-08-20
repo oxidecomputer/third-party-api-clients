@@ -28,8 +28,8 @@ impl Topups {
      */
     pub async fn get_page(
         &self,
-        _amount: &str,
-        _created: &str,
+        amount: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -77,8 +77,8 @@ impl Topups {
      */
     pub async fn get_all(
         &self,
-        _amount: &str,
-        _created: &str,
+        amount: &str,
+        created: &str,
         status: crate::types::GetTopupsStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::Topup>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

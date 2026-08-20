@@ -31,9 +31,9 @@ impl Skus {
     pub async fn get_page(
         &self,
         active: bool,
-        _attributes: &str,
+        attributes: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         in_stock: bool,
         limit: i64,
         product: &str,
@@ -88,8 +88,8 @@ impl Skus {
     pub async fn get_all(
         &self,
         active: bool,
-        _attributes: &str,
-        _ids: &[String],
+        attributes: &str,
+        ids: &[String],
         in_stock: bool,
         product: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Sku>>> {

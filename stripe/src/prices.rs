@@ -33,13 +33,13 @@ impl Prices {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
-        _lookup_keys: &[String],
+        lookup_keys: &[String],
         product: &str,
-        _recurring: &str,
+        recurring: &str,
         starting_after: &str,
         type_: crate::types::PriceType,
     ) -> ClientResult<crate::Response<Vec<crate::types::PriceData>>> {
@@ -95,11 +95,11 @@ impl Prices {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
-        _lookup_keys: &[String],
+        lookup_keys: &[String],
         product: &str,
-        _recurring: &str,
+        recurring: &str,
         type_: crate::types::PriceType,
     ) -> ClientResult<crate::Response<Vec<crate::types::PriceData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
