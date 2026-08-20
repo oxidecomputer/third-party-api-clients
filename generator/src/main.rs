@@ -1,4 +1,5 @@
 mod client;
+mod docs;
 mod functions;
 mod template;
 mod types;
@@ -20,6 +21,7 @@ use openapiv3::OpenAPI;
 use serde::Deserialize;
 
 use client::GeneratedServers;
+use docs::{render_block_doc_lines, render_doc_text, render_line_doc_comment};
 
 enum TemplateType {
     Github,
@@ -859,32 +861,24 @@ impl TypeSpace {
     }
 
     fn render_docs(&self, tid: &TypeId) -> String {
-        let mut out = String::new();
-
-        let mut a = |s: &str| {
-            out.push_str(s);
-            out.push('\n');
-        };
-
         let schema = self.get_schema_data_for_id(tid);
+        let mut docs = Vec::new();
 
         if let Some(s) = schema {
             if let Some(description) = &s.description {
-                let description = description.trim();
-                if !description.is_empty() {
-                    a(&format!(
-                        " * {}",
-                        description.replace('*', "\\*").replace('\n', "\n *  ")
-                    ));
+                let rendered = render_doc_text(description);
+                if !rendered.is_empty() {
+                    docs.push(rendered);
                 }
             }
             if let Some(external_docs) = &s.external_docs {
-                a(" *");
-                a(&format!(" * FROM: <{}>", external_docs.url));
+                if !external_docs.url.is_empty() {
+                    docs.push(format!("FROM: <{}>", external_docs.url));
+                }
             }
         }
 
-        out.trim().to_string()
+        docs.join("\n\n")
     }
 
     fn render_type(&self, tid: &TypeId, in_mod: bool) -> Result<String> {
@@ -2175,7 +2169,10 @@ fn render_param(
     let description = description.trim();
     if !description.is_empty() {
         a("/**");
-        a(&format!(" * {}", description.replace('\n', "\n *   ")));
+        let docs = render_block_doc_lines(description);
+        if !docs.is_empty() {
+            a(&format!(" * {}", docs.replace("\n * ", "\n *   ")));
+        }
         a(" */");
     }
 
@@ -2322,7 +2319,10 @@ fn r#gen(
 
         let mut docs = "".to_string();
         if let Some(d) = &tag.description {
-            docs = d.trim().to_string();
+            let description = render_doc_text(d);
+            if !description.is_empty() {
+                docs = description;
+            }
         }
         if let Some(e) = &tag.external_docs {
             if !e.url.is_empty() {
@@ -2332,7 +2332,10 @@ fn r#gen(
         docs = docs.trim().to_string();
 
         if !docs.is_empty() {
-            a(&format!("/// {}", docs.replace('\n', "\n/// "),));
+            let docs = render_line_doc_comment(&docs);
+            if !docs.is_empty() {
+                a(&docs);
+            }
         }
         a(&format!(
             "pub mod {};",
@@ -2562,7 +2565,10 @@ pub(crate) struct Message {
             tag.name
         );
         if let Some(d) = &tag.description {
-            docs = d.trim().to_string();
+            let description = render_doc_text(d);
+            if !description.is_empty() {
+                docs = description;
+            }
         }
         if let Some(e) = &tag.external_docs {
             if !e.url.is_empty() {
@@ -2570,12 +2576,14 @@ pub(crate) struct Message {
             }
         }
 
+        let docs = render_line_doc_comment(&docs);
+        if !docs.is_empty() {
+            a(&docs);
+        }
         a(&format!(
-            r#"/// {}
-               pub fn {}(&self) -> {}::{} {{
+            r#"               pub fn {}(&self) -> {}::{} {{
                     {}::{}::new(self.clone())
                }}"#,
-            docs.replace('\n', "\n/// "),
             to_snake_case(&clean_name(&tag.name)),
             to_snake_case(&clean_name(&tag.name)),
             struct_name(&tag.name),
