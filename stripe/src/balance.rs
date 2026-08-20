@@ -54,7 +54,7 @@ impl Balance {
      */
     pub async fn get_history(
         &self,
-        _created: &str,
+        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -118,7 +118,7 @@ impl Balance {
      */
     pub async fn get_all_history(
         &self,
-        _created: &str,
+        created: &str,
         currency: &str,
         payout: &str,
         source: &str,

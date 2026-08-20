@@ -31,13 +31,13 @@ impl SubscriptionSchedules {
      */
     pub async fn get_page(
         &self,
-        _canceled_at: &str,
-        _completed_at: &str,
-        _created: &str,
+        canceled_at: &str,
+        completed_at: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
-        _released_at: &str,
+        released_at: &str,
         scheduled: bool,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionSchedule>>> {
@@ -88,11 +88,11 @@ impl SubscriptionSchedules {
      */
     pub async fn get_all(
         &self,
-        _canceled_at: &str,
-        _completed_at: &str,
-        _created: &str,
+        canceled_at: &str,
+        completed_at: &str,
+        created: &str,
         customer: &str,
-        _released_at: &str,
+        released_at: &str,
         scheduled: bool,
     ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionSchedule>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

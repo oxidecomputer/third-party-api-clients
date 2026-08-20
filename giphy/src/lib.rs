@@ -30,7 +30,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! giphy-api = "0.11.0-rc.0"
+//! giphy-api = "0.11.0-rc.1"
 //! ```
 //!
 //! ## Basic example

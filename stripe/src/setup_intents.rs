@@ -28,7 +28,7 @@ impl SetupIntents {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -82,7 +82,7 @@ impl SetupIntents {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         payment_method: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::SetupIntent>>> {

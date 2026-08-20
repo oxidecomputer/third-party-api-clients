@@ -3338,7 +3338,7 @@ version = "{}"
 documentation = "https://docs.rs/{}/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/{}"
 readme = "README.md"
-edition = "2021"
+edition = "2024"
 license = "MIT"
 
 [features]
