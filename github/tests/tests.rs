@@ -1,17 +1,17 @@
 use rand::RngCore;
-use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
+use rsa::{RsaPrivateKey, pkcs1::EncodeRsaPrivateKey};
 use std::{mem, time::Duration, time::SystemTime};
 
 use wiremock::{
+    Mock, MockServer, ResponseTemplate,
     http::{HeaderName, HeaderValue},
     matchers::{bearer_token, header, method, path, query_param},
-    Mock, MockServer, ResponseTemplate,
 };
 
 use octorust::{
+    Client, ClientError,
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
     types::InstallationToken,
-    Client, ClientError,
 };
 
 fn app_id() -> i64 {
@@ -371,12 +371,13 @@ async fn test_does_not_follow_redirects() {
 
     mem::drop(server);
 
-    assert!(res
-        .unwrap()
-        .headers
-        .get("Location")
-        .unwrap()
-        .to_str()
-        .unwrap()
-        .ends_with("/fake-download-path"));
+    assert!(
+        res.unwrap()
+            .headers
+            .get("Location")
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .ends_with("/fake-download-path")
+    );
 }

@@ -1,11 +1,11 @@
 [package]
 name = "shopify"
 description = "A fully generated & opinionated API client for the Shopify API."
-version = "0.11.0-rc.0"
+version = "0.11.0-rc.1"
 documentation = "https://docs.rs/shopify/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/shopify"
 readme = "README.md"
-edition = "2021"
+edition = "2024"
 license = "MIT"
 
 [features]

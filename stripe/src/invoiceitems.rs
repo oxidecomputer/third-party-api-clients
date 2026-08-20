@@ -29,7 +29,7 @@ impl Invoiceitems {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         invoice: &str,
@@ -87,7 +87,7 @@ impl Invoiceitems {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         invoice: &str,
         pending: bool,

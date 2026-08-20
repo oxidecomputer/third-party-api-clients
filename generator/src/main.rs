@@ -12,7 +12,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use anyhow::{bail, Result};
+use anyhow::{Result, bail};
 use inflector::cases::{
     pascalcase::to_pascal_case, snakecase::to_snake_case, titlecase::to_title_case,
 };
@@ -153,7 +153,10 @@ where
                             }
 
                             if !o.servers.is_empty() {
-                                println!("op {}: servers are only partially supported. Variables are not supported", oid);
+                                println!(
+                                    "op {}: servers are only partially supported. Variables are not supported",
+                                    oid
+                                );
                             }
 
                             if o.security.is_some() {
@@ -2282,7 +2285,7 @@ fn render_param(
 }
 
 #[allow(clippy::too_many_arguments)]
-fn gen(
+fn r#gen(
     api: &OpenAPI,
     proper_name: &str,
     host: &str,
@@ -3311,7 +3314,7 @@ fn main() -> Result<()> {
 
     let add_post_header = args.opt_str("add-post-header").unwrap_or_default();
 
-    let fail = match gen(
+    let fail = match r#gen(
         &api,
         &proper_name,
         &host,
@@ -3358,7 +3361,7 @@ version = "{}"
 documentation = "https://docs.rs/{}/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/{}"
 readme = "README.md"
-edition = "2021"
+edition = "2024"
 license = "MIT"
 
 [features]

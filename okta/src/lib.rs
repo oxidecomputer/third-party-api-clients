@@ -36,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! okta = "0.11.0-rc.0"
+//! okta = "0.11.0-rc.1"
 //! ```
 //!
 //! ## Basic example
@@ -98,7 +98,7 @@ pub mod users;
 #[doc(hidden)]
 pub mod utils;
 
-pub use reqwest::{header::HeaderMap, StatusCode};
+pub use reqwest::{StatusCode, header::HeaderMap};
 
 #[derive(Debug)]
 pub struct Response<T> {
@@ -155,7 +155,7 @@ pub enum ClientError {
 pub const FALLBACK_HOST: &str = "https://na4.okta.net";
 
 mod progenitor_support {
-    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
+    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')

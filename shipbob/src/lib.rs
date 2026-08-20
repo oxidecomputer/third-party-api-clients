@@ -28,7 +28,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shipbob = "0.11.0-rc.0"
+//! shipbob = "0.11.0-rc.1"
 //! ```
 //!
 //! ## Basic example
@@ -155,7 +155,7 @@ pub mod utils;
 /// Use the Webhooks Resource to create, view or delete subscriptions for a user.
 pub mod webhooks;
 
-pub use reqwest::{header::HeaderMap, StatusCode};
+pub use reqwest::{StatusCode, header::HeaderMap};
 
 #[derive(Debug)]
 pub struct Response<T> {
@@ -212,7 +212,7 @@ pub enum ClientError {
 pub const FALLBACK_HOST: &str = "https://api.shipbob.com/1.0";
 
 mod progenitor_support {
-    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
+    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')

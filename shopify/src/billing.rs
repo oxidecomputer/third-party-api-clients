@@ -115,21 +115,21 @@ impl Billing {
             .await
     }
     /**
-     * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
+        * Caution
+         This endpoint is no longer required and is deprecated as of
+         API version 2021-01.
 
-    "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-01/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-01
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+       "Activates an accepted application charge. One-time charges are now immediately activated
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-01/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-01
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn deprecated_202001_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -256,21 +256,21 @@ impl Billing {
             .await
     }
     /**
-     * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
+        * Caution
+         This endpoint is no longer required and is deprecated as of
+         API version 2021-01.
 
-    "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-04/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-04
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+       "Activates an accepted application charge. One-time charges are now immediately activated
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-04/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-04
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn deprecated_202004_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -397,21 +397,21 @@ impl Billing {
             .await
     }
     /**
-     * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
+        * Caution
+         This endpoint is no longer required and is deprecated as of
+         API version 2021-01.
 
-    "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-07/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-07
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+       "Activates an accepted application charge. One-time charges are now immediately activated
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-07/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-07
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn deprecated_202007_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -538,21 +538,21 @@ impl Billing {
             .await
     }
     /**
-     * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
+        * Caution
+         This endpoint is no longer required and is deprecated as of
+         API version 2021-01.
 
-    "Activates an accepted application charge. One-time charges are now immediately activated
-    when approved by a merchant.
-     *
-     * This function performs a `POST` to the `/admin/api/2020-10/application_charges/{application_charge_id}/activate.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-10
-     *
-     * **Parameters:**
-     *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     */
+       "Activates an accepted application charge. One-time charges are now immediately activated
+when approved by a merchant.
+ *
+ * This function performs a `POST` to the `/admin/api/2020-10/application_charges/{application_charge_id}/activate.json` endpoint.
+ *
+ * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-10
+ *
+ * **Parameters:**
+ *
+ * * `application_charge_id: &str` -- storefront_access_token_id.
+ */
     pub async fn create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,

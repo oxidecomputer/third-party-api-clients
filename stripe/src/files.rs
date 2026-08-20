@@ -36,7 +36,7 @@ impl Files {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         purpose: crate::types::Purpose,
@@ -84,7 +84,7 @@ impl Files {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         purpose: crate::types::Purpose,
     ) -> ClientResult<crate::Response<Vec<crate::types::File>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

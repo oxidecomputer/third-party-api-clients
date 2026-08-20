@@ -47,7 +47,7 @@ pub mod date_format {
 }
 
 pub mod date_time_format {
-    use chrono::{DateTime, TimeZone, Utc};
+    use chrono::{DateTime, NaiveDateTime, Utc};
     use serde::{self, Deserialize, Deserializer};
 
     // The date format Ramp returns looks like this: "2021-04-24T01:03:21"
@@ -71,36 +71,64 @@ pub mod date_time_format {
                 Ok(t) => Ok(Some(t)),
                 Err(_) => {
                     // This is google calendar.
-                    match Utc.datetime_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ") {
+                    match NaiveDateTime::parse_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ")
+                        .map(|t| t.and_utc())
+                    {
                         Ok(t) => Ok(Some(t)),
-                        Err(_) => match Utc.datetime_from_str(&s, FORMAT) {
-                            Ok(t) => Ok(Some(t)),
-                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
+                        Err(_) => {
+                            match DateTime::parse_from_str(&s, FORMAT)
+                                .map(|t| t.with_timezone(&Utc))
+                            {
                                 Ok(t) => Ok(Some(t)),
-                                Err(_) => match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d") {
-                                    Ok(d) => Ok(Some(DateTime::<Utc>::from_utc(
-                                        chrono::NaiveDateTime::new(
-                                            d,
-                                            chrono::NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
-                                        ),
-                                        Utc,
-                                    ))),
-                                    Err(_) => {
-                                        s = format!("{}+00:00", s);
-                                        match Utc.datetime_from_str(&s, FORMAT) {
-                                            Ok(r) => Ok(Some(r)),
-                                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
-                                                Ok(d) => Ok(Some(d)),
-                                                Err(e) => Err(serde::de::Error::custom(format!(
-                                                    "deserializing {} as DateTime<Utc> failed: {}",
-                                                    s, e
-                                                ))),
-                                            },
+                                Err(_) => {
+                                    match DateTime::parse_from_str(&s, "%+")
+                                        .map(|t| t.with_timezone(&Utc))
+                                    {
+                                        Ok(t) => Ok(Some(t)),
+                                        Err(_) => {
+                                            match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d")
+                                            {
+                                                Ok(d) => Ok(Some(
+                                                    DateTime::<Utc>::from_naive_utc_and_offset(
+                                                        chrono::NaiveDateTime::new(
+                                                            d,
+                                                            chrono::NaiveTime::from_hms_opt(
+                                                                0, 0, 0,
+                                                            )
+                                                            .unwrap(),
+                                                        ),
+                                                        Utc,
+                                                    ),
+                                                )),
+                                                Err(_) => {
+                                                    s = format!("{}+00:00", s);
+                                                    match DateTime::parse_from_str(&s, FORMAT)
+                                                        .map(|t| t.with_timezone(&Utc))
+                                                    {
+                                                        Ok(r) => Ok(Some(r)),
+                                                        Err(_) => {
+                                                            match DateTime::parse_from_str(&s, "%+")
+                                                                .map(|t| t.with_timezone(&Utc))
+                                                            {
+                                                                Ok(d) => Ok(Some(d)),
+                                                                Err(e) => {
+                                                                    Err(serde::de::Error::custom(
+                                                                        format!(
+                                                                            "deserializing {} as DateTime<Utc> failed: {}",
+                                                                            s, e
+                                                                        ),
+                                                                    ))
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
-                                },
-                            },
-                        },
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -135,7 +163,7 @@ pub mod deserialize_empty_url {
                     return Err(serde::de::Error::custom(format!(
                         "error url parsing {}: {}",
                         s, e
-                    )))
+                    )));
                 }
             }
         }
@@ -166,7 +194,7 @@ pub mod deserialize_null_string {
 
 struct BoolVisitor;
 
-impl<'de> Visitor<'de> for BoolVisitor {
+impl Visitor<'_> for BoolVisitor {
     type Value = bool;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -231,7 +259,7 @@ pub mod deserialize_null_boolean {
 
 struct I32Visitor;
 
-impl<'de> Visitor<'de> for I32Visitor {
+impl Visitor<'_> for I32Visitor {
     type Value = i32;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -303,7 +331,7 @@ pub mod deserialize_null_i32 {
 
 struct I64Visitor;
 
-impl<'de> Visitor<'de> for I64Visitor {
+impl Visitor<'_> for I64Visitor {
     type Value = i64;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -370,7 +398,7 @@ pub mod deserialize_null_i64 {
 
 struct F32Visitor;
 
-impl<'de> Visitor<'de> for F32Visitor {
+impl Visitor<'_> for F32Visitor {
     type Value = f32;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -461,7 +489,7 @@ pub mod deserialize_null_f32 {
 
 struct F64Visitor;
 
-impl<'de> Visitor<'de> for F64Visitor {
+impl Visitor<'_> for F64Visitor {
     type Value = f64;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {

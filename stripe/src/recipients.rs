@@ -28,7 +28,7 @@ impl Recipients {
      */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -80,7 +80,7 @@ impl Recipients {
      */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         type_: crate::types::GetRecipientsType,
         verified: bool,
     ) -> ClientResult<crate::Response<Vec<crate::types::Recipient>>> {

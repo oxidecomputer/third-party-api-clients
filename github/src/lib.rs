@@ -36,7 +36,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.11.0-rc.0"
+//! octorust = "0.11.0-rc.1"
 //! ```
 //!
 //! ## Basic example
@@ -56,7 +56,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host_override](https://docs.rs/octorust/0.11.0-rc.0/octorust/struct.Client.html#method.host_override) method.
+//! [Client#host_override](https://docs.rs/octorust/0.11.0-rc.1/octorust/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -70,7 +70,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.11.0-rc.0", features = ["httpcache"] }
+//! octorust = { version = "0.11.0-rc.1", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -244,7 +244,7 @@ pub mod users;
 #[doc(hidden)]
 pub mod utils;
 
-pub use reqwest::{header::HeaderMap, StatusCode};
+pub use reqwest::{StatusCode, header::HeaderMap};
 
 #[derive(Debug)]
 pub struct Response<T> {
@@ -310,7 +310,7 @@ pub enum ClientError {
 pub const FALLBACK_HOST: &str = "https://api.github.com";
 
 mod progenitor_support {
-    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
+    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -645,7 +645,7 @@ impl Client {
                 .await?;
 
             if method == http::Method::GET {
-                if let Ok(etag) = self.http_cache.lookup_etag(&uri) {
+                if let Ok(etag) = self.http_cache.lookup_etag(uri) {
                     req = req.header(http::header::IF_NONE_MATCH, etag);
                 }
             }
@@ -678,7 +678,7 @@ impl Client {
             {
                 if let Some(etag) = etag {
                     if let Err(e) = self.http_cache.cache_response(
-                        &uri,
+                        uri,
                         &response_body,
                         &etag,
                         &next_link.as_ref().map(|n| n.0.clone()),
@@ -707,13 +707,13 @@ impl Client {
                     // header when cargo builds with --cfg feature="httpcache"
                     #[cfg(feature = "httpcache")]
                     {
-                        let body = self.http_cache.lookup_body(&uri).unwrap();
+                        let body = self.http_cache.lookup_body(uri).unwrap();
                         let out = serde_json::from_str::<Out>(&body).unwrap();
                         let link = match next_link {
                             Some(next_link) => Ok(Some(next_link)),
                             None => self
                                 .http_cache
-                                .lookup_next_link(&uri)
+                                .lookup_next_link(uri)
                                 .map(|next_link| next_link.map(crate::utils::NextLink)),
                         };
                         link.map(|link| (link, Response::new(status, headers, out)))

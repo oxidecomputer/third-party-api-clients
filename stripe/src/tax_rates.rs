@@ -29,7 +29,7 @@ impl TaxRates {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         inclusive: bool,
         limit: i64,
@@ -81,7 +81,7 @@ impl TaxRates {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         inclusive: bool,
     ) -> ClientResult<crate::Response<Vec<crate::types::TaxRate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();

@@ -1,12 +1,12 @@
 use std::collections::BTreeMap;
 
-use anyhow::{bail, Result};
+use anyhow::{Result, bail};
 use inflector::cases::{pascalcase::to_pascal_case, snakecase::to_snake_case};
 
 use crate::{
-    clean_fn_name, clean_name, client::generate_servers, get_parameter_data, make_plural,
-    oid_to_object_name, path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType,
-    ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace,
+    ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace, clean_fn_name,
+    clean_name, client::generate_servers, get_parameter_data, make_plural, oid_to_object_name,
+    path_to_operation_id, struct_name, template::parse,
 };
 
 #[derive(Debug, Default)]
@@ -40,7 +40,7 @@ pub fn generate_files(
     for (pn, p) in api.paths.iter() {
         let op = p.item().unwrap_or_else(|e| panic!("bad path: {}", e));
 
-        let mut gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
+        let mut r#gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
             let o = if let Some(o) = o {
                 o
             } else {
@@ -470,14 +470,14 @@ pub fn generate_files(
             Ok(())
         };
 
-        gen(pn.as_str(), "GET", op.get.as_ref())?;
-        gen(pn.as_str(), "PUT", op.put.as_ref())?;
-        gen(pn.as_str(), "POST", op.post.as_ref())?;
-        gen(pn.as_str(), "DELETE", op.delete.as_ref())?;
-        gen(pn.as_str(), "OPTIONS", op.options.as_ref())?;
-        gen(pn.as_str(), "HEAD", op.head.as_ref())?;
-        gen(pn.as_str(), "PATCH", op.patch.as_ref())?;
-        gen(pn.as_str(), "TRACE", op.trace.as_ref())?;
+        r#gen(pn.as_str(), "GET", op.get.as_ref())?;
+        r#gen(pn.as_str(), "PUT", op.put.as_ref())?;
+        r#gen(pn.as_str(), "POST", op.post.as_ref())?;
+        r#gen(pn.as_str(), "DELETE", op.delete.as_ref())?;
+        r#gen(pn.as_str(), "OPTIONS", op.options.as_ref())?;
+        r#gen(pn.as_str(), "HEAD", op.head.as_ref())?;
+        r#gen(pn.as_str(), "PATCH", op.patch.as_ref())?;
+        r#gen(pn.as_str(), "TRACE", op.trace.as_ref())?;
     }
 
     Ok(tag_files)
@@ -855,7 +855,10 @@ fn get_fn_inner(
         .unwrap_or_else(|| String::from("None"));
 
     if all_pages && pagination_property.is_empty() {
-        return Ok(format!("self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await", body));
+        return Ok(format!(
+            "self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await",
+            body
+        ));
     } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
         let inner = format!(

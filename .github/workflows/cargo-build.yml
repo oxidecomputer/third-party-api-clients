@@ -4,6 +4,7 @@ on:
       - '**.rs'
       - Cargo.toml
       - Cargo.lock
+      - rust-toolchain.toml
       - '**/Cargo.toml'
       - '**/Cargo.lock'
       - .github/workflows/cargo-build.yml
@@ -14,12 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Install latest rust
-        uses: actions-rs/toolchain@v1
-        with:
-            toolchain: nightly
-            override: true
-            components: rustfmt, clippy
+      - name: Install pinned Rust
+        run: rustup toolchain install
       - name: Cache cargo registry
         uses: actions/cache@v3
         with:

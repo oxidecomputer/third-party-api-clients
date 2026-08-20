@@ -1,11 +1,11 @@
 [package]
 name = "sendgrid-api"
 description = "A fully generated & opinionated API client for the SendGrid API."
-version = "0.11.0-rc.0"
+version = "0.11.0-rc.1"
 documentation = "https://docs.rs/sendgrid-api/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/sendgrid"
 readme = "README.md"
-edition = "2021"
+edition = "2024"
 license = "MIT"
 
 [features]
