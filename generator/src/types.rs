@@ -3,21 +3,7 @@ use std::collections::BTreeMap;
 use anyhow::{Result, bail};
 use inflector::cases::snakecase::to_snake_case;
 
-use crate::{TypeDetails, TypeSpace, render_param, struct_name};
-
-fn render_line_doc_comment(docs: &str) -> String {
-    docs.lines()
-        .map(|line| {
-            let text = line.trim().trim_start_matches('*').trim();
-            if text.is_empty() {
-                "///".to_string()
-            } else {
-                format!("/// {}", text)
-            }
-        })
-        .collect::<Vec<_>>()
-        .join("\n")
-}
+use crate::{TypeDetails, TypeSpace, docs::render_line_doc_comment, render_param, struct_name};
 
 /*
  * Declare named types we know about:
@@ -76,17 +62,11 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         continue;
                     }*/
 
-                    let desc = if let Some(description) = &schema_data.description {
-                        let description = description.trim();
-                        if description.is_empty() {
-                            String::new()
-                        } else {
-                            format!("/// {}", description.replace('\n', "\n/// "))
-                        }
-                    } else {
-                        String::new()
-                    };
-
+                    let desc = schema_data
+                        .description
+                        .as_deref()
+                        .map(render_line_doc_comment)
+                        .unwrap_or_default();
                     if !desc.is_empty() {
                         a(&desc);
                     }
@@ -394,8 +374,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
         "\nYou can easily convert this enum to the inner value with `From` and `Into`, as both \
          are implemented for each type.\n",
     );
-    description = format!("/// {}", description.replace('\n', "\n/// "));
-    a(&description);
+    a(&render_line_doc_comment(&description));
 
     a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
     if !flatten {
@@ -557,8 +536,7 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
         let rt = ts.render_type(itid, true).unwrap();
         description.push_str(&format!("- `{}`\n", rt));
     }
-    description = format!("/// {}", description.replace('\n', "\n/// "));
-    a(&description);
+    a(&render_line_doc_comment(&description));
 
     if sn == "SubmitJobOptionsAllOf" || sn == "DescriptionlessJobOptionsAllOf" {
         a("#[derive(Serialize, Deserialize, Default, PartialEq, Debug, Clone, JsonSchema)]");

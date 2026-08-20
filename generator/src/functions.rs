@@ -5,117 +5,29 @@ use inflector::cases::{pascalcase::to_pascal_case, snakecase::to_snake_case};
 
 use crate::{
     ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace, clean_fn_name,
-    clean_name, client::generate_servers, get_parameter_data, make_plural, oid_to_object_name,
-    path_to_operation_id, struct_name, template::parse,
+    clean_name, client::generate_servers, docs::render_block_doc_lines, get_parameter_data,
+    make_plural, oid_to_object_name, path_to_operation_id, struct_name, template::parse,
 };
-
-fn render_doc_lines(description: &str) -> String {
-    fn is_list_item(line: &str) -> bool {
-        line.starts_with("- ")
-            || line.starts_with("* ")
-            || line
-                .split_once(". ")
-                .map(|(prefix, _)| prefix.chars().all(|c| c.is_ascii_digit()))
-                .unwrap_or(false)
-    }
-
-    fn strip_leading_breaks(mut line: &str) -> &str {
-        loop {
-            let trimmed = line.trim_start();
-            if let Some(rest) = trimmed.strip_prefix("<br>") {
-                line = rest;
-            } else if let Some(rest) = trimmed.strip_prefix("<br/>") {
-                line = rest;
-            } else if let Some(rest) = trimmed.strip_prefix("</br>") {
-                line = rest;
-            } else {
-                return trimmed;
-            }
-        }
-    }
-
-    fn is_section_label(line: &str) -> bool {
-        strip_leading_breaks(line).starts_with("**")
-    }
-
-    let lines = description.lines().collect::<Vec<_>>();
-
-    let start = lines.iter().position(|line| !line.trim().is_empty());
-    let end = lines.iter().rposition(|line| !line.trim().is_empty());
-    let Some(start) = start else {
-        return String::new();
-    };
-    let end = end.unwrap();
-
-    let first = lines[start].trim();
-    let mut rendered = first.to_string();
-    let mut previous_was_list_item = is_list_item(first);
-    let mut in_list_continuation = false;
-    let mut in_code_block = first.starts_with("```");
-
-    for line in &lines[start + 1..=end] {
-        let trimmed = line.trim();
-        if in_code_block {
-            rendered.push_str("\n * ");
-            rendered.push_str(line.trim_end_matches('\r'));
-            if trimmed.starts_with("```") {
-                in_code_block = false;
-            }
-            continue;
-        }
-
-        let is_list_item = is_list_item(trimmed);
-        if trimmed.is_empty() {
-            rendered.push_str("\n *");
-            previous_was_list_item = false;
-            in_list_continuation = false;
-        } else {
-            if !previous_was_list_item && !in_list_continuation && is_list_item {
-                rendered.push_str("\n *");
-            }
-            if (previous_was_list_item || in_list_continuation)
-                && !is_list_item
-                && is_section_label(trimmed)
-            {
-                rendered.push_str("\n *\n * ");
-                in_list_continuation = false;
-            } else if (previous_was_list_item || in_list_continuation) && !is_list_item {
-                rendered.push_str("\n *     ");
-                in_list_continuation = true;
-            } else {
-                rendered.push_str("\n * ");
-                in_list_continuation = false;
-            }
-            rendered.push_str(trimmed);
-            if trimmed.starts_with("```") {
-                in_code_block = true;
-            }
-            previous_was_list_item = is_list_item;
-        }
-    }
-
-    while rendered.contains("\n *\n *\n") {
-        rendered = rendered.replace("\n *\n *\n", "\n *\n");
-    }
-
-    rendered
-}
 
 fn render_param_doc_lines(description: &str) -> String {
     format!(
         " -- {}",
-        render_doc_lines(description).replace("\n * ", "\n *   ")
+        render_block_doc_lines(description).replace("\n * ", "\n *   ")
     )
 }
 
 fn render_schema_param_doc_lines(docs: &str) -> String {
-    let docs = docs
-        .lines()
-        .map(|line| line.trim().trim_start_matches('*').trim())
-        .collect::<Vec<_>>()
-        .join("\n");
+    render_param_doc_lines(docs)
+}
 
-    render_param_doc_lines(&docs)
+fn supports_parameter(item: &openapiv3::Parameter, path: &str) -> bool {
+    match item {
+        openapiv3::Parameter::Query { style, .. } => *style == openapiv3::QueryStyle::Form,
+        openapiv3::Parameter::Path { parameter_data, .. } => {
+            path.contains(&format!("{{{}}}", parameter_data.name))
+        }
+        _ => true,
+    }
 }
 
 #[derive(Debug, Default)]
@@ -356,8 +268,15 @@ pub fn generate_files(
             /*
              * Get the function parameters.
              */
-            let (fn_params_str, query_params) =
-                get_fn_params(ts, o, parameters, false, op.parameters.clone(), proper_name)?;
+            let (fn_params_str, query_params) = get_fn_params(
+                ts,
+                o,
+                parameters,
+                false,
+                op.parameters.clone(),
+                proper_name,
+                p,
+            )?;
 
             // Generate the server to send the request to
             let server_arg = if o.servers.len() == 1 {
@@ -504,8 +423,15 @@ pub fn generate_files(
                     oid.trim_start_matches(&tag).trim_start_matches('_'),
                 )?;
 
-                let (fn_params_str, query_params) =
-                    get_fn_params(ts, o, parameters, true, op.parameters.clone(), proper_name)?;
+                let (fn_params_str, query_params) = get_fn_params(
+                    ts,
+                    o,
+                    parameters,
+                    true,
+                    op.parameters.clone(),
+                    proper_name,
+                    p,
+                )?;
 
                 let tmp = parse(p)?;
                 let template = tmp.compile(query_params, &server_arg);
@@ -809,6 +735,7 @@ fn get_fn_params(
     all_pages: bool,
     global_params: Vec<openapiv3::ReferenceOr<openapiv3::Parameter>>,
     proper_name: &str,
+    path: &str,
 ) -> Result<(Vec<String>, BTreeMap<String, (String, String)>)> {
     /*
      * Query parameters are sorted lexicographically to ensure a stable
@@ -837,6 +764,9 @@ fn get_fn_params(
 
         let parameter_data = get_parameter_data(item).unwrap();
         let nam = &to_snake_case(&parameter_data.name);
+        if !supports_parameter(item, path) {
+            continue;
+        }
 
         if !fn_params.contains(nam) && !fn_params.contains(&format!("{}_", nam)) {
             let typ = parameter_data.render_type(&param_name, ts)?;
@@ -1283,7 +1213,10 @@ fn get_fn_docs(
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!(" * {}", render_doc_lines(summary)));
+        let docs = render_block_doc_lines(summary);
+        if !docs.is_empty() {
+            a(&format!(" * {}", docs));
+        }
         a(" *");
     }
     a(&format!(
@@ -1291,19 +1224,18 @@ fn get_fn_docs(
         m, p
     ));
     if let Some(description) = &o.description {
-        a(" *");
-        a(&format!(" * {}", render_doc_lines(description)));
+        let docs = render_block_doc_lines(description);
+        if !docs.is_empty() {
+            a(" *");
+            a(&format!(" * {}", docs));
+        }
     }
     if let Some(external_docs) = &o.external_docs {
         a(" *");
         a(&format!(" * FROM: <{}>", external_docs.url));
     }
-    if !o.parameters.is_empty() {
-        a(" *");
-        a(" * **Parameters:**");
-        a(" *");
-    }
-    // Iterate over the function parameters and add any data those had as well.
+
+    let mut supported_params = Vec::new();
     for par in o.parameters.iter() {
         let item = match par {
             openapiv3::ReferenceOr::Reference { reference } => {
@@ -1318,6 +1250,19 @@ fn get_fn_docs(
             openapiv3::ReferenceOr::Item(item) => item,
         };
 
+        if supports_parameter(item, p) {
+            supported_params.push((par, item));
+        }
+    }
+
+    if !supported_params.is_empty() {
+        a(" *");
+        a(" * **Parameters:**");
+        a(" *");
+    }
+
+    // Iterate over the function parameters and add any data those had as well.
+    for (par, item) in supported_params {
         let parameter_data = get_parameter_data(item).unwrap();
 
         let pid = ts.select_param(None, par)?;
@@ -1361,7 +1306,10 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!(" * {}", render_doc_lines(summary)));
+        let docs = render_block_doc_lines(summary);
+        if !docs.is_empty() {
+            a(&format!(" * {}", docs));
+        }
         a(" *");
     }
     a(&format!(
@@ -1374,8 +1322,11 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
         fn_name
     ));
     if let Some(description) = &o.description {
-        a(" *");
-        a(&format!(" * {}", render_doc_lines(description)));
+        let docs = render_block_doc_lines(description);
+        if !docs.is_empty() {
+            a(" *");
+            a(&format!(" * {}", docs));
+        }
     }
     if let Some(external_docs) = &o.external_docs {
         a(" *");
