@@ -887,6 +887,7 @@ crate::progenitor_support::encode_path(&number.to_string()),), None);
 &format!("/path/{}:command",
 crate::progenitor_support::encode_path(&param.to_string()),), None);
 "#;
-        Ok(assert_eq!(want, &out))
+        assert_eq!(want, &out);
+        Ok(())
     }
 }
