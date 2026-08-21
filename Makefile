@@ -1,6 +1,7 @@
 SHELL := bash
 
 VERSION = 0.11.0-rc.1
+CLIPPY_FIX = cargo clippy --fix --allow-dirty --allow-staged --quiet
 
 DOCUSIGN_SPEC_DIR = $(CURDIR)/specs/docusign
 DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.yaml
@@ -171,6 +172,7 @@ docusign: target/debug/generator $(DOCUSIGN_SPEC)
 		--host "na4.docusign.net" \
 		--token-endpoint "account.docusign.com/oauth/token" \
 		--user-consent-endpoint "account.docusign.com/oauth/auth" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p docusign
 	cargo fmt -p docusign
 	@echo -e "- [DocuSign](docusign/) [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)" >> README.md
 
@@ -188,6 +190,7 @@ giphy: target/debug/generator $(GIPHY_SPEC)
 		-d "A fully generated & opinionated API client for the Giphy API." \
 		--spec-link "https://github.com/APIs-guru/openapi-directory/tree/main/APIs/giphy.com" \
 		--host "api.giphy.com/v1" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p giphy-api
 	cargo fmt -p giphy-api
 	@echo -e "- [Giphy](giphy/) [![docs.rs](https://docs.rs/giphy-api/badge.svg)](https://docs.rs/giphy-api)" >> README.md
 
@@ -205,6 +208,7 @@ github: target/debug/generator $(GITHUB_SPEC)
 		-d "A fully generated & opinionated API client for the GitHub API." \
 		--spec-link "https://github.com/$(GITHUB_SPEC_REPO)" \
 		--host "api.github.com" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p octorust
 	cargo fmt -p octorust
 	@echo -e "- [GitHub](github/) [![docs.rs](https://docs.rs/octorust/badge.svg)](https://docs.rs/octorust)" >> README.md
 
@@ -229,6 +233,7 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p gsuite-api
 	cargo fmt -p gsuite-api
 	@echo -e "- [Google Admin](google/admin/) [![docs.rs](https://docs.rs/gsuite-api/badge.svg)](https://docs.rs/gsuite-api)" >> README.md
 
@@ -248,6 +253,7 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p google-calendar
 	cargo fmt -p google-calendar
 	@echo -e "- [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)" >> README.md
 
@@ -267,6 +273,7 @@ google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MA
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "cloudresourcemanager.googleapis.com/v2" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p google-cloud-resource-manager
 	cargo fmt -p google-cloud-resource-manager
 	@echo -e "- [Google Cloud Resource Manager](google/cloud-resource-manager/) [![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)" >> README.md
 
@@ -286,6 +293,7 @@ google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com/drive/v3" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p google-drive
 	cargo fmt -p google-drive
 	@echo -e "- [Google Drive](google/drive/) [![docs.rs](https://docs.rs/google-drive/badge.svg)](https://docs.rs/google-drive)" >> README.md
 
@@ -305,6 +313,7 @@ google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com/groups/v1/groups" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p google-groups-settings
 	cargo fmt -p google-groups-settings
 	@echo -e "- [Google Groups Settings](google/groups-settings/) [![docs.rs](https://docs.rs/google-groups-settings/badge.svg)](https://docs.rs/google-groups-settings)" >> README.md
 
@@ -324,6 +333,7 @@ google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "sheets.googleapis.com" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p sheets
 	cargo fmt -p sheets
 	@echo -e "- [Google Sheets](google/sheets/) [![docs.rs](https://docs.rs/sheets/badge.svg)](https://docs.rs/sheets)" >> README.md
 
@@ -343,6 +353,7 @@ gusto: target/debug/generator $(GUSTO_SPEC)
 		--host "api.gusto.com" \
 		--token-endpoint "api.gusto.com/oauth/token" \
 		--user-consent-endpoint "api.gusto.com/oauth/authorize" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p gusto-api
 	cargo fmt -p gusto-api
 	@echo -e "- [Gusto](gusto/) [![docs.rs](https://docs.rs/gusto-api/badge.svg)](https://docs.rs/gusto-api)" >> README.md
 
@@ -365,6 +376,7 @@ mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
 		--host "us1.api.mailchimp.com" \
 		--token-endpoint "login.mailchimp.com/oauth2/token" \
 		--user-consent-endpoint "login.mailchimp.com/oauth2/authorize" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p mailchimp-api
 	cargo fmt -p mailchimp-api
 	@echo -e "- [MailChimp](mailchimp/) [![docs.rs](https://docs.rs/mailchimp-api/badge.svg)](https://docs.rs/mailchimp-api)" >> README.md
 
@@ -388,6 +400,7 @@ okta: target/debug/generator $(OKTA_SPEC)
 		--token-endpoint "account.okta.com/oauth/token" \
 		--user-consent-endpoint "account.okta.com/oauth/auth" $(EXTRA_ARGS) \
 		--disclaimer "Okta is a registered trademark of Okta, Inc. and this library has no affiliation with or sponsorship by Okta, Inc."
+	$(CLIPPY_FIX) -p okta
 	cargo fmt -p okta
 	@echo -e "- [Okta](okta/) [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)" >> README.md
 
@@ -410,6 +423,7 @@ ramp: target/debug/generator $(RAMP_SPEC)
 		--host "api.ramp.com/developer/v1" \
 		--token-endpoint "api.ramp.com/v1/public/customer/token" \
 		--user-consent-endpoint "app.ramp.com/v1/authorize" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p ramp-api
 	cargo fmt -p ramp-api
 	@echo -e "- [Ramp](ramp/) [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)" >> README.md
 
@@ -427,6 +441,7 @@ revai: target/debug/generator $(REVAI_SPEC)
 		-d "A fully generated & opinionated API client for the Rev.ai API." \
 		--spec-link "$(REVAI_SPEC_REMOTE)" \
 		--host "api.rev.ai/speechtotext/v1" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p revai
 	cargo fmt -p revai
 	@echo -e "- [Rev.ai](rev.ai/) [![docs.rs](https://docs.rs/revai/badge.svg)](https://docs.rs/revai)" >> README.md
 
@@ -447,6 +462,7 @@ sendgrid: target/debug/generator $(SENDGRID_SPEC)
 		-d "A fully generated & opinionated API client for the SendGrid API." \
 		--spec-link "$(SENDGRID_SPEC_REMOTE)" \
 		--host "api.sendgrid.com/v3" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p sendgrid-api
 	cargo fmt -p sendgrid-api
 	@echo -e "- [SendGrid](sendgrid/) [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)" >> README.md
 
@@ -468,6 +484,7 @@ shipbob: target/debug/generator $(SHIPBOB_SPEC)
 		-d "A fully generated & opinionated API client for the ShipBob API." \
 		--spec-link "$(SHIPBOB_SPEC_REMOTE)" \
 		--host "api.shipbob.com/1.0" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p shipbob
 	cargo fmt -p shipbob
 	@echo -e "- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)" >> README.md
 
@@ -487,6 +504,7 @@ shopify: target/debug/generator $(SHOPIFY_SPEC)
 		--host "{shop}.myshopify.com/admin/api/2021-07" \
 		--token-endpoint "{shop}.myshopify.com/admin/oauth/access_token" \
 		--user-consent-endpoint "{shop}.myshopify.com/admin/oauth/authorize" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p shopify
 	cargo fmt -p shopify
 	@echo -e "- [Shopify](shopify/) [![docs.rs](https://docs.rs/shopify/badge.svg)](https://docs.rs/shopify)" >> README.md
 
@@ -509,6 +527,7 @@ slack: target/debug/generator $(SLACK_SPEC)
 		--host "slack.com/api" \
 		--token-endpoint "slack.com/api/oauth.v2.access" \
 		--user-consent-endpoint "slack.com/oauth/v2/authorize" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p slack-chat-api
 	cargo fmt -p slack-chat-api
 	@echo -e "- [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)" >> README.md
 
@@ -529,6 +548,7 @@ stripe: target/debug/generator $(STRIPE_SPEC)
 		-d "A fully generated & opinionated API client for the Stripe API." \
 		--spec-link "$(STRIPE_SPEC_REMOTE)" \
 		--host "api.stripe.com/v1" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p dolladollabills
 	cargo fmt -p dolladollabills
 	@echo -e "- [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)" >> README.md
 
@@ -547,6 +567,7 @@ tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
 		--spec-link "https://app.tripactions.com/api/public/documentation/swagger-ui/index.html?configUrl=/api/public/documentation/api-docs/swagger-config" \
 		--host "api.tripactions.com" \
 		--token-endpoint "api.tripactions.com/ta-auth/oauth/token" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p tripactions
 	cargo fmt -p tripactions
 	@echo -e "- [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)" >> README.md
 
@@ -569,6 +590,7 @@ zoom: target/debug/generator $(ZOOM_SPEC)
 		--host "api.zoom.us/v2" \
 		--token-endpoint "zoom.us/oauth/token" \
 		--user-consent-endpoint "zoom.us/oauth/authorize" $(EXTRA_ARGS)
+	$(CLIPPY_FIX) -p zoom-api
 	cargo fmt -p zoom-api
 	@echo -e "- [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)" >> README.md
 

@@ -1,4 +1,5 @@
 mod client;
+mod docs;
 mod functions;
 mod template;
 mod types;
@@ -20,6 +21,7 @@ use openapiv3::OpenAPI;
 use serde::Deserialize;
 
 use client::GeneratedServers;
+use docs::{render_block_doc_lines, render_doc_text, render_line_doc_comment};
 
 enum TemplateType {
     Github,
@@ -77,7 +79,7 @@ where
 {
     let api: OpenAPI = load(p)?;
 
-    if api.openapi != "3.0.3" {
+    if !api.openapi.starts_with("3.0.") {
         /*
          * XXX During development we are being very strict, but this should
          * probably be relaxed.
@@ -239,7 +241,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
                                     // Make sure we actually have a type, we might have
                                     // not added the type since it is a duplicate of another type.
-                                    if !name.is_empty() && ts.name_to_id.get(&sn).is_some() {
+                                    if !name.is_empty() && ts.name_to_id.contains_key(&sn) {
                                         return Ok(format!("crate::types::{}", struct_name(&sn)));
                                     }
 
@@ -353,13 +355,13 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         uint = true;
                                     } else {
                                         // TODO: handle this later
-                                        println!("XXX invalid minimum: {}", min);
+                                        // println!("XXX invalid minimum: {}", min);
                                     }
                                 }
 
                                 if it.maximum.is_some() {
                                     // TODO: handle this later
-                                    println!("XXX maximum is not supported");
+                                    // println!("XXX maximum is not supported");
                                 }
                                 if !it.enumeration.is_empty() {
                                     bail!("XXX enumeration {}: {:?}", self.name, it);
@@ -385,23 +387,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
 trait ExtractJsonMediaType {
     fn is_binary(&self) -> Result<bool>;
-    fn content_json(&self) -> Result<openapiv3::MediaType>;
 }
 
 impl ExtractJsonMediaType for openapiv3::Response {
-    fn content_json(&self) -> Result<openapiv3::MediaType> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/json") {
-            Ok(mt.clone())
-        } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
-        }
-    }
-
     fn is_binary(&self) -> Result<bool> {
         if self.content.is_empty() {
             /*
@@ -463,19 +451,6 @@ impl ExtractJsonMediaType for openapiv3::Response {
 }
 
 impl ExtractJsonMediaType for openapiv3::RequestBody {
-    fn content_json(&self) -> Result<openapiv3::MediaType> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/json") {
-            Ok(mt.clone())
-        } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
-        }
-    }
-
     fn is_binary(&self) -> Result<bool> {
         if self.content.is_empty() {
             /*
@@ -886,29 +861,24 @@ impl TypeSpace {
     }
 
     fn render_docs(&self, tid: &TypeId) -> String {
-        let mut out = String::new();
-
-        let mut a = |s: &str| {
-            out.push_str(s);
-            out.push('\n');
-        };
-
         let schema = self.get_schema_data_for_id(tid);
+        let mut docs = Vec::new();
 
         if let Some(s) = schema {
             if let Some(description) = &s.description {
-                a(&format!(
-                    " * {}",
-                    description.replace('*', "\\*").replace('\n', "\n *  ")
-                ));
+                let rendered = render_doc_text(description);
+                if !rendered.is_empty() {
+                    docs.push(rendered);
+                }
             }
             if let Some(external_docs) = &s.external_docs {
-                a(" *");
-                a(&format!(" * FROM: <{}>", external_docs.url));
+                if !external_docs.url.is_empty() {
+                    docs.push(format!("FROM: <{}>", external_docs.url));
+                }
             }
         }
 
-        out.trim().to_string()
+        docs.join("\n\n")
     }
 
     fn render_type(&self, tid: &TypeId, in_mod: bool) -> Result<String> {
@@ -1511,12 +1481,12 @@ impl TypeSpace {
                             if n == t
                                 || n.ends_with("response")
                                 || n.ends_with("request")
-                                || self.name_to_id.get(&clean_name(n)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(n))
                             {
                                 t
                             } else if t.ends_with("response")
                                 || t.ends_with("request")
-                                || self.name_to_id.get(&clean_name(t)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(t))
                                 || n.len() < t.len()
                             {
                                 n
@@ -1558,7 +1528,7 @@ impl TypeSpace {
                             };
 
                             // If this name already exists add additional properties to it.
-                            if self.name_to_id.get(&clean_name(&name)).is_some() {
+                            if self.name_to_id.contains_key(&clean_name(&name)) {
                                 name = format!("{} additional properties", name);
                             }
                             let id = self.select(Some(&name), ad, &desc)?;
@@ -1572,7 +1542,7 @@ impl TypeSpace {
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
                         if n.is_empty() {
-                            println!("XXX n cannot be empty for {}", name);
+                            // println!("XXX n cannot be empty for {}", name);
                             continue;
                         }
 
@@ -1651,11 +1621,11 @@ impl TypeSpace {
                                 // Check if we already have a type with this name.
                                 if n == t
                                     || (n.ends_with("response") || n.ends_with("request"))
-                                    || self.name_to_id.get(&clean_name(n)).is_some()
+                                    || self.name_to_id.contains_key(&clean_name(n))
                                 {
                                     t
                                 } else if (t.ends_with("response") || t.ends_with("request"))
-                                    || self.name_to_id.get(&clean_name(t)).is_some()
+                                    || self.name_to_id.contains_key(&clean_name(t))
                                     || n.len() < t.len()
                                 {
                                     n
@@ -2026,11 +1996,11 @@ impl TypeSpace {
                             // Check if we already have a type with this name.
                             if n == t
                                 || (n.ends_with("response") || n.ends_with("request"))
-                                || self.name_to_id.get(&clean_name(n)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(n))
                             {
                                 t
                             } else if (t.ends_with("response") || t.ends_with("request"))
-                                || self.name_to_id.get(&clean_name(t)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(t))
                                 || n.len() < t.len()
                             {
                                 n
@@ -2196,9 +2166,13 @@ fn render_param(
         enums.push(e.to_string());
     }
 
+    let description = description.trim();
     if !description.is_empty() {
         a("/**");
-        a(&format!(" * {}", description.replace('\n', "\n *   ")));
+        let docs = render_block_doc_lines(description);
+        if !docs.is_empty() {
+            a(&format!(" * {}", docs.replace("\n * ", "\n *   ")));
+        }
         a(" */");
     }
 
@@ -2345,7 +2319,10 @@ fn r#gen(
 
         let mut docs = "".to_string();
         if let Some(d) = &tag.description {
-            docs = format!("{}.", d.trim_end_matches('.'));
+            let description = render_doc_text(d);
+            if !description.is_empty() {
+                docs = description;
+            }
         }
         if let Some(e) = &tag.external_docs {
             if !e.url.is_empty() {
@@ -2355,7 +2332,10 @@ fn r#gen(
         docs = docs.trim().to_string();
 
         if !docs.is_empty() {
-            a(&format!("/// {}", docs.replace('\n', "\n///"),));
+            let docs = render_line_doc_comment(&docs);
+            if !docs.is_empty() {
+                a(&docs);
+            }
         }
         a(&format!(
             "pub mod {};",
@@ -2585,7 +2565,10 @@ pub(crate) struct Message {
             tag.name
         );
         if let Some(d) = &tag.description {
-            docs = format!("{}.", d.trim_end_matches('.'));
+            let description = render_doc_text(d);
+            if !description.is_empty() {
+                docs = description;
+            }
         }
         if let Some(e) = &tag.external_docs {
             if !e.url.is_empty() {
@@ -2593,12 +2576,14 @@ pub(crate) struct Message {
             }
         }
 
+        let docs = render_line_doc_comment(&docs);
+        if !docs.is_empty() {
+            a(&docs);
+        }
         a(&format!(
-            r#"/// {}
-               pub fn {}(&self) -> {}::{} {{
+            r#"               pub fn {}(&self) -> {}::{} {{
                     {}::{}::new(self.clone())
                }}"#,
-            docs.replace('\n', "\n///"),
             to_snake_case(&clean_name(&tag.name)),
             to_snake_case(&clean_name(&tag.name)),
             struct_name(&tag.name),
@@ -3146,11 +3131,11 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<String> {
             if let Some(o) = o {
-                let op_id = if o.operation_id.is_none() {
-                    // Make the operation id, the function.
-                    path_to_operation_id(pn, m)
+                let op_id = if let Some(operation_id) = &o.operation_id {
+                    operation_id.to_string()
                 } else {
-                    o.operation_id.as_ref().unwrap().to_string()
+                    // Make the operation id the function.
+                    path_to_operation_id(pn, m)
                 };
                 let od = to_snake_case(&op_id);
 
