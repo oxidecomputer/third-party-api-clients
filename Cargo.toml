@@ -24,3 +24,5 @@ members = [
 	"tripactions",
 	"zoom"
 ]
+
+resolver = "2"
