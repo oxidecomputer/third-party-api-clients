@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Update `reqwest` to 0.13.
+- Update `jsonwebtoken` from 9 to 11 and explicitly select its `aws_lc_rs` crypto provider.
+- Update `rustls` to 0.23.43 and configure `reqwest`'s Rustls backend to use AWS-LC instead of `ring`.
+- Update `yup-oauth2` from 8 to 12 and explicitly select its `hyper-rustls` and `aws-lc-rs` features.
+- Remove direct `ring` dependencies and the legacy Rustls 0.21 and 0.22 dependency paths.
+
 ## 0.7.0-rc.1
 
 This update refactors all of the clients and changes the way responses are handled. Previously methods that make calls to a third party service would return an `anyhow::Result<T>` over some structured interpretation of the response body (i.e. a deserialized struct, a unit type, or a raw string). Methods now return a `Result<Response<T>, ClientError>` where a `Response` contains the body type that was previously returned along with the status code and headers that were sent from the third party service. When requesting unfolded paginated results the status code and headers returned will be the values returned from the final request made to the service. `ClientError` now provides a more structure error type than the previous `anyhow` error.
