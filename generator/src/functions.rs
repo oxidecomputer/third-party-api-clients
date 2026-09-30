@@ -5,9 +5,30 @@ use inflector::cases::{pascalcase::to_pascal_case, snakecase::to_snake_case};
 
 use crate::{
     ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace, clean_fn_name,
-    clean_name, client::generate_servers, get_parameter_data, make_plural, oid_to_object_name,
-    path_to_operation_id, struct_name, template::parse,
+    clean_name, client::generate_servers, docs::render_block_doc_lines, get_parameter_data,
+    make_plural, oid_to_object_name, path_to_operation_id, struct_name, template::parse,
 };
+
+fn render_param_doc_lines(description: &str) -> String {
+    format!(
+        " -- {}",
+        render_block_doc_lines(description).replace("\n * ", "\n *   ")
+    )
+}
+
+fn render_schema_param_doc_lines(docs: &str) -> String {
+    render_param_doc_lines(docs)
+}
+
+fn supports_parameter(item: &openapiv3::Parameter, path: &str) -> bool {
+    match item {
+        openapiv3::Parameter::Query { style, .. } => *style == openapiv3::QueryStyle::Form,
+        openapiv3::Parameter::Path { parameter_data, .. } => {
+            path.contains(&format!("{{{}}}", parameter_data.name))
+        }
+        _ => true,
+    }
+}
 
 #[derive(Debug, Default)]
 pub struct FileOutput {
@@ -38,7 +59,7 @@ pub fn generate_files(
 
     let mut fn_names: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
-        let op = p.item().unwrap_or_else(|e| panic!("bad path: {}", e));
+        let op = p.item().unwrap_or_else(|e| panic!("bad path: {e}"));
 
         let mut r#gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
             let o = if let Some(o) = o {
@@ -47,11 +68,11 @@ pub fn generate_files(
                 return Ok(());
             };
 
-            let op_id = if o.operation_id.is_none() {
-                // Make the operation id, the function.
-                path_to_operation_id(pn, m)
+            let op_id = if let Some(operation_id) = &o.operation_id {
+                operation_id.to_string()
             } else {
-                o.operation_id.as_ref().unwrap().to_string()
+                // Make the operation id the function.
+                path_to_operation_id(pn, m)
             };
             let od = to_snake_case(&op_id);
 
@@ -112,7 +133,7 @@ pub fn generate_files(
                 }
 
                 if bounds.is_empty() {
-                    content.push_str(&format!("pub async fn {}(", fn_name,));
+                    content.push_str(&format!("pub async fn {fn_name}(",));
                 } else {
                     content.push_str(&format!("pub async fn {}<{}>(", fn_name, bounds.join(", ")));
                 }
@@ -123,12 +144,11 @@ pub fn generate_files(
                 }
 
                 if let Some(bp) = &body_param {
-                    content.push_str(&format!("body: {}", bp));
+                    content.push_str(&format!("body: {bp}"));
                 }
 
                 content.push_str(&format!(
-                    ") -> ClientResult<crate::Response<{}>> {{",
-                    response_type
+                    ") -> ClientResult<crate::Response<{response_type}>> {{"
                 ));
 
                 content.push_str(template);
@@ -186,7 +206,7 @@ pub fn generate_files(
                                                 Some("json".to_string()),
                                             )
                                         } else {
-                                            (Some(format!("&{}", rt)), Some("json".to_string()))
+                                            (Some(format!("&{rt}")), Some("json".to_string()))
                                         }
                                     }
                                 } else {
@@ -200,19 +220,19 @@ pub fn generate_files(
                                             Some("json".to_string()),
                                         )
                                     } else {
-                                        (Some(format!("&{}", rt)), Some("json".to_string()))
+                                        (Some(format!("&{rt}")), Some("json".to_string()))
                                     }
                                 }
                             } else {
                                 (None, None)
                             }
                         } else if ct == "multipart/form-data" {
-                            println!("got multipart/formdata for {}", oid);
+                            println!("got multipart/formdata for {oid}");
                             // Skip it for now.
                             // TODO: fix this later.
                             (None, None)
                         } else if ct == "application/x-www-form-urlencoded" {
-                            println!("got application/x-www-form-urlencoded for {}", oid);
+                            println!("got application/x-www-form-urlencoded for {oid}");
                             // Skip it for now.
                             // TODO: fix this later.
                             (None, None)
@@ -234,7 +254,7 @@ pub fn generate_files(
                     let object_name = format!("{} request", oid_to_object_name(&od));
                     let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
                     let rt = ts.render_type(&id, false)?;
-                    (Some(format!("&{}", rt)), Some("json".to_string()))
+                    (Some(format!("&{rt}")), Some("json".to_string()))
                 } else {
                     (None, None)
                 }
@@ -247,8 +267,15 @@ pub fn generate_files(
             /*
              * Get the function parameters.
              */
-            let (fn_params_str, query_params) =
-                get_fn_params(ts, o, parameters, false, op.parameters.clone(), proper_name)?;
+            let (fn_params_str, query_params) = get_fn_params(
+                ts,
+                o,
+                parameters,
+                false,
+                op.parameters.clone(),
+                proper_name,
+                p,
+            )?;
 
             // Generate the server to send the request to
             let server_arg = if o.servers.len() == 1 {
@@ -369,7 +396,7 @@ pub fn generate_files(
             // Do this right before printing. Check if we already have this function name.
             // This will ensure we don't have any duplicates.
             if fn_names.contains(&(fn_name.clone() + &tag)) {
-                fn_name = format!("{}_{}", fn_name, tag);
+                fn_name = format!("{fn_name}_{tag}");
             }
             fn_names.push(fn_name.clone() + &tag);
 
@@ -395,8 +422,15 @@ pub fn generate_files(
                     oid.trim_start_matches(&tag).trim_start_matches('_'),
                 )?;
 
-                let (fn_params_str, query_params) =
-                    get_fn_params(ts, o, parameters, true, op.parameters.clone(), proper_name)?;
+                let (fn_params_str, query_params) = get_fn_params(
+                    ts,
+                    o,
+                    parameters,
+                    true,
+                    op.parameters.clone(),
+                    proper_name,
+                    p,
+                )?;
 
                 let tmp = parse(p)?;
                 let template = tmp.compile(query_params, &server_arg);
@@ -433,7 +467,7 @@ pub fn generate_files(
                     && !fn_name.contains("list")
                     && !fn_name.contains("list_all")
                 {
-                    fn_name = format!("get_all_{}", fn_name);
+                    fn_name = format!("get_all_{fn_name}");
                 }
 
                 if fn_name != "get_all"
@@ -447,7 +481,7 @@ pub fn generate_files(
                 // Do this right before printing. Check if we already have this function name.
                 // This will ensure we don't have any duplicates.
                 if fn_names.contains(&(fn_name.clone() + &tag)) {
-                    fn_name = format!("{}_all", fn_name);
+                    fn_name = format!("{fn_name}_all");
                 }
                 fn_names.push(fn_name.clone() + &tag);
 
@@ -545,7 +579,7 @@ fn get_response_type_from_object(
 
         // For Ramp, the pagination values are passed _in_ the resulting
         // struct, so we want to ignore them and just get the data.
-        if p.get("has_more").is_some() {
+        if p.contains_key("has_more") {
             if let Some(did) = p.get("data") {
                 let rt = ts.render_type(did, false)?;
                 return Ok((og_rt, did.clone(), rt, "data".to_string()));
@@ -700,6 +734,7 @@ fn get_fn_params(
     all_pages: bool,
     global_params: Vec<openapiv3::ReferenceOr<openapiv3::Parameter>>,
     proper_name: &str,
+    path: &str,
 ) -> Result<(Vec<String>, BTreeMap<String, (String, String)>)> {
     /*
      * Query parameters are sorted lexicographically to ensure a stable
@@ -728,8 +763,11 @@ fn get_fn_params(
 
         let parameter_data = get_parameter_data(item).unwrap();
         let nam = &to_snake_case(&parameter_data.name);
+        if !supports_parameter(item, path) {
+            continue;
+        }
 
-        if !fn_params.contains(nam) && !fn_params.contains(&format!("{}_", nam)) {
+        if !fn_params.contains(nam) && !fn_params.contains(&format!("{nam}_")) {
             let typ = parameter_data.render_type(&param_name, ts)?;
             if nam == "ref"
                 || nam == "type"
@@ -738,10 +776,10 @@ fn get_fn_params(
                 || nam == "const"
                 || nam == "use"
             {
-                fn_params_str.push(format!("{}_: {},", nam, typ));
+                fn_params_str.push(format!("{nam}_: {typ},"));
                 fn_params.push(nam.to_string() + "_");
             } else if nam == "i_ds" {
-                fn_params_str.push(format!("ids: {},", typ));
+                fn_params_str.push(format!("ids: {typ},"));
                 fn_params.push("ids".to_string());
             } else if (!all_pages || !is_page_param(nam, proper_name))
                 && (nam != "authorization" || proper_name == "Stripe")
@@ -755,10 +793,10 @@ fn get_fn_params(
                 && (proper_name != "Stripe" || !is_stripe_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
-                    fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
+                    fn_params_str.push(format!("{nam}: Option<{typ}>,"));
                     fn_params.push(nam.to_string());
                 } else {
-                    let p = format!("{}: {},", nam, typ);
+                    let p = format!("{nam}: {typ},");
                     if !fn_params.contains(nam) {
                         fn_params_str.push(p);
                         fn_params.push(nam.to_string());
@@ -786,7 +824,7 @@ fn get_fn_params(
                     || nam == "use"
                 {
                     query_params.insert(
-                        format!("{}_", nam),
+                        format!("{nam}_"),
                         (typ.to_string(), parameter_data.name.to_string()),
                     );
                 } else if nam == "i_ds" {
@@ -808,7 +846,7 @@ fn get_fn_params(
                     if typ == "chrono::DateTime<chrono::Utc>" {
                         query_params.insert(
                             nam.to_string(),
-                            (format!("Option<{}>", typ), parameter_data.name.to_string()),
+                            (format!("Option<{typ}>"), parameter_data.name.to_string()),
                         );
                     } else {
                         query_params.insert(
@@ -856,8 +894,7 @@ fn get_fn_inner(
 
     if all_pages && pagination_property.is_empty() {
         return Ok(format!(
-            "self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await",
-            body
+            "self.client.get_all_pages(&url, crate::Message {{ body: {body}, content_type: None }}).await"
         ));
     } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
@@ -1174,32 +1211,32 @@ fn get_fn_docs(
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!(" * {}.", summary.trim_end_matches('.')));
+        let docs = render_block_doc_lines(summary);
+        if !docs.is_empty() {
+            a(&format!(" * {docs}"));
+        }
         a(" *");
     }
     a(&format!(
-        " * This function performs a `{}` to the `{}` endpoint.",
-        m, p
+        " * This function performs a `{m}` to the `{p}` endpoint."
     ));
     if let Some(description) = &o.description {
-        a(" *");
-        a(&format!(" * {}", description.replace('\n', "\n * ")));
+        let docs = render_block_doc_lines(description);
+        if !docs.is_empty() {
+            a(" *");
+            a(&format!(" * {docs}"));
+        }
     }
     if let Some(external_docs) = &o.external_docs {
         a(" *");
         a(&format!(" * FROM: <{}>", external_docs.url));
     }
-    if !o.parameters.is_empty() {
-        a(" *");
-        a(" * **Parameters:**");
-        a(" *");
-    }
-    // Iterate over the function parameters and add any data those had as well.
+
+    let mut supported_params = Vec::new();
     for par in o.parameters.iter() {
-        let mut param_name = "".to_string();
         let item = match par {
             openapiv3::ReferenceOr::Reference { reference } => {
-                param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                let param_name = struct_name(&reference.replace("#/components/parameters/", ""));
                 // Get the parameter from our BTreeMap.
                 if let Some(param) = parameters.get(&param_name) {
                     param
@@ -1210,28 +1247,34 @@ fn get_fn_docs(
             openapiv3::ReferenceOr::Item(item) => item,
         };
 
+        if supports_parameter(item, p) {
+            supported_params.push((par, item));
+        }
+    }
+
+    if !supported_params.is_empty() {
+        a(" *");
+        a(" * **Parameters:**");
+        a(" *");
+    }
+
+    // Iterate over the function parameters and add any data those had as well.
+    for (par, item) in supported_params {
         let parameter_data = get_parameter_data(item).unwrap();
 
         let pid = ts.select_param(None, par)?;
         let mut docs = ts.render_docs(&pid);
         if let Some(d) = &parameter_data.description {
             if !d.is_empty() && d.len() > docs.len() {
-                docs = format!(" -- {}.", d.trim_end_matches('.').replace('\n', "\n  *   "));
+                docs = render_param_doc_lines(d);
             } else if !docs.is_empty() {
-                docs = format!(
-                    " -- {}.",
-                    docs.trim_start_matches('*').trim_end_matches('.').trim()
-                );
+                docs = render_schema_param_doc_lines(&docs);
             }
         } else if !docs.is_empty() {
-            docs = format!(
-                " -- {}.",
-                docs.trim_start_matches('*').trim_end_matches('.').trim()
-            );
+            docs = render_schema_param_doc_lines(&docs);
         }
 
         let nam = &to_snake_case(&clean_name(&parameter_data.name));
-        let typ = parameter_data.render_type(&param_name, ts)?;
 
         if nam == "ref"
             || nam == "type"
@@ -1240,9 +1283,9 @@ fn get_fn_docs(
             || nam == "const"
             || nam == "use"
         {
-            a(&format!(" * * `{}_: {}`{}", nam, typ, docs));
+            a(&format!(" * * `{nam}_`{docs}"));
         } else {
-            a(&format!(" * * `{}: {}`{}", nam, typ, docs));
+            a(&format!(" * * `{nam}`{docs}"));
         }
     }
     a(" */");
@@ -1260,21 +1303,25 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!(" * {}.", summary.trim_end_matches('.')));
+        let docs = render_block_doc_lines(summary);
+        if !docs.is_empty() {
+            a(&format!(" * {docs}"));
+        }
         a(" *");
     }
     a(&format!(
-        " * This function performs a `{}` to the `{}` endpoint.",
-        m, p
+        " * This function performs a `{m}` to the `{p}` endpoint."
     ));
     a(" *");
     a(&format!(
-        " * As opposed to `{}`, this function returns all the pages of the request at once.",
-        fn_name
+        " * As opposed to `{fn_name}`, this function returns all the pages of the request at once."
     ));
     if let Some(description) = &o.description {
-        a(" *");
-        a(&format!(" * {}", description.replace('\n', "\n * ")));
+        let docs = render_block_doc_lines(description);
+        if !docs.is_empty() {
+            a(" *");
+            a(&format!(" * {docs}"));
+        }
     }
     if let Some(external_docs) = &o.external_docs {
         a(" *");

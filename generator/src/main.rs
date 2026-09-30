@@ -1,4 +1,5 @@
 mod client;
+mod docs;
 mod functions;
 mod template;
 mod types;
@@ -20,6 +21,7 @@ use openapiv3::OpenAPI;
 use serde::Deserialize;
 
 use client::GeneratedServers;
+use docs::{render_block_doc_lines, render_doc_text, render_line_doc_comment};
 
 enum TemplateType {
     Github,
@@ -77,7 +79,7 @@ where
 {
     let api: OpenAPI = load(p)?;
 
-    if api.openapi != "3.0.3" {
+    if !api.openapi.starts_with("3.0.") {
         /*
          * XXX During development we are being very strict, but this should
          * probably be relaxed.
@@ -154,8 +156,7 @@ where
 
                             if !o.servers.is_empty() {
                                 println!(
-                                    "op {}: servers are only partially supported. Variables are not supported",
-                                    oid
+                                    "op {oid}: servers are only partially supported. Variables are not supported"
                                 );
                             }
 
@@ -164,7 +165,7 @@ where
                             }
 
                             if o.responses.default.is_some() {
-                                println!("op {}: has response default", oid);
+                                println!("op {oid}: has response default");
                             }
                         }
                     }
@@ -239,7 +240,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
                                     // Make sure we actually have a type, we might have
                                     // not added the type since it is a duplicate of another type.
-                                    if !name.is_empty() && ts.name_to_id.get(&sn).is_some() {
+                                    if !name.is_empty() && ts.name_to_id.contains_key(&sn) {
                                         return Ok(format!("crate::types::{}", struct_name(&sn)));
                                     }
 
@@ -259,7 +260,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                                 &te.details
                                             {
                                                 if enums == *vals {
-                                                    return Ok(format!("crate::types::{}", sn));
+                                                    return Ok(format!("crate::types::{sn}"));
                                                 }
                                             }
                                         }
@@ -353,21 +354,21 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         uint = true;
                                     } else {
                                         // TODO: handle this later
-                                        println!("XXX invalid minimum: {}", min);
+                                        // println!("XXX invalid minimum: {}", min);
                                     }
                                 }
 
                                 if it.maximum.is_some() {
                                     // TODO: handle this later
-                                    println!("XXX maximum is not supported");
+                                    // println!("XXX maximum is not supported");
                                 }
                                 if !it.enumeration.is_empty() {
                                     bail!("XXX enumeration {}: {:?}", self.name, it);
                                 }
                                 if uint {
-                                    format!("u{}", width)
+                                    format!("u{width}")
                                 } else {
-                                    format!("i{}", width)
+                                    format!("i{width}")
                                 }
                             }
                             openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), /* TODO: make this smarter. */
@@ -385,23 +386,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
 trait ExtractJsonMediaType {
     fn is_binary(&self) -> Result<bool>;
-    fn content_json(&self) -> Result<openapiv3::MediaType>;
 }
 
 impl ExtractJsonMediaType for openapiv3::Response {
-    fn content_json(&self) -> Result<openapiv3::MediaType> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/json") {
-            Ok(mt.clone())
-        } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
-        }
-    }
-
     fn is_binary(&self) -> Result<bool> {
         if self.content.is_empty() {
             /*
@@ -463,19 +450,6 @@ impl ExtractJsonMediaType for openapiv3::Response {
 }
 
 impl ExtractJsonMediaType for openapiv3::RequestBody {
-    fn content_json(&self) -> Result<openapiv3::MediaType> {
-        // We do not need to check the length of the content because there might be
-        // more than one. For example, if xml or some other format is also defined.
-        if let Some(mt) = self.content.get("application/json") {
-            Ok(mt.clone())
-        } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
-        }
-    }
-
     fn is_binary(&self) -> Result<bool> {
         if self.content.is_empty() {
             /*
@@ -781,7 +755,7 @@ impl TypeSpace {
                 }
                 TypeDetails::Enum(..) => {
                     if let Some(n) = &te.name {
-                        format!("enum {}", n)
+                        format!("enum {n}")
                     } else {
                         format!("[ENUM {} !NONAME?]", tid.0)
                     }
@@ -814,28 +788,28 @@ impl TypeSpace {
                 }
                 TypeDetails::Object(..) => {
                     if let Some(n) = &te.name {
-                        format!("object {}", n)
+                        format!("object {n}")
                     } else {
                         format!("[OBJECT {} !NONAME?]", tid.0)
                     }
                 }
                 TypeDetails::OneOf(..) => {
                     if let Some(n) = &te.name {
-                        format!("one_of {}", n)
+                        format!("one_of {n}")
                     } else {
                         format!("[ONE_OF {} !NONAME?]", tid.0)
                     }
                 }
                 TypeDetails::AnyOf(..) => {
                     if let Some(n) = &te.name {
-                        format!("any_of {}", n)
+                        format!("any_of {n}")
                     } else {
                         format!("[ANY_OF {} !NONAME?]", tid.0)
                     }
                 }
                 TypeDetails::AllOf(..) => {
                     if let Some(n) = &te.name {
-                        format!("all_of {}", n)
+                        format!("all_of {n}")
                     } else {
                         format!("[ALL_OF {} !NONAME?]", tid.0)
                     }
@@ -886,29 +860,24 @@ impl TypeSpace {
     }
 
     fn render_docs(&self, tid: &TypeId) -> String {
-        let mut out = String::new();
-
-        let mut a = |s: &str| {
-            out.push_str(s);
-            out.push('\n');
-        };
-
         let schema = self.get_schema_data_for_id(tid);
+        let mut docs = Vec::new();
 
         if let Some(s) = schema {
             if let Some(description) = &s.description {
-                a(&format!(
-                    " * {}",
-                    description.replace('*', "\\*").replace('\n', "\n *  ")
-                ));
+                let rendered = render_doc_text(description);
+                if !rendered.is_empty() {
+                    docs.push(rendered);
+                }
             }
             if let Some(external_docs) = &s.external_docs {
-                a(" *");
-                a(&format!(" * FROM: <{}>", external_docs.url));
+                if !external_docs.url.is_empty() {
+                    docs.push(format!("FROM: <{}>", external_docs.url));
+                }
             }
         }
 
-        out.trim().to_string()
+        docs.join("\n\n")
     }
 
     fn render_type(&self, tid: &TypeId, in_mod: bool) -> Result<String> {
@@ -927,7 +896,7 @@ impl TypeSpace {
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("crate::types::{}", struct_name))
+                            Ok(format!("crate::types::{struct_name}"))
                         }
                     } else {
                         bail!("enum type {:?} does not have a name?", tid);
@@ -944,7 +913,7 @@ impl TypeSpace {
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("crate::types::{}", struct_name))
+                            Ok(format!("crate::types::{struct_name}"))
                         }
                     } else {
                         bail!("one_of type {:?} does not have a name?", tid);
@@ -961,7 +930,7 @@ impl TypeSpace {
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("crate::types::{}", struct_name))
+                            Ok(format!("crate::types::{struct_name}"))
                         }
                     } else {
                         bail!("any_of type {:?} does not have a name?", tid);
@@ -978,7 +947,7 @@ impl TypeSpace {
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("crate::types::{}", struct_name))
+                            Ok(format!("crate::types::{struct_name}"))
                         }
                     } else {
                         bail!("all_of type {:?} does not have a name?", tid);
@@ -1018,7 +987,7 @@ impl TypeSpace {
                     {
                         Ok(rt)
                     } else {
-                        Ok(format!("Option<{}>", rt))
+                        Ok(format!("Option<{rt}>"))
                     }
                 }
                 TypeDetails::Object(..) => {
@@ -1032,7 +1001,7 @@ impl TypeSpace {
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("crate::types::{}", struct_name))
+                            Ok(format!("crate::types::{struct_name}"))
                         }
                     } else {
                         bail!("object type {:?} does not have a name?", tid);
@@ -1043,7 +1012,7 @@ impl TypeSpace {
                 }
             }
         } else {
-            panic!("could not resolve type ID {:?}", tid);
+            panic!("could not resolve type ID {tid:?}");
         }
     }
 
@@ -1054,14 +1023,13 @@ impl TypeSpace {
     }
 
     fn id_for_name(&mut self, name: &str) -> TypeId {
-        let id = if let Some(id) = self.name_to_id.get(name) {
+        if let Some(id) = self.name_to_id.get(name) {
             id.clone()
         } else {
             let id = self.assign();
             self.name_to_id.insert(name.to_string(), id.clone());
             id
-        };
-        id
+        }
     }
 
     fn id_for_optional(&mut self, tid: &TypeId, sd: openapiv3::SchemaData) -> TypeId {
@@ -1236,7 +1204,7 @@ impl TypeSpace {
                     // that have properties that are different.
                     if !parent_name.is_empty() {
                         // We have a parent name, let's append it to the real name.
-                        let pname = format!("{} {}", parent_name, name);
+                        let pname = format!("{parent_name} {name}");
                         return self.add_if_not_exists(
                             Some(clean_name(&pname)),
                             details,
@@ -1247,7 +1215,7 @@ impl TypeSpace {
 
                     if !name.contains("data") {
                         // Let's try to append "data" onto the end and see if that helps.
-                        let new_name = format!("{} data", name);
+                        let new_name = format!("{name} data");
                         return self.add_if_not_exists(
                             Some(clean_name(&new_name)),
                             details,
@@ -1256,7 +1224,7 @@ impl TypeSpace {
                         );
                     } else if !name.contains("type") {
                         // Let's try to append "type" onto the end and see if that helps.
-                        let new_name = format!("{} type", name);
+                        let new_name = format!("{name} type");
                         return self.add_if_not_exists(
                             Some(clean_name(&new_name)),
                             details,
@@ -1265,7 +1233,7 @@ impl TypeSpace {
                         );
                     } else if !name.contains("links") {
                         // Let's try to append "type" onto the end and see if that helps.
-                        let new_name = format!("{} links", name);
+                        let new_name = format!("{name} links");
                         return self.add_if_not_exists(
                             Some(clean_name(&new_name)),
                             details,
@@ -1274,7 +1242,7 @@ impl TypeSpace {
                         );
                     } else if !name.contains("object") {
                         // Let's try to append "type" onto the end and see if that helps.
-                        let new_name = format!("{} object", name);
+                        let new_name = format!("{name} object");
                         return self.add_if_not_exists(
                             Some(clean_name(&new_name)),
                             details,
@@ -1511,12 +1479,12 @@ impl TypeSpace {
                             if n == t
                                 || n.ends_with("response")
                                 || n.ends_with("request")
-                                || self.name_to_id.get(&clean_name(n)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(n))
                             {
                                 t
                             } else if t.ends_with("response")
                                 || t.ends_with("request")
-                                || self.name_to_id.get(&clean_name(t)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(t))
                                 || n.len() < t.len()
                             {
                                 n
@@ -1558,8 +1526,8 @@ impl TypeSpace {
                             };
 
                             // If this name already exists add additional properties to it.
-                            if self.name_to_id.get(&clean_name(&name)).is_some() {
-                                name = format!("{} additional properties", name);
+                            if self.name_to_id.contains_key(&clean_name(&name)) {
+                                name = format!("{name} additional properties");
                             }
                             let id = self.select(Some(&name), ad, &desc)?;
                             return Ok((
@@ -1572,7 +1540,7 @@ impl TypeSpace {
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
                         if n.is_empty() {
-                            println!("XXX n cannot be empty for {}", name);
+                            // println!("XXX n cannot be empty for {}", name);
                             continue;
                         }
 
@@ -1651,11 +1619,11 @@ impl TypeSpace {
                                 // Check if we already have a type with this name.
                                 if n == t
                                     || (n.ends_with("response") || n.ends_with("request"))
-                                    || self.name_to_id.get(&clean_name(n)).is_some()
+                                    || self.name_to_id.contains_key(&clean_name(n))
                                 {
                                     t
                                 } else if (t.ends_with("response") || t.ends_with("request"))
-                                    || self.name_to_id.get(&clean_name(t)).is_some()
+                                    || self.name_to_id.contains_key(&clean_name(t))
                                     || n.len() < t.len()
                                 {
                                     n
@@ -2026,11 +1994,11 @@ impl TypeSpace {
                             // Check if we already have a type with this name.
                             if n == t
                                 || (n.ends_with("response") || n.ends_with("request"))
-                                || self.name_to_id.get(&clean_name(n)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(n))
                             {
                                 t
                             } else if (t.ends_with("response") || t.ends_with("request"))
-                                || self.name_to_id.get(&clean_name(t)).is_some()
+                                || self.name_to_id.contains_key(&clean_name(t))
                                 || n.len() < t.len()
                             {
                                 n
@@ -2094,10 +2062,7 @@ impl TypeSpace {
 
                 // We have no idea what this is.
                 // Then we use the serde_json type.
-                println!(
-                    "[warn] got ANY kind: {:?} {} {:?}\n",
-                    name, parent_name, any
-                );
+                println!("[warn] got ANY kind: {name:?} {parent_name} {any:?}\n");
 
                 Ok((
                     Some(nam),
@@ -2196,21 +2161,25 @@ fn render_param(
         enums.push(e.to_string());
     }
 
+    let description = description.trim();
     if !description.is_empty() {
         a("/**");
-        a(&format!(" * {}", description.replace('\n', "\n *   ")));
+        let docs = render_block_doc_lines(description);
+        if !docs.is_empty() {
+            a(&format!(" * {}", docs.replace("\n * ", "\n *   ")));
+        }
         a(" */");
     }
 
     a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
 
-    a(&format!("pub enum {} {{", sn));
+    a(&format!("pub enum {sn} {{"));
     for e in &enums {
         if struct_name(e).is_empty() {
             // TODO: do something for empty(?)
             continue;
         }
-        a(&format!(r#"#[serde(rename = "{}")]"#, e));
+        a(&format!(r#"#[serde(rename = "{e}")]"#));
         a(&format!("{},", struct_name(e)));
     }
     if !required && default.is_none() {
@@ -2225,7 +2194,7 @@ fn render_param(
     a("}");
     a("");
 
-    a(&format!("impl std::fmt::Display for {} {{", sn));
+    a(&format!("impl std::fmt::Display for {sn} {{"));
     a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
     a(r#"match self {"#);
     for e in &enums {
@@ -2236,11 +2205,11 @@ fn render_param(
         a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
     }
     if !required && default.is_none() {
-        a(&format!(r#"{}::Noop => "","#, sn));
+        a(&format!(r#"{sn}::Noop => "","#));
     }
 
     // Let's add the display format for the wildcard.
-    a(&format!(r#"{}::FallthroughString => "*","#, sn));
+    a(&format!(r#"{sn}::FallthroughString => "*","#));
 
     a("}");
     a(".fmt(f)");
@@ -2250,8 +2219,8 @@ fn render_param(
 
     // Add a default for the enum if it is not required.
     if !required || default.is_some() {
-        a(&format!("impl Default for {} {{", sn));
-        a(&format!("fn default() -> {} {{", sn));
+        a(&format!("impl Default for {sn} {{"));
+        a(&format!("fn default() -> {sn} {{"));
         if let Some(d) = default {
             // Use the default that can be passed to the OpenAPI,
             // github is not using that currently for everything but we might want to
@@ -2262,7 +2231,7 @@ fn render_param(
                 struct_name(&d.to_string().replace('"', ""))
             ));
         } else {
-            a(&format!("{}::Noop", sn));
+            a(&format!("{sn}::Noop"));
         }
         a("}");
         a("}");
@@ -2271,12 +2240,11 @@ fn render_param(
     // Add a method to check if it is empty if it has this Noop state.
     if !required && default.is_none() {
         a(&format!(
-            r#"impl {} {{
+            r#"impl {sn} {{
             pub fn is_noop(&self) -> bool {{
-                matches!(self, {}::Noop)
+                matches!(self, {sn}::Noop)
             }}
-    }}"#,
-            sn, sn
+    }}"#
         ));
         a("");
     }
@@ -2345,7 +2313,10 @@ fn r#gen(
 
         let mut docs = "".to_string();
         if let Some(d) = &tag.description {
-            docs = format!("{}.", d.trim_end_matches('.'));
+            let description = render_doc_text(d);
+            if !description.is_empty() {
+                docs = description;
+            }
         }
         if let Some(e) = &tag.external_docs {
             if !e.url.is_empty() {
@@ -2355,7 +2326,10 @@ fn r#gen(
         docs = docs.trim().to_string();
 
         if !docs.is_empty() {
-            a(&format!("/// {}", docs.replace('\n', "\n///"),));
+            let docs = render_line_doc_comment(&docs);
+            if !docs.is_empty() {
+                a(&docs);
+            }
         }
         a(&format!(
             "pub mod {};",
@@ -2585,7 +2559,10 @@ pub(crate) struct Message {
             tag.name
         );
         if let Some(d) = &tag.description {
-            docs = format!("{}.", d.trim_end_matches('.'));
+            let description = render_doc_text(d);
+            if !description.is_empty() {
+                docs = description;
+            }
         }
         if let Some(e) = &tag.external_docs {
             if !e.url.is_empty() {
@@ -2593,12 +2570,14 @@ pub(crate) struct Message {
             }
         }
 
+        let docs = render_line_doc_comment(&docs);
+        if !docs.is_empty() {
+            a(&docs);
+        }
         a(&format!(
-            r#"/// {}
-               pub fn {}(&self) -> {}::{} {{
+            r#"               pub fn {}(&self) -> {}::{} {{
                     {}::{}::new(self.clone())
                }}"#,
-            docs.replace('\n', "\n///"),
             to_snake_case(&clean_name(&tag.name)),
             to_snake_case(&clean_name(&tag.name)),
             struct_name(&tag.name),
@@ -2639,14 +2618,14 @@ pub fn make_plural(proper_name: &str, s: &str) -> String {
     }
 
     if s.ends_with("ss") && !s.ends_with("access") {
-        return format!("{}es", s);
+        return format!("{s}es");
     } else if s.ends_with('s') || s.ends_with("_all") {
         return s.to_string();
     } else if s.ends_with('y') {
         return format!("{}ies", s.trim_end_matches('y'));
     }
 
-    format!("{}s", s)
+    format!("{s}s")
 }
 
 fn struct_name(s: &str) -> String {
@@ -2659,7 +2638,7 @@ fn struct_name(s: &str) -> String {
         to_pascal_case(&english_numbers::convert_all_fmt(i))
     } else if t == "Option" || t == "Self" {
         // Fix any reserved words.
-        format!("{}Data", t)
+        format!("{t}Data")
     } else {
         t
     }
@@ -2892,8 +2871,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
 }
 
 fn oid_to_object_name(s: &str) -> String {
-    let cleaned = s
-        .to_lowercase()
+    s.to_lowercase()
         .replace('.', "")
         .replace('_', " ")
         .replace(" an ", " ")
@@ -2913,9 +2891,7 @@ fn oid_to_object_name(s: &str) -> String {
         .replace("authenticated user", "")
         .replace("  ", " ")
         .trim()
-        .to_string();
-
-    cleaned
+        .to_string()
 }
 
 fn main() -> Result<()> {
@@ -2980,7 +2956,7 @@ fn main() -> Result<()> {
 
     let debug = |s: &str| {
         if args.opt_present("debug") {
-            println!("{}", s);
+            println!("{s}");
         }
     };
 
@@ -3002,7 +2978,7 @@ fn main() -> Result<()> {
             ));
 
             let id = ts.select(Some(name.as_str()), s, "")?;
-            debug(&format!("    -> {:?}", id));
+            debug(&format!("    -> {id:?}"));
             debug("");
 
             // Insert the named type for our reference.
@@ -3026,7 +3002,7 @@ fn main() -> Result<()> {
             // DO NOT CLEAN THE NAME HERE.
             ts.populate_ref(Some(pn.as_str()), Some(id.clone()), "parameter")?;
 
-            debug(&format!("    -> {:?}", id));
+            debug(&format!("    -> {id:?}"));
             debug("");
             if let openapiv3::ReferenceOr::Item(item) = p {
                 parameters.insert(struct_name(pn), item);
@@ -3055,14 +3031,14 @@ fn main() -> Result<()> {
                         && content.len() == 1)
                 {
                     if let Some(s) = &mt.schema {
-                        let object_name = format!("{} request", name);
+                        let object_name = format!("{name} request");
                         let id = ts.select(Some(&clean_name(&object_name)), s, "")?;
 
                         // Insert the named type for our reference.
                         // DO NOT CLEAN THE NAME HERE.
                         ts.populate_ref(Some(rn.as_str()), Some(id.clone()), "requestBodies")?;
 
-                        debug(&format!("    -> {:?}", id));
+                        debug(&format!("    -> {id:?}"));
                         debug("");
                     }
                 }
@@ -3103,14 +3079,14 @@ fn main() -> Result<()> {
                             }
                         }
 
-                        let object_name = format!("{} response", name);
+                        let object_name = format!("{name} response");
                         let id = ts.select(Some(&clean_name(&object_name)), s, "")?;
 
                         // Insert the named type for our reference.
                         // DO NOT CLEAN THE NAME HERE.
                         ts.populate_ref(Some(rn.as_str()), Some(id.clone()), "response")?;
 
-                        debug(&format!("    -> {:?}", id));
+                        debug(&format!("    -> {id:?}"));
                         debug("");
                     }
                 }
@@ -3146,11 +3122,11 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<String> {
             if let Some(o) = o {
-                let op_id = if o.operation_id.is_none() {
-                    // Make the operation id, the function.
-                    path_to_operation_id(pn, m)
+                let op_id = if let Some(operation_id) = &o.operation_id {
+                    operation_id.to_string()
                 } else {
-                    o.operation_id.as_ref().unwrap().to_string()
+                    // Make the operation id the function.
+                    path_to_operation_id(pn, m)
                 };
                 let od = to_snake_case(&op_id);
 
@@ -3202,7 +3178,7 @@ fn main() -> Result<()> {
                                 let object_name = format!("{} request", oid_to_object_name(&od));
                                 let id = ts.select(Some(&object_name), s, "")?;
                                 let rt = ts.render_type(&id, true)?;
-                                req.push(format!("{} {:?}", rt, id));
+                                req.push(format!("{rt} {id:?}"));
                             }
                         } else {
                             req.push(ct.to_string());
@@ -3212,7 +3188,7 @@ fn main() -> Result<()> {
                     &o.request_body
                 {
                     let id = ts.select_ref(None, reference.as_str())?;
-                    req.push(format!("{:?}", id));
+                    req.push(format!("{id:?}"));
                 }
                 if !req.is_empty() {
                     debug(&format!(
@@ -3263,7 +3239,7 @@ fn main() -> Result<()> {
                                         let id =
                                             ts.select(Some(&clean_name(&object_name)), s, "")?;
                                         let rt = ts.render_type(&id, false)?;
-                                        res.push(format!("{} {:?}", rt, id));
+                                        res.push(format!("{rt} {id:?}"));
                                     }
                                 } else {
                                     res.push(ct.to_string());
@@ -3272,7 +3248,7 @@ fn main() -> Result<()> {
                         }
                         openapiv3::ReferenceOr::Reference { reference } => {
                             let id = ts.select_ref(None, reference.as_str())?;
-                            res.push(format!("{:?}", id));
+                            res.push(format!("{id:?}"));
                         }
                     }
                 }
@@ -3347,19 +3323,25 @@ uuid = { version = "1.1", features = ["serde", "v4"] }"#
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"
 base64 = "^0.21"
-yup-oauth2 = {{ version = "12", default-features = false, features = ["hyper-rustls", "aws-lc-rs"] }}"#
+yup-oauth2 = { version = "12", default-features = false, features = ["hyper-rustls", "aws-lc-rs"] }"#
                     .to_string();
             }
+
+            let rsa_dev_lib = if proper_name == "GitHub" {
+                r#"{ version = "0.8.1", features = ["getrandom"] }"#
+            } else {
+                r#""0.8.1""#
+            };
 
             let mut toml = root.clone();
             toml.push("Cargo.toml");
             let tomlout = format!(
                 r#"[package]
-name = "{}"
-description = "{}"
-version = "{}"
-documentation = "https://docs.rs/{}/"
-repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/{}"
+name = "{name}"
+description = "{description}"
+version = "{version}"
+documentation = "https://docs.rs/{name}/"
+repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/{output_dir}"
 readme = "README.md"
 edition = "2024"
 license = "MIT"
@@ -3398,7 +3380,7 @@ schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
 serde_urlencoded = "^0.7"
-url = {{ version = "2", features = ["serde"] }}{}{}
+url = {{ version = "2", features = ["serde"] }}{uuid_lib}{yup_oauth2_lib}
 thiserror = "1"
 tokio = {{ version = "1.25.0", default-features = false }}
 
@@ -3406,16 +3388,15 @@ tokio = {{ version = "1.25.0", default-features = false }}
 base64 = "^0.21"
 dirs = "^3.0.2"
 nom_pem = "4"
-rand = "0.8.5"
-rsa = "0.8.1"
+rand = "0.10.1"
+rsa = {rsa_dev_lib}
 tokio = {{ version = "1.25.0", features = ["full", "test-util"] }}
 wiremock = "0.5.17"
 
 [package.metadata.docs.rs]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
-"#,
-                name, description, version, name, output_dir, uuid_lib, yup_oauth2_lib
+"#
             );
             save(&toml, tomlout.as_str())?;
 
@@ -3501,10 +3482,7 @@ rustdoc-args = ["--cfg", "docsrs"]
             /*
              * Create the Rust source file containing the generated client:
              */
-            let lib = format!(
-                "{}\n#![allow(clippy::derive_partial_eq_without_eq)]\n{}",
-                docs, out
-            );
+            let lib = format!("{docs}\n#![allow(clippy::derive_partial_eq_without_eq)]\n{out}");
             let mut librs = src.clone();
             librs.push("lib.rs");
             save(librs, lib.as_str())?;
@@ -3571,13 +3549,13 @@ impl {} {{
                     false
                 }
                 Err(e) => {
-                    println!("generate_files fail: {:?}", e);
+                    println!("generate_files fail: {e:?}");
                     true
                 }
             }
         }
         Err(e) => {
-            println!("gen fail: {:?}", e);
+            println!("gen fail: {e:?}");
             true
         }
     };
