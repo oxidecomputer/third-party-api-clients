@@ -12,7 +12,7 @@ impl RateLimit {
     }
 
     /**
-     * Get rate limit status for the authenticated user.
+     * Get rate limit status for the authenticated user
      *
      * This function performs a `GET` to the `/rate_limit` endpoint.
      *

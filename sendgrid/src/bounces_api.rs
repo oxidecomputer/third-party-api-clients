@@ -12,7 +12,7 @@ impl BouncesApi {
     }
 
     /**
-     * Retrieve all bounces.
+     * Retrieve all bounces
      *
      * This function performs a `GET` to the `/suppression/bounces` endpoint.
      *
@@ -20,10 +20,10 @@ impl BouncesApi {
      *
      * **Parameters:**
      *
-     * * `start_time: i64` -- Refers start of the time range in unix timestamp when a bounce was created (inclusive).
-     * * `end_time: i64` -- Refers end of the time range in unix timestamp when a bounce was created (inclusive).
-     * * `accept: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `start_time` -- Refers start of the time range in unix timestamp when a bounce was created (inclusive).
+     * * `end_time` -- Refers end of the time range in unix timestamp when a bounce was created (inclusive).
+     * * `accept` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_bounces(
         &self,
@@ -40,7 +40,7 @@ impl BouncesApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/bounces?{}", query_), None);
+            .url(&format!("/suppression/bounces?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -52,7 +52,7 @@ impl BouncesApi {
             .await
     }
     /**
-     * Retrieve all bounces.
+     * Retrieve all bounces
      *
      * This function performs a `GET` to the `/suppression/bounces` endpoint.
      *
@@ -75,7 +75,7 @@ impl BouncesApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/bounces?{}", query_), None);
+            .url(&format!("/suppression/bounces?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -87,7 +87,7 @@ impl BouncesApi {
             .await
     }
     /**
-     * Delete bounces.
+     * Delete bounces
      *
      * This function performs a `DELETE` to the `/suppression/bounces` endpoint.
      *
@@ -100,7 +100,7 @@ impl BouncesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_bounces(
         &self,
@@ -118,7 +118,7 @@ impl BouncesApi {
             .await
     }
     /**
-     * Retrieve a Bounce.
+     * Retrieve a Bounce
      *
      * This function performs a `GET` to the `/suppression/bounces/{email}` endpoint.
      *
@@ -126,7 +126,7 @@ impl BouncesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_bounces_email(
         &self,
@@ -150,7 +150,7 @@ impl BouncesApi {
             .await
     }
     /**
-     * Retrieve a Bounce.
+     * Retrieve a Bounce
      *
      * This function performs a `GET` to the `/suppression/bounces/{email}` endpoint.
      *
@@ -180,7 +180,7 @@ impl BouncesApi {
             .await
     }
     /**
-     * Delete a bounce.
+     * Delete a bounce
      *
      * This function performs a `DELETE` to the `/suppression/bounces/{email}` endpoint.
      *
@@ -188,8 +188,8 @@ impl BouncesApi {
      *
      * **Parameters:**
      *
-     * * `email_address: &str` -- The email address you would like to remove from the bounce list.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `email_address` -- The email address you would like to remove from the bounce list.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_bounces_email(
         &self,

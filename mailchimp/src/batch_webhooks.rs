@@ -12,7 +12,7 @@ impl BatchWebhooks {
     }
 
     /**
-     * List batch webhooks.
+     * List batch webhooks
      *
      * This function performs a `GET` to the `/batch-webhooks` endpoint.
      *
@@ -20,10 +20,10 @@ impl BatchWebhooks {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get(
         &self,
@@ -46,9 +46,7 @@ impl BatchWebhooks {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/batch-webhooks?{}", query_), None);
+        let url = self.client.url(&format!("/batch-webhooks?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -60,7 +58,7 @@ impl BatchWebhooks {
             .await
     }
     /**
-     * Add batch webhook.
+     * Add batch webhook
      *
      * This function performs a `POST` to the `/batch-webhooks` endpoint.
      *
@@ -82,7 +80,7 @@ impl BatchWebhooks {
             .await
     }
     /**
-     * Get batch webhook info.
+     * Get batch webhook info
      *
      * This function performs a `GET` to the `/batch-webhooks/{batch_webhook_id}` endpoint.
      *
@@ -90,9 +88,9 @@ impl BatchWebhooks {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `batch_webhook_id: &str` -- The unique id for the batch webhook.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `batch_webhook_id` -- The unique id for the batch webhook.
      */
     pub async fn get_batch_webhooks(
         &self,
@@ -127,7 +125,7 @@ impl BatchWebhooks {
             .await
     }
     /**
-     * Delete batch webhook.
+     * Delete batch webhook
      *
      * This function performs a `DELETE` to the `/batch-webhooks/{batch_webhook_id}` endpoint.
      *
@@ -135,7 +133,7 @@ impl BatchWebhooks {
      *
      * **Parameters:**
      *
-     * * `batch_webhook_id: &str` -- The unique id for the batch webhook.
+     * * `batch_webhook_id` -- The unique id for the batch webhook.
      */
     pub async fn delete(&self, batch_webhook_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -156,7 +154,7 @@ impl BatchWebhooks {
             .await
     }
     /**
-     * Update batch webhook.
+     * Update batch webhook
      *
      * This function performs a `PATCH` to the `/batch-webhooks/{batch_webhook_id}` endpoint.
      *
@@ -164,7 +162,7 @@ impl BatchWebhooks {
      *
      * **Parameters:**
      *
-     * * `batch_webhook_id: &str` -- The unique id for the batch webhook.
+     * * `batch_webhook_id` -- The unique id for the batch webhook.
      */
     pub async fn patch(
         &self,

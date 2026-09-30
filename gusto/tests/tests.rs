@@ -125,7 +125,7 @@ const EMPLOYEE: &str = r#"{
 #[test]
 fn test_deserialize_employee() {
     let deserialized: gusto_api::types::Employee = serde_json::from_str(EMPLOYEE).unwrap();
-    println!("employee = {:?}", deserialized);
+    println!("employee = {deserialized:?}");
     let first_job = deserialized.jobs.first().unwrap();
     let first_compensation = first_job.compensations.first().unwrap();
     assert_eq!(

@@ -12,7 +12,7 @@ impl Conversations {
     }
 
     /**
-     * List conversations.
+     * List conversations
      *
      * This function performs a `GET` to the `/conversations` endpoint.
      *
@@ -20,13 +20,13 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `has_unread_messages: crate::types::IsRead` -- Whether a conversation message has been marked as read.
-     * * `list_id: &str` -- The unique id for the list.
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `has_unread_messages` -- Whether a conversation message has been marked as read.
+     * * `list_id` -- The unique id for the list.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn get(
         &self,
@@ -64,7 +64,7 @@ impl Conversations {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/conversations?{}", query_), None);
+        let url = self.client.url(&format!("/conversations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -76,7 +76,7 @@ impl Conversations {
             .await
     }
     /**
-     * Get conversation.
+     * Get conversation
      *
      * This function performs a `GET` to the `/conversations/{conversation_id}` endpoint.
      *
@@ -84,9 +84,9 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `conversation_id: &str` -- The unique id for the conversation.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `conversation_id` -- The unique id for the conversation.
      */
     pub async fn get_conversations(
         &self,
@@ -121,7 +121,7 @@ impl Conversations {
             .await
     }
     /**
-     * List messages.
+     * List messages
      *
      * This function performs a `GET` to the `/conversations/{conversation_id}/messages` endpoint.
      *
@@ -129,12 +129,12 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `conversation_id: &str` -- The unique id for the conversation.
-     * * `is_read: crate::types::IsRead` -- Whether a conversation message has been marked as read.
-     * * `before_timestamp: chrono::DateTime<chrono::Utc>` -- Restrict the response to messages created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_timestamp: chrono::DateTime<chrono::Utc>` -- Restrict the response to messages created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `conversation_id` -- The unique id for the conversation.
+     * * `is_read` -- Whether a conversation message has been marked as read.
+     * * `before_timestamp` -- Restrict the response to messages created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_timestamp` -- Restrict the response to messages created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
      */
     pub async fn get_message(
         &self,
@@ -181,7 +181,7 @@ impl Conversations {
             .await
     }
     /**
-     * Get message.
+     * Get message
      *
      * This function performs a `GET` to the `/conversations/{conversation_id}/messages/{message_id}` endpoint.
      *
@@ -189,10 +189,10 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `conversation_id: &str` -- The unique id for the conversation.
-     * * `message_id: &str` -- The unique id for the conversation message.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `conversation_id` -- The unique id for the conversation.
+     * * `message_id` -- The unique id for the conversation message.
      */
     pub async fn get_message_conversations(
         &self,

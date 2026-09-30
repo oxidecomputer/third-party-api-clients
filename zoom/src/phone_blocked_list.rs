@@ -12,22 +12,23 @@ impl PhoneBlockedList {
     }
 
     /**
-     * List blocked lists.
+     * List blocked lists
      *
      * This function performs a `GET` to the `/phone/blocked_list` endpoint.
      *
      * A Zoom account owner or a user with admin privilege can block phone numbers for phone users in an account. Blocked numbers can be inbound (numbers will be blocked from calling in) and outbound (phone users in your account won't be able to dial those numbers). Blocked callers will hear a generic message stating that the person they are calling is not available.<br>Use this API to list all the blocked lists in an acccount.<br>
      * **Prerequisites:**
+     *
      * * Pro or higher account plan with Zoom phone license<br>
+     *
      * **Scope:** `phone:read:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `page_size: i64` -- The total number of records returned from a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The total number of records returned from a single API call.
      */
     pub async fn list_blocked(
         &self,
@@ -44,7 +45,7 @@ impl PhoneBlockedList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/blocked_list?{}", query_), None);
+            .url(&format!("/phone/blocked_list?{query_}"), None);
         let resp: crate::Response<crate::types::ListBlockedResponse> = self
             .client
             .get(
@@ -64,7 +65,7 @@ impl PhoneBlockedList {
         ))
     }
     /**
-     * List blocked lists.
+     * List blocked lists
      *
      * This function performs a `GET` to the `/phone/blocked_list` endpoint.
      *
@@ -72,11 +73,12 @@ impl PhoneBlockedList {
      *
      * A Zoom account owner or a user with admin privilege can block phone numbers for phone users in an account. Blocked numbers can be inbound (numbers will be blocked from calling in) and outbound (phone users in your account won't be able to dial those numbers). Blocked callers will hear a generic message stating that the person they are calling is not available.<br>Use this API to list all the blocked lists in an acccount.<br>
      * **Prerequisites:**
+     *
      * * Pro or higher account plan with Zoom phone license<br>
+     *
      * **Scope:** `phone:read:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn list_all_blocked(
         &self,
@@ -111,7 +113,7 @@ impl PhoneBlockedList {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -126,7 +128,7 @@ impl PhoneBlockedList {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -148,17 +150,18 @@ impl PhoneBlockedList {
         Ok(crate::Response::new(status, headers, blocked_list))
     }
     /**
-     * Create a blocked list.
+     * Create a blocked list
      *
      * This function performs a `POST` to the `/phone/blocked_list` endpoint.
      *
      * A Zoom account owner or a user with admin privilege can block phone numbers for phone users in an account. Blocked numbers can be inbound (numbers will be blocked from calling in) and outbound (phone users in your account won't be able to dial those numbers). Blocked callers will hear a generic message stating that the person they are calling is not available.<br>Use this API to create a blocked list and add a number to that blocked list.<br>
      * **Prerequisites:**
+     *
      * * Pro or higher account plan with Zoom phone license<br>
+     *
      * **Scope:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn add_anumber_blocked_list(
         &self,
@@ -176,20 +179,22 @@ impl PhoneBlockedList {
             .await
     }
     /**
-     * Get blocked list details.
+     * Get blocked list details
      *
      * This function performs a `GET` to the `/phone/blocked_list/{blockedListId}` endpoint.
      *
      * A Zoom account owner or a user with admin privilege can block phone numbers for phone users in an account. Blocked numbers can be inbound (numbers will be blocked from calling in) and outbound (phone users in your account won't be able to dial those numbers). Blocked callers will hear a generic message stating that the person they are calling is not available.<br>Use this API to get information about a specific blocked list.<br>
      * **Prerequisites:**
+     *
      * * Pro or higher account plan with Zoom phone license<br>
+     *
      * **Scope:** `phone:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `blocked_list_id: &str` -- Unique Identifier of the blocked list.
+     * * `blocked_list_id` -- Unique Identifier of the blocked list.
      */
     pub async fn get_blocked_list(
         &self,
@@ -213,22 +218,23 @@ impl PhoneBlockedList {
             .await
     }
     /**
-     * Delete a blocked list.
+     * Delete a blocked list
      *
      * This function performs a `DELETE` to the `/phone/blocked_list/{blockedListId}` endpoint.
      *
      * A Zoom account owner or a user with admin privilege can block phone numbers for phone users in an account. Blocked numbers can be inbound (numbers will be blocked from calling in) and outbound (phone users in your account won't be able to dial those numbers).
-     * <br>Use this API to delete a blocked list and therefore removing the associated number from the blocked list. The number will be unblocked after the deletion.<br>
+     * Use this API to delete a blocked list and therefore removing the associated number from the blocked list. The number will be unblocked after the deletion.<br>
      * **Prerequisites:**
+     *
      * * Pro or higher account plan with Zoom phone license<br>
+     *
      * **Scope:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `blocked_list_id: &str` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
+     * * `blocked_list_id` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
      */
     pub async fn delete_blocked_list(
         &self,
@@ -252,21 +258,21 @@ impl PhoneBlockedList {
             .await
     }
     /**
-     * Update a blocked list.
+     * Update a blocked list
      *
      * This function performs a `PATCH` to the `/phone/blocked_list/{blockedListId}` endpoint.
      *
      * A Zoom account owner or a user with admin privilege can block phone numbers for phone users in an account. Blocked numbers can be inbound (numbers will be blocked from calling in) and outbound (phone users in your account won't be able to dial those numbers). Blocked callers will hear a generic message stating that the person they are calling is not available.<br>Use this API to update information on the blocked list.<br>
      * **Prerequisites:**
+     *
      * * Pro or higher account plan with Zoom phone license<br>
+     *
      * **Scope:** `phone:write:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-     *
-     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `blocked_list_id: &str` -- Unique Identifier of the blocked list.
+     * * `blocked_list_id` -- Unique Identifier of the blocked list.
      */
     pub async fn update_blocked_list(
         &self,

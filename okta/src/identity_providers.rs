@@ -12,7 +12,7 @@ impl IdentityProviders {
     }
 
     /**
-     * List Identity Providers.
+     * List Identity Providers
      *
      * This function performs a `GET` to the `/api/v1/idps` endpoint.
      *
@@ -20,10 +20,10 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `q: &str` -- Searches the name property of IdPs for matching value.
-     * * `after: &str` -- Specifies the pagination cursor for the next page of IdPs.
-     * * `limit: i64` -- Specifies the number of IdP results in a page.
-     * * `type_: &str` -- Filters IdPs by type.
+     * * `q` -- Searches the name property of IdPs for matching value
+     * * `after` -- Specifies the pagination cursor for the next page of IdPs
+     * * `limit` -- Specifies the number of IdP results in a page
+     * * `type_` -- Filters IdPs by type
      */
     pub async fn list(
         &self,
@@ -46,7 +46,7 @@ impl IdentityProviders {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/idps?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/idps?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -58,7 +58,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * List Identity Providers.
+     * List Identity Providers
      *
      * This function performs a `GET` to the `/api/v1/idps` endpoint.
      *
@@ -79,7 +79,7 @@ impl IdentityProviders {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/idps?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/idps?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -91,7 +91,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Add Identity Provider.
+     * Add Identity Provider
      *
      * This function performs a `POST` to the `/api/v1/idps` endpoint.
      *
@@ -113,7 +113,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * List Keys.
+     * List Keys
      *
      * This function performs a `GET` to the `/api/v1/idps/credentials/keys` endpoint.
      *
@@ -121,8 +121,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `after: &str` -- Specifies the pagination cursor for the next page of keys.
-     * * `limit: i64` -- Specifies the number of key results in a page.
+     * * `after` -- Specifies the pagination cursor for the next page of keys
+     * * `limit` -- Specifies the number of key results in a page
      */
     pub async fn list_keys(
         &self,
@@ -139,7 +139,7 @@ impl IdentityProviders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/idps/credentials/keys?{}", query_), None);
+            .url(&format!("/api/v1/idps/credentials/keys?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -151,7 +151,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * List Keys.
+     * List Keys
      *
      * This function performs a `GET` to the `/api/v1/idps/credentials/keys` endpoint.
      *
@@ -174,7 +174,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Add X.509 Certificate Public Key.
+     * Add X.509 Certificate Public Key
      *
      * This function performs a `POST` to the `/api/v1/idps/credentials/keys` endpoint.
      *
@@ -196,7 +196,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Get Key.
+     * Get Key
      *
      * This function performs a `GET` to the `/api/v1/idps/credentials/keys/{keyId}` endpoint.
      *
@@ -204,7 +204,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `key_id: &str`
+     * * `key_id`
      */
     pub async fn get_key(
         &self,
@@ -228,7 +228,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Delete Key.
+     * Delete Key
      *
      * This function performs a `DELETE` to the `/api/v1/idps/credentials/keys/{keyId}` endpoint.
      *
@@ -236,7 +236,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `key_id: &str`
+     * * `key_id`
      */
     pub async fn delete_key(&self, key_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -257,7 +257,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Get Identity Provider.
+     * Get Identity Provider
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}` endpoint.
      *
@@ -265,7 +265,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn get(
         &self,
@@ -289,7 +289,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Update Identity Provider.
+     * Update Identity Provider
      *
      * This function performs a `PUT` to the `/api/v1/idps/{idpId}` endpoint.
      *
@@ -297,7 +297,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn update(
         &self,
@@ -322,7 +322,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Delete Identity Provider.
+     * Delete Identity Provider
      *
      * This function performs a `DELETE` to the `/api/v1/idps/{idpId}` endpoint.
      *
@@ -330,7 +330,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn delete(&self, idp_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -351,7 +351,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * List Certificate Signing Requests for IdP.
+     * List Certificate Signing Requests for IdP
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/credentials/csrs` endpoint.
      *
@@ -359,7 +359,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn list_csrs_fors(
         &self,
@@ -383,7 +383,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * List Certificate Signing Requests for IdP.
+     * List Certificate Signing Requests for IdP
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/credentials/csrs` endpoint.
      *
@@ -413,7 +413,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Generate Certificate Signing Request for IdP.
+     * Generate Certificate Signing Request for IdP
      *
      * This function performs a `POST` to the `/api/v1/idps/{idpId}/credentials/csrs` endpoint.
      *
@@ -421,7 +421,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn generate_csr_for(
         &self,
@@ -452,8 +452,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `csr_id: &str`
+     * * `idp_id`
+     * * `csr_id`
      */
     pub async fn get_csr_for(
         &self,
@@ -485,8 +485,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `csr_id: &str`
+     * * `idp_id`
+     * * `csr_id`
      */
     pub async fn revoke_csr_for(
         &self,
@@ -518,8 +518,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `csr_id: &str`
+     * * `idp_id`
+     * * `csr_id`
      */
     pub async fn post_idp_credentials_csr_lifecycle_publish(
         &self,
@@ -545,7 +545,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * List Signing Key Credentials for IdP.
+     * List Signing Key Credentials for IdP
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/credentials/keys` endpoint.
      *
@@ -553,7 +553,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn list_signing_keys(
         &self,
@@ -577,7 +577,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * List Signing Key Credentials for IdP.
+     * List Signing Key Credentials for IdP
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/credentials/keys` endpoint.
      *
@@ -607,7 +607,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Generate New IdP Signing Key Credential.
+     * Generate New IdP Signing Key Credential
      *
      * This function performs a `POST` to the `/api/v1/idps/{idpId}/credentials/keys/generate` endpoint.
      *
@@ -615,8 +615,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `validity_years: i64` -- expiry of the IdP Key Credential.
+     * * `idp_id`
+     * * `validity_years` -- expiry of the IdP Key Credential
      */
     pub async fn generate_signing_key(
         &self,
@@ -647,7 +647,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Get Signing Key Credential for IdP.
+     * Get Signing Key Credential for IdP
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/credentials/keys/{keyId}` endpoint.
      *
@@ -655,8 +655,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `key_id: &str`
+     * * `idp_id`
+     * * `key_id`
      */
     pub async fn get_signing_key(
         &self,
@@ -682,7 +682,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Clone Signing Key Credential for IdP.
+     * Clone Signing Key Credential for IdP
      *
      * This function performs a `POST` to the `/api/v1/idps/{idpId}/credentials/keys/{keyId}/clone` endpoint.
      *
@@ -690,9 +690,9 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `key_id: &str`
-     * * `target_idp_id: &str`
+     * * `idp_id`
+     * * `key_id`
+     * * `target_idp_id`
      */
     pub async fn clone_key(
         &self,
@@ -725,7 +725,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Activate Identity Provider.
+     * Activate Identity Provider
      *
      * This function performs a `POST` to the `/api/v1/idps/{idpId}/lifecycle/activate` endpoint.
      *
@@ -733,7 +733,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn activate(
         &self,
@@ -757,7 +757,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Deactivate Identity Provider.
+     * Deactivate Identity Provider
      *
      * This function performs a `POST` to the `/api/v1/idps/{idpId}/lifecycle/deactivate` endpoint.
      *
@@ -765,7 +765,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn deactivate(
         &self,
@@ -789,7 +789,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Find Users.
+     * Find Users
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/users` endpoint.
      *
@@ -797,7 +797,7 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
+     * * `idp_id`
      */
     pub async fn list_application_users(
         &self,
@@ -821,7 +821,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Find Users.
+     * Find Users
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/users` endpoint.
      *
@@ -857,8 +857,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `user_id: &str`
+     * * `idp_id`
+     * * `user_id`
      */
     pub async fn get_application_user(
         &self,
@@ -884,7 +884,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Link a user to a Social IdP without a transaction.
+     * Link a user to a Social IdP without a transaction
      *
      * This function performs a `POST` to the `/api/v1/idps/{idpId}/users/{userId}` endpoint.
      *
@@ -892,8 +892,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `user_id: &str`
+     * * `idp_id`
+     * * `user_id`
      */
     pub async fn link_user(
         &self,
@@ -920,7 +920,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Unlink User from IdP.
+     * Unlink User from IdP
      *
      * This function performs a `DELETE` to the `/api/v1/idps/{idpId}/users/{userId}` endpoint.
      *
@@ -928,8 +928,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `user_id: &str`
+     * * `idp_id`
+     * * `user_id`
      */
     pub async fn unlink_user_from(
         &self,
@@ -955,7 +955,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Social Authentication Token Operation.
+     * Social Authentication Token Operation
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/users/{userId}/credentials/tokens` endpoint.
      *
@@ -963,8 +963,8 @@ impl IdentityProviders {
      *
      * **Parameters:**
      *
-     * * `idp_id: &str`
-     * * `user_id: &str`
+     * * `idp_id`
+     * * `user_id`
      */
     pub async fn list_social_auth_tokens(
         &self,
@@ -990,7 +990,7 @@ impl IdentityProviders {
             .await
     }
     /**
-     * Social Authentication Token Operation.
+     * Social Authentication Token Operation
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/users/{userId}/credentials/tokens` endpoint.
      *

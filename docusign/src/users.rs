@@ -22,30 +22,29 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `additional_info: &str` -- When set to **true**, the custom settings information is returned for each user in the account. If this parameter is omitted, the default behavior is **false**.
-     * * `count: &str` -- The number of records to return. This number must be greater than `0` and less than or equal to `100`. .
-     * * `email: &str` -- Filters results based on the email address associated with the user that you want to return.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `additional_info` -- When set to **true**, the custom settings information is returned for each user in the account. If this parameter is omitted, the default behavior is **false**.
+     * * `count` -- The number of records to return. This number must be greater than `0` and less than or equal to `100`.
+     * * `email` -- Filters results based on the email address associated with the user that you want to return.
+     *
      *   **Note**: You can use either this parameter or the `email_substring` parameter, but not both. For older accounts, this parameter might return multiple users who are associated with a single email address.
-     * * `email_substring: &str` -- Filters results based on a fragment of an email address. For example, you could enter `gmail` to return all users who have Gmail addresses.
-     *   
+     * * `email_substring` -- Filters results based on a fragment of an email address. For example, you could enter `gmail` to return all users who have Gmail addresses.
+     *
      *   **Note**: You do not use a wildcard character with this parameter. You can use either this parameter or the `email` parameter, but not both.
-     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_usersettings_for_csv: &str` -- When set to **true**, the response includes the `userSettings` object data in CSV format.
-     * * `login_status: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `not_group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values.
-     * * `status: &str` -- Filters results by user account status. Possible values are:
-     *   
+     * * `group_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_usersettings_for_csv` -- When set to **true**, the response includes the `userSettings` object data in CSV format.
+     * * `login_status` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `not_group_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The position within the total result set from which to start returning values.
+     * * `status` -- Filters results by user account status. Possible values are:
+     *
      *   * `ActivationRequired`
      *   * `ActivationSent`
      *   * `Active`
      *   * `Closed`
      *   * `Disabled`
-     *   .
-     * * `user_name_substring: &str` -- Filters results based on a full or partial user name.
-     *   
+     * * `user_name_substring` -- Filters results based on a full or partial user name.
+     *
      *   **Note**: When you enter a partial user name, you do not use a wildcard character.
      */
     pub async fn get(
@@ -131,7 +130,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -165,7 +164,6 @@ impl Users {
      * The body of this request is an array of `newUsers` objects. For each new user, you must provide at least the `userName` and `email` properties.
      *
      * The `userSettings` property specifies the actions users can perform. In the example below, Tal Mason will be able to send envelopes, and the activation email will be in French because the `locale` is set to `fr`.
-     *
      *
      * ```
      * POST /restapi/v2.1/accounts/{accountId}/users
@@ -219,10 +217,9 @@ impl Users {
      * }
      * ```
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -257,8 +254,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `delete: &str` -- ID of the user to delete. This parameter takes a comma-separated list of values in the format: `Groups,PermissionSet,SigningGroupsEmail`.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `delete` -- ID of the user to delete. This parameter takes a comma-separated list of values in the format: `Groups,PermissionSet,SigningGroupsEmail`.
      */
     pub async fn delete(
         &self,
@@ -300,11 +297,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `additional_info: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `email: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `additional_info` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `email` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get_users(
         &self,
@@ -349,9 +345,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn put_users(
         &self,
@@ -390,10 +385,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `encoding: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `encoding` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn profile_image_get(
         &self,
@@ -436,9 +430,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn profile_image_put(
         &self,
@@ -474,9 +467,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn profile_image_delete(
         &self,
@@ -515,14 +507,10 @@ impl Users {
      * information, see
      * [Users:create](https://developers.docusign.com/docs/esign-rest-api/reference/Users/Users/create/).
      *
-     *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn settings_get(
         &self,
@@ -556,9 +544,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn settings_put(
         &self,

@@ -20,7 +20,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
+     * * `token` -- Authentication token. Requires scope: `chat:write`
      */
     pub async fn delete(
         &self,
@@ -45,7 +45,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
+     * * `token` -- Authentication token. Requires scope: `chat:write`
      */
     pub async fn delete_scheduled_message(
         &self,
@@ -70,9 +70,9 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `channel: &str` -- The ID of the conversation or channel containing the message.
-     * * `message_ts: &str` -- A message's `ts` value, uniquely identifying it within a channel.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `channel` -- The ID of the conversation or channel containing the message
+     * * `message_ts` -- A message's `ts` value, uniquely identifying it within a channel
      */
     pub async fn get_permalink(
         &self,
@@ -89,7 +89,7 @@ impl Chat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/chat.getPermalink?{}", query_), None);
+            .url(&format!("/chat.getPermalink?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -109,7 +109,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
+     * * `token` -- Authentication token. Requires scope: `chat:write`
      */
     pub async fn me_message(
         &self,
@@ -134,7 +134,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
+     * * `token` -- Authentication token. Requires scope: `chat:write`
      */
     pub async fn post_ephemeral(
         &self,
@@ -159,7 +159,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
+     * * `token` -- Authentication token. Requires scope: `chat:write`
      */
     pub async fn post_message(
         &self,
@@ -184,7 +184,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
+     * * `token` -- Authentication token. Requires scope: `chat:write`
      */
     pub async fn schedule_message(
         &self,
@@ -209,7 +209,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `links:write`.
+     * * `token` -- Authentication token. Requires scope: `links:write`
      */
     pub async fn unfurl(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/chat.unfurl", None);
@@ -232,7 +232,7 @@ impl Chat {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
+     * * `token` -- Authentication token. Requires scope: `chat:write`
      */
     pub async fn update(
         &self,

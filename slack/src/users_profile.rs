@@ -20,9 +20,9 @@ impl UsersProfile {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
-     * * `include_labels: bool` -- Include labels for each ID in custom profile fields.
-     * * `user: &str` -- User to retrieve profile info for.
+     * * `token` -- Authentication token. Requires scope: `users.profile:read`
+     * * `include_labels` -- Include labels for each ID in custom profile fields
+     * * `user` -- User to retrieve profile info for
      */
     pub async fn get(
         &self,
@@ -39,7 +39,7 @@ impl UsersProfile {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users.profile.get?{}", query_), None);
+            .url(&format!("/users.profile.get?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -59,7 +59,7 @@ impl UsersProfile {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
+     * * `token` -- Authentication token. Requires scope: `users.profile:write`
      */
     pub async fn set(&self) -> ClientResult<crate::Response<crate::types::UsersProfileSetSchema>> {
         let url = self.client.url("/users.profile.set", None);

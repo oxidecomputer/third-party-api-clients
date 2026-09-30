@@ -35,7 +35,7 @@ impl EphemeralKeys {
      *
      * **Parameters:**
      *
-     * * `key: &str` -- The account's country.
+     * * `key` -- The account's country.
      */
     pub async fn delete_key(
         &self,

@@ -18,7 +18,7 @@ impl Privileges {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer` -- Immutable ID of the Google Workspace account.
      */
     pub async fn list(
         &self,

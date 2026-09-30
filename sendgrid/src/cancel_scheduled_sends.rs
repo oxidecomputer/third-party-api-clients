@@ -12,7 +12,7 @@ impl CancelScheduledSends {
     }
 
     /**
-     * Create a batch ID.
+     * Create a batch ID
      *
      * This function performs a `POST` to the `/mail/batch` endpoint.
      *
@@ -24,7 +24,7 @@ impl CancelScheduledSends {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_mail_batch(
         &self,
@@ -41,7 +41,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Retrieve all scheduled sends.
+     * Retrieve all scheduled sends
      *
      * This function performs a `GET` to the `/user/scheduled_sends` endpoint.
      *
@@ -51,7 +51,7 @@ impl CancelScheduledSends {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_scheduled_sends(
         &self,
@@ -68,7 +68,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Retrieve all scheduled sends.
+     * Retrieve all scheduled sends
      *
      * This function performs a `GET` to the `/user/scheduled_sends` endpoint.
      *
@@ -93,7 +93,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Cancel or pause a scheduled send.
+     * Cancel or pause a scheduled send
      *
      * This function performs a `POST` to the `/user/scheduled_sends` endpoint.
      *
@@ -107,7 +107,7 @@ impl CancelScheduledSends {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_user_scheduled_send(
         &self,
@@ -125,7 +125,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Validate batch ID.
+     * Validate batch ID
      *
      * This function performs a `GET` to the `/mail/batch/{batch_id}` endpoint.
      *
@@ -139,7 +139,7 @@ impl CancelScheduledSends {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_batch(
         &self,
@@ -163,7 +163,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Retrieve scheduled send.
+     * Retrieve scheduled send
      *
      * This function performs a `GET` to the `/user/scheduled_sends/{batch_id}` endpoint.
      *
@@ -171,7 +171,7 @@ impl CancelScheduledSends {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_scheduled_sends_batch(
         &self,
@@ -195,7 +195,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Retrieve scheduled send.
+     * Retrieve scheduled send
      *
      * This function performs a `GET` to the `/user/scheduled_sends/{batch_id}` endpoint.
      *
@@ -225,7 +225,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Delete a cancellation or pause from a scheduled send.
+     * Delete a cancellation or pause from a scheduled send
      *
      * This function performs a `DELETE` to the `/user/scheduled_sends/{batch_id}` endpoint.
      *
@@ -235,7 +235,7 @@ impl CancelScheduledSends {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_user_scheduled_sends_batch(
         &self,
@@ -259,7 +259,7 @@ impl CancelScheduledSends {
             .await
     }
     /**
-     * Update a scheduled send.
+     * Update a scheduled send
      *
      * This function performs a `PATCH` to the `/user/scheduled_sends/{batch_id}` endpoint.
      *
@@ -269,7 +269,7 @@ impl CancelScheduledSends {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_user_scheduled_sends_batch(
         &self,

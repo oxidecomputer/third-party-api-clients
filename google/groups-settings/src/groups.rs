@@ -18,9 +18,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
-     *  - true: G Suite users external to your organization can become members of this group.
-     *  - false: Users not belonging to the organization are not allowed to become members of this group.
+     * * `group_unique_id` -- Identifies whether members external to your organization can join the group. Possible values are:
+     *
+     *   - true: G Suite users external to your organization can become members of this group.
+     *   - false: Users not belonging to the organization are not allowed to become members of this group.
      */
     pub async fn get(
         &self,
@@ -57,9 +58,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
-     *  - true: G Suite users external to your organization can become members of this group.
-     *  - false: Users not belonging to the organization are not allowed to become members of this group.
+     * * `group_unique_id` -- Identifies whether members external to your organization can join the group. Possible values are:
+     *
+     *   - true: G Suite users external to your organization can become members of this group.
+     *   - false: Users not belonging to the organization are not allowed to become members of this group.
      */
     pub async fn update(
         &self,
@@ -97,9 +99,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
-     *  - true: G Suite users external to your organization can become members of this group.
-     *  - false: Users not belonging to the organization are not allowed to become members of this group.
+     * * `group_unique_id` -- Identifies whether members external to your organization can join the group. Possible values are:
+     *
+     *   - true: G Suite users external to your organization can become members of this group.
+     *   - false: Users not belonging to the organization are not allowed to become members of this group.
      */
     pub async fn patch(
         &self,

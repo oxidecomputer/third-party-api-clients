@@ -18,18 +18,15 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `created: &str`
-     * * `customer: &str` -- Only return charges for the customer specified by this customer ID.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `payment_intent: &str` -- Only return charges that were created by the PaymentIntent specified by this PaymentIntent ID.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `transfer_group: &str` -- Only return charges for this transfer group.
+     * * `customer` -- Only return charges for the customer specified by this customer ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `payment_intent` -- Only return charges that were created by the PaymentIntent specified by this PaymentIntent ID.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `transfer_group` -- Only return charges for this transfer group.
      */
     pub async fn get_page(
         &self,
-        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -57,7 +54,7 @@ impl Charges {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/charges?{}", query_), None);
+        let url = self.client.url(&format!("/v1/charges?{query_}"), None);
         let resp: crate::Response<crate::types::Charges> = self
             .client
             .get(
@@ -85,7 +82,6 @@ impl Charges {
      */
     pub async fn get_all(
         &self,
-        created: &str,
         customer: &str,
         payment_intent: &str,
         transfer_group: &str,
@@ -101,7 +97,7 @@ impl Charges {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/charges?{}", query_), None);
+        let url = self.client.url(&format!("/v1/charges?{query_}"), None);
         let crate::Response::<crate::types::Charges> {
             mut status,
             mut headers,
@@ -141,7 +137,7 @@ impl Charges {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -156,7 +152,7 @@ impl Charges {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -200,10 +196,9 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `page: &str` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
-     * * `query: &str` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for charges](https://stripe.com/docs/search#query-fields-for-charges).
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `page` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
+     * * `query` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for charges](https://stripe.com/docs/search#query-fields-for-charges).
      */
     pub async fn get_search(
         &self,
@@ -224,7 +219,7 @@ impl Charges {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/charges/search?{}", query_), None);
+            .url(&format!("/v1/charges/search?{query_}"), None);
         let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
@@ -264,7 +259,7 @@ impl Charges {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/charges/search?{}", query_), None);
+            .url(&format!("/v1/charges/search?{query_}"), None);
         let crate::Response::<crate::types::SearchResult> {
             mut status,
             mut headers,
@@ -304,7 +299,7 @@ impl Charges {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -319,7 +314,7 @@ impl Charges {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -343,8 +338,7 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `charge` -- The account's country.
      */
     pub async fn get(&self, charge: &str) -> ClientResult<crate::Response<crate::types::Charge>> {
         let url = self.client.url(
@@ -371,7 +365,7 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
+     * * `charge` -- The account's country.
      */
     pub async fn post_charges(
         &self,
@@ -403,7 +397,7 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
+     * * `charge` -- The account's country.
      */
     pub async fn post_capture(
         &self,
@@ -433,8 +427,7 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `charge` -- The account's country.
      */
     pub async fn get_dispute(
         &self,
@@ -460,11 +453,9 @@ impl Charges {
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/dispute` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
+     * * `charge` -- The account's country.
      */
     pub async fn post_dispute(
         &self,
@@ -490,11 +481,9 @@ impl Charges {
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/dispute/close` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
+     * * `charge` -- The account's country.
      */
     pub async fn post_dispute_close(
         &self,
@@ -534,7 +523,7 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
+     * * `charge` -- The account's country.
      */
     pub async fn post_refund(
         &self,
@@ -564,11 +553,10 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `charge` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_refunds(
         &self,
@@ -671,7 +659,7 @@ impl Charges {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -686,7 +674,7 @@ impl Charges {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -710,7 +698,7 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
+     * * `charge` -- The account's country.
      */
     pub async fn post_refund_charges(
         &self,
@@ -740,9 +728,8 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `refund: &str` -- The account's country.
+     * * `charge` -- The account's country.
+     * * `refund` -- The account's country.
      */
     pub async fn get_refunds_refund(
         &self,
@@ -774,8 +761,8 @@ impl Charges {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- The account's country.
-     * * `refund: &str` -- The account's country.
+     * * `charge` -- The account's country.
+     * * `refund` -- The account's country.
      */
     pub async fn post_refunds_refund(
         &self,

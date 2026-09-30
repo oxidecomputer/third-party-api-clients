@@ -20,10 +20,10 @@ impl OauthV2 {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- Issued when you created your application.
-     * * `client_secret: &str` -- Issued when you created your application.
-     * * `code: &str` -- The `code` param returned via the OAuth callback.
-     * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
+     * * `client_id` -- Issued when you created your application.
+     * * `client_secret` -- Issued when you created your application.
+     * * `code` -- The `code` param returned via the OAuth callback.
+     * * `redirect_uri` -- This must match the originally submitted URI (if one was sent).
      */
     pub async fn oauth_access(
         &self,
@@ -46,9 +46,7 @@ impl OauthV2 {
             query_args.push(("redirect_uri".to_string(), redirect_uri.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/oauth.v2.access?{}", query_), None);
+        let url = self.client.url(&format!("/oauth.v2.access?{query_}"), None);
         self.client
             .get(
                 &url,

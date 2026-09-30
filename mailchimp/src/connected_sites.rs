@@ -12,7 +12,7 @@ impl ConnectedSites {
     }
 
     /**
-     * List connected sites.
+     * List connected sites
      *
      * This function performs a `GET` to the `/connected-sites` endpoint.
      *
@@ -20,10 +20,10 @@ impl ConnectedSites {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get(
         &self,
@@ -46,9 +46,7 @@ impl ConnectedSites {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/connected-sites?{}", query_), None);
+        let url = self.client.url(&format!("/connected-sites?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -60,7 +58,7 @@ impl ConnectedSites {
             .await
     }
     /**
-     * Add connected site.
+     * Add connected site
      *
      * This function performs a `POST` to the `/connected-sites` endpoint.
      *
@@ -82,7 +80,7 @@ impl ConnectedSites {
             .await
     }
     /**
-     * Get connected site.
+     * Get connected site
      *
      * This function performs a `GET` to the `/connected-sites/{connected_site_id}` endpoint.
      *
@@ -90,9 +88,9 @@ impl ConnectedSites {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `connected_site_id: &str` -- The unique identifier for the site.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `connected_site_id` -- The unique identifier for the site.
      */
     pub async fn get_connected_sites(
         &self,
@@ -127,7 +125,7 @@ impl ConnectedSites {
             .await
     }
     /**
-     * Delete connected site.
+     * Delete connected site
      *
      * This function performs a `DELETE` to the `/connected-sites/{connected_site_id}` endpoint.
      *
@@ -135,7 +133,7 @@ impl ConnectedSites {
      *
      * **Parameters:**
      *
-     * * `connected_site_id: &str` -- The unique identifier for the site.
+     * * `connected_site_id` -- The unique identifier for the site.
      */
     pub async fn delete(&self, connected_site_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -156,7 +154,7 @@ impl ConnectedSites {
             .await
     }
     /**
-     * Verify connected site script.
+     * Verify connected site script
      *
      * This function performs a `POST` to the `/connected-sites/{connected_site_id}/actions/verify-script-installation` endpoint.
      *
@@ -164,7 +162,7 @@ impl ConnectedSites {
      *
      * **Parameters:**
      *
-     * * `connected_site_id: &str` -- The unique identifier for the site.
+     * * `connected_site_id` -- The unique identifier for the site.
      */
     pub async fn post_actions_verify_script_installation(
         &self,

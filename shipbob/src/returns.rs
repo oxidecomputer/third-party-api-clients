@@ -12,14 +12,14 @@ impl Returns {
     }
 
     /**
-     * Get Return Order.
+     * Get Return Order
      *
      * This function performs a `GET` to the `/return/{id}` endpoint.
      *
      * **Parameters:**
      *
-     * * `id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get(&self, id: i64) -> ClientResult<crate::Response<crate::types::ReturnOrder>> {
         let url = self.client.url(
@@ -40,14 +40,14 @@ impl Returns {
             .await
     }
     /**
-     * Modify Return Order.
+     * Modify Return Order
      *
      * This function performs a `PUT` to the `/return/{id}` endpoint.
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
-     * * `id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
+     * * `id` -- Unique id of the channel
      */
     pub async fn put(
         &self,
@@ -72,25 +72,25 @@ impl Returns {
             .await
     }
     /**
-     * Get Return Orders.
+     * Get Return Orders
      *
      * This function performs a `GET` to the `/return` endpoint.
      *
      * **Parameters:**
      *
-     * * `page: i64` -- Page of return orders to get.
-     * * `limit: i64` -- Amount of return orders per page to request.
-     * * `sort_order: crate::types::SortOrder` -- Order to sort results in.
-     * * `start_date: chrono::DateTime<chrono::Utc>` -- Start date to filter orders inserted later than.
-     * * `end_date: chrono::DateTime<chrono::Utc>` -- End date to filter orders inserted earlier than.
-     * * `i_ds: &[String]` -- Comma separated list of return orders ids to filter by.
-     * * `reference_ids: &[String]` -- Comma separated list of reference ids to filter by.
-     * * `status: &[String]` -- Comma separated list of statuses to filter by.
-     * * `fulfillment_center_ids: &[String]` -- Comma separated list of destination fulfillment center IDs to filter by.
-     * * `tracking_numbers: &[String]` -- Comma separated list of tracking numbers to filter by.
-     * * `original_shipment_ids: &[String]` -- Comma separated list of original shipment IDs to filter by.
-     * * `inventory_ids: &[String]` -- Comma separated list of inventory IDs contained in return to filter by.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `page` -- Page of return orders to get
+     * * `limit` -- Amount of return orders per page to request
+     * * `sort_order` -- Order to sort results in
+     * * `start_date` -- Start date to filter orders inserted later than
+     * * `end_date` -- End date to filter orders inserted earlier than
+     * * `i_ds` -- Comma separated list of return orders ids to filter by
+     * * `reference_ids` -- Comma separated list of reference ids to filter by
+     * * `status` -- Comma separated list of statuses to filter by
+     * * `fulfillment_center_ids` -- Comma separated list of destination fulfillment center IDs to filter by
+     * * `tracking_numbers` -- Comma separated list of tracking numbers to filter by
+     * * `original_shipment_ids` -- Comma separated list of original shipment IDs to filter by
+     * * `inventory_ids` -- Comma separated list of inventory IDs contained in return to filter by
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_page(
         &self,
@@ -151,7 +151,7 @@ impl Returns {
             query_args.push(("TrackingNumbers".to_string(), tracking_numbers.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/return?{}", query_), None);
+        let url = self.client.url(&format!("/return?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -163,7 +163,7 @@ impl Returns {
             .await
     }
     /**
-     * Get Return Orders.
+     * Get Return Orders
      *
      * This function performs a `GET` to the `/return` endpoint.
      *
@@ -220,7 +220,7 @@ impl Returns {
             query_args.push(("TrackingNumbers".to_string(), tracking_numbers.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/return?{}", query_), None);
+        let url = self.client.url(&format!("/return?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -232,13 +232,13 @@ impl Returns {
             .await
     }
     /**
-     * Create Return Order.
+     * Create Return Order
      *
      * This function performs a `POST` to the `/return` endpoint.
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post(
         &self,
@@ -256,14 +256,14 @@ impl Returns {
             .await
     }
     /**
-     * Cancel Return Order.
+     * Cancel Return Order
      *
      * This function performs a `POST` to the `/return/{id}/cancel` endpoint.
      *
      * **Parameters:**
      *
-     * * `id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post_cancel(
         &self,
@@ -287,14 +287,14 @@ impl Returns {
             .await
     }
     /**
-     * Get One Return's status history.
+     * Get One Return's status history
      *
      * This function performs a `GET` to the `/return/{id}/statushistory` endpoint.
      *
      * **Parameters:**
      *
-     * * `id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_status_history(
         &self,

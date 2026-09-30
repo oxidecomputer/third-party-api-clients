@@ -12,13 +12,13 @@ impl Inventory {
     }
 
     /**
-     * Get an inventory item.
+     * Get an inventory item
      *
      * This function performs a `GET` to the `/inventory/{inventoryId}` endpoint.
      *
      * **Parameters:**
      *
-     * * `inventory_id: i64` -- Unique id of the channel.
+     * * `inventory_id` -- Unique id of the channel
      */
     pub async fn get(
         &self,
@@ -42,25 +42,26 @@ impl Inventory {
             .await
     }
     /**
-     * List inventory items.
+     * List inventory items
      *
      * This function performs a `GET` to the `/inventory` endpoint.
      *
      * **Parameters:**
      *
-     * * `page: i64` -- Page of inventory items to get.
-     * * `limit: i64` -- Amount of inventory items per page to request.
-     * * `is_active: bool` -- True if the inventory item is marked as a digital item.
-     * * `is_digital: bool` -- True if the inventory item is marked as a digital item.
-     * * `i_ds: &[String]` -- Comma separated inventory ids to filter by.
-     * * `sort: &str` -- Sort will default to ascending order for each field.
+     * * `page` -- Page of inventory items to get
+     * * `limit` -- Amount of inventory items per page to request
+     * * `is_active` -- True if the inventory item is marked as a digital item
+     * * `is_digital` -- True if the inventory item is marked as a digital item
+     * * `i_ds` -- Comma separated inventory ids to filter by
+     * * `sort` -- Sort will default to ascending order for each field.
      *   To sort in descending order please pass a "-" in front of the field name.
-     *   For example, Sort=-onHand,name will sort by onHand descending.
-     * * `search: &str` -- Search is available for 2 fields, Inventory ID and Name -
+     *   For example, Sort=-onHand,name will sort by onHand descending
+     * * `search` -- Search is available for 2 fields, Inventory ID and Name -
+     *
      *   1. Expected behavior for search by Inventory ID is exact match
      *   2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,
-     *   but must be consecutive characters. This is not case sensitive.
-     * * `channel_id: i64` -- Unique id of the channel.
+     *      but must be consecutive characters. This is not case sensitive.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_page(
         &self,
@@ -95,7 +96,7 @@ impl Inventory {
             query_args.push(("Sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/inventory?{}", query_), None);
+        let url = self.client.url(&format!("/inventory?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -107,7 +108,7 @@ impl Inventory {
             .await
     }
     /**
-     * List inventory items.
+     * List inventory items
      *
      * This function performs a `GET` to the `/inventory` endpoint.
      *
@@ -138,7 +139,7 @@ impl Inventory {
             query_args.push(("Sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/inventory?{}", query_), None);
+        let url = self.client.url(&format!("/inventory?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -150,14 +151,14 @@ impl Inventory {
             .await
     }
     /**
-     * Get a list of inventory items by product id.
+     * Get a list of inventory items by product id
      *
      * This function performs a `GET` to the `/product/{productId}/inventory` endpoint.
      *
      * **Parameters:**
      *
-     * * `product_id: i64` -- The product id to get inventory for.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `product_id` -- The product id to get inventory for
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_product(
         &self,
@@ -181,7 +182,7 @@ impl Inventory {
             .await
     }
     /**
-     * Get a list of inventory items by product id.
+     * Get a list of inventory items by product id
      *
      * This function performs a `GET` to the `/product/{productId}/inventory` endpoint.
      *

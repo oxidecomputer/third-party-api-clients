@@ -12,7 +12,7 @@ impl Users {
     }
 
     /**
-     * Get User Info by User ID.
+     * Get User Info by User ID
      *
      * This function performs a `GET` to the `/users/{id}` endpoint.
      *
@@ -20,7 +20,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url(
@@ -38,7 +38,7 @@ impl Users {
             .await
     }
     /**
-     * Suspend a user.
+     * Suspend a user
      *
      * This function performs a `DELETE` to the `/users/{id}` endpoint.
      *
@@ -60,7 +60,7 @@ impl Users {
             .await
     }
     /**
-     * Modify Existing User.
+     * Modify Existing User
      *
      * This function performs a `PATCH` to the `/users/{id}` endpoint.
      *
@@ -86,7 +86,7 @@ impl Users {
             .await
     }
     /**
-     * List users.
+     * List users
      *
      * This function performs a `GET` to the `/users` endpoint.
      *
@@ -94,11 +94,11 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `department_id: &str` -- The OAuth2 token header.
-     * * `location_id: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
+     * * `start` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `department_id` -- The OAuth2 token header
+     * * `location_id` -- The OAuth2 token header
      */
     pub async fn get_page(
         &self,
@@ -121,7 +121,7 @@ impl Users {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users?{}", query_), None);
+        let url = self.client.url(&format!("/users?{query_}"), None);
         let resp: crate::Response<crate::types::GetUsersResponse> = self
             .client
             .get(
@@ -141,7 +141,7 @@ impl Users {
         ))
     }
     /**
-     * List users.
+     * List users
      *
      * This function performs a `GET` to the `/users` endpoint.
      *
@@ -162,7 +162,7 @@ impl Users {
             query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users?{}", query_), None);
+        let url = self.client.url(&format!("/users?{query_}"), None);
         let crate::Response::<crate::types::GetUsersResponse> {
             mut status,
             mut headers,
@@ -219,7 +219,7 @@ impl Users {
         Ok(crate::Response::new(status, headers, data))
     }
     /**
-     * Invite a new user.
+     * Invite a new user
      *
      * This function performs a `POST` to the `/users/deferred` endpoint.
      *
@@ -241,7 +241,7 @@ impl Users {
             .await
     }
     /**
-     * Get status of a deferred user task.
+     * Get status of a deferred user task
      *
      * This function performs a `GET` to the `/users/deferred/status/{id}` endpoint.
      *

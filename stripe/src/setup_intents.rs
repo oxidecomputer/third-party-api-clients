@@ -18,17 +18,14 @@ impl SetupIntents {
      *
      * **Parameters:**
      *
-     * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
-     * * `customer: &str` -- Only return SetupIntents for the customer specified by this customer ID.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `payment_method: &str` -- Only return SetupIntents associated with the specified payment method.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- Only return SetupIntents for the customer specified by this customer ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `payment_method` -- Only return SetupIntents associated with the specified payment method.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
-        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -54,7 +51,7 @@ impl SetupIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/setup_intents?{}", query_), None);
+            .url(&format!("/v1/setup_intents?{query_}"), None);
         let resp: crate::Response<crate::types::PaymentFlowsSetupIntentList> = self
             .client
             .get(
@@ -82,7 +79,6 @@ impl SetupIntents {
      */
     pub async fn get_all(
         &self,
-        created: &str,
         customer: &str,
         payment_method: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::SetupIntent>>> {
@@ -96,7 +92,7 @@ impl SetupIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/setup_intents?{}", query_), None);
+            .url(&format!("/v1/setup_intents?{query_}"), None);
         let crate::Response::<crate::types::PaymentFlowsSetupIntentList> {
             mut status,
             mut headers,
@@ -136,7 +132,7 @@ impl SetupIntents {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -151,7 +147,7 @@ impl SetupIntents {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -199,9 +195,8 @@ impl SetupIntents {
      *
      * **Parameters:**
      *
-     * * `client_secret: &str` -- The client secret of the SetupIntent. Required if a publishable key is used to retrieve the SetupIntent.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `intent: &str` -- The account's country.
+     * * `client_secret` -- The client secret of the SetupIntent. Required if a publishable key is used to retrieve the SetupIntent.
+     * * `intent` -- The account's country.
      */
     pub async fn get_intent(
         &self,
@@ -238,7 +233,7 @@ impl SetupIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent(
         &self,
@@ -270,7 +265,7 @@ impl SetupIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent_cancel(
         &self,
@@ -312,7 +307,7 @@ impl SetupIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent_confirm(
         &self,
@@ -342,7 +337,7 @@ impl SetupIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent_verify_microdeposit(
         &self,

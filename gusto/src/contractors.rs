@@ -12,7 +12,7 @@ impl Contractors {
     }
 
     /**
-     * Get a contractor.
+     * Get a contractor
      *
      * This function performs a `GET` to the `/v1/contractors/{contractor_id_or_uuid}` endpoint.
      *
@@ -40,7 +40,7 @@ impl Contractors {
             .await
     }
     /**
-     * Update a contractor.
+     * Update a contractor
      *
      * This function performs a `PUT` to the `/v1/contractors/{contractor_id_or_uuid}` endpoint.
      *
@@ -69,7 +69,7 @@ impl Contractors {
             .await
     }
     /**
-     * Get contractors of a company.
+     * Get contractors of a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
      *
@@ -97,7 +97,7 @@ impl Contractors {
             .await
     }
     /**
-     * Get contractors of a company.
+     * Get contractors of a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
      *
@@ -127,7 +127,7 @@ impl Contractors {
             .await
     }
     /**
-     * Create a contractor.
+     * Create a contractor
      *
      * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
      *

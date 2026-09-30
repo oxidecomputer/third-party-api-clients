@@ -12,7 +12,7 @@ impl ActivityFeed {
     }
 
     /**
-     * Get latest chimp chatter.
+     * Get latest chimp chatter
      *
      * This function performs a `GET` to the `/activity-feed/chimp-chatter` endpoint.
      *
@@ -20,8 +20,8 @@ impl ActivityFeed {
      *
      * **Parameters:**
      *
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get_chimp_chatter(
         &self,
@@ -38,7 +38,7 @@ impl ActivityFeed {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/activity-feed/chimp-chatter?{}", query_), None);
+            .url(&format!("/activity-feed/chimp-chatter?{query_}"), None);
         self.client
             .get(
                 &url,

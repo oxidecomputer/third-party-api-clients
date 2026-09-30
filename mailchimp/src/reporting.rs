@@ -12,7 +12,7 @@ impl Reporting {
     }
 
     /**
-     * List facebook ads reports.
+     * List facebook ads reports
      *
      * This function performs a `GET` to the `/reporting/facebook-ads` endpoint.
      *
@@ -20,12 +20,12 @@ impl Reporting {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `sort_field: crate::types::GetAllFacebookAdsSortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `sort_field` -- Returns files sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
      */
     pub async fn get_facebook_ads(
         &self,
@@ -58,7 +58,7 @@ impl Reporting {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/reporting/facebook-ads?{}", query_), None);
+            .url(&format!("/reporting/facebook-ads?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -70,7 +70,7 @@ impl Reporting {
             .await
     }
     /**
-     * Get facebook ad report.
+     * Get facebook ad report
      *
      * This function performs a `GET` to the `/reporting/facebook-ads/{outreach_id}` endpoint.
      *
@@ -78,9 +78,9 @@ impl Reporting {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `outreach_id: &str` -- The name of the folder.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `outreach_id` -- The name of the folder.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_facebook_ad(
         &self,
@@ -115,7 +115,7 @@ impl Reporting {
             .await
     }
     /**
-     * List facebook ecommerce report.
+     * List facebook ecommerce report
      *
      * This function performs a `GET` to the `/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity` endpoint.
      *
@@ -123,12 +123,12 @@ impl Reporting {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `outreach_id: &str` -- The name of the folder.
-     * * `sort_field: crate::types::GetReportsEcommerceProductActivitySortField` -- Returns files sorted by the specified field.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `outreach_id` -- The name of the folder.
+     * * `sort_field` -- Returns files sorted by the specified field.
      */
     pub async fn get_facebook_ads_ecommerce_product_activity(
         &self,
@@ -176,7 +176,7 @@ impl Reporting {
             .await
     }
     /**
-     * Get landing page report.
+     * Get landing page report
      *
      * This function performs a `GET` to the `/reporting/landing-pages/{outreach_id}` endpoint.
      *
@@ -184,9 +184,9 @@ impl Reporting {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `outreach_id: &str` -- The name of the folder.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `outreach_id` -- The name of the folder.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_landing_page(
         &self,
@@ -221,7 +221,7 @@ impl Reporting {
             .await
     }
     /**
-     * List landing pages reports.
+     * List landing pages reports
      *
      * This function performs a `GET` to the `/reporting/landing-pages` endpoint.
      *
@@ -229,10 +229,10 @@ impl Reporting {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get_landing_pages(
         &self,
@@ -257,7 +257,7 @@ impl Reporting {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/reporting/landing-pages?{}", query_), None);
+            .url(&format!("/reporting/landing-pages?{query_}"), None);
         self.client
             .get(
                 &url,

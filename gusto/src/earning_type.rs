@@ -12,7 +12,7 @@ impl EarningType {
     }
 
     /**
-     * Get all earning types for a company.
+     * Get all earning types for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/earning_types` endpoint.
      *
@@ -46,7 +46,7 @@ impl EarningType {
             .await
     }
     /**
-     * Create a custom earning type.
+     * Create a custom earning type
      *
      * This function performs a `POST` to the `/v1/companies/{company_id}/earning_types` endpoint.
      *
@@ -77,7 +77,7 @@ impl EarningType {
             .await
     }
     /**
-     * Update an earning type.
+     * Update an earning type
      *
      * This function performs a `PUT` to the `/v1/companies/{company_id}/earning_types/{earning_type_uuid}` endpoint.
      *
@@ -108,7 +108,7 @@ impl EarningType {
             .await
     }
     /**
-     * Deactivate an earning type.
+     * Deactivate an earning type
      *
      * This function performs a `DELETE` to the `/v1/companies/{company_id}/earning_types/{earning_type_uuid}` endpoint.
      *

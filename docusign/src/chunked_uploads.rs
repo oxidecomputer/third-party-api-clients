@@ -20,7 +20,7 @@ impl ChunkedUploads {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -55,9 +55,9 @@ impl ChunkedUploads {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `chunked_upload_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include: &str` -- (Optional) This parameter enables you to include additional attribute data in the response. The valid value for this method is `checksum`, which returns an SHA256 checksum of the content of the chunked upload in the response. You can use compare this checksum against your own checksum of the original content to verify that there are no missing parts before you attempt to commit the chunked upload.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `chunked_upload_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include` -- (Optional) This parameter enables you to include additional attribute data in the response. The valid value for this method is `checksum`, which returns an SHA256 checksum of the content of the chunked upload in the response. You can use compare this checksum against your own checksum of the original content to verify that there are no missing parts before you attempt to commit the chunked upload.
      */
     pub async fn get_upload(
         &self,
@@ -102,9 +102,9 @@ impl ChunkedUploads {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `chunked_upload_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `action: &str` -- (Required) You must use this query parameter with the value `commit`, which affirms the request to validate and prepare the chunked upload for use with other API calls.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `chunked_upload_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `action` -- (Required) You must use this query parameter with the value `commit`, which affirms the request to validate and prepare the chunked upload for use with other API calls.
      */
     pub async fn put(
         &self,
@@ -145,7 +145,6 @@ impl ChunkedUploads {
      *
      * This method cannot be used to delete the following types of chunked uploads, which the system deletes automatically:
      *
-     *
      * - Chunked uploads that have been consumed by use in another API call.
      * - Expired chunked uploads.
      *
@@ -153,8 +152,8 @@ impl ChunkedUploads {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `chunked_upload_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `chunked_upload_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete_upload(
         &self,
@@ -191,7 +190,6 @@ impl ChunkedUploads {
      *
      * Example:
      *
-     *
      * ```
      * PUT /v2.1/accounts/{accountId}/chunked_uploads/{chunkedUploadId}/1
      * PUT /v2.1/accounts/{accountId}/chunked_uploads/{chunkedUploadId}/2
@@ -202,10 +200,10 @@ impl ChunkedUploads {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `chunked_upload_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `chunked_upload_part_seq: &str` -- The sequence or order of the part in the chunked upload. By default, the sequence of the first part that is uploaded as part of the Create request is `0`.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `chunked_upload_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `chunked_upload_part_seq` -- The sequence or order of the part in the chunked upload. By default, the sequence of the first part that is uploaded as part of the Create request is `0`.
+     *
      *   **Note**: You can add parts out of order. However, the chunked upload must consist of a contiguous series of one or more parts before you can successfully commit it.
      */
     pub async fn put_upload_part(

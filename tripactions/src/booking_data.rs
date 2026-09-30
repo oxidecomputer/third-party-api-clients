@@ -12,7 +12,7 @@ impl BookingData {
     }
 
     /**
-     * Your company's bookings.
+     * Your company's bookings
      *
      * This function performs a `GET` to the `/v1/bookings` endpoint.
      *
@@ -20,14 +20,14 @@ impl BookingData {
      *
      * **Parameters:**
      *
-     * * `created_from: &str` -- Filter based on booking created date in epoch seconds.
-     * * `created_to: &str` -- Filter based on booking created date in epoch seconds.
-     * * `start_date_from: &str` -- Filter based on travel start date in epoch seconds.
-     * * `start_date_to: &str` -- Filter based on travel end date in epoch seconds.
-     * * `booking_status: crate::types::BookingStatus` -- Filter based on booking status.
-     * * `page: u64` -- Page cursor for use in pagination.
-     * * `size: i64` -- Number of records returned per page.
-     * * `booking_type: crate::types::BookingType` -- Filter based on Booking type.
+     * * `created_from` -- Filter based on booking created date in epoch seconds
+     * * `created_to` -- Filter based on booking created date in epoch seconds
+     * * `start_date_from` -- Filter based on travel start date in epoch seconds
+     * * `start_date_to` -- Filter based on travel end date in epoch seconds
+     * * `booking_status` -- Filter based on booking status
+     * * `page` -- Page cursor for use in pagination
+     * * `size` -- Number of records returned per page
+     * * `booking_type` -- Filter based on Booking type
      */
     pub async fn get_booking_report(
         &self,
@@ -66,7 +66,7 @@ impl BookingData {
             query_args.push(("startDateTo".to_string(), start_date_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/bookings?{}", query_), None);
+        let url = self.client.url(&format!("/v1/bookings?{query_}"), None);
         let resp: crate::Response<crate::types::BookingReportResponse> = self
             .client
             .get(
@@ -86,7 +86,7 @@ impl BookingData {
         ))
     }
     /**
-     * Your company's bookings.
+     * Your company's bookings
      *
      * This function performs a `GET` to the `/v1/bookings` endpoint.
      *
@@ -123,7 +123,7 @@ impl BookingData {
             query_args.push(("startDateTo".to_string(), start_date_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/bookings?{}", query_), None);
+        let url = self.client.url(&format!("/v1/bookings?{query_}"), None);
 
         let crate::Response::<crate::types::BookingReportResponse> {
             mut status,
@@ -132,7 +132,7 @@ impl BookingData {
         } = if !url.contains('?') {
             self.client
                 .get(
-                    &format!("{}?page=0&size=100", url),
+                    &format!("{url}?page=0&size=100"),
                     crate::Message {
                         body: None,
                         content_type: None,
@@ -142,7 +142,7 @@ impl BookingData {
         } else {
             self.client
                 .get(
-                    &format!("{}&page=0&size=100", url),
+                    &format!("{url}&page=0&size=100"),
                     crate::Message {
                         body: None,
                         content_type: None,
@@ -164,7 +164,7 @@ impl BookingData {
                 } = self
                     .client
                     .get(
-                        &format!("{}?page={}&size=100", url, page),
+                        &format!("{url}?page={page}&size=100"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -179,7 +179,7 @@ impl BookingData {
                 } = self
                     .client
                     .get(
-                        &format!("{}&page={}&size=100", url, page),
+                        &format!("{url}&page={page}&size=100"),
                         crate::Message {
                             body: None,
                             content_type: None,

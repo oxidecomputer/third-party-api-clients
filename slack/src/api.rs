@@ -20,8 +20,8 @@ impl Api {
      *
      * **Parameters:**
      *
-     * * `error: &str` -- Error response to return.
-     * * `foo_: &str` -- example property to return.
+     * * `error` -- Error response to return
+     * * `foo_` -- example property to return
      */
     pub async fn test(
         &self,
@@ -36,7 +36,7 @@ impl Api {
             query_args.push(("foo".to_string(), foo_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api.test?{}", query_), None);
+        let url = self.client.url(&format!("/api.test?{query_}"), None);
         self.client
             .get(
                 &url,

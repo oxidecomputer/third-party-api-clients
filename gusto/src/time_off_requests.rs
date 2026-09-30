@@ -12,7 +12,7 @@ impl TimeOffRequests {
     }
 
     /**
-     * Get time off requests for a company.
+     * Get time off requests for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/time_off_requests` endpoint.
      *
@@ -34,11 +34,10 @@ impl TimeOffRequests {
      *
      * Returns all time off requests where the request start date is equal to or after May 1, 2019 and the request end date is equal to or before August 31, 2019.
      *
-     *
      * **Parameters:**
      *
-     * * `start_date: &str` -- Filter time off requests where the request start date is equal to or after this parameter.
-     * * `end_date: &str` -- Filter time off requests where the request end date is equal to or after this parameter.
+     * * `start_date` -- Filter time off requests where the request start date is equal to or after this parameter
+     * * `end_date` -- Filter time off requests where the request end date is equal to or after this parameter
      */
     pub async fn get_company(
         &self,
@@ -73,7 +72,7 @@ impl TimeOffRequests {
             .await
     }
     /**
-     * Get time off requests for a company.
+     * Get time off requests for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/time_off_requests` endpoint.
      *
@@ -96,7 +95,6 @@ impl TimeOffRequests {
      * `?start_date='2019-05-01'&end_date='2019-08-31'`
      *
      * Returns all time off requests where the request start date is equal to or after May 1, 2019 and the request end date is equal to or before August 31, 2019.
-     *
      */
     pub async fn get_all_company(
         &self,
@@ -131,7 +129,7 @@ impl TimeOffRequests {
             .await
     }
     /**
-     * Get a specific time off request.
+     * Get a specific time off request
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/time_off_requests/{time_off_request_id}` endpoint.
      *

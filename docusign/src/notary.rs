@@ -21,7 +21,7 @@ impl Notary {
      *
      * **Parameters:**
      *
-     * * `include_jurisdictions: &str` -- If **true**, the response will include a `jurisdiction` property that contains an array of all supported jurisdictions for the current user.
+     * * `include_jurisdictions` -- If **true**, the response will include a `jurisdiction` property that contains an array of all supported jurisdictions for the current user.
      */
     pub async fn get(
         &self,
@@ -37,7 +37,7 @@ impl Notary {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v2.1/current_user/notary?{}", query_), None);
+            .url(&format!("/v2.1/current_user/notary?{query_}"), None);
         self.client
             .get(
                 &url,

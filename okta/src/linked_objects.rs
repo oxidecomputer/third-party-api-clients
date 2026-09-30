@@ -84,7 +84,7 @@ impl LinkedObjects {
      *
      * **Parameters:**
      *
-     * * `linked_object_name: &str`
+     * * `linked_object_name`
      */
     pub async fn get_definition(
         &self,
@@ -114,7 +114,7 @@ impl LinkedObjects {
      *
      * **Parameters:**
      *
-     * * `linked_object_name: &str`
+     * * `linked_object_name`
      */
     pub async fn delete_definition(
         &self,

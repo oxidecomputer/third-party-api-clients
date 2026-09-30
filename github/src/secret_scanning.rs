@@ -12,7 +12,7 @@ impl SecretScanning {
     }
 
     /**
-     * List secret scanning alerts for a repository.
+     * List secret scanning alerts for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts` endpoint.
      *
@@ -24,12 +24,12 @@ impl SecretScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `state: crate::types::SecretScanningAlertState` -- Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
-     * * `secret_type: &str` -- A comma separated list of secret types to return. By default all secret types are returned. See "[About secret scanning for private repositories](https://docs.github.com/code-security/secret-security/about-secret-scanning#about-secret-scanning-for-private-repositories)" for a complete list of secret types (API slug).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
+     * * `owner`
+     * * `repo`
+     * * `state` -- Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
+     * * `secret_type` -- A comma separated list of secret types to return. By default all secret types are returned. See "[About secret scanning for private repositories](https://docs.github.com/code-security/secret-security/about-secret-scanning#about-secret-scanning-for-private-repositories)" for a complete list of secret types (API slug).
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
      */
     pub async fn list_alerts_for_repo(
         &self,
@@ -74,7 +74,7 @@ impl SecretScanning {
             .await
     }
     /**
-     * List secret scanning alerts for a repository.
+     * List secret scanning alerts for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts` endpoint.
      *
@@ -121,7 +121,7 @@ impl SecretScanning {
             .await
     }
     /**
-     * Get a secret scanning alert.
+     * Get a secret scanning alert
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}` endpoint.
      *
@@ -133,9 +133,9 @@ impl SecretScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `alert_number: i64` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
+     * * `owner`
+     * * `repo`
+     * * `alert_number` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
      */
     pub async fn get_alert(
         &self,
@@ -163,7 +163,7 @@ impl SecretScanning {
             .await
     }
     /**
-     * Update a secret scanning alert.
+     * Update a secret scanning alert
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}` endpoint.
      *
@@ -175,9 +175,9 @@ impl SecretScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `alert_number: i64` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
+     * * `owner`
+     * * `repo`
+     * * `alert_number` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
      */
     pub async fn update_alert(
         &self,

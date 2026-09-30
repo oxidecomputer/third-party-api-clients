@@ -12,7 +12,7 @@ impl AdminsBeta {
     }
 
     /**
-     * Get all the admins at a company.
+     * Get all the admins at a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/admins` endpoint.
      *
@@ -42,7 +42,7 @@ impl AdminsBeta {
             .await
     }
     /**
-     * Get all the admins at a company.
+     * Get all the admins at a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/admins` endpoint.
      *

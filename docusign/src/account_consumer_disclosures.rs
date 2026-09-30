@@ -24,9 +24,9 @@ impl AccountConsumerDisclosures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `lang_code: &str` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve. The following languages are supported:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `lang_code` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve. The following languages are supported:
+     *
      *   - Arabic (`ar`)
      *   - Bulgarian (`bg`)
      *   - Czech (`cs`)
@@ -70,7 +70,7 @@ impl AccountConsumerDisclosures {
      *   - Turkish (`tr`)
      *   - Ukrainian (`uk`)
      *   - Vietnamese (`vi`)
-     *   
+     *
      *   Additionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.
      */
     pub async fn consumer_disclosure_get(
@@ -114,9 +114,9 @@ impl AccountConsumerDisclosures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `lang_code: &str` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve. The following languages are supported:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `lang_code` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve. The following languages are supported:
+     *
      *   - Arabic (`ar`)
      *   - Bulgarian (`bg`)
      *   - Czech (`cs`)
@@ -160,7 +160,7 @@ impl AccountConsumerDisclosures {
      *   - Turkish (`tr`)
      *   - Ukrainian (`uk`)
      *   - Vietnamese (`vi`)
-     *   
+     *
      *   Additionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.
      */
     pub async fn consumer_disclosure_get_lang_code(
@@ -240,13 +240,11 @@ impl AccountConsumerDisclosures {
      *
      * **Important**: Only the disclosure for the currently selected signer language is saved. DocuSign will not automatically translate your custom disclosure. You must create a disclosure for each language that your signers use.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `lang_code: &str` -- (Optional) The code for the signer language version of the disclosure that you want to update. The following languages are supported:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `lang_code` -- (Optional) The code for the signer language version of the disclosure that you want to update. The following languages are supported:
+     *
      *   - Arabic (`ar`)
      *   - Bulgarian (`bg`)
      *   - Czech (`cs`)
@@ -290,9 +288,9 @@ impl AccountConsumerDisclosures {
      *   - Turkish (`tr`)
      *   - Ukrainian (`uk`)
      *   - Vietnamese (`vi`)
-     *   
+     *
      *   Additionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.
-     * * `include_metadata: &str` -- (Optional) When set to true, the response includes metadata indicating which properties are editable.
+     * * `include_metadata` -- (Optional) When set to true, the response includes metadata indicating which properties are editable.
      */
     pub async fn consumer_disclosure_put(
         &self,

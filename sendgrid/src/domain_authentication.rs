@@ -12,7 +12,7 @@ impl DomainAuthentication {
     }
 
     /**
-     * List all authenticated domains.
+     * List all authenticated domains
      *
      * This function performs a `GET` to the `/whitelabel/domains` endpoint.
      *
@@ -20,12 +20,12 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- Number of domains to return.
-     * * `offset: i64` -- Paging offset.
-     * * `exclude_subusers: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
-     * * `username: &str` -- The license key provided with your New Relic account.
-     * * `domain: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- Number of domains to return.
+     * * `offset` -- Paging offset.
+     * * `exclude_subusers` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * * `username` -- The license key provided with your New Relic account.
+     * * `domain` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_domains(
         &self,
@@ -55,7 +55,7 @@ impl DomainAuthentication {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/domains?{}", query_), None);
+            .url(&format!("/whitelabel/domains?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -67,7 +67,7 @@ impl DomainAuthentication {
             .await
     }
     /**
-     * List all authenticated domains.
+     * List all authenticated domains
      *
      * This function performs a `GET` to the `/whitelabel/domains` endpoint.
      *
@@ -99,7 +99,7 @@ impl DomainAuthentication {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/domains?{}", query_), None);
+            .url(&format!("/whitelabel/domains?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -111,19 +111,20 @@ impl DomainAuthentication {
             .await
     }
     /**
-     * Authenticate a domain.
+     * Authenticate a domain
      *
      * This function performs a `POST` to the `/whitelabel/domains` endpoint.
      *
      * **This endpoint allows you to authenticate a domain.**
      *
      * If you are authenticating a domain for a subuser, you have two options:
+     *
      * 1. Use the "username" parameter. This allows you to authenticate a domain on behalf of your subuser. This means the subuser is able to see and modify the authenticated domain.
      * 2. Use the Association workflow (see Associate Domain section). This allows you to authenticate a domain created by the parent to a subuser. This means the subuser will default to the assigned domain, but will not be able to see or modify that authenticated domain. However, if the subuser authenticates their own domain it will overwrite the assigned domain.
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_whitelabel_domain(
         &self,
@@ -141,7 +142,7 @@ impl DomainAuthentication {
             .await
     }
     /**
-     * Retrieve an authenticated domain.
+     * Retrieve an authenticated domain
      *
      * This function performs a `GET` to the `/whitelabel/domains/{domain_id}` endpoint.
      *
@@ -149,7 +150,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_domains_domain(
         &self,
@@ -181,7 +182,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_whitelabel_domains_domain(
         &self,
@@ -205,7 +206,7 @@ impl DomainAuthentication {
             .await
     }
     /**
-     * Update an authenticated domain.
+     * Update an authenticated domain
      *
      * This function performs a `PATCH` to the `/whitelabel/domains/{domain_id}` endpoint.
      *
@@ -213,7 +214,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_whitelabel_domains_domain(
         &self,
@@ -239,7 +240,7 @@ impl DomainAuthentication {
             .await
     }
     /**
-     * Get the default authentication.
+     * Get the default authentication
      *
      * This function performs a `GET` to the `/whitelabel/domains/default` endpoint.
      *
@@ -251,8 +252,8 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `domain: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `domain` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_domains_default(
         &self,
@@ -266,7 +267,7 @@ impl DomainAuthentication {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/domains/default?{}", query_), None);
+            .url(&format!("/whitelabel/domains/default?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -278,7 +279,7 @@ impl DomainAuthentication {
             .await
     }
     /**
-     * Get the default authentication.
+     * Get the default authentication
      *
      * This function performs a `GET` to the `/whitelabel/domains/default` endpoint.
      *
@@ -302,7 +303,7 @@ impl DomainAuthentication {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/domains/default?{}", query_), None);
+            .url(&format!("/whitelabel/domains/default?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -314,7 +315,7 @@ impl DomainAuthentication {
             .await
     }
     /**
-     * Add an IP to an authenticated domain.
+     * Add an IP to an authenticated domain
      *
      * This function performs a `POST` to the `/whitelabel/domains/{id}/ips` endpoint.
      *
@@ -322,7 +323,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_whitelabel_domains_ip(
         &self,
@@ -355,7 +356,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_whitelabel_domains_ips_ip(
         &self,
@@ -389,7 +390,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_whitelabel_domains_validate(
         &self,
@@ -423,7 +424,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `username: &str` -- Username for the subuser to find associated authenticated domain.
+     * * `username` -- Username for the subuser to find associated authenticated domain.
      */
     pub async fn get_whitelabel_domains_subuser(
         &self,
@@ -436,7 +437,7 @@ impl DomainAuthentication {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/domains/subuser?{}", query_), None);
+            .url(&format!("/whitelabel/domains/subuser?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -458,7 +459,7 @@ impl DomainAuthentication {
      *
      * **Parameters:**
      *
-     * * `username: &str` -- Username for the subuser to find associated authenticated domain.
+     * * `username` -- Username for the subuser to find associated authenticated domain.
      */
     pub async fn delete_whitelabel_domains_subuser(
         &self,
@@ -471,7 +472,7 @@ impl DomainAuthentication {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/domains/subuser?{}", query_), None);
+            .url(&format!("/whitelabel/domains/subuser?{query_}"), None);
         self.client
             .delete(
                 &url,

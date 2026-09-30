@@ -12,7 +12,7 @@ impl Locations {
     }
 
     /**
-     * Get company locations.
+     * Get company locations
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
      *
@@ -42,7 +42,7 @@ impl Locations {
             .await
     }
     /**
-     * Get company locations.
+     * Get company locations
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
      *
@@ -74,7 +74,7 @@ impl Locations {
             .await
     }
     /**
-     * Create a company location.
+     * Create a company location
      *
      * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
      *
@@ -105,7 +105,7 @@ impl Locations {
             .await
     }
     /**
-     * Get a location.
+     * Get a location
      *
      * This function performs a `GET` to the `/v1/locations/{location_id}` endpoint.
      *
@@ -133,7 +133,7 @@ impl Locations {
             .await
     }
     /**
-     * Update a location.
+     * Update a location
      *
      * This function performs a `PUT` to the `/v1/locations/{location_id}` endpoint.
      *

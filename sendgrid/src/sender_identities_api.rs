@@ -12,7 +12,7 @@ impl SenderIdentitiesApi {
     }
 
     /**
-     * Get all Sender Identities.
+     * Get all Sender Identities
      *
      * This function performs a `GET` to the `/senders` endpoint.
      *
@@ -20,7 +20,7 @@ impl SenderIdentitiesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_senders(
         &self,
@@ -37,7 +37,7 @@ impl SenderIdentitiesApi {
             .await
     }
     /**
-     * Create a Sender Identity.
+     * Create a Sender Identity
      *
      * This function performs a `POST` to the `/senders` endpoint.
      *
@@ -47,7 +47,7 @@ impl SenderIdentitiesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_sender(
         &self,
@@ -65,7 +65,7 @@ impl SenderIdentitiesApi {
             .await
     }
     /**
-     * View a Sender Identity.
+     * View a Sender Identity
      *
      * This function performs a `GET` to the `/senders/{sender_id}` endpoint.
      *
@@ -73,7 +73,7 @@ impl SenderIdentitiesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_senders_sender(
         &self,
@@ -97,7 +97,7 @@ impl SenderIdentitiesApi {
             .await
     }
     /**
-     * Delete a Sender Identity.
+     * Delete a Sender Identity
      *
      * This function performs a `DELETE` to the `/senders/{sender_id}` endpoint.
      *
@@ -105,7 +105,7 @@ impl SenderIdentitiesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_senders_sender(
         &self,
@@ -129,7 +129,7 @@ impl SenderIdentitiesApi {
             .await
     }
     /**
-     * Update a Sender Identity.
+     * Update a Sender Identity
      *
      * This function performs a `PATCH` to the `/senders/{sender_id}` endpoint.
      *
@@ -141,7 +141,7 @@ impl SenderIdentitiesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_senders_sender(
         &self,
@@ -166,7 +166,7 @@ impl SenderIdentitiesApi {
             .await
     }
     /**
-     * Resend Sender Identity Verification.
+     * Resend Sender Identity Verification
      *
      * This function performs a `POST` to the `/senders/{sender_id}/resend_verification` endpoint.
      *
@@ -174,7 +174,7 @@ impl SenderIdentitiesApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_senders_sender_resend_verification(
         &self,

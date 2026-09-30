@@ -12,7 +12,7 @@ impl Benefits {
     }
 
     /**
-     * Get all benefits supported by Gusto.
+     * Get all benefits supported by Gusto
      *
      * This function performs a `GET` to the `/v1/benefits` endpoint.
      *
@@ -35,7 +35,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get all benefits supported by Gusto.
+     * Get all benefits supported by Gusto
      *
      * This function performs a `GET` to the `/v1/benefits` endpoint.
      *
@@ -60,7 +60,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get a supported benefit by ID.
+     * Get a supported benefit by ID
      *
      * This function performs a `GET` to the `/v1/benefits/{benefit_id}` endpoint.
      *
@@ -90,7 +90,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get benefits for a company.
+     * Get benefits for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/company_benefits` endpoint.
      *
@@ -120,7 +120,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get benefits for a company.
+     * Get benefits for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/company_benefits` endpoint.
      *
@@ -152,7 +152,7 @@ impl Benefits {
             .await
     }
     /**
-     * Create a company benefit.
+     * Create a company benefit
      *
      * This function performs a `POST` to the `/v1/companies/{company_id}/company_benefits` endpoint.
      *
@@ -183,7 +183,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get a company benefit.
+     * Get a company benefit
      *
      * This function performs a `GET` to the `/v1/company_benefits/{company_benefit_id}` endpoint.
      *
@@ -213,7 +213,7 @@ impl Benefits {
             .await
     }
     /**
-     * Update a company benefit.
+     * Update a company benefit
      *
      * This function performs a `PUT` to the `/v1/company_benefits/{company_benefit_id}` endpoint.
      *
@@ -244,7 +244,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get an employee's benefits.
+     * Get an employee's benefits
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/employee_benefits` endpoint.
      *
@@ -274,7 +274,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get an employee's benefits.
+     * Get an employee's benefits
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/employee_benefits` endpoint.
      *
@@ -306,7 +306,7 @@ impl Benefits {
             .await
     }
     /**
-     * Create an employee benefit.
+     * Create an employee benefit
      *
      * This function performs a `POST` to the `/v1/employees/{employee_id}/employee_benefits` endpoint.
      *
@@ -335,7 +335,7 @@ impl Benefits {
             .await
     }
     /**
-     * Year-to-date Benefit Amounts from Different Company.
+     * Year-to-date Benefit Amounts from Different Company
      *
      * This function performs a `POST` to the `/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company` endpoint.
      *
@@ -364,7 +364,7 @@ impl Benefits {
             .await
     }
     /**
-     * Get an employee benefit.
+     * Get an employee benefit
      *
      * This function performs a `GET` to the `/v1/employee_benefits/{employee_benefit_id}` endpoint.
      *
@@ -392,7 +392,7 @@ impl Benefits {
             .await
     }
     /**
-     * Update an employee benefit.
+     * Update an employee benefit
      *
      * This function performs a `PUT` to the `/v1/employee_benefits/{employee_benefit_id}` endpoint.
      *
@@ -421,7 +421,7 @@ impl Benefits {
             .await
     }
     /**
-     * Delete an employee benefit.
+     * Delete an employee benefit
      *
      * This function performs a `DELETE` to the `/v1/employee_benefits/{employee_benefit_id}` endpoint.
      *

@@ -20,9 +20,9 @@ impl AppsPermissionsResources {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     * * `limit: i64` -- The maximum number of items to return.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `limit` -- The maximum number of items to return.
      */
     pub async fn list(
         &self,
@@ -38,10 +38,9 @@ impl AppsPermissionsResources {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/apps.permissions.resources.list?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/apps.permissions.resources.list?{query_}"), None);
         self.client
             .get(
                 &url,

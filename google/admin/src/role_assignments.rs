@@ -18,11 +18,11 @@ impl RoleAssignments {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `page_token: &str` -- Token to specify the next page in the list.
-     * * `role_id: &str` -- Immutable ID of a role. If included in the request, returns only role assignments containing this role ID.
-     * * `user_key: &str` -- The user's primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `max_results` -- Maximum number of results to return.
+     * * `page_token` -- Token to specify the next page in the list.
+     * * `role_id` -- Immutable ID of a role. If included in the request, returns only role assignments containing this role ID.
+     * * `user_key` -- The user's primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.
      */
     pub async fn list(
         &self,
@@ -129,7 +129,7 @@ impl RoleAssignments {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -144,7 +144,7 @@ impl RoleAssignments {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -172,7 +172,7 @@ impl RoleAssignments {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer` -- Immutable ID of the Google Workspace account.
      */
     pub async fn insert(
         &self,
@@ -203,8 +203,8 @@ impl RoleAssignments {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `role_assignment_id` -- Immutable ID of the role assignment.
      */
     pub async fn get(
         &self,
@@ -236,8 +236,8 @@ impl RoleAssignments {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `role_assignment_id` -- Immutable ID of the role assignment.
      */
     pub async fn delete(
         &self,

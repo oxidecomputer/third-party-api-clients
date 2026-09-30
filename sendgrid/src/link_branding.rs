@@ -12,7 +12,7 @@ impl LinkBranding {
     }
 
     /**
-     * Retrieve all branded links.
+     * Retrieve all branded links
      *
      * This function performs a `GET` to the `/whitelabel/links` endpoint.
      *
@@ -22,8 +22,8 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- Limits the number of results returned per page.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- Limits the number of results returned per page.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_links(
         &self,
@@ -36,7 +36,7 @@ impl LinkBranding {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/links?{}", query_), None);
+            .url(&format!("/whitelabel/links?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -48,7 +48,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Retrieve all branded links.
+     * Retrieve all branded links
      *
      * This function performs a `GET` to the `/whitelabel/links` endpoint.
      *
@@ -73,7 +73,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Create a branded link.
+     * Create a branded link
      *
      * This function performs a `POST` to the `/whitelabel/links` endpoint.
      *
@@ -85,7 +85,7 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_whitelabel_link(
         &self,
@@ -103,7 +103,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Validate a branded link.
+     * Validate a branded link
      *
      * This function performs a `POST` to the `/whitelabel/links/{id}/validate` endpoint.
      *
@@ -113,7 +113,7 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_whitelabel_links_validate(
         &self,
@@ -137,7 +137,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Associate a branded link with a subuser.
+     * Associate a branded link with a subuser
      *
      * This function performs a `POST` to the `/whitelabel/links/{link_id}/subuser` endpoint.
      *
@@ -168,7 +168,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Retrieve a branded link.
+     * Retrieve a branded link
      *
      * This function performs a `GET` to the `/whitelabel/links/{id}` endpoint.
      *
@@ -178,7 +178,7 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_links_link_branding(
         &self,
@@ -202,7 +202,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Delete a branded link.
+     * Delete a branded link
      *
      * This function performs a `DELETE` to the `/whitelabel/links/{id}` endpoint.
      *
@@ -214,7 +214,7 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_whitelabel_links(
         &self,
@@ -238,7 +238,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Update a branded link.
+     * Update a branded link
      *
      * This function performs a `PATCH` to the `/whitelabel/links/{id}` endpoint.
      *
@@ -248,7 +248,7 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_whitelabel_links(
         &self,
@@ -273,7 +273,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Retrieve the default branded link.
+     * Retrieve the default branded link
      *
      * This function performs a `GET` to the `/whitelabel/links/default` endpoint.
      *
@@ -289,8 +289,8 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `domain: &str` -- The domain to match against when finding the default branded link.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `domain` -- The domain to match against when finding the default branded link.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_links_default(
         &self,
@@ -303,7 +303,7 @@ impl LinkBranding {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/links/default?{}", query_), None);
+            .url(&format!("/whitelabel/links/default?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -315,7 +315,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Retrieve a subuser's branded link.
+     * Retrieve a subuser's branded link
      *
      * This function performs a `GET` to the `/whitelabel/links/subuser` endpoint.
      *
@@ -325,7 +325,7 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `username: &str` -- The username of the subuser to retrieve associated branded links for.
+     * * `username` -- The username of the subuser to retrieve associated branded links for.
      */
     pub async fn get_whitelabel_links_subuser(
         &self,
@@ -338,7 +338,7 @@ impl LinkBranding {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/links/subuser?{}", query_), None);
+            .url(&format!("/whitelabel/links/subuser?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -350,7 +350,7 @@ impl LinkBranding {
             .await
     }
     /**
-     * Disassociate a branded link from a subuser.
+     * Disassociate a branded link from a subuser
      *
      * This function performs a `DELETE` to the `/whitelabel/links/subuser` endpoint.
      *
@@ -362,7 +362,7 @@ impl LinkBranding {
      *
      * **Parameters:**
      *
-     * * `username: &str` -- The username of the subuser account that you want to disassociate a branded link from.
+     * * `username` -- The username of the subuser account that you want to disassociate a branded link from.
      */
     pub async fn delete_whitelabel_links_subuser(
         &self,
@@ -375,7 +375,7 @@ impl LinkBranding {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/whitelabel/links/subuser?{}", query_), None);
+            .url(&format!("/whitelabel/links/subuser?{query_}"), None);
         self.client
             .delete(
                 &url,

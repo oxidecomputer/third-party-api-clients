@@ -18,13 +18,13 @@ impl Permissions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `page_size: i64` -- The maximum number of permissions to return per page. When not set for files in a shared drive, at most 100 results will be returned. When not set for files that are not in a shared drive, the entire list will be returned.
-     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
+     * * `file_id` -- A link to this theme's background image.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `page_size` -- The maximum number of permissions to return per page. When not set for files in a shared drive, at most 100 results will be returned. When not set for files that are not in a shared drive, the entire list will be returned.
+     * * `page_token` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
     pub async fn list(
         &self,
@@ -171,7 +171,7 @@ impl Permissions {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -186,7 +186,7 @@ impl Permissions {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -214,15 +214,15 @@ impl Permissions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `email_message: &str` -- A plain text custom message to include in the notification email.
-     * * `enforce_single_parent: bool` -- Whether the user has installed the requesting app.
-     * * `move_to_new_owners_root: bool` -- This parameter will only take effect if the item is not in a shared drive and the request is attempting to transfer the ownership of the item. If set to true, the item will be moved to the new owner's My Drive root folder and all prior parents removed. If set to false, parents are not changed.
-     * * `send_notification_email: bool` -- Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `transfer_ownership: bool` -- Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
+     * * `file_id` -- A link to this theme's background image.
+     * * `email_message` -- A plain text custom message to include in the notification email.
+     * * `enforce_single_parent` -- Whether the user has installed the requesting app.
+     * * `move_to_new_owners_root` -- This parameter will only take effect if the item is not in a shared drive and the request is attempting to transfer the ownership of the item. If set to true, the item will be moved to the new owner's My Drive root folder and all prior parents removed. If set to false, parents are not changed.
+     * * `send_notification_email` -- Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `transfer_ownership` -- Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
     pub async fn create(
         &self,
@@ -300,11 +300,11 @@ impl Permissions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `permission_id: &str` -- A link to this theme's background image.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
+     * * `file_id` -- A link to this theme's background image.
+     * * `permission_id` -- A link to this theme's background image.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
     pub async fn get(
         &self,
@@ -360,11 +360,11 @@ impl Permissions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `permission_id: &str` -- A link to this theme's background image.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
+     * * `file_id` -- A link to this theme's background image.
+     * * `permission_id` -- A link to this theme's background image.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
     pub async fn delete(
         &self,
@@ -420,13 +420,13 @@ impl Permissions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `permission_id: &str` -- A link to this theme's background image.
-     * * `remove_expiration: bool` -- Whether the user has installed the requesting app.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `transfer_ownership: bool` -- Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
+     * * `file_id` -- A link to this theme's background image.
+     * * `permission_id` -- A link to this theme's background image.
+     * * `remove_expiration` -- Whether the user has installed the requesting app.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `transfer_ownership` -- Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
     pub async fn update(
         &self,

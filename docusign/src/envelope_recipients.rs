@@ -22,12 +22,12 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_anchor_tab_locations: &str` --  When set to **true** and `include_tabs` value is set to **true**, all tabs with anchor tab properties are included in the response. .
-     * * `include_extended: &str` --  When set to **true**, the extended properties are included in the response. .
-     * * `include_metadata: &str` -- Boolean value that specifies whether to include metadata associated with the recipients (for envelopes only, not templates).
-     * * `include_tabs: &str` -- When set to **true**, the tab information associated with the recipient is included in the response.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_anchor_tab_locations` -- When set to **true** and `include_tabs` value is set to **true**, all tabs with anchor tab properties are included in the response.
+     * * `include_extended` -- When set to **true**, the extended properties are included in the response.
+     * * `include_metadata` -- Boolean value that specifies whether to include metadata associated with the recipients (for envelopes only, not templates).
+     * * `include_tabs` -- When set to **true**, the tab information associated with the recipient is included in the response.
      */
     pub async fn recipients_get(
         &self,
@@ -112,11 +112,11 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `combine_same_order_recipients: &str` -- When set to **true**, recipients are combined or merged with matching recipients. Recipient matching occurs as part of [template matching](https://docs.docusign.com/DocuSignHelp/Content/automatic-template-matching.htm), and is based on Recipient Role and Routing Order.
-     * * `offline_signing: &str` -- Indicates if offline signing is enabled for the recipient when a network connection is unavailable. .
-     * * `resend_envelope: &str` -- When set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `combine_same_order_recipients` -- When set to **true**, recipients are combined or merged with matching recipients. Recipient matching occurs as part of [template matching](https://docs.docusign.com/DocuSignHelp/Content/automatic-template-matching.htm), and is based on Recipient Role and Routing Order.
+     * * `offline_signing` -- Indicates if offline signing is enabled for the recipient when a network connection is unavailable.
+     * * `resend_envelope` -- When set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
      */
     pub async fn recipients_put(
         &self,
@@ -171,9 +171,9 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `resend_envelope: &str` -- When set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `resend_envelope` -- When set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
      */
     pub async fn recipients_post(
         &self,
@@ -217,8 +217,8 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_delete(
         &self,
@@ -245,7 +245,7 @@ impl EnvelopeRecipients {
             .await
     }
     /**
-     * Updates document visibility for recipients.
+     * Updates document visibility for recipients
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/document_visibility` endpoint.
      *
@@ -255,8 +255,8 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_put_document_visibility(
         &self,
@@ -293,9 +293,9 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
      */
     pub async fn recipients_delete_recipient(
         &self,
@@ -323,7 +323,7 @@ impl EnvelopeRecipients {
             .await
     }
     /**
-     * Creates a resource token for a sender to request ID Evidence data. .
+     * Creates a resource token for a sender to request ID Evidence data.
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/identity_proof_token` endpoint.
      *
@@ -331,9 +331,9 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_post_recipient_proof_file_resource_token(
         &self,
@@ -369,13 +369,13 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- A value that identifies your account. This value is automatically generated by DocuSign for any account you create. Copy the value from the API Account ID field in the [AppsI and Keys](https://support.docusign.com/en/guides/ndse-admin-guide-api-and-keys) page.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A GUID value that DocuSign assigns to identify each recipient in an envelope. This value is globally unique for all recipients, not just those in your account.
-     *   
+     * * `account_id` -- A value that identifies your account. This value is automatically generated by DocuSign for any account you create. Copy the value from the API Account ID field in the [AppsI and Keys](https://support.docusign.com/en/guides/ndse-admin-guide-api-and-keys) page.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A GUID value that DocuSign assigns to identify each recipient in an envelope. This value is globally unique for all recipients, not just those in your account.
+     *
      *   The specified recipient must belong to a workflow that allows the [manual review](https://support.docusign.com/en/guides/Identity-Verification-DocuSign-eSignature-Admin-Guide) of IDs. In addition, the status of the automatic verification for this recipient must return `Failed` and the value of the `vendorFailureStatusCode` field must be `MANUAL_REVIEW_STARTED` as shown in the following extract of a response to the [GET ENVELOPE](https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/envelopes/get/) method:
      *   <p>
-     *   
+     *
      *   ```
      *   "recipientAuthenticationStatus": {
      *          "identityVerificationResult": {
@@ -384,7 +384,7 @@ impl EnvelopeRecipients {
      *                "vendorFailureStatusCode": "MANUAL_REVIEW_STARTED"
      *           }
      *     }
-     *   ```.
+     *   ```
      */
     pub async fn views_post_recipient_manual_review_view(
         &self,
@@ -422,8 +422,8 @@ impl EnvelopeRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn views_post_preview(
         &self,

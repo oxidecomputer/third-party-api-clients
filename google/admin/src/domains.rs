@@ -18,7 +18,7 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer` -- Immutable ID of the Google Workspace account.
      */
     pub async fn list(
         &self,
@@ -48,7 +48,7 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer` -- Immutable ID of the Google Workspace account.
      */
     pub async fn insert(
         &self,
@@ -79,8 +79,8 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `domain_name: &str` -- Name of domain to be retrieved.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `domain_name` -- Name of domain to be retrieved
      */
     pub async fn get(
         &self,
@@ -112,8 +112,8 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `domain_name: &str` -- Name of domain to be deleted.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `domain_name` -- Name of domain to be deleted
      */
     pub async fn delete(
         &self,

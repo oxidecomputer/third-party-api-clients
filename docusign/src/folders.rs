@@ -20,23 +20,21 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include: &str` -- A comma-separated list of folder types to include in the response.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include` -- A comma-separated list of folder types to include in the response.
      *   Valid values are:
-     *   
+     *
      *   - `envelope_folders`: Returns a list of envelope folders. (Default)
      *   - `template_folders`: Returns a list of template folders.
      *   - `shared_template_folders`: Returns a list of shared template folders.
-     *   .
-     * * `include_items: &str` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values.
-     * * `template: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_filter: &str` -- Narrows down the resulting folder list by the following values:
-     *   
+     * * `include_items` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
+     * * `start_position` -- The position within the total result set from which to start returning values.
+     * * `template` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_filter` -- Narrows down the resulting folder list by the following values:
+     *
      *   - `all`: Returns all templates owned or shared with the user. (default)
      *   - `owned_by_me`: Returns only  templates the user owns.
      *   - `shared_with_me`: Returns only templates that are shared with the user.
-     *   .
      */
     pub async fn get(
         &self,
@@ -91,16 +89,16 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `from_date: &str` -- The billing period end date in UTC timedate format.
-     * * `include_items: &str` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
-     * * `owner_email: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `owner_name: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `search_text: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `status: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `to_date: &str` -- The billing period end date in UTC timedate format.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `from_date` -- The billing period end date in UTC timedate format.
+     * * `include_items` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
+     * * `owner_email` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `owner_name` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `search_text` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `status` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `to_date` -- The billing period end date in UTC timedate format.
      */
     pub async fn get_items(
         &self,
@@ -174,8 +172,8 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -216,16 +214,16 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `search_folder_id: &str` -- Specifies the envelope group that is searched by the request. These are logical groupings, not actual folder names. Valid values are: drafts, awaiting_my_signature, completed, out_for_signature.
-     * * `all: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- Specifies the number of records returned in the cache. The number must be greater than 0 and less than or equal to 100.
-     * * `from_date: &str` -- Specifies the start of the date range to return. If no value is provided, the default search is the previous 30 days.
-     * * `include_recipients: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `order: &str` -- Specifies the order in which the list is returned. Valid values are: `asc` for ascending order, and `desc` for descending order.
-     * * `order_by: &str` -- Specifies the property used to sort the list. Valid values are: `action_required`, `created`, `completed`, `sent`, `signer_list`, `status`, or `subject`.
-     * * `start_position: &str` -- Specifies the the starting location in the result set of the items that are returned.
-     * * `to_date: &str` -- The billing period end date in UTC timedate format.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `search_folder_id` -- Specifies the envelope group that is searched by the request. These are logical groupings, not actual folder names. Valid values are: drafts, awaiting_my_signature, completed, out_for_signature.
+     * * `all` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- Specifies the number of records returned in the cache. The number must be greater than 0 and less than or equal to 100.
+     * * `from_date` -- Specifies the start of the date range to return. If no value is provided, the default search is the previous 30 days.
+     * * `include_recipients` -- When set to **true**, the recipient information is returned in the response.
+     * * `order` -- Specifies the order in which the list is returned. Valid values are: `asc` for ascending order, and `desc` for descending order.
+     * * `order_by` -- Specifies the property used to sort the list. Valid values are: `action_required`, `created`, `completed`, `sent`, `signer_list`, `status`, or `subject`.
+     * * `start_position` -- Specifies the the starting location in the result set of the items that are returned.
+     * * `to_date` -- The billing period end date in UTC timedate format.
      */
     pub async fn search_get_contents(
         &self,

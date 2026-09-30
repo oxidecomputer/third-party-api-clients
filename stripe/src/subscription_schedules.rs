@@ -18,26 +18,17 @@ impl SubscriptionSchedules {
      *
      * **Parameters:**
      *
-     * * `canceled_at: &str` -- Only return subscription schedules that were created canceled the given date interval.
-     * * `completed_at: &str` -- Only return subscription schedules that completed during the given date interval.
-     * * `created: &str` -- Only return subscription schedules that were created during the given date interval.
-     * * `customer: &str` -- Only return subscription schedules for the given customer.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `released_at: &str` -- Only return subscription schedules that were released during the given date interval.
-     * * `scheduled: bool` -- Only return subscription schedules that have not started yet.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- Only return subscription schedules for the given customer.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `scheduled` -- Only return subscription schedules that have not started yet.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
-        canceled_at: &str,
-        completed_at: &str,
-        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
-        released_at: &str,
         scheduled: bool,
         starting_after: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionSchedule>>> {
@@ -60,7 +51,7 @@ impl SubscriptionSchedules {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/subscription_schedules?{}", query_), None);
+            .url(&format!("/v1/subscription_schedules?{query_}"), None);
         let resp: crate::Response<crate::types::GetSubscriptionSchedulesResponse> = self
             .client
             .get(
@@ -88,11 +79,7 @@ impl SubscriptionSchedules {
      */
     pub async fn get_all(
         &self,
-        canceled_at: &str,
-        completed_at: &str,
-        created: &str,
         customer: &str,
-        released_at: &str,
         scheduled: bool,
     ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionSchedule>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -105,7 +92,7 @@ impl SubscriptionSchedules {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/subscription_schedules?{}", query_), None);
+            .url(&format!("/v1/subscription_schedules?{query_}"), None);
         let crate::Response::<crate::types::GetSubscriptionSchedulesResponse> {
             mut status,
             mut headers,
@@ -145,7 +132,7 @@ impl SubscriptionSchedules {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -160,7 +147,7 @@ impl SubscriptionSchedules {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -201,8 +188,7 @@ impl SubscriptionSchedules {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `schedule: &str` -- The account's country.
+     * * `schedule` -- The account's country.
      */
     pub async fn get_schedule(
         &self,
@@ -232,7 +218,7 @@ impl SubscriptionSchedules {
      *
      * **Parameters:**
      *
-     * * `schedule: &str` -- The account's country.
+     * * `schedule` -- The account's country.
      */
     pub async fn post_schedule(
         &self,
@@ -262,7 +248,7 @@ impl SubscriptionSchedules {
      *
      * **Parameters:**
      *
-     * * `schedule: &str` -- The account's country.
+     * * `schedule` -- The account's country.
      */
     pub async fn post_schedule_cancel(
         &self,
@@ -292,7 +278,7 @@ impl SubscriptionSchedules {
      *
      * **Parameters:**
      *
-     * * `schedule: &str` -- The account's country.
+     * * `schedule` -- The account's country.
      */
     pub async fn post_schedule_release(
         &self,

@@ -12,7 +12,7 @@ impl SendTestEmail {
     }
 
     /**
-     * Send a Test Marketing Email.
+     * Send a Test Marketing Email
      *
      * This function performs a `POST` to the `/marketing/test/send_email` endpoint.
      *

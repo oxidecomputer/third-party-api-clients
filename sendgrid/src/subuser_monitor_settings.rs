@@ -12,7 +12,7 @@ impl SubuserMonitorSettings {
     }
 
     /**
-     * Retrieve monitor settings for a subuser.
+     * Retrieve monitor settings for a subuser
      *
      * This function performs a `GET` to the `/subusers/{subuser_name}/monitor` endpoint.
      */
@@ -38,7 +38,7 @@ impl SubuserMonitorSettings {
             .await
     }
     /**
-     * Update Monitor Settings for a subuser.
+     * Update Monitor Settings for a subuser
      *
      * This function performs a `PUT` to the `/subusers/{subuser_name}/monitor` endpoint.
      */
@@ -65,7 +65,7 @@ impl SubuserMonitorSettings {
             .await
     }
     /**
-     * Create monitor settings.
+     * Create monitor settings
      *
      * This function performs a `POST` to the `/subusers/{subuser_name}/monitor` endpoint.
      */
@@ -92,7 +92,7 @@ impl SubuserMonitorSettings {
             .await
     }
     /**
-     * Delete monitor settings.
+     * Delete monitor settings
      *
      * This function performs a `DELETE` to the `/subusers/{subuser_name}/monitor` endpoint.
      */

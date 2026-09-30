@@ -4,36 +4,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub application_name: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Array of permissions granted for the channel
-     */
+    /// Array of permissions granted for the channel
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -45,36 +37,28 @@ pub struct Channel {
 /// Information about an inventory item's dimensions
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InventoryDimension {
-    /**
-     * Information about an inventory item's dimensions
-     */
+    /// Information about an inventory item's dimensions
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub depth: f64,
-    /**
-     * Information about an inventory item's dimensions
-     */
+    /// Information about an inventory item's dimensions
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub length: f64,
-    /**
-     * Information about an inventory item's dimensions
-     */
+    /// Information about an inventory item's dimensions
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub weight: f64,
-    /**
-     * Information about an inventory item's dimensions
-     */
+    /// Information about an inventory item's dimensions
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -86,63 +70,49 @@ pub struct InventoryDimension {
 /// Break down of fulfillable quantity by fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InventoryFulfillmentCenterQuantity {
-    /**
-     * Break down of fulfillable quantity by fulfillment center
-     */
+    /// Break down of fulfillable quantity by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub awaiting_quantity: i64,
-    /**
-     * Break down of fulfillable quantity by fulfillment center
-     */
+    /// Break down of fulfillable quantity by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub committed_quantity: i64,
-    /**
-     * Break down of fulfillable quantity by fulfillment center
-     */
+    /// Break down of fulfillable quantity by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub fulfillable_quantity: i64,
-    /**
-     * Break down of fulfillable quantity by fulfillment center
-     */
+    /// Break down of fulfillable quantity by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Break down of fulfillable quantity by fulfillment center
-     */
+    /// Break down of fulfillable quantity by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub internal_transfer_quantity: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Break down of fulfillable quantity by fulfillment center
-     */
+    /// Break down of fulfillable quantity by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -154,72 +124,56 @@ pub struct InventoryFulfillmentCenterQuantity {
 /// Break down of fulfillable quantity by lot
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InventoryLotQuantity {
-    /**
-     * Break down of fulfillable quantity by lot
-     */
+    /// Break down of fulfillable quantity by lot
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub awaiting_quantity: i64,
-    /**
-     * Break down of fulfillable quantity by lot
-     */
+    /// Break down of fulfillable quantity by lot
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub committed_quantity: i64,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expiration_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Break down of fulfillable quantity by lot
-     */
+    /// Break down of fulfillable quantity by lot
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub fulfillable_quantity: i64,
-    /**
-     * Break down of fulfillable quantity by lot
-     */
+    /// Break down of fulfillable quantity by lot
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantity>,
-    /**
-     * Break down of fulfillable quantity by lot
-     */
+    /// Break down of fulfillable quantity by lot
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub internal_transfer_quantity: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lot_number: String,
-    /**
-     * Break down of fulfillable quantity by lot
-     */
+    /// Break down of fulfillable quantity by lot
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -286,150 +240,114 @@ impl PackagingAttribute {
 /// Information about an inventory item
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Inventory {
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dimensions: Option<InventoryDimension>,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantity>,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub fulfillable_quantity_by_lot: Vec<InventoryLotQuantity>,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_active: bool,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_case_pick: bool,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_digital: bool,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_lot: bool,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub packaging_attribute: Option<PackagingAttribute>,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_awaiting_quantity: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_backordered_quantity: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_committed_quantity: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_exception_quantity: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_fulfillable_quantity: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_internal_transfer_quantity: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_onhand_quantity: i64,
-    /**
-     * Information about an inventory item
-     */
+    /// Information about an inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -440,9 +358,7 @@ pub struct Inventory {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersEstimationAddress {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -450,9 +366,7 @@ pub struct OrdersEstimationAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -460,45 +374,35 @@ pub struct OrdersEstimationAddress {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company_name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -509,27 +413,21 @@ pub struct OrdersEstimationAddress {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersEstimateProductInfoModel {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -541,18 +439,14 @@ pub struct OrdersEstimateProductInfoModel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersEstimateFulfillmentRequestModel {
     pub address: OrdersEstimationAddress,
-    /**
-     * Products to be included in the order. Each product must include one of reference_id or id
-     */
+    /// Products to be included in the order. Each product must include one of reference_id or id
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub products: Vec<OrdersEstimateProductInfoModel>,
-    /**
-     * Array of permissions granted for the channel
-     */
+    /// Array of permissions granted for the channel
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -564,18 +458,14 @@ pub struct OrdersEstimateFulfillmentRequestModel {
 /// Information about a fulfillment center that a shipment can belong to
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersFulfillmentCenter {
-    /**
-     * Information about a fulfillment center that a shipment can belong to
-     */
+    /// Information about a fulfillment center that a shipment can belong to
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -586,23 +476,17 @@ pub struct OrdersFulfillmentCenter {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersEstimateDetail {
-    /**
-     * Weight in ounces of this inventory item
-     */
+    /// Weight in ounces of this inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub estimated_price: f64,
-    /**
-     * Information about a fulfillment center that a shipment can belong to
-     */
+    /// Information about a fulfillment center that a shipment can belong to
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fulfillment_center: Option<OrdersFulfillmentCenter>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -613,9 +497,7 @@ pub struct OrdersEstimateDetail {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersEstimate {
-    /**
-     * Array of estimates for each shipping method
-     */
+    /// Array of estimates for each shipping method
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -627,18 +509,14 @@ pub struct OrdersEstimate {
 /// Created by channel metadata
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersChannelInfo {
-    /**
-     * Created by channel metadata
-     */
+    /// Created by channel metadata
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -686,9 +564,7 @@ impl Type {
 /// Address to used when creating a B2B/DropShip order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersRetailerProgramDataAddress {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -696,9 +572,7 @@ pub struct OrdersRetailerProgramDataAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -706,52 +580,40 @@ pub struct OrdersRetailerProgramDataAddress {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company_name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Specifies the type of address:
-     *  ShipFrom
-     *  MarkFor
-     */
+    /// Specifies the type of address:
+    /// ShipFrom
+    /// MarkFor
     #[serde(default, skip_serializing_if = "Type::is_noop", rename = "type")]
     pub type_: Type,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -763,31 +625,23 @@ pub struct OrdersRetailerProgramDataAddress {
 /// Information about the recipient of an order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersRecipientInfo {
-    /**
-     * Address to used when creating a B2B/DropShip order.
-     */
+    /// Address to used when creating a B2B/DropShip order.
     pub address: OrdersRetailerProgramDataAddress,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -798,36 +652,28 @@ pub struct OrdersRecipientInfo {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersProductInfo {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -838,18 +684,14 @@ pub struct OrdersProductInfo {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersTag {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -861,32 +703,24 @@ pub struct OrdersTag {
 /// Information about the recipient of a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersRecipient {
-    /**
-     * Information about the recipient of a shipment
-     */
+    /// Information about the recipient of a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<OrdersRetailerProgramDataAddress>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -897,45 +731,35 @@ pub struct OrdersRecipient {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersStatusDetail {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub exception_fulfillment_center_id: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub inventory_id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -947,36 +771,28 @@ pub struct OrdersStatusDetail {
 /// Tracking information for a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersTracking {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub carrier: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub carrier_service: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub tracking_number: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -988,71 +804,55 @@ pub struct OrdersTracking {
 /// Information about inventory belonging to a store product
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersInventory {
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expiration_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about inventory belonging to a store product
-     */
+    /// Information about inventory belonging to a store product
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Information about inventory belonging to a store product
-     */
+    /// Information about inventory belonging to a store product
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_dangerous_goods: bool,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lot: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about inventory belonging to a store product
-     */
+    /// Information about inventory belonging to a store product
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    /**
-     * Information about inventory belonging to a store product
-     */
+    /// Information about inventory belonging to a store product
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity_committed: i64,
-    /**
-     * Array of permissions granted for the channel
-     */
+    /// Array of permissions granted for the channel
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1064,45 +864,35 @@ pub struct OrdersInventory {
 /// Information about a store product belonging to a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersShipmentProduct {
-    /**
-     * Information about a store product belonging to a shipment
-     */
+    /// Information about a store product belonging to a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Information about a store product belonging to a shipment
-     */
+    /// Information about a store product belonging to a shipment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub inventory_items: Vec<OrdersInventory>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1114,36 +904,28 @@ pub struct OrdersShipmentProduct {
 /// Measurements of a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersMeasurements {
-    /**
-     * Measurements of a shipment
-     */
+    /// Measurements of a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub depth_in: i64,
-    /**
-     * Measurements of a shipment
-     */
+    /// Measurements of a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub length_in: i64,
-    /**
-     * Measurements of a shipment
-     */
+    /// Measurements of a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_weight_oz: i64,
-    /**
-     * Measurements of a shipment
-     */
+    /// Measurements of a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1322,181 +1104,137 @@ impl EstimatedFulfillmentDateStatus {
 /// Information about a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersShipment {
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub actual_fulfillment_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub estimated_fulfillment_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub estimated_fulfillment_date_status: Option<EstimatedFulfillmentDateStatus>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub gift_message: String,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub insurance_value: f64,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub invoice_amount: f64,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_tracking_uploaded: bool,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_update_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<OrdersFulfillmentCenter>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub measurements: Option<OrdersMeasurements>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub order_id: i64,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub package_material_type: Option<PackageMaterialType>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub products: Vec<OrdersShipmentProduct>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipient: Option<OrdersRecipient>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub require_signature: bool,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ship_option: String,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub status_details: Vec<OrdersStatusDetail>,
-    /**
-     * Information about a shipment
-     */
+    /// Information about a shipment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<OrdersTracking>,
 }
 
 /**
  * Identifies whether to ship parcel or freight.
- *   
+ *
  *   Parcel: Smaller, light weight boxes.
- *   
+ *
  *   Freight: Larger boxes, usually transported by truckload.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -1532,11 +1270,11 @@ impl CarrierType {
 
 /**
  * Identifies the party responsible for shipping charges.
- *   
+ *
  *   Collect: The person/entity receiving the product pays the shipping charges [freight only].
- *   
+ *
  *   ThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].
- *   
+ *
  *   Prepaid: The shipper pays the shipping charges (Shipbob or merchant).
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -1576,24 +1314,20 @@ impl PaymentTerm {
 /// Contains shipping properties that need to be used for fulfilling an order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersShippingTerms {
-    /**
-     * Identifies whether to ship parcel or freight.
-     *  
-     *  Parcel: Smaller, light weight boxes.
-     *  
-     *  Freight: Larger boxes, usually transported by truckload.
-     */
+    /// Identifies whether to ship parcel or freight.
+    ///
+    /// Parcel: Smaller, light weight boxes.
+    ///
+    /// Freight: Larger boxes, usually transported by truckload.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub carrier_type: Option<CarrierType>,
-    /**
-     * Identifies the party responsible for shipping charges.
-     *  
-     *  Collect: The person/entity receiving the product pays the shipping charges [freight only].
-     *  
-     *  ThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].
-     *  
-     *  Prepaid: The shipper pays the shipping charges (Shipbob or merchant).
-     */
+    /// Identifies the party responsible for shipping charges.
+    ///
+    /// Collect: The person/entity receiving the product pays the shipping charges [freight only].
+    ///
+    /// ThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].
+    ///
+    /// Prepaid: The shipper pays the shipping charges (Shipbob or merchant).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payment_term: Option<PaymentTerm>,
 }
@@ -1601,45 +1335,35 @@ pub struct OrdersShippingTerms {
 /// Contains properties that needs to be used for fulfilling B2B/Dropship orders.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersRetailerProgramData {
-    /**
-     * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
-     */
+    /// Contains properties that needs to be used for fulfilling B2B/Dropship orders.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub addresses: Vec<OrdersRetailerProgramDataAddress>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub delivery_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub mark_for_store: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub purchase_order_number: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1733,142 +1457,106 @@ impl OrderType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Order {
-    /**
-     * Created by channel metadata
-     */
+    /// Created by channel metadata
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<OrdersChannelInfo>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub gift_message: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_number: String,
-    /**
-     * List of products included in the order
-     */
+    /// List of products included in the order
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub products: Vec<OrdersProductInfo>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub purchase_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about the recipient of an order
-     */
+    /// Information about the recipient of an order
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipient: Option<OrdersRecipientInfo>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
-     */
+    /// Contains properties that needs to be used for fulfilling B2B/Dropship orders.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub retailer_program_data: Option<OrdersRetailerProgramData>,
-    /**
-     * Shipments affiliated with the order
-     */
+    /// Shipments affiliated with the order
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub shipments: Vec<OrdersShipment>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub shipping_method: String,
-    /**
-     * Contains shipping properties that need to be used for fulfilling an order.
-     */
+    /// Contains shipping properties that need to be used for fulfilling an order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_terms: Option<OrdersShippingTerms>,
-    /**
-     * The order status
-     */
+    /// The order status
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<OrderStatus>,
-    /**
-     * Client-defined order tags
-     */
+    /// Client-defined order tags
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub tags: Vec<OrdersTag>,
-    /**
-     * Shipment type of the order
-     */
+    /// Shipment type of the order
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrderType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersAddProductOrderByModel {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1879,27 +1567,21 @@ pub struct OrdersAddProductOrderByModel {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersAddProductOrderByReferenceModel {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1914,7 +1596,6 @@ pub struct OrdersAddProductOrderByReferenceModel {
 /// - `OrdersAddProductOrderByReferenceModel`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum OrdersAddProductOrderModelOneOf {
@@ -1942,95 +1623,71 @@ impl OrdersAddProductOrderModelOneOf {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersCreateOrderModel {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub gift_message: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub location_id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_number: String,
-    /**
-     * Products included in the order. Products identified by reference_id must also include the product name if there is no matching ShipBob product.
-     */
+    /// Products included in the order. Products identified by reference_id must also include the product name if there is no matching ShipBob product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub products: Vec<OrdersAddProductOrderModelOneOf>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub purchase_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about the recipient of an order
-     */
+    /// Information about the recipient of an order
     pub recipient: OrdersRecipientInfo,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
-     */
+    /// Contains properties that needs to be used for fulfilling B2B/Dropship orders.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub retailer_program_data: Option<OrdersRetailerProgramData>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub shipping_method: String,
-    /**
-     * Contains shipping properties that need to be used for fulfilling an order.
-     */
+    /// Contains shipping properties that need to be used for fulfilling an order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_terms: Option<OrdersShippingTerms>,
-    /**
-     * Client-defined order tags
-     */
+    /// Client-defined order tags
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub tags: Vec<OrdersTag>,
-    /**
-     * Shipment type of the order
-     */
+    /// Shipment type of the order
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrderType>,
 }
@@ -2063,34 +1720,22 @@ impl Action {
     }
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersCanceledShipment {
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<Action>,
-    /**
-     *
-     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_success: bool,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reason: String,
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2136,35 +1781,22 @@ impl OrdersCanceledOrderStatus {
     }
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersCanceledOrder {
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub canceled_shipment_results: Vec<OrdersCanceledShipment>,
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order: Option<Order>,
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub order_id: i64,
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<OrdersCanceledOrderStatus>,
 }
@@ -2172,9 +1804,7 @@ pub struct OrdersCanceledOrder {
 /// Model for adding a Store Order Json to a ShipBob Order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersAddStoreOrderJsonModel {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2185,45 +1815,35 @@ pub struct OrdersAddStoreOrderJsonModel {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersShipmentLog {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub log_type_id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub log_type_name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub log_type_text: String,
-    /**
-     * Specifics data for the event
-     */
+    /// Specifics data for the event
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub metadata: String,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -2235,9 +1855,7 @@ pub struct OrdersShipmentLog {
 /// Model for cancel multiple shipments at once
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersCancelShipmentsModel {
-    /**
-     * Model for cancel multiple shipments at once
-     */
+    /// Model for cancel multiple shipments at once
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2246,12 +1864,8 @@ pub struct OrdersCancelShipmentsModel {
     pub shipment_ids: Vec<i64>,
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersCanceledShipments {
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2262,18 +1876,14 @@ pub struct OrdersCanceledShipments {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersServiceLevelDetail {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2284,34 +1894,26 @@ pub struct OrdersServiceLevelDetail {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersShipMethodDetail {
-    /**
-     * True if the inventory item is marked as a digital item
-     */
+    /// True if the inventory item is marked as a digital item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    /**
-     * True if the inventory item is marked as a digital item
-     */
+    /// True if the inventory item is marked as a digital item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub default: bool,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2393,18 +1995,14 @@ impl ProductBundleStatus {
 /// Information about a store channel
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProductsChannel {
-    /**
-     * Information about a store channel
-     */
+    /// Information about a store channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2416,27 +2014,21 @@ pub struct ProductsChannel {
 /// The inventory that store products can resolve to when packing a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProductsInventoryItem {
-    /**
-     * The inventory that store products can resolve to when packing a shipment
-     */
+    /// The inventory that store products can resolve to when packing a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The inventory that store products can resolve to when packing a shipment
-     */
+    /// The inventory that store products can resolve to when packing a shipment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2448,45 +2040,35 @@ pub struct ProductsInventoryItem {
 /// Break down of quantities by fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProductsFulfillmentCenterQuantity {
-    /**
-     * Break down of quantities by fulfillment center
-     */
+    /// Break down of quantities by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub committed_quantity: i64,
-    /**
-     * Break down of quantities by fulfillment center
-     */
+    /// Break down of quantities by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub fulfillable_quantity: i64,
-    /**
-     * Break down of quantities by fulfillment center
-     */
+    /// Break down of quantities by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Break down of quantities by fulfillment center
-     */
+    /// Break down of quantities by fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2497,9 +2079,7 @@ pub struct ProductsFulfillmentCenterQuantity {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Product {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2508,122 +2088,94 @@ pub struct Product {
     pub barcode: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bundle_root_information: Option<OrdersServiceLevelDetail>,
-    /**
-     * Information about a store channel
-     */
+    /// Information about a store channel
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<ProductsChannel>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The inventory that this product will resolve to when packing a shipment
-     */
+    /// The inventory that this product will resolve to when packing a shipment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub fulfillable_inventory_items: Vec<ProductsInventoryItem>,
-    /**
-     * Fulfillable quantity of this product broken down by fulfillment center location
-     */
+    /// Fulfillable quantity of this product broken down by fulfillment center location
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub fulfillable_quantity_by_fulfillment_center: Vec<ProductsFulfillmentCenterQuantity>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub gtin: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sku: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_committed_quantity: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_fulfillable_quantity: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_onhand_quantity: i64,
-    /**
-     * Weight in ounces of this inventory item
-     */
+    /// Weight in ounces of this inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub unit_price: f64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2635,63 +2187,49 @@ pub struct Product {
 /// The product to create
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProductsCreateProductModel {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub barcode: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub gtin: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sku: String,
-    /**
-     * The product to create
-     */
+    /// The product to create
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub unit_price: f64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2703,54 +2241,42 @@ pub struct ProductsCreateProductModel {
 /// Updates to an existing product product
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProductsUpdateProductModel {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub barcode: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub gtin: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sku: String,
-    /**
-     * Updates to an existing product product
-     */
+    /// Updates to an existing product product
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub unit_price: f64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2762,9 +2288,7 @@ pub struct ProductsUpdateProductModel {
 /// Information about a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingFulfillmentCenter {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2772,9 +2296,7 @@ pub struct ReceivingFulfillmentCenter {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2782,81 +2304,63 @@ pub struct ReceivingFulfillmentCenter {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * Information about a fulfillment center
-     */
+    /// Information about a fulfillment center
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone_number: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub timezone: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3025,45 +2529,35 @@ impl ReceivingBoxStatus {
 /// Information about an item contained inside a box as part of a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingBoxItem {
-    /**
-     * Information about an item contained inside a box as part of a receiving order
-     */
+    /// Information about an item contained inside a box as part of a receiving order
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub inventory_id: i64,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub lot_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lot_number: String,
-    /**
-     * Information about an item contained inside a box as part of a receiving order
-     */
+    /// Information about an item contained inside a box as part of a receiving order
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    /**
-     * Information about an item contained inside a box as part of a receiving order
-     */
+    /// Information about an item contained inside a box as part of a receiving order
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3075,59 +2569,45 @@ pub struct ReceivingBoxItem {
 /// Information about a box shipment included in a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingBox {
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub arrived_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about the items included in the box
-     */
+    /// Information about the items included in the box
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub box_items: Vec<ReceivingBoxItem>,
-    /**
-     * Information about a box shipment included in a receiving order
-     */
+    /// Information about a box shipment included in a receiving order
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub box_number: i64,
-    /**
-     * Information about a box shipment included in a receiving order
-     */
+    /// Information about a box shipment included in a receiving order
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub box_status: Option<ReceivingBoxStatus>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub counting_started_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub received_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3139,78 +2619,58 @@ pub struct ReceivingBox {
 /// Information about a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingOrder {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub box_labels_uri: String,
-    /**
-     * Information about a receiving order
-     */
+    /// Information about a receiving order
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub box_packaging_type: Option<ReceivingPackingType>,
-    /**
-     * Information about the boxes being shipped in this receiving order
-     */
+    /// Information about the boxes being shipped in this receiving order
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub boxes: Vec<ReceivingBox>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expected_arrival_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a receiving order
-     */
+    /// Information about a receiving order
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fulfillment_center: Option<ReceivingFulfillmentCenter>,
-    /**
-     * Information about a receiving order
-     */
+    /// Information about a receiving order
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub insert_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_updated_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a receiving order
-     */
+    /// Information about a receiving order
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub package_type: Option<ReceivingPackageType>,
-    /**
-     * Information about a receiving order
-     */
+    /// Information about a receiving order
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReceivingStatus>,
 }
@@ -3220,9 +2680,7 @@ pub struct Extensions {}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MicrosoftAspNetCoreMvcValidationProblemDetails {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3237,36 +2695,28 @@ pub struct MicrosoftAspNetCoreMvcValidationProblemDetails {
     pub errors: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub extensions: Option<Extensions>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub instance: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub status: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3279,9 +2729,7 @@ pub struct MicrosoftAspNetCoreMvcValidationProblemDetails {
 /// Model containing information that assigns a receiving order to a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingAssignOrderFulfillmentCenterModel {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3293,36 +2741,28 @@ pub struct ReceivingAssignOrderFulfillmentCenterModel {
 /// Information about an inventory item contained inside a receiving order box
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingAddBoxItemModel {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub inventory_id: i64,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub lot_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lot_number: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3334,18 +2774,14 @@ pub struct ReceivingAddBoxItemModel {
 /// Information about a box shipment to be added to a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingAddBoxOrderModel {
-    /**
-     * Items contained in this box
-     */
+    /// Items contained in this box
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub box_items: Vec<ReceivingAddBoxItemModel>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3358,27 +2794,21 @@ pub struct ReceivingAddBoxOrderModel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingCreateOrderModel {
     pub box_packaging_type: ReceivingPackingType,
-    /**
-     * Box shipments to be added to this receiving order
-     */
+    /// Box shipments to be added to this receiving order
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub boxes: Vec<ReceivingAddBoxOrderModel>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expected_arrival_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Model containing information that assigns a receiving order to a fulfillment center
-     */
+    /// Model containing information that assigns a receiving order to a fulfillment center
     pub fulfillment_center: ReceivingAssignOrderFulfillmentCenterModel,
     pub package_type: ReceivingPackageType,
 }
@@ -3459,9 +2889,7 @@ impl ReturnsTransactionLogSource {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnsTransaction {
-    /**
-     * Weight in ounces of this inventory item
-     */
+    /// Weight in ounces of this inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3475,18 +2903,14 @@ pub struct ReturnsTransaction {
 /// Information about a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnsFulfillmentCenter {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3569,9 +2993,7 @@ pub struct ReturnActionRequested {
     pub action: Option<ReturnAction>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action_type: Option<ReturnActionSource>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3584,18 +3006,14 @@ pub struct ReturnActionRequested {
 pub struct ReturnActionTaken {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<ReturnAction>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub action_reason: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3608,36 +3026,28 @@ pub struct ReturnActionTaken {
 pub struct ReturnsInventoryItem {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action_requested: Option<ReturnActionRequested>,
-    /**
-     * Action(s) taken when processing the return
-     */
+    /// Action(s) taken when processing the return
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub action_taken: Vec<ReturnActionTaken>,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3679,64 +3089,48 @@ impl ReturnType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnOrder {
-    /**
-     * Created by channel metadata
-     */
+    /// Created by channel metadata
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<OrdersChannelInfo>,
-    /**
-     * Information about a fulfillment center
-     */
+    /// Information about a fulfillment center
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fulfillment_center: Option<ReturnsFulfillmentCenter>,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub insert_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * List of inventory included in the return order
-     */
+    /// List of inventory included in the return order
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub inventory: Vec<ReturnsInventoryItem>,
-    /**
-     * Weight in ounces of this inventory item
-     */
+    /// Weight in ounces of this inventory item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub invoice_amount: f64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub original_shipment_id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3747,18 +3141,14 @@ pub struct ReturnOrder {
     pub return_type: Option<ReturnType>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReturnStatus>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub tracking_number: String,
-    /**
-     * Array of transactions affiliated with the return order
-     */
+    /// Array of transactions affiliated with the return order
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3769,18 +3159,14 @@ pub struct ReturnOrder {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnInventory {
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3793,40 +3179,30 @@ pub struct ReturnInventory {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnsCreateReturn {
-    /**
-     * Information about a fulfillment center
-     */
+    /// Information about a fulfillment center
     pub fulfillment_center: ReturnsFulfillmentCenter,
-    /**
-     * Array of inventory items being returned
-     */
+    /// Array of inventory items being returned
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub inventory: Vec<ReturnInventory>,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub original_shipment_id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reference_id: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3873,9 +3249,7 @@ impl SortOrder {
 pub struct ReturnOrderStatusHistory {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReturnStatus>,
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3923,27 +3297,21 @@ impl WebhooksTopics {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Webhook {
-    /**
-     * Expiration date for this lot
-     */
+    /// Expiration date for this lot
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Unique id of the channel
-     */
+    /// Unique id of the channel
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3956,9 +3324,7 @@ pub struct Webhook {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebhooksCreateWebhookSubscriptionModel {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3970,9 +3336,7 @@ pub struct WebhooksCreateWebhookSubscriptionModel {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MicrosoftAspNetCoreMvcProblemDetails {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3980,9 +3344,7 @@ pub struct MicrosoftAspNetCoreMvcProblemDetails {
         rename = "$type"
     )]
     pub type__: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3991,9 +3353,7 @@ pub struct MicrosoftAspNetCoreMvcProblemDetails {
     pub detail: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub extensions: Option<Extensions>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4006,18 +3366,14 @@ pub struct MicrosoftAspNetCoreMvcProblemDetails {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub status: i64,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4061,9 +3417,7 @@ impl IntegrationsLocationServiceTypeEnum {
 /// The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IntegrationsLocationAddress {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4071,9 +3425,7 @@ pub struct IntegrationsLocationAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4081,63 +3433,49 @@ pub struct IntegrationsLocationAddress {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone_number: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4148,14 +3486,10 @@ pub struct IntegrationsLocationAddress {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IntegrationsLocationService {
-    /**
-     * The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email
-     */
+    /// The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<IntegrationsLocationAddress>,
-    /**
-     * True if the inventory item is marked as a digital item
-     */
+    /// True if the inventory item is marked as a digital item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4167,9 +3501,7 @@ pub struct IntegrationsLocationService {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IntegrationsLocation {
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4177,9 +3509,7 @@ pub struct IntegrationsLocation {
         rename = "$type"
     )]
     pub type__: String,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4191,9 +3521,7 @@ pub struct IntegrationsLocation {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub access_granted: bool,
-    /**
-     * Array of permissions granted for the channel
-     */
+    /// Array of permissions granted for the channel
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4221,9 +3549,7 @@ pub struct IntegrationsLocation {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_shipping_enabled: bool,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4232,18 +3558,14 @@ pub struct IntegrationsLocation {
     pub name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<OrdersServiceLevelDetail>,
-    /**
-     * Services provided by the location
-     */
+    /// Services provided by the location
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub services: Vec<IntegrationsLocationService>,
-    /**
-     * Name of the channel
-     */
+    /// Name of the channel
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4254,9 +3576,7 @@ pub struct IntegrationsLocation {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IntegrationsLocationInternal {
-    /**
-     * True if the inventory item is marked as a digital item
-     */
+    /// True if the inventory item is marked as a digital item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4268,7 +3588,6 @@ pub struct IntegrationsLocationInternal {
 ///
 /// - `IntegrationsLocation`
 /// - `IntegrationsLocationInternal`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IntegrationsLocationInternalAllOf {
     #[serde(flatten)]

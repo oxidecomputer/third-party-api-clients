@@ -41,9 +41,9 @@ impl AdminConversationsRestrictAccess {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:read`.
-     * * `channel_id: &str`
-     * * `team_id: &str` -- The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:read`
+     * * `channel_id`
+     * * `team_id` -- The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
      */
     pub async fn list_group(
         &self,
@@ -59,7 +59,7 @@ impl AdminConversationsRestrictAccess {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin.conversations.restrictAccess.listGroups?{}", query_),
+            &format!("/admin.conversations.restrictAccess.listGroups?{query_}"),
             None,
         );
         self.client

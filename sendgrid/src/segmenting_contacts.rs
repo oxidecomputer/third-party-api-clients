@@ -12,7 +12,7 @@ impl SegmentingContacts {
     }
 
     /**
-     * Get List of Segments.
+     * Get List of Segments
      *
      * This function performs a `GET` to the `/marketing/segments` endpoint.
      *
@@ -29,8 +29,8 @@ impl SegmentingContacts {
      *
      * **Parameters:**
      *
-     * * `parent_list_ids: &str` -- A comma separated list of list ids to be used when searching for segments with the specified parent_list_id, no more than 50 is allowed.
-     * * `no_parent_list_id: bool` -- If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
+     * * `parent_list_ids` -- A comma separated list of list ids to be used when searching for segments with the specified parent_list_id, no more than 50 is allowed
+     * * `no_parent_list_id` -- If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
      */
     pub async fn get_marketing_segments(
         &self,
@@ -50,7 +50,7 @@ impl SegmentingContacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/marketing/segments?{}", query_), None);
+            .url(&format!("/marketing/segments?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -62,7 +62,7 @@ impl SegmentingContacts {
             .await
     }
     /**
-     * Create Segment.
+     * Create Segment
      *
      * This function performs a `POST` to the `/marketing/segments` endpoint.
      *
@@ -84,7 +84,7 @@ impl SegmentingContacts {
             .await
     }
     /**
-     * Get Segment by ID.
+     * Get Segment by ID
      *
      * This function performs a `GET` to the `/marketing/segments/{segment_id}` endpoint.
      *
@@ -92,7 +92,7 @@ impl SegmentingContacts {
      *
      * **Parameters:**
      *
-     * * `query_json: bool` -- Defaults to `false`.  Set to `true` to return the parsed SQL AST as a JSON object in the field `query_json`.
+     * * `query_json` -- Defaults to `false`.  Set to `true` to return the parsed SQL AST as a JSON object in the field `query_json`
      */
     pub async fn get_marketing_segments_segment(
         &self,
@@ -123,7 +123,7 @@ impl SegmentingContacts {
             .await
     }
     /**
-     * Delete Segment.
+     * Delete Segment
      *
      * This function performs a `DELETE` to the `/marketing/segments/{segment_id}` endpoint.
      *
@@ -153,7 +153,7 @@ impl SegmentingContacts {
             .await
     }
     /**
-     * Update Segment.
+     * Update Segment
      *
      * This function performs a `PATCH` to the `/marketing/segments/{segment_id}` endpoint.
      *
@@ -184,7 +184,7 @@ impl SegmentingContacts {
             .await
     }
     /**
-     * Bulk Delete Segments.
+     * Bulk Delete Segments
      *
      * This function performs a `POST` to the `/marketing/segments/delete` endpoint.
      *

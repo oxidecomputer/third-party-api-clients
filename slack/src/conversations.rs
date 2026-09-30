@@ -20,7 +20,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn archive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/conversations.archive", None);
@@ -43,7 +43,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn close(
         &self,
@@ -68,7 +68,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn create(
         &self,
@@ -93,13 +93,13 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:history`.
-     * * `channel: &str` -- Conversation ID to fetch history for.
-     * * `latest: f64` -- End of time range of messages to include in results.
-     * * `oldest: f64` -- Start of time range of messages to include in results.
-     * * `inclusive: bool` -- Include messages with latest or oldest timestamp in results only when either timestamp is specified.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `token` -- Authentication token. Requires scope: `conversations:history`
+     * * `channel` -- Conversation ID to fetch history for.
+     * * `latest` -- End of time range of messages to include in results.
+     * * `oldest` -- Start of time range of messages to include in results.
+     * * `inclusive` -- Include messages with latest or oldest timestamp in results only when either timestamp is specified.
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
      */
     pub async fn history(
         &self,
@@ -132,7 +132,7 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/conversations.history?{}", query_), None);
+            .url(&format!("/conversations.history?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -152,10 +152,10 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:read`.
-     * * `channel: &str` -- Conversation ID to learn more about.
-     * * `include_locale: bool` -- Set this to `true` to receive the locale for this conversation. Defaults to `false`.
-     * * `include_num_members: bool` -- Set to `true` to include the member count for the specified conversation. Defaults to `false`.
+     * * `token` -- Authentication token. Requires scope: `conversations:read`
+     * * `channel` -- Conversation ID to learn more about
+     * * `include_locale` -- Set this to `true` to receive the locale for this conversation. Defaults to `false`
+     * * `include_num_members` -- Set to `true` to include the member count for the specified conversation. Defaults to `false`
      */
     pub async fn info(
         &self,
@@ -179,7 +179,7 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/conversations.info?{}", query_), None);
+            .url(&format!("/conversations.info?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -199,7 +199,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn invite(
         &self,
@@ -224,7 +224,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `channels:write`.
+     * * `token` -- Authentication token. Requires scope: `channels:write`
      */
     pub async fn join(
         &self,
@@ -249,7 +249,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn kick(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/conversations.kick", None);
@@ -272,7 +272,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn leave(
         &self,
@@ -297,11 +297,11 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:read`.
-     * * `exclude_archived: bool` -- Set to `true` to exclude archived channels from the list.
-     * * `types: &str` -- Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `token` -- Authentication token. Requires scope: `conversations:read`
+     * * `exclude_archived` -- Set to `true` to exclude archived channels from the list
+     * * `types` -- Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
      */
     pub async fn list(
         &self,
@@ -326,7 +326,7 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/conversations.list?{}", query_), None);
+            .url(&format!("/conversations.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -346,7 +346,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn mark(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/conversations.mark", None);
@@ -369,10 +369,10 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:read`.
-     * * `channel: &str` -- ID of the conversation to retrieve members for.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `token` -- Authentication token. Requires scope: `conversations:read`
+     * * `channel` -- ID of the conversation to retrieve members for
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
      */
     pub async fn member(
         &self,
@@ -393,7 +393,7 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/conversations.members?{}", query_), None);
+            .url(&format!("/conversations.members?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -413,7 +413,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn open(
         &self,
@@ -438,7 +438,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn rename(
         &self,
@@ -463,14 +463,14 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:history`.
-     * * `channel: &str` -- Conversation ID to fetch thread from.
-     * * `ts: f64` -- Unique identifier of a thread's parent message. `ts` must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by `ts` will return - it is just an ordinary, unthreaded message.
-     * * `latest: f64` -- End of time range of messages to include in results.
-     * * `oldest: f64` -- Start of time range of messages to include in results.
-     * * `inclusive: bool` -- Include messages with latest or oldest timestamp in results only when either timestamp is specified.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `token` -- Authentication token. Requires scope: `conversations:history`
+     * * `channel` -- Conversation ID to fetch thread from.
+     * * `ts` -- Unique identifier of a thread's parent message. `ts` must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by `ts` will return - it is just an ordinary, unthreaded message.
+     * * `latest` -- End of time range of messages to include in results.
+     * * `oldest` -- Start of time range of messages to include in results.
+     * * `inclusive` -- Include messages with latest or oldest timestamp in results only when either timestamp is specified.
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
      */
     pub async fn replie(
         &self,
@@ -507,7 +507,7 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/conversations.replies?{}", query_), None);
+            .url(&format!("/conversations.replies?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -527,7 +527,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn set_purpose(
         &self,
@@ -552,7 +552,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn set_topic(
         &self,
@@ -577,7 +577,7 @@ impl Conversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `conversations:write`
      */
     pub async fn unarchive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/conversations.unarchive", None);

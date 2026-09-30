@@ -20,8 +20,8 @@ impl CustomTabs {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_tab_only: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_tab_only` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn tabs_get_tab_definition(
         &self,
@@ -62,7 +62,7 @@ impl CustomTabs {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn tabs_post_tab_definitions(
         &self,
@@ -95,8 +95,8 @@ impl CustomTabs {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_tab_id` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
      */
     pub async fn tab_get_custom(
         &self,
@@ -123,8 +123,6 @@ impl CustomTabs {
     }
     /**
      * Updates custom tab information.
-
-    .
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/tab_definitions/{customTabId}` endpoint.
      *
@@ -132,8 +130,8 @@ impl CustomTabs {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_tab_id` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
      */
     pub async fn tab_put_custom(
         &self,
@@ -168,8 +166,8 @@ impl CustomTabs {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_tab_id` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
      */
     pub async fn tab_delete_custom(
         &self,

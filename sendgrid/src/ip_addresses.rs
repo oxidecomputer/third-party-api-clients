@@ -12,7 +12,7 @@ impl IpAddresses {
     }
 
     /**
-     * Retrieve all IP addresses.
+     * Retrieve all IP addresses
      *
      * This function performs a `GET` to the `/ips` endpoint.
      *
@@ -24,12 +24,12 @@ impl IpAddresses {
      *
      * **Parameters:**
      *
-     * * `ip: &str` -- The license key provided with your New Relic account.
-     * * `exclude_whitelabels: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
-     * * `limit: i64` -- The number of IPs you want returned at the same time.
-     * * `offset: i64` -- The offset for the number of IPs that you are requesting.
-     * * `subuser: &str` -- The license key provided with your New Relic account.
-     * * `sort_by_direction: crate::types::SortByDirection` -- The direction to sort the results.
+     * * `ip` -- The license key provided with your New Relic account.
+     * * `exclude_whitelabels` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * * `limit` -- The number of IPs you want returned at the same time.
+     * * `offset` -- The offset for the number of IPs that you are requesting.
+     * * `subuser` -- The license key provided with your New Relic account.
+     * * `sort_by_direction` -- The direction to sort the results.
      */
     pub async fn get_ips(
         &self,
@@ -66,7 +66,7 @@ impl IpAddresses {
             query_args.push(("subuser".to_string(), subuser.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/ips?{}", query_), None);
+        let url = self.client.url(&format!("/ips?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -78,7 +78,7 @@ impl IpAddresses {
             .await
     }
     /**
-     * Retrieve all IP addresses.
+     * Retrieve all IP addresses
      *
      * This function performs a `GET` to the `/ips` endpoint.
      *
@@ -121,7 +121,7 @@ impl IpAddresses {
             query_args.push(("subuser".to_string(), subuser.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/ips?{}", query_), None);
+        let url = self.client.url(&format!("/ips?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -133,7 +133,7 @@ impl IpAddresses {
             .await
     }
     /**
-     * Add IPs.
+     * Add IPs
      *
      * This function performs a `POST` to the `/ips` endpoint.
      *
@@ -155,7 +155,7 @@ impl IpAddresses {
             .await
     }
     /**
-     * Get remaining IPs count.
+     * Get remaining IPs count
      *
      * This function performs a `GET` to the `/ips/remaining` endpoint.
      *
@@ -176,7 +176,7 @@ impl IpAddresses {
             .await
     }
     /**
-     * Retrieve all assigned IPs.
+     * Retrieve all assigned IPs
      *
      * This function performs a `GET` to the `/ips/assigned` endpoint.
      *
@@ -199,7 +199,7 @@ impl IpAddresses {
             .await
     }
     /**
-     * Retrieve all assigned IPs.
+     * Retrieve all assigned IPs
      *
      * This function performs a `GET` to the `/ips/assigned` endpoint.
      *
@@ -224,7 +224,7 @@ impl IpAddresses {
             .await
     }
     /**
-     * Retrieve all IP pools an IP address belongs to.
+     * Retrieve all IP pools an IP address belongs to
      *
      * This function performs a `GET` to the `/ips/{ip_address}` endpoint.
      *

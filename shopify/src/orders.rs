@@ -12,7 +12,7 @@ impl Orders {
     }
 
     /**
-     * Retrieves a count of checkouts from the past 90 days.
+     * Retrieves a count of checkouts from the past 90 days
      *
      * This function performs a `GET` to the `/admin/api/2020-01/checkouts/count.json` endpoint.
      *
@@ -20,16 +20,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count checkouts with a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count only open abandoned checkouts.
-     *                           closed: Count only closed abandoned checkouts.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `status` -- Count checkouts with a given status.
+     *   (default: open)
+     *
+     *   open: Count only open abandoned checkouts.
+     *   closed: Count only closed abandoned checkouts.
      */
     pub async fn deprecated_202001_get_checkouts_count(
         &self,
@@ -61,7 +61,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/checkouts/count.json?{}", query_),
+            &format!("/admin/api/2020-01/checkouts/count.json?{query_}"),
             None,
         );
         self.client
@@ -75,7 +75,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a count of checkouts from the past 90 days.
+     * Retrieves a count of checkouts from the past 90 days
      *
      * This function performs a `GET` to the `/admin/api/2020-04/checkouts/count.json` endpoint.
      *
@@ -83,16 +83,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count checkouts with a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count only open abandoned checkouts.
-     *                           closed: Count only closed abandoned checkouts.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `status` -- Count checkouts with a given status.
+     *   (default: open)
+     *
+     *   open: Count only open abandoned checkouts.
+     *   closed: Count only closed abandoned checkouts.
      */
     pub async fn deprecated_202004_get_checkouts_count(
         &self,
@@ -124,7 +124,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/checkouts/count.json?{}", query_),
+            &format!("/admin/api/2020-04/checkouts/count.json?{query_}"),
             None,
         );
         self.client
@@ -138,7 +138,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a count of checkouts from the past 90 days.
+     * Retrieves a count of checkouts from the past 90 days
      *
      * This function performs a `GET` to the `/admin/api/2020-07/checkouts/count.json` endpoint.
      *
@@ -146,16 +146,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count checkouts with a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count only open abandoned checkouts.
-     *                           closed: Count only closed abandoned checkouts.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `status` -- Count checkouts with a given status.
+     *   (default: open)
+     *
+     *   open: Count only open abandoned checkouts.
+     *   closed: Count only closed abandoned checkouts.
      */
     pub async fn deprecated_202007_get_checkouts_count(
         &self,
@@ -187,7 +187,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/checkouts/count.json?{}", query_),
+            &format!("/admin/api/2020-07/checkouts/count.json?{query_}"),
             None,
         );
         self.client
@@ -201,7 +201,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a count of checkouts from the past 90 days.
+     * Retrieves a count of checkouts from the past 90 days
      *
      * This function performs a `GET` to the `/admin/api/2020-10/checkouts/count.json` endpoint.
      *
@@ -209,16 +209,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count checkouts with a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count only open abandoned checkouts.
-     *                           closed: Count only closed abandoned checkouts.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `status` -- Count checkouts with a given status.
+     *   (default: open)
+     *
+     *   open: Count only open abandoned checkouts.
+     *   closed: Count only closed abandoned checkouts.
      */
     pub async fn get_checkouts_count(
         &self,
@@ -250,7 +250,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/checkouts/count.json?{}", query_),
+            &format!("/admin/api/2020-10/checkouts/count.json?{query_}"),
             None,
         );
         self.client
@@ -264,7 +264,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a count of checkouts from the past 90 days.
+     * Retrieves a count of checkouts from the past 90 days
      *
      * This function performs a `GET` to the `/admin/api/2021-01/checkouts/count.json` endpoint.
      *
@@ -272,16 +272,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count checkouts with a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count only open abandoned checkouts.
-     *                           closed: Count only closed abandoned checkouts.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `status` -- Count checkouts with a given status.
+     *   (default: open)
+     *
+     *   open: Count only open abandoned checkouts.
+     *   closed: Count only closed abandoned checkouts.
      */
     pub async fn deprecated_202101_get_checkouts_count(
         &self,
@@ -313,7 +313,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/checkouts/count.json?{}", query_),
+            &format!("/admin/api/2021-01/checkouts/count.json?{query_}"),
             None,
         );
         self.client
@@ -327,7 +327,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a count of checkouts from the past 90 days.
+     * Retrieves a count of checkouts from the past 90 days
      *
      * This function performs a `GET` to the `/admin/api/unstable/checkouts/count.json` endpoint.
      *
@@ -335,16 +335,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count checkouts with a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count only open abandoned checkouts.
-     *                           closed: Count only closed abandoned checkouts.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Count checkouts created after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Count checkouts created before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Count checkouts last updated after the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Count checkouts last updated before the specified date. (format: 2014-04-25T16:15:47-04:00)
+     * * `status` -- Count checkouts with a given status.
+     *   (default: open)
+     *
+     *   open: Count only open abandoned checkouts.
+     *   closed: Count only closed abandoned checkouts.
      */
     pub async fn deprecated_unstable_get_checkouts_count(
         &self,
@@ -376,7 +376,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/checkouts/count.json?{}", query_),
+            &format!("/admin/api/unstable/checkouts/count.json?{query_}"),
             None,
         );
         self.client
@@ -398,45 +398,45 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Retrieve only orders specified by a comma-separated list of order IDs.
-     * * `limit: &str` -- The maximum number of results to show on a page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Show orders after the specified ID.
-     * * `created_at_min: &str` -- Show orders created at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show orders created at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show orders last updated at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show orders last updated at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `processed_at_min: &str` -- Show orders imported at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `processed_at_max: &str` -- Show orders imported at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `attribution_app_id: &str` -- Show orders attributed to a certain app, specified by the app ID. Set as current to show orders for the app currently consuming the API.
-     * * `status: &str` -- Filter orders by their status.
-     *                     (default: open)
-     *                       
-     *                           open: Show only open orders.
-     *                           closed: Show only closed orders.
-     *                           cancelled: Show only canceled orders.
-     *                           any: Show orders of any status, including archived orders.
-     * * `financial_status: &str` -- Filter orders by their financial status.
-     *                     (default: any)
-     *                       
-     *                           authorized: Show only authorized orders
-     *                           pending: Show only pending orders
-     *                           paid: Show only paid orders
-     *                           partially_paid: Show only partially paid orders
-     *                           refunded: Show only refunded orders
-     *                           voided: Show only voided orders
-     *                           partially_refunded: Show only partially refunded orders
-     *                           any: Show orders of any financial status.
-     *                           unpaid: Show authorized and partially paid orders.
-     * * `fulfillment_status: &str` -- Filter orders by their fulfillment status.
-     *                     (default: any)
-     *                       
-     *                           shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
-     *                           partial: Show partially shipped orders.
-     *                           unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
-     *                           any: Show orders of any fulfillment status.
-     *                           unfulfilled: Returns orders with fulfillment_status of null or partial.
-     * * `fields: &str` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
+     * * `ids` -- Retrieve only orders specified by a comma-separated list of order IDs.
+     * * `limit` -- The maximum number of results to show on a page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Show orders after the specified ID.
+     * * `created_at_min` -- Show orders created at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show orders created at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show orders last updated at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show orders last updated at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `processed_at_min` -- Show orders imported at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `processed_at_max` -- Show orders imported at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `attribution_app_id` -- Show orders attributed to a certain app, specified by the app ID. Set as current to show orders for the app currently consuming the API.
+     * * `status` -- Filter orders by their status.
+     *   (default: open)
+     *
+     *   open: Show only open orders.
+     *   closed: Show only closed orders.
+     *   cancelled: Show only canceled orders.
+     *   any: Show orders of any status, including archived orders.
+     * * `financial_status` -- Filter orders by their financial status.
+     *   (default: any)
+     *
+     *   authorized: Show only authorized orders
+     *   pending: Show only pending orders
+     *   paid: Show only paid orders
+     *   partially_paid: Show only partially paid orders
+     *   refunded: Show only refunded orders
+     *   voided: Show only voided orders
+     *   partially_refunded: Show only partially refunded orders
+     *   any: Show orders of any financial status.
+     *   unpaid: Show authorized and partially paid orders.
+     * * `fulfillment_status` -- Filter orders by their fulfillment status.
+     *   (default: any)
+     *
+     *   shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
+     *   partial: Show partially shipped orders.
+     *   unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
+     *   any: Show orders of any fulfillment status.
+     *   unfulfilled: Returns orders with fulfillment_status of null or partial.
+     * * `fields` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202001_get(
         &self,
@@ -507,7 +507,7 @@ impl Orders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-01/orders.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-01/orders.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -519,35 +519,31 @@ impl Orders {
             .await
     }
     /**
-    * Creates an order. By default, product inventory is not claimed.
-             When you create an order, you can include the following option parameters in the body of the request:
-
-               inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
-
-                   bypass: Do not claim inventory.
-                   decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
-                   decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
-
-
-               send_receipt: Whether to send an order confirmation to the customer.
-
-
-                 Note
-                 If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
-
-
-               send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
-
-
-               Note
-               If you are including shipping_address or billing_address, make sure to pass both
-                 first_name and last_name. Otherwise both these addresses will be ignored.
-               If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-01
-    */
+     * Creates an order. By default, product inventory is not claimed.
+     * When you create an order, you can include the following option parameters in the body of the request:
+     *
+     * inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
+     *
+     * bypass: Do not claim inventory.
+     * decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
+     * decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
+     *
+     * send_receipt: Whether to send an order confirmation to the customer.
+     *
+     * Note
+     * If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
+     *
+     * send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
+     *
+     * Note
+     * If you are including shipping_address or billing_address, make sure to pass both
+     * first_name and last_name. Otherwise both these addresses will be ignored.
+     * If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-01
+     */
     pub async fn deprecated_202001_create(
         &self,
         body: &serde_json::Value,
@@ -564,7 +560,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a specific order.
+     * Retrieves a specific order
      *
      * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}.json` endpoint.
      *
@@ -572,8 +568,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
+     * * `order_id` -- storefront_access_token_id
+     * * `fields` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202001_get_param(
         &self,
@@ -604,7 +600,7 @@ impl Orders {
             .await
     }
     /**
-     * Updates an order.
+     * Updates an order
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/orders/{order_id}.json` endpoint.
      *
@@ -612,7 +608,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_param(
         &self,
@@ -645,7 +641,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_param(
         &self,
@@ -669,7 +665,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves an order count.
+     * Retrieves an order count
      *
      * This function performs a `GET` to the `/admin/api/2020-01/orders/count.json` endpoint.
      *
@@ -677,33 +673,33 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `created_at_min: &str` -- Count orders created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count orders created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count orders last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count orders last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count orders of a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count open orders.
-     *                           closed: Count closed orders.
-     *                           any: Count orders of any status.
-     * * `financial_status: &str` -- Count orders of a given financial status.
-     *                     (default: any)
-     *                       
-     *                           authorized: Count authorized orders.
-     *                           pending: Count pending orders.
-     *                           paid: Count paid orders.
-     *                           refunded: Count refunded orders.
-     *                           voided: Count voided orders.
-     *                           any: Count orders of any financial status.
-     * * `fulfillment_status: &str` -- Filter orders by their fulfillment status.
-     *                     (default: any)
-     *                       
-     *                           shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
-     *                           partial: Show partially shipped orders.
-     *                           unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
-     *                           any: Show orders of any fulfillment status.
-     *                           unfulfilled: Returns orders with fulfillment_status of null or partial.
+     * * `created_at_min` -- Count orders created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count orders created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count orders last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count orders last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `status` -- Count orders of a given status.
+     *   (default: open)
+     *
+     *   open: Count open orders.
+     *   closed: Count closed orders.
+     *   any: Count orders of any status.
+     * * `financial_status` -- Count orders of a given financial status.
+     *   (default: any)
+     *
+     *   authorized: Count authorized orders.
+     *   pending: Count pending orders.
+     *   paid: Count paid orders.
+     *   refunded: Count refunded orders.
+     *   voided: Count voided orders.
+     *   any: Count orders of any financial status.
+     * * `fulfillment_status` -- Filter orders by their fulfillment status.
+     *   (default: any)
+     *
+     *   shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
+     *   partial: Show partially shipped orders.
+     *   unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
+     *   any: Show orders of any fulfillment status.
+     *   unfulfilled: Returns orders with fulfillment_status of null or partial.
      */
     pub async fn deprecated_202001_get_count(
         &self,
@@ -742,7 +738,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/orders/count.json?{}", query_),
+            &format!("/admin/api/2020-01/orders/count.json?{query_}"),
             None,
         );
         self.client
@@ -756,7 +752,7 @@ impl Orders {
             .await
     }
     /**
-     * Closes an order.
+     * Closes an order
      *
      * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/close.json` endpoint.
      *
@@ -764,7 +760,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_param_close(
         &self,
@@ -789,7 +785,7 @@ impl Orders {
             .await
     }
     /**
-     * Re-opens a closed order.
+     * Re-opens a closed order
      *
      * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/open.json` endpoint.
      *
@@ -797,7 +793,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_param_open(
         &self,
@@ -823,9 +819,9 @@ impl Orders {
     }
     /**
      * Caution
-      For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-    Cancels an order. Orders that have a fulfillment object can't be canceled.
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+     *
+     * Cancels an order. Orders that have a fulfillment object can't be canceled.
      *
      * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/cancel.json` endpoint.
      *
@@ -833,16 +829,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `amount: &str` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
-     * * `currency: &str` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
-     * * `restock_deprecated: &str` -- Whether to restock refunded items back to your store's inventory.
-      *                     (default: false).
-     * * `reason: &str` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
-      *                     (default: other).
-     * * `email: &str` -- Whether to send an email to the customer notifying them of the cancellation.
-      *                     (default: false).
-     * * `refund: &str` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
+     * * `order_id` -- storefront_access_token_id
+     * * `amount` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
+     * * `currency` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
+     * * `restock_deprecated` -- Whether to restock refunded items back to your store's inventory.
+     *   (default: false)
+     * * `reason` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
+     *   (default: other)
+     * * `email` -- Whether to send an email to the customer notifying them of the cancellation.
+     *   (default: false)
+     * * `refund` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
      */
     pub async fn deprecated_202001_create_param_cancel(
         &self,
@@ -907,45 +903,45 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Retrieve only orders specified by a comma-separated list of order IDs.
-     * * `limit: &str` -- The maximum number of results to show on a page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Show orders after the specified ID.
-     * * `created_at_min: &str` -- Show orders created at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show orders created at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show orders last updated at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show orders last updated at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `processed_at_min: &str` -- Show orders imported at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `processed_at_max: &str` -- Show orders imported at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `attribution_app_id: &str` -- Show orders attributed to a certain app, specified by the app ID. Set as current to show orders for the app currently consuming the API.
-     * * `status: &str` -- Filter orders by their status.
-     *                     (default: open)
-     *                       
-     *                           open: Show only open orders.
-     *                           closed: Show only closed orders.
-     *                           cancelled: Show only canceled orders.
-     *                           any: Show orders of any status, including archived orders.
-     * * `financial_status: &str` -- Filter orders by their financial status.
-     *                     (default: any)
-     *                       
-     *                           authorized: Show only authorized orders
-     *                           pending: Show only pending orders
-     *                           paid: Show only paid orders
-     *                           partially_paid: Show only partially paid orders
-     *                           refunded: Show only refunded orders
-     *                           voided: Show only voided orders
-     *                           partially_refunded: Show only partially refunded orders
-     *                           any: Show orders of any financial status.
-     *                           unpaid: Show authorized and partially paid orders.
-     * * `fulfillment_status: &str` -- Filter orders by their fulfillment status.
-     *                     (default: any)
-     *                       
-     *                           shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
-     *                           partial: Show partially shipped orders.
-     *                           unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
-     *                           any: Show orders of any fulfillment status.
-     *                           unfulfilled: Returns orders with fulfillment_status of null or partial.
-     * * `fields: &str` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
+     * * `ids` -- Retrieve only orders specified by a comma-separated list of order IDs.
+     * * `limit` -- The maximum number of results to show on a page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Show orders after the specified ID.
+     * * `created_at_min` -- Show orders created at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show orders created at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show orders last updated at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show orders last updated at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `processed_at_min` -- Show orders imported at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `processed_at_max` -- Show orders imported at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `attribution_app_id` -- Show orders attributed to a certain app, specified by the app ID. Set as current to show orders for the app currently consuming the API.
+     * * `status` -- Filter orders by their status.
+     *   (default: open)
+     *
+     *   open: Show only open orders.
+     *   closed: Show only closed orders.
+     *   cancelled: Show only canceled orders.
+     *   any: Show orders of any status, including archived orders.
+     * * `financial_status` -- Filter orders by their financial status.
+     *   (default: any)
+     *
+     *   authorized: Show only authorized orders
+     *   pending: Show only pending orders
+     *   paid: Show only paid orders
+     *   partially_paid: Show only partially paid orders
+     *   refunded: Show only refunded orders
+     *   voided: Show only voided orders
+     *   partially_refunded: Show only partially refunded orders
+     *   any: Show orders of any financial status.
+     *   unpaid: Show authorized and partially paid orders.
+     * * `fulfillment_status` -- Filter orders by their fulfillment status.
+     *   (default: any)
+     *
+     *   shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
+     *   partial: Show partially shipped orders.
+     *   unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
+     *   any: Show orders of any fulfillment status.
+     *   unfulfilled: Returns orders with fulfillment_status of null or partial.
+     * * `fields` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202004_get(
         &self,
@@ -1016,7 +1012,7 @@ impl Orders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-04/orders.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-04/orders.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1028,35 +1024,31 @@ impl Orders {
             .await
     }
     /**
-    * Creates an order. By default, product inventory is not claimed.
-             When you create an order, you can include the following option parameters in the body of the request:
-
-               inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
-
-                   bypass: Do not claim inventory.
-                   decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
-                   decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
-
-
-               send_receipt: Whether to send an order confirmation to the customer.
-
-
-                 Note
-                 If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
-
-
-               send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
-
-
-               Note
-               If you are including shipping_address or billing_address, make sure to pass both
-                 first_name and last_name. Otherwise both these addresses will be ignored.
-               If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-04
-    */
+     * Creates an order. By default, product inventory is not claimed.
+     * When you create an order, you can include the following option parameters in the body of the request:
+     *
+     * inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
+     *
+     * bypass: Do not claim inventory.
+     * decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
+     * decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
+     *
+     * send_receipt: Whether to send an order confirmation to the customer.
+     *
+     * Note
+     * If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
+     *
+     * send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
+     *
+     * Note
+     * If you are including shipping_address or billing_address, make sure to pass both
+     * first_name and last_name. Otherwise both these addresses will be ignored.
+     * If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-04
+     */
     pub async fn deprecated_202004_create(
         &self,
         body: &serde_json::Value,
@@ -1073,7 +1065,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a specific order.
+     * Retrieves a specific order
      *
      * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}.json` endpoint.
      *
@@ -1081,8 +1073,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
+     * * `order_id` -- storefront_access_token_id
+     * * `fields` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202004_get_param(
         &self,
@@ -1113,7 +1105,7 @@ impl Orders {
             .await
     }
     /**
-     * Updates an order.
+     * Updates an order
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/orders/{order_id}.json` endpoint.
      *
@@ -1121,7 +1113,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_param(
         &self,
@@ -1154,7 +1146,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_param(
         &self,
@@ -1178,7 +1170,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves an order count.
+     * Retrieves an order count
      *
      * This function performs a `GET` to the `/admin/api/2020-04/orders/count.json` endpoint.
      *
@@ -1186,33 +1178,33 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `created_at_min: &str` -- Count orders created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count orders created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count orders last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count orders last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `status: &str` -- Count orders of a given status.
-     *                     (default: open)
-     *                       
-     *                           open: Count open orders.
-     *                           closed: Count closed orders.
-     *                           any: Count orders of any status.
-     * * `financial_status: &str` -- Count orders of a given financial status.
-     *                     (default: any)
-     *                       
-     *                           authorized: Count authorized orders.
-     *                           pending: Count pending orders.
-     *                           paid: Count paid orders.
-     *                           refunded: Count refunded orders.
-     *                           voided: Count voided orders.
-     *                           any: Count orders of any financial status.
-     * * `fulfillment_status: &str` -- Filter orders by their fulfillment status.
-     *                     (default: any)
-     *                       
-     *                           shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
-     *                           partial: Show partially shipped orders.
-     *                           unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
-     *                           any: Show orders of any fulfillment status.
-     *                           unfulfilled: Returns orders with fulfillment_status of null or partial.
+     * * `created_at_min` -- Count orders created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count orders created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count orders last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count orders last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `status` -- Count orders of a given status.
+     *   (default: open)
+     *
+     *   open: Count open orders.
+     *   closed: Count closed orders.
+     *   any: Count orders of any status.
+     * * `financial_status` -- Count orders of a given financial status.
+     *   (default: any)
+     *
+     *   authorized: Count authorized orders.
+     *   pending: Count pending orders.
+     *   paid: Count paid orders.
+     *   refunded: Count refunded orders.
+     *   voided: Count voided orders.
+     *   any: Count orders of any financial status.
+     * * `fulfillment_status` -- Filter orders by their fulfillment status.
+     *   (default: any)
+     *
+     *   shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
+     *   partial: Show partially shipped orders.
+     *   unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
+     *   any: Show orders of any fulfillment status.
+     *   unfulfilled: Returns orders with fulfillment_status of null or partial.
      */
     pub async fn deprecated_202004_get_count(
         &self,
@@ -1251,7 +1243,7 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/orders/count.json?{}", query_),
+            &format!("/admin/api/2020-04/orders/count.json?{query_}"),
             None,
         );
         self.client
@@ -1265,7 +1257,7 @@ impl Orders {
             .await
     }
     /**
-     * Closes an order.
+     * Closes an order
      *
      * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/close.json` endpoint.
      *
@@ -1273,7 +1265,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_param_close(
         &self,
@@ -1298,7 +1290,7 @@ impl Orders {
             .await
     }
     /**
-     * Re-opens a closed order.
+     * Re-opens a closed order
      *
      * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/open.json` endpoint.
      *
@@ -1306,7 +1298,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_param_open(
         &self,
@@ -1332,9 +1324,9 @@ impl Orders {
     }
     /**
      * Caution
-      For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-    Cancels an order. Orders that have a fulfillment object can't be canceled.
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+     *
+     * Cancels an order. Orders that have a fulfillment object can't be canceled.
      *
      * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/cancel.json` endpoint.
      *
@@ -1342,16 +1334,16 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `amount: &str` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
-     * * `currency: &str` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
-     * * `restock_deprecated: &str` -- Whether to restock refunded items back to your store's inventory.
-      *                     (default: false).
-     * * `reason: &str` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
-      *                     (default: other).
-     * * `email: &str` -- Whether to send an email to the customer notifying them of the cancellation.
-      *                     (default: false).
-     * * `refund: &str` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
+     * * `order_id` -- storefront_access_token_id
+     * * `amount` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
+     * * `currency` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
+     * * `restock_deprecated` -- Whether to restock refunded items back to your store's inventory.
+     *   (default: false)
+     * * `reason` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
+     *   (default: other)
+     * * `email` -- Whether to send an email to the customer notifying them of the cancellation.
+     *   (default: false)
+     * * `refund` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
      */
     pub async fn deprecated_202004_create_param_cancel(
         &self,
@@ -1416,45 +1408,45 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Retrieve only orders specified by a comma-separated list of order IDs.
-     * * `limit: &str` -- The maximum number of results to show on a page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Show orders after the specified ID.
-     * * `created_at_min: &str` -- Show orders created at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show orders created at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show orders last updated at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show orders last updated at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `processed_at_min: &str` -- Show orders imported at or after date (format: 2014-04-25T16:15:47-04:00).
-     * * `processed_at_max: &str` -- Show orders imported at or before date (format: 2014-04-25T16:15:47-04:00).
-     * * `attribution_app_id: &str` -- Show orders attributed to a certain app, specified by the app ID. Set as current to show orders for the app currently consuming the API.
-     * * `status: &str` -- Filter orders by their status.
-     *                     (default: open)
-     *                       
-     *                           open: Show only open orders.
-     *                           closed: Show only closed orders.
-     *                           cancelled: Show only canceled orders.
-     *                           any: Show orders of any status, including archived orders.
-     * * `financial_status: &str` -- Filter orders by their financial status.
-     *                     (default: any)
-     *                       
-     *                           authorized: Show only authorized orders
-     *                           pending: Show only pending orders
-     *                           paid: Show only paid orders
-     *                           partially_paid: Show only partially paid orders
-     *                           refunded: Show only refunded orders
-     *                           voided: Show only voided orders
-     *                           partially_refunded: Show only partially refunded orders
-     *                           any: Show orders of any financial status.
-     *                           unpaid: Show authorized and partially paid orders.
-     * * `fulfillment_status: &str` -- Filter orders by their fulfillment status.
-     *                     (default: any)
-     *                       
-     *                           shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
-     *                           partial: Show partially shipped orders.
-     *                           unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
-     *                           any: Show orders of any fulfillment status.
-     *                           unfulfilled: Returns orders with fulfillment_status of null or partial.
-     * * `fields: &str` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
+     * * `ids` -- Retrieve only orders specified by a comma-separated list of order IDs.
+     * * `limit` -- The maximum number of results to show on a page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Show orders after the specified ID.
+     * * `created_at_min` -- Show orders created at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show orders created at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show orders last updated at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show orders last updated at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `processed_at_min` -- Show orders imported at or after date (format: 2014-04-25T16:15:47-04:00).
+     * * `processed_at_max` -- Show orders imported at or before date (format: 2014-04-25T16:15:47-04:00).
+     * * `attribution_app_id` -- Show orders attributed to a certain app, specified by the app ID. Set as current to show orders for the app currently consuming the API.
+     * * `status` -- Filter orders by their status.
+     *   (default: open)
+     *
+     *   open: Show only open orders.
+     *   closed: Show only closed orders.
+     *   cancelled: Show only canceled orders.
+     *   any: Show orders of any status, including archived orders.
+     * * `financial_status` -- Filter orders by their financial status.
+     *   (default: any)
+     *
+     *   authorized: Show only authorized orders
+     *   pending: Show only pending orders
+     *   paid: Show only paid orders
+     *   partially_paid: Show only partially paid orders
+     *   refunded: Show only refunded orders
+     *   voided: Show only voided orders
+     *   partially_refunded: Show only partially refunded orders
+     *   any: Show orders of any financial status.
+     *   unpaid: Show authorized and partially paid orders.
+     * * `fulfillment_status` -- Filter orders by their fulfillment status.
+     *   (default: any)
+     *
+     *   shipped: Show orders that have been shipped. Returns orders with fulfillment_status of fulfilled.
+     *   partial: Show partially shipped orders.
+     *   unshipped: Show orders that have not yet been shipped. Returns orders with fulfillment_status of null.
+     *   any: Show orders of any fulfillment status.
+     *   unfulfilled: Returns orders with fulfillment_status of null or partial.
+     * * `fields` -- Retrieve only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202007_get(
         &self,
@@ -1525,7 +1517,7 @@ impl Orders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-07/orders.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-07/orders.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1545,7 +1537,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_param_risk(
         &self,
@@ -1569,7 +1561,7 @@ impl Orders {
             .await
     }
     /**
-     * Creates an order risk for an order.
+     * Creates an order risk for an order
      *
      * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/risks.json` endpoint.
      *
@@ -1577,7 +1569,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_param_risks(
         &self,
@@ -1602,7 +1594,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a single order risk by its ID.
+     * Retrieves a single order risk by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
      *
@@ -1610,8 +1602,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `risk_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_param_risks_risk(
         &self,
@@ -1637,21 +1629,20 @@ impl Orders {
             .await
     }
     /**
-    * Updates an order risk
-
-
-               Note
-               You cannot modify an order risk that was created by another application.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an order risk
+     *
+     * Note
+     * You cannot modify an order risk that was created by another application.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_update_param_risks_risk(
         &self,
         order_id: &str,
@@ -1677,21 +1668,20 @@ impl Orders {
             .await
     }
     /**
-    * Deletes an order risk for an order
-
-
-               Note
-               You cannot delete an order risk that was created by another application.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes an order risk for an order
+     *
+     * Note
+     * You cannot delete an order risk that was created by another application.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_delete_param_risks_risk(
         &self,
         order_id: &str,
@@ -1724,7 +1714,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_param_risk(
         &self,
@@ -1748,7 +1738,7 @@ impl Orders {
             .await
     }
     /**
-     * Creates an order risk for an order.
+     * Creates an order risk for an order
      *
      * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/risks.json` endpoint.
      *
@@ -1756,7 +1746,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_param_risks(
         &self,
@@ -1781,7 +1771,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a single order risk by its ID.
+     * Retrieves a single order risk by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/risks/{risk_id}.json` endpoint.
      *
@@ -1789,8 +1779,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `risk_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_param_risks_risk(
         &self,
@@ -1816,21 +1806,20 @@ impl Orders {
             .await
     }
     /**
-    * Updates an order risk
-
-
-               Note
-               You cannot modify an order risk that was created by another application.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an order risk
+     *
+     * Note
+     * You cannot modify an order risk that was created by another application.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_update_param_risks_risk(
         &self,
         order_id: &str,
@@ -1856,21 +1845,20 @@ impl Orders {
             .await
     }
     /**
-    * Deletes an order risk for an order
-
-
-               Note
-               You cannot delete an order risk that was created by another application.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes an order risk for an order
+     *
+     * Note
+     * You cannot delete an order risk that was created by another application.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_delete_param_risks_risk(
         &self,
         order_id: &str,
@@ -1903,7 +1891,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_param_risk(
         &self,
@@ -1927,7 +1915,7 @@ impl Orders {
             .await
     }
     /**
-     * Creates an order risk for an order.
+     * Creates an order risk for an order
      *
      * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/risks.json` endpoint.
      *
@@ -1935,7 +1923,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_create_param_risks(
         &self,
@@ -1960,7 +1948,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a single order risk by its ID.
+     * Retrieves a single order risk by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/risks/{risk_id}.json` endpoint.
      *
@@ -1968,8 +1956,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `risk_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_param_risks_risk(
         &self,
@@ -1995,21 +1983,20 @@ impl Orders {
             .await
     }
     /**
-    * Updates an order risk
-
-
-               Note
-               You cannot modify an order risk that was created by another application.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an order risk
+     *
+     * Note
+     * You cannot modify an order risk that was created by another application.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_update_param_risks_risk(
         &self,
         order_id: &str,
@@ -2035,21 +2022,20 @@ impl Orders {
             .await
     }
     /**
-    * Deletes an order risk for an order
-
-
-               Note
-               You cannot delete an order risk that was created by another application.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes an order risk for an order
+     *
+     * Note
+     * You cannot delete an order risk that was created by another application.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_delete_param_risks_risk(
         &self,
         order_id: &str,
@@ -2082,7 +2068,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn get_param_risk(&self, order_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -2103,7 +2089,7 @@ impl Orders {
             .await
     }
     /**
-     * Creates an order risk for an order.
+     * Creates an order risk for an order
      *
      * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/risks.json` endpoint.
      *
@@ -2111,7 +2097,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn create_param_risks(
         &self,
@@ -2136,7 +2122,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a single order risk by its ID.
+     * Retrieves a single order risk by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/risks/{risk_id}.json` endpoint.
      *
@@ -2144,8 +2130,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `risk_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
      */
     pub async fn get_param_risks_risk(
         &self,
@@ -2171,21 +2157,20 @@ impl Orders {
             .await
     }
     /**
-    * Updates an order risk
-
-
-               Note
-               You cannot modify an order risk that was created by another application.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an order risk
+     *
+     * Note
+     * You cannot modify an order risk that was created by another application.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn update_param_risks_risk(
         &self,
         order_id: &str,
@@ -2211,21 +2196,20 @@ impl Orders {
             .await
     }
     /**
-    * Deletes an order risk for an order
-
-
-               Note
-               You cannot delete an order risk that was created by another application.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes an order risk for an order
+     *
+     * Note
+     * You cannot delete an order risk that was created by another application.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn delete_param_risks_risk(
         &self,
         order_id: &str,
@@ -2258,7 +2242,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_param_risk(
         &self,
@@ -2282,7 +2266,7 @@ impl Orders {
             .await
     }
     /**
-     * Creates an order risk for an order.
+     * Creates an order risk for an order
      *
      * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/risks.json` endpoint.
      *
@@ -2290,7 +2274,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_create_param_risks(
         &self,
@@ -2315,7 +2299,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a single order risk by its ID.
+     * Retrieves a single order risk by its ID
      *
      * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
      *
@@ -2323,8 +2307,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `risk_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_param_risks_risk(
         &self,
@@ -2350,21 +2334,20 @@ impl Orders {
             .await
     }
     /**
-    * Updates an order risk
-
-
-               Note
-               You cannot modify an order risk that was created by another application.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an order risk
+     *
+     * Note
+     * You cannot modify an order risk that was created by another application.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_update_param_risks_risk(
         &self,
         order_id: &str,
@@ -2390,21 +2373,20 @@ impl Orders {
             .await
     }
     /**
-    * Deletes an order risk for an order
-
-
-               Note
-               You cannot delete an order risk that was created by another application.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes an order risk for an order
+     *
+     * Note
+     * You cannot delete an order risk that was created by another application.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_delete_param_risks_risk(
         &self,
         order_id: &str,
@@ -2437,7 +2419,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_param_risk(
         &self,
@@ -2461,7 +2443,7 @@ impl Orders {
             .await
     }
     /**
-     * Creates an order risk for an order.
+     * Creates an order risk for an order
      *
      * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/risks.json` endpoint.
      *
@@ -2469,7 +2451,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_create_param_risks(
         &self,
@@ -2494,7 +2476,7 @@ impl Orders {
             .await
     }
     /**
-     * Retrieves a single order risk by its ID.
+     * Retrieves a single order risk by its ID
      *
      * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/risks/{risk_id}.json` endpoint.
      *
@@ -2502,8 +2484,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `risk_id: &str` -- storefront_access_token_id.
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_param_risks_risk(
         &self,
@@ -2529,21 +2511,20 @@ impl Orders {
             .await
     }
     /**
-    * Updates an order risk
-
-
-               Note
-               You cannot modify an order risk that was created by another application.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an order risk
+     *
+     * Note
+     * You cannot modify an order risk that was created by another application.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_update_param_risks_risk(
         &self,
         order_id: &str,
@@ -2569,21 +2550,20 @@ impl Orders {
             .await
     }
     /**
-    * Deletes an order risk for an order
-
-
-               Note
-               You cannot delete an order risk that was created by another application.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/orders/{order_id}/risks/{risk_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `risk_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes an order risk for an order
+     *
+     * Note
+     * You cannot delete an order risk that was created by another application.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/orders/{order_id}/risks/{risk_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order-risk#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `risk_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_delete_param_risks_risk(
         &self,
         order_id: &str,
@@ -2616,12 +2596,12 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202001_get_param_refund(
         &self,
@@ -2660,55 +2640,53 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
-
-
-               Note
-               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/refunds.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `restock_deprecated: &str` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
-    * * `notify: &str` -- Whether to send a refund notification to the customer.
-    * * `note: &str` -- An optional note attached to a refund.
-    * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Creates a refund. Use the calculate endpoint to produce the transactions to submit.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * Note
+     * When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled.
-     *               The canceled quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-     *               line item will remain unchanged.
+     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/refunds.json` endpoint.
      *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-01
      *
-     *                           location_id:           The ID of the location where the items should be
-     *             restocked. This is required when the value of restock_type is return or cancel.
-     *             If the item is not already stocked at the location, then
-     *             the item is connected to the location. An error is returned when the item is connected to
-     *             a
-     *             fulfillment service location and a different location is provided.
-    * * `transactions: &str` -- A list of transactions
-     *             to process as refunds.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
-    */
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `restock_deprecated` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
+     * * `notify` -- Whether to send a refund notification to the customer.
+     * * `note` -- An optional note attached to a refund.
+     * * `discrepancy_reason` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
+     *
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled.
+     *   The canceled quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *   line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location where the items should be
+     *   restocked. This is required when the value of restock_type is return or cancel.
+     *   If the item is not already stocked at the location, then
+     *   the item is connected to the location. An error is returned when the item is connected to
+     *   a
+     *   fulfillment service location and a different location is provided.
+     * * `transactions` -- A list of transactions
+     *   to process as refunds.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
+     */
     pub async fn deprecated_202001_create_param_refunds(
         &self,
         order_id: &str,
@@ -2786,11 +2764,11 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `refund_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `refund_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202001_get_param_refunds_refund(
         &self,
@@ -2827,53 +2805,52 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Calculates refund transactions based on line items and shipping. When you want to create a refund,
-             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-             that are being refunded, their quantity and restock instructions, and whether you intend to refund
-             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-             The response includes a transactions object with "kind": "suggested_refund",
-             which must to be changed to "kind" : "refund" for the refund to be accepted.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/refunds/calculate.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Calculates refund transactions based on line items and shipping. When you want to create a refund,
+     * you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+     * that are being refunded, their quantity and restock instructions, and whether you intend to refund
+     * shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+     * fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+     * The response includes a transactions object with "kind": "suggested_refund",
+     * which must to be changed to "kind" : "refund" for the refund to be accepted.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/refunds/calculate.json` endpoint.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-     *               back to the available count. The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will remain unchanged.
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-01
      *
+     * **Parameters:**
      *
-     *                           location_id:           The ID of the location
-     *             where the items should be restocked. If location_id is not provided and the value of
-     *             restock_type is return or cancel, then the endpoint returns a suitable
-     *             location ID.
+     * * `order_id` -- storefront_access_token_id
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
      *
-     *                           already_stocked:           Whether the item is already stocked at
-     *             the location. If this is false, then creating the refund will connect the item to the location and start
-     *             stocking it there.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
-    */
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *   back to the available count. The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location
+     *   where the items should be restocked. If location_id is not provided and the value of
+     *   restock_type is return or cancel, then the endpoint returns a suitable
+     *   location ID.
+     *
+     *   already_stocked:           Whether the item is already stocked at
+     *   the location. If this is false, then creating the refund will connect the item to the location and start
+     *   stocking it there.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the
+     *   currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     */
     pub async fn deprecated_202001_create_param_refunds_calculate(
         &self,
         order_id: &str,
@@ -2923,12 +2900,12 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202004_get_param_refund(
         &self,
@@ -2967,55 +2944,53 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
-
-
-               Note
-               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/refunds.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `restock_deprecated: &str` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
-    * * `notify: &str` -- Whether to send a refund notification to the customer.
-    * * `note: &str` -- An optional note attached to a refund.
-    * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Creates a refund. Use the calculate endpoint to produce the transactions to submit.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * Note
+     * When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled.
-     *               The canceled quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-     *               line item will remain unchanged.
+     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/refunds.json` endpoint.
      *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-04
      *
-     *                           location_id:           The ID of the location where the items should be
-     *             restocked. This is required when the value of restock_type is return or cancel.
-     *             If the item is not already stocked at the location, then
-     *             the item is connected to the location. An error is returned when the item is connected to
-     *             a
-     *             fulfillment service location and a different location is provided.
-    * * `transactions: &str` -- A list of transactions
-     *             to process as refunds.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
-    */
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `restock_deprecated` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
+     * * `notify` -- Whether to send a refund notification to the customer.
+     * * `note` -- An optional note attached to a refund.
+     * * `discrepancy_reason` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
+     *
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled.
+     *   The canceled quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *   line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location where the items should be
+     *   restocked. This is required when the value of restock_type is return or cancel.
+     *   If the item is not already stocked at the location, then
+     *   the item is connected to the location. An error is returned when the item is connected to
+     *   a
+     *   fulfillment service location and a different location is provided.
+     * * `transactions` -- A list of transactions
+     *   to process as refunds.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
+     */
     pub async fn deprecated_202004_create_param_refunds(
         &self,
         order_id: &str,
@@ -3093,11 +3068,11 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `refund_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `refund_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202004_get_param_refunds_refund(
         &self,
@@ -3134,53 +3109,52 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Calculates refund transactions based on line items and shipping. When you want to create a refund,
-             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-             that are being refunded, their quantity and restock instructions, and whether you intend to refund
-             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-             The response includes a transactions object with "kind": "suggested_refund",
-             which must to be changed to "kind" : "refund" for the refund to be accepted.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/refunds/calculate.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Calculates refund transactions based on line items and shipping. When you want to create a refund,
+     * you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+     * that are being refunded, their quantity and restock instructions, and whether you intend to refund
+     * shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+     * fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+     * The response includes a transactions object with "kind": "suggested_refund",
+     * which must to be changed to "kind" : "refund" for the refund to be accepted.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/refunds/calculate.json` endpoint.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-     *               back to the available count. The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will remain unchanged.
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-04
      *
+     * **Parameters:**
      *
-     *                           location_id:           The ID of the location
-     *             where the items should be restocked. If location_id is not provided and the value of
-     *             restock_type is return or cancel, then the endpoint returns a suitable
-     *             location ID.
+     * * `order_id` -- storefront_access_token_id
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
      *
-     *                           already_stocked:           Whether the item is already stocked at
-     *             the location. If this is false, then creating the refund will connect the item to the location and start
-     *             stocking it there.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
-    */
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *   back to the available count. The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location
+     *   where the items should be restocked. If location_id is not provided and the value of
+     *   restock_type is return or cancel, then the endpoint returns a suitable
+     *   location ID.
+     *
+     *   already_stocked:           Whether the item is already stocked at
+     *   the location. If this is false, then creating the refund will connect the item to the location and start
+     *   stocking it there.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the
+     *   currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     */
     pub async fn deprecated_202004_create_param_refunds_calculate(
         &self,
         order_id: &str,
@@ -3230,12 +3204,12 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202007_get_param_refund(
         &self,
@@ -3274,55 +3248,53 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
-
-
-               Note
-               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/refunds.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `restock_deprecated: &str` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
-    * * `notify: &str` -- Whether to send a refund notification to the customer.
-    * * `note: &str` -- An optional note attached to a refund.
-    * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Creates a refund. Use the calculate endpoint to produce the transactions to submit.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * Note
+     * When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled.
-     *               The canceled quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-     *               line item will remain unchanged.
+     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/refunds.json` endpoint.
      *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-07
      *
-     *                           location_id:           The ID of the location where the items should be
-     *             restocked. This is required when the value of restock_type is return or cancel.
-     *             If the item is not already stocked at the location, then
-     *             the item is connected to the location. An error is returned when the item is connected to
-     *             a
-     *             fulfillment service location and a different location is provided.
-    * * `transactions: &str` -- A list of transactions
-     *             to process as refunds.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
-    */
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `restock_deprecated` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
+     * * `notify` -- Whether to send a refund notification to the customer.
+     * * `note` -- An optional note attached to a refund.
+     * * `discrepancy_reason` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
+     *
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled.
+     *   The canceled quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *   line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location where the items should be
+     *   restocked. This is required when the value of restock_type is return or cancel.
+     *   If the item is not already stocked at the location, then
+     *   the item is connected to the location. An error is returned when the item is connected to
+     *   a
+     *   fulfillment service location and a different location is provided.
+     * * `transactions` -- A list of transactions
+     *   to process as refunds.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
+     */
     pub async fn deprecated_202007_create_param_refunds(
         &self,
         order_id: &str,
@@ -3400,11 +3372,11 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `refund_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `refund_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202007_get_param_refunds_refund(
         &self,
@@ -3441,53 +3413,52 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Calculates refund transactions based on line items and shipping. When you want to create a refund,
-             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-             that are being refunded, their quantity and restock instructions, and whether you intend to refund
-             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-             The response includes a transactions object with "kind": "suggested_refund",
-             which must to be changed to "kind" : "refund" for the refund to be accepted.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/refunds/calculate.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Calculates refund transactions based on line items and shipping. When you want to create a refund,
+     * you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+     * that are being refunded, their quantity and restock instructions, and whether you intend to refund
+     * shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+     * fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+     * The response includes a transactions object with "kind": "suggested_refund",
+     * which must to be changed to "kind" : "refund" for the refund to be accepted.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/refunds/calculate.json` endpoint.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-     *               back to the available count. The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will remain unchanged.
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-07
      *
+     * **Parameters:**
      *
-     *                           location_id:           The ID of the location
-     *             where the items should be restocked. If location_id is not provided and the value of
-     *             restock_type is return or cancel, then the endpoint returns a suitable
-     *             location ID.
+     * * `order_id` -- storefront_access_token_id
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
      *
-     *                           already_stocked:           Whether the item is already stocked at
-     *             the location. If this is false, then creating the refund will connect the item to the location and start
-     *             stocking it there.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
-    */
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *   back to the available count. The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location
+     *   where the items should be restocked. If location_id is not provided and the value of
+     *   restock_type is return or cancel, then the endpoint returns a suitable
+     *   location ID.
+     *
+     *   already_stocked:           Whether the item is already stocked at
+     *   the location. If this is false, then creating the refund will connect the item to the location and start
+     *   stocking it there.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the
+     *   currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     */
     pub async fn deprecated_202007_create_param_refunds_calculate(
         &self,
         order_id: &str,
@@ -3537,12 +3508,12 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn get_param_refund(
         &self,
@@ -3581,55 +3552,53 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
-
-
-               Note
-               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/refunds.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `restock_deprecated: &str` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
-    * * `notify: &str` -- Whether to send a refund notification to the customer.
-    * * `note: &str` -- An optional note attached to a refund.
-    * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Creates a refund. Use the calculate endpoint to produce the transactions to submit.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * Note
+     * When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled.
-     *               The canceled quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-     *               line item will remain unchanged.
+     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/refunds.json` endpoint.
      *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2020-10
      *
-     *                           location_id:           The ID of the location where the items should be
-     *             restocked. This is required when the value of restock_type is return or cancel.
-     *             If the item is not already stocked at the location, then
-     *             the item is connected to the location. An error is returned when the item is connected to
-     *             a
-     *             fulfillment service location and a different location is provided.
-    * * `transactions: &str` -- A list of transactions
-     *             to process as refunds.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
-    */
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `restock_deprecated` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
+     * * `notify` -- Whether to send a refund notification to the customer.
+     * * `note` -- An optional note attached to a refund.
+     * * `discrepancy_reason` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
+     *
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled.
+     *   The canceled quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *   line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location where the items should be
+     *   restocked. This is required when the value of restock_type is return or cancel.
+     *   If the item is not already stocked at the location, then
+     *   the item is connected to the location. An error is returned when the item is connected to
+     *   a
+     *   fulfillment service location and a different location is provided.
+     * * `transactions` -- A list of transactions
+     *   to process as refunds.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
+     */
     pub async fn create_param_refunds(
         &self,
         order_id: &str,
@@ -3707,11 +3676,11 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `refund_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `refund_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn get_param_refunds_refund(
         &self,
@@ -3748,53 +3717,52 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Calculates refund transactions based on line items and shipping. When you want to create a refund,
-             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-             that are being refunded, their quantity and restock instructions, and whether you intend to refund
-             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-             The response includes a transactions object with "kind": "suggested_refund",
-             which must to be changed to "kind" : "refund" for the refund to be accepted.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/refunds/calculate.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Calculates refund transactions based on line items and shipping. When you want to create a refund,
+     * you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+     * that are being refunded, their quantity and restock instructions, and whether you intend to refund
+     * shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+     * fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+     * The response includes a transactions object with "kind": "suggested_refund",
+     * which must to be changed to "kind" : "refund" for the refund to be accepted.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/refunds/calculate.json` endpoint.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-     *               back to the available count. The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will remain unchanged.
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2020-10
      *
+     * **Parameters:**
      *
-     *                           location_id:           The ID of the location
-     *             where the items should be restocked. If location_id is not provided and the value of
-     *             restock_type is return or cancel, then the endpoint returns a suitable
-     *             location ID.
+     * * `order_id` -- storefront_access_token_id
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
      *
-     *                           already_stocked:           Whether the item is already stocked at
-     *             the location. If this is false, then creating the refund will connect the item to the location and start
-     *             stocking it there.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
-    */
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *   back to the available count. The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location
+     *   where the items should be restocked. If location_id is not provided and the value of
+     *   restock_type is return or cancel, then the endpoint returns a suitable
+     *   location ID.
+     *
+     *   already_stocked:           Whether the item is already stocked at
+     *   the location. If this is false, then creating the refund will connect the item to the location and start
+     *   stocking it there.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the
+     *   currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     */
     pub async fn create_param_refunds_calculate(
         &self,
         order_id: &str,
@@ -3844,12 +3812,12 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202101_get_param_refund(
         &self,
@@ -3888,55 +3856,53 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
-
-
-               Note
-               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/refunds.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `restock_deprecated: &str` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
-    * * `notify: &str` -- Whether to send a refund notification to the customer.
-    * * `note: &str` -- An optional note attached to a refund.
-    * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Creates a refund. Use the calculate endpoint to produce the transactions to submit.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * Note
+     * When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled.
-     *               The canceled quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-     *               line item will remain unchanged.
+     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/refunds.json` endpoint.
      *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-2021-01
      *
-     *                           location_id:           The ID of the location where the items should be
-     *             restocked. This is required when the value of restock_type is return or cancel.
-     *             If the item is not already stocked at the location, then
-     *             the item is connected to the location. An error is returned when the item is connected to
-     *             a
-     *             fulfillment service location and a different location is provided.
-    * * `transactions: &str` -- A list of transactions
-     *             to process as refunds.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
-    */
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `restock_deprecated` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
+     * * `notify` -- Whether to send a refund notification to the customer.
+     * * `note` -- An optional note attached to a refund.
+     * * `discrepancy_reason` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
+     *
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled.
+     *   The canceled quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *   line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location where the items should be
+     *   restocked. This is required when the value of restock_type is return or cancel.
+     *   If the item is not already stocked at the location, then
+     *   the item is connected to the location. An error is returned when the item is connected to
+     *   a
+     *   fulfillment service location and a different location is provided.
+     * * `transactions` -- A list of transactions
+     *   to process as refunds.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
+     */
     pub async fn deprecated_202101_create_param_refunds(
         &self,
         order_id: &str,
@@ -4014,11 +3980,11 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `refund_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `refund_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_202101_get_param_refunds_refund(
         &self,
@@ -4055,53 +4021,52 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Calculates refund transactions based on line items and shipping. When you want to create a refund,
-             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-             that are being refunded, their quantity and restock instructions, and whether you intend to refund
-             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-             The response includes a transactions object with "kind": "suggested_refund",
-             which must to be changed to "kind" : "refund" for the refund to be accepted.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/refunds/calculate.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Calculates refund transactions based on line items and shipping. When you want to create a refund,
+     * you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+     * that are being refunded, their quantity and restock instructions, and whether you intend to refund
+     * shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+     * fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+     * The response includes a transactions object with "kind": "suggested_refund",
+     * which must to be changed to "kind" : "refund" for the refund to be accepted.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/refunds/calculate.json` endpoint.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-     *               back to the available count. The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will remain unchanged.
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-2021-01
      *
+     * **Parameters:**
      *
-     *                           location_id:           The ID of the location
-     *             where the items should be restocked. If location_id is not provided and the value of
-     *             restock_type is return or cancel, then the endpoint returns a suitable
-     *             location ID.
+     * * `order_id` -- storefront_access_token_id
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
      *
-     *                           already_stocked:           Whether the item is already stocked at
-     *             the location. If this is false, then creating the refund will connect the item to the location and start
-     *             stocking it there.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
-    */
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *   back to the available count. The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location
+     *   where the items should be restocked. If location_id is not provided and the value of
+     *   restock_type is return or cancel, then the endpoint returns a suitable
+     *   location ID.
+     *
+     *   already_stocked:           Whether the item is already stocked at
+     *   the location. If this is false, then creating the refund will connect the item to the location and start
+     *   stocking it there.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the
+     *   currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     */
     pub async fn deprecated_202101_create_param_refunds_calculate(
         &self,
         order_id: &str,
@@ -4151,12 +4116,12 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_unstable_get_param_refund(
         &self,
@@ -4195,55 +4160,53 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
-
-
-               Note
-               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/refunds.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `restock_deprecated: &str` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
-    * * `notify: &str` -- Whether to send a refund notification to the customer.
-    * * `note: &str` -- An optional note attached to a refund.
-    * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Creates a refund. Use the calculate endpoint to produce the transactions to submit.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * Note
+     * When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled.
-     *               The canceled quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-     *               line item will remain unchanged.
+     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/refunds.json` endpoint.
      *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#create-unstable
      *
-     *                           location_id:           The ID of the location where the items should be
-     *             restocked. This is required when the value of restock_type is return or cancel.
-     *             If the item is not already stocked at the location, then
-     *             the item is connected to the location. An error is returned when the item is connected to
-     *             a
-     *             fulfillment service location and a different location is provided.
-    * * `transactions: &str` -- A list of transactions
-     *             to process as refunds.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
-    */
+     * **Parameters:**
+     *
+     * * `order_id` -- storefront_access_token_id
+     * * `restock_deprecated` -- Whether to add the line items back to the store inventory. Use restock_type for refund line items instead.
+     * * `notify` -- Whether to send a refund notification to the customer.
+     * * `note` -- An optional note attached to a refund.
+     * * `discrepancy_reason` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
+     *
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled.
+     *   The canceled quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *   line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location where the items should be
+     *   restocked. This is required when the value of restock_type is return or cancel.
+     *   If the item is not already stocked at the location, then
+     *   the item is connected to the location. An error is returned when the item is connected to
+     *   a
+     *   fulfillment service location and a different location is provided.
+     * * `transactions` -- A list of transactions
+     *   to process as refunds.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
+     */
     pub async fn deprecated_unstable_create_param_refunds(
         &self,
         order_id: &str,
@@ -4321,11 +4284,11 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `order_id: &str` -- storefront_access_token_id.
-     * * `refund_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `in_shop_currency: &str` -- Show amounts in the shop currency for the underlying transaction.
-     *                     (default: false).
+     * * `order_id` -- storefront_access_token_id
+     * * `refund_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `in_shop_currency` -- Show amounts in the shop currency for the underlying transaction.
+     *   (default: false)
      */
     pub async fn deprecated_unstable_get_param_refunds_refund(
         &self,
@@ -4362,53 +4325,52 @@ impl Orders {
             .await
     }
     /**
-    * Caution
-             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
-
-             Calculates refund transactions based on line items and shipping. When you want to create a refund,
-             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-             that are being refunded, their quantity and restock instructions, and whether you intend to refund
-             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-             The response includes a transactions object with "kind": "suggested_refund",
-             which must to be changed to "kind" : "refund" for the refund to be accepted.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/refunds/calculate.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
+     * Caution
+     * For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
      *
-     *                           full_refund: Whether to refund all remaining shipping.
-     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
-    * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     * Calculates refund transactions based on line items and shipping. When you want to create a refund,
+     * you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+     * that are being refunded, their quantity and restock instructions, and whether you intend to refund
+     * shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+     * fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+     * The response includes a transactions object with "kind": "suggested_refund",
+     * which must to be changed to "kind" : "refund" for the refund to be accepted.
      *
-     *                           line_item_id: The ID of a line item to refund.
-     *                           quantity: The quantity to refund.
-     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/refunds/calculate.json` endpoint.
      *
-     *               no_restock: Refunding these items won't affect inventory.
-     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-     *               back to the available count. The number of fulfillable units for this line item will decrease.
-     *               return: The items were already delivered but will be returned to the merchant.
-     *               The returned quantity will be added back to the available count.
-     *               The number of fulfillable units for this line item will remain unchanged.
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/refund#calculate-unstable
      *
+     * **Parameters:**
      *
-     *                           location_id:           The ID of the location
-     *             where the items should be restocked. If location_id is not provided and the value of
-     *             restock_type is return or cancel, then the endpoint returns a suitable
-     *             location ID.
+     * * `order_id` -- storefront_access_token_id
+     * * `shipping` -- Specify how much shipping to refund. It has the following properties:
      *
-     *                           already_stocked:           Whether the item is already stocked at
-     *             the location. If this is false, then creating the refund will connect the item to the location and start
-     *             stocking it there.
-    * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
-    */
+     *   full_refund: Whether to refund all remaining shipping.
+     *   amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     * * `refund_line_items` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
+     *
+     *   line_item_id: The ID of a line item to refund.
+     *   quantity: The quantity to refund.
+     *   restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *   no_restock: Refunding these items won't affect inventory.
+     *   cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *   back to the available count. The number of fulfillable units for this line item will decrease.
+     *   return: The items were already delivered but will be returned to the merchant.
+     *   The returned quantity will be added back to the available count.
+     *   The number of fulfillable units for this line item will remain unchanged.
+     *
+     *   location_id:           The ID of the location
+     *   where the items should be restocked. If location_id is not provided and the value of
+     *   restock_type is return or cancel, then the endpoint returns a suitable
+     *   location ID.
+     *
+     *   already_stocked:           Whether the item is already stocked at
+     *   the location. If this is false, then creating the refund will connect the item to the location and start
+     *   stocking it there.
+     * * `currency` -- The three-letter code (ISO 4217 format) for the
+     *   currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     */
     pub async fn deprecated_unstable_create_param_refunds_calculate(
         &self,
         order_id: &str,

@@ -20,9 +20,9 @@ impl Rtm {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `rtm:stream`.
-     * * `batch_presence_aware: bool` -- Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
-     * * `presence_sub: bool` -- Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).
+     * * `token` -- Authentication token. Requires scope: `rtm:stream`
+     * * `batch_presence_aware` -- Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
+     * * `presence_sub` -- Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).
      */
     pub async fn connect(
         &self,
@@ -40,7 +40,7 @@ impl Rtm {
             query_args.push(("presence_sub".to_string(), presence_sub.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/rtm.connect?{}", query_), None);
+        let url = self.client.url(&format!("/rtm.connect?{query_}"), None);
         self.client
             .get(
                 &url,

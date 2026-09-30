@@ -12,7 +12,7 @@ impl Suppressions {
     }
 
     /**
-     * Retrieve all suppressions for a suppression group.
+     * Retrieve all suppressions for a suppression group
      *
      * This function performs a `GET` to the `/asm/groups/{group_id}/suppressions` endpoint.
      *
@@ -20,7 +20,7 @@ impl Suppressions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_asm_groups_group(
         &self,
@@ -44,7 +44,7 @@ impl Suppressions {
             .await
     }
     /**
-     * Retrieve all suppressions for a suppression group.
+     * Retrieve all suppressions for a suppression group
      *
      * This function performs a `GET` to the `/asm/groups/{group_id}/suppressions` endpoint.
      *
@@ -74,7 +74,7 @@ impl Suppressions {
             .await
     }
     /**
-     * Add suppressions to a suppression group.
+     * Add suppressions to a suppression group
      *
      * This function performs a `POST` to the `/asm/groups/{group_id}/suppressions` endpoint.
      *
@@ -84,7 +84,7 @@ impl Suppressions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_asm_groups_group(
         &self,
@@ -109,7 +109,7 @@ impl Suppressions {
             .await
     }
     /**
-     * Search for suppressions within a group.
+     * Search for suppressions within a group
      *
      * This function performs a `POST` to the `/asm/groups/{group_id}/suppressions/search` endpoint.
      *
@@ -119,7 +119,7 @@ impl Suppressions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_asm_groups_group_search(
         &self,
@@ -144,7 +144,7 @@ impl Suppressions {
             .await
     }
     /**
-     * Retrieve all suppressions.
+     * Retrieve all suppressions
      *
      * This function performs a `GET` to the `/asm/suppressions` endpoint.
      *
@@ -152,7 +152,7 @@ impl Suppressions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_asm(
         &self,
@@ -169,7 +169,7 @@ impl Suppressions {
             .await
     }
     /**
-     * Retrieve all suppressions.
+     * Retrieve all suppressions
      *
      * This function performs a `GET` to the `/asm/suppressions` endpoint.
      *
@@ -192,7 +192,7 @@ impl Suppressions {
             .await
     }
     /**
-     * Retrieve all suppression groups for an email address.
+     * Retrieve all suppression groups for an email address
      *
      * This function performs a `GET` to the `/asm/suppressions/{email}` endpoint.
      *
@@ -200,7 +200,7 @@ impl Suppressions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_asm_email(
         &self,
@@ -224,7 +224,7 @@ impl Suppressions {
             .await
     }
     /**
-     * Delete a suppression from a suppression group.
+     * Delete a suppression from a suppression group
      *
      * This function performs a `DELETE` to the `/asm/groups/{group_id}/suppressions/{email}` endpoint.
      *
@@ -234,7 +234,7 @@ impl Suppressions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_asm_groups_group_email(
         &self,

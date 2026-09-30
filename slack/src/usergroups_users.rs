@@ -20,9 +20,9 @@ impl UsergroupsUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `usergroups:read`.
-     * * `include_disabled: bool` -- Allow results that involve disabled User Groups.
-     * * `usergroup: &str` -- The encoded ID of the User Group to update.
+     * * `token` -- Authentication token. Requires scope: `usergroups:read`
+     * * `include_disabled` -- Allow results that involve disabled User Groups.
+     * * `usergroup` -- The encoded ID of the User Group to update.
      */
     pub async fn list(
         &self,
@@ -39,7 +39,7 @@ impl UsergroupsUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/usergroups.users.list?{}", query_), None);
+            .url(&format!("/usergroups.users.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -59,7 +59,7 @@ impl UsergroupsUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
+     * * `token` -- Authentication token. Requires scope: `usergroups:write`
      */
     pub async fn update(
         &self,

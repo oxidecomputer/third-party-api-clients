@@ -12,7 +12,7 @@ impl SpamReportsApi {
     }
 
     /**
-     * Retrieve all spam reports.
+     * Retrieve all spam reports
      *
      * This function performs a `GET` to the `/suppression/spam_reports` endpoint.
      *
@@ -20,11 +20,11 @@ impl SpamReportsApi {
      *
      * **Parameters:**
      *
-     * * `start_time: i64` -- The start of the time range when a spam report was created (inclusive). This is a unix timestamp.
-     * * `end_time: i64` -- The end of the time range when a spam report was created (inclusive). This is a unix timestamp.
-     * * `limit: i64` -- Limit the number of results to be displayed per page.
-     * * `offset: i64` -- Paging offset. The point in the list to begin displaying results.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `start_time` -- The start of the time range when a spam report was created (inclusive). This is a unix timestamp.
+     * * `end_time` -- The end of the time range when a spam report was created (inclusive). This is a unix timestamp.
+     * * `limit` -- Limit the number of results to be displayed per page.
+     * * `offset` -- Paging offset. The point in the list to begin displaying results.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_spam_reports(
         &self,
@@ -49,7 +49,7 @@ impl SpamReportsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/spam_reports?{}", query_), None);
+            .url(&format!("/suppression/spam_reports?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -61,7 +61,7 @@ impl SpamReportsApi {
             .await
     }
     /**
-     * Retrieve all spam reports.
+     * Retrieve all spam reports
      *
      * This function performs a `GET` to the `/suppression/spam_reports` endpoint.
      *
@@ -88,7 +88,7 @@ impl SpamReportsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/spam_reports?{}", query_), None);
+            .url(&format!("/suppression/spam_reports?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -100,7 +100,7 @@ impl SpamReportsApi {
             .await
     }
     /**
-     * Delete spam reports.
+     * Delete spam reports
      *
      * This function performs a `DELETE` to the `/suppression/spam_reports` endpoint.
      *
@@ -115,7 +115,7 @@ impl SpamReportsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_spam_reports(
         &self,
@@ -133,7 +133,7 @@ impl SpamReportsApi {
             .await
     }
     /**
-     * Retrieve a specific spam report.
+     * Retrieve a specific spam report
      *
      * This function performs a `GET` to the `/suppression/spam_reports/{email}` endpoint.
      *
@@ -141,7 +141,7 @@ impl SpamReportsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_spam_reports_email(
         &self,
@@ -165,7 +165,7 @@ impl SpamReportsApi {
             .await
     }
     /**
-     * Retrieve a specific spam report.
+     * Retrieve a specific spam report
      *
      * This function performs a `GET` to the `/suppression/spam_reports/{email}` endpoint.
      *
@@ -195,7 +195,7 @@ impl SpamReportsApi {
             .await
     }
     /**
-     * Delete a specific spam report.
+     * Delete a specific spam report
      *
      * This function performs a `DELETE` to the `/suppression/spam_reports/{email}` endpoint.
      *
@@ -205,7 +205,7 @@ impl SpamReportsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_spam_reports_email(
         &self,

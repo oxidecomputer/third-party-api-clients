@@ -12,7 +12,7 @@ impl Billing {
     }
 
     /**
-     * Get GitHub Actions billing for an enterprise.
+     * Get GitHub Actions billing for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/actions` endpoint.
      *
@@ -26,7 +26,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn get_github_actions_billing_ghe(
         &self,
@@ -50,7 +50,7 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Packages billing for an enterprise.
+     * Get GitHub Packages billing for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/packages` endpoint.
      *
@@ -64,7 +64,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn get_github_packages_billing_ghe(
         &self,
@@ -88,7 +88,7 @@ impl Billing {
             .await
     }
     /**
-     * Get shared storage billing for an enterprise.
+     * Get shared storage billing for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/shared-storage` endpoint.
      *
@@ -102,7 +102,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn get_shared_storage_billing_ghe(
         &self,
@@ -126,7 +126,7 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Actions billing for an organization.
+     * Get GitHub Actions billing for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/settings/billing/actions` endpoint.
      *
@@ -140,7 +140,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_github_actions_billing_org(
         &self,
@@ -164,7 +164,7 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Packages billing for an organization.
+     * Get GitHub Packages billing for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/settings/billing/packages` endpoint.
      *
@@ -178,7 +178,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_github_packages_billing_org(
         &self,
@@ -202,7 +202,7 @@ impl Billing {
             .await
     }
     /**
-     * Get shared storage billing for an organization.
+     * Get shared storage billing for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/settings/billing/shared-storage` endpoint.
      *
@@ -216,7 +216,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_shared_storage_billing_org(
         &self,
@@ -240,7 +240,7 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Actions billing for a user.
+     * Get GitHub Actions billing for a user
      *
      * This function performs a `GET` to the `/users/{username}/settings/billing/actions` endpoint.
      *
@@ -254,7 +254,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn get_github_actions_billing_user(
         &self,
@@ -278,7 +278,7 @@ impl Billing {
             .await
     }
     /**
-     * Get GitHub Packages billing for a user.
+     * Get GitHub Packages billing for a user
      *
      * This function performs a `GET` to the `/users/{username}/settings/billing/packages` endpoint.
      *
@@ -292,7 +292,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn get_github_packages_billing_user(
         &self,
@@ -316,7 +316,7 @@ impl Billing {
             .await
     }
     /**
-     * Get shared storage billing for a user.
+     * Get shared storage billing for a user
      *
      * This function performs a `GET` to the `/users/{username}/settings/billing/shared-storage` endpoint.
      *
@@ -330,7 +330,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn get_shared_storage_billing_user(
         &self,

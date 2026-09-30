@@ -12,25 +12,23 @@ impl ImChat {
     }
 
     /**
-     * Get IM chat sessions.
+     * Get IM chat sessions
      *
      * This function performs a `GET` to the `/im/chat/sessions` endpoint.
      *
      * Retrieve IM Chat sessions for a specified period of time. This API only supports Oauth2.<br>
      *
      * **Scopes:** `imchat:read, imchat:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
-     *  <br><br>
-     *   <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
-     *  
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
+     * <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn session(
         &self,
@@ -55,7 +53,7 @@ impl ImChat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/im/chat/sessions?{}", query_), None);
+            .url(&format!("/im/chat/sessions?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -67,7 +65,7 @@ impl ImChat {
             .await
     }
     /**
-     * Get IM chat messages.
+     * Get IM chat messages
      *
      * This function performs a `GET` to the `/im/chat/sessions/{sessionId}` endpoint.
      *
@@ -75,22 +73,17 @@ impl ImChat {
      *
      * **Scopes:** `imchat:read`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
-     *  
-     *  <br>
-     *  
-     *  <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      *
-     *
-     *
+     * <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      *
      * **Parameters:**
      *
-     * * `session_id: &str` -- User's first name.
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `session_id` -- IM chat session ID.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn message(
         &self,
@@ -133,25 +126,24 @@ impl ImChat {
             .await
     }
     /**
-     * Get user’s IM messages.
+     * Get user’s IM messages
      *
      * This function performs a `GET` to the `/im/users/{userId}/chat/messages` endpoint.
      *
      * Get IM Chat messages for a specified period of time. This API only supports Oauth2.<br>
      * **Scopes:** `imchat:read`<br>
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
-     * <br><br>
-     *   <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      *
+     * <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address.
-     * * `chat_user: &str` -- Chat user's ID or email address.
-     * * `channel: &str` -- User's first name.
-     * * `date: &str` -- IM message's query date time, format as yyyy-MM-dd.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `user_id` -- The user ID or email address.
+     * * `chat_user` -- Chat user's ID or email address.
+     * * `channel` -- User's first name.
+     * * `date` -- IM message's query date time, format as yyyy-MM-dd.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn list_im_messages(
         &self,
@@ -206,7 +198,7 @@ impl ImChat {
         ))
     }
     /**
-     * Get user’s IM messages.
+     * Get user’s IM messages
      *
      * This function performs a `GET` to the `/im/users/{userId}/chat/messages` endpoint.
      *
@@ -215,9 +207,8 @@ impl ImChat {
      * Get IM Chat messages for a specified period of time. This API only supports Oauth2.<br>
      * **Scopes:** `imchat:read`<br>
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
-     * <br><br>
-     *   <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      *
+     * <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      */
     pub async fn list_all_im_messages(
         &self,
@@ -274,7 +265,7 @@ impl ImChat {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -289,7 +280,7 @@ impl ImChat {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -311,17 +302,17 @@ impl ImChat {
         Ok(crate::Response::new(status, headers, messages))
     }
     /**
-     * Send IM messages.
+     * Send IM messages
      *
      * This function performs a `POST` to the `/im/users/me/chat/messages` endpoint.
      *
      * Send chat message to a user. <aside>Note: This API only supports OAuth 2.0.</aside><br><br>**Scope:** `imchat:write`
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `chat_user: &str` -- The email address (registered with Zoom) or the userId of the chat user.
+     * * `chat_user` -- The email address (registered with Zoom) or the userId of the chat user.
      */
     pub async fn send_im_messages(
         &self,
@@ -335,7 +326,7 @@ impl ImChat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/im/users/me/chat/messages?{}", query_), None);
+            .url(&format!("/im/users/me/chat/messages?{query_}"), None);
         self.client
             .post(
                 &url,

@@ -20,7 +20,7 @@ impl AppsPermissionsScopes {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
+     * * `token` -- Authentication token. Requires scope: `none`
      */
     pub async fn list(
         &self,

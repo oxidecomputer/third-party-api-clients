@@ -12,7 +12,7 @@ impl CodeScanning {
     }
 
     /**
-     * List code scanning alerts for a repository.
+     * List code scanning alerts for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts` endpoint.
      *
@@ -30,14 +30,14 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `tool_name: &str` -- The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
-     * * `tool_guid: &str` -- The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `ref_: &str` -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
-     * * `state: crate::types::CodeScanningAlertState` -- Set to `open`, `fixed`, or `dismissed` to list code scanning alerts in a specific state.
+     * * `owner`
+     * * `repo`
+     * * `tool_name` -- The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
+     * * `tool_guid` -- The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `ref_` -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+     * * `state` -- Set to `open`, `fixed`, or `dismissed` to list code scanning alerts in a specific state.
      */
     pub async fn list_alerts_for_repo(
         &self,
@@ -90,7 +90,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * List code scanning alerts for a repository.
+     * List code scanning alerts for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts` endpoint.
      *
@@ -151,7 +151,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * Get a code scanning alert.
+     * Get a code scanning alert
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}` endpoint.
      *
@@ -164,9 +164,9 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `alert_number: i64` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
+     * * `owner`
+     * * `repo`
+     * * `alert_number` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
      */
     pub async fn get_alert(
         &self,
@@ -194,7 +194,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * Update a code scanning alert.
+     * Update a code scanning alert
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}` endpoint.
      *
@@ -204,9 +204,9 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `alert_number: i64` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
+     * * `owner`
+     * * `repo`
+     * * `alert_number` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
      */
     pub async fn update_alert(
         &self,
@@ -235,7 +235,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * List instances of a code scanning alert.
+     * List instances of a code scanning alert
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances` endpoint.
      *
@@ -245,12 +245,12 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `alert_number: i64` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `ref_: &str` -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+     * * `owner`
+     * * `repo`
+     * * `alert_number` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `ref_` -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
      */
     pub async fn list_alert_instances(
         &self,
@@ -293,7 +293,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * List instances of a code scanning alert.
+     * List instances of a code scanning alert
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances` endpoint.
      *
@@ -336,7 +336,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * List code scanning analyses for a repository.
+     * List code scanning analyses for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses` endpoint.
      *
@@ -361,14 +361,14 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `tool_name: &str` -- The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
-     * * `tool_guid: &str` -- The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `ref_: &str` -- The Git reference for the analyses you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
-     * * `sarif_id: &str` -- Filter analyses belonging to the same SARIF upload.
+     * * `owner`
+     * * `repo`
+     * * `tool_name` -- The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
+     * * `tool_guid` -- The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `ref_` -- The Git reference for the analyses you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+     * * `sarif_id` -- Filter analyses belonging to the same SARIF upload.
      */
     pub async fn list_recent_analyses(
         &self,
@@ -421,7 +421,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * List code scanning analyses for a repository.
+     * List code scanning analyses for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses` endpoint.
      *
@@ -489,7 +489,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * Get a code scanning analysis for a repository.
+     * Get a code scanning analysis for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}` endpoint.
      *
@@ -519,9 +519,9 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `analysis_id: i64` -- The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
+     * * `owner`
+     * * `repo`
+     * * `analysis_id` -- The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
      */
     pub async fn get_analysis(
         &self,
@@ -549,7 +549,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * Delete a code scanning analysis from a repository.
+     * Delete a code scanning analysis from a repository
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}` endpoint.
      *
@@ -609,12 +609,14 @@ impl CodeScanning {
      * The procedure therefore consists of a nested loop:
      *
      * **Outer loop**:
+     *
      * * List the analyses for the repository, filtered by tool.
      * * Parse this list to find a deletable analysis. If found:
      *
-     *   **Inner loop**:
-     *   * Delete the identified analysis.
-     *   * Parse the response for the value of `confirm_delete_url` and, if found, use this in the next iteration.
+     * **Inner loop**:
+     *
+     * * Delete the identified analysis.
+     * * Parse the response for the value of `confirm_delete_url` and, if found, use this in the next iteration.
      *
      * The above process assumes that you want to remove all trace of the tool's analyses from the GitHub user interface, for the specified repository, and it therefore uses the `confirm_delete_url` value. Alternatively, you could use the `next_analysis_url` value, which would leave the last analysis in each set undeleted to avoid removing a tool's analysis entirely.
      *
@@ -622,10 +624,10 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `analysis_id: i64` -- The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
-     * * `confirm_delete: &str` -- Allow deletion if the specified analysis is the last in a set. If you attempt to delete the final analysis in a set without setting this parameter to `true`, you'll get a 400 response with the message: `Analysis is last of its type and deletion may result in the loss of historical alert data. Please specify confirm_delete.`.
+     * * `owner`
+     * * `repo`
+     * * `analysis_id` -- The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
+     * * `confirm_delete` -- Allow deletion if the specified analysis is the last in a set. If you attempt to delete the final analysis in a set without setting this parameter to `true`, you'll get a 400 response with the message: `Analysis is last of its type and deletion may result in the loss of historical alert data. Please specify confirm_delete.`
      */
     pub async fn delete_analysis(
         &self,
@@ -660,15 +662,16 @@ impl CodeScanning {
             .await
     }
     /**
-     * Upload an analysis as SARIF data.
+     * Upload an analysis as SARIF data
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/code-scanning/sarifs` endpoint.
      *
      * Uploads SARIF data containing the results of a code scanning analysis to make the results available in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
      *
      * There are two places where you can upload code scanning results.
-     *  - If you upload to a pull request, for example `--ref refs/pull/42/merge` or `--ref refs/pull/42/head`, then the results appear as alerts in a pull request check. For more information, see "[Triaging code scanning alerts in pull requests](/code-security/secure-coding/triaging-code-scanning-alerts-in-pull-requests)."
-     *  - If you upload to a branch, for example `--ref refs/heads/my-branch`, then the results appear in the **Security** tab for your repository. For more information, see "[Managing code scanning alerts for your repository](/code-security/secure-coding/managing-code-scanning-alerts-for-your-repository#viewing-the-alerts-for-a-repository)."
+     *
+     * - If you upload to a pull request, for example `--ref refs/pull/42/merge` or `--ref refs/pull/42/head`, then the results appear as alerts in a pull request check. For more information, see "[Triaging code scanning alerts in pull requests](/code-security/secure-coding/triaging-code-scanning-alerts-in-pull-requests)."
+     * - If you upload to a branch, for example `--ref refs/heads/my-branch`, then the results appear in the **Security** tab for your repository. For more information, see "[Managing code scanning alerts for your repository](/code-security/secure-coding/managing-code-scanning-alerts-for-your-repository#viewing-the-alerts-for-a-repository)."
      *
      * You must compress the SARIF-formatted analysis data that you want to upload, using `gzip`, and then encode it as a Base64 format string. For example:
      *
@@ -686,8 +689,8 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn upload_sarif(
         &self,
@@ -714,7 +717,7 @@ impl CodeScanning {
             .await
     }
     /**
-     * Get information about a SARIF upload.
+     * Get information about a SARIF upload
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}` endpoint.
      *
@@ -724,9 +727,9 @@ impl CodeScanning {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `sarif_id: &str` -- The SARIF ID obtained after uploading.
+     * * `owner`
+     * * `repo`
+     * * `sarif_id` -- The SARIF ID obtained after uploading.
      */
     pub async fn get_sarif(
         &self,

@@ -12,7 +12,7 @@ impl ContactsApiSegments {
     }
 
     /**
-     * Retrieve all segments.
+     * Retrieve all segments
      *
      * This function performs a `GET` to the `/contactdb/segments` endpoint.
      *
@@ -20,7 +20,7 @@ impl ContactsApiSegments {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_segments(
         &self,
@@ -37,23 +37,24 @@ impl ContactsApiSegments {
             .await
     }
     /**
-     * Create a Segment.
+     * Create a Segment
      *
      * This function performs a `POST` to the `/contactdb/segments` endpoint.
      *
      * **This endpoint allows you to create a new segment.**
      *
-     *
-     *   Valid operators for create and update depend on the type of the field for which you are searching.
+     * Valid operators for create and update depend on the type of the field for which you are searching.
      *
      * **Dates**
+     *
      * - "eq", "ne", "lt" (before), "gt" (after)
-     *     - You may use MM/DD/YYYY for day granularity or an epoch for second granularity.
+     * - You may use MM/DD/YYYY for day granularity or an epoch for second granularity.
      * - "empty", "not_empty"
      * - "is within"
-     *     - You may use an [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601) or the # of days.
+     * - You may use an [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601) or the # of days.
      *
      * **Text**
+     *
      * - "contains"
      * - "eq" (is/equals - matches the full field)
      * - "ne" (is not/not equals - matches any field where the entire field is not the condition value)
@@ -61,6 +62,7 @@ impl ContactsApiSegments {
      * - "not_empty"
      *
      * **Numbers**
+     *
      * - "eq" (is/equals)
      * - "lt" (is less than)
      * - "gt" (is greater than)
@@ -68,15 +70,14 @@ impl ContactsApiSegments {
      * - "not_empty"
      *
      * **Email Clicks and Opens**
+     *
      * - "eq" (opened)
      * - "ne" (not opened)
      *
      * All field values must be a string.
      *
-     *
      * Conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either `clicks.campaign_identifier` or `opens.campaign_identifier`.
      * The condition value should be a string containing the id of a completed campaign.
-     *
      *
      * The conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field.
      *
@@ -84,7 +85,7 @@ impl ContactsApiSegments {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_contactdb_segment(
         &self,
@@ -102,7 +103,7 @@ impl ContactsApiSegments {
             .await
     }
     /**
-     * Retrieve a segment.
+     * Retrieve a segment
      *
      * This function performs a `GET` to the `/contactdb/segments/{segment_id}` endpoint.
      *
@@ -110,8 +111,8 @@ impl ContactsApiSegments {
      *
      * **Parameters:**
      *
-     * * `segment_id: i64` -- The ID of the segment you want to request.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `segment_id` -- The ID of the segment you want to request.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_segments_segment(
         &self,
@@ -135,7 +136,7 @@ impl ContactsApiSegments {
             .await
     }
     /**
-     * Delete a segment.
+     * Delete a segment
      *
      * This function performs a `DELETE` to the `/contactdb/segments/{segment_id}` endpoint.
      *
@@ -145,8 +146,8 @@ impl ContactsApiSegments {
      *
      * **Parameters:**
      *
-     * * `delete_contacts: bool` -- True to delete all contacts matching the segment in addition to deleting the segment.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `delete_contacts` -- True to delete all contacts matching the segment in addition to deleting the segment
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_segments_segment(
         &self,
@@ -178,7 +179,7 @@ impl ContactsApiSegments {
             .await
     }
     /**
-     * Update a segment.
+     * Update a segment
      *
      * This function performs a `PATCH` to the `/contactdb/segments/{segment_id}` endpoint.
      *
@@ -186,8 +187,8 @@ impl ContactsApiSegments {
      *
      * **Parameters:**
      *
-     * * `segment_id: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `segment_id` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_contactdb_segments_segment(
         &self,
@@ -212,7 +213,7 @@ impl ContactsApiSegments {
             .await
     }
     /**
-     * Retrieve recipients on a segment.
+     * Retrieve recipients on a segment
      *
      * This function performs a `GET` to the `/contactdb/segments/{segment_id}/recipients` endpoint.
      *
@@ -220,9 +221,9 @@ impl ContactsApiSegments {
      *
      * **Parameters:**
      *
-     * * `page: i64`
-     * * `page_size: i64`
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `page`
+     * * `page_size`
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_segments_segment_recipients(
         &self,

@@ -18,22 +18,17 @@ impl Skus {
      *
      * **Parameters:**
      *
-     * * `active: bool` -- Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive products).
-     * * `attributes: &str` -- Only return SKUs that have the specified key-value pairs in this partially constructed dictionary. Can be specified only if `product` is also supplied. For instance, if the associated product has attributes `["color", "size"]`, passing in `attributes[color]=red` returns all the SKUs for this product that have `color` set to `red`.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `ids: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `in_stock: bool` -- Only return SKUs that are either in stock or out of stock (e.g., pass `false` to list all SKUs that are out of stock). If no value is provided, all SKUs are returned.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `product: &str` -- The ID of the product whose SKUs will be retrieved. Must be a product with type `good`.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `active` -- Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive products).
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `in_stock` -- Only return SKUs that are either in stock or out of stock (e.g., pass `false` to list all SKUs that are out of stock). If no value is provided, all SKUs are returned.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `product` -- The ID of the product whose SKUs will be retrieved. Must be a product with type `good`.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
         active: bool,
-        attributes: &str,
         ending_before: &str,
-        ids: &[String],
         in_stock: bool,
         limit: i64,
         product: &str,
@@ -59,7 +54,7 @@ impl Skus {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/skus?{}", query_), None);
+        let url = self.client.url(&format!("/v1/skus?{query_}"), None);
         let resp: crate::Response<crate::types::GetSkusResponse> = self
             .client
             .get(
@@ -88,8 +83,6 @@ impl Skus {
     pub async fn get_all(
         &self,
         active: bool,
-        attributes: &str,
-        ids: &[String],
         in_stock: bool,
         product: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Sku>>> {
@@ -104,7 +97,7 @@ impl Skus {
             query_args.push(("product".to_string(), product.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/skus?{}", query_), None);
+        let url = self.client.url(&format!("/v1/skus?{query_}"), None);
         let crate::Response::<crate::types::GetSkusResponse> {
             mut status,
             mut headers,
@@ -144,7 +137,7 @@ impl Skus {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -159,7 +152,7 @@ impl Skus {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -200,8 +193,7 @@ impl Skus {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get(
         &self,
@@ -230,7 +222,7 @@ impl Skus {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_skus(&self, id: &str) -> ClientResult<crate::Response<crate::types::Sku>> {
         let url = self.client.url(
@@ -254,7 +246,7 @@ impl Skus {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn delete(
         &self,

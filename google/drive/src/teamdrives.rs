@@ -18,10 +18,10 @@ impl Teamdrives {
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `page_token: &str` -- A link to this theme's background image.
-     * * `q: &str` -- A link to this theme's background image.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.
+     * * `page_size` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `page_token` -- A link to this theme's background image.
+     * * `q` -- A link to this theme's background image.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.
      */
     pub async fn list(
         &self,
@@ -47,7 +47,7 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
+        let url = self.client.url(&format!("/teamdrives?{query_}"), None);
         let resp: crate::Response<crate::types::TeamDriveList> = self
             .client
             .get(
@@ -89,7 +89,7 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
+        let url = self.client.url(&format!("/teamdrives?{query_}"), None);
         let crate::Response::<crate::types::TeamDriveList> {
             mut status,
             mut headers,
@@ -118,7 +118,7 @@ impl Teamdrives {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -133,7 +133,7 @@ impl Teamdrives {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -161,7 +161,7 @@ impl Teamdrives {
      *
      * **Parameters:**
      *
-     * * `request_id: &str` -- An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
+     * * `request_id` -- An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
      */
     pub async fn create(
         &self,
@@ -173,7 +173,7 @@ impl Teamdrives {
             query_args.push(("requestId".to_string(), request_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
+        let url = self.client.url(&format!("/teamdrives?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -191,8 +191,8 @@ impl Teamdrives {
      *
      * **Parameters:**
      *
-     * * `team_drive_id: &str` -- A link to this theme's background image.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
+     * * `team_drive_id` -- A link to this theme's background image.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
      */
     pub async fn get(
         &self,
@@ -232,7 +232,7 @@ impl Teamdrives {
      *
      * **Parameters:**
      *
-     * * `team_drive_id: &str` -- A link to this theme's background image.
+     * * `team_drive_id` -- A link to this theme's background image.
      */
     pub async fn delete(&self, team_drive_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -259,8 +259,8 @@ impl Teamdrives {
      *
      * **Parameters:**
      *
-     * * `team_drive_id: &str` -- A link to this theme's background image.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
+     * * `team_drive_id` -- A link to this theme's background image.
+     * * `use_domain_admin_access` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
      */
     pub async fn update(
         &self,

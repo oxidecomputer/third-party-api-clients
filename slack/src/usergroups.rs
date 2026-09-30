@@ -20,7 +20,7 @@ impl Usergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
+     * * `token` -- Authentication token. Requires scope: `usergroups:write`
      */
     pub async fn create(
         &self,
@@ -45,7 +45,7 @@ impl Usergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
+     * * `token` -- Authentication token. Requires scope: `usergroups:write`
      */
     pub async fn disable(
         &self,
@@ -70,7 +70,7 @@ impl Usergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
+     * * `token` -- Authentication token. Requires scope: `usergroups:write`
      */
     pub async fn enable(
         &self,
@@ -95,10 +95,10 @@ impl Usergroups {
      *
      * **Parameters:**
      *
-     * * `include_users: bool` -- Include the list of users for each User Group.
-     * * `token: &str` -- Authentication token. Requires scope: `usergroups:read`.
-     * * `include_count: bool` -- Include the number of users in each User Group.
-     * * `include_disabled: bool` -- Include disabled User Groups.
+     * * `include_users` -- Include the list of users for each User Group.
+     * * `token` -- Authentication token. Requires scope: `usergroups:read`
+     * * `include_count` -- Include the number of users in each User Group.
+     * * `include_disabled` -- Include disabled User Groups.
      */
     pub async fn list(
         &self,
@@ -117,9 +117,7 @@ impl Usergroups {
             query_args.push(("include_users".to_string(), include_users.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/usergroups.list?{}", query_), None);
+        let url = self.client.url(&format!("/usergroups.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -139,7 +137,7 @@ impl Usergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
+     * * `token` -- Authentication token. Requires scope: `usergroups:write`
      */
     pub async fn update(
         &self,

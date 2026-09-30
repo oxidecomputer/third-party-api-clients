@@ -20,9 +20,9 @@ impl BccEmailArchive {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- (Optional) The index position within the total result set from which to start returning values. The default value is `0`.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- (Optional) The index position within the total result set from which to start returning values. The default value is `0`.
      */
     pub async fn get_list(
         &self,
@@ -67,10 +67,9 @@ impl BccEmailArchive {
      *
      * **Note**: An account can have up to five active and pending email archive addresses combined, but you must use this method to add them to the account one at a time. Each email address is considered a separate BCC email archive configuration.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -103,10 +102,10 @@ impl BccEmailArchive {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bcc_email_archive_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- (Optional) The index position within the total result set from which to start returning values. The default value is `0`.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bcc_email_archive_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- (Optional) The index position within the total result set from which to start returning values. The default value is `0`.
      */
     pub async fn get_history_list(
         &self,
@@ -151,11 +150,10 @@ impl BccEmailArchive {
      *
      * When you use this method, the status of the BCC email archive configuration switches to `closed` and the BCC email address is no longer used to archive DocuSign-generated email messages.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bcc_email_archive_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bcc_email_archive_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(
         &self,

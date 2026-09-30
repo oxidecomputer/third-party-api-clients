@@ -12,7 +12,7 @@ impl CsvUiOnly {
     }
 
     /**
-     * Request CSV.
+     * Request CSV
      *
      * This function performs a `POST` to the `/messages/download` endpoint.
      *
@@ -26,8 +26,8 @@ impl CsvUiOnly {
      *
      * **Parameters:**
      *
-     * * `query: &str` -- Uses a SQL like syntax to indicate which messages to include in the CSV.
-     * * `authorization: &str` -- The license key provided with your New Relic account.
+     * * `query` -- Uses a SQL like syntax to indicate which messages to include in the CSV
+     * * `authorization` -- The license key provided with your New Relic account.
      */
     pub async fn post_messages_download(
         &self,
@@ -40,7 +40,7 @@ impl CsvUiOnly {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/messages/download?{}", query_), None);
+            .url(&format!("/messages/download?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -52,7 +52,7 @@ impl CsvUiOnly {
             .await
     }
     /**
-     * Download CSV.
+     * Download CSV
      *
      * This function performs a `GET` to the `/messages/download/{download_uuid}` endpoint.
      *
@@ -60,7 +60,7 @@ impl CsvUiOnly {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The license key provided with your New Relic account.
+     * * `authorization` -- The license key provided with your New Relic account.
      */
     pub async fn get_messages_download(
         &self,

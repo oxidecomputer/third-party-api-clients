@@ -18,7 +18,7 @@ impl VerificationCodes {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn list(
         &self,
@@ -48,7 +48,7 @@ impl VerificationCodes {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Email or immutable ID of the user.
+     * * `user_key` -- Email or immutable ID of the user
      */
     pub async fn generate(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -75,7 +75,7 @@ impl VerificationCodes {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Email or immutable ID of the user.
+     * * `user_key` -- Email or immutable ID of the user
      */
     pub async fn invalidate(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

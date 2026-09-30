@@ -18,10 +18,9 @@ impl ConnectEvents {
      *
      * Republishes Connect information for the  specified set of envelopes. The primary use is to republish Connect post failures by including envelope IDs for the envelopes that failed to post in the request. The list of envelope IDs that failed to post correctly can be retrieved by calling to [Connect::listEventLogs](https://developers.docusign.com/docs/esign-rest-api/reference/Connect/ConnectEvents/list) retrieve the failure log.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_publish_put_retry(
         &self,
@@ -54,8 +53,8 @@ impl ConnectEvents {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_publish_put_retry_envelope(
         &self,
@@ -89,12 +88,12 @@ impl ConnectEvents {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `from_date: &str` -- The start date for a date range in UTC DateTime format.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `from_date` -- The start date for a date range in UTC DateTime format.
+     *
      *   **Note**: If this property is null, no date filtering is applied.
-     * * `to_date: &str` -- The end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.
-     *   
+     * * `to_date` -- The end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.
+     *
      *   **Note**: If this property is null, the value defaults to the current date.
      */
     pub async fn connect_failures_get_log(
@@ -138,8 +137,8 @@ impl ConnectEvents {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `failure_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `failure_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_failures_delete_failure_log(
         &self,
@@ -175,12 +174,12 @@ impl ConnectEvents {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `from_date: &str` -- The start date for a date range in UTC DateTime format.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `from_date` -- The start date for a date range in UTC DateTime format.
+     *
      *   **Note**: If this property is null, no date filtering is applied.
-     * * `to_date: &str` -- The end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.
-     *   
+     * * `to_date` -- The end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.
+     *
      *   **Note**: If this property is null, the value defaults to the current date.
      */
     pub async fn connect_log_get_log(
@@ -224,7 +223,7 @@ impl ConnectEvents {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_log_delete_logs(
         &self,
@@ -258,9 +257,9 @@ impl ConnectEvents {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `additional_info: &str` -- When set to **true**, the response includes the `connectDebugLog` information.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `log_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `additional_info` -- When set to **true**, the response includes the `connectDebugLog` information.
      */
     pub async fn connect_log_get(
         &self,
@@ -299,11 +298,10 @@ impl ConnectEvents {
      *
      * Deletes a specified entry from the Connect Log.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `log_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_log_delete(
         &self,

@@ -12,7 +12,7 @@ impl BlocksApi {
     }
 
     /**
-     * Retrieve all blocks.
+     * Retrieve all blocks
      *
      * This function performs a `GET` to the `/suppression/blocks` endpoint.
      *
@@ -20,11 +20,11 @@ impl BlocksApi {
      *
      * **Parameters:**
      *
-     * * `start_time: i64` -- The start of the time range when a blocked email was created (inclusive). This is a unix timestamp.
-     * * `end_time: i64` -- The end of the time range when a blocked email was created (inclusive). This is a unix timestamp.
-     * * `limit: i64` -- Limit the number of results to be displayed per page.
-     * * `offset: i64` -- The point in the list to begin displaying results.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `start_time` -- The start of the time range when a blocked email was created (inclusive). This is a unix timestamp.
+     * * `end_time` -- The end of the time range when a blocked email was created (inclusive). This is a unix timestamp.
+     * * `limit` -- Limit the number of results to be displayed per page.
+     * * `offset` -- The point in the list to begin displaying results.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_blocks(
         &self,
@@ -49,7 +49,7 @@ impl BlocksApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/blocks?{}", query_), None);
+            .url(&format!("/suppression/blocks?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -61,7 +61,7 @@ impl BlocksApi {
             .await
     }
     /**
-     * Retrieve all blocks.
+     * Retrieve all blocks
      *
      * This function performs a `GET` to the `/suppression/blocks` endpoint.
      *
@@ -88,7 +88,7 @@ impl BlocksApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/blocks?{}", query_), None);
+            .url(&format!("/suppression/blocks?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -100,7 +100,7 @@ impl BlocksApi {
             .await
     }
     /**
-     * Delete blocks.
+     * Delete blocks
      *
      * This function performs a `DELETE` to the `/suppression/blocks` endpoint.
      *
@@ -113,7 +113,7 @@ impl BlocksApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_blocks(
         &self,
@@ -131,7 +131,7 @@ impl BlocksApi {
             .await
     }
     /**
-     * Retrieve a specific block.
+     * Retrieve a specific block
      *
      * This function performs a `GET` to the `/suppression/blocks/{email}` endpoint.
      *
@@ -139,7 +139,7 @@ impl BlocksApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_blocks_email(
         &self,
@@ -163,7 +163,7 @@ impl BlocksApi {
             .await
     }
     /**
-     * Retrieve a specific block.
+     * Retrieve a specific block
      *
      * This function performs a `GET` to the `/suppression/blocks/{email}` endpoint.
      *
@@ -193,7 +193,7 @@ impl BlocksApi {
             .await
     }
     /**
-     * Delete a specific block.
+     * Delete a specific block
      *
      * This function performs a `DELETE` to the `/suppression/blocks/{email}` endpoint.
      *
@@ -201,7 +201,7 @@ impl BlocksApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_blocks_email(
         &self,

@@ -39,9 +39,9 @@ impl FilesRemote {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `remote_files:read`.
-     * * `file: &str` -- Specify a file by providing its ID.
-     * * `external_id: &str` -- Creator defined GUID for the file.
+     * * `token` -- Authentication token. Requires scope: `remote_files:read`
+     * * `file` -- Specify a file by providing its ID.
+     * * `external_id` -- Creator defined GUID for the file.
      */
     pub async fn info(
         &self,
@@ -58,7 +58,7 @@ impl FilesRemote {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/files.remote.info?{}", query_), None);
+            .url(&format!("/files.remote.info?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -78,12 +78,12 @@ impl FilesRemote {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `remote_files:read`.
-     * * `channel: &str` -- Filter files appearing in a specific channel, indicated by its ID.
-     * * `ts_from: f64` -- Filter files created after this timestamp (inclusive).
-     * * `ts_to: f64` -- Filter files created before this timestamp (inclusive).
-     * * `limit: i64` -- The maximum number of items to return.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `token` -- Authentication token. Requires scope: `remote_files:read`
+     * * `channel` -- Filter files appearing in a specific channel, indicated by its ID.
+     * * `ts_from` -- Filter files created after this timestamp (inclusive).
+     * * `ts_to` -- Filter files created before this timestamp (inclusive).
+     * * `limit` -- The maximum number of items to return.
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
      */
     pub async fn list(
         &self,
@@ -112,7 +112,7 @@ impl FilesRemote {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/files.remote.list?{}", query_), None);
+            .url(&format!("/files.remote.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -151,10 +151,10 @@ impl FilesRemote {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `remote_files:share`.
-     * * `file: &str` -- Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required.
-     * * `external_id: &str` -- The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required.
-     * * `channels: &str` -- Comma-separated list of channel IDs where the file will be shared.
+     * * `token` -- Authentication token. Requires scope: `remote_files:share`
+     * * `file` -- Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required.
+     * * `external_id` -- The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required.
+     * * `channels` -- Comma-separated list of channel IDs where the file will be shared.
      */
     pub async fn share(
         &self,
@@ -175,7 +175,7 @@ impl FilesRemote {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/files.remote.share?{}", query_), None);
+            .url(&format!("/files.remote.share?{query_}"), None);
         self.client
             .get(
                 &url,

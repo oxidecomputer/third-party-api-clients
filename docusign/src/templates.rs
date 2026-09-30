@@ -20,24 +20,23 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `created_from_date: &str` -- The billing period end date in UTC timedate format.
-     * * `created_to_date: &str` -- The billing period end date in UTC timedate format.
-     * * `folder_ids: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_types: &str` -- The type of folder to return templates for. Possible values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `created_from_date` -- The billing period end date in UTC timedate format.
+     * * `created_to_date` -- The billing period end date in UTC timedate format.
+     * * `folder_ids` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_types` -- The type of folder to return templates for. Possible values are:
+     *
      *   - `templates`: Templates in the **My Templates** folder.
      *     Templates in the **Shared Templates**  and **All Template** folders (if the request id from and Admin) are excluded.
      *   - `templates_root`: Templates in the root level of the **My Templates** folder, but not in an actual folder. Note that the **My Templates** folder is not a real folder.
      *   - `recylebin`: Templates that have been deleted.
-     *   .
-     * * `from_date: &str` -- Start of the search date range. Only returns templates created on or after this date/time. If no value is specified, there is no limit on the earliest date created.
-     * * `include: &str` -- A comma-separated list
+     * * `from_date` -- Start of the search date range. Only returns templates created on or after this date/time. If no value is specified, there is no limit on the earliest date created.
+     * * `include` -- A comma-separated list
      *   of additional template attributes
      *   to include in the response.
      *   Valid values are:
-     *   
+     *
      *   - `powerforms`: Includes details about the PowerForms associated with the templates.
      *   - `documents`: Includes information about template documents.
      *   - `folders`: Includes information about the folder that holds the template.
@@ -46,49 +45,47 @@ impl Templates {
      *   - `recipients`: Includes information about template recipients.
      *   - `custom_fields`: Includes information about template custom fields.
      *   - `notifications`: Includes information about the notification settings for templates.
-     * * `is_deleted_template_only: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `is_download: &str` -- When set to **true**, downloads the templates listed in `template_ids` as a collection of JSON definitions in a single zip file.
-     *   
+     * * `is_deleted_template_only` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `is_download` -- When set to **true**, downloads the templates listed in `template_ids` as a collection of JSON definitions in a single zip file.
+     *
      *   The `Content-Disposition` header is set in the response. The value of the header provides the filename of the file.
-     *   
+     *
      *   The default is **false**.
-     *   
+     *
      *   **Note**: This parameter only works when you specify a list of templates in the `template_ids` parameter.
-     * * `modified_from_date: &str` -- The billing period end date in UTC timedate format.
-     * * `modified_to_date: &str` -- The billing period end date in UTC timedate format.
-     * * `order: &str` -- Specifies the sort order of the search results.
+     * * `modified_from_date` -- The billing period end date in UTC timedate format.
+     * * `modified_to_date` -- The billing period end date in UTC timedate format.
+     * * `order` -- Specifies the sort order of the search results.
      *   Valid values are:
-     *   
+     *
      *   - `asc`: Ascending (A to Z)
-     *   - `desc`: Descending (Z to A).
-     * * `order_by: &str` -- Specifies how the search results are listed.
+     *   - `desc`: Descending (Z to A)
+     * * `order_by` -- Specifies how the search results are listed.
      *   Valid values are:
-     *   
+     *
      *   - `name`: template name
      *   - `modified`: date/time template was last modified
      *   - `used`: date/time the template was last used.
-     * * `search_fields: &str` -- A comma-separated list of additional template properties to search.
-     *   
-     *   
+     * * `search_fields` -- A comma-separated list of additional template properties to search.
+     *
      *   - `sender`: Include sender name and email in the search.
      *   - `recipients`: Include recipient names and emails in the search.
      *   - `envelope`: Not used in template searches.
-     *   .
-     * * `search_text: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `shared_by_me: &str` -- If **true**, the response only includes templates shared by the user. If false, the response only returns template not shared by the user. If not specified, the response is not affected.
-     * * `start_position: &str` -- The starting zero-based index position for the first template to show in the response. This value must be greater than or equal to `0` (zero).
-     * * `template_ids: &str` -- A comma-separated list of template ids to download. This value is valid only when `is_download` is **true**.
-     * * `to_date: &str` -- The end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.
-     *   
+     * * `search_text` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `shared_by_me` -- If **true**, the response only includes templates shared by the user. If false, the response only returns template not shared by the user. If not specified, the response is not affected.
+     * * `start_position` -- The starting zero-based index position for the first template to show in the response. This value must be greater than or equal to `0` (zero).
+     * * `template_ids` -- A comma-separated list of template ids to download. This value is valid only when `is_download` is **true**.
+     * * `to_date` -- The end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.
+     *
      *   **Note**: If this property is null, the value defaults to the current date.
-     * * `used_from_date: &str` -- Start of the search date range. Only returns templates used or edited on or after this date/time. If no value is specified, there is no limit on the earliest date used.
-     * * `used_to_date: &str` -- End of the search date range. Only returns templates used or edited up to this date/time. If no value is provided, this defaults to the current date.
-     * * `user_filter: &str` -- Filters the templates in the response. Valid values are:
-     *   
+     * * `used_from_date` -- Start of the search date range. Only returns templates used or edited on or after this date/time. If no value is specified, there is no limit on the earliest date used.
+     * * `used_to_date` -- End of the search date range. Only returns templates used or edited up to this date/time. If no value is provided, this defaults to the current date.
+     * * `user_filter` -- Filters the templates in the response. Valid values are:
+     *
      *   - `owned_by_me`: Results include only templates owned by the user.
      *   - `shared_with_me`: Results include only templates owned by the user.
      *   - `all`:  Results include all templates owned or shared with the user.
-     * * `user_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -274,7 +271,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -307,13 +304,13 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include: &str` -- A comma-separated list
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include` -- A comma-separated list
      *   of additional template attributes
      *   to include in the response.
      *   Valid values are:
-     *   
+     *
      *   - `powerforms`: Includes information about PowerForms.
      *   - `tabs`: Includes information about tabs.
      *   - `documents`: Includes information about documents.
@@ -358,8 +355,8 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -394,16 +391,16 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `dpi: &str` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
-     * * `max_height: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `max_width: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `nocache: &str` -- If **true**, using cache is disabled and image information is retrieved from a database. **True** is the default value. .
-     * * `show_changes: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `dpi` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
+     * * `max_height` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `max_width` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `nocache` -- If **true**, using cache is disabled and image information is retrieved from a database. **True** is the default value.
+     * * `show_changes` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
      */
     pub async fn pages_get_page_image(
         &self,
@@ -470,10 +467,10 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `page_number` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn pages_delete_page(
         &self,
@@ -512,14 +509,14 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `dpi: &str` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
-     * * `max_height: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `max_width: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `show_changes: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `page_number` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `dpi` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
+     * * `max_height` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `max_width` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `show_changes` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn pages_get_page_image_templates(
         &self,
@@ -576,10 +573,10 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `page_number` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn pages_put_page_image(
         &self,
@@ -618,8 +615,8 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn notification_get(
         &self,
@@ -653,8 +650,8 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn notification_put(
         &self,
@@ -691,9 +688,9 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_part: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_part` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put_part(
         &self,
@@ -730,9 +727,9 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_part: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_part` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete_part(
         &self,

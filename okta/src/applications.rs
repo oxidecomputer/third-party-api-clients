@@ -12,7 +12,7 @@ impl Applications {
     }
 
     /**
-     * List Applications.
+     * List Applications
      *
      * This function performs a `GET` to the `/api/v1/apps` endpoint.
      *
@@ -20,12 +20,12 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `q: &str`
-     * * `after: &str` -- Specifies the pagination cursor for the next page of apps.
-     * * `limit: i64` -- Specifies the number of results for a page.
-     * * `filter: &str` -- Filters apps by status, user.id, group.id or credentials.signing.kid expression.
-     * * `expand: &str` -- Traverses users link relationship and optionally embeds Application User resource.
-     * * `include_non_deleted: bool`
+     * * `q`
+     * * `after` -- Specifies the pagination cursor for the next page of apps
+     * * `limit` -- Specifies the number of results for a page
+     * * `filter` -- Filters apps by status, user.id, group.id or credentials.signing.kid expression
+     * * `expand` -- Traverses users link relationship and optionally embeds Application User resource
+     * * `include_non_deleted`
      */
     pub async fn list(
         &self,
@@ -59,7 +59,7 @@ impl Applications {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/apps?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/apps?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -71,7 +71,7 @@ impl Applications {
             .await
     }
     /**
-     * List Applications.
+     * List Applications
      *
      * This function performs a `GET` to the `/api/v1/apps` endpoint.
      *
@@ -103,7 +103,7 @@ impl Applications {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/apps?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/apps?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -115,7 +115,7 @@ impl Applications {
             .await
     }
     /**
-     * Add Application.
+     * Add Application
      *
      * This function performs a `POST` to the `/api/v1/apps` endpoint.
      *
@@ -123,8 +123,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `activate: bool` -- Executes activation lifecycle operation when creating the app.
-     * * `okta_access_gateway_agent: &str`
+     * * `activate` -- Executes activation lifecycle operation when creating the app
+     * * `okta_access_gateway_agent`
      */
     pub async fn create(
         &self,
@@ -136,7 +136,7 @@ impl Applications {
             query_args.push(("activate".to_string(), activate.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/apps?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/apps?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -148,7 +148,7 @@ impl Applications {
             .await
     }
     /**
-     * Get Application.
+     * Get Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}` endpoint.
      *
@@ -156,8 +156,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `expand: &str`
+     * * `app_id`
+     * * `expand`
      */
     pub async fn get(
         &self,
@@ -188,7 +188,7 @@ impl Applications {
             .await
     }
     /**
-     * Update Application.
+     * Update Application
      *
      * This function performs a `PUT` to the `/api/v1/apps/{appId}` endpoint.
      *
@@ -196,7 +196,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn update(
         &self,
@@ -221,7 +221,7 @@ impl Applications {
             .await
     }
     /**
-     * Delete Application.
+     * Delete Application
      *
      * This function performs a `DELETE` to the `/api/v1/apps/{appId}` endpoint.
      *
@@ -229,7 +229,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn delete(&self, app_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -250,7 +250,7 @@ impl Applications {
             .await
     }
     /**
-     * List Certificate Signing Requests for Application.
+     * List Certificate Signing Requests for Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/credentials/csrs` endpoint.
      *
@@ -258,7 +258,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn list_csrs_fors(
         &self,
@@ -282,7 +282,7 @@ impl Applications {
             .await
     }
     /**
-     * List Certificate Signing Requests for Application.
+     * List Certificate Signing Requests for Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/credentials/csrs` endpoint.
      *
@@ -312,7 +312,7 @@ impl Applications {
             .await
     }
     /**
-     * Generate Certificate Signing Request for Application.
+     * Generate Certificate Signing Request for Application
      *
      * This function performs a `POST` to the `/api/v1/apps/{appId}/credentials/csrs` endpoint.
      *
@@ -320,7 +320,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn generate_csr_for(
         &self,
@@ -349,8 +349,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `csr_id: &str`
+     * * `app_id`
+     * * `csr_id`
      */
     pub async fn get_csr_for(
         &self,
@@ -380,8 +380,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `csr_id: &str`
+     * * `app_id`
+     * * `csr_id`
      */
     pub async fn revoke_csr_from(
         &self,
@@ -411,8 +411,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `csr_id: &str`
+     * * `app_id`
+     * * `csr_id`
      */
     pub async fn post_app_credentials_csr_lifecycle_publish(
         &self,
@@ -438,7 +438,7 @@ impl Applications {
             .await
     }
     /**
-     * List Key Credentials for Application.
+     * List Key Credentials for Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/credentials/keys` endpoint.
      *
@@ -446,7 +446,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn list_keys(
         &self,
@@ -470,7 +470,7 @@ impl Applications {
             .await
     }
     /**
-     * List Key Credentials for Application.
+     * List Key Credentials for Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/credentials/keys` endpoint.
      *
@@ -506,8 +506,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `validity_years: i64`
+     * * `app_id`
+     * * `validity_years`
      */
     pub async fn generate_key(
         &self,
@@ -538,7 +538,7 @@ impl Applications {
             .await
     }
     /**
-     * Get Key Credential for Application.
+     * Get Key Credential for Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/credentials/keys/{keyId}` endpoint.
      *
@@ -546,8 +546,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `key_id: &str`
+     * * `app_id`
+     * * `key_id`
      */
     pub async fn get_key(
         &self,
@@ -573,7 +573,7 @@ impl Applications {
             .await
     }
     /**
-     * Clone Application Key Credential.
+     * Clone Application Key Credential
      *
      * This function performs a `POST` to the `/api/v1/apps/{appId}/credentials/keys/{keyId}/clone` endpoint.
      *
@@ -581,9 +581,9 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `key_id: &str`
-     * * `target_aid: &str` -- Unique key of the target Application.
+     * * `app_id`
+     * * `key_id`
+     * * `target_aid` -- Unique key of the target Application
      */
     pub async fn clone_key(
         &self,
@@ -622,8 +622,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `expand: &str`
+     * * `app_id`
+     * * `expand`
      */
     pub async fn list_scope_consent_grants(
         &self,
@@ -695,7 +695,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn grant_consent_scope(
         &self,
@@ -726,9 +726,9 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `grant_id: &str`
-     * * `expand: &str`
+     * * `app_id`
+     * * `grant_id`
+     * * `expand`
      */
     pub async fn get_scope_consent_grant(
         &self,
@@ -767,8 +767,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `grant_id: &str`
+     * * `app_id`
+     * * `grant_id`
      */
     pub async fn revoke_scope_consent_grant(
         &self,
@@ -794,7 +794,7 @@ impl Applications {
             .await
     }
     /**
-     * List Groups Assigned to Application.
+     * List Groups Assigned to Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/groups` endpoint.
      *
@@ -802,11 +802,11 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `q: &str`
-     * * `after: &str` -- Specifies the pagination cursor for the next page of assignments.
-     * * `limit: i64` -- Specifies the number of results for a page.
-     * * `expand: &str`
+     * * `app_id`
+     * * `q`
+     * * `after` -- Specifies the pagination cursor for the next page of assignments
+     * * `limit` -- Specifies the number of results for a page
+     * * `expand`
      */
     pub async fn list_group_assignments(
         &self,
@@ -849,7 +849,7 @@ impl Applications {
             .await
     }
     /**
-     * List Groups Assigned to Application.
+     * List Groups Assigned to Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/groups` endpoint.
      *
@@ -890,7 +890,7 @@ impl Applications {
             .await
     }
     /**
-     * Get Assigned Group for Application.
+     * Get Assigned Group for Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/groups/{groupId}` endpoint.
      *
@@ -898,9 +898,9 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `group_id: &str`
-     * * `expand: &str`
+     * * `app_id`
+     * * `group_id`
+     * * `expand`
      */
     pub async fn get_group_assignment(
         &self,
@@ -933,7 +933,7 @@ impl Applications {
             .await
     }
     /**
-     * Assign Group to Application.
+     * Assign Group to Application
      *
      * This function performs a `PUT` to the `/api/v1/apps/{appId}/groups/{groupId}` endpoint.
      *
@@ -941,8 +941,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `group_id: &str`
+     * * `app_id`
+     * * `group_id`
      */
     pub async fn create_group_assignment(
         &self,
@@ -969,7 +969,7 @@ impl Applications {
             .await
     }
     /**
-     * Remove Group from Application.
+     * Remove Group from Application
      *
      * This function performs a `DELETE` to the `/api/v1/apps/{appId}/groups/{groupId}` endpoint.
      *
@@ -977,8 +977,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `group_id: &str`
+     * * `app_id`
+     * * `group_id`
      */
     pub async fn delete_group_assignment(
         &self,
@@ -1004,7 +1004,7 @@ impl Applications {
             .await
     }
     /**
-     * Activate Application.
+     * Activate Application
      *
      * This function performs a `POST` to the `/api/v1/apps/{appId}/lifecycle/activate` endpoint.
      *
@@ -1012,7 +1012,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn activate(&self, app_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1033,7 +1033,7 @@ impl Applications {
             .await
     }
     /**
-     * Deactivate Application.
+     * Deactivate Application
      *
      * This function performs a `POST` to the `/api/v1/apps/{appId}/lifecycle/deactivate` endpoint.
      *
@@ -1041,7 +1041,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn deactivate(&self, app_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1068,10 +1068,10 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `expand: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `app_id`
+     * * `expand`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_o_auth_2_tokens_fors(
         &self,
@@ -1151,7 +1151,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn revoke_o_auth_2_tokens_for(
         &self,
@@ -1181,9 +1181,9 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `token_id: &str`
-     * * `expand: &str`
+     * * `app_id`
+     * * `token_id`
+     * * `expand`
      */
     pub async fn get_o_auth_2_token_for(
         &self,
@@ -1222,8 +1222,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `token_id: &str`
+     * * `app_id`
+     * * `token_id`
      */
     pub async fn revoke_o_auth_2_token_for(
         &self,
@@ -1249,7 +1249,7 @@ impl Applications {
             .await
     }
     /**
-     * List Users Assigned to Application.
+     * List Users Assigned to Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/users` endpoint.
      *
@@ -1257,13 +1257,13 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `q: &str`
-     * * `query_scope: &str`
-     * * `after: &str` -- specifies the pagination cursor for the next page of assignments.
-     * * `limit: i64` -- specifies the number of results for a page.
-     * * `filter: &str`
-     * * `expand: &str`
+     * * `app_id`
+     * * `q`
+     * * `query_scope`
+     * * `after` -- specifies the pagination cursor for the next page of assignments
+     * * `limit` -- specifies the number of results for a page
+     * * `filter`
+     * * `expand`
      */
     pub async fn list_users(
         &self,
@@ -1314,7 +1314,7 @@ impl Applications {
             .await
     }
     /**
-     * List Users Assigned to Application.
+     * List Users Assigned to Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/users` endpoint.
      *
@@ -1363,7 +1363,7 @@ impl Applications {
             .await
     }
     /**
-     * Assign User to Application for SSO & Provisioning.
+     * Assign User to Application for SSO & Provisioning
      *
      * This function performs a `POST` to the `/api/v1/apps/{appId}/users` endpoint.
      *
@@ -1371,7 +1371,7 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
+     * * `app_id`
      */
     pub async fn assign_user(
         &self,
@@ -1396,7 +1396,7 @@ impl Applications {
             .await
     }
     /**
-     * Get Assigned User for Application.
+     * Get Assigned User for Application
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/users/{userId}` endpoint.
      *
@@ -1404,9 +1404,9 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `user_id: &str`
-     * * `expand: &str`
+     * * `app_id`
+     * * `user_id`
+     * * `expand`
      */
     pub async fn get_user(
         &self,
@@ -1439,7 +1439,7 @@ impl Applications {
             .await
     }
     /**
-     * Update Application Profile for Assigned User.
+     * Update Application Profile for Assigned User
      *
      * This function performs a `POST` to the `/api/v1/apps/{appId}/users/{userId}` endpoint.
      *
@@ -1447,8 +1447,8 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `user_id: &str`
+     * * `app_id`
+     * * `user_id`
      */
     pub async fn update_user(
         &self,
@@ -1475,7 +1475,7 @@ impl Applications {
             .await
     }
     /**
-     * Remove User from Application.
+     * Remove User from Application
      *
      * This function performs a `DELETE` to the `/api/v1/apps/{appId}/users/{userId}` endpoint.
      *
@@ -1483,9 +1483,9 @@ impl Applications {
      *
      * **Parameters:**
      *
-     * * `app_id: &str`
-     * * `user_id: &str`
-     * * `send_email: bool`
+     * * `app_id`
+     * * `user_id`
+     * * `send_email`
      */
     pub async fn delete_user(
         &self,

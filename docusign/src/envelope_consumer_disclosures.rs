@@ -24,11 +24,11 @@ impl EnvelopeConsumerDisclosures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `lang_code: &str` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve. The following languages are supported:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `lang_code` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve. The following languages are supported:
+     *
      *   - Arabic (`ar`)
      *   - Bulgarian (`bg`)
      *   - Czech (`cs`)
@@ -72,7 +72,7 @@ impl EnvelopeConsumerDisclosures {
      *   - Turkish (`tr`)
      *   - Ukrainian (`uk`)
      *   - Vietnamese (`vi`)
-     *   
+     *
      *   Additionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.
      */
     pub async fn consumer_disclosure_get_envelope_recipient(
@@ -118,10 +118,10 @@ impl EnvelopeConsumerDisclosures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `lang_code: &str` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve, as a path parameter. The following languages are supported:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `lang_code` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve, as a path parameter. The following languages are supported:
+     *
      *   - Arabic (`ar`)
      *   - Bulgarian (`bg`)
      *   - Czech (`cs`)
@@ -165,11 +165,11 @@ impl EnvelopeConsumerDisclosures {
      *   - Turkish (`tr`)
      *   - Ukrainian (`uk`)
      *   - Vietnamese (`vi`)
-     *   
+     *
      *   Additionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `lang_code: &str` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve, as a query parameter. The following languages are supported:
-     *   
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `lang_code` -- (Optional) The code for the signer language version of the disclosure that you want to retrieve, as a query parameter. The following languages are supported:
+     *
      *   - Arabic (`ar`)
      *   - Bulgarian (`bg`)
      *   - Czech (`cs`)
@@ -213,7 +213,7 @@ impl EnvelopeConsumerDisclosures {
      *   - Turkish (`tr`)
      *   - Ukrainian (`uk`)
      *   - Vietnamese (`vi`)
-     *   
+     *
      *   Additionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.
      */
     pub async fn consumer_disclosure_get_envelope_recipient_lang_code(

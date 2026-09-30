@@ -18,19 +18,19 @@ impl Changes {
      *
      * **Parameters:**
      *
-     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-     * * `drive_id: &str` -- The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
-     * * `include_corpus_removals: bool` -- Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
-     * * `include_items_from_all_drives: bool` -- Whether both My Drive and shared drive items should be included in results.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `include_removed: bool` -- Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
-     * * `include_team_drive_items: bool` -- Whether the user has installed the requesting app.
-     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `restrict_to_my_drive: bool` -- Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
-     * * `spaces: &str` -- A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `team_drive_id: &str` -- A link to this theme's background image.
+     * * `page_token` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+     * * `drive_id` -- The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+     * * `include_corpus_removals` -- Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+     * * `include_items_from_all_drives` -- Whether both My Drive and shared drive items should be included in results.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `include_removed` -- Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+     * * `include_team_drive_items` -- Whether the user has installed the requesting app.
+     * * `page_size` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `restrict_to_my_drive` -- Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+     * * `spaces` -- A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `team_drive_id` -- A link to this theme's background image.
      */
     pub async fn list(
         &self,
@@ -110,7 +110,7 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/changes?{}", query_), None);
+        let url = self.client.url(&format!("/changes?{query_}"), None);
         let resp: crate::Response<crate::types::ChangeList> = self
             .client
             .get(
@@ -206,7 +206,7 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/changes?{}", query_), None);
+        let url = self.client.url(&format!("/changes?{query_}"), None);
         let crate::Response::<crate::types::ChangeList> {
             mut status,
             mut headers,
@@ -235,7 +235,7 @@ impl Changes {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -250,7 +250,7 @@ impl Changes {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -278,10 +278,10 @@ impl Changes {
      *
      * **Parameters:**
      *
-     * * `drive_id: &str` -- The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `team_drive_id: &str` -- A link to this theme's background image.
+     * * `drive_id` -- The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `team_drive_id` -- A link to this theme's background image.
      */
     pub async fn get_start_page_token(
         &self,
@@ -312,7 +312,7 @@ impl Changes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/changes/startPageToken?{}", query_), None);
+            .url(&format!("/changes/startPageToken?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -330,19 +330,19 @@ impl Changes {
      *
      * **Parameters:**
      *
-     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-     * * `drive_id: &str` -- The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
-     * * `include_corpus_removals: bool` -- Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
-     * * `include_items_from_all_drives: bool` -- Whether both My Drive and shared drive items should be included in results.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `include_removed: bool` -- Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
-     * * `include_team_drive_items: bool` -- Whether the user has installed the requesting app.
-     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `restrict_to_my_drive: bool` -- Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
-     * * `spaces: &str` -- A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `team_drive_id: &str` -- A link to this theme's background image.
+     * * `page_token` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+     * * `drive_id` -- The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.
+     * * `include_corpus_removals` -- Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
+     * * `include_items_from_all_drives` -- Whether both My Drive and shared drive items should be included in results.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `include_removed` -- Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
+     * * `include_team_drive_items` -- Whether the user has installed the requesting app.
+     * * `page_size` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `restrict_to_my_drive` -- Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
+     * * `spaces` -- A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `team_drive_id` -- A link to this theme's background image.
      */
     pub async fn watch(
         &self,
@@ -423,7 +423,7 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/changes/watch?{}", query_), None);
+        let url = self.client.url(&format!("/changes/watch?{query_}"), None);
         self.client
             .post(
                 &url,

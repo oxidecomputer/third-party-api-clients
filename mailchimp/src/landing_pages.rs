@@ -12,7 +12,7 @@ impl LandingPages {
     }
 
     /**
-     * List landing pages.
+     * List landing pages
      *
      * This function performs a `GET` to the `/landing-pages` endpoint.
      *
@@ -20,11 +20,11 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
-     * * `sort_field: crate::types::GetAllLandingPagesSortField` -- Returns files sorted by the specified field.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `sort_dir` -- Determines the order direction for sorted results.
+     * * `sort_field` -- Returns files sorted by the specified field.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
      */
     pub async fn get_all(
         &self,
@@ -51,7 +51,7 @@ impl LandingPages {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/landing-pages?{}", query_), None);
+        let url = self.client.url(&format!("/landing-pages?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -63,7 +63,7 @@ impl LandingPages {
             .await
     }
     /**
-     * Add landing page.
+     * Add landing page
      *
      * This function performs a `POST` to the `/landing-pages` endpoint.
      *
@@ -71,7 +71,7 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `use_default_list: bool` -- Will create the Landing Page using the account's Default List instead of requiring a list_id.
+     * * `use_default_list` -- Will create the Landing Page using the account's Default List instead of requiring a list_id.
      */
     pub async fn post_all(
         &self,
@@ -83,7 +83,7 @@ impl LandingPages {
             query_args.push(("use_default_list".to_string(), use_default_list.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/landing-pages?{}", query_), None);
+        let url = self.client.url(&format!("/landing-pages?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -95,7 +95,7 @@ impl LandingPages {
             .await
     }
     /**
-     * Get landing page info.
+     * Get landing page info
      *
      * This function performs a `GET` to the `/landing-pages/{page_id}` endpoint.
      *
@@ -103,9 +103,9 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `page_id: &str` -- The unique id for the page.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `page_id` -- The unique id for the page.
      */
     pub async fn get(
         &self,
@@ -140,7 +140,7 @@ impl LandingPages {
             .await
     }
     /**
-     * Delete landing page.
+     * Delete landing page
      *
      * This function performs a `DELETE` to the `/landing-pages/{page_id}` endpoint.
      *
@@ -148,7 +148,7 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `page_id: &str` -- The unique id for the page.
+     * * `page_id` -- The unique id for the page.
      */
     pub async fn delete(&self, page_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -169,7 +169,7 @@ impl LandingPages {
             .await
     }
     /**
-     * Update landing page.
+     * Update landing page
      *
      * This function performs a `PATCH` to the `/landing-pages/{page_id}` endpoint.
      *
@@ -177,7 +177,7 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `page_id: &str` -- The unique id for the page.
+     * * `page_id` -- The unique id for the page.
      */
     pub async fn patch(
         &self,
@@ -202,7 +202,7 @@ impl LandingPages {
             .await
     }
     /**
-     * Publish landing page.
+     * Publish landing page
      *
      * This function performs a `POST` to the `/landing-pages/{page_id}/actions/publish` endpoint.
      *
@@ -210,7 +210,7 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `page_id: &str` -- The unique id for the page.
+     * * `page_id` -- The unique id for the page.
      */
     pub async fn post_actions_publish(
         &self,
@@ -234,7 +234,7 @@ impl LandingPages {
             .await
     }
     /**
-     * Unpublish landing page.
+     * Unpublish landing page
      *
      * This function performs a `POST` to the `/landing-pages/{page_id}/actions/unpublish` endpoint.
      *
@@ -242,7 +242,7 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `page_id: &str` -- The unique id for the page.
+     * * `page_id` -- The unique id for the page.
      */
     pub async fn post_actions_unpublish(&self, page_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -263,7 +263,7 @@ impl LandingPages {
             .await
     }
     /**
-     * Get landing page content.
+     * Get landing page content
      *
      * This function performs a `GET` to the `/landing-pages/{page_id}/content` endpoint.
      *
@@ -271,9 +271,9 @@ impl LandingPages {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `page_id: &str` -- The unique id for the page.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `page_id` -- The unique id for the page.
      */
     pub async fn get_content(
         &self,

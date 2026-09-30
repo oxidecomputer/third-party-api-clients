@@ -12,7 +12,7 @@ impl PhoneDevices {
     }
 
     /**
-     * List devices.
+     * List devices
      *
      * This function performs a `GET` to the `/phone/devices` endpoint.
      *
@@ -21,14 +21,15 @@ impl PhoneDevices {
      * **Scopes:** `phone:read:admin`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `type_: crate::types::ListPhoneDevicesType` -- State of the device. The value should be either `assigned` to list devices that have been assigned to user(s) or `unassigned` to list devices that have not yet been assigned to any user in the Zoom account.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `type_` -- State of the device. The value should be either `assigned` to list devices that have been assigned to user(s) or `unassigned` to list devices that have not yet been assigned to any user in the Zoom account.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single API call.
      */
     pub async fn list(
         &self,
@@ -47,7 +48,7 @@ impl PhoneDevices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/phone/devices?{}", query_), None);
+        let url = self.client.url(&format!("/phone/devices?{query_}"), None);
         let resp: crate::Response<crate::types::ListPhoneDevicesResponseData> = self
             .client
             .get(
@@ -67,7 +68,7 @@ impl PhoneDevices {
         ))
     }
     /**
-     * List devices.
+     * List devices
      *
      * This function performs a `GET` to the `/phone/devices` endpoint.
      *
@@ -78,6 +79,7 @@ impl PhoneDevices {
      * **Scopes:** `phone:read:admin`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
@@ -90,7 +92,7 @@ impl PhoneDevices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/phone/devices?{}", query_), None);
+        let url = self.client.url(&format!("/phone/devices?{query_}"), None);
         let crate::Response::<crate::types::ListPhoneDevicesResponseData> {
             mut status,
             mut headers,
@@ -120,7 +122,7 @@ impl PhoneDevices {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -135,7 +137,7 @@ impl PhoneDevices {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -157,20 +159,21 @@ impl PhoneDevices {
         Ok(crate::Response::new(status, headers, devices))
     }
     /**
-     * Add a device.
+     * Add a device
      *
      * This function performs a `POST` to the `/phone/devices` endpoint.
      *
      * By default, all Zoom Phone users can make and receive calls using the Zoom desktop and mobile applications. Additionally, if a desk phone is required, use this API to [add a desk phone and assign it](https://support.zoom.us/hc/en-us/articles/360021119092#h_5ca07504-68a8-4c3d-ad0e-c1d3594436da) to a user.
      *
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      * * [Supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)<br>
+     *
      * **Scopes:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn add(
         &self,
@@ -188,7 +191,7 @@ impl PhoneDevices {
             .await
     }
     /**
-     * Get device details.
+     * Get device details
      *
      * This function performs a `GET` to the `/phone/devices/{deviceId}` endpoint.
      *
@@ -197,12 +200,13 @@ impl PhoneDevices {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `device_id: &str` -- Unique Identifier of the device.
+     * * `device_id` -- Unique Identifier of the device.
      */
     pub async fn get_device(
         &self,
@@ -226,23 +230,24 @@ impl PhoneDevices {
             .await
     }
     /**
-     * Delete a device.
+     * Delete a device
      *
      * This function performs a `DELETE` to the `/phone/devices/{deviceId}` endpoint.
      *
      * Remove a [desk phone device](https://support.zoom.us/hc/en-us/articles/360021119092) from the Zoom Phone System Management.<br><br>
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      * * Device must not have been assigned to a user.<br>
+     *
      * **Scopes:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `device_id: &str` -- Unique Identifier of the device.
+     * * `device_id` -- Unique Identifier of the device.
      */
     pub async fn delete_device(&self, device_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -263,22 +268,23 @@ impl PhoneDevices {
             .await
     }
     /**
-     * Update a device.
+     * Update a device
      *
      * This function performs a `PATCH` to the `/phone/devices/{deviceId}` endpoint.
      *
      * Update information of a [desk phone device](https://support.zoom.us/hc/en-us/articles/360021119092).<br><br>
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions<br>
+     *
      * **Scopes:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `device_id: &str` -- Unique Identifier of the Device.
+     * * `device_id` -- Unique Identifier of the Device.
      */
     pub async fn update_device(
         &self,

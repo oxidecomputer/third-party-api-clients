@@ -34,9 +34,8 @@ impl UserCustomSettings {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn get(
         &self,
@@ -90,9 +89,8 @@ impl UserCustomSettings {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn put(
         &self,
@@ -137,9 +135,8 @@ impl UserCustomSettings {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn delete(
         &self,

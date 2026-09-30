@@ -20,10 +20,10 @@ impl TransactionalTemplates {
      *
      * **Parameters:**
      *
-     * * `generations: crate::types::Generations` -- Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
-     * * `page_size: f64` -- The number of templates to be returned in each page of results.
-     * * `page_token: &str` -- A token corresponding to a specific page of results, as provided by metadata.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `generations` -- Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
+     * * `page_size` -- The number of templates to be returned in each page of results
+     * * `page_token` -- A token corresponding to a specific page of results, as provided by metadata
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_templates(
         &self,
@@ -42,7 +42,7 @@ impl TransactionalTemplates {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/templates?{}", query_), None);
+        let url = self.client.url(&format!("/templates?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -62,7 +62,7 @@ impl TransactionalTemplates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_template(
         &self,
@@ -88,7 +88,7 @@ impl TransactionalTemplates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_templates_template(
         &self,
@@ -120,7 +120,7 @@ impl TransactionalTemplates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_templates_template(
         &self,
@@ -153,7 +153,7 @@ impl TransactionalTemplates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_templates_template(
         &self,
@@ -187,7 +187,7 @@ impl TransactionalTemplates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_templates_template(
         &self,

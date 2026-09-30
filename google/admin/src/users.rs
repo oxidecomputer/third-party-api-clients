@@ -18,18 +18,18 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `custom_field_mask: &str` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users). Either the `customer` or the `domain` parameter must be provided.
-     * * `domain: &str` -- The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead. Either the `customer` or the `domain` parameter must be provided.
-     * * `event: crate::types::Event` -- Event on which subscription is intended (if subscribing).
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `order_by: crate::types::DirectoryUsersListOrderBy` -- Property to use for sorting results.
-     * * `page_token: &str` -- Token to specify next page in the list.
-     * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
-     * * `query: &str` -- Query string for searching user fields. For more information on constructing user queries, see [Search for Users](/admin-sdk/directory/v1/guides/search-users).
-     * * `show_deleted: &str` -- If set to `true`, retrieves the list of deleted users. (Default: `false`).
-     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
-     * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+     * * `custom_field_mask` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users). Either the `customer` or the `domain` parameter must be provided.
+     * * `domain` -- The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead. Either the `customer` or the `domain` parameter must be provided.
+     * * `event` -- Event on which subscription is intended (if subscribing)
+     * * `max_results` -- Maximum number of results to return.
+     * * `order_by` -- Property to use for sorting results.
+     * * `page_token` -- Token to specify next page in the list
+     * * `projection` -- What subset of fields to fetch for this user.
+     * * `query` -- Query string for searching user fields. For more information on constructing user queries, see [Search for Users](/admin-sdk/directory/v1/guides/search-users).
+     * * `show_deleted` -- If set to `true`, retrieves the list of deleted users. (Default: `false`)
+     * * `sort_order` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     * * `view_type` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
      */
     pub async fn list(
         &self,
@@ -82,7 +82,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/directory/v1/users?{}", query_), None);
+            .url(&format!("/admin/directory/v1/users?{query_}"), None);
         let resp: crate::Response<crate::types::Users> = self
             .client
             .get(
@@ -151,7 +151,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/directory/v1/users?{}", query_), None);
+            .url(&format!("/admin/directory/v1/users?{query_}"), None);
         let crate::Response::<crate::types::Users> {
             mut status,
             mut headers,
@@ -180,7 +180,7 @@ impl Users {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -195,7 +195,7 @@ impl Users {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -243,18 +243,18 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `custom_field_mask: &str` -- Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
-     * * `customer: &str` -- Immutable ID of the Google Workspace account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
-     * * `domain: &str` -- Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.".
-     * * `event: crate::types::Event` -- Event on which subscription is intended (if subscribing).
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `order_by: crate::types::DirectoryUsersListOrderBy` -- Property to use for sorting results.
-     * * `page_token: &str` -- Token to specify next page in the list.
-     * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
-     * * `query: &str` -- Query string search. Should be of the form "". Complete documentation is at https: //developers.google.com/admin-sdk/directory/v1/guides/search-users.
-     * * `show_deleted: &str` -- If set to true, retrieves the list of deleted users. (Default: false).
-     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
-     * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+     * * `custom_field_mask` -- Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+     * * `customer` -- Immutable ID of the Google Workspace account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
+     * * `domain` -- Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead."
+     * * `event` -- Event on which subscription is intended (if subscribing)
+     * * `max_results` -- Maximum number of results to return.
+     * * `order_by` -- Property to use for sorting results.
+     * * `page_token` -- Token to specify next page in the list
+     * * `projection` -- What subset of fields to fetch for this user.
+     * * `query` -- Query string search. Should be of the form "". Complete documentation is at https: //developers.google.com/admin-sdk/directory/v1/guides/search-users
+     * * `show_deleted` -- If set to true, retrieves the list of deleted users. (Default: false)
+     * * `sort_order` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     * * `view_type` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
      */
     pub async fn watch(
         &self,
@@ -308,7 +308,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/directory/v1/users/watch?{}", query_), None);
+            .url(&format!("/admin/directory/v1/users/watch?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -326,10 +326,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-     * * `custom_field_mask: &str` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
-     * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
-     * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `custom_field_mask` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
+     * * `projection` -- What subset of fields to fetch for this user.
+     * * `view_type` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
      */
     pub async fn get(
         &self,
@@ -370,7 +370,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn update(
         &self,
@@ -401,7 +401,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn delete(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -428,7 +428,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn patch(
         &self,
@@ -459,8 +459,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-     * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `event` -- Events to watch for.
      */
     pub async fn aliases_list(
         &self,
@@ -497,7 +497,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn aliases_insert(
         &self,
@@ -528,8 +528,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Email or immutable ID of the user.
-     * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
+     * * `user_key` -- Email or immutable ID of the user
+     * * `event` -- Events to watch for.
      */
     pub async fn aliases_watch(
         &self,
@@ -567,8 +567,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-     * * `alias: &str` -- The alias to be removed.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `alias` -- The alias to be removed.
      */
     pub async fn aliases_delete(
         &self,
@@ -600,7 +600,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn make_admin(
         &self,
@@ -631,7 +631,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn photos_get(
         &self,
@@ -661,7 +661,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn photos_update(
         &self,
@@ -692,7 +692,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn photos_delete(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -719,7 +719,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn photos_patch(
         &self,
@@ -750,7 +750,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn sign_out(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -777,7 +777,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- The immutable id of the user.
+     * * `user_key` -- The immutable id of the user
      */
     pub async fn undelete(
         &self,

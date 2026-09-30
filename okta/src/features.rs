@@ -54,7 +54,7 @@ impl Features {
      *
      * **Parameters:**
      *
-     * * `feature_id: &str`
+     * * `feature_id`
      */
     pub async fn get(
         &self,
@@ -84,7 +84,7 @@ impl Features {
      *
      * **Parameters:**
      *
-     * * `feature_id: &str`
+     * * `feature_id`
      */
     pub async fn list_dependencies(
         &self,
@@ -142,7 +142,7 @@ impl Features {
      *
      * **Parameters:**
      *
-     * * `feature_id: &str`
+     * * `feature_id`
      */
     pub async fn list_dependents(
         &self,
@@ -200,9 +200,9 @@ impl Features {
      *
      * **Parameters:**
      *
-     * * `feature_id: &str`
-     * * `lifecycle: &str`
-     * * `mode: &str`
+     * * `feature_id`
+     * * `lifecycle`
+     * * `mode`
      */
     pub async fn update_lifecycle(
         &self,

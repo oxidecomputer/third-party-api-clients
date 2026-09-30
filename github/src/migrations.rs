@@ -12,7 +12,7 @@ impl Migrations {
     }
 
     /**
-     * List organization migrations.
+     * List organization migrations
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations` endpoint.
      *
@@ -22,10 +22,10 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `exclude: &[String]` -- Exclude attributes from the API response to improve performance.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `exclude` -- Exclude attributes from the API response to improve performance
      */
     pub async fn list_for_org(
         &self,
@@ -64,7 +64,7 @@ impl Migrations {
             .await
     }
     /**
-     * List organization migrations.
+     * List organization migrations
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations` endpoint.
      *
@@ -103,7 +103,7 @@ impl Migrations {
             .await
     }
     /**
-     * Start an organization migration.
+     * Start an organization migration
      *
      * This function performs a `POST` to the `/orgs/{org}/migrations` endpoint.
      *
@@ -113,7 +113,7 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn start_for_org(
         &self,
@@ -138,7 +138,7 @@ impl Migrations {
             .await
     }
     /**
-     * Get an organization migration status.
+     * Get an organization migration status
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}` endpoint.
      *
@@ -155,9 +155,9 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `exclude: &[String]` -- Exclude attributes from the API response to improve performance.
+     * * `org`
+     * * `migration_id` -- migration_id parameter
+     * * `exclude` -- Exclude attributes from the API response to improve performance
      */
     pub async fn get_status_for_org(
         &self,
@@ -190,7 +190,7 @@ impl Migrations {
             .await
     }
     /**
-     * Download an organization migration archive.
+     * Download an organization migration archive
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}/archive` endpoint.
      *
@@ -200,8 +200,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `org`
+     * * `migration_id` -- migration_id parameter
      */
     pub async fn download_archive_for_org(
         &self,
@@ -227,7 +227,7 @@ impl Migrations {
             .await
     }
     /**
-     * Delete an organization migration archive.
+     * Delete an organization migration archive
      *
      * This function performs a `DELETE` to the `/orgs/{org}/migrations/{migration_id}/archive` endpoint.
      *
@@ -237,8 +237,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `org`
+     * * `migration_id` -- migration_id parameter
      */
     pub async fn delete_archive_for_org(
         &self,
@@ -264,7 +264,7 @@ impl Migrations {
             .await
     }
     /**
-     * Unlock an organization repository.
+     * Unlock an organization repository
      *
      * This function performs a `DELETE` to the `/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock` endpoint.
      *
@@ -274,9 +274,9 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `repo_name: &str` -- repo_name parameter.
+     * * `org`
+     * * `migration_id` -- migration_id parameter
+     * * `repo_name` -- repo_name parameter
      */
     pub async fn unlock_repo_for_org(
         &self,
@@ -304,7 +304,7 @@ impl Migrations {
             .await
     }
     /**
-     * List repositories in an organization migration.
+     * List repositories in an organization migration
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}/repositories` endpoint.
      *
@@ -314,10 +314,10 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `migration_id` -- migration_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_for_org(
         &self,
@@ -354,7 +354,7 @@ impl Migrations {
             .await
     }
     /**
-     * List repositories in an organization migration.
+     * List repositories in an organization migration
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}/repositories` endpoint.
      *
@@ -388,7 +388,7 @@ impl Migrations {
             .await
     }
     /**
-     * Get an import status.
+     * Get an import status
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/import` endpoint.
      *
@@ -431,8 +431,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_import_status(
         &self,
@@ -458,7 +458,7 @@ impl Migrations {
             .await
     }
     /**
-     * Start an import.
+     * Start an import
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/import` endpoint.
      *
@@ -468,8 +468,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn start_import(
         &self,
@@ -496,7 +496,7 @@ impl Migrations {
             .await
     }
     /**
-     * Cancel an import.
+     * Cancel an import
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/import` endpoint.
      *
@@ -506,8 +506,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn cancel_import(
         &self,
@@ -533,7 +533,7 @@ impl Migrations {
             .await
     }
     /**
-     * Update an import.
+     * Update an import
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import` endpoint.
      *
@@ -544,8 +544,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn update_import(
         &self,
@@ -572,7 +572,7 @@ impl Migrations {
             .await
     }
     /**
-     * Get commit authors.
+     * Get commit authors
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/import/authors` endpoint.
      *
@@ -584,9 +584,9 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `since: i64` -- A user ID. Only return users with an ID greater than this ID.
+     * * `owner`
+     * * `repo`
+     * * `since` -- A user ID. Only return users with an ID greater than this ID.
      */
     pub async fn get_commit_authors(
         &self,
@@ -619,7 +619,7 @@ impl Migrations {
             .await
     }
     /**
-     * Get commit authors.
+     * Get commit authors
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/import/authors` endpoint.
      *
@@ -662,7 +662,7 @@ impl Migrations {
             .await
     }
     /**
-     * Map a commit author.
+     * Map a commit author
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/authors/{author_id}` endpoint.
      *
@@ -672,9 +672,9 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `author_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `author_id`
      */
     pub async fn map_commit_author(
         &self,
@@ -703,7 +703,7 @@ impl Migrations {
             .await
     }
     /**
-     * Get large files.
+     * Get large files
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/import/large_files` endpoint.
      *
@@ -713,8 +713,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_large_files(
         &self,
@@ -740,7 +740,7 @@ impl Migrations {
             .await
     }
     /**
-     * Get large files.
+     * Get large files
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/import/large_files` endpoint.
      *
@@ -774,7 +774,7 @@ impl Migrations {
             .await
     }
     /**
-     * Update Git LFS preference.
+     * Update Git LFS preference
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/lfs` endpoint.
      *
@@ -784,8 +784,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn set_lfs_preference(
         &self,
@@ -812,7 +812,7 @@ impl Migrations {
             .await
     }
     /**
-     * List user migrations.
+     * List user migrations
      *
      * This function performs a `GET` to the `/user/migrations` endpoint.
      *
@@ -822,8 +822,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_authenticated_user(
         &self,
@@ -838,9 +838,7 @@ impl Migrations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/user/migrations?{}", query_), None);
+        let url = self.client.url(&format!("/user/migrations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -852,7 +850,7 @@ impl Migrations {
             .await
     }
     /**
-     * List user migrations.
+     * List user migrations
      *
      * This function performs a `GET` to the `/user/migrations` endpoint.
      *
@@ -877,7 +875,7 @@ impl Migrations {
             .await
     }
     /**
-     * Start a user migration.
+     * Start a user migration
      *
      * This function performs a `POST` to the `/user/migrations` endpoint.
      *
@@ -901,7 +899,7 @@ impl Migrations {
             .await
     }
     /**
-     * Get a user migration status.
+     * Get a user migration status
      *
      * This function performs a `GET` to the `/user/migrations/{migration_id}` endpoint.
      *
@@ -918,8 +916,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `exclude: &[String]` -- The list of events for the GitHub app.
+     * * `migration_id` -- migration_id parameter
+     * * `exclude` -- The list of events for the GitHub app
      */
     pub async fn get_status_for_authenticated_user(
         &self,
@@ -950,7 +948,7 @@ impl Migrations {
             .await
     }
     /**
-     * Download a user migration archive.
+     * Download a user migration archive
      *
      * This function performs a `GET` to the `/user/migrations/{migration_id}/archive` endpoint.
      *
@@ -980,7 +978,7 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `migration_id` -- migration_id parameter
      */
     pub async fn get_archive_for_authenticated_user(
         &self,
@@ -1004,7 +1002,7 @@ impl Migrations {
             .await
     }
     /**
-     * Delete a user migration archive.
+     * Delete a user migration archive
      *
      * This function performs a `DELETE` to the `/user/migrations/{migration_id}/archive` endpoint.
      *
@@ -1014,7 +1012,7 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
+     * * `migration_id` -- migration_id parameter
      */
     pub async fn delete_archive_for_authenticated_user(
         &self,
@@ -1038,7 +1036,7 @@ impl Migrations {
             .await
     }
     /**
-     * Unlock a user repository.
+     * Unlock a user repository
      *
      * This function performs a `DELETE` to the `/user/migrations/{migration_id}/repos/{repo_name}/lock` endpoint.
      *
@@ -1048,8 +1046,8 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `repo_name: &str` -- repo_name parameter.
+     * * `migration_id` -- migration_id parameter
+     * * `repo_name` -- repo_name parameter
      */
     pub async fn unlock_repo_for_authenticated_user(
         &self,
@@ -1075,7 +1073,7 @@ impl Migrations {
             .await
     }
     /**
-     * List repositories for a user migration.
+     * List repositories for a user migration
      *
      * This function performs a `GET` to the `/user/migrations/{migration_id}/repositories` endpoint.
      *
@@ -1085,9 +1083,9 @@ impl Migrations {
      *
      * **Parameters:**
      *
-     * * `migration_id: i64` -- migration_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `migration_id` -- migration_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_for_user(
         &self,
@@ -1122,7 +1120,7 @@ impl Migrations {
             .await
     }
     /**
-     * List repositories for a user migration.
+     * List repositories for a user migration
      *
      * This function performs a `GET` to the `/user/migrations/{migration_id}/repositories` endpoint.
      *

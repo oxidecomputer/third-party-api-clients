@@ -12,7 +12,7 @@ impl Receiving {
     }
 
     /**
-     * Get Fulfillment Centers.
+     * Get Fulfillment Centers
      *
      * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
      */
@@ -31,7 +31,7 @@ impl Receiving {
             .await
     }
     /**
-     * Get Fulfillment Centers.
+     * Get Fulfillment Centers
      *
      * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
      *
@@ -52,13 +52,13 @@ impl Receiving {
             .await
     }
     /**
-     * Get Warehouse Receiving Order.
+     * Get Warehouse Receiving Order
      *
      * This function performs a `GET` to the `/receiving/{id}` endpoint.
      *
      * **Parameters:**
      *
-     * * `id: i64` -- Unique id of the channel.
+     * * `id` -- Id of the receiving order
      */
     pub async fn get(
         &self,
@@ -82,13 +82,13 @@ impl Receiving {
             .await
     }
     /**
-     * Get Warehouse Receiving Order Box Labels.
+     * Get Warehouse Receiving Order Box Labels
      *
      * This function performs a `GET` to the `/receiving/{id}/labels` endpoint.
      *
      * **Parameters:**
      *
-     * * `id: i64` -- Unique id of the channel.
+     * * `id` -- Id of the receiving order
      */
     pub async fn get_label(&self, id: i64) -> ClientResult<crate::Response<bytes::Bytes>> {
         let url = self.client.url(
@@ -109,7 +109,7 @@ impl Receiving {
             .await
     }
     /**
-     * Create Warehouse Receiving Order.
+     * Create Warehouse Receiving Order
      *
      * This function performs a `POST` to the `/receiving` endpoint.
      */
@@ -129,13 +129,13 @@ impl Receiving {
             .await
     }
     /**
-     * Cancel Warehouse Receiving Order.
+     * Cancel Warehouse Receiving Order
      *
      * This function performs a `POST` to the `/receiving/{id}/cancel` endpoint.
      *
      * **Parameters:**
      *
-     * * `id: i64` -- Id of the receiving order to cancel.
+     * * `id` -- Id of the receiving order to cancel
      */
     pub async fn post_cancel(&self, id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

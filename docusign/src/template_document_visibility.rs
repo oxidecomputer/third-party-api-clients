@@ -12,19 +12,18 @@ impl TemplateDocumentVisibility {
     }
 
     /**
-     * Updates document visibility for template recipients.
+     * Updates document visibility for template recipients
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/templates/{templateId}/recipients/document_visibility` endpoint.
      *
      * This method updates document visibility for one or more template recipients based on the `recipientId` and `visible` values that you include in the request body.
      *
-     *
      * **Note**: A document cannot be hidden from a recipient if the recipient has tabs assigned to them on the document. Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all documents.
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_put(
         &self,
@@ -51,7 +50,7 @@ impl TemplateDocumentVisibility {
             .await
     }
     /**
-     * Returns document visibility for a template recipient.
+     * Returns document visibility for a template recipient
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/templates/{templateId}/recipients/{recipientId}/document_visibility` endpoint.
      *
@@ -59,9 +58,9 @@ impl TemplateDocumentVisibility {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_get_template_recipient_document_visibility(
         &self,
@@ -89,7 +88,7 @@ impl TemplateDocumentVisibility {
             .await
     }
     /**
-     * Updates document visibility for a template recipient.
+     * Updates document visibility for a template recipient
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/templates/{templateId}/recipients/{recipientId}/document_visibility` endpoint.
      *
@@ -99,9 +98,9 @@ impl TemplateDocumentVisibility {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_put_template_recipient_document_visibility(
         &self,

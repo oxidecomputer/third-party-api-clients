@@ -12,7 +12,7 @@ impl Terminations {
     }
 
     /**
-     * Get terminations for an employee.
+     * Get terminations for an employee
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/terminations` endpoint.
      *
@@ -42,7 +42,7 @@ impl Terminations {
             .await
     }
     /**
-     * Get terminations for an employee.
+     * Get terminations for an employee
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/terminations` endpoint.
      *
@@ -74,7 +74,7 @@ impl Terminations {
             .await
     }
     /**
-     * Create an employee termination.
+     * Create an employee termination
      *
      * This function performs a `POST` to the `/v1/employees/{employee_id}/terminations` endpoint.
      *

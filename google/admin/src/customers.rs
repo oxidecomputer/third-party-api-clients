@@ -18,7 +18,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_key: &str` -- Id of the customer to be retrieved.
+     * * `customer_key` -- Id of the customer to be retrieved
      */
     pub async fn get(
         &self,
@@ -48,7 +48,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_key: &str` -- Id of the customer to be updated.
+     * * `customer_key` -- Id of the customer to be updated
      */
     pub async fn update(
         &self,
@@ -79,7 +79,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_key: &str` -- Id of the customer to be updated.
+     * * `customer_key` -- Id of the customer to be updated
      */
     pub async fn patch(
         &self,
@@ -110,7 +110,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- Required. The name of the printer to retrieve. Format: customers/{customer_id}/chrome/printers/{printer_id}.
+     * * `name` -- Required. The name of the printer to retrieve. Format: customers/{customer_id}/chrome/printers/{printer_id}
      */
     pub async fn admin_chrome_printers_get(
         &self,
@@ -140,7 +140,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- Required. The name of the printer to be updated. Format: customers/{customer_id}/chrome/printers/{printer_id}.
+     * * `name` -- Required. The name of the printer to be updated. Format: customers/{customer_id}/chrome/printers/{printer_id}
      */
     pub async fn admin_chrome_printers_delete(
         &self,
@@ -170,9 +170,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- The resource name of the Printer object, in the format customers/{customer-id}/printers/{printer-id} (During printer creation leave empty).
-     * * `clear_mask: &str` -- The list of fields to be cleared. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
-     * * `update_mask: &str` -- The list of fields to be updated. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
+     * * `name` -- The resource name of the Printer object, in the format customers/{customer-id}/printers/{printer-id} (During printer creation leave empty)
+     * * `clear_mask` -- The list of fields to be cleared. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
+     * * `update_mask` -- The list of fields to be updated. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
      */
     pub async fn admin_chrome_printers_patch(
         &self,
@@ -214,11 +214,11 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `parent: &str` -- Required. The name of the customer who owns this collection of printers. Format: customers/{customer_id}.
-     * * `filter: &str` -- Search query. Search syntax is shared between this api and Admin Console printers pages.
-     * * `org_unit_id: &str` -- Organization Unit that we want to list the printers for. When org_unit is not present in the request then all printers of the customer are returned (or filtered). When org_unit is present in the request then only printers available to this OU will be returned (owned or inherited). You may see if printer is owned or inherited for this OU by looking at Printer.org_unit_id.
-     * * `page_size: i64` -- The maximum number of objects to return. The service may return fewer than this value.
-     * * `page_token: &str` -- A page token, received from a previous call.
+     * * `parent` -- Required. The name of the customer who owns this collection of printers. Format: customers/{customer_id}
+     * * `filter` -- Search query. Search syntax is shared between this api and Admin Console printers pages.
+     * * `org_unit_id` -- Organization Unit that we want to list the printers for. When org_unit is not present in the request then all printers of the customer are returned (or filtered). When org_unit is present in the request then only printers available to this OU will be returned (owned or inherited). You may see if printer is owned or inherited for this OU by looking at Printer.org_unit_id.
+     * * `page_size` -- The maximum number of objects to return. The service may return fewer than this value.
+     * * `page_token` -- A page token, received from a previous call.
      */
     pub async fn admin_chrome_printers_list(
         &self,
@@ -325,7 +325,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -340,7 +340,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -368,7 +368,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `parent: &str` -- Required. The name of the customer. Format: customers/{customer_id}.
+     * * `parent` -- Required. The name of the customer. Format: customers/{customer_id}
      */
     pub async fn admin_chrome_printers_create(
         &self,
@@ -399,7 +399,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `parent: &str` -- Required. The name of the customer. Format: customers/{customer_id}.
+     * * `parent` -- Required. The name of the customer. Format: customers/{customer_id}
      */
     pub async fn admin_chrome_printers_batch_create(
         &self,
@@ -430,7 +430,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `parent: &str` -- Required. The name of the customer. Format: customers/{customer_id}.
+     * * `parent` -- Required. The name of the customer. Format: customers/{customer_id}
      */
     pub async fn admin_chrome_printers_batch_delete(
         &self,
@@ -461,10 +461,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `parent: &str` -- Required. The name of the customer who owns this collection of printers. Format: customers/{customer_id}.
-     * * `filter: &str` -- Filer to list only models by a given manufacturer in format: "manufacturer:Brother". Search syntax is shared between this api and Admin Console printers pages.
-     * * `page_size: i64` -- The maximum number of objects to return. The service may return fewer than this value.
-     * * `page_token: &str` -- A page token, received from a previous call.
+     * * `parent` -- Required. The name of the customer who owns this collection of printers. Format: customers/{customer_id}
+     * * `filter` -- Filer to list only models by a given manufacturer in format: "manufacturer:Brother". Search syntax is shared between this api and Admin Console printers pages.
+     * * `page_size` -- The maximum number of objects to return. The service may return fewer than this value.
+     * * `page_token` -- A page token, received from a previous call.
      */
     pub async fn admin_chrome_printers_list_printer_models(
         &self,
@@ -563,7 +563,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -578,7 +578,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,

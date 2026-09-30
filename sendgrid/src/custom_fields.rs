@@ -12,7 +12,7 @@ impl CustomFields {
     }
 
     /**
-     * Get All Field Definitions.
+     * Get All Field Definitions
      *
      * This function performs a `GET` to the `/marketing/field_definitions` endpoint.
      *
@@ -33,7 +33,7 @@ impl CustomFields {
             .await
     }
     /**
-     * Create Custom Field Definition.
+     * Create Custom Field Definition
      *
      * This function performs a `POST` to the `/marketing/field_definitions` endpoint.
      *
@@ -61,7 +61,7 @@ impl CustomFields {
             .await
     }
     /**
-     * Delete Custom Field Definition.
+     * Delete Custom Field Definition
      *
      * This function performs a `DELETE` to the `/marketing/field_definitions/{custom_field_id}` endpoint.
      *
@@ -91,7 +91,7 @@ impl CustomFields {
             .await
     }
     /**
-     * Update Custom Field Definition.
+     * Update Custom Field Definition
      *
      * This function performs a `PATCH` to the `/marketing/field_definitions/{custom_field_id}` endpoint.
      *

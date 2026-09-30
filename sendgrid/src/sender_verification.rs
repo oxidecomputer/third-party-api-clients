@@ -12,7 +12,7 @@ impl SenderVerification {
     }
 
     /**
-     * Domain Warn List.
+     * Domain Warn List
      *
      * This function performs a `GET` to the `/verified_senders/domains` endpoint.
      *
@@ -37,7 +37,7 @@ impl SenderVerification {
             .await
     }
     /**
-     * Completed Steps.
+     * Completed Steps
      *
      * This function performs a `GET` to the `/verified_senders/steps_completed` endpoint.
      *
@@ -62,7 +62,7 @@ impl SenderVerification {
             .await
     }
     /**
-     * Get All Verified Senders.
+     * Get All Verified Senders
      *
      * This function performs a `GET` to the `/verified_senders` endpoint.
      *
@@ -78,9 +78,9 @@ impl SenderVerification {
      *
      * **Parameters:**
      *
-     * * `limit: f64` -- The number of errors found while adding recipients.
-     * * `last_seen_id: f64` -- The number of errors found while adding recipients.
-     * * `id: i64`
+     * * `limit` -- The number of errors found while adding recipients.
+     * * `last_seen_id` -- The number of errors found while adding recipients.
+     * * `id`
      */
     pub async fn get_verified_senders(
         &self,
@@ -101,7 +101,7 @@ impl SenderVerification {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/verified_senders?{}", query_), None);
+            .url(&format!("/verified_senders?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -113,7 +113,7 @@ impl SenderVerification {
             .await
     }
     /**
-     * Create Verified Sender Request.
+     * Create Verified Sender Request
      *
      * This function performs a `POST` to the `/verified_senders` endpoint.
      *
@@ -141,7 +141,7 @@ impl SenderVerification {
             .await
     }
     /**
-     * Verify Sender Request.
+     * Verify Sender Request
      *
      * This function performs a `GET` to the `/verified_senders/verify/{token}` endpoint.
      *
@@ -171,7 +171,7 @@ impl SenderVerification {
             .await
     }
     /**
-     * Delete Verified Sender.
+     * Delete Verified Sender
      *
      * This function performs a `DELETE` to the `/verified_senders/{id}` endpoint.
      *
@@ -203,7 +203,7 @@ impl SenderVerification {
             .await
     }
     /**
-     * Edit Verified Sender.
+     * Edit Verified Sender
      *
      * This function performs a `PATCH` to the `/verified_senders/{id}` endpoint.
      *
@@ -238,7 +238,7 @@ impl SenderVerification {
             .await
     }
     /**
-     * Resend Verified Sender Request.
+     * Resend Verified Sender Request
      *
      * This function performs a `POST` to the `/verified_senders/resend/{id}` endpoint.
      *

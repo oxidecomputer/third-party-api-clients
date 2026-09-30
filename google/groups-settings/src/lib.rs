@@ -348,7 +348,7 @@ impl Client {
                     client,
                 }
             }
-            Err(e) => panic!("creating reqwest client failed: {:?}", e),
+            Err(e) => panic!("creating reqwest client failed: {e:?}"),
         }
     }
 
@@ -502,7 +502,7 @@ impl Client {
                     client,
                 }
             }
-            Err(e) => panic!("creating reqwest client failed: {:?}", e),
+            Err(e) => panic!("creating reqwest client failed: {e:?}"),
         }
     }
 

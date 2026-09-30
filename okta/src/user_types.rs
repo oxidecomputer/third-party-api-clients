@@ -74,7 +74,7 @@ impl UserTypes {
      *
      * **Parameters:**
      *
-     * * `type_id: &str`
+     * * `type_id`
      */
     pub async fn get(
         &self,
@@ -104,7 +104,7 @@ impl UserTypes {
      *
      * **Parameters:**
      *
-     * * `type_id: &str`
+     * * `type_id`
      */
     pub async fn replace(
         &self,
@@ -135,7 +135,7 @@ impl UserTypes {
      *
      * **Parameters:**
      *
-     * * `type_id: &str`
+     * * `type_id`
      */
     pub async fn update(
         &self,
@@ -166,7 +166,7 @@ impl UserTypes {
      *
      * **Parameters:**
      *
-     * * `type_id: &str`
+     * * `type_id`
      */
     pub async fn delete(&self, type_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

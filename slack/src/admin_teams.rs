@@ -20,7 +20,7 @@ impl AdminTeams {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.teams:write`
      */
     pub async fn create(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.teams.create", None);
@@ -43,9 +43,9 @@ impl AdminTeams {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:read`.
-     * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 100 both inclusive.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+     * * `token` -- Authentication token. Requires scope: `admin.teams:read`
+     * * `limit` -- The maximum number of items to return. Must be between 1 - 100 both inclusive.
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
      */
     pub async fn list(
         &self,
@@ -62,7 +62,7 @@ impl AdminTeams {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.teams.list?{}", query_), None);
+            .url(&format!("/admin.teams.list?{query_}"), None);
         self.client
             .get(
                 &url,

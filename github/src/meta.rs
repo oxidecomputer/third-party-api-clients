@@ -12,7 +12,7 @@ impl Meta {
     }
 
     /**
-     * GitHub API Root.
+     * GitHub API Root
      *
      * This function performs a `GET` to the `/` endpoint.
      *
@@ -33,7 +33,7 @@ impl Meta {
             .await
     }
     /**
-     * Get GitHub meta information.
+     * Get GitHub meta information
      *
      * This function performs a `GET` to the `/meta` endpoint.
      *
@@ -56,7 +56,7 @@ impl Meta {
             .await
     }
     /**
-     * Get Octocat.
+     * Get Octocat
      *
      * This function performs a `GET` to the `/octocat` endpoint.
      *
@@ -66,7 +66,7 @@ impl Meta {
      *
      * **Parameters:**
      *
-     * * `s: &str` -- The words to show in Octocat's speech bubble.
+     * * `s` -- The words to show in Octocat's speech bubble
      */
     pub async fn get_octocat(&self, s: &str) -> ClientResult<crate::Response<String>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -74,7 +74,7 @@ impl Meta {
             query_args.push(("s".to_string(), s.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/octocat?{}", query_), None);
+        let url = self.client.url(&format!("/octocat?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -86,7 +86,7 @@ impl Meta {
             .await
     }
     /**
-     * Get the Zen of GitHub.
+     * Get the Zen of GitHub
      *
      * This function performs a `GET` to the `/zen` endpoint.
      *

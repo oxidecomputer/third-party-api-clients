@@ -18,10 +18,10 @@ impl TrustedOrigins {
      *
      * **Parameters:**
      *
-     * * `q: &str`
-     * * `filter: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `q`
+     * * `filter`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_origins(
         &self,
@@ -46,7 +46,7 @@ impl TrustedOrigins {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/trustedOrigins?{}", query_), None);
+            .url(&format!("/api/v1/trustedOrigins?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -79,7 +79,7 @@ impl TrustedOrigins {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/trustedOrigins?{}", query_), None);
+            .url(&format!("/api/v1/trustedOrigins?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -117,7 +117,7 @@ impl TrustedOrigins {
      *
      * **Parameters:**
      *
-     * * `trusted_origin_id: &str`
+     * * `trusted_origin_id`
      */
     pub async fn get_origin(
         &self,
@@ -147,7 +147,7 @@ impl TrustedOrigins {
      *
      * **Parameters:**
      *
-     * * `trusted_origin_id: &str`
+     * * `trusted_origin_id`
      */
     pub async fn update_origin(
         &self,
@@ -178,7 +178,7 @@ impl TrustedOrigins {
      *
      * **Parameters:**
      *
-     * * `trusted_origin_id: &str`
+     * * `trusted_origin_id`
      */
     pub async fn delete_origin(
         &self,
@@ -208,7 +208,7 @@ impl TrustedOrigins {
      *
      * **Parameters:**
      *
-     * * `trusted_origin_id: &str`
+     * * `trusted_origin_id`
      */
     pub async fn activate_origin(
         &self,
@@ -238,7 +238,7 @@ impl TrustedOrigins {
      *
      * **Parameters:**
      *
-     * * `trusted_origin_id: &str`
+     * * `trusted_origin_id`
      */
     pub async fn deactivate_origin(
         &self,

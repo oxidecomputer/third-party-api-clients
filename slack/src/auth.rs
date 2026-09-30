@@ -20,8 +20,8 @@ impl Auth {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `test: bool` -- Setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `test` -- Setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked.
      */
     pub async fn revoke(
         &self,
@@ -32,7 +32,7 @@ impl Auth {
             query_args.push(("test".to_string(), test.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/auth.revoke?{}", query_), None);
+        let url = self.client.url(&format!("/auth.revoke?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -52,7 +52,7 @@ impl Auth {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
+     * * `token` -- Authentication token. Requires scope: `none`
      */
     pub async fn test(&self) -> ClientResult<crate::Response<crate::types::AuthTestSuccessSchema>> {
         let url = self.client.url("/auth.test", None);

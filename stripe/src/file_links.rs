@@ -18,17 +18,14 @@ impl FileLinks {
      *
      * **Parameters:**
      *
-     * * `created: &str`
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `expired: bool` -- Filter links by their expiration status. By default, all links are returned.
-     * * `file: &str` -- Only return links for the given file.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expired` -- Filter links by their expiration status. By default, all links are returned.
+     * * `file` -- Only return links for the given file.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
-        created: &str,
         ending_before: &str,
         expired: bool,
         file: &str,
@@ -52,7 +49,7 @@ impl FileLinks {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/file_links?{}", query_), None);
+        let url = self.client.url(&format!("/v1/file_links?{query_}"), None);
         let resp: crate::Response<crate::types::Links> = self
             .client
             .get(
@@ -80,7 +77,6 @@ impl FileLinks {
      */
     pub async fn get_all(
         &self,
-        created: &str,
         expired: bool,
         file: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::FileLink>>> {
@@ -92,7 +88,7 @@ impl FileLinks {
             query_args.push(("file".to_string(), file.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/file_links?{}", query_), None);
+        let url = self.client.url(&format!("/v1/file_links?{query_}"), None);
         let crate::Response::<crate::types::Links> {
             mut status,
             mut headers,
@@ -132,7 +128,7 @@ impl FileLinks {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -147,7 +143,7 @@ impl FileLinks {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -188,8 +184,7 @@ impl FileLinks {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `link: &str` -- The account's country.
+     * * `link` -- The account's country.
      */
     pub async fn get_link(
         &self,
@@ -219,7 +214,7 @@ impl FileLinks {
      *
      * **Parameters:**
      *
-     * * `link: &str` -- The account's country.
+     * * `link` -- The account's country.
      */
     pub async fn post_link(
         &self,

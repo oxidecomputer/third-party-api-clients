@@ -20,9 +20,9 @@ impl Views {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `trigger_id: &str` -- Exchange a trigger to post to the user.
-     * * `view: &str` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `trigger_id` -- Exchange a trigger to post to the user.
+     * * `view` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
      */
     pub async fn open(
         &self,
@@ -37,7 +37,7 @@ impl Views {
             query_args.push(("view".to_string(), view.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/views.open?{}", query_), None);
+        let url = self.client.url(&format!("/views.open?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -57,10 +57,10 @@ impl Views {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `user_id: &str` -- `id` of the user you want publish a view to.
-     * * `view: &str` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
-     * * `hash: &str` -- A string that represents view state to protect against possible race conditions.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `user_id` -- `id` of the user you want publish a view to.
+     * * `view` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
+     * * `hash` -- A string that represents view state to protect against possible race conditions.
      */
     pub async fn publish(
         &self,
@@ -79,7 +79,7 @@ impl Views {
             query_args.push(("view".to_string(), view.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/views.publish?{}", query_), None);
+        let url = self.client.url(&format!("/views.publish?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -99,9 +99,9 @@ impl Views {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `trigger_id: &str` -- Exchange a trigger to post to the user.
-     * * `view: &str` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `trigger_id` -- Exchange a trigger to post to the user.
+     * * `view` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
      */
     pub async fn push(
         &self,
@@ -116,7 +116,7 @@ impl Views {
             query_args.push(("view".to_string(), view.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/views.push?{}", query_), None);
+        let url = self.client.url(&format!("/views.push?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -136,11 +136,11 @@ impl Views {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `view_id: &str` -- A unique identifier of the view to be updated. Either `view_id` or `external_id` is required.
-     * * `external_id: &str` -- A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either `view_id` or `external_id` is required.
-     * * `view: &str` -- A [view object](/reference/surfaces/views). This must be a JSON-encoded string.
-     * * `hash: &str` -- A string that represents view state to protect against possible race conditions.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `view_id` -- A unique identifier of the view to be updated. Either `view_id` or `external_id` is required.
+     * * `external_id` -- A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either `view_id` or `external_id` is required.
+     * * `view` -- A [view object](/reference/surfaces/views). This must be a JSON-encoded string.
+     * * `hash` -- A string that represents view state to protect against possible race conditions.
      */
     pub async fn update(
         &self,
@@ -163,7 +163,7 @@ impl Views {
             query_args.push(("view_id".to_string(), view_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/views.update?{}", query_), None);
+        let url = self.client.url(&format!("/views.update?{query_}"), None);
         self.client
             .get(
                 &url,

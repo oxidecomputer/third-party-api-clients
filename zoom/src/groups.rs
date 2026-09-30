@@ -12,7 +12,7 @@ impl Groups {
     }
 
     /**
-     * List groups.
+     * List groups
      *
      * This function performs a `GET` to the `/groups` endpoint.
      *
@@ -21,7 +21,7 @@ impl Groups {
      * **Prerequisite**: Pro or higher account.<br>
      * **Scopes**: `group:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get(&self) -> ClientResult<crate::Response<crate::types::GroupList>> {
         let url = self.client.url("/groups", None);
@@ -36,7 +36,7 @@ impl Groups {
             .await
     }
     /**
-     * Create a group.
+     * Create a group
      *
      * This function performs a `POST` to the `/groups` endpoint.
      *
@@ -46,8 +46,8 @@ impl Groups {
      *
      * **Prerequisite**: Pro or higher account.<br>
      * **Scopes**: `group:write:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn create(
         &self,
@@ -65,7 +65,7 @@ impl Groups {
             .await
     }
     /**
-     * Get a group.
+     * Get a group
      *
      * This function performs a `GET` to the `/groups/{groupId}` endpoint.
      *
@@ -74,11 +74,11 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The group ID.<br>
+     * * `group_id` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn group(
@@ -103,7 +103,7 @@ impl Groups {
             .await
     }
     /**
-     * Delete a group.
+     * Delete a group
      *
      * This function performs a `DELETE` to the `/groups/{groupId}` endpoint.
      *
@@ -112,11 +112,11 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:write:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The group ID.<br>
+     * * `group_id` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn delete(&self, group_id: &str) -> ClientResult<crate::Response<()>> {
@@ -138,7 +138,7 @@ impl Groups {
             .await
     }
     /**
-     * Update a group.
+     * Update a group
      *
      * This function performs a `PATCH` to the `/groups/{groupId}` endpoint.
      *
@@ -147,11 +147,11 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:write:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The group ID.<br>
+     * * `group_id` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn update(
@@ -177,7 +177,7 @@ impl Groups {
             .await
     }
     /**
-     * List group members .
+     * List group members
      *
      * This function performs a `GET` to the `/groups/{groupId}/members` endpoint.
      *
@@ -186,18 +186,17 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The group ID.<br>
+     * * `group_id` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` --
-     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *   
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `page_number` -- **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *
      *   The page number of the current page in the returned records.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn members(
         &self,
@@ -244,7 +243,7 @@ impl Groups {
         ))
     }
     /**
-     * List group members .
+     * List group members
      *
      * This function performs a `GET` to the `/groups/{groupId}/members` endpoint.
      *
@@ -255,7 +254,7 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get_all_members(
         &self,
@@ -297,7 +296,7 @@ impl Groups {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -312,7 +311,7 @@ impl Groups {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -334,7 +333,7 @@ impl Groups {
         Ok(crate::Response::new(status, headers, members))
     }
     /**
-     * Add group members.
+     * Add group members
      *
      * This function performs a `POST` to the `/groups/{groupId}/members` endpoint.
      *
@@ -343,11 +342,11 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:write:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The group ID.<br>
+     * * `group_id` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn members_create(
@@ -373,7 +372,7 @@ impl Groups {
             .await
     }
     /**
-     * Delete a group member.
+     * Delete a group member
      *
      * This function performs a `DELETE` to the `/groups/{groupId}/members/{memberId}` endpoint.
      *
@@ -382,13 +381,13 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:write:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The group ID.<br>
+     * * `group_id` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
-     * * `member_id: &str` -- User's first name.
+     * * `member_id` -- User's first name.
      */
     pub async fn members_delete(
         &self,
@@ -414,11 +413,12 @@ impl Groups {
             .await
     }
     /**
-     * Update a group member.
+     * Update a group member
      *
      * This function performs a `PATCH` to the `/groups/{groupId}/members/{memberId}` endpoint.
      *
      * Use this API to perform either of the following tasks:
+     *
      * * Remove a group member from one group and move them to a different group.
      * * Set a user's primary group. By default, the primary group is the first group that user is added to.
      *
@@ -427,14 +427,16 @@ impl Groups {
      * **Scopes:** `group:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The group's unique ID. To get this value, use the [List Groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
+     * * `group_id` -- The group's unique ID. To get this value, use the [List Groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
+     *
      *   * To set a user's primary group, use the `target_group_id` value for this parameter's value.
      *   * To move a group member from one group to another, use the `groupId` of the designated group.
-     * * `member_id: &str` -- The group member's unique ID. To get this value, use the [List Group Members](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groupmembers) API.
+     * * `member_id` -- The group member's unique ID. To get this value, use the [List Group Members](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groupmembers) API.
      */
     pub async fn update_member(
         &self,
@@ -461,23 +463,24 @@ impl Groups {
             .await
     }
     /**
-     * Get a group's settings.
+     * Get a group's settings
      *
      * This function performs a `GET` to the `/groups/{groupId}/settings` endpoint.
      *
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_settings_domains(
         &self,
@@ -515,23 +518,24 @@ impl Groups {
             .await
     }
     /**
-     * Get a group's settings.
+     * Get a group's settings
      *
      * This function performs a `GET` to the `/groups/{groupId}/settings` endpoint.
      *
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_settings_meeting_security(
         &self,
@@ -569,23 +573,24 @@ impl Groups {
             .await
     }
     /**
-     * Get a group's settings.
+     * Get a group's settings
      *
      * This function performs a `GET` to the `/groups/{groupId}/settings` endpoint.
      *
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_settings_group_response(
         &self,
@@ -623,23 +628,24 @@ impl Groups {
             .await
     }
     /**
-     * Get a group's settings.
+     * Get a group's settings
      *
      * This function performs a `GET` to the `/groups/{groupId}/settings` endpoint.
      *
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_setting(
         &self,
@@ -677,7 +683,7 @@ impl Groups {
             .await
     }
     /**
-     * Update a group's settings.
+     * Update a group's settings
      *
      * This function performs a `PATCH` to the `/groups/{groupId}/settings` endpoint.
      *
@@ -685,12 +691,12 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:write:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- User's first name.
-     * * `option: crate::types::UpdateGroupSettingsOption`
+     * * `group_id` -- User's first name.
+     * * `option`
      */
     pub async fn update_settings(
         &self,
@@ -729,7 +735,7 @@ impl Groups {
             .await
     }
     /**
-     * Get locked settings.
+     * Get locked settings
      *
      * This function performs a `GET` to the `/groups/{groupId}/lock_settings` endpoint.
      *
@@ -738,12 +744,12 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- User's first name.
-     * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
+     * * `group_id` -- User's first name.
+     * * `option` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn get_lock_settings_meeting_security(
         &self,
@@ -781,7 +787,7 @@ impl Groups {
             .await
     }
     /**
-     * Get locked settings.
+     * Get locked settings
      *
      * This function performs a `GET` to the `/groups/{groupId}/lock_settings` endpoint.
      *
@@ -790,12 +796,12 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- User's first name.
-     * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
+     * * `group_id` -- User's first name.
+     * * `option` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn get_lock_settings_group_response(
         &self,
@@ -833,7 +839,7 @@ impl Groups {
             .await
     }
     /**
-     * Get locked settings.
+     * Get locked settings
      *
      * This function performs a `GET` to the `/groups/{groupId}/lock_settings` endpoint.
      *
@@ -842,12 +848,12 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- User's first name.
-     * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
+     * * `group_id` -- User's first name.
+     * * `option` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn get_lock_setting(
         &self,
@@ -885,7 +891,7 @@ impl Groups {
             .await
     }
     /**
-     * Update locked settings.
+     * Update locked settings
      *
      * This function performs a `PATCH` to the `/groups/{groupId}/lock_settings` endpoint.
      *
@@ -894,12 +900,12 @@ impl Groups {
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:write:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- User's first name.
-     * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
+     * * `group_id` -- The Id of the group.
+     * * `option` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn locked_settings(
         &self,
@@ -938,24 +944,24 @@ impl Groups {
             .await
     }
     /**
-     * Upload virtual background files.
+     * Upload virtual background files
      *
      * This function performs a `POST` to the `/groups/{groupId}/settings/virtual_backgrounds` endpoint.
      *
      * Use this API to [upload virtual background files](https://support.zoom.us/hc/en-us/articles/210707503-Virtual-Background#h_01EJF3YFEWGT8YA0ZJ079JEDQE) for all users in a group to use.
      *
-     *
      * **Prerequisites:**<br>
-     * * Virtual background feature must be [enabled](https://support.zoom.us/hc/en-us/articles/210707503-Virtual-Background#h_2ef28080-fce9-4ac2-b567-dc958afab1b7) on the account.
-     * <br> **Scope:** `group:write:admin`<br><br>
-     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      *
+     * * Virtual background feature must be [enabled](https://support.zoom.us/hc/en-us/articles/210707503-Virtual-Background#h_2ef28080-fce9-4ac2-b567-dc958afab1b7) on the account.
+     *
+     * **Scope:** `group:write:admin`<br><br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      *
      * `
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
+     * * `group_id` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
      */
     pub async fn upload_vb(
         &self,
@@ -987,23 +993,23 @@ impl Groups {
             .await
     }
     /**
-     * Delete virtual background files.
+     * Delete virtual background files
      *
      * This function performs a `DELETE` to the `/groups/{groupId}/settings/virtual_backgrounds` endpoint.
      *
      * Delete existing virtual background file(s) from an account.
      *
      * **Prerequisites:**<br>
+     *
      * * Virtual background feature must be [enabled](https://support.zoom.us/hc/en-us/articles/210707503-Virtual-Background#h_2ef28080-fce9-4ac2-b567-dc958afab1b7) on the account.
-     * <br> **Scope:** `group:write:admin`<br><br>
+     *
+     * **Scope:** `group:write:admin`<br><br>
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
-     * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
+     * * `group_id` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
+     * * `file_ids` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      */
     pub async fn del_vb(
         &self,

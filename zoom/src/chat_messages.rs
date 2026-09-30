@@ -12,7 +12,7 @@ impl ChatMessages {
     }
 
     /**
-     * List user's chat messages.
+     * List user's chat messages
      *
      * This function performs a `GET` to the `/chat/users/{userId}/messages` endpoint.
      *
@@ -29,16 +29,16 @@ impl ChatMessages {
      *
      * **Parameters:**
      *
-     * * `to_contact: &str` -- The email address of a chat contact with whom the current user chatted. Messages that were sent and/or received between the user and the contact is displayed.
-     *   
-     *   Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel. .
-     * * `to_channel: &str` -- The channel Id of a channel inside which the current user had chat conversations. Messages that were sent and/or received between the user and the channel is displayed.
-     *   
-     *   Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel. .
-     * * `date: chrono::NaiveDate` -- The query date for which you would like to get the chat messages. This value defaults to the current date.
-     * * `page_size: i64` -- The number of records returned with a single API call. .
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_deleted_and_edited_message: &str` -- **Optional** <br>
+     * * `to_contact` -- The email address of a chat contact with whom the current user chatted. Messages that were sent and/or received between the user and the contact is displayed.
+     *
+     *   Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel.
+     * * `to_channel` -- The channel Id of a channel inside which the current user had chat conversations. Messages that were sent and/or received between the user and the channel is displayed.
+     *
+     *   Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel.
+     * * `date` -- The query date for which you would like to get the chat messages. This value defaults to the current date.
+     * * `page_size` -- The number of records returned with a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `include_deleted_and_edited_message` -- **Optional** <br>
      *   Set the value of this field to `true` to include edited and deleted messages in the response.
      */
     pub async fn get_page(
@@ -101,7 +101,7 @@ impl ChatMessages {
         ))
     }
     /**
-     * List user's chat messages.
+     * List user's chat messages
      *
      * This function performs a `GET` to the `/chat/users/{userId}/messages` endpoint.
      *
@@ -180,7 +180,7 @@ impl ChatMessages {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -195,7 +195,7 @@ impl ChatMessages {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -217,7 +217,7 @@ impl ChatMessages {
         Ok(crate::Response::new(status, headers, messages))
     }
     /**
-     * Send a chat message.
+     * Send a chat message
      *
      * This function performs a `POST` to the `/chat/users/{userId}/messages` endpoint.
      *
@@ -227,7 +227,7 @@ impl ChatMessages {
      *
      * **Scopes:** `chat_message:write`, `chat_message:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
-     *  <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> For an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, this API can only be used on behalf of a user who is assigned with a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit."> role</a> that has the <b>Edit</b> permission for <b>Chat Messages</b>.</p>
+     * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> For an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, this API can only be used on behalf of a user who is assigned with a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit."> role</a> that has the <b>Edit</b> permission for <b>Chat Messages</b>.</p>
      */
     pub async fn senda(
         &self,
@@ -252,7 +252,7 @@ impl ChatMessages {
             .await
     }
     /**
-     * Mark message read or unread.
+     * Mark message read or unread
      *
      * This function performs a `PATCH` to the `/chat/users/{userId}/messages/{messageId}/status` endpoint.
      *
@@ -264,8 +264,8 @@ impl ChatMessages {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- Unique identifier of the user.
-     * * `message_id: &str` -- Unique identifier of the message.
+     * * `user_id` -- Unique identifier of the user.
+     * * `message_id` -- Unique identifier of the message.
      */
     pub async fn mark_message(
         &self,
@@ -292,7 +292,7 @@ impl ChatMessages {
             .await
     }
     /**
-     * React to a chat message.
+     * React to a chat message
      *
      * This function performs a `PATCH` to the `/chat/users/{userId}/messages/{messageId}/emoji_reactions` endpoint.
      *
@@ -304,8 +304,8 @@ impl ChatMessages {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user's unique ID.
-     * * `message_id: &str` -- The message's unique ID.
+     * * `user_id` -- The user's unique ID.
+     * * `message_id` -- The message's unique ID.
      */
     pub async fn react_message(
         &self,
@@ -332,13 +332,14 @@ impl ChatMessages {
             .await
     }
     /**
-     * Get a message.
+     * Get a message
      *
      * This function performs a `GET` to the `/chat/users/{userId}/messages/{messageId}` endpoint.
      *
      * Get a chat message previously sent to a contact or a channel. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
      *
      * You must provide one of the following query parameters:<br>
+     *
      * * `to_contact` — The email address of the Zoom contact to whom you sent the message.
      * * `to_channel` — The ID of the Zoom channel where you sent the message.
      *
@@ -348,9 +349,9 @@ impl ChatMessages {
      *
      * **Parameters:**
      *
-     * * `message_id: &str` -- User's first name.
-     * * `to_contact: &str` -- The `userId` or email address of a Zoom Chat contact to whom you sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to a Zoom Chat contact. .
-     * * `to_channel: &str` -- The `channelId` of the Zoom Chat channel where sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to Zoom Chat channel.
+     * * `message_id` -- User's first name.
+     * * `to_contact` -- The `userId` or email address of a Zoom Chat contact to whom you sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to a Zoom Chat contact.
+     * * `to_channel` -- The `channelId` of the Zoom Chat channel where sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to Zoom Chat channel.
      */
     pub async fn get(
         &self,
@@ -387,7 +388,7 @@ impl ChatMessages {
             .await
     }
     /**
-     * Update a message.
+     * Update a message
      *
      * This function performs a `PUT` to the `/chat/users/{userId}/messages/{messageId}` endpoint.
      *
@@ -402,7 +403,7 @@ impl ChatMessages {
      *
      * **Parameters:**
      *
-     * * `message_id: &str` -- Message ID: Unique Identifier of the message.
+     * * `message_id` -- Message ID: Unique Identifier of the message.
      */
     pub async fn edit_message(
         &self,
@@ -429,7 +430,7 @@ impl ChatMessages {
             .await
     }
     /**
-     * Delete a message.
+     * Delete a message
      *
      * This function performs a `DELETE` to the `/chat/users/{userId}/messages/{messageId}` endpoint.
      *
@@ -440,21 +441,19 @@ impl ChatMessages {
      * * `to_contact`: The email address of the contact to whom you sent the message. Use this parameter to delete a message sent to an individual contact in Zoom.
      * * `to_channel`: The channel ID of the channel where you sent the message. Use this parameter to delete a message sent to a channel in Zoom.
      *
-     *
-     *
      * **Scopes:** `chat_message:write`, `chat_message:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> For an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, this API can only be used on behalf of a user who is assigned with a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit."> role</a> that has the <b>Edit</b> permission for <b>Chat Messages</b>.</p>
      *
      * **Parameters:**
      *
-     * * `message_id: &str` -- User's first name.
-     * * `to_contact: &str` -- The userId or email address of a chat contact to whom you previously sent the message.
-     *   
-     *   Note: You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel respectively. .
-     * * `to_channel: &str` -- The channel Id of the channel where you would like to send the message.
-     *   
-     *   You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel .
+     * * `message_id` -- User's first name.
+     * * `to_contact` -- The userId or email address of a chat contact to whom you previously sent the message.
+     *
+     *   Note: You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel respectively.
+     * * `to_channel` -- The channel Id of the channel where you would like to send the message.
+     *
+     *   You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel
      */
     pub async fn delete(
         &self,

@@ -12,7 +12,7 @@ impl EmailAddressValidation {
     }
 
     /**
-     * Validate an email.
+     * Validate an email
      *
      * This function performs a `POST` to the `/validations/email` endpoint.
      *

@@ -12,13 +12,13 @@ impl UsersApi {
     }
 
     /**
-     * Get a user's profile.
+     * Get a user's profile
      *
      * This function performs a `GET` to the `/user/profile` endpoint.
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_profile(
         &self,
@@ -35,7 +35,7 @@ impl UsersApi {
             .await
     }
     /**
-     * Update a user's profile.
+     * Update a user's profile
      *
      * This function performs a `PATCH` to the `/user/profile` endpoint.
      *
@@ -45,7 +45,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_user_profile(
         &self,
@@ -73,7 +73,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_account(
         &self,
@@ -90,7 +90,7 @@ impl UsersApi {
             .await
     }
     /**
-     * Retrieve your account email address.
+     * Retrieve your account email address
      *
      * This function performs a `GET` to the `/user/email` endpoint.
      *
@@ -98,7 +98,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_email(
         &self,
@@ -115,7 +115,7 @@ impl UsersApi {
             .await
     }
     /**
-     * Update your account email address.
+     * Update your account email address
      *
      * This function performs a `PUT` to the `/user/email` endpoint.
      *
@@ -123,7 +123,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn put_user_email(
         &self,
@@ -141,7 +141,7 @@ impl UsersApi {
             .await
     }
     /**
-     * Retrieve your username.
+     * Retrieve your username
      *
      * This function performs a `GET` to the `/user/username` endpoint.
      *
@@ -149,7 +149,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_username(&self) -> ClientResult<crate::Response<crate::types::Users>> {
         let url = self.client.url("/user/username", None);
@@ -164,7 +164,7 @@ impl UsersApi {
             .await
     }
     /**
-     * Update your username.
+     * Update your username
      *
      * This function performs a `PUT` to the `/user/username` endpoint.
      *
@@ -172,7 +172,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn put_user_username(
         &self,
@@ -190,7 +190,7 @@ impl UsersApi {
             .await
     }
     /**
-     * Retrieve your credit balance.
+     * Retrieve your credit balance
      *
      * This function performs a `GET` to the `/user/credits` endpoint.
      *
@@ -200,7 +200,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_credits(
         &self,
@@ -217,7 +217,7 @@ impl UsersApi {
             .await
     }
     /**
-     * Update your password.
+     * Update your password
      *
      * This function performs a `PUT` to the `/user/password` endpoint.
      *
@@ -225,7 +225,7 @@ impl UsersApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn put_user_password(
         &self,

@@ -20,11 +20,11 @@ impl Oauth {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- Issued when you created your application.
-     * * `client_secret: &str` -- Issued when you created your application.
-     * * `code: &str` -- The `code` param returned via the OAuth callback.
-     * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
-     * * `single_channel: bool` -- Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
+     * * `client_id` -- Issued when you created your application.
+     * * `client_secret` -- Issued when you created your application.
+     * * `code` -- The `code` param returned via the OAuth callback.
+     * * `redirect_uri` -- This must match the originally submitted URI (if one was sent).
+     * * `single_channel` -- Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
      */
     pub async fn access(
         &self,
@@ -51,7 +51,7 @@ impl Oauth {
             query_args.push(("single_channel".to_string(), single_channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/oauth.access?{}", query_), None);
+        let url = self.client.url(&format!("/oauth.access?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -71,11 +71,11 @@ impl Oauth {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- Issued when you created your application.
-     * * `client_secret: &str` -- Issued when you created your application.
-     * * `code: &str` -- The `code` param returned via the OAuth callback.
-     * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
-     * * `single_channel: bool` -- Request the user to add your app only to a single channel.
+     * * `client_id` -- Issued when you created your application.
+     * * `client_secret` -- Issued when you created your application.
+     * * `code` -- The `code` param returned via the OAuth callback.
+     * * `redirect_uri` -- This must match the originally submitted URI (if one was sent).
+     * * `single_channel` -- Request the user to add your app only to a single channel.
      */
     pub async fn token(
         &self,
@@ -102,7 +102,7 @@ impl Oauth {
             query_args.push(("single_channel".to_string(), single_channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/oauth.token?{}", query_), None);
+        let url = self.client.url(&format!("/oauth.token?{query_}"), None);
         self.client
             .get(
                 &url,

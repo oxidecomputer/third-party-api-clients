@@ -20,12 +20,12 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `conversations:read`.
-     * * `user: &str` -- Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership.
-     * * `types: &str` -- Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`.
-     * * `exclude_archived: bool` -- Set to `true` to exclude archived channels from the list.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `token` -- Authentication token. Requires scope: `conversations:read`
+     * * `user` -- Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership.
+     * * `types` -- Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
+     * * `exclude_archived` -- Set to `true` to exclude archived channels from the list
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
      */
     pub async fn conversation(
         &self,
@@ -54,7 +54,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users.conversations?{}", query_), None);
+            .url(&format!("/users.conversations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -93,8 +93,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users:read`.
-     * * `user: &str` -- User to get presence info on. Defaults to the authed user.
+     * * `token` -- Authentication token. Requires scope: `users:read`
+     * * `user` -- User to get presence info on. Defaults to the authed user.
      */
     pub async fn get_presence(
         &self,
@@ -107,7 +107,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users.getPresence?{}", query_), None);
+            .url(&format!("/users.getPresence?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -127,7 +127,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `identity.basic`.
+     * * `token` -- Authentication token. Requires scope: `identity.basic`
      */
     pub async fn identity(
         &self,
@@ -175,9 +175,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users:read`.
-     * * `include_locale: bool` -- Set this to `true` to receive the locale for this user. Defaults to `false`.
-     * * `user: &str` -- User to get info on.
+     * * `token` -- Authentication token. Requires scope: `users:read`
+     * * `include_locale` -- Set this to `true` to receive the locale for this user. Defaults to `false`
+     * * `user` -- User to get info on
      */
     pub async fn info(
         &self,
@@ -192,7 +192,7 @@ impl Users {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users.info?{}", query_), None);
+        let url = self.client.url(&format!("/users.info?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -212,10 +212,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users:read`.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no `limit` value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience `limit_required` or HTTP 500 errors.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     * * `include_locale: bool` -- Set this to `true` to receive the locale for users. Defaults to `false`.
+     * * `token` -- Authentication token. Requires scope: `users:read`
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no `limit` value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience `limit_required` or HTTP 500 errors.
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `include_locale` -- Set this to `true` to receive the locale for users. Defaults to `false`
      */
     pub async fn list(
         &self,
@@ -234,7 +234,7 @@ impl Users {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users.list?{}", query_), None);
+        let url = self.client.url(&format!("/users.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -254,8 +254,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users:read.email`.
-     * * `email: &str` -- An email address belonging to a user in the workspace.
+     * * `token` -- Authentication token. Requires scope: `users:read.email`
+     * * `email` -- An email address belonging to a user in the workspace
      */
     pub async fn lookup_email(
         &self,
@@ -268,7 +268,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users.lookupByEmail?{}", query_), None);
+            .url(&format!("/users.lookupByEmail?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -288,7 +288,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users:write`.
+     * * `token` -- Authentication token. Requires scope: `users:write`
      */
     pub async fn set_active(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/users.setActive", None);
@@ -332,7 +332,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users:write`.
+     * * `token` -- Authentication token. Requires scope: `users:write`
      */
     pub async fn set_presence(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/users.setPresence", None);

@@ -12,19 +12,17 @@ impl Licenses {
     }
 
     /**
-     * Get all commonly used licenses.
+     * Get all commonly used licenses
      *
      * This function performs a `GET` to the `/licenses` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
      *
      * **Parameters:**
      *
-     * * `featured: bool`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `featured`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn get_all_commonly_used(
         &self,
@@ -43,7 +41,7 @@ impl Licenses {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/licenses?{}", query_), None);
+        let url = self.client.url(&format!("/licenses?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -55,13 +53,11 @@ impl Licenses {
             .await
     }
     /**
-     * Get all commonly used licenses.
+     * Get all commonly used licenses
      *
      * This function performs a `GET` to the `/licenses` endpoint.
      *
      * As opposed to `get_all_commonly_used`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
      */
@@ -74,7 +70,7 @@ impl Licenses {
             query_args.push(("featured".to_string(), featured.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/licenses?{}", query_), None);
+        let url = self.client.url(&format!("/licenses?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -86,17 +82,15 @@ impl Licenses {
             .await
     }
     /**
-     * Get a license.
+     * Get a license
      *
      * This function performs a `GET` to the `/licenses/{license}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/licenses#get-a-license>
      *
      * **Parameters:**
      *
-     * * `license: &str`
+     * * `license`
      */
     pub async fn get(
         &self,
@@ -120,7 +114,7 @@ impl Licenses {
             .await
     }
     /**
-     * Get the license for a repository.
+     * Get the license for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/license` endpoint.
      *
@@ -132,8 +126,8 @@ impl Licenses {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_for_repo(
         &self,

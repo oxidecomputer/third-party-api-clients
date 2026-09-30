@@ -12,13 +12,13 @@ impl ChatbotMessages {
     }
 
     /**
-     * Send chatbot messages.
+     * Send chatbot messages
      *
      * This function performs a `POST` to the `/im/chat/messages` endpoint.
      *
      * Send chatbot messages from your marketplace chatbot app.<br><br>
      * **Scopes:** `imchat:bot`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      * **Authorization Flow**: Client Credentials Flow<br><br>
      * To get authorized, make a POST request to `/oauth/token` endpoint with grant type as `client_credentials`. <br>Use `https://api.zoom.us/oauth/token?grant_type=client_credentials` as the endpoint for the request.
      * You will need to send your ClientID and Secret as a Basic base64 encoded AUthorization header. Ex. `Basic base64Encode({client_id}:{client_sceret})`<br><br> Next, use the token recieved (access_token) as a bearer token while making the POST /im/chat/messages request to send chatbot messages.<br><br>
@@ -40,14 +40,14 @@ impl ChatbotMessages {
             .await
     }
     /**
-     * Edit a chatbot message.
+     * Edit a chatbot message
      *
      * This function performs a `PUT` to the `/im/chat/messages/{message_id}` endpoint.
      *
      * Edit a message that was [sent](https://marketplace.zoom.us/docs/api-reference/zoom-api/im-chat/sendchatbot) by your Chatbot app.<br> After sending a message using the Send Chatbot Message API, you must store the messageId returned in the response so that you can make edits to the associated message using this API.
      *
      * **Scope:** `imchat:bot`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      * **Authorization Flow**: Client Credentials Flow<br><br>
      * To get authorized, make a POST request to `/oauth/token` endpoint with grant type as `client_credentials`. <br>Use `https://api.zoom.us/oauth/token?grant_type=client_credentials` as the endpoint for the request.
      * You will need to send your ClientID and Secret as a Basic base64 encoded AUthorization header. Ex. `Basic base64Encode({client_id}:{client_sceret})`<br><br> Next, use the token received (access_token) as a bearer token while making the PUT /im/chat/messages/{message_id} request to edit a chatbot message.<br><br>
@@ -55,7 +55,7 @@ impl ChatbotMessages {
      *
      * **Parameters:**
      *
-     * * `message_id: &str` -- Unique Identifier of the message that needs to be updated. This should be retrieved from the response of [Send Chatbot Message API](https://marketplace.zoom.us/docs/api-reference/zoom-api/im-chat/sendchatbot).
+     * * `message_id` -- Unique Identifier of the message that needs to be updated. This should be retrieved from the response of [Send Chatbot Message API](https://marketplace.zoom.us/docs/api-reference/zoom-api/im-chat/sendchatbot).
      */
     pub async fn edit(
         &self,
@@ -80,7 +80,7 @@ impl ChatbotMessages {
             .await
     }
     /**
-     * Delete a chatbot message.
+     * Delete a chatbot message
      *
      * This function performs a `DELETE` to the `/im/chat/messages/{message_id}` endpoint.
      *

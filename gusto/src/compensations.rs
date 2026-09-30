@@ -12,14 +12,13 @@ impl Compensations {
     }
 
     /**
-     * Get a compensation.
+     * Get a compensation
      *
      * This function performs a `GET` to the `/v1/compensations/{compensation_id}` endpoint.
      *
      * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      *
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
-     *
      */
     pub async fn get(
         &self,
@@ -43,7 +42,7 @@ impl Compensations {
             .await
     }
     /**
-     * Update a compensation.
+     * Update a compensation
      *
      * This function performs a `PUT` to the `/v1/compensations/{compensation_id}` endpoint.
      *
@@ -74,7 +73,7 @@ impl Compensations {
             .await
     }
     /**
-     * Get compensations for a job.
+     * Get compensations for a job
      *
      * This function performs a `GET` to the `/v1/jobs/{job_id}/compensations` endpoint.
      *
@@ -106,7 +105,7 @@ impl Compensations {
             .await
     }
     /**
-     * Get compensations for a job.
+     * Get compensations for a job
      *
      * This function performs a `GET` to the `/v1/jobs/{job_id}/compensations` endpoint.
      *

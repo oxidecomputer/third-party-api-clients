@@ -12,7 +12,7 @@ impl BulkSend {
     }
 
     /**
-     * Returns a list of bulk send batch summaries. .
+     * Returns a list of bulk send batch summaries.
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/bulk_send_batch` endpoint.
      *
@@ -22,18 +22,18 @@ impl BulkSend {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `batch_ids: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The number of results to report. Must be a value from 1 to 1000.
-     *   
-     *   Default: 100.
-     * * `start_position: &str` -- The start position for results. Essentially the number of results to skip before collecting them. Must be a value greater than 0.
-     * * `status: &str` -- The kind of results to collect. Must be one of:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `batch_ids` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The number of results to report. Must be a value from 1 to 1000.
+     *
+     *   Default: 100
+     * * `start_position` -- The start position for results. Essentially the number of results to skip before collecting them. Must be a value greater than 0.
+     * * `status` -- The kind of results to collect. Must be one of:
+     *
      *   - all
      *   - failed
      *   - sent
-     *   - queued.
+     *   - queued
      */
     pub async fn batch_get_batche(
         &self,
@@ -90,8 +90,8 @@ impl BulkSend {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bulk_send_batch_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bulk_send_batch_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn batch_get_statu(
         &self,
@@ -121,12 +121,10 @@ impl BulkSend {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/bulk_send_batch/{bulkSendBatchId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bulk_send_batch_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bulk_send_batch_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn batch_put_status(
         &self,
@@ -153,7 +151,7 @@ impl BulkSend {
             .await
     }
     /**
-     * Gets bulk send lists.
+     * Gets bulk send lists
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/bulk_send_lists` endpoint.
      *
@@ -161,7 +159,7 @@ impl BulkSend {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn v_2crud_get_list(
         &self,
@@ -185,7 +183,7 @@ impl BulkSend {
             .await
     }
     /**
-     * Creates a bulk send list.
+     * Creates a bulk send list
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/bulk_send_lists` endpoint.
      *
@@ -219,7 +217,7 @@ impl BulkSend {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn v_2crud_post_list(
         &self,
@@ -244,7 +242,7 @@ impl BulkSend {
             .await
     }
     /**
-     * Gets a specific bulk send list.
+     * Gets a specific bulk send list
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/bulk_send_lists/{bulkSendListId}` endpoint.
      *
@@ -252,8 +250,8 @@ impl BulkSend {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bulk_send_list_id: &str` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bulk_send_list_id` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
      */
     pub async fn v_2crud_get_list_bulk_send(
         &self,
@@ -279,7 +277,7 @@ impl BulkSend {
             .await
     }
     /**
-     * Updates a bulk send list.
+     * Updates a bulk send list
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/bulk_send_lists/{bulkSendListId}` endpoint.
      *
@@ -287,8 +285,8 @@ impl BulkSend {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bulk_send_list_id: &str` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bulk_send_list_id` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
      */
     pub async fn v_2crud_put_list(
         &self,
@@ -315,7 +313,7 @@ impl BulkSend {
             .await
     }
     /**
-     * Deletes a bulk send list.
+     * Deletes a bulk send list
      *
      * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/bulk_send_lists/{bulkSendListId}` endpoint.
      *
@@ -323,8 +321,8 @@ impl BulkSend {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bulk_send_list_id: &str` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bulk_send_list_id` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
      */
     pub async fn v_2crud_delete_list(
         &self,
@@ -350,7 +348,7 @@ impl BulkSend {
             .await
     }
     /**
-     * Creates a bulk send request.
+     * Creates a bulk send request
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/bulk_send_lists/{bulkSendListId}/send` endpoint.
      *
@@ -391,12 +389,10 @@ impl BulkSend {
      * [create_test]:      https://developers.docusign.com/docs/esign-rest-api/reference/BulkEnvelopes/BulkSend/createBulkSendTestRequest
      * [BulkSendOverview]: https://developers.docusign.com/docs/esign-rest-api/reference/BulkEnvelopes/BulkSend
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bulk_send_list_id: &str` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bulk_send_list_id` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
      */
     pub async fn post_request(
         &self,
@@ -423,7 +419,7 @@ impl BulkSend {
             .await
     }
     /**
-     * Creates a bulk send test.
+     * Creates a bulk send test
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/bulk_send_lists/{bulkSendListId}/test` endpoint.
      *
@@ -463,13 +459,10 @@ impl BulkSend {
      *
      * [BulkSendRequest]:  https://developers.docusign.com/docs/esign-rest-api/reference/BulkEnvelopes/BulkSend/createBulkSendRequest
      *
-     *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `bulk_send_list_id: &str` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `bulk_send_list_id` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
      */
     pub async fn test_post_request(
         &self,

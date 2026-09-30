@@ -8,14 +8,10 @@ pub struct Details {}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Error {
-    /**
-     * Extra metadata about the error, may be empty. Usually depends on the error type.
-     */
+    /// Extra metadata about the error, may be empty. Usually depends on the error type.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub details: Option<Details>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -32,9 +28,7 @@ pub struct ErrorResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TaskResponse {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -83,90 +77,70 @@ impl Role {
 /// Ramp User
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub amount_limit: String,
-    /**
-     * Ramp User
-     */
+    /// Ramp User
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub business_id: String,
-    /**
-     * Ramp User
-     */
+    /// Ramp User
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub department_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * Ramp User
-     */
+    /// Ramp User
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub location_id: String,
-    /**
-     * Ramp User
-     */
+    /// Ramp User
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub manager_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -179,27 +153,21 @@ pub struct User {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchUsersRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub department_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub direct_manager_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -212,9 +180,7 @@ pub struct PatchUsersRequest {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -225,54 +191,42 @@ pub struct Page {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CardHolder {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub department_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub department_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub location_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -283,18 +237,14 @@ pub struct CardHolder {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountingCategories {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub category_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -342,18 +292,14 @@ pub struct PolicyViolations {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -409,18 +355,14 @@ pub struct Disputes {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -434,18 +376,14 @@ pub struct Disputes {
 /// Ramp transaction
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Data {
-    /**
-     * Ramp transaction
-     */
+    /// Ramp transaction
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub accounting_categories: Vec<AccountingCategories>,
-    /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    /// The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -453,99 +391,77 @@ pub struct Data {
     )]
     pub amount: f64,
     pub card_holder: CardHolder,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub card_id: String,
-    /**
-     * Ramp transaction
-     */
+    /// Ramp transaction
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub disputes: Vec<Disputes>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Ramp transaction
-     */
+    /// Ramp transaction
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub memo: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub merchant_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub merchant_name: String,
-    /**
-     * Ramp transaction
-     */
+    /// Ramp transaction
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub policy_violations: Vec<PolicyViolations>,
-    /**
-     * Ramp transaction
-     */
+    /// Ramp transaction
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub receipts: Vec<String>,
-    /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    /// The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub sk_category_id: f64,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sk_category_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -575,18 +491,14 @@ pub struct GetTransactionResponse {
 /// Ramp location
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
-    /**
-     * Ramp location
-     */
+    /// Ramp location
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Ramp location
-     */
+    /// Ramp location
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -607,12 +519,9 @@ pub struct GetLocationResponse {
     pub page: Page,
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostLocationRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -621,7 +530,6 @@ pub struct PostLocationRequest {
     pub name: String,
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersResponse {
     #[serde(
@@ -637,18 +545,14 @@ pub struct GetUsersResponse {
 /// Ramp Department
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Department {
-    /**
-     * Ramp Department
-     */
+    /// Ramp Department
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Ramp Department
-     */
+    /// Ramp Department
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -671,9 +575,7 @@ pub struct GetDepartmentsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientAddress {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -681,54 +583,42 @@ pub struct RecipientAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub postal_code: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -746,9 +636,7 @@ pub struct Shipping {
 /// Details for shipping physical cards
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Fulfillment {
-    /**
-     * Details for shipping physical cards
-     */
+    /// Details for shipping physical cards
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping: Option<Shipping>,
 }
@@ -796,58 +684,44 @@ impl Interval {
 /// Specifies the spend restrictions on a Ramp card.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SpendingRestrictions {
-    /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    /// The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount: f64,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub blocked_categories: Vec<f64>,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub categories: Vec<f64>,
-    /**
-     * Time interval to apply limit to.
-     */
+    /// Time interval to apply limit to.
     #[serde(default, skip_serializing_if = "Interval::is_noop")]
     pub interval: Interval,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub lock_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub suspended: bool,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -859,76 +733,58 @@ pub struct SpendingRestrictions {
 /// Card data that holds mostly static information about a card.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Card {
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub card_program_id: String,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub cardholder_id: String,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub cardholder_name: String,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub display_name: String,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fulfillment: Option<Fulfillment>,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_physical: bool,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_four: String,
-    /**
-     * Card data that holds mostly static information about a card.
-     */
+    /// Card data that holds mostly static information about a card.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
@@ -947,18 +803,14 @@ pub struct GetCardsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchResourcesCardsCardRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub card_program_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -967,18 +819,14 @@ pub struct PatchResourcesCardsCardRequest {
     pub display_name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub has_notifications_enabled: Option<bool>,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCustomProviderResponse {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -989,9 +837,7 @@ pub struct GetCustomProviderResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostcustomProviderResponse {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1002,9 +848,7 @@ pub struct PostcustomProviderResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingAddress {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1012,36 +856,28 @@ pub struct BillingAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub postal_code: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1059,45 +895,35 @@ pub struct Business {
     )]
     pub active: bool,
     pub billing_address: BillingAddress,
-    /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    /// The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub business_memo_required_threshold: f64,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub business_name_legal: String,
-    /**
-     * Mostly static information about a business that doesn't change often.
-     */
+    /// Mostly static information about a business that doesn't change often.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub business_name_on_card: String,
-    /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    /// The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub business_receipt_required_threshold: f64,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1109,18 +935,14 @@ pub struct Business {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enforce_sso: bool,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    /// The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -1142,18 +964,14 @@ pub struct Business {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub limit_locked: bool,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1164,46 +982,34 @@ pub struct Business {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardPhysicalRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub card_program_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub display_name: String,
-    /**
-     * Details for shipping physical cards
-     */
+    /// Details for shipping physical cards
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fulfillment: Option<Fulfillment>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub idempotency_key: String,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1214,41 +1020,31 @@ pub struct PostResourcesCardPhysicalRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardVirtualRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub card_program_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub display_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub idempotency_key: String,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1285,48 +1081,35 @@ impl TokenType {
     }
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OAuth2Token {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub access_token: String,
-    /**
-     * Expiration time for access token in seconds
-     */
+    /// Expiration time for access token in seconds
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub expires_in: i64,
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub refresh_token: String,
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub refresh_token_expires_in: i64,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1340,45 +1123,35 @@ pub struct OAuth2Token {
 /// Current data about the business.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BusinessCurrentStatus {
-    /**
-     * Current data about the business.
-     */
+    /// Current data about the business.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub balance_including_pending: f64,
-    /**
-     * Current data about the business.
-     */
+    /// Current data about the business.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub max_balance: f64,
-    /**
-     * Current data about the business.
-     */
+    /// Current data about the business.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_format::deserialize"
     )]
     pub next_billing_date: Option<chrono::NaiveDate>,
-    /**
-     * Current data about the business.
-     */
+    /// Current data about the business.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_format::deserialize"
     )]
     pub prev_billing_date: Option<chrono::NaiveDate>,
-    /**
-     * Current data about the business.
-     */
+    /// Current data about the business.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -1389,9 +1162,7 @@ pub struct BusinessCurrentStatus {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardsCardSuspensionRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1402,9 +1173,7 @@ pub struct PostResourcesCardsCardSuspensionRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeCustomRampResponse {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1415,9 +1184,7 @@ pub struct GetEntityTypeCustomRampResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeRampCustomResponse {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1428,36 +1195,28 @@ pub struct GetEntityTypeRampCustomResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetResourcesCardsDeferredResponseData {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub card_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub error: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1507,9 +1266,7 @@ impl Status {
 pub struct GetResourcesCardsDeferredResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<GetResourcesCardsDeferredResponseData>,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1578,57 +1335,43 @@ impl Icon {
 /// Card Program data that serves as a template for creating new cards.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CardProgram {
-    /**
-     * Card Program data that serves as a template for creating new cards.
-     */
+    /// Card Program data that serves as a template for creating new cards.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Card Program data that serves as a template for creating new cards.
-     */
+    /// Card Program data that serves as a template for creating new cards.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub display_name: String,
-    /**
-     * Card Program data that serves as a template for creating new cards.
-     */
+    /// Card Program data that serves as a template for creating new cards.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub icon: Option<Icon>,
-    /**
-     * Card Program data that serves as a template for creating new cards.
-     */
+    /// Card Program data that serves as a template for creating new cards.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Card Program data that serves as a template for creating new cards.
-     */
+    /// Card Program data that serves as a template for creating new cards.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_default: bool,
-    /**
-     * Card Program data that serves as a template for creating new cards.
-     */
+    /// Card Program data that serves as a template for creating new cards.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_physical: bool,
-    /**
-     * Card Program data that serves as a template for creating new cards.
-     */
+    /// Card Program data that serves as a template for creating new cards.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
@@ -1648,18 +1391,14 @@ pub struct GetCardProgramsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardProgramRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1672,71 +1411,55 @@ pub struct PostResourcesCardProgramRequest {
     pub is_default: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_physical: Option<bool>,
-    /**
-     * Specifies the spend restrictions on a Ramp card.
-     */
+    /// Specifies the spend restrictions on a Ramp card.
     pub spending_restrictions: SpendingRestrictions,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostUsersDeferredRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub department_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub direct_manager_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub location_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1749,36 +1472,28 @@ pub struct PostUsersDeferredRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseData {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub error: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub misc: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1787,26 +1502,16 @@ pub struct GetUsersDeferredStatusResponseData {
     pub user_id: String,
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponse {
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<GetUsersDeferredStatusResponseData>,
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     *
-     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1815,12 +1520,8 @@ pub struct GetUsersDeferredStatusResponse {
     pub status: String,
 }
 
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseDataType {
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error: Option<Error>,
 }
@@ -1937,18 +1638,14 @@ pub struct GetReimbursementsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCustomProviderEntityTypeLinkRequest {
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub custom_id: String,
-    /**
-     * The OAuth2 token header
-     */
+    /// The OAuth2 token header
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",

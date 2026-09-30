@@ -12,7 +12,7 @@ impl Categories {
     }
 
     /**
-     * Retrieve all categories.
+     * Retrieve all categories
      *
      * This function performs a `GET` to the `/categories` endpoint.
      *
@@ -20,10 +20,10 @@ impl Categories {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- The number of categories to display per page.
-     * * `category: &str` -- Allows you to perform a prefix search on this particular category.
-     * * `offset: i64` -- The point in the list that you would like to begin displaying results.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- The number of categories to display per page.
+     * * `category` -- Allows you to perform a prefix search on this particular category.
+     * * `offset` -- The point in the list that you would like to begin displaying results.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_page(
         &self,
@@ -42,7 +42,7 @@ impl Categories {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/categories?{}", query_), None);
+        let url = self.client.url(&format!("/categories?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -54,7 +54,7 @@ impl Categories {
             .await
     }
     /**
-     * Retrieve all categories.
+     * Retrieve all categories
      *
      * This function performs a `GET` to the `/categories` endpoint.
      *
@@ -75,7 +75,7 @@ impl Categories {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/categories?{}", query_), None);
+        let url = self.client.url(&format!("/categories?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -87,7 +87,7 @@ impl Categories {
             .await
     }
     /**
-     * Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?].
+     * Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?]
      *
      * This function performs a `GET` to the `/categories/stats/sums` endpoint.
      *
@@ -97,14 +97,14 @@ impl Categories {
      *
      * **Parameters:**
      *
-     * * `sort_by_metric: &str` -- The metric that you want to sort by.  Must be a single metric.
-     * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
-     * * `limit: i64` -- Limits the number of results returned.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `sort_by_metric` -- The metric that you want to sort by.  Must be a single metric.
+     * * `sort_by_direction` -- The direction you want to sort.
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `limit` -- Limits the number of results returned.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_stats_sum(
         &self,
@@ -144,7 +144,7 @@ impl Categories {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/categories/stats/sums?{}", query_), None);
+            .url(&format!("/categories/stats/sums?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -156,7 +156,7 @@ impl Categories {
             .await
     }
     /**
-     * Retrieve Email Statistics for Categories.
+     * Retrieve Email Statistics for Categories
      *
      * This function performs a `GET` to the `/categories/stats` endpoint.
      *
@@ -166,13 +166,13 @@ impl Categories {
      *
      * **Parameters:**
      *
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
-     * * `categories: &str` -- The individual categories that you want to retrieve statistics for. You may include up to 10 different categories.
-     * * `limit: i64` -- The number of results to include.
-     * * `offset: i64` -- The number of results to skip.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `categories` -- The individual categories that you want to retrieve statistics for. You may include up to 10 different categories.
+     * * `limit` -- The number of results to include.
+     * * `offset` -- The number of results to skip.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_stats(
         &self,
@@ -205,7 +205,7 @@ impl Categories {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/categories/stats?{}", query_), None);
+            .url(&format!("/categories/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -217,7 +217,7 @@ impl Categories {
             .await
     }
     /**
-     * Retrieve Email Statistics for Categories.
+     * Retrieve Email Statistics for Categories
      *
      * This function performs a `GET` to the `/categories/stats` endpoint.
      *
@@ -254,7 +254,7 @@ impl Categories {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/categories/stats?{}", query_), None);
+            .url(&format!("/categories/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,

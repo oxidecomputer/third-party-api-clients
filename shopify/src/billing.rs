@@ -12,7 +12,7 @@ impl Billing {
     }
 
     /**
-     * Retrieves a list of application charges.
+     * Retrieves a list of application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-01/application_charges.json` endpoint.
      *
@@ -20,8 +20,8 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_application_charge(
         &self,
@@ -37,7 +37,7 @@ impl Billing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/application_charges.json?{}", query_),
+            &format!("/admin/api/2020-01/application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -51,7 +51,7 @@ impl Billing {
             .await
     }
     /**
-     * Creates an application charge.
+     * Creates an application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-01/application_charges.json` endpoint.
      *
@@ -75,7 +75,7 @@ impl Billing {
             .await
     }
     /**
-     * Retrieves an application charge.
+     * Retrieves an application charge
      *
      * This function performs a `GET` to the `/admin/api/2020-01/application_charges/{application_charge_id}.json` endpoint.
      *
@@ -83,8 +83,8 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_application_charges_param_charge(
         &self,
@@ -115,21 +115,21 @@ impl Billing {
             .await
     }
     /**
-        * Caution
-         This endpoint is no longer required and is deprecated as of
-         API version 2021-01.
-
-       "Activates an accepted application charge. One-time charges are now immediately activated
-when approved by a merchant.
- *
- * This function performs a `POST` to the `/admin/api/2020-01/application_charges/{application_charge_id}/activate.json` endpoint.
- *
- * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-01
- *
- * **Parameters:**
- *
- * * `application_charge_id: &str` -- storefront_access_token_id.
- */
+     * Caution
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * "Activates an accepted application charge. One-time charges are now immediately activated
+     * when approved by a merchant.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/application_charges/{application_charge_id}/activate.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -153,7 +153,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of application charges.
+     * Retrieves a list of application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-04/application_charges.json` endpoint.
      *
@@ -161,8 +161,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_application_charge(
         &self,
@@ -178,7 +178,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/application_charges.json?{}", query_),
+            &format!("/admin/api/2020-04/application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -192,7 +192,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application charge.
+     * Creates an application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-04/application_charges.json` endpoint.
      *
@@ -216,7 +216,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves an application charge.
+     * Retrieves an application charge
      *
      * This function performs a `GET` to the `/admin/api/2020-04/application_charges/{application_charge_id}.json` endpoint.
      *
@@ -224,8 +224,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_application_charges_param_charge(
         &self,
@@ -256,21 +256,21 @@ when approved by a merchant.
             .await
     }
     /**
-        * Caution
-         This endpoint is no longer required and is deprecated as of
-         API version 2021-01.
-
-       "Activates an accepted application charge. One-time charges are now immediately activated
-when approved by a merchant.
- *
- * This function performs a `POST` to the `/admin/api/2020-04/application_charges/{application_charge_id}/activate.json` endpoint.
- *
- * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-04
- *
- * **Parameters:**
- *
- * * `application_charge_id: &str` -- storefront_access_token_id.
- */
+     * Caution
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * "Activates an accepted application charge. One-time charges are now immediately activated
+     * when approved by a merchant.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/application_charges/{application_charge_id}/activate.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -294,7 +294,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of application charges.
+     * Retrieves a list of application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-07/application_charges.json` endpoint.
      *
@@ -302,8 +302,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_application_charge(
         &self,
@@ -319,7 +319,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/application_charges.json?{}", query_),
+            &format!("/admin/api/2020-07/application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -333,7 +333,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application charge.
+     * Creates an application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-07/application_charges.json` endpoint.
      *
@@ -357,7 +357,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves an application charge.
+     * Retrieves an application charge
      *
      * This function performs a `GET` to the `/admin/api/2020-07/application_charges/{application_charge_id}.json` endpoint.
      *
@@ -365,8 +365,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_application_charges_param_charge(
         &self,
@@ -397,21 +397,21 @@ when approved by a merchant.
             .await
     }
     /**
-        * Caution
-         This endpoint is no longer required and is deprecated as of
-         API version 2021-01.
-
-       "Activates an accepted application charge. One-time charges are now immediately activated
-when approved by a merchant.
- *
- * This function performs a `POST` to the `/admin/api/2020-07/application_charges/{application_charge_id}/activate.json` endpoint.
- *
- * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-07
- *
- * **Parameters:**
- *
- * * `application_charge_id: &str` -- storefront_access_token_id.
- */
+     * Caution
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * "Activates an accepted application charge. One-time charges are now immediately activated
+     * when approved by a merchant.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/application_charges/{application_charge_id}/activate.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -435,7 +435,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of application charges.
+     * Retrieves a list of application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-10/application_charges.json` endpoint.
      *
@@ -443,8 +443,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_application_charge(
         &self,
@@ -460,7 +460,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/application_charges.json?{}", query_),
+            &format!("/admin/api/2020-10/application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -474,7 +474,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application charge.
+     * Creates an application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-10/application_charges.json` endpoint.
      *
@@ -498,7 +498,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves an application charge.
+     * Retrieves an application charge
      *
      * This function performs a `GET` to the `/admin/api/2020-10/application_charges/{application_charge_id}.json` endpoint.
      *
@@ -506,8 +506,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_application_charges_param_charge(
         &self,
@@ -538,21 +538,21 @@ when approved by a merchant.
             .await
     }
     /**
-        * Caution
-         This endpoint is no longer required and is deprecated as of
-         API version 2021-01.
-
-       "Activates an accepted application charge. One-time charges are now immediately activated
-when approved by a merchant.
- *
- * This function performs a `POST` to the `/admin/api/2020-10/application_charges/{application_charge_id}/activate.json` endpoint.
- *
- * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-10
- *
- * **Parameters:**
- *
- * * `application_charge_id: &str` -- storefront_access_token_id.
- */
+     * Caution
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * "Activates an accepted application charge. One-time charges are now immediately activated
+     * when approved by a merchant.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/application_charges/{application_charge_id}/activate.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#activate-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id` -- storefront_access_token_id
+     */
     pub async fn create_application_charges_param_charge_activate(
         &self,
         application_charge_id: &str,
@@ -576,7 +576,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of application charges.
+     * Retrieves a list of application charges
      *
      * This function performs a `GET` to the `/admin/api/2021-01/application_charges.json` endpoint.
      *
@@ -584,8 +584,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_application_charge(
         &self,
@@ -601,7 +601,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/application_charges.json?{}", query_),
+            &format!("/admin/api/2021-01/application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -615,7 +615,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application charge.
+     * Creates an application charge
      *
      * This function performs a `POST` to the `/admin/api/2021-01/application_charges.json` endpoint.
      *
@@ -639,7 +639,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves an application charge.
+     * Retrieves an application charge
      *
      * This function performs a `GET` to the `/admin/api/2021-01/application_charges/{application_charge_id}.json` endpoint.
      *
@@ -647,8 +647,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_application_charges_param_charge(
         &self,
@@ -679,7 +679,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of application charges.
+     * Retrieves a list of application charges
      *
      * This function performs a `GET` to the `/admin/api/unstable/application_charges.json` endpoint.
      *
@@ -687,8 +687,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_application_charge(
         &self,
@@ -704,7 +704,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/application_charges.json?{}", query_),
+            &format!("/admin/api/unstable/application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -718,7 +718,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application charge.
+     * Creates an application charge
      *
      * This function performs a `POST` to the `/admin/api/unstable/application_charges.json` endpoint.
      *
@@ -742,7 +742,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves an application charge.
+     * Retrieves an application charge
      *
      * This function performs a `GET` to the `/admin/api/unstable/application_charges/{application_charge_id}.json` endpoint.
      *
@@ -750,8 +750,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_application_charges_param_charge(
         &self,
@@ -782,7 +782,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves all application credits.
+     * Retrieves all application credits
      *
      * This function performs a `GET` to the `/admin/api/2020-01/application_credits.json` endpoint.
      *
@@ -790,7 +790,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_application_credit(
         &self,
@@ -802,7 +802,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/application_credits.json?{}", query_),
+            &format!("/admin/api/2020-01/application_credits.json?{query_}"),
             None,
         );
         self.client
@@ -816,7 +816,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application credit.
+     * Creates an application credit
      *
      * This function performs a `POST` to the `/admin/api/2020-01/application_credits.json` endpoint.
      *
@@ -840,7 +840,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single application credit.
+     * Retrieves a single application credit
      *
      * This function performs a `GET` to the `/admin/api/2020-01/application_credits/{application_credit_id}.json` endpoint.
      *
@@ -848,8 +848,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_credit_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_credit_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_application_credits_param_credit(
         &self,
@@ -880,7 +880,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves all application credits.
+     * Retrieves all application credits
      *
      * This function performs a `GET` to the `/admin/api/2020-04/application_credits.json` endpoint.
      *
@@ -888,7 +888,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_application_credit(
         &self,
@@ -900,7 +900,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/application_credits.json?{}", query_),
+            &format!("/admin/api/2020-04/application_credits.json?{query_}"),
             None,
         );
         self.client
@@ -914,7 +914,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application credit.
+     * Creates an application credit
      *
      * This function performs a `POST` to the `/admin/api/2020-04/application_credits.json` endpoint.
      *
@@ -938,7 +938,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single application credit.
+     * Retrieves a single application credit
      *
      * This function performs a `GET` to the `/admin/api/2020-04/application_credits/{application_credit_id}.json` endpoint.
      *
@@ -946,8 +946,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_credit_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_credit_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_application_credits_param_credit(
         &self,
@@ -978,7 +978,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves all application credits.
+     * Retrieves all application credits
      *
      * This function performs a `GET` to the `/admin/api/2020-07/application_credits.json` endpoint.
      *
@@ -986,7 +986,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_application_credit(
         &self,
@@ -998,7 +998,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/application_credits.json?{}", query_),
+            &format!("/admin/api/2020-07/application_credits.json?{query_}"),
             None,
         );
         self.client
@@ -1012,7 +1012,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application credit.
+     * Creates an application credit
      *
      * This function performs a `POST` to the `/admin/api/2020-07/application_credits.json` endpoint.
      *
@@ -1036,7 +1036,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single application credit.
+     * Retrieves a single application credit
      *
      * This function performs a `GET` to the `/admin/api/2020-07/application_credits/{application_credit_id}.json` endpoint.
      *
@@ -1044,8 +1044,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_credit_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_credit_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_application_credits_param_credit(
         &self,
@@ -1076,7 +1076,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves all application credits.
+     * Retrieves all application credits
      *
      * This function performs a `GET` to the `/admin/api/2020-10/application_credits.json` endpoint.
      *
@@ -1084,7 +1084,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_application_credit(&self, fields: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1093,7 +1093,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/application_credits.json?{}", query_),
+            &format!("/admin/api/2020-10/application_credits.json?{query_}"),
             None,
         );
         self.client
@@ -1107,7 +1107,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application credit.
+     * Creates an application credit
      *
      * This function performs a `POST` to the `/admin/api/2020-10/application_credits.json` endpoint.
      *
@@ -1131,7 +1131,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single application credit.
+     * Retrieves a single application credit
      *
      * This function performs a `GET` to the `/admin/api/2020-10/application_credits/{application_credit_id}.json` endpoint.
      *
@@ -1139,8 +1139,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_credit_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_credit_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_application_credits_param_credit(
         &self,
@@ -1171,7 +1171,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves all application credits.
+     * Retrieves all application credits
      *
      * This function performs a `GET` to the `/admin/api/2021-01/application_credits.json` endpoint.
      *
@@ -1179,7 +1179,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_application_credit(
         &self,
@@ -1191,7 +1191,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/application_credits.json?{}", query_),
+            &format!("/admin/api/2021-01/application_credits.json?{query_}"),
             None,
         );
         self.client
@@ -1205,7 +1205,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application credit.
+     * Creates an application credit
      *
      * This function performs a `POST` to the `/admin/api/2021-01/application_credits.json` endpoint.
      *
@@ -1229,7 +1229,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single application credit.
+     * Retrieves a single application credit
      *
      * This function performs a `GET` to the `/admin/api/2021-01/application_credits/{application_credit_id}.json` endpoint.
      *
@@ -1237,8 +1237,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_credit_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_credit_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_application_credits_param_credit(
         &self,
@@ -1269,7 +1269,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves all application credits.
+     * Retrieves all application credits
      *
      * This function performs a `GET` to the `/admin/api/unstable/application_credits.json` endpoint.
      *
@@ -1277,7 +1277,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_application_credit(
         &self,
@@ -1289,7 +1289,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/application_credits.json?{}", query_),
+            &format!("/admin/api/unstable/application_credits.json?{query_}"),
             None,
         );
         self.client
@@ -1303,7 +1303,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates an application credit.
+     * Creates an application credit
      *
      * This function performs a `POST` to the `/admin/api/unstable/application_credits.json` endpoint.
      *
@@ -1327,7 +1327,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single application credit.
+     * Retrieves a single application credit
      *
      * This function performs a `GET` to the `/admin/api/unstable/application_credits/{application_credit_id}.json` endpoint.
      *
@@ -1335,8 +1335,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `application_credit_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `application_credit_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_application_credits_param_credit(
         &self,
@@ -1367,7 +1367,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of recurring application charges.
+     * Retrieves a list of recurring application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges.json` endpoint.
      *
@@ -1375,8 +1375,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_recurring_application_charge(
         &self,
@@ -1392,10 +1392,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/recurring_application_charges.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/recurring_application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -1409,7 +1406,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a recurring application charge.
+     * Creates a recurring application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-01/recurring_application_charges.json` endpoint.
      *
@@ -1434,7 +1431,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -1442,8 +1439,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_recurring_application_charges_param_charge(
         &self,
@@ -1474,7 +1471,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Cancels a recurring application charge.
+     * Cancels a recurring application charge
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -1482,7 +1479,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202001_delete_recurring_application_charges_param_charge(
         &self,
@@ -1507,11 +1504,11 @@ when approved by a merchant.
     }
     /**
      * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
-
-    Activates a previously accepted recurring application charge. Recurring charges are now
-    immediately activated when approved by a merchant.
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * Activates a previously accepted recurring application charge. Recurring charges are now
+     * immediately activated when approved by a merchant.
      *
      * This function performs a `POST` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/activate.json` endpoint.
      *
@@ -1519,7 +1516,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202001_create_recurring_application_charges_param_charge_activate(
         &self,
@@ -1544,7 +1541,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Updates the capped amount of an active recurring application charge.
+     * Updates the capped amount of an active recurring application charge
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
      *
@@ -1552,8 +1549,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `recurring_application_charge_capped_amount` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202001_update_recurring_application_charges_param_charge_customize(
         &self,
@@ -1587,7 +1584,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of recurring application charges.
+     * Retrieves a list of recurring application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges.json` endpoint.
      *
@@ -1595,8 +1592,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_recurring_application_charge(
         &self,
@@ -1612,10 +1609,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-04/recurring_application_charges.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-04/recurring_application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -1629,7 +1623,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a recurring application charge.
+     * Creates a recurring application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-04/recurring_application_charges.json` endpoint.
      *
@@ -1654,7 +1648,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -1662,8 +1656,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_recurring_application_charges_param_charge(
         &self,
@@ -1694,7 +1688,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Cancels a recurring application charge.
+     * Cancels a recurring application charge
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -1702,7 +1696,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202004_delete_recurring_application_charges_param_charge(
         &self,
@@ -1727,11 +1721,11 @@ when approved by a merchant.
     }
     /**
      * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
-
-    Activates a previously accepted recurring application charge. Recurring charges are now
-    immediately activated when approved by a merchant.
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * Activates a previously accepted recurring application charge. Recurring charges are now
+     * immediately activated when approved by a merchant.
      *
      * This function performs a `POST` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/activate.json` endpoint.
      *
@@ -1739,7 +1733,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202004_create_recurring_application_charges_param_charge_activate(
         &self,
@@ -1764,7 +1758,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Updates the capped amount of an active recurring application charge.
+     * Updates the capped amount of an active recurring application charge
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
      *
@@ -1772,8 +1766,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `recurring_application_charge_capped_amount` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202004_update_recurring_application_charges_param_charge_customize(
         &self,
@@ -1807,7 +1801,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of recurring application charges.
+     * Retrieves a list of recurring application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges.json` endpoint.
      *
@@ -1815,8 +1809,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_recurring_application_charge(
         &self,
@@ -1832,10 +1826,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-07/recurring_application_charges.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-07/recurring_application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -1849,7 +1840,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a recurring application charge.
+     * Creates a recurring application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-07/recurring_application_charges.json` endpoint.
      *
@@ -1874,7 +1865,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -1882,8 +1873,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_recurring_application_charges_param_charge(
         &self,
@@ -1914,7 +1905,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Cancels a recurring application charge.
+     * Cancels a recurring application charge
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -1922,7 +1913,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202007_delete_recurring_application_charges_param_charge(
         &self,
@@ -1947,11 +1938,11 @@ when approved by a merchant.
     }
     /**
      * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
-
-    Activates a previously accepted recurring application charge. Recurring charges are now
-    immediately activated when approved by a merchant.
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * Activates a previously accepted recurring application charge. Recurring charges are now
+     * immediately activated when approved by a merchant.
      *
      * This function performs a `POST` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/activate.json` endpoint.
      *
@@ -1959,7 +1950,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202007_create_recurring_application_charges_param_charge_activate(
         &self,
@@ -1984,7 +1975,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Updates the capped amount of an active recurring application charge.
+     * Updates the capped amount of an active recurring application charge
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
      *
@@ -1992,8 +1983,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `recurring_application_charge_capped_amount` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202007_update_recurring_application_charges_param_charge_customize(
         &self,
@@ -2027,7 +2018,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of recurring application charges.
+     * Retrieves a list of recurring application charges
      *
      * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges.json` endpoint.
      *
@@ -2035,8 +2026,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_recurring_application_charge(
         &self,
@@ -2052,10 +2043,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-10/recurring_application_charges.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-10/recurring_application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -2069,7 +2057,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a recurring application charge.
+     * Creates a recurring application charge
      *
      * This function performs a `POST` to the `/admin/api/2020-10/recurring_application_charges.json` endpoint.
      *
@@ -2094,7 +2082,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -2102,8 +2090,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_recurring_application_charges_param_charge(
         &self,
@@ -2134,7 +2122,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Cancels a recurring application charge.
+     * Cancels a recurring application charge
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -2142,7 +2130,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn delete_recurring_application_charges_param_charge(
         &self,
@@ -2167,11 +2155,11 @@ when approved by a merchant.
     }
     /**
      * Caution
-      This endpoint is no longer required and is deprecated as of
-      API version 2021-01.
-
-    Activates a previously accepted recurring application charge. Recurring charges are now
-    immediately activated when approved by a merchant.
+     * This endpoint is no longer required and is deprecated as of
+     * API version 2021-01.
+     *
+     * Activates a previously accepted recurring application charge. Recurring charges are now
+     * immediately activated when approved by a merchant.
      *
      * This function performs a `POST` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/activate.json` endpoint.
      *
@@ -2179,7 +2167,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn create_recurring_application_charges_param_charge_activate(
         &self,
@@ -2204,7 +2192,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Updates the capped amount of an active recurring application charge.
+     * Updates the capped amount of an active recurring application charge
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
      *
@@ -2212,8 +2200,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `recurring_application_charge_capped_amount` -- recurring_application_charge[capped_amount]
      */
     pub async fn update_recurring_application_charges_param_charge_customize(
         &self,
@@ -2247,7 +2235,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of recurring application charges.
+     * Retrieves a list of recurring application charges
      *
      * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges.json` endpoint.
      *
@@ -2255,8 +2243,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_recurring_application_charge(
         &self,
@@ -2272,10 +2260,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2021-01/recurring_application_charges.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2021-01/recurring_application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -2289,7 +2274,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a recurring application charge.
+     * Creates a recurring application charge
      *
      * This function performs a `POST` to the `/admin/api/2021-01/recurring_application_charges.json` endpoint.
      *
@@ -2314,7 +2299,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -2322,8 +2307,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_recurring_application_charges_param_charge(
         &self,
@@ -2354,7 +2339,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Cancels a recurring application charge.
+     * Cancels a recurring application charge
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -2362,7 +2347,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202101_delete_recurring_application_charges_param_charge(
         &self,
@@ -2386,7 +2371,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Updates the capped amount of an active recurring application charge.
+     * Updates the capped amount of an active recurring application charge
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
      *
@@ -2394,8 +2379,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `recurring_application_charge_capped_amount` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202101_update_recurring_application_charges_param_charge_customize(
         &self,
@@ -2429,7 +2414,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of recurring application charges.
+     * Retrieves a list of recurring application charges
      *
      * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges.json` endpoint.
      *
@@ -2437,8 +2422,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_recurring_application_charge(
         &self,
@@ -2454,10 +2439,7 @@ when approved by a merchant.
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/recurring_application_charges.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/recurring_application_charges.json?{query_}"),
             None,
         );
         self.client
@@ -2471,7 +2453,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a recurring application charge.
+     * Creates a recurring application charge
      *
      * This function performs a `POST` to the `/admin/api/unstable/recurring_application_charges.json` endpoint.
      *
@@ -2496,7 +2478,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -2504,8 +2486,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_recurring_application_charges_param_charge(
         &self,
@@ -2536,7 +2518,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Cancels a recurring application charge.
+     * Cancels a recurring application charge
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
      *
@@ -2544,7 +2526,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_unstable_delete_recurring_application_charges_param_charge(
         &self,
@@ -2568,7 +2550,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Updates the capped amount of an active recurring application charge.
+     * Updates the capped amount of an active recurring application charge
      *
      * This function performs a `PUT` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
      *
@@ -2576,8 +2558,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `recurring_application_charge_capped_amount` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_unstable_update_recurring_application_charges_param_charge_customize(
         &self,
@@ -2611,7 +2593,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of usage charges.
+     * Retrieves a list of usage charges
      *
      * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -2619,8 +2601,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_recurring_application_charges_param_charge_usage(
         &self,
@@ -2651,7 +2633,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a usage charge.
+     * Creates a usage charge
      *
      * This function performs a `POST` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -2659,7 +2641,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202001_create_recurring_application_charges_param_charge_usage(
         &self,
@@ -2684,7 +2666,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
      *
@@ -2692,9 +2674,9 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `usage_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `usage_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_recurring_application_charges_param_charge_usage_billing(
         &self,
@@ -2727,7 +2709,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of usage charges.
+     * Retrieves a list of usage charges
      *
      * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -2735,8 +2717,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_recurring_application_charges_param_charge_usage(
         &self,
@@ -2767,7 +2749,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a usage charge.
+     * Creates a usage charge
      *
      * This function performs a `POST` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -2775,7 +2757,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202004_create_recurring_application_charges_param_charge_usage(
         &self,
@@ -2800,7 +2782,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
      *
@@ -2808,9 +2790,9 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `usage_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `usage_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_recurring_application_charges_param_charge_usage_billing(
         &self,
@@ -2843,7 +2825,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of usage charges.
+     * Retrieves a list of usage charges
      *
      * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -2851,8 +2833,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_recurring_application_charges_param_charge_usage(
         &self,
@@ -2883,7 +2865,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a usage charge.
+     * Creates a usage charge
      *
      * This function performs a `POST` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -2891,7 +2873,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202007_create_recurring_application_charges_param_charge_usage(
         &self,
@@ -2916,7 +2898,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
      *
@@ -2924,9 +2906,9 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `usage_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `usage_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_recurring_application_charges_param_charge_usage_billing(
         &self,
@@ -2959,7 +2941,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of usage charges.
+     * Retrieves a list of usage charges
      *
      * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -2967,8 +2949,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_recurring_application_charges_param_charge_usage(
         &self,
@@ -2999,7 +2981,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a usage charge.
+     * Creates a usage charge
      *
      * This function performs a `POST` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -3007,7 +2989,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn create_recurring_application_charges_param_charge_usage(
         &self,
@@ -3032,7 +3014,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
      *
@@ -3040,9 +3022,9 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `usage_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `usage_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_recurring_application_charges_param_charge_usage_billing(
         &self,
@@ -3075,7 +3057,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of usage charges.
+     * Retrieves a list of usage charges
      *
      * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -3083,8 +3065,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_recurring_application_charges_param_charge_usage(
         &self,
@@ -3115,7 +3097,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a usage charge.
+     * Creates a usage charge
      *
      * This function performs a `POST` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -3123,7 +3105,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_202101_create_recurring_application_charges_param_charge_usage(
         &self,
@@ -3148,7 +3130,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
      *
@@ -3156,9 +3138,9 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `usage_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `usage_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_recurring_application_charges_param_charge_usage_billing(
         &self,
@@ -3191,7 +3173,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a list of usage charges.
+     * Retrieves a list of usage charges
      *
      * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -3199,8 +3181,8 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_recurring_application_charges_param_charge_usage(
         &self,
@@ -3231,7 +3213,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Creates a usage charge.
+     * Creates a usage charge
      *
      * This function performs a `POST` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
      *
@@ -3239,7 +3221,7 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
      */
     pub async fn deprecated_unstable_create_recurring_application_charges_param_charge_usage(
         &self,
@@ -3264,7 +3246,7 @@ when approved by a merchant.
             .await
     }
     /**
-     * Retrieves a single charge.
+     * Retrieves a single charge
      *
      * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
      *
@@ -3272,9 +3254,9 @@ when approved by a merchant.
      *
      * **Parameters:**
      *
-     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-     * * `usage_charge_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `recurring_application_charge_id` -- recurring_application_charge_id
+     * * `usage_charge_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_recurring_application_charges_param_charge_usage_billing(
         &self,

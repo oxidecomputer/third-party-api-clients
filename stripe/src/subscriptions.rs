@@ -18,25 +18,18 @@ impl Subscriptions {
      *
      * **Parameters:**
      *
-     * * `collection_method: crate::types::CollectionMethod` -- Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
-     * * `created: &str`
-     * * `current_period_end: &str`
-     * * `current_period_start: &str`
-     * * `customer: &str` -- The ID of the customer whose subscriptions will be retrieved.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `price: &str` -- Filter for subscriptions that contain this recurring price ID.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::GetSubscriptionsStatus` -- The status of the subscriptions to retrieve. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Pass `ended` to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of `all` will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
-     * * `test_clock: &str` -- Filter for subscriptions that are associated with the specified test clock. The response will not include subscriptions with test clocks if this and the customer parameter is not set.
+     * * `collection_method` -- Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
+     * * `customer` -- The ID of the customer whose subscriptions will be retrieved.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `price` -- Filter for subscriptions that contain this recurring price ID.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- The status of the subscriptions to retrieve. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Pass `ended` to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of `all` will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
+     * * `test_clock` -- Filter for subscriptions that are associated with the specified test clock. The response will not include subscriptions with test clocks if this and the customer parameter is not set.
      */
     pub async fn get_page(
         &self,
         collection_method: crate::types::CollectionMethod,
-        created: &str,
-        current_period_end: &str,
-        current_period_start: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -76,7 +69,7 @@ impl Subscriptions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/subscriptions?{}", query_), None);
+            .url(&format!("/v1/subscriptions?{query_}"), None);
         let resp: crate::Response<crate::types::Subscriptions> = self
             .client
             .get(
@@ -105,9 +98,6 @@ impl Subscriptions {
     pub async fn get_all(
         &self,
         collection_method: crate::types::CollectionMethod,
-        created: &str,
-        current_period_end: &str,
-        current_period_start: &str,
         customer: &str,
         price: &str,
         status: crate::types::GetSubscriptionsStatus,
@@ -135,7 +125,7 @@ impl Subscriptions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/subscriptions?{}", query_), None);
+            .url(&format!("/v1/subscriptions?{query_}"), None);
         let crate::Response::<crate::types::Subscriptions> {
             mut status,
             mut headers,
@@ -175,7 +165,7 @@ impl Subscriptions {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -190,7 +180,7 @@ impl Subscriptions {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -240,10 +230,9 @@ impl Subscriptions {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `page: &str` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
-     * * `query: &str` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for subscriptions](https://stripe.com/docs/search#query-fields-for-subscriptions).
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `page` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
+     * * `query` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for subscriptions](https://stripe.com/docs/search#query-fields-for-subscriptions).
      */
     pub async fn get_search(
         &self,
@@ -264,7 +253,7 @@ impl Subscriptions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/subscriptions/search?{}", query_), None);
+            .url(&format!("/v1/subscriptions/search?{query_}"), None);
         let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
@@ -304,7 +293,7 @@ impl Subscriptions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/subscriptions/search?{}", query_), None);
+            .url(&format!("/v1/subscriptions/search?{query_}"), None);
         let crate::Response::<crate::types::SearchResult> {
             mut status,
             mut headers,
@@ -344,7 +333,7 @@ impl Subscriptions {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -359,7 +348,7 @@ impl Subscriptions {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -383,8 +372,7 @@ impl Subscriptions {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn get_exposed(
         &self,
@@ -414,7 +402,7 @@ impl Subscriptions {
      *
      * **Parameters:**
      *
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn post_exposed(
         &self,
@@ -448,7 +436,7 @@ impl Subscriptions {
      *
      * **Parameters:**
      *
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn delete_exposed(
         &self,
@@ -478,7 +466,7 @@ impl Subscriptions {
      *
      * **Parameters:**
      *
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn delete_exposed_discount(
         &self,

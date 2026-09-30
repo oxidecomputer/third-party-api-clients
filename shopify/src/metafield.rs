@@ -20,8 +20,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     * * `metafield_owner_id` -- recurring_application_charge[capped_amount]
+     * * `metafield_owner_resource` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get(
         &self,
@@ -43,7 +43,7 @@ impl Metafield {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/metafields.json?{}", query_),
+            &format!("/admin/api/2020-01/metafields.json?{query_}"),
             None,
         );
         self.client
@@ -108,8 +108,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `metafield_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_param(
         &self,
@@ -148,7 +148,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_param(
         &self,
@@ -181,7 +181,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_param(
         &self,
@@ -213,8 +213,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     * * `metafield_owner_id` -- recurring_application_charge[capped_amount]
+     * * `metafield_owner_resource` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get(
         &self,
@@ -236,7 +236,7 @@ impl Metafield {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/metafields.json?{}", query_),
+            &format!("/admin/api/2020-04/metafields.json?{query_}"),
             None,
         );
         self.client
@@ -301,8 +301,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `metafield_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_param(
         &self,
@@ -341,7 +341,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_param(
         &self,
@@ -374,7 +374,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_param(
         &self,
@@ -406,8 +406,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     * * `metafield_owner_id` -- recurring_application_charge[capped_amount]
+     * * `metafield_owner_resource` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get(
         &self,
@@ -429,7 +429,7 @@ impl Metafield {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/metafields.json?{}", query_),
+            &format!("/admin/api/2020-07/metafields.json?{query_}"),
             None,
         );
         self.client
@@ -494,8 +494,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `metafield_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_param(
         &self,
@@ -534,7 +534,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_param(
         &self,
@@ -567,7 +567,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_param(
         &self,
@@ -599,8 +599,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     * * `metafield_owner_id` -- recurring_application_charge[capped_amount]
+     * * `metafield_owner_resource` -- storefront_access_token_id
      */
     pub async fn get(
         &self,
@@ -622,7 +622,7 @@ impl Metafield {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/metafields.json?{}", query_),
+            &format!("/admin/api/2020-10/metafields.json?{query_}"),
             None,
         );
         self.client
@@ -684,8 +684,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `metafield_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_param(
         &self,
@@ -724,7 +724,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn update_param(
         &self,
@@ -757,7 +757,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn delete_param(&self, metafield_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -786,8 +786,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     * * `metafield_owner_id` -- recurring_application_charge[capped_amount]
+     * * `metafield_owner_resource` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get(
         &self,
@@ -809,7 +809,7 @@ impl Metafield {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/metafields.json?{}", query_),
+            &format!("/admin/api/2021-01/metafields.json?{query_}"),
             None,
         );
         self.client
@@ -874,8 +874,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `metafield_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_param(
         &self,
@@ -914,7 +914,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_param(
         &self,
@@ -947,7 +947,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_param(
         &self,
@@ -979,8 +979,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     * * `metafield_owner_id` -- recurring_application_charge[capped_amount]
+     * * `metafield_owner_resource` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get(
         &self,
@@ -1002,7 +1002,7 @@ impl Metafield {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/metafields.json?{}", query_),
+            &format!("/admin/api/unstable/metafields.json?{query_}"),
             None,
         );
         self.client
@@ -1067,8 +1067,8 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `metafield_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_param(
         &self,
@@ -1107,7 +1107,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_param(
         &self,
@@ -1140,7 +1140,7 @@ impl Metafield {
      *
      * **Parameters:**
      *
-     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `metafield_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_param(
         &self,

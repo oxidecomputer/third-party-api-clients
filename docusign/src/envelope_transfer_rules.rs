@@ -22,9 +22,9 @@ impl EnvelopeTransferRules {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- (Optional) The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- (Optional) The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
      */
     pub async fn get(
         &self,
@@ -69,7 +69,7 @@ impl EnvelopeTransferRules {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -113,7 +113,7 @@ impl EnvelopeTransferRules {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -150,8 +150,8 @@ impl EnvelopeTransferRules {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_transfer_rule_id: &str` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_transfer_rule_id` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
      */
     pub async fn put_rule(
         &self,
@@ -188,8 +188,8 @@ impl EnvelopeTransferRules {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_transfer_rule_id: &str` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_transfer_rule_id` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
      */
     pub async fn delete(
         &self,

@@ -12,7 +12,7 @@ impl Employees {
     }
 
     /**
-     * Get an employee.
+     * Get an employee
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id_or_uuid}` endpoint.
      *
@@ -20,7 +20,7 @@ impl Employees {
      *
      * **Parameters:**
      *
-     * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
+     * * `include` -- Include the requested attribute(s) in each employee response
      */
     pub async fn get(
         &self,
@@ -51,7 +51,7 @@ impl Employees {
             .await
     }
     /**
-     * Update an employee.
+     * Update an employee
      *
      * This function performs a `PUT` to the `/v1/employees/{employee_id_or_uuid}` endpoint.
      *
@@ -80,7 +80,7 @@ impl Employees {
             .await
     }
     /**
-     * Get employees of a company.
+     * Get employees of a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
      *
@@ -88,10 +88,10 @@ impl Employees {
      *
      * **Parameters:**
      *
-     * * `terminated: bool` -- Filters employees by the provided boolean.
-     * * `page: f64` -- The page that is requested. When unspecified, will load all employees.
-     * * `per: f64` -- Number of employees per page. When unspecified, will default to 25.
-     * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
+     * * `terminated` -- Filters employees by the provided boolean
+     * * `page` -- The page that is requested. When unspecified, will load all employees.
+     * * `per` -- Number of employees per page. When unspecified, will default to 25
+     * * `include` -- Include the requested attribute(s) in each employee response
      */
     pub async fn get_company(
         &self,
@@ -134,7 +134,7 @@ impl Employees {
             .await
     }
     /**
-     * Get employees of a company.
+     * Get employees of a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
      *
@@ -175,7 +175,7 @@ impl Employees {
             .await
     }
     /**
-     * Create an employee.
+     * Create an employee
      *
      * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
      *
@@ -204,7 +204,7 @@ impl Employees {
             .await
     }
     /**
-     * Get an employee's home address.
+     * Get an employee's home address
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/home_address` endpoint.
      *
@@ -232,7 +232,7 @@ impl Employees {
             .await
     }
     /**
-     * Update an employee's home address.
+     * Update an employee's home address
      *
      * This function performs a `PUT` to the `/v1/employees/{employee_id}/home_address` endpoint.
      *

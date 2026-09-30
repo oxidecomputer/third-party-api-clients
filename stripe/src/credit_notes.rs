@@ -18,12 +18,11 @@ impl CreditNotes {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Only return credit notes for the customer specified by this customer ID.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `invoice: &str` -- Only return credit notes for the invoice specified by this invoice ID.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- Only return credit notes for the customer specified by this customer ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `invoice` -- Only return credit notes for the invoice specified by this invoice ID.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
@@ -50,9 +49,7 @@ impl CreditNotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/v1/credit_notes?{}", query_), None);
+        let url = self.client.url(&format!("/v1/credit_notes?{query_}"), None);
         let resp: crate::Response<crate::types::CreditNotesList> = self
             .client
             .get(
@@ -91,9 +88,7 @@ impl CreditNotes {
             query_args.push(("invoice".to_string(), invoice.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/v1/credit_notes?{}", query_), None);
+        let url = self.client.url(&format!("/v1/credit_notes?{query_}"), None);
         let crate::Response::<crate::types::CreditNotesList> {
             mut status,
             mut headers,
@@ -133,7 +128,7 @@ impl CreditNotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -148,7 +143,7 @@ impl CreditNotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -202,26 +197,21 @@ impl CreditNotes {
      *
      * **Parameters:**
      *
-     * * `amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-     * * `credit_amount: i64` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `invoice: &str` -- The account's country.
-     * * `lines: &[String]` -- Line items that make up the credit note.
-     * * `memo: &str` -- The credit note's memo appears on the credit note PDF.
-     * * `metadata: &str` -- Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
-     * * `out_of_band_amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-     * * `reason: crate::types::Reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`.
-     * * `refund: &str` -- ID of an existing refund to link this credit note to.
-     * * `refund_amount: i64` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+     * * `amount` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `credit_amount` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
+     * * `invoice` -- The account's country.
+     * * `memo` -- The credit note's memo appears on the credit note PDF.
+     * * `out_of_band_amount` -- The integer amount in %s representing the amount that is credited outside of Stripe.
+     * * `reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
+     * * `refund` -- ID of an existing refund to link this credit note to.
+     * * `refund_amount` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
      */
     pub async fn get_preview(
         &self,
         amount: i64,
         credit_amount: i64,
         invoice: &str,
-        lines: &[String],
         memo: &str,
-        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -258,7 +248,7 @@ impl CreditNotes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/credit_notes/preview?{}", query_), None);
+            .url(&format!("/v1/credit_notes/preview?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -276,20 +266,17 @@ impl CreditNotes {
      *
      * **Parameters:**
      *
-     * * `amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-     * * `credit_amount: i64` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `invoice: &str` -- The account's country.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `lines: &[String]` -- Line items that make up the credit note.
-     * * `memo: &str` -- The credit note's memo appears on the credit note PDF.
-     * * `metadata: &str` -- Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
-     * * `out_of_band_amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-     * * `reason: crate::types::Reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`.
-     * * `refund: &str` -- ID of an existing refund to link this credit note to.
-     * * `refund_amount: i64` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `amount` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `credit_amount` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `invoice` -- The account's country.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `memo` -- The credit note's memo appears on the credit note PDF.
+     * * `out_of_band_amount` -- The integer amount in %s representing the amount that is credited outside of Stripe.
+     * * `reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
+     * * `refund` -- ID of an existing refund to link this credit note to.
+     * * `refund_amount` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_preview_lines(
         &self,
@@ -298,9 +285,7 @@ impl CreditNotes {
         ending_before: &str,
         invoice: &str,
         limit: i64,
-        lines: &[String],
         memo: &str,
-        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -347,7 +332,7 @@ impl CreditNotes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
+            .url(&format!("/v1/credit_notes/preview/lines?{query_}"), None);
         let resp: crate::Response<crate::types::Lines> = self
             .client
             .get(
@@ -378,9 +363,7 @@ impl CreditNotes {
         amount: i64,
         credit_amount: i64,
         invoice: &str,
-        lines: &[String],
         memo: &str,
-        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -417,7 +400,7 @@ impl CreditNotes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
+            .url(&format!("/v1/credit_notes/preview/lines?{query_}"), None);
         let crate::Response::<crate::types::Lines> {
             mut status,
             mut headers,
@@ -457,7 +440,7 @@ impl CreditNotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -472,7 +455,7 @@ impl CreditNotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -496,11 +479,10 @@ impl CreditNotes {
      *
      * **Parameters:**
      *
-     * * `credit_note: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `credit_note` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_note_lines(
         &self,
@@ -603,7 +585,7 @@ impl CreditNotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -618,7 +600,7 @@ impl CreditNotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -642,8 +624,7 @@ impl CreditNotes {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::CreditNote>> {
         let url = self.client.url(
@@ -670,7 +651,7 @@ impl CreditNotes {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_credit_notes(
         &self,
@@ -700,7 +681,7 @@ impl CreditNotes {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_void(
         &self,

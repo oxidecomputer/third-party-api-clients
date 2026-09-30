@@ -12,7 +12,7 @@ impl SingleSignOnSettings {
     }
 
     /**
-     * Get All SSO Integrations.
+     * Get All SSO Integrations
      *
      * This function performs a `GET` to the `/sso/integrations` endpoint.
      *
@@ -22,7 +22,7 @@ impl SingleSignOnSettings {
      *
      * **Parameters:**
      *
-     * * `si: bool` -- If this parameter is set to `true`, the response will include the `completed_integration` field.
+     * * `si` -- If this parameter is set to `true`, the response will include the `completed_integration` field.
      */
     pub async fn get_sso_integrations(
         &self,
@@ -35,7 +35,7 @@ impl SingleSignOnSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/sso/integrations?{}", query_), None);
+            .url(&format!("/sso/integrations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -47,7 +47,7 @@ impl SingleSignOnSettings {
             .await
     }
     /**
-     * Get All SSO Integrations.
+     * Get All SSO Integrations
      *
      * This function performs a `GET` to the `/sso/integrations` endpoint.
      *
@@ -68,7 +68,7 @@ impl SingleSignOnSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/sso/integrations?{}", query_), None);
+            .url(&format!("/sso/integrations?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -80,7 +80,7 @@ impl SingleSignOnSettings {
             .await
     }
     /**
-     * Create an SSO Integration.
+     * Create an SSO Integration
      *
      * This function performs a `POST` to the `/sso/integrations` endpoint.
      *
@@ -102,7 +102,7 @@ impl SingleSignOnSettings {
             .await
     }
     /**
-     * Get an SSO Integration.
+     * Get an SSO Integration
      *
      * This function performs a `GET` to the `/sso/integrations/{id}` endpoint.
      *
@@ -112,7 +112,7 @@ impl SingleSignOnSettings {
      *
      * **Parameters:**
      *
-     * * `si: bool` -- If this parameter is set to `true`, the response will include the `completed_integration` field.
+     * * `si` -- If this parameter is set to `true`, the response will include the `completed_integration` field.
      */
     pub async fn get_sso_integration(
         &self,
@@ -143,7 +143,7 @@ impl SingleSignOnSettings {
             .await
     }
     /**
-     * Delete an SSO Integration.
+     * Delete an SSO Integration
      *
      * This function performs a `DELETE` to the `/sso/integrations/{id}` endpoint.
      *
@@ -170,7 +170,7 @@ impl SingleSignOnSettings {
             .await
     }
     /**
-     * Update an SSO Integration.
+     * Update an SSO Integration
      *
      * This function performs a `PATCH` to the `/sso/integrations/{id}` endpoint.
      *
@@ -180,7 +180,7 @@ impl SingleSignOnSettings {
      *
      * **Parameters:**
      *
-     * * `si: bool` -- If this parameter is set to `true`, the response will include the `completed_integration` field.
+     * * `si` -- If this parameter is set to `true`, the response will include the `completed_integration` field.
      */
     pub async fn patch_sso_integrations(
         &self,

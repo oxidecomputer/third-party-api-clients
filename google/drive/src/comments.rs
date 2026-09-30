@@ -18,11 +18,11 @@ impl Comments {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `include_deleted: bool` -- Whether to include deleted comments. Deleted comments will not include their original content.
-     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
-     * * `start_modified_time: &str` -- The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).
+     * * `file_id` -- A link to this theme's background image.
+     * * `include_deleted` -- Whether to include deleted comments. Deleted comments will not include their original content.
+     * * `page_size` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `page_token` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+     * * `start_modified_time` -- The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).
      */
     pub async fn list(
         &self,
@@ -135,7 +135,7 @@ impl Comments {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -150,7 +150,7 @@ impl Comments {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -178,7 +178,7 @@ impl Comments {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
+     * * `file_id` -- A link to this theme's background image.
      */
     pub async fn create(
         &self,
@@ -209,9 +209,9 @@ impl Comments {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
-     * * `include_deleted: bool` -- Whether to return deleted comments. Deleted comments will not include their original content.
+     * * `file_id` -- A link to this theme's background image.
+     * * `comment_id` -- A link to this theme's background image.
+     * * `include_deleted` -- Whether to return deleted comments. Deleted comments will not include their original content.
      */
     pub async fn get(
         &self,
@@ -250,8 +250,8 @@ impl Comments {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
+     * * `file_id` -- A link to this theme's background image.
+     * * `comment_id` -- A link to this theme's background image.
      */
     pub async fn delete(
         &self,
@@ -283,8 +283,8 @@ impl Comments {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
+     * * `file_id` -- A link to this theme's background image.
+     * * `comment_id` -- A link to this theme's background image.
      */
     pub async fn update(
         &self,

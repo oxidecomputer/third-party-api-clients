@@ -18,22 +18,17 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `active: bool` -- Only return products that are active or inactive (e.g., pass `false` to list all inactive products).
-     * * `created: &str` -- Only return products that were created during the given date interval.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `ids: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `shippable: bool` -- Only return products that can be shipped (i.e., physical, not digital products).
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `url: &str` -- Only return products with the given url.
+     * * `active` -- Only return products that are active or inactive (e.g., pass `false` to list all inactive products).
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `shippable` -- Only return products that can be shipped (i.e., physical, not digital products).
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `url` -- Only return products with the given url.
      */
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
         ending_before: &str,
-        ids: &[String],
         limit: i64,
         shippable: bool,
         starting_after: &str,
@@ -59,7 +54,7 @@ impl Products {
             query_args.push(("url".to_string(), url.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/products?{}", query_), None);
+        let url = self.client.url(&format!("/v1/products?{query_}"), None);
         let resp: crate::Response<crate::types::ProductList> = self
             .client
             .get(
@@ -88,8 +83,6 @@ impl Products {
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
-        ids: &[String],
         shippable: bool,
         url: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Product>>> {
@@ -104,7 +97,7 @@ impl Products {
             query_args.push(("url".to_string(), url.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/products?{}", query_), None);
+        let url = self.client.url(&format!("/v1/products?{query_}"), None);
         let crate::Response::<crate::types::ProductList> {
             mut status,
             mut headers,
@@ -144,7 +137,7 @@ impl Products {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -159,7 +152,7 @@ impl Products {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -203,10 +196,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `page: &str` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
-     * * `query: &str` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for products](https://stripe.com/docs/search#query-fields-for-products).
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `page` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
+     * * `query` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for products](https://stripe.com/docs/search#query-fields-for-products).
      */
     pub async fn get_search(
         &self,
@@ -227,7 +219,7 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/products/search?{}", query_), None);
+            .url(&format!("/v1/products/search?{query_}"), None);
         let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
@@ -267,7 +259,7 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/products/search?{}", query_), None);
+            .url(&format!("/v1/products/search?{query_}"), None);
         let crate::Response::<crate::types::SearchResult> {
             mut status,
             mut headers,
@@ -307,7 +299,7 @@ impl Products {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -322,7 +314,7 @@ impl Products {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -346,8 +338,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Product>> {
         let url = self.client.url(
@@ -374,7 +365,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_products(
         &self,
@@ -404,7 +395,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn delete(
         &self,

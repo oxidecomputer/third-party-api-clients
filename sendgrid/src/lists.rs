@@ -12,7 +12,7 @@ impl Lists {
     }
 
     /**
-     * Get All Lists.
+     * Get All Lists
      *
      * This function performs a `GET` to the `/marketing/lists` endpoint.
      *
@@ -20,8 +20,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `page_size: f64` -- Maximum number of elements to return. Defaults to 100, returns 1000 max.
-     * * `page_token: &str` -- The license key provided with your New Relic account.
+     * * `page_size` -- Maximum number of elements to return. Defaults to 100, returns 1000 max
+     * * `page_token` -- The license key provided with your New Relic account.
      */
     pub async fn get_mc(
         &self,
@@ -36,9 +36,7 @@ impl Lists {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/marketing/lists?{}", query_), None);
+        let url = self.client.url(&format!("/marketing/lists?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -50,7 +48,7 @@ impl Lists {
             .await
     }
     /**
-     * Create List.
+     * Create List
      *
      * This function performs a `POST` to the `/marketing/lists` endpoint.
      *
@@ -76,7 +74,7 @@ impl Lists {
             .await
     }
     /**
-     * Get List Contact Count.
+     * Get List Contact Count
      *
      * This function performs a `GET` to the `/marketing/lists/{id}/contacts/count` endpoint.
      *
@@ -104,7 +102,7 @@ impl Lists {
             .await
     }
     /**
-     * Get a List by ID.
+     * Get a List by ID
      *
      * This function performs a `GET` to the `/marketing/lists/{id}` endpoint.
      *
@@ -116,7 +114,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `contact_sample: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * * `contact_sample` -- Setting this parameter to the true  will cause the contact_sample to be returned
      */
     pub async fn get_mc_lists(
         &self,
@@ -147,7 +145,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete a list.
+     * Delete a list
      *
      * This function performs a `DELETE` to the `/marketing/lists/{id}` endpoint.
      *
@@ -157,7 +155,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `delete_contacts: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * * `delete_contacts` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     pub async fn delete(
         &self,
@@ -188,7 +186,7 @@ impl Lists {
             .await
     }
     /**
-     * Update List.
+     * Update List
      *
      * This function performs a `PATCH` to the `/marketing/lists/{id}` endpoint.
      *
@@ -217,7 +215,7 @@ impl Lists {
             .await
     }
     /**
-     * Remove Contacts from a List.
+     * Remove Contacts from a List
      *
      * This function performs a `DELETE` to the `/marketing/lists/{id}/contacts` endpoint.
      *
@@ -227,7 +225,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `contact_ids: &str` -- The license key provided with your New Relic account.
+     * * `contact_ids` -- The license key provided with your New Relic account.
      */
     pub async fn delete_mc_contacts(
         &self,

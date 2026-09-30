@@ -12,7 +12,7 @@ impl Emojis {
     }
 
     /**
-     * Get emojis.
+     * Get emojis
      *
      * This function performs a `GET` to the `/emojis` endpoint.
      *

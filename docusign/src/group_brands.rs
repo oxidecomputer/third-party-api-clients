@@ -20,8 +20,8 @@ impl GroupBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brands_get_group(
         &self,
@@ -55,8 +55,8 @@ impl GroupBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brands_put_group(
         &self,
@@ -91,8 +91,8 @@ impl GroupBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brands_delete_group(
         &self,

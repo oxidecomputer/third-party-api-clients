@@ -12,7 +12,7 @@ impl TemplateFolders {
     }
 
     /**
-     * List template folders.
+     * List template folders
      *
      * This function performs a `GET` to the `/template-folders` endpoint.
      *
@@ -20,10 +20,10 @@ impl TemplateFolders {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get(
         &self,
@@ -48,7 +48,7 @@ impl TemplateFolders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/template-folders?{}", query_), None);
+            .url(&format!("/template-folders?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -60,7 +60,7 @@ impl TemplateFolders {
             .await
     }
     /**
-     * Add template folder.
+     * Add template folder
      *
      * This function performs a `POST` to the `/template-folders` endpoint.
      *
@@ -82,7 +82,7 @@ impl TemplateFolders {
             .await
     }
     /**
-     * Get template folder.
+     * Get template folder
      *
      * This function performs a `GET` to the `/template-folders/{folder_id}` endpoint.
      *
@@ -90,9 +90,9 @@ impl TemplateFolders {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `folder_id: &str` -- The unique id for the template folder.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `folder_id` -- The unique id for the template folder.
      */
     pub async fn get_template_folders(
         &self,
@@ -127,7 +127,7 @@ impl TemplateFolders {
             .await
     }
     /**
-     * Delete template folder.
+     * Delete template folder
      *
      * This function performs a `DELETE` to the `/template-folders/{folder_id}` endpoint.
      *
@@ -135,7 +135,7 @@ impl TemplateFolders {
      *
      * **Parameters:**
      *
-     * * `folder_id: &str` -- The unique id for the template folder.
+     * * `folder_id` -- The unique id for the template folder.
      */
     pub async fn delete(&self, folder_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -156,7 +156,7 @@ impl TemplateFolders {
             .await
     }
     /**
-     * Update template folder.
+     * Update template folder
      *
      * This function performs a `PATCH` to the `/template-folders/{folder_id}` endpoint.
      *
@@ -164,7 +164,7 @@ impl TemplateFolders {
      *
      * **Parameters:**
      *
-     * * `folder_id: &str` -- The unique id for the template folder.
+     * * `folder_id` -- The unique id for the template folder.
      */
     pub async fn patch(
         &self,

@@ -22,9 +22,9 @@ impl Payments {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `from_date: &str` -- Specifies the date/time of the earliest payment in the account to retrieve.
-     * * `to_date: &str` -- Specifies the date/time of the latest payment in the account to retrieve.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `from_date` -- Specifies the date/time of the earliest payment in the account to retrieve.
+     * * `to_date` -- Specifies the date/time of the latest payment in the account to retrieve.
      */
     pub async fn billing_get_list(
         &self,
@@ -71,10 +71,9 @@ impl Payments {
      *
      * Privileges required: account administrator
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn billing_post(
         &self,
@@ -109,8 +108,8 @@ impl Payments {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `payment_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `payment_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn billing_get(
         &self,

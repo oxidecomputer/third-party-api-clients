@@ -20,10 +20,10 @@ impl AdminTeamsAdmins {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:read`.
-     * * `limit: i64` -- The maximum number of items to return.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     * * `team_id: &str`
+     * * `token` -- Authentication token. Requires scope: `admin.teams:read`
+     * * `limit` -- The maximum number of items to return.
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+     * * `team_id`
      */
     pub async fn list(
         &self,
@@ -44,7 +44,7 @@ impl AdminTeamsAdmins {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.teams.admins.list?{}", query_), None);
+            .url(&format!("/admin.teams.admins.list?{query_}"), None);
         self.client
             .get(
                 &url,

@@ -20,7 +20,7 @@ impl Pins {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
+     * * `token` -- Authentication token. Requires scope: `pins:write`
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/pins.add", None);
@@ -43,8 +43,8 @@ impl Pins {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `pins:read`.
-     * * `channel: &str` -- Channel to get pinned items for.
+     * * `token` -- Authentication token. Requires scope: `pins:read`
+     * * `channel` -- Channel to get pinned items for.
      */
     pub async fn list(
         &self,
@@ -55,7 +55,7 @@ impl Pins {
             query_args.push(("channel".to_string(), channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/pins.list?{}", query_), None);
+        let url = self.client.url(&format!("/pins.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -84,7 +84,7 @@ impl Pins {
             query_args.push(("channel".to_string(), channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/pins.list?{}", query_), None);
+        let url = self.client.url(&format!("/pins.list?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -104,7 +104,7 @@ impl Pins {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
+     * * `token` -- Authentication token. Requires scope: `pins:write`
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/pins.remove", None);

@@ -12,7 +12,7 @@ impl InvalidEmailsApi {
     }
 
     /**
-     * Retrieve all invalid emails.
+     * Retrieve all invalid emails
      *
      * This function performs a `GET` to the `/suppression/invalid_emails` endpoint.
      *
@@ -20,11 +20,11 @@ impl InvalidEmailsApi {
      *
      * **Parameters:**
      *
-     * * `start_time: i64` -- Refers start of the time range in unix timestamp when an invalid email was created (inclusive).
-     * * `end_time: i64` -- Refers end of the time range in unix timestamp when an invalid email was created (inclusive).
-     * * `limit: i64` -- Limit the number of results to be displayed per page.
-     * * `offset: i64` -- Paging offset. The point in the list to begin displaying results.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `start_time` -- Refers start of the time range in unix timestamp when an invalid email was created (inclusive).
+     * * `end_time` -- Refers end of the time range in unix timestamp when an invalid email was created (inclusive).
+     * * `limit` -- Limit the number of results to be displayed per page.
+     * * `offset` -- Paging offset. The point in the list to begin displaying results.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_invalid_emails(
         &self,
@@ -49,7 +49,7 @@ impl InvalidEmailsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/invalid_emails?{}", query_), None);
+            .url(&format!("/suppression/invalid_emails?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -61,7 +61,7 @@ impl InvalidEmailsApi {
             .await
     }
     /**
-     * Retrieve all invalid emails.
+     * Retrieve all invalid emails
      *
      * This function performs a `GET` to the `/suppression/invalid_emails` endpoint.
      *
@@ -88,7 +88,7 @@ impl InvalidEmailsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/invalid_emails?{}", query_), None);
+            .url(&format!("/suppression/invalid_emails?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -100,7 +100,7 @@ impl InvalidEmailsApi {
             .await
     }
     /**
-     * Delete invalid emails.
+     * Delete invalid emails
      *
      * This function performs a `DELETE` to the `/suppression/invalid_emails` endpoint.
      *
@@ -113,7 +113,7 @@ impl InvalidEmailsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_invalid_emails(
         &self,
@@ -131,7 +131,7 @@ impl InvalidEmailsApi {
             .await
     }
     /**
-     * Retrieve a specific invalid email.
+     * Retrieve a specific invalid email
      *
      * This function performs a `GET` to the `/suppression/invalid_emails/{email}` endpoint.
      *
@@ -139,7 +139,7 @@ impl InvalidEmailsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_invalid_emails_email(
         &self,
@@ -163,7 +163,7 @@ impl InvalidEmailsApi {
             .await
     }
     /**
-     * Retrieve a specific invalid email.
+     * Retrieve a specific invalid email
      *
      * This function performs a `GET` to the `/suppression/invalid_emails/{email}` endpoint.
      *
@@ -193,7 +193,7 @@ impl InvalidEmailsApi {
             .await
     }
     /**
-     * Delete a specific invalid email.
+     * Delete a specific invalid email
      *
      * This function performs a `DELETE` to the `/suppression/invalid_emails/{email}` endpoint.
      *
@@ -201,7 +201,7 @@ impl InvalidEmailsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_invalid_emails_email(
         &self,

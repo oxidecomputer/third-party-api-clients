@@ -18,9 +18,9 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `page_token: &str` -- Token to specify the next page in the list.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `max_results` -- Maximum number of results to return.
+     * * `page_token` -- Token to specify the next page in the list.
      */
     pub async fn buildings_list(
         &self,
@@ -108,7 +108,7 @@ impl Resources {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -123,7 +123,7 @@ impl Resources {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -151,8 +151,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `coordinates_source` -- Source from which Building.coordinates are derived.
      */
     pub async fn buildings_insert(
         &self,
@@ -193,8 +193,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The unique ID of the building to retrieve.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `building_id` -- The unique ID of the building to retrieve.
      */
     pub async fn buildings_get(
         &self,
@@ -226,9 +226,9 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The id of the building to update.
-     * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `building_id` -- The id of the building to update.
+     * * `coordinates_source` -- Source from which Building.coordinates are derived.
      */
     pub async fn buildings_update(
         &self,
@@ -271,8 +271,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The id of the building to delete.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `building_id` -- The id of the building to delete.
      */
     pub async fn buildings_delete(
         &self,
@@ -304,9 +304,9 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The id of the building to update.
-     * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `building_id` -- The id of the building to update.
+     * * `coordinates_source` -- Source from which Building.coordinates are derived.
      */
     pub async fn buildings_patch(
         &self,
@@ -349,11 +349,11 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `order_by: &str` -- Field(s) to sort results by in either ascending or descending order. Supported fields include `resourceId`, `resourceName`, `capacity`, `buildingId`, and `floorName`. If no order is specified, defaults to ascending. Should be of the form "field [asc|desc], field [asc|desc], ...". For example `buildingId, capacity desc` would return results sorted first by `buildingId` in ascending order then by `capacity` in descending order.
-     * * `page_token: &str` -- Token to specify the next page in the list.
-     * * `query: &str` -- String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include '=' for exact match, '!=' for mismatch and ':' for prefix match or HAS match where applicable. For prefix match, the value should always be followed by a *. Logical operators NOT and AND are supported (in this order of precedence). Supported fields include `generatedResourceName`, `name`, `buildingId`, `floor_name`, `capacity`, `featureInstances.feature.name`, `resourceEmail`, `resourceCategory`. For example `buildingId=US-NYC-9TH AND featureInstances.feature.name:Phone`.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `max_results` -- Maximum number of results to return.
+     * * `order_by` -- Field(s) to sort results by in either ascending or descending order. Supported fields include `resourceId`, `resourceName`, `capacity`, `buildingId`, and `floorName`. If no order is specified, defaults to ascending. Should be of the form "field [asc|desc], field [asc|desc], ...". For example `buildingId, capacity desc` would return results sorted first by `buildingId` in ascending order then by `capacity` in descending order.
+     * * `page_token` -- Token to specify the next page in the list.
+     * * `query` -- String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include '=' for exact match, '!=' for mismatch and ':' for prefix match or HAS match where applicable. For prefix match, the value should always be followed by a *. Logical operators NOT and AND are supported (in this order of precedence). Supported fields include `generatedResourceName`, `name`, `buildingId`, `floor_name`, `capacity`, `featureInstances.feature.name`, `resourceEmail`, `resourceCategory`. For example `buildingId=US-NYC-9TH AND featureInstances.feature.name:Phone`.
      */
     pub async fn calendars_list(
         &self,
@@ -460,7 +460,7 @@ impl Resources {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -475,7 +475,7 @@ impl Resources {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -503,7 +503,7 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      */
     pub async fn calendars_insert(
         &self,
@@ -534,8 +534,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to retrieve.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `calendar_resource_id` -- The unique ID of the calendar resource to retrieve.
      */
     pub async fn calendars_get(
         &self,
@@ -567,8 +567,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to update.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `calendar_resource_id` -- The unique ID of the calendar resource to update.
      */
     pub async fn calendars_update(
         &self,
@@ -601,8 +601,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to delete.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `calendar_resource_id` -- The unique ID of the calendar resource to delete.
      */
     pub async fn calendars_delete(
         &self,
@@ -634,8 +634,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to update.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `calendar_resource_id` -- The unique ID of the calendar resource to update.
      */
     pub async fn calendars_patch(
         &self,
@@ -668,9 +668,9 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `page_token: &str` -- Token to specify the next page in the list.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `max_results` -- Maximum number of results to return.
+     * * `page_token` -- Token to specify the next page in the list.
      */
     pub async fn features_list(
         &self,
@@ -758,7 +758,7 @@ impl Resources {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -773,7 +773,7 @@ impl Resources {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -801,7 +801,7 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      */
     pub async fn features_insert(
         &self,
@@ -832,8 +832,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to retrieve.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `feature_key` -- The unique ID of the feature to retrieve.
      */
     pub async fn features_get(
         &self,
@@ -865,8 +865,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to update.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `feature_key` -- The unique ID of the feature to update.
      */
     pub async fn features_update(
         &self,
@@ -899,8 +899,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to delete.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `feature_key` -- The unique ID of the feature to delete.
      */
     pub async fn features_delete(
         &self,
@@ -932,8 +932,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to update.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `feature_key` -- The unique ID of the feature to update.
      */
     pub async fn features_patch(
         &self,
@@ -966,8 +966,8 @@ impl Resources {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `old_name: &str` -- The unique ID of the feature to rename.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+     * * `old_name` -- The unique ID of the feature to rename.
      */
     pub async fn features_rename(
         &self,

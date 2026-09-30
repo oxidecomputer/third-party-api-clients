@@ -20,12 +20,12 @@ impl ChatScheduledMessages {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `channel: &str` -- The channel of the scheduled messages.
-     * * `latest: f64` -- A UNIX timestamp of the latest value in the time range.
-     * * `oldest: f64` -- A UNIX timestamp of the oldest value in the time range.
-     * * `limit: i64` -- Maximum number of original entries to return.
-     * * `cursor: &str` -- For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `channel` -- The channel of the scheduled messages
+     * * `latest` -- A UNIX timestamp of the latest value in the time range
+     * * `oldest` -- A UNIX timestamp of the oldest value in the time range
+     * * `limit` -- Maximum number of original entries to return.
+     * * `cursor` -- For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from.
      */
     pub async fn list(
         &self,
@@ -54,7 +54,7 @@ impl ChatScheduledMessages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/chat.scheduledMessages.list?{}", query_), None);
+            .url(&format!("/chat.scheduledMessages.list?{query_}"), None);
         self.client
             .get(
                 &url,

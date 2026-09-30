@@ -12,7 +12,7 @@ impl Projects {
     }
 
     /**
-     * List organization projects.
+     * List organization projects
      *
      * This function performs a `GET` to the `/orgs/{org}/projects` endpoint.
      *
@@ -22,10 +22,10 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `state` -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_org(
         &self,
@@ -64,7 +64,7 @@ impl Projects {
             .await
     }
     /**
-     * List organization projects.
+     * List organization projects
      *
      * This function performs a `GET` to the `/orgs/{org}/projects` endpoint.
      *
@@ -103,7 +103,7 @@ impl Projects {
             .await
     }
     /**
-     * Create an organization project.
+     * Create an organization project
      *
      * This function performs a `POST` to the `/orgs/{org}/projects` endpoint.
      *
@@ -113,7 +113,7 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create_for_org(
         &self,
@@ -138,17 +138,15 @@ impl Projects {
             .await
     }
     /**
-     * Get a project card.
+     * Get a project card
      *
      * This function performs a `GET` to the `/projects/columns/cards/{card_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#get-a-project-card>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `card_id` -- card_id parameter
      */
     pub async fn get_card(
         &self,
@@ -172,17 +170,15 @@ impl Projects {
             .await
     }
     /**
-     * Delete a project card.
+     * Delete a project card
      *
      * This function performs a `DELETE` to the `/projects/columns/cards/{card_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project-card>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `card_id` -- card_id parameter
      */
     pub async fn delete_card(&self, card_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -203,17 +199,15 @@ impl Projects {
             .await
     }
     /**
-     * Update an existing project card.
+     * Update an existing project card
      *
      * This function performs a `PATCH` to the `/projects/columns/cards/{card_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-card>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `card_id` -- card_id parameter
      */
     pub async fn update_card(
         &self,
@@ -238,17 +232,15 @@ impl Projects {
             .await
     }
     /**
-     * Move a project card.
+     * Move a project card
      *
      * This function performs a `POST` to the `/projects/columns/cards/{card_id}/moves` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#move-a-project-card>
      *
      * **Parameters:**
      *
-     * * `card_id: i64` -- card_id parameter.
+     * * `card_id` -- card_id parameter
      */
     pub async fn move_card(
         &self,
@@ -273,17 +265,15 @@ impl Projects {
             .await
     }
     /**
-     * Get a project column.
+     * Get a project column
      *
      * This function performs a `GET` to the `/projects/columns/{column_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#get-a-project-column>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `column_id` -- column_id parameter
      */
     pub async fn get_column(
         &self,
@@ -307,17 +297,15 @@ impl Projects {
             .await
     }
     /**
-     * Delete a project column.
+     * Delete a project column
      *
      * This function performs a `DELETE` to the `/projects/columns/{column_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project-column>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `column_id` -- column_id parameter
      */
     pub async fn delete_column(&self, column_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -338,17 +326,15 @@ impl Projects {
             .await
     }
     /**
-     * Update an existing project column.
+     * Update an existing project column
      *
      * This function performs a `PATCH` to the `/projects/columns/{column_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-column>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `column_id` -- column_id parameter
      */
     pub async fn update_column(
         &self,
@@ -373,20 +359,18 @@ impl Projects {
             .await
     }
     /**
-     * List project cards.
+     * List project cards
      *
      * This function performs a `GET` to the `/projects/columns/{column_id}/cards` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
-     * * `archived_state: crate::types::ArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `column_id` -- column_id parameter
+     * * `archived_state` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_cards(
         &self,
@@ -425,13 +409,11 @@ impl Projects {
             .await
     }
     /**
-     * List project cards.
+     * List project cards
      *
      * This function performs a `GET` to the `/projects/columns/{column_id}/cards` endpoint.
      *
      * As opposed to `list_cards`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
      */
@@ -464,17 +446,15 @@ impl Projects {
             .await
     }
     /**
-     * Create a project card.
+     * Create a project card
      *
      * This function performs a `POST` to the `/projects/columns/{column_id}/cards` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-card>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `column_id` -- column_id parameter
      */
     pub async fn create_card(
         &self,
@@ -499,17 +479,15 @@ impl Projects {
             .await
     }
     /**
-     * Move a project column.
+     * Move a project column
      *
      * This function performs a `POST` to the `/projects/columns/{column_id}/moves` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#move-a-project-column>
      *
      * **Parameters:**
      *
-     * * `column_id: i64` -- column_id parameter.
+     * * `column_id` -- column_id parameter
      */
     pub async fn move_column(
         &self,
@@ -534,7 +512,7 @@ impl Projects {
             .await
     }
     /**
-     * Get a project.
+     * Get a project
      *
      * This function performs a `GET` to the `/projects/{project_id}` endpoint.
      *
@@ -544,7 +522,7 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
+     * * `project_id`
      */
     pub async fn get(
         &self,
@@ -568,7 +546,7 @@ impl Projects {
             .await
     }
     /**
-     * Delete a project.
+     * Delete a project
      *
      * This function performs a `DELETE` to the `/projects/{project_id}` endpoint.
      *
@@ -578,7 +556,7 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
+     * * `project_id`
      */
     pub async fn delete(&self, project_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -599,7 +577,7 @@ impl Projects {
             .await
     }
     /**
-     * Update a project.
+     * Update a project
      *
      * This function performs a `PATCH` to the `/projects/{project_id}` endpoint.
      *
@@ -609,7 +587,7 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
+     * * `project_id`
      */
     pub async fn update(
         &self,
@@ -634,7 +612,7 @@ impl Projects {
             .await
     }
     /**
-     * List project collaborators.
+     * List project collaborators
      *
      * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
      *
@@ -644,13 +622,13 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
-     * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
-     *  \\* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
-     *  \\* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
-     *  \\* `all`: All collaborators the authenticated user can see.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `project_id`
+     * * `affiliation` -- Filters the collaborators by their affiliation. Can be one of:
+     *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.
+     *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.
+     *   \* `all`: All collaborators the authenticated user can see.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_collaborators(
         &self,
@@ -689,7 +667,7 @@ impl Projects {
             .await
     }
     /**
-     * List project collaborators.
+     * List project collaborators
      *
      * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
      *
@@ -728,7 +706,7 @@ impl Projects {
             .await
     }
     /**
-     * Add project collaborator.
+     * Add project collaborator
      *
      * This function performs a `PUT` to the `/projects/{project_id}/collaborators/{username}` endpoint.
      *
@@ -738,8 +716,8 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
-     * * `username: &str`
+     * * `project_id`
+     * * `username`
      */
     pub async fn add_collaborator(
         &self,
@@ -766,7 +744,7 @@ impl Projects {
             .await
     }
     /**
-     * Remove user as a collaborator.
+     * Remove user as a collaborator
      *
      * This function performs a `DELETE` to the `/projects/{project_id}/collaborators/{username}` endpoint.
      *
@@ -776,8 +754,8 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
-     * * `username: &str`
+     * * `project_id`
+     * * `username`
      */
     pub async fn remove_collaborator(
         &self,
@@ -803,7 +781,7 @@ impl Projects {
             .await
     }
     /**
-     * Get project permission for a user.
+     * Get project permission for a user
      *
      * This function performs a `GET` to the `/projects/{project_id}/collaborators/{username}/permission` endpoint.
      *
@@ -813,8 +791,8 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
-     * * `username: &str`
+     * * `project_id`
+     * * `username`
      */
     pub async fn get_permission_for_user(
         &self,
@@ -840,19 +818,17 @@ impl Projects {
             .await
     }
     /**
-     * List project columns.
+     * List project columns
      *
      * This function performs a `GET` to the `/projects/{project_id}/columns` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-project-columns>
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `project_id`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_columns(
         &self,
@@ -887,13 +863,11 @@ impl Projects {
             .await
     }
     /**
-     * List project columns.
+     * List project columns
      *
      * This function performs a `GET` to the `/projects/{project_id}/columns` endpoint.
      *
      * As opposed to `list_columns`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-project-columns>
      */
@@ -919,17 +893,15 @@ impl Projects {
             .await
     }
     /**
-     * Create a project column.
+     * Create a project column
      *
      * This function performs a `POST` to the `/projects/{project_id}/columns` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-column>
      *
      * **Parameters:**
      *
-     * * `project_id: i64`
+     * * `project_id`
      */
     pub async fn create_column(
         &self,
@@ -954,7 +926,7 @@ impl Projects {
             .await
     }
     /**
-     * List repository projects.
+     * List repository projects
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/projects` endpoint.
      *
@@ -964,11 +936,11 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `state` -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_repo(
         &self,
@@ -1009,7 +981,7 @@ impl Projects {
             .await
     }
     /**
-     * List repository projects.
+     * List repository projects
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/projects` endpoint.
      *
@@ -1050,7 +1022,7 @@ impl Projects {
             .await
     }
     /**
-     * Create a repository project.
+     * Create a repository project
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/projects` endpoint.
      *
@@ -1060,8 +1032,8 @@ impl Projects {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_for_repo(
         &self,
@@ -1088,11 +1060,9 @@ impl Projects {
             .await
     }
     /**
-     * Create a user project.
+     * Create a user project
      *
      * This function performs a `POST` to the `/user/projects` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#create-a-user-project>
      */
@@ -1112,20 +1082,18 @@ impl Projects {
             .await
     }
     /**
-     * List user projects.
+     * List user projects
      *
      * This function performs a `GET` to the `/users/{username}/projects` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `state` -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_user(
         &self,
@@ -1164,13 +1132,11 @@ impl Projects {
             .await
     }
     /**
-     * List user projects.
+     * List user projects
      *
      * This function performs a `GET` to the `/users/{username}/projects` endpoint.
      *
      * As opposed to `list_for_user`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
      */

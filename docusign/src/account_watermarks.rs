@@ -16,11 +16,9 @@ impl AccountWatermarks {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/watermark` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn watermark_get(
         &self,
@@ -48,11 +46,9 @@ impl AccountWatermarks {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/watermark` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn watermark_put(
         &self,
@@ -81,11 +77,9 @@ impl AccountWatermarks {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/watermark/preview` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn watermark_preview_put(
         &self,

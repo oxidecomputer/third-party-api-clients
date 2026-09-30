@@ -12,7 +12,7 @@ impl AuthorizedApps {
     }
 
     /**
-     * List authorized apps.
+     * List authorized apps
      *
      * This function performs a `GET` to the `/authorized-apps` endpoint.
      *
@@ -20,10 +20,10 @@ impl AuthorizedApps {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get(
         &self,
@@ -46,9 +46,7 @@ impl AuthorizedApps {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/authorized-apps?{}", query_), None);
+        let url = self.client.url(&format!("/authorized-apps?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -60,7 +58,7 @@ impl AuthorizedApps {
             .await
     }
     /**
-     * Get authorized app info.
+     * Get authorized app info
      *
      * This function performs a `GET` to the `/authorized-apps/{app_id}` endpoint.
      *
@@ -68,9 +66,9 @@ impl AuthorizedApps {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `app_id: &str` -- The unique id for the connected authorized application.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `app_id` -- The unique id for the connected authorized application.
      */
     pub async fn get_authorized_apps(
         &self,

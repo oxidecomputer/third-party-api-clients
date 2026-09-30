@@ -27,11 +27,11 @@ const REIMBURSEMENT: &str = r#"{
 #[test]
 fn test_deserialize() {
     let deserialized: ramp_api::types::User = serde_json::from_str(USER).unwrap();
-    println!("user = {:?}", deserialized);
+    println!("user = {deserialized:?}");
     assert_eq!(deserialized.role, ramp_api::types::Role::BusinessUser);
 
     let deserialized: ramp_api::types::Reimbursement = serde_json::from_str(REIMBURSEMENT).unwrap();
-    println!("reimbursement = {:?}", deserialized);
+    println!("reimbursement = {deserialized:?}");
 
     let t = ramp_api::types::PostUsersDeferredRequest {
         department_id: "".to_string(),
@@ -44,6 +44,6 @@ fn test_deserialize() {
         role: ramp_api::types::Role::BusinessUser,
     };
     let s = serde_json::to_string_pretty(&t).unwrap();
-    println!("string_user_request = {}", s);
+    println!("string_user_request = {s}");
     assert!(s.contains("BUSINESS_USER"), "{s}");
 }

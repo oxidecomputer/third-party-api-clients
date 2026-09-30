@@ -12,7 +12,7 @@ impl CustomFields {
     }
 
     /**
-     * Get an employee's custom fields.
+     * Get an employee's custom fields
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/custom_fields` endpoint.
      *
@@ -40,7 +40,7 @@ impl CustomFields {
             .await
     }
     /**
-     * Get the custom fields of a company.
+     * Get the custom fields of a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/custom_fields` endpoint.
      *

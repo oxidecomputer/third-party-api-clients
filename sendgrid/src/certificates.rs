@@ -12,7 +12,7 @@ impl Certificates {
     }
 
     /**
-     * Create an SSO Certificate.
+     * Create an SSO Certificate
      *
      * This function performs a `POST` to the `/sso/certificates` endpoint.
      *
@@ -34,7 +34,7 @@ impl Certificates {
             .await
     }
     /**
-     * Get All SSO Certificates by Integration.
+     * Get All SSO Certificates by Integration
      *
      * This function performs a `GET` to the `/sso/integrations/{integration_id}/certificates` endpoint.
      *
@@ -64,7 +64,7 @@ impl Certificates {
             .await
     }
     /**
-     * Get All SSO Certificates by Integration.
+     * Get All SSO Certificates by Integration
      *
      * This function performs a `GET` to the `/sso/integrations/{integration_id}/certificates` endpoint.
      *
@@ -96,7 +96,7 @@ impl Certificates {
             .await
     }
     /**
-     * Get an SSO Certificate.
+     * Get an SSO Certificate
      *
      * This function performs a `GET` to the `/sso/certificates/{cert_id}` endpoint.
      *
@@ -124,7 +124,7 @@ impl Certificates {
             .await
     }
     /**
-     * Delete an SSO Certificate.
+     * Delete an SSO Certificate
      *
      * This function performs a `DELETE` to the `/sso/certificates/{cert_id}` endpoint.
      *
@@ -154,7 +154,7 @@ impl Certificates {
             .await
     }
     /**
-     * Update SSO Certificate.
+     * Update SSO Certificate
      *
      * This function performs a `PATCH` to the `/sso/certificates/{cert_id}` endpoint.
      *

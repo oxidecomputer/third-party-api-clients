@@ -12,13 +12,14 @@ impl Alerts {
     }
 
     /**
-     * Retrieve all alerts.
+     * Retrieve all alerts
      *
      * This function performs a `GET` to the `/alerts` endpoint.
      *
      * **This endpoint allows you to retrieve all of your alerts.**
      *
      * Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+     *
      * * Usage alerts allow you to set the threshold at which an alert will be sent.
      * * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
      *
@@ -26,8 +27,8 @@ impl Alerts {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `authorization` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_page(
         &self,
@@ -44,7 +45,7 @@ impl Alerts {
             .await
     }
     /**
-     * Retrieve all alerts.
+     * Retrieve all alerts
      *
      * This function performs a `GET` to the `/alerts` endpoint.
      *
@@ -53,6 +54,7 @@ impl Alerts {
      * **This endpoint allows you to retrieve all of your alerts.**
      *
      * Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+     *
      * * Usage alerts allow you to set the threshold at which an alert will be sent.
      * * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
      *
@@ -73,7 +75,7 @@ impl Alerts {
             .await
     }
     /**
-     * Create a new Alert.
+     * Create a new Alert
      *
      * This function performs a `POST` to the `/alerts` endpoint.
      *
@@ -88,8 +90,8 @@ impl Alerts {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `authorization` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post(
         &self,
@@ -107,13 +109,14 @@ impl Alerts {
             .await
     }
     /**
-     * Retrieve a specific alert.
+     * Retrieve a specific alert
      *
      * This function performs a `GET` to the `/alerts/{alert_id}` endpoint.
      *
      * **This endpoint allows you to retrieve a specific alert.**
      *
      * Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+     *
      * * Usage alerts allow you to set the threshold at which an alert will be sent.
      * * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
      *
@@ -121,8 +124,8 @@ impl Alerts {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `authorization` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get(
         &self,
@@ -146,13 +149,14 @@ impl Alerts {
             .await
     }
     /**
-     * Delete an alert.
+     * Delete an alert
      *
      * This function performs a `DELETE` to the `/alerts/{alert_id}` endpoint.
      *
      * **This endpoint allows you to delete an alert.**
      *
      * Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+     *
      * * Usage alerts allow you to set the threshold at which an alert will be sent.
      * * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
      *
@@ -160,7 +164,7 @@ impl Alerts {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete(&self, alert_id: i64) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
@@ -181,13 +185,14 @@ impl Alerts {
             .await
     }
     /**
-     * Update an alert.
+     * Update an alert
      *
      * This function performs a `PATCH` to the `/alerts/{alert_id}` endpoint.
      *
      * **This endpoint allows you to update an alert.**
      *
      * Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+     *
      * * Usage alerts allow you to set the threshold at which an alert will be sent.
      * * Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
      *
@@ -195,7 +200,7 @@ impl Alerts {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch(
         &self,

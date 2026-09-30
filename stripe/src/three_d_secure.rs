@@ -37,8 +37,7 @@ impl ThreeDSecure {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `three_d_secure: &str` -- The account's country.
+     * * `three_d_secure` -- The account's country.
      */
     pub async fn get_3d_secure_three_d(
         &self,

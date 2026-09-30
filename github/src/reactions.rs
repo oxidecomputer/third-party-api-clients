@@ -12,7 +12,7 @@ impl Reactions {
     }
 
     /**
-     * List reactions for a team discussion comment.
+     * List reactions for a team discussion comment
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
@@ -24,13 +24,13 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `comment_number`
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_team_discussion_comment_in_org(
         &self,
@@ -75,7 +75,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a team discussion comment.
+     * List reactions for a team discussion comment
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
@@ -122,7 +122,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for a team discussion comment.
+     * Create reaction for a team discussion comment
      *
      * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
@@ -134,10 +134,10 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn create_for_team_discussion_comment_in_org(
         &self,
@@ -168,7 +168,7 @@ impl Reactions {
             .await
     }
     /**
-     * Delete team discussion comment reaction.
+     * Delete team discussion comment reaction
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}` endpoint.
      *
@@ -180,11 +180,11 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
-     * * `reaction_id: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `comment_number`
+     * * `reaction_id`
      */
     pub async fn delete_for_team_discussion_comment(
         &self,
@@ -216,7 +216,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a team discussion.
+     * List reactions for a team discussion
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions` endpoint.
      *
@@ -228,12 +228,12 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_team_discussion_in_org(
         &self,
@@ -276,7 +276,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a team discussion.
+     * List reactions for a team discussion
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions` endpoint.
      *
@@ -321,7 +321,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for a team discussion.
+     * Create reaction for a team discussion
      *
      * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions` endpoint.
      *
@@ -333,9 +333,9 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
      */
     pub async fn create_for_team_discussion_in_org(
         &self,
@@ -364,7 +364,7 @@ impl Reactions {
             .await
     }
     /**
-     * Delete team discussion reaction.
+     * Delete team discussion reaction
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}` endpoint.
      *
@@ -376,10 +376,10 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `reaction_id: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `reaction_id`
      */
     pub async fn delete_for_team_discussion(
         &self,
@@ -409,7 +409,7 @@ impl Reactions {
             .await
     }
     /**
-     * Delete a reaction (Legacy).
+     * Delete a reaction (Legacy)
      *
      * This function performs a `DELETE` to the `/reactions/{reaction_id}` endpoint.
      *
@@ -421,7 +421,7 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `reaction_id: i64`
+     * * `reaction_id`
      */
     pub async fn delete_legacy(&self, reaction_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -442,7 +442,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a commit comment.
+     * List reactions for a commit comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions` endpoint.
      *
@@ -452,12 +452,12 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_commit_comment(
         &self,
@@ -500,7 +500,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a commit comment.
+     * List reactions for a commit comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions` endpoint.
      *
@@ -543,7 +543,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for a commit comment.
+     * Create reaction for a commit comment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions` endpoint.
      *
@@ -553,9 +553,9 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn create_for_commit_comment(
         &self,
@@ -584,7 +584,7 @@ impl Reactions {
             .await
     }
     /**
-     * Delete a commit comment reaction.
+     * Delete a commit comment reaction
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}` endpoint.
      *
@@ -596,10 +596,10 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
-     * * `reaction_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
+     * * `reaction_id`
      */
     pub async fn delete_for_commit_comment(
         &self,
@@ -629,7 +629,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for an issue comment.
+     * List reactions for an issue comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions` endpoint.
      *
@@ -639,12 +639,12 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_issue_comment(
         &self,
@@ -687,7 +687,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for an issue comment.
+     * List reactions for an issue comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions` endpoint.
      *
@@ -730,7 +730,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for an issue comment.
+     * Create reaction for an issue comment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions` endpoint.
      *
@@ -740,9 +740,9 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn create_for_issue_comment(
         &self,
@@ -771,7 +771,7 @@ impl Reactions {
             .await
     }
     /**
-     * Delete an issue comment reaction.
+     * Delete an issue comment reaction
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}` endpoint.
      *
@@ -783,10 +783,10 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
-     * * `reaction_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
+     * * `reaction_id`
      */
     pub async fn delete_for_issue_comment(
         &self,
@@ -816,7 +816,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for an issue.
+     * List reactions for an issue
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions` endpoint.
      *
@@ -826,12 +826,12 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_issue(
         &self,
@@ -874,7 +874,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for an issue.
+     * List reactions for an issue
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions` endpoint.
      *
@@ -917,7 +917,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for an issue.
+     * Create reaction for an issue
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions` endpoint.
      *
@@ -927,9 +927,9 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn create_for_issue(
         &self,
@@ -958,7 +958,7 @@ impl Reactions {
             .await
     }
     /**
-     * Delete an issue reaction.
+     * Delete an issue reaction
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}` endpoint.
      *
@@ -970,10 +970,10 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
-     * * `reaction_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
+     * * `reaction_id`
      */
     pub async fn delete_for_issue(
         &self,
@@ -1003,7 +1003,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a pull request review comment.
+     * List reactions for a pull request review comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions` endpoint.
      *
@@ -1013,12 +1013,12 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_pull_request_review_comment(
         &self,
@@ -1061,7 +1061,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a pull request review comment.
+     * List reactions for a pull request review comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions` endpoint.
      *
@@ -1104,7 +1104,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for a pull request review comment.
+     * Create reaction for a pull request review comment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions` endpoint.
      *
@@ -1114,9 +1114,9 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn create_for_pull_request_review_comment(
         &self,
@@ -1145,7 +1145,7 @@ impl Reactions {
             .await
     }
     /**
-     * Delete a pull request comment reaction.
+     * Delete a pull request comment reaction
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}` endpoint.
      *
@@ -1157,10 +1157,10 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
-     * * `reaction_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
+     * * `reaction_id`
      */
     pub async fn delete_for_pull_request_comment(
         &self,
@@ -1190,7 +1190,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for a release.
+     * Create reaction for a release
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/releases/{release_id}/reactions` endpoint.
      *
@@ -1200,9 +1200,9 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `release_id: i64` -- release_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `release_id` -- release_id parameter
      */
     pub async fn create_for_release(
         &self,
@@ -1231,7 +1231,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a team discussion comment (Legacy).
+     * List reactions for a team discussion comment (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
@@ -1243,12 +1243,12 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `discussion_number`
+     * * `comment_number`
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_team_discussion_comment_legacy(
         &self,
@@ -1291,7 +1291,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a team discussion comment (Legacy).
+     * List reactions for a team discussion comment (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
@@ -1336,7 +1336,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for a team discussion comment (Legacy).
+     * Create reaction for a team discussion comment (Legacy)
      *
      * This function performs a `POST` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
@@ -1348,9 +1348,9 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `team_id`
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn create_for_team_discussion_comment_legacy(
         &self,
@@ -1379,7 +1379,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a team discussion (Legacy).
+     * List reactions for a team discussion (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/reactions` endpoint.
      *
@@ -1391,11 +1391,11 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
-     * * `content: crate::types::Content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `discussion_number`
+     * * `content` -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_team_discussion_legacy(
         &self,
@@ -1436,7 +1436,7 @@ impl Reactions {
             .await
     }
     /**
-     * List reactions for a team discussion (Legacy).
+     * List reactions for a team discussion (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/reactions` endpoint.
      *
@@ -1479,7 +1479,7 @@ impl Reactions {
             .await
     }
     /**
-     * Create reaction for a team discussion (Legacy).
+     * Create reaction for a team discussion (Legacy)
      *
      * This function performs a `POST` to the `/teams/{team_id}/discussions/{discussion_number}/reactions` endpoint.
      *
@@ -1491,8 +1491,8 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
+     * * `team_id`
+     * * `discussion_number`
      */
     pub async fn create_for_team_discussion_legacy(
         &self,

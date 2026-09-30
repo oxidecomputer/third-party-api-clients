@@ -20,7 +20,7 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
+     * * `token` -- Authentication token. Requires scope: `reactions:write`
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/reactions.add", None);
@@ -43,12 +43,12 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `reactions:read`.
-     * * `channel: &str` -- Channel where the message to get reactions for was posted.
-     * * `file: &str` -- File to get reactions for.
-     * * `file_comment: &str` -- File comment to get reactions for.
-     * * `full: bool` -- If true always return the complete reaction list.
-     * * `timestamp: &str` -- Timestamp of the message to get reactions for.
+     * * `token` -- Authentication token. Requires scope: `reactions:read`
+     * * `channel` -- Channel where the message to get reactions for was posted.
+     * * `file` -- File to get reactions for.
+     * * `file_comment` -- File comment to get reactions for.
+     * * `full` -- If true always return the complete reaction list.
+     * * `timestamp` -- Timestamp of the message to get reactions for.
      */
     pub async fn get(
         &self,
@@ -75,7 +75,7 @@ impl Reactions {
             query_args.push(("timestamp".to_string(), timestamp.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/reactions.get?{}", query_), None);
+        let url = self.client.url(&format!("/reactions.get?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -95,13 +95,13 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `reactions:read`.
-     * * `user: &str` -- Show reactions made by this user. Defaults to the authed user.
-     * * `full: bool` -- If true always return the complete reaction list.
-     * * `count: i64`
-     * * `page: i64`
-     * * `cursor: &str` -- Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+     * * `token` -- Authentication token. Requires scope: `reactions:read`
+     * * `user` -- Show reactions made by this user. Defaults to the authed user.
+     * * `full` -- If true always return the complete reaction list.
+     * * `count`
+     * * `page`
+     * * `cursor` -- Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
      */
     pub async fn list(
         &self,
@@ -132,9 +132,7 @@ impl Reactions {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/reactions.list?{}", query_), None);
+        let url = self.client.url(&format!("/reactions.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -154,7 +152,7 @@ impl Reactions {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
+     * * `token` -- Authentication token. Requires scope: `reactions:write`
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/reactions.remove", None);

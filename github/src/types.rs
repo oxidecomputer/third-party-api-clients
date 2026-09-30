@@ -195,9 +195,7 @@ pub struct GitHubApp {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -222,9 +220,7 @@ pub struct GitHubApp {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -251,9 +247,7 @@ pub struct GitHubApp {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pem: String,
-    /**
-     * The set of permissions for the GitHub app
-     */
+    /// The set of permissions for the GitHub app
     pub permissions: Permissions,
     #[serde(
         default,
@@ -313,9 +307,7 @@ pub struct ValidationErrorSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub documentation_url: String,
-    /**
-     * Validation Error Simple
-     */
+    /// Validation Error Simple
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -336,7 +328,6 @@ pub struct ValidationErrorSimple {
 /// - `f64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum WebhookConfigInsecureSslOneOf {
@@ -393,9 +384,7 @@ pub struct WebhookConfig {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    /**
-     * Configuration object of the webhook
-     */
+    /// Configuration object of the webhook
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
@@ -503,9 +492,7 @@ pub struct ScimError {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * Scim Error
-     */
+    /// Scim Error
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -519,9 +506,7 @@ pub struct ScimError {
         rename = "scimType"
     )]
     pub scim_type: String,
-    /**
-     * Scim Error
-     */
+    /// Scim Error
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -537,15 +522,12 @@ pub struct ScimError {
 /// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ValueOneOf {
     String(String),
     I64(i64),
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
 }
 
@@ -653,9 +635,7 @@ pub struct ValidationError {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub documentation_url: String,
-    /**
-     * Validation Error
-     */
+    /// Validation Error
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -675,23 +655,17 @@ pub struct Data {}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Request {
-    /**
-     * The request headers sent with the webhook delivery.
-     */
+    /// The request headers sent with the webhook delivery.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub headers: Option<Data>,
-    /**
-     * The request headers sent with the webhook delivery.
-     */
+    /// The request headers sent with the webhook delivery.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payload: Option<Data>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Response {
-    /**
-     * The request headers sent with the webhook delivery.
-     */
+    /// The request headers sent with the webhook delivery.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub headers: Option<Data>,
     #[serde(
@@ -975,159 +949,97 @@ impl Workflows {
 /// The permissions granted to the user-to-server access token.
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppPermissions {
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actions: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub administration: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub checks: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_references: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contents: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployments: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub environments: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issues: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metadata: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_administration: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_hooks: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_packages: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_plan: Option<OrganizationPlan>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_projects: Option<RepositoryProjects>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_secrets: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_self_hosted_runners: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_user_blocking: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub packages: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pages: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_requests: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_hooks: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_projects: Option<RepositoryProjects>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub secret_scanning_alerts: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub secrets: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_events: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub single_file: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub statuses: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub team_discussions: Option<Pages>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub vulnerability_alerts: Option<OrganizationPlan>,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub workflows: Option<Workflows>,
 }
@@ -1136,17 +1048,12 @@ pub struct AppPermissions {
 ///
 /// - `SimpleUser`
 /// - `Enterprise`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountAnyOf {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(flatten)]
     pub simple_user: SimpleUser,
-    /**
-     * An enterprise account
-     */
+    /// An enterprise account
     #[serde(flatten)]
     pub enterprise: Enterprise,
 }
@@ -1219,18 +1126,14 @@ pub struct Installation {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub events: Vec<String>,
-    /**
-     * Installation
-     */
+    /// Installation
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -1248,9 +1151,7 @@ pub struct Installation {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     pub permissions: AppPermissions,
     #[serde(
         default,
@@ -1258,9 +1159,7 @@ pub struct Installation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub repositories_url: String,
-    /**
-     * Describe whether all repositories have been selected or there's a selection involved
-     */
+    /// Describe whether all repositories have been selected or there's a selection involved
     #[serde(default, skip_serializing_if = "RepositorySelection::is_noop")]
     pub repository_selection: RepositorySelection,
     #[serde(
@@ -1269,9 +1168,7 @@ pub struct Installation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub single_file_name: String,
-    /**
-     * Installation
-     */
+    /// Installation
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1977,33 +1874,25 @@ pub struct TemplateRepository {
 /// A git repository
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Repository {
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_auto_merge: bool,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_merge_commit: bool,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_rebase_merge: bool,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -2092,9 +1981,7 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_branch: String,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -2231,9 +2118,7 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -2313,9 +2198,7 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2348,14 +2231,10 @@ pub struct Repository {
     pub open_issues_count: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization: Option<SimpleUser>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryPermissions>,
     #[serde(
@@ -2417,9 +2296,7 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub statuses_url: String,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2464,9 +2341,7 @@ pub struct Repository {
     pub temp_clone_token: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<TemplateRepository>,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2520,31 +2395,23 @@ pub struct InstallationToken {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub expires_at: String,
-    /**
-     * Authentication token for a GitHub App installed on a user or org.
-     */
+    /// Authentication token for a GitHub App installed on a user or org.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_multiple_single_files: bool,
-    /**
-     * Authentication token for a GitHub App installed on a user or org.
-     */
+    /// Authentication token for a GitHub App installed on a user or org.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<AppPermissions>,
-    /**
-     * Authentication token for a GitHub App installed on a user or org.
-     */
+    /// Authentication token for a GitHub App installed on a user or org.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub repositories: Vec<Repository>,
-    /**
-     * Authentication token for a GitHub App installed on a user or org.
-     */
+    /// Authentication token for a GitHub App installed on a user or org.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_selection: Option<RepositorySelection>,
     #[serde(
@@ -2553,9 +2420,7 @@ pub struct InstallationToken {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub single_file: String,
-    /**
-     * Authentication token for a GitHub App installed on a user or org.
-     */
+    /// Authentication token for a GitHub App installed on a user or org.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2608,9 +2473,7 @@ pub struct ApplicationGrant {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2635,9 +2498,7 @@ pub struct ApplicationGrant {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScopedInstallation {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub account: Option<SimpleUser>,
     #[serde(
@@ -2645,9 +2506,7 @@ pub struct ScopedInstallation {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_multiple_single_files: bool,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     pub permissions: AppPermissions,
     #[serde(
         default,
@@ -2655,9 +2514,7 @@ pub struct ScopedInstallation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub repositories_url: String,
-    /**
-     * Describe whether all repositories have been selected or there's a selection involved
-     */
+    /// Describe whether all repositories have been selected or there's a selection involved
     #[serde(default, skip_serializing_if = "RepositorySelection::is_noop")]
     pub repository_selection: RepositorySelection,
     #[serde(
@@ -2716,9 +2573,7 @@ pub struct Authorization {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2864,14 +2719,10 @@ impl AllowedActions {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsEnterprisePermissions {
-    /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
-     */
+    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
-    /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
-     */
+    /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
     pub enabled_organizations: EnabledRepositories,
     #[serde(
         default,
@@ -2971,9 +2822,7 @@ pub struct SelectedActions {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub github_owned_allowed: bool,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3079,9 +2928,7 @@ pub struct Labels {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The type of label. Read-only labels are applied automatically when the runner is configured.
-     */
+    /// The type of label. Read-only labels are applied automatically when the runner is configured.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
 }
@@ -3177,23 +3024,17 @@ pub struct AuthenticationToken {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The request headers sent with the webhook delivery.
-     */
+    /// The request headers sent with the webhook delivery.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<Data>,
-    /**
-     * Authentication Token
-     */
+    /// Authentication Token
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub repositories: Vec<Repository>,
-    /**
-     * Authentication Token
-     */
+    /// Authentication Token
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository_selection: Option<RepositorySelection>,
     #[serde(
@@ -3278,18 +3119,14 @@ pub struct AuditLogEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub business: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub config: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3322,18 +3159,14 @@ pub struct AuditLogEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub emoji: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub events: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3740,9 +3573,7 @@ pub struct Milestone {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_issues: i64,
-    /**
-     * The state of the milestone.
-     */
+    /// The state of the milestone.
     #[serde(default)]
     pub state: State,
     #[serde(
@@ -3868,9 +3699,7 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub assignees: Vec<SimpleUser>,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -3965,14 +3794,10 @@ pub struct IssueSimple {
     pub number: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Issue Simple
-     */
+    /// Issue Simple
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_request: Option<PullRequest>,
-    /**
-     * Issue Simple
-     */
+    /// Issue Simple
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<Repository>,
     #[serde(
@@ -4084,9 +3909,7 @@ pub struct ReactionRollup {
 /// Comments provide a way for people to collaborate on an issue.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssueComment {
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -4138,9 +3961,7 @@ pub struct IssueComment {
     pub node_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Comments provide a way for people to collaborate on an issue.
-     */
+    /// Comments provide a way for people to collaborate on an issue.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     #[serde(
@@ -4229,14 +4050,10 @@ pub struct Payload {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub action: String,
-    /**
-     * Comments provide a way for people to collaborate on an issue.
-     */
+    /// Comments provide a way for people to collaborate on an issue.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comment: Option<IssueComment>,
-    /**
-     * Issue Simple
-     */
+    /// Issue Simple
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issue: Option<IssueSimple>,
     #[serde(
@@ -4250,9 +4067,7 @@ pub struct Payload {
 /// Event
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
-    /**
-     * Actor
-     */
+    /// Actor
     pub actor: Actor,
     #[serde(
         default,
@@ -4266,9 +4081,7 @@ pub struct Event {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Event
-     */
+    /// Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub org: Option<Actor>,
     pub payload: Payload,
@@ -4308,19 +4121,13 @@ pub struct LinkWithType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Links {
-    /**
-     * Hypermedia Link with Type
-     */
+    /// Hypermedia Link with Type
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user: Option<LinkWithType>,
-    /**
-     * Hypermedia Link with Type
-     */
+    /// Hypermedia Link with Type
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user_actor: Option<LinkWithType>,
-    /**
-     * Hypermedia Link with Type
-     */
+    /// Hypermedia Link with Type
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user_organization: Option<LinkWithType>,
     #[serde(
@@ -4329,23 +4136,15 @@ pub struct Links {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub current_user_organizations: Vec<LinkWithType>,
-    /**
-     * Hypermedia Link with Type
-     */
+    /// Hypermedia Link with Type
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user_public: Option<LinkWithType>,
-    /**
-     * Hypermedia Link with Type
-     */
+    /// Hypermedia Link with Type
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_advisories: Option<LinkWithType>,
-    /**
-     * Hypermedia Link with Type
-     */
+    /// Hypermedia Link with Type
     pub timeline: LinkWithType,
-    /**
-     * Hypermedia Link with Type
-     */
+    /// Hypermedia Link with Type
     pub user: LinkWithType,
 }
 
@@ -4366,9 +4165,7 @@ pub struct Feed {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub current_user_organization_url: String,
-    /**
-     * Feed
-     */
+    /// Feed
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4476,9 +4273,7 @@ pub struct BaseGist {
     )]
     pub description: String,
     pub files: Files,
-    /**
-     * Base Gist
-     */
+    /// Base Gist
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4503,9 +4298,7 @@ pub struct BaseGist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub git_push_url: String,
-    /**
-     * Base Gist
-     */
+    /// Base Gist
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4537,9 +4330,7 @@ pub struct BaseGist {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    /**
-     * Base Gist
-     */
+    /// Base Gist
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4610,9 +4401,7 @@ pub struct PublicUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub blog: String,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4631,9 +4420,7 @@ pub struct PublicUser {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4735,23 +4522,17 @@ pub struct PublicUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub organizations_url: String,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub owned_private_repos: i64,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<Plan>,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4799,18 +4580,14 @@ pub struct PublicUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subscriptions_url: String,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4869,14 +4646,10 @@ pub struct Stats {
 /// Gist History
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistHistory {
-    /**
-     * Gist History
-     */
+    /// Gist History
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub change_status: Option<Stats>,
-    /**
-     * Gist History
-     */
+    /// Gist History
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -4889,9 +4662,7 @@ pub struct GistHistory {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
     #[serde(
@@ -4928,9 +4699,7 @@ pub struct Forks {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Public User
-     */
+    /// Public User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<PublicUser>,
 }
@@ -4969,9 +4738,7 @@ pub struct Gist {
     )]
     pub description: String,
     pub files: Files,
-    /**
-     * Gist
-     */
+    /// Gist
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4996,9 +4763,7 @@ pub struct Gist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub git_push_url: String,
-    /**
-     * Gist
-     */
+    /// Gist
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5030,9 +4795,7 @@ pub struct Gist {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    /**
-     * Gist
-     */
+    /// Gist
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5103,9 +4866,7 @@ pub struct FilesAdditionalProperties {
 /// Gist Simple
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistSimple {
-    /**
-     * Gist Simple
-     */
+    /// Gist Simple
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5138,9 +4899,7 @@ pub struct GistSimple {
     pub description: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub files: Option<FilesAdditionalProperties>,
-    /**
-     * Gist
-     */
+    /// Gist
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fork_of: Option<Gist>,
     #[serde(
@@ -5191,22 +4950,16 @@ pub struct GistSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
-    /**
-     * Gist Simple
-     */
+    /// Gist Simple
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    /**
-     * Gist Simple
-     */
+    /// Gist Simple
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5235,9 +4988,7 @@ pub struct GistSimple {
 /// A comment made to a gist.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistComment {
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -5373,7 +5124,6 @@ pub struct LabelsData {
 /// - `LabelsData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum LabelsOneOf {
@@ -5426,9 +5176,7 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub assignees: Vec<SimpleUser>,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -5492,9 +5240,7 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
-     */
+    /// Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5528,19 +5274,13 @@ pub struct Issue {
     pub number: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
-     */
+    /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_request: Option<PullRequest>,
-    /**
-     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
-     */
+    /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
-    /**
-     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
-     */
+    /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<Repository>,
     #[serde(
@@ -5592,9 +5332,7 @@ pub struct LicenseData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5630,9 +5368,7 @@ pub struct LicenseData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub key: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5651,9 +5387,7 @@ pub struct LicenseData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5683,9 +5417,7 @@ pub struct MarketplaceListingPlan {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub accounts_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5818,9 +5550,7 @@ pub struct MarketplacePurchase {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub on_free_trial: bool,
-    /**
-     * Marketplace Listing Plan
-     */
+    /// Marketplace Listing Plan
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<MarketplaceListingPlan>,
     #[serde(
@@ -5903,81 +5633,63 @@ pub struct SshKeyFingerprints {
 /// Api Overview
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiOverview {
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub actions: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub api: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub dependabot: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub git: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub hooks: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub importer: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub packages: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub pages: Vec<String>,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ssh_key_fingerprints: Option<SshKeyFingerprints>,
     #[serde(
@@ -5985,9 +5697,7 @@ pub struct ApiOverview {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub verifiable_password_authentication: bool,
-    /**
-     * Api Overview
-     */
+    /// Api Overview
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6068,9 +5778,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6100,9 +5808,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub clone_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_of_conduct: Option<CodeOfConduct>,
     #[serde(
@@ -6141,9 +5847,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contributors_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6156,9 +5860,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_branch: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6176,9 +5878,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6201,18 +5901,14 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub fork: bool,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub forks: i64,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6255,41 +5951,31 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub git_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_downloads: bool,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_issues: bool,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_pages: bool,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_projects: bool,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6319,9 +6005,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6395,9 +6079,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6416,32 +6098,24 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub notifications_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_issues: i64,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_issues_count: i64,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<MinimalRepositoryPermissions>,
     #[serde(
@@ -6455,9 +6129,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pulls_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6470,9 +6142,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub releases_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6485,9 +6155,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ssh_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6506,9 +6174,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub statuses_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6551,14 +6217,10 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub temp_clone_token: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<Data>,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6571,9 +6233,7 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub trees_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6592,18 +6252,14 @@ pub struct MinimalRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub visibility: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub watchers: i64,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6662,9 +6318,7 @@ pub struct Thread {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reason: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
     pub subject: Subject,
     #[serde(
@@ -6792,9 +6446,7 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub blog: String,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6825,9 +6477,7 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6886,9 +6536,7 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6918,57 +6566,43 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub members_allowed_repository_creation_type: String,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub members_can_create_internal_repositories: bool,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub members_can_create_pages: bool,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub members_can_create_private_pages: bool,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub members_can_create_private_repositories: bool,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub members_can_create_public_pages: bool,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub members_can_create_public_repositories: bool,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6992,23 +6626,17 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub owned_private_repos: i64,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<OrganizationFullPlan>,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7039,9 +6667,7 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub repos_url: String,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7054,9 +6680,7 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub twitter_username: String,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -7085,14 +6709,10 @@ pub struct OrganizationFull {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsOrganizationPermissions {
-    /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
-     */
+    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
-    /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
-     */
+    /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
     pub enabled_repositories: EnabledRepositories,
     #[serde(
         default,
@@ -7226,9 +6846,7 @@ pub struct OrganizationActionsSecret {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Visibility of a secret
-     */
+    /// Visibility of a secret
     #[serde(default, skip_serializing_if = "Visibility::is_noop")]
     pub visibility: Visibility,
 }
@@ -7242,9 +6860,7 @@ pub struct ActionsPublicKey {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_at: String,
-    /**
-     * The public key used for setting Actions Secrets.
-     */
+    /// The public key used for setting Actions Secrets.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7280,9 +6896,7 @@ pub struct ActionsPublicKey {
 /// Credential Authorization
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CredentialAuthorization {
-    /**
-     * Credential Authorization
-     */
+    /// Credential Authorization
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7301,9 +6915,7 @@ pub struct CredentialAuthorization {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub authorized_credential_title: String,
-    /**
-     * Credential Authorization
-     */
+    /// Credential Authorization
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -7340,9 +6952,7 @@ pub struct CredentialAuthorization {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub login: String,
-    /**
-     * Credential Authorization
-     */
+    /// Credential Authorization
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7396,9 +7006,7 @@ pub struct OrganizationInvitation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub invitation_teams_url: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub inviter: Option<SimpleUser>,
     #[serde(
@@ -7476,9 +7084,7 @@ pub struct OrgHook {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub deliveries_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7570,9 +7176,7 @@ pub struct InteractionLimits {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
-     */
+    /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
     pub limit: InteractionGroup,
     #[serde(
         default,
@@ -7628,14 +7232,10 @@ impl InteractionExpiry {
 /// Limit interactions to a specific type of user for a specified duration
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InteractionLimit {
-    /**
-     * Limit interactions to a specific type of user for a specified duration
-     */
+    /// Limit interactions to a specific type of user for a specified duration
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub expiry: Option<InteractionExpiry>,
-    /**
-     * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
-     */
+    /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
     pub limit: InteractionGroup,
 }
 
@@ -7792,9 +7392,7 @@ pub struct Team {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub permission: String,
-    /**
-     * Groups of organization members that gives permissions on specified repositories.
-     */
+    /// Groups of organization members that gives permissions on specified repositories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<TeamPermissions>,
     #[serde(
@@ -7906,9 +7504,7 @@ pub struct OrgMembershipPermissions {
 /// Org Membership
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgMembership {
-    /**
-     * Organization Simple
-     */
+    /// Organization Simple
     pub organization: OrganizationSimple,
     #[serde(
         default,
@@ -7916,19 +7512,13 @@ pub struct OrgMembership {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub organization_url: String,
-    /**
-     * Org Membership
-     */
+    /// Org Membership
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<OrgMembershipPermissions>,
-    /**
-     * The user's membership type in the organization.
-     */
+    /// The user's membership type in the organization.
     #[serde(default, skip_serializing_if = "Role::is_noop")]
     pub role: Role,
-    /**
-     * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
-     */
+    /// The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
     #[serde(default, skip_serializing_if = "OrgMembershipState::is_noop")]
     pub state: OrgMembershipState,
     #[serde(
@@ -7956,9 +7546,7 @@ pub struct Migration {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A migration.
-     */
+    /// A migration.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8152,9 +7740,7 @@ pub struct Package {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Container {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8192,9 +7778,7 @@ pub struct PackageVersion {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A version of a software package
-     */
+    /// A version of a software package
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -8225,9 +7809,7 @@ pub struct PackageVersion {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub license: String,
-    /**
-     * A version of a software package
-     */
+    /// A version of a software package
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metadata: Option<Metadata>,
     #[serde(
@@ -8349,9 +7931,7 @@ pub struct Project {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub number: i64,
-    /**
-     * Projects are a way to organize columns and cards of work.
-     */
+    /// Projects are a way to organize columns and cards of work.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_permission: Option<OrganizationPermission>,
     #[serde(
@@ -8360,9 +7940,7 @@ pub struct Project {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub owner_url: String,
-    /**
-     * Projects are a way to organize columns and cards of work.
-     */
+    /// Projects are a way to organize columns and cards of work.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -8425,9 +8003,7 @@ pub struct Groups {
 /// External Groups to be mapped to a team for membership
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupMapping {
-    /**
-     * External Groups to be mapped to a team for membership
-     */
+    /// External Groups to be mapped to a team for membership
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8527,9 +8103,7 @@ pub struct FullTeam {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * Organization Full
-     */
+    /// Organization Full
     pub organization: OrganizationFull,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parent: Option<TeamSimple>,
@@ -8539,9 +8113,7 @@ pub struct FullTeam {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub permission: String,
-    /**
-     * Groups of organization members that gives permissions on specified repositories.
-     */
+    /// Groups of organization members that gives permissions on specified repositories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub privacy: Option<Privacy>,
     #[serde(
@@ -8651,9 +8223,7 @@ pub struct TeamDiscussion {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub private: bool,
-    /**
-     * A team discussion is a persistent record of a free-form conversation within a team.
-     */
+    /// A team discussion is a persistent record of a free-form conversation within a team.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     #[serde(
@@ -8741,9 +8311,7 @@ pub struct TeamDiscussionComment {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub number: i64,
-    /**
-     * A reply to a discussion within a team.
-     */
+    /// A reply to a discussion within a team.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     #[serde(
@@ -8815,9 +8383,7 @@ impl Content {
 /// Reactions to conversations provide a way to help people express their feelings more simply and effectively.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reaction {
-    /**
-     * The reaction to use
-     */
+    /// The reaction to use
     #[serde(default, skip_serializing_if = "Content::is_noop")]
     pub content: Content,
     #[serde(
@@ -8870,14 +8436,10 @@ impl std::fmt::Display for TeamMembershipRole {
 /// Team Membership
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamMembership {
-    /**
-     * The role of the user in the team.
-     */
+    /// The role of the user in the team.
     #[serde(default)]
     pub role: TeamMembershipRole,
-    /**
-     * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
-     */
+    /// The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
     #[serde(default, skip_serializing_if = "OrgMembershipState::is_noop")]
     pub state: OrgMembershipState,
     #[serde(
@@ -8928,9 +8490,7 @@ pub struct TeamProject {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_at: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub creator: Option<SimpleUser>,
     #[serde(
@@ -8976,9 +8536,7 @@ pub struct TeamProject {
     )]
     pub owner_url: String,
     pub permissions: TeamProjectPermissions,
-    /**
-     * A team's access to a project.
-     */
+    /// A team's access to a project.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9007,33 +8565,25 @@ pub struct TeamProject {
 /// A team's access to a repository.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamRepository {
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_auto_merge: bool,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_merge_commit: bool,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_rebase_merge: bool,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9122,9 +8672,7 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_branch: String,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9261,9 +8809,7 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9343,9 +8889,7 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9378,9 +8922,7 @@ pub struct TeamRepository {
     pub open_issues_count: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryPermissions>,
     #[serde(
@@ -9436,9 +8978,7 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub statuses_url: String,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9481,14 +9021,10 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub temp_clone_token: String,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<Data>,
-    /**
-     * A team's access to a repository.
-     */
+    /// A team's access to a repository.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9536,9 +9072,7 @@ pub struct TeamRepository {
 /// Project cards represent a scope of work.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProjectCard {
-    /**
-     * Project cards represent a scope of work.
-     */
+    /// Project cards represent a scope of work.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9825,41 +9359,31 @@ pub struct SecurityAnalysis {
 /// Full Repository
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullRepository {
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_auto_merge: bool,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_merge_commit: bool,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_rebase_merge: bool,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_squash_merge: bool,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9900,9 +9424,7 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub clone_url: String,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_of_conduct: Option<CodeOfConductSimple>,
     #[serde(
@@ -9953,9 +9475,7 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_branch: String,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -10092,9 +9612,7 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -10206,19 +9724,13 @@ pub struct FullRepository {
     pub open_issues_count: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization: Option<SimpleUser>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parent: Option<Repository>,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
     #[serde(
@@ -10252,9 +9764,7 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub size: i64,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Repository>,
     #[serde(
@@ -10323,14 +9833,10 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub temp_clone_token: String,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template_repository: Option<Data>,
-    /**
-     * Full Repository
-     */
+    /// Full Repository
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -10508,9 +10014,7 @@ pub struct Steps {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The phase of the lifecycle that the job is currently in.
-     */
+    /// The phase of the lifecycle that the job is currently in.
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
 }
@@ -10584,14 +10088,10 @@ pub struct Job {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The phase of the lifecycle that the job is currently in.
-     */
+    /// The phase of the lifecycle that the job is currently in.
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
-    /**
-     * Information of a job execution in a workflow run
-     */
+    /// Information of a job execution in a workflow run
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -10608,9 +10108,7 @@ pub struct Job {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsRepositoryPermissions {
-    /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
-     */
+    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
     #[serde(
@@ -10733,9 +10231,7 @@ pub struct WorkflowRun {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub cancel_url: String,
-    /**
-     * An invocation of a workflow
-     */
+    /// An invocation of a workflow
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10780,13 +10276,9 @@ pub struct WorkflowRun {
     pub head_branch: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub head_commit: Option<SimpleCommit>,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub head_repository: MinimalRepository,
-    /**
-     * An invocation of a workflow
-     */
+    /// An invocation of a workflow
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10841,9 +10333,7 @@ pub struct WorkflowRun {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub pull_requests: Vec<PullRequestMinimal>,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -10978,23 +10468,17 @@ pub struct EnvironmentApproval {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comment: String,
-    /**
-     * The list of environments that were approved or rejected
-     */
+    /// The list of environments that were approved or rejected
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub environments: Vec<Environments>,
-    /**
-     * Whether deployment to the environment(s) was approved or rejected
-     */
+    /// Whether deployment to the environment(s) was approved or rejected
     #[serde(default, skip_serializing_if = "EnvironmentApprovalState::is_noop")]
     pub state: EnvironmentApprovalState,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
 }
@@ -11071,17 +10555,12 @@ pub struct Environment {
 ///
 /// - `SimpleUser`
 /// - `Team`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewerAnyOf {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(flatten)]
     pub simple_user: SimpleUser,
-    /**
-     * Groups of organization members that gives permissions on specified repositories.
-     */
+    /// Groups of organization members that gives permissions on specified repositories.
     #[serde(flatten)]
     pub team: Team,
 }
@@ -11090,9 +10569,7 @@ pub struct ReviewerAnyOf {
 pub struct Reviewers {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reviewer: Option<ReviewerAnyOf>,
-    /**
-     * The type of reviewer. Must be one of: `User` or `Team`
-     */
+    /// The type of reviewer. Must be one of: `User` or `Team`
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DeploymentReviewerType>,
 }
@@ -11106,9 +10583,7 @@ pub struct PendingDeployment {
     )]
     pub current_user_can_approve: bool,
     pub environment: Environment,
-    /**
-     * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
-     */
+    /// The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11135,7 +10610,6 @@ pub struct PendingDeployment {
 /// - `Data`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PayloadOneOf {
@@ -11215,9 +10689,7 @@ pub struct Deployment {
     pub payload: PayloadOneOf,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * A request for a specific ref(branch,sha,tag) to be deployed
-     */
+    /// A request for a specific ref(branch,sha,tag) to be deployed
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -11254,9 +10726,7 @@ pub struct Deployment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub task: String,
-    /**
-     * A request for a specific ref(branch,sha,tag) to be deployed
-     */
+    /// A request for a specific ref(branch,sha,tag) to be deployed
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -11306,9 +10776,7 @@ pub struct Billable {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkflowRunUsage {
     pub billable: Billable,
-    /**
-     * Workflow Run Usage
-     */
+    /// Workflow Run Usage
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -11395,9 +10863,7 @@ pub struct Workflow {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A GitHub Actions workflow
-     */
+    /// A GitHub Actions workflow
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -11516,9 +10982,7 @@ pub struct EnforceAdmins {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DismissalRestrictions {
-    /**
-     * The list of teams with review dismissal access.
-     */
+    /// The list of teams with review dismissal access.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11559,9 +11023,7 @@ pub struct ProtectedBranchPullRequestReview {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub dismiss_stale_reviews: bool,
-    /**
-     * Protected Branch Pull Request Review
-     */
+    /// Protected Branch Pull Request Review
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissal_restrictions: Option<DismissalRestrictions>,
     #[serde(
@@ -11569,9 +11031,7 @@ pub struct ProtectedBranchPullRequestReview {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub require_code_owner_reviews: bool,
-    /**
-     * Protected Branch Pull Request Review
-     */
+    /// Protected Branch Pull Request Review
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -11846,9 +11306,7 @@ pub struct Apps {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11952,9 +11410,7 @@ pub struct BranchRestrictionPolicy {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RequiredStatusChecks {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11998,27 +11454,19 @@ pub struct AllowDeletions {
 /// Branch Protection
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BranchProtection {
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_deletions: Option<AllowDeletions>,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_force_pushes: Option<AllowDeletions>,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enforce_admins: Option<EnforceAdmins>,
     #[serde(
@@ -12033,34 +11481,22 @@ pub struct BranchProtection {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub protection_url: String,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_conversation_resolution: Option<AllowDeletions>,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_linear_history: Option<AllowDeletions>,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default)]
     pub required_pull_request_reviews: Option<ProtectedBranchPullRequestReview>,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_signatures: Option<EnforceAdmins>,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default)]
     pub required_status_checks: Option<RequiredStatusChecks>,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     #[serde(default)]
     pub restrictions: Option<BranchRestrictionPolicy>,
     #[serde(
@@ -12102,9 +11538,7 @@ pub struct ShortBranch {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub protected: bool,
-    /**
-     * Short Branch
-     */
+    /// Short Branch
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub protection: Option<BranchProtection>,
     #[serde(
@@ -12299,9 +11733,7 @@ pub struct CommitDataType {
     pub commit: CommitData,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub committer: Option<SimpleUser>,
-    /**
-     * Commit
-     */
+    /// Commit
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12332,9 +11764,7 @@ pub struct CommitDataType {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    /**
-     * Commit
-     */
+    /// Commit
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<Stats>,
     #[serde(
@@ -12367,9 +11797,7 @@ pub struct BranchWithProtectionLinks {
 pub struct BranchWithProtection {
     #[serde(rename = "_links")]
     pub links: BranchWithProtectionLinks,
-    /**
-     * Commit
-     */
+    /// Commit
     pub commit: CommitDataType,
     #[serde(
         default,
@@ -12388,9 +11816,7 @@ pub struct BranchWithProtection {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub protected: bool,
-    /**
-     * Branch Protection
-     */
+    /// Branch Protection
     pub protection: BranchProtection,
     #[serde(
         default,
@@ -12398,9 +11824,7 @@ pub struct BranchWithProtection {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub protection_url: String,
-    /**
-     * Branch With Protection
-     */
+    /// Branch With Protection
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12412,9 +11836,7 @@ pub struct BranchWithProtection {
 /// Status Check Policy
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StatusCheckPolicy {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12442,9 +11864,7 @@ pub struct StatusCheckPolicy {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
-    /**
-     * The list of teams with review dismissal access.
-     */
+    /// The list of teams with review dismissal access.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12518,49 +11938,31 @@ pub struct ProtectedBranchRequiredLinearHistory {
 /// Branch protections protect branches
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranch {
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_deletions: Option<ProtectedBranchRequiredLinearHistory>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_force_pushes: Option<ProtectedBranchRequiredLinearHistory>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enforce_admins: Option<EnforceAdmins>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_conversation_resolution: Option<AllowDeletions>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_linear_history: Option<ProtectedBranchRequiredLinearHistory>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default)]
     pub required_pull_request_reviews: Option<RequiredPullRequestReviews>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_signatures: Option<EnforceAdmins>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default)]
     pub required_status_checks: Option<StatusCheckPolicy>,
-    /**
-     * Branch protections protect branches
-     */
+    /// Branch protections protect branches
     #[serde(default)]
     pub restrictions: Option<BranchRestrictionPolicy>,
     #[serde(
@@ -12612,9 +12014,7 @@ pub struct DeploymentSimple {
     pub original_environment: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * A deployment created as the result of an Actions check run from a workflow that references an environment
-     */
+    /// A deployment created as the result of an Actions check run from a workflow that references an environment
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -12638,9 +12038,7 @@ pub struct DeploymentSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub task: String,
-    /**
-     * A deployment created as the result of an Actions check run from a workflow that references an environment
-     */
+    /// A deployment created as the result of an Actions check run from a workflow that references an environment
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -12765,9 +12163,7 @@ pub struct CheckRun {
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conclusion: Option<Conclusion>,
-    /**
-     * A check performed on the code of a given code change
-     */
+    /// A check performed on the code of a given code change
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployment: Option<DeploymentSimple>,
     #[serde(
@@ -12825,9 +12221,7 @@ pub struct CheckRun {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The phase of the lifecycle that the job is currently in.
-     */
+    /// The phase of the lifecycle that the job is currently in.
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
     #[serde(
@@ -12940,9 +12334,7 @@ pub struct CheckSuiteData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub head_branch: String,
-    /**
-     * Simple Commit
-     */
+    /// Simple Commit
     pub head_commit: SimpleCommit,
     #[serde(
         default,
@@ -12974,13 +12366,9 @@ pub struct CheckSuiteData {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub pull_requests: Vec<PullRequestMinimal>,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
-    /**
-     * The phase of the lifecycle that the job is currently in.
-     */
+    /// The phase of the lifecycle that the job is currently in.
     #[serde(default, skip_serializing_if = "JobStatus::is_noop")]
     pub status: JobStatus,
     #[serde(
@@ -13026,9 +12414,7 @@ pub struct Preferences {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CheckSuitePreference {
     pub preferences: Preferences,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
 }
 
@@ -13169,9 +12555,7 @@ pub struct CodeScanningAlertRuleSummary {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The severity of the alert.
-     */
+    /// The severity of the alert.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub severity: Option<Severity>,
 }
@@ -13201,18 +12585,14 @@ pub struct CodeScanningAnalysisTool {
 /// Describe a region within a file for the alert.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertLocation {
-    /**
-     * Describe a region within a file for the alert.
-     */
+    /// Describe a region within a file for the alert.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub end_column: i64,
-    /**
-     * Describe a region within a file for the alert.
-     */
+    /// Describe a region within a file for the alert.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13225,18 +12605,14 @@ pub struct CodeScanningAlertLocation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
-    /**
-     * Describe a region within a file for the alert.
-     */
+    /// Describe a region within a file for the alert.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub start_column: i64,
-    /**
-     * Describe a region within a file for the alert.
-     */
+    /// Describe a region within a file for the alert.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13303,10 +12679,8 @@ pub struct CodeScanningAlertInstance {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub analysis_key: String,
-    /**
-     * Classifications that have been applied to the file that triggered the alert.
-     *  For example identifying it as documentation, or a generated file.
-     */
+    /// Classifications that have been applied to the file that triggered the alert.
+    /// For example identifying it as documentation, or a generated file.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -13331,9 +12705,7 @@ pub struct CodeScanningAlertInstance {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    /**
-     * Describe a region within a file for the alert.
-     */
+    /// Describe a region within a file for the alert.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<CodeScanningAlertLocation>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -13345,9 +12717,7 @@ pub struct CodeScanningAlertInstance {
         rename = "ref"
     )]
     pub ref_: String,
-    /**
-     * State of a code scanning alert.
-     */
+    /// State of a code scanning alert.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<CodeScanningAlertState>,
 }
@@ -13366,14 +12736,10 @@ pub struct CodeScanningAlertItems {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_by: Option<SimpleUser>,
-    /**
-     * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
-     */
+    /// **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
     #[serde(
@@ -13396,9 +12762,7 @@ pub struct CodeScanningAlertItems {
     )]
     pub number: i64,
     pub rule: CodeScanningAlertRuleSummary,
-    /**
-     * State of a code scanning alert.
-     */
+    /// State of a code scanning alert.
     pub state: CodeScanningAlertState,
     pub tool: CodeScanningAnalysisTool,
     #[serde(
@@ -13481,19 +12845,13 @@ pub struct CodeScanningAlertRule {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The security severity of the alert.
-     */
+    /// The security severity of the alert.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_severity_level: Option<SecuritySeverityLevel>,
-    /**
-     * The severity of the alert.
-     */
+    /// The severity of the alert.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub severity: Option<Severity>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -13516,14 +12874,10 @@ pub struct CodeScanningAlert {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_by: Option<SimpleUser>,
-    /**
-     * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
-     */
+    /// **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
     #[serde(
@@ -13548,9 +12902,7 @@ pub struct CodeScanningAlert {
     )]
     pub number: i64,
     pub rule: CodeScanningAlertRule,
-    /**
-     * State of a code scanning alert.
-     */
+    /// State of a code scanning alert.
     pub state: CodeScanningAlertState,
     pub tool: CodeScanningAnalysisTool,
     #[serde(
@@ -13765,9 +13117,7 @@ pub struct CodeScanningSarifsStatus {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub analyses_url: String,
-    /**
-     * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
-     */
+    /// `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub processing_status: Option<ProcessingStatus>,
 }
@@ -13853,9 +13203,7 @@ pub struct Collaborator {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub organizations_url: String,
-    /**
-     * Collaborator
-     */
+    /// Collaborator
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
     #[serde(
@@ -13954,9 +13302,7 @@ pub struct RepositoryInvitation {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Repository invitations let you manage who you collaborate with.
-     */
+    /// Repository invitations let you manage who you collaborate with.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -13984,17 +13330,13 @@ pub struct RepositoryInvitation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * The permission associated with the invitation.
-     */
+    /// The permission associated with the invitation.
     #[serde(
         default,
         skip_serializing_if = "RepositoryInvitationPermissions::is_noop"
     )]
     pub permissions: RepositoryInvitationPermissions,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -14007,9 +13349,7 @@ pub struct RepositoryInvitation {
 /// Commit Comment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommitComment {
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -14065,9 +13405,7 @@ pub struct CommitComment {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub position: i64,
-    /**
-     * Commit Comment
-     */
+    /// Commit Comment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     #[serde(
@@ -14166,14 +13504,10 @@ pub struct AutoMerge {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit_title: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enabled_by: Option<SimpleUser>,
-    /**
-     * The merge method to use.
-     */
+    /// The merge method to use.
     #[serde(default, skip_serializing_if = "MergeMethod::is_noop")]
     pub merge_method: MergeMethod,
 }
@@ -14193,9 +13527,7 @@ pub struct PullRequestSimpleHead {
         rename = "ref"
     )]
     pub ref_: String,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repo: Option<Repository>,
     #[serde(
@@ -14223,9 +13555,7 @@ pub struct Base {
         rename = "ref"
     )]
     pub ref_: String,
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repo: Option<Repository>,
     #[serde(
@@ -14240,38 +13570,22 @@ pub struct Base {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestSimpleLinks {
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub comments: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub commits: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub html: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub issue: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub review_comment: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub review_comments: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     #[serde(rename = "self")]
     pub self_: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub statuses: Link,
 }
 
@@ -14294,13 +13608,9 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub assignees: Vec<SimpleUser>,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
-    /**
-     * The status of auto merging a pull request.
-     */
+    /// The status of auto merging a pull request.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_merge: Option<AutoMerge>,
     pub base: Base,
@@ -14340,9 +13650,7 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub diff_url: String,
-    /**
-     * Pull Request Simple
-     */
+    /// Pull Request Simple
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -14416,9 +13724,7 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub requested_reviewers: Vec<SimpleUser>,
-    /**
-     * Pull Request Simple
-     */
+    /// Pull Request Simple
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14549,9 +13855,7 @@ pub struct CombinedCommitStatus {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit_url: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -14606,9 +13910,7 @@ pub struct StatusData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_at: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub creator: Option<SimpleUser>,
     #[serde(
@@ -14673,9 +13975,7 @@ pub struct CommunityHealthFile {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommunityProfileFiles {
-    /**
-     * Code of Conduct Simple
-     */
+    /// Code of Conduct Simple
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_of_conduct: Option<CodeOfConductSimple>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -14695,9 +13995,7 @@ pub struct CommunityProfileFiles {
 /// Community Profile
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommunityProfile {
-    /**
-     * Community Profile
-     */
+    /// Community Profile
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -14847,9 +14145,7 @@ pub struct CommitComparison {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub ahead_by: i64,
-    /**
-     * Commit
-     */
+    /// Commit
     pub base_commit: CommitDataType,
     #[serde(
         default,
@@ -14869,9 +14165,7 @@ pub struct CommitComparison {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub diff_url: String,
-    /**
-     * Commit Comparison
-     */
+    /// Commit Comparison
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14884,9 +14178,7 @@ pub struct CommitComparison {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    /**
-     * Commit
-     */
+    /// Commit
     pub merge_base_commit: CommitDataType,
     #[serde(
         default,
@@ -15046,9 +14338,7 @@ pub struct ContentTree {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub download_url: String,
-    /**
-     * Content Tree
-     */
+    /// Content Tree
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15529,9 +14819,7 @@ pub struct Contributor {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    /**
-     * Contributor
-     */
+    /// Contributor
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15574,9 +14862,7 @@ pub struct Contributor {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub repos_url: String,
-    /**
-     * Contributor
-     */
+    /// Contributor
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -15719,9 +15005,7 @@ pub struct DeploymentStatus {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub repository_url: String,
-    /**
-     * The state of the status.
-     */
+    /// The state of the status.
     #[serde(default, skip_serializing_if = "DeploymentStatusState::is_noop")]
     pub state: DeploymentStatusState,
     #[serde(
@@ -15802,9 +15086,7 @@ pub struct ProtectionRulesData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
-     */
+    /// The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15848,7 +15130,6 @@ pub struct ProtectionRulesDataType {
 /// - `ProtectionRules`
 /// - `ProtectionRulesData`
 /// - `ProtectionRulesDataType`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProtectionRulesAnyOf {
     #[serde(flatten)]
@@ -15868,9 +15149,7 @@ pub struct EnvironmentData {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
-     */
+    /// The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
     #[serde(
@@ -15897,9 +15176,7 @@ pub struct EnvironmentData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * Details of a deployment environment
-     */
+    /// Details of a deployment environment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15993,13 +15270,9 @@ pub struct Committer {
 /// Low-level Git commit operations within a repository
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCommit {
-    /**
-     * Identifying information for the git-user
-     */
+    /// Identifying information for the git-user
     pub author: Committer,
-    /**
-     * Identifying information for the git-user
-     */
+    /// Identifying information for the git-user
     pub committer: Committer,
     #[serde(
         default,
@@ -16124,9 +15397,7 @@ pub struct GitTag {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Metadata for a Git tag
-     */
+    /// Metadata for a Git tag
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub verification: Option<Verification>,
 }
@@ -16181,9 +15452,7 @@ pub struct GitTreeData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    /**
-     * Objects specifying a tree structure
-     */
+    /// Objects specifying a tree structure
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -16306,9 +15575,7 @@ pub struct Hook {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub deliveries_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -16459,9 +15726,7 @@ pub struct ProjectChoices {
 /// A repository import from an external source.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Import {
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16474,9 +15739,7 @@ pub struct Import {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub authors_url: String,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16495,9 +15758,7 @@ pub struct Import {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub failed_step: String,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -16509,27 +15770,21 @@ pub struct Import {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub import_percent: i64,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub large_files_count: i64,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16542,18 +15797,14 @@ pub struct Import {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub project_choices: Vec<ProjectChoices>,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16598,9 +15849,7 @@ pub struct Import {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * A repository import from an external source.
-     */
+    /// A repository import from an external source.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -16818,9 +16067,7 @@ pub struct IssueEvent {
     pub assignee: Option<SimpleUser>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assigner: Option<SimpleUser>,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author_association: Option<AuthorAssociation>,
     #[serde(
@@ -16841,9 +16088,7 @@ pub struct IssueEvent {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_review: Option<DismissedReview>,
     #[serde(
@@ -16858,14 +16103,10 @@ pub struct IssueEvent {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issue: Option<IssueSimple>,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub label: Option<IssueEventLabel>,
     #[serde(
@@ -16874,9 +16115,7 @@ pub struct IssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lock_reason: String,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<IssueEventMilestone>,
     #[serde(
@@ -16887,21 +16126,15 @@ pub struct IssueEvent {
     pub node_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rename: Option<Rename>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_reviewer: Option<SimpleUser>,
-    /**
-     * Issue Event
-     */
+    /// Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_team: Option<Team>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -16917,9 +16150,7 @@ pub struct IssueEvent {
 /// Labeled Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LabeledIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -16952,9 +16183,7 @@ pub struct LabeledIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Issue Event Label
-     */
+    /// Issue Event Label
     pub label: IssueEventLabel,
     #[serde(
         default,
@@ -16962,9 +16191,7 @@ pub struct LabeledIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
@@ -16978,19 +16205,13 @@ pub struct LabeledIssueEvent {
 /// Assigned Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assigner: Option<SimpleUser>,
     #[serde(
@@ -17029,9 +16250,7 @@ pub struct AssignedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
@@ -17045,9 +16264,7 @@ pub struct AssignedIssueEvent {
 /// Milestoned Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MilestonedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17080,9 +16297,7 @@ pub struct MilestonedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Issue Event Milestone
-     */
+    /// Issue Event Milestone
     pub milestone: IssueEventMilestone,
     #[serde(
         default,
@@ -17090,9 +16305,7 @@ pub struct MilestonedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
@@ -17106,9 +16319,7 @@ pub struct MilestonedIssueEvent {
 /// Renamed Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RenamedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17147,9 +16358,7 @@ pub struct RenamedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     pub rename: Rename,
@@ -17164,9 +16373,7 @@ pub struct RenamedIssueEvent {
 /// Review Requested Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewRequestedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17205,24 +16412,16 @@ pub struct ReviewRequestedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_reviewer: Option<SimpleUser>,
-    /**
-     * Review Requested Issue Event
-     */
+    /// Review Requested Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_team: Option<Team>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub review_requester: Option<SimpleUser>,
     #[serde(
@@ -17236,9 +16435,7 @@ pub struct ReviewRequestedIssueEvent {
 /// Review Request Removed Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewRequestRemovedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17277,24 +16474,16 @@ pub struct ReviewRequestRemovedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_reviewer: Option<SimpleUser>,
-    /**
-     * Review Request Removed Issue Event
-     */
+    /// Review Request Removed Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_team: Option<Team>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub review_requester: Option<SimpleUser>,
     #[serde(
@@ -17308,9 +16497,7 @@ pub struct ReviewRequestRemovedIssueEvent {
 /// Review Dismissed Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewDismissedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17350,9 +16537,7 @@ pub struct ReviewDismissedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
@@ -17366,9 +16551,7 @@ pub struct ReviewDismissedIssueEvent {
 /// Locked Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LockedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17413,9 +16596,7 @@ pub struct LockedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
@@ -17429,9 +16610,7 @@ pub struct LockedIssueEvent {
 /// Added to Project Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddedProjectIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17470,14 +16649,10 @@ pub struct AddedProjectIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Added to Project Issue Event
-     */
+    /// Added to Project Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
     #[serde(
@@ -17491,9 +16666,7 @@ pub struct AddedProjectIssueEvent {
 /// Moved Column in Project Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MovedColumnInProjectIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17532,14 +16705,10 @@ pub struct MovedColumnInProjectIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Moved Column in Project Issue Event
-     */
+    /// Moved Column in Project Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
     #[serde(
@@ -17553,9 +16722,7 @@ pub struct MovedColumnInProjectIssueEvent {
 /// Removed from Project Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RemovedFromProjectIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17594,14 +16761,10 @@ pub struct RemovedFromProjectIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Removed from Project Issue Event
-     */
+    /// Removed from Project Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
     #[serde(
@@ -17615,9 +16778,7 @@ pub struct RemovedFromProjectIssueEvent {
 /// Converted Note to Issue Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConvertedNoteIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17656,14 +16817,10 @@ pub struct ConvertedNoteIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Converted Note to Issue Issue Event
-     */
+    /// Converted Note to Issue Issue Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_card: Option<IssueEventProjectCard>,
     #[serde(
@@ -17691,67 +16848,42 @@ pub struct ConvertedNoteIssueEvent {
 /// - `MovedColumnInProjectIssueEvent`
 /// - `RemovedFromProjectIssueEvent`
 /// - `ConvertedNoteIssueEvent`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssueEventAnyOf {
-    /**
-     * Labeled Issue Event
-     */
+    /// Labeled Issue Event
     #[serde(flatten)]
     pub labeled_issue_event: LabeledIssueEvent,
-    /**
-     * Assigned Issue Event
-     */
+    /// Assigned Issue Event
     #[serde(flatten)]
     pub assigned_issue_event: AssignedIssueEvent,
-    /**
-     * Milestoned Issue Event
-     */
+    /// Milestoned Issue Event
     #[serde(flatten)]
     pub milestoned_issue_event: MilestonedIssueEvent,
-    /**
-     * Renamed Issue Event
-     */
+    /// Renamed Issue Event
     #[serde(flatten)]
     pub renamed_issue_event: RenamedIssueEvent,
-    /**
-     * Review Requested Issue Event
-     */
+    /// Review Requested Issue Event
     #[serde(flatten)]
     pub review_requested_issue_event: ReviewRequestedIssueEvent,
-    /**
-     * Review Request Removed Issue Event
-     */
+    /// Review Request Removed Issue Event
     #[serde(flatten)]
     pub review_request_removed_issue_event: ReviewRequestRemovedIssueEvent,
-    /**
-     * Review Dismissed Issue Event
-     */
+    /// Review Dismissed Issue Event
     #[serde(flatten)]
     pub review_dismissed_issue_event: ReviewDismissedIssueEvent,
-    /**
-     * Locked Issue Event
-     */
+    /// Locked Issue Event
     #[serde(flatten)]
     pub locked_issue_event: LockedIssueEvent,
-    /**
-     * Added to Project Issue Event
-     */
+    /// Added to Project Issue Event
     #[serde(flatten)]
     pub added_project_issue_event: AddedProjectIssueEvent,
-    /**
-     * Moved Column in Project Issue Event
-     */
+    /// Moved Column in Project Issue Event
     #[serde(flatten)]
     pub moved_column_in_project_issue_event: MovedColumnInProjectIssueEvent,
-    /**
-     * Removed from Project Issue Event
-     */
+    /// Removed from Project Issue Event
     #[serde(flatten)]
     pub removed_from_project_issue_event: RemovedFromProjectIssueEvent,
-    /**
-     * Converted Note to Issue Issue Event
-     */
+    /// Converted Note to Issue Issue Event
     #[serde(flatten)]
     pub converted_note_issue_event: ConvertedNoteIssueEvent,
 }
@@ -17759,14 +16891,10 @@ pub struct IssueEventAnyOf {
 /// Timeline Comment Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCommentEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -17822,14 +16950,10 @@ pub struct TimelineCommentEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Timeline Comment Event
-     */
+    /// Timeline Comment Event
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     #[serde(
@@ -17844,18 +16968,14 @@ pub struct TimelineCommentEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Source {
-    /**
-     * Issue Simple
-     */
+    /// Issue Simple
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issue: Option<IssueSimple>,
     #[serde(
@@ -17870,9 +16990,7 @@ pub struct Source {
 /// Timeline Cross Referenced Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCrossReferencedEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
     #[serde(
@@ -17899,13 +17017,9 @@ pub struct TimelineCrossReferencedEvent {
 /// Timeline Committed Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCommittedEvent {
-    /**
-     * Identifying information for the git-user
-     */
+    /// Identifying information for the git-user
     pub author: Committer,
-    /**
-     * Identifying information for the git-user
-     */
+    /// Identifying information for the git-user
     pub committer: Committer,
     #[serde(
         default,
@@ -17955,13 +17069,9 @@ pub struct TimelineCommittedEvent {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineReviewedEventLinks {
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub html: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub pull_request: Link,
 }
 
@@ -17970,9 +17080,7 @@ pub struct TimelineReviewedEventLinks {
 pub struct TimelineReviewedEvent {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -18034,35 +17142,25 @@ pub struct TimelineReviewedEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Timeline Reviewed Event
-     */
+    /// Timeline Reviewed Event
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewCommentLinks {
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub html: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub pull_request: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     #[serde(rename = "self")]
     pub self_: Link,
 }
@@ -18097,9 +17195,7 @@ impl std::fmt::Display for Side {
 pub struct PullRequestReviewComment {
     #[serde(rename = "_links")]
     pub links: PullRequestReviewCommentLinks,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -18149,18 +17245,14 @@ pub struct PullRequestReviewComment {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-     */
+    /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub in_reply_to_id: i64,
-    /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-     */
+    /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -18179,9 +17271,7 @@ pub struct PullRequestReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub original_commit_id: String,
-    /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-     */
+    /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -18194,9 +17284,7 @@ pub struct PullRequestReviewComment {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub original_position: i64,
-    /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-     */
+    /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -18227,28 +17315,20 @@ pub struct PullRequestReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pull_request_url: String,
-    /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-     */
+    /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
-    /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-     */
+    /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub side: Option<Side>,
-    /**
-     * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-     */
+    /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub start_line: i64,
-    /**
-     * The side of the first line of the range for a multi-line comment.
-     */
+    /// The side of the first line of the range for a multi-line comment.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<Side>,
     #[serde(
@@ -18263,9 +17343,7 @@ pub struct PullRequestReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user: Option<SimpleUser>,
 }
@@ -18273,9 +17351,7 @@ pub struct PullRequestReviewComment {
 /// Timeline Line Commented Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineLineCommentedEvent {
-    /**
-     * Timeline Line Commented Event
-     */
+    /// Timeline Line Commented Event
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18299,9 +17375,7 @@ pub struct TimelineLineCommentedEvent {
 /// Timeline Commit Commented Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineCommitCommentedEvent {
-    /**
-     * Timeline Commit Commented Event
-     */
+    /// Timeline Commit Commented Event
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18331,14 +17405,10 @@ pub struct TimelineCommitCommentedEvent {
 /// Timeline Assigned Issue Event
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimelineAssignedIssueEvent {
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
     #[serde(
@@ -18377,9 +17447,7 @@ pub struct TimelineAssignedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
@@ -18596,9 +17664,7 @@ pub struct PagesHttpsCertificate {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18684,9 +17750,7 @@ pub struct Page {
     )]
     pub public: bool,
     pub source: PagesSourceHash,
-    /**
-     * The status of the most recent build of the Page.
-     */
+    /// The status of the most recent build of the Page.
     #[serde(default, skip_serializing_if = "PageStatus::is_noop")]
     pub status: PageStatus,
     #[serde(
@@ -19073,9 +18137,7 @@ pub struct AltDomain {
 pub struct PagesHealthCheck {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub alt_domain: Option<AltDomain>,
-    /**
-     * Pages Health Check Status
-     */
+    /// Pages Health Check Status
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub domain: Option<Domain>,
 }
@@ -20098,9 +19160,7 @@ pub struct PullRequestBaseRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub temp_clone_token: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20190,13 +19250,9 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub assignees: Vec<SimpleUser>,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
-    /**
-     * The status of auto merging a pull request.
-     */
+    /// The status of auto merging a pull request.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_merge: Option<AutoMerge>,
     pub base: PullRequestBase,
@@ -20260,9 +19316,7 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub diff_url: String,
-    /**
-     * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
-     */
+    /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -20353,9 +19407,7 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub patch_url: String,
-    /**
-     * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
-     */
+    /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -20391,9 +19443,7 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub review_comments_url: String,
-    /**
-     * The state of the milestone.
-     */
+    /// The state of the milestone.
     #[serde(default)]
     pub state: State,
     #[serde(
@@ -20449,9 +19499,7 @@ pub struct PullRequestMergeResult {
 /// Pull Request Review Request
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestReview {
-    /**
-     * The list of teams with review dismissal access.
-     */
+    /// The list of teams with review dismissal access.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20471,9 +19519,7 @@ pub struct PullRequestReview {
 pub struct PullRequestReviewData {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -20529,9 +19575,7 @@ pub struct PullRequestReviewData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Pull Request Reviews are reviews on pull requests.
-     */
+    /// Pull Request Reviews are reviews on pull requests.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -20544,17 +19588,11 @@ pub struct PullRequestReviewData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReviewCommentLinks {
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub html: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     pub pull_request: Link,
-    /**
-     * Hypermedia Link
-     */
+    /// Hypermedia Link
     #[serde(rename = "self")]
     pub self_: Link,
 }
@@ -20564,9 +19602,7 @@ pub struct ReviewCommentLinks {
 pub struct ReviewComment {
     #[serde(rename = "_links")]
     pub links: ReviewCommentLinks,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -20616,18 +19652,14 @@ pub struct ReviewComment {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub in_reply_to_id: i64,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20646,9 +19678,7 @@ pub struct ReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub original_commit_id: String,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20661,9 +19691,7 @@ pub struct ReviewComment {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub original_position: i64,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20694,28 +19722,20 @@ pub struct ReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pull_request_url: String,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub side: Option<Side>,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub start_line: i64,
-    /**
-     * Legacy Review Comment
-     */
+    /// Legacy Review Comment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<Side>,
     #[serde(
@@ -20825,9 +19845,7 @@ pub struct ReleaseAsset {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub size: i64,
-    /**
-     * State of the release asset.
-     */
+    /// State of the release asset.
     #[serde(default, skip_serializing_if = "ReleaseAssetState::is_noop")]
     pub state: ReleaseAssetState,
     #[serde(
@@ -20861,9 +19879,7 @@ pub struct Release {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub assets_url: String,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<SimpleUser>,
     #[serde(
@@ -20913,9 +19929,7 @@ pub struct Release {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * A release.
-     */
+    /// A release.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20945,9 +19959,7 @@ pub struct Release {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A release.
-     */
+    /// A release.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
     #[serde(
@@ -21082,9 +20094,7 @@ pub struct SecretScanningAlert {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub number: i64,
-    /**
-     * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
-     */
+    /// **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolution: Option<SecretScanningAlertResolution>,
     #[serde(
@@ -21093,9 +20103,7 @@ pub struct SecretScanningAlert {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub resolved_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Simple User
-     */
+    /// Simple User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolved_by: Option<SimpleUser>,
     #[serde(
@@ -21110,9 +20118,7 @@ pub struct SecretScanningAlert {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub secret_type: String,
-    /**
-     * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
-     */
+    /// Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<SecretScanningAlertState>,
     #[serde(
@@ -21139,9 +20145,7 @@ pub struct Stargazer {
 /// Commit Activity
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommitActivity {
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21211,18 +20215,14 @@ pub struct ContributorActivity {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ParticipationStats {
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub all: Vec<i64>,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21303,9 +20303,7 @@ pub struct Tag {
 /// A topic aggregates entities that are related to a subject.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Topic {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21517,9 +20515,7 @@ pub struct ScimEnterpriseGroup {
     pub members: Vec<Members>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meta: Option<Meta>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21544,9 +20540,7 @@ pub struct ScimGroupListEnterprise {
         rename = "itemsPerPage"
     )]
     pub items_per_page: f64,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21655,9 +20649,7 @@ pub struct ScimEnterpriseUser {
     pub meta: Option<Meta>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub name: Option<Name>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21689,9 +20681,7 @@ pub struct ScimUserListEnterprise {
         rename = "itemsPerPage"
     )]
     pub items_per_page: f64,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21824,14 +20814,11 @@ impl Op {
 /// - `Data`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUserOperationsValueOneOf {
     String(String),
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
     Data(Data),
 }
@@ -21912,9 +20899,7 @@ pub struct ScimUser {
         rename = "displayName"
     )]
     pub display_name: String,
-    /**
-     * user emails
-     */
+    /// user emails
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21928,9 +20913,7 @@ pub struct ScimUser {
         rename = "externalId"
     )]
     pub external_id: String,
-    /**
-     * SCIM /Users provisioning endpoints
-     */
+    /// SCIM /Users provisioning endpoints
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21945,27 +20928,21 @@ pub struct ScimUser {
     pub id: String,
     pub meta: ScimUserMeta,
     pub name: ScimUserName,
-    /**
-     * SCIM /Users provisioning endpoints
-     */
+    /// SCIM /Users provisioning endpoints
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub operations: Vec<Operations>,
-    /**
-     * SCIM /Users provisioning endpoints
-     */
+    /// SCIM /Users provisioning endpoints
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub organization_id: i64,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21998,9 +20975,7 @@ pub struct ScimUserList {
         rename = "itemsPerPage"
     )]
     pub items_per_page: i64,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22025,9 +21000,7 @@ pub struct ScimUserList {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Matches {
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22079,9 +21052,7 @@ pub struct SearchResultTextMatches {
 /// Code Search Result Item
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CodeSearchResultItem {
-    /**
-     * Code Search Result Item
-     */
+    /// Code Search Result Item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -22106,18 +21077,14 @@ pub struct CodeSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Code Search Result Item
-     */
+    /// Code Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_modified_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Code Search Result Item
-     */
+    /// Code Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22136,9 +21103,7 @@ pub struct CodeSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -22152,9 +21117,7 @@ pub struct CodeSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    /**
-     * Code Search Result Item
-     */
+    /// Code Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22171,9 +21134,7 @@ pub struct CodeSearchResultItem {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommitSearchResultItem {
-    /**
-     * Identifying information for the git-user
-     */
+    /// Identifying information for the git-user
     pub author: Committer,
     #[serde(
         default,
@@ -22232,9 +21193,7 @@ pub struct CommitSearchResultItemData {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub parents: Vec<Parents>,
-    /**
-     * Minimal Repository
-     */
+    /// Minimal Repository
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -22248,9 +21207,7 @@ pub struct CommitSearchResultItemData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    /**
-     * Commit Search Result Item
-     */
+    /// Commit Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22282,9 +21239,7 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub assignees: Vec<SimpleUser>,
-    /**
-     * How the author is associated with the repository.
-     */
+    /// How the author is associated with the repository.
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -22328,9 +21283,7 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Issue Search Result Item
-     */
+    /// Issue Search Result Item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -22387,14 +21340,10 @@ pub struct IssueSearchResultItem {
     pub number: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    /**
-     * Issue Search Result Item
-     */
+    /// Issue Search Result Item
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pull_request: Option<PullRequest>,
-    /**
-     * Issue Search Result Item
-     */
+    /// Issue Search Result Item
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<Repository>,
     #[serde(
@@ -22415,9 +21364,7 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Issue Search Result Item
-     */
+    /// Issue Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22496,9 +21443,7 @@ pub struct LabelSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub score: f64,
-    /**
-     * Label Search Result Item
-     */
+    /// Label Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22516,33 +21461,25 @@ pub struct LabelSearchResultItem {
 /// Repo Search Result Item
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RepoSearchResultItem {
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_auto_merge: bool,
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_merge_commit: bool,
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub allow_rebase_merge: bool,
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -22631,9 +21568,7 @@ pub struct RepoSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_branch: String,
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -22870,9 +21805,7 @@ pub struct RepoSearchResultItem {
     pub open_issues_count: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
     #[serde(
@@ -22970,18 +21903,14 @@ pub struct RepoSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub temp_clone_token: String,
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub text_matches: Vec<SearchResultTextMatches>,
-    /**
-     * Repo Search Result Item
-     */
+    /// Repo Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23121,9 +22050,7 @@ pub struct TopicSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub released: String,
-    /**
-     * Topic Search Result Item
-     */
+    /// Topic Search Result Item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23142,9 +22069,7 @@ pub struct TopicSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub short_description: String,
-    /**
-     * Topic Search Result Item
-     */
+    /// Topic Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23186,9 +22111,7 @@ pub struct UserSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -23207,9 +22130,7 @@ pub struct UserSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub events_url: String,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23222,9 +22143,7 @@ pub struct UserSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub followers_url: String,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23249,9 +22168,7 @@ pub struct UserSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub gravatar_id: String,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -23299,18 +22216,14 @@ pub struct UserSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub organizations_url: String,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub public_gists: i64,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23352,18 +22265,14 @@ pub struct UserSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subscriptions_url: String,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23377,9 +22286,7 @@ pub struct UserSearchResultItem {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * User Search Result Item
-     */
+    /// User Search Result Item
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -23415,9 +22322,7 @@ pub struct PrivateUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub blog: String,
-    /**
-     * Private User
-     */
+    /// Private User
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -23554,9 +22459,7 @@ pub struct PrivateUser {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub owned_private_repos: i64,
-    /**
-     * Private User
-     */
+    /// Private User
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan: Option<Plan>,
     #[serde(
@@ -23606,9 +22509,7 @@ pub struct PrivateUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subscriptions_url: String,
-    /**
-     * Private User
-     */
+    /// Private User
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -23723,9 +22624,7 @@ pub struct Subkeys {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_at: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23768,9 +22667,7 @@ pub struct Subkeys {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub raw_key: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23977,9 +22874,7 @@ pub struct UserMarketplacePurchase {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub on_free_trial: bool,
-    /**
-     * Marketplace Listing Plan
-     */
+    /// Marketplace Listing Plan
     pub plan: MarketplaceListingPlan,
     #[serde(
         default,
@@ -23998,9 +22893,7 @@ pub struct UserMarketplacePurchase {
 /// Starred Repository
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StarredRepository {
-    /**
-     * A git repository
-     */
+    /// A git repository
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repo: Option<Repository>,
     #[serde(
@@ -24057,11 +22950,11 @@ pub struct KeySimple {
 
 /**
  * The event types to include:
- *   
+ *
  *   - `web` - returns web (non-Git) events
  *   - `git` - returns Git events
  *   - `all` - returns both web and Git events
- *   
+ *
  *   The default is `web`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -24100,7 +22993,7 @@ impl Include {
 
 /**
  * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
- *   
+ *
  *   The default is `desc`.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -24232,7 +23125,6 @@ impl WorkflowRunStatus {
 /// - `i64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TitleOneOf {
@@ -24617,12 +23509,9 @@ pub struct AppsCreateFromManifestResponse {
 ///
 /// - `GitHubApp`
 /// - `AppsCreateFromManifestResponse`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppsCreateFromManifestResponseAllOf {
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
+    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[serde(flatten)]
     pub git_hub_app: GitHubApp,
     #[serde(flatten)]
@@ -24655,23 +23544,17 @@ pub struct AppsUpdateWebhookConfigAppRequest {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppsCreateInstallationAccessTokenRequest {
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<AppPermissions>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub repositories: Vec<String>,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24698,23 +23581,17 @@ pub struct AppsScopeTokenRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub access_token: String,
-    /**
-     * The permissions granted to the user-to-server access token.
-     */
+    /// The permissions granted to the user-to-server access token.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<AppPermissions>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub repositories: Vec<String>,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24767,9 +23644,7 @@ pub struct OauthAuthorizationsCreateAuthorizationRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24804,9 +23679,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24835,9 +23708,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24848,9 +23719,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OauthAuthorizationsUpdateAuthorizationRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24875,18 +23744,14 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub remove_scopes: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24897,14 +23762,10 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
-    /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
-     */
+    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
-    /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
-     */
+    /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
     pub enabled_organizations: EnabledRepositories,
 }
 
@@ -24926,9 +23787,7 @@ pub struct EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24961,27 +23820,21 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub runners: Vec<i64>,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub selected_organization_ids: Vec<i64>,
-    /**
-     * Describe whether all repositories have been selected or there's a selection involved
-     */
+    /// Describe whether all repositories have been selected or there's a selection involved
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<RepositorySelection>,
 }
@@ -24994,9 +23847,7 @@ pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Describe whether all repositories have been selected or there's a selection involved
-     */
+    /// Describe whether all repositories have been selected or there's a selection involved
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<RepositorySelection>,
 }
@@ -25019,9 +23870,7 @@ pub struct ActionsListSelfHostedRunnersInGroupOrgResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25085,7 +23934,6 @@ impl std::fmt::Display for Public {
 /// - `Public`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PublicOneOf {
@@ -25129,9 +23977,7 @@ pub struct GistsCreateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Names and content for the files that make up the gist
-     */
+    /// Names and content for the files that make up the gist
     pub files: FilesAdditionalPropertiesData,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<PublicOneOf>,
@@ -25199,11 +24045,11 @@ pub struct AppsListInstallationReposResponse {
 }
 
 /**
- * Indicates which sorts of issues to return. Can be one of:  
- *   \* `assigned`: Issues assigned to you  
- *   \* `created`: Issues created by you  
- *   \* `mentioned`: Issues mentioning you  
- *   \* `subscribed`: Issues you're subscribed to updates for  
+ * Indicates which sorts of issues to return. Can be one of:
+ *   \* `assigned`: Issues assigned to you
+ *   \* `created`: Issues created by you
+ *   \* `mentioned`: Issues mentioning you
+ *   \* `subscribed`: Issues you're subscribed to updates for
  *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -25329,9 +24175,7 @@ pub struct MarkdownRenderRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub context: String,
-    /**
-     * The rendering mode.
-     */
+    /// The rendering mode.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mode: Option<Mode>,
     #[serde(
@@ -25361,10 +24205,10 @@ pub struct ActivitySetThreadSubscriptionRequest {
 }
 
 /**
- * Specifies which types of repositories non-admin organization members can create. Can be one of:  
- *   \* `all` - all organization members can create public and private repositories.  
- *   \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
- *   \* `none` - only admin members can create repositories.  
+ * Specifies which types of repositories non-admin organization members can create. Can be one of:
+ *   \* `all` - all organization members can create public and private repositories.
+ *   \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.
+ *   \* `none` - only admin members can create repositories.
  *   **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -25421,9 +24265,7 @@ pub struct OrgsUpdateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * The baseline permission that all organization members have on this project. Only present if owner is an organization.
-     */
+    /// The baseline permission that all organization members have on this project. Only present if owner is an organization.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub default_repository_permission: Option<OrganizationPermission>,
     #[serde(
@@ -25448,13 +24290,11 @@ pub struct OrgsUpdateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub location: String,
-    /**
-     * Specifies which types of repositories non-admin organization members can create. Can be one of:  
-     *  \\* `all` - all organization members can create public and private repositories.  
-     *  \\* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
-     *  \\* `none` - only admin members can create repositories.  
-     *  \*\*Note:\*\* This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
-     */
+    /// Specifies which types of repositories non-admin organization members can create. Can be one of:
+    /// \* `all` - all organization members can create public and private repositories.
+    /// \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.
+    /// \* `none` - only admin members can create repositories.
+    /// **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members_allowed_repository_creation_type: Option<MembersAllowedRepositoryCreationType>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25491,17 +24331,12 @@ pub struct OrgsUpdateRequest {
 /// - `ValidationError`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum OrgsUpdateResponseOneOf {
-    /**
-     * Validation Error Simple
-     */
+    /// Validation Error Simple
     ValidationErrorSimple(ValidationErrorSimple),
-    /**
-     * Validation Error
-     */
+    /// Validation Error
     ValidationError(ValidationError),
 }
 
@@ -25523,14 +24358,10 @@ impl OrgsUpdateResponseOneOf {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsOrganizationRequest {
-    /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
-     */
+    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
-    /**
-     * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
-     */
+    /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
     pub enabled_repositories: EnabledRepositories,
 }
 
@@ -25552,9 +24383,7 @@ pub struct ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25587,27 +24416,21 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub runners: Vec<i64>,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub selected_repository_ids: Vec<i64>,
-    /**
-     * Visibility of a secret
-     */
+    /// Visibility of a secret
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
 }
@@ -25620,9 +24443,7 @@ pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Visibility of a secret
-     */
+    /// Visibility of a secret
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
 }
@@ -25689,18 +24510,14 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub key_id: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub selected_repository_ids: Vec<String>,
-    /**
-     * Visibility of a secret
-     */
+    /// Visibility of a secret
     #[serde(default, skip_serializing_if = "Visibility::is_noop")]
     pub visibility: Visibility,
 }
@@ -25723,9 +24540,7 @@ pub struct ActionsListSelectedReposOrgSecretResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetSelectedReposOrgSecretRequest {
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25743,9 +24558,7 @@ pub struct OrgsCreateWebhookRequestConfig {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
-     */
+    /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
@@ -25778,13 +24591,9 @@ pub struct OrgsCreateWebhookRequestConfig {
 pub struct OrgsCreateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
-    /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
-     */
+    /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
     pub config: OrgsCreateWebhookRequestConfig,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25808,9 +24617,7 @@ pub struct OrgsUpdateWebhookRequestConfig {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
-     */
+    /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
@@ -25831,14 +24638,10 @@ pub struct OrgsUpdateWebhookRequestConfig {
 pub struct OrgsUpdateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
-    /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
-     */
+    /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub config: Option<OrgsUpdateWebhookRequestConfig>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25873,22 +24676,19 @@ pub struct AppsListInstallationsResponse {
 ///
 /// - `Data`
 /// - `InteractionLimits`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InteractionsGetRestrictionsResponseAnyOf {
     #[serde(flatten)]
     pub data: Data,
-    /**
-     * Interaction limit settings.
-     */
+    /// Interaction limit settings.
     #[serde(flatten)]
     pub interaction_limits: InteractionLimits,
 }
 
 /**
- * Specify role for new member. Can be one of:  
- *   \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
- *   \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
+ * Specify role for new member. Can be one of:
+ *   \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.
+ *   \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.
  *   \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -25930,17 +24730,13 @@ pub struct OrgsCreateInvitationRequest {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub invitee_id: i64,
-    /**
-     * Specify role for new member. Can be one of:  
-     *  \\* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
-     *  \\* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
-     *  \\* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
-     */
+    /// Specify role for new member. Can be one of:
+    /// \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.
+    /// \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.
+    /// \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<OrgsCreateInvitationRequestRole>,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25950,8 +24746,8 @@ pub struct OrgsCreateInvitationRequest {
 }
 
 /**
- * Filter members returned in the list. Can be one of:  
- *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
+ * Filter members returned in the list. Can be one of:
+ *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
  *   \* `all` - All members the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -25977,9 +24773,9 @@ impl std::fmt::Display for OrgsListMembersFilter {
 }
 
 /**
- * Filter members returned by their role. Can be one of:  
- *   \* `all` - All members of the organization, regardless of role.  
- *   \* `admin` - Organization owners.  
+ * Filter members returned by their role. Can be one of:
+ *   \* `all` - All members of the organization, regardless of role.
+ *   \* `admin` - Organization owners.
  *   \* `member` - Non-owner organization members.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -26008,8 +24804,8 @@ impl std::fmt::Display for OrgsListMembersRole {
 }
 
 /**
- * The role to give the user in the organization. Can be one of:  
- *   \* `admin` - The user will become an owner of the organization.  
+ * The role to give the user in the organization. Can be one of:
+ *   \* `admin` - The user will become an owner of the organization.
  *   \* `member` - The user will become a non-owner member of the organization.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -26036,11 +24832,9 @@ impl std::fmt::Display for OrgsSetMembershipUserRequestRole {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgsSetMembershipUserRequest {
-    /**
-     * The role to give the user in the organization. Can be one of:  
-     *  \\* `admin` - The user will become an owner of the organization.  
-     *  \\* `member` - The user will become a non-owner member of the organization.
-     */
+    /// The role to give the user in the organization. Can be one of:
+    /// \* `admin` - The user will become an owner of the organization.
+    /// \* `member` - The user will become a non-owner member of the organization.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<OrgsSetMembershipUserRequestRole>,
 }
@@ -26078,9 +24872,7 @@ impl Exclude {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MigrationsStartRequest {
-    /**
-     * Exclude attributes from the API response to improve performance
-     */
+    /// Exclude attributes from the API response to improve performance
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26091,9 +24883,7 @@ pub struct MigrationsStartRequest {
     pub exclude_attachments: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lock_repositories: Option<bool>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26224,7 +25014,7 @@ impl std::fmt::Display for ReposListOrgSort {
 }
 
 /**
- * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
+ * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
  *   The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -26324,18 +25114,16 @@ pub struct ReposCreateInOrgRequest {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub team_id: i64,
-    /**
-     * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
-     *  The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
-     */
+    /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
+    /// The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<ReposCreateInOrgRequestVisibility>,
 }
 
 /**
- * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
- *   \* `pull` - team members can pull, but not push to or administer newly-added repositories.  
- *   \* `push` - team members can pull and push, but not administer newly-added repositories.  
+ * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+ *   \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+ *   \* `push` - team members can pull and push, but not administer newly-added repositories.
  *   \* `admin` - team members can pull, push and administer newly-added repositories.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -26371,9 +25159,7 @@ pub struct TeamsCreateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26392,22 +25178,16 @@ pub struct TeamsCreateRequest {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub parent_team_id: i64,
-    /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
-     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
-     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
-     *  \\* `admin` - team members can pull, push and administer newly-added repositories.
-     */
+    /// **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+    /// \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+    /// \* `push` - team members can pull and push, but not administer newly-added repositories.
+    /// \* `admin` - team members can pull, push and administer newly-added repositories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
-    /**
-     * The level of privacy this team should have
-     */
+    /// The level of privacy this team should have
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub privacy: Option<Privacy>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26436,17 +25216,13 @@ pub struct TeamsUpdateInOrgRequest {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub parent_team_id: i64,
-    /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
-     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
-     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
-     *  \\* `admin` - team members can pull, push and administer newly-added repositories.
-     */
+    /// **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+    /// \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+    /// \* `push` - team members can pull and push, but not administer newly-added repositories.
+    /// \* `admin` - team members can pull, push and administer newly-added repositories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
-    /**
-     * The level of privacy this team should have
-     */
+    /// The level of privacy this team should have
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub privacy: Option<Privacy>,
 }
@@ -26487,17 +25263,15 @@ pub struct TeamsUpdateDiscussionInOrgRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateIssueRequest {
-    /**
-     * The reaction to use
-     */
+    /// The reaction to use
     #[serde(default, skip_serializing_if = "Content::is_noop")]
     pub content: Content,
 }
 
 /**
- * Filters members returned by their role in the team. Can be one of:  
- *   \* `member` - normal members of the team.  
- *   \* `maintainer` - team maintainers.  
+ * Filters members returned by their role in the team. Can be one of:
+ *   \* `member` - normal members of the team.
+ *   \* `maintainer` - team maintainers.
  *   \* `all` - all members of the team.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -26527,9 +25301,7 @@ impl std::fmt::Display for TeamsListMembersInOrgRole {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateMembershipUserInOrgRequest {
-    /**
-     * The role of the user in the team.
-     */
+    /// The role of the user in the team.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<TeamMembershipRole>,
 }
@@ -26541,13 +25313,13 @@ pub struct ProjectsAddCollaboratorRequest {
 }
 
 /**
- * The permission to grant the team on this repository. Can be one of:  
- *   \* `pull` - team members can pull, but not push to or administer this repository.  
- *   \* `push` - team members can pull and push, but not administer this repository.  
- *   \* `admin` - team members can pull, push and administer this repository.  
- *   \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  
- *   \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
- *     
+ * The permission to grant the team on this repository. Can be one of:
+ *   \* `pull` - team members can pull, but not push to or administer this repository.
+ *   \* `push` - team members can pull and push, but not administer this repository.
+ *   \* `admin` - team members can pull, push and administer this repository.
+ *   \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
+ *   \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
+ *
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -26595,16 +25367,14 @@ impl TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
-    /**
-     * The permission to grant the team on this repository. Can be one of:  
-     *  \\* `pull` - team members can pull, but not push to or administer this repository.  
-     *  \\* `push` - team members can pull and push, but not administer this repository.  
-     *  \\* `admin` - team members can pull, push and administer this repository.  
-     *  \\* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  
-     *  \\* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
-     *    
-     *  If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
-     */
+    /// The permission to grant the team on this repository. Can be one of:
+    /// \* `pull` - team members can pull, but not push to or administer this repository.
+    /// \* `push` - team members can pull and push, but not administer this repository.
+    /// \* `admin` - team members can pull, push and administer this repository.
+    /// \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
+    /// \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
+    ///
+    /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<TeamsAddUpdateRepoPermissionsInOrgRequestPermission>,
 }
@@ -26633,9 +25403,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
-    /**
-     * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
-     */
+    /// The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26652,9 +25420,7 @@ pub struct ProjectsDeleteResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub documentation_url: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26861,7 +25627,6 @@ pub struct ProjectsCreateCardRequestData {
 /// - `ProjectsCreateCardRequestData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ProjectsCreateCardRequestOneOf {
@@ -26909,9 +25674,7 @@ pub struct ProjectsUpdateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The baseline permission that all organization members have on this project. Only present if owner is an organization.
-     */
+    /// The baseline permission that all organization members have on this project. Only present if owner is an organization.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_permission: Option<OrganizationPermission>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26925,9 +25688,9 @@ pub struct ProjectsUpdateRequest {
 }
 
 /**
- * Filters the collaborators by their affiliation. Can be one of:  
- *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
- *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
+ * Filters the collaborators by their affiliation. Can be one of:
+ *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.
+ *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -26969,14 +25732,10 @@ pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
 /// Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateRequestSecurityAnalysis {
-    /**
-     * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
-     */
+    /// Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub advanced_security: Option<ReposUpdateRequestSecurityAnalysisAdvanced>,
-    /**
-     * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
-     */
+    /// Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub secret_scanning: Option<ReposUpdateRequestSecurityAnalysisAdvanced>,
 }
@@ -27029,15 +25788,11 @@ pub struct ReposUpdateRequest {
     pub name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub private: Option<bool>,
-    /**
-     * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
-     */
+    /// Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub security_and_analysis: Option<ReposUpdateRequestSecurityAnalysis>,
-    /**
-     * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
-     *  The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
-     */
+    /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
+    /// The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<ReposCreateInOrgRequestVisibility>,
 }
@@ -27060,9 +25815,7 @@ pub struct ActionsListArtifactsRepoResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsRepositoryRequest {
-    /**
-     * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
-     */
+    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allowed_actions: Option<AllowedActions>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27086,8 +25839,8 @@ pub struct ActionsListWorkflowRunsResponse {
 }
 
 /**
- * Filters jobs by their `completed_at` timestamp. Can be one of:  
- *   \* `latest`: Returns jobs from the most recent execution of the workflow run.  
+ * Filters jobs by their `completed_at` timestamp. Can be one of:
+ *   \* `latest`: Returns jobs from the most recent execution of the workflow run.
  *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -27136,18 +25889,14 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comment: String,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub environment_ids: Vec<i64>,
-    /**
-     * Whether deployment to the environment(s) was approved or rejected
-     */
+    /// Whether deployment to the environment(s) was approved or rejected
     #[serde(default, skip_serializing_if = "EnvironmentApprovalState::is_noop")]
     pub state: EnvironmentApprovalState,
 }
@@ -27236,9 +25985,7 @@ pub struct ReposCreateAutolinkRequest {
 /// Require status checks to pass before merging. Set to `null` to disable.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27255,18 +26002,14 @@ pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
 /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions {
-    /**
-     * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
-     */
+    /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub teams: Vec<String>,
-    /**
-     * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
-     */
+    /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27278,31 +26021,23 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestric
 /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
-    /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
-     */
+    /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub dismiss_stale_reviews: bool,
-    /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
-     */
+    /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissal_restrictions:
         Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
-    /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
-     */
+    /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub require_code_owner_reviews: bool,
-    /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
-     */
+    /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -27314,27 +26049,21 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
 /// Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Restrictions {
-    /**
-     * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
-     */
+    /// Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub apps: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub teams: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27355,20 +26084,14 @@ pub struct ReposUpdateBranchProtectionRequest {
     pub required_conversation_resolution: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub required_linear_history: Option<bool>,
-    /**
-     * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
-     */
+    /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
     #[serde(default)]
     pub required_pull_request_reviews:
         Option<ReposUpdateBranchProtectionRequestRequiredPullReviews>,
-    /**
-     * Require status checks to pass before merging. Set to `null` to disable.
-     */
+    /// Require status checks to pass before merging. Set to `null` to disable.
     #[serde(default)]
     pub required_status_checks: Option<ReposUpdateBranchProtectionRequestRequiredStatusChecks>,
-    /**
-     * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
-     */
+    /// Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
     #[serde(default)]
     pub restrictions: Option<Restrictions>,
 }
@@ -27380,9 +26103,7 @@ pub struct ReposUpdatePullRequestReviewProtection {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub dismiss_stale_reviews: bool,
-    /**
-     * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
-     */
+    /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissal_restrictions:
         Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
@@ -27401,9 +26122,7 @@ pub struct ReposUpdatePullRequestReviewProtection {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateStatusCheckProtectionRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27416,9 +26135,7 @@ pub struct ReposUpdateStatusCheckProtectionRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddStatusCheckContextsRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27433,13 +26150,10 @@ pub struct ReposAddStatusCheckContextsRequest {
 /// - `ReposAddStatusCheckContextsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddStatusCheckContextsRequestOneOf {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
     ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
 }
@@ -27478,9 +26192,7 @@ impl std::convert::From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String>
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddAppAccessRestrictionsRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27495,13 +26207,10 @@ pub struct ReposAddAppAccessRestrictionsRequest {
 /// - `ReposAddAppAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddAppAccessRestrictionsRequestOneOf {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
     ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
 }
@@ -27541,9 +26250,7 @@ impl std::convert::From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<Strin
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddTeamAccessRestrictionsRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27558,13 +26265,10 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
 /// - `ReposAddTeamAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
     ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
 }
@@ -27604,9 +26308,7 @@ impl std::convert::From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<Stri
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddUserAccessRestrictionsRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27621,13 +26323,10 @@ pub struct ReposAddUserAccessRestrictionsRequest {
 /// - `ReposAddUserAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddUserAccessRestrictionsRequestOneOf {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
     ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
 }
@@ -27676,7 +26375,7 @@ pub struct ReposRenameBranchRequest {
 }
 
 /**
- * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
+ * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -27767,9 +26466,7 @@ impl AnnotationLevel {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Annotations {
-    /**
-     * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
-     */
+    /// The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
     #[serde(default, skip_serializing_if = "AnnotationLevel::is_noop")]
     pub annotation_level: AnnotationLevel,
     #[serde(
@@ -27847,18 +26544,14 @@ pub struct Images {
 /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateRequestOutput {
-    /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
-     */
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub annotations: Vec<Annotations>,
-    /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
-     */
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27909,9 +26602,7 @@ pub struct ChecksCreateRequestActions {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateRequest {
-    /**
-     * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
-     */
+    /// Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27924,10 +26615,8 @@ pub struct ChecksCreateRequest {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
-     *  \*\*Note:\*\* Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
-     */
+    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
+    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conclusion: Option<ChecksCreateRequestConclusion>,
     #[serde(
@@ -27954,9 +26643,7 @@ pub struct ChecksCreateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
-     */
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub output: Option<ChecksCreateRequestOutput>,
     #[serde(
@@ -27965,9 +26652,7 @@ pub struct ChecksCreateRequest {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The phase of the lifecycle that the job is currently in.
-     */
+    /// The phase of the lifecycle that the job is currently in.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<JobStatus>,
 }
@@ -27975,18 +26660,14 @@ pub struct ChecksCreateRequest {
 /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksUpdateRequestOutput {
-    /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
-     */
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub annotations: Vec<Annotations>,
-    /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
-     */
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -28015,9 +26696,7 @@ pub struct ChecksUpdateRequestOutput {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksUpdateRequest {
-    /**
-     * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
-     */
+    /// Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -28030,10 +26709,8 @@ pub struct ChecksUpdateRequest {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
-     *  \*\*Note:\*\* Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
-     */
+    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
+    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conclusion: Option<ChecksCreateRequestConclusion>,
     #[serde(
@@ -28054,9 +26731,7 @@ pub struct ChecksUpdateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
-     */
+    /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub output: Option<ChecksUpdateRequestOutput>,
     #[serde(
@@ -28065,9 +26740,7 @@ pub struct ChecksUpdateRequest {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The phase of the lifecycle that the job is currently in.
-     */
+    /// The phase of the lifecycle that the job is currently in.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<JobStatus>,
 }
@@ -28100,14 +26773,10 @@ pub struct ChecksListRefResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CodeScanningUpdateAlertRequest {
-    /**
-     * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
-     */
+    /// **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
-    /**
-     * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
-     */
+    /// Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
     pub state: CodeScanningAlertSetState,
 }
 
@@ -28154,16 +26823,14 @@ pub struct CodeScanningUploadSarifRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposAddCollaboratorRequest {
-    /**
-     * The permission to grant the team on this repository. Can be one of:  
-     *  \\* `pull` - team members can pull, but not push to or administer this repository.  
-     *  \\* `push` - team members can pull and push, but not administer this repository.  
-     *  \\* `admin` - team members can pull, push and administer this repository.  
-     *  \\* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  
-     *  \\* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
-     *    
-     *  If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
-     */
+    /// The permission to grant the team on this repository. Can be one of:
+    /// \* `pull` - team members can pull, but not push to or administer this repository.
+    /// \* `push` - team members can pull and push, but not administer this repository.
+    /// \* `admin` - team members can pull, push and administer this repository.
+    /// \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
+    /// \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
+    ///
+    /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<TeamsAddUpdateRepoPermissionsInOrgRequestPermission>,
     #[serde(
@@ -28226,22 +26893,15 @@ pub struct ChecksListSuitesRefResponse {
 /// - `ContentSubmodule`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposGetContentResponseOneOf {
     EntriesVector(Vec<Entries>),
-    /**
-     * Content File
-     */
+    /// Content File
     ContentFile(ContentFile),
-    /**
-     * An object describing a symlink
-     */
+    /// An object describing a symlink
     SymlinkContent(SymlinkContent),
-    /**
-     * An object describing a symlink
-     */
+    /// An object describing a symlink
     ContentSubmodule(ContentSubmodule),
 }
 
@@ -28372,9 +27032,7 @@ pub struct ReposCreateDeploymentRequest {
         rename = "ref"
     )]
     pub ref_: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -28438,9 +27096,7 @@ pub struct ReposCreateDeploymentStatusRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
-     */
+    /// Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub environment: Option<ReposCreateDeploymentStatusRequestEnvironment>,
     #[serde(
@@ -28455,9 +27111,7 @@ pub struct ReposCreateDeploymentStatusRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub log_url: String,
-    /**
-     * The state of the status.
-     */
+    /// The state of the status.
     #[serde(default, skip_serializing_if = "DeploymentStatusState::is_noop")]
     pub state: DeploymentStatusState,
     #[serde(
@@ -28504,23 +27158,17 @@ pub struct ReposCreateUpdateEnvironmentRequestReviewers {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * The type of reviewer. Must be one of: `User` or `Team`
-     */
+    /// The type of reviewer. Must be one of: `User` or `Team`
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DeploymentReviewerType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateEnvironmentRequest {
-    /**
-     * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
-     */
+    /// The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
-    /**
-     * The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
-     */
+    /// The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -28595,9 +27243,7 @@ pub struct GitCreateBlobRequest {
 /// Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequestAuthor {
-    /**
-     * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
-     */
+    /// Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -28621,9 +27267,7 @@ pub struct GitCreateCommitRequestAuthor {
 /// Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequestCommitter {
-    /**
-     * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
-     */
+    /// Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -28646,14 +27290,10 @@ pub struct GitCreateCommitRequestCommitter {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequest {
-    /**
-     * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
-     */
+    /// Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<GitCreateCommitRequestAuthor>,
-    /**
-     * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
-     */
+    /// Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub committer: Option<GitCreateCommitRequestCommitter>,
     #[serde(
@@ -28662,9 +27302,7 @@ pub struct GitCreateCommitRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -28760,9 +27398,7 @@ impl GitCreateTagRequestType {
 /// An object with information about the individual creating the tag.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GitCreateTagRequestTagger {
-    /**
-     * An object with information about the individual creating the tag.
-     */
+    /// An object with information about the individual creating the tag.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -28803,14 +27439,10 @@ pub struct GitCreateTagRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub tag: String,
-    /**
-     * An object with information about the individual creating the tag.
-     */
+    /// An object with information about the individual creating the tag.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tagger: Option<GitCreateTagRequestTagger>,
-    /**
-     * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
-     */
+    /// The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
     #[serde(
         default,
         skip_serializing_if = "GitCreateTagRequestType::is_noop",
@@ -28870,9 +27502,7 @@ pub struct GitCreateTreeRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content: String,
-    /**
-     * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
-     */
+    /// The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mode: Option<GitCreateTreeRequestMode>,
     #[serde(
@@ -28887,9 +27517,7 @@ pub struct GitCreateTreeRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    /**
-     * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
-     */
+    /// The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GitCreateTagRequestType>,
 }
@@ -28902,9 +27530,7 @@ pub struct GitCreateTreeRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub base_tree: String,
-    /**
-     * Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure.
-     */
+    /// Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -28928,9 +27554,7 @@ pub struct ReposCreateWebhookRequestConfig {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub digest: String,
-    /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
-     */
+    /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
@@ -28988,9 +27612,7 @@ pub struct ReposUpdateWebhookRequestConfig {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
-     */
+    /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
@@ -29017,32 +27639,24 @@ pub struct ReposUpdateWebhookRequestConfig {
 pub struct ReposUpdateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub add_events: Vec<String>,
-    /**
-     * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
-     */
+    /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub config: Option<ReposUpdateWebhookRequestConfig>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub events: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29099,9 +27713,7 @@ pub struct MigrationsStartImportRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub tfvc_project: String,
-    /**
-     * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
-     */
+    /// The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub vcs: Option<Vcs>,
     #[serde(
@@ -29188,18 +27800,14 @@ impl UseLfs {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MigrationsSetLfsPreferenceRequest {
-    /**
-     * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
-     */
+    /// Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
     #[serde(default, skip_serializing_if = "UseLfs::is_noop")]
     pub use_lfs: UseLfs,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateInvitationRequest {
-    /**
-     * The permission associated with the invitation.
-     */
+    /// The permission associated with the invitation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryInvitationPermissions>,
 }
@@ -29238,7 +27846,6 @@ pub struct LabelsDataType {
 /// - `LabelsDataType`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesCreateRequestLabelsOneOf {
@@ -29282,9 +27889,7 @@ pub struct IssuesCreateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub assignee: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29297,9 +27902,7 @@ pub struct IssuesCreateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    /**
-     * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
-     */
+    /// Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29319,9 +27922,7 @@ pub struct IssuesUpdateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub assignee: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29334,9 +27935,7 @@ pub struct IssuesUpdateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    /**
-     * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
-     */
+    /// Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29345,9 +27944,7 @@ pub struct IssuesUpdateRequest {
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<TitleOneOf>,
-    /**
-     * The state of the milestone.
-     */
+    /// The state of the milestone.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -29356,9 +27953,7 @@ pub struct IssuesUpdateRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesAddAssigneesRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29369,9 +27964,7 @@ pub struct IssuesAddAssigneesRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesAddLabelsRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29399,14 +27992,11 @@ pub struct IssuesSetLabelsRequest {
 /// - `IssuesSetLabelsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesAddLabelsRequestOneOf {
     String(String),
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
     IssuesAddLabelsRequest(IssuesAddLabelsRequest),
     ProjectsUpdateColumnRequestVector(Vec<ProjectsUpdateColumnRequest>),
@@ -29493,14 +28083,11 @@ impl std::convert::From<IssuesAddLabelsRequestOneOf> for Vec<String> {
 /// - `IssuesAddLabelsRequest`
 /// - `Vec<ProjectsUpdateColumnRequest>`
 /// - `IssuesSetLabelsRequest`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesSetLabelsRequestAnyOf {
     #[serde(flatten)]
     pub string: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(flatten)]
     pub string_vector: Vec<String>,
     #[serde(flatten)]
@@ -29512,10 +28099,10 @@ pub struct IssuesSetLabelsRequestAnyOf {
 }
 
 /**
- * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  
- *   \* `off-topic`  
- *   \* `too heated`  
- *   \* `resolved`  
+ * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:
+ *   \* `off-topic`
+ *   \* `too heated`
+ *   \* `resolved`
  *   \* `spam`
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -29684,9 +28271,7 @@ pub struct IssuesCreateMilestoneRequest {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub due_on: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The state of the milestone.
-     */
+    /// The state of the milestone.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
     #[serde(
@@ -29757,9 +28342,7 @@ pub struct ReposCreatePagesSiteRequestSource {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub branch: String,
-    /**
-     * The source branch and directory used to publish your Pages site.
-     */
+    /// The source branch and directory used to publish your Pages site.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub path: Option<Path>,
 }
@@ -29767,9 +28350,7 @@ pub struct ReposCreatePagesSiteRequestSource {
 /// The source branch and directory used to publish your Pages site.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposCreatePagesSiteRequest {
-    /**
-     * The source branch and directory used to publish your Pages site.
-     */
+    /// The source branch and directory used to publish your Pages site.
     pub source: ReposCreatePagesSiteRequestSource,
 }
 
@@ -29819,9 +28400,7 @@ pub struct SourceDataType {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub branch: String,
-    /**
-     * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
-     */
+    /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
     #[serde(default)]
     pub path: Path,
 }
@@ -29830,17 +28409,12 @@ pub struct SourceDataType {
 ///
 /// - `SourceData`
 /// - `SourceDataType`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SourceAnyOf {
-    /**
-     * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
-     */
+    /// Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
     #[serde(flatten)]
     pub source_data: SourceData,
-    /**
-     * Update the source for the repository. Must include the branch name and path.
-     */
+    /// Update the source for the repository. Must include the branch name and path.
     #[serde(flatten)]
     pub source_data_type: SourceDataType,
 }
@@ -29980,9 +28554,7 @@ pub struct PullsUpdateRequest {
     pub body: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub maintainer_can_modify: Option<bool>,
-    /**
-     * The state of the milestone.
-     */
+    /// The state of the milestone.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
     #[serde(
@@ -30068,9 +28640,7 @@ pub struct PullsCreateReviewCommentRequest {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub position: i64,
-    /**
-     * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
-     */
+    /// The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub side: Option<Side>,
     #[serde(
@@ -30079,9 +28649,7 @@ pub struct PullsCreateReviewCommentRequest {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub start_line: i64,
-    /**
-     * \*\*Required when using multi-line comments\*\*. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
-     */
+    /// **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<PullsCreateReviewCommentRequestStartSide>,
 }
@@ -30112,18 +28680,14 @@ pub struct PullsMergeRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsRequestReviewers {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub reviewers: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30134,18 +28698,14 @@ pub struct PullsRequestReviewers {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullsRemoveRequestedReviewersRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub reviewers: Vec<String>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30245,9 +28805,7 @@ pub struct PullsCreateReviewRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    /**
-     * Use the following table to specify the location, destination, and contents of the draft review comment.
-     */
+    /// Use the following table to specify the location, destination, and contents of the draft review comment.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30260,9 +28818,7 @@ pub struct PullsCreateReviewRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit_id: String,
-    /**
-     * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
-     */
+    /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub event: Option<PullsCreateReviewRequestEvent>,
 }
@@ -30291,9 +28847,7 @@ pub struct PullsSubmitReviewRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    /**
-     * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
-     */
+    /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
     #[serde(
         default,
         skip_serializing_if = "PullsCreateReviewRequestEvent::is_noop"
@@ -30419,9 +28973,7 @@ impl ReactionsCreateReleaseRequestContent {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateReleaseRequest {
-    /**
-     * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
-     */
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
     #[serde(
         default,
         skip_serializing_if = "ReactionsCreateReleaseRequestContent::is_noop"
@@ -30431,14 +28983,10 @@ pub struct ReactionsCreateReleaseRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SecretScanningUpdateAlertRequest {
-    /**
-     * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
-     */
+    /// **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolution: Option<SecretScanningAlertResolution>,
-    /**
-     * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
-     */
+    /// Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
     pub state: SecretScanningAlertState,
 }
 
@@ -30446,7 +28994,6 @@ pub struct SecretScanningUpdateAlertRequest {
 ///
 /// - `Vec<SimpleUser>`
 /// - `Vec<Stargazer>`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActivityListStargazersRepoResponseAnyOf {
     #[serde(flatten)]
@@ -30509,9 +29056,7 @@ pub struct ReposCreateCommitStatusRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
-     */
+    /// The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
     #[serde(
         default,
         skip_serializing_if = "ReposCreateCommitStatusRequestState::is_noop"
@@ -30541,9 +29086,7 @@ pub struct ReposTransferRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub new_owner: String,
-    /**
-     * Code Frequency Stat
-     */
+    /// Code Frequency Stat
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30593,9 +29136,7 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<ScimUserListEnterpriseResourcesGroups>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30660,9 +29201,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequest {
-    /**
-     * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
-     */
+    /// Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30670,9 +29209,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequest {
         rename = "Operations"
     )]
     pub operations: Vec<EnterpriseAdminUpdateAttributeGroupRequestOperations>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30705,9 +29242,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminProvisionInviteUserRequest {
-    /**
-     * List of user emails.
-     */
+    /// List of user emails.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30721,9 +29256,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
     )]
     pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
     pub name: Name,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30741,9 +29274,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeUserRequest {
-    /**
-     * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
-     */
+    /// Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30751,9 +29282,7 @@ pub struct EnterpriseAdminUpdateAttributeUserRequest {
         rename = "Operations"
     )]
     pub operations: Vec<Data>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30786,9 +29315,7 @@ pub struct ScimProvisionInviteUserRequest {
         rename = "externalId"
     )]
     pub external_id: String,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30796,9 +29323,7 @@ pub struct ScimProvisionInviteUserRequest {
     )]
     pub groups: Vec<String>,
     pub name: ScimUserName,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30858,14 +29383,11 @@ pub struct Value {
 /// - `Value`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
     String(String),
-    /**
-     * user emails
-     */
+    /// user emails
     ScimUserEmailsVector(Vec<ScimUserEmails>),
     Value(Value),
 }
@@ -30938,9 +29460,7 @@ pub struct ScimUpdateAttributeUserRequestOperations {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimUpdateAttributeUserRequest {
-    /**
-     * Set of operations to be performed
-     */
+    /// Set of operations to be performed
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -30948,9 +29468,7 @@ pub struct ScimUpdateAttributeUserRequest {
         rename = "Operations"
     )]
     pub operations: Vec<ScimUpdateAttributeUserRequestOperations>,
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -31311,21 +29829,17 @@ pub struct SearchUsersResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
-    /**
-     * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
-     */
+    /// The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<RepositoryProjects>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
-    /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
-     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
-     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
-     *  \\* `admin` - team members can pull, push and administer newly-added repositories.
-     */
+    /// **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+    /// \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+    /// \* `push` - team members can pull and push, but not administer newly-added repositories.
+    /// \* `admin` - team members can pull, push and administer newly-added repositories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
 }
@@ -31372,9 +29886,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
-    /**
-     * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
-     */
+    /// The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -31395,17 +29907,12 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
 /// - `PrivateUser`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersGetByUsernameResponseOneOf {
-    /**
-     * Public User
-     */
+    /// Public User
     PublicUser(PublicUser),
-    /**
-     * Private User
-     */
+    /// Private User
     PrivateUser(PrivateUser),
 }
 
@@ -31481,9 +29988,7 @@ pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersAddEmailAuthenticatedRequest {
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -31499,14 +30004,11 @@ pub struct UsersAddEmailAuthenticatedRequest {
 /// - `UsersAddEmailAuthenticatedRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersAddEmailAuthenticatedRequestOneOf {
     String(String),
-    /**
-     * The list of events for the GitHub app
-     */
+    /// The list of events for the GitHub app
     StringVector(Vec<String>),
     UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
 }
@@ -31621,9 +30123,7 @@ impl OrgsUpdateMembershipRequestState {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgsUpdateMembershipRequest {
-    /**
-     * The state that the membership should be in. Only `"active"` will be accepted.
-     */
+    /// The state that the membership should be in. Only `"active"` will be accepted.
     #[serde(
         default,
         skip_serializing_if = "OrgsUpdateMembershipRequestState::is_noop"
@@ -31660,8 +30160,8 @@ impl std::fmt::Display for ReposListVisibility {
 }
 
 /**
- * Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
- *     
+ * Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`
+ *
  *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
@@ -31831,7 +30331,6 @@ impl std::fmt::Display for ReposListUserType {
 ///
 /// - `Vec<Repository>`
 /// - `Vec<StarredRepository>`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActivityListReposStarredByUserResponseAnyOf {
     #[serde(flatten)]

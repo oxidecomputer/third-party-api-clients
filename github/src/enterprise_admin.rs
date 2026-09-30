@@ -12,7 +12,7 @@ impl EnterpriseAdmin {
     }
 
     /**
-     * Get GitHub Actions permissions for an enterprise.
+     * Get GitHub Actions permissions for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/permissions` endpoint.
      *
@@ -24,7 +24,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn get_github_actions_permissions_enterprise(
         &self,
@@ -48,7 +48,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Set GitHub Actions permissions for an enterprise.
+     * Set GitHub Actions permissions for an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions` endpoint.
      *
@@ -60,7 +60,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn set_github_actions_permissions_enterprise(
         &self,
@@ -85,7 +85,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List selected organizations enabled for GitHub Actions in an enterprise.
+     * List selected organizations enabled for GitHub Actions in an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/permissions/organizations` endpoint.
      *
@@ -97,9 +97,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_selected_organizations_enabled_github_actions_enterprise(
         &self,
@@ -136,7 +136,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Set selected organizations enabled for GitHub Actions in an enterprise.
+     * Set selected organizations enabled for GitHub Actions in an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions/organizations` endpoint.
      *
@@ -148,7 +148,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn set_selected_organizations_enabled_github_actions_enterprise(
         &self,
@@ -173,7 +173,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Enable a selected organization for GitHub Actions in an enterprise.
+     * Enable a selected organization for GitHub Actions in an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions/organizations/{org_id}` endpoint.
      *
@@ -185,8 +185,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `org_id: i64` -- Unique identifier of an organization.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `org_id` -- Unique identifier of an organization.
      */
     pub async fn enable_selected_organization_github_actions_enterprise(
         &self,
@@ -212,7 +212,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Disable a selected organization for GitHub Actions in an enterprise.
+     * Disable a selected organization for GitHub Actions in an enterprise
      *
      * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/permissions/organizations/{org_id}` endpoint.
      *
@@ -224,8 +224,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `org_id: i64` -- Unique identifier of an organization.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `org_id` -- Unique identifier of an organization.
      */
     pub async fn disable_selected_organization_github_actions_enterprise(
         &self,
@@ -251,7 +251,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Get allowed actions for an enterprise.
+     * Get allowed actions for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/permissions/selected-actions` endpoint.
      *
@@ -263,7 +263,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn get_allowed_actions_enterprise(
         &self,
@@ -287,7 +287,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Set allowed actions for an enterprise.
+     * Set allowed actions for an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions/selected-actions` endpoint.
      *
@@ -299,7 +299,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn set_allowed_actions_enterprise(
         &self,
@@ -324,7 +324,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List self-hosted runner groups for an enterprise.
+     * List self-hosted runner groups for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups` endpoint.
      *
@@ -336,9 +336,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_self_hosted_runner_groups_for_enterprise(
         &self,
@@ -375,7 +375,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Create a self-hosted runner group for an enterprise.
+     * Create a self-hosted runner group for an enterprise
      *
      * This function performs a `POST` to the `/enterprises/{enterprise}/actions/runner-groups` endpoint.
      *
@@ -387,7 +387,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn create_self_hosted_runner_group_for_enterprise(
         &self,
@@ -412,7 +412,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Get a self-hosted runner group for an enterprise.
+     * Get a self-hosted runner group for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}` endpoint.
      *
@@ -424,8 +424,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn get_self_hosted_runner_group_for_enterprise(
         &self,
@@ -451,7 +451,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Delete a self-hosted runner group from an enterprise.
+     * Delete a self-hosted runner group from an enterprise
      *
      * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}` endpoint.
      *
@@ -463,8 +463,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn delete_self_hosted_runner_group_from_enterprise(
         &self,
@@ -490,7 +490,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Update a self-hosted runner group for an enterprise.
+     * Update a self-hosted runner group for an enterprise
      *
      * This function performs a `PATCH` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}` endpoint.
      *
@@ -502,8 +502,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn update_self_hosted_runner_group_for_enterprise(
         &self,
@@ -530,7 +530,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List organization access to a self-hosted runner group in an enterprise.
+     * List organization access to a self-hosted runner group in an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations` endpoint.
      *
@@ -542,10 +542,10 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -584,7 +584,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Set organization access for a self-hosted runner group in an enterprise.
+     * Set organization access for a self-hosted runner group in an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations` endpoint.
      *
@@ -596,8 +596,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn set_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -624,7 +624,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Add organization access to a self-hosted runner group in an enterprise.
+     * Add organization access to a self-hosted runner group in an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}` endpoint.
      *
@@ -636,9 +636,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `org_id: i64` -- Unique identifier of an organization.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `org_id` -- Unique identifier of an organization.
      */
     pub async fn add_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -666,7 +666,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Remove organization access to a self-hosted runner group in an enterprise.
+     * Remove organization access to a self-hosted runner group in an enterprise
      *
      * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}` endpoint.
      *
@@ -678,9 +678,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `org_id: i64` -- Unique identifier of an organization.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `org_id` -- Unique identifier of an organization.
      */
     pub async fn remove_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -708,7 +708,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List self-hosted runners in a group for an enterprise.
+     * List self-hosted runners in a group for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners` endpoint.
      *
@@ -720,10 +720,10 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_self_hosted_runners_in_group_for_enterprise(
         &self,
@@ -761,7 +761,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Set self-hosted runners in a group for an enterprise.
+     * Set self-hosted runners in a group for an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners` endpoint.
      *
@@ -773,8 +773,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn set_self_hosted_runners_in_group_for_enterprise(
         &self,
@@ -801,7 +801,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Add a self-hosted runner to a group for an enterprise.
+     * Add a self-hosted runner to a group for an enterprise
      *
      * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
      *
@@ -814,9 +814,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn add_self_hosted_runner_to_group_for_enterprise(
         &self,
@@ -844,7 +844,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Remove a self-hosted runner from a group for an enterprise.
+     * Remove a self-hosted runner from a group for an enterprise
      *
      * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
      *
@@ -856,9 +856,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn remove_self_hosted_runner_from_group_for_enterprise(
         &self,
@@ -886,7 +886,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List self-hosted runners for an enterprise.
+     * List self-hosted runners for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners` endpoint.
      *
@@ -898,9 +898,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_self_hosted_runners_for_enterprise(
         &self,
@@ -936,7 +936,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List runner applications for an enterprise.
+     * List runner applications for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners/downloads` endpoint.
      *
@@ -948,7 +948,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn list_runner_applications_for_enterprise(
         &self,
@@ -972,7 +972,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List runner applications for an enterprise.
+     * List runner applications for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners/downloads` endpoint.
      *
@@ -1006,7 +1006,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Create a registration token for an enterprise.
+     * Create a registration token for an enterprise
      *
      * This function performs a `POST` to the `/enterprises/{enterprise}/actions/runners/registration-token` endpoint.
      *
@@ -1026,7 +1026,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn create_registration_token_for_enterprise(
         &self,
@@ -1050,7 +1050,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Create a remove token for an enterprise.
+     * Create a remove token for an enterprise
      *
      * This function performs a `POST` to the `/enterprises/{enterprise}/actions/runners/remove-token` endpoint.
      *
@@ -1071,7 +1071,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn create_remove_token_for_enterprise(
         &self,
@@ -1095,7 +1095,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Get a self-hosted runner for an enterprise.
+     * Get a self-hosted runner for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners/{runner_id}` endpoint.
      *
@@ -1107,8 +1107,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn get_self_hosted_runner_for_enterprise(
         &self,
@@ -1134,7 +1134,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Delete a self-hosted runner from an enterprise.
+     * Delete a self-hosted runner from an enterprise
      *
      * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runners/{runner_id}` endpoint.
      *
@@ -1146,8 +1146,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn delete_self_hosted_runner_from_enterprise(
         &self,
@@ -1173,7 +1173,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Get the audit log for an enterprise.
+     * Get the audit log for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/audit-log` endpoint.
      *
@@ -1183,22 +1183,22 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `phrase: &str` -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
-     * * `include: crate::types::Include` -- The event types to include:
-     *  
-     *  - `web` - returns web (non-Git) events
-     *  - `git` - returns Git events
-     *  - `all` - returns both web and Git events
-     *  
-     *  The default is `web`.
-     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
-     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-     * * `order: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `phrase` -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
+     * * `include` -- The event types to include:
+     *
+     *   - `web` - returns web (non-Git) events
+     *   - `git` - returns Git events
+     *   - `all` - returns both web and Git events
+     *
+     *   The default is `web`.
+     * * `after` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+     * * `before` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
+     * * `order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
      */
     pub async fn get_audit_log(
         &self,
@@ -1253,7 +1253,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Get the audit log for an enterprise.
+     * Get the audit log for an enterprise
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/audit-log` endpoint.
      *
@@ -1308,7 +1308,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List provisioned SCIM groups for an enterprise.
+     * List provisioned SCIM groups for an enterprise
      *
      * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Groups` endpoint.
      *
@@ -1318,11 +1318,11 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `start_index: i64` -- Used for pagination: the index of the first result to return.
-     * * `count: i64` -- Used for pagination: the number of results to return.
-     * * `filter: &str` -- filter results.
-     * * `excluded_attributes: &str` -- attributes to exclude.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `start_index` -- Used for pagination: the index of the first result to return.
+     * * `count` -- Used for pagination: the number of results to return.
+     * * `filter` -- filter results
+     * * `excluded_attributes` -- attributes to exclude
      */
     pub async fn list_provisioned_groups_enterprise(
         &self,
@@ -1368,7 +1368,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Provision a SCIM enterprise group and invite users.
+     * Provision a SCIM enterprise group and invite users
      *
      * This function performs a `POST` to the `/scim/v2/enterprises/{enterprise}/Groups` endpoint.
      *
@@ -1380,7 +1380,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn provision_and_invite_enterprise_group(
         &self,
@@ -1405,7 +1405,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Get SCIM provisioning information for an enterprise group.
+     * Get SCIM provisioning information for an enterprise group
      *
      * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
      *
@@ -1415,9 +1415,9 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_group_id: &str` -- Identifier generated by the GitHub SCIM endpoint.
-     * * `excluded_attributes: &str` -- Attributes to exclude.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_group_id` -- Identifier generated by the GitHub SCIM endpoint.
+     * * `excluded_attributes` -- Attributes to exclude.
      */
     pub async fn get_provisioning_information_for_enterprise_group(
         &self,
@@ -1453,7 +1453,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Set SCIM information for a provisioned enterprise group.
+     * Set SCIM information for a provisioned enterprise group
      *
      * This function performs a `PUT` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
      *
@@ -1465,8 +1465,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_group_id: &str` -- Identifier generated by the GitHub SCIM endpoint.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_group_id` -- Identifier generated by the GitHub SCIM endpoint.
      */
     pub async fn set_information_for_provisioned_enterprise_group(
         &self,
@@ -1493,7 +1493,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Delete a SCIM group from an enterprise.
+     * Delete a SCIM group from an enterprise
      *
      * This function performs a `DELETE` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
      *
@@ -1503,8 +1503,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_group_id: &str` -- Identifier generated by the GitHub SCIM endpoint.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_group_id` -- Identifier generated by the GitHub SCIM endpoint.
      */
     pub async fn delete_scim_group_from_enterprise(
         &self,
@@ -1530,7 +1530,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Update an attribute for a SCIM enterprise group.
+     * Update an attribute for a SCIM enterprise group
      *
      * This function performs a `PATCH` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
      *
@@ -1542,8 +1542,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_group_id: &str` -- Identifier generated by the GitHub SCIM endpoint.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_group_id` -- Identifier generated by the GitHub SCIM endpoint.
      */
     pub async fn update_attribute_for_enterprise_group(
         &self,
@@ -1570,7 +1570,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * List SCIM provisioned identities for an enterprise.
+     * List SCIM provisioned identities for an enterprise
      *
      * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Users` endpoint.
      *
@@ -1579,9 +1579,10 @@ impl EnterpriseAdmin {
      * Retrieves a paginated list of all provisioned enterprise members, including pending invitations.
      *
      * When a user with a SAML-provisioned external identity leaves (or is removed from) an enterprise, the account's metadata is immediately removed. However, the returned list of user accounts might not always match the organization or enterprise member list you see on GitHub. This can happen in certain cases where an external identity associated with an organization will not match an organization member:
-     *   - When a user with a SCIM-provisioned external identity is removed from an enterprise, the account's metadata is preserved to allow the user to re-join the organization in the future.
-     *   - When inviting a user to join an organization, you can expect to see their external identity in the results before they accept the invitation, or if the invitation is cancelled (or never accepted).
-     *   - When a user is invited over SCIM, an external identity is created that matches with the invitee's email address. However, this identity is only linked to a user account when the user accepts the invitation by going through SAML SSO.
+     *
+     * - When a user with a SCIM-provisioned external identity is removed from an enterprise, the account's metadata is preserved to allow the user to re-join the organization in the future.
+     * - When inviting a user to join an organization, you can expect to see their external identity in the results before they accept the invitation, or if the invitation is cancelled (or never accepted).
+     * - When a user is invited over SCIM, an external identity is created that matches with the invitee's email address. However, this identity is only linked to a user account when the user accepts the invitation by going through SAML SSO.
      *
      * The returned list of external identities can include an entry for a `null` user. These are unlinked SAML identities that are created when a user goes through the following Single Sign-On (SSO) process but does not sign in to their GitHub account after completing SSO:
      *
@@ -1590,17 +1591,17 @@ impl EnterpriseAdmin {
      * 1. The user attempts to access the GitHub enterprise and initiates the SAML SSO process, and is not currently signed in to their GitHub account.
      *
      * 1. After successfully authenticating with the SAML SSO IdP, the `null` external identity entry is created and the user is prompted to sign in to their GitHub account:
-     *    - If the user signs in, their GitHub account is linked to this entry.
-     *    - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
+     * - If the user signs in, their GitHub account is linked to this entry.
+     * - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
      *
      * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-scim-provisioned-identities-for-an-enterprise>
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `start_index: i64` -- Used for pagination: the index of the first result to return.
-     * * `count: i64` -- Used for pagination: the number of results to return.
-     * * `filter: &str` -- filter results.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `start_index` -- Used for pagination: the index of the first result to return.
+     * * `count` -- Used for pagination: the number of results to return.
+     * * `filter` -- filter results
      */
     pub async fn list_provisioned_identities_enterprise(
         &self,
@@ -1639,7 +1640,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Provision and invite a SCIM enterprise user.
+     * Provision and invite a SCIM enterprise user
      *
      * This function performs a `POST` to the `/scim/v2/enterprises/{enterprise}/Users` endpoint.
      *
@@ -1653,7 +1654,7 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
     pub async fn provision_and_invite_enterprise_user(
         &self,
@@ -1678,7 +1679,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Get SCIM provisioning information for an enterprise user.
+     * Get SCIM provisioning information for an enterprise user
      *
      * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
      *
@@ -1688,8 +1689,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_user_id: &str` -- scim_user_id parameter.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_user_id` -- scim_user_id parameter
      */
     pub async fn get_provisioning_information_for_enterprise_user(
         &self,
@@ -1715,7 +1716,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Set SCIM information for a provisioned enterprise user.
+     * Set SCIM information for a provisioned enterprise user
      *
      * This function performs a `PUT` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
      *
@@ -1731,8 +1732,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_user_id: &str` -- scim_user_id parameter.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_user_id` -- scim_user_id parameter
      */
     pub async fn set_information_for_provisioned_enterprise_user(
         &self,
@@ -1759,7 +1760,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Delete a SCIM user from an enterprise.
+     * Delete a SCIM user from an enterprise
      *
      * This function performs a `DELETE` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
      *
@@ -1769,8 +1770,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_user_id: &str` -- scim_user_id parameter.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_user_id` -- scim_user_id parameter
      */
     pub async fn delete_user_from_enterprise(
         &self,
@@ -1796,7 +1797,7 @@ impl EnterpriseAdmin {
             .await
     }
     /**
-     * Update an attribute for a SCIM enterprise user.
+     * Update an attribute for a SCIM enterprise user
      *
      * This function performs a `PATCH` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
      *
@@ -1823,8 +1824,8 @@ impl EnterpriseAdmin {
      *
      * **Parameters:**
      *
-     * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-     * * `scim_user_id: &str` -- scim_user_id parameter.
+     * * `enterprise` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * `scim_user_id` -- scim_user_id parameter
      */
     pub async fn update_attribute_for_enterprise_user(
         &self,

@@ -12,15 +12,15 @@ impl Locations {
     }
 
     /**
-     * Get locations.
+     * Get locations
      *
      * This function performs a `GET` to the `/location` endpoint.
      *
      * **Parameters:**
      *
-     * * `include_inactive: bool` -- True if the inventory item is marked as a digital item.
-     * * `receiving_enabled: bool` -- True if the inventory item is marked as a digital item.
-     * * `access_granted: bool` -- True if the inventory item is marked as a digital item.
+     * * `include_inactive` -- Whether the inactive locations should be included or not
+     * * `receiving_enabled` -- True if the inventory item is marked as a digital item
+     * * `access_granted` -- True if the inventory item is marked as a digital item
      */
     pub async fn get_page(
         &self,
@@ -42,7 +42,7 @@ impl Locations {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/location?{}", query_), None);
+        let url = self.client.url(&format!("/location?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -54,7 +54,7 @@ impl Locations {
             .await
     }
     /**
-     * Get locations.
+     * Get locations
      *
      * This function performs a `GET` to the `/location` endpoint.
      *
@@ -80,7 +80,7 @@ impl Locations {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/location?{}", query_), None);
+        let url = self.client.url(&format!("/location?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,

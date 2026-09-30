@@ -20,10 +20,10 @@ impl Migration {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `tokens.basic`.
-     * * `users: &str` -- A comma-separated list of user ids, up to 400 per request.
-     * * `team_id: &str` -- Specify team_id starts with `T` in case of Org Token.
-     * * `to_old: bool` -- Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`.
+     * * `token` -- Authentication token. Requires scope: `tokens.basic`
+     * * `users` -- A comma-separated list of user ids, up to 400 per request
+     * * `team_id` -- Specify team_id starts with `T` in case of Org Token
+     * * `to_old` -- Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`.
      */
     pub async fn exchange(
         &self,
@@ -44,7 +44,7 @@ impl Migration {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/migration.exchange?{}", query_), None);
+            .url(&format!("/migration.exchange?{query_}"), None);
         self.client
             .get(
                 &url,

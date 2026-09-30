@@ -20,7 +20,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn archive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.archive", None);
@@ -43,7 +43,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn convert_private(
         &self,
@@ -70,7 +70,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn create(
         &self,
@@ -95,7 +95,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.delete", None);
@@ -118,7 +118,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn disconnect_shared(
         &self,
@@ -145,8 +145,8 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:read`.
-     * * `channel_id: &str` -- The channel to get preferences for.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:read`
+     * * `channel_id` -- The channel to get preferences for.
      */
     pub async fn get_conversation_pref(
         &self,
@@ -159,7 +159,7 @@ impl AdminConversations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin.conversations.getConversationPrefs?{}", query_),
+            &format!("/admin.conversations.getConversationPrefs?{query_}"),
             None,
         );
         self.client
@@ -181,10 +181,10 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:read`.
-     * * `channel_id: &str` -- The channel to determine connected workspaces within the organization for.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:read`
+     * * `channel_id` -- The channel to determine connected workspaces within the organization for.
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * * `limit` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
      */
     pub async fn get_team(
         &self,
@@ -205,7 +205,7 @@ impl AdminConversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.conversations.getTeams?{}", query_), None);
+            .url(&format!("/admin.conversations.getTeams?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -225,7 +225,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn invite(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.invite", None);
@@ -248,7 +248,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn rename(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.rename", None);
@@ -271,14 +271,14 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:read`.
-     * * `team_ids: &str` -- Comma separated string of team IDs, signifying the workspaces to search through.
-     * * `query: &str` -- Name of the the channel to query by.
-     * * `limit: i64` -- Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     * * `search_channel_types: &str` -- The type of channel to include or exclude in the search. For example `private` will search private channels, while `private_exclude` will exclude them. For a full list of types, check the [Types section](#types).
-     * * `sort: &str` -- Possible values are `relevant` (search ranking based on what we think is closest), `name` (alphabetical), `member_count` (number of users in the channel), and `created` (date channel was created). You can optionally pair this with the `sort_dir` arg to change how it is sorted .
-     * * `sort_dir: &str` -- Sort direction. Possible values are `asc` for ascending order like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2, 1) or (c, b, a).
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:read`
+     * * `team_ids` -- Comma separated string of team IDs, signifying the workspaces to search through.
+     * * `query` -- Name of the the channel to query by.
+     * * `limit` -- Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+     * * `search_channel_types` -- The type of channel to include or exclude in the search. For example `private` will search private channels, while `private_exclude` will exclude them. For a full list of types, check the [Types section](#types).
+     * * `sort` -- Possible values are `relevant` (search ranking based on what we think is closest), `name` (alphabetical), `member_count` (number of users in the channel), and `created` (date channel was created). You can optionally pair this with the `sort_dir` arg to change how it is sorted
+     * * `sort_dir` -- Sort direction. Possible values are `asc` for ascending order like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2, 1) or (c, b, a)
      */
     pub async fn search(
         &self,
@@ -318,7 +318,7 @@ impl AdminConversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.conversations.search?{}", query_), None);
+            .url(&format!("/admin.conversations.search?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -338,7 +338,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn set_conversation_prefs(
         &self,
@@ -365,7 +365,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn set_teams(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.setTeams", None);
@@ -388,7 +388,7 @@ impl AdminConversations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:write`
      */
     pub async fn unarchive(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.conversations.unarchive", None);

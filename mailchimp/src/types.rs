@@ -5,9 +5,7 @@ use serde::{Deserialize, Serialize};
 /// An individual folder listed in the File Manager.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GalleryFolder {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19,27 +17,21 @@ pub struct GalleryFolder {
 /// Information about a specific template.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateInstance {
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub folder_id: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -51,9 +43,7 @@ pub struct TemplateInstance {
 /// A specific note for a specific member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberNotes {
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -65,18 +55,14 @@ pub struct MemberNotes {
 /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Interest {
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub display_order: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -128,27 +114,21 @@ impl Type {
 /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestCategory {
-    /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
-     */
+    /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub display_order: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Determines how this category’s interests appear on signup forms.
-     */
+    /// Determines how this category’s interests appear on signup forms.
     #[serde(default, skip_serializing_if = "Type::is_noop", rename = "type")]
     pub type_: Type,
 }
@@ -156,49 +136,37 @@ pub struct InterestCategory {
 /// The events that can trigger the webhook and whether they are enabled.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Events {
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub campaign: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub cleaned: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub profile: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub subscribe: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub unsubscribe: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -209,25 +177,19 @@ pub struct Events {
 /// The possible sources of any events that can trigger the webhook and whether they are enabled.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sources {
-    /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
-     */
+    /// The possible sources of any events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub admin: bool,
-    /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
-     */
+    /// The possible sources of any events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub api: bool,
-    /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
-     */
+    /// The possible sources of any events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -238,19 +200,13 @@ pub struct Sources {
 /// Configure a webhook for the given list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddWebhook {
-    /**
-     * Configure a webhook for the given list.
-     */
+    /// Configure a webhook for the given list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub events: Option<Events>,
-    /**
-     * Configure a webhook for the given list.
-     */
+    /// Configure a webhook for the given list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sources: Option<Sources>,
-    /**
-     * Configure a webhook for the given list.
-     */
+    /// Configure a webhook for the given list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -262,9 +218,7 @@ pub struct AddWebhook {
 /// Information about subscribers in an Automation email queue.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberInAutomationQueue {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -276,81 +230,63 @@ pub struct SubscriberInAutomationQueue {
 /// Information about a specific product variant.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductVariant {
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub backorders: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub inventory_quantity: i64,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sku: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -399,9 +335,7 @@ impl PricingPlanType {
 /// Information about the account contact.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contact {
-    /**
-     * Information about the account contact.
-     */
+    /// Information about the account contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -409,9 +343,7 @@ pub struct Contact {
         rename = "addr1"
     )]
     pub addr_1: String,
-    /**
-     * Information about the account contact.
-     */
+    /// Information about the account contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -419,45 +351,35 @@ pub struct Contact {
         rename = "addr2"
     )]
     pub addr_2: String,
-    /**
-     * Information about the account contact.
-     */
+    /// Information about the account contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * Information about the account contact.
-     */
+    /// Information about the account contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * Information about the account contact.
-     */
+    /// Information about the account contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * Information about the account contact.
-     */
+    /// Information about the account contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * Information about the account contact.
-     */
+    /// Information about the account contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -469,27 +391,21 @@ pub struct Contact {
 /// The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IndustryStats {
-    /**
-     * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
-     */
+    /// The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub bounce_rate: f64,
-    /**
-     * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
-     */
+    /// The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
-     */
+    /// The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -550,41 +466,31 @@ impl Method {
 /// This object represents a link from the resource where it is found to another resource or action that may be performed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Links {
-    /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
-     */
+    /// This object represents a link from the resource where it is found to another resource or action that may be performed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub href: String,
-    /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
-     */
+    /// This object represents a link from the resource where it is found to another resource or action that may be performed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub method: Option<Method>,
-    /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
-     */
+    /// This object represents a link from the resource where it is found to another resource or action that may be performed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub rel: String,
-    /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
-     */
+    /// This object represents a link from the resource where it is found to another resource or action that may be performed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub schema: String,
-    /**
-     * This object represents a link from the resource where it is found to another resource or action that may be performed.
-     */
+    /// This object represents a link from the resource where it is found to another resource or action that may be performed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -597,9 +503,7 @@ pub struct Links {
 /// The API root resource links to all other resources available in the API.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiRoot {
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -607,158 +511,120 @@ pub struct ApiRoot {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_id: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_industry: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_name: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_timezone: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub avatar_url: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contact: Option<Contact>,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub first_payment: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub industry_stats: Option<IndustryStats>,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_login: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub login_id: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub member_since: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pricing_plan_type: Option<PricingPlanType>,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub pro_enabled: bool,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub role: String,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_subscribers: i64,
-    /**
-     * The API root resource links to all other resources available in the API.
-     */
+    /// The API root resource links to all other resources available in the API.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -820,59 +686,45 @@ impl GetActivityFeedChimpChatterResponseType {
 /// A Chimp Chatter message
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChimpChatter {
-    /**
-     * A Chimp Chatter message
-     */
+    /// A Chimp Chatter message
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A Chimp Chatter message
-     */
+    /// A Chimp Chatter message
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A Chimp Chatter message
-     */
+    /// A Chimp Chatter message
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * A Chimp Chatter message
-     */
+    /// A Chimp Chatter message
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * A Chimp Chatter message
-     */
+    /// A Chimp Chatter message
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<GetActivityFeedChimpChatterResponseType>,
-    /**
-     * A Chimp Chatter message
-     */
+    /// A Chimp Chatter message
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub update_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A Chimp Chatter message
-     */
+    /// A Chimp Chatter message
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -884,9 +736,7 @@ pub struct ChimpChatter {
 /// An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetActivityFeedChimpChatterResponse {
-    /**
-     * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
-     */
+    /// An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -894,18 +744,14 @@ pub struct GetActivityFeedChimpChatterResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
-     */
+    /// An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub chimp_chatter: Vec<ChimpChatter>,
-    /**
-     * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
-     */
+    /// An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -917,9 +763,7 @@ pub struct GetActivityFeedChimpChatterResponse {
 /// An authorized app.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Apps {
-    /**
-     * An authorized app.
-     */
+    /// An authorized app.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -927,36 +771,28 @@ pub struct Apps {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An authorized app.
-     */
+    /// An authorized app.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * An authorized app.
-     */
+    /// An authorized app.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * An authorized app.
-     */
+    /// An authorized app.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * An authorized app.
-     */
+    /// An authorized app.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -968,9 +804,7 @@ pub struct Apps {
 /// An array of objects, each representing an authorized application.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAuthorizedAppsResponse {
-    /**
-     * An array of objects, each representing an authorized application.
-     */
+    /// An array of objects, each representing an authorized application.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -978,18 +812,14 @@ pub struct GetAuthorizedAppsResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An array of objects, each representing an authorized application.
-     */
+    /// An array of objects, each representing an authorized application.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub apps: Vec<Apps>,
-    /**
-     * An array of objects, each representing an authorized application.
-     */
+    /// An array of objects, each representing an authorized application.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1177,24 +1007,16 @@ impl Op {
 /// Segment by interaction with a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Conditions {
-    /**
-     * Segment by interaction with a specific campaign.
-     */
+    /// Segment by interaction with a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<ConditionType>,
-    /**
-     * Segment by interaction with a specific campaign.
-     */
+    /// Segment by interaction with a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<Field>,
-    /**
-     * Segment by interaction with a specific campaign.
-     */
+    /// Segment by interaction with a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<Op>,
-    /**
-     * Segment by interaction with a specific campaign.
-     */
+    /// Segment by interaction with a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1305,24 +1127,16 @@ impl SegmentOperator {
 /// Segment by interaction with an Automation workflow.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationSegment {
-    /**
-     * Segment by interaction with an Automation workflow.
-     */
+    /// Segment by interaction with an Automation workflow.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<AutomationSegmentConditionType>,
-    /**
-     * Segment by interaction with an Automation workflow.
-     */
+    /// Segment by interaction with an Automation workflow.
     #[serde(default, skip_serializing_if = "SegmentField::is_noop")]
     pub field: SegmentField,
-    /**
-     * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
-     */
+    /// The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
     #[serde(default, skip_serializing_if = "SegmentOperator::is_noop")]
     pub op: SegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1427,24 +1241,16 @@ impl PollActivitySegmentOperator {
 /// Segment by poll activity.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PollActivitySegment {
-    /**
-     * Segment by poll activity.
-     */
+    /// Segment by poll activity.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<PollActivitySegmentConditionType>,
-    /**
-     * Segment by poll activity.
-     */
+    /// Segment by poll activity.
     #[serde(default, skip_serializing_if = "PollActivitySegmentField::is_noop")]
     pub field: PollActivitySegmentField,
-    /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
-     */
+    /// Members have/have not interacted with a specific poll in a Mailchimp email.
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -1515,24 +1321,16 @@ impl ConversationSegmentField {
 /// Segment by interaction with a campaign via Conversations.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationSegment {
-    /**
-     * Segment by interaction with a campaign via Conversations.
-     */
+    /// Segment by interaction with a campaign via Conversations.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<ConversationSegmentConditionType>,
-    /**
-     * Segment by interaction with a campaign via Conversations.
-     */
+    /// Segment by interaction with a campaign via Conversations.
     #[serde(default, skip_serializing_if = "ConversationSegmentField::is_noop")]
     pub field: ConversationSegmentField,
-    /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
-     */
+    /// Members have/have not interacted with a specific poll in a Mailchimp email.
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1661,33 +1459,23 @@ impl DateSegmentOperator {
 /// Segment by a specific date field.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateSegment {
-    /**
-     * Segment by a specific date field.
-     */
+    /// Segment by a specific date field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<DateSegmentConditionType>,
-    /**
-     * Segment by a specific date field.
-     */
+    /// Segment by a specific date field.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub extra: String,
-    /**
-     * The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
-     */
+    /// The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
     #[serde(default, skip_serializing_if = "DateSegmentField::is_noop")]
     pub field: DateSegmentField,
-    /**
-     * When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
-     */
+    /// When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
     #[serde(default, skip_serializing_if = "DateSegmentOperator::is_noop")]
     pub op: DateSegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1792,24 +1580,16 @@ impl EmailClientSegmentOperator {
 /// Segment by use of a particular email client.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailClientSegment {
-    /**
-     * Segment by use of a particular email client.
-     */
+    /// Segment by use of a particular email client.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EmailClientSegmentConditionType>,
-    /**
-     * Segment by use of a particular email client.
-     */
+    /// Segment by use of a particular email client.
     #[serde(default, skip_serializing_if = "EmailClientSegmentField::is_noop")]
     pub field: EmailClientSegmentField,
-    /**
-     * The operation to determine whether we select clients that match the value, or clients that do not match the value.
-     */
+    /// The operation to determine whether we select clients that match the value, or clients that do not match the value.
     #[serde(default, skip_serializing_if = "EmailClientSegmentOperator::is_noop")]
     pub op: EmailClientSegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1914,24 +1694,16 @@ impl LanguageSegmentOperator {
 /// Segment by language.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LanguageSegment {
-    /**
-     * Segment by language.
-     */
+    /// Segment by language.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<LanguageSegmentConditionType>,
-    /**
-     * Segmenting based off of a subscriber's language.
-     */
+    /// Segmenting based off of a subscriber's language.
     #[serde(default, skip_serializing_if = "LanguageSegmentField::is_noop")]
     pub field: LanguageSegmentField,
-    /**
-     * Whether the member's language is or is not set to a specific language.
-     */
+    /// Whether the member's language is or is not set to a specific language.
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2042,24 +1814,16 @@ impl MemberRatingSegmentOperator {
 /// Segment by member rating.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberRatingSegment {
-    /**
-     * Segment by member rating.
-     */
+    /// Segment by member rating.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<MemberRatingSegmentConditionType>,
-    /**
-     * Segment by member rating.
-     */
+    /// Segment by member rating.
     #[serde(default, skip_serializing_if = "MemberRatingSegmentField::is_noop")]
     pub field: MemberRatingSegmentField,
-    /**
-     * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
-     */
+    /// Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
     #[serde(default, skip_serializing_if = "MemberRatingSegmentOperator::is_noop")]
     pub op: MemberRatingSegmentOperator,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -2165,14 +1929,10 @@ pub struct SignupSourceSegment {
     pub condition_type: SignupSourceSegmentType,
     #[serde(default, skip_serializing_if = "SignupSourceSegmentField::is_noop")]
     pub field: SignupSourceSegmentField,
-    /**
-     * Whether the member's signup source was/was not a particular value.
-     */
+    /// Whether the member's signup source was/was not a particular value.
     #[serde(default, skip_serializing_if = "SignupSourceSegmentOperator::is_noop")]
     pub op: SignupSourceSegmentOperator,
-    /**
-     * Segment by signup source.
-     */
+    /// Segment by signup source.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2243,24 +2003,16 @@ impl SurveyMonkeySegmentField {
 /// Segment by interaction with a SurveyMonkey survey.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SurveyMonkeySegment {
-    /**
-     * Segment by interaction with a SurveyMonkey survey.
-     */
+    /// Segment by interaction with a SurveyMonkey survey.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SurveyMonkeySegmentConditionType>,
-    /**
-     * Segment by interaction with a SurveyMonkey survey.
-     */
+    /// Segment by interaction with a SurveyMonkey survey.
     #[serde(default, skip_serializing_if = "SurveyMonkeySegmentField::is_noop")]
     pub field: SurveyMonkeySegmentField,
-    /**
-     * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
-     */
+    /// The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
     #[serde(default, skip_serializing_if = "SegmentOperator::is_noop")]
     pub op: SegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2331,19 +2083,13 @@ impl VipSegmentField {
 /// Segment by VIP status.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VipSegment {
-    /**
-     * Segment by VIP status.
-     */
+    /// Segment by VIP status.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<VipSegmentConditionType>,
-    /**
-     * Segment by VIP status.
-     */
+    /// Segment by VIP status.
     #[serde(default, skip_serializing_if = "VipSegmentField::is_noop")]
     pub field: VipSegmentField,
-    /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
-     */
+    /// Members have/have not interacted with a specific poll in a Mailchimp email.
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
 }
@@ -2416,28 +2162,20 @@ impl InterestsSegmentOperator {
 /// Segment by an interest group merge field.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestsSegment {
-    /**
-     * Segment by an interest group merge field.
-     */
+    /// Segment by an interest group merge field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<InterestsSegmentConditionType>,
-    /**
-     * Segment by an interest group merge field.
-     */
+    /// Segment by an interest group merge field.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub field: String,
-    /**
-     * Segment by an interest group merge field.
-     */
+    /// Segment by an interest group merge field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<InterestsSegmentOperator>,
-    /**
-     * Segment by an interest group merge field.
-     */
+    /// Segment by an interest group merge field.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2557,24 +2295,16 @@ impl EcommerceCategorySegmentOperator {
 /// Segment by purchases in specific items or categories.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceCategorySegment {
-    /**
-     * Segment by purchases in specific items or categories.
-     */
+    /// Segment by purchases in specific items or categories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommerceCategorySegmentConditionType>,
-    /**
-     * Segment by purchases in specific items or categories.
-     */
+    /// Segment by purchases in specific items or categories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommerceCategorySegmentField>,
-    /**
-     * Segment by purchases in specific items or categories.
-     */
+    /// Segment by purchases in specific items or categories.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<EcommerceCategorySegmentOperator>,
-    /**
-     * Segment by purchases in specific items or categories.
-     */
+    /// Segment by purchases in specific items or categories.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2654,24 +2384,16 @@ impl EcommerceNumberSegmentField {
 /// Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceNumberSegment {
-    /**
-     * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
-     */
+    /// Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommerceNumberSegmentConditionType>,
-    /**
-     * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
-     */
+    /// Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
     #[serde(default, skip_serializing_if = "EcommerceNumberSegmentField::is_noop")]
     pub field: EcommerceNumberSegmentField,
-    /**
-     * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
-     */
+    /// Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
     #[serde(default, skip_serializing_if = "MemberRatingSegmentOperator::is_noop")]
     pub op: MemberRatingSegmentOperator,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -2742,19 +2464,13 @@ impl EcommercePurchasedSegmentField {
 /// Segment by whether someone has purchased anything.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommercePurchasedSegment {
-    /**
-     * Segment by whether someone has purchased anything.
-     */
+    /// Segment by whether someone has purchased anything.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommercePurchasedSegmentConditionType>,
-    /**
-     * Segment by whether someone has purchased anything.
-     */
+    /// Segment by whether someone has purchased anything.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommercePurchasedSegmentField>,
-    /**
-     * Segment by whether someone has purchased anything.
-     */
+    /// Segment by whether someone has purchased anything.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<PollActivitySegmentOperator>,
 }
@@ -2858,24 +2574,16 @@ impl EcommerceSpentSegmentOperator {
 /// Segment by amount spent on a single order or across all orders.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceSpentSegment {
-    /**
-     * Segment by amount spent on a single order or across all orders.
-     */
+    /// Segment by amount spent on a single order or across all orders.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommerceSpentSegmentConditionType>,
-    /**
-     * Segment by amount spent on a single order or across all orders.
-     */
+    /// Segment by amount spent on a single order or across all orders.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommerceSpentSegmentField>,
-    /**
-     * Segment by amount spent on a single order or across all orders.
-     */
+    /// Segment by amount spent on a single order or across all orders.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<EcommerceSpentSegmentOperator>,
-    /**
-     * Segment by amount spent on a single order or across all orders.
-     */
+    /// Segment by amount spent on a single order or across all orders.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2946,24 +2654,16 @@ impl EcommercePurchasedStoreSegmentField {
 /// Segment by purchases from a specific store.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommercePurchasedStoreSegment {
-    /**
-     * Segment by purchases from a specific store.
-     */
+    /// Segment by purchases from a specific store.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EcommercePurchasedStoreSegmentConditionType>,
-    /**
-     * Segment by purchases from a specific store.
-     */
+    /// Segment by purchases from a specific store.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<EcommercePurchasedStoreSegmentField>,
-    /**
-     * Segment by purchases from a specific store.
-     */
+    /// Segment by purchases from a specific store.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<LanguageSegmentOperator>,
-    /**
-     * Segment by purchases from a specific store.
-     */
+    /// Segment by purchases from a specific store.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3080,24 +2780,16 @@ impl GoalActivitySegmentOperator {
 /// Segment by Goal activity.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GoalActivitySegment {
-    /**
-     * Segment by Goal activity.
-     */
+    /// Segment by Goal activity.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<GoalActivitySegmentConditionType>,
-    /**
-     * Segment by Goal activity.
-     */
+    /// Segment by Goal activity.
     #[serde(default, skip_serializing_if = "GoalActivitySegmentField::is_noop")]
     pub field: GoalActivitySegmentField,
-    /**
-     * Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
-     */
+    /// Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
     #[serde(default, skip_serializing_if = "GoalActivitySegmentOperator::is_noop")]
     pub op: GoalActivitySegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3205,24 +2897,16 @@ impl GoalTimestampSegmentOperator {
 /// Segment by most recent interaction with a website.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GoalTimestampSegment {
-    /**
-     * Segment by most recent interaction with a website.
-     */
+    /// Segment by most recent interaction with a website.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<GoalTimestampSegmentConditionType>,
-    /**
-     * Segment by most recent interaction with a website.
-     */
+    /// Segment by most recent interaction with a website.
     #[serde(default, skip_serializing_if = "GoalTimestampSegmentField::is_noop")]
     pub field: GoalTimestampSegmentField,
-    /**
-     * Whether the website activity happened after, before, or at a given timestamp.
-     */
+    /// Whether the website activity happened after, before, or at a given timestamp.
     #[serde(default, skip_serializing_if = "GoalTimestampSegmentOperator::is_noop")]
     pub op: GoalTimestampSegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3327,30 +3011,22 @@ impl SimilarSubscribersSegmentMemberOperator {
 /// Segment by similar subscribers.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SimilarSubscribersSegmentMember {
-    /**
-     * Segment by similar subscribers.
-     */
+    /// Segment by similar subscribers.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SimilarSubscribersSegmentMemberConditionType>,
-    /**
-     * Segment by similar subscribers.
-     */
+    /// Segment by similar subscribers.
     #[serde(
         default,
         skip_serializing_if = "SimilarSubscribersSegmentMemberField::is_noop"
     )]
     pub field: SimilarSubscribersSegmentMemberField,
-    /**
-     * Members who are/are not apart of a 'similar subscribers' segment.
-     */
+    /// Members who are/are not apart of a 'similar subscribers' segment.
     #[serde(
         default,
         skip_serializing_if = "SimilarSubscribersSegmentMemberOperator::is_noop"
     )]
     pub op: SimilarSubscribersSegmentMemberOperator,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3455,24 +3131,16 @@ impl StaticSegmentMemberOperator {
 /// Segment by a given static segment.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StaticSegmentMember {
-    /**
-     * Segment by a given static segment.
-     */
+    /// Segment by a given static segment.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<StaticSegmentMemberConditionType>,
-    /**
-     * Segment by a given static segment.
-     */
+    /// Segment by a given static segment.
     #[serde(default, skip_serializing_if = "StaticSegmentMemberField::is_noop")]
     pub field: StaticSegmentMemberField,
-    /**
-     * Members who are/are not apart of a static segment.
-     */
+    /// Members who are/are not apart of a static segment.
     #[serde(default, skip_serializing_if = "StaticSegmentMemberOperator::is_noop")]
     pub op: StaticSegmentMemberOperator,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3583,24 +3251,16 @@ impl LocationBasedSegmentOperator {
 /// Segment by a specific country or US state.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LocationBasedSegment {
-    /**
-     * Segment by a specific country or US state.
-     */
+    /// Segment by a specific country or US state.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<LocationBasedSegmentConditionType>,
-    /**
-     * Segmenting subscribers who are within a specific location.
-     */
+    /// Segmenting subscribers who are within a specific location.
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
-    /**
-     * Segment members who are within a specific country or US state.
-     */
+    /// Segment members who are within a specific country or US state.
     #[serde(default, skip_serializing_if = "LocationBasedSegmentOperator::is_noop")]
     pub op: LocationBasedSegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3674,51 +3334,37 @@ impl GeolocationSegmentOperator {
 /// Segment by a specific geographic region.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GeolocationSegment {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub addr: String,
-    /**
-     * Segment by a specific geographic region.
-     */
+    /// Segment by a specific geographic region.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<GeolocationSegmentConditionType>,
-    /**
-     * Segmenting subscribers who are within a specific location.
-     */
+    /// Segmenting subscribers who are within a specific location.
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lat: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lng: String,
-    /**
-     * Segment members who are within a specific geographic region.
-     */
+    /// Segment members who are within a specific geographic region.
     #[serde(default, skip_serializing_if = "GeolocationSegmentOperator::is_noop")]
     pub op: GeolocationSegmentOperator,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3789,33 +3435,23 @@ impl UsZipCodeSegmentOperator {
 /// Segment by a specific US ZIP code.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsZipCodeSegment {
-    /**
-     * Segment by a specific US ZIP code.
-     */
+    /// Segment by a specific US ZIP code.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<UsZipCodeSegmentConditionType>,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub extra: i64,
-    /**
-     * Segmenting subscribers who are within a specific location.
-     */
+    /// Segmenting subscribers who are within a specific location.
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
-    /**
-     * Segment members who are within a specific US zip code.
-     */
+    /// Segment members who are within a specific US zip code.
     #[serde(default, skip_serializing_if = "UsZipCodeSegmentOperator::is_noop")]
     pub op: UsZipCodeSegmentOperator,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3886,19 +3522,13 @@ impl UnknownLocationBasedSegmentOperator {
 /// Segment members whose location information is unknown.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UnknownLocationBasedSegment {
-    /**
-     * Segment members whose location information is unknown.
-     */
+    /// Segment members whose location information is unknown.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<UnknownLocationBasedSegmentConditionType>,
-    /**
-     * Segmenting subscribers who are within a specific location.
-     */
+    /// Segmenting subscribers who are within a specific location.
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
-    /**
-     * Segment members for which location information is unknown.
-     */
+    /// Segment members for which location information is unknown.
     #[serde(
         default,
         skip_serializing_if = "UnknownLocationBasedSegmentOperator::is_noop"
@@ -3971,27 +3601,19 @@ impl ZipCodeLocationBasedSegmentOperator {
 /// Segment by a specific US ZIP code.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ZipCodeLocationBasedSegment {
-    /**
-     * Segment by a specific US ZIP code.
-     */
+    /// Segment by a specific US ZIP code.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<ZipCodeLocationBasedSegmentConditionType>,
-    /**
-     * Segmenting subscribers who are within a specific location.
-     */
+    /// Segmenting subscribers who are within a specific location.
     #[serde(default, skip_serializing_if = "LocationBasedSegmentField::is_noop")]
     pub field: LocationBasedSegmentField,
-    /**
-     * Segment members who are/are not within a specific US zip code.
-     */
+    /// Segment members who are/are not within a specific US zip code.
     #[serde(
         default,
         skip_serializing_if = "ZipCodeLocationBasedSegmentOperator::is_noop"
     )]
     pub op: ZipCodeLocationBasedSegmentOperator,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4102,27 +3724,19 @@ impl Value {
 /// Segment by age ranges in Social Profiles data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesAgeSegment {
-    /**
-     * Segment by age ranges in Social Profiles data.
-     */
+    /// Segment by age ranges in Social Profiles data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesAgeSegmentConditionType>,
-    /**
-     * Segment by age ranges in Social Profiles data.
-     */
+    /// Segment by age ranges in Social Profiles data.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesAgeSegmentField::is_noop"
     )]
     pub field: SocialProfilesAgeSegmentField,
-    /**
-     * Whether the member's language is or is not set to a specific language.
-     */
+    /// Whether the member's language is or is not set to a specific language.
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
-    /**
-     * The age range to segment.
-     */
+    /// The age range to segment.
     #[serde(default, skip_serializing_if = "Value::is_noop")]
     pub value: Value,
 }
@@ -4223,27 +3837,19 @@ impl SocialProfilesGenderSegmentOperator {
 /// Segment by listed gender in Social Profiles data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesGenderSegment {
-    /**
-     * Segment by listed gender in Social Profiles data.
-     */
+    /// Segment by listed gender in Social Profiles data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesGenderSegmentConditionType>,
-    /**
-     * Segment by listed gender in Social Profiles data.
-     */
+    /// Segment by listed gender in Social Profiles data.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesGenderSegmentField::is_noop"
     )]
     pub field: SocialProfilesGenderSegmentField,
-    /**
-     * Whether the member's language is or is not set to a specific language.
-     */
+    /// Whether the member's language is or is not set to a specific language.
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
-    /**
-     * The Social Profiles gender to segment.
-     */
+    /// The Social Profiles gender to segment.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesGenderSegmentOperator::is_noop"
@@ -4313,27 +3919,19 @@ impl SocialProfilesInfluenceSegmentField {
 /// Segment by influence rating in Social Profiles data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesInfluenceSegment {
-    /**
-     * Segment by influence rating in Social Profiles data.
-     */
+    /// Segment by influence rating in Social Profiles data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesInfluenceSegmentConditionType>,
-    /**
-     * Segment by influence rating in Social Profiles data.
-     */
+    /// Segment by influence rating in Social Profiles data.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesInfluenceSegmentField::is_noop"
     )]
     pub field: SocialProfilesInfluenceSegmentField,
-    /**
-     * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
-     */
+    /// Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
     #[serde(default, skip_serializing_if = "MemberRatingSegmentOperator::is_noop")]
     pub op: MemberRatingSegmentOperator,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -4465,27 +4063,19 @@ impl SocialProfilesNetworkSegmentOperator {
 /// Segment by social network in Social Profiles data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesNetworkSegment {
-    /**
-     * Segment by social network in Social Profiles data.
-     */
+    /// Segment by social network in Social Profiles data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesNetworkSegmentConditionType>,
-    /**
-     * Segment by social network in Social Profiles data.
-     */
+    /// Segment by social network in Social Profiles data.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesNetworkSegmentField::is_noop"
     )]
     pub field: SocialProfilesNetworkSegmentField,
-    /**
-     * Members have/have not interacted with a specific poll in a Mailchimp email.
-     */
+    /// Members have/have not interacted with a specific poll in a Mailchimp email.
     #[serde(default, skip_serializing_if = "PollActivitySegmentOperator::is_noop")]
     pub op: PollActivitySegmentOperator,
-    /**
-     * The social network to segment against.
-     */
+    /// The social network to segment against.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesNetworkSegmentOperator::is_noop"
@@ -4591,30 +4181,22 @@ impl SocialProfilesNetworkFollowSegmentOperatorData {
 /// Segment by social network in Social Profiles data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialProfilesNetworkFollowSegment {
-    /**
-     * Segment by social network in Social Profiles data.
-     */
+    /// Segment by social network in Social Profiles data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<SocialProfilesNetworkFollowSegmentConditionType>,
-    /**
-     * Segment by social network in Social Profiles data.
-     */
+    /// Segment by social network in Social Profiles data.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesNetworkSegmentField::is_noop"
     )]
     pub field: SocialProfilesNetworkSegmentField,
-    /**
-     * Members who are/not following a linked account on a given social network.
-     */
+    /// Members who are/not following a linked account on a given social network.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesNetworkFollowSegmentOperator::is_noop"
     )]
     pub op: SocialProfilesNetworkFollowSegmentOperator,
-    /**
-     * The social network to segment against.
-     */
+    /// The social network to segment against.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesNetworkFollowSegmentOperatorData::is_noop"
@@ -4693,31 +4275,23 @@ impl AddressMergeFieldSegmentOperator {
 /// Segment by an address-type merge field.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddressMergeFieldSegment {
-    /**
-     * Segment by an address-type merge field.
-     */
+    /// Segment by an address-type merge field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<AddressMergeFieldSegmentConditionType>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub field: String,
-    /**
-     * Whether the member's address merge field contains/does not contain a value or is/is not blank.
-     */
+    /// Whether the member's address merge field contains/does not contain a value or is/is not blank.
     #[serde(
         default,
         skip_serializing_if = "AddressMergeFieldSegmentOperator::is_noop"
     )]
     pub op: AddressMergeFieldSegmentOperator,
-    /**
-     * Segment by an address-type merge field.
-     */
+    /// Segment by an address-type merge field.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4788,40 +4362,30 @@ impl AddressZipMergeFieldSegmentOperator {
 /// Segment by an address-type merge field within a given distance.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddressZipMergeFieldSegment {
-    /**
-     * Segment by an address-type merge field within a given distance.
-     */
+    /// Segment by an address-type merge field within a given distance.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<AddressZipMergeFieldSegmentConditionType>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub extra: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub field: String,
-    /**
-     * Whether the member's address merge field is within a given distance from a city or zip.
-     */
+    /// Whether the member's address merge field is within a given distance from a city or zip.
     #[serde(
         default,
         skip_serializing_if = "AddressZipMergeFieldSegmentOperator::is_noop"
     )]
     pub op: AddressZipMergeFieldSegmentOperator,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4901,31 +4465,23 @@ impl BirthdayMergeFieldSegmentOperator {
 /// Segment by a contact's birthday.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BirthdayMergeFieldSegment {
-    /**
-     * Segment by a contact's birthday.
-     */
+    /// Segment by a contact's birthday.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<BirthdayMergeFieldSegmentConditionType>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub field: String,
-    /**
-     * Whether the member's birthday merge information is/is not a certain date or is/is not blank.
-     */
+    /// Whether the member's birthday merge information is/is not a certain date or is/is not blank.
     #[serde(
         default,
         skip_serializing_if = "BirthdayMergeFieldSegmentOperator::is_noop"
     )]
     pub op: BirthdayMergeFieldSegmentOperator,
-    /**
-     * Segment by a contact's birthday.
-     */
+    /// Segment by a contact's birthday.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5011,31 +4567,23 @@ impl DateMergeFieldSegmentOperator {
 /// Segment by a given date merge field.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateMergeFieldSegment {
-    /**
-     * Segment by a given date merge field.
-     */
+    /// Segment by a given date merge field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<DateMergeFieldSegmentConditionType>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub field: String,
-    /**
-     * Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
-     */
+    /// Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
     #[serde(
         default,
         skip_serializing_if = "DateMergeFieldSegmentOperator::is_noop"
     )]
     pub op: DateMergeFieldSegmentOperator,
-    /**
-     * Segment by a given date merge field.
-     */
+    /// Segment by a given date merge field.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5121,31 +4669,23 @@ impl DropdownRadioMergeFieldSegmentOperator {
 /// An individual segment condition
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DropdownRadioMergeFieldSegment {
-    /**
-     * An individual segment condition
-     */
+    /// An individual segment condition
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<DropdownRadioMergeFieldSegmentConditionType>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub field: String,
-    /**
-     * Whether the member's merge information is/is not a value or is/is not blank.
-     */
+    /// Whether the member's merge information is/is not a value or is/is not blank.
     #[serde(
         default,
         skip_serializing_if = "DropdownRadioMergeFieldSegmentOperator::is_noop"
     )]
     pub op: DropdownRadioMergeFieldSegmentOperator,
-    /**
-     * An individual segment condition
-     */
+    /// An individual segment condition
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5243,31 +4783,23 @@ impl TextNumberMergeFieldSegmentOperator {
 /// Segment by a given text or number merge field.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextNumberMergeFieldSegment {
-    /**
-     * Segment by a given text or number merge field.
-     */
+    /// Segment by a given text or number merge field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<TextNumberMergeFieldSegmentConditionType>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub field: String,
-    /**
-     * Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
-     */
+    /// Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
     #[serde(
         default,
         skip_serializing_if = "TextNumberMergeFieldSegmentOperator::is_noop"
     )]
     pub op: TextNumberMergeFieldSegmentOperator,
-    /**
-     * Segment by a given text or number merge field.
-     */
+    /// Segment by a given text or number merge field.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5393,24 +4925,16 @@ impl EmailSegmentOperator {
 /// Segment by email address.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailSegment {
-    /**
-     * Segment by email address.
-     */
+    /// Segment by email address.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<EmailSegmentConditionType>,
-    /**
-     * Segmenting based off of a subscriber's email address.
-     */
+    /// Segmenting based off of a subscriber's email address.
     #[serde(default, skip_serializing_if = "EmailSegmentField::is_noop")]
     pub field: EmailSegmentField,
-    /**
-     * Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
-     */
+    /// Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
     #[serde(default, skip_serializing_if = "EmailSegmentOperator::is_noop")]
     pub op: EmailSegmentOperator,
-    /**
-     * Segment by email address.
-     */
+    /// Segment by email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5481,24 +5005,16 @@ impl PredictedGenderSegmentField {
 /// Segment by predicted gender.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PredictedGenderSegment {
-    /**
-     * Segment by predicted gender.
-     */
+    /// Segment by predicted gender.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<PredictedGenderSegmentConditionType>,
-    /**
-     * Segment by predicted gender.
-     */
+    /// Segment by predicted gender.
     #[serde(default, skip_serializing_if = "PredictedGenderSegmentField::is_noop")]
     pub field: PredictedGenderSegmentField,
-    /**
-     * Whether the member's language is or is not set to a specific language.
-     */
+    /// Whether the member's language is or is not set to a specific language.
     #[serde(default, skip_serializing_if = "LanguageSegmentOperator::is_noop")]
     pub op: LanguageSegmentOperator,
-    /**
-     * The Social Profiles gender to segment.
-     */
+    /// The Social Profiles gender to segment.
     #[serde(
         default,
         skip_serializing_if = "SocialProfilesGenderSegmentOperator::is_noop"
@@ -5645,24 +5161,16 @@ impl PredictedAgeSegmentOperatorData {
 /// Segment by predicted age.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PredictedAgeSegment {
-    /**
-     * Segment by predicted age.
-     */
+    /// Segment by predicted age.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<PredictedAgeSegmentConditionType>,
-    /**
-     * Segment by predicted age.
-     */
+    /// Segment by predicted age.
     #[serde(default, skip_serializing_if = "PredictedAgeSegmentField::is_noop")]
     pub field: PredictedAgeSegmentField,
-    /**
-     * Members who are/not the exact criteria listed.
-     */
+    /// Members who are/not the exact criteria listed.
     #[serde(default, skip_serializing_if = "PredictedAgeSegmentOperator::is_noop")]
     pub op: PredictedAgeSegmentOperator,
-    /**
-     * The predicted age to segment.
-     */
+    /// The predicted age to segment.
     #[serde(
         default,
         skip_serializing_if = "PredictedAgeSegmentOperatorData::is_noop"
@@ -5763,24 +5271,16 @@ impl NewSubscribersPrebuiltSegmentOperator {
 /// Segment by when people subscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewSubscribersPrebuiltSegment {
-    /**
-     * Segment by when people subscribed.
-     */
+    /// Segment by when people subscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition_type: Option<NewSubscribersPrebuiltSegmentConditionType>,
-    /**
-     * Segment by when people subscribed.
-     */
+    /// Segment by when people subscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<NewSubscribersPrebuiltSegmentField>,
-    /**
-     * Segment by when people subscribed.
-     */
+    /// Segment by when people subscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub op: Option<NewSubscribersPrebuiltSegmentOperator>,
-    /**
-     * Segment by when people subscribed.
-     */
+    /// Segment by when people subscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5834,173 +5334,90 @@ pub struct NewSubscribersPrebuiltSegment {
 /// - `NewSubscribersPrebuiltSegment`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ConditionsOneOf {
-    /**
-     * Segment by interaction with a specific campaign.
-     */
+    /// Segment by interaction with a specific campaign.
     Conditions(Conditions),
-    /**
-     * Segment by interaction with an Automation workflow.
-     */
+    /// Segment by interaction with an Automation workflow.
     AutomationSegment(AutomationSegment),
-    /**
-     * Segment by poll activity.
-     */
+    /// Segment by poll activity.
     PollActivitySegment(PollActivitySegment),
-    /**
-     * Segment by interaction with a campaign via Conversations.
-     */
+    /// Segment by interaction with a campaign via Conversations.
     ConversationSegment(ConversationSegment),
-    /**
-     * Segment by a specific date field.
-     */
+    /// Segment by a specific date field.
     DateSegment(DateSegment),
-    /**
-     * Segment by use of a particular email client.
-     */
+    /// Segment by use of a particular email client.
     EmailClientSegment(EmailClientSegment),
-    /**
-     * Segment by language.
-     */
+    /// Segment by language.
     LanguageSegment(LanguageSegment),
-    /**
-     * Segment by member rating.
-     */
+    /// Segment by member rating.
     MemberRatingSegment(MemberRatingSegment),
-    /**
-     * Segment by signup source.
-     */
+    /// Segment by signup source.
     SignupSourceSegment(SignupSourceSegment),
-    /**
-     * Segment by interaction with a SurveyMonkey survey.
-     */
+    /// Segment by interaction with a SurveyMonkey survey.
     SurveyMonkeySegment(SurveyMonkeySegment),
-    /**
-     * Segment by VIP status.
-     */
+    /// Segment by VIP status.
     VipSegment(VipSegment),
-    /**
-     * Segment by an interest group merge field.
-     */
+    /// Segment by an interest group merge field.
     InterestsSegment(InterestsSegment),
-    /**
-     * Segment by purchases in specific items or categories.
-     */
+    /// Segment by purchases in specific items or categories.
     EcommerceCategorySegment(EcommerceCategorySegment),
-    /**
-     * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
-     */
+    /// Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
     EcommerceNumberSegment(EcommerceNumberSegment),
-    /**
-     * Segment by whether someone has purchased anything.
-     */
+    /// Segment by whether someone has purchased anything.
     EcommercePurchasedSegment(EcommercePurchasedSegment),
-    /**
-     * Segment by amount spent on a single order or across all orders.
-     */
+    /// Segment by amount spent on a single order or across all orders.
     EcommerceSpentSegment(EcommerceSpentSegment),
-    /**
-     * Segment by purchases from a specific store.
-     */
+    /// Segment by purchases from a specific store.
     EcommercePurchasedStoreSegment(EcommercePurchasedStoreSegment),
-    /**
-     * Segment by Goal activity.
-     */
+    /// Segment by Goal activity.
     GoalActivitySegment(GoalActivitySegment),
-    /**
-     * Segment by most recent interaction with a website.
-     */
+    /// Segment by most recent interaction with a website.
     GoalTimestampSegment(GoalTimestampSegment),
-    /**
-     * Segment by similar subscribers.
-     */
+    /// Segment by similar subscribers.
     SimilarSubscribersSegmentMember(SimilarSubscribersSegmentMember),
-    /**
-     * Segment by a given static segment.
-     */
+    /// Segment by a given static segment.
     StaticSegmentMember(StaticSegmentMember),
-    /**
-     * Segment by a specific country or US state.
-     */
+    /// Segment by a specific country or US state.
     LocationBasedSegment(LocationBasedSegment),
-    /**
-     * Segment by a specific geographic region.
-     */
+    /// Segment by a specific geographic region.
     GeolocationSegment(GeolocationSegment),
-    /**
-     * Segment by a specific US ZIP code.
-     */
+    /// Segment by a specific US ZIP code.
     UsZipCodeSegment(UsZipCodeSegment),
-    /**
-     * Segment members whose location information is unknown.
-     */
+    /// Segment members whose location information is unknown.
     UnknownLocationBasedSegment(UnknownLocationBasedSegment),
-    /**
-     * Segment by a specific US ZIP code.
-     */
+    /// Segment by a specific US ZIP code.
     ZipCodeLocationBasedSegment(ZipCodeLocationBasedSegment),
-    /**
-     * Segment by age ranges in Social Profiles data.
-     */
+    /// Segment by age ranges in Social Profiles data.
     SocialProfilesAgeSegment(SocialProfilesAgeSegment),
-    /**
-     * Segment by listed gender in Social Profiles data.
-     */
+    /// Segment by listed gender in Social Profiles data.
     SocialProfilesGenderSegment(SocialProfilesGenderSegment),
-    /**
-     * Segment by influence rating in Social Profiles data.
-     */
+    /// Segment by influence rating in Social Profiles data.
     SocialProfilesInfluenceSegment(SocialProfilesInfluenceSegment),
-    /**
-     * Segment by social network in Social Profiles data.
-     */
+    /// Segment by social network in Social Profiles data.
     SocialProfilesNetworkSegment(SocialProfilesNetworkSegment),
-    /**
-     * Segment by social network in Social Profiles data.
-     */
+    /// Segment by social network in Social Profiles data.
     SocialProfilesNetworkFollowSegment(SocialProfilesNetworkFollowSegment),
-    /**
-     * Segment by an address-type merge field.
-     */
+    /// Segment by an address-type merge field.
     AddressMergeFieldSegment(AddressMergeFieldSegment),
-    /**
-     * Segment by an address-type merge field within a given distance.
-     */
+    /// Segment by an address-type merge field within a given distance.
     AddressZipMergeFieldSegment(AddressZipMergeFieldSegment),
-    /**
-     * Segment by a contact's birthday.
-     */
+    /// Segment by a contact's birthday.
     BirthdayMergeFieldSegment(BirthdayMergeFieldSegment),
-    /**
-     * Segment by a given date merge field.
-     */
+    /// Segment by a given date merge field.
     DateMergeFieldSegment(DateMergeFieldSegment),
-    /**
-     * An individual segment condition
-     */
+    /// An individual segment condition
     DropdownRadioMergeFieldSegment(DropdownRadioMergeFieldSegment),
-    /**
-     * Segment by a given text or number merge field.
-     */
+    /// Segment by a given text or number merge field.
     TextNumberMergeFieldSegment(TextNumberMergeFieldSegment),
-    /**
-     * Segment by email address.
-     */
+    /// Segment by email address.
     EmailSegment(EmailSegment),
-    /**
-     * Segment by predicted gender.
-     */
+    /// Segment by predicted gender.
     PredictedGenderSegment(PredictedGenderSegment),
-    /**
-     * Segment by predicted age.
-     */
+    /// Segment by predicted age.
     PredictedAgeSegment(PredictedAgeSegment),
-    /**
-     * Segment by when people subscribed.
-     */
+    /// Segment by when people subscribed.
     NewSubscribersPrebuiltSegment(NewSubscribersPrebuiltSegment),
 }
 
@@ -6298,23 +5715,17 @@ impl ConditionsOneOf {
 /// An object representing all segmentation options.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentOpts {
-    /**
-     * An object representing all segmentation options.
-     */
+    /// An object representing all segmentation options.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conditions: Vec<ConditionsOneOf>,
-    /**
-     * An object representing all segmentation options.
-     */
+    /// An object representing all segmentation options.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
-    /**
-     * An object representing all segmentation options.
-     */
+    /// An object representing all segmentation options.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6326,40 +5737,30 @@ pub struct SegmentOpts {
 /// List settings for the Automation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct List {
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_name: String,
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOpts>,
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6371,69 +5772,53 @@ pub struct List {
 /// The settings for the Automation workflow.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Settings {
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub authenticate: bool,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_footer: bool,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub inline_css: bool,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_to: String,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub to_name: String,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6444,17 +5829,13 @@ pub struct Settings {
 /// Deprecated
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Salesforce {
-    /**
-     * Deprecated
-     */
+    /// Deprecated
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub campaign: bool,
-    /**
-     * Deprecated
-     */
+    /// Deprecated
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6465,9 +5846,7 @@ pub struct Salesforce {
 /// Deprecated
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Capsule {
-    /**
-     * Deprecated
-     */
+    /// Deprecated
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6478,70 +5857,52 @@ pub struct Capsule {
 /// The tracking options for the Automation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tracking {
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capsule: Option<Capsule>,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub clicktale: String,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "ecomm360"
     )]
     pub ecomm_360: bool,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub goal_tracking: bool,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub google_analytics: String,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub html_clicks: bool,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub opens: bool,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub salesforce: Option<Salesforce>,
-    /**
-     * The tracking options for the Automation.
-     */
+    /// The tracking options for the Automation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6714,9 +6075,7 @@ impl EmailSendTimeSettings {
 /// The hours an Automation workflow can send.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Hours {
-    /**
-     * When to send the Automation email.
-     */
+    /// When to send the Automation email.
     #[serde(
         default,
         skip_serializing_if = "EmailSendTimeSettings::is_noop",
@@ -6728,18 +6087,14 @@ pub struct Hours {
 /// A workflow's runtime settings for an Automation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Runtime {
-    /**
-     * A workflow's runtime settings for an Automation.
-     */
+    /// A workflow's runtime settings for an Automation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub days: Vec<Days>,
-    /**
-     * A workflow's runtime settings for an Automation.
-     */
+    /// A workflow's runtime settings for an Automation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hours: Option<Hours>,
 }
@@ -6747,32 +6102,24 @@ pub struct Runtime {
 /// Available triggers for Automation workflows.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TriggerSettings {
-    /**
-     * Available triggers for Automation workflows.
-     */
+    /// Available triggers for Automation workflows.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub runtime: Option<Runtime>,
-    /**
-     * Available triggers for Automation workflows.
-     */
+    /// Available triggers for Automation workflows.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub workflow_emails_count: i64,
-    /**
-     * Available triggers for Automation workflows.
-     */
+    /// Available triggers for Automation workflows.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub workflow_title: String,
-    /**
-     * The type of Automation workflow.
-     */
+    /// The type of Automation workflow.
     #[serde(default, skip_serializing_if = "WorkflowType::is_noop")]
     pub workflow_type: WorkflowType,
 }
@@ -6780,54 +6127,42 @@ pub struct TriggerSettings {
 /// A summary of opens and clicks for sent campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportSummary {
-    /**
-     * A summary of opens and clicks for sent campaigns.
-     */
+    /// A summary of opens and clicks for sent campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * A summary of opens and clicks for sent campaigns.
-     */
+    /// A summary of opens and clicks for sent campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * A summary of opens and clicks for sent campaigns.
-     */
+    /// A summary of opens and clicks for sent campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * A summary of opens and clicks for sent campaigns.
-     */
+    /// A summary of opens and clicks for sent campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * A summary of opens and clicks for sent campaigns.
-     */
+    /// A summary of opens and clicks for sent campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscriber_clicks: i64,
-    /**
-     * A summary of opens and clicks for sent campaigns.
-     */
+    /// A summary of opens and clicks for sent campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6839,9 +6174,7 @@ pub struct ReportSummary {
 /// A summary of an individual Automation workflow's settings and content.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Automations {
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6849,70 +6182,50 @@ pub struct Automations {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<List>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<ReportSummary>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<Settings>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<Tracking>,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub trigger_settings: Option<TriggerSettings>,
 }
@@ -6920,9 +6233,7 @@ pub struct Automations {
 /// An array of objects, each representing an Automation workflow.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAutomationsResponse {
-    /**
-     * An array of objects, each representing an Automation workflow.
-     */
+    /// An array of objects, each representing an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6930,18 +6241,14 @@ pub struct GetAutomationsResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An array of objects, each representing an Automation workflow.
-     */
+    /// An array of objects, each representing an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub automations: Vec<Automations>,
-    /**
-     * An array of objects, each representing an Automation workflow.
-     */
+    /// An array of objects, each representing an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6953,18 +6260,14 @@ pub struct GetAutomationsResponse {
 /// List settings for the Automation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Recipients {
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6976,18 +6279,14 @@ pub struct Recipients {
 /// The settings for the Automation workflow.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationCampaignSettings {
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * The settings for the Automation workflow.
-     */
+    /// The settings for the Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6999,9 +6298,7 @@ pub struct AutomationCampaignSettings {
 /// Trigger settings for the Automation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationTrigger {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7013,18 +6310,12 @@ pub struct AutomationTrigger {
 /// A summary of an individual Automation workflow's settings and content.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationWorkflow {
-    /**
-     * List settings for the Automation.
-     */
+    /// List settings for the Automation.
     pub recipients: Recipients,
-    /**
-     * A summary of an individual Automation workflow's settings and content.
-     */
+    /// A summary of an individual Automation workflow's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<AutomationCampaignSettings>,
-    /**
-     * Trigger settings for the Automation.
-     */
+    /// Trigger settings for the Automation.
     pub trigger_settings: AutomationTrigger,
 }
 
@@ -7232,46 +6523,34 @@ impl Action {
 /// The delay settings for an Automation email.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Delay {
-    /**
-     * The delay settings for an Automation email.
-     */
+    /// The delay settings for an Automation email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<Action>,
-    /**
-     * The delay settings for an Automation email.
-     */
+    /// The delay settings for an Automation email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub action_description: String,
-    /**
-     * The delay settings for an Automation email.
-     */
+    /// The delay settings for an Automation email.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount: i64,
-    /**
-     * The delay settings for an Automation email.
-     */
+    /// The delay settings for an Automation email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub direction: Option<Direction>,
-    /**
-     * The delay settings for an Automation email.
-     */
+    /// The delay settings for an Automation email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub full_description: String,
-    /**
-     * The delay settings for an Automation email.
-     */
+    /// The delay settings for an Automation email.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DelayType>,
 }
@@ -7279,32 +6558,24 @@ pub struct Delay {
 /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentOptions {
-    /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
-     */
+    /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conditions: Vec<ConditionsOneOf>,
-    /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
-     */
+    /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
-    /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
-     */
+    /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub prebuilt_segment_id: String,
-    /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
-     */
+    /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7316,49 +6587,37 @@ pub struct SegmentOptions {
 /// List settings for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationEmailsList {
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_name: String,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_count: i64,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7370,111 +6629,85 @@ pub struct AutomationEmailsList {
 /// Settings for the campaign including the email subject, from name, and from email address.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignSettings {
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub authenticate: bool,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub auto_fb_post: Vec<String>,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_footer: bool,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_tweet: bool,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub drag_and_drop: bool,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub fb_comments: bool,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub inline_css: bool,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub preview_text: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_to: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_line: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub template_id: i64,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7486,70 +6719,52 @@ pub struct CampaignSettings {
 /// The tracking options for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignTrackingOptions {
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capsule: Option<Capsule>,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub clicktale: String,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "ecomm360"
     )]
     pub ecomm_360: bool,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub goal_tracking: bool,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub google_analytics: String,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub html_clicks: bool,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub opens: bool,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub salesforce: Option<Salesforce>,
-    /**
-     * The tracking options for a campaign.
-     */
+    /// The tracking options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -7560,27 +6775,21 @@ pub struct CampaignTrackingOptions {
 /// The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialCard {
-    /**
-     * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
-     */
+    /// The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
-     */
+    /// The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
-     */
+    /// The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7592,54 +6801,42 @@ pub struct SocialCard {
 /// For sent campaigns, a summary of opens and clicks.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportSummary {
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscriber_clicks: i64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7651,9 +6848,7 @@ pub struct CampaignReportSummary {
 /// A summary of an individual Automation workflow email.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Emails {
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7661,146 +6856,106 @@ pub struct Emails {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_url: String,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delay: Option<Delay>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_logo_merge_tag: bool,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub needs_block_refresh: bool,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub position: i64,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<AutomationEmailsList>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<CampaignReportSummary>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<CampaignSettings>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub trigger_settings: Option<TriggerSettings>,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub web_id: i64,
-    /**
-     * A summary of an individual Automation workflow email.
-     */
+    /// A summary of an individual Automation workflow email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7812,9 +6967,7 @@ pub struct Emails {
 /// A summary of the emails in an Automation workflow.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationEmails {
-    /**
-     * A summary of the emails in an Automation workflow.
-     */
+    /// A summary of the emails in an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7822,18 +6975,14 @@ pub struct AutomationEmails {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of the emails in an Automation workflow.
-     */
+    /// A summary of the emails in an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub emails: Vec<Emails>,
-    /**
-     * A summary of the emails in an Automation workflow.
-     */
+    /// A summary of the emails in an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7845,45 +6994,35 @@ pub struct AutomationEmails {
 /// Settings for the campaign including the email subject, from name, and from email address.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub preview_text: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_to: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_line: String,
-    /**
-     * Settings for the campaign including the email subject, from name, and from email address.
-     */
+    /// Settings for the campaign including the email subject, from name, and from email address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7963,28 +7102,20 @@ impl DelayAction {
 /// The delay settings for an automation email.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutomationDelay {
-    /**
-     * The action that triggers the delay of an automation emails.
-     */
+    /// The action that triggers the delay of an automation emails.
     #[serde(default, skip_serializing_if = "DelayAction::is_noop")]
     pub action: DelayAction,
-    /**
-     * The delay settings for an automation email.
-     */
+    /// The delay settings for an automation email.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount: i64,
-    /**
-     * The delay settings for an automation email.
-     */
+    /// The delay settings for an automation email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub direction: Option<DelayDirection>,
-    /**
-     * The delay settings for an automation email.
-     */
+    /// The delay settings for an automation email.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DelayType>,
 }
@@ -7992,14 +7123,10 @@ pub struct AutomationDelay {
 /// Update information about an individual Automation workflow email.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateInformationAboutASpecificWorkflowEmail {
-    /**
-     * Update information about an individual Automation workflow email.
-     */
+    /// Update information about an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delay: Option<AutomationDelay>,
-    /**
-     * Update information about an individual Automation workflow email.
-     */
+    /// Update information about an individual Automation workflow email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<UpdateInformationAboutASpecificWorkflowEmailCampaignSettings>,
 }
@@ -8007,9 +7134,7 @@ pub struct UpdateInformationAboutASpecificWorkflowEmail {
 /// Information about subscribers in an Automation email queue.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Queue {
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8017,54 +7142,42 @@ pub struct Queue {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub next_send: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8076,9 +7189,7 @@ pub struct Queue {
 /// An automation workflow
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAutomationsEmailsQueueResponse {
-    /**
-     * An automation workflow
-     */
+    /// An automation workflow
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8086,36 +7197,28 @@ pub struct GetAutomationsEmailsQueueResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An automation workflow
-     */
+    /// An automation workflow
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * An automation workflow
-     */
+    /// An automation workflow
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub queue: Vec<Queue>,
-    /**
-     * An automation workflow
-     */
+    /// An automation workflow
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * An automation workflow
-     */
+    /// An automation workflow
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8127,9 +7230,7 @@ pub struct GetAutomationsEmailsQueueResponse {
 /// Information about subscribers in an Automation email queue.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberInAutomationQueueData {
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8137,62 +7238,48 @@ pub struct SubscriberInAutomationQueueData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub next_send: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about subscribers in an Automation email queue.
-     */
+    /// Information about subscribers in an Automation email queue.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8204,9 +7291,7 @@ pub struct SubscriberInAutomationQueueData {
 /// A summary of a subscriber removed from an Automation workflow.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Subscribers {
-    /**
-     * A summary of a subscriber removed from an Automation workflow.
-     */
+    /// A summary of a subscriber removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8214,36 +7299,28 @@ pub struct Subscribers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of a subscriber removed from an Automation workflow.
-     */
+    /// A summary of a subscriber removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * A summary of a subscriber removed from an Automation workflow.
-     */
+    /// A summary of a subscriber removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A summary of a subscriber removed from an Automation workflow.
-     */
+    /// A summary of a subscriber removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A summary of a subscriber removed from an Automation workflow.
-     */
+    /// A summary of a subscriber removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8255,9 +7332,7 @@ pub struct Subscribers {
 /// A summary of the subscribers who were removed from an Automation workflow.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RemovedSubscribers {
-    /**
-     * A summary of the subscribers who were removed from an Automation workflow.
-     */
+    /// A summary of the subscribers who were removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8265,27 +7340,21 @@ pub struct RemovedSubscribers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of the subscribers who were removed from an Automation workflow.
-     */
+    /// A summary of the subscribers who were removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub subscribers: Vec<Subscribers>,
-    /**
-     * A summary of the subscribers who were removed from an Automation workflow.
-     */
+    /// A summary of the subscribers who were removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * A summary of the subscribers who were removed from an Automation workflow.
-     */
+    /// A summary of the subscribers who were removed from an Automation workflow.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8340,9 +7409,7 @@ impl BatchOperationsStatus {
 /// The status of a batch request
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Batch {
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8350,68 +7417,52 @@ pub struct Batch {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub errored_operations: i64,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub finished_operations: i64,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub response_body_url: String,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<BatchOperationsStatus>,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The status of a batch request
-     */
+    /// The status of a batch request
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -8423,9 +7474,7 @@ pub struct Batch {
 /// A summary of batch requests that have been made.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchOperations {
-    /**
-     * A summary of batch requests that have been made.
-     */
+    /// A summary of batch requests that have been made.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8433,18 +7482,14 @@ pub struct BatchOperations {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of batch requests that have been made.
-     */
+    /// A summary of batch requests that have been made.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub batches: Vec<Batch>,
-    /**
-     * A summary of batch requests that have been made.
-     */
+    /// A summary of batch requests that have been made.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -8508,9 +7553,7 @@ pub struct Operations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    /**
-     * The HTTP method to use for the operation.
-     */
+    /// The HTTP method to use for the operation.
     #[serde(default, skip_serializing_if = "HttpMethod::is_noop")]
     pub method: HttpMethod,
     #[serde(
@@ -8521,9 +7564,7 @@ pub struct Operations {
     pub operation_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub params: Option<Params>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8534,9 +7575,7 @@ pub struct Operations {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostBatchesRequest {
-    /**
-     * An array of objects that describes operations to perform.
-     */
+    /// An array of objects that describes operations to perform.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8548,9 +7587,7 @@ pub struct PostBatchesRequest {
 /// A webhook configured for batch status updates.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Webhooks {
-    /**
-     * A webhook configured for batch status updates.
-     */
+    /// A webhook configured for batch status updates.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8558,18 +7595,14 @@ pub struct Webhooks {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A webhook configured for batch status updates.
-     */
+    /// A webhook configured for batch status updates.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A webhook configured for batch status updates.
-     */
+    /// A webhook configured for batch status updates.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8581,9 +7614,7 @@ pub struct Webhooks {
 /// Manage webhooks for batch requests.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchWebhooks {
-    /**
-     * Manage webhooks for batch requests.
-     */
+    /// Manage webhooks for batch requests.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8591,18 +7622,14 @@ pub struct BatchWebhooks {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Manage webhooks for batch requests.
-     */
+    /// Manage webhooks for batch requests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * Manage webhooks for batch requests.
-     */
+    /// Manage webhooks for batch requests.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8614,9 +7641,7 @@ pub struct BatchWebhooks {
 /// Add a new Batch Webook.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchWebhook {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8628,9 +7653,7 @@ pub struct BatchWebhook {
 /// A folder used to organize templates.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Folders {
-    /**
-     * A folder used to organize templates.
-     */
+    /// A folder used to organize templates.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8638,27 +7661,21 @@ pub struct Folders {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A folder used to organize templates.
-     */
+    /// A folder used to organize templates.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub count: i64,
-    /**
-     * A folder used to organize templates.
-     */
+    /// A folder used to organize templates.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A folder used to organize templates.
-     */
+    /// A folder used to organize templates.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8670,9 +7687,7 @@ pub struct Folders {
 /// A list of template folders
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateFolders {
-    /**
-     * A list of template folders
-     */
+    /// A list of template folders
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8680,18 +7695,14 @@ pub struct TemplateFolders {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of template folders
-     */
+    /// A list of template folders
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub folders: Vec<Folders>,
-    /**
-     * A list of template folders
-     */
+    /// A list of template folders
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -8703,9 +7714,7 @@ pub struct TemplateFolders {
 /// A folder used to organize campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFolder {
-    /**
-     * A folder used to organize campaigns.
-     */
+    /// A folder used to organize campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8713,27 +7722,21 @@ pub struct CampaignFolder {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A folder used to organize campaigns.
-     */
+    /// A folder used to organize campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub count: i64,
-    /**
-     * A folder used to organize campaigns.
-     */
+    /// A folder used to organize campaigns.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A folder used to organize campaigns.
-     */
+    /// A folder used to organize campaigns.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8745,9 +7748,7 @@ pub struct CampaignFolder {
 /// A list of campaign folders
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFolders {
-    /**
-     * A list of campaign folders
-     */
+    /// A list of campaign folders
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8755,18 +7756,14 @@ pub struct CampaignFolders {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of campaign folders
-     */
+    /// A list of campaign folders
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub folders: Vec<CampaignFolder>,
-    /**
-     * A list of campaign folders
-     */
+    /// A list of campaign folders
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9024,146 +8021,112 @@ impl ContentType {
 /// The settings for your campaign, including subject, from name, reply-to address, and more.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsResponseCampaignSettings {
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub authenticate: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub auto_fb_post: Vec<String>,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_footer: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_tweet: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub drag_and_drop: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub fb_comments: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub folder_id: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub inline_css: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub preview_text: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_to: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_line: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub template_id: i64,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub timewarp: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub to_name: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9213,63 +8176,49 @@ impl WinnerCriteria {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Combinations {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub content_description: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub from_name: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipients: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub reply_to: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub send_time: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9281,95 +8230,73 @@ pub struct Combinations {
 /// The settings specific to A/B test campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ABTestOptions {
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub combinations: Vec<Combinations>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub contents: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub from_names: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub reply_to_addresses: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub subject_lines: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub test_size: i64,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub wait_time: i64,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub winner_criteria: Option<WinnerCriteria>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub winning_campaign_id: String,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9418,57 +8345,43 @@ impl Frequency {
 /// The days of the week to send a daily RSS Campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DailySend {
-    /**
-     * The days of the week to send a daily RSS Campaign.
-     */
+    /// The days of the week to send a daily RSS Campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub friday: bool,
-    /**
-     * The days of the week to send a daily RSS Campaign.
-     */
+    /// The days of the week to send a daily RSS Campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub monday: bool,
-    /**
-     * The days of the week to send a daily RSS Campaign.
-     */
+    /// The days of the week to send a daily RSS Campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub saturday: bool,
-    /**
-     * The days of the week to send a daily RSS Campaign.
-     */
+    /// The days of the week to send a daily RSS Campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub sunday: bool,
-    /**
-     * The days of the week to send a daily RSS Campaign.
-     */
+    /// The days of the week to send a daily RSS Campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub thursday: bool,
-    /**
-     * The days of the week to send a daily RSS Campaign.
-     */
+    /// The days of the week to send a daily RSS Campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub tuesday: bool,
-    /**
-     * The days of the week to send a daily RSS Campaign.
-     */
+    /// The days of the week to send a daily RSS Campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9479,32 +8392,24 @@ pub struct DailySend {
 /// The schedule for sending the RSS Campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Schedule {
-    /**
-     * The schedule for sending the RSS Campaign.
-     */
+    /// The schedule for sending the RSS Campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub daily_send: Option<DailySend>,
-    /**
-     * The schedule for sending the RSS Campaign.
-     */
+    /// The schedule for sending the RSS Campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub hour: i64,
-    /**
-     * The schedule for sending the RSS Campaign.
-     */
+    /// The schedule for sending the RSS Campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub monthly_send_date: f64,
-    /**
-     * The schedule for sending the RSS Campaign.
-     */
+    /// The schedule for sending the RSS Campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub weekly_send_day: Option<Days>,
 }
@@ -9512,40 +8417,30 @@ pub struct Schedule {
 /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RssOpts {
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub constrain_rss_img: bool,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub feed_url: String,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub frequency: Option<Frequency>,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_sent: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
 }
@@ -9661,118 +8556,90 @@ impl WaitTime {
 /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbSplitOpts {
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name_a: String,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name_b: String,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pick_winner: Option<PickWinner>,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_email_a: String,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_email_b: String,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub send_time_a: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub send_time_b: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub send_time_winner: String,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub split_size: i64,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub split_test: Option<SplitTest>,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_a: String,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_b: String,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub wait_time: i64,
-    /**
-     * [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
-     */
+    /// [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub wait_units: Option<WaitTime>,
 }
@@ -9780,27 +8647,21 @@ pub struct AbSplitOpts {
 /// E-Commerce stats for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ecommerce {
-    /**
-     * E-Commerce stats for a campaign.
-     */
+    /// E-Commerce stats for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_orders: i64,
-    /**
-     * E-Commerce stats for a campaign.
-     */
+    /// E-Commerce stats for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub total_revenue: f64,
-    /**
-     * E-Commerce stats for a campaign.
-     */
+    /// E-Commerce stats for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -9812,59 +8673,45 @@ pub struct Ecommerce {
 /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsResponseCampaignReportSummary {
-    /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
-     */
+    /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
-     */
+    /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
-     */
+    /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<Ecommerce>,
-    /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
-     */
+    /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
-     */
+    /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
-     */
+    /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscriber_clicks: i64,
-    /**
-     * For sent campaigns, a summary of opens, clicks, and e-commerce data.
-     */
+    /// For sent campaigns, a summary of opens, clicks, and e-commerce data.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9916,43 +8763,33 @@ impl CampaignDeliveryStatus {
 /// Updates on campaigns in the process of sending.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeliveryStatus {
-    /**
-     * Updates on campaigns in the process of sending.
-     */
+    /// Updates on campaigns in the process of sending.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub can_cancel: bool,
-    /**
-     * Updates on campaigns in the process of sending.
-     */
+    /// Updates on campaigns in the process of sending.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_canceled: i64,
-    /**
-     * Updates on campaigns in the process of sending.
-     */
+    /// Updates on campaigns in the process of sending.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * Updates on campaigns in the process of sending.
-     */
+    /// Updates on campaigns in the process of sending.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Updates on campaigns in the process of sending.
-     */
+    /// Updates on campaigns in the process of sending.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<CampaignDeliveryStatus>,
 }
@@ -9960,9 +8797,7 @@ pub struct DeliveryStatus {
 /// A summary of an individual campaign's settings and content.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Campaign {
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9970,148 +8805,104 @@ pub struct Campaign {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split_opts: Option<AbSplitOpts>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_url: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_type: Option<ContentType>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivery_status: Option<DeliveryStatus>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub long_archive_url: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub needs_block_refresh: bool,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub parent_campaign_id: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<AutomationEmailsList>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<GetCampaignsResponseCampaignReportSummary>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub resendable: bool,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<RssOpts>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<GetCampaignsResponseCampaignSettings>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<CampaignStatus>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<CampaignType>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<ABTestOptions>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10123,9 +8914,7 @@ pub struct Campaign {
 /// An array of campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsResponse {
-    /**
-     * An array of campaigns.
-     */
+    /// An array of campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -10133,18 +8922,14 @@ pub struct GetCampaignsResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An array of campaigns.
-     */
+    /// An array of campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub campaigns: Vec<Campaign>,
-    /**
-     * An array of campaigns.
-     */
+    /// An array of campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10156,23 +8941,17 @@ pub struct GetCampaignsResponse {
 /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaignListSegmentOptions {
-    /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
-     */
+    /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conditions: Vec<ConditionsOneOf>,
-    /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
-     */
+    /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
-    /**
-     * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
-     */
+    /// An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10184,18 +8963,14 @@ pub struct CreatedCampaignListSegmentOptions {
 /// List settings for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaignList {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<CreatedCampaignListSegmentOptions>,
 }
@@ -10203,130 +8978,100 @@ pub struct CreatedCampaignList {
 /// The settings for your campaign, including subject, from name, reply-to address, and more.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaignSettings {
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub authenticate: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub auto_fb_post: Vec<String>,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_footer: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_tweet: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub fb_comments: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub folder_id: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub inline_css: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub preview_text: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_to: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_line: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub template_id: i64,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub to_name: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -10337,63 +9082,49 @@ pub struct CreatedCampaignSettings {
 /// The settings specific to A/B test campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VariateSettings {
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub from_names: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub reply_to_addresses: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub subject_lines: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub test_size: i64,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub wait_time: i64,
-    /**
-     * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
-     */
+    /// The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
     #[serde(default, skip_serializing_if = "WinnerCriteria::is_noop")]
     pub winner_criteria: WinnerCriteria,
 }
@@ -10401,31 +9132,23 @@ pub struct VariateSettings {
 /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RssOptions {
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub constrain_rss_img: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub feed_url: String,
-    /**
-     * The frequency of the RSS Campaign.
-     */
+    /// The frequency of the RSS Campaign.
     #[serde(default, skip_serializing_if = "Frequency::is_noop")]
     pub frequency: Frequency,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options, specific to an RSS campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
 }
@@ -10467,48 +9190,32 @@ impl CreatedCampaignContentType {
 /// A summary of an individual campaign's settings and content.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreatedCampaign {
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_type: Option<CreatedCampaignContentType>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<CreatedCampaignList>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<RssOptions>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<CreatedCampaignSettings>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
-    /**
-     * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
-     */
+    /// There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
     #[serde(
         default,
         skip_serializing_if = "CampaignType::is_noop",
         rename = "type"
     )]
     pub type_: CampaignType,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<VariateSettings>,
 }
@@ -10516,18 +9223,14 @@ pub struct CreatedCampaign {
 /// List settings for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignList {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
 }
@@ -10535,130 +9238,100 @@ pub struct CampaignList {
 /// The settings for your campaign, including subject, from name, reply-to address, and more.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignSettingsData {
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub authenticate: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub auto_fb_post: Vec<String>,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_footer: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_tweet: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub fb_comments: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub folder_id: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub inline_css: bool,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub preview_text: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reply_to: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_line: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub template_id: i64,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub to_name: String,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -10669,31 +9342,23 @@ pub struct CampaignSettingsData {
 /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignRssOptions {
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub constrain_rss_img: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub feed_url: String,
-    /**
-     * The frequency of the RSS Campaign.
-     */
+    /// The frequency of the RSS Campaign.
     #[serde(default, skip_serializing_if = "Frequency::is_noop")]
     pub frequency: Frequency,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
 }
@@ -10701,33 +9366,21 @@ pub struct CampaignRssOptions {
 /// A summary of an individual campaign's settings and content.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignData {
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<CampaignList>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<CampaignRssOptions>,
-    /**
-     * The settings for your campaign, including subject, from name, reply-to address, and more.
-     */
+    /// The settings for your campaign, including subject, from name, reply-to address, and more.
     pub settings: CampaignSettingsData,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<VariateSettings>,
 }
@@ -10735,41 +9388,31 @@ pub struct CampaignData {
 /// List settings for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignListData {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_name: String,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_count: i64,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
-    /**
-     * List settings for the campaign.
-     */
+    /// List settings for the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10781,95 +9424,73 @@ pub struct CampaignListData {
 /// The settings specific to A/B test campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignABTestOptions {
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub combinations: Vec<Combinations>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub contents: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub from_names: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub reply_to_addresses: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub subject_lines: Vec<String>,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub test_size: i64,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub wait_time: i64,
-    /**
-     * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
-     */
+    /// The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
     #[serde(default, skip_serializing_if = "WinnerCriteria::is_noop")]
     pub winner_criteria: WinnerCriteria,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub winning_campaign_id: String,
-    /**
-     * The settings specific to A/B test campaigns.
-     */
+    /// The settings specific to A/B test campaigns.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10881,40 +9502,30 @@ pub struct CampaignABTestOptions {
 /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignRssOptionsData {
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub constrain_rss_img: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub feed_url: String,
-    /**
-     * The frequency of the RSS Campaign.
-     */
+    /// The frequency of the RSS Campaign.
     #[serde(default, skip_serializing_if = "Frequency::is_noop")]
     pub frequency: Frequency,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_sent: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
-     */
+    /// [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub schedule: Option<Schedule>,
 }
@@ -10922,59 +9533,45 @@ pub struct CampaignRssOptionsData {
 /// For sent campaigns, a summary of opens and clicks.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportSummaryData {
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<Ecommerce>,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscriber_clicks: i64,
-    /**
-     * For sent campaigns, a summary of opens and clicks.
-     */
+    /// For sent campaigns, a summary of opens and clicks.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10986,9 +9583,7 @@ pub struct CampaignReportSummaryData {
 /// A summary of an individual campaign's settings and content.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignDataType {
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -10996,156 +9591,112 @@ pub struct CampaignDataType {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split_opts: Option<AbSplitOpts>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_url: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivery_status: Option<DeliveryStatus>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub long_archive_url: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub needs_block_refresh: bool,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub parent_campaign_id: String,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<CampaignListData>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<CampaignReportSummaryData>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub resendable: bool,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rss_opts: Option<CampaignRssOptionsData>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub settings: Option<GetCampaignsResponseCampaignSettings>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub social_card: Option<SocialCard>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<CampaignStatus>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<CampaignTrackingOptions>,
-    /**
-     * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
-     */
+    /// There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
     #[serde(
         default,
         skip_serializing_if = "CampaignType::is_noop",
         rename = "type"
     )]
     pub type_: CampaignType,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub variate_settings: Option<CampaignABTestOptions>,
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -11157,18 +9708,14 @@ pub struct CampaignDataType {
 /// Choose whether the campaign should use [Batch Delivery](https://mailchimp.com/help/schedule-batch-delivery/). Cannot be set to `true` for campaigns using [Timewarp](https://mailchimp.com/help/use-timewarp/).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchDelivery {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub batch_count: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -11179,23 +9726,17 @@ pub struct BatchDelivery {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCampaignsActionsScheduleRequest {
-    /**
-     * Choose whether the campaign should use [Batch Delivery](https://mailchimp.com/help/schedule-batch-delivery/). Cannot be set to `true` for campaigns using [Timewarp](https://mailchimp.com/help/use-timewarp/).
-     */
+    /// Choose whether the campaign should use [Batch Delivery](https://mailchimp.com/help/schedule-batch-delivery/). Cannot be set to `true` for campaigns using [Timewarp](https://mailchimp.com/help/use-timewarp/).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub batch_delivery: Option<BatchDelivery>,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub schedule_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub timewarp: Option<bool>,
 }
@@ -11236,14 +9777,10 @@ impl SendType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCampaignsActionsTestRequest {
-    /**
-     * Choose the type of test email to send.
-     */
+    /// Choose the type of test email to send.
     #[serde(default, skip_serializing_if = "SendType::is_noop")]
     pub send_type: SendType,
-    /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    /// A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11254,27 +9791,21 @@ pub struct PostCampaignsActionsTestRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VariateContents {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_label: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11286,9 +9817,7 @@ pub struct VariateContents {
 /// The HTML and plain-text content for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignContent {
-    /**
-     * The HTML and plain-text content for a campaign.
-     */
+    /// The HTML and plain-text content for a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11296,36 +9825,28 @@ pub struct CampaignContent {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The HTML and plain-text content for a campaign.
-     */
+    /// The HTML and plain-text content for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_html: String,
-    /**
-     * The HTML and plain-text content for a campaign.
-     */
+    /// The HTML and plain-text content for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html: String,
-    /**
-     * The HTML and plain-text content for a campaign.
-     */
+    /// The HTML and plain-text content for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub plain_text: String,
-    /**
-     * The HTML and plain-text content for a campaign.
-     */
+    /// The HTML and plain-text content for a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11337,18 +9858,14 @@ pub struct CampaignContent {
 /// Use this template to generate the HTML content of the campaign
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Template {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Use this template to generate the HTML content of the campaign
-     */
+    /// Use this template to generate the HTML content of the campaign
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sections: Option<Params>,
 }
@@ -11402,18 +9919,14 @@ impl ArchiveType {
 /// Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Archive {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_content: String,
-    /**
-     * Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
-     */
+    /// Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive_type: Option<ArchiveType>,
 }
@@ -11421,64 +9934,48 @@ pub struct Archive {
 /// Use this template to generate the HTML content for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateContent {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Use this template to generate the HTML content for the campaign.
-     */
+    /// Use this template to generate the HTML content for the campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sections: Option<Params>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignContentVariateContents {
-    /**
-     * Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
-     */
+    /// Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive: Option<Archive>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_label: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub plain_text: String,
-    /**
-     * Use this template to generate the HTML content for the campaign.
-     */
+    /// Use this template to generate the HTML content for the campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template: Option<TemplateContent>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11490,46 +9987,34 @@ pub struct CampaignContentVariateContents {
 /// The HTML and plain-text content for a campaign
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignContentData {
-    /**
-     * The HTML and plain-text content for a campaign
-     */
+    /// The HTML and plain-text content for a campaign
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub archive: Option<Archive>,
-    /**
-     * The HTML and plain-text content for a campaign
-     */
+    /// The HTML and plain-text content for a campaign
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html: String,
-    /**
-     * The HTML and plain-text content for a campaign
-     */
+    /// The HTML and plain-text content for a campaign
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub plain_text: String,
-    /**
-     * The HTML and plain-text content for a campaign
-     */
+    /// The HTML and plain-text content for a campaign
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub template: Option<Template>,
-    /**
-     * The HTML and plain-text content for a campaign
-     */
+    /// The HTML and plain-text content for a campaign
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * The HTML and plain-text content for a campaign
-     */
+    /// The HTML and plain-text content for a campaign
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11587,9 +10072,7 @@ impl Source {
 /// A specific feedback message from a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Feedback {
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11597,85 +10080,65 @@ pub struct Feedback {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub block_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub feedback_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_complete: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub parent_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -11687,9 +10150,7 @@ pub struct Feedback {
 /// A summary of the comment feedback for a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReports {
-    /**
-     * A summary of the comment feedback for a specific campaign.
-     */
+    /// A summary of the comment feedback for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11697,27 +10158,21 @@ pub struct CampaignReports {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of the comment feedback for a specific campaign.
-     */
+    /// A summary of the comment feedback for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A summary of the comment feedback for a specific campaign.
-     */
+    /// A summary of the comment feedback for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub feedback: Vec<Feedback>,
-    /**
-     * A summary of the comment feedback for a specific campaign.
-     */
+    /// A summary of the comment feedback for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -11729,26 +10184,20 @@ pub struct CampaignReports {
 /// A specific feedback message from a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFeedback {
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub block_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_complete: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11760,9 +10209,7 @@ pub struct CampaignFeedback {
 /// A specific feedback message from a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFeedbackData {
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11770,85 +10217,65 @@ pub struct CampaignFeedbackData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub block_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub feedback_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_complete: bool,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub parent_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -11860,26 +10287,20 @@ pub struct CampaignFeedbackData {
 /// A specific feedback message from a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignFeedbackDataType {
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub block_id: i64,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_complete: bool,
-    /**
-     * A specific feedback message from a specific campaign.
-     */
+    /// A specific feedback message from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11927,36 +10348,28 @@ impl SendChecklistItemsType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Items {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub details: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub heading: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * The item type.
-     */
+    /// The item type.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<SendChecklistItemsType>,
 }
@@ -11964,9 +10377,7 @@ pub struct Items {
 /// The send checklist for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SendChecklist {
-    /**
-     * The send checklist for the campaign.
-     */
+    /// The send checklist for the campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11974,17 +10385,13 @@ pub struct SendChecklist {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The send checklist for the campaign.
-     */
+    /// The send checklist for the campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_ready: bool,
-    /**
-     * The send checklist for the campaign.
-     */
+    /// The send checklist for the campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11996,18 +10403,14 @@ pub struct SendChecklist {
 /// The script used to connect your site with Mailchimp.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Script {
-    /**
-     * The script used to connect your site with Mailchimp.
-     */
+    /// The script used to connect your site with Mailchimp.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fragment: String,
-    /**
-     * The script used to connect your site with Mailchimp.
-     */
+    /// The script used to connect your site with Mailchimp.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12019,9 +10422,7 @@ pub struct Script {
 /// Information about a specific connected site.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sites {
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12029,59 +10430,45 @@ pub struct Sites {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub foreign_id: String,
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub platform: String,
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site_script: Option<Script>,
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * Information about a specific connected site.
-     */
+    /// Information about a specific connected site.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -12093,9 +10480,7 @@ pub struct Sites {
 /// A collection of connected sites in the account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectedSites {
-    /**
-     * A collection of connected sites in the account.
-     */
+    /// A collection of connected sites in the account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12103,18 +10488,14 @@ pub struct ConnectedSites {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of connected sites in the account.
-     */
+    /// A collection of connected sites in the account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub sites: Vec<Sites>,
-    /**
-     * A collection of connected sites in the account.
-     */
+    /// A collection of connected sites in the account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12126,18 +10507,14 @@ pub struct ConnectedSites {
 /// Information about a specific connected site.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectedSite {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12183,53 +10560,41 @@ impl IsRead {
 /// The most recent message in the conversation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LastMessage {
-    /**
-     * The most recent message in the conversation.
-     */
+    /// The most recent message in the conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_email: String,
-    /**
-     * The most recent message in the conversation.
-     */
+    /// The most recent message in the conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_label: String,
-    /**
-     * The most recent message in the conversation.
-     */
+    /// The most recent message in the conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * The most recent message in the conversation.
-     */
+    /// The most recent message in the conversation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub read: bool,
-    /**
-     * The most recent message in the conversation.
-     */
+    /// The most recent message in the conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject: String,
-    /**
-     * The most recent message in the conversation.
-     */
+    /// The most recent message in the conversation.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -12241,9 +10606,7 @@ pub struct LastMessage {
 /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Conversation {
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12251,77 +10614,59 @@ pub struct Conversation {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_email: String,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_label: String,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_message: Option<LastMessage>,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub message_count: i64,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject: String,
-    /**
-     * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12333,9 +10678,7 @@ pub struct Conversation {
 /// A collection of this account's tracked conversations.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackedConversations {
-    /**
-     * A collection of this account's tracked conversations.
-     */
+    /// A collection of this account's tracked conversations.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12343,18 +10686,14 @@ pub struct TrackedConversations {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of this account's tracked conversations.
-     */
+    /// A collection of this account's tracked conversations.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conversations: Vec<Conversation>,
-    /**
-     * A collection of this account's tracked conversations.
-     */
+    /// A collection of this account's tracked conversations.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12366,9 +10705,7 @@ pub struct TrackedConversations {
 /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationMessage {
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12376,80 +10713,62 @@ pub struct ConversationMessage {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub conversation_id: String,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_email: String,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_label: String,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub list_id: i64,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub read: bool,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject: String,
-    /**
-     * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
-     */
+    /// An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -12461,9 +10780,7 @@ pub struct ConversationMessage {
 /// Messages from a specific conversation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfConversationMessages {
-    /**
-     * Messages from a specific conversation.
-     */
+    /// Messages from a specific conversation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12471,27 +10788,21 @@ pub struct CollectionOfConversationMessages {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Messages from a specific conversation.
-     */
+    /// Messages from a specific conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub conversation_id: String,
-    /**
-     * Messages from a specific conversation.
-     */
+    /// Messages from a specific conversation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conversation_messages: Vec<ConversationMessage>,
-    /**
-     * Messages from a specific conversation.
-     */
+    /// Messages from a specific conversation.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12568,9 +10879,7 @@ impl FileType {
 /// An individual file listed in the File Manager.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Files {
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12578,95 +10887,73 @@ pub struct Files {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub folder_id: i64,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub full_size_url: String,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub height: i64,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub size: i64,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub thumbnail_url: String,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<FileType>,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12678,9 +10965,7 @@ pub struct Files {
 /// A list of available images and files stored in the File Manager for the account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileManager {
-    /**
-     * A list of available images and files stored in the File Manager for the account.
-     */
+    /// A list of available images and files stored in the File Manager for the account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12688,27 +10973,21 @@ pub struct FileManager {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of available images and files stored in the File Manager for the account.
-     */
+    /// A list of available images and files stored in the File Manager for the account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub files: Vec<Files>,
-    /**
-     * A list of available images and files stored in the File Manager for the account.
-     */
+    /// A list of available images and files stored in the File Manager for the account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub total_file_size: f64,
-    /**
-     * A list of available images and files stored in the File Manager for the account.
-     */
+    /// A list of available images and files stored in the File Manager for the account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12720,27 +10999,21 @@ pub struct FileManager {
 /// An individual file listed in the File Manager.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GalleryFile {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub file_data: String,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub folder_id: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12752,18 +11025,14 @@ pub struct GalleryFile {
 /// An individual file listed in the File Manager.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GalleryFileData {
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub folder_id: i64,
-    /**
-     * An individual file listed in the File Manager.
-     */
+    /// An individual file listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12775,9 +11044,7 @@ pub struct GalleryFileData {
 /// An individual folder listed in the File Manager.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileManagerFoldersGalleryFolder {
-    /**
-     * An individual folder listed in the File Manager.
-     */
+    /// An individual folder listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12785,45 +11052,35 @@ pub struct FileManagerFoldersGalleryFolder {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An individual folder listed in the File Manager.
-     */
+    /// An individual folder listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * An individual folder listed in the File Manager.
-     */
+    /// An individual folder listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * An individual folder listed in the File Manager.
-     */
+    /// An individual folder listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub file_count: i64,
-    /**
-     * An individual folder listed in the File Manager.
-     */
+    /// An individual folder listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * An individual folder listed in the File Manager.
-     */
+    /// An individual folder listed in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12835,9 +11092,7 @@ pub struct FileManagerFoldersGalleryFolder {
 /// A list of all folders in the File Manager.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileManagerFolders {
-    /**
-     * A list of all folders in the File Manager.
-     */
+    /// A list of all folders in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -12845,18 +11100,14 @@ pub struct FileManagerFolders {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of all folders in the File Manager.
-     */
+    /// A list of all folders in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub folders: Vec<FileManagerFoldersGalleryFolder>,
-    /**
-     * A list of all folders in the File Manager.
-     */
+    /// A list of all folders in the File Manager.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12899,9 +11150,7 @@ impl GetListsSortField {
 /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListContact {
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12909,9 +11158,7 @@ pub struct ListContact {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12919,54 +11166,42 @@ pub struct ListContact {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12978,36 +11213,28 @@ pub struct ListContact {
 /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignDefaults {
-    /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
-     */
+    /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_email: String,
-    /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
-     */
+    /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
-     */
+    /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
-     */
+    /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13053,153 +11280,119 @@ impl Visibility {
 /// Stats for the list. Many of these are cached for at least five minutes.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Stats {
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub avg_sub_rate: f64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub avg_unsub_rate: f64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub campaign_count: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub campaign_last_sent: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub cleaned_count: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub cleaned_count_since_send: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_sub_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_unsub_date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub member_count: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub member_count_since_send: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub merge_field_count: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub target_sub_rate: f64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_contacts: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unsubscribe_count: i64,
-    /**
-     * Stats for the list. Many of these are cached for at least five minutes.
-     */
+    /// Stats for the list. Many of these are cached for at least five minutes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13211,9 +11404,7 @@ pub struct Stats {
 /// Information about a specific list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Lists {
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -13221,168 +11412,126 @@ pub struct Lists {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub beamer_address: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub campaign_defaults: Option<CampaignDefaults>,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contact: Option<ListContact>,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date_created: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub double_optin: bool,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub email_type_option: bool,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_welcome: bool,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub list_rating: i64,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub marketing_permissions: bool,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub modules: Vec<String>,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub notify_on_subscribe: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub notify_on_unsubscribe: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub permission_reminder: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<Stats>,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subscribe_url_long: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subscribe_url_short: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub use_archive_bar: bool,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13394,27 +11543,21 @@ pub struct Lists {
 /// Do particular authorization constraints around this collection limit creation of new instances?
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Constraints {
-    /**
-     * Do particular authorization constraints around this collection limit creation of new instances?
-     */
+    /// Do particular authorization constraints around this collection limit creation of new instances?
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub current_total_instances: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub max_instances: i64,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -13425,9 +11568,7 @@ pub struct Constraints {
 /// A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberLists {
-    /**
-     * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
-     */
+    /// A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -13435,23 +11576,17 @@ pub struct SubscriberLists {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
-     */
+    /// A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub constraints: Option<Constraints>,
-    /**
-     * An array of objects, each representing a list.
-     */
+    /// An array of objects, each representing a list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lists: Vec<Lists>,
-    /**
-     * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
-     */
+    /// A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13463,9 +11598,7 @@ pub struct SubscriberLists {
 /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListContact {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13473,9 +11606,7 @@ pub struct SubscriberListContact {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13483,54 +11614,42 @@ pub struct SubscriberListContact {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13542,36 +11661,28 @@ pub struct SubscriberListContact {
 /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListCampaignDefaults {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_email: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_name: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13583,77 +11694,57 @@ pub struct SubscriberListCampaignDefaults {
 /// Information about a specific list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberList {
-    /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
-     */
+    /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
     pub campaign_defaults: SubscriberListCampaignDefaults,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     pub contact: SubscriberListContact,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub double_optin: bool,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub email_type_option: bool,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub marketing_permissions: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub notify_on_subscribe: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub notify_on_unsubscribe: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub permission_reminder: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -13707,18 +11798,14 @@ impl MembersSubscribeUnsubscribeFromAListInBatchStatus {
 /// Subscriber location information.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub latitude: f64,
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -13730,95 +11817,71 @@ pub struct Location {
 /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Members {
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_type: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub interests: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_opt: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_signup: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<MembersSubscribeUnsubscribeFromAListInBatchStatus>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -13829,18 +11892,14 @@ pub struct Members {
 /// Members to subscribe to or unsubscribe from a list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MembersSubscribeUnsubscribeFromAListInBatch {
-    /**
-     * An array of objects, each representing an email address and the subscription status for a specific list. Up to 500 members may be added or updated with each API call.
-     */
+    /// An array of objects, each representing an email address and the subscription status for a specific list. Up to 500 members may be added or updated with each API call.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<Members>,
-    /**
-     * Members to subscribe to or unsubscribe from a list.
-     */
+    /// Members to subscribe to or unsubscribe from a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -13894,18 +11953,14 @@ impl StatusIfNew {
 /// Open and click rates for this subscriber.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberStats {
-    /**
-     * Open and click rates for this subscriber.
-     */
+    /// Open and click rates for this subscriber.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub avg_click_rate: f64,
-    /**
-     * Open and click rates for this subscriber.
-     */
+    /// Open and click rates for this subscriber.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -13917,54 +11972,42 @@ pub struct SubscriberStats {
 /// Subscriber location information.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateListMembersNewLocation {
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country_code: String,
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub dstoff: i64,
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub gmtoff: i64,
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub latitude: f64,
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub longitude: f64,
-    /**
-     * Subscriber location information.
-     */
+    /// Subscriber location information.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13976,36 +12019,28 @@ pub struct BatchUpdateListMembersNewLocation {
 /// The most recent Note added about this member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Notes {
-    /**
-     * The most recent Note added about this member.
-     */
+    /// The most recent Note added about this member.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The most recent Note added about this member.
-     */
+    /// The most recent Note added about this member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * The most recent Note added about this member.
-     */
+    /// The most recent Note added about this member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note: String,
-    /**
-     * The most recent Note added about this member.
-     */
+    /// The most recent Note added about this member.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -14016,18 +12051,14 @@ pub struct Notes {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tags {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14039,9 +12070,7 @@ pub struct Tags {
 /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewMembers {
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14049,177 +12078,133 @@ pub struct NewMembers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_client: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_type: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub interests: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_opt: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_signup: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_changed: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_note: Option<Notes>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<BatchUpdateListMembersNewLocation>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub member_rating: i64,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<SubscriberStats>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<StatusIfNew>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub tags: Vec<Tags>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub tags_count: i64,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub unique_email_id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -14263,27 +12248,21 @@ impl ErrorCode {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Errors {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub error: String,
-    /**
-     * A unique code that identifies this specifc error.
-     */
+    /// A unique code that identifies this specifc error.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error_code: Option<ErrorCode>,
 }
@@ -14291,9 +12270,7 @@ pub struct Errors {
 /// Batch update list members.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateListMembers {
-    /**
-     * Batch update list members.
-     */
+    /// Batch update list members.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14301,54 +12278,42 @@ pub struct BatchUpdateListMembers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Batch update list members.
-     */
+    /// Batch update list members.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub error_count: i64,
-    /**
-     * Batch update list members.
-     */
+    /// Batch update list members.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub errors: Vec<Errors>,
-    /**
-     * Batch update list members.
-     */
+    /// Batch update list members.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub new_members: Vec<NewMembers>,
-    /**
-     * Batch update list members.
-     */
+    /// Batch update list members.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_created: i64,
-    /**
-     * Batch update list members.
-     */
+    /// Batch update list members.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_updated: i64,
-    /**
-     * Batch update list members.
-     */
+    /// Batch update list members.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14360,9 +12325,7 @@ pub struct BatchUpdateListMembers {
 /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListContactData {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14370,9 +12333,7 @@ pub struct SubscriberListContactData {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14380,54 +12341,42 @@ pub struct SubscriberListContactData {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14439,77 +12388,57 @@ pub struct SubscriberListContactData {
 /// Information about a specific list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriberListData {
-    /**
-     * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
-     */
+    /// [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
     pub campaign_defaults: SubscriberListCampaignDefaults,
-    /**
-     * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
-     */
+    /// [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
     pub contact: SubscriberListContactData,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub double_optin: bool,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub email_type_option: bool,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub marketing_permissions: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub notify_on_subscribe: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub notify_on_unsubscribe: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub permission_reminder: String,
-    /**
-     * Information about a specific list.
-     */
+    /// Information about a specific list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -14520,9 +12449,7 @@ pub struct SubscriberListData {
 /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseReports {
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14530,68 +12457,52 @@ pub struct AbuseReports {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub date: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -14602,9 +12513,7 @@ pub struct AbuseReports {
 /// A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseComplaints {
-    /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14612,27 +12521,21 @@ pub struct AbuseComplaints {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub abuse_reports: Vec<AbuseReports>,
-    /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -14644,9 +12547,7 @@ pub struct AbuseComplaints {
 /// One day's worth of list activity. Doesn't include Automation activity.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Activity {
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14654,90 +12555,70 @@ pub struct Activity {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub day: String,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub hard_bounce: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub other_adds: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub other_removes: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_clicks: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub soft_bounce: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subs: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_opens: i64,
-    /**
-     * One day's worth of list activity. Doesn't include Automation activity.
-     */
+    /// One day's worth of list activity. Doesn't include Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -14749,9 +12630,7 @@ pub struct Activity {
 /// Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListActivity {
-    /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
-     */
+    /// Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14759,27 +12638,21 @@ pub struct ListActivity {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
-     */
+    /// Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub activity: Vec<Activity>,
-    /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
-     */
+    /// Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
-     */
+    /// Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -14791,18 +12664,14 @@ pub struct ListActivity {
 /// The email client.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Clients {
-    /**
-     * The email client.
-     */
+    /// The email client.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub client: String,
-    /**
-     * The email client.
-     */
+    /// The email client.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -14814,9 +12683,7 @@ pub struct Clients {
 /// The top email clients based on user-agent strings.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailClients {
-    /**
-     * The top email clients based on user-agent strings.
-     */
+    /// The top email clients based on user-agent strings.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14824,27 +12691,21 @@ pub struct EmailClients {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The top email clients based on user-agent strings.
-     */
+    /// The top email clients based on user-agent strings.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub clients: Vec<Clients>,
-    /**
-     * The top email clients based on user-agent strings.
-     */
+    /// The top email clients based on user-agent strings.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * The top email clients based on user-agent strings.
-     */
+    /// The top email clients based on user-agent strings.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -14887,9 +12748,7 @@ impl GetListsGrowthHistorySortField {
 /// A summary of a specific list's growth activity for a specific month and year.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct History {
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -14897,108 +12756,84 @@ pub struct History {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub cleaned: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub deleted: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub existing: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub imports: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub month: String,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub optins: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub pending: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub reconfirm: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscribed: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub transactional: i64,
-    /**
-     * A summary of a specific list's growth activity for a specific month and year.
-     */
+    /// A summary of a specific list's growth activity for a specific month and year.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15010,9 +12845,7 @@ pub struct History {
 /// A month-by-month summary of a specific list's growth activity.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GrowthHistory {
-    /**
-     * A month-by-month summary of a specific list's growth activity.
-     */
+    /// A month-by-month summary of a specific list's growth activity.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15020,27 +12853,21 @@ pub struct GrowthHistory {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A month-by-month summary of a specific list's growth activity.
-     */
+    /// A month-by-month summary of a specific list's growth activity.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub history: Vec<History>,
-    /**
-     * A month-by-month summary of a specific list's growth activity.
-     */
+    /// A month-by-month summary of a specific list's growth activity.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A month-by-month summary of a specific list's growth activity.
-     */
+    /// A month-by-month summary of a specific list's growth activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15052,9 +12879,7 @@ pub struct GrowthHistory {
 /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Categories {
-    /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
-     */
+    /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15062,45 +12887,35 @@ pub struct Categories {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
-     */
+    /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub display_order: i64,
-    /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
-     */
+    /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
-     */
+    /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
-     */
+    /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
-     */
+    /// Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
 }
@@ -15108,9 +12923,7 @@ pub struct Categories {
 /// Information about this list's interest categories.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestGroupings {
-    /**
-     * Information about this list's interest categories.
-     */
+    /// Information about this list's interest categories.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15118,27 +12931,21 @@ pub struct InterestGroupings {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about this list's interest categories.
-     */
+    /// Information about this list's interest categories.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub categories: Vec<Categories>,
-    /**
-     * Information about this list's interest categories.
-     */
+    /// Information about this list's interest categories.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Information about this list's interest categories.
-     */
+    /// Information about this list's interest categories.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15150,9 +12957,7 @@ pub struct InterestGroupings {
 /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestsInterest {
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15160,54 +12965,42 @@ pub struct InterestsInterest {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub category_id: String,
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub display_order: i64,
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
-     */
+    /// Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -15219,9 +13012,7 @@ pub struct InterestsInterest {
 /// A list of this category's interests
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterestsData {
-    /**
-     * A list of this category's interests
-     */
+    /// A list of this category's interests
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15229,36 +13020,28 @@ pub struct InterestsData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of this category's interests
-     */
+    /// A list of this category's interests
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub category_id: String,
-    /**
-     * A list of this category's interests
-     */
+    /// A list of this category's interests
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub interests: Vec<InterestsInterest>,
-    /**
-     * A list of this category's interests
-     */
+    /// A list of this category's interests
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A list of this category's interests
-     */
+    /// A list of this category's interests
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15307,18 +13090,14 @@ impl CollectionOfSegmentsType {
 /// The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Options {
-    /**
-     * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
-     */
+    /// The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conditions: Vec<ConditionsOneOf>,
-    /**
-     * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
-     */
+    /// The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
 }
@@ -15326,9 +13105,7 @@ pub struct Options {
 /// Information about a specific segment.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Segments {
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15336,64 +13113,48 @@ pub struct Segments {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub member_count: i64,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<Options>,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<CollectionOfSegmentsType>,
-    /**
-     * Information about a specific segment.
-     */
+    /// Information about a specific segment.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -15405,9 +13166,7 @@ pub struct Segments {
 /// A list of available segments.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfSegments {
-    /**
-     * A list of available segments.
-     */
+    /// A list of available segments.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15415,27 +13174,21 @@ pub struct CollectionOfSegments {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of available segments.
-     */
+    /// A list of available segments.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A list of available segments.
-     */
+    /// A list of available segments.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub segments: Vec<Segments>,
-    /**
-     * A list of available segments.
-     */
+    /// A list of available segments.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15447,18 +13200,14 @@ pub struct CollectionOfSegments {
 /// The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListConditions {
-    /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
-     */
+    /// The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conditions: Vec<ConditionsOneOf>,
-    /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
-     */
+    /// The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
 }
@@ -15466,23 +13215,17 @@ pub struct ListConditions {
 /// Information about a specific list segment.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListData {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about a specific list segment.
-     */
+    /// Information about a specific list segment.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<ListConditions>,
-    /**
-     * Information about a specific list segment.
-     */
+    /// Information about a specific list segment.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15494,18 +13237,14 @@ pub struct ListData {
 /// Members to add/remove to/from a static segment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MembersAddRemoveFromAStaticSegment {
-    /**
-     * Members to add/remove to/from a static segment
-     */
+    /// Members to add/remove to/from a static segment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members_to_add: Vec<String>,
-    /**
-     * Members to add/remove to/from a static segment
-     */
+    /// Members to add/remove to/from a static segment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15516,18 +13255,14 @@ pub struct MembersAddRemoveFromAStaticSegment {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchAddRemoveListMembersFromStaticSegmentErrors {
-    /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    /// A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub email_addresses: Vec<String>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -15539,9 +13274,7 @@ pub struct BatchAddRemoveListMembersFromStaticSegmentErrors {
 /// Batch add/remove List members to/from static segment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchAddRemoveListMembersFromStaticSegment {
-    /**
-     * Batch add/remove List members to/from static segment
-     */
+    /// Batch add/remove List members to/from static segment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15549,54 +13282,42 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Batch add/remove List members to/from static segment
-     */
+    /// Batch add/remove List members to/from static segment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub error_count: i64,
-    /**
-     * Batch add/remove List members to/from static segment
-     */
+    /// Batch add/remove List members to/from static segment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub errors: Vec<BatchAddRemoveListMembersFromStaticSegmentErrors>,
-    /**
-     * Batch add/remove List members to/from static segment
-     */
+    /// Batch add/remove List members to/from static segment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members_added: Vec<NewMembers>,
-    /**
-     * Batch add/remove List members to/from static segment
-     */
+    /// Batch add/remove List members to/from static segment
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members_removed: Vec<NewMembers>,
-    /**
-     * Batch add/remove List members to/from static segment
-     */
+    /// Batch add/remove List members to/from static segment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_added: i64,
-    /**
-     * Batch add/remove List members to/from static segment
-     */
+    /// Batch add/remove List members to/from static segment
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15608,18 +13329,14 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
 /// The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListConditionsData {
-    /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
-     */
+    /// The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub conditions: Vec<Vec<ConditionsOneOf>>,
-    /**
-     * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
-     */
+    /// The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "match")]
     pub match_: Option<Match>,
 }
@@ -15627,23 +13344,17 @@ pub struct ListConditionsData {
 /// Information about a specific list segment.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListDataType {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about a specific list segment.
-     */
+    /// Information about a specific list segment.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<ListConditionsData>,
-    /**
-     * Information about a specific list segment.
-     */
+    /// Information about a specific list segment.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15655,9 +13366,7 @@ pub struct ListDataType {
 /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembers {
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15665,159 +13374,119 @@ pub struct ListMembers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_client: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_type: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub interests: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_opt: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_signup: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_changed: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_note: Option<Notes>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<BatchUpdateListMembersNewLocation>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub member_rating: i64,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<SubscriberStats>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<StatusIfNew>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub unique_email_id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -15828,9 +13497,7 @@ pub struct ListMembers {
 /// View members in a specific list segment.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentMembers {
-    /**
-     * View members in a specific list segment.
-     */
+    /// View members in a specific list segment.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -15838,18 +13505,14 @@ pub struct SegmentMembers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * View members in a specific list segment.
-     */
+    /// View members in a specific list segment.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<ListMembers>,
-    /**
-     * View members in a specific list segment.
-     */
+    /// View members in a specific list segment.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15861,18 +13524,14 @@ pub struct SegmentMembers {
 /// A list of tags matching the input query.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TagSearchResults {
-    /**
-     * A list of tags matching the input query.
-     */
+    /// A list of tags matching the input query.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub tags: Vec<String>,
-    /**
-     * A list of tags matching the input query.
-     */
+    /// A list of tags matching the input query.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16004,27 +13663,21 @@ impl GetListsMembersSortField {
 /// Ecommerce stats for the list member if the list is attached to a store.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceData {
-    /**
-     * Ecommerce stats for the list member if the list is attached to a store.
-     */
+    /// Ecommerce stats for the list member if the list is attached to a store.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Ecommerce stats for the list member if the list is attached to a store.
-     */
+    /// Ecommerce stats for the list member if the list is attached to a store.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub number_of_orders: f64,
-    /**
-     * Ecommerce stats for the list member if the list is attached to a store.
-     */
+    /// Ecommerce stats for the list member if the list is attached to a store.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -16036,27 +13689,21 @@ pub struct EcommerceData {
 /// Open and click rates for this subscriber.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembersSubscriberStats {
-    /**
-     * Open and click rates for this subscriber.
-     */
+    /// Open and click rates for this subscriber.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub avg_click_rate: f64,
-    /**
-     * Open and click rates for this subscriber.
-     */
+    /// Open and click rates for this subscriber.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub avg_open_rate: f64,
-    /**
-     * Open and click rates for this subscriber.
-     */
+    /// Open and click rates for this subscriber.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce_data: Option<EcommerceData>,
 }
@@ -16064,26 +13711,20 @@ pub struct ListMembersSubscriberStats {
 /// A single marketing permission a subscriber has either opted-in to or opted-out of.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarketingPermission {
-    /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
-     */
+    /// A single marketing permission a subscriber has either opted-in to or opted-out of.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
-     */
+    /// A single marketing permission a subscriber has either opted-in to or opted-out of.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub marketing_permission_id: String,
-    /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
-     */
+    /// A single marketing permission a subscriber has either opted-in to or opted-out of.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16095,9 +13736,7 @@ pub struct MarketingPermission {
 /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembersData {
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -16105,221 +13744,167 @@ pub struct ListMembersData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_client: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_type: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub full_name: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub interests: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_opt: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_signup: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_changed: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_note: Option<Notes>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<BatchUpdateListMembersNewLocation>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub marketing_permissions: Vec<MarketingPermission>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub member_rating: i64,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub source: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<ListMembersSubscriberStats>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<GetListsMembersStatus>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub tags: Vec<Tags>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub tags_count: i64,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub unique_email_id: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub unsubscribe_reason: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub vip: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16331,9 +13916,7 @@ pub struct ListMembersData {
 /// Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMembersDataType {
-    /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
-     */
+    /// Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -16341,27 +13924,21 @@ pub struct ListMembersDataType {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
-     */
+    /// Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
-     */
+    /// Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<ListMembersData>,
-    /**
-     * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
-     */
+    /// Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16373,17 +13950,13 @@ pub struct ListMembersDataType {
 /// A single marketing permission a subscriber has either opted-in to or opted-out of.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarketingPermissions {
-    /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
-     */
+    /// A single marketing permission a subscriber has either opted-in to or opted-out of.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * A single marketing permission a subscriber has either opted-in to or opted-out of.
-     */
+    /// A single marketing permission a subscriber has either opted-in to or opted-out of.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16395,113 +13968,85 @@ pub struct MarketingPermissions {
 /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddListMembers {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_type: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub interests: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_opt: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_signup: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub marketing_permissions: Vec<MarketingPermissions>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Subscriber's status. This value is required only if the email address is not already present on the list.
-     */
+    /// Subscriber's status. This value is required only if the email address is not already present on the list.
     #[serde(default, skip_serializing_if = "StatusIfNew::is_noop")]
     pub status: StatusIfNew,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub tags: Vec<String>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -16512,109 +14057,81 @@ pub struct AddListMembers {
 /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddListMembersData {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_type: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub interests: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_opt: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_signup: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub marketing_permissions: Vec<MarketingPermissions>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<StatusIfNew>,
-    /**
-     * Subscriber's status. This value is required only if the email address is not already present on the list.
-     */
+    /// Subscriber's status. This value is required only if the email address is not already present on the list.
     #[serde(default, skip_serializing_if = "StatusIfNew::is_noop")]
     pub status_if_new: StatusIfNew,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -16625,104 +14142,78 @@ pub struct AddListMembersData {
 /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddListMembersDataType {
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_type: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub interests: bool,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_opt: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip_signup: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub language: String,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<Location>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub marketing_permissions: Vec<MarketingPermissions>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<MembersSubscribeUnsubscribeFromAListInBatchStatus>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_opt: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp_signup: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
-     */
+    /// Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -16733,54 +14224,42 @@ pub struct AddListMembersDataType {
 /// Member activity events.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberActivity {
-    /**
-     * Member activity events.
-     */
+    /// Member activity events.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub action: String,
-    /**
-     * Member activity events.
-     */
+    /// Member activity events.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Member activity events.
-     */
+    /// Member activity events.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub parent_campaign: String,
-    /**
-     * Member activity events.
-     */
+    /// Member activity events.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Member activity events.
-     */
+    /// Member activity events.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Member activity events.
-     */
+    /// Member activity events.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16788,9 +14267,7 @@ pub struct MemberActivity {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * Member activity events.
-     */
+    /// Member activity events.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16802,9 +14279,7 @@ pub struct MemberActivity {
 /// The last 50 member events for a list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberActivityEvents {
-    /**
-     * The last 50 member events for a list.
-     */
+    /// The last 50 member events for a list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -16812,36 +14287,28 @@ pub struct MemberActivityEvents {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The last 50 member events for a list.
-     */
+    /// The last 50 member events for a list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub activity: Vec<MemberActivity>,
-    /**
-     * The last 50 member events for a list.
-     */
+    /// The last 50 member events for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * The last 50 member events for a list.
-     */
+    /// The last 50 member events for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * The last 50 member events for a list.
-     */
+    /// The last 50 member events for a list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -16884,32 +14351,24 @@ impl ActivityType {
 /// Activity feed item representing opening an email.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailOpens {
-    /**
-     * Activity feed item representing opening an email.
-     */
+    /// Activity feed item representing opening an email.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ActivityType>,
-    /**
-     * Activity feed item representing opening an email.
-     */
+    /// Activity feed item representing opening an email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Activity feed item representing opening an email.
-     */
+    /// Activity feed item representing opening an email.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_title: String,
-    /**
-     * Activity feed item representing opening an email.
-     */
+    /// Activity feed item representing opening an email.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -16952,41 +14411,31 @@ impl EmailClicksActivityType {
 /// Activity feed item representing having a link clicked by a contact.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailClicks {
-    /**
-     * Activity feed item representing having a link clicked by a contact.
-     */
+    /// Activity feed item representing having a link clicked by a contact.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EmailClicksActivityType>,
-    /**
-     * Activity feed item representing having a link clicked by a contact.
-     */
+    /// Activity feed item representing having a link clicked by a contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Activity feed item representing having a link clicked by a contact.
-     */
+    /// Activity feed item representing having a link clicked by a contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_title: String,
-    /**
-     * Activity feed item representing having a link clicked by a contact.
-     */
+    /// Activity feed item representing having a link clicked by a contact.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item representing having a link clicked by a contact.
-     */
+    /// Activity feed item representing having a link clicked by a contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17063,45 +14512,33 @@ impl BounceType {
 /// Activity feed item representing an email to this contact bouncing.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailBounced {
-    /**
-     * Activity feed item representing an email to this contact bouncing.
-     */
+    /// Activity feed item representing an email to this contact bouncing.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EmailBouncedActivityType>,
-    /**
-     * Activity feed item representing an email to this contact bouncing.
-     */
+    /// Activity feed item representing an email to this contact bouncing.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub bounce_has_open_activity: bool,
-    /**
-     * Activity feed item representing an email to this contact bouncing.
-     */
+    /// Activity feed item representing an email to this contact bouncing.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bounce_type: Option<BounceType>,
-    /**
-     * Activity feed item representing an email to this contact bouncing.
-     */
+    /// Activity feed item representing an email to this contact bouncing.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Activity feed item representing an email to this contact bouncing.
-     */
+    /// Activity feed item representing an email to this contact bouncing.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_title: String,
-    /**
-     * Activity feed item representing an email to this contact bouncing.
-     */
+    /// Activity feed item representing an email to this contact bouncing.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -17144,49 +14581,37 @@ impl ListUnsubscribedActivityType {
 /// Activity feed item representing this contact unsubscribing from a list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListUnsubscribed {
-    /**
-     * Activity feed item representing this contact unsubscribing from a list.
-     */
+    /// Activity feed item representing this contact unsubscribing from a list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ListUnsubscribedActivityType>,
-    /**
-     * Activity feed item representing this contact unsubscribing from a list.
-     */
+    /// Activity feed item representing this contact unsubscribing from a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Activity feed item representing this contact unsubscribing from a list.
-     */
+    /// Activity feed item representing this contact unsubscribing from a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_title: String,
-    /**
-     * Activity feed item representing this contact unsubscribing from a list.
-     */
+    /// Activity feed item representing this contact unsubscribing from a list.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item representing this contact unsubscribing from a list.
-     */
+    /// Activity feed item representing this contact unsubscribing from a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_admin_unsubscribed: bool,
-    /**
-     * Activity feed item representing this contact unsubscribing from a list.
-     */
+    /// Activity feed item representing this contact unsubscribing from a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17229,32 +14654,24 @@ impl EmailSentActivityType {
 /// Activity feed item representing having an email sent to the contact.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailSent {
-    /**
-     * Activity feed item representing having an email sent to the contact.
-     */
+    /// Activity feed item representing having an email sent to the contact.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EmailSentActivityType>,
-    /**
-     * Activity feed item representing having an email sent to the contact.
-     */
+    /// Activity feed item representing having an email sent to the contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Activity feed item representing having an email sent to the contact.
-     */
+    /// Activity feed item representing having an email sent to the contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_title: String,
-    /**
-     * Activity feed item representing having an email sent to the contact.
-     */
+    /// Activity feed item representing having an email sent to the contact.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -17266,93 +14683,71 @@ pub struct EmailSent {
 /// Activity feed item representing an individual reply in a conversation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailConversation {
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ConversationSegmentField>,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub avatar_url: String,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_title: String,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from_email: String,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_read: bool,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_user: bool,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message_text: String,
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17395,59 +14790,45 @@ impl NoteActivityType {
 /// Activity feed item representing a note on the contact record.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Note {
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<NoteActivityType>,
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub avatar_url: String,
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note_id: String,
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note_text: String,
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -17490,40 +14871,30 @@ impl MarketingPermissionActivityType {
 /// Activity feed item indicating if a marketing permission was added or updated.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarketingPermissionData {
-    /**
-     * Activity feed item indicating if a marketing permission was added or updated.
-     */
+    /// Activity feed item indicating if a marketing permission was added or updated.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<MarketingPermissionActivityType>,
-    /**
-     * Activity feed item indicating if a marketing permission was added or updated.
-     */
+    /// Activity feed item indicating if a marketing permission was added or updated.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item indicating if a marketing permission was added or updated.
-     */
+    /// Activity feed item indicating if a marketing permission was added or updated.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub marketing_permission_opted_in: bool,
-    /**
-     * Activity feed item indicating if a marketing permission was added or updated.
-     */
+    /// Activity feed item indicating if a marketing permission was added or updated.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub marketing_permisson_text: String,
-    /**
-     * Activity feed item indicating if a marketing permission was added or updated.
-     */
+    /// Activity feed item indicating if a marketing permission was added or updated.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17566,32 +14937,24 @@ impl PostcardSentActivityType {
 /// Activity feed item representing a time when a contact was sent a particular postcard.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostcardSent {
-    /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
-     */
+    /// Activity feed item representing a time when a contact was sent a particular postcard.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<PostcardSentActivityType>,
-    /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
-     */
+    /// Activity feed item representing a time when a contact was sent a particular postcard.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
-     */
+    /// Activity feed item representing a time when a contact was sent a particular postcard.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub outreach_id: String,
-    /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
-     */
+    /// Activity feed item representing a time when a contact was sent a particular postcard.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17634,32 +14997,24 @@ impl SquatterSignupActivityType {
 /// Activity feed item to representing a contact signing up for the audience from a squatter page.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SquatterSignup {
-    /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
-     */
+    /// Activity feed item to representing a contact signing up for the audience from a squatter page.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<SquatterSignupActivityType>,
-    /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
-     */
+    /// Activity feed item to representing a contact signing up for the audience from a squatter page.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
-     */
+    /// Activity feed item to representing a contact signing up for the audience from a squatter page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub outreach_id: String,
-    /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
-     */
+    /// Activity feed item to representing a contact signing up for the audience from a squatter page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17702,32 +15057,24 @@ impl WebsiteSignupActivityType {
 /// Activity feed item to representing a contact signing up for the contact through a website page.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebsiteSignup {
-    /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
-     */
+    /// Activity feed item to representing a contact signing up for the contact through a website page.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<WebsiteSignupActivityType>,
-    /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
-     */
+    /// Activity feed item to representing a contact signing up for the contact through a website page.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
-     */
+    /// Activity feed item to representing a contact signing up for the contact through a website page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub outreach_id: String,
-    /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
-     */
+    /// Activity feed item to representing a contact signing up for the contact through a website page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17770,32 +15117,24 @@ impl LandingPageSignupActivityType {
 /// Activity feed item to representing a contact signing up for the list via a landing page.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageSignup {
-    /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a landing page.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<LandingPageSignupActivityType>,
-    /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a landing page.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a landing page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub outreach_id: String,
-    /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a landing page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17838,23 +15177,17 @@ impl EcommerceSignupActivityType {
 /// Activity feed item to representing a contact signing up for the list via a ecommerce store.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceSignup {
-    /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a ecommerce store.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EcommerceSignupActivityType>,
-    /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a ecommerce store.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a ecommerce store.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17897,23 +15230,17 @@ impl GenericSignupActivityType {
 /// Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GenericSignup {
-    /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
-     */
+    /// Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<GenericSignupActivityType>,
-    /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
-     */
+    /// Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
-     */
+    /// Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17956,9 +15283,7 @@ impl EcommerceOrderActivityType {
 /// Information about a specific order line.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Lines {
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -17966,81 +15291,63 @@ pub struct Lines {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub discount: f64,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_title: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_id: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_title: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -18052,86 +15359,66 @@ pub struct Lines {
 /// Activity feed item that represents an order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceOrder {
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<EcommerceOrderActivityType>,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_id: String,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub order_items: Vec<Lines>,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_total: String,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_url: String,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub outreach_id: String,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub outreach_title: String,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub outreach_type: String,
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18174,32 +15461,24 @@ impl ContactActivityEventType {
 /// Activity feed item that represents a generic event.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactActivityEvent {
-    /**
-     * Activity feed item that represents a generic event.
-     */
+    /// Activity feed item that represents a generic event.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<ContactActivityEventType>,
-    /**
-     * Activity feed item that represents a generic event.
-     */
+    /// Activity feed item that represents a generic event.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Activity feed item that represents a generic event.
-     */
+    /// Activity feed item that represents a generic event.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub event_name: String,
-    /**
-     * Activity feed item that represents a generic event.
-     */
+    /// Activity feed item that represents a generic event.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18242,32 +15521,24 @@ impl SurveyResponseActivityType {
 /// Represents when a contact completes and submits a survey
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SurveyResponse {
-    /**
-     * Represents when a contact completes and submits a survey
-     */
+    /// Represents when a contact completes and submits a survey
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub activity_type: Option<SurveyResponseActivityType>,
-    /**
-     * Represents when a contact completes and submits a survey
-     */
+    /// Represents when a contact completes and submits a survey
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Represents when a contact completes and submits a survey
-     */
+    /// Represents when a contact completes and submits a survey
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub survey_id: String,
-    /**
-     * Represents when a contact completes and submits a survey
-     */
+    /// Represents when a contact completes and submits a survey
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18297,77 +15568,42 @@ pub struct SurveyResponse {
 /// - `SurveyResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ActivityOneOf {
-    /**
-     * Activity feed item representing opening an email.
-     */
+    /// Activity feed item representing opening an email.
     EmailOpens(EmailOpens),
-    /**
-     * Activity feed item representing having a link clicked by a contact.
-     */
+    /// Activity feed item representing having a link clicked by a contact.
     EmailClicks(EmailClicks),
-    /**
-     * Activity feed item representing an email to this contact bouncing.
-     */
+    /// Activity feed item representing an email to this contact bouncing.
     EmailBounced(EmailBounced),
-    /**
-     * Activity feed item representing this contact unsubscribing from a list.
-     */
+    /// Activity feed item representing this contact unsubscribing from a list.
     ListUnsubscribed(ListUnsubscribed),
-    /**
-     * Activity feed item representing having an email sent to the contact.
-     */
+    /// Activity feed item representing having an email sent to the contact.
     EmailSent(EmailSent),
-    /**
-     * Activity feed item representing an individual reply in a conversation.
-     */
+    /// Activity feed item representing an individual reply in a conversation.
     EmailConversation(EmailConversation),
-    /**
-     * Activity feed item representing a note on the contact record.
-     */
+    /// Activity feed item representing a note on the contact record.
     Note(Note),
-    /**
-     * Activity feed item indicating if a marketing permission was added or updated.
-     */
+    /// Activity feed item indicating if a marketing permission was added or updated.
     MarketingPermissionData(MarketingPermissionData),
-    /**
-     * Activity feed item representing a time when a contact was sent a particular postcard.
-     */
+    /// Activity feed item representing a time when a contact was sent a particular postcard.
     PostcardSent(PostcardSent),
-    /**
-     * Activity feed item to representing a contact signing up for the audience from a squatter page.
-     */
+    /// Activity feed item to representing a contact signing up for the audience from a squatter page.
     SquatterSignup(SquatterSignup),
-    /**
-     * Activity feed item to representing a contact signing up for the contact through a website page.
-     */
+    /// Activity feed item to representing a contact signing up for the contact through a website page.
     WebsiteSignup(WebsiteSignup),
-    /**
-     * Activity feed item to representing a contact signing up for the list via a landing page.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a landing page.
     LandingPageSignup(LandingPageSignup),
-    /**
-     * Activity feed item to representing a contact signing up for the list via a ecommerce store.
-     */
+    /// Activity feed item to representing a contact signing up for the list via a ecommerce store.
     EcommerceSignup(EcommerceSignup),
-    /**
-     * Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
-     */
+    /// Activity feed item that represents a contact signing up for the audience via a generic some generic method (specifically, one we can't link to).
     GenericSignup(GenericSignup),
-    /**
-     * Activity feed item that represents an order.
-     */
+    /// Activity feed item that represents an order.
     EcommerceOrder(EcommerceOrder),
-    /**
-     * Activity feed item that represents a generic event.
-     */
+    /// Activity feed item that represents a generic event.
     ContactActivityEvent(ContactActivityEvent),
-    /**
-     * Represents when a contact completes and submits a survey
-     */
+    /// Represents when a contact completes and submits a survey
     SurveyResponse(SurveyResponse),
 }
 
@@ -18495,9 +15731,7 @@ impl ActivityOneOf {
 /// The member activity events for a given member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberActivityEventsData {
-    /**
-     * The member activity events for a given member.
-     */
+    /// The member activity events for a given member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18505,27 +15739,21 @@ pub struct MemberActivityEventsData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The member activity events for a given member.
-     */
+    /// The member activity events for a given member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub activity: Vec<ActivityOneOf>,
-    /**
-     * The member activity events for a given member.
-     */
+    /// The member activity events for a given member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * The member activity events for a given member.
-     */
+    /// The member activity events for a given member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18537,9 +15765,7 @@ pub struct MemberActivityEventsData {
 /// A list of tags assigned to a list member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfTags {
-    /**
-     * A list of tags assigned to a list member.
-     */
+    /// A list of tags assigned to a list member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18547,18 +15773,14 @@ pub struct CollectionOfTags {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of tags assigned to a list member.
-     */
+    /// A list of tags assigned to a list member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub tags: Vec<String>,
-    /**
-     * A list of tags assigned to a list member.
-     */
+    /// A list of tags assigned to a list member.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -18604,18 +15826,14 @@ impl MemberTagsTagStatus {
 /// Add or remove tags on a member by declaring a tag either active or inactive on a member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberTag {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The status for the tag on the member, pass in active to add a tag or inactive to remove it.
-     */
+    /// The status for the tag on the member, pass in active to add a tag or inactive to remove it.
     #[serde(default, skip_serializing_if = "MemberTagsTagStatus::is_noop")]
     pub status: MemberTagsTagStatus,
 }
@@ -18623,17 +15841,13 @@ pub struct MemberTag {
 /// A list of tags assigned to a list member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberTags {
-    /**
-     * A list of tags assigned to a list member.
-     */
+    /// A list of tags assigned to a list member.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_syncing: bool,
-    /**
-     * A list of tags assigned to the list member.
-     */
+    /// A list of tags assigned to the list member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18645,27 +15859,21 @@ pub struct MemberTags {
 /// A specific event for a contact.
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
-    /**
-     * A specific event for a contact.
-     */
+    /// A specific event for a contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A specific event for a contact.
-     */
+    /// A specific event for a contact.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub occurred_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A specific event for a contact.
-     */
+    /// A specific event for a contact.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18677,9 +15885,7 @@ pub struct Event {
 /// A collection of events for a given contact
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfEvents {
-    /**
-     * A collection of events for a given contact
-     */
+    /// A collection of events for a given contact
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18687,18 +15893,14 @@ pub struct CollectionOfEvents {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of events for a given contact
-     */
+    /// A collection of events for a given contact
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub events: Vec<Event>,
-    /**
-     * A collection of events for a given contact
-     */
+    /// A collection of events for a given contact
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -18710,35 +15912,27 @@ pub struct CollectionOfEvents {
 /// A new event for a specific list member
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventsData {
-    /**
-     * A new event for a specific list member
-     */
+    /// A new event for a specific list member
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_syncing: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A new event for a specific list member
-     */
+    /// A new event for a specific list member
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub occurred_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A new event for a specific list member
-     */
+    /// A new event for a specific list member
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18750,36 +15944,28 @@ pub struct EventsData {
 /// A single instance of a goal activity.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Goal {
-    /**
-     * A single instance of a goal activity.
-     */
+    /// A single instance of a goal activity.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub data: String,
-    /**
-     * A single instance of a goal activity.
-     */
+    /// A single instance of a goal activity.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub event: String,
-    /**
-     * A single instance of a goal activity.
-     */
+    /// A single instance of a goal activity.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub goal_id: i64,
-    /**
-     * A single instance of a goal activity.
-     */
+    /// A single instance of a goal activity.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -18791,9 +15977,7 @@ pub struct Goal {
 /// The last 50 Goal events for a member on a specific list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfMemberActivityEvents {
-    /**
-     * The last 50 Goal events for a member on a specific list.
-     */
+    /// The last 50 Goal events for a member on a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18801,36 +15985,28 @@ pub struct CollectionOfMemberActivityEvents {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The last 50 Goal events for a member on a specific list.
-     */
+    /// The last 50 Goal events for a member on a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * The last 50 Goal events for a member on a specific list.
-     */
+    /// The last 50 Goal events for a member on a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub goals: Vec<Goal>,
-    /**
-     * The last 50 Goal events for a member on a specific list.
-     */
+    /// The last 50 Goal events for a member on a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * The last 50 Goal events for a member on a specific list.
-     */
+    /// The last 50 Goal events for a member on a specific list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -18879,9 +16055,7 @@ impl GetListsMembersNotesSortField {
 /// A specific note for a specific member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfNotesMember {
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18889,63 +16063,49 @@ pub struct CollectionOfNotesMember {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note: String,
-    /**
-     * A specific note for a specific member.
-     */
+    /// A specific note for a specific member.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -18957,9 +16117,7 @@ pub struct CollectionOfNotesMember {
 /// The last 10 notes for a specific list member, based on date created.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfNotes {
-    /**
-     * The last 10 notes for a specific list member, based on date created.
-     */
+    /// The last 10 notes for a specific list member, based on date created.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -18967,36 +16125,28 @@ pub struct CollectionOfNotes {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The last 10 notes for a specific list member, based on date created.
-     */
+    /// The last 10 notes for a specific list member, based on date created.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * The last 10 notes for a specific list member, based on date created.
-     */
+    /// The last 10 notes for a specific list member, based on date created.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * The last 10 notes for a specific list member, based on date created.
-     */
+    /// The last 10 notes for a specific list member, based on date created.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub notes: Vec<CollectionOfNotesMember>,
-    /**
-     * The last 10 notes for a specific list member, based on date created.
-     */
+    /// The last 10 notes for a specific list member, based on date created.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -19069,45 +16219,35 @@ impl MergeFieldType {
 /// Extra options for some merge field types.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldOptions {
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub choices: Vec<String>,
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_format::deserialize"
     )]
     pub date_format: Option<chrono::NaiveDate>,
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub default_country: i64,
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone_format: String,
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -19119,9 +16259,7 @@ pub struct MergeFieldOptions {
 /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeField {
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -19129,93 +16267,71 @@ pub struct MergeField {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_value: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub display_order: i64,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub help_text: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub merge_id: i64,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<MergeFieldOptions>,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub required: bool,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub tag: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<MergeFieldType>,
 }
@@ -19223,9 +16339,7 @@ pub struct MergeField {
 /// The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CollectionOfMergeFields {
-    /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
-     */
+    /// The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -19233,27 +16347,21 @@ pub struct CollectionOfMergeFields {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
-     */
+    /// The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
-     */
+    /// The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub merge_fields: Vec<MergeField>,
-    /**
-     * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
-     */
+    /// The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -19265,75 +16373,57 @@ pub struct CollectionOfMergeFields {
 /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldData {
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_value: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub display_order: i64,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub help_text: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<MergeFieldOptions>,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub required: bool,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub tag: String,
-    /**
-     * The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
-     */
+    /// The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
     #[serde(
         default,
         skip_serializing_if = "MergeFieldType::is_noop",
@@ -19345,36 +16435,28 @@ pub struct MergeFieldData {
 /// Extra options for some merge field types.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldOptionsData {
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub choices: Vec<String>,
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_format::deserialize"
     )]
     pub date_format: Option<chrono::NaiveDate>,
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub default_country: i64,
-    /**
-     * Extra options for some merge field types.
-     */
+    /// Extra options for some merge field types.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19386,66 +16468,50 @@ pub struct MergeFieldOptionsData {
 /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeFieldDataType {
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub default_value: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub display_order: i64,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub help_text: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub options: Option<MergeFieldOptionsData>,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub required: bool,
-    /**
-     * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
-     */
+    /// A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19457,49 +16523,37 @@ pub struct MergeFieldDataType {
 /// The events that can trigger the webhook and whether they are enabled.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooksEvents {
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub campaign: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub cleaned: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub profile: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub subscribe: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub unsubscribe: bool,
-    /**
-     * The events that can trigger the webhook and whether they are enabled.
-     */
+    /// The events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -19510,25 +16564,19 @@ pub struct ListWebhooksEvents {
 /// The possible sources of any events that can trigger the webhook and whether they are enabled.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooksSources {
-    /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
-     */
+    /// The possible sources of any events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub admin: bool,
-    /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
-     */
+    /// The possible sources of any events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub api: bool,
-    /**
-     * The possible sources of any events that can trigger the webhook and whether they are enabled.
-     */
+    /// The possible sources of any events that can trigger the webhook and whether they are enabled.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -19539,9 +16587,7 @@ pub struct ListWebhooksSources {
 /// Webhook configured for the given list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooks {
-    /**
-     * Webhook configured for the given list.
-     */
+    /// Webhook configured for the given list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -19549,37 +16595,27 @@ pub struct ListWebhooks {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Webhook configured for the given list.
-     */
+    /// Webhook configured for the given list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub events: Option<ListWebhooksEvents>,
-    /**
-     * Webhook configured for the given list.
-     */
+    /// Webhook configured for the given list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Webhook configured for the given list.
-     */
+    /// Webhook configured for the given list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Webhook configured for the given list.
-     */
+    /// Webhook configured for the given list.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sources: Option<ListWebhooksSources>,
-    /**
-     * Webhook configured for the given list.
-     */
+    /// Webhook configured for the given list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19591,9 +16627,7 @@ pub struct ListWebhooks {
 /// Manage webhooks for a specific list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebhooksData {
-    /**
-     * Manage webhooks for a specific list.
-     */
+    /// Manage webhooks for a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -19601,27 +16635,21 @@ pub struct ListWebhooksData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Manage webhooks for a specific list.
-     */
+    /// Manage webhooks for a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Manage webhooks for a specific list.
-     */
+    /// Manage webhooks for a specific list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * Manage webhooks for a specific list.
-     */
+    /// Manage webhooks for a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -19762,87 +16790,65 @@ impl ImageTarget {
 /// Options for customizing your signup form header.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Header {
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image_align: Option<ImageAlign>,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_alt: String,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_border_color: String,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image_border_style: Option<ImageBorderStyle>,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_border_width: String,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_height: String,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_link: String,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image_target: Option<ImageTarget>,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_width: String,
-    /**
-     * Options for customizing your signup form header.
-     */
+    /// Options for customizing your signup form header.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19891,14 +16897,10 @@ impl Section {
 /// Collection of Content for List Signup Forms.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contents {
-    /**
-     * Collection of Content for List Signup Forms.
-     */
+    /// Collection of Content for List Signup Forms.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub section: Option<Section>,
-    /**
-     * Collection of Content for List Signup Forms.
-     */
+    /// Collection of Content for List Signup Forms.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19980,18 +16982,14 @@ impl Selector {
 /// An option for Signup Form Styles.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AnOptionSignupFormStyles {
-    /**
-     * An option for Signup Form Styles.
-     */
+    /// An option for Signup Form Styles.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub property: String,
-    /**
-     * An option for Signup Form Styles.
-     */
+    /// An option for Signup Form Styles.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20003,18 +17001,14 @@ pub struct AnOptionSignupFormStyles {
 /// Collection of Element style for List Signup Forms.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Styles {
-    /**
-     * Collection of Element style for List Signup Forms.
-     */
+    /// Collection of Element style for List Signup Forms.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub options: Vec<AnOptionSignupFormStyles>,
-    /**
-     * Collection of Element style for List Signup Forms.
-     */
+    /// Collection of Element style for List Signup Forms.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub selector: Option<Selector>,
 }
@@ -20022,9 +17016,7 @@ pub struct Styles {
 /// List signup form.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignupForm {
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20032,41 +17024,31 @@ pub struct SignupForm {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub contents: Vec<Contents>,
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub header: Option<Header>,
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub signup_form_url: String,
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20078,9 +17060,7 @@ pub struct SignupForm {
 /// List Signup Forms.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSignupForms {
-    /**
-     * List Signup Forms.
-     */
+    /// List Signup Forms.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20088,27 +17068,21 @@ pub struct ListSignupForms {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * List Signup Forms.
-     */
+    /// List Signup Forms.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List Signup Forms.
-     */
+    /// List Signup Forms.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub signup_forms: Vec<SignupForm>,
-    /**
-     * List Signup Forms.
-     */
+    /// List Signup Forms.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20120,23 +17094,17 @@ pub struct ListSignupForms {
 /// List signup form.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignupFormData {
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub contents: Vec<Contents>,
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub header: Option<Header>,
-    /**
-     * List signup form.
-     */
+    /// List signup form.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20176,9 +17144,7 @@ pub struct Locations {
 /// A summary of List's locations.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListLocations {
-    /**
-     * A summary of List's locations.
-     */
+    /// A summary of List's locations.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20186,27 +17152,21 @@ pub struct ListLocations {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of List's locations.
-     */
+    /// A summary of List's locations.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A summary of List's locations.
-     */
+    /// A summary of List's locations.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub locations: Vec<Locations>,
-    /**
-     * A summary of List's locations.
-     */
+    /// A summary of List's locations.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20289,17 +17249,13 @@ impl LandingPageStatus {
 /// The tracking settings applied to this landing page.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackingSettings {
-    /**
-     * The tracking settings applied to this landing page.
-     */
+    /// The tracking settings applied to this landing page.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enable_restricted_data_processing: bool,
-    /**
-     * The tracking settings applied to this landing page.
-     */
+    /// The tracking settings applied to this landing page.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -20310,9 +17266,7 @@ pub struct TrackingSettings {
 /// A summary of an individual landing page's settings and content.
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPage {
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20320,136 +17274,104 @@ pub struct LandingPage {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by_source: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<LandingPageStatus>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub template_id: i64,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<TrackingSettings>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub unpublished_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20461,9 +17383,7 @@ pub struct LandingPage {
 /// A collection of landing pages.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAllLandingPagesResponse {
-    /**
-     * A collection of landing pages.
-     */
+    /// A collection of landing pages.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20471,18 +17391,14 @@ pub struct GetAllLandingPagesResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of landing pages.
-     */
+    /// A collection of landing pages.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub landing_pages: Vec<LandingPage>,
-    /**
-     * A collection of landing pages.
-     */
+    /// A collection of landing pages.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20528,68 +17444,52 @@ impl LandingPageTemplateType {
 /// A summary of an individual page's properties.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageData {
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub template_id: i64,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<TrackingSettings>,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<LandingPageTemplateType>,
 }
@@ -20597,54 +17497,42 @@ pub struct LandingPageData {
 /// A summary of an individual page's properties.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageDataType {
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * A summary of an individual page's properties.
-     */
+    /// A summary of an individual page's properties.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking: Option<TrackingSettings>,
 }
@@ -20652,9 +17540,7 @@ pub struct LandingPageDataType {
 /// The HTML content for a landing page.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageContent {
-    /**
-     * The HTML content for a landing page.
-     */
+    /// The HTML content for a landing page.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -20662,18 +17548,14 @@ pub struct LandingPageContent {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * The HTML content for a landing page.
-     */
+    /// The HTML content for a landing page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html: String,
-    /**
-     * The HTML content for a landing page.
-     */
+    /// The HTML content for a landing page.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20685,27 +17567,21 @@ pub struct LandingPageContent {
 /// An object describing the bounce summary for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Bounces {
-    /**
-     * An object describing the bounce summary for the campaign.
-     */
+    /// An object describing the bounce summary for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub hard_bounces: i64,
-    /**
-     * An object describing the bounce summary for the campaign.
-     */
+    /// An object describing the bounce summary for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub soft_bounces: i64,
-    /**
-     * An object describing the bounce summary for the campaign.
-     */
+    /// An object describing the bounce summary for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20717,18 +17593,14 @@ pub struct Bounces {
 /// An object describing the forwards and forward activity for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Forwards {
-    /**
-     * An object describing the forwards and forward activity for the campaign.
-     */
+    /// An object describing the forwards and forward activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub forwards_count: i64,
-    /**
-     * An object describing the forwards and forward activity for the campaign.
-     */
+    /// An object describing the forwards and forward activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20740,36 +17612,28 @@ pub struct Forwards {
 /// An object describing the open activity for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Opens {
-    /**
-     * An object describing the open activity for the campaign.
-     */
+    /// An object describing the open activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_open: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * An object describing the open activity for the campaign.
-     */
+    /// An object describing the open activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * An object describing the open activity for the campaign.
-     */
+    /// An object describing the open activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens_total: i64,
-    /**
-     * An object describing the open activity for the campaign.
-     */
+    /// An object describing the open activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20781,45 +17645,35 @@ pub struct Opens {
 /// An object describing the click activity for the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Clicks {
-    /**
-     * An object describing the click activity for the campaign.
-     */
+    /// An object describing the click activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * An object describing the click activity for the campaign.
-     */
+    /// An object describing the click activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks_total: i64,
-    /**
-     * An object describing the click activity for the campaign.
-     */
+    /// An object describing the click activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * An object describing the click activity for the campaign.
-     */
+    /// An object describing the click activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_clicks: i64,
-    /**
-     * An object describing the click activity for the campaign.
-     */
+    /// An object describing the click activity for the campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20831,27 +17685,21 @@ pub struct Clicks {
 /// An object describing campaign engagement on Facebook.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookLikes {
-    /**
-     * An object describing campaign engagement on Facebook.
-     */
+    /// An object describing campaign engagement on Facebook.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub facebook_likes: i64,
-    /**
-     * An object describing campaign engagement on Facebook.
-     */
+    /// An object describing campaign engagement on Facebook.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_likes: i64,
-    /**
-     * An object describing campaign engagement on Facebook.
-     */
+    /// An object describing campaign engagement on Facebook.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -20863,45 +17711,35 @@ pub struct FacebookLikes {
 /// The average campaign statistics for your industry.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportsIndustryStats {
-    /**
-     * The average campaign statistics for your industry.
-     */
+    /// The average campaign statistics for your industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub abuse_rate: f64,
-    /**
-     * The average campaign statistics for your industry.
-     */
+    /// The average campaign statistics for your industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub bounce_rate: f64,
-    /**
-     * The average campaign statistics for your industry.
-     */
+    /// The average campaign statistics for your industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * The average campaign statistics for your industry.
-     */
+    /// The average campaign statistics for your industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * The average campaign statistics for your industry.
-     */
+    /// The average campaign statistics for your industry.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20909,18 +17747,14 @@ pub struct CampaignReportsIndustryStats {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * The average campaign statistics for your industry.
-     */
+    /// The average campaign statistics for your industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub unopen_rate: f64,
-    /**
-     * The average campaign statistics for your industry.
-     */
+    /// The average campaign statistics for your industry.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -20932,36 +17766,28 @@ pub struct CampaignReportsIndustryStats {
 /// The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListStats {
-    /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
-     */
+    /// The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
-     */
+    /// The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
-     */
+    /// The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub sub_rate: f64,
-    /**
-     * The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
-     */
+    /// The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -20973,81 +17799,63 @@ pub struct ListStats {
 /// Stats for Campaign A.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct A {
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub abuse_reports: i64,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub bounces: i64,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub forwards: i64,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub forwards_opens: i64,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_open: String,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_clicks: i64,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_opens: i64,
-    /**
-     * Stats for Campaign A.
-     */
+    /// Stats for Campaign A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21059,81 +17867,63 @@ pub struct A {
 /// Stats for Campaign B.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct B {
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub abuse_reports: i64,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub bounces: i64,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub forwards: i64,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub forwards_opens: i64,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_open: String,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_clicks: i64,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_opens: i64,
-    /**
-     * Stats for Campaign B.
-     */
+    /// Stats for Campaign B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21145,86 +17935,66 @@ pub struct B {
 /// General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbSplit {
-    /**
-     * General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
-     */
+    /// General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub a: Option<A>,
-    /**
-     * General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
-     */
+    /// General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub b: Option<B>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Timewarp {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub bounces: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub gmt_offset: i64,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_open: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_clicks: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21235,36 +18005,28 @@ pub struct Timewarp {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Timeseries {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipients_clicks: i64,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21276,18 +18038,14 @@ pub struct Timeseries {
 /// The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShareReport {
-    /**
-     * The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
-     */
+    /// The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub share_password: String,
-    /**
-     * The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
-     */
+    /// The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -21299,36 +18057,28 @@ pub struct ShareReport {
 /// E-Commerce stats for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceReport {
-    /**
-     * E-Commerce stats for a campaign.
-     */
+    /// E-Commerce stats for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * E-Commerce stats for a campaign.
-     */
+    /// E-Commerce stats for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_orders: i64,
-    /**
-     * E-Commerce stats for a campaign.
-     */
+    /// E-Commerce stats for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub total_revenue: f64,
-    /**
-     * E-Commerce stats for a campaign.
-     */
+    /// E-Commerce stats for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -21340,9 +18090,7 @@ pub struct ECommerceReport {
 /// Report details about a sent campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reports {
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21350,180 +18098,130 @@ pub struct Reports {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split: Option<AbSplit>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub abuse_reports: i64,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bounces: Option<Bounces>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_title: String,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub clicks: Option<Clicks>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delivery_status: Option<DeliveryStatus>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<ECommerceReport>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub facebook_likes: Option<FacebookLikes>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub forwards: Option<Forwards>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub industry_stats: Option<CampaignReportsIndustryStats>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_name: String,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub list_stats: Option<ListStats>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub opens: Option<Opens>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub preview_text: String,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub rss_last_send: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub send_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub share_report: Option<ShareReport>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subject_line: String,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub timeseries: Vec<Timeseries>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub timewarp: Vec<Timewarp>,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -21531,9 +18229,7 @@ pub struct Reports {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * Report details about a sent campaign.
-     */
+    /// Report details about a sent campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21545,9 +18241,7 @@ pub struct Reports {
 /// A list of reports containing campaigns marked as Sent.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignReportsData {
-    /**
-     * A list of reports containing campaigns marked as Sent.
-     */
+    /// A list of reports containing campaigns marked as Sent.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21555,18 +18249,14 @@ pub struct CampaignReportsData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of reports containing campaigns marked as Sent.
-     */
+    /// A list of reports containing campaigns marked as Sent.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub reports: Vec<Reports>,
-    /**
-     * A list of reports containing campaigns marked as Sent.
-     */
+    /// A list of reports containing campaigns marked as Sent.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21578,9 +18268,7 @@ pub struct CampaignReportsData {
 /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseComplaint {
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21588,76 +18276,58 @@ pub struct AbuseComplaint {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
-     */
+    /// Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -21668,9 +18338,7 @@ pub struct AbuseComplaint {
 /// A list of abuse complaints for a specific list.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbuseComplaintsData {
-    /**
-     * A list of abuse complaints for a specific list.
-     */
+    /// A list of abuse complaints for a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21678,27 +18346,21 @@ pub struct AbuseComplaintsData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of abuse complaints for a specific list.
-     */
+    /// A list of abuse complaints for a specific list.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub abuse_reports: Vec<AbuseComplaint>,
-    /**
-     * A list of abuse complaints for a specific list.
-     */
+    /// A list of abuse complaints for a specific list.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of abuse complaints for a specific list.
-     */
+    /// A list of abuse complaints for a specific list.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21747,9 +18409,7 @@ impl AdviceType {
 /// Campaign feedback details.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Advice {
-    /**
-     * Campaign feedback details.
-     */
+    /// Campaign feedback details.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21757,18 +18417,14 @@ pub struct Advice {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Campaign feedback details.
-     */
+    /// Campaign feedback details.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * Campaign feedback details.
-     */
+    /// Campaign feedback details.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<AdviceType>,
 }
@@ -21776,9 +18432,7 @@ pub struct Advice {
 /// A list of feedback based on a campaign's statistics.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignAdviceReport {
-    /**
-     * A list of feedback based on a campaign's statistics.
-     */
+    /// A list of feedback based on a campaign's statistics.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21786,27 +18440,21 @@ pub struct CampaignAdviceReport {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of feedback based on a campaign's statistics.
-     */
+    /// A list of feedback based on a campaign's statistics.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub advice: Vec<Advice>,
-    /**
-     * A list of feedback based on a campaign's statistics.
-     */
+    /// A list of feedback based on a campaign's statistics.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of feedback based on a campaign's statistics.
-     */
+    /// A list of feedback based on a campaign's statistics.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21818,36 +18466,28 @@ pub struct CampaignAdviceReport {
 /// Stats for Group A.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupA {
-    /**
-     * Stats for Group A.
-     */
+    /// Stats for Group A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_percentage_a: f64,
-    /**
-     * Stats for Group A.
-     */
+    /// Stats for Group A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_clicks_a: i64,
-    /**
-     * Stats for Group A.
-     */
+    /// Stats for Group A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub unique_click_percentage_a: f64,
-    /**
-     * Stats for Group A.
-     */
+    /// Stats for Group A.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21859,36 +18499,28 @@ pub struct GroupA {
 /// Stats for Group B.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupB {
-    /**
-     * Stats for Group B.
-     */
+    /// Stats for Group B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_percentage_b: f64,
-    /**
-     * Stats for Group B.
-     */
+    /// Stats for Group B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_clicks_b: i64,
-    /**
-     * Stats for Group B.
-     */
+    /// Stats for Group B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub unique_click_percentage_b: f64,
-    /**
-     * Stats for Group B.
-     */
+    /// Stats for Group B.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -21900,14 +18532,10 @@ pub struct GroupB {
 /// A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ABSplit {
-    /**
-     * A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
-     */
+    /// A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub a: Option<GroupA>,
-    /**
-     * A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
-     */
+    /// A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub b: Option<GroupB>,
 }
@@ -21915,9 +18543,7 @@ pub struct ABSplit {
 /// A report of links clicked in a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UrlsClicked {
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -21925,77 +18551,59 @@ pub struct UrlsClicked {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ab_split: Option<ABSplit>,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_percentage: f64,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_clicks: i64,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub unique_click_percentage: f64,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_clicks: i64,
-    /**
-     * A report of links clicked in a specific campaign.
-     */
+    /// A report of links clicked in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22007,9 +18615,7 @@ pub struct UrlsClicked {
 /// A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickDetailReport {
-    /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
-     */
+    /// A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22017,27 +18623,21 @@ pub struct ClickDetailReport {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
-     */
+    /// A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
-     */
+    /// A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
-     */
+    /// A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22049,9 +18649,7 @@ pub struct ClickDetailReport {
 /// A subscriber who clicked a specific URL in a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickDetailMember {
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22059,85 +18657,65 @@ pub struct ClickDetailMember {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contact_status: String,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url_id: String,
-    /**
-     * A subscriber who clicked a specific URL in a specific campaign.
-     */
+    /// A subscriber who clicked a specific URL in a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -22148,9 +18726,7 @@ pub struct ClickDetailMember {
 /// A collection of members who clicked on a specific link within a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickDetailMembers {
-    /**
-     * A collection of members who clicked on a specific link within a campaign.
-     */
+    /// A collection of members who clicked on a specific link within a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22158,27 +18734,21 @@ pub struct ClickDetailMembers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of members who clicked on a specific link within a campaign.
-     */
+    /// A collection of members who clicked on a specific link within a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A collection of members who clicked on a specific link within a campaign.
-     */
+    /// A collection of members who clicked on a specific link within a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<ClickDetailMember>,
-    /**
-     * A collection of members who clicked on a specific link within a campaign.
-     */
+    /// A collection of members who clicked on a specific link within a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -22190,9 +18760,7 @@ pub struct ClickDetailMembers {
 /// A summary of the interaction with the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenDetailReportActivityMember {
-    /**
-     * A summary of the interaction with the campaign.
-     */
+    /// A summary of the interaction with the campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -22204,9 +18772,7 @@ pub struct OpenDetailReportActivityMember {
 /// A list of a member's opens activity in a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenActivity {
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22214,85 +18780,65 @@ pub struct OpenActivity {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contact_status: String,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub opens: Vec<OpenDetailReportActivityMember>,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens_count: i64,
-    /**
-     * A list of a member's opens activity in a specific campaign.
-     */
+    /// A list of a member's opens activity in a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -22303,9 +18849,7 @@ pub struct OpenActivity {
 /// A detailed report of any campaign emails that were opened by a list member.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenDetailReport {
-    /**
-     * A detailed report of any campaign emails that were opened by a list member.
-     */
+    /// A detailed report of any campaign emails that were opened by a list member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22313,36 +18857,28 @@ pub struct OpenDetailReport {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A detailed report of any campaign emails that were opened by a list member.
-     */
+    /// A detailed report of any campaign emails that were opened by a list member.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A detailed report of any campaign emails that were opened by a list member.
-     */
+    /// A detailed report of any campaign emails that were opened by a list member.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<OpenActivity>,
-    /**
-     * A detailed report of any campaign emails that were opened by a list member.
-     */
+    /// A detailed report of any campaign emails that were opened by a list member.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * A detailed report of any campaign emails that were opened by a list member.
-     */
+    /// A detailed report of any campaign emails that were opened by a list member.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -22354,108 +18890,84 @@ pub struct OpenDetailReport {
 /// A single email domain's performance
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Domains {
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub bounces: i64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub bounces_pct: f64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub clicks_pct: f64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub delivered: i64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub emails_pct: f64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub emails_sent: i64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub opens_pct: f64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unsubs: i64,
-    /**
-     * A single email domain's performance
-     */
+    /// A single email domain's performance
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -22467,9 +18979,7 @@ pub struct Domains {
 /// Statistics for the top-performing email domains in a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainPerformance {
-    /**
-     * Statistics for the top-performing email domains in a campaign.
-     */
+    /// Statistics for the top-performing email domains in a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22477,36 +18987,28 @@ pub struct DomainPerformance {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Statistics for the top-performing email domains in a campaign.
-     */
+    /// Statistics for the top-performing email domains in a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Statistics for the top-performing email domains in a campaign.
-     */
+    /// Statistics for the top-performing email domains in a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub domains: Vec<Domains>,
-    /**
-     * Statistics for the top-performing email domains in a campaign.
-     */
+    /// Statistics for the top-performing email domains in a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * Statistics for the top-performing email domains in a campaign.
-     */
+    /// Statistics for the top-performing email domains in a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -22518,44 +19020,34 @@ pub struct DomainPerformance {
 /// An individual tweet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Statuses {
-    /**
-     * An individual tweet.
-     */
+    /// An individual tweet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub datetime: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * An individual tweet.
-     */
+    /// An individual tweet.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_retweet: bool,
-    /**
-     * An individual tweet.
-     */
+    /// An individual tweet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub screen_name: String,
-    /**
-     * An individual tweet.
-     */
+    /// An individual tweet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub status: String,
-    /**
-     * An individual tweet.
-     */
+    /// An individual tweet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22567,45 +19059,35 @@ pub struct Statuses {
 /// A summary of Twitter activity for a campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Twitter {
-    /**
-     * A summary of Twitter activity for a campaign.
-     */
+    /// A summary of Twitter activity for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_tweet: String,
-    /**
-     * A summary of Twitter activity for a campaign.
-     */
+    /// A summary of Twitter activity for a campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_tweet: String,
-    /**
-     * A summary of Twitter activity for a campaign.
-     */
+    /// A summary of Twitter activity for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub retweets: i64,
-    /**
-     * A summary of Twitter activity for a campaign.
-     */
+    /// A summary of Twitter activity for a campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub statuses: Vec<Statuses>,
-    /**
-     * A summary of Twitter activity for a campaign.
-     */
+    /// A summary of Twitter activity for a campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -22617,18 +19099,14 @@ pub struct Twitter {
 /// An individual click location.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EepurlActivityClickSummaryLocation {
-    /**
-     * An individual click location.
-     */
+    /// An individual click location.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * An individual click location.
-     */
+    /// An individual click location.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22640,36 +19118,28 @@ pub struct EepurlActivityClickSummaryLocation {
 /// A summary of the click-throughs on the campaign's URL.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClickSummary {
-    /**
-     * A summary of the click-throughs on the campaign's URL.
-     */
+    /// A summary of the click-throughs on the campaign's URL.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * A summary of the click-throughs on the campaign's URL.
-     */
+    /// A summary of the click-throughs on the campaign's URL.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub first_click: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of the click-throughs on the campaign's URL.
-     */
+    /// A summary of the click-throughs on the campaign's URL.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of the click-throughs on the campaign's URL.
-     */
+    /// A summary of the click-throughs on the campaign's URL.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22681,36 +19151,28 @@ pub struct ClickSummary {
 /// A single instance of a campaign referral.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Referrer {
-    /**
-     * A single instance of a campaign referral.
-     */
+    /// A single instance of a campaign referral.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * A single instance of a campaign referral.
-     */
+    /// A single instance of a campaign referral.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub first_click: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A single instance of a campaign referral.
-     */
+    /// A single instance of a campaign referral.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_click: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A single instance of a campaign referral.
-     */
+    /// A single instance of a campaign referral.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22722,9 +19184,7 @@ pub struct Referrer {
 /// A summary of social activity for the campaign, tracked by EepURL.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EepurlActivity {
-    /**
-     * A summary of social activity for the campaign, tracked by EepURL.
-     */
+    /// A summary of social activity for the campaign, tracked by EepURL.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22732,50 +19192,38 @@ pub struct EepurlActivity {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of social activity for the campaign, tracked by EepURL.
-     */
+    /// A summary of social activity for the campaign, tracked by EepURL.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A summary of social activity for the campaign, tracked by EepURL.
-     */
+    /// A summary of social activity for the campaign, tracked by EepURL.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub clicks: Option<ClickSummary>,
-    /**
-     * A summary of social activity for the campaign, tracked by EepURL.
-     */
+    /// A summary of social activity for the campaign, tracked by EepURL.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub eepurl: String,
-    /**
-     * A summary of social activity for the campaign, tracked by EepURL.
-     */
+    /// A summary of social activity for the campaign, tracked by EepURL.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub referrers: Vec<Referrer>,
-    /**
-     * A summary of social activity for the campaign, tracked by EepURL.
-     */
+    /// A summary of social activity for the campaign, tracked by EepURL.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * A summary of social activity for the campaign, tracked by EepURL.
-     */
+    /// A summary of social activity for the campaign, tracked by EepURL.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub twitter: Option<Twitter>,
 }
@@ -22783,36 +19231,28 @@ pub struct EepurlActivity {
 /// A summary of the interaction with the campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailActivityMember {
-    /**
-     * A summary of the interaction with the campaign.
-     */
+    /// A summary of the interaction with the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub action: String,
-    /**
-     * A summary of the interaction with the campaign.
-     */
+    /// A summary of the interaction with the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub ip: String,
-    /**
-     * A summary of the interaction with the campaign.
-     */
+    /// A summary of the interaction with the campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of the interaction with the campaign.
-     */
+    /// A summary of the interaction with the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22820,9 +19260,7 @@ pub struct EmailActivityMember {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * A summary of the interaction with the campaign.
-     */
+    /// A summary of the interaction with the campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22834,9 +19272,7 @@ pub struct EmailActivityMember {
 /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailActivity {
-    /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
-     */
+    /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22844,54 +19280,42 @@ pub struct EmailActivity {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
-     */
+    /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub activity: Vec<EmailActivityMember>,
-    /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
-     */
+    /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
-     */
+    /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
-     */
+    /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
-     */
+    /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
-     */
+    /// A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -22902,9 +19326,7 @@ pub struct EmailActivity {
 /// A list of member's subscriber activity in a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailActivityData {
-    /**
-     * A list of member's subscriber activity in a specific campaign.
-     */
+    /// A list of member's subscriber activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22912,27 +19334,21 @@ pub struct EmailActivityData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of member's subscriber activity in a specific campaign.
-     */
+    /// A list of member's subscriber activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of member's subscriber activity in a specific campaign.
-     */
+    /// A list of member's subscriber activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub emails: Vec<EmailActivity>,
-    /**
-     * A list of member's subscriber activity in a specific campaign.
-     */
+    /// A list of member's subscriber activity in a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -22943,36 +19359,28 @@ pub struct EmailActivityData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenLocations {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country_code: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub region: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22984,9 +19392,7 @@ pub struct OpenLocations {
 /// Top open locations for a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OpenLocationsData {
-    /**
-     * Top open locations for a specific campaign.
-     */
+    /// Top open locations for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -22994,27 +19400,21 @@ pub struct OpenLocationsData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Top open locations for a specific campaign.
-     */
+    /// Top open locations for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Top open locations for a specific campaign.
-     */
+    /// Top open locations for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub locations: Vec<OpenLocations>,
-    /**
-     * Top open locations for a specific campaign.
-     */
+    /// Top open locations for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23026,9 +19426,7 @@ pub struct OpenLocationsData {
 /// A subscriber's status for a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SentTo {
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23036,103 +19434,79 @@ pub struct SentTo {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub absplit_group: String,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub gmt_offset: i64,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub last_open: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_count: i64,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub status: String,
-    /**
-     * A subscriber's status for a specific campaign.
-     */
+    /// A subscriber's status for a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -23143,9 +19517,7 @@ pub struct SentTo {
 /// A list of subscribers who were sent a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SentData {
-    /**
-     * A list of subscribers who were sent a specific campaign.
-     */
+    /// A list of subscribers who were sent a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23153,27 +19525,21 @@ pub struct SentData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of subscribers who were sent a specific campaign.
-     */
+    /// A list of subscribers who were sent a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of subscribers who were sent a specific campaign.
-     */
+    /// A list of subscribers who were sent a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub sent_to: Vec<SentTo>,
-    /**
-     * A list of subscribers who were sent a specific campaign.
-     */
+    /// A list of subscribers who were sent a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23185,9 +19551,7 @@ pub struct SentData {
 /// A list of reports containing child campaigns for a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignSubReports {
-    /**
-     * A list of reports containing child campaigns for a specific campaign.
-     */
+    /// A list of reports containing child campaigns for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23195,27 +19559,21 @@ pub struct CampaignSubReports {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of reports containing child campaigns for a specific campaign.
-     */
+    /// A list of reports containing child campaigns for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of reports containing child campaigns for a specific campaign.
-     */
+    /// A list of reports containing child campaigns for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub reports: Vec<Reports>,
-    /**
-     * A list of reports containing child campaigns for a specific campaign.
-     */
+    /// A list of reports containing child campaigns for a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23227,9 +19585,7 @@ pub struct CampaignSubReports {
 /// A member who unsubscribed from a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Unsubscribes {
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23237,76 +19593,58 @@ pub struct Unsubscribes {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_id: String,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merge_fields: Option<serde_json::Value>,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub reason: String,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A member who unsubscribed from a specific campaign.
-     */
+    /// A member who unsubscribed from a specific campaign.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -23317,9 +19655,7 @@ pub struct Unsubscribes {
 /// A list of members who have unsubscribed from a specific campaign.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UnsubscribesData {
-    /**
-     * A list of members who have unsubscribed from a specific campaign.
-     */
+    /// A list of members who have unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23327,27 +19663,21 @@ pub struct UnsubscribesData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list of members who have unsubscribed from a specific campaign.
-     */
+    /// A list of members who have unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * A list of members who have unsubscribed from a specific campaign.
-     */
+    /// A list of members who have unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * A list of members who have unsubscribed from a specific campaign.
-     */
+    /// A list of members who have unsubscribed from a specific campaign.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23395,72 +19725,56 @@ impl GetReportsEcommerceProductActivitySortField {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Products {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recommendation_purchased: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recommendation_total: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sku: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub total_purchased: f64,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -23472,9 +19786,7 @@ pub struct Products {
 /// A collection of ecommerce products.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportsEcommerceProductActivityResponse {
-    /**
-     * A collection of ecommerce products.
-     */
+    /// A collection of ecommerce products.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23482,18 +19794,14 @@ pub struct GetReportsEcommerceProductActivityResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of ecommerce products.
-     */
+    /// A collection of ecommerce products.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub products: Vec<Products>,
-    /**
-     * A collection of ecommerce products.
-     */
+    /// A collection of ecommerce products.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23542,9 +19850,7 @@ impl GetTemplatesSortField {
 /// Information about a specific template.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Templates {
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23552,123 +19858,95 @@ pub struct Templates {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub category: String,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_by: String,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date_created: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub date_edited: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub drag_and_drop: bool,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub edited_by: String,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub folder_id: String,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub responsive: bool,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub share_url: String,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub thumbnail: String,
-    /**
-     * Information about a specific template.
-     */
+    /// Information about a specific template.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23681,9 +19959,7 @@ pub struct Templates {
 /// A list an account's available templates.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplatesData {
-    /**
-     * A list an account's available templates.
-     */
+    /// A list an account's available templates.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23691,18 +19967,14 @@ pub struct TemplatesData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A list an account's available templates.
-     */
+    /// A list an account's available templates.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub templates: Vec<Templates>,
-    /**
-     * A list an account's available templates.
-     */
+    /// A list an account's available templates.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23714,9 +19986,7 @@ pub struct TemplatesData {
 /// Default content for a template.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDefaultContent {
-    /**
-     * Default content for a template.
-     */
+    /// Default content for a template.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23724,9 +19994,7 @@ pub struct TemplateDefaultContent {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Default content for a template.
-     */
+    /// Default content for a template.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sections: Option<serde_json::Value>,
 }
@@ -23734,9 +20002,7 @@ pub struct TemplateDefaultContent {
 /// The customer's address.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Address {
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23744,9 +20010,7 @@ pub struct Address {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23754,54 +20018,42 @@ pub struct Address {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country_code: String,
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub postal_code: String,
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub province: String,
-    /**
-     * The customer's address.
-     */
+    /// The customer's address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23813,9 +20065,7 @@ pub struct Address {
 /// Information about a specific customer.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Customer {
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23823,94 +20073,72 @@ pub struct Customer {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub opt_in_status: bool,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub orders_count: i64,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub total_spent: f64,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -23953,9 +20181,7 @@ impl TrackingCode {
 /// The shipping address for the order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShippingAddress {
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23963,9 +20189,7 @@ pub struct ShippingAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23973,99 +20197,77 @@ pub struct ShippingAddress {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country_code: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub latitude: f64,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub longitude: f64,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub postal_code: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub province: String,
-    /**
-     * The shipping address for the order.
-     */
+    /// The shipping address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24077,9 +20279,7 @@ pub struct ShippingAddress {
 /// The billing address for the order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingAddress {
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24087,9 +20287,7 @@ pub struct BillingAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24097,99 +20295,77 @@ pub struct BillingAddress {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country_code: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub latitude: f64,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub longitude: f64,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub postal_code: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub province: String,
-    /**
-     * The billing address for the order.
-     */
+    /// The billing address for the order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24234,27 +20410,21 @@ impl OrdersPromosType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Promos {
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount_discounted: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub code: String,
-    /**
-     * Type of discount. For free shipping set type to fixed
-     */
+    /// Type of discount. For free shipping set type to fixed
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrdersPromosType>,
 }
@@ -24262,36 +20432,28 @@ pub struct Promos {
 /// The outreach associated with this order. For example, an email campaign or Facebook ad.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Outreach {
-    /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
-     */
+    /// The outreach associated with this order. For example, an email campaign or Facebook ad.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
-     */
+    /// The outreach associated with this order. For example, an email campaign or Facebook ad.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
-     */
+    /// The outreach associated with this order. For example, an email campaign or Facebook ad.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
-     */
+    /// The outreach associated with this order. For example, an email campaign or Facebook ad.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24304,9 +20466,7 @@ pub struct Outreach {
 /// Information about a specific order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Orders {
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24314,178 +20474,134 @@ pub struct Orders {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_address: Option<BillingAddress>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub cancelled_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<Customer>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub discount_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub financial_status: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fulfillment_status: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub landing_site: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<Lines>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub order_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_url: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outreach: Option<Outreach>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub processed_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub promos: Vec<Promos>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_address: Option<ShippingAddress>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub shipping_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub tax_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking_code: Option<TrackingCode>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -24497,9 +20613,7 @@ pub struct Orders {
 /// A collection of orders in an account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersData {
-    /**
-     * A collection of orders in an account.
-     */
+    /// A collection of orders in an account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24507,18 +20621,14 @@ pub struct OrdersData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of orders in an account.
-     */
+    /// A collection of orders in an account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub orders: Vec<Orders>,
-    /**
-     * A collection of orders in an account.
-     */
+    /// A collection of orders in an account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -24530,9 +20640,7 @@ pub struct OrdersData {
 /// The store address.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoresAddress {
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24540,9 +20648,7 @@ pub struct ECommerceStoresAddress {
         rename = "address1"
     )]
     pub address_1: String,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24550,72 +20656,56 @@ pub struct ECommerceStoresAddress {
         rename = "address2"
     )]
     pub address_2: String,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country_code: String,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub latitude: f64,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub longitude: f64,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub postal_code: String,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub province: String,
-    /**
-     * The store address.
-     */
+    /// The store address.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24627,18 +20717,14 @@ pub struct ECommerceStoresAddress {
 /// The Connected Site associated with the store.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoresConnectedSite {
-    /**
-     * The Connected Site associated with the store.
-     */
+    /// The Connected Site associated with the store.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub site_foreign_id: String,
-    /**
-     * The Connected Site associated with the store.
-     */
+    /// The Connected Site associated with the store.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site_script: Option<Script>,
 }
@@ -24646,26 +20732,20 @@ pub struct ECommerceStoresConnectedSite {
 /// abandonedCart automation details.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbandonedCart {
-    /**
-     * abandonedCart automation details.
-     */
+    /// abandonedCart automation details.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * abandonedCart automation details.
-     */
+    /// abandonedCart automation details.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_supported: bool,
-    /**
-     * abandonedCart automation details.
-     */
+    /// abandonedCart automation details.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
 }
@@ -24673,26 +20753,20 @@ pub struct AbandonedCart {
 /// abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AbandonedBrowse {
-    /**
-     * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
-     */
+    /// abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
-     */
+    /// abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_supported: bool,
-    /**
-     * abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
-     */
+    /// abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
 }
@@ -24700,14 +20774,10 @@ pub struct AbandonedBrowse {
 /// Details for the automations attached to this store.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoresAutomations {
-    /**
-     * Details for the automations attached to this store.
-     */
+    /// Details for the automations attached to this store.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub abandoned_browse: Option<AbandonedBrowse>,
-    /**
-     * Details for the automations attached to this store.
-     */
+    /// Details for the automations attached to this store.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub abandoned_cart: Option<AbandonedCart>,
 }
@@ -24715,9 +20785,7 @@ pub struct ECommerceStoresAutomations {
 /// An individual store in an account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Stores {
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24725,148 +20793,112 @@ pub struct Stores {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<ECommerceStoresAddress>,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub automations: Option<ECommerceStoresAutomations>,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub connected_site: Option<ECommerceStoresConnectedSite>,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_syncing: bool,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub money_format: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub platform: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub primary_locale: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub timezone: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -24878,9 +20910,7 @@ pub struct Stores {
 /// A collection of stores in the account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStores {
-    /**
-     * A collection of stores in the account.
-     */
+    /// A collection of stores in the account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -24888,18 +20918,14 @@ pub struct ECommerceStores {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of stores in the account.
-     */
+    /// A collection of stores in the account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub stores: Vec<Stores>,
-    /**
-     * A collection of stores in the account.
-     */
+    /// A collection of stores in the account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -24911,112 +20937,86 @@ pub struct ECommerceStores {
 /// An individual store in an account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStore {
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<ECommerceStoresAddress>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_syncing: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub money_format: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub platform: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub primary_locale: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -25028,94 +21028,72 @@ pub struct ECommerceStore {
 /// An individual store in an account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceStoreData {
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<ECommerceStoresAddress>,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_syncing: bool,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub money_format: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub platform: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub primary_locale: String,
-    /**
-     * An individual store in an account.
-     */
+    /// An individual store in an account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -25127,9 +21105,7 @@ pub struct ECommerceStoreData {
 /// Information about a specific cart line item.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartLineItem {
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25137,63 +21113,49 @@ pub struct ECommerceCartLineItem {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_title: String,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_id: String,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_title: String,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -25205,9 +21167,7 @@ pub struct ECommerceCartLineItem {
 /// Information about a specific cart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Carts {
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25215,86 +21175,66 @@ pub struct Carts {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub checkout_url: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<Customer>,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<ECommerceCartLineItem>,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub order_total: f64,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub tax_total: f64,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -25306,9 +21246,7 @@ pub struct Carts {
 /// A collection of a store's carts.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CartsData {
-    /**
-     * A collection of a store's carts.
-     */
+    /// A collection of a store's carts.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25316,27 +21254,21 @@ pub struct CartsData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of a store's carts.
-     */
+    /// A collection of a store's carts.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub carts: Vec<Carts>,
-    /**
-     * A collection of a store's carts.
-     */
+    /// A collection of a store's carts.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of a store's carts.
-     */
+    /// A collection of a store's carts.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -25348,59 +21280,45 @@ pub struct CartsData {
 /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCustomer {
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -25411,45 +21329,35 @@ pub struct ECommerceCustomer {
 /// Information about a specific cart line item.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartLineItemData {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_id: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -25461,67 +21369,51 @@ pub struct ECommerceCartLineItemData {
 /// Information about a specific cart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCart {
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub checkout_url: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     pub customer: ECommerceCustomer,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * An array of the cart's line items.
-     */
+    /// An array of the cart's line items.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<ECommerceCartLineItemData>,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub order_total: f64,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -25533,41 +21425,31 @@ pub struct ECommerceCart {
 /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartCustomer {
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -25578,36 +21460,28 @@ pub struct ECommerceCartCustomer {
 /// Information about a specific cart line item.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartLineItemDataType {
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_id: String,
-    /**
-     * Information about a specific cart line item.
-     */
+    /// Information about a specific cart line item.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -25619,59 +21493,45 @@ pub struct ECommerceCartLineItemDataType {
 /// Information about a specific cart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCartData {
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub checkout_url: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<ECommerceCartCustomer>,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<ECommerceCartLineItemDataType>,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub order_total: f64,
-    /**
-     * Information about a specific cart.
-     */
+    /// Information about a specific cart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -25683,9 +21543,7 @@ pub struct ECommerceCartData {
 /// A collection of a cart's line items.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CartLines {
-    /**
-     * A collection of a cart's line items.
-     */
+    /// A collection of a cart's line items.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25693,36 +21551,28 @@ pub struct CartLines {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of a cart's line items.
-     */
+    /// A collection of a cart's line items.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub cart_id: String,
-    /**
-     * A collection of a cart's line items.
-     */
+    /// A collection of a cart's line items.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<ECommerceCartLineItem>,
-    /**
-     * A collection of a cart's line items.
-     */
+    /// A collection of a cart's line items.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of a cart's line items.
-     */
+    /// A collection of a cart's line items.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -25734,9 +21584,7 @@ pub struct CartLines {
 /// A collection of the store's customers.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Customers {
-    /**
-     * A collection of the store's customers.
-     */
+    /// A collection of the store's customers.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25744,27 +21592,21 @@ pub struct Customers {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of the store's customers.
-     */
+    /// A collection of the store's customers.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub customers: Vec<Customer>,
-    /**
-     * A collection of the store's customers.
-     */
+    /// A collection of the store's customers.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of the store's customers.
-     */
+    /// A collection of the store's customers.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -25776,59 +21618,45 @@ pub struct Customers {
 /// Information about a specific customer.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCustomerData {
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific customer.
-     */
+    /// Information about a specific customer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -25839,59 +21667,45 @@ pub struct ECommerceCustomerData {
 /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceCustomerDataType {
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_address: String,
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub first_name: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. Orders for existing customers should include only the `id` parameter in the `customer` object body.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -25939,9 +21753,7 @@ impl Target {
 /// Information about an Ecommerce Store's specific Promo Rule
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoRules {
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -25949,90 +21761,68 @@ pub struct PromoRules {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount: f64,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub ends_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub starts_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub target: Option<Target>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrdersPromosType>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -26044,9 +21834,7 @@ pub struct PromoRules {
 /// A collection of the store's promo rules.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoRulesData {
-    /**
-     * A collection of the store's promo rules.
-     */
+    /// A collection of the store's promo rules.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26054,27 +21842,21 @@ pub struct PromoRulesData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of the store's promo rules.
-     */
+    /// A collection of the store's promo rules.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub promo_rules: Vec<PromoRules>,
-    /**
-     * A collection of the store's promo rules.
-     */
+    /// A collection of the store's promo rules.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of the store's promo rules.
-     */
+    /// A collection of the store's promo rules.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26086,94 +21868,72 @@ pub struct PromoRulesData {
 /// Information about an Ecommerce Store's specific Promo Rule.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoRule {
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount: f64,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub ends_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub starts_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The target that the discount applies to.
-     */
+    /// The target that the discount applies to.
     #[serde(default, skip_serializing_if = "Target::is_noop")]
     pub target: Target,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Type of discount. For free shipping set type to fixed
-     */
+    /// Type of discount. For free shipping set type to fixed
     #[serde(
         default,
         skip_serializing_if = "OrdersPromosType::is_noop",
         rename = "type"
     )]
     pub type_: OrdersPromosType,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -26185,81 +21945,61 @@ pub struct ECommercePromoRule {
 /// Information about an Ecommerce Store's specific Promo Rule.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoRuleData {
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount: f64,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub ends_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub starts_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub target: Option<Target>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OrdersPromosType>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Rule.
-     */
+    /// Information about an Ecommerce Store's specific Promo Rule.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -26271,9 +22011,7 @@ pub struct ECommercePromoRuleData {
 /// Information about an Ecommerce Store's specific Promo Code
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoCodes {
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26281,62 +22019,48 @@ pub struct PromoCodes {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub code: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub redemption_url: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code
-     */
+    /// Information about an Ecommerce Store's specific Promo Code
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26348,9 +22072,7 @@ pub struct PromoCodes {
 /// A collection of the store's promo codes.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PromoCodesData {
-    /**
-     * A collection of the store's promo codes.
-     */
+    /// A collection of the store's promo codes.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26358,27 +22080,21 @@ pub struct PromoCodesData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of the store's promo codes.
-     */
+    /// A collection of the store's promo codes.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub promo_codes: Vec<PromoCodes>,
-    /**
-     * A collection of the store's promo codes.
-     */
+    /// A collection of the store's promo codes.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of the store's promo codes.
-     */
+    /// A collection of the store's promo codes.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26390,62 +22106,48 @@ pub struct PromoCodesData {
 /// Information about an Ecommerce Store's specific Promo Code.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoCode {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub code: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub redemption_url: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26457,53 +22159,41 @@ pub struct ECommercePromoCode {
 /// Information about an Ecommerce Store's specific Promo Code.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommercePromoCodeData {
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub code: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub redemption_url: String,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about an Ecommerce Store's specific Promo Code.
-     */
+    /// Information about an Ecommerce Store's specific Promo Code.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26515,9 +22205,7 @@ pub struct ECommercePromoCodeData {
 /// A collection of orders in a store.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersDataType {
-    /**
-     * A collection of orders in a store.
-     */
+    /// A collection of orders in a store.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -26525,27 +22213,21 @@ pub struct OrdersDataType {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of orders in a store.
-     */
+    /// A collection of orders in a store.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub orders: Vec<Orders>,
-    /**
-     * A collection of orders in a store.
-     */
+    /// A collection of orders in a store.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of orders in a store.
-     */
+    /// A collection of orders in a store.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26556,27 +22238,21 @@ pub struct OrdersDataType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderPromos {
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount_discounted: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub code: String,
-    /**
-     * Type of discount. For free shipping set type to fixed
-     */
+    /// Type of discount. For free shipping set type to fixed
     #[serde(
         default,
         skip_serializing_if = "OrdersPromosType::is_noop",
@@ -26588,54 +22264,42 @@ pub struct ECommerceOrderPromos {
 /// Information about a specific order line.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderLineItem {
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub discount: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_id: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26647,9 +22311,7 @@ pub struct ECommerceOrderLineItem {
 /// The outreach associated with this order. For example, an email campaign or Facebook ad.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderOutreach {
-    /**
-     * The outreach associated with this order. For example, an email campaign or Facebook ad.
-     */
+    /// The outreach associated with this order. For example, an email campaign or Facebook ad.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -26661,168 +22323,126 @@ pub struct ECommerceOrderOutreach {
 /// Information about a specific order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrder {
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_address: Option<BillingAddress>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub cancelled_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
-     */
+    /// Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
     pub customer: ECommerceCustomer,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub discount_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub financial_status: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fulfillment_status: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub landing_site: String,
-    /**
-     * An array of the order's line items.
-     */
+    /// An array of the order's line items.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<ECommerceOrderLineItem>,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub order_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_url: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outreach: Option<ECommerceOrderOutreach>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub processed_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub promos: Vec<ECommerceOrderPromos>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_address: Option<ShippingAddress>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub shipping_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub tax_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking_code: Option<TrackingCode>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -26834,45 +22454,35 @@ pub struct ECommerceOrder {
 /// Information about a specific order line.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderLineItemData {
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub discount: f64,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_variant_id: String,
-    /**
-     * Information about a specific order line.
-     */
+    /// Information about a specific order line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -26884,160 +22494,120 @@ pub struct ECommerceOrderLineItemData {
 /// Information about a specific order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceOrderData {
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_address: Option<BillingAddress>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub campaign_id: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub cancelled_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub customer: Option<ECommerceCartCustomer>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub discount_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub financial_status: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fulfillment_status: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub landing_site: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<ECommerceOrderLineItemData>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub order_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_url: String,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outreach: Option<ECommerceOrderOutreach>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub processed_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub promos: Vec<ECommerceOrderPromos>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shipping_address: Option<ShippingAddress>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub shipping_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub tax_total: f64,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tracking_code: Option<TrackingCode>,
-    /**
-     * Information about a specific order.
-     */
+    /// Information about a specific order.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -27049,9 +22619,7 @@ pub struct ECommerceOrderData {
 /// A collection of an order's line items.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrderLines {
-    /**
-     * A collection of an order's line items.
-     */
+    /// A collection of an order's line items.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27059,36 +22627,28 @@ pub struct OrderLines {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of an order's line items.
-     */
+    /// A collection of an order's line items.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub lines: Vec<Lines>,
-    /**
-     * A collection of an order's line items.
-     */
+    /// A collection of an order's line items.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub order_id: String,
-    /**
-     * A collection of an order's line items.
-     */
+    /// A collection of an order's line items.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of an order's line items.
-     */
+    /// A collection of an order's line items.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -27100,9 +22660,7 @@ pub struct OrderLines {
 /// Information about a specific product variant.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Variants {
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27110,99 +22668,77 @@ pub struct Variants {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub backorders: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub inventory_quantity: i64,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sku: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27214,9 +22750,7 @@ pub struct Variants {
 /// Information about a specific product image.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Images {
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27224,27 +22758,21 @@ pub struct Images {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27256,9 +22784,7 @@ pub struct Images {
 /// Information about a specific product.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProduct {
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27266,81 +22792,63 @@ pub struct ECommerceProduct {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub handle: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub images: Vec<Images>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27348,27 +22856,21 @@ pub struct ECommerceProduct {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub variants: Vec<Variants>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27380,9 +22882,7 @@ pub struct ECommerceProduct {
 /// A collection of a store's products.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProductsData {
-    /**
-     * A collection of a store's products.
-     */
+    /// A collection of a store's products.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27390,27 +22890,21 @@ pub struct ProductsData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of a store's products.
-     */
+    /// A collection of a store's products.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub products: Vec<ECommerceProduct>,
-    /**
-     * A collection of a store's products.
-     */
+    /// A collection of a store's products.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of a store's products.
-     */
+    /// A collection of a store's products.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -27422,27 +22916,21 @@ pub struct ProductsData {
 /// Information about a specific product image.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductImage {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27454,72 +22942,56 @@ pub struct ECommerceProductImage {
 /// Information about a specific product.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductData {
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub handle: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub images: Vec<ECommerceProductImage>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27527,27 +22999,21 @@ pub struct ECommerceProductData {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * An array of the product's variants. At least one variant is required for each product. A variant can use the same `id` and `title` as the parent product.
-     */
+    /// An array of the product's variants. At least one variant is required for each product. A variant can use the same `id` and `title` as the parent product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub variants: Vec<ECommerceProductVariant>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27559,72 +23025,56 @@ pub struct ECommerceProductData {
 /// Information about a specific product variant.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductVariantData {
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub backorders: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub inventory_quantity: i64,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub price: f64,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sku: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product variant.
-     */
+    /// Information about a specific product variant.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27636,27 +23086,21 @@ pub struct ECommerceProductVariantData {
 /// Information about a specific product image.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductImageData {
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product image.
-     */
+    /// Information about a specific product image.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27668,63 +23112,49 @@ pub struct ECommerceProductImageData {
 /// Information about a specific product.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ECommerceProductDataType {
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub handle: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub images: Vec<ECommerceProductImageData>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_at_foreign: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27732,27 +23162,21 @@ pub struct ECommerceProductDataType {
         rename = "type"
     )]
     pub type_: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub variants: Vec<ECommerceProductVariantData>,
-    /**
-     * Information about a specific product.
-     */
+    /// Information about a specific product.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27764,9 +23188,7 @@ pub struct ECommerceProductDataType {
 /// A collection of a product's variants.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceProductVariants {
-    /**
-     * A collection of a product's variants.
-     */
+    /// A collection of a product's variants.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27774,36 +23196,28 @@ pub struct EcommerceProductVariants {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of a product's variants.
-     */
+    /// A collection of a product's variants.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * A collection of a product's variants.
-     */
+    /// A collection of a product's variants.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of a product's variants.
-     */
+    /// A collection of a product's variants.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_items: i64,
-    /**
-     * A collection of a product's variants.
-     */
+    /// A collection of a product's variants.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27815,9 +23229,7 @@ pub struct EcommerceProductVariants {
 /// A collection of a product's images.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EcommerceProductImages {
-    /**
-     * A collection of a product's images.
-     */
+    /// A collection of a product's images.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27825,36 +23237,28 @@ pub struct EcommerceProductImages {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of a product's images.
-     */
+    /// A collection of a product's images.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub images: Vec<Images>,
-    /**
-     * A collection of a product's images.
-     */
+    /// A collection of a product's images.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product_id: String,
-    /**
-     * A collection of a product's images.
-     */
+    /// A collection of a product's images.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub store_id: String,
-    /**
-     * A collection of a product's images.
-     */
+    /// A collection of a product's images.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -27865,14 +23269,10 @@ pub struct EcommerceProductImages {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Results {
-    /**
-     * A summary of an individual campaign's settings and content.
-     */
+    /// A summary of an individual campaign's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub campaign: Option<Campaign>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -27884,9 +23284,7 @@ pub struct Results {
 /// Campaigns and Snippets found for given search term.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Campaigns {
-    /**
-     * Campaigns and Snippets found for given search term.
-     */
+    /// Campaigns and Snippets found for given search term.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27894,18 +23292,14 @@ pub struct Campaigns {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Campaigns and Snippets found for given search term.
-     */
+    /// Campaigns and Snippets found for given search term.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub results: Vec<Results>,
-    /**
-     * Campaigns and Snippets found for given search term.
-     */
+    /// Campaigns and Snippets found for given search term.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -27917,18 +23311,14 @@ pub struct Campaigns {
 /// Exact matches of the provided search query.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExactMatches {
-    /**
-     * Exact matches of the provided search query.
-     */
+    /// Exact matches of the provided search query.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<ListMembersData>,
-    /**
-     * Exact matches of the provided search query.
-     */
+    /// Exact matches of the provided search query.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -27940,18 +23330,14 @@ pub struct ExactMatches {
 /// Partial matches of the provided search query.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullSearch {
-    /**
-     * Partial matches of the provided search query.
-     */
+    /// Partial matches of the provided search query.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub members: Vec<ListMembersData>,
-    /**
-     * Partial matches of the provided search query.
-     */
+    /// Partial matches of the provided search query.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -27963,9 +23349,7 @@ pub struct FullSearch {
 /// Members found for given search term
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MembersData {
-    /**
-     * Members found for given search term
-     */
+    /// Members found for given search term
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -27973,14 +23357,10 @@ pub struct MembersData {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Members found for given search term
-     */
+    /// Members found for given search term
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exact_matches: Option<ExactMatches>,
-    /**
-     * Members found for given search term
-     */
+    /// Members found for given search term
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub full_search: Option<FullSearch>,
 }
@@ -27988,9 +23368,7 @@ pub struct MembersData {
 /// API health status.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiHealthStatus {
-    /**
-     * API health status.
-     */
+    /// API health status.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -28187,27 +23565,21 @@ impl OutreachStatus {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummaryEcommerce {
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub average_order_revenue: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -28218,27 +23590,21 @@ pub struct FacebookAdsReportSummaryEcommerce {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummary {
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -28247,99 +23613,77 @@ pub struct FacebookAdsReportSummary {
     pub conversion_rate: f64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<FacebookAdsReportSummaryEcommerce>,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub engagements: i64,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub impressions: f64,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub open_rate: f64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub opens: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub reach: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscriber_clicks: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscribes: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_sent: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_opens: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_visits: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -28351,49 +23695,37 @@ pub struct FacebookAdsReportSummary {
 /// List settings for the outreach
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsList {
-    /**
-     * List settings for the outreach
-     */
+    /// List settings for the outreach
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * List settings for the outreach
-     */
+    /// List settings for the outreach
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub list_is_active: bool,
-    /**
-     * List settings for the outreach
-     */
+    /// List settings for the outreach
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_name: String,
-    /**
-     * List settings for the outreach
-     */
+    /// List settings for the outreach
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_count: i64,
-    /**
-     * List settings for the outreach
-     */
+    /// List settings for the outreach
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub segment_opts: Option<SegmentOptions>,
-    /**
-     * List settings for the outreach
-     */
+    /// List settings for the outreach
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -28404,114 +23736,86 @@ pub struct FacebookAdsList {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAds {
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub canceled_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_segment: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * List settings for the outreach
-     */
+    /// List settings for the outreach
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipients: Option<FacebookAdsList>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<FacebookAdsReportSummary>,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub show_report: bool,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Campaign, Ad, or Page status
-     */
+    /// Campaign, Ad, or Page status
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<OutreachStatus>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub thumbnail: String,
-    /**
-     * Supported Campaign, Ad, Page type
-     */
+    /// Supported Campaign, Ad, Page type
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<OutreachType>,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -28522,44 +23826,34 @@ pub struct FacebookAds {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsData {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email_source_name: String,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub needs_attention: bool,
-    /**
-     * The date and time that the account was created in ISO 8601 format.
-     */
+    /// The date and time that the account was created in ISO 8601 format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub paused_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -28570,25 +23864,19 @@ pub struct FacebookAdsData {
 /// Channel settings
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
-    /**
-     * Channel settings
-     */
+    /// Channel settings
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub fb_placement_audience: bool,
-    /**
-     * Channel settings
-     */
+    /// Channel settings
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub fb_placement_feed: bool,
-    /**
-     * Channel settings
-     */
+    /// Channel settings
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -28599,36 +23887,28 @@ pub struct Channel {
 /// Check if this ad is connected to a facebook page
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsFeedback {
-    /**
-     * Check if this ad is connected to a facebook page
-     */
+    /// Check if this ad is connected to a facebook page
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub audience: String,
-    /**
-     * Check if this ad is connected to a facebook page
-     */
+    /// Check if this ad is connected to a facebook page
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub budget: String,
-    /**
-     * Check if this ad is connected to a facebook page
-     */
+    /// Check if this ad is connected to a facebook page
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub compliance: String,
-    /**
-     * Check if this ad is connected to a facebook page
-     */
+    /// Check if this ad is connected to a facebook page
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -28640,27 +23920,21 @@ pub struct FacebookAdsFeedback {
 /// Connected Site
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Site {
-    /**
-     * Connected Site
-     */
+    /// Connected Site
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * Connected Site
-     */
+    /// Connected Site
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * Connected Site
-     */
+    /// Connected Site
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -28742,44 +24016,34 @@ impl SourceType {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailSource {
-    /**
-     * Whether the webhook is triggered when a list subscriber is added.
-     */
+    /// Whether the webhook is triggered when a list subscriber is added.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_segment: bool,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_name: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub segment_type: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -28791,36 +24055,28 @@ pub struct EmailSource {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAudienceTargetingSpecsLocations {
-    /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    /// A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub cities: Vec<String>,
-    /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    /// A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub countries: Vec<String>,
-    /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    /// A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub regions: Vec<String>,
-    /**
-     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    /// A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -28831,9 +24087,7 @@ pub struct FacebookAdsAudienceTargetingSpecsLocations {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAudienceTargetingSpecsInterests {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -28844,9 +24098,7 @@ pub struct FacebookAdsAudienceTargetingSpecsInterests {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TargetingSpecs {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -28861,18 +24113,14 @@ pub struct TargetingSpecs {
     pub interests: Vec<FacebookAdsAudienceTargetingSpecsInterests>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub locations: Option<FacebookAdsAudienceTargetingSpecsLocations>,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub max_age: i64,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -28884,68 +24132,50 @@ pub struct TargetingSpecs {
 /// Audience settings
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Audience {
-    /**
-     * Audience settings
-     */
+    /// Audience settings
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_source: Option<EmailSource>,
-    /**
-     * Audience settings
-     */
+    /// Audience settings
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub include_source_in_target: bool,
-    /**
-     * Audience settings
-     */
+    /// Audience settings
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub lookalike_country_code: String,
-    /**
-     * Audience settings
-     */
+    /// Audience settings
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source_type: Option<SourceType>,
-    /**
-     * Audience settings
-     */
+    /// Audience settings
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub targeting_specs: Option<TargetingSpecs>,
-    /**
-     * Audience settings
-     */
+    /// Audience settings
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<FacebookAdsAudienceType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Budget {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub duration: i64,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -28956,45 +24186,35 @@ pub struct Budget {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Attachments {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub call_to_action: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub link_url: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -29011,54 +24231,42 @@ pub struct Content {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub attachments: Vec<Attachments>,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub call_to_action: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub image_url: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub link_url: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -29070,67 +24278,47 @@ pub struct Content {
 /// A facebook ad.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsDataType {
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audience: Option<Audience>,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub budget: Option<Budget>,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<Channel>,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content: Option<Content>,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub feedback: Option<FacebookAdsFeedback>,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_audience: bool,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_content: bool,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_connected: bool,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetFacebookAdsResponse {
-    /**
-     * A list of link types and descriptions for the API schema documents.
-     */
+    /// A list of link types and descriptions for the API schema documents.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29146,16 +24334,13 @@ pub struct GetFacebookAdsResponse {
 /// - `FacebookAdsData`
 /// - `FacebookAdsDataType`
 /// - `GetFacebookAdsResponse`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAllOf {
     #[serde(flatten)]
     pub facebook_ads: FacebookAds,
     #[serde(flatten)]
     pub facebook_ads_data: FacebookAdsData,
-    /**
-     * A facebook ad.
-     */
+    /// A facebook ad.
     #[serde(flatten)]
     pub facebook_ads_data_type: FacebookAdsDataType,
     #[serde(flatten)]
@@ -29165,9 +24350,7 @@ pub struct FacebookAdsAllOf {
 /// Contains an array of facebook ads.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAllFacebookAdsResponse {
-    /**
-     * Contains an array of facebook ads.
-     */
+    /// Contains an array of facebook ads.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29175,18 +24358,14 @@ pub struct GetAllFacebookAdsResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * Contains an array of facebook ads.
-     */
+    /// Contains an array of facebook ads.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub facebook_ads: Vec<FacebookAdsAllOf>,
-    /**
-     * Contains an array of facebook ads.
-     */
+    /// Contains an array of facebook ads.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29197,18 +24376,14 @@ pub struct GetAllFacebookAdsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummaryEcommerceData {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -29219,18 +24394,14 @@ pub struct FacebookAdsReportSummaryEcommerceData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CostPerClick {
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -29241,18 +24412,14 @@ pub struct CostPerClick {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExtendedAt {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub datetime: String,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -29264,141 +24431,105 @@ pub struct ExtendedAt {
 /// Report summary of facebook ad
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsReportSummaryData {
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub average_daily_budget: Option<CostPerClick>,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub average_order_amount: Option<CostPerClick>,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub click_rate: f64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub comments: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub cost_per_click: Option<CostPerClick>,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<FacebookAdsReportSummaryEcommerceData>,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub extended_at: Option<ExtendedAt>,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub first_time_buyers: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_extended_ad_duration: bool,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub impressions: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub likes: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub reach: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub return_on_investment: f64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub shares: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_orders: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_products_sold: i64,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29409,18 +24540,14 @@ pub struct FacebookAdsReportSummaryData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAudienceActivityClicks {
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -29431,18 +24558,14 @@ pub struct FacebookAdsAudienceActivityClicks {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Impressions {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub date: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29453,18 +24576,14 @@ pub struct Impressions {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Revenue {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub date: String,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -29497,23 +24616,17 @@ pub struct AudienceActivity {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsDataTypeLinksObject {
-    /**
-     * Audience settings
-     */
+    /// Audience settings
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audience: Option<Audience>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audience_activity: Option<AudienceActivity>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub budget: Option<Budget>,
-    /**
-     * Channel settings
-     */
+    /// Channel settings
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<Channel>,
-    /**
-     * Report summary of facebook ad
-     */
+    /// Report summary of facebook ad
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub report_summary: Option<FacebookAdsReportSummaryData>,
 }
@@ -29524,7 +24637,6 @@ pub struct FacebookAdsDataTypeLinksObject {
 /// - `FacebookAdsData`
 /// - `GetFacebookAdsResponse`
 /// - `FacebookAdsDataTypeLinksObject`
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportingFacebookAdsResponseAllOf {
     #[serde(flatten)]
@@ -29540,9 +24652,7 @@ pub struct GetReportingFacebookAdsResponseAllOf {
 /// A collection of Facebook ads.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportingFacebookAdsResponse {
-    /**
-     * A collection of Facebook ads.
-     */
+    /// A collection of Facebook ads.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29550,18 +24660,14 @@ pub struct GetReportingFacebookAdsResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of Facebook ads.
-     */
+    /// A collection of Facebook ads.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub facebook_ads: Vec<GetReportingFacebookAdsResponseAllOf>,
-    /**
-     * A collection of Facebook ads.
-     */
+    /// A collection of Facebook ads.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29572,18 +24678,14 @@ pub struct GetReportingFacebookAdsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Visits {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub date: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29595,27 +24697,21 @@ pub struct Visits {
 /// The clicks and visits data from the last seven days.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DailyStats {
-    /**
-     * The clicks and visits data from the last seven days.
-     */
+    /// The clicks and visits data from the last seven days.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub clicks: Vec<Visits>,
-    /**
-     * The clicks and visits data from the last seven days.
-     */
+    /// The clicks and visits data from the last seven days.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub unique_visits: Vec<Visits>,
-    /**
-     * The clicks and visits data from the last seven days.
-     */
+    /// The clicks and visits data from the last seven days.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29627,27 +24723,21 @@ pub struct DailyStats {
 /// The clicks and visits data from the last five weeks.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WeeklyStats {
-    /**
-     * The clicks and visits data from the last five weeks.
-     */
+    /// The clicks and visits data from the last five weeks.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub clicks: Vec<Visits>,
-    /**
-     * The clicks and visits data from the last five weeks.
-     */
+    /// The clicks and visits data from the last five weeks.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub unique_visits: Vec<Visits>,
-    /**
-     * The clicks and visits data from the last five weeks.
-     */
+    /// The clicks and visits data from the last five weeks.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29658,50 +24748,38 @@ pub struct WeeklyStats {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageReportTimeseries {
-    /**
-     * The clicks and visits data from the last seven days.
-     */
+    /// The clicks and visits data from the last seven days.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub daily_stats: Option<DailyStats>,
-    /**
-     * The clicks and visits data from the last five weeks.
-     */
+    /// The clicks and visits data from the last five weeks.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub weekly_stats: Option<WeeklyStats>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPageReportEcommerce {
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub average_order_revenue: f64,
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency_code: String,
-    /**
-     * The display order for interests.
-     */
+    /// The display order for interests.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_orders: i64,
-    /**
-     * The price of a product variant.
-     */
+    /// The price of a product variant.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -29729,9 +24807,7 @@ pub struct Tag {
 /// A summary of an individual landing page's settings and content.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPages {
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29739,154 +24815,118 @@ pub struct LandingPages {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub clicks: i64,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub conversion_rate: f64,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ecommerce: Option<LandingPageReportEcommerce>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_id: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub list_name: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub signup_tags: Vec<Tag>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub status: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub subscribes: i64,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub timeseries: Option<LandingPageReportTimeseries>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unique_visits: i64,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub unpublished_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub visits: i64,
-    /**
-     * A summary of an individual landing page's settings and content.
-     */
+    /// A summary of an individual landing page's settings and content.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29898,9 +24938,7 @@ pub struct LandingPages {
 /// A collection of landing pages.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportingLandingPagesResponse {
-    /**
-     * A collection of landing pages.
-     */
+    /// A collection of landing pages.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -29908,18 +24946,14 @@ pub struct GetReportingLandingPagesResponse {
         rename = "_links"
     )]
     pub links: Vec<Links>,
-    /**
-     * A collection of landing pages.
-     */
+    /// A collection of landing pages.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub landing_pages: Vec<LandingPages>,
-    /**
-     * A collection of landing pages.
-     */
+    /// A collection of landing pages.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29931,44 +24965,34 @@ pub struct GetReportingLandingPagesResponse {
 /// The verified domains currently on the account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifiedDomains {
-    /**
-     * The verified domains currently on the account.
-     */
+    /// The verified domains currently on the account.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub authenticated: bool,
-    /**
-     * The verified domains currently on the account.
-     */
+    /// The verified domains currently on the account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    /**
-     * The verified domains currently on the account.
-     */
+    /// The verified domains currently on the account.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub verification_email: String,
-    /**
-     * The verified domains currently on the account.
-     */
+    /// The verified domains currently on the account.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub verification_sent: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The verified domains currently on the account.
-     */
+    /// The verified domains currently on the account.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -29979,9 +25003,7 @@ pub struct VerifiedDomains {
 /// Submit a response to the verification challenge and verify a domain for sending.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifyADomainSending {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -29993,18 +25015,14 @@ pub struct VerifyADomainSending {
 /// The verified domains currently on the account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifiedDomainsData {
-    /**
-     * The verified domains currently on the account.
-     */
+    /// The verified domains currently on the account.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub domains: Vec<VerifiedDomains>,
-    /**
-     * The verified domains currently on the account.
-     */
+    /// The verified domains currently on the account.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -30016,9 +25034,7 @@ pub struct VerifiedDomainsData {
 /// The verified domains currently on the account.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VerifiedDomainsDataType {
-    /**
-     * The name of the folder.
-     */
+    /// The name of the folder.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",

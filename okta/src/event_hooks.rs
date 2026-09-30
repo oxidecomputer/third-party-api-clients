@@ -74,7 +74,7 @@ impl EventHooks {
      *
      * **Parameters:**
      *
-     * * `event_hook_id: &str`
+     * * `event_hook_id`
      */
     pub async fn get(
         &self,
@@ -104,7 +104,7 @@ impl EventHooks {
      *
      * **Parameters:**
      *
-     * * `event_hook_id: &str`
+     * * `event_hook_id`
      */
     pub async fn update(
         &self,
@@ -135,7 +135,7 @@ impl EventHooks {
      *
      * **Parameters:**
      *
-     * * `event_hook_id: &str`
+     * * `event_hook_id`
      */
     pub async fn delete(&self, event_hook_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -162,7 +162,7 @@ impl EventHooks {
      *
      * **Parameters:**
      *
-     * * `event_hook_id: &str`
+     * * `event_hook_id`
      */
     pub async fn activate(
         &self,
@@ -192,7 +192,7 @@ impl EventHooks {
      *
      * **Parameters:**
      *
-     * * `event_hook_id: &str`
+     * * `event_hook_id`
      */
     pub async fn deactivate(
         &self,
@@ -222,7 +222,7 @@ impl EventHooks {
      *
      * **Parameters:**
      *
-     * * `event_hook_id: &str`
+     * * `event_hook_id`
      */
     pub async fn verify(
         &self,

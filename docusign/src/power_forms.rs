@@ -20,25 +20,24 @@ impl PowerForms {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `from_date: &str` -- (Optional) The start date for a date range.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `from_date` -- (Optional) The start date for a date range.
+     *
      *   **Note**: If no value is provided, no date filtering is applied.
-     * * `order: &str` -- (Optional) The order in which to sort the results.
-     *   
+     * * `order` -- (Optional) The order in which to sort the results.
+     *
      *   Valid values are:
-     *   
-     *   
+     *
      *   * `asc`: Ascending order.
      *   * `desc`: Descending order.
-     * * `order_by: &str` -- (Optional) The file attribute to use to sort the results.
-     *   
+     * * `order_by` -- (Optional) The file attribute to use to sort the results.
+     *
      *   Valid values are:
-     *   
+     *
      *   * `modified`
-     *   * `name`.
-     * * `to_date: &str` -- (Optional) The end date for a date range.
-     *   
+     *   * `name`
+     * * `to_date` -- (Optional) The end date for a date range.
+     *
      *   **Note**: If no value is provided, this property defaults to the current date.
      */
     pub async fn get_list(
@@ -82,7 +81,7 @@ impl PowerForms {
             .await
     }
     /**
-     * Creates a new PowerForm.
+     * Creates a new PowerForm
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/powerforms` endpoint.
      *
@@ -90,12 +89,11 @@ impl PowerForms {
      *
      * You create a PowerForm from an existing DocuSign [template](https://developers.docusign.com/docs/esign-rest-api/reference/templates/templates/create/), based on the `templateId` in the request body.
      *
-     *  PowerForms that you create from a template are referred to as *web PowerForms*.
+     * PowerForms that you create from a template are referred to as *web PowerForms*.
      *
      * **Note**: The RADmin console also supports creating a PowerForm by uploading a PDF file that has active form fields (referred to as a *PDF PowerForm*). However, PDF PowerForms are deprecated and are not supported in the API.
      *
      * **Note**: A PowerForm can have only one sender. (Because PowerForms are not necessarily sent by email, this user is also referred to as the PowerForm *initiator*.) If you need to associate multiple senders with a PowerForm, create multiple copies of the PowerForm by using the same template (one copy for each sender). By default, the sender is the PowerForm Administrator who creates the PowerForm.
-     *
      *
      * ### Signing modes
      *
@@ -125,11 +123,9 @@ impl PowerForms {
      *
      * For more information about creating PowerForms, see [Create a PowerForm](https://support.docusign.com/en/guides/ndse-user-guide-create-a-powerform).
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post_form(
         &self,
@@ -162,7 +158,7 @@ impl PowerForms {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete_list(
         &self,
@@ -195,8 +191,8 @@ impl PowerForms {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
      */
     pub async fn get_senders(
         &self,
@@ -235,8 +231,8 @@ impl PowerForms {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `power_form_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `power_form_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get_form(
         &self,
@@ -270,8 +266,8 @@ impl PowerForms {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `power_form_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `power_form_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put_form(
         &self,
@@ -306,8 +302,8 @@ impl PowerForms {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `power_form_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `power_form_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete_form(
         &self,

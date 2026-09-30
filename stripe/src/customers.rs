@@ -18,17 +18,14 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `created: &str`
-     * * `email: &str` -- A case-sensitive filter on the list based on the customer's `email` field. The value must be a string.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `test_clock: &str` -- Provides a list of customers that are associated with the specified test clock. The response will not include customers with test clocks if this parameter is not set.
+     * * `email` -- A case-sensitive filter on the list based on the customer's `email` field. The value must be a string.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `test_clock` -- Provides a list of customers that are associated with the specified test clock. The response will not include customers with test clocks if this parameter is not set.
      */
     pub async fn get_page(
         &self,
-        created: &str,
         email: &str,
         ending_before: &str,
         limit: i64,
@@ -52,7 +49,7 @@ impl Customers {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/customers?{}", query_), None);
+        let url = self.client.url(&format!("/v1/customers?{query_}"), None);
         let resp: crate::Response<crate::types::GetCustomersResponse> = self
             .client
             .get(
@@ -80,7 +77,6 @@ impl Customers {
      */
     pub async fn get_all(
         &self,
-        created: &str,
         email: &str,
         test_clock: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Customer>>> {
@@ -92,7 +88,7 @@ impl Customers {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/customers?{}", query_), None);
+        let url = self.client.url(&format!("/v1/customers?{query_}"), None);
         let crate::Response::<crate::types::GetCustomersResponse> {
             mut status,
             mut headers,
@@ -132,7 +128,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -147,7 +143,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -191,10 +187,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `page: &str` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
-     * * `query: &str` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for customers](https://stripe.com/docs/search#query-fields-for-customers).
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `page` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
+     * * `query` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for customers](https://stripe.com/docs/search#query-fields-for-customers).
      */
     pub async fn get_search(
         &self,
@@ -215,7 +210,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/customers/search?{}", query_), None);
+            .url(&format!("/v1/customers/search?{query_}"), None);
         let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
@@ -255,7 +250,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/customers/search?{}", query_), None);
+            .url(&format!("/v1/customers/search?{query_}"), None);
         let crate::Response::<crate::types::SearchResult> {
             mut status,
             mut headers,
@@ -295,7 +290,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -310,7 +305,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -334,8 +329,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `customer` -- The account's country.
      */
     pub async fn get(
         &self,
@@ -367,7 +361,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn post_customers(
         &self,
@@ -397,7 +391,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn delete(
         &self,
@@ -427,11 +421,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_balance_transactions(
         &self,
@@ -534,7 +527,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -549,7 +542,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -573,7 +566,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn post_balance_transaction(
         &self,
@@ -603,9 +596,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `transaction: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `transaction` -- The account's country.
      */
     pub async fn get_balance_transactions_transaction(
         &self,
@@ -637,8 +629,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `transaction: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `transaction` -- The account's country.
      */
     pub async fn post_balance_transactions_transaction(
         &self,
@@ -670,11 +662,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_bank_accounts(
         &self,
@@ -777,7 +768,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -792,7 +783,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -820,7 +811,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn post_bank_account(
         &self,
@@ -850,9 +841,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get_bank_account(
         &self,
@@ -884,8 +874,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_bank_account_customers(
         &self,
@@ -917,8 +907,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn delete_bank_accounts(
         &self,
@@ -951,8 +941,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_bank_accounts_verify(
         &self,
@@ -986,11 +976,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_cards(
         &self,
@@ -1095,7 +1084,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1110,7 +1099,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1138,7 +1127,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn post_card(
         &self,
@@ -1168,9 +1157,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get_card(
         &self,
@@ -1202,8 +1190,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_card_customers(
         &self,
@@ -1235,8 +1223,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn delete_cards(
         &self,
@@ -1265,12 +1253,9 @@ impl Customers {
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/discount` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `customer` -- The account's country.
      */
     pub async fn get_discount(
         &self,
@@ -1300,7 +1285,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn delete_discount(
         &self,
@@ -1330,12 +1315,11 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `type_: crate::types::GetCustomersCustomerPaymentMethodsType` -- A required filter on the list, based on the object `type` field.
+     * * `customer` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `type_` -- A required filter on the list, based on the object `type` field.
      */
     pub async fn get_payment_methods(
         &self,
@@ -1449,7 +1433,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1464,7 +1448,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1488,12 +1472,11 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `object: &str` -- Filter sources according to a particular object type.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `object` -- Filter sources according to a particular object type.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_sources(
         &self,
@@ -1607,7 +1590,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1622,7 +1605,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1650,7 +1633,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn post_source(
         &self,
@@ -1680,9 +1663,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get_source(
         &self,
@@ -1714,8 +1696,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_source_customers(
         &self,
@@ -1747,8 +1729,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn delete_sources(
         &self,
@@ -1781,8 +1763,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_sources_verify(
         &self,
@@ -1814,11 +1796,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_subscriptions(
         &self,
@@ -1921,7 +1902,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1936,7 +1917,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1960,7 +1941,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn post_subscription(
         &self,
@@ -1990,9 +1971,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn get_subscriptions_subscription_exposed(
         &self,
@@ -2024,8 +2004,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn post_subscriptions_subscription_exposed(
         &self,
@@ -2061,8 +2041,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn delete_subscriptions_subscription_exposed(
         &self,
@@ -2090,13 +2070,10 @@ impl Customers {
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}/discount` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn get_subscriptions_subscription_exposed_discount(
         &self,
@@ -2128,8 +2105,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `subscription_exposed_id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `subscription_exposed_id` -- The account's country.
      */
     pub async fn delete_subscriptions_subscription_exposed_discount(
         &self,
@@ -2161,11 +2138,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- The account's country.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_tax_ids(
         &self,
@@ -2268,7 +2244,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2283,7 +2259,7 @@ impl Customers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2307,7 +2283,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
+     * * `customer` -- The account's country.
      */
     pub async fn post_tax_id(
         &self,
@@ -2337,9 +2313,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get_tax_id(
         &self,
@@ -2371,8 +2346,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `customer` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn delete_tax_ids(
         &self,

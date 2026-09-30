@@ -18,10 +18,10 @@ impl ProfileMappings {
      *
      * **Parameters:**
      *
-     * * `after: &str`
-     * * `limit: i64`
-     * * `source_id: &str`
-     * * `target_id: &str`
+     * * `after`
+     * * `limit`
+     * * `source_id`
+     * * `target_id`
      */
     pub async fn list(
         &self,
@@ -44,9 +44,7 @@ impl ProfileMappings {
             query_args.push(("targetId".to_string(), target_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/api/v1/mappings?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/mappings?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -77,9 +75,7 @@ impl ProfileMappings {
             query_args.push(("targetId".to_string(), target_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/api/v1/mappings?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/mappings?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -91,7 +87,7 @@ impl ProfileMappings {
             .await
     }
     /**
-     * Get Profile Mapping.
+     * Get Profile Mapping
      *
      * This function performs a `GET` to the `/api/v1/mappings/{mappingId}` endpoint.
      *
@@ -99,7 +95,7 @@ impl ProfileMappings {
      *
      * **Parameters:**
      *
-     * * `mapping_id: &str`
+     * * `mapping_id`
      */
     pub async fn get(
         &self,
@@ -123,7 +119,7 @@ impl ProfileMappings {
             .await
     }
     /**
-     * Update Profile Mapping.
+     * Update Profile Mapping
      *
      * This function performs a `POST` to the `/api/v1/mappings/{mappingId}` endpoint.
      *
@@ -131,7 +127,7 @@ impl ProfileMappings {
      *
      * **Parameters:**
      *
-     * * `mapping_id: &str`
+     * * `mapping_id`
      */
     pub async fn update(
         &self,

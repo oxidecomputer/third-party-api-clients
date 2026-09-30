@@ -12,7 +12,7 @@ impl OauthAuthorizations {
     }
 
     /**
-     * List your grants.
+     * List your grants
      *
      * This function performs a `GET` to the `/applications/grants` endpoint.
      *
@@ -24,9 +24,9 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn list_grants(
         &self,
@@ -47,7 +47,7 @@ impl OauthAuthorizations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/applications/grants?{}", query_), None);
+            .url(&format!("/applications/grants?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -59,7 +59,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * List your grants.
+     * List your grants
      *
      * This function performs a `GET` to the `/applications/grants` endpoint.
      *
@@ -82,7 +82,7 @@ impl OauthAuthorizations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/applications/grants?{}", query_), None);
+            .url(&format!("/applications/grants?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -94,7 +94,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Get a single grant.
+     * Get a single grant
      *
      * This function performs a `GET` to the `/applications/grants/{grant_id}` endpoint.
      *
@@ -104,7 +104,7 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `grant_id: i64` -- grant_id parameter.
+     * * `grant_id` -- grant_id parameter
      */
     pub async fn get_grant(
         &self,
@@ -128,7 +128,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Delete a grant.
+     * Delete a grant
      *
      * This function performs a `DELETE` to the `/applications/grants/{grant_id}` endpoint.
      *
@@ -140,7 +140,7 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `grant_id: i64` -- grant_id parameter.
+     * * `grant_id` -- grant_id parameter
      */
     pub async fn delete_grant(&self, grant_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -161,7 +161,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * List your authorizations.
+     * List your authorizations
      *
      * This function performs a `GET` to the `/authorizations` endpoint.
      *
@@ -171,9 +171,9 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn list_authorizations(
         &self,
@@ -192,9 +192,7 @@ impl OauthAuthorizations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/authorizations?{}", query_), None);
+        let url = self.client.url(&format!("/authorizations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -206,7 +204,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * List your authorizations.
+     * List your authorizations
      *
      * This function performs a `GET` to the `/authorizations` endpoint.
      *
@@ -225,9 +223,7 @@ impl OauthAuthorizations {
             query_args.push(("client_id".to_string(), client_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/authorizations?{}", query_), None);
+        let url = self.client.url(&format!("/authorizations?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -239,7 +235,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Create a new authorization.
+     * Create a new authorization
      *
      * This function performs a `POST` to the `/authorizations` endpoint.
      *
@@ -273,7 +269,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Get-or-create an authorization for a specific app.
+     * Get-or-create an authorization for a specific app
      *
      * This function performs a `PUT` to the `/authorizations/clients/{client_id}` endpoint.
      *
@@ -291,7 +287,7 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn get_or_create_authorization_for_app(
         &self,
@@ -316,7 +312,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Get-or-create an authorization for a specific app and fingerprint.
+     * Get-or-create an authorization for a specific app and fingerprint
      *
      * This function performs a `PUT` to the `/authorizations/clients/{client_id}/{fingerprint}` endpoint.
      *
@@ -332,8 +328,8 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
-     * * `fingerprint: &str`
+     * * `client_id` -- The client ID of your GitHub app.
+     * * `fingerprint`
      */
     pub async fn get_or_create_authorization_for_app_and_fingerprint(
         &self,
@@ -360,7 +356,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Get a single authorization.
+     * Get a single authorization
      *
      * This function performs a `GET` to the `/authorizations/{authorization_id}` endpoint.
      *
@@ -370,7 +366,7 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `authorization_id: i64` -- authorization_id parameter.
+     * * `authorization_id` -- authorization_id parameter
      */
     pub async fn get_authorization(
         &self,
@@ -394,7 +390,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Delete an authorization.
+     * Delete an authorization
      *
      * This function performs a `DELETE` to the `/authorizations/{authorization_id}` endpoint.
      *
@@ -404,7 +400,7 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `authorization_id: i64` -- authorization_id parameter.
+     * * `authorization_id` -- authorization_id parameter
      */
     pub async fn delete_authorization(
         &self,
@@ -428,7 +424,7 @@ impl OauthAuthorizations {
             .await
     }
     /**
-     * Update an existing authorization.
+     * Update an existing authorization
      *
      * This function performs a `PATCH` to the `/authorizations/{authorization_id}` endpoint.
      *
@@ -442,7 +438,7 @@ impl OauthAuthorizations {
      *
      * **Parameters:**
      *
-     * * `authorization_id: i64` -- authorization_id parameter.
+     * * `authorization_id` -- authorization_id parameter
      */
     pub async fn update_authorization(
         &self,

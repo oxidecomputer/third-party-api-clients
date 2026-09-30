@@ -12,7 +12,7 @@ impl Query {
     }
 
     /**
-     * Filter all messages.
+     * Filter all messages
      *
      * This function performs a `GET` to the `/messages` endpoint.
      *
@@ -33,7 +33,6 @@ impl Query {
      * Filter by subject line - `query=subject%3d%22A%20Great%20Subject%22`
      *
      * **Full list of basic query types and examples:**
-     *
      *
      * | **Filter query**    | **Unencoded Example** (put this one into the try it out query - it'll automatically encode it for you) | **Encoded Example** (use this one in your code)                        |
      * |-----------------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
@@ -59,11 +58,11 @@ impl Query {
      *
      * **Parameters:**
      *
-     * * `query: &str` -- The license key provided with your New Relic account.
-     * * `limit: f64` -- The number of messages returned. This parameter must be greater than 0 and less than or equal to 1000.
-     * * `x_query_id: &str` -- The license key provided with your New Relic account.
-     * * `x_cursor: &str` -- The license key provided with your New Relic account.
-     * * `authorization: &str` -- The license key provided with your New Relic account.
+     * * `query` -- The license key provided with your New Relic account.
+     * * `limit` -- The number of messages returned. This parameter must be greater than 0 and less than or equal to 1000
+     * * `x_query_id` -- The license key provided with your New Relic account.
+     * * `x_cursor` -- The license key provided with your New Relic account.
+     * * `authorization` -- The license key provided with your New Relic account.
      */
     pub async fn get_messages(
         &self,
@@ -78,7 +77,7 @@ impl Query {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/messages?{}", query_), None);
+        let url = self.client.url(&format!("/messages?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -90,7 +89,7 @@ impl Query {
             .await
     }
     /**
-     * Filter messages by message ID.
+     * Filter messages by message ID
      *
      * This function performs a `GET` to the `/messages/{msg_id}` endpoint.
      *
@@ -100,7 +99,7 @@ impl Query {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The license key provided with your New Relic account.
+     * * `authorization` -- The license key provided with your New Relic account.
      */
     pub async fn get_messages_msg(
         &self,

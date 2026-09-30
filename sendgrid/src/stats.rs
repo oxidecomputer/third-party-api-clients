@@ -12,7 +12,7 @@ impl Stats {
     }
 
     /**
-     * Retrieve global email statistics.
+     * Retrieve global email statistics
      *
      * This function performs a `GET` to the `/stats` endpoint.
      *
@@ -22,12 +22,12 @@ impl Stats {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
      */
     pub async fn get_page(
         &self,
@@ -50,7 +50,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/stats?{}", query_), None);
+        let url = self.client.url(&format!("/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -62,7 +62,7 @@ impl Stats {
             .await
     }
     /**
-     * Retrieve global email statistics.
+     * Retrieve global email statistics
      *
      * This function performs a `GET` to the `/stats` endpoint.
      *
@@ -93,7 +93,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/stats?{}", query_), None);
+        let url = self.client.url(&format!("/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -117,13 +117,13 @@ impl Stats {
      *
      * **Parameters:**
      *
-     * * `country: crate::types::Country` -- The country you would like to see statistics for. Currently only supported for US and CA.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `country` -- The country you would like to see statistics for. Currently only supported for US and CA.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
      */
     pub async fn get_geo(
         &self,
@@ -150,7 +150,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/geo/stats?{}", query_), None);
+        let url = self.client.url(&format!("/geo/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -199,7 +199,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/geo/stats?{}", query_), None);
+        let url = self.client.url(&format!("/geo/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -232,12 +232,12 @@ impl Stats {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
      */
     pub async fn get_devices(
         &self,
@@ -260,7 +260,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/devices/stats?{}", query_), None);
+        let url = self.client.url(&format!("/devices/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -314,7 +314,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/devices/stats?{}", query_), None);
+        let url = self.client.url(&format!("/devices/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -338,10 +338,10 @@ impl Stats {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
      */
     pub async fn get_clients(
         &self,
@@ -360,7 +360,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/clients/stats?{}", query_), None);
+        let url = self.client.url(&format!("/clients/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -401,7 +401,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/clients/stats?{}", query_), None);
+        let url = self.client.url(&format!("/clients/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -422,6 +422,7 @@ impl Stats {
      * **We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.
      *
      * ## Available Client Types
+     *
      * - phone
      * - tablet
      * - webmail
@@ -431,10 +432,10 @@ impl Stats {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
      */
     pub async fn get_clients_client_type(
         &self,
@@ -484,6 +485,7 @@ impl Stats {
      * **We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.
      *
      * ## Available Client Types
+     *
      * - phone
      * - tablet
      * - webmail
@@ -540,13 +542,13 @@ impl Stats {
      *
      * **Parameters:**
      *
-     * * `mailbox_providers: &str` -- The mail box providers to get statistics for. You can include up to 10 by including this parameter multiple times.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `mailbox_providers` -- The mail box providers to get statistics for. You can include up to 10 by including this parameter multiple times.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
      */
     pub async fn get_mailbox_providers(
         &self,
@@ -579,7 +581,7 @@ impl Stats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/mailbox_providers/stats?{}", query_), None);
+            .url(&format!("/mailbox_providers/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -634,7 +636,7 @@ impl Stats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/mailbox_providers/stats?{}", query_), None);
+            .url(&format!("/mailbox_providers/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -658,13 +660,13 @@ impl Stats {
      *
      * **Parameters:**
      *
-     * * `browsers: &str` -- The browsers to get statistics for. You can include up to 10 different browsers by including this parameter multiple times.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `offset: i64` -- The point in the list to begin retrieving results.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `browsers` -- The browsers to get statistics for. You can include up to 10 different browsers by including this parameter multiple times.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `offset` -- The point in the list to begin retrieving results.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
      */
     pub async fn get_browsers(
         &self,
@@ -691,9 +693,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/browsers/stats?{}", query_), None);
+        let url = self.client.url(&format!("/browsers/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -742,9 +742,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/browsers/stats?{}", query_), None);
+        let url = self.client.url(&format!("/browsers/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,

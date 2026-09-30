@@ -18,9 +18,9 @@ impl Settings {
      *
      * **Parameters:**
      *
-     * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
-     * * `page_token: &str` -- Token specifying which result page to return. Optional.
-     * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+     * * `max_results` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+     * * `page_token` -- Token specifying which result page to return. Optional.
+     * * `sync_token` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
      *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
@@ -40,7 +40,7 @@ impl Settings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users/me/settings?{}", query_), None);
+            .url(&format!("/users/me/settings?{query_}"), None);
         let resp: crate::Response<crate::types::Settings> = self
             .client
             .get(
@@ -96,7 +96,7 @@ impl Settings {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -111,7 +111,7 @@ impl Settings {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -139,9 +139,9 @@ impl Settings {
      *
      * **Parameters:**
      *
-     * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
-     * * `page_token: &str` -- Token specifying which result page to return. Optional.
-     * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+     * * `max_results` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+     * * `page_token` -- Token specifying which result page to return. Optional.
+     * * `sync_token` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
      *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
@@ -162,7 +162,7 @@ impl Settings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users/me/settings/watch?{}", query_), None);
+            .url(&format!("/users/me/settings/watch?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -180,7 +180,7 @@ impl Settings {
      *
      * **Parameters:**
      *
-     * * `setting: &str` -- The id of the user setting.
+     * * `setting` -- The id of the user setting.
      */
     pub async fn get(&self, setting: &str) -> ClientResult<crate::Response<crate::types::Setting>> {
         let url = self.client.url(

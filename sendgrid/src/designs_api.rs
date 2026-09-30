@@ -12,7 +12,7 @@ impl DesignsApi {
     }
 
     /**
-     * Get Design.
+     * Get Design
      *
      * This function performs a `GET` to the `/designs/{id}` endpoint.
      *
@@ -41,7 +41,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * Duplicate Design.
+     * Duplicate Design
      *
      * This function performs a `POST` to the `/designs/{id}` endpoint.
      *
@@ -74,7 +74,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * Delete Design.
+     * Delete Design
      *
      * This function performs a `DELETE` to the `/designs/{id}` endpoint.
      *
@@ -101,7 +101,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * Update Design.
+     * Update Design
      *
      * This function performs a `PATCH` to the `/designs/{id}` endpoint.
      *
@@ -137,7 +137,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * List Designs.
+     * List Designs
      *
      * This function performs a `GET` to the `/designs` endpoint.
      *
@@ -149,9 +149,9 @@ impl DesignsApi {
      *
      * **Parameters:**
      *
-     * * `page_size: u64` -- number of results to return.
-     * * `page_token: &str` -- token corresponding to a specific page of results, as provided by metadata.
-     * * `summary: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * * `page_size` -- number of results to return
+     * * `page_token` -- token corresponding to a specific page of results, as provided by metadata
+     * * `summary` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     pub async fn list_designs(
         &self,
@@ -170,7 +170,7 @@ impl DesignsApi {
             query_args.push(("summary".to_string(), summary.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/designs?{}", query_), None);
+        let url = self.client.url(&format!("/designs?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -182,7 +182,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * Create Design.
+     * Create Design
      *
      * This function performs a `POST` to the `/designs` endpoint.
      *
@@ -210,7 +210,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * Get SendGrid Pre-built Design.
+     * Get SendGrid Pre-built Design
      *
      * This function performs a `GET` to the `/designs/pre-builts/{id}` endpoint.
      *
@@ -242,7 +242,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * Duplicate SendGrid Pre-built Design.
+     * Duplicate SendGrid Pre-built Design
      *
      * This function performs a `POST` to the `/designs/pre-builts/{id}` endpoint.
      *
@@ -276,7 +276,7 @@ impl DesignsApi {
             .await
     }
     /**
-     * List SendGrid Pre-built Designs.
+     * List SendGrid Pre-built Designs
      *
      * This function performs a `GET` to the `/designs/pre-builts` endpoint.
      *
@@ -290,9 +290,9 @@ impl DesignsApi {
      *
      * **Parameters:**
      *
-     * * `page_size: u64` -- number of results to return.
-     * * `page_token: &str` -- token corresponding to a specific page of results, as provided by metadata.
-     * * `summary: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+     * * `page_size` -- number of results to return
+     * * `page_token` -- token corresponding to a specific page of results, as provided by metadata
+     * * `summary` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
     pub async fn list_sendgrid_pre_built_designs(
         &self,
@@ -313,7 +313,7 @@ impl DesignsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/designs/pre-builts?{}", query_), None);
+            .url(&format!("/designs/pre-builts?{query_}"), None);
         self.client
             .get(
                 &url,

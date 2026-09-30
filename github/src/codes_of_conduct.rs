@@ -12,11 +12,9 @@ impl CodesOfConduct {
     }
 
     /**
-     * Get all codes of conduct.
+     * Get all codes of conduct
      *
      * This function performs a `GET` to the `/codes_of_conduct` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
@@ -35,13 +33,11 @@ impl CodesOfConduct {
             .await
     }
     /**
-     * Get all codes of conduct.
+     * Get all codes of conduct
      *
      * This function performs a `GET` to the `/codes_of_conduct` endpoint.
      *
      * As opposed to `get_all_codes_of_conduct`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
@@ -60,17 +56,15 @@ impl CodesOfConduct {
             .await
     }
     /**
-     * Get a code of conduct.
+     * Get a code of conduct
      *
      * This function performs a `GET` to the `/codes_of_conduct/{key}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-a-code-of-conduct>
      *
      * **Parameters:**
      *
-     * * `key: &str`
+     * * `key`
      */
     pub async fn get_conduct_code(
         &self,
@@ -94,7 +88,7 @@ impl CodesOfConduct {
             .await
     }
     /**
-     * Get the code of conduct for a repository.
+     * Get the code of conduct for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/community/code_of_conduct` endpoint.
      *
@@ -106,8 +100,8 @@ impl CodesOfConduct {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_for_repo(
         &self,

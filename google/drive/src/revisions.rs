@@ -18,9 +18,9 @@ impl Revisions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+     * * `file_id` -- A link to this theme's background image.
+     * * `page_size` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `page_token` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
      */
     pub async fn list(
         &self,
@@ -108,7 +108,7 @@ impl Revisions {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -123,7 +123,7 @@ impl Revisions {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -151,9 +151,9 @@ impl Revisions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `revision_id: &str` -- A link to this theme's background image.
-     * * `acknowledge_abuse: bool` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+     * * `file_id` -- A link to this theme's background image.
+     * * `revision_id` -- A link to this theme's background image.
+     * * `acknowledge_abuse` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
      */
     pub async fn get(
         &self,
@@ -195,8 +195,8 @@ impl Revisions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `revision_id: &str` -- A link to this theme's background image.
+     * * `file_id` -- A link to this theme's background image.
+     * * `revision_id` -- A link to this theme's background image.
      */
     pub async fn delete(
         &self,
@@ -228,8 +228,8 @@ impl Revisions {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `revision_id: &str` -- A link to this theme's background image.
+     * * `file_id` -- A link to this theme's background image.
+     * * `revision_id` -- A link to this theme's background image.
      */
     pub async fn update(
         &self,

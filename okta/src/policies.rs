@@ -18,9 +18,9 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `type_: &str`
-     * * `status: &str`
-     * * `expand: &str`
+     * * `type_`
+     * * `status`
+     * * `expand`
      */
     pub async fn list(
         &self,
@@ -39,9 +39,7 @@ impl Policies {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/api/v1/policies?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/policies?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -76,9 +74,7 @@ impl Policies {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/api/v1/policies?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/policies?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -96,7 +92,7 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `activate: bool`
+     * * `activate`
      */
     pub async fn create_policy(
         &self,
@@ -108,9 +104,7 @@ impl Policies {
             query_args.push(("activate".to_string(), activate.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/api/v1/policies?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/policies?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -128,8 +122,8 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `expand: &str`
+     * * `policy_id`
+     * * `expand`
      */
     pub async fn get_policy(
         &self,
@@ -166,7 +160,7 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
+     * * `policy_id`
      */
     pub async fn update_policy(
         &self,
@@ -197,7 +191,7 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
+     * * `policy_id`
      */
     pub async fn delete_policy(&self, policy_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -224,7 +218,7 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
+     * * `policy_id`
      */
     pub async fn activate_policy(&self, policy_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -251,7 +245,7 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
+     * * `policy_id`
      */
     pub async fn deactivate_policy(&self, policy_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -278,7 +272,7 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
+     * * `policy_id`
      */
     pub async fn list_policy_rules(
         &self,
@@ -336,7 +330,7 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
+     * * `policy_id`
      */
     pub async fn create_policy_rule(
         &self,
@@ -367,8 +361,8 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `rule_id`
      */
     pub async fn get_policy_rule(
         &self,
@@ -400,8 +394,8 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `rule_id`
      */
     pub async fn update_policy_rule(
         &self,
@@ -434,8 +428,8 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `rule_id`
      */
     pub async fn delete_policy_rule(
         &self,
@@ -467,8 +461,8 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `rule_id`
      */
     pub async fn activate_policy_rule(
         &self,
@@ -500,8 +494,8 @@ impl Policies {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `rule_id`
      */
     pub async fn deactivate_policy_rule(
         &self,

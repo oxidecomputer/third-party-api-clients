@@ -12,13 +12,13 @@ impl CustomIds {
     }
 
     /**
-     * GET the Custom ID provider linked to the current OAuth token.
+     * GET the Custom ID provider linked to the current OAuth token
      *
      * This function performs a `GET` to the `/custom-id-provider` endpoint.
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get_custom_provider(
         &self,
@@ -35,15 +35,13 @@ impl CustomIds {
             .await
     }
     /**
-     * Create a Custom ID provider.
+     * Create a Custom ID provider
      *
      * This function performs a `POST` to the `/custom-id-provider` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `authorization_bearer_111111111111: &str` -- The OAuth2 token header.
+     * * `authorization_bearer_111111111111` -- The OAuth2 token header
      */
     pub async fn postcustom_provider(
         &self,
@@ -60,7 +58,6 @@ impl CustomIds {
             .await
     }
     /**
-     * .
      *
      * This function performs a `POST` to the `/custom-id-provider/application-link` endpoint.
      *
@@ -84,15 +81,13 @@ impl CustomIds {
             .await
     }
     /**
-     * Convert custom id to ramp id.
+     * Convert custom id to ramp id
      *
      * This function performs a `GET` to the `/custom-id-provider/{entity_type}/{custom_id}/ramp-id` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get_entity_type_custom_ramp(
         &self,
@@ -118,13 +113,13 @@ impl CustomIds {
             .await
     }
     /**
-     * Convert ramp id to custom id.
+     * Convert ramp id to custom id
      *
      * This function performs a `GET` to the `/custom-id-provider/{entity_type}/{ramp_id}/custom-id` endpoint.
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get_entity_type_ramp_custom(
         &self,
@@ -150,7 +145,7 @@ impl CustomIds {
             .await
     }
     /**
-     * Create custom id link.
+     * Create custom id link
      *
      * This function performs a `POST` to the `/custom-id-provider/{entity_type}/custom-id-link` endpoint.
      *

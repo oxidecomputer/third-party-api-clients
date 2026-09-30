@@ -20,10 +20,10 @@ impl AdminInviteRequestsDenied {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.invites:read`.
-     * * `team_id: &str` -- ID for the workspace where the invite requests were made.
-     * * `cursor: &str` -- Value of the `next_cursor` field sent as part of the previous api response.
-     * * `limit: i64` -- The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive.
+     * * `token` -- Authentication token. Requires scope: `admin.invites:read`
+     * * `team_id` -- ID for the workspace where the invite requests were made.
+     * * `cursor` -- Value of the `next_cursor` field sent as part of the previous api response
+     * * `limit` -- The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive
      */
     pub async fn list(
         &self,
@@ -42,10 +42,9 @@ impl AdminInviteRequestsDenied {
             query_args.push(("team_id".to_string(), team_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin.inviteRequests.denied.list?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin.inviteRequests.denied.list?{query_}"), None);
         self.client
             .get(
                 &url,

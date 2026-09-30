@@ -12,26 +12,27 @@ impl Dashboards {
     }
 
     /**
-     * List meetings.
+     * List meetings
      *
      * This function performs a `GET` to the `/metrics/meetings` endpoint.
      *
      * List total live or past meetings that occurred during a specified period of time. This overview will show if features such as audio, video, screen sharing, and recording were being used in the meeting. You can also see the license types of each user on your account.<br> You can specify a monthly date range for the dashboard data using the `from` and `to` query parameters. The month should fall within the last six months.<br>
      * **Scopes:** `dashboard_meetings:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Resource-intensive`<br><br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Resource-intensive`<br><br>
      * **Prerequisites:** <br>
+     *
      * * Business or a higher plan.<br><br>
      *
      * **Parameters:**
      *
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_fields: crate::types::IncludeFields` -- Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `include_fields` -- Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
      */
     pub async fn meeting(
         &self,
@@ -64,7 +65,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/metrics/meetings?{}", query_), None);
+            .url(&format!("/metrics/meetings?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -76,24 +77,25 @@ impl Dashboards {
             .await
     }
     /**
-     * Get meeting details.
+     * Get meeting details
      *
      * This function performs a `GET` to the `/metrics/meetings/{meetingId}` endpoint.
      *
      * Get details on live or past meetings. This overview will show if features such as audio, video, screen sharing, and recording were being used in the meeting. You can also see the license types of each user on your account.<br> You can specify a monthly date range for the dashboard data using the `from` and `to` query parameters. The month should fall within the last six months.  <br>
      * **Scopes:** `dashboard_meetings:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:** <br>
+     *
      * * Business or a higher plan.
      *
      * **Parameters:**
      *
-     * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *   
+     * * `meeting_id` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      */
     pub async fn meeting_detail(
         &self,
@@ -124,7 +126,7 @@ impl Dashboards {
             .await
     }
     /**
-     * List meeting participants.
+     * List meeting participants
      *
      * This function performs a `GET` to the `/metrics/meetings/{meetingId}/participants` endpoint.
      *
@@ -132,20 +134,20 @@ impl Dashboards {
      * If you do not provide the `type` query parameter, the default value will be set to `live` and thus, you will only see metrics for participants in a live meeting, if any meeting is currently being conducted. To view metrics on past meeting participants, provide the appropriate value for `type`. <br> You can specify a monthly date range for the dashboard data using the `from` and `to` query parameters. The month should fall within the last six months.
      *
      * **Scopes:** `dashboard_meetings:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:** Business or a higher plan.
      *
      * **Parameters:**
      *
-     * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *   
+     * * `meeting_id` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `include_fields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
     pub async fn meeting_participant(
         &self,
@@ -189,7 +191,7 @@ impl Dashboards {
             .await
     }
     /**
-     * Get meeting participant QoS.
+     * Get meeting participant QoS
      *
      * This function performs a `GET` to the `/metrics/meetings/{meetingId}/participants/{participantId}/qos` endpoint.
      *
@@ -202,13 +204,13 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *   
+     * * `meeting_id` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `participant_id: &str` -- User's first name.
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `participant_id` -- User's first name.
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      */
     pub async fn meeting_participant_qo(
         &self,
@@ -241,26 +243,27 @@ impl Dashboards {
             .await
     }
     /**
-     * List meeting participants QoS.
+     * List meeting participants QoS
      *
      * This function performs a `GET` to the `/metrics/meetings/{meetingId}/participants/qos` endpoint.
      *
      * Get a list of meeting participants from live or past meetings along with the quality of service they recieve during the meeting such as connection quality for sending/receiving video, audio, and shared content.<br>If you do not provide the `type` query parameter, the default value will be set to `live` and thus, you will only see metrics for participants in a live meeting, if any meeting is currently being conducted. To view metrics on past meeting participants, provide the appropriate value for `type`.<br> <br> You can specify a monthly date range for the dashboard data using the `from` and `to` query parameters. The month should fall within the last six months.<br><br>
      * **Scopes:** `dashboard_meetings:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:** <br>
+     *
      * * Business or a higher plan.
      *
      * **Parameters:**
      *
-     * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *   
+     * * `meeting_id` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
-     * * `page_size: i64` -- The number of items returned per page.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `page_size` -- The number of items returned per page.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn meeting_participants_qo(
         &self,
@@ -299,26 +302,27 @@ impl Dashboards {
             .await
     }
     /**
-     * Get sharing/recording details.
+     * Get sharing/recording details
      *
      * This function performs a `GET` to the `/metrics/meetings/{meetingId}/participants/sharing` endpoint.
      *
      * Retrieve the sharing and recording details of participants from live or past meetings.<br>
      * **Scopes:** `dashboard_meetings:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:** <br>
+     *
      * * Business or a higher plan.
      *
      * **Parameters:**
      *
-     * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *   
+     * * `meeting_id` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn meeting_participant_share(
         &self,
@@ -358,7 +362,7 @@ impl Dashboards {
             .await
     }
     /**
-     * List webinars.
+     * List webinars
      *
      * This function performs a `GET` to the `/metrics/webinars` endpoint.
      *
@@ -366,18 +370,16 @@ impl Dashboards {
      * **Scopes:** `dashboard_webinars:read:admin`<br>
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Resource-intensive`<br>
      * **Prerequisites:**<br>
+     *
      * * Business, Education or API Plan with Webinar add-on.
-     *
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `type_` -- The webinar type.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn webinar(
         &self,
@@ -406,7 +408,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/metrics/webinars?{}", query_), None);
+            .url(&format!("/metrics/webinars?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -418,24 +420,23 @@ impl Dashboards {
             .await
     }
     /**
-     * Get webinar details.
+     * Get webinar details
      *
      * This function performs a `GET` to the `/metrics/webinars/{webinarId}` endpoint.
      *
      * Retrieve details from live or past webinars.<br><br>
      * **Scopes:** `dashboard_webinars:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:**<br>
+     *
      * * Business, Education or API Plan with Webinar add-on.
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *   
+     * * `webinar_id` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
+     * * `type_` -- The webinar type.
      */
     pub async fn webinar_detail(
         &self,
@@ -466,27 +467,26 @@ impl Dashboards {
             .await
     }
     /**
-     * Get webinar participants.
+     * Get webinar participants
      *
      * This function performs a `GET` to the `/metrics/webinars/{webinarId}/participants` endpoint.
      *
      * Retrieve details on participants from live or past webinars.<br><br>
      * **Scopes:** `dashboard_webinars:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:**<br>
+     *
      * * Business, Education or API Plan with Webinar add-on.
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *   
+     * * `webinar_id` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
+     * * `type_` -- The webinar type.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `include_fields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
     pub async fn webinar_participant(
         &self,
@@ -530,24 +530,24 @@ impl Dashboards {
             .await
     }
     /**
-     * Get webinar participant QoS.
+     * Get webinar participant QoS
      *
      * This function performs a `GET` to the `/metrics/webinars/{webinarId}/participants/{participantId}/qos` endpoint.
      *
      * Retrieve details on the quality of service that participants from live or past webinars recieved.<br>This data indicates the connection quality for sending/receiving video, audio, and shared content. If nothing is being sent or received at that time, no information will be shown in the fields.<br>
      * **Scopes:** `dashboard_webinars:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy` <br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy` <br>
      * **Prerequisites:** <br>
-     * * Business, Education or API Plan with Zoom Rooms set up.
      *
+     * * Business, Education or API Plan with Zoom Rooms set up.
      *
      * **Parameters:**
      *
-     * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *   
+     * * `webinar_id` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `participant_id: &str` -- User's first name.
-     * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
+     * * `participant_id` -- User's first name.
+     * * `type_` -- The webinar type.
      */
     pub async fn webinar_participant_qo(
         &self,
@@ -580,26 +580,25 @@ impl Dashboards {
             .await
     }
     /**
-     * List webinar participant QoS.
+     * List webinar participant QoS
      *
      * This function performs a `GET` to the `/metrics/webinars/{webinarId}/participants/qos` endpoint.
      *
      * Retrieve a list of participants from live or past webinars and the quality of service they received.<br>This data indicates the connection quality for sending/receiving video, audio, and shared content. If nothing is being sent or received at that time, no information will be shown in the fields.<br>
      * **Scopes:** `dashboard_webinars:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:**
+     *
      * * Business, Education or API Plan with Webinar add-on.
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *   
+     * * `webinar_id` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
-     * * `page_size: i64` -- The number of items returned per page.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `type_` -- The webinar type.
+     * * `page_size` -- The number of items returned per page.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn webinar_participants_qo(
         &self,
@@ -638,26 +637,25 @@ impl Dashboards {
             .await
     }
     /**
-     * Get sharing/recording details.
+     * Get sharing/recording details
      *
      * This function performs a `GET` to the `/metrics/webinars/{webinarId}/participants/sharing` endpoint.
      *
      * Retrieve the sharing and recording details of participants from live or past webinars. <br><br>
      * **Scopes:** `dashboard_webinars:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy` <br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy` <br>
      * **Prerequisites:**<br>
+     *
      * * Business, Education or API Plan with Webinar add-on.
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *   
+     * * `webinar_id` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
+     * * `type_` -- The webinar type.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn webinar_participant_share(
         &self,
@@ -697,25 +695,23 @@ impl Dashboards {
             .await
     }
     /**
-     * List Zoom Rooms.
+     * List Zoom Rooms
      *
      * This function performs a `GET` to the `/metrics/zoomrooms` endpoint.
      *
      * List information on all Zoom Rooms in an account.<br><br>
      * **Scopes:** `dashboard_zr:read:admin`
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Resource-intensive`<br>
-     *  **Prerequisites:**<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Resource-intensive`<br>
+     * **Prerequisites:**<br>
+     *
      * * Business, Education or API Plan with Zoom Rooms set up.
-     *
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- The page number of the current page in the returned records.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `page_number` -- The page number of the current page in the returned records.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn zoom_room(
         &self,
@@ -736,7 +732,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/metrics/zoomrooms?{}", query_), None);
+            .url(&format!("/metrics/zoomrooms?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -748,7 +744,7 @@ impl Dashboards {
             .await
     }
     /**
-     * Get Zoom Rooms details.
+     * Get Zoom Rooms details
      *
      * This function performs a `GET` to the `/metrics/zoomrooms/{zoomroomId}` endpoint.
      *
@@ -757,17 +753,17 @@ impl Dashboards {
      * Use this API to retrieve information on a specific room.<br><br>
      * **Scopes:** `dashboard_zr:read:admin`<br> <br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`**Prerequisites:**<br>
-     * * Business, Education or API Plan with Zoom Rooms set up.
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`**Prerequisites:**<br>
      *
+     * * Business, Education or API Plan with Zoom Rooms set up.
      *
      * **Parameters:**
      *
-     * * `zoomroom_id: &str` -- User's first name.
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `zoomroom_id` -- User's first name.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn zoom_room_dashboards(
         &self,
@@ -810,7 +806,7 @@ impl Dashboards {
             .await
     }
     /**
-     * Get CRC port usage.
+     * Get CRC port usage
      *
      * This function performs a `GET` to the `/metrics/crc` endpoint.
      *
@@ -818,15 +814,17 @@ impl Dashboards {
      *
      * Use this API to get the hour by hour CRC Port usage for a specified period of time. <aside class='notice'>We will provide the report for a maximum of one month. For example, if "from" is set to "2017-08-05" and "to" is set to "2017-10-10", we will adjust "from" to "2017-09-10".</aside><br><br>
      * **Prerequisites:**<br>
+     *
      * * Business, Education or API Plan.
      * * Room Connector must be enabled on the account.<br><br>
+     *
      * **Scopes:** `dashboard_crc:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
      */
     pub async fn crc(
         &self,
@@ -841,7 +839,7 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/metrics/crc?{}", query_), None);
+        let url = self.client.url(&format!("/metrics/crc?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -853,7 +851,7 @@ impl Dashboards {
             .await
     }
     /**
-     * Get IM metrics.
+     * Get IM metrics
      *
      * This function performs a `GET` to the `/metrics/im` endpoint.
      *
@@ -869,10 +867,10 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn im(
         &self,
@@ -895,7 +893,7 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/metrics/im?{}", query_), None);
+        let url = self.client.url(&format!("/metrics/im?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -907,7 +905,7 @@ impl Dashboards {
             .await
     }
     /**
-     * Get chat metrics.
+     * Get chat metrics
      *
      * This function performs a `GET` to the `/metrics/chat` endpoint.
      *
@@ -925,10 +923,10 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn chat(
         &self,
@@ -951,7 +949,7 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/metrics/chat?{}", query_), None);
+        let url = self.client.url(&format!("/metrics/chat?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -963,24 +961,25 @@ impl Dashboards {
             .await
     }
     /**
-     * List Zoom meetings client feedback.
+     * List Zoom meetings client feedback
      *
      * This function performs a `GET` to the `/metrics/client/feedback` endpoint.
      *
      * Retrieve survey results from [Zoom meetings client feedback](https://support.zoom.us/hc/en-us/articles/115005855266-End-of-Meeting-Feedback-Survey#h_e30d552b-6d8e-4e0a-a588-9ca8180c4dbf). <br> You can specify a monthly date range for the dashboard data using the `from` and `to` query parameters. The month should fall within the last six months.
      *
      * **Prerequisites:**
+     *
      * * Business or higher account
      * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) enabled.
      *
      * **Scope:** `account:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
      */
     pub async fn client_feedback(
         &self,
@@ -997,7 +996,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/metrics/client/feedback?{}", query_), None);
+            .url(&format!("/metrics/client/feedback?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1009,23 +1008,22 @@ impl Dashboards {
             .await
     }
     /**
-     * Get top 25 issues of Zoom Rooms.
+     * Get top 25 issues of Zoom Rooms
      *
      * This function performs a `GET` to the `/metrics/zoomrooms/issues` endpoint.
      *
      * Get top 25 issues of Zoom Rooms.<br>
      * **Scopes:** `dashboard_zr:read:admin`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
-     *  **Prerequisites:**<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **Prerequisites:**<br>
+     *
      * * Business, Education or API Plan with Zoom Rooms set up.
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
      */
     pub async fn zoom_room_issue(
         &self,
@@ -1042,7 +1040,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/metrics/zoomrooms/issues?{}", query_), None);
+            .url(&format!("/metrics/zoomrooms/issues?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1054,21 +1052,22 @@ impl Dashboards {
             .await
     }
     /**
-     * Get top 25 Zoom Rooms with issues.
+     * Get top 25 Zoom Rooms with issues
      *
      * This function performs a `GET` to the `/metrics/issues/zoomrooms` endpoint.
      *
      * Get information on top 25 Zoom Rooms with issues in a month. The month specified with the "from" and "to" range should fall within the last six months.<br>
      * **Scope:** `dashboard_home:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:**<br>
+     *
      * * Business or a higher plan.
      * * Zoom Room must be enabled in the account.
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
      */
     pub async fn issue_zoom_room(
         &self,
@@ -1085,7 +1084,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/metrics/issues/zoomrooms?{}", query_), None);
+            .url(&format!("/metrics/issues/zoomrooms?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1097,25 +1096,26 @@ impl Dashboards {
             .await
     }
     /**
-     * Get issues of Zoom Rooms.
+     * Get issues of Zoom Rooms
      *
      * This function performs a `GET` to the `/metrics/issues/zoomrooms/{zoomroomId}` endpoint.
      *
      * Get information about the issues that occured on the Top 25 **Zoom Rooms with issues** in an acount. <br> You can specify a monthly date range for the dashboard data using the `from` and `to` query parameters. The month should fall within the last six months.
      *
      * **Scope:** `dashboard_home:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      * **Prerequisites:** <br>
+     *
      * * Business or a higher plan.
      * * Zoom Room must be enabled in the account.
      *
      * **Parameters:**
      *
-     * * `zoomroom_id: &str` -- User's first name.
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `zoomroom_id` -- User's first name.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn issue_detail_zoom_room(
         &self,
@@ -1159,28 +1159,29 @@ impl Dashboards {
             .await
     }
     /**
-     * Get zoom meetings client feedback.
+     * Get zoom meetings client feedback
      *
      * This function performs a `GET` to the `/metrics/client/feedback/{feedbackId}` endpoint.
      *
      * Retrieve detailed information on a [Zoom meetings client feedback](https://support.zoom.us/hc/en-us/articles/115005855266-End-of-Meeting-Feedback-Survey#h_e30d552b-6d8e-4e0a-a588-9ca8180c4dbf). <br> You can specify a monthly date range for the dashboard data using the `from` and `to` query parameters. The month should fall within the last six months.
      *
      * **Prerequisites:**
+     *
      * * Business or higher account
      * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) enabled.
      *
      * **Scope:** `dashboard_home:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * `
      *
      * **Parameters:**
      *
-     * * `feedback_id: &str` -- User's first name.
-     * * `from: chrono::NaiveDate` -- Start Date.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `page_size: i64` -- Account seats.
-     * * `next_page_token: &str` -- User's first name.
+     * * `feedback_id` -- User's first name.
+     * * `from` -- Start Date.
+     * * `to` -- Start Date.
+     * * `page_size` -- Account seats.
+     * * `next_page_token` -- User's first name.
      */
     pub async fn client_feedback_detail(
         &self,
@@ -1224,7 +1225,7 @@ impl Dashboards {
             .await
     }
     /**
-     * List client meeting satisfaction.
+     * List client meeting satisfaction
      *
      * This function performs a `GET` to the `/metrics/client/satisfaction` endpoint.
      *
@@ -1232,12 +1233,12 @@ impl Dashboards {
      *
      * To get information on the survey results with negative experiences (indicated by **Thumbs Down**), use the [Get Zoom Meetings Client Feedback API](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardclientfeedbackdetail).<br>
      * **Scopes:** `dashboard:read:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- The start date for the query in “yyyy-mm-dd” format. .
-     * * `to: chrono::NaiveDate` -- The end date for the query in “yyyy-mm-dd” format. .
+     * * `from` -- The start date for the query in “yyyy-mm-dd” format.
+     * * `to` -- The end date for the query in “yyyy-mm-dd” format.
      */
     pub async fn list_meeting_satisfaction(
         &self,
@@ -1254,7 +1255,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/metrics/client/satisfaction?{}", query_), None);
+            .url(&format!("/metrics/client/satisfaction?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1266,7 +1267,7 @@ impl Dashboards {
             .await
     }
     /**
-     * List call logs.
+     * List call logs
      *
      * This function performs a `GET` to the `/phone/metrics/call_logs` endpoint.
      *
@@ -1275,6 +1276,7 @@ impl Dashboards {
      * Use this API to list monthly call logs metrics. You can use query parameters to filter the response by date, site and MOS(Mean Opinion Score) of the call.
      *
      * **Prerequisites:**
+     *
      * * Business, or Education account
      * * Zoom Phone license <br><br>
      *
@@ -1283,19 +1285,16 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `from: &str` -- Start date for the report in `yyyy-mm-dd` format. Specify a 30 day range using the `from` and `to` parameters as the response provides a maximum of a month worth of data per API request.
-     * * `to: &str` -- End date for the report in `yyyy-mm-dd` format.
-     * * `site_id: &str` -- Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites). Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by call logs of a specific phone site.
-     * * `quality_type: &str` -- Filter call logs by voice quality. Zoom uses MOS of 3.5 as a general baseline to categorize calls by call quality. A MOS greater than or equal to 3.5 means good quality, while below 3.5 means poor quality. <br><br>The value of this field can be one of the following:<br>
+     * * `from` -- Start date for the report in `yyyy-mm-dd` format. Specify a 30 day range using the `from` and `to` parameters as the response provides a maximum of a month worth of data per API request.
+     * * `to` -- End date for the report in `yyyy-mm-dd` format.
+     * * `site_id` -- Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites). Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by call logs of a specific phone site.
+     * * `quality_type` -- Filter call logs by voice quality. Zoom uses MOS of 3.5 as a general baseline to categorize calls by call quality. A MOS greater than or equal to 3.5 means good quality, while below 3.5 means poor quality. <br><br>The value of this field can be one of the following:<br>
+     *
      *   * `good`: Retrieve call logs of the call(s) with good quality of voice.<br>
      *   * `bad`: Retrieve call logs of the call(s) with good quality of voice.<br>
      *   * `all`: Retrieve all call logs without filtering by voice quality.
-     *   
-     *   
-     *   
-     *   .
-     * * `page_size: i64` -- The number of records returned within a single call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn list_call_logs_metrics(
         &self,
@@ -1328,7 +1327,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/metrics/call_logs?{}", query_), None);
+            .url(&format!("/phone/metrics/call_logs?{query_}"), None);
         let resp: crate::Response<crate::types::ListCallLogsMetricsResponseData> = self
             .client
             .get(
@@ -1348,7 +1347,7 @@ impl Dashboards {
         ))
     }
     /**
-     * List call logs.
+     * List call logs
      *
      * This function performs a `GET` to the `/phone/metrics/call_logs` endpoint.
      *
@@ -1359,6 +1358,7 @@ impl Dashboards {
      * Use this API to list monthly call logs metrics. You can use query parameters to filter the response by date, site and MOS(Mean Opinion Score) of the call.
      *
      * **Prerequisites:**
+     *
      * * Business, or Education account
      * * Zoom Phone license <br><br>
      *
@@ -1388,7 +1388,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/metrics/call_logs?{}", query_), None);
+            .url(&format!("/phone/metrics/call_logs?{query_}"), None);
         let crate::Response::<crate::types::ListCallLogsMetricsResponseData> {
             mut status,
             mut headers,
@@ -1418,7 +1418,7 @@ impl Dashboards {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1433,7 +1433,7 @@ impl Dashboards {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1455,7 +1455,7 @@ impl Dashboards {
         Ok(crate::Response::new(status, headers, call_logs))
     }
     /**
-     * Get call details from call log.
+     * Get call details from call log
      *
      * This function performs a `GET` to the `/phone/metrics/call_logs/{call_id}` endpoint.
      *
@@ -1464,16 +1464,16 @@ impl Dashboards {
      * Use this API to list call log details of a specific call.
      *
      * **Prerequisites:**
+     *
      * * Business, or Education account
      * * Zoom Phone license <br><br>
      *
      * **Scopes:** `phone:read:admin`, `phone:write:admin`<br>
      * **Rate Limit Label:** `Light`
      *
-     *
      * **Parameters:**
      *
-     * * `call_id: &str` -- Unique identifier of the phone call. The value of this field can be retrieved from [List Call Logs]() API.
+     * * `call_id` -- Unique identifier of the phone call. The value of this field can be retrieved from [List Call Logs]() API.
      */
     pub async fn get_call_log_metrics_details(
         &self,
@@ -1497,21 +1497,23 @@ impl Dashboards {
             .await
     }
     /**
-     * Get call QoS.
+     * Get call QoS
      *
      * This function performs a `GET` to the `/phone/metrics/call_logs/{callId}/qos` endpoint.
      *
      * Get call quality of service(QoS) data for a call made or received by a Zoom phone user in the account.
      *
      * **Prerequisites:**
+     *
      * * Business, or Education account
      * * Zoom Phone license <br><br>
+     *
      * **Scopes:** `phone:read:admin`, `phone:write:admin`<br>
      * **Rate Limit Label:** `Light`
      *
      * **Parameters:**
      *
-     * * `call_id: &str` -- Unique identifier of the call.
+     * * `call_id` -- Unique identifier of the call.
      */
     pub async fn get_call_qo(
         &self,
@@ -1535,30 +1537,31 @@ impl Dashboards {
             .await
     }
     /**
-     * Get post meeting feedback.
+     * Get post meeting feedback
      *
      * This function performs a `GET` to the `/metrics/meetings/{meetingId}/participants/satisfaction` endpoint.
      *
      * When a meeting ends, each attendee will be prompted to share their meeting experience by clicking either thumbs up or thumbs down. Use this API to retrieve the feedback submitted for a specific meeting. Note that this API only works for meetings scheduled after December 20, 2020.
      *
      * **Prerequisites:**
+     *
      * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) setting must be enabled by the participant prior to the meeting.
      * * The user making the API request must be enrolled in a Business or a higher plan.
      *
-     * <br> **Scope:** `dashboard_meetings:read:admiin`
+     * **Scope:** `dashboard_meetings:read:admiin`
      *
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      *
      * **Parameters:**
      *
-     * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *   
+     * * `meeting_id` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single API call.
      */
     pub async fn participant_feedback(
         &self,
@@ -1606,7 +1609,7 @@ impl Dashboards {
         ))
     }
     /**
-     * Get post meeting feedback.
+     * Get post meeting feedback
      *
      * This function performs a `GET` to the `/metrics/meetings/{meetingId}/participants/satisfaction` endpoint.
      *
@@ -1615,10 +1618,11 @@ impl Dashboards {
      * When a meeting ends, each attendee will be prompted to share their meeting experience by clicking either thumbs up or thumbs down. Use this API to retrieve the feedback submitted for a specific meeting. Note that this API only works for meetings scheduled after December 20, 2020.
      *
      * **Prerequisites:**
+     *
      * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) setting must be enabled by the participant prior to the meeting.
      * * The user making the API request must be enrolled in a Business or a higher plan.
      *
-     * <br> **Scope:** `dashboard_meetings:read:admiin`
+     * **Scope:** `dashboard_meetings:read:admiin`
      *
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      */
@@ -1670,7 +1674,7 @@ impl Dashboards {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1685,7 +1689,7 @@ impl Dashboards {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1707,30 +1711,30 @@ impl Dashboards {
         Ok(crate::Response::new(status, headers, participants))
     }
     /**
-     * Get post webinar feedback.
+     * Get post webinar feedback
      *
      * This function performs a `GET` to the `/metrics/webinars/{webinarId}/participants/satisfaction` endpoint.
      *
      * When a Webinar ends, each attendee will be prompted to share their Webinar experience by clicking either thumbs up or thumbs down. Use this API to retrieve the feedback submitted for a specific webinar. Note that this API only works for meetings scheduled after December 20, 2020.
      *
      * **Prerequisites:**
+     *
      * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) setting must be enabled by the participant prior to the meeting.
      * * The user making the API request must be enrolled in a Business or a higher plan.
      *
-     *
-     * <br> **Scope:** `dashboard_webinars:read:admin`
+     * **Scope:** `dashboard_webinars:read:admin`
      *
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      *
      * **Parameters:**
      *
-     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
-     *  
-     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *   
+     * * `type_` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+     *
+     *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `webinar_id` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
+     *
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn participant_webinar_feedback(
@@ -1779,7 +1783,7 @@ impl Dashboards {
         ))
     }
     /**
-     * Get post webinar feedback.
+     * Get post webinar feedback
      *
      * This function performs a `GET` to the `/metrics/webinars/{webinarId}/participants/satisfaction` endpoint.
      *
@@ -1788,11 +1792,11 @@ impl Dashboards {
      * When a Webinar ends, each attendee will be prompted to share their Webinar experience by clicking either thumbs up or thumbs down. Use this API to retrieve the feedback submitted for a specific webinar. Note that this API only works for meetings scheduled after December 20, 2020.
      *
      * **Prerequisites:**
+     *
      * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) setting must be enabled by the participant prior to the meeting.
      * * The user making the API request must be enrolled in a Business or a higher plan.
      *
-     *
-     * <br> **Scope:** `dashboard_webinars:read:admin`
+     * **Scope:** `dashboard_webinars:read:admin`
      *
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      */
@@ -1844,7 +1848,7 @@ impl Dashboards {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1859,7 +1863,7 @@ impl Dashboards {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,

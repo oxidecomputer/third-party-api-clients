@@ -20,13 +20,13 @@ impl Search {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `search:read`.
-     * * `count: i64` -- Pass the number of results you want per "page". Maximum of `100`.
-     * * `highlight: bool` -- Pass a value of `true` to enable query highlight markers (see below).
-     * * `page: i64`
-     * * `query: &str` -- Search query.
-     * * `sort: &str` -- Return matches sorted by either `score` or `timestamp`.
-     * * `sort_dir: &str` -- Change sort direction to ascending (`asc`) or descending (`desc`).
+     * * `token` -- Authentication token. Requires scope: `search:read`
+     * * `count` -- Pass the number of results you want per "page". Maximum of `100`.
+     * * `highlight` -- Pass a value of `true` to enable query highlight markers (see below).
+     * * `page`
+     * * `query` -- Search query.
+     * * `sort` -- Return matches sorted by either `score` or `timestamp`.
+     * * `sort_dir` -- Change sort direction to ascending (`asc`) or descending (`desc`).
      */
     pub async fn message(
         &self,
@@ -57,9 +57,7 @@ impl Search {
             query_args.push(("sort_dir".to_string(), sort_dir.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/search.messages?{}", query_), None);
+        let url = self.client.url(&format!("/search.messages?{query_}"), None);
         self.client
             .get(
                 &url,

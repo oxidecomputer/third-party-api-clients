@@ -12,7 +12,7 @@ impl Receipts {
     }
 
     /**
-     * List receipts.
+     * List receipts
      *
      * This function performs a `GET` to the `/receipts` endpoint.
      *
@@ -20,12 +20,12 @@ impl Receipts {
      *
      * **Parameters:**
      *
-     * * `from_date: chrono::DateTime<chrono::Utc>` -- Filter for receipts related to transactions which occurred after the specified date.
-     * * `to_date: chrono::DateTime<chrono::Utc>` -- Filter for receipts related to transactions which occurred before the specified date.
-     * * `created_after: chrono::DateTime<chrono::Utc>` -- Filter for receipts that were created after the specified date.
-     * * `created_before: chrono::DateTime<chrono::Utc>` -- Filter for receipts that were created before the specified date.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `from_date` -- Filter for receipts related to transactions which occurred after the specified date.
+     * * `to_date` -- Filter for receipts related to transactions which occurred before the specified date.
+     * * `created_after` -- Filter for receipts that were created after the specified date.
+     * * `created_before` -- Filter for receipts that were created before the specified date.
+     * * `start` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     pub async fn get_page(
         &self,
@@ -56,7 +56,7 @@ impl Receipts {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/receipts?{}", query_), None);
+        let url = self.client.url(&format!("/receipts?{query_}"), None);
         let resp: crate::Response<crate::types::GetReceiptsResponse> = self
             .client
             .get(
@@ -76,7 +76,7 @@ impl Receipts {
         ))
     }
     /**
-     * List receipts.
+     * List receipts
      *
      * This function performs a `GET` to the `/receipts` endpoint.
      *
@@ -105,7 +105,7 @@ impl Receipts {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/receipts?{}", query_), None);
+        let url = self.client.url(&format!("/receipts?{query_}"), None);
         let crate::Response::<crate::types::GetReceiptsResponse> {
             mut status,
             mut headers,
@@ -162,11 +162,9 @@ impl Receipts {
         Ok(crate::Response::new(status, headers, data))
     }
     /**
-     * Get details for one receipt.
+     * Get details for one receipt
      *
      * This function performs a `GET` to the `/receipts/{id}` endpoint.
-     *
-     *
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Receipt>> {
         let url = self.client.url(

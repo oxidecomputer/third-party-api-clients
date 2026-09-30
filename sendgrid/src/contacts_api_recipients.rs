@@ -12,7 +12,7 @@ impl ContactsApiRecipients {
     }
 
     /**
-     * Retrieve recipients.
+     * Retrieve recipients
      *
      * This function performs a `GET` to the `/contactdb/recipients` endpoint.
      *
@@ -23,9 +23,9 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `page: i64` -- Page index of first recipients to return (must be a positive integer).
-     * * `page_size: i64` -- Number of recipients to return at a time (must be a positive integer between 1 and 1000).
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `page` -- Page index of first recipients to return (must be a positive integer)
+     * * `page_size` -- Number of recipients to return at a time (must be a positive integer between 1 and 1000)
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_recipients(
         &self,
@@ -42,7 +42,7 @@ impl ContactsApiRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/contactdb/recipients?{}", query_), None);
+            .url(&format!("/contactdb/recipients?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -54,7 +54,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Add recipients.
+     * Add recipients
      *
      * This function performs a `POST` to the `/contactdb/recipients` endpoint.
      *
@@ -66,7 +66,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_contactdb_recipient(
         &self,
@@ -84,7 +84,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Delete Recipients.
+     * Delete Recipients
      *
      * This function performs a `DELETE` to the `/contactdb/recipients` endpoint.
      *
@@ -94,7 +94,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_recipients(
         &self,
@@ -112,7 +112,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Update Recipient.
+     * Update Recipient
      *
      * This function performs a `PATCH` to the `/contactdb/recipients` endpoint.
      *
@@ -124,7 +124,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_contactdb_recipients(
         &self,
@@ -142,7 +142,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Get Recipient Upload Status.
+     * Get Recipient Upload Status
      *
      * This function performs a `GET` to the `/contactdb/status` endpoint.
      *
@@ -150,7 +150,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_statu(
         &self,
@@ -167,7 +167,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Retrieve a single recipient.
+     * Retrieve a single recipient
      *
      * This function performs a `GET` to the `/contactdb/recipients/{recipient_id}` endpoint.
      *
@@ -175,7 +175,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_recipients_recipient(
         &self,
@@ -199,7 +199,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Delete a Recipient.
+     * Delete a Recipient
      *
      * This function performs a `DELETE` to the `/contactdb/recipients/{recipient_id}` endpoint.
      *
@@ -209,7 +209,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_recipients_recipient(
         &self,
@@ -233,7 +233,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Retrieve the lists that a recipient is on.
+     * Retrieve the lists that a recipient is on
      *
      * This function performs a `GET` to the `/contactdb/recipients/{recipient_id}/lists` endpoint.
      *
@@ -243,7 +243,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_recipients_recipient_lists(
         &self,
@@ -268,7 +268,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Retrieve the count of billable recipients.
+     * Retrieve the count of billable recipients
      *
      * This function performs a `GET` to the `/contactdb/recipients/billable_count` endpoint.
      *
@@ -278,7 +278,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_recipients_billable_count(
         &self,
@@ -297,7 +297,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Retrieve a Count of Recipients.
+     * Retrieve a Count of Recipients
      *
      * This function performs a `GET` to the `/contactdb/recipients/count` endpoint.
      *
@@ -305,7 +305,7 @@ impl ContactsApiRecipients {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_recipients_count(
         &self,
@@ -322,7 +322,7 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Search recipients.
+     * Search recipients
      *
      * This function performs a `GET` to the `/contactdb/recipients/search` endpoint.
      *
@@ -333,14 +333,14 @@ impl ContactsApiRecipients {
      * * is a variable that is substituted for your actual custom field name from your recipient.
      * * Text fields must be url-encoded. Date fields are searchable only by unix timestamp (e.g. 2/2/2015 becomes 1422835200)
      * * If field_name is a 'reserved' date field, such as created_at or updated_at, the system will internally convert
-     * your epoch time to a date range encompassing the entire day. For example, an epoch time of 1422835600 converts to
-     * Mon, 02 Feb 2015 00:06:40 GMT, but internally the system will search from Mon, 02 Feb 2015 00:00:00 GMT through
-     * Mon, 02 Feb 2015 23:59:59 GMT.
+     *   your epoch time to a date range encompassing the entire day. For example, an epoch time of 1422835600 converts to
+     *   Mon, 02 Feb 2015 00:06:40 GMT, but internally the system will search from Mon, 02 Feb 2015 00:00:00 GMT through
+     *   Mon, 02 Feb 2015 23:59:59 GMT.
      *
      * **Parameters:**
      *
-     * * `field_name: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `field_name` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_recipients_search(
         &self,
@@ -353,7 +353,7 @@ impl ContactsApiRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/contactdb/recipients/search?{}", query_), None);
+            .url(&format!("/contactdb/recipients/search?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -365,52 +365,52 @@ impl ContactsApiRecipients {
             .await
     }
     /**
-     * Search recipients.
+     * Search recipients
      *
      * This function performs a `POST` to the `/contactdb/recipients/search` endpoint.
      *
      * <p>
-     *   Search using segment conditions without actually creating a segment.
-     *   Body contains a JSON object with <code>conditions</code>, a list of conditions as described below, and an optional <code>list_id</code>, which is a valid list ID for a list to limit the search on.
+     * Search using segment conditions without actually creating a segment.
+     * Body contains a JSON object with <code>conditions</code>, a list of conditions as described below, and an optional <code>list_id</code>, which is a valid list ID for a list to limit the search on.
      * </p>
      *
      * <p>
-     *   Valid operators for create and update depend on the type of the field for which you are searching.
+     * Valid operators for create and update depend on the type of the field for which you are searching.
      * </p>
      *
      * <ul>
-     *   <li>Dates:
-     *     <ul>
-     *       <li>"eq", "ne", "lt" (before), "gt" (after)
-     *         <ul>
-     *           <li>You may use MM/DD/YYYY for day granularity or an epoch for second granularity.</li>
-     *         </ul>
-     *       </li>
-     *       <li>"empty", "not_empty"</li>
-     *       <li>"is within"
-     *         <ul>
-     *           <li>You may use an <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 date format</a> or the # of days.</li>
-     *         </ul>
-     *       </li>
-     *     </ul>
-     *   </li>
-     *   <li>Text: "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value), "empty", "not_empty"</li>
-     *   <li>Numbers: "eq", "lt", "gt", "empty", "not_empty"</li>
-     *   <li>Email Clicks and Opens: "eq" (opened), "ne" (not opened)</li>
+     * <li>Dates:
+     * <ul>
+     * <li>"eq", "ne", "lt" (before), "gt" (after)
+     * <ul>
+     * <li>You may use MM/DD/YYYY for day granularity or an epoch for second granularity.</li>
+     * </ul>
+     * </li>
+     * <li>"empty", "not_empty"</li>
+     * <li>"is within"
+     * <ul>
+     * <li>You may use an <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 date format</a> or the # of days.</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * </li>
+     * <li>Text: "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value), "empty", "not_empty"</li>
+     * <li>Numbers: "eq", "lt", "gt", "empty", "not_empty"</li>
+     * <li>Email Clicks and Opens: "eq" (opened), "ne" (not opened)</li>
      * </ul>
      *
      * <p>
-     *   Field values must all be a string.
+     * Field values must all be a string.
      * </p>
      *
      * <p>
-     *   Search conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either <code>clicks.campaign_identifier</code> or <code>opens.campaign_identifier</code>.
-     *   The condition value should be a string containing the id of a completed campaign.
+     * Search conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either <code>clicks.campaign_identifier</code> or <code>opens.campaign_identifier</code>.
+     * The condition value should be a string containing the id of a completed campaign.
      * </p>
      *
      * <p>
-     *   Search conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field.
-     *   The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
+     * Search conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field.
+     * The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
      * </p>
      */
     pub async fn post_contactdb_recipients_search(

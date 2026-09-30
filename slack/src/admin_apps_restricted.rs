@@ -20,11 +20,11 @@ impl AdminAppsRestricted {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.apps:read`.
-     * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     * * `team_id: &str`
-     * * `enterprise_id: &str`
+     * * `token` -- Authentication token. Requires scope: `admin.apps:read`
+     * * `limit` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * * `team_id`
+     * * `enterprise_id`
      */
     pub async fn list(
         &self,
@@ -49,7 +49,7 @@ impl AdminAppsRestricted {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.apps.restricted.list?{}", query_), None);
+            .url(&format!("/admin.apps.restricted.list?{query_}"), None);
         self.client
             .get(
                 &url,

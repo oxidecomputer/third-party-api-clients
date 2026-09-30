@@ -28,7 +28,7 @@ impl ApiKeyPermissions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_scopes(
         &self,

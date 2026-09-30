@@ -12,7 +12,7 @@ impl SingleSignOnTeammates {
     }
 
     /**
-     * Create SSO Teammate.
+     * Create SSO Teammate
      *
      * This function performs a `POST` to the `/sso/teammates` endpoint.
      *
@@ -36,7 +36,7 @@ impl SingleSignOnTeammates {
             .await
     }
     /**
-     * Edit an SSO Teammate.
+     * Edit an SSO Teammate
      *
      * This function performs a `PATCH` to the `/sso/teammates/{username}` endpoint.
      *

@@ -12,7 +12,7 @@ impl IpAccessManagement {
     }
 
     /**
-     * Retrieve a list of currently allowed IPs.
+     * Retrieve a list of currently allowed IPs
      *
      * This function performs a `GET` to the `/access_settings/whitelist` endpoint.
      *
@@ -22,7 +22,7 @@ impl IpAccessManagement {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_access_settings_whitelist(
         &self,
@@ -39,7 +39,7 @@ impl IpAccessManagement {
             .await
     }
     /**
-     * Add one or more IPs to the allow list.
+     * Add one or more IPs to the allow list
      *
      * This function performs a `POST` to the `/access_settings/whitelist` endpoint.
      *
@@ -49,7 +49,7 @@ impl IpAccessManagement {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_access_settings_whitelist(
         &self,
@@ -67,7 +67,7 @@ impl IpAccessManagement {
             .await
     }
     /**
-     * Remove one or more IPs from the allow list.
+     * Remove one or more IPs from the allow list
      *
      * This function performs a `DELETE` to the `/access_settings/whitelist` endpoint.
      *
@@ -79,7 +79,7 @@ impl IpAccessManagement {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_access_settings_whitelist(
         &self,
@@ -97,7 +97,7 @@ impl IpAccessManagement {
             .await
     }
     /**
-     * Retrieve all recent access attempts.
+     * Retrieve all recent access attempts
      *
      * This function performs a `GET` to the `/access_settings/activity` endpoint.
      *
@@ -105,8 +105,8 @@ impl IpAccessManagement {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- Limits the number of IPs to return.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- Limits the number of IPs to return.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_access_settings_activity(
         &self,
@@ -119,7 +119,7 @@ impl IpAccessManagement {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/access_settings/activity?{}", query_), None);
+            .url(&format!("/access_settings/activity?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -131,7 +131,7 @@ impl IpAccessManagement {
             .await
     }
     /**
-     * Retrieve a specific allowed IP.
+     * Retrieve a specific allowed IP
      *
      * This function performs a `GET` to the `/access_settings/whitelist/{rule_id}` endpoint.
      *
@@ -141,7 +141,7 @@ impl IpAccessManagement {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_access_settings_whitelist_rule(
         &self,
@@ -165,7 +165,7 @@ impl IpAccessManagement {
             .await
     }
     /**
-     * Remove a specific IP from the allowed list.
+     * Remove a specific IP from the allowed list
      *
      * This function performs a `DELETE` to the `/access_settings/whitelist/{rule_id}` endpoint.
      *
@@ -175,7 +175,7 @@ impl IpAccessManagement {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_access_settings_whitelist_rule(
         &self,

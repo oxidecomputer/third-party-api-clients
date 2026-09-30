@@ -12,7 +12,7 @@ impl CardPrograms {
     }
 
     /**
-     * List card programs.
+     * List card programs
      *
      * This function performs a `GET` to the `/card-programs` endpoint.
      *
@@ -20,9 +20,9 @@ impl CardPrograms {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `authorization` -- The OAuth2 token header
+     * * `start` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     pub async fn get_page(
         &self,
@@ -37,7 +37,7 @@ impl CardPrograms {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/card-programs?{}", query_), None);
+        let url = self.client.url(&format!("/card-programs?{query_}"), None);
         let resp: crate::Response<crate::types::GetCardProgramsResponse> = self
             .client
             .get(
@@ -57,7 +57,7 @@ impl CardPrograms {
         ))
     }
     /**
-     * List card programs.
+     * List card programs
      *
      * This function performs a `GET` to the `/card-programs` endpoint.
      *
@@ -123,15 +123,13 @@ impl CardPrograms {
         Ok(crate::Response::new(status, headers, card_programs))
     }
     /**
-     * Create a card program.
+     * Create a card program
      *
      * This function performs a `POST` to the `/card-programs` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn post_resources(
         &self,
@@ -149,7 +147,7 @@ impl CardPrograms {
             .await
     }
     /**
-     * GET a card program.
+     * GET a card program
      *
      * This function performs a `GET` to the `/card-programs/{id}` endpoint.
      *
@@ -157,7 +155,7 @@ impl CardPrograms {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get_program(
         &self,

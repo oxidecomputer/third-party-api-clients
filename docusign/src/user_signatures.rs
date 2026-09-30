@@ -26,14 +26,13 @@ impl UserSignatures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `stamp_type: &str` -- The type of stamps to return. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `stamp_type` -- The type of stamps to return. Valid values are:
+     *
      *   - `signature`: Returns information about signature images only. This is the default value.
      *   - `stamp`: Returns information about eHanko and custom stamps only.
-     *   - null.
+     *   - null
      */
     pub async fn get(
         &self,
@@ -70,13 +69,10 @@ impl UserSignatures {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/users/{userId}/signatures` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn put_signature(
         &self,
@@ -129,9 +125,8 @@ impl UserSignatures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn post(
         &self,
@@ -172,10 +167,9 @@ impl UserSignatures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signature_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn get_signature(
         &self,
@@ -219,11 +213,10 @@ impl UserSignatures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `close_existing_signature: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signature_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `close_existing_signature` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put_signature_user_signatures(
         &self,
@@ -276,10 +269,9 @@ impl UserSignatures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signature_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn delete_signature(
         &self,
@@ -323,15 +315,14 @@ impl UserSignatures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `image_type: &str` -- Specificies the type of image. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `image_type` -- Specificies the type of image. Valid values are:
+     *
      *   - `signature_image`
-     *   - `initials_image`.
-     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `include_chrome: &str` -- When **true**, the chrome (or frame containing the added line and identifier) is included with the signature image.
+     *   - `initials_image`
+     * * `signature_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `include_chrome` -- When **true**, the chrome (or frame containing the added line and identifier) is included with the signature image.
      */
     pub async fn get_signature_image(
         &self,
@@ -380,18 +371,16 @@ impl UserSignatures {
      *
      * For example encode "Bob Smith" as "Bob%20Smith".
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `image_type: &str` -- Specificies the type of image. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `image_type` -- Specificies the type of image. Valid values are:
+     *
      *   - `signature_image`
-     *   - `initials_image`.
-     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `transparent_png: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     *   - `initials_image`
+     * * `signature_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `transparent_png` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put_signature_image(
         &self,
@@ -444,14 +433,13 @@ impl UserSignatures {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `image_type: &str` -- Specificies the type of image. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `image_type` -- Specificies the type of image. Valid values are:
+     *
      *   - `signature_image`
-     *   - `initials_image`.
-     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     *   - `initials_image`
+     * * `signature_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn delete_signature_image(
         &self,
