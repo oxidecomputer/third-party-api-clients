@@ -401,7 +401,7 @@ dependencies = [
 
 [[package]]
 name = "docusign"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -438,7 +438,7 @@ dependencies = [
 
 [[package]]
 name = "dolladollabills"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -781,7 +781,7 @@ checksum = "07e28edb80900c19c28f1072f2e8aeca7fa06b23cd4169cefe1af5aa3260783f"
 
 [[package]]
 name = "giphy-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -818,7 +818,7 @@ dependencies = [
 
 [[package]]
 name = "google-calendar"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -856,7 +856,7 @@ dependencies = [
 
 [[package]]
 name = "google-cloud-resource-manager"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -894,7 +894,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -932,7 +932,7 @@ dependencies = [
 
 [[package]]
 name = "google-groups-settings"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -970,7 +970,7 @@ dependencies = [
 
 [[package]]
 name = "gsuite-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -1008,7 +1008,7 @@ dependencies = [
 
 [[package]]
 name = "gusto-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -1665,7 +1665,7 @@ checksum = "112b39cec0b298b6c1999fee3e31427f74f676e4cb9879ed1a121b43661a4154"
 
 [[package]]
 name = "mailchimp-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -1877,7 +1877,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -1914,7 +1914,7 @@ dependencies = [
 
 [[package]]
 name = "okta"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -2234,7 +2234,7 @@ checksum = "f8dcc9c7d52a811697d2151c701e0d08956f92b0e24136cf4cf27b57a6a0d9bf"
 
 [[package]]
 name = "ramp-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -2537,7 +2537,7 @@ dependencies = [
 
 [[package]]
 name = "revai"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -2830,7 +2830,7 @@ checksum = "8a7852d02fc848982e0c167ef163aaff9cd91dc640ba85e263cb1ce46fae51cd"
 
 [[package]]
 name = "sendgrid-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -2956,7 +2956,7 @@ dependencies = [
 
 [[package]]
 name = "sheets"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -2994,7 +2994,7 @@ dependencies = [
 
 [[package]]
 name = "shipbob"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -3037,7 +3037,7 @@ checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
 name = "shopify"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -3130,7 +3130,7 @@ dependencies = [
 
 [[package]]
 name = "slack-chat-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -3501,7 +3501,7 @@ dependencies = [
 
 [[package]]
 name = "tripactions"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -4222,7 +4222,7 @@ dependencies = [
 
 [[package]]
 name = "zoom-api"
-version = "0.11.0-rc.1"
+version = "0.11.0-rc.2"
 dependencies = [
  "async-recursion",
  "async-trait",
