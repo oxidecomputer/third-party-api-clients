@@ -1,5 +1,4 @@
-use rand::RngCore;
-use rsa::{RsaPrivateKey, pkcs1::EncodeRsaPrivateKey};
+use rsa::{RsaPrivateKey, pkcs1::EncodeRsaPrivateKey, rand_core::OsRng};
 use std::{mem, time::Duration, time::SystemTime};
 
 use wiremock::{
@@ -15,17 +14,15 @@ use octorust::{
 };
 
 fn app_id() -> i64 {
-    let mut rng = rand::thread_rng();
-    rng.next_u32() as i64
+    rand::random::<u32>() as i64
 }
 
 fn installation_id() -> i64 {
-    let mut rng = rand::thread_rng();
-    rng.next_u32() as i64
+    rand::random::<u32>() as i64
 }
 
 fn private_key() -> Vec<u8> {
-    let mut rng = rand::thread_rng();
+    let mut rng = OsRng;
     let private_key = RsaPrivateKey::new(&mut rng, 2048)
         .unwrap()
         .to_pkcs1_der()
