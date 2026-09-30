@@ -293,7 +293,7 @@ impl Client {
             let mut req = self.make_request(method.clone(), uri, message, media_type, authentication).await?;
 
             if method == http::Method::GET {
-                if let Ok(etag) = self.http_cache.lookup_etag(&uri) {
+                if let Ok(etag) = self.http_cache.lookup_etag(uri) {
                     req = req.header(http::header::IF_NONE_MATCH, etag);
                 }
             }
@@ -326,7 +326,7 @@ impl Client {
             {
                 if let Some(etag) = etag {
                     if let Err(e) = self.http_cache.cache_response(
-                        &uri,
+                        uri,
                         &response_body,
                         &etag,
                         &next_link.as_ref().map(|n| n.0.clone()),
@@ -350,13 +350,13 @@ impl Client {
                     // header when cargo builds with --cfg feature="httpcache"
                     #[cfg(feature = "httpcache")]
                     {
-                        let body = self.http_cache.lookup_body(&uri).unwrap();
+                        let body = self.http_cache.lookup_body(uri).unwrap();
                         let out = serde_json::from_str::<Out>(&body).unwrap();
                         let link = match next_link {
                             Some(next_link) => Ok(Some(next_link)),
                             None => self
                                 .http_cache
-                                .lookup_next_link(&uri)
+                                .lookup_next_link(uri)
                                 .map(|next_link| next_link.map(crate::utils::NextLink)),
                         };
                         link.map(|link| (link, Response::new(status, headers, out)))

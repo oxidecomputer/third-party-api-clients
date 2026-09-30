@@ -172,7 +172,7 @@ pub fn cache_path<S: AsRef<OsStr>>(dir: &Path, uri: &str, extension: S) -> PathB
     let uri_encoded = uri.replace(" ", "%20");
     let uri = uri_encoded
         .parse::<Uri>()
-        .unwrap_or_else(|_| panic!("Expected a URI, got {}", uri_encoded));
+        .unwrap_or_else(|_| panic!("Expected a URI, got {uri_encoded}"));
     let parts = uri.clone().into_parts();
     let mut path = dir.to_path_buf();
     path.push("v1");
@@ -231,5 +231,5 @@ fn hash1<A: Hash, H: Hasher>(x: A, mut hasher: H) -> String {
 /// ```
 #[doc(hidden)] // public for doc testing only
 pub fn u64_to_padded_hex(x: u64) -> String {
-    format!("{:016x}", x)
+    format!("{x:016x}")
 }

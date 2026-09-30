@@ -3327,6 +3327,12 @@ yup-oauth2 = { version = "12", default-features = false, features = ["hyper-rust
                     .to_string();
             }
 
+            let rsa_dev_lib = if proper_name == "GitHub" {
+                r#"{ version = "0.8.1", features = ["getrandom"] }"#
+            } else {
+                r#""0.8.1""#
+            };
+
             let mut toml = root.clone();
             toml.push("Cargo.toml");
             let tomlout = format!(
@@ -3382,8 +3388,8 @@ tokio = {{ version = "1.25.0", default-features = false }}
 base64 = "^0.21"
 dirs = "^3.0.2"
 nom_pem = "4"
-rand = "0.8.5"
-rsa = "0.8.1"
+rand = "0.10.1"
+rsa = {rsa_dev_lib}
 tokio = {{ version = "1.25.0", features = ["full", "test-util"] }}
 wiremock = "0.5.17"
 
