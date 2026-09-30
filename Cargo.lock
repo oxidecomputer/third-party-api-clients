@@ -182,9 +182,9 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "bytes"
-version = "1.8.0"
+version = "1.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ac0150caa2ae65ca5bd83f25c7de183dea78d4d366469f148435e2acfbad0da"
+checksum = "1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33"
 dependencies = [
  "serde",
 ]
@@ -410,7 +410,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -447,7 +447,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -695,7 +695,7 @@ dependencies = [
  "anyhow",
  "english-numbers",
  "getopts",
- "http 0.2.12",
+ "http 1.5.0",
  "openapiv3",
  "serde",
  "serde_json",
@@ -790,7 +790,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -827,7 +827,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -865,7 +865,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -903,7 +903,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -941,7 +941,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -979,7 +979,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1017,7 +1017,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1074,7 +1074,7 @@ dependencies = [
  "fnv",
  "futures-core",
  "futures-sink",
- "http 1.1.0",
+ "http 1.5.0",
  "indexmap 2.14.0",
  "slab",
  "tokio",
@@ -1128,12 +1128,11 @@ dependencies = [
 
 [[package]]
 name = "http"
-version = "1.1.0"
+version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "21b9ddb458710bc376481b842f5da65cdf31522de232c1ca8146abce2a358258"
+checksum = "918d3568bebf352712bc2ef3d46a8bcf1a75b373be6539de198e9105cbbf9ce0"
 dependencies = [
  "bytes",
- "fnv",
  "itoa",
 ]
 
@@ -1155,7 +1154,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1efedce1fb8e6913f23e0c92de8e62cd5b772a67e7b3946df930a62566c93184"
 dependencies = [
  "bytes",
- "http 1.1.0",
+ "http 1.5.0",
 ]
 
 [[package]]
@@ -1166,7 +1165,7 @@ checksum = "793429d76616a256bcb62c2a2ec2bed781c8307e797e2598c50010f2bee2544f"
 dependencies = [
  "bytes",
  "futures-util",
- "http 1.1.0",
+ "http 1.5.0",
  "http-body 1.0.1",
  "pin-project-lite",
 ]
@@ -1239,7 +1238,7 @@ dependencies = [
  "futures-channel",
  "futures-core",
  "h2 0.4.16",
- "http 1.1.0",
+ "http 1.5.0",
  "http-body 1.0.1",
  "httparse",
  "httpdate",
@@ -1257,7 +1256,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08afdbb5c31130e3034af566421053ab03787c640246a446327f550d11bcb333"
 dependencies = [
  "futures-util",
- "http 1.1.0",
+ "http 1.5.0",
  "hyper 1.9.0",
  "hyper-util",
  "rustls",
@@ -1294,7 +1293,7 @@ dependencies = [
  "bytes",
  "futures-channel",
  "futures-util",
- "http 1.1.0",
+ "http 1.5.0",
  "http-body 1.0.1",
  "hyper 1.9.0",
  "ipnet",
@@ -1675,7 +1674,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1887,7 +1886,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1924,7 +1923,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2244,7 +2243,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2427,7 +2426,7 @@ dependencies = [
  "bytes",
  "futures-core",
  "futures-util",
- "http 1.1.0",
+ "http 1.5.0",
  "http-body 1.0.1",
  "http-body-util",
  "hyper 1.9.0",
@@ -2467,7 +2466,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "51b1fc1521b1ec6eeebcf412357bfe28db3eb23008c91852bb69120a1d7ab6d0"
 dependencies = [
  "async-trait",
- "http 1.1.0",
+ "http 1.5.0",
  "reqwest",
  "reqwest-middleware",
 ]
@@ -2480,7 +2479,7 @@ checksum = "199dda04a536b532d0cc04d7979e39b1c763ea749bf91507017069c00b96056f"
 dependencies = [
  "anyhow",
  "async-trait",
- "http 1.1.0",
+ "http 1.5.0",
  "reqwest",
  "thiserror 2.0.18",
  "tower-service",
@@ -2496,7 +2495,7 @@ dependencies = [
  "async-trait",
  "futures",
  "getrandom 0.2.15",
- "http 1.1.0",
+ "http 1.5.0",
  "hyper 1.9.0",
  "reqwest",
  "reqwest-middleware",
@@ -2516,7 +2515,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "getrandom 0.2.15",
- "http 1.1.0",
+ "http 1.5.0",
  "matchit",
  "reqwest",
  "reqwest-middleware",
@@ -2548,7 +2547,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2841,7 +2840,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2967,7 +2966,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -3005,7 +3004,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -3048,7 +3047,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -3141,7 +3140,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -3451,7 +3450,7 @@ dependencies = [
  "bitflags",
  "bytes",
  "futures-util",
- "http 1.1.0",
+ "http 1.5.0",
  "http-body 1.0.1",
  "pin-project-lite",
  "tower",
@@ -3513,7 +3512,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
@@ -4123,7 +4122,7 @@ checksum = "ef19a12dfb29fe39f78e1547e1be49717b84aef8762a4001359ed4f94d3accc1"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
- "http 1.1.0",
+ "http 1.5.0",
  "http-body-util",
  "hyper 1.9.0",
  "hyper-rustls",
@@ -4234,7 +4233,7 @@ dependencies = [
  "bytes",
  "chrono",
  "dirs",
- "http 1.1.0",
+ "http 1.5.0",
  "jsonwebtoken",
  "log",
  "mime",
