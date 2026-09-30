@@ -776,5 +776,5 @@ pub fn generate_utils(proper_name: &str) -> String {
         optional = GITHUB_TEMPLATE.to_string();
     }
 
-    format!("{}\n{}", optional, TEMPLATE)
+    format!("{optional}\n{TEMPLATE}")
 }

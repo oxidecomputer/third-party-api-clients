@@ -596,4 +596,4 @@ zoom: target/debug/generator $(ZOOM_SPEC)
 
 .PHONY: README.md
 README.md: ## Cleans client info in README.md.
-	@sed -i '/## Clients Generated/q' $@
+	@sed '/## Clients Generated/q' $@ > $@.tmp && mv $@.tmp $@

@@ -59,7 +59,7 @@ pub fn generate_files(
 
     let mut fn_names: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
-        let op = p.item().unwrap_or_else(|e| panic!("bad path: {}", e));
+        let op = p.item().unwrap_or_else(|e| panic!("bad path: {e}"));
 
         let mut r#gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
             let o = if let Some(o) = o {
@@ -133,7 +133,7 @@ pub fn generate_files(
                 }
 
                 if bounds.is_empty() {
-                    content.push_str(&format!("pub async fn {}(", fn_name,));
+                    content.push_str(&format!("pub async fn {fn_name}(",));
                 } else {
                     content.push_str(&format!("pub async fn {}<{}>(", fn_name, bounds.join(", ")));
                 }
@@ -144,12 +144,11 @@ pub fn generate_files(
                 }
 
                 if let Some(bp) = &body_param {
-                    content.push_str(&format!("body: {}", bp));
+                    content.push_str(&format!("body: {bp}"));
                 }
 
                 content.push_str(&format!(
-                    ") -> ClientResult<crate::Response<{}>> {{",
-                    response_type
+                    ") -> ClientResult<crate::Response<{response_type}>> {{"
                 ));
 
                 content.push_str(template);
@@ -207,7 +206,7 @@ pub fn generate_files(
                                                 Some("json".to_string()),
                                             )
                                         } else {
-                                            (Some(format!("&{}", rt)), Some("json".to_string()))
+                                            (Some(format!("&{rt}")), Some("json".to_string()))
                                         }
                                     }
                                 } else {
@@ -221,19 +220,19 @@ pub fn generate_files(
                                             Some("json".to_string()),
                                         )
                                     } else {
-                                        (Some(format!("&{}", rt)), Some("json".to_string()))
+                                        (Some(format!("&{rt}")), Some("json".to_string()))
                                     }
                                 }
                             } else {
                                 (None, None)
                             }
                         } else if ct == "multipart/form-data" {
-                            println!("got multipart/formdata for {}", oid);
+                            println!("got multipart/formdata for {oid}");
                             // Skip it for now.
                             // TODO: fix this later.
                             (None, None)
                         } else if ct == "application/x-www-form-urlencoded" {
-                            println!("got application/x-www-form-urlencoded for {}", oid);
+                            println!("got application/x-www-form-urlencoded for {oid}");
                             // Skip it for now.
                             // TODO: fix this later.
                             (None, None)
@@ -255,7 +254,7 @@ pub fn generate_files(
                     let object_name = format!("{} request", oid_to_object_name(&od));
                     let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
                     let rt = ts.render_type(&id, false)?;
-                    (Some(format!("&{}", rt)), Some("json".to_string()))
+                    (Some(format!("&{rt}")), Some("json".to_string()))
                 } else {
                     (None, None)
                 }
@@ -397,7 +396,7 @@ pub fn generate_files(
             // Do this right before printing. Check if we already have this function name.
             // This will ensure we don't have any duplicates.
             if fn_names.contains(&(fn_name.clone() + &tag)) {
-                fn_name = format!("{}_{}", fn_name, tag);
+                fn_name = format!("{fn_name}_{tag}");
             }
             fn_names.push(fn_name.clone() + &tag);
 
@@ -468,7 +467,7 @@ pub fn generate_files(
                     && !fn_name.contains("list")
                     && !fn_name.contains("list_all")
                 {
-                    fn_name = format!("get_all_{}", fn_name);
+                    fn_name = format!("get_all_{fn_name}");
                 }
 
                 if fn_name != "get_all"
@@ -482,7 +481,7 @@ pub fn generate_files(
                 // Do this right before printing. Check if we already have this function name.
                 // This will ensure we don't have any duplicates.
                 if fn_names.contains(&(fn_name.clone() + &tag)) {
-                    fn_name = format!("{}_all", fn_name);
+                    fn_name = format!("{fn_name}_all");
                 }
                 fn_names.push(fn_name.clone() + &tag);
 
@@ -768,7 +767,7 @@ fn get_fn_params(
             continue;
         }
 
-        if !fn_params.contains(nam) && !fn_params.contains(&format!("{}_", nam)) {
+        if !fn_params.contains(nam) && !fn_params.contains(&format!("{nam}_")) {
             let typ = parameter_data.render_type(&param_name, ts)?;
             if nam == "ref"
                 || nam == "type"
@@ -777,10 +776,10 @@ fn get_fn_params(
                 || nam == "const"
                 || nam == "use"
             {
-                fn_params_str.push(format!("{}_: {},", nam, typ));
+                fn_params_str.push(format!("{nam}_: {typ},"));
                 fn_params.push(nam.to_string() + "_");
             } else if nam == "i_ds" {
-                fn_params_str.push(format!("ids: {},", typ));
+                fn_params_str.push(format!("ids: {typ},"));
                 fn_params.push("ids".to_string());
             } else if (!all_pages || !is_page_param(nam, proper_name))
                 && (nam != "authorization" || proper_name == "Stripe")
@@ -794,10 +793,10 @@ fn get_fn_params(
                 && (proper_name != "Stripe" || !is_stripe_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
-                    fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
+                    fn_params_str.push(format!("{nam}: Option<{typ}>,"));
                     fn_params.push(nam.to_string());
                 } else {
-                    let p = format!("{}: {},", nam, typ);
+                    let p = format!("{nam}: {typ},");
                     if !fn_params.contains(nam) {
                         fn_params_str.push(p);
                         fn_params.push(nam.to_string());
@@ -825,7 +824,7 @@ fn get_fn_params(
                     || nam == "use"
                 {
                     query_params.insert(
-                        format!("{}_", nam),
+                        format!("{nam}_"),
                         (typ.to_string(), parameter_data.name.to_string()),
                     );
                 } else if nam == "i_ds" {
@@ -847,7 +846,7 @@ fn get_fn_params(
                     if typ == "chrono::DateTime<chrono::Utc>" {
                         query_params.insert(
                             nam.to_string(),
-                            (format!("Option<{}>", typ), parameter_data.name.to_string()),
+                            (format!("Option<{typ}>"), parameter_data.name.to_string()),
                         );
                     } else {
                         query_params.insert(
@@ -895,8 +894,7 @@ fn get_fn_inner(
 
     if all_pages && pagination_property.is_empty() {
         return Ok(format!(
-            "self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await",
-            body
+            "self.client.get_all_pages(&url, crate::Message {{ body: {body}, content_type: None }}).await"
         ));
     } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
@@ -1215,19 +1213,18 @@ fn get_fn_docs(
     if let Some(summary) = &o.summary {
         let docs = render_block_doc_lines(summary);
         if !docs.is_empty() {
-            a(&format!(" * {}", docs));
+            a(&format!(" * {docs}"));
         }
         a(" *");
     }
     a(&format!(
-        " * This function performs a `{}` to the `{}` endpoint.",
-        m, p
+        " * This function performs a `{m}` to the `{p}` endpoint."
     ));
     if let Some(description) = &o.description {
         let docs = render_block_doc_lines(description);
         if !docs.is_empty() {
             a(" *");
-            a(&format!(" * {}", docs));
+            a(&format!(" * {docs}"));
         }
     }
     if let Some(external_docs) = &o.external_docs {
@@ -1286,9 +1283,9 @@ fn get_fn_docs(
             || nam == "const"
             || nam == "use"
         {
-            a(&format!(" * * `{}_`{}", nam, docs));
+            a(&format!(" * * `{nam}_`{docs}"));
         } else {
-            a(&format!(" * * `{}`{}", nam, docs));
+            a(&format!(" * * `{nam}`{docs}"));
         }
     }
     a(" */");
@@ -1308,24 +1305,22 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
     if let Some(summary) = &o.summary {
         let docs = render_block_doc_lines(summary);
         if !docs.is_empty() {
-            a(&format!(" * {}", docs));
+            a(&format!(" * {docs}"));
         }
         a(" *");
     }
     a(&format!(
-        " * This function performs a `{}` to the `{}` endpoint.",
-        m, p
+        " * This function performs a `{m}` to the `{p}` endpoint."
     ));
     a(" *");
     a(&format!(
-        " * As opposed to `{}`, this function returns all the pages of the request at once.",
-        fn_name
+        " * As opposed to `{fn_name}`, this function returns all the pages of the request at once."
     ));
     if let Some(description) = &o.description {
         let docs = render_block_doc_lines(description);
         if !docs.is_empty() {
             a(" *");
-            a(&format!(" * {}", docs));
+            a(&format!(" * {docs}"));
         }
     }
     if let Some(external_docs) = &o.external_docs {

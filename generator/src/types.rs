@@ -114,13 +114,13 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, \
                              JsonSchema)]");
                     }
-                    a(&format!("pub struct {} {{", sn));
+                    a(&format!("pub struct {sn} {{"));
                     for (name, tid) in omap.iter() {
                         if let Ok(mut rt) = ts.render_type(tid, true) {
                             // Stripe has some really weird recursive types.
                             if rt.ends_with("AnyOf") && proper_name == "Stripe" {
                                 // Stripe uses anyof, but we want oneof.
-                                rt = format!("Box<{}>", rt);
+                                rt = format!("Box<{rt}>");
                             } else if ((rt.ends_with("AnyOf>") && rt.starts_with("Option<"))
                                 || rt == "Option<ApiErrors>"
                                 || rt == "Option<PaymentIntent>")
@@ -155,7 +155,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || prop == "const"
                                 || prop == "use"
                             {
-                                prop = format!("{}_", name);
+                                prop = format!("{name}_");
                             } else if name == "$ref" {
                                 prop = format!("{}_", name.replace('$', ""));
                             } else if name == "$type" {
@@ -262,7 +262,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 a(r#"#[serde(default,"#);
                                 // Figure out if its a no op and skip serializing if it is.
                                 if sd.default.is_none() {
-                                    a(&format!(r#"skip_serializing_if = "{}::is_noop","#, rt));
+                                    a(&format!(r#"skip_serializing_if = "{rt}::is_noop","#));
                                 }
                             } else {
                                 // In only this case do we switch to not outputting the start of
@@ -287,7 +287,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || prop == "const"
                                 || prop == "use"
                             {
-                                prop = format!("{}_", prop);
+                                prop = format!("{prop}_");
                             }
 
                             // Before closing, ensure that we have actually opened a serde attribute,
@@ -298,7 +298,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                     started_serde_attr = true;
                                 }
 
-                                a(&format!(r#"rename = "{}""#, name));
+                                a(&format!(r#"rename = "{name}""#));
                             } else if rt == "Page" && prop == "page" || rt.ends_with("Page") {
                                 if !started_serde_attr {
                                     a(r#"#[serde("#);
@@ -314,10 +314,10 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                             }
 
                             if prop == "type" {
-                                println!("{} {}", sn, prop);
+                                println!("{sn} {prop}");
                             }
 
-                            a(&format!("pub {}: {},", prop, rt));
+                            a(&format!("pub {prop}: {rt},"));
                         } else {
                             bail!("rendering type {} {:?} failed", name, tid);
                         }
@@ -351,7 +351,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
     let mut flatten = true;
     for (i, itid) in omap.iter().enumerate() {
         let rt = ts.render_type(itid, true).unwrap();
-        description.push_str(&format!("- `{}`\n", rt));
+        description.push_str(&format!("- `{rt}`\n"));
 
         // Determine if we can do anything fancy with the resulting enum and flatten it.
         let et = ts.id_to_entry.get(itid).unwrap();
@@ -380,7 +380,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
     if !flatten {
         a("#[serde(untagged)]");
     }
-    a(&format!("pub enum {} {{", sn));
+    a(&format!("pub enum {sn} {{"));
     let mut name_map: BTreeMap<String, String> = Default::default();
     // Becasue we have so many defaults set on our serde types these enums
     // sometimes parse the wrong value. It's better to instead use the functions we
@@ -409,7 +409,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
                 a(&render_line_doc_comment(&p));
             }
 
-            a(&format!("{}({}),", fn_name, name));
+            a(&format!("{fn_name}({name}),"));
             name_map.insert(fn_name.to_string(), name.to_string());
             fns.push(fn_name);
         }
@@ -418,7 +418,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
     a("");
 
     // Render the implementation to easily unpack these things for the end user.
-    a(&format!("impl {} {{", sn));
+    a(&format!("impl {sn} {{"));
     for (fn_name, name) in &name_map {
         if name_map.len() > 1 {
             a(&format!(
@@ -473,12 +473,11 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
             || name.starts_with("Vec<")
         {
             a(&format!(
-                r#"impl std::convert::From<{}> for {} {{
-                                    fn from(f: {}) -> Self {{
-                                        {}::{}(f)
+                r#"impl std::convert::From<{name}> for {sn} {{
+                                    fn from(f: {name}) -> Self {{
+                                        {sn}::{fn_name}(f)
                                     }}
                             }}"#,
-                name, sn, name, sn, fn_name,
             ));
             a("");
         }
@@ -534,7 +533,7 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
 
     for itid in omap {
         let rt = ts.render_type(itid, true).unwrap();
-        description.push_str(&format!("- `{}`\n", rt));
+        description.push_str(&format!("- `{rt}`\n"));
     }
     a(&render_line_doc_comment(&description));
 
@@ -543,7 +542,7 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
     } else {
         a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
     }
-    a(&format!("pub struct {} {{", sn));
+    a(&format!("pub struct {sn} {{"));
     let mut name_map: BTreeMap<String, String> = Default::default();
     // Becasue we have so many defaults set on our serde types these enums
     // sometimes parse the wrong value. It's better to instead use the functions we

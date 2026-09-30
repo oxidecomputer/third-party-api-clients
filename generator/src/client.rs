@@ -1158,7 +1158,7 @@ fn get_shared_functions(proper_name: &str, add_post_header: &str) -> String {
 
     format!(
         r#"
-{}
+{raw_request}
 
 async fn request<Out>(
     &self,
@@ -1557,8 +1557,7 @@ where
         uri,
         message,
     ).await
-}}"#,
-        raw_request
+}}"#
     )
 }
 
@@ -1570,7 +1569,7 @@ async fn url_and_auth(
     uri: &str,
 ) -> ClientResult<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>()?;
-    let auth = format!("{} {{}}", self.token);
+    let auth = format!("{bearer} {{}}", self.token);
     Ok((parsed_url, Some(auth)))
 }}
 
@@ -1602,7 +1601,7 @@ async fn request_raw(
         );
     }}
 
-    {}
+    {post_header_args}
     if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
@@ -1611,8 +1610,7 @@ async fn request_raw(
     }}
     Ok(req.send().await?)
 }}
-"#,
-        bearer, post_header_args
+"#
     )
 }
 
@@ -1625,7 +1623,7 @@ async fn url_and_auth(
 ) -> ClientResult<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>()?;
 
-    let auth = format!("{} {{}}", self.token.read().await.access_token);
+    let auth = format!("{bearer} {{}}", self.token.read().await.access_token);
     Ok((parsed_url, Some(auth)))
 }}
 
@@ -1659,7 +1657,7 @@ async fn make_request(
         );
     }}
 
-    {}
+    {post_header_args}
 
     if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
@@ -1709,8 +1707,7 @@ async fn request_raw(
     let resp = self.client.execute(req).await?;
 
     Ok(resp)
-}}"#,
-        bearer, post_header_args
+}}"#
     )
 }
 
@@ -2117,7 +2114,7 @@ pub fn generate_servers(servers: &[openapiv3::Server], server_prefix: &str) -> G
 
             for server in servers {
                 if let Some(description) = &server.description {
-                    let server_name = struct_name(&format!("{server_prefix}{}Server", description));
+                    let server_name = struct_name(&format!("{server_prefix}{description}Server"));
                     let server_struct = generate_server(&server_name, server);
 
                     server_variants.push_str(&format!("{server_name}({server_name}),\n"));

@@ -43,38 +43,31 @@ impl Template {
             for (nam, (value, prop)) in &query_params {
                 if value == "Option<chrono::DateTime<chrono::Utc>>" {
                     a(&format!(
-                        r#"if let Some(date) = {} {{ query_args.push(("{}".to_string(), date.to_rfc3339())); }}"#,
-                        nam, prop
+                        r#"if let Some(date) = {nam} {{ query_args.push(("{prop}".to_string(), date.to_rfc3339())); }}"#
                     ));
                 } else if value == "Option<uuid::Uuid>" {
                     a(&format!(
-                        r#"if let Some(u) = {} {{ query_args.push(("{}".to_string(), u.to_string())); }}"#,
-                        nam, prop
+                        r#"if let Some(u) = {nam} {{ query_args.push(("{prop}".to_string(), u.to_string())); }}"#
                     ));
                 } else if value == "uuid::Uuid" {
                     a(&format!(
-                        r#"if {}.to_string() != uuid::Uuid::nil().to_string() {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam, prop, nam
+                        r#"if {nam}.to_string() != uuid::Uuid::nil().to_string() {{ query_args.push(("{prop}".to_string(), {nam}.to_string())); }}"#
                     ));
                 } else if value == "i64" || value == "i32" {
                     a(&format!(
-                        r#"if {} > 0 {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam, prop, nam
+                        r#"if {nam} > 0 {{ query_args.push(("{prop}".to_string(), {nam}.to_string())); }}"#
                     ));
                 } else if value == "bool" && prop == "sendNotificationEmail" {
                     a(&format!(
-                        r#"query_args.push(("{}".to_string(), {}.to_string()));"#,
-                        prop, nam
+                        r#"query_args.push(("{prop}".to_string(), {nam}.to_string()));"#
                     ));
                 } else if value == "bool" {
                     a(&format!(
-                        r#"if {} {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam, prop, nam
+                        r#"if {nam} {{ query_args.push(("{prop}".to_string(), {nam}.to_string())); }}"#
                     ));
                 } else if value == "&str" {
                     a(&format!(
-                        r#"if !{}.is_empty() {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam, prop, nam
+                        r#"if !{nam}.is_empty() {{ query_args.push(("{prop}".to_string(), {nam}.to_string())); }}"#
                     ));
                 } else if value == "&[String]" {
                     // TODO: I have no idea how these should be seperated and the docs
@@ -82,13 +75,11 @@ impl Template {
                     // params.
                     // https://docs.github.com/en/rest/reference/migrations
                     a(&format!(
-                        r#"if !{}.is_empty() {{ query_args.push(("{}".to_string(), {}.join(" "))); }}"#,
-                        nam, prop, nam
+                        r#"if !{nam}.is_empty() {{ query_args.push(("{prop}".to_string(), {nam}.join(" "))); }}"#
                     ));
                 } else {
                     a(&format!(
-                        r#"if !{}.to_string().is_empty() {{  query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam, prop, nam
+                        r#"if !{nam}.to_string().is_empty() {{  query_args.push(("{prop}".to_string(), {nam}.to_string())); }}"#
                     ));
                 }
             }
@@ -429,7 +420,7 @@ pub fn generate_docs_openapi_info(
 
     let mut tos = String::new();
     if let Some(t) = &api.info.terms_of_service {
-        tos = format!("[API Terms of Service]({})", t);
+        tos = format!("[API Terms of Service]({t})");
     }
 
     let mut contact = String::new();
@@ -456,9 +447,8 @@ pub fn generate_docs_openapi_info(
         if !contact.is_empty() {
             contact.push('|');
             contact = format!(
-                r#"//! {}
-//! "#,
-                contact
+                r#"//! {contact}
+//! "#
             );
             for _ in 1..num {
                 contact.push_str("|----");
@@ -467,19 +457,19 @@ pub fn generate_docs_openapi_info(
         }
 
         if !name.is_empty() {
-            contact.push_str(&format!("| {} ", name));
+            contact.push_str(&format!("| {name} "));
         }
         if !url.is_empty() {
-            contact.push_str(&format!("| <{}> ", url));
+            contact.push_str(&format!("| <{url}> "));
         }
         if !email.is_empty() {
-            contact.push_str(&format!("| {} ", email));
+            contact.push_str(&format!("| {email} "));
         }
         if !contact.is_empty() {
             contact.push_str("|\n//! ");
         }
 
-        contact = format!("### Contact\n//!\n//! \n{}", contact);
+        contact = format!("### Contact\n//!\n//! \n{contact}");
     }
 
     let mut license = String::new();
@@ -493,9 +483,8 @@ pub fn generate_docs_openapi_info(
         }
         license.push('|');
         license = format!(
-            r#"//! {}
-//! "#,
-            license
+            r#"//! {license}
+//! "#
         );
 
         license.push_str("|----");
@@ -506,11 +495,11 @@ pub fn generate_docs_openapi_info(
 
         license.push_str(&format!("| {} ", l.name));
         if !url.is_empty() {
-            license.push_str(&format!("| <{}> ", url));
+            license.push_str(&format!("| <{url}> "));
         }
         license.push_str("|\n//! ");
 
-        license = format!("### License\n//!\n//! \n{}", license);
+        license = format!("### License\n//!\n//! \n{license}");
     }
 
     let api_version = format!("based on API spec version `{}`", api.info.version);
@@ -580,12 +569,12 @@ pub fn generate_docs_generic_token(
     };
 
     let server_args_nl = if !server_args.is_empty() {
-        format!(",\n//!     {}", server_args)
+        format!(",\n//!     {server_args}")
     } else {
         String::new()
     };
     let server_args_flat = if !server_args.is_empty() {
-        format!(", {}", server_args)
+        format!(", {server_args}")
     } else {
         String::new()
     };

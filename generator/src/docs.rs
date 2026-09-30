@@ -1,10 +1,20 @@
-fn is_list_item(line: &str) -> bool {
-    line.starts_with("- ")
-        || line.starts_with("* ")
-        || line
-            .split_once(". ")
-            .map(|(prefix, _)| prefix.chars().all(|c| c.is_ascii_digit()))
-            .unwrap_or(false)
+fn list_item_indent(line: &str) -> Option<usize> {
+    if line.starts_with("- ") || line.starts_with("* ") {
+        return Some(
+            1 + line.as_bytes()[1..]
+                .iter()
+                .take_while(|&&c| c == b' ')
+                .count(),
+        );
+    }
+
+    line.split_once(". ").and_then(|(prefix, _)| {
+        if !prefix.is_empty() && prefix.chars().all(|c| c.is_ascii_digit()) {
+            Some(prefix.len() + 2)
+        } else {
+            None
+        }
+    })
 }
 
 fn strip_leading_breaks(mut line: &str) -> &str {
@@ -40,6 +50,7 @@ fn normalized_doc_lines(description: &str) -> Vec<String> {
     let mut previous_was_list_item = false;
     let mut in_list_continuation = false;
     let mut in_code_block = false;
+    let mut list_indent = 0;
 
     for line in &lines[start..=end] {
         let raw = line.trim_end_matches('\r').trim_end();
@@ -57,10 +68,12 @@ fn normalized_doc_lines(description: &str) -> Vec<String> {
             rendered.push(String::new());
             previous_was_list_item = false;
             in_list_continuation = false;
+            list_indent = 0;
             continue;
         }
 
-        let is_list_item = is_list_item(trimmed);
+        let item_indent = list_item_indent(trimmed);
+        let is_list_item = item_indent.is_some();
         if !previous_was_list_item
             && !in_list_continuation
             && is_list_item
@@ -79,11 +92,17 @@ fn normalized_doc_lines(description: &str) -> Vec<String> {
             rendered.push(trimmed.to_string());
             in_list_continuation = false;
         } else if (previous_was_list_item || in_list_continuation) && !is_list_item {
-            rendered.push(format!("   {trimmed}"));
+            rendered.push(format!("{}{trimmed}", " ".repeat(list_indent)));
             in_list_continuation = true;
         } else {
             rendered.push(trimmed.to_string());
             in_list_continuation = false;
+        }
+
+        if let Some(indent) = item_indent {
+            list_indent = indent;
+        } else if !in_list_continuation {
+            list_indent = 0;
         }
 
         if trimmed.starts_with("```") {
@@ -125,9 +144,6 @@ pub(crate) fn render_block_doc_lines(description: &str) -> String {
     for line in lines {
         if line.is_empty() {
             rendered.push_str("\n *");
-        } else if line.starts_with(' ') {
-            rendered.push_str("\n *  ");
-            rendered.push_str(&line);
         } else {
             rendered.push_str("\n * ");
             rendered.push_str(&line);
@@ -164,7 +180,7 @@ mod tests {
 
         assert_eq!(
             render_line_doc_comment(docs),
-            "/// EmailSettings consists of:\n///\n/// * bccEmailAddresses - An array.\n///    DocuSign verifies the email.\n///    *Example*: example text."
+            "/// EmailSettings consists of:\n///\n/// * bccEmailAddresses - An array.\n///   DocuSign verifies the email.\n///   *Example*: example text."
         );
     }
 
@@ -181,7 +197,7 @@ mod tests {
     fn renders_block_doc_lines() {
         assert_eq!(
             render_block_doc_lines("one\n\n- two\nthree"),
-            "one\n *\n * - two\n *     three"
+            "one\n *\n * - two\n *   three"
         );
     }
 
@@ -189,7 +205,23 @@ mod tests {
     fn renders_plain_doc_text() {
         assert_eq!(
             super::render_doc_text("one\n\n- two\nthree"),
-            "one\n\n- two\n   three"
+            "one\n\n- two\n  three"
+        );
+    }
+
+    #[test]
+    fn keeps_numbered_list_continuations_under_the_text() {
+        assert_eq!(
+            render_line_doc_comment("1. first\nmore text\n2. second"),
+            "/// 1. first\n///    more text\n/// 2. second"
+        );
+    }
+
+    #[test]
+    fn keeps_spaced_bullet_continuations_under_the_text() {
+        assert_eq!(
+            render_block_doc_lines("*   A link to the Git Trees\nAPI]"),
+            "*   A link to the Git Trees\n *     API]"
         );
     }
 }
