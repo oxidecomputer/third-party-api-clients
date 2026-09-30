@@ -9,7 +9,7 @@ description = "An OpenAPI client generator, bespoke for the GitHub API."
 anyhow = { version = "1", features = ["backtrace"] }
 english-numbers = "0.3.3"
 getopts = "0.2"
-http = "^0.2.4"
+http = "^1.5.0"
 Inflector = "^0.11.4"
 serde = { version = "1", features = [ "derive" ]}
 serde_json = "1"
