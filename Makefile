@@ -1,6 +1,6 @@
 SHELL := bash
 
-VERSION = 0.11.0-rc.1
+VERSION = 0.11.0-rc.2
 CLIPPY_FIX = cargo clippy --fix --allow-dirty --allow-staged --quiet
 
 DOCUSIGN_SPEC_DIR = $(CURDIR)/specs/docusign
